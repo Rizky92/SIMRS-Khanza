@@ -1,5 +1,9 @@
 package widget;
 
+import com.sun.jna.Native;
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.WinDef;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
@@ -9,6 +13,9 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.KeyboardFocusManager;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
@@ -25,6 +32,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 import javax.swing.JComponent;
 import javax.swing.JRootPane;
+import javax.swing.JWindow;
 import javax.swing.RootPaneContainer;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
@@ -56,6 +64,11 @@ public final class LoadingOverlaySMC extends JComponent {
     private static final Color TRACK = new Color(0, 131, 62, 45);
     private static final Font MESSAGE_FONT = new Font("Inter Medium", Font.PLAIN, 22);
     private static final String DEFAULT_MESSAGE = "Mohon tunggu...";
+    private static final Color COVER_HIT_AREA = new Color(0, 0, 0, 1);
+    private static final int COVER_RAISE_DELAY = 250;
+    private static final int SWP_NOSIZE = 0x0001;
+    private static final int SWP_NOMOVE = 0x0002;
+    private static final int SWP_NOACTIVATE = 0x0010;
 
     private static final Map<Window, LoadingOverlaySMC> OVERLAYS = new IdentityHashMap<>();
     private static boolean keyDispatcherInstalled = false;
@@ -130,7 +143,7 @@ public final class LoadingOverlaySMC extends JComponent {
         }
 
         overlay.depth++;
-        overlay.setMessage(message);
+        overlay.updateMessage(message);
         return true;
     }
 
@@ -175,6 +188,76 @@ public final class LoadingOverlaySMC extends JComponent {
             task.run();
             return null;
         });
+    }
+
+    /**
+     * Runs {@code task} on the event dispatch thread while a cover spans the whole screen of {@code owner}, above every window including those of
+     * other applications. The cover swallows mouse and touch input but never takes the keyboard focus, so keystrokes sent with
+     * {@link java.awt.Robot} still reach whichever application is in the foreground. Meant for driving another application on the patient's
+     * behalf, e.g. logging in to a biometric app, without the patient being able to interfere.
+     *
+     * @param owner a component inside the window that started the work; it is blocked as well
+     * @param message the text shown under the spinner, or {@code null} for a generic one
+     * @param task the work to run
+     */
+    public static void runOverScreen(Component owner, String message, Runnable task) {
+        if (!EventQueue.isDispatchThread()) {
+            task.run();
+            return;
+        }
+
+        Window ownerWindow = windowOf(owner);
+        GraphicsConfiguration configuration = ownerWindow != null ? ownerWindow.getGraphicsConfiguration() : GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+
+        JWindow cover = new JWindow(configuration);
+        cover.setFocusableWindowState(false);
+        cover.setAlwaysOnTop(true);
+        JComponent hitArea = new JComponent() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                g.setColor(COVER_HIT_AREA);
+                g.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
+        cover.setContentPane(hitArea);
+        if (configuration.getDevice().isWindowTranslucencySupported(GraphicsDevice.WindowTranslucency.PERPIXEL_TRANSLUCENT)) {
+            cover.setBackground(new Color(0, 0, 0, 0));
+        }
+        cover.setBounds(configuration.getBounds());
+
+        Timer raise = new Timer(COVER_RAISE_DELAY, e -> raiseAboveOthers(cover));
+        boolean ownerBlocked = begin(owner, message);
+        cover.setVisible(true);
+        raise.start();
+        try {
+            run(cover, message, task);
+        } finally {
+            raise.stop();
+            cover.dispose();
+            if (ownerBlocked) {
+                end(owner);
+            }
+        }
+    }
+
+    /**
+     * Changes the text under the spinner of every busy window, e.g. to report the progress of a long task.
+     *
+     * @param message the new text, or {@code null} for a generic one
+     */
+    public static void setMessage(String message) {
+        for (LoadingOverlaySMC overlay : OVERLAYS.values()) {
+            overlay.updateMessage(message);
+        }
+    }
+
+    private static void raiseAboveOthers(Window window) {
+        try {
+            WinDef.HWND hwnd = new WinDef.HWND(Native.getWindowPointer(window));
+            User32.INSTANCE.SetWindowPos(hwnd, new WinDef.HWND(Pointer.createConstant(-1)), 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+        } catch (RuntimeException | LinkageError e) {
+            System.out.println("Notif : " + e);
+        }
     }
 
     /**
@@ -355,7 +438,7 @@ public final class LoadingOverlaySMC extends JComponent {
         }
     }
 
-    private void setMessage(String message) {
+    private void updateMessage(String message) {
         String next = message == null || message.isBlank() ? DEFAULT_MESSAGE : message;
         if (!next.equals(this.message)) {
             this.message = next;

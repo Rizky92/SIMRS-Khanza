@@ -655,6 +655,71 @@
             </Constraint>
           </Constraints>
         </Component>
+        <Component class="widget.Label" name="label17">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Timeout Fingerprint :"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="0" y="510" width="240" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="widget.TextField" name="timeoutFingerprint">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Batas waktu membuka dan login aplikasi sidik jari dalam detik, kosong atau 0 berarti tanpa batas. Hanya boleh diubah oleh admin"/>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[75, 35]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[75, 35]"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="247" y="510" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="widget.Label" name="label18">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Timeout FRISTA :"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="327" y="510" width="160" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="widget.TextField" name="timeoutFrista">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Batas waktu membuka dan login aplikasi FRISTA dalam detik, kosong atau 0 berarti tanpa batas. Hanya boleh diubah oleh admin"/>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[75, 35]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[75, 35]"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="492" y="510" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="widget.Label" name="label19">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="2"/>
+            <Property name="text" type="java.lang.String" value="detik (0 = tanpa batas)"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="572" y="510" width="250" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
         <Component class="widget.Button" name="peekUserFP">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

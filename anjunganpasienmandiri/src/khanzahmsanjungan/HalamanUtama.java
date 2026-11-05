@@ -286,7 +286,7 @@ public class HalamanUtama extends javax.swing.JFrame {
             login.requireAkses("kasir_ralan");
             login.setOnLoginListener(e -> {
                 DlgPengaturanAPM pengaturan = new DlgPengaturanAPM(HalamanUtama.this, false);
-                pengaturan.setSize(new Dimension(960, 640));
+                pengaturan.setSize(new Dimension(960, 680));
                 pengaturan.setLocationRelativeTo(HalamanUtama.this);
                 pengaturan.addWindowListener(new WindowAdapter() {
                     @Override

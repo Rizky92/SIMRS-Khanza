@@ -2,16 +2,13 @@ package khanzahmsanjungan;
 
 import AESsecurity.EnkripsiAES;
 import bridging.ApiBPJS;
+import bridging.AplikasiBiometrikSMC;
 import bridging.BPJSReferensiDiagnosa;
 import bridging.BPJSReferensiDokter;
 import bridging.BPJSRiwayatPelayananPasien;
 import bridging.BPJSRiwayatRujukanPasien;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.jna.Native;
-import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.User32;
-import com.sun.jna.platform.win32.WinDef;
 import fungsi.BatasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -19,11 +16,6 @@ import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -42,6 +34,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.concurrent.TimeoutException;
 import javax.swing.SwingUtilities;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -105,7 +98,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         pathFrista = "",
         userLoginValidasi = "",
         passLoginValidasi = "";
-    private int kuota = 0, sisaKuota = 0, printJumlahBarcode = 0;
+    private int kuota = 0, sisaKuota = 0, printJumlahBarcode = 0, timeoutFingerprintSmc = 0, timeoutFristaSmc = 0;
     private final ObjectMapper mapper = new ObjectMapper();
     private JsonNode root, response, metadata;
     private HttpHeaders headers;
@@ -1315,82 +1308,22 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         if (noPeserta.getText().isBlank()) {
             Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
         } else {
-            SwingUtilities.invokeLater(() -> LoadingOverlaySMC.run(this, "Membuka aplikasi sidik jari...", () -> {
-                try {
-                    fingerprintAktif = false;
-                    User32 u32 = User32.INSTANCE;
-
-                    u32.EnumWindows((WinDef.HWND hwnd, Pointer pntr) -> {
-                        char[] windowText = new char[512];
-                        u32.GetWindowText(hwnd, windowText, 512);
-                        String wText = Native.toString(windowText);
-
-                        if (wText.isEmpty()) {
-                            return true;
-                        }
-
-                        if (wText.contains("Registrasi Sidik Jari")) {
-                            DlgRegistrasiBPJS.this.fingerprintAktif = true;
-                            u32.SetForegroundWindow(hwnd);
-                        }
-
-                        return true;
-                    }, Pointer.NULL);
-
-                    Robot r = new Robot();
-                    Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
-                    StringSelection ss;
-
-                    if (fingerprintAktif) {
-                        LoadingOverlaySMC.sleep(1000);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_A);
-                        r.keyRelease(KeyEvent.VK_A);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                        LoadingOverlaySMC.sleep(500);
-
-                        ss = new StringSelection(noPeserta.getText().trim());
-                        c.setContents(ss, ss);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                    } else {
-                        Runtime.getRuntime().exec("\"" + pathFingerprint + "\"");
-                        LoadingOverlaySMC.sleep(2000);
-                        ss = new StringSelection(EnkripsiAES.decrypt(userLoginValidasi));
-                        c.setContents(ss, ss);
-
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_TAB);
-                        r.keyRelease(KeyEvent.VK_TAB);
-                        LoadingOverlaySMC.sleep(1000);
-
-                        ss = new StringSelection(EnkripsiAES.decrypt(passLoginValidasi));
-                        c.setContents(ss, ss);
-
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_ENTER);
-                        r.keyRelease(KeyEvent.VK_ENTER);
-                        LoadingOverlaySMC.sleep(1000);
-
-                        ss = new StringSelection(noPeserta.getText().trim());
-                        c.setContents(ss, ss);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
+            SwingUtilities.invokeLater(() -> {
+                boolean[] timeout = {false};
+                LoadingOverlaySMC.runOverScreen(this, "Membuka aplikasi sidik jari...", () -> {
+                    try {
+                        AplikasiBiometrikSMC.bukaFingerprint(pathFingerprint, EnkripsiAES.decrypt(userLoginValidasi), EnkripsiAES.decrypt(passLoginValidasi), noPeserta.getText().trim(), timeoutFingerprintSmc);
+                        fingerprintAktif = true;
+                    } catch (TimeoutException e) {
+                        timeout[0] = true;
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notif : " + e);
+                });
+                if (timeout[0]) {
+                    Valid.popupGagalDialog("Aplikasi sidik jari tidak merespon..!!\nSilahkan hubungi petugas.", 5);
                 }
-            }));
+            });
         }
     }//GEN-LAST:event_btnFingerprintActionPerformed
 
@@ -1398,110 +1331,22 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         if (noPeserta.getText().isBlank()) {
             Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
         } else {
-            SwingUtilities.invokeLater(() -> LoadingOverlaySMC.run(this, "Membuka aplikasi FRISTA...", () -> {
-                try {
-                    fristaAktif = false;
-                    User32 u32 = User32.INSTANCE;
-
-                    u32.EnumWindows((WinDef.HWND hwnd, Pointer pntr) -> {
-                        char[] windowText = new char[512];
-                        u32.GetWindowText(hwnd, windowText, 512);
-                        String wText = Native.toString(windowText);
-
-                        if (wText.isEmpty()) {
-                            return true;
-                        }
-
-                        if (wText.toLowerCase().contains("face recognition bpjs kesehatan")) {
-                            DlgRegistrasiBPJS.this.fristaAktif = true;
-                            u32.SetForegroundWindow(hwnd);
-                            u32.ShowWindow(hwnd, User32.SW_MAXIMIZE);
-                            u32.ShowWindow(hwnd, User32.SW_RESTORE);
-                            u32.SetFocus(hwnd);
-                        }
-
-                        return true;
-                    }, Pointer.NULL);
-
-                    Robot r = new Robot();
-                    Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
-                    StringSelection ss;
-
-                    if (fristaAktif) {
-                        LoadingOverlaySMC.sleep(1000);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_A);
-                        r.keyRelease(KeyEvent.VK_A);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                        LoadingOverlaySMC.sleep(200);
-
-                        ss = new StringSelection(noPeserta.getText());
-                        c.setContents(ss, ss);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                    } else {
-                        Runtime.getRuntime().exec("\"" + pathFrista + "\"");
-                        while (!u32.IsWindowVisible(u32.FindWindow(null, "Login Frista (Face Recognition BPJS Kesehatan)"))) {
-                            LoadingOverlaySMC.sleep(200);
-                        }
+            SwingUtilities.invokeLater(() -> {
+                boolean[] timeout = {false};
+                LoadingOverlaySMC.runOverScreen(this, "Membuka aplikasi FRISTA...", () -> {
+                    try {
+                        AplikasiBiometrikSMC.bukaFrista(pathFrista, EnkripsiAES.decrypt(userLoginValidasi), EnkripsiAES.decrypt(passLoginValidasi), noPeserta.getText().trim(), timeoutFristaSmc);
                         fristaAktif = true;
-                        LoadingOverlaySMC.sleep(1000);
-
-                        ss = new StringSelection(EnkripsiAES.decrypt(userLoginValidasi));
-                        c.setContents(ss, ss);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_TAB);
-                        r.keyRelease(KeyEvent.VK_TAB);
-                        LoadingOverlaySMC.sleep(1000);
-
-                        ss = new StringSelection(EnkripsiAES.decrypt(passLoginValidasi));
-                        c.setContents(ss, ss);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_TAB);
-                        r.keyRelease(KeyEvent.VK_TAB);
-                        r.keyPress(KeyEvent.VK_SPACE);
-                        r.keyRelease(KeyEvent.VK_SPACE);
-                        LoadingOverlaySMC.sleep(1000);
-
-                        u32.EnumWindows((WinDef.HWND hwnd, Pointer pntr) -> {
-                            char[] windowText = new char[512];
-                            u32.GetWindowText(hwnd, windowText, 512);
-                            String wText = Native.toString(windowText);
-
-                            if (wText.isEmpty()) {
-                                return true;
-                            }
-
-                            if (wText.toLowerCase().contains("face recognition bpjs kesehatan")) {
-                                u32.SetForegroundWindow(hwnd);
-                                u32.ShowWindow(hwnd, User32.SW_MAXIMIZE);
-                                u32.ShowWindow(hwnd, User32.SW_RESTORE);
-                                u32.SetFocus(hwnd);
-                            }
-
-                            return true;
-                        }, Pointer.NULL);
-                        LoadingOverlaySMC.sleep(1000);
-
-                        ss = new StringSelection(noPeserta.getText());
-                        c.setContents(ss, ss);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
+                    } catch (TimeoutException e) {
+                        timeout[0] = true;
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notif : " + e);
+                });
+                if (timeout[0]) {
+                    Valid.popupGagalDialog("Aplikasi FRISTA tidak merespon..!!\nSilahkan hubungi petugas.", 5);
                 }
-            }));
+            });
         }
     }//GEN-LAST:event_btnFristaActionPerformed
 
@@ -3218,6 +3063,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
                 if (decrypted.hasNonNull("frista")) {
                     pathFrista = decrypted.path("frista").path("path").asText();
+                    timeoutFristaSmc = decrypted.path("frista").path("timeout").asInt(0);
                     if (decrypted.path("frista").path("aktifkan").asBoolean()) {
                         panelValidasi.add(btnFrista);
                         panelTambahanValidasi.remove(btnFrista);
@@ -3229,6 +3075,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
                 if (decrypted.hasNonNull("fingerprint")) {
                     pathFingerprint = decrypted.path("fingerprint").path("path").asText();
+                    timeoutFingerprintSmc = decrypted.path("fingerprint").path("timeout").asInt(0);
                     if (decrypted.path("fingerprint").path("aktifkan").asBoolean()) {
                         panelValidasi.add(btnFingerprint);
                         panelTambahanValidasi.remove(btnFingerprint);
