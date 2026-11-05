@@ -25,7 +25,6 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
-import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -34,6 +33,7 @@ import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimplePrintServiceExporterConfiguration;
 import net.sf.jasperreports.view.JasperViewer;
 import widget.Button;
+import widget.LoadingOverlaySMC;
 import widget.Tanggal;
 
 public final class validasi {
@@ -56,59 +56,16 @@ public final class validasi {
 
     public void printReportSmc(String reportName, String reportDirName, String judul, Map reportParams, String printerName, int jumlah, String sql, String... values) {
         try {
-            try (PreparedStatement ps = connect.prepareStatement(sql)) {
-                for (int i = 0; i < values.length; i++) {
-                    ps.setString(i + 1, values[i]);
-                }
-
-                JasperPrint jp = JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery()));
-
-                PrintService printService = null;
-                for (PrintService currentPrintService : PrintServiceLookup.lookupPrintServices(null, null)) {
-                    if (currentPrintService.getName().equals(printerName)) {
-                        printService = currentPrintService;
-                        break;
+            JasperPrint jp = LoadingOverlaySMC.background(() -> {
+                try (PreparedStatement ps = connect.prepareStatement(sql)) {
+                    for (int i = 0; i < values.length; i++) {
+                        ps.setString(i + 1, values[i]);
                     }
+
+                    return JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery()));
                 }
-
-                if (printService != null) {
-                    PrintRequestAttributeSet pra = new HashPrintRequestAttributeSet();
-                    pra.add(new Copies(jumlah));
-
-                    SimplePrintServiceExporterConfiguration config = new SimplePrintServiceExporterConfiguration();
-
-                    config.setPrintService(printService);
-                    config.setPrintRequestAttributeSet(pra);
-                    config.setPrintServiceAttributeSet(printService.getAttributes());
-                    config.setDisplayPageDialog(false);
-                    config.setDisplayPrintDialog(false);
-
-                    JRPrintServiceExporter exporter = new JRPrintServiceExporter();
-
-                    exporter.setExporterInput(new SimpleExporterInput(jp));
-                    exporter.setConfiguration(config);
-                    exporter.exportReport();
-
-                    if (koneksiDB.PREVIEWHASILPRINT()) {
-                        JasperViewer jv = new JasperViewer(jp, false);
-                        jv.setTitle(judul);
-                        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-                        jv.setSize(screen.width - 50, screen.height - 50);
-                        jv.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
-                        jv.setLocationRelativeTo(null);
-                        jv.setVisible(true);
-                    }
-                } else {
-                    popupPeringatanDialog("Printer tidak ditemukan!", 3);
-                    JasperViewer jv = new JasperViewer(jp, false);
-                    jv.setTitle(judul);
-                    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-                    jv.setSize(screen.width - 50, screen.height - 50);
-                    jv.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
-                    jv.setLocationRelativeTo(null);
-                    jv.setVisible(true);
-                }
-            }
+            });
+            cetakReportSmc(jp, judul, printerName, jumlah);
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             popupGagalDialog("Terjadi kesalahan pada saat melakukan proses cetak..!!");
@@ -117,8 +74,16 @@ public final class validasi {
 
     public void printReportSmc(String reportName, String reportDirName, String judul, Map reportParams, String printerName, int jumlah) {
         try {
-            JasperPrint jp = JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, connect);
+            JasperPrint jp = LoadingOverlaySMC.background(() -> JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, connect));
+            cetakReportSmc(jp, judul, printerName, jumlah);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            popupGagalDialog("Terjadi kesalahan pada saat melakukan proses cetak..!!");
+        }
+    }
 
+    private void cetakReportSmc(JasperPrint jp, String judul, String printerName, int jumlah) throws Exception {
+        boolean tercetak = LoadingOverlaySMC.background(() -> {
             PrintService printService = null;
             for (PrintService currentPrintService : PrintServiceLookup.lookupPrintServices(null, null)) {
                 if (currentPrintService.getName().equals(printerName)) {
@@ -127,47 +92,47 @@ public final class validasi {
                 }
             }
 
-            if (printService != null) {
-                PrintRequestAttributeSet pra = new HashPrintRequestAttributeSet();
-                pra.add(new Copies(jumlah));
-
-                SimplePrintServiceExporterConfiguration config = new SimplePrintServiceExporterConfiguration();
-
-                config.setPrintService(printService);
-                config.setPrintRequestAttributeSet(pra);
-                config.setPrintServiceAttributeSet(printService.getAttributes());
-                config.setDisplayPageDialog(false);
-                config.setDisplayPrintDialog(false);
-
-                JRPrintServiceExporter exporter = new JRPrintServiceExporter();
-
-                exporter.setExporterInput(new SimpleExporterInput(jp));
-                exporter.setConfiguration(config);
-                exporter.exportReport();
-
-                if (koneksiDB.PREVIEWHASILPRINT()) {
-                    JasperViewer jv = new JasperViewer(jp, false);
-                    jv.setTitle(judul);
-                    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-                    jv.setSize(screen.width - 50, screen.height - 50);
-                    jv.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
-                    jv.setLocationRelativeTo(null);
-                    jv.setVisible(true);
-                }
-            } else {
-                popupPeringatanDialog("Printer tidak ditemukan!", 3);
-                JasperViewer jv = new JasperViewer(jp, false);
-                jv.setTitle(judul);
-                Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-                jv.setSize(screen.width - 50, screen.height - 50);
-                jv.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
-                jv.setLocationRelativeTo(null);
-                jv.setVisible(true);
+            if (printService == null) {
+                return false;
             }
-        } catch (JRException e) {
-            System.out.println("Notif : " + e);
-            popupGagalDialog("Terjadi kesalahan pada saat melakukan proses cetak..!!");
+
+            PrintRequestAttributeSet pra = new HashPrintRequestAttributeSet();
+            pra.add(new Copies(jumlah));
+
+            SimplePrintServiceExporterConfiguration config = new SimplePrintServiceExporterConfiguration();
+
+            config.setPrintService(printService);
+            config.setPrintRequestAttributeSet(pra);
+            config.setPrintServiceAttributeSet(printService.getAttributes());
+            config.setDisplayPageDialog(false);
+            config.setDisplayPrintDialog(false);
+
+            JRPrintServiceExporter exporter = new JRPrintServiceExporter();
+
+            exporter.setExporterInput(new SimpleExporterInput(jp));
+            exporter.setConfiguration(config);
+            exporter.exportReport();
+            return true;
+        });
+
+        if (tercetak) {
+            if (koneksiDB.PREVIEWHASILPRINT()) {
+                tampilPreviewSmc(jp, judul);
+            }
+        } else {
+            popupPeringatanDialog("Printer tidak ditemukan!", 3);
+            tampilPreviewSmc(jp, judul);
         }
+    }
+
+    private void tampilPreviewSmc(JasperPrint jp, String judul) {
+        JasperViewer jv = new JasperViewer(jp, false);
+        jv.setTitle(judul);
+        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        jv.setSize(screen.width - 50, screen.height - 50);
+        jv.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+        jv.setLocationRelativeTo(null);
+        jv.setVisible(true);
     }
 
     public int popupDialog(String judul, String pesan, int popupType, int messageType, int timeout) {
@@ -218,7 +183,12 @@ public final class validasi {
             timer.start();
         }
 
-        popup.setVisible(true);
+        LoadingOverlaySMC.suspend();
+        try {
+            popup.setVisible(true);
+        } finally {
+            LoadingOverlaySMC.resume();
+        }
 
         return (Integer) (pane.getValue() == null || pane.getValue().equals(JOptionPane.UNINITIALIZED_VALUE) ? -1 : pane.getValue());
     }

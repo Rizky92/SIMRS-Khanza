@@ -1,6 +1,12 @@
 package bridging;
 
+import AESsecurity.EnkripsiAES;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.InvalidAlgorithmParameterException;
@@ -20,9 +26,13 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.client.RestTemplate;
+import widget.LoadingOverlaySMC;
 
 public class ApiBPJS {
     private String Key, Consid;
@@ -114,7 +124,41 @@ public class ApiBPJS {
         scheme = new Scheme("https", 443, sslFactory);
         factory = new HttpComponentsClientHttpRequestFactory();
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
-        return new RestTemplate(factory);
+        aturTimeoutSmc(factory.getHttpClient().getParams());
+        RestTemplate rest = new RestTemplate(factory);
+        rest.setInterceptors(new ClientHttpRequestInterceptor[] {(request, body, execution) -> {
+            try {
+                return LoadingOverlaySMC.background(() -> execution.execute(request, body));
+            } catch (IOException | RuntimeException e) {
+                throw e;
+            } catch (Exception e) {
+                throw new IOException(e);
+            }
+        }});
+        return rest;
+    }
+
+    private void aturTimeoutSmc(HttpParams params) {
+        if (!new File("./cache/pengaturanapmsmc.iyem").isFile()) {
+            return;
+        }
+
+        try (FileReader fr = new FileReader("./cache/pengaturanapmsmc.iyem")) {
+            final ObjectMapper mapper = new ObjectMapper();
+            final JsonNode root = mapper.readTree(fr).path("pengaturanapmsmc");
+            final JsonNode timeout = mapper.readTree(EnkripsiAES.decrypt(root.asText())).path("timeoutAPIBPJS");
+
+            int koneksi = timeout.path("koneksi").asInt(0);
+            int respon = timeout.path("respon").asInt(0);
+            if (koneksi > 0) {
+                HttpConnectionParams.setConnectionTimeout(params, koneksi * 1000);
+            }
+            if (respon > 0) {
+                HttpConnectionParams.setSoTimeout(params, respon * 1000);
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
     }
 
 }
