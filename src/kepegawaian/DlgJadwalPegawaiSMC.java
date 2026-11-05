@@ -71,6 +71,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import smc.utils.ExcelSMC;
+import widget.LookAndFeelSMC;
 
 public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
     private static final int KOLOM_ID = 1;
@@ -1148,7 +1149,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             if (!isSelected) {
-                component.setForeground(new Color(200, 0, 0));
+                component.setForeground(LookAndFeelSMC.DARK_RED);
             }
             component.setBackground(1 == row % 2 ? new Color(255, 228, 228) : new Color(255, 240, 240));
             return component;
@@ -1165,7 +1166,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component component = asli.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            component.setForeground(new Color(200, 0, 0));
+            component.setForeground(LookAndFeelSMC.DARK_RED);
             return component;
         }
     }

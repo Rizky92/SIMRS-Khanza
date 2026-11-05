@@ -1,19 +1,24 @@
 package widget;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.UIResource;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 public class TableSMC extends JTable {
     private static final long serialVersionUID = 2L;
+    private static final Color SELECTED_FOREGROUND = Color.RED;
 
     private Font boldFontBase;
     private Font boldFont;
@@ -28,7 +33,7 @@ public class TableSMC extends JTable {
     }
 
     /**
-     * Cells of the default renderers mark a selected row with bold text instead
+     * Cells of the default renderers mark a selected row with red bold text instead
      * of the selection colors, like the {@code fungsi.WarnaTable} renderers do,
      * because row colors carry conditional information.
      */
@@ -41,8 +46,27 @@ public class TableSMC extends JTable {
         boolean printing = isPaintingForPrint();
         boolean selected = !printing && isCellSelected(row, column);
         boolean hasFocus = !printing && row == getSelectionModel().getLeadSelectionIndex() && column == getColumnModel().getSelectionModel().getLeadSelectionIndex() && isFocusOwner();
+        if (renderer instanceof DefaultTableCellRenderer) {
+            ((DefaultTableCellRenderer) renderer).setForeground(null);
+        }
         Component component = renderer.getTableCellRendererComponent(this, getValueAt(row, column), false, hasFocus, row, column);
         component.setFont(selected ? boldFontSmc() : getFont());
+        if (selected) {
+            component.setForeground(SELECTED_FOREGROUND);
+        }
+
+        return component;
+    }
+
+    /**
+     * Gives a check box editor the background its cell shows, where {@code DefaultCellEditor} would take the selection background and flash it while the check box is pressed.
+     */
+    @Override
+    public Component prepareEditor(TableCellEditor editor, int row, int column) {
+        Component component = super.prepareEditor(editor, row, column);
+        if (component instanceof JCheckBox && component.isOpaque()) {
+            component.setBackground(prepareRenderer(getCellRenderer(row, column), row, column).getBackground());
+        }
         return component;
     }
 

@@ -30,6 +30,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.lang3.StringUtils;
+import widget.LookAndFeelSMC;
 
 /**
  *
@@ -157,15 +158,15 @@ public class PanelInacbgSmc extends widget.panelisi {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 if (row % 2 == 1) {
-                    component.setBackground(new Color(255, 244, 244));
-                    component.setForeground(new Color(50, 50, 50));
+                    component.setBackground(LookAndFeelSMC.ALT_WHITE);
+                    component.setForeground(LookAndFeelSMC.TEXT_DARK);
                 } else {
-                    component.setBackground(new Color(255, 255, 255));
-                    component.setForeground(new Color(50, 50, 50));
+                    component.setBackground(Color.WHITE);
+                    component.setForeground(LookAndFeelSMC.TEXT_DARK);
                 }
                 if (table.getValueAt(row, 5).toString().equals("1")) {
-                    component.setBackground(new Color(200, 0, 0));
-                    component.setForeground(new Color(255, 255, 255));
+                    component.setBackground(LookAndFeelSMC.DARK_RED);
+                    component.setForeground(Color.WHITE);
                 }
                 return component;
             }
@@ -210,15 +211,15 @@ public class PanelInacbgSmc extends widget.panelisi {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 if (row % 2 == 1) {
-                    component.setBackground(new Color(255, 244, 244));
-                    component.setForeground(new Color(50, 50, 50));
+                    component.setBackground(LookAndFeelSMC.ALT_WHITE);
+                    component.setForeground(LookAndFeelSMC.TEXT_DARK);
                 } else {
-                    component.setBackground(new Color(255, 255, 255));
-                    component.setForeground(new Color(50, 50, 50));
+                    component.setBackground(Color.WHITE);
+                    component.setForeground(LookAndFeelSMC.TEXT_DARK);
                 }
                 if (table.getValueAt(row, 5).toString().equals("1")) {
-                    component.setBackground(new Color(200, 0, 0));
-                    component.setForeground(new Color(255, 230, 230));
+                    component.setBackground(LookAndFeelSMC.DARK_RED);
+                    component.setForeground(LookAndFeelSMC.PALE_RED);
                 }
                 return component;
             }

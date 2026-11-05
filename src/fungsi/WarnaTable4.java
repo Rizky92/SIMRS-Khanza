@@ -10,6 +10,7 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.TableCellRenderer;
+import widget.LookAndFeelSMC;
 
 /**
  *
@@ -22,13 +23,13 @@ public class WarnaTable4 extends JTextArea implements TableCellRenderer {
         this.setWrapStyleWord(true);
         this.setLineWrap(true);
         if (row % 2 == 1){
-            this.setBackground(new Color(255,244,244));
+            this.setBackground(LookAndFeelSMC.ALT_WHITE);
         }else{
-            this.setBackground(new Color(255,255,255));
+            this.setBackground(Color.WHITE);
         }
-        this.setSelectionColor(new Color(255,255,255));
-        this.setSelectedTextColor(new Color(255,0,0));
-        this.setForeground(new Color(50,50,50));
+        this.setSelectionColor(Color.WHITE);
+        this.setSelectedTextColor(Color.RED);
+        this.setForeground(LookAndFeelSMC.TEXT_DARK);
         this.setFont(new java.awt.Font("Tahoma", 0, 11));
         return this;
     }

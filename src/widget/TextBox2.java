@@ -13,9 +13,9 @@ public class TextBox2 extends JTextField {
         super();
         setFont(new java.awt.Font("Tahoma", 0, 11));
         setSelectionColor(new Color(190, 210, 215));
-        setSelectedTextColor(new Color(50, 50, 50));
-        setForeground(new Color(50,50,50));
-        setBackground(new Color(255,255,255));
+        setSelectedTextColor(LookAndFeelSMC.TEXT_DARK);
+        setForeground(LookAndFeelSMC.TEXT_DARK);
+        setBackground(Color.WHITE);
         setHorizontalAlignment(LEFT);
         setSize(WIDTH,23);
     }

@@ -94,6 +94,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.util.HtmlUtils;
 import rekammedis.RMRiwayatPerawatan;
 import simrskhanza.DlgCariCaraBayar;
+import widget.LookAndFeelSMC;
 
 public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
@@ -169,8 +170,8 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                 Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 switch ((Integer) table.getValueAt(row, 12)) {
                     case 1:
-                        component.setBackground(new Color(50, 50, 50));
-                        component.setForeground(new Color(255, 255, 255));
+                        component.setBackground(LookAndFeelSMC.TEXT_DARK);
+                        component.setForeground(Color.WHITE);
                         break;
                     case 2:
                     case 3:
@@ -179,8 +180,8 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                         break;
                     case 4:
                     case 5:
-                        component.setBackground(new Color(30, 230, 255));
-                        component.setForeground(new Color(45, 40, 55));
+                        component.setBackground(LookAndFeelSMC.BRIGHT_CYAN);
+                        component.setForeground(LookAndFeelSMC.DARK_PURPLE);
                         break;
                 }
                 return component;

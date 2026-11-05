@@ -10,6 +10,7 @@ import java.awt.Component;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import widget.LookAndFeelSMC;
 
 /**
  *
@@ -21,22 +22,24 @@ public class WarnaTable2 extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if (row % 2 == 1){
-            component.setBackground(new Color(255,244,244));
+            component.setBackground(LookAndFeelSMC.ALT_WHITE);
         }else{
-            component.setBackground(new Color(255,255,255));
+            component.setBackground(Color.WHITE);
         }
         if (column == kolom){
-            component.setBackground(new Color(215,215,255));
-            component.setForeground(new Color(255,255,255));
+            component.setBackground(LookAndFeelSMC.LAVENDER);
+            component.setForeground(Color.WHITE);
             try {
                 if(!table.getValueAt(row,kolom).toString().equals("")){
-                    component.setBackground(new Color(255,255,255));
-                    component.setForeground(new Color(55,55,175));
+                    component.setBackground(Color.WHITE);
+                    component.setForeground(LookAndFeelSMC.DARK_BLUE);
                 }
             } catch (Exception e) {
             }
+        }else if (isSelected) {
+            component.setForeground(Color.RED);
         }else{
-            component.setForeground(new Color(70,70,70));
+            component.setForeground(LookAndFeelSMC.TEXT_GRAY);
         }
         if (isSelected) {
             component.setFont(component.getFont().deriveFont(Font.BOLD));

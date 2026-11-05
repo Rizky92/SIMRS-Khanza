@@ -8,6 +8,7 @@ import javax.swing.JViewport;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicBorders;
 
@@ -177,7 +178,10 @@ public class TextArea extends JTextArea {
         super.addNotify();
         JScrollPane sp = scrollPane();
         if (null != sp && !(sp.getBorder() instanceof UIResource)) {
-            Border border = UIManager.getBorder("ScrollPane.border");
+            Border current = sp.getBorder();
+            Border border = current instanceof TitledBorder && UIManager.getLookAndFeel() instanceof LookAndFeelSMC
+                ? new LookAndFeelSMC.TitledScrollPaneBorder((TitledBorder) current)
+                : UIManager.getBorder("ScrollPane.border");
             if (null != border) {
                 sp.setBorder(border);
             }

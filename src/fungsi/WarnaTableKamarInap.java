@@ -9,6 +9,7 @@ import java.awt.Component;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import widget.LookAndFeelSMC;
 
 /**
  *
@@ -20,24 +21,24 @@ public class WarnaTableKamarInap extends DefaultTableCellRenderer {
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
         if (row % 2 == 1) {
-            component.setBackground(new Color(255, 244, 244));
-            component.setForeground(new Color(50, 50, 50));
+            component.setBackground(LookAndFeelSMC.ALT_WHITE);
+            component.setForeground(LookAndFeelSMC.TEXT_DARK);
         } else {
-            component.setBackground(new Color(255, 255, 255));
-            component.setForeground(new Color(50, 50, 50));
+            component.setBackground(Color.WHITE);
+            component.setForeground(LookAndFeelSMC.TEXT_DARK);
         }
 
         if (isSelected) {
-            component.setForeground(new Color(255, 0, 0));
+            component.setForeground(Color.RED);
             component.setFont(component.getFont().deriveFont(Font.BOLD));
         } else {
-            component.setForeground(new Color(50, 50, 50));
+            component.setForeground(LookAndFeelSMC.TEXT_DARK);
             component.setFont(component.getFont().deriveFont(Font.PLAIN));
         }
 
         if (table.getValueAt(row, 21).toString().equals("Sudah Bayar")) {
-            component.setBackground(new Color(50, 50, 50));
-            component.setForeground(new Color(255, 255, 255));
+            component.setBackground(LookAndFeelSMC.TEXT_DARK);
+            component.setForeground(Color.WHITE);
         }
 
         return component;

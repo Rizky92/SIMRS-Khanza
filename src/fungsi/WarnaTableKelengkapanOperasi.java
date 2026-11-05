@@ -10,6 +10,7 @@ import java.awt.Component;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import widget.LookAndFeelSMC;
 
 /**
  *
@@ -19,11 +20,11 @@ public class WarnaTableKelengkapanOperasi extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if (row % 2 == 1){
-            component.setBackground(new Color(255,246,244));
-            component.setForeground(new Color(50,50,50));
+            component.setBackground(LookAndFeelSMC.ALT_WHITE);
+            component.setForeground(LookAndFeelSMC.TEXT_DARK);
         }else{
-            component.setBackground(new Color(255,255,255));
-            component.setForeground(new Color(50,50,50));
+            component.setBackground(Color.WHITE);
+            component.setForeground(LookAndFeelSMC.TEXT_DARK);
         }
 
         if (column == 12){
@@ -39,6 +40,9 @@ public class WarnaTableKelengkapanOperasi extends DefaultTableCellRenderer {
             }
         }
         if (isSelected) {
+            if (LookAndFeelSMC.TEXT_DARK.equals(component.getForeground())) {
+                component.setForeground(Color.RED);
+            }
             component.setFont(component.getFont().deriveFont(Font.BOLD));
         } else {
             component.setFont(component.getFont().deriveFont(Font.PLAIN));

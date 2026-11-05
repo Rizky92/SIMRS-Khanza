@@ -10,6 +10,7 @@ import java.awt.Component;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import widget.LookAndFeelSMC;
 
 /**
  *
@@ -20,20 +21,20 @@ public class WarnaTableKasirRalan extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if (row % 2 == 1){
-            component.setBackground(new Color(255,244,244));
+            component.setBackground(LookAndFeelSMC.ALT_WHITE);
         }else{
-            component.setBackground(new Color(255,255,255));
+            component.setBackground(Color.WHITE);
         }
         if (isSelected) {
-            component.setForeground(new Color(255, 0, 0));
+            component.setForeground(Color.RED);
             component.setFont(component.getFont().deriveFont(Font.BOLD));
         } else {
-            component.setForeground(new Color(50, 50, 50));
+            component.setForeground(LookAndFeelSMC.TEXT_DARK);
             component.setFont(component.getFont().deriveFont(Font.PLAIN));
         }
         if(table.getValueAt(row,10).toString().equals("Sudah")){
-            component.setBackground(new Color(200,0,0));
-            component.setForeground(new Color(255,230,230));
+            component.setBackground(LookAndFeelSMC.DARK_RED);
+            component.setForeground(LookAndFeelSMC.PALE_RED);
         }else if(table.getValueAt(row,10).toString().equals("Batal")){
             component.setBackground(new Color(255,243,109));
             component.setForeground(new Color(67,60,25));
@@ -47,16 +48,16 @@ public class WarnaTableKasirRalan extends DefaultTableCellRenderer {
             if (row % 2 == 1) {
                 component.setBackground(new Color(17, 217, 242));
             } else {
-                component.setBackground(new Color(30, 230, 255));
+                component.setBackground(LookAndFeelSMC.BRIGHT_CYAN);
             }
-            component.setForeground(new Color(45, 40, 55));
+            component.setForeground(LookAndFeelSMC.DARK_PURPLE);
         }else if (table.getValueAt(row, 10).toString().equals("Rujuk Internal")) {
             component.setBackground(new Color(138, 1, 148));
             component.setForeground(new Color(250, 232, 255));
         }
         if(table.getValueAt(row,15).toString().equals("Sudah Bayar")){
-            component.setBackground(new Color(50,50,50));
-            component.setForeground(new Color(255,255,255));
+            component.setBackground(LookAndFeelSMC.TEXT_DARK);
+            component.setForeground(Color.WHITE);
         }
         return component;
     }

@@ -9,6 +9,7 @@ import java.awt.Component;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import widget.LookAndFeelSMC;
 
 /**
  *
@@ -23,21 +24,35 @@ public class WarnaTableValidasiResep extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if (row % 2 == 1) {
-            component.setBackground(new Color(255, 244, 244));
-            component.setForeground(new Color(50, 50, 50));
+            component.setBackground(LookAndFeelSMC.ALT_WHITE);
+            component.setForeground(LookAndFeelSMC.TEXT_DARK);
         } else {
-            component.setBackground(new Color(255, 255, 255));
-            component.setForeground(new Color(50, 50, 50));
+            component.setBackground(Color.WHITE);
+            component.setForeground(LookAndFeelSMC.TEXT_DARK);
+        }
+        if (isSelected) {
+            component.setForeground(Color.RED);
+        }
+        if (column == posisiWarna) {
+            component.setBackground(LookAndFeelSMC.LAVENDER);
+            component.setForeground(Color.WHITE);
+            try {
+                if (! table.getValueAt(row, posisiWarna).toString().isEmpty()) {
+                    component.setBackground(Color.WHITE);
+                    component.setForeground(LookAndFeelSMC.DARK_BLUE);
+                }
+            } catch (Exception e) {
+            }
         }
 
         try {
             if (Integer.parseInt(table.getValueAt(row, posisiKondisi).toString()) > 0) {
-                component.setBackground(new Color(200, 0, 0));
-                component.setForeground(new Color(255, 230, 230));
+                component.setBackground(LookAndFeelSMC.DARK_RED);
+                component.setForeground(LookAndFeelSMC.PALE_RED);
                 if (column == posisiWarna) {
                     if (! table.getValueAt(row, posisiWarna).toString().isEmpty()) {
-                        component.setBackground(new Color(255, 255, 255));
-                        component.setForeground(new Color(55, 55, 175));
+                        component.setBackground(Color.WHITE);
+                        component.setForeground(LookAndFeelSMC.DARK_BLUE);
                     }
                 }
             }

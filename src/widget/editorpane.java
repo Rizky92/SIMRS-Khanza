@@ -16,9 +16,9 @@ import javax.swing.text.Caret;
 public class editorpane extends JEditorPane  {
     private static final long serialVersionUID = 2L;
 
-    static final Color AKSEN   = new Color(22, 160, 93);
-    static final Color GARIS   = new Color(239, 244, 234);
-    static final Color TEKS    = new Color(50, 50, 50);
+    static final Color AKSEN   = LookAndFeelSMC.ACCENT;
+    static final Color GARIS   = LookAndFeelSMC.PALE_GREEN;
+    static final Color TEKS    = LookAndFeelSMC.TEXT_DARK;
 
     private static final Border PADDING         = new EmptyBorder(6, 8, 6, 8);
     private static final Border BORDER_MANDIRI  = new CompoundBorder(new LineBorder(GARIS), PADDING);
@@ -29,8 +29,8 @@ public class editorpane extends JEditorPane  {
         setFont(new Font("Tahoma", Font.PLAIN, 11));
         setForeground(TEKS);
         setBackground(Color.WHITE);
-        setSelectionColor(new Color(0xCDEBDA));
-        setSelectedTextColor(new Color(0x0E3B24));
+        setSelectionColor(LookAndFeelSMC.MINT);
+        setSelectedTextColor(LookAndFeelSMC.DARK_GREEN);
         setCaretColor(AKSEN);
         setBorder(BORDER_MANDIRI);
 

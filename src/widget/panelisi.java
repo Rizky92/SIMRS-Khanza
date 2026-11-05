@@ -27,15 +27,15 @@ public class panelisi extends JPanel{
     private BufferedImage gradientImage;
     //private Color warnaAtas = new Color(245,200,245) ;
     //private Color warnaBawah = new Color(245,150,245) ;
-    private Color warnaAtas = new Color(255,255,255) ;
-    private Color warnaBawah = new Color(255,255,255) ;
+    private Color warnaAtas = Color.WHITE ;
+    private Color warnaBawah = Color.WHITE ;
 
     //private Color warnaAtas = new Color(255,194,255);
     //private Color warnaBawah = new Color(255,194,255);
 
     public panelisi(){
         super();
-        this.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(239,244,234)));
+        this.setBorder(javax.swing.BorderFactory.createLineBorder(LookAndFeelSMC.PALE_GREEN));
     }
 
     public panelisi(LayoutManager layout) {

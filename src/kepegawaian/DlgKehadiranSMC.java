@@ -63,6 +63,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import smc.utils.ExcelSMC;
+import widget.LookAndFeelSMC;
 
 public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private final DefaultTableModel tabMode, tabModeImport, tabModeScan, tabModeLog;
@@ -80,7 +81,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private static final int KOLOM_MODE = 3;
     private static final Color WARNA_TANPA_KETERANGAN = new Color(220, 20, 20);
     private static final Color WARNA_IZIN = new Color(30, 90, 200);
-    private static final Color WARNA_NORMATIF = new Color(0, 0, 0);
+    private static final Color WARNA_NORMATIF = Color.BLACK;
     private static final Color WARNA_LIBUR = new Color(255, 190, 205);
     private static final Color WARNA_TIDAK_LENGKAP = new Color(255, 160, 40);
     private static final String JAM_KOSONG = "--:--";
@@ -2618,15 +2619,15 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
             if (null == background) {
                 background = (1 == row % 2)
-                    ? new Color(255, 244, 244)
-                    : new Color(255, 255, 255);
+                    ? LookAndFeelSMC.ALT_WHITE
+                    : Color.WHITE;
             }
 
             component.setBackground(background);
 
             boolean gelap = WARNA_TANPA_KETERANGAN.equals(background) || WARNA_IZIN.equals(background) || WARNA_NORMATIF.equals(background);
 
-            component.setForeground(gelap ? new Color(255, 255, 255) : isSelected ? new Color(255, 0, 0) : new Color(50, 50, 50));
+            component.setForeground(gelap ? Color.WHITE : isSelected ? Color.RED : LookAndFeelSMC.TEXT_DARK);
             component.setFont(component.getFont().deriveFont(isSelected ? Font.BOLD : Font.PLAIN));
 
             return component;

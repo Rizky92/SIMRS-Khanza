@@ -22,12 +22,12 @@ public class BackCari extends JPanel {
 
     private static final long serialVersionUID = -1;
     private BufferedImage gradientImage;
-    private final Color black = new Color(255,255,255);
-    private final Color warna = new Color(255,255,254);
+    private final Color black = Color.WHITE;
+    private final Color warna = LookAndFeelSMC.NEAR_WHITE;
 
     public BackCari() {
         super();
-        this.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(239,244,234)));
+        this.setBorder(javax.swing.BorderFactory.createLineBorder(LookAndFeelSMC.PALE_GREEN));
     }
 
     @Override

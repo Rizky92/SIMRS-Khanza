@@ -27,7 +27,7 @@ public class MenuBar extends JMenuBar {
         HIJAU(new Color(0x1CB06C), new Color(0x0B8A4F), new Color(0x077242), Color.WHITE, 45),
         BIRU (new Color(0x3C8FF0), new Color(0x1D6DCE), new Color(0x165AAD), Color.WHITE, 45),
         UNGU (new Color(0x8C5FF6), new Color(0x6A40DA), new Color(0x5530B8), Color.WHITE, 45),
-        GELAP(new Color(0x2D323A), new Color(0x1E2127), new Color(0x3DDC84), new Color(0xE8ECF1), 20);
+        GELAP(new Color(0x2D323A), new Color(0x1E2127), LookAndFeelSMC.BRIGHT_GREEN, new Color(0xE8ECF1), 20);
 
         final Color atas, bawah, garis, teks;
         final int kilau;   // intensitas efek glass (0 = flat)

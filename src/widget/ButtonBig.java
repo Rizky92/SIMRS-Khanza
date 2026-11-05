@@ -1,7 +1,5 @@
 package widget;
 
-import java.awt.Color;
-
 /**
  *
  * @author usu
@@ -15,7 +13,7 @@ public class ButtonBig extends Button {
 
     public ButtonBig() {
         super();
-        setForeground(new Color(50,50,50));
+        setForeground(LookAndFeelSMC.TEXT_DARK);
         setFont(new java.awt.Font("Tahoma", 0, 11));
         setHorizontalTextPosition(CENTER);
         setVerticalTextPosition(BOTTOM);

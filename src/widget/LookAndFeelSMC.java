@@ -15,6 +15,7 @@ import com.formdev.flatlaf.ui.FlatPopupMenuSeparatorUI;
 import com.formdev.flatlaf.ui.FlatPopupMenuUI;
 import com.formdev.flatlaf.ui.FlatScrollBarUI;
 import com.formdev.flatlaf.ui.FlatScrollPaneBorder;
+import com.formdev.flatlaf.ui.FlatScrollPaneUI;
 import com.formdev.flatlaf.ui.FlatTabbedPaneUI;
 import com.formdev.flatlaf.ui.FlatTableHeaderBorder;
 import com.formdev.flatlaf.ui.FlatTableUI;
@@ -39,8 +40,13 @@ import java.awt.Rectangle;
 import java.awt.Window;
 import java.awt.geom.Rectangle2D;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.util.IdentityHashMap;
 import java.util.Map;
+import java.util.Properties;
+import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JList;
@@ -58,6 +64,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.ComboPopup;
@@ -99,6 +106,51 @@ public class LookAndFeelSMC extends FlatLightLaf {
 
     public static final String NAME = "SIMRS Khanza";
 
+    /** Default text, {@code @textDark}; also the {@code @foreground} of the theme. */
+    public static final Color TEXT_DARK = paletteColor("textDark");
+
+    /** Muted text, {@code @textGray}. */
+    public static final Color TEXT_GRAY = paletteColor("textGray");
+
+    /** Background of alternate (odd) table rows, {@code @altWhite}; also the {@code @alternateWhiteColor} of the theme. */
+    public static final Color ALT_WHITE = paletteColor("altWhite");
+
+    /** Off-white background used by upstream forms in place of plain white, {@code @nearWhite}. */
+    public static final Color NEAR_WHITE = paletteColor("nearWhite");
+
+    /** Light green of panel and frame borders, {@code @paleGreen}. */
+    public static final Color PALE_GREEN = paletteColor("paleGreen");
+
+    /** Accent green, {@code @accent}; also the {@code @accentColor} of the theme. */
+    public static final Color ACCENT = paletteColor("accent");
+
+    /** Bright green, {@code @brightGreen}. */
+    public static final Color BRIGHT_GREEN = paletteColor("brightGreen");
+
+    /** Mint background of selected text, {@code @mint}. */
+    public static final Color MINT = paletteColor("mint");
+
+    /** Dark green text on {@link #MINT}, {@code @darkGreen}. */
+    public static final Color DARK_GREEN = paletteColor("darkGreen");
+
+    /** Dark red background of rows flagged by a condition, {@code @darkRed}. */
+    public static final Color DARK_RED = paletteColor("darkRed");
+
+    /** Pale red text on {@link #DARK_RED}, {@code @paleRed}. */
+    public static final Color PALE_RED = paletteColor("paleRed");
+
+    /** Dark blue text of a highlighted column that has a value, {@code @darkBlue}. */
+    public static final Color DARK_BLUE = paletteColor("darkBlue");
+
+    /** Lavender background of a highlighted column that is still empty, {@code @lavender}. */
+    public static final Color LAVENDER = paletteColor("lavender");
+
+    /** Bright cyan background, {@code @brightCyan}. */
+    public static final Color BRIGHT_CYAN = paletteColor("brightCyan");
+
+    /** Dark purple text on {@link #BRIGHT_CYAN}, {@code @darkPurple}. */
+    public static final Color DARK_PURPLE = paletteColor("darkPurple");
+
     private static final float CHECK_BOX_ICON_SCALE = 1.15f;
 
     private static final String KEY_ROUNDED_POPUP = "widget.LookAndFeelSMC.roundedPopup";
@@ -116,6 +168,46 @@ public class LookAndFeelSMC extends FlatLightLaf {
         }
 
         return FlatLaf.setup(new LookAndFeelSMC());
+    }
+
+    /**
+     * Reads a palette color from {@code LookAndFeelSMC.properties}, following references to other palette entries.
+     *
+     * @param name the palette variable without its {@code @}
+     * @return the color
+     * @throws IllegalStateException when the variable is missing or is not a {@code #RRGGBB} value
+     */
+    private static Color paletteColor(String name) {
+        String key = "@" + name;
+        String value = PaletteHolder.PROPERTIES.getProperty(key);
+        for (int depth = 0; null != value && value.startsWith("@") && depth < 8; depth++) {
+            key = value;
+            value = PaletteHolder.PROPERTIES.getProperty(key);
+        }
+        if (null == value || !value.matches("#[0-9A-Fa-f]{6}")) {
+            throw new IllegalStateException("Palette entry " + key + " in LookAndFeelSMC.properties must be a #RRGGBB value, found: " + value);
+        }
+
+        return new Color(Integer.parseInt(value.substring(1), 16));
+    }
+
+    private static final class PaletteHolder {
+
+        static final Properties PROPERTIES = load();
+
+        private static Properties load() {
+            Properties properties = new Properties();
+            try (InputStream in = LookAndFeelSMC.class.getResourceAsStream("LookAndFeelSMC.properties")) {
+                if (null == in) {
+                    throw new IllegalStateException("LookAndFeelSMC.properties is missing from the classpath");
+                }
+                properties.load(in);
+            } catch (IOException e) {
+                throw new UncheckedIOException(e);
+            }
+
+            return properties;
+        }
     }
 
     @Override
@@ -149,6 +241,8 @@ public class LookAndFeelSMC extends FlatLightLaf {
         defaults.put(OptionPaneUI.class.getName(), OptionPaneUI.class);
         defaults.put("TabbedPaneUI", TabbedPaneUI.class.getName());
         defaults.put(TabbedPaneUI.class.getName(), TabbedPaneUI.class);
+        defaults.put("ScrollPaneUI", ScrollPaneUI.class.getName());
+        defaults.put(ScrollPaneUI.class.getName(), ScrollPaneUI.class);
         defaults.put("ScrollBarUI", ScrollBarUI.class.getName());
         defaults.put(ScrollBarUI.class.getName(), ScrollBarUI.class);
         defaults.put("TableUI", TableUI.class.getName());
@@ -192,6 +286,86 @@ public class LookAndFeelSMC extends FlatLightLaf {
         @Override
         protected boolean isEnabled(Component c) {
             return super.isEnabled(c) && isEditable(c);
+        }
+    }
+
+    /**
+     * Scroll pane border that keeps the title of a {@link TitledBorder} given in a form, painting it above the rounded box instead of dropping it.
+     */
+    public static class TitledScrollPaneBorder extends ScrollPaneBorder {
+
+        private final TitledBorder title;
+
+        public TitledScrollPaneBorder(TitledBorder source) {
+            super();
+            title = new TitledBorder(BorderFactory.createEmptyBorder(), source.getTitle(), source.getTitleJustification(), TitledBorder.TOP, source.getTitleFont(), source.getTitleColor());
+        }
+
+        /**
+         * Returns the height of the band above the rounded box that holds the title.
+         *
+         * @param c the scroll pane
+         * @return the title band height
+         */
+        public int getTitleHeight(Component c) {
+            return title.getBorderInsets(c).top;
+        }
+
+        int getBoxArc(Component c) {
+            return getArc(c);
+        }
+
+        @Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+            int titleHeight = getTitleHeight(c);
+            title.paintBorder(c, g, x, y, width, height);
+            super.paintBorder(c, g, x, y + titleHeight, width, height - titleHeight);
+        }
+
+        @Override
+        public Insets getBorderInsets(Component c, Insets insets) {
+            insets = super.getBorderInsets(c, insets);
+            insets.top += getTitleHeight(c);
+            return insets;
+        }
+    }
+
+    public static class ScrollPaneUI extends FlatScrollPaneUI {
+
+        public static ComponentUI createUI(JComponent c) {
+            return new ScrollPaneUI();
+        }
+
+        /**
+         * Paints the rounded view background below the title band of a {@link TitledScrollPaneBorder}, where the base class would paint it over the whole scroll pane.
+         */
+        @Override
+        public void update(Graphics g, JComponent c) {
+            Border border = c.getBorder();
+            if (!(border instanceof TitledScrollPaneBorder)) {
+                super.update(g, c);
+                return;
+            }
+
+            if (c.isOpaque()) {
+                FlatUIUtils.paintParentBackground(g, c);
+                Insets insets = c.getInsets();
+                g.setColor(c.getBackground());
+                g.fillRect(insets.left, insets.top, c.getWidth() - insets.left - insets.right, c.getHeight() - insets.top - insets.bottom);
+            }
+
+            TitledScrollPaneBorder titled = (TitledScrollPaneBorder) border;
+            float arc = UIScale.scale((float) titled.getBoxArc(c));
+            Component view = scrollpane.getViewport().getView();
+            if (arc > 0 && null != view) {
+                int titleHeight = titled.getTitleHeight(c);
+                g.setColor(view.getBackground());
+                Object[] oldRenderingHints = FlatUIUtils.setRenderingHints(g);
+                FlatUIUtils.paintComponentBackground((Graphics2D) g, 0, titleHeight, c.getWidth(), c.getHeight() - titleHeight, FlatUIUtils.getBorderFocusWidth(c), arc);
+                FlatUIUtils.resetRenderingHints(g, oldRenderingHints);
+            }
+
+            paint(g, c);
         }
     }
 

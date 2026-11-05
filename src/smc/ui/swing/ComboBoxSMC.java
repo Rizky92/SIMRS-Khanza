@@ -32,6 +32,7 @@ import javax.swing.plaf.ComboBoxUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.text.JTextComponent;
+import widget.LookAndFeelSMC;
 
 /**
  * A ComboBox alternative that can be populated with a plain List or with key-value pairs (Map).
@@ -59,8 +60,8 @@ public final class ComboBoxSMC extends JComboBox<Object> {
     public ComboBoxSMC() {
         super();
         setFont(new Font("Tahoma", 0, 11));
-        setBackground(new Color(255, 255, 255));
-        setForeground(new Color(50, 50, 50));
+        setBackground(Color.WHITE);
+        setForeground(LookAndFeelSMC.TEXT_DARK);
         setSize(WIDTH, 23);
         filterModel = new FilterModel();
 

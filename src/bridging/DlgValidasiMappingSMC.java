@@ -46,6 +46,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
+import widget.LookAndFeelSMC;
 
 /**
  *
@@ -131,9 +132,9 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         }
         tbValidasi.setDefaultRenderer(Object.class, new WarnaTable());
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)),
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(LookAndFeelSMC.PALE_GREEN),
             SUMBER_RADIOLOGI.equals(this.sumber) ? "::[ Validasi Mapping Kode SatuSehat Radiologi ]::" : "::[ Validasi Mapping Kode SatuSehat Laboratorium ]::",
-            javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50)));
+            javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), LookAndFeelSMC.TEXT_DARK));
     }
 
     /**

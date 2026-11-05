@@ -30,6 +30,7 @@ import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.lang3.StringUtils;
+import widget.LookAndFeelSMC;
 
 /**
  *
@@ -132,11 +133,11 @@ public class PanelIdrgSmc extends widget.panelisi {
                 JLabel c = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 c.setHorizontalAlignment(JLabel.RIGHT);
                 if (column == 1) {
-                    c.setBackground(new Color(215, 215, 255));
-                    c.setForeground(new Color(50, 50, 50));
+                    c.setBackground(LookAndFeelSMC.LAVENDER);
+                    c.setForeground(LookAndFeelSMC.TEXT_DARK);
                     if (value != null && ((Integer) value) > 0) {
-                        c.setBackground(new Color(255, 255, 255));
-                        c.setForeground(new Color(55, 55, 175));
+                        c.setBackground(Color.WHITE);
+                        c.setForeground(LookAndFeelSMC.DARK_BLUE);
                     } else {
                         c.setText("");
                     }
