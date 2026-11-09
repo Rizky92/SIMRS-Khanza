@@ -25,6 +25,7 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -591,14 +592,34 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         if (tabMode.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!");
         } else {
+            ArrayList<String> bookingBatal = new ArrayList<>();
             for (int i = 0; i < tabMode.getRowCount(); i++) {
                 if (tbJnsPerawatan.getValueAt(i, 0).toString().equals("true")) {
+                    /*
                     if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Belum',validasi='0000-00-00 00:00:00'",1,new String[]{
                         tbJnsPerawatan.getValueAt(i,15).toString()
                     })==true){
                         Sequel.meghapus("referensi_mobilejkn_bpjs_batal","nobooking",tbJnsPerawatan.getValueAt(i,15).toString());
                     }
+                    */
+                    if (Sequel.mengupdatetfSmc("referensi_mobilejkn_bpjs", "status = 'Belum', validasi = '0000-00-00 00:00:00.000'", "nobooking = ? and " +
+                        "exists(select * from referensi_mobilejkn_bpjs_batal where referensi_mobilejkn_bpjs_batal.nobooking = referensi_mobilejkn_bpjs.nobooking " +
+                        "and referensi_mobilejkn_bpjs_batal.statuskirim = 'Belum')", tbJnsPerawatan.getValueAt(i,15).toString()
+                    )) {
+                        Sequel.menghapustfSmc("referensi_mobilejkn_bpjs_batal", "nobooking = ?", tbJnsPerawatan.getValueAt(i, 15).toString());
+                    } else if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.nobooking = ? and referensi_mobilejkn_bpjs.status = 'Batal'", tbJnsPerawatan.getValueAt(i, 15).toString())) {
+                        bookingBatal.add(tbJnsPerawatan.getValueAt(i, 15).toString());
+                    }
                 }
+            }
+            if (!bookingBatal.isEmpty() && JOptionPane.showConfirmDialog(null, "<html><body>" + bookingBatal.size() + " booking sudah dibatalkan di BPJS sehingga statusnya tidak dapat dikembalikan.<br>" +
+                "Daftarkan ulang dengan No. Rawat, No. Booking, dan No. Antrian baru?</body></html>", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION
+            ) {
+                StringBuilder pesan = new StringBuilder();
+                for (String noBooking : bookingBatal) {
+                    daftarUlang(noBooking, pesan);
+                }
+                JOptionPane.showMessageDialog(null, "<html><body>" + pesan + "</body></html>");
             }
             runBackground(() ->tampil());
         }
@@ -749,6 +770,114 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
+    }
+
+    private void daftarUlang(String noBookingLama, StringBuilder pesan) {
+        String noRawatLama = "", tglPeriksa = "", kodePoli = "", kodeDokter = "", noReg = "", noRawat = "", noBooking = "";
+        boolean batalkanRegLama = false;
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select b.no_rawat, b.tanggalperiksa, b.tanggalperiksa < current_date() as lewat, r.no_rawat as no_rawat_reg, r.stts, r.status_lanjut, r.status_bayar, " +
+            "exists(select * from bridging_sep s where s.no_rawat = r.no_rawat) as ada_sep, coalesce(r.kd_dokter, (select md.kd_dokter from maping_dokter_dpjpvclaim md " +
+            "where md.kd_dokter_bpjs = b.kodedokter limit 1)) as kd_dokter, coalesce(r.kd_poli, (select mp.kd_poli_rs from maping_poli_bpjs mp join maping_dokter_dpjpvclaim md " +
+            "on md.kd_dokter_bpjs = b.kodedokter join jadwal j on j.kd_poli = mp.kd_poli_rs and j.kd_dokter = md.kd_dokter and j.hari_kerja = elt(dayofweek(b.tanggalperiksa), " +
+            "'AKHAD', 'SENIN', 'SELASA', 'RABU', 'KAMIS', 'JUMAT', 'SABTU') and j.jam_mulai = concat(left(b.jampraktek, 5), ':00') and j.jam_selesai = " +
+            "concat(right(b.jampraktek, 5), ':00') where mp.kd_poli_bpjs = b.kodepoli limit 1)) as kd_poli, (select a.nobooking from referensi_mobilejkn_bpjs a where " +
+            "a.nomorreferensi = b.nomorreferensi and a.status in ('Belum', 'Checkin') limit 1) as booking_aktif from referensi_mobilejkn_bpjs b left join reg_periksa r " +
+            "on b.no_rawat = r.no_rawat where b.nobooking = ? and b.status = 'Batal'"
+        )) {
+            ps.setString(1, noBookingLama);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) {
+                    pesan.append(noBookingLama).append(" : Booking tidak ditemukan atau statusnya bukan Batal<br>");
+                    return;
+                }
+                if (rs.getBoolean("lewat")) {
+                    pesan.append(noBookingLama).append(" : Tanggal periksa sudah lewat<br>");
+                    return;
+                }
+                if (rs.getString("booking_aktif") != null) {
+                    pesan.append(noBookingLama).append(" : Nomor referensi sudah dipakai booking aktif ").append(rs.getString("booking_aktif")).append("<br>");
+                    return;
+                }
+                if (rs.getString("kd_poli") == null || rs.getString("kd_dokter") == null) {
+                    pesan.append(noBookingLama).append(" : Mapping poli/dokter atau jadwal praktek tidak ditemukan<br>");
+                    return;
+                }
+                noRawatLama = rs.getString("no_rawat");
+                tglPeriksa = rs.getString("tanggalperiksa");
+                kodePoli = rs.getString("kd_poli");
+                kodeDokter = rs.getString("kd_dokter");
+                if (rs.getString("no_rawat_reg") != null && !"Batal".equals(rs.getString("stts"))) {
+                    if ("Belum".equals(rs.getString("stts")) && "Ralan".equals(rs.getString("status_lanjut")) && "Belum Bayar".equals(rs.getString("status_bayar")) && !rs.getBoolean("ada_sep")) {
+                        batalkanRegLama = true;
+                    } else {
+                        pesan.append(noBookingLama).append(" : No. Rawat ").append(noRawatLama).append(" sudah menerima pelayanan, batalkan registrasi tersebut terlebih dahulu<br>");
+                        return;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            pesan.append(noBookingLama).append(" : Gagal membaca data booking<br>");
+            return;
+        }
+
+        boolean sukses = true;
+        Sequel.AutoComitFalse();
+        try {
+            if (batalkanRegLama) {
+                sukses = Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Batal'", "no_rawat = ? and stts = 'Belum' and status_bayar = 'Belum Bayar'", noRawatLama);
+            }
+            if (sukses) {
+                noReg = Sequel.cariIsiSmc(
+                    "select lpad(greatest((select ifnull(max(convert(booking_registrasi.no_reg, signed)), 0) from booking_registrasi where booking_registrasi.kd_poli = ? and " +
+                    "booking_registrasi.kd_dokter = ? and booking_registrasi.tanggal_periksa = ?), (select ifnull(max(convert(reg_periksa.no_reg, signed)), 0) from reg_periksa " +
+                    "where reg_periksa.kd_poli = ? and reg_periksa.kd_dokter = ? and reg_periksa.tgl_registrasi = ?)) + 1, 3, '0')",
+                    kodePoli, kodeDokter, tglPeriksa, kodePoli, kodeDokter, tglPeriksa
+                );
+                noRawat = Sequel.cariIsiSmc(
+                    "select concat(date_format(?, '%Y/%m/%d/'), lpad(greatest((select ifnull(max(convert(right(referensi_mobilejkn_bpjs.no_rawat, 6), signed)), 0) from " +
+                    "referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.no_rawat like concat(date_format(?, '%Y/%m/%d/'), '%')), (select ifnull(max(convert(right(" +
+                    "reg_periksa.no_rawat, 6), signed)), 0) from reg_periksa where reg_periksa.no_rawat like concat(date_format(?, '%Y/%m/%d/'), '%'))) + 1, 6, '0'))",
+                    tglPeriksa, tglPeriksa, tglPeriksa
+                );
+                sukses = !noReg.isBlank() && !noRawat.isBlank() && Sequel.executeRawSmc(
+                    "insert into reg_periksa (no_reg, no_rawat, tgl_registrasi, jam_reg, kd_dokter, no_rkm_medis, kd_poli, p_jawab, almt_pj, hubunganpj, biaya_reg, stts, " +
+                    "stts_daftar, status_lanjut, kd_pj, umurdaftar, sttsumur, status_bayar, status_poli) select ?, ?, b.tanggalperiksa, concat(left(b.jampraktek, 5), ':00'), ?, " +
+                    "b.norm, ?, p.namakeluarga, concat_ws(', ', p.alamatpj, p.kelurahanpj, p.kecamatanpj, p.kabupatenpj, p.propinsipj), p.keluarga, (select poliklinik.registrasilama " +
+                    "from poliklinik where poliklinik.kd_poli = ?), 'Belum', if(b.pasienbaru = '1', 'Baru', 'Lama'), 'Ralan', (select password_asuransi.kd_pj from password_asuransi " +
+                    "limit 1), case when timestampdiff(year, p.tgl_lahir, b.tanggalperiksa) > 0 then timestampdiff(year, p.tgl_lahir, b.tanggalperiksa) when timestampdiff(month, " +
+                    "p.tgl_lahir, b.tanggalperiksa) > 0 then timestampdiff(month, p.tgl_lahir, b.tanggalperiksa) else timestampdiff(day, p.tgl_lahir, b.tanggalperiksa) end, case when " +
+                    "timestampdiff(year, p.tgl_lahir, b.tanggalperiksa) > 0 then 'Th' when timestampdiff(month, p.tgl_lahir, b.tanggalperiksa) > 0 then 'Bl' else 'Hr' end, 'Belum Bayar', " +
+                    "if(b.pasienbaru = '1' or not exists(select * from reg_periksa r where r.no_rkm_medis = b.norm and r.kd_poli = ? and r.no_rawat != ifnull(b.no_rawat, '')), 'Baru', " +
+                    "'Lama') from referensi_mobilejkn_bpjs b join pasien p on b.norm = p.no_rkm_medis where b.nobooking = ?",
+                    noReg, noRawat, kodeDokter, kodePoli, kodePoli, kodePoli, noBookingLama
+                );
+            }
+            if (sukses) {
+                noBooking = Sequel.autonomorSmc("", "", "referensi_mobilejkn_bpjs", "nobooking", 6, "0", tglPeriksa);
+                sukses = !noBooking.isBlank() && Sequel.executeRawSmc(
+                    "insert into referensi_mobilejkn_bpjs (nobooking, no_rawat, nomorkartu, nik, nohp, kodepoli, pasienbaru, norm, tanggalperiksa, kodedokter, jampraktek, " +
+                    "jeniskunjungan, nomorreferensi, nomorantrean, angkaantrean, estimasidilayani, sisakuotajkn, kuotajkn, sisakuotanonjkn, kuotanonjkn, status, validasi, statuskirim) " +
+                    "select ?, ?, b.nomorkartu, b.nik, b.nohp, b.kodepoli, b.pasienbaru, b.norm, b.tanggalperiksa, b.kodedokter, b.jampraktek, b.jeniskunjungan, b.nomorreferensi, " +
+                    "concat(?, '-', ?), ?, cast(unix_timestamp(timestamp(b.tanggalperiksa, concat(left(b.jampraktek, 5), ':00')) + interval (cast(? as signed) * 5) minute) * 1000 as unsigned), " +
+                    "greatest(b.kuotajkn - q.terpakai, 0), b.kuotajkn, greatest(b.kuotanonjkn - q.terpakai, 0), b.kuotanonjkn, 'Belum', '0000-00-00 00:00:00', 'Belum' from " +
+                    "referensi_mobilejkn_bpjs b cross join (select count(*) as terpakai from reg_periksa where reg_periksa.kd_poli = ? and reg_periksa.kd_dokter = ? and " +
+                    "reg_periksa.tgl_registrasi = ?) q where b.nobooking = ?",
+                    noBooking, noRawat, kodePoli, noReg, noReg, noReg, kodePoli, kodeDokter, tglPeriksa, noBookingLama
+                );
+            }
+            if (sukses) {
+                Sequel.Commit();
+                pesan.append(noBookingLama).append(" : Didaftarkan ulang dengan No. Booking ").append(noBooking).append(", No. Rawat ").append(noRawat)
+                    .append(", No. Antrian ").append(kodePoli).append("-").append(noReg).append("<br>");
+            } else {
+                Sequel.RollBack();
+                pesan.append(noBookingLama).append(" : Gagal mendaftarkan ulang, silahkan coba lagi<br>");
+            }
+        } finally {
+            Sequel.AutoComitTrue();
+        }
     }
 
     private void runBackground(Runnable task) {
