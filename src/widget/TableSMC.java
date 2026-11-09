@@ -5,7 +5,9 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.EventObject;
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -15,6 +17,7 @@ import javax.swing.plaf.UIResource;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.text.JTextComponent;
 
 public class TableSMC extends JTable {
     private static final long serialVersionUID = 2L;
@@ -22,6 +25,7 @@ public class TableSMC extends JTable {
 
     private Font boldFontBase;
     private Font boldFont;
+    private boolean replaceOnType;
 
     public TableSMC() {
         super();
@@ -68,6 +72,37 @@ public class TableSMC extends JTable {
             component.setBackground(prepareRenderer(getCellRenderer(row, column), row, column).getBackground());
         }
         return component;
+    }
+
+    /**
+     * Whether typing a character on a cell that is not being edited replaces its value, the way a spreadsheet does.
+     * Without it the typed character is appended to the cell's text, so typing {@code 25} on a cell showing {@code 0.0} edits it to {@code 0.025}.
+     * Editing started by a double click or F2 keeps the text either way.
+     *
+     * @return {@code true} when typing replaces the cell's value
+     */
+    public boolean isReplaceOnType() {
+        return replaceOnType;
+    }
+
+    /**
+     * @param replaceOnType {@code true} to make typing replace the cell's value
+     * @see #isReplaceOnType()
+     */
+    public void setReplaceOnType(boolean replaceOnType) {
+        this.replaceOnType = replaceOnType;
+    }
+
+    @Override
+    public boolean editCellAt(int row, int column, EventObject e) {
+        boolean editing = super.editCellAt(row, column, e);
+        if (editing && replaceOnType && e instanceof KeyEvent && getEditorComponent() instanceof JTextComponent) {
+            char typed = ((KeyEvent) e).getKeyChar();
+            if (KeyEvent.CHAR_UNDEFINED != typed && !Character.isISOControl(typed)) {
+                ((JTextComponent) getEditorComponent()).setText("");
+            }
+        }
+        return editing;
     }
 
     private Font boldFontSmc() {

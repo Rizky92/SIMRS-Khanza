@@ -18,6 +18,7 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,6 +29,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPetugas;
@@ -50,6 +53,8 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
     private WarnaTable2 warna=new WarnaTable2();
     public boolean tampikan=true;
     private boolean sukses=true;
+    private boolean menghitungSmc = false;
+    private volatile boolean totalTertundaSmc = false;
     private File file;
     private FileWriter fileWriter;
     private String Penerimaan_NonMedis="",PPN_Masukan="",Kontra_Penerimaan_NonMedis="";
@@ -87,6 +92,12 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
              }
         };
         tbDokter.setModel(tabMode);
+        tbDokter.setReplaceOnType(true);
+        tabMode.addTableModelListener(e -> {
+            if ((TableModelEvent.UPDATE == e.getType()) && (e.getFirstRow() == e.getLastRow()) && (TableModelEvent.ALL_COLUMNS != e.getColumn())) {
+                hitungBarisSmc(e.getFirstRow(), e.getColumn());
+            }
+        });
 
         tbDokter.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbDokter.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -124,6 +135,25 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
         kdptg.setDocument(new batasInput((byte)25).getKata(kdptg));
         Meterai.setDocument(new batasInput((byte)15).getOnlyAngka(Meterai));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
+        DocumentListener hitungUlang = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                jadwalkanTotalSmc();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                jadwalkanTotalSmc();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                jadwalkanTotalSmc();
+            }
+        };
+        tppn.getDocument().addDocumentListener(hitungUlang);
+        Meterai.getDocument().addDocumentListener(hitungUlang);
     }
 
     /** This method is called from within the constructor to
@@ -691,6 +721,10 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
     */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDokter.isEditing() && !tbDokter.getCellEditor().stopCellEditing()) {
+            return;
+        }
+        hitungTotalSmc();
         if(NoFaktur.getText().trim().equals("")){
             Valid.textKosong(NoFaktur,"No.Faktur");
         }else if(nmsup.getText().trim().equals("")){
@@ -731,8 +765,11 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
                                 });
                                 if(tbDokter.getValueAt(i,4).toString().equals("true")&&(akses.getipsrs_barang()==true)){
                                     Double hargadiskon=Valid.SetAngka(tbDokter.getValueAt(i,9).toString())/Valid.SetAngka(tbDokter.getValueAt(i,0).toString());
+//                                    Sequel.mengedit("ipsrsbarang","kode_brng=?","harga=?",2,new String[]{
+//                                        (hargadiskon+((Double.parseDouble(tppn.getText())/100)*hargadiskon))+"",tbDokter.getValueAt(i,1).toString()
+//                                    });
                                     Sequel.mengedit("ipsrsbarang","kode_brng=?","harga=?",2,new String[]{
-                                        (hargadiskon+((Double.parseDouble(tppn.getText())/100)*hargadiskon))+"",tbDokter.getValueAt(i,1).toString()
+                                        (hargadiskon+((persenPPNSmc()/100)*hargadiskon))+"",tbDokter.getValueAt(i,1).toString()
                                     });
                                 }
                             }else{
@@ -845,8 +882,8 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
                    if((tbDokter.getSelectedColumn()==1)||(tbDokter.getSelectedColumn()==4)||(tbDokter.getSelectedColumn()==5)||(tbDokter.getSelectedColumn()==6)||(tbDokter.getSelectedColumn()==8)){
                         getData();
                    }else if(tbDokter.getSelectedColumn()==7){
-                       tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())*
-                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())/100)),tbDokter.getSelectedRow(),8);
+//                       tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())*
+//                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())/100)),tbDokter.getSelectedRow(),8);
                        getData();
                    }
             } catch (java.lang.NullPointerException e) {
@@ -863,19 +900,20 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
                         TCari.setText("");
                         TCari.requestFocus();
                    }else if(tbDokter.getSelectedColumn()==7){
-                       if(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())>0){
-                           tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())*
-                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())/100)),tbDokter.getSelectedRow(),8);
-                       }
+//                       if(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())>0){
+//                           tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())*
+//                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())/100)),tbDokter.getSelectedRow(),8);
+//                       }
                        getData();
                    }
                 } catch (java.lang.NullPointerException e) {
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
-                i=tbDokter.getSelectedRow();
-                if(i!= -1){
-                    tbDokter.setValueAt("", i,0);
-                }
+//                i=tbDokter.getSelectedRow();
+//                if(i!= -1){
+//                    tbDokter.setValueAt("", i,0);
+//                }
+                kosongkanSelSmc(evt);
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -883,10 +921,10 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
                    if((tbDokter.getSelectedColumn()==1)||(tbDokter.getSelectedColumn()==5)||(tbDokter.getSelectedColumn()==6)){
                         getData();
                    }else if((tbDokter.getSelectedColumn()==7)||(tbDokter.getSelectedColumn()==8)){
-                       if(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())>0){
-                          tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())*
-                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())/100)),tbDokter.getSelectedRow(),8);
-                       }
+//                       if(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())>0){
+//                          tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())*
+//                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())/100)),tbDokter.getSelectedRow(),8);
+//                       }
                        getData();
                    }
             }
@@ -1312,6 +1350,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
     }
 
     private void getData(){
+        /*
         row=tbDokter.getSelectedRow();
         if(row!= -1){
             if(!tbDokter.getValueAt(row,0).toString().equals("")){
@@ -1334,12 +1373,14 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
                 tbDokter.setValueAt(0,row,9);
             }
         }
+        */
         ttl=0;sbttl=0;ttldisk=0;
         y=0;w=0;
         meterai=0;
-        if(!Meterai.getText().equals("")){
-            meterai=Double.parseDouble(Meterai.getText());
-        }
+//        if(!Meterai.getText().equals("")){
+//            meterai=Double.parseDouble(Meterai.getText());
+//        }
+        meterai = angkaSmc(Meterai.getText());
 
         jml=tbDokter.getRowCount();
         for(i=0;i<jml;i++){
@@ -1361,10 +1402,110 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
         ttl=sbttl-ttldisk;
         LTotal2.setText(Valid.SetAngka(ttl));
         ppn=0;
-        if(!tppn.getText().equals("")){
-            ppn=Math.round((Double.parseDouble(tppn.getText())/100) *(ttl));
-            LPpn.setText(Valid.SetAngka(ppn));
-            LTagiha.setText(Valid.SetAngka(ttl+ppn+meterai));
+//        if(!tppn.getText().equals("")){
+//            ppn=Math.round((Double.parseDouble(tppn.getText())/100) *(ttl));
+//            LPpn.setText(Valid.SetAngka(ppn));
+//            LTagiha.setText(Valid.SetAngka(ttl+ppn+meterai));
+//        }
+        ppn = Math.round((persenPPNSmc() / 100) * (ttl));
+        LPpn.setText(Valid.SetAngka(ppn));
+        LTagiha.setText(Valid.SetAngka(ttl + ppn + meterai));
+    }
+
+    private void hitungBarisSmc(int baris, int kolom) {
+        if (menghitungSmc || ((0 != kolom) && (5 != kolom) && (7 != kolom) && (8 != kolom))) {
+            return;
+        }
+        menghitungSmc = true;
+        try {
+            if (!jumlahValidSmc(tabMode.getValueAt(baris, 0))) {
+                tabMode.setValueAt("", baris, 0);
+            }
+            if (null == tabMode.getValueAt(baris, 5)) {
+                tabMode.setValueAt(0d, baris, 5);
+            }
+            double jumlahBeli = angkaSmc(tabMode.getValueAt(baris, 0)), subtotalBeli = 0, persenDiskon = angkaSmc(tabMode.getValueAt(baris, 7)), nominalDiskon = 0;
+            if (jumlahBeli > 0) {
+                subtotalBeli = jumlahBeli * angkaSmc(tabMode.getValueAt(baris, 5));
+            }
+            if (subtotalBeli > 0) {
+                if (8 == kolom) {
+                    nominalDiskon = angkaSmc(tabMode.getValueAt(baris, 8));
+                    persenDiskon = nominalDiskon * 100 / subtotalBeli;
+                } else {
+                    nominalDiskon = Math.round(subtotalBeli * persenDiskon / 100);
+                }
+            }
+            tabMode.setValueAt(subtotalBeli, baris, 6);
+            tabMode.setValueAt(persenDiskon, baris, 7);
+            tabMode.setValueAt(nominalDiskon, baris, 8);
+            tabMode.setValueAt(subtotalBeli - nominalDiskon, baris, 9);
+        } finally {
+            menghitungSmc = false;
+        }
+        jadwalkanTotalSmc();
+    }
+
+    private void kosongkanSelSmc(KeyEvent evt) {
+        int baris = tbDokter.getSelectedRow(), kolom = tbDokter.getSelectedColumn();
+        if (tbDokter.isEditing() || (-1 == baris) || (-1 == kolom)) {
+            return;
+        }
+        if (0 == kolom) {
+            tbDokter.setValueAt("", baris, kolom);
+        } else if ((5 == kolom) || (7 == kolom) || (8 == kolom)) {
+            tbDokter.setValueAt(0d, baris, kolom);
+        }
+        evt.consume();
+    }
+
+    private boolean jumlahValidSmc(Object nilai) {
+        if (null == nilai) {
+            return false;
+        }
+        String teks = nilai.toString().trim();
+        if (teks.isEmpty()) {
+            return true;
+        }
+        try {
+            Double.parseDouble(teks);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private void jadwalkanTotalSmc() {
+        if (!totalTertundaSmc) {
+            totalTertundaSmc = true;
+            SwingUtilities.invokeLater(() -> {
+                totalTertundaSmc = false;
+                hitungTotalSmc();
+            });
+        }
+    }
+
+    private double persenPPNSmc() {
+        return angkaSmc(tppn.getText().replace(',', '.'));
+    }
+
+    private void hitungTotalSmc() {
+        menghitungSmc = true;
+        try {
+            getData();
+        } finally {
+            menghitungSmc = false;
+        }
+    }
+
+    private double angkaSmc(Object nilai) {
+        if (nilai instanceof Number) {
+            return ((Number) nilai).doubleValue();
+        }
+        try {
+            return Double.parseDouble(nilai.toString().trim());
+        } catch (Exception e) {
+            return 0;
         }
     }
 
@@ -1411,6 +1552,10 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
                         rs.getString("kode_sat"),true,rs.getDouble("h_pesan"),rs.getDouble("subtotal"),
                         rs.getDouble("dis"),rs.getDouble("besardis"),rs.getDouble("total"),
                     });
+                }
+                String persenPPN = Sequel.cariIsiSmc("select round(ifnull(surat_pemesanan_non_medis.ppn / nullif(surat_pemesanan_non_medis.total, 0) * 100, 0), 2) from surat_pemesanan_non_medis where surat_pemesanan_non_medis.no_pemesanan = ?", noorder);
+                if (!persenPPN.isEmpty()) {
+                    tppn.setText(new BigDecimal(persenPPN).stripTrailingZeros().toPlainString());
                 }
                 getData();
             } catch (Exception e) {
