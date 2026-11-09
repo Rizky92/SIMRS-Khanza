@@ -2,16 +2,13 @@ package khanzahmsanjungan;
 
 import AESsecurity.EnkripsiAES;
 import bridging.ApiBPJS;
+import bridging.AplikasiBiometrikSMC;
 import bridging.BPJSReferensiDiagnosa;
 import bridging.BPJSReferensiDokter;
 import bridging.BPJSRiwayatPelayananPasien;
 import bridging.BPJSRiwayatRujukanPasien;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.jna.Native;
-import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.User32;
-import com.sun.jna.platform.win32.WinDef;
 import fungsi.BatasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -19,11 +16,6 @@ import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -42,6 +34,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.concurrent.TimeoutException;
 import javax.swing.SwingUtilities;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -49,6 +42,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
+import widget.LoadingOverlaySMC;
 
 public class DlgRegistrasiBPJS extends widget.Dialog {
 
@@ -104,7 +98,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         pathFrista = "",
         userLoginValidasi = "",
         passLoginValidasi = "";
-    private int kuota = 0, sisaKuota = 0, printJumlahBarcode = 0;
+    private int kuota = 0, sisaKuota = 0, printJumlahBarcode = 0, timeoutFingerprintSmc = 0, timeoutFristaSmc = 0;
     private final ObjectMapper mapper = new ObjectMapper();
     private JsonNode root, response, metadata;
     private HttpHeaders headers;
@@ -202,9 +196,11 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     namaDokter.setText("");
                     kodeDPJPLayanan.setText("");
                     namaDPJPLayanan.setText("");
-                    if (cariJadwalSmc()) {
-                        isiDokterSmc();
-                    }
+                    LoadingOverlaySMC.run(DlgRegistrasiBPJS.this, "Memuat jadwal dokter...", () -> {
+                        if (cariJadwalSmc()) {
+                            isiDokterSmc();
+                        }
+                    });
                     tglRujukan.setText(riwayatRujukan.getSelectedRow(5).toString());
                     System.out.println("Kode Poli Registrasi: " + kodePoliReg);
                     System.out.println("Jadwal dokter: " + jamMulaiJadwal + " - " + jamSelesaiJadwal);
@@ -1025,66 +1021,66 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void btnKonfirmasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKonfirmasiActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        cekStatusFinger();
-        if (namaPasien.getText().isBlank()) {
-            Valid.teksKosongSmc(namaPasien, "Pasien");
-        } else if (noPeserta.getText().isBlank()) {
-            Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
-        } else if (!Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ?", noRM.getText())) {
-            Valid.popupPeringatanDialog("Maaf, No. RM. tidak sesuai..!!", 5);
-        } else if (kodePPKRujukan.getText().isBlank() || namaPPKRujukan.getText().isBlank()) {
-            Valid.teksKosongSmc(kodePPKRujukan, "PPK Rujukan");
-        } else if (kodePPK.getText().isBlank() || namaPPK.getText().isBlank()) {
-            Valid.teksKosongSmc(kodePPK, "PPK Pelayanan");
-        } else if (kodeDiagnosa.getText().isBlank() || namaDiagnosa.getText().isBlank()) {
-            Valid.teksKosongSmc(kodeDiagnosa, "Diagnosa");
-        } else if (catatan.getText().isBlank()) {
-            Valid.teksKosongSmc(catatan, "Catatan");
-        } else if (namaPoli.getText().isBlank()) {
-            Valid.teksKosongSmc(namaPoli, "Poli Tujuan");
-        } else if ((lakaLantas.getSelectedIndex() == 1) && keterangan.getText().isBlank()) {
-            Valid.teksKosongSmc(keterangan, "Keterangan");
-        } else if (kodeDokter.isBlank() || namaDokter.getText().isBlank()) {
-            Valid.teksKosongSmc(namaDokter, "DPJP");
-        } else if (!statusFinger && Valid.compareTahun(tglSEP.getText(), tglLahir.getText()) >= 17 && !namaPoli.getText().toLowerCase().contains("darurat")) {
-            Valid.popupPeringatanDialog("Silahkan lakukan validasi biometrik dahulu..!!", 3);
-        } else {
-            if (kodeDokterReg.isBlank()) {
-                kodeDokterReg = Sequel.cariIsiSmc("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs = ?", kodeDokter);
-            }
-            if (kodePoliReg.isBlank() || jamMulaiJadwal.isBlank()) {
-                cariJadwalSmc();
-            }
-            if (kodePoliReg.isBlank() || kodeDokterReg.isBlank()) {
-                Valid.popupPeringatanDialog("Mapping Poliklinik atau Dokter tidak ditemukan..!!", 5);
-            } else if (!cekWaktuRegistrasi()) {
-                Valid.popupPeringatanDialog("Pendaftaran untuk jadwal praktek " + jamPraktek + "\nbaru dibuka pukul " + jamDibukaSmc() + "..!!", 5);
+        LoadingOverlaySMC.run(this, "Memproses pendaftaran dan penerbitan SEP...", () -> {
+            cekStatusFinger();
+            if (namaPasien.getText().isBlank()) {
+                Valid.teksKosongSmc(namaPasien, "Pasien");
+            } else if (noPeserta.getText().isBlank()) {
+                Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
+            } else if (!Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ?", noRM.getText())) {
+                Valid.popupPeringatanDialog("Maaf, No. RM. tidak sesuai..!!", 5);
+            } else if (kodePPKRujukan.getText().isBlank() || namaPPKRujukan.getText().isBlank()) {
+                Valid.teksKosongSmc(kodePPKRujukan, "PPK Rujukan");
+            } else if (kodePPK.getText().isBlank() || namaPPK.getText().isBlank()) {
+                Valid.teksKosongSmc(kodePPK, "PPK Pelayanan");
+            } else if (kodeDiagnosa.getText().isBlank() || namaDiagnosa.getText().isBlank()) {
+                Valid.teksKosongSmc(kodeDiagnosa, "Diagnosa");
+            } else if (catatan.getText().isBlank()) {
+                Valid.teksKosongSmc(catatan, "Catatan");
+            } else if (namaPoli.getText().isBlank()) {
+                Valid.teksKosongSmc(namaPoli, "Poli Tujuan");
+            } else if ((lakaLantas.getSelectedIndex() == 1) && keterangan.getText().isBlank()) {
+                Valid.teksKosongSmc(keterangan, "Keterangan");
+            } else if (kodeDokter.isBlank() || namaDokter.getText().isBlank()) {
+                Valid.teksKosongSmc(namaDokter, "DPJP");
+            } else if (!statusFinger && Valid.compareTahun(tglSEP.getText(), tglLahir.getText()) >= 17 && !namaPoli.getText().toLowerCase().contains("darurat")) {
+                Valid.popupPeringatanDialog("Silahkan lakukan validasi biometrik dahulu..!!", 3);
             } else {
-                if (!registerPasien()) {
-                    Valid.popupGagalDialog("Terjadi kesalahan pada saat pendaftaran pasien!");
+                if (kodeDokterReg.isBlank()) {
+                    kodeDokterReg = Sequel.cariIsiSmc("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs = ?", kodeDokter);
+                }
+                if (kodePoliReg.isBlank() || jamMulaiJadwal.isBlank()) {
+                    cariJadwalSmc();
+                }
+                if (kodePoliReg.isBlank() || kodeDokterReg.isBlank()) {
+                    Valid.popupPeringatanDialog("Mapping Poliklinik atau Dokter tidak ditemukan..!!", 5);
+                } else if (!cekWaktuRegistrasi()) {
+                    Valid.popupPeringatanDialog("Pendaftaran untuk jadwal praktek " + jamPraktek + "\nbaru dibuka pukul " + jamDibukaSmc() + "..!!", 5);
                 } else {
-                    if (namaPoli.getText().toLowerCase().contains("darurat")) {
-                        if (Sequel.cariIntegerSmc("select count(*) from bridging_sep where no_kartu = ? and jnspelayanan = '2' and tglsep = ? and nmpolitujuan like '%darurat%'", noPeserta.getText(), tglSEP.getText()) >= 3) {
-                            Valid.popupPeringatanDialog("Maaf, sebelumnya sudah dilakukan 3x pembuatan SEP\ndi jenis pelayanan yang sama..!!", 5);
-                        } else {
-                            if (kirimAntrianOnsite()) {
-                                insertSEP();
-                            }
-                        }
+                    if (!registerPasien()) {
+                        Valid.popupGagalDialog("Terjadi kesalahan pada saat pendaftaran pasien!");
                     } else {
-                        if (Sequel.cariIntegerSmc("select count(*) from bridging_sep where no_kartu = ? and jnspelayanan = '2' and tglsep = ? and nmpolitujuan not like '%darurat%'", noPeserta.getText(), tglSEP.getText()) >= 1) {
-                            Valid.popupPeringatanDialog("Maaf, sebelumnya sudah dilakukan pembuatan SEP\ndi jenis pelayanan yang sama..!!", 5);
+                        if (namaPoli.getText().toLowerCase().contains("darurat")) {
+                            if (Sequel.cariIntegerSmc("select count(*) from bridging_sep where no_kartu = ? and jnspelayanan = '2' and tglsep = ? and nmpolitujuan like '%darurat%'", noPeserta.getText(), tglSEP.getText()) >= 3) {
+                                Valid.popupPeringatanDialog("Maaf, sebelumnya sudah dilakukan 3x pembuatan SEP\ndi jenis pelayanan yang sama..!!", 5);
+                            } else {
+                                if (kirimAntrianOnsite()) {
+                                    insertSEP();
+                                }
+                            }
                         } else {
-                            if (kirimAntrianOnsite()) {
-                                insertSEP();
+                            if (Sequel.cariIntegerSmc("select count(*) from bridging_sep where no_kartu = ? and jnspelayanan = '2' and tglsep = ? and nmpolitujuan not like '%darurat%'", noPeserta.getText(), tglSEP.getText()) >= 1) {
+                                Valid.popupPeringatanDialog("Maaf, sebelumnya sudah dilakukan pembuatan SEP\ndi jenis pelayanan yang sama..!!", 5);
+                            } else {
+                                if (kirimAntrianOnsite()) {
+                                    insertSEP();
+                                }
                             }
                         }
                     }
                 }
             }
-        }
-        this.setCursor(Cursor.getDefaultCursor());
+        });
     }//GEN-LAST:event_btnKonfirmasiActionPerformed
 
     private void cariDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariDokterActionPerformed
@@ -1182,7 +1178,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 login.setLocationRelativeTo(getContentPane());
             }
             login.requireAkses("bpjs_sep");
-            login.setOnLoginListener(e -> {
+            login.setOnLoginListener(e -> LoadingOverlaySMC.run(this, "Mengirim approval validasi biometrik...", () -> {
                 btnKonfirmasi.setEnabled(false);
                 btnBatal.setEnabled(false);
                 btnApprovalFP.setEnabled(false);
@@ -1227,13 +1223,13 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 } catch (Exception ex) {
                     btnApprovalFP.setEnabled(true);
                     System.out.println("Notif : " + ex);
-                    if (ex.toString().contains("UnknownHostException")) {
+                    if (ex.toString().contains("UnknownHostException") || ex.toString().contains("TimeoutException")) {
                         Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                     }
                 }
                 btnKonfirmasi.setEnabled(true);
                 btnBatal.setEnabled(true);
-            });
+            }));
             login.setVisible(true);
         }
     }//GEN-LAST:event_btnApprovalFPActionPerformed
@@ -1251,7 +1247,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 login.setLocationRelativeTo(getContentPane());
             }
             login.requireAkses("bpjs_sep");
-            login.setOnLoginListener(e -> {
+            login.setOnLoginListener(e -> LoadingOverlaySMC.run(this, "Mengirim pengajuan validasi biometrik...", () -> {
                 btnKonfirmasi.setEnabled(false);
                 btnBatal.setEnabled(false);
                 btnPengajuanFP.setEnabled(false);
@@ -1297,13 +1293,13 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 } catch (Exception ex) {
                     btnPengajuanFP.setEnabled(true);
                     System.out.println("Notif : " + ex);
-                    if (ex.toString().contains("UnknownHostException")) {
+                    if (ex.toString().contains("UnknownHostException") || ex.toString().contains("TimeoutException")) {
                         Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                     }
                 }
                 btnKonfirmasi.setEnabled(true);
                 btnBatal.setEnabled(true);
-            });
+            }));
             login.setVisible(true);
         }
     }//GEN-LAST:event_btnPengajuanFPActionPerformed
@@ -1313,79 +1309,19 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
         } else {
             SwingUtilities.invokeLater(() -> {
-                try {
-                    fingerprintAktif = false;
-                    User32 u32 = User32.INSTANCE;
-
-                    u32.EnumWindows((WinDef.HWND hwnd, Pointer pntr) -> {
-                        char[] windowText = new char[512];
-                        u32.GetWindowText(hwnd, windowText, 512);
-                        String wText = Native.toString(windowText);
-
-                        if (wText.isEmpty()) {
-                            return true;
-                        }
-
-                        if (wText.contains("Registrasi Sidik Jari")) {
-                            DlgRegistrasiBPJS.this.fingerprintAktif = true;
-                            u32.SetForegroundWindow(hwnd);
-                        }
-
-                        return true;
-                    }, Pointer.NULL);
-
-                    Robot r = new Robot();
-                    Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
-                    StringSelection ss;
-
-                    if (fingerprintAktif) {
-                        Thread.sleep(1000);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_A);
-                        r.keyRelease(KeyEvent.VK_A);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                        Thread.sleep(500);
-
-                        ss = new StringSelection(noPeserta.getText().trim());
-                        c.setContents(ss, ss);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                    } else {
-                        Runtime.getRuntime().exec("\"" + pathFingerprint + "\"");
-                        Thread.sleep(2000);
-                        ss = new StringSelection(EnkripsiAES.decrypt(userLoginValidasi));
-                        c.setContents(ss, ss);
-
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_TAB);
-                        r.keyRelease(KeyEvent.VK_TAB);
-                        Thread.sleep(1000);
-
-                        ss = new StringSelection(EnkripsiAES.decrypt(passLoginValidasi));
-                        c.setContents(ss, ss);
-
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_ENTER);
-                        r.keyRelease(KeyEvent.VK_ENTER);
-                        Thread.sleep(1000);
-
-                        ss = new StringSelection(noPeserta.getText().trim());
-                        c.setContents(ss, ss);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
+                boolean[] timeout = {false};
+                LoadingOverlaySMC.runOverScreen(this, "Membuka aplikasi sidik jari...", () -> {
+                    try {
+                        AplikasiBiometrikSMC.bukaFingerprint(pathFingerprint, EnkripsiAES.decrypt(userLoginValidasi), EnkripsiAES.decrypt(passLoginValidasi), noPeserta.getText().trim(), timeoutFingerprintSmc);
+                        fingerprintAktif = true;
+                    } catch (TimeoutException e) {
+                        timeout[0] = true;
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notif : " + e);
+                });
+                if (timeout[0]) {
+                    Valid.popupGagalDialog("Aplikasi sidik jari tidak merespon..!!\nSilahkan hubungi petugas.", 5);
                 }
             });
         }
@@ -1396,109 +1332,20 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
         } else {
             SwingUtilities.invokeLater(() -> {
-                try {
-                    fristaAktif = false;
-                    User32 u32 = User32.INSTANCE;
-
-                    u32.EnumWindows((WinDef.HWND hwnd, Pointer pntr) -> {
-                        char[] windowText = new char[512];
-                        u32.GetWindowText(hwnd, windowText, 512);
-                        String wText = Native.toString(windowText);
-
-                        if (wText.isEmpty()) {
-                            return true;
-                        }
-
-                        if (wText.toLowerCase().contains("face recognition bpjs kesehatan")) {
-                            DlgRegistrasiBPJS.this.fristaAktif = true;
-                            u32.SetForegroundWindow(hwnd);
-                            u32.ShowWindow(hwnd, User32.SW_MAXIMIZE);
-                            u32.ShowWindow(hwnd, User32.SW_RESTORE);
-                            u32.SetFocus(hwnd);
-                        }
-
-                        return true;
-                    }, Pointer.NULL);
-
-                    Robot r = new Robot();
-                    Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
-                    StringSelection ss;
-
-                    if (fristaAktif) {
-                        Thread.sleep(1000);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_A);
-                        r.keyRelease(KeyEvent.VK_A);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                        Thread.sleep(200);
-
-                        ss = new StringSelection(noPeserta.getText());
-                        c.setContents(ss, ss);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                    } else {
-                        Runtime.getRuntime().exec("\"" + pathFrista + "\"");
-                        while (true) {
-                            if (u32.IsWindowVisible(u32.FindWindow(null, "Login Frista (Face Recognition BPJS Kesehatan)"))) {
-                                fristaAktif = true;
-                                break;
-                            }
-                        }
-                        Thread.sleep(1000);
-
-                        ss = new StringSelection(EnkripsiAES.decrypt(userLoginValidasi));
-                        c.setContents(ss, ss);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_TAB);
-                        r.keyRelease(KeyEvent.VK_TAB);
-                        Thread.sleep(1000);
-
-                        ss = new StringSelection(EnkripsiAES.decrypt(passLoginValidasi));
-                        c.setContents(ss, ss);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_TAB);
-                        r.keyRelease(KeyEvent.VK_TAB);
-                        r.keyPress(KeyEvent.VK_SPACE);
-                        r.keyRelease(KeyEvent.VK_SPACE);
-                        Thread.sleep(1000);
-
-                        u32.EnumWindows((WinDef.HWND hwnd, Pointer pntr) -> {
-                            char[] windowText = new char[512];
-                            u32.GetWindowText(hwnd, windowText, 512);
-                            String wText = Native.toString(windowText);
-
-                            if (wText.isEmpty()) {
-                                return true;
-                            }
-
-                            if (wText.toLowerCase().contains("face recognition bpjs kesehatan")) {
-                                u32.SetForegroundWindow(hwnd);
-                                u32.ShowWindow(hwnd, User32.SW_MAXIMIZE);
-                                u32.ShowWindow(hwnd, User32.SW_RESTORE);
-                                u32.SetFocus(hwnd);
-                            }
-
-                            return true;
-                        }, Pointer.NULL);
-                        Thread.sleep(1000);
-
-                        ss = new StringSelection(noPeserta.getText());
-                        c.setContents(ss, ss);
-                        r.keyPress(KeyEvent.VK_CONTROL);
-                        r.keyPress(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_V);
-                        r.keyRelease(KeyEvent.VK_CONTROL);
+                boolean[] timeout = {false};
+                LoadingOverlaySMC.runOverScreen(this, "Membuka aplikasi FRISTA...", () -> {
+                    try {
+                        AplikasiBiometrikSMC.bukaFrista(pathFrista, EnkripsiAES.decrypt(userLoginValidasi), EnkripsiAES.decrypt(passLoginValidasi), noPeserta.getText().trim(), timeoutFristaSmc);
+                        fristaAktif = true;
+                        AplikasiBiometrikSMC.pantauKonfirmasiFrista(this);
+                    } catch (TimeoutException e) {
+                        timeout[0] = true;
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notif : " + e);
+                });
+                if (timeout[0]) {
+                    Valid.popupGagalDialog("Aplikasi FRISTA tidak merespon..!!\nSilahkan hubungi petugas.", 5);
                 }
             });
         }
@@ -1887,7 +1734,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             }
         } catch (Exception ex) {
             System.out.println("Notif : " + ex);
-            if (ex.toString().contains("UnknownHostException")) {
+            if (ex.toString().contains("UnknownHostException") || ex.toString().contains("TimeoutException")) {
                 Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
             }
         }
@@ -1947,7 +1794,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         }
                     } catch (Exception ex) {
                         System.out.println("Notif : " + ex);
-                        if (ex.toString().contains("UnknownHostException")) {
+                        if (ex.toString().contains("UnknownHostException") || ex.toString().contains("TimeoutException")) {
                             Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                         }
                     }
@@ -2111,14 +1958,14 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     }
                 } catch (Exception e) {
                     System.out.println("Notif : " + e);
-                    if (e.toString().contains("UnknownHostException")) {
+                    if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                         Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                     }
                 }
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-            if (e.toString().contains("UnknownHostException")) {
+            if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                 Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
             }
         }
@@ -2236,7 +2083,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                             }
                         } catch (Exception e) {
                             System.out.println("Notif : " + e);
-                            if (e.toString().contains("UnknownHostException")) {
+                            if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                                 Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                             }
                         }
@@ -2332,7 +2179,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                             }
                         } catch (Exception ex) {
                             System.out.println("Notif : " + ex);
-                            if (ex.toString().contains("UnknownHostException")) {
+                            if (ex.toString().contains("UnknownHostException") || ex.toString().contains("TimeoutException")) {
                                 Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                             }
                         }
@@ -2469,7 +2316,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Notif : " + e);
-                                        if (e.toString().contains("UnknownHostException")) {
+                                        if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                                             Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                                         }
                                         emptTeks();
@@ -2508,7 +2355,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Notif : " + e);
-                                        if (e.toString().contains("UnknownHostException")) {
+                                        if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                                             Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                                         }
                                         emptTeks();
@@ -2582,7 +2429,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                                         }
                                                     } catch (Exception e) {
                                                         System.out.println("Notif : " + e);
-                                                        if (e.toString().contains("UnknownHostException")) {
+                                                        if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                                                             Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                                                         }
                                                         emptTeks();
@@ -2613,7 +2460,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     } catch (Exception e) {
                         emptTeks();
                         System.out.println("Notif : " + e);
-                        if (e.toString().contains("UnknownHostException")) {
+                        if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                             Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                         }
                     }
@@ -3040,7 +2887,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
-                if (e.toString().contains("UnknownHostException")) {
+                if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                     Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                 }
             }
@@ -3217,6 +3064,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
                 if (decrypted.hasNonNull("frista")) {
                     pathFrista = decrypted.path("frista").path("path").asText();
+                    timeoutFristaSmc = decrypted.path("frista").path("timeout").asInt(0);
                     if (decrypted.path("frista").path("aktifkan").asBoolean()) {
                         panelValidasi.add(btnFrista);
                         panelTambahanValidasi.remove(btnFrista);
@@ -3228,6 +3076,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
                 if (decrypted.hasNonNull("fingerprint")) {
                     pathFingerprint = decrypted.path("fingerprint").path("path").asText();
+                    timeoutFingerprintSmc = decrypted.path("fingerprint").path("timeout").asInt(0);
                     if (decrypted.path("fingerprint").path("aktifkan").asBoolean()) {
                         panelValidasi.add(btnFingerprint);
                         panelTambahanValidasi.remove(btnFingerprint);

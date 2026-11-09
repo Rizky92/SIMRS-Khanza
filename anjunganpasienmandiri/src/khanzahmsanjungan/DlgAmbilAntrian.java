@@ -10,13 +10,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import java.awt.Cursor;
 import java.io.File;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
+import widget.LoadingOverlaySMC;
 
 public class DlgAmbilAntrian extends widget.Dialog {
     private final Connection koneksi = koneksiDB.condb();
@@ -225,77 +225,77 @@ public class DlgAmbilAntrian extends widget.Dialog {
     // End of variables declaration//GEN-END:variables
 
     private void cetakAntrianHuruf(String prefix) {
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        switch (prefix) {
-            case "A":
-                if (Sequel.executeRawSmc(
-                    "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('A', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
-                    String.valueOf(Integer.parseInt(HurufA.getText().substring(HurufA.getText().indexOf("(") + 2, HurufA.getText().length() - 1)) + 1)
-                )) {
-                    param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
-                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
-                        "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
-                        "antriloketcetak_smc where left(nomor, 1) = 'A' and tanggal = current_date() order by nomor desc limit 1");
-                }
-                break;
-            case "B":
-                if (Sequel.executeRawSmc(
-                    "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('B', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
-                    String.valueOf(Integer.parseInt(HurufB.getText().substring(HurufB.getText().indexOf("(") + 2, HurufB.getText().length() - 1)) + 1)
-                )) {
-                    param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
-                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
-                        "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
-                        "antriloketcetak_smc where left(nomor, 1) = 'B' and tanggal = current_date() order by nomor desc limit 1");
-                }
-                break;
-            case "C":
-                if (Sequel.executeRawSmc(
-                    "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('C', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
-                    String.valueOf(Integer.parseInt(HurufC.getText().substring(HurufC.getText().indexOf("(") + 2, HurufC.getText().length() - 1)) + 1)
-                )) {
-                    param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
-                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
-                        "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
-                        "antriloketcetak_smc where left(nomor, 1) = 'C' and tanggal = current_date() order by nomor desc limit 1");
-                }
-                break;
-            case "D":
-                if (Sequel.executeRawSmc(
-                    "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('D', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
-                    String.valueOf(Integer.parseInt(HurufD.getText().substring(HurufD.getText().indexOf("(") + 2, HurufD.getText().length() - 1)) + 1)
-                )) {
-                    param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
-                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
-                        "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
-                        "antriloketcetak_smc where left(nomor, 1) = 'D' and tanggal = current_date() order by nomor desc limit 1");
-                }
-                break;
-            case "E":
-                if (Sequel.executeRawSmc(
-                    "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('E', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
-                    String.valueOf(Integer.parseInt(HurufE.getText().substring(HurufE.getText().indexOf("(") + 2, HurufE.getText().length() - 1)) + 1)
-                )) {
-                    param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
-                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
-                        "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
-                        "antriloketcetak_smc where left(nomor, 1) = 'E' and tanggal = current_date() order by nomor desc limit 1");
-                }
-                break;
-            case "F":
-                if (Sequel.executeRawSmc(
-                    "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('F', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
-                    String.valueOf(Integer.parseInt(HurufF.getText().substring(HurufF.getText().indexOf("(") + 2, HurufF.getText().length() - 1)) + 1)
-                )) {
-                    param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
-                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
-                        "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
-                        "antriloketcetak_smc where left(nomor, 1) = 'F' and tanggal = current_date() order by nomor desc limit 1");
-                }
-                break;
-        }
-        tampil();
-        this.setCursor(Cursor.getDefaultCursor());
+        LoadingOverlaySMC.run(this, "Mencetak nomor antrian...", () -> {
+            switch (prefix) {
+                case "A":
+                    if (Sequel.executeRawSmc(
+                        "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('A', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
+                        String.valueOf(Integer.parseInt(HurufA.getText().substring(HurufA.getText().indexOf("(") + 2, HurufA.getText().length() - 1)) + 1)
+                    )) {
+                        param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
+                        Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
+                            "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
+                            "antriloketcetak_smc where left(nomor, 1) = 'A' and tanggal = current_date() order by nomor desc limit 1");
+                    }
+                    break;
+                case "B":
+                    if (Sequel.executeRawSmc(
+                        "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('B', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
+                        String.valueOf(Integer.parseInt(HurufB.getText().substring(HurufB.getText().indexOf("(") + 2, HurufB.getText().length() - 1)) + 1)
+                    )) {
+                        param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
+                        Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
+                            "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
+                            "antriloketcetak_smc where left(nomor, 1) = 'B' and tanggal = current_date() order by nomor desc limit 1");
+                    }
+                    break;
+                case "C":
+                    if (Sequel.executeRawSmc(
+                        "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('C', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
+                        String.valueOf(Integer.parseInt(HurufC.getText().substring(HurufC.getText().indexOf("(") + 2, HurufC.getText().length() - 1)) + 1)
+                    )) {
+                        param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
+                        Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
+                            "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
+                            "antriloketcetak_smc where left(nomor, 1) = 'C' and tanggal = current_date() order by nomor desc limit 1");
+                    }
+                    break;
+                case "D":
+                    if (Sequel.executeRawSmc(
+                        "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('D', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
+                        String.valueOf(Integer.parseInt(HurufD.getText().substring(HurufD.getText().indexOf("(") + 2, HurufD.getText().length() - 1)) + 1)
+                    )) {
+                        param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
+                        Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
+                            "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
+                            "antriloketcetak_smc where left(nomor, 1) = 'D' and tanggal = current_date() order by nomor desc limit 1");
+                    }
+                    break;
+                case "E":
+                    if (Sequel.executeRawSmc(
+                        "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('E', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
+                        String.valueOf(Integer.parseInt(HurufE.getText().substring(HurufE.getText().indexOf("(") + 2, HurufE.getText().length() - 1)) + 1)
+                    )) {
+                        param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
+                        Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
+                            "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
+                            "antriloketcetak_smc where left(nomor, 1) = 'E' and tanggal = current_date() order by nomor desc limit 1");
+                    }
+                    break;
+                case "F":
+                    if (Sequel.executeRawSmc(
+                        "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('F', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
+                        String.valueOf(Integer.parseInt(HurufF.getText().substring(HurufF.getText().indexOf("(") + 2, HurufF.getText().length() - 1)) + 1)
+                    )) {
+                        param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
+                        Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
+                            "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
+                            "antriloketcetak_smc where left(nomor, 1) = 'F' and tanggal = current_date() order by nomor desc limit 1");
+                    }
+                    break;
+            }
+            tampil();
+        });
     }
 
     private void tampil() {

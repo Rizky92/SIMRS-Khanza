@@ -2,9 +2,9 @@ package khanzahmsanjungan;
 
 import fungsi.sekuel;
 import fungsi.validasi;
-import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import javax.swing.border.TitledBorder;
+import widget.LoadingOverlaySMC;
 
 public class DlgCekDataBPJS extends widget.Dialog {
     public static final int SEP_KUNJUNGAN_PERTAMA = 1;
@@ -293,78 +293,63 @@ public class DlgCekDataBPJS extends widget.Dialog {
     }
 
     private void cek() {
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if (NoRMPasien.getText().isBlank()) {
             Valid.popupPeringatanDialog("Isian masih kosong..!!", 3);
-        } else {
-            if (flag == SEP_MOBILEJKN) {
-                String noKartu = Sequel.cariIsiSmc("select pasien.no_peserta from pasien where (pasien.no_ktp = ? or pasien.no_peserta = ? or pasien.no_rkm_medis = ?)", NoRMPasien.getText().trim(), NoRMPasien.getText().trim(), NoRMPasien.getText().trim());
-                if (noKartu.isBlank()) {
-                    noKartu = Sequel.cariIsiSmc("select bridging_sep.no_kartu from bridging_surat_kontrol_bpjs join bridging_sep on bridging_surat_kontrol_bpjs.no_sep = bridging_sep.no_sep where bridging_surat_kontrol_bpjs.no_surat = ?", NoRMPasien.getText().trim());
-                }
-                if (noKartu.isBlank()) {
-                    Valid.popupGagalDialog("Data pasien tidak ditemukan..!!", 5);
-                } else {
-                    if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs where nomorkartu = ? and tanggalperiksa = current_date() and status in ('Belum', 'Checkin')", noKartu)) {
-                        if (regist.tampilMobileJKN(noKartu)) {
-                            regist.setSize(getContentPane().getSize());
-                            regist.setLocationRelativeTo(getContentPane());
-                            regist.setVisible(true);
-                            flag = -1;
-                            dispose();
-                        }
-                    } else {
-                        Valid.popupGagalDialog("Data booking MobileJKN tidak ditemukan..!!", 5);
-                    }
-                }
-            } else if (flag == SEP_KONTROL) {
-                String noSKDP = Sequel.cariIsiSmc("select bridging_surat_kontrol_bpjs.no_surat from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = ?", NoRMPasien.getText().trim());
-                if (noSKDP.isBlank()) {
-                    Valid.popupGagalDialog("Data rujukan tidak ditemukan..!!", 5);
-                } else {
-                    if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs where nomorreferensi = ? and tanggalperiksa = current_date() and status in ('Belum', 'Checkin')", noSKDP)) {
-                        Valid.popupPeringatanDialog("Pasien telah mengambil antrian menggunakan Mobile JKN.\nSilahkan cekin melalui menu \"Cek In MobileJKN\"..!!");
-                    } else if (Sequel.cariIntegerSmc("select datediff((select tgl_rencana from bridging_surat_kontrol_bpjs where no_surat = ?), current_date())", noSKDP) > 0) {
-                        Valid.popupPeringatanDialog("Jadwal kontrol pasien tidak boleh dimajukan..!!");
-                    } else {
-                        if (regist.tampilKontrol(noSKDP)) {
-                            regist.setSize(getContentPane().getSize());
-                            regist.setLocationRelativeTo(getContentPane());
-                            regist.setVisible(true);
-                            flag = -1;
-                            dispose();
-                        }
-                    }
-                }
+        } else if (LoadingOverlaySMC.call(this, flag == SEP_KONTROL ? "Mencari data surat kontrol..." : "Mencari data pasien...", this::cariPasienSmc)) {
+            regist.setSize(getContentPane().getSize());
+            regist.setLocationRelativeTo(getContentPane());
+            regist.setVisible(true);
+            flag = -1;
+            dispose();
+        }
+        formWindowActivated(null);
+    }
+
+    private boolean cariPasienSmc() {
+        if (flag == SEP_MOBILEJKN) {
+            String noKartu = Sequel.cariIsiSmc("select pasien.no_peserta from pasien where (pasien.no_ktp = ? or pasien.no_peserta = ? or pasien.no_rkm_medis = ?)", NoRMPasien.getText().trim(), NoRMPasien.getText().trim(), NoRMPasien.getText().trim());
+            if (noKartu.isBlank()) {
+                noKartu = Sequel.cariIsiSmc("select bridging_sep.no_kartu from bridging_surat_kontrol_bpjs join bridging_sep on bridging_surat_kontrol_bpjs.no_sep = bridging_sep.no_sep where bridging_surat_kontrol_bpjs.no_surat = ?", NoRMPasien.getText().trim());
+            }
+            if (noKartu.isBlank()) {
+                Valid.popupGagalDialog("Data pasien tidak ditemukan..!!", 5);
             } else {
-                String noKartu = Sequel.cariIsiSmc("select pasien.no_peserta from pasien where (pasien.no_ktp = ? or pasien.no_peserta = ? or pasien.no_rkm_medis = ?)", NoRMPasien.getText().trim(), NoRMPasien.getText().trim(), NoRMPasien.getText().trim());
-                if (noKartu.isBlank()) {
-                    Valid.popupGagalDialog("Data pasien tidak ditemukan..!!", 5);
+                if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs where nomorkartu = ? and tanggalperiksa = current_date() and status in ('Belum', 'Checkin')", noKartu)) {
+                    return regist.tampilMobileJKN(noKartu);
                 } else {
-                    if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs where nomorkartu = ? and tanggalperiksa = current_date() and status in ('Belum', 'Checkin')", noKartu)) {
-                        Valid.popupPeringatanDialog("Pasien telah mengambil antrian menggunakan Mobile JKN.\nSilahkan cekin melalui menu \"Cek In MobileJKN\"..!!");
-                    } else {
-                        boolean tampil = false;
-                        switch (flag) {
-                            case SEP_KUNJUNGAN_PERTAMA:
-                                tampil = regist.tampilKunjunganPertama(noKartu);
-                                break;
-                            case SEP_KONTROL_BEDA_POLI:
-                                tampil = regist.tampilKontrolBedaPoli(noKartu);
-                                break;
-                        }
-                        if (tampil) {
-                            regist.setSize(getContentPane().getSize());
-                            regist.setLocationRelativeTo(getContentPane());
-                            regist.setVisible(true);
-                            flag = -1;
-                            dispose();
-                        }
+                    Valid.popupGagalDialog("Data booking MobileJKN tidak ditemukan..!!", 5);
+                }
+            }
+        } else if (flag == SEP_KONTROL) {
+            String noSKDP = Sequel.cariIsiSmc("select bridging_surat_kontrol_bpjs.no_surat from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = ?", NoRMPasien.getText().trim());
+            if (noSKDP.isBlank()) {
+                Valid.popupGagalDialog("Data rujukan tidak ditemukan..!!", 5);
+            } else {
+                if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs where nomorreferensi = ? and tanggalperiksa = current_date() and status in ('Belum', 'Checkin')", noSKDP)) {
+                    Valid.popupPeringatanDialog("Pasien telah mengambil antrian menggunakan Mobile JKN.\nSilahkan cekin melalui menu \"Cek In MobileJKN\"..!!");
+                } else if (Sequel.cariIntegerSmc("select datediff((select tgl_rencana from bridging_surat_kontrol_bpjs where no_surat = ?), current_date())", noSKDP) > 0) {
+                    Valid.popupPeringatanDialog("Jadwal kontrol pasien tidak boleh dimajukan..!!");
+                } else {
+                    return regist.tampilKontrol(noSKDP);
+                }
+            }
+        } else {
+            String noKartu = Sequel.cariIsiSmc("select pasien.no_peserta from pasien where (pasien.no_ktp = ? or pasien.no_peserta = ? or pasien.no_rkm_medis = ?)", NoRMPasien.getText().trim(), NoRMPasien.getText().trim(), NoRMPasien.getText().trim());
+            if (noKartu.isBlank()) {
+                Valid.popupGagalDialog("Data pasien tidak ditemukan..!!", 5);
+            } else {
+                if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs where nomorkartu = ? and tanggalperiksa = current_date() and status in ('Belum', 'Checkin')", noKartu)) {
+                    Valid.popupPeringatanDialog("Pasien telah mengambil antrian menggunakan Mobile JKN.\nSilahkan cekin melalui menu \"Cek In MobileJKN\"..!!");
+                } else {
+                    switch (flag) {
+                        case SEP_KUNJUNGAN_PERTAMA:
+                            return regist.tampilKunjunganPertama(noKartu);
+                        case SEP_KONTROL_BEDA_POLI:
+                            return regist.tampilKontrolBedaPoli(noKartu);
                     }
                 }
             }
         }
-        formWindowActivated(null);
-        setCursor(Cursor.getDefaultCursor());
+        return false;
     }
 }
