@@ -593,10 +593,18 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         } else {
             for (int i = 0; i < tabMode.getRowCount(); i++) {
                 if (tbJnsPerawatan.getValueAt(i, 0).toString().equals("true")) {
+                    /*
                     if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Belum',validasi='0000-00-00 00:00:00'",1,new String[]{
                         tbJnsPerawatan.getValueAt(i,15).toString()
                     })==true){
                         Sequel.meghapus("referensi_mobilejkn_bpjs_batal","nobooking",tbJnsPerawatan.getValueAt(i,15).toString());
+                    }
+                    */
+                    if (Sequel.mengupdatetfSmc("referensi_mobilejkn_bpjs", "status = 'Belum', validasi = '0000-00-00 00:00:00.000'", "nobooking = ? and " +
+                        "exists(select * from referensi_mobilejkn_bpjs_batal where referensi_mobilejkn_bpjs_batal.nobooking = referensi_mobilejkn_bpjs.nobooking " +
+                        "and referensi_mobilejkn_bpjs_batal.statuskirim = 'Belum')", tbJnsPerawatan.getValueAt(i,15).toString()
+                    )) {
+                        Sequel.menghapustfSmc("referensi_mobilejkn_bpjs_batal", "nobooking = ?", tbJnsPerawatan.getValueAt(i, 15).toString());
                     }
                 }
             }
