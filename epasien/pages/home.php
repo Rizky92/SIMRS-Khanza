@@ -167,7 +167,7 @@
                                     <input type="text" class="form-control text-uppercase" onkeydown="setDefault(this, document.getElementById('MsgIsi2'));" id="TxtIsi2" pattern="[a-zA-Z0-9, ./@_]{1,200}" title=" a-zA-Z0-9, ./@_ (Maksimal 200 karakter)" required name="alamat" maxlength="200" placeholder="Alamat Anda" autocomplete="off"/>
                                     <span id="MsgIsi2" style="color:#CC0000; font-size:10px;"></span>
                                </div>
-                               <div class="col-md-6 col-sm-6">    
+                               <div class="col-md-6 col-sm-6">
                                     <label for="nohp">Nomor HP/Telephone</label>
                                     <input type="tel" class="form-control" onkeydown="setDefault(this, document.getElementById('MsgIsi3'));" id="TxtIsi3" pattern="[0-9]{1,40}" title=" 0-9 (Maksimal 40 karakter)" required name="nohp" maxlength="40" placeholder="Nomor HP/Telephone Anda" autocomplete="off" />
                                     <span id="MsgIsi3" style="color:#CC0000; font-size:10px;"></span>
@@ -220,7 +220,7 @@
                                                 }
                                                 $_SESSION["poli"]=$datapoli;
                                             }
-                                            
+
                                             echo $_SESSION["poli"];
                                         ?>
                                     </select>
@@ -250,13 +250,11 @@
                                </div>
                           </div>
                     </form>
-                </div> 
+                </div>
            </div>
       </div>
  </section>
 
  <section id="google-map">
       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3911.449032219332!2d110.30504256997102!3d-7.860565684814225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x88ca51d8f3d715e5!2sWarung%20RERE!5e0!3m2!1sid!2sid!4v1588857905294!5m2!1sid!2sid" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen="true"></iframe>
- </section>     
-
- 
+ </section>

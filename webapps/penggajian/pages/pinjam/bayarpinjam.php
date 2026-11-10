@@ -14,7 +14,7 @@
             @$pokok         = $baris2[3];
             @$jasa          = $baris2[4];
             @$setoran       = $baris2[4]+$baris2[3];
-            @$status        = $baris2[6];          
+            @$status        = $baris2[6];
             $_sql           = "SELECT pegawai.nik,pegawai.nama FROM pegawai where pegawai.id='$id'";
             $hasil          = bukaquery($_sql);
             $baris          = mysqli_fetch_row($hasil);
@@ -25,7 +25,7 @@
             @$sdh_setor     = $barisj[1];
             @$sisa_pinjam   = $pinjaman-($jml_sdh_angsur*$pokok);
         ?>
-        <div align='center' class='link'>                          
+        <div align='center' class='link'>
             <a href=?act=DetailPinjam&action=TAMBAH&id=<?=$id;?>>| List History Pinjam |</a>
             <a href=?act=HomeAdmin>| Menu Utama |</a>
         </div>
@@ -78,10 +78,10 @@
                 <td width="31%" >Sisa Pinjaman</td><td width="">:</td>
                 <td width="67%"><?php echo formatDuit($sisa_pinjam);?></td>
             </tr>
-        </table>     
-    </div>      
+        </table>
+    </div>
     <form onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
-        <?php 
+        <?php
             echo "<input type=hidden name=id value=$id>
                   <input type=hidden name=setoran value=$setoran>
                   <input type=hidden name=pinjaman value=$pinjaman>
@@ -90,14 +90,14 @@
                   <input type=hidden name=pokok value=$pokok>
                   <input type=hidden name=jasa value=$jasa>";
         ?>
-        <table width="100%" align="center">		
+        <table width="100%" align="center">
             <tr class="head">
                 <td width="31%" >No.Angsuran Terakhir</td><td width="">:</td>
                 <td width="67%"><input name="banyak_angsur" class="text" type=text  size="10" maxlength="4" autofocus/>
                 <input name=BtnGenerate type=submit class="button" value="Generate">
                 </td>
             </tr>
-        </table> 
+        </table>
     </form>
     <?php
          $BtnGenerate=isset($_POST['BtnGenerate'])?$_POST['BtnGenerate']:NULL;
@@ -121,7 +121,7 @@
             echo "<html><head><title></title><meta http-equiv='refresh' content='2;URL=?act=BayarPinjam&action=TAMBAH&id=$id&tanggal=$tanggal'></head><body></body></html>";
          }
     ?>
-    <div style="width: 100%; height: 29%; overflow: auto;">  
+    <div style="width: 100%; height: 29%; overflow: auto;">
     <?php
         $_sql   = "select angsuran_koperasi.id,angsuran_koperasi.tanggal_pinjam,angsuran_koperasi.tanggal_angsur,angsuran_koperasi.pokok,angsuran_koperasi.jasa from angsuran_koperasi where angsuran_koperasi.id='$id' and angsuran_koperasi.tanggal_pinjam='$tanggal'";
         $hasil  = bukaquery($_sql);
@@ -170,8 +170,8 @@
     <?php
         if ($action=="HAPUS") {
             try {
-                HapusAll(" angsuran_koperasi where id ='".validTeks($_GET["id"])."' and tanggal_angsur='".validTeks($_GET["tanggal_angsur"])."' ");	
-                EditData(" potongan "," angkop='0' WHERE id='".validTeks($_GET["id"])."' and tahun=year('".validTeks($_GET["tanggal_angsur"])."') and bulan=(MONTH('".validTeks($_GET["tanggal_angsur"])."')-1) ");	
+                HapusAll(" angsuran_koperasi where id ='".validTeks($_GET["id"])."' and tanggal_angsur='".validTeks($_GET["tanggal_angsur"])."' ");
+                EditData(" potongan "," angkop='0' WHERE id='".validTeks($_GET["id"])."' and tahun=year('".validTeks($_GET["tanggal_angsur"])."') and bulan=(MONTH('".validTeks($_GET["tanggal_angsur"])."')-1) ");
                 if(validangka($_GET["pinjaman"])<=getOne("select sum(pokok) from angsuran_koperasi where id ='".validTeks($_GET["id"])."' and tanggal_pinjam='".validTeks($_GET["tanggal_pinjam"])."'  group by id")){
                     Ubah(" peminjaman_koperasi "," status='Lunas' WHERE id ='".validTeks($_GET["id"])."' and tanggal='".validTeks($_GET["tanggal_pinjam"])."' "," Potongan ");
                 }else{
@@ -185,8 +185,8 @@
 
         echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                 <tr class='head'>
-                    <td><div align='left'>Data : $jumlah <a target=_blank href=../penggajian/pages/pinjam/LaporanBayarPinjam.php?id=$id&tanggal=$tanggal>| Laporan |</a> </div></td>                        
-                </tr>     
+                    <td><div align='left'>Data : $jumlah <a target=_blank href=../penggajian/pages/pinjam/LaporanBayarPinjam.php?id=$id&tanggal=$tanggal>| Laporan |</a> </div></td>
+                </tr>
              </table>");
     ?>
 </div>

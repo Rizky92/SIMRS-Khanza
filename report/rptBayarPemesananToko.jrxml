@@ -20,8 +20,8 @@
 tokopemesanan.tgl_tempo, toko_bayar_pemesanan.no_faktur,
 tokosuplier.nama_suplier,toko_bayar_pemesanan.nama_bayar,toko_bayar_pemesanan.no_bukti,
 toko_bayar_pemesanan.besar_bayar,toko_bayar_pemesanan.keterangan,
-toko_bayar_pemesanan.nip,petugas.nama from toko_bayar_pemesanan inner join petugas 
-inner join tokopemesanan inner join tokosuplier on toko_bayar_pemesanan.nip=petugas.nip 
+toko_bayar_pemesanan.nip,petugas.nama from toko_bayar_pemesanan inner join petugas
+inner join tokopemesanan inner join tokosuplier on toko_bayar_pemesanan.nip=petugas.nip
 and toko_bayar_pemesanan.no_faktur=tokopemesanan.no_faktur
 and tokopemesanan.kode_suplier=tokosuplier.kode_suplier]]>
 	</queryString>

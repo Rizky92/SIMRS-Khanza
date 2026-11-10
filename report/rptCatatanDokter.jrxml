@@ -13,8 +13,8 @@
 	<queryString>
 		<![CDATA[select catatan_perawatan.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,
                     catatan_perawatan.tanggal,catatan_perawatan.jam,catatan_perawatan.kd_dokter,dokter.nm_dokter,
-                    catatan_perawatan.catatan from pasien inner join reg_periksa inner join catatan_perawatan inner join dokter 
-                    on catatan_perawatan.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    catatan_perawatan.catatan from pasien inner join reg_periksa inner join catatan_perawatan inner join dokter
+                    on catatan_perawatan.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     and catatan_perawatan.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

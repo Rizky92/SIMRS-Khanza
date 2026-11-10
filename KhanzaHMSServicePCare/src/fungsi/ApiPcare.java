@@ -23,7 +23,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.client.RestTemplate;
 
-public class ApiPcare {        
+public class ApiPcare {
     private String Key,Consid;
     private ApiBPJSAesKeySpec mykey;
     private String salt;
@@ -36,17 +36,17 @@ public class ApiPcare {
     private SecretKeySpec secretKey;
     private Scheme scheme;
     private HttpComponentsClientHttpRequestFactory factory;
-    
+
     public ApiPcare(){
         try {
             Key = koneksiDB.SECRETKEYAPIPCARE();
             Consid = koneksiDB.CONSIDAPIPCARE();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
-        }        
+        }
     }
-    
-    public String getHmac() {        
+
+    public String getHmac() {
         long GetUTCdatetimeAsString = GetUTCdatetimeAsString();
         salt = Consid +"&"+String.valueOf(GetUTCdatetimeAsString);
         generateHmacSHA256Signature = null;
@@ -73,7 +73,7 @@ public class ApiPcare {
 	    throw new GeneralSecurityException(e);
 	}
     }
-    
+
     public String Decrypt(String data,String utc)throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         System.out.println(data);
         mykey = ApiBPJSEnc.generateKey(Consid+Key+utc);
@@ -82,12 +82,12 @@ public class ApiPcare {
         System.out.println(data);
         return data;
     }
-        
-    public long GetUTCdatetimeAsString(){    
-        millis = System.currentTimeMillis();   
+
+    public long GetUTCdatetimeAsString(){
+        millis = System.currentTimeMillis();
         return millis/1000;
     }
-    
+
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         sslContext = SSLContext.getInstance("SSL");
         javax.net.ssl.TrustManager[] trustManagers= {

@@ -1,7 +1,7 @@
 <?php
     include_once "conf/command.php";
     require_once('../conf/conf.php');
-    
+
     $usere      = trim(isset($_GET['usere']))?trim($_GET['usere']):NULL;
     $passwordte = trim(isset($_GET['passwordte']))?trim($_GET['passwordte']):NULL;
     $level      = trim(isset($_GET['level']))?trim($_GET['level']):NULL;

@@ -7,17 +7,14 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import java.awt.Dimension;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,8 +26,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
@@ -49,7 +49,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps,ps2;
-    private ResultSet rs,rs2;   
+    private ResultSet rs,rs2;
     private int i=0,cekada=0;
     private String link="",json="",iddokter="",idpasien="",sistole="0",diastole="0";
     private ApiSatuSehat api=new ApiSatuSehat();
@@ -59,10 +59,10 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
     private JsonNode root;
     private JsonNode response;
     private String[] arrSplit;
-    private SatuSehatCekNIK cekViaSatuSehat=new SatuSehatCekNIK();  
+    private SatuSehatCekNIK cekViaSatuSehat=new SatuSehatCekNIK();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgKamar
      * @param parent
      * @param modal */
@@ -89,9 +89,9 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                 java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 
-                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 
-                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 
+                 java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                  java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                  java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                  java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
@@ -192,7 +192,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
             }
         }
         tbIGDPrimer.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeIGDSekunder=new DefaultTableModel(null,new String[]{
                 "P","No.Rawat","No.RM","Nama Pasien","No.KTP Pasien","ID Encounter","Petugas/Dokter/Praktisi","No.KTP Praktisi","Tanggal","Cara Masuk","ID Observation Cara Masuk",
                 "Alat Transportasi","ID Observation Alat Transportasi","Alasan Kedatangan","Keterangan Kedatangan","ID Observation Alasan Kedatangan",
@@ -208,9 +208,9 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                 java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 
-                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 
-                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 
+                 java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                  java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                  java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                  java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
@@ -307,7 +307,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
             }
         }
         tbIGDSekunder.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeAwalKeperawatanIGD=new DefaultTableModel(null,new String[]{
                 "P","No.Rawat","No.RM","Nama Pasien","No.KTP Pasien","ID Encounter","Petugas","No.KTP Praktisi","Tanggal","Informasi","ID Observation Informasi","Riwayat Penyakit Sekarang","ID Observation Keluhan Utama","Riwayat Penyakit Dahulu","ID Observation RPD",
                 "Riwayat Penggunaan Obat","ID Observation RPO","Status Hamil","ID Observation Status Hamil","Gravida","ID Observation Gravida","Para","ID Observation Para","Abortus","ID Observation Abortus","HPHT","ID Observation HPHT","Tekanan Intrakranial",
@@ -587,15 +587,15 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
             }
         }
         tbAwalKeperawatanIGD.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         try {
             link=koneksiDB.URLFHIRSATUSEHAT();
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        }    
-        
+        }
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -622,7 +622,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
         LoadHTMLIGDPrimer.setDocument(doc);
         LoadHTMLIGDSekunder.setDocument(doc);
         LoadHTMLAwalKeperawatanIGD.setDocument(doc);
-        
+
         ChkAccorIGDPrimer.setSelected(false);
         isMenuIGDPrimer();
         ChkAccorIGDSekunder.setSelected(false);
@@ -630,8 +630,8 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
         ChkAccorAwalKeperawatanIGD.setSelected(false);
         isMenuAwalKeperawatanIGD();
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1213,7 +1213,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
             case 0:
                 try{
                     StringBuilder htmlContent= new StringBuilder();
-                    htmlContent.append(                             
+                    htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tanggal Registrasi</b></td>"+
                             "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
@@ -1261,7 +1261,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                     );
                     htmlContent=null;
 
-                    File g = new File("file2.css");            
+                    File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                     bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1276,8 +1276,8 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                     );
                     bg.close();
 
-                    File f = new File("DataSatuSehatObservationTTVSuhu.html");            
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                    File f = new File("DataSatuSehatObservationTTVSuhu.html");
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                     bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                 "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                 "<table width='1500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1286,12 +1286,12 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                             "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                             akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                             akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>DATA PENGIRIMAN SATU SEHAT OBSERVATION-TTV SUHU TUBUH<br><br></font>"+        
+                                            "<font size='2' face='Tahoma'>DATA PENGIRIMAN SATU SEHAT OBSERVATION-TTV SUHU TUBUH<br><br></font>"+
                                         "</td>"+
                                    "</tr>"+
                                 "</table>")
                     );
-                    bw.close();                         
+                    bw.close();
                     Desktop.getDesktop().browse(f.toURI());
                 }catch(Exception e){
                     System.out.println("Notifikasi : "+e);
@@ -1300,7 +1300,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
             default:
                 break;
         }
-        this.setCursor(Cursor.getDefaultCursor());    
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
@@ -1459,7 +1459,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                 if(tbIGDPrimer.getSelectedRow()!= -1){
                     getDataIGDPrimer();
                 }
-            }          
+            }
         }
     }//GEN-LAST:event_tbIGDPrimerKeyReleased
 
@@ -1487,7 +1487,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                 if(tbIGDSekunder.getSelectedRow()!= -1){
                     getDataIGDSekunder();
                 }
-            }          
+            }
         }
     }//GEN-LAST:event_tbIGDSekunderKeyPressed
 
@@ -1497,7 +1497,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
         }else if(TabRawat.getSelectedIndex()==1){
             UpdateTriaseIGDSekunder();
         }else if(TabRawat.getSelectedIndex()==2){
-            
+
         }
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
@@ -1517,7 +1517,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                 if(tbAwalKeperawatanIGD.getSelectedRow()!= -1){
                     getDataIGDSekunder();
                 }
-            }          
+            }
         }
     }//GEN-LAST:event_tbAwalKeperawatanIGDKeyPressed
 
@@ -1608,7 +1608,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
     private widget.Table tbTB;
     private widget.Table tbTensi;
     // End of variables declaration//GEN-END:variables
-    
+
     private void tampilIGDPrimer() {
         Valid.tabelKosong(tabModeIGDPrimer);
         try{
@@ -1659,7 +1659,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
         }
         LCount.setText(""+tabModeIGDPrimer.getRowCount());
     }
-    
+
     private void tampilIGDSekunder() {
         Valid.tabelKosong(tabModeIGDSekunder);
         try{
@@ -1710,7 +1710,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
         }
         LCount.setText(""+tabModeIGDSekunder.getRowCount());
     }
-    
+
     private void tampilAwalKeperawatanIGD() {
         Valid.tabelKosong(tabModeAwalKeperawatanIGD);
         try{
@@ -1784,55 +1784,55 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
         }
         LCount.setText(""+tabModeAwalKeperawatanIGD.getRowCount());
     }
-    
+
     public void isCek(){
         BtnKirim.setEnabled(akses.getsatu_sehat_kirim_composition());
         BtnUpdate.setEnabled(akses.getsatu_sehat_kirim_composition());
         BtnPrint.setEnabled(akses.getsatu_sehat_kirim_composition());
     }
-    
+
     private void isMenuIGDPrimer(){
         if(ChkAccorIGDPrimer.isSelected()==true){
             ChkAccorIGDPrimer.setVisible(false);
             PanelAccorIGDPrimer.setPreferredSize(new Dimension(520,HEIGHT));
-            ScrollHTMLIGDPrimer.setVisible(true);  
+            ScrollHTMLIGDPrimer.setVisible(true);
             ChkAccorIGDPrimer.setVisible(true);
-        }else if(ChkAccorIGDPrimer.isSelected()==false){   
+        }else if(ChkAccorIGDPrimer.isSelected()==false){
             ChkAccorIGDPrimer.setVisible(false);
             PanelAccorIGDPrimer.setPreferredSize(new Dimension(15,HEIGHT));
             ScrollHTMLIGDPrimer.setVisible(false);
             ChkAccorIGDPrimer.setVisible(true);
         }
     }
-    
+
     private void isMenuIGDSekunder(){
         if(ChkAccorIGDSekunder.isSelected()==true){
             ChkAccorIGDSekunder.setVisible(false);
             PanelAccorIGDSekunder.setPreferredSize(new Dimension(520,HEIGHT));
-            ScrollHTMLIGDSekunder.setVisible(true);  
+            ScrollHTMLIGDSekunder.setVisible(true);
             ChkAccorIGDSekunder.setVisible(true);
-        }else if(ChkAccorIGDSekunder.isSelected()==false){   
+        }else if(ChkAccorIGDSekunder.isSelected()==false){
             ChkAccorIGDSekunder.setVisible(false);
             PanelAccorIGDSekunder.setPreferredSize(new Dimension(15,HEIGHT));
             ScrollHTMLIGDSekunder.setVisible(false);
             ChkAccorIGDSekunder.setVisible(true);
         }
     }
-    
+
     private void isMenuAwalKeperawatanIGD(){
         if(ChkAccorAwalKeperawatanIGD.isSelected()==true){
             ChkAccorAwalKeperawatanIGD.setVisible(false);
             PanelAccorAwalKeperawatanIGD.setPreferredSize(new Dimension(520,HEIGHT));
-            ScrollHTMLAwalKeperawatanIGD.setVisible(true);  
+            ScrollHTMLAwalKeperawatanIGD.setVisible(true);
             ChkAccorAwalKeperawatanIGD.setVisible(true);
-        }else if(ChkAccorAwalKeperawatanIGD.isSelected()==false){   
+        }else if(ChkAccorAwalKeperawatanIGD.isSelected()==false){
             ChkAccorAwalKeperawatanIGD.setVisible(false);
             PanelAccorAwalKeperawatanIGD.setPreferredSize(new Dimension(15,HEIGHT));
             ScrollHTMLAwalKeperawatanIGD.setVisible(false);
             ChkAccorAwalKeperawatanIGD.setVisible(true);
         }
     }
-    
+
     private void getDataIGDPrimer() {
         try {
             cekada=0;
@@ -1910,14 +1910,14 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                     ps.setString(1,tbIGDPrimer.getValueAt(tbIGDPrimer.getSelectedRow(),1).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
-                        htmlContent.append("<tr class='isi'>").                                    
-                                        append("<td valign='middle' bgcolor='#FFFAF8' align='center' width='60%'>Pemeriksaan</td>").                                    
-                                        append("<td valign='middle' bgcolor='#FF0000' color='ffffff' align='left' width='40%'>Emergensi</td>").                                    
+                        htmlContent.append("<tr class='isi'>").
+                                        append("<td valign='middle' bgcolor='#FFFAF8' align='center' width='60%'>Pemeriksaan</td>").
+                                        append("<td valign='middle' bgcolor='#FF0000' color='ffffff' align='left' width='40%'>Emergensi</td>").
                                     append("</tr>");
                         rs.beforeFirst();
                         while(rs.next()){
-                            htmlContent.append("<tr class='isi'>").                                    
-                                        append("<td valign='middle'>").append(rs.getString("nama_pemeriksaan")).append("</td>").                                    
+                            htmlContent.append("<tr class='isi'>").
+                                        append("<td valign='middle'>").append(rs.getString("nama_pemeriksaan")).append("</td>").
                                         append("<td valign='middle' bgcolor='#FF0000' color='ffffff'>").
                                         append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0'>");
                             ps2=koneksi.prepareStatement(
@@ -1930,9 +1930,9 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                 ps2.setString(2,tbIGDPrimer.getValueAt(tbIGDPrimer.getSelectedRow(),1).toString());
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
-                                    htmlContent.append("<tr class='isi'>").                                    
-                                                    append("<td border='0' valign='middle' bgcolor='#FF0000' color='ffffff' width='50%'>").append(rs2.getString("pengkajian_skala2")).append("</td>").                                    
-                                                    append("<td border='0' valign='middle' bgcolor='#FF0000' color='ffffff' width='50%'>").append(rs2.getString("id_observation_skala2")).append("</td>").                                    
+                                    htmlContent.append("<tr class='isi'>").
+                                                    append("<td border='0' valign='middle' bgcolor='#FF0000' color='ffffff' width='50%'>").append(rs2.getString("pengkajian_skala2")).append("</td>").
+                                                    append("<td border='0' valign='middle' bgcolor='#FF0000' color='ffffff' width='50%'>").append(rs2.getString("id_observation_skala2")).append("</td>").
                                                 append("</tr>");
                                 }
                             } catch (Exception e) {
@@ -1946,7 +1946,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                 }
                             }
                             htmlContent.append("</table>").
-                                        append("</td>").                                    
+                                        append("</td>").
                                         append("</tr>");
                         }
                     }
@@ -1972,7 +1972,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     private void getDataIGDSekunder() {
         try {
             cekada=0;
@@ -2050,14 +2050,14 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                     ps.setString(1,tbIGDSekunder.getValueAt(tbIGDSekunder.getSelectedRow(),1).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
-                        htmlContent.append("<tr class='isi'>").                                    
-                                        append("<td valign='middle' bgcolor='#FFFAF8' align='center' width='60%'>Pemeriksaan</td>").                                    
-                                        append("<td valign='middle' bgcolor='#00AA00' color='ffffff' align='left' width='40%'>Emergensi</td>").                                    
+                        htmlContent.append("<tr class='isi'>").
+                                        append("<td valign='middle' bgcolor='#FFFAF8' align='center' width='60%'>Pemeriksaan</td>").
+                                        append("<td valign='middle' bgcolor='#00AA00' color='ffffff' align='left' width='40%'>Emergensi</td>").
                                     append("</tr>");
                         rs.beforeFirst();
                         while(rs.next()){
-                            htmlContent.append("<tr class='isi'>").                                    
-                                        append("<td valign='middle'>").append(rs.getString("nama_pemeriksaan")).append("</td>").                                    
+                            htmlContent.append("<tr class='isi'>").
+                                        append("<td valign='middle'>").append(rs.getString("nama_pemeriksaan")).append("</td>").
                                         append("<td valign='middle' bgcolor='#00AA00' color='ffffff'>").
                                         append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0'>");
                             ps2=koneksi.prepareStatement(
@@ -2070,9 +2070,9 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                 ps2.setString(2,tbIGDSekunder.getValueAt(tbIGDSekunder.getSelectedRow(),1).toString());
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
-                                    htmlContent.append("<tr class='isi'>").                                    
-                                                    append("<td border='0' valign='middle' bgcolor='#00AA00' color='ffffff' width='50%'>").append(rs2.getString("pengkajian_skala4")).append("</td>").                                    
-                                                    append("<td border='0' valign='middle' bgcolor='#00AA00' color='ffffff' width='50%'>").append(rs2.getString("id_observation_skala4")).append("</td>").                                    
+                                    htmlContent.append("<tr class='isi'>").
+                                                    append("<td border='0' valign='middle' bgcolor='#00AA00' color='ffffff' width='50%'>").append(rs2.getString("pengkajian_skala4")).append("</td>").
+                                                    append("<td border='0' valign='middle' bgcolor='#00AA00' color='ffffff' width='50%'>").append(rs2.getString("id_observation_skala4")).append("</td>").
                                                 append("</tr>");
                                 }
                             } catch (Exception e) {
@@ -2086,7 +2086,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                 }
                             }
                             htmlContent.append("</table>").
-                                        append("</td>").                                    
+                                        append("</td>").
                                         append("</tr>");
                         }
                     }
@@ -2101,7 +2101,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                     }
                 }
             }
-            
+
             if(cekada==0){
                 ps=koneksi.prepareStatement(
                     "select master_triase_pemeriksaan.kode_pemeriksaan,master_triase_pemeriksaan.nama_pemeriksaan from master_triase_pemeriksaan "+
@@ -2113,14 +2113,14 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                     ps.setString(1,tbIGDSekunder.getValueAt(tbIGDSekunder.getSelectedRow(),1).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
-                        htmlContent.append("<tr class='isi'>").                                    
-                                        append("<td valign='middle' bgcolor='#FFFAF8' align='center' width='60%'>Pemeriksaan</td>").                                    
-                                        append("<td valign='middle' bgcolor='#969696' color='ffffff' align='left' width='40%'>Emergensi</td>").                                    
+                        htmlContent.append("<tr class='isi'>").
+                                        append("<td valign='middle' bgcolor='#FFFAF8' align='center' width='60%'>Pemeriksaan</td>").
+                                        append("<td valign='middle' bgcolor='#969696' color='ffffff' align='left' width='40%'>Emergensi</td>").
                                     append("</tr>");
                         rs.beforeFirst();
                         while(rs.next()){
-                            htmlContent.append("<tr class='isi'>").                                    
-                                        append("<td valign='middle'>").append(rs.getString("nama_pemeriksaan")).append("</td>").                                    
+                            htmlContent.append("<tr class='isi'>").
+                                        append("<td valign='middle'>").append(rs.getString("nama_pemeriksaan")).append("</td>").
                                         append("<td valign='middle' bgcolor='#969696' color='ffffff'>").
                                         append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0'>");
                             ps2=koneksi.prepareStatement(
@@ -2133,9 +2133,9 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                 ps2.setString(2,tbIGDSekunder.getValueAt(tbIGDSekunder.getSelectedRow(),1).toString());
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
-                                    htmlContent.append("<tr class='isi'>").                                    
-                                                    append("<td border='0' valign='middle' bgcolor='#969696' color='ffffff' width='50%'>").append(rs2.getString("pengkajian_skala5")).append("</td>").                                    
-                                                    append("<td border='0' valign='middle' bgcolor='#969696' color='ffffff' width='50%'>").append(rs2.getString("id_observation_skala5")).append("</td>").                                    
+                                    htmlContent.append("<tr class='isi'>").
+                                                    append("<td border='0' valign='middle' bgcolor='#969696' color='ffffff' width='50%'>").append(rs2.getString("pengkajian_skala5")).append("</td>").
+                                                    append("<td border='0' valign='middle' bgcolor='#969696' color='ffffff' width='50%'>").append(rs2.getString("id_observation_skala5")).append("</td>").
                                                 append("</tr>");
                                 }
                             } catch (Exception e) {
@@ -2149,7 +2149,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                 }
                             }
                             htmlContent.append("</table>").
-                                        append("</td>").                                    
+                                        append("</td>").
                                         append("</tr>");
                         }
                     }
@@ -2175,7 +2175,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     private void getDataAwalKeperawatanIGD(){
         try {
             StringBuilder htmlContent= new StringBuilder();
@@ -2249,7 +2249,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     private void KirimTriaseIGDPrimer() {
         for(i=0;i<tbIGDPrimer.getRowCount();i++){
             if(tbIGDPrimer.getValueAt(i,0).toString().equals("true")&&(!tbIGDPrimer.getValueAt(i,4).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,7).toString().equals(""))){
@@ -2381,7 +2381,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                             }
                         }catch(Exception e){
                             System.out.println("Notifikasi Alat Transportasi : "+e);
-                        } 
+                        }
                     }
 
                     //Alasan Kedatangan
@@ -2445,7 +2445,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                             }
                         }catch(Exception e){
                             System.out.println("Notifikasi Alasan Kedatangan : "+e);
-                        } 
+                        }
                     }
 
                     //Macam Kasus
@@ -2509,7 +2509,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                             }
                         }catch(Exception e){
                             System.out.println("Notifikasi Macam Kasus : "+e);
-                        } 
+                        }
                     }
 
                     //Tekanan Darah
@@ -3375,7 +3375,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                         }else{
                                             iyembuilder.append("{\"reference\": \"Observation/").append(rs2.getString("id_observation_skala1")).append("\"},");
                                         }
-                                            
+
                                         cekada++;
                                     }
                                 } catch (Exception e) {
@@ -3560,7 +3560,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                             }else{
                                                 iyembuilder.append("{\"reference\": \"Observation/").append(rs2.getString("id_observation_skala2")).append("\"},");
                                             }
-                                                
+
                                             cekada++;
                                         }
                                     } catch (Exception e) {
@@ -3586,7 +3586,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                             }
                         }
                     }
-                    
+
                     //Composition IGD
                     if((!tbIGDPrimer.getValueAt(i,10).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,12).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,15).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,17).toString().equals(""))&&
                             (!tbIGDPrimer.getValueAt(i,19).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,21).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,23).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,25).toString().equals(""))&&
@@ -3738,7 +3738,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void KirimTriaseIGDSekunder() {
         for(i=0;i<tbIGDSekunder.getRowCount();i++){
             if(tbIGDSekunder.getValueAt(i,0).toString().equals("true")&&(!tbIGDSekunder.getValueAt(i,4).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,7).toString().equals(""))){
@@ -3870,7 +3870,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                             }
                         }catch(Exception e){
                             System.out.println("Notifikasi Alat Transportasi : "+e);
-                        } 
+                        }
                     }
 
                     //Alasan Kedatangan
@@ -3934,7 +3934,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                             }
                         }catch(Exception e){
                             System.out.println("Notifikasi Alasan Kedatangan : "+e);
-                        } 
+                        }
                     }
 
                     //Macam Kasus
@@ -3998,7 +3998,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                             }
                         }catch(Exception e){
                             System.out.println("Notifikasi Macam Kasus : "+e);
-                        } 
+                        }
                     }
 
                     //Tekanan Darah
@@ -4456,7 +4456,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                             System.out.println("Notifikasi Nyeri : "+e);
                         }
                     }
-                    
+
                     //Anamnesa Singkat
                     if(tbIGDSekunder.getValueAt(i,31).toString().equals("")){
                         try{
@@ -4508,7 +4508,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                             System.out.println("Notifikasi Anamnesa Singkat : "+e);
                         }
                     }
-                    
+
                     //Catatan
                     if((!tbIGDSekunder.getValueAt(i, 32).toString().equals("")) && tbIGDSekunder.getValueAt(i, 33).toString().equals("")){
                         try{
@@ -4627,7 +4627,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                             System.out.println("Notifikasi Keputusan : "+e);
                         }
                     }
-                    
+
                     //Triase Skala 3
                     cekada=0;
                     StringBuilder iyembuilder = new StringBuilder();
@@ -4788,7 +4788,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                         }else{
                                             iyembuilder.append("{\"reference\": \"Observation/").append(rs2.getString("id_observation_skala3")).append("\"},");
                                         }
-                                            
+
                                         cekada++;
                                     }
                                 } catch (Exception e) {
@@ -4973,7 +4973,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                             }else{
                                                 iyembuilder.append("{\"reference\": \"Observation/").append(rs2.getString("id_observation_skala4")).append("\"},");
                                             }
-                                                
+
                                             cekada++;
                                         }
                                     } catch (Exception e) {
@@ -4999,7 +4999,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                             }
                         }
                     }
-                    
+
                     //Triase Skala 5
                     if(cekada==0){
                         ps=koneksi.prepareStatement(
@@ -5159,7 +5159,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                             }else{
                                                 iyembuilder.append("{\"reference\": \"Observation/").append(rs2.getString("id_observation_skala5")).append("\"},");
                                             }
-                                                
+
                                             cekada++;
                                         }
                                     } catch (Exception e) {
@@ -5185,7 +5185,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                             }
                         }
                     }
-                    
+
                     //Composition IGD Sekunder
                     if((!tbIGDSekunder.getValueAt(i,10).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,12).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,15).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,17).toString().equals(""))&&
                             (!tbIGDSekunder.getValueAt(i,19).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,21).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,23).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,25).toString().equals(""))&&
@@ -5322,7 +5322,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void KirimAwalKeperawatanIGD() {
         for(i=0;i<tbAwalKeperawatanIGD.getRowCount();i++){
             if(tbAwalKeperawatanIGD.getValueAt(i,0).toString().equals("true")&&(!tbAwalKeperawatanIGD.getValueAt(i,4).toString().equals(""))&&(!tbAwalKeperawatanIGD.getValueAt(i,7).toString().equals(""))){
@@ -7773,7 +7773,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void UpdateTriaseIGDPrimer() {
         for(i=0;i<tbIGDPrimer.getRowCount();i++){
             if(tbIGDPrimer.getValueAt(i,0).toString().equals("true")&&(!tbIGDPrimer.getValueAt(i,4).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,7).toString().equals(""))){
@@ -9118,7 +9118,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void UpdateTriaseIGDSekunder() {
         for(i=0;i<tbIGDSekunder.getRowCount();i++){
             if(tbIGDSekunder.getValueAt(i,0).toString().equals("true")&&(!tbIGDSekunder.getValueAt(i,4).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,7).toString().equals(""))){
@@ -10554,7 +10554,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -10580,7 +10580,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

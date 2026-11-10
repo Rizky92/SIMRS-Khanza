@@ -20,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php 
+                    <?php
                        $queryinformasikamar = bukaquery(
                                "SELECT  nama.kelas,(SELECT COUNT(*) FROM kamar WHERE kelas = nama.kelas AND statusdata='1') AS total,
                                    (SELECT COUNT(*) FROM kamar WHERE  kelas = nama.kelas AND statusdata='1' AND status='ISI') AS isi,
@@ -47,12 +47,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php 
+                    <?php
                        $queryinformasibangsal = bukaquery(
                                "SELECT  nama.nm_bangsal, nama.kd_bangsal,
                                    (SELECT COUNT(*) FROM kamar WHERE kd_bangsal = nama.kd_bangsal AND statusdata='1') AS total,
                                    (SELECT COUNT(*) FROM kamar WHERE kd_bangsal = nama.kd_bangsal AND statusdata='1' AND status='ISI') AS isi,
-                                   (SELECT COUNT(*) FROM kamar WHERE kd_bangsal = nama.kd_bangsal AND statusdata='1' AND status='KOSONG') AS kosong 
+                                   (SELECT COUNT(*) FROM kamar WHERE kd_bangsal = nama.kd_bangsal AND statusdata='1' AND status='KOSONG') AS kosong
                                 FROM (SELECT DISTINCT nm_bangsal, kd_bangsal FROM bangsal WHERE status='1' AND kd_bangsal IN(SELECT kd_bangsal FROM kamar)) AS nama");
                        while($rsqueryinformasibangsal= mysqli_fetch_array($queryinformasibangsal)) {
                            echo "<tr>

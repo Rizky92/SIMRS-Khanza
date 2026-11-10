@@ -15,7 +15,7 @@
     $header = $newhead;
     $method = $_SERVER['REQUEST_METHOD'];
     $waktutunggu=10;
-    
+
     if(!empty($url[0])){
         if($method == 'GET'){
             if ((!empty($header['x-username'])) && (!empty($header['x-password']))) {
@@ -65,7 +65,7 @@
                     $decode = json_decode($konten, true);
                     switch ($url[0]) {
                         case "daftarhasilpemeriksaan":
-                            if(empty($decode['periodeawal'])) { 
+                            if(empty($decode['periodeawal'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Tanggal periode awal pencarian tidak boleh kosong',
@@ -79,9 +79,9 @@
                                         'message' => 'Format tanggal awal periode pencarian tidak sesuai, format yang benar adalah yyyy-mm-dd',
                                         'code' => 201
                                     )
-                                );  
+                                );
                                 http_response_code(201);
-                            }else if(empty($decode['periodeakhir'])) { 
+                            }else if(empty($decode['periodeakhir'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Tanggal periode akhir pencarian tidak boleh kosong',
@@ -95,7 +95,7 @@
                                         'message' => 'Format tanggal akhir periode pencarian tidak sesuai, format yang benar adalah yyyy-mm-dd',
                                         'code' => 201
                                     )
-                                );  
+                                );
                                 http_response_code(201);
                             }else if(strpos($decode['keyword'],"'")||strpos($decode['keyword'],"\\")){
                                 $response = array(
@@ -110,33 +110,33 @@
                                         order_out.expertise_finding,order_out.expertise_conclusion,order_out.expertise_bookmark,order_out.dokter_radiolog,
                                         order_out.link_ris,order_out.link_synapse,order_out.link_mobility,order_out.kode_tindakan,order_out.tindakan_radiologi,
                                         order_out.proyeksi,order_out.kV,order_out.mAS,order_out.FFD,order_out.BSF,order_out.inak,order_out.jml_penyinaran,
-                                        order_out.dosis,order_out.statusupdate FROM order_out 
-                                        WHERE order_out.tanggal_order between '".validTeks4($decode['periodeawal'],20)." 00:00:00' and '".validTeks4($decode['periodeakhir'],20)." 23:59:59' 
-                                        and (order_out.no_rm like '%".validTeks4($decode['keyword'],20)."%' or order_out.no_rontgen like '%".validTeks4($decode['keyword'],20)."%' or 
-                                        order_out.no_register like '%".validTeks4($decode['keyword'],20)."%' or order_out.nama_pasien like '%".validTeks4($decode['keyword'],20)."%' or 
-                                        order_out.expertise_finding like '%".validTeks4($decode['keyword'],20)."%' or order_out.expertise_conclusion like '%".validTeks4($decode['keyword'],20)."%' or 
-                                        order_out.dokter_radiolog like '%".validTeks4($decode['keyword'],20)."%' or order_out.kode_tindakan like '%".validTeks4($decode['keyword'],20)."%' or 
+                                        order_out.dosis,order_out.statusupdate FROM order_out
+                                        WHERE order_out.tanggal_order between '".validTeks4($decode['periodeawal'],20)." 00:00:00' and '".validTeks4($decode['periodeakhir'],20)." 23:59:59'
+                                        and (order_out.no_rm like '%".validTeks4($decode['keyword'],20)."%' or order_out.no_rontgen like '%".validTeks4($decode['keyword'],20)."%' or
+                                        order_out.no_register like '%".validTeks4($decode['keyword'],20)."%' or order_out.nama_pasien like '%".validTeks4($decode['keyword'],20)."%' or
+                                        order_out.expertise_finding like '%".validTeks4($decode['keyword'],20)."%' or order_out.expertise_conclusion like '%".validTeks4($decode['keyword'],20)."%' or
+                                        order_out.dokter_radiolog like '%".validTeks4($decode['keyword'],20)."%' or order_out.kode_tindakan like '%".validTeks4($decode['keyword'],20)."%' or
                                         order_out.tindakan_radiologi like '%".validTeks4($decode['keyword'],20)."%') order by order_out.tanggal_order";
                                 $result2 = bukaquery($sql2);
                                 if (mysqli_num_rows($result2) !== 0) {
                                     while ($data = fetch_array($result2)) {
                                         $data_array[] = array(
-                                            'tanggal_order'=>$data['tanggal_order'], 
-                                            'no_rm'=>$data['no_rm'], 
-                                            'no_rontgen'=>$data['no_rontgen'], 
-                                            'no_register'=>$data['no_register'], 
-                                            'nama_pasien'=>$data['nama_pasien'], 
-                                            'expertise_finding'=>$data['expertise_finding'], 
-                                            'expertise_conclusion'=>$data['expertise_conclusion'], 
-                                            'expertise_bookmark'=>$data['expertise_bookmark'], 
+                                            'tanggal_order'=>$data['tanggal_order'],
+                                            'no_rm'=>$data['no_rm'],
+                                            'no_rontgen'=>$data['no_rontgen'],
+                                            'no_register'=>$data['no_register'],
+                                            'nama_pasien'=>$data['nama_pasien'],
+                                            'expertise_finding'=>$data['expertise_finding'],
+                                            'expertise_conclusion'=>$data['expertise_conclusion'],
+                                            'expertise_bookmark'=>$data['expertise_bookmark'],
                                             'dokter_radiolog'=>$data['dokter_radiolog'],
-                                            'link_ris'=>$data['link_ris'], 
-                                            'link_synapse'=>$data['link_synapse'], 
+                                            'link_ris'=>$data['link_ris'],
+                                            'link_synapse'=>$data['link_synapse'],
                                             'link_mobility'=>$data['link_mobility'],
                                             'kode_tindakan'=>$data['kode_tindakan'],
                                             'tindakan_radiologi'=>$data['tindakan_radiologi'],
                                             'proyeksi'=>$data['proyeksi'],
-                                            'kV'=>$data['kV'], 
+                                            'kV'=>$data['kV'],
                                             'mAS'=>$data['mAS'],
                                             'FFD'=>$data['FFD'],
                                             'BSF'=>$data['BSF'],
@@ -145,7 +145,7 @@
                                             'dosis'=>$data['dosis'],
                                             'statusupdate'=>$data['statusupdate']
                                         );
-                                    }    
+                                    }
                                     $response = array(
                                         'response' => array(
                                             'list' => (
@@ -163,14 +163,14 @@
                                         'metadata' => array(
                                             'message' => 'Data pencarian tidak ditemukan',
                                             'code' => '201'
-                                        )   
+                                        )
                                     );
                                     http_response_code(201);
                                 }
                             }
                             break;
                         case "carinomororder":
-                            if(empty($decode['no_rontgen'])) { 
+                            if(empty($decode['no_rontgen'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Nomor rontgen tidak boleh kosong',
@@ -191,28 +191,28 @@
                                         order_out.expertise_finding,order_out.expertise_conclusion,order_out.expertise_bookmark,order_out.dokter_radiolog,
                                         order_out.link_ris,order_out.link_synapse,order_out.link_mobility,order_out.kode_tindakan,order_out.tindakan_radiologi,
                                         order_out.proyeksi,order_out.kV,order_out.mAS,order_out.FFD,order_out.BSF,order_out.inak,order_out.jml_penyinaran,
-                                        order_out.dosis,order_out.statusupdate FROM order_out 
+                                        order_out.dosis,order_out.statusupdate FROM order_out
                                         WHERE order_out.no_rontgen='".validTeks($decode['no_rontgen'])."'";
                                 $result2 = bukaquery($sql2);
                                 if ($data = fetch_array($result2)) {
                                     $response = array(
                                         'response' => array(
-                                            'tanggal_order'=>$data['tanggal_order'], 
-                                            'no_rm'=>$data['no_rm'], 
-                                            'no_rontgen'=>$data['no_rontgen'], 
-                                            'no_register'=>$data['no_register'], 
-                                            'nama_pasien'=>$data['nama_pasien'], 
-                                            'expertise_finding'=>$data['expertise_finding'], 
-                                            'expertise_conclusion'=>$data['expertise_conclusion'], 
-                                            'expertise_bookmark'=>$data['expertise_bookmark'], 
+                                            'tanggal_order'=>$data['tanggal_order'],
+                                            'no_rm'=>$data['no_rm'],
+                                            'no_rontgen'=>$data['no_rontgen'],
+                                            'no_register'=>$data['no_register'],
+                                            'nama_pasien'=>$data['nama_pasien'],
+                                            'expertise_finding'=>$data['expertise_finding'],
+                                            'expertise_conclusion'=>$data['expertise_conclusion'],
+                                            'expertise_bookmark'=>$data['expertise_bookmark'],
                                             'dokter_radiolog'=>$data['dokter_radiolog'],
-                                            'link_ris'=>$data['link_ris'], 
-                                            'link_synapse'=>$data['link_synapse'], 
+                                            'link_ris'=>$data['link_ris'],
+                                            'link_synapse'=>$data['link_synapse'],
                                             'link_mobility'=>$data['link_mobility'],
                                             'kode_tindakan'=>$data['kode_tindakan'],
                                             'tindakan_radiologi'=>$data['tindakan_radiologi'],
                                             'proyeksi'=>$data['proyeksi'],
-                                            'kV'=>$data['kV'], 
+                                            'kV'=>$data['kV'],
                                             'mAS'=>$data['mAS'],
                                             'FFD'=>$data['FFD'],
                                             'BSF'=>$data['BSF'],
@@ -232,14 +232,14 @@
                                         'metadata' => array(
                                             'message' => 'Data pencarian tidak ditemukan',
                                             'code' => '201'
-                                        )   
+                                        )
                                     );
                                     http_response_code(201);
                                 }
                             }
                             break;
                         case "hapushasilpemeriksaan":
-                            if(empty($decode['no_rontgen'])) { 
+                            if(empty($decode['no_rontgen'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Nomor order tidak boleh kosong',
@@ -273,14 +273,14 @@
                                         'metadata' => array(
                                             'message' => 'Gagal menghapus',
                                             'code' => '201'
-                                        )   
+                                        )
                                     );
                                     http_response_code(201);
                                 }
                             }
                             break;
                         case "tambahhasilpemeriksaan":
-                            if(empty($decode['tanggal_order'])) { 
+                            if(empty($decode['tanggal_order'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Tanggal tidak boleh kosong',
@@ -294,9 +294,9 @@
                                         'message' => 'Format Tanggal tidak sesuai, format yang benar adalah yyyy-mm-dd HH:ii:ss',
                                         'code' => 201
                                     )
-                                );  
+                                );
                                 http_response_code(201);
-                            }else if(empty($decode['no_rm'])) { 
+                            }else if(empty($decode['no_rm'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'No.RM tidak boleh kosong',
@@ -312,7 +312,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['no_rontgen'])) { 
+                            }else if(empty($decode['no_rontgen'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Nomor rontgen/order tidak boleh kosong',
@@ -328,7 +328,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['no_register'])) { 
+                            }else if(empty($decode['no_register'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Nomor register/pendaftaran tidak boleh kosong',
@@ -344,7 +344,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['nama_pasien'])) { 
+                            }else if(empty($decode['nama_pasien'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Nama pasien tidak boleh kosong',
@@ -360,7 +360,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['expertise_finding'])) { 
+                            }else if(empty($decode['expertise_finding'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Expertise finding tidak boleh kosong',
@@ -376,7 +376,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['expertise_conclusion'])) { 
+                            }else if(empty($decode['expertise_conclusion'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Expertise conclusion tidak boleh kosong',
@@ -392,7 +392,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['expertise_bookmark'])) { 
+                            }else if(empty($decode['expertise_bookmark'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Expertise bookmark tidak boleh kosong',
@@ -408,7 +408,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['dokter_radiolog'])) { 
+                            }else if(empty($decode['dokter_radiolog'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'dokter radiolog tidak boleh kosong',
@@ -424,7 +424,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['link_ris'])) { 
+                            }else if(empty($decode['link_ris'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Link RIS tidak boleh kosong',
@@ -440,7 +440,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['link_synapse'])) { 
+                            }else if(empty($decode['link_synapse'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Link synapse tidak boleh kosong',
@@ -456,7 +456,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['link_mobility'])) { 
+                            }else if(empty($decode['link_mobility'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Link mobility tidak boleh kosong',
@@ -472,7 +472,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['kode_tindakan'])) { 
+                            }else if(empty($decode['kode_tindakan'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Kode tindakan tidak boleh kosong',
@@ -488,7 +488,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['tindakan_radiologi'])) { 
+                            }else if(empty($decode['tindakan_radiologi'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Tindakan radiologi tidak boleh kosong',
@@ -504,7 +504,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['proyeksi'])) { 
+                            }else if(empty($decode['proyeksi'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Proyeksi tidak boleh kosong',
@@ -520,7 +520,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['kV'])) { 
+                            }else if(empty($decode['kV'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'kV tidak boleh kosong',
@@ -536,7 +536,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['mAS'])) { 
+                            }else if(empty($decode['mAS'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'mAS tidak boleh kosong',
@@ -552,7 +552,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['FFD'])) { 
+                            }else if(empty($decode['FFD'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'FFD tidak boleh kosong',
@@ -568,7 +568,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['BSF'])) { 
+                            }else if(empty($decode['BSF'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'BSF tidak boleh kosong',
@@ -584,7 +584,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['inak'])) { 
+                            }else if(empty($decode['inak'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'BSF tidak boleh kosong',
@@ -600,7 +600,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['jml_penyinaran'])) { 
+                            }else if(empty($decode['jml_penyinaran'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Jumlah penyinaran tidak boleh kosong',
@@ -616,7 +616,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['dosis'])) { 
+                            }else if(empty($decode['dosis'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Dosis tidak boleh kosong',
@@ -637,22 +637,22 @@
                                 if ($query) {
                                     $response = array(
                                         'response' => array(
-                                            'tanggal_order'=>$decode['tanggal_order'], 
-                                            'no_rm'=>$decode['no_rm'], 
-                                            'no_rontgen'=>$decode['no_rontgen'], 
-                                            'no_register'=>$decode['no_register'], 
-                                            'nama_pasien'=>$decode['nama_pasien'], 
-                                            'expertise_finding'=>$decode['expertise_finding'], 
-                                            'expertise_conclusion'=>$decode['expertise_conclusion'], 
-                                            'expertise_bookmark'=>$decode['expertise_bookmark'], 
+                                            'tanggal_order'=>$decode['tanggal_order'],
+                                            'no_rm'=>$decode['no_rm'],
+                                            'no_rontgen'=>$decode['no_rontgen'],
+                                            'no_register'=>$decode['no_register'],
+                                            'nama_pasien'=>$decode['nama_pasien'],
+                                            'expertise_finding'=>$decode['expertise_finding'],
+                                            'expertise_conclusion'=>$decode['expertise_conclusion'],
+                                            'expertise_bookmark'=>$decode['expertise_bookmark'],
                                             'dokter_radiolog'=>$decode['dokter_radiolog'],
-                                            'link_ris'=>$decode['link_ris'], 
-                                            'link_synapse'=>$decode['link_synapse'], 
+                                            'link_ris'=>$decode['link_ris'],
+                                            'link_synapse'=>$decode['link_synapse'],
                                             'link_mobility'=>$decode['link_mobility'],
                                             'kode_tindakan'=>$decode['kode_tindakan'],
                                             'tindakan_radiologi'=>$decode['tindakan_radiologi'],
                                             'proyeksi'=>$decode['proyeksi'],
-                                            'kV'=>$decode['kV'], 
+                                            'kV'=>$decode['kV'],
                                             'mAS'=>$decode['mAS'],
                                             'FFD'=>$decode['FFD'],
                                             'BSF'=>$decode['BSF'],
@@ -671,14 +671,14 @@
                                         'metadata' => array(
                                             'message' => 'Gagal menyimpan',
                                             'code' => '201'
-                                        )   
+                                        )
                                     );
                                     http_response_code(201);
                                 }
                             }
                             break;
                         case "ubahhasilpemeriksaan":
-                            if(empty($decode['tanggal_order'])) { 
+                            if(empty($decode['tanggal_order'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Tanggal tidak boleh kosong',
@@ -692,9 +692,9 @@
                                         'message' => 'Format Tanggal tidak sesuai, format yang benar adalah yyyy-mm-dd',
                                         'code' => 201
                                     )
-                                );  
+                                );
                                 http_response_code(201);
-                            }else if(empty($decode['no_rm'])) { 
+                            }else if(empty($decode['no_rm'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'No.RM tidak boleh kosong',
@@ -710,7 +710,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['no_rontgen'])) { 
+                            }else if(empty($decode['no_rontgen'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Nomor rontgen/order tidak boleh kosong',
@@ -726,7 +726,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['no_register'])) { 
+                            }else if(empty($decode['no_register'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Nomor register/pendaftaran tidak boleh kosong',
@@ -742,7 +742,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['nama_pasien'])) { 
+                            }else if(empty($decode['nama_pasien'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Nama pasien tidak boleh kosong',
@@ -758,7 +758,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['expertise_finding'])) { 
+                            }else if(empty($decode['expertise_finding'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Expertise finding tidak boleh kosong',
@@ -774,7 +774,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['expertise_conclusion'])) { 
+                            }else if(empty($decode['expertise_conclusion'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Expertise conclusion tidak boleh kosong',
@@ -790,7 +790,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['expertise_bookmark'])) { 
+                            }else if(empty($decode['expertise_bookmark'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Expertise bookmark tidak boleh kosong',
@@ -806,7 +806,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['dokter_radiolog'])) { 
+                            }else if(empty($decode['dokter_radiolog'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'dokter radiolog tidak boleh kosong',
@@ -822,7 +822,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['link_ris'])) { 
+                            }else if(empty($decode['link_ris'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Link RIS tidak boleh kosong',
@@ -838,7 +838,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['link_synapse'])) { 
+                            }else if(empty($decode['link_synapse'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Link synapse tidak boleh kosong',
@@ -854,7 +854,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['link_mobility'])) { 
+                            }else if(empty($decode['link_mobility'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Link mobility tidak boleh kosong',
@@ -870,7 +870,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['kode_tindakan'])) { 
+                            }else if(empty($decode['kode_tindakan'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Kode tindakan tidak boleh kosong',
@@ -886,7 +886,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['tindakan_radiologi'])) { 
+                            }else if(empty($decode['tindakan_radiologi'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Tindakan radiologi tidak boleh kosong',
@@ -902,7 +902,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['proyeksi'])) { 
+                            }else if(empty($decode['proyeksi'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Proyeksi tidak boleh kosong',
@@ -918,7 +918,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['kV'])) { 
+                            }else if(empty($decode['kV'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'kV tidak boleh kosong',
@@ -934,7 +934,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['mAS'])) { 
+                            }else if(empty($decode['mAS'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'mAS tidak boleh kosong',
@@ -950,7 +950,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['FFD'])) { 
+                            }else if(empty($decode['FFD'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'FFD tidak boleh kosong',
@@ -966,7 +966,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['BSF'])) { 
+                            }else if(empty($decode['BSF'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'BSF tidak boleh kosong',
@@ -982,7 +982,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['inak'])) { 
+                            }else if(empty($decode['inak'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'BSF tidak boleh kosong',
@@ -998,7 +998,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['jml_penyinaran'])) { 
+                            }else if(empty($decode['jml_penyinaran'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Jumlah penyinaran tidak boleh kosong',
@@ -1014,7 +1014,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if(empty($decode['dosis'])) { 
+                            }else if(empty($decode['dosis'])) {
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Dosis tidak boleh kosong',
@@ -1037,27 +1037,27 @@
                                             expertise_bookmark='".validTeks($decode['expertise_bookmark'])."',dokter_radiolog='".validTeks($decode['dokter_radiolog'])."',link_ris='".validTeks($decode['link_ris'])."',
                                             link_synapse='".validTeks($decode['link_synapse'])."',link_mobility='".validTeks($decode['link_mobility'])."',kode_tindakan='".validTeks($decode['kode_tindakan'])."',
                                             tindakan_radiologi='".validTeks($decode['tindakan_radiologi'])."',proyeksi='".validTeks($decode['proyeksi'])."',kV='".validTeks($decode['kV'])."',mAS='".validTeks($decode['mAS'])."',FFD='".validTeks($decode['FFD'])."',
-                                            BSF='".validTeks($decode['BSF'])."',inak='".validTeks($decode['inak'])."',jml_penyinaran='".validTeks($decode['jml_penyinaran'])."',dosis='".validTeks($decode['dosis'])."',statusupdate='1' 
+                                            BSF='".validTeks($decode['BSF'])."',inak='".validTeks($decode['inak'])."',jml_penyinaran='".validTeks($decode['jml_penyinaran'])."',dosis='".validTeks($decode['dosis'])."',statusupdate='1'
                                             where no_rontgen='".validTeks($decode['no_rontgen'])."'");
                                     if ($query) {
                                         $response = array(
                                             'response' => array(
-                                                'tanggal_order'=>$decode['tanggal_order'], 
-                                                'no_rm'=>$decode['no_rm'], 
-                                                'no_rontgen'=>$decode['no_rontgen'], 
-                                                'no_register'=>$decode['no_register'], 
-                                                'nama_pasien'=>$decode['nama_pasien'], 
-                                                'expertise_finding'=>$decode['expertise_finding'], 
-                                                'expertise_conclusion'=>$decode['expertise_conclusion'], 
-                                                'expertise_bookmark'=>$decode['expertise_bookmark'], 
+                                                'tanggal_order'=>$decode['tanggal_order'],
+                                                'no_rm'=>$decode['no_rm'],
+                                                'no_rontgen'=>$decode['no_rontgen'],
+                                                'no_register'=>$decode['no_register'],
+                                                'nama_pasien'=>$decode['nama_pasien'],
+                                                'expertise_finding'=>$decode['expertise_finding'],
+                                                'expertise_conclusion'=>$decode['expertise_conclusion'],
+                                                'expertise_bookmark'=>$decode['expertise_bookmark'],
                                                 'dokter_radiolog'=>$decode['dokter_radiolog'],
-                                                'link_ris'=>$decode['link_ris'], 
-                                                'link_synapse'=>$decode['link_synapse'], 
+                                                'link_ris'=>$decode['link_ris'],
+                                                'link_synapse'=>$decode['link_synapse'],
                                                 'link_mobility'=>$decode['link_mobility'],
                                                 'kode_tindakan'=>$decode['kode_tindakan'],
                                                 'tindakan_radiologi'=>$decode['tindakan_radiologi'],
                                                 'proyeksi'=>$decode['proyeksi'],
-                                                'kV'=>$decode['kV'], 
+                                                'kV'=>$decode['kV'],
                                                 'mAS'=>$decode['mAS'],
                                                 'FFD'=>$decode['FFD'],
                                                 'BSF'=>$decode['BSF'],
@@ -1076,7 +1076,7 @@
                                             'metadata' => array(
                                                 'message' => 'Gagal menyimpan',
                                                 'code' => '201'
-                                            )   
+                                            )
                                         );
                                         http_response_code(201);
                                     }
@@ -1085,11 +1085,11 @@
                                         'metadata' => array(
                                             'message' => 'Nomor rontgen tidak ditemukan',
                                             'code' => '201'
-                                        )   
+                                        )
                                     );
                                     http_response_code(201);
                                 }
-                                    
+
                             }
                             break;
                     }
@@ -1120,7 +1120,7 @@
             );
             http_response_code(201);
         }
-        
+
         if (!empty($response)) {
             echo json_encode($response);
         } else {
@@ -1129,7 +1129,7 @@
     }else{
         tampil();
     }
-    
+
     function tampil(){
         echo "Selamat Datang di Web Service Bridging Radiologi ";
         echo "\n\n";

@@ -16,12 +16,12 @@
 	<parameter name="parameter" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select inventaris_produsen.kode_produsen, inventaris_produsen.nama_produsen, inventaris_produsen.alamat_produsen, inventaris_produsen.no_telp,
-                   inventaris_produsen.email, inventaris_produsen.website_produsen from inventaris_produsen 
-                   where inventaris_produsen.kode_produsen like $P{parameter} 
-                    or inventaris_produsen.nama_produsen like $P{parameter} 
-                    or inventaris_produsen.alamat_produsen like $P{parameter} 
-                    or inventaris_produsen.no_telp like $P{parameter} 
-                    or inventaris_produsen.email like $P{parameter} 
+                   inventaris_produsen.email, inventaris_produsen.website_produsen from inventaris_produsen
+                   where inventaris_produsen.kode_produsen like $P{parameter}
+                    or inventaris_produsen.nama_produsen like $P{parameter}
+                    or inventaris_produsen.alamat_produsen like $P{parameter}
+                    or inventaris_produsen.no_telp like $P{parameter}
+                    or inventaris_produsen.email like $P{parameter}
                     or inventaris_produsen.website_produsen like $P{parameter} order by inventaris_produsen.kode_produsen]]>
 	</queryString>
 	<field name="kode_produsen" class="java.lang.String">

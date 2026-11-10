@@ -28,9 +28,9 @@
 	<queryString>
 		<![CDATA[select satu_sehat_mapping_lokasi_ruangrad.id_lokasi_satusehat,satu_sehat_mapping_lokasi_ruangrad.longitude,
                    satu_sehat_mapping_lokasi_ruangrad.latitude,satu_sehat_mapping_lokasi_ruangrad.altittude,
-                   satu_sehat_mapping_departemen.dep_id,departemen.nama,satu_sehat_mapping_lokasi_ruangrad.id_organisasi_satusehat 
-                   from satu_sehat_mapping_lokasi_ruangrad inner join satu_sehat_mapping_departemen 
-                   on satu_sehat_mapping_lokasi_ruangrad.id_organisasi_satusehat=satu_sehat_mapping_departemen.id_organisasi_satusehat 
+                   satu_sehat_mapping_departemen.dep_id,departemen.nama,satu_sehat_mapping_lokasi_ruangrad.id_organisasi_satusehat
+                   from satu_sehat_mapping_lokasi_ruangrad inner join satu_sehat_mapping_departemen
+                   on satu_sehat_mapping_lokasi_ruangrad.id_organisasi_satusehat=satu_sehat_mapping_departemen.id_organisasi_satusehat
                    inner join departemen on satu_sehat_mapping_departemen.dep_id=departemen.dep_id]]>
 	</queryString>
 	<field name="id_lokasi_satusehat" class="java.lang.String">

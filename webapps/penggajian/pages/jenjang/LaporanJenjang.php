@@ -29,7 +29,7 @@
                             </tr>";
                             while($baris = mysqli_fetch_array($hasil)) {
                                 echo "<tr class='isi'>
-                                        <td>$no</td>  
+                                        <td>$no</td>
                                         <td>$baris[0]</td>
                                         <td>$baris[1]</td>
                                         <td>".formatDuit($baris[2])."</td>
@@ -46,8 +46,8 @@
                                 <td width='20%'><div align='center'>Tunjangan Jabatan</div></td>
                                 <td width='10%'><div align='center'>Index</div></td>
                             </tr>
-                          </table>";    
-                } 
+                          </table>";
+                }
             }else{
                 exit(header("Location:../index.php"));
             }

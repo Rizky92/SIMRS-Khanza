@@ -6,7 +6,7 @@
     }
 ?>
 <div id="post">
-    <div class="entry">        
+    <div class="entry">
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                 $action =isset($_GET['action'])?$_GET['action']:NULL;
@@ -62,7 +62,7 @@
                         <td width="35%">
                             :&nbsp;<input name="tujuan" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi3'));" type=text id="TxtIsi3" class="inputbox" value="" size="35" maxlength="300" pattern="[a-zA-Z 0-9-]{1,300}" title=" a-zA-Z 0-9- (Maksimal 300 karakter)" autocomplete="off" required>
                             <span id="MsgIsi3" style="color:#CC0000; font-size:10px;"></span>
-                        </td>                        
+                        </td>
                         <td width="15%" >Lampiran</td>
                         <td width="35%">
                             :&nbsp;<input name="lampiran" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi12'));" type=text id="TxtIsi12" class="inputbox" value="" size="35" maxlength="300" pattern="[a-zA-Z 0-9-]{1,300}" title=" a-zA-Z 0-9- (Maksimal 300 karakter)" autocomplete="off" required>
@@ -88,7 +88,7 @@
                                  ?>
                             </select>
                             <span id="MsgIsi4" style="color:#CC0000; font-size:10px;"></span>
-                        </td>                        
+                        </td>
                         <td width="15%" >Tembusan</td>
                         <td width="35%">
                             :&nbsp;<input name="tembusan" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi13'));" type=text id="TxtIsi13" class="inputbox" value="" size="35" maxlength="300" pattern="[a-zA-Z 0-9-]{1,300}" title=" a-zA-Z 0-9- (Maksimal 300 karakter)" autocomplete="off" required>
@@ -100,7 +100,7 @@
                         <td width="35%">
                             :&nbsp;<input name="perihal" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi5'));" type=text id="TxtIsi5" class="inputbox" value="" size="35" maxlength="300" pattern="[a-zA-Z 0-9-]{1,300}" title=" a-zA-Z 0-9- (Maksimal 300 karakter)" autocomplete="off" required>
                             <span id="MsgIsi5" style="color:#CC0000; font-size:10px;"></span>
-                        </td> 
+                        </td>
                         <td width="15%" >Deadline Balas</td>
                         <td width="35%">
                            :&nbsp;<select name="TglDeadlineBalas" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi14'));" id="TxtIsi14">
@@ -153,7 +153,7 @@
                                 ?>
                             </select>
                             <span id="MsgIsi15" style="color:#CC0000; font-size:10px;"></span>
-                        </td>                 
+                        </td>
                     </tr>
                     <tr class="isi2">
                         <td width="15%" >Almari Surat</td>
@@ -238,7 +238,7 @@
                             <span id="MsgIsi19" style="color:#CC0000; font-size:10px;"></span>
                         </td>
                     </tr>
-                </table>                
+                </table>
                 <div align="center"><input name=BtnSimpan type=submit class="button" value="&nbsp;&nbsp;Simpan&nbsp;&nbsp;">&nbsp<input name=BtnKosong type=reset class="button" value="&nbsp;&nbsp;Kosong&nbsp;&nbsp;"></div><br>
                 </div>
             </div>
@@ -299,6 +299,6 @@
                     }
                 }
             ?>
-        </form>        
+        </form>
     </div>
 </div>

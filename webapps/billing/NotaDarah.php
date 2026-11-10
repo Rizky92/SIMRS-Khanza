@@ -10,23 +10,23 @@
             window.onload = function() { window.print(); }
         </script>
         <?php
-            reportsqlinjection();   
+            reportsqlinjection();
             $usere      = trim(isset($_GET['usere']))?trim($_GET['usere']):NULL;
             $passwordte = trim(isset($_GET['passwordte']))?trim($_GET['passwordte']):NULL;
             if((USERHYBRIDWEB==$usere)&&(PASHYBRIDWEB==$passwordte)){
-                $nopenyerahan   = validTeks4(str_replace("_"," ",$_GET['nopenyerahan']),20); 
-                $tanggal        = validTeks4($_GET['tanggal'],20); 
-                $catatan        = validTeks4(str_replace("_"," ",$_GET['catatan']),70); 
-                $petugaspj      = validTeks4(str_replace("_"," ",$_GET['petugaspj']),70); 
-                $pasien         = validTeks4(str_replace("_"," ",$_GET['pasien']),70); 
-                $besarppn       = validTeks4(str_replace("_"," ",$_GET['besarppn']),20); 
-                $bayar          = validTeks4(str_replace("_"," ",$_GET['bayar']),20); 
-                $alamatip       = validTeks4(str_replace("_"," ",$_GET['alamatip']),70); 
+                $nopenyerahan   = validTeks4(str_replace("_"," ",$_GET['nopenyerahan']),20);
+                $tanggal        = validTeks4($_GET['tanggal'],20);
+                $catatan        = validTeks4(str_replace("_"," ",$_GET['catatan']),70);
+                $petugaspj      = validTeks4(str_replace("_"," ",$_GET['petugaspj']),70);
+                $pasien         = validTeks4(str_replace("_"," ",$_GET['pasien']),70);
+                $besarppn       = validTeks4(str_replace("_"," ",$_GET['besarppn']),20);
+                $bayar          = validTeks4(str_replace("_"," ",$_GET['bayar']),20);
+                $alamatip       = validTeks4(str_replace("_"," ",$_GET['alamatip']),70);
 
-                $_sql = "SELECT temporary.no,temporary.temp1,temporary.temp2,temporary.temp3,temporary.temp4,temporary.temp5,temporary.temp6,temporary.temp7,temporary.temp8,temporary.temp9,temporary.temp10,temporary.temp11,temporary.temp12,temporary.temp13 from temporary where temporary.temp37='$alamatip' order by temporary.no";            
+                $_sql = "SELECT temporary.no,temporary.temp1,temporary.temp2,temporary.temp3,temporary.temp4,temporary.temp5,temporary.temp6,temporary.temp7,temporary.temp8,temporary.temp9,temporary.temp10,temporary.temp11,temporary.temp12,temporary.temp13 from temporary where temporary.temp37='$alamatip' order by temporary.no";
                 $hasil=bukaquery($_sql);
 
-                if(mysqli_num_rows($hasil)!=0) { 
+                if(mysqli_num_rows($hasil)!=0) {
                   $setting=  mysqli_fetch_array(bukaquery("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting"));
                   echo "<table width='".getOne("select notaapotek  from set_nota")."'  border='0' align='left' cellpadding='0' cellspacing='0' class='tbl_form'>
                          <tr class='isi14'>
@@ -42,7 +42,7 @@
                                                 <font color='000000' size='2'  face='Tahoma'>
                                                     ".$setting["alamat_instansi"].", ".$setting["kabupaten"].", ".$setting["propinsi"]."<br/>
                                                     ".$setting["kontak"].", E-mail : ".$setting["email"]."
-                                                </font> 
+                                                </font>
                                             </center>
                                             </td>
                                         </tr>
@@ -64,8 +64,8 @@
                                             </td>
                                             <td width='25%'>
                                            <font color='000000' size='2' face='Tahoma'>: $tanggal</font>
-                                        </td>                                                                
-                                        </tr> 
+                                        </td>
+                                        </tr>
                                         <tr class='isi14'>
                                             <td width='25%'>
                                                <font color='000000' size='2' face='Tahoma'>Petugas P.J.</font>
@@ -78,16 +78,16 @@
                                             </td>
                                             <td width='25%'>
                                                <font color='000000' size='2' face='Tahoma'>: $pasien</font>
-                                            </td>                                                                
-                                        </tr> 
+                                            </td>
+                                        </tr>
                                         <tr class='isi14'>
                                             <td width='25%'>
                                                <font color='000000' size='2' face='Tahoma'>Keterangan</font>
                                             </td>
                                             <td width='75%' colspan='3'>
                                                <font color='000000' size='2' face='Tahoma'>: $catatan</font>
-                                            </td>                                                                
-                                        </tr> 
+                                            </td>
+                                        </tr>
                                     </table>
                                 </td>
                          </tr>
@@ -104,7 +104,7 @@
                                        </tr>";
                                               $ttlpesan=0;
                                               $i=1;
-                                              while($barispesan = mysqli_fetch_array($hasil)) { 
+                                              while($barispesan = mysqli_fetch_array($hasil)) {
                                                   $ttlpesan=$ttlpesan+$barispesan[5];
                                                   echo "
                                                     <tr class='isi15'>
@@ -115,22 +115,22 @@
                                                         <td><font color='000000' size='2'  face='Tahoma'>$barispesan[4] </font></td>
                                                         <td align=right><font color='000000' size='2'  face='Tahoma'>".formatDuit2($barispesan[5])."</font></td>
                                                    </tr>";$i++;
-                                              }    
+                                              }
                                      echo " <tr class='isi14'>
                                               <td colspan=4></td>
                                               <td align='right'><font color='000000' size='2'  face='Tahoma'>Tagihan</font></td>
                                               <td align='right'><font color='000000' size='2'  face='Tahoma'>".formatDuit2($ttlpesan)."</font></td>
-                                            </tr>  
+                                            </tr>
                                             <tr class='isi14'>
                                               <td colspan=4></td>
                                               <td align='right'><font color='000000' size='2'  face='Tahoma'>PPN</font></td>
                                               <td align='right'><font color='000000' size='2'  face='Tahoma'>".formatDuit2($besarppn)."</font></td>
-                                            </tr>   
+                                            </tr>
                                             <tr class='isi14'>
                                               <td colspan=4></td>
                                               <td align='right'><font color='000000' size='2'  face='Tahoma'>Tagihan+PPN</font></td>
                                               <td align='right'><font color='000000' size='2'  face='Tahoma'>".formatDuit2($ttlpesan+$besarppn)."</font></td>
-                                            </tr>  
+                                            </tr>
                                   </table>
                               </td>
                             </tr>
@@ -139,7 +139,7 @@
                 } else {echo "<b>Data pesan masih kosong !</b>";}
             }else {
                 exit(header("Location:../index.php"));
-            } 
+            }
         ?>
 
     </body>

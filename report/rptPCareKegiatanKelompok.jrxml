@@ -17,15 +17,15 @@
 	<parameter name="tanggal2" class="java.lang.String"/>
 	<parameter name="parameter" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select eduId,clubId,namaClub,tglPelayanan,nmKegiatan,nmKelompok,materi, 
-                   pembicara,lokasi,keterangan,biaya from pcare_kegiatan_kelompok where 
-                   tglPelayanan between $P{tanggal1} and $P{tanggal2} and eduId like $P{parameter} or 
-                   tglPelayanan between $P{tanggal1} and $P{tanggal2} and clubId like $P{parameter} or 
-                   tglPelayanan between $P{tanggal1} and $P{tanggal2} and nmKelompok like $P{parameter} or 
-                   tglPelayanan between $P{tanggal1} and $P{tanggal2} and materi like $P{parameter} or 
-                   tglPelayanan between $P{tanggal1} and $P{tanggal2} and pembicara like $P{parameter} or 
-                   tglPelayanan between $P{tanggal1} and $P{tanggal2} and lokasi like $P{parameter} or 
-                   tglPelayanan between $P{tanggal1} and $P{tanggal2} and keterangan like $P{parameter} or 
+		<![CDATA[select eduId,clubId,namaClub,tglPelayanan,nmKegiatan,nmKelompok,materi,
+                   pembicara,lokasi,keterangan,biaya from pcare_kegiatan_kelompok where
+                   tglPelayanan between $P{tanggal1} and $P{tanggal2} and eduId like $P{parameter} or
+                   tglPelayanan between $P{tanggal1} and $P{tanggal2} and clubId like $P{parameter} or
+                   tglPelayanan between $P{tanggal1} and $P{tanggal2} and nmKelompok like $P{parameter} or
+                   tglPelayanan between $P{tanggal1} and $P{tanggal2} and materi like $P{parameter} or
+                   tglPelayanan between $P{tanggal1} and $P{tanggal2} and pembicara like $P{parameter} or
+                   tglPelayanan between $P{tanggal1} and $P{tanggal2} and lokasi like $P{parameter} or
+                   tglPelayanan between $P{tanggal1} and $P{tanggal2} and keterangan like $P{parameter} or
                    tglPelayanan between $P{tanggal1} and $P{tanggal2} and nmKegiatan like $P{parameter} order by eduId]]>
 	</queryString>
 	<field name="eduId" class="java.lang.String">

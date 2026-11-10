@@ -1,6 +1,6 @@
 <?php
     require_once('conf/conf.php');
-    
+
     $curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_URL => "https://demo2.terassekawanbersama.co.id/ws/",
@@ -23,7 +23,7 @@
     curl_close($curl);
     $nopermintaan = validTeks(isset($_GET["nopermintaan"])?$_GET["nopermintaan"]:NULL);
     $nopermintaan = str_replace("PL","",$nopermintaan);
-    
+
     echo "no_lab=$nopermintaan";
     $curl2 = curl_init();
     curl_setopt_array($curl2, array(
@@ -43,7 +43,7 @@
     ));
 
     $response = curl_exec($curl2);
-    
+
     curl_close($curl);
     if(strpos(strtolower($response),'"status": 1')===true){
         echo"<meta http-equiv='refresh' content='1;URL=?json=".str_replace(" ","_",$response)."'>";

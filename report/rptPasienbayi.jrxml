@@ -12,14 +12,14 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk,
-pasien.tgl_lahir,pasien_bayi.jam_lahir, pasien.umur, 
+pasien.tgl_lahir,pasien_bayi.jam_lahir, pasien.umur,
 pasien.tgl_daftar,pasien.nm_ibu,pasien_bayi.umur_ibu,
-pasien_bayi.nama_ayah,pasien_bayi.umur_ayah,pasien.alamat, 
+pasien_bayi.nama_ayah,pasien_bayi.umur_ayah,pasien.alamat,
 pasien_bayi.berat_badan,pasien_bayi.panjang_badan, pasien_bayi.lingkar_kepala,
-pasien_bayi.proses_lahir,pasien_bayi.anakke, pasien_bayi.keterangan, 
+pasien_bayi.proses_lahir,pasien_bayi.anakke, pasien_bayi.keterangan,
 pasien_bayi.diagnosa,pasien_bayi.penyulit_kehamilan,pasien_bayi.ketuban,
 pasien_bayi.lingkar_perut,pasien_bayi.lingkar_dada,pegawai.nama,
-pasien_bayi.no_skl from pasien inner join pegawai inner join pasien_bayi 
+pasien_bayi.no_skl from pasien inner join pegawai inner join pasien_bayi
 on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis and pasien_bayi.penolong=pegawai.nik]]>
 	</queryString>
 	<field name="no_rkm_medis" class="java.lang.String">

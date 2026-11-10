@@ -4,23 +4,23 @@
     }
 ?>
 <div id="post">
-    <div class="entry">        
+    <div class="entry">
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                 echo "";
                 $action  = isset($_GET['action'])?$_GET['action']:NULL;
                 $kode    = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-                $kode    = json_decode(encrypt_decrypt($kode,"d"),true); 
+                $kode    = json_decode(encrypt_decrypt($kode,"d"),true);
                 if (isset($kode["kode"])) {
                     $kode = validTeks4($kode["kode"],10);
                 }else{
                     $kode = "";
                 }
-                
+
                 $kode = validTeks4($kode,10);
 
                 $urlDetail = "?act=MasterBerkas&action=TAMBAH";
-                
+
                 echo "<input type=hidden name=kode  value=$kode><input type=hidden name=action value=$action>";
                 echo "<div align='center' class='link'>
                           <a href=?act=List>| List Berkas |</a>
@@ -84,7 +84,7 @@
                                 <td width='18%'><div align='center'>Kode Berkas Digital</div></td>
                                 <td width='76%'><div align='center'>Nama Berkas Digital</div></td>
                             </tr>";
-                    while($baris = mysqli_fetch_array($hasil)) {                        
+                    while($baris = mysqli_fetch_array($hasil)) {
                       echo "<tr class='isi'>
                                 <td width='70'>
                                     <center>
@@ -104,7 +104,7 @@
                                 <td width='76%'><div align='center'>Nama Berkas Digital</div></td>
                             </tr>
                       </table>";
-            } 
+            }
         ?>
         </div>
         </form>
@@ -116,13 +116,13 @@
                     echo "<b style='color:red'>Gagal menghapus</b>";
                 }
             }
-            
+
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah</div></td>
+                    </tr>
                  </table>");
-        
+
         ?>
     </div>
 

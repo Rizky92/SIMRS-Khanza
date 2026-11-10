@@ -11,9 +11,9 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select opname.kode_brng, databarang.nama_brng, databarang.kode_sat, opname.tanggal, opname.stok, 
+		<![CDATA[select opname.kode_brng, databarang.nama_brng, databarang.kode_sat, opname.tanggal, opname.stok,
 opname.real, opname.selisih, opname.nomihilang, opname.keterangan, bangsal.kd_bangsal, bangsal.nm_bangsal
-from opname inner join databarang inner join bangsal 
+from opname inner join databarang inner join bangsal
 on opname.kode_brng=databarang.kode_brng and opname.kd_bangsal=bangsal.kd_bangsal]]>
 	</queryString>
 	<field name="kode_brng" class="java.lang.String">

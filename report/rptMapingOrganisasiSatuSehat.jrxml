@@ -17,9 +17,9 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="parameter" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select satu_sehat_mapping_departemen.dep_id,departemen.nama,satu_sehat_mapping_departemen.id_organisasi_satusehat 
-from satu_sehat_mapping_departemen inner join departemen on satu_sehat_mapping_departemen.dep_id=departemen.dep_id 
-where satu_sehat_mapping_departemen.dep_id like $P{parameter} or departemen.nama like $P{parameter} or 
+		<![CDATA[select satu_sehat_mapping_departemen.dep_id,departemen.nama,satu_sehat_mapping_departemen.id_organisasi_satusehat
+from satu_sehat_mapping_departemen inner join departemen on satu_sehat_mapping_departemen.dep_id=departemen.dep_id
+where satu_sehat_mapping_departemen.dep_id like $P{parameter} or departemen.nama like $P{parameter} or
 satu_sehat_mapping_departemen.id_organisasi_satusehat like $P{parameter}  order by departemen.nama]]>
 	</queryString>
 	<field name="dep_id" class="java.lang.String">

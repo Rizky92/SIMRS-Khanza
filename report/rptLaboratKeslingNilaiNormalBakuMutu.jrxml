@@ -30,11 +30,11 @@
 	<queryString>
 		<![CDATA[
 select laborat_kesling_parameter_pengujian.kode_parameter,laborat_kesling_parameter_pengujian.nama_parameter,laborat_kesling_parameter_pengujian.metode_pengujian,laborat_kesling_parameter_pengujian.satuan,
-                    laborat_kesling_nilai_normal_baku_mutu.nilai_normal,laborat_kesling_master_sampel.kode_sampel,laborat_kesling_master_sampel.nama_sampel,laborat_kesling_master_sampel.baku_mutu from laborat_kesling_nilai_normal_baku_mutu 
-                    inner join laborat_kesling_parameter_pengujian on laborat_kesling_parameter_pengujian.kode_parameter=laborat_kesling_nilai_normal_baku_mutu.kode_parameter 
-                    inner join laborat_kesling_master_sampel on laborat_kesling_master_sampel.kode_sampel=laborat_kesling_nilai_normal_baku_mutu.kode_sampel 
-                    where laborat_kesling_parameter_pengujian.kode_parameter like $P{parameter} or laborat_kesling_parameter_pengujian.nama_parameter like $P{parameter} or 
-                    laborat_kesling_parameter_pengujian.metode_pengujian like $P{parameter} or laborat_kesling_master_sampel.kode_sampel like $P{parameter} or laborat_kesling_master_sampel.nama_sampel like $P{parameter} or 
+                    laborat_kesling_nilai_normal_baku_mutu.nilai_normal,laborat_kesling_master_sampel.kode_sampel,laborat_kesling_master_sampel.nama_sampel,laborat_kesling_master_sampel.baku_mutu from laborat_kesling_nilai_normal_baku_mutu
+                    inner join laborat_kesling_parameter_pengujian on laborat_kesling_parameter_pengujian.kode_parameter=laborat_kesling_nilai_normal_baku_mutu.kode_parameter
+                    inner join laborat_kesling_master_sampel on laborat_kesling_master_sampel.kode_sampel=laborat_kesling_nilai_normal_baku_mutu.kode_sampel
+                    where laborat_kesling_parameter_pengujian.kode_parameter like $P{parameter} or laborat_kesling_parameter_pengujian.nama_parameter like $P{parameter} or
+                    laborat_kesling_parameter_pengujian.metode_pengujian like $P{parameter} or laborat_kesling_master_sampel.kode_sampel like $P{parameter} or laborat_kesling_master_sampel.nama_sampel like $P{parameter} or
                     laborat_kesling_master_sampel.baku_mutu like $P{parameter} order by laborat_kesling_parameter_pengujian.kode_parameter,laborat_kesling_master_sampel.kode_sampel
   ]]>
 	</queryString>

@@ -14,10 +14,10 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -247,11 +247,11 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbKamar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         runBackground(() ->tampil2());
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -259,12 +259,12 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -272,7 +272,7 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
         }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
@@ -286,8 +286,8 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
         form.setLocationRelativeTo(internalFrame1);
         form.setAlwaysOnTop(false);
         form.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -399,7 +399,7 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
                 fileWriter.write("{\"kodetransaksitujuantransfer\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -421,14 +421,14 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
                     for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             list.path("KodeMetode").asText(),list.path("MetodePembayaran").asText(),list.path("BiayaTransaksi").asText(),list.path("KodeBank").asText(),list.path("NamaBank").asText(),list.path("KodeTransaksi").asText()
-                        }); 
+                        });
                     }
                 }else{
                     for(JsonNode list:response){
                         if(list.path("KodeMetode").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("MetodePembayaran").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("KodeBank").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaBank").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
                             tabMode.addRow(new Object[]{
                                 list.path("KodeMetode").asText(),list.path("MetodePembayaran").asText(),list.path("BiayaTransaksi").asText(),list.path("KodeBank").asText(),list.path("NamaBank").asText(),list.path("KodeTransaksi").asText()
-                            });                    
+                            });
                         }
                     }
                 }
@@ -447,7 +447,7 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void setCari(String data) {
         TCari.setText(data);
         TCari.requestFocus();
@@ -457,11 +457,11 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getkodetransaksi_tujuan_transfer_bankmandiri());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -487,7 +487,7 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

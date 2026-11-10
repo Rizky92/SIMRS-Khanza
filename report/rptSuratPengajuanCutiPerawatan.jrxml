@@ -14,23 +14,23 @@
 	<parameter name="photo" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,reg_periksa.umurdaftar,reg_periksa.sttsumur,
-                concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat_pasien, 
+                concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat_pasien,
                 surat_pengajuan_cuti_pasien.no_surat,surat_pengajuan_cuti_pasien.tanggal,surat_pengajuan_cuti_pasien.kd_bangsal,bangsal.nm_bangsal,
                 surat_pengajuan_cuti_pasien.pembuat_pengajuan,surat_pengajuan_cuti_pasien.alamat_pembuat_pengajuan,surat_pengajuan_cuti_pasien.tgl_lahir_pembuat_pengajuan,
                 surat_pengajuan_cuti_pasien.jk_pembuat_pengajuan,surat_pengajuan_cuti_pasien.hubungan_pembuat_pengajuan,surat_pengajuan_cuti_pasien.notelp as telppembuatpengajuan,
                 surat_pengajuan_cuti_pasien.alasan_cuti,surat_pengajuan_cuti_pasien.mulai_cuti,surat_pengajuan_cuti_pasien.alamat_selama_cuti,
                 surat_pengajuan_cuti_pasien.kembali_dari_cuti,surat_pengajuan_cuti_pasien.nip,petugas.nama,pasien.no_tlp,
-                surat_pengajuan_cuti_pasien.kd_dokter,dokter.nm_dokter,bukti_surat_pengajuan_cuti_pasien.photo as photo_bukti 
-                from surat_pengajuan_cuti_pasien 
-                inner join reg_periksa on surat_pengajuan_cuti_pasien.no_rawat=reg_periksa.no_rawat 
-                inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                inner join petugas on surat_pengajuan_cuti_pasien.nip=petugas.nip 
-                inner join bangsal on surat_pengajuan_cuti_pasien.kd_bangsal=bangsal.kd_bangsal 
-                inner join dokter on surat_pengajuan_cuti_pasien.kd_dokter=dokter.kd_dokter 
-                left join bukti_surat_pengajuan_cuti_pasien on bukti_surat_pengajuan_cuti_pasien.no_surat=surat_pengajuan_cuti_pasien.no_surat 
-                inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel 
-                inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
-                inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab 
+                surat_pengajuan_cuti_pasien.kd_dokter,dokter.nm_dokter,bukti_surat_pengajuan_cuti_pasien.photo as photo_bukti
+                from surat_pengajuan_cuti_pasien
+                inner join reg_periksa on surat_pengajuan_cuti_pasien.no_rawat=reg_periksa.no_rawat
+                inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                inner join petugas on surat_pengajuan_cuti_pasien.nip=petugas.nip
+                inner join bangsal on surat_pengajuan_cuti_pasien.kd_bangsal=bangsal.kd_bangsal
+                inner join dokter on surat_pengajuan_cuti_pasien.kd_dokter=dokter.kd_dokter
+                left join bukti_surat_pengajuan_cuti_pasien on bukti_surat_pengajuan_cuti_pasien.no_surat=surat_pengajuan_cuti_pasien.no_surat
+                inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
+                inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
+                inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
                 inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

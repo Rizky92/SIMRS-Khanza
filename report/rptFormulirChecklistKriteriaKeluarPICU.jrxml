@@ -24,9 +24,9 @@
                     checklist_kriteria_keluar_picu.kebutuhanperawatan1,checklist_kriteria_keluar_picu.kebutuhanperawatan2,checklist_kriteria_keluar_picu.kebutuhanperawatan3,
                     checklist_kriteria_keluar_picu.kebutuhanperawatan4,checklist_kriteria_keluar_picu.tindaklanjut1,checklist_kriteria_keluar_picu.tindaklanjut2,
                     checklist_kriteria_keluar_picu.tindaklanjut3,checklist_kriteria_keluar_picu.tindaklanjut4,checklist_kriteria_keluar_picu.keputusan,
-                    checklist_kriteria_keluar_picu.keterangan,checklist_kriteria_keluar_picu.nik,pegawai.nama from checklist_kriteria_keluar_picu 
-                    inner join reg_periksa on checklist_kriteria_keluar_picu.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    checklist_kriteria_keluar_picu.keterangan,checklist_kriteria_keluar_picu.nik,pegawai.nama from checklist_kriteria_keluar_picu
+                    inner join reg_periksa on checklist_kriteria_keluar_picu.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join pegawai on pegawai.nik=checklist_kriteria_keluar_picu.nik ]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

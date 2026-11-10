@@ -36,9 +36,9 @@
                 penilaian_medis_ralan_jantung.nyeri,penilaian_medis_ralan_jantung.status_nutrisi,penilaian_medis_ralan_jantung.jantung,penilaian_medis_ralan_jantung.keterangan_jantung,penilaian_medis_ralan_jantung.paru,
                 penilaian_medis_ralan_jantung.keterangan_paru,penilaian_medis_ralan_jantung.ekstrimitas,penilaian_medis_ralan_jantung.keterangan_ekstrimitas,penilaian_medis_ralan_jantung.lainnya,
                 penilaian_medis_ralan_jantung.lab,penilaian_medis_ralan_jantung.ekg,penilaian_medis_ralan_jantung.penunjang_lain,penilaian_medis_ralan_jantung.diagnosis,penilaian_medis_ralan_jantung.diagnosis2,
-                penilaian_medis_ralan_jantung.permasalahan,penilaian_medis_ralan_jantung.terapi,penilaian_medis_ralan_jantung.tindakan,penilaian_medis_ralan_jantung.edukasi,dokter.nm_dokter 
-                from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                inner join penilaian_medis_ralan_jantung on reg_periksa.no_rawat=penilaian_medis_ralan_jantung.no_rawat 
+                penilaian_medis_ralan_jantung.permasalahan,penilaian_medis_ralan_jantung.terapi,penilaian_medis_ralan_jantung.tindakan,penilaian_medis_ralan_jantung.edukasi,dokter.nm_dokter
+                from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                inner join penilaian_medis_ralan_jantung on reg_periksa.no_rawat=penilaian_medis_ralan_jantung.no_rawat
                 inner join dokter on penilaian_medis_ralan_jantung.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

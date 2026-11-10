@@ -31,8 +31,8 @@ public class TextBox extends JTextField {
     public TextBox() {
         super();
         warnaAksen = AKSEN_DEFAULT;
-        warnaBorder = new Color(0x96BEA5);   
-        warnaNonAktif = new Color(0xFAFCFB);   
+        warnaBorder = new Color(0x96BEA5);
+        warnaNonAktif = new Color(0xFAFCFB);
         radius = 6;
 
         setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -41,7 +41,7 @@ public class TextBox extends JTextField {
         setSelectionColor(new Color(0xCDEBDA));
         setSelectedTextColor(new Color(0x0E3B24));
         setCaretColor(warnaAksen);
-        setDisabledTextColor(new Color(0x55625B));   
+        setDisabledTextColor(new Color(0x55625B));
         setHorizontalAlignment(LEFT);
         setOpaque(false);
         setBorder(new BorderModern());
@@ -69,7 +69,7 @@ public class TextBox extends JTextField {
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);   
+        super.paintComponent(g);
 
         if (placeholder != null && !placeholder.isEmpty() && getText().isEmpty() && !isFocusOwner()) {
             Graphics2D gp = (Graphics2D) g.create();

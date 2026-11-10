@@ -59,8 +59,8 @@ public class DlgPilihBayar extends javax.swing.JDialog {
             }
         }
         tbAdmin.setDefaultRenderer(Object.class, new WarnaTable());
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));                
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
     }
 
     /** This method is called from within the constructor to
@@ -215,11 +215,11 @@ public class DlgPilihBayar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
-        
+
     }//GEN-LAST:event_tbAdminKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
-        
+
     }//GEN-LAST:event_tbAdminMouseClicked
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
@@ -274,7 +274,7 @@ public class DlgPilihBayar extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(() -> {
             DlgPilihBayar dialog = new DlgPilihBayar(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                
+
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
                     System.exit(0);
@@ -299,14 +299,14 @@ public class DlgPilihBayar extends javax.swing.JDialog {
         Valid.tabelKosong(tabmode);
         try{
             ps=koneksi.prepareStatement(
-                    "select * from penjab where kd_pj like ? or png_jawab like ? order by  png_jawab "); 
-            try{ 
+                    "select * from penjab where kd_pj like ? or png_jawab like ? order by  png_jawab ");
+            try{
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
-                rs=ps.executeQuery(); 
+                rs=ps.executeQuery();
                 while(rs.next()){
                     tabmode.addRow(new Object[]{rs.getString(1),rs.getString(2)});
-                }  
+                }
             }catch(Exception ex){
                 System.out.println(ex);
             }finally{
@@ -316,14 +316,14 @@ public class DlgPilihBayar extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }                     
+            }
         }catch(Exception ex){
             System.out.println(ex);
         }
     }
-    
+
     public JTable getTable(){
         return tbAdmin;
     }
-    
+
 }

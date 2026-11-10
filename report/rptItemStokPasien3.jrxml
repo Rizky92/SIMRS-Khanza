@@ -18,9 +18,9 @@
 	<queryString>
 		<![CDATA[select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,
                                             stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,
-                                            stok_obat_pasien.no_batch,stok_obat_pasien.no_faktur,stok_obat_pasien.aturan_pakai 
-                                            from stok_obat_pasien inner join reg_periksa on stok_obat_pasien.no_rawat=reg_periksa.no_rawat 
-                                            inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                                            stok_obat_pasien.no_batch,stok_obat_pasien.no_faktur,stok_obat_pasien.aturan_pakai
+                                            from stok_obat_pasien inner join reg_periksa on stok_obat_pasien.no_rawat=reg_periksa.no_rawat
+                                            inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                                             inner join databarang on stok_obat_pasien.kode_brng=databarang.kode_brng]]>
 	</queryString>
 	<field name="tanggal" class="java.sql.Date">

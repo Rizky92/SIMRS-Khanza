@@ -12,8 +12,8 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select rujuk_masuk.perujuk,rujuk_masuk.no_rujuk,reg_periksa.no_rawat,pasien.alamat,dokter.nm_dokter, reg_periksa.no_rkm_medis,pasien.jk,pasien.keluarga,pasien.namakeluarga,pasien.tgl_lahir,                    pasien.nm_pasien,reg_periksa.almt_pj,pasien.umur,reg_periksa.tgl_registrasi,rujuk_masuk.jm_perujuk 
-from reg_periksa inner join pasien inner join rujuk_masuk inner join dokter  on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+		<![CDATA[select rujuk_masuk.perujuk,rujuk_masuk.no_rujuk,reg_periksa.no_rawat,pasien.alamat,dokter.nm_dokter, reg_periksa.no_rkm_medis,pasien.jk,pasien.keluarga,pasien.namakeluarga,pasien.tgl_lahir,                    pasien.nm_pasien,reg_periksa.almt_pj,pasien.umur,reg_periksa.tgl_registrasi,rujuk_masuk.jm_perujuk
+from reg_periksa inner join pasien inner join rujuk_masuk inner join dokter  on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 and reg_periksa.no_rawat=rujuk_masuk.no_rawat and reg_periksa.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="perujuk" class="java.lang.String">

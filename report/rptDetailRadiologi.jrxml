@@ -15,8 +15,8 @@
 	<parameter name="tanggal2" class="java.lang.String"/>
 	<parameter name="cari" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select periksa_radiologi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, 
-periksa_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan, 
+		<![CDATA[select periksa_radiologi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,
+periksa_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,
 periksa_radiologi.kd_dokter,dokter.nm_dokter,periksa_radiologi.nip,
 petugas.nama,periksa_radiologi.dokter_perujuk,
 (select nm_dokter from dokter where dokter.kd_dokter=periksa_radiologi.dokter_perujuk ) as perujuk,
@@ -25,25 +25,25 @@ periksa_radiologi.bagian_rs,periksa_radiologi.bhp,periksa_radiologi.tarif_peruju
 periksa_radiologi.tarif_tindakan_dokter,periksa_radiologi.tarif_tindakan_petugas,
 periksa_radiologi.kso,periksa_radiologi.menejemen,periksa_radiologi.biaya,
 if(periksa_radiologi.status='Ralan',(select nm_poli from poliklinik where poliklinik.kd_poli=reg_periksa.kd_poli),
-(select bangsal.nm_bangsal from kamar_inap inner join kamar inner join bangsal on kamar_inap.kd_kamar=kamar.kd_kamar 
-and kamar.kd_bangsal=bangsal.kd_bangsal where kamar_inap.no_rawat=periksa_radiologi.no_rawat limit 1 )) as ruangan 
-from periksa_radiologi inner join reg_periksa 
-inner join pasien inner join dokter inner join petugas inner join penjab 
-inner join jns_perawatan_radiologi on periksa_radiologi.no_rawat=reg_periksa.no_rawat 
-and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj 
-and periksa_radiologi.kd_dokter=dokter.kd_dokter and periksa_radiologi.nip=petugas.nip 
-and periksa_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw 
-where periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_radiologi.no_rawat like $P{cari} or 
-periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and reg_periksa.no_rkm_medis like $P{cari} or 
-periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and pasien.nm_pasien like $P{cari} or 
-periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_radiologi.kd_jenis_prw like $P{cari} or 
-periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and jns_perawatan_radiologi.nm_perawatan like $P{cari} or 
-periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_radiologi.kd_dokter like $P{cari} or 
-periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and dokter.nm_dokter like $P{cari} or 
-periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_radiologi.nip like $P{cari} or 
-periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and petugas.nama like $P{cari} or 
-periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_radiologi.dokter_perujuk like $P{cari} or 
-periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and penjab.png_jawab like $P{cari} 
+(select bangsal.nm_bangsal from kamar_inap inner join kamar inner join bangsal on kamar_inap.kd_kamar=kamar.kd_kamar
+and kamar.kd_bangsal=bangsal.kd_bangsal where kamar_inap.no_rawat=periksa_radiologi.no_rawat limit 1 )) as ruangan
+from periksa_radiologi inner join reg_periksa
+inner join pasien inner join dokter inner join petugas inner join penjab
+inner join jns_perawatan_radiologi on periksa_radiologi.no_rawat=reg_periksa.no_rawat
+and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj
+and periksa_radiologi.kd_dokter=dokter.kd_dokter and periksa_radiologi.nip=petugas.nip
+and periksa_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw
+where periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_radiologi.no_rawat like $P{cari} or
+periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and reg_periksa.no_rkm_medis like $P{cari} or
+periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and pasien.nm_pasien like $P{cari} or
+periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_radiologi.kd_jenis_prw like $P{cari} or
+periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and jns_perawatan_radiologi.nm_perawatan like $P{cari} or
+periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_radiologi.kd_dokter like $P{cari} or
+periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and dokter.nm_dokter like $P{cari} or
+periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_radiologi.nip like $P{cari} or
+periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and petugas.nama like $P{cari} or
+periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_radiologi.dokter_perujuk like $P{cari} or
+periksa_radiologi.tgl_periksa between $P{tanggal1} and $P{tanggal2} and penjab.png_jawab like $P{cari}
  order by periksa_radiologi.tgl_periksa]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

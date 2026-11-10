@@ -17,10 +17,10 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="parameter" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select maping_dokter_dpjpvclaim.kd_dokter,dokter.nm_dokter,maping_dokter_dpjpvclaim.kd_dokter_bpjs,maping_dokter_dpjpvclaim.nm_dokter_bpjs 
-                   from maping_dokter_dpjpvclaim inner join dokter on maping_dokter_dpjpvclaim.kd_dokter=dokter.kd_dokter where 
-                   maping_dokter_dpjpvclaim.kd_dokter like $P{parameter} or dokter.nm_dokter like $P{parameter} or 
-                   maping_dokter_dpjpvclaim.kd_dokter_bpjs like $P{parameter} or 
+		<![CDATA[select maping_dokter_dpjpvclaim.kd_dokter,dokter.nm_dokter,maping_dokter_dpjpvclaim.kd_dokter_bpjs,maping_dokter_dpjpvclaim.nm_dokter_bpjs
+                   from maping_dokter_dpjpvclaim inner join dokter on maping_dokter_dpjpvclaim.kd_dokter=dokter.kd_dokter where
+                   maping_dokter_dpjpvclaim.kd_dokter like $P{parameter} or dokter.nm_dokter like $P{parameter} or
+                   maping_dokter_dpjpvclaim.kd_dokter_bpjs like $P{parameter} or
                    maping_dokter_dpjpvclaim.nm_dokter_bpjs like $P{parameter} order by dokter.nm_dokter]]>
 	</queryString>
 	<field name="kd_dokter" class="java.lang.String">

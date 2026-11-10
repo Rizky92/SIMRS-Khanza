@@ -5,7 +5,7 @@
     header("Content-Type: application/json");
     header("Access-Control-Allow-Methods: POST, GET");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    
+
     $url     = isset($_GET['url']) ? $_GET['url'] : '/';
     $url     = explode("/", $url);
     $header  = apache_request_headers();

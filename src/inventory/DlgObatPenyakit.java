@@ -11,13 +11,12 @@
 
 package inventory;
 
-import laporan.DlgKtgPenyakit;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -40,6 +39,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import laporan.DlgCariPenyakit;
+import laporan.DlgKtgPenyakit;
 
 /**
  *
@@ -87,8 +87,8 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                  java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Object.class
              };
              @Override
@@ -573,15 +573,15 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
 
     private void TPenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPenyakitKeyPressed
         //Valid.pindah(evt,TCari,cmbBangsal);
-}//GEN-LAST:event_TPenyakitKeyPressed
+    }//GEN-LAST:event_TPenyakitKeyPressed
 
     private void nmobatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nmobatKeyPressed
         //Valid.pindah(evt,TKd,BtnSimpan);
-}//GEN-LAST:event_nmobatKeyPressed
+    }//GEN-LAST:event_nmobatKeyPressed
 
     private void TRefKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TRefKeyPressed
         Valid.pindah(evt,kdobat,BtnSimpan);
-}//GEN-LAST:event_TRefKeyPressed
+    }//GEN-LAST:event_TRefKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TPenyakit.getText().trim().equals("")){
@@ -609,7 +609,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
                 System.out.println("Notifikasi : "+e);
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -617,29 +617,29 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,TRef,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbObatPenyakit.getRowCount();i++){ 
+        for(i=0;i<tbObatPenyakit.getRowCount();i++){
             if(tbObatPenyakit.getValueAt(i,0).toString().equals("true")){
                 Sequel.queryu2("delete from obat_penyakit where kd_penyakit=? and kode_brng=?",2,new String[]{
                     tbObatPenyakit.getValueAt(i,1).toString(),tbObatPenyakit.getValueAt(i,7).toString()
                 });
             }
-        } 
+        }
         runBackground(() ->tampil());
         emptTeks();
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -647,7 +647,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnPrint);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -656,14 +656,14 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             if(ceksukses==false){
-                Map<String, Object> param = new HashMap<>();    
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 sql=" nm_kategori like '%"+KtgCari.getText()+"%' "+
                 " and nm_penyakit like '%"+PenyakitCari.getText()+"%' ";
 
@@ -691,7 +691,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             }
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -699,23 +699,23 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,KtgCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         KtgCari.setText("");
         PenyakitCari.setText("");
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -723,7 +723,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -733,11 +733,11 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -745,7 +745,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void TCariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyTyped
         if((! KtgCari.getText().equals("")) ||(! PenyakitCari.getText().equals(""))){
@@ -763,10 +763,10 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if( penyakit.getTable().getSelectedRow()!= -1){                   
+                if( penyakit.getTable().getSelectedRow()!= -1){
                     kdpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString());
                     TPenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdpenyakit.requestFocus();
             }
             @Override
@@ -783,11 +783,11 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
         penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         penyakit.setLocationRelativeTo(internalFrame1);
         penyakit.setVisible(true);
-}//GEN-LAST:event_btnpenyakitActionPerformed
+    }//GEN-LAST:event_btnpenyakitActionPerformed
 
     private void btnpenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnpenyakitKeyPressed
         Valid.pindah(evt,kdpenyakit,kdobat);
-}//GEN-LAST:event_btnpenyakitKeyPressed
+    }//GEN-LAST:event_btnpenyakitKeyPressed
 
     private void btnobatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnobatActionPerformed
         DlgBarang barang=new DlgBarang(null,false);
@@ -798,10 +798,10 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){                   
-                    kdobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());                    
+                if(barang.getTable().getSelectedRow()!= -1){
+                    kdobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                     nmobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
-                }    
+                }
                 kdobat.requestFocus();
             }
             @Override
@@ -813,7 +813,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -821,7 +821,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     barang.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -831,11 +831,11 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
         barang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         barang.setLocationRelativeTo(internalFrame1);
         barang.setVisible(true);
-}//GEN-LAST:event_btnobatActionPerformed
+    }//GEN-LAST:event_btnobatActionPerformed
 
     private void btnobatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnobatKeyPressed
         Valid.pindah(evt,kdobat,BtnSimpan);
-}//GEN-LAST:event_btnobatKeyPressed
+    }//GEN-LAST:event_btnobatKeyPressed
 
     private void tbObatPenyakitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatPenyakitMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -844,7 +844,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbObatPenyakitMouseClicked
+    }//GEN-LAST:event_tbObatPenyakitMouseClicked
 
     private void tbObatPenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatPenyakitKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -855,9 +855,9 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbObatPenyakitKeyPressed
+    }//GEN-LAST:event_tbObatPenyakitKeyPressed
 
-private void kdpenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpenyakitKeyPressed
+    private void kdpenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpenyakitKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nm_penyakit from penyakit where  kd_penyakit=?", TPenyakit,kdpenyakit.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -865,9 +865,9 @@ private void kdpenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         }else{
              Valid.pindah(evt,TCari,kdobat);
         }
-}//GEN-LAST:event_kdpenyakitKeyPressed
+    }//GEN-LAST:event_kdpenyakitKeyPressed
 
-private void kdobatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdobatKeyPressed
+    private void kdobatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdobatKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
              Sequel.cariIsi("select nama_brng from databarang where kode_brng=?", nmobat,kdobat.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -875,17 +875,17 @@ private void kdobatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kd
         }else{
              Valid.pindah(evt,kdpenyakit,TRef);
         }
-}//GEN-LAST:event_kdobatKeyPressed
+    }//GEN-LAST:event_kdobatKeyPressed
 
-private void KtgCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KtgCariKeyPressed
+    private void KtgCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KtgCariKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_UP){
        btnKategoriCariActionPerformed(null);
    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
        runBackground(() ->tampil());
    }
-}//GEN-LAST:event_KtgCariKeyPressed
+    }//GEN-LAST:event_KtgCariKeyPressed
 
-private void btnKategoriCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKategoriCariActionPerformed
+    private void btnKategoriCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKategoriCariActionPerformed
         DlgKtgPenyakit ktg=new DlgKtgPenyakit(null,false);
         ktg.addWindowListener(new WindowListener() {
             @Override
@@ -894,9 +894,9 @@ private void btnKategoriCariActionPerformed(java.awt.event.ActionEvent evt) {//G
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ktg.getTable().getSelectedRow()!= -1){                                   
+                if(ktg.getTable().getSelectedRow()!= -1){
                     KtgCari.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 KtgCari.requestFocus();
             }
             @Override
@@ -908,7 +908,7 @@ private void btnKategoriCariActionPerformed(java.awt.event.ActionEvent evt) {//G
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         ktg.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -916,30 +916,30 @@ private void btnKategoriCariActionPerformed(java.awt.event.ActionEvent evt) {//G
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     ktg.dispose();
-                }  
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        ktg.emptTeks();        
+        ktg.emptTeks();
         ktg.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         ktg.setLocationRelativeTo(internalFrame1);
         ktg.setVisible(true);
-}//GEN-LAST:event_btnKategoriCariActionPerformed
+    }//GEN-LAST:event_btnKategoriCariActionPerformed
 
-private void btnKategoriCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnKategoriCariKeyPressed
+    private void btnKategoriCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnKategoriCariKeyPressed
    Valid.pindah(evt,btnPenyakitCari,TCari);
-}//GEN-LAST:event_btnKategoriCariKeyPressed
+    }//GEN-LAST:event_btnKategoriCariKeyPressed
 
-private void PenyakitCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PenyakitCariKeyPressed
+    private void PenyakitCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PenyakitCariKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_UP){
        btnPenyakitCariActionPerformed(null);
    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
        runBackground(() ->tampil());
    }
-}//GEN-LAST:event_PenyakitCariKeyPressed
+    }//GEN-LAST:event_PenyakitCariKeyPressed
 
-private void btnPenyakitCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPenyakitCariActionPerformed
+    private void btnPenyakitCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPenyakitCariActionPerformed
         DlgCariPenyakit penyakit=new DlgCariPenyakit(null,false);
         penyakit.addWindowListener(new WindowListener() {
             @Override
@@ -948,10 +948,10 @@ private void btnPenyakitCariActionPerformed(java.awt.event.ActionEvent evt) {//G
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if( penyakit.getTable().getSelectedRow()!= -1){                   
+                if( penyakit.getTable().getSelectedRow()!= -1){
                     PenyakitCari.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
                     runBackground(() ->tampil());
-                }  
+                }
                 kdpenyakit.requestFocus();
             }
             @Override
@@ -968,11 +968,11 @@ private void btnPenyakitCariActionPerformed(java.awt.event.ActionEvent evt) {//G
         penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         penyakit.setLocationRelativeTo(internalFrame1);
         penyakit.setVisible(true);
-}//GEN-LAST:event_btnPenyakitCariActionPerformed
+    }//GEN-LAST:event_btnPenyakitCariActionPerformed
 
-private void btnPenyakitCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPenyakitCariKeyPressed
+    private void btnPenyakitCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPenyakitCariKeyPressed
 // TODO add your handling code here:
-}//GEN-LAST:event_btnPenyakitCariKeyPressed
+    }//GEN-LAST:event_btnPenyakitCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         runBackground(() ->tampil());
@@ -997,7 +997,7 @@ private void btnPenyakitCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -1123,14 +1123,14 @@ private void btnPenyakitCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST
             nmobat.setText(tbObatPenyakit.getValueAt(row,8).toString());
             TRef.setText(tbObatPenyakit.getValueAt(row,11).toString());
         }
-    }  
-    
+    }
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getobat_penyakit());
         BtnHapus.setEnabled(akses.getobat_penyakit());
         BtnPrint.setEnabled(akses.getobat_penyakit());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1156,7 +1156,7 @@ private void btnPenyakitCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

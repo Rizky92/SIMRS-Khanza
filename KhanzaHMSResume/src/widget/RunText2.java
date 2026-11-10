@@ -6,12 +6,12 @@ import java.awt.geom.GeneralPath;
 import java.util.Random;
 import java.awt.Font;
 import javax.swing.*;
- 
+
 public class RunText2 extends JPanel {
     String s="Which Way? ";
     Timer t;
     private final int DELAY=200;
-    
+
     public void init() {
         setBackground(Color.BLACK);
         t=new Timer(DELAY,new BlinkText());
@@ -65,7 +65,7 @@ public class RunText2 extends JPanel {
         RenderingHints.VALUE_ANTIALIAS_ON);
         drawShapes(d.width, d.height, z);
     }
-    
+
     private class BlinkText implements ActionListener{
         int x=0;
         int y=1;
@@ -82,7 +82,7 @@ public class RunText2 extends JPanel {
             repaint();
         }
     }
-    
+
     public static void main(String arg[]) {
         final RunText2 x = new RunText2();
         x.init();

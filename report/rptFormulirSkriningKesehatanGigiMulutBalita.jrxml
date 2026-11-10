@@ -21,8 +21,8 @@
                     skrining_kesehatan_gigi_mulut_balita.pernah_pemeriksaan_gigimulut,skrining_kesehatan_gigi_mulut_balita.sudah_tumbuh_gigi,skrining_kesehatan_gigi_mulut_balita.jumlah_gigi_tumbuh,
                     skrining_kesehatan_gigi_mulut_balita.kondisi_kebersihan_gigimulut,skrining_kesehatan_gigi_mulut_balita.kebiasaan_susu_botol,skrining_kesehatan_gigi_mulut_balita.mengemil_manis,
                     skrining_kesehatan_gigi_mulut_balita.menyikat_gigi_sebelum_tidur,skrining_kesehatan_gigi_mulut_balita.mengemut_makanan,skrining_kesehatan_gigi_mulut_balita.lidah_kotor,
-                    skrining_kesehatan_gigi_mulut_balita.celah_bibir,skrining_kesehatan_gigi_mulut_balita.hasil_skrining,skrining_kesehatan_gigi_mulut_balita.keterangan from skrining_kesehatan_gigi_mulut_balita 
-                    inner join reg_periksa on skrining_kesehatan_gigi_mulut_balita.no_rawat=reg_periksa.no_rawat 
+                    skrining_kesehatan_gigi_mulut_balita.celah_bibir,skrining_kesehatan_gigi_mulut_balita.hasil_skrining,skrining_kesehatan_gigi_mulut_balita.keterangan from skrining_kesehatan_gigi_mulut_balita
+                    inner join reg_periksa on skrining_kesehatan_gigi_mulut_balita.no_rawat=reg_periksa.no_rawat
                     inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_kesehatan_gigi_mulut_balita.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

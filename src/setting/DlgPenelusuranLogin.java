@@ -12,11 +12,11 @@
 package setting;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -78,7 +78,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode2=new DefaultTableModel(null,new Object[]{"Tanggal","User","SQL"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -102,7 +102,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
 
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
    }
-    
+
     private Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
     /** This method is called from within the constructor to
      * initialize the form.
@@ -370,8 +370,8 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
                 }
             }
         }
-            
-}//GEN-LAST:event_BtnHapusActionPerformed
+
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -379,17 +379,17 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnKeluar);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnKeluar,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -399,7 +399,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         if(TabRawat.getSelectedIndex()==0){
@@ -407,7 +407,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
         }else if(TabRawat.getSelectedIndex()==1){
             runBackground(() ->tampil2());
         }
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -415,7 +415,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
@@ -425,7 +425,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
         }else if(TabRawat.getSelectedIndex()==1){
             runBackground(() ->tampil2());
         }
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -433,7 +433,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(koneksiDB.CARICEPAT().equals("aktif")){
@@ -521,7 +521,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps=koneksi.prepareStatement(
                     "select tracker.nip,tracker.tgl_login,tracker.jam_login from tracker  "+
                     "where tracker.tgl_login between ? and ? "+(TCari.getText().trim().equals("")?"":"and tracker.nip like ? ")+" order by tracker.tgl_login");
@@ -543,7 +543,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
                 if(rs!=null){
                     rs.close();
                 }
-                
+
                 if(ps!=null){
                     ps.close();
                 }
@@ -553,10 +553,10 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void tampil2() {
         Valid.tabelKosong(tabMode2);
-        try{    
+        try{
             ps=koneksi.prepareStatement(
                     "select trackersql.tanggal,trackersql.usere, replace(trackersql.sqle,'|','\\',\\'') as sqle from trackersql where trackersql.tanggal between ? and ? "+(TCari.getText().trim().equals("")?"":"and (trackersql.usere like ? or trackersql.sqle like ?) ")+"order by trackersql.tanggal");
             try {
@@ -581,14 +581,14 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
                             });
                         }
                     }
-                }   
+                }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } finally{
                 if(rs!=null){
                     rs.close();
                 }
-                
+
                 if(ps!=null){
                     ps.close();
                 }
@@ -599,7 +599,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
         LCount.setText(""+tabMode2.getRowCount());
     }
 
-    
+
     public void isCek(){
         BtnHapus.setEnabled(akses.gettracer_login());
     }
@@ -629,7 +629,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

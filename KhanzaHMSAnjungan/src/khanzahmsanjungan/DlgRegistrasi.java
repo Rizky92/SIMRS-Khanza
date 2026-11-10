@@ -50,7 +50,7 @@ public class DlgRegistrasi extends javax.swing.JDialog {
     public DlgRegistrasi(java.awt.Frame parent, boolean id) {
         super(parent, id);
         initComponents();
-       
+
         try{
            ps=koneksi.prepareStatement(
                    "select nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) asal,"+
@@ -61,11 +61,11 @@ public class DlgRegistrasi extends javax.swing.JDialog {
                         "inner join kelurahan inner join kecamatan inner join kabupaten inner join penjab "+
                         "on pasien.kd_kel=kelurahan.kd_kel and pasien.kd_pj=penjab.kd_pj "+
                         "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab "+
-                        "where pasien.no_rkm_medis=?"); 
+                        "where pasien.no_rkm_medis=?");
         }catch(Exception ex){
             System.out.println(ex);
         }
-        
+
         pilihbayar.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -80,7 +80,7 @@ public class DlgRegistrasi extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         pilihbayar.getTable().addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -98,9 +98,9 @@ public class DlgRegistrasi extends javax.swing.JDialog {
 
             @Override
             public void mouseExited(MouseEvent e) {}
-            
+
         });
-        
+
         pilihbayar.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -113,7 +113,7 @@ public class DlgRegistrasi extends javax.swing.JDialog {
                 if(pilihbayar.getTable().getSelectedRow()!= -1){
                     KdBayar.setText(pilihbayar.getTable().getValueAt(pilihbayar.getTable().getSelectedRow(),0).toString());
                     NmBayar.setText(pilihbayar.getTable().getValueAt(pilihbayar.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 pilihbayar.requestFocus();
             }
 
@@ -129,18 +129,18 @@ public class DlgRegistrasi extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             aktifjadwal=prop.getProperty("JADWALDOKTERDIREGISTRASI");
             URUTNOREG=prop.getProperty("URUTNOREG");
             BASENOREG=prop.getProperty("BASENOREG");
         } catch (Exception ex) {
-            aktifjadwal="";         
+            aktifjadwal="";
             URUTNOREG="";
             BASENOREG="";
         }
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -741,7 +741,7 @@ public class DlgRegistrasi extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Silahkan hubungi petugas kami, terjadi masalah pada system..!!!");
                 PngJawab.requestFocus();
             }
-        }            
+        }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSimpanKeyPressed
@@ -804,7 +804,7 @@ public class DlgRegistrasi extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(() -> {
             DlgRegistrasi dialog = new DlgRegistrasi(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                
+
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
                     System.exit(0);
@@ -865,8 +865,8 @@ public class DlgRegistrasi extends javax.swing.JDialog {
     private component.Panel jPanel2;
     private component.Panel jPanel4;
     // End of variables declaration//GEN-END:variables
-    
-    
+
+
     public void setPasien(String norm,String kodepoli,String kddokter){
         LblNoRm.setText(norm);
         try {
@@ -915,12 +915,12 @@ public class DlgRegistrasi extends javax.swing.JDialog {
         LblNoReg.setText(NoReg.getText());
         LblNoRawat.setText(NoRawat.getText());
     }
-    
+
     private void UpdateUmur(){
         Sequel.mengedit("pasien","no_rkm_medis=?","umur=CONCAT(CONCAT(CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()), ' Th '),CONCAT(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12), ' Bl ')),CONCAT(TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()), ' Hr'))",1,new String[]{LblNoRm.getText()});
     }
-    
-    private void isNumber(){         
+
+    private void isNumber(){
         if(BASENOREG.equals("booking")){
             switch (URUTNOREG) {
                 case "poli":
@@ -939,13 +939,13 @@ public class DlgRegistrasi extends javax.swing.JDialog {
                         Valid.autoNomer3("select ifnull(MAX(CONVERT(no_reg,signed)),0) from reg_periksa where kd_dokter='"+LblKdDokter.getText()+"' and tgl_registrasi='"+LblTanggal.getText()+"'","",3,NoReg);
                     }
                     break;
-                case "dokter + poli":  
+                case "dokter + poli":
                     if(Sequel.cariInteger("select ifnull(MAX(CONVERT(no_reg,signed)),0) from booking_registrasi where kd_dokter='"+LblKdDokter.getText()+"' and kd_poli='"+LblKdPoli.getText()+"' and tanggal_periksa='"+LblTanggal.getText()+"'")>=
                             Sequel.cariInteger("select ifnull(MAX(CONVERT(no_reg,signed)),0) from reg_periksa where kd_dokter='"+LblKdDokter.getText()+"' and kd_poli='"+LblKdPoli.getText()+"' and tgl_registrasi='"+LblTanggal.getText()+"'")){
                         Valid.autoNomer3("select ifnull(MAX(CONVERT(no_reg,signed)),0) from booking_registrasi where kd_dokter='"+LblKdDokter.getText()+"' and kd_poli='"+LblKdPoli.getText()+"' and tanggal_periksa='"+LblTanggal.getText()+"'","",3,NoReg);
                     }else{
                         Valid.autoNomer3("select ifnull(MAX(CONVERT(no_reg,signed)),0) from reg_periksa where kd_dokter='"+LblKdDokter.getText()+"' and kd_poli='"+LblKdPoli.getText()+"' and tgl_registrasi='"+LblTanggal.getText()+"'","",3,NoReg);
-                    }                    
+                    }
                     break;
                 default:
                     if(Sequel.cariInteger("select ifnull(MAX(CONVERT(no_reg,signed)),0) from booking_registrasi where kd_poli='"+LblKdPoli.getText()+"' and tanggal_periksa='"+LblTanggal.getText()+"'")>=
@@ -964,15 +964,15 @@ public class DlgRegistrasi extends javax.swing.JDialog {
                 case "dokter":
                     Valid.autoNomer3("select ifnull(MAX(CONVERT(no_reg,signed)),0) from reg_periksa where kd_dokter='"+LblKdDokter.getText()+"' and tgl_registrasi='"+LblTanggal.getText()+"'","",3,NoReg);
                     break;
-                case "dokter + poli":             
+                case "dokter + poli":
                     Valid.autoNomer3("select ifnull(MAX(CONVERT(no_reg,signed)),0) from reg_periksa where kd_dokter='"+LblKdDokter.getText()+"' and kd_poli='"+LblKdPoli.getText()+"' and tgl_registrasi='"+LblTanggal.getText()+"'","",3,NoReg);
                     break;
                 default:
                     Valid.autoNomer3("select ifnull(MAX(CONVERT(no_reg,signed)),0) from reg_periksa where kd_dokter='"+LblKdDokter.getText()+"' and tgl_registrasi='"+LblTanggal.getText()+"'","",3,NoReg);
                     break;
             }
-        }    
-        
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_rawat,6),signed)),0) from reg_periksa where tgl_registrasi='"+LblTanggal.getText()+"' ",LblTanggal.getText().replaceAll("-","/")+"/",6,NoRawat);           
+        }
+
+        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_rawat,6),signed)),0) from reg_periksa where tgl_registrasi='"+LblTanggal.getText()+"' ",LblTanggal.getText().replaceAll("-","/")+"/",6,NoRawat);
     }
 }

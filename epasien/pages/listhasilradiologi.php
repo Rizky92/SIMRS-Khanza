@@ -2,16 +2,16 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["norawat"])) {
         $norawat    = validTeks3($iyem["norawat"],20);
         $tglperiksa = validTeks3($iyem["tglperiksa"],10);
         $jam        = validTeks4($iyem["jam"],10);
         $querytanggalradiologi = bukaquery(
             "select periksa_radiologi.tgl_periksa,periksa_radiologi.jam from periksa_radiologi where periksa_radiologi.no_rawat='".$norawat."' and periksa_radiologi.tgl_periksa='".$tglperiksa."' ".
-            "and periksa_radiologi.jam='".$jam."' group by concat(periksa_radiologi.no_rawat,periksa_radiologi.tgl_periksa,periksa_radiologi.jam) order by periksa_radiologi.tgl_periksa,periksa_radiologi.jam" 
+            "and periksa_radiologi.jam='".$jam."' group by concat(periksa_radiologi.no_rawat,periksa_radiologi.tgl_periksa,periksa_radiologi.jam) order by periksa_radiologi.tgl_periksa,periksa_radiologi.jam"
         );
         if(mysqli_num_rows($querytanggalradiologi)!=0) {
             echo "<div class='row clearfix'>
@@ -44,14 +44,14 @@
                                         <td valign='top'>".$rsqueryradiologi["nm_perawatan"]."</td>
                                         <td valign='top'>".$rsqueryradiologi["nm_dokter"]."</td>
                                         <td valign='top'>".$rsqueryradiologi["nama"]."</td>
-                                    </tr>"; 
+                                    </tr>";
                     }else{
                         echo"       <tr>
                                         <td valign='top' align='center'></td>
                                         <td valign='top'>".$rsqueryradiologi["nm_perawatan"]."</td>
                                         <td valign='top'>".$rsqueryradiologi["nm_dokter"]."</td>
                                         <td valign='top'>".$rsqueryradiologi["nama"]."</td>
-                                    </tr>"; 
+                                    </tr>";
                     }
 
                     $querydetailradiologi = bukaquery(
@@ -66,7 +66,7 @@
                             echo "  <tr>
                                         <td valign='top' align='center'></td>
                                         <td valign='top' colspan='3'>".$rsquerydetailradiologi["hasil"]."</td>
-                                    </tr>"; 
+                                    </tr>";
                             $querygambarradiologi = bukaquery(
                                 "select gambar_radiologi.tgl_periksa,gambar_radiologi.jam,gambar_radiologi.lokasi_gambar from gambar_radiologi where gambar_radiologi.no_rawat='".$norawat."' ".
                                 "and gambar_radiologi.tgl_periksa='".$tglperiksa."' and gambar_radiologi.jam='".$jam."' order by gambar_radiologi.tgl_periksa,gambar_radiologi.jam"
@@ -84,7 +84,7 @@
                                           </tr>";
                                 }
                             }
-                                
+
                         }
                     }
                     $s++;

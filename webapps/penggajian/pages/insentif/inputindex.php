@@ -2,7 +2,7 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $_sql         = "SELECT * FROM set_tahun";
     $hasil        = bukaquery($_sql);
     $baristh      = mysqli_fetch_row($hasil);
@@ -38,7 +38,7 @@
                     <td width="31%" >Pendapatan</td><td width="">:</td>
                     <td width="67%">
                          <select name="dep_id" class="text1" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" id="TxtIsi1" autofocus>
-                            <?php                            
+                            <?php
                                 if($action == "UBAH"){
                                     $_sql2  = "SELECT departemen.dep_id,departemen.nama FROM departemen where departemen.dep_id='$dep_id' ORDER BY departemen.dep_id";
                                     $hasil2 = bukaquery($_sql2);
@@ -52,7 +52,7 @@
                                     while($barisdep = mysqli_fetch_array($hasildep)) {
                                         echo "<option id='TxtIsi1' value='$barisdep[0]'>$barisdep[0]  $barisdep[1]</option>";
                                     }
-                                }                                
+                                }
                             ?>
                         </select>
                     <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>

@@ -2,9 +2,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $token      = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $token      = json_decode(encrypt_decrypt($token,"d"),true); 
+    $token      = json_decode(encrypt_decrypt($token,"d"),true);
     if (isset($token["noantrian"])) {
         $noantrian  = cleankar2($token["noantrian"]);
         $tahun      = cleankar2($token["tahun"]);
@@ -12,15 +12,15 @@
         if($rsquerysuratkontrol = mysqli_fetch_array($querysuratkontrol)) {
             $PNG_TEMP_DIR           = dirname(__FILE__).DIRECTORY_SEPARATOR.'temp'.DIRECTORY_SEPARATOR;
             $PNG_WEB_DIR            = 'temp/';
-            include "plugins/phpqrcode/qrlib.php"; 
+            include "plugins/phpqrcode/qrlib.php";
             if (!file_exists($PNG_TEMP_DIR)) mkdir($PNG_TEMP_DIR);
             $filename               = $PNG_TEMP_DIR.$rsquerysuratkontrol["kd_dokter"].'.png';
             $filename2              = $PNG_TEMP_DIR.$rsquerysuratkontrol["no_antrian"].'.png';
             $errorCorrectionLevel   = 'L';
             $matrixPointSize        = 4;
-            QRcode::png(getOne3("select ifnull(sha1(sidikjari.sidikjari),'".$rsquerysuratkontrol["kd_dokter"]."') from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik='".$rsquerysuratkontrol["kd_dokter"]."'",$rsquerysuratkontrol["kd_dokter"]), $filename, $errorCorrectionLevel, $matrixPointSize, 2); 
-            QRcode::png($rsquerysuratkontrol["no_antrian"], $filename2, $errorCorrectionLevel, $matrixPointSize, 2); 
-            
+            QRcode::png(getOne3("select ifnull(sha1(sidikjari.sidikjari),'".$rsquerysuratkontrol["kd_dokter"]."') from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik='".$rsquerysuratkontrol["kd_dokter"]."'",$rsquerysuratkontrol["kd_dokter"]), $filename, $errorCorrectionLevel, $matrixPointSize, 2);
+            QRcode::png($rsquerysuratkontrol["no_antrian"], $filename2, $errorCorrectionLevel, $matrixPointSize, 2);
+
             echo "<div class='row clearfix'>
                     <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
                         <div class='card'>
@@ -32,16 +32,16 @@
                                     <tr>
                                         <td width='100%' valign='top' align='right'>
                                             <table width='100%' class='table-hover' border='0' align='center' cellpadding='5' cellspacing='5' class='tbl_form'>
-                                                <tr> 
+                                                <tr>
                                                     <td width='29%' valign='top'>NO. SURAT</td><td width='1%' valign='top'>:&nbsp;</td><td width='70%' valign='top'>".$rsquerysuratkontrol["no_antrian"]."</td>
                                                 </tr>
-                                                <tr> 
+                                                <tr>
                                                     <td width='29%' valign='top'>NO. RM</td><td width='1%' valign='top'>:&nbsp;</td><td width='70%' valign='top'>".$rsquerysuratkontrol["no_rkm_medis"]."</td>
                                                 </tr>
-                                                <tr> 
+                                                <tr>
                                                     <td width='29%' valign='top'>DIAGNOSA</td><td width='1%' valign='top'>:&nbsp;</td><td width='70%' valign='top'>".$rsquerysuratkontrol["diagnosa"]."</td>
                                                 </tr>
-                                                <tr> 
+                                                <tr>
                                                     <td width='29%' valign='top'>TERAPI</td><td width='1%' valign='top'>:&nbsp;</td><td width='70%' valign='top'>".$rsquerysuratkontrol["terapi"]."</td>
                                                 </tr>
                                             </table>
@@ -120,7 +120,7 @@
                                     <tr>
                                         <td width='100%' valign='top' align='right'>
                                             <table width='100%' class='table-hover' border='0' align='center' cellpadding='5' cellspacing='5' class='tbl_form'>
-                                                <tr> 
+                                                <tr>
                                                     <td width='50%' align='center'><img src='pages/".$PNG_WEB_DIR.basename($filename2)."'/></td>
                                                     <td width='50%' align='center'>".$_SESSION["kabupaten"].", <br/>Dokter<br/><img src='pages/".$PNG_WEB_DIR.basename($filename)."'/><br/> <u>".$rsquerysuratkontrol["nm_dokter"]."</u> </td>
                                                 </tr>

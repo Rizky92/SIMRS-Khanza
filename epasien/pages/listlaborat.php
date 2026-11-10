@@ -10,7 +10,7 @@
                      <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
                           <h2>Laboratorium</h2>
                      </div>
-                </div> 
+                </div>
                 <div class="col-md-12 col-sm-12">
                      <div class="news-thumb wow fadeInUp" data-wow-delay="0.3s">
                          <form id="cariKamar" name="frmCariLaborat" method="post" action="" enctype=multipart/form-data>
@@ -30,7 +30,7 @@
                                    <th width="15%"><center>Kelas</center></th>
                                    <th width="15%"><center>Tarif Laborat</center></th>
                                </tr>
-                               <?php 
+                               <?php
                                   $laborat      = trim(isset($_POST['laborat']))?trim($_POST['laborat']):NULL;
                                   $laborat      = cleankar($laborat);
                                   if(strlen($laborat)>20){
@@ -54,7 +54,7 @@
                                         }
                                   }
                               ?>
-                            </table> 
+                            </table>
                          </div>
                      </div>
                 </div>

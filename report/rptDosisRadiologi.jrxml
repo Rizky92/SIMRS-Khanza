@@ -21,14 +21,14 @@
 reg_periksa.no_rkm_medis,pasien.nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab)as almt_pj,
 pasien.jk,concat(reg_periksa.umurdaftar,reg_periksa.sttsumur) as umur,periksa_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,
 periksa_radiologi.status,periksa_radiologi.proyeksi,periksa_radiologi.kV,periksa_radiologi.mAS,
-periksa_radiologi.FFD,periksa_radiologi.BSF,periksa_radiologi.inak,periksa_radiologi.jml_penyinaran,periksa_radiologi.dosis 
+periksa_radiologi.FFD,periksa_radiologi.BSF,periksa_radiologi.inak,periksa_radiologi.jml_penyinaran,periksa_radiologi.dosis
 from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat
-inner join dokter on periksa_radiologi.dokter_perujuk=dokter.kd_dokter 
-inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+inner join dokter on periksa_radiologi.dokter_perujuk=dokter.kd_dokter
+inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 inner join penjab on reg_periksa.kd_pj=penjab.kd_pj
-inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab 
-inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
-inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel 
+inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
+inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
+inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
 inner join jns_perawatan_radiologi on periksa_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

@@ -3,26 +3,26 @@
         exit(header("Location:../index.php"));
     }
 ?>
-<div id="post">        
+<div id="post">
     <?php
         $action             = isset($_GET['action'])?$_GET['action']:NULL;
         $keyword            = validTeks(str_replace("_"," ",isset($_GET['keyword']))?str_replace("_"," ",$_GET['keyword']):NULL);
     ?>
     <div style="width: 100%; height: 96%; overflow: auto;">
     <?php
-        $_sql = "select perpustakaan_ebook.kode_ebook, perpustakaan_ebook.judul_ebook, perpustakaan_ebook.jml_halaman, 
+        $_sql = "select perpustakaan_ebook.kode_ebook, perpustakaan_ebook.judul_ebook, perpustakaan_ebook.jml_halaman,
                perpustakaan_penerbit.nama_penerbit, perpustakaan_pengarang.nama_pengarang, perpustakaan_ebook.thn_terbit,
-               perpustakaan_kategori.nama_kategori, perpustakaan_jenis_buku.nama_jenis,perpustakaan_ebook.berkas from perpustakaan_ebook inner join perpustakaan_penerbit 
-               inner join perpustakaan_jenis_buku inner join perpustakaan_kategori inner join perpustakaan_pengarang 
-               on perpustakaan_ebook.kode_penerbit=perpustakaan_penerbit.kode_penerbit and perpustakaan_ebook.kode_pengarang=perpustakaan_pengarang.kode_pengarang 
-               and perpustakaan_ebook.id_kategori=perpustakaan_kategori.id_kategori and perpustakaan_ebook.id_jenis=perpustakaan_jenis_buku.id_jenis 
-               where perpustakaan_ebook.kode_ebook like '%$keyword%' 
-                or perpustakaan_ebook.judul_ebook like '%$keyword%' 
-                or perpustakaan_ebook.jml_halaman like '%$keyword%' 
-                or perpustakaan_penerbit.nama_penerbit like '%$keyword%' 
-                or perpustakaan_pengarang.nama_pengarang like '%$keyword%' 
-                or perpustakaan_ebook.thn_terbit like '%$keyword%' 
-                or perpustakaan_kategori.nama_kategori like '%$keyword%' 
+               perpustakaan_kategori.nama_kategori, perpustakaan_jenis_buku.nama_jenis,perpustakaan_ebook.berkas from perpustakaan_ebook inner join perpustakaan_penerbit
+               inner join perpustakaan_jenis_buku inner join perpustakaan_kategori inner join perpustakaan_pengarang
+               on perpustakaan_ebook.kode_penerbit=perpustakaan_penerbit.kode_penerbit and perpustakaan_ebook.kode_pengarang=perpustakaan_pengarang.kode_pengarang
+               and perpustakaan_ebook.id_kategori=perpustakaan_kategori.id_kategori and perpustakaan_ebook.id_jenis=perpustakaan_jenis_buku.id_jenis
+               where perpustakaan_ebook.kode_ebook like '%$keyword%'
+                or perpustakaan_ebook.judul_ebook like '%$keyword%'
+                or perpustakaan_ebook.jml_halaman like '%$keyword%'
+                or perpustakaan_penerbit.nama_penerbit like '%$keyword%'
+                or perpustakaan_pengarang.nama_pengarang like '%$keyword%'
+                or perpustakaan_ebook.thn_terbit like '%$keyword%'
+                or perpustakaan_kategori.nama_kategori like '%$keyword%'
                 or perpustakaan_jenis_buku.nama_jenis like '%$keyword%' order by perpustakaan_ebook.kode_ebook ";
         $hasil=bukaquery($_sql);
         $jumlah=mysqli_num_rows($hasil);
@@ -40,7 +40,7 @@
                         <td width='11%'><div align='center'>Kategori</div></td>
                         <td width='11%'><div align='center'>Jenis</div></td>
                     </tr>";
-            while($baris = mysqli_fetch_array($hasil)) {                        
+            while($baris = mysqli_fetch_array($hasil)) {
               echo "<tr class='isi'>
                         <td valign='top'>
                             <center>
@@ -78,9 +78,8 @@
     <?php
         echo("<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                 <tr class='head'>
-                    <td><div align='left'>Data : $jumlah</div></td>                        
-                </tr>     
+                    <td><div align='left'>Data : $jumlah</div></td>
+                </tr>
              </table>");
     ?>
 </div>
-

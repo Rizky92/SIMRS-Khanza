@@ -25,16 +25,16 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select pengeluaran_obat_bhp.no_keluar, pengeluaran_obat_bhp.tanggal,pengeluaran_obat_bhp.nip,petugas.nama, 
+		<![CDATA[select pengeluaran_obat_bhp.no_keluar, pengeluaran_obat_bhp.tanggal,pengeluaran_obat_bhp.nip,petugas.nama,
                     pengeluaran_obat_bhp.kd_bangsal,bangsal.nm_bangsal,pengeluaran_obat_bhp.keterangan,detail_pengeluaran_obat_bhp.kode_brng,
                     databarang.nama_brng,detail_pengeluaran_obat_bhp.no_faktur,jenis.nama as namajenis,detail_pengeluaran_obat_bhp.harga_beli,
                     detail_pengeluaran_obat_bhp.jumlah, detail_pengeluaran_obat_bhp.kode_sat,detail_pengeluaran_obat_bhp.no_batch,
-                     detail_pengeluaran_obat_bhp.total 
-                     from pengeluaran_obat_bhp inner join petugas inner join bangsal inner join jenis  
-                     inner join detail_pengeluaran_obat_bhp inner join databarang 
-                     on detail_pengeluaran_obat_bhp.kode_brng=databarang.kode_brng 
-                     and pengeluaran_obat_bhp.kd_bangsal=bangsal.kd_bangsal 
-                     and pengeluaran_obat_bhp.no_keluar=detail_pengeluaran_obat_bhp.no_keluar 
+                     detail_pengeluaran_obat_bhp.total
+                     from pengeluaran_obat_bhp inner join petugas inner join bangsal inner join jenis
+                     inner join detail_pengeluaran_obat_bhp inner join databarang
+                     on detail_pengeluaran_obat_bhp.kode_brng=databarang.kode_brng
+                     and pengeluaran_obat_bhp.kd_bangsal=bangsal.kd_bangsal
+                     and pengeluaran_obat_bhp.no_keluar=detail_pengeluaran_obat_bhp.no_keluar
                      and pengeluaran_obat_bhp.nip=petugas.nip and databarang.kdjns=jenis.kdjns]]>
 	</queryString>
 	<field name="no_keluar" class="java.lang.String">

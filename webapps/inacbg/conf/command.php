@@ -7,7 +7,7 @@
             $judul = preg_replace("[^A-Za-z0-9_\-\./,|]"," ",$judul);
             $judul = str_replace(array('.','-','/',',')," ",$judul);
             $judul = trim($judul);
-            echo "$judul";	
+            echo "$judul";
     }
 
     function cekSessiAdmin() {
@@ -41,7 +41,7 @@
         } else {
             return true;
         }
-    }	
+    }
 
 
     function formProtek() {
@@ -55,7 +55,7 @@
                             break;
                         }
                     }
-            }		
+            }
 
     }
 

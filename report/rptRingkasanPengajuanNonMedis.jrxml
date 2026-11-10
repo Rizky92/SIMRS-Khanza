@@ -23,12 +23,12 @@
 	<parameter name="barang" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select detail_pengajuan_barang_nonmedis.kode_brng,ipsrsbarang.nama_brng,detail_pengajuan_barang_nonmedis.kode_sat,kodesatuan.satuan,ipsrsjenisbarang.nm_jenis as namajenis,
-sum(detail_pengajuan_barang_nonmedis.jumlah) as jumlah,sum(detail_pengajuan_barang_nonmedis.total) as total 
-from pengajuan_barang_nonmedis inner join pegawai inner join kodesatuan inner join detail_pengajuan_barang_nonmedis 
+sum(detail_pengajuan_barang_nonmedis.jumlah) as jumlah,sum(detail_pengajuan_barang_nonmedis.total) as total
+from pengajuan_barang_nonmedis inner join pegawai inner join kodesatuan inner join detail_pengajuan_barang_nonmedis
 inner join ipsrsjenisbarang inner join ipsrsbarang on detail_pengajuan_barang_nonmedis.kode_brng=ipsrsbarang.kode_brng
- and ipsrsbarang.kode_sat=kodesatuan.kode_sat 
- and pengajuan_barang_nonmedis.no_pengajuan=detail_pengajuan_barang_nonmedis.no_pengajuan 
- and pengajuan_barang_nonmedis.nip=pegawai.nik 
+ and ipsrsbarang.kode_sat=kodesatuan.kode_sat
+ and pengajuan_barang_nonmedis.no_pengajuan=detail_pengajuan_barang_nonmedis.no_pengajuan
+ and pengajuan_barang_nonmedis.nip=pegawai.nik
  and ipsrsbarang.jenis=ipsrsjenisbarang.kd_jenis]]>
 	</queryString>
 	<field name="kode_brng" class="java.lang.String">

@@ -12,11 +12,11 @@
 package perpustakaan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -110,11 +110,11 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
         Email.setDocument(new batasInput((byte)25).getKata(Email));
         NoID.setDocument(new batasInput((byte)20).getKata(NoID));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-    
+
         ChkInput.setSelected(false);
-        isForm(); 
+        isForm();
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -723,7 +723,7 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
                     emptTeks();
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -731,25 +731,25 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,Habis,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         Valid.hapusTable(tabMode,NoAnggota,"perpustakaan_anggota","no_anggota");
         BtnCariActionPerformed(evt);
         emptTeks();
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -757,7 +757,7 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(NoAnggota.getText().trim().equals("")){
@@ -785,7 +785,7 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -793,17 +793,17 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -815,20 +815,20 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
             if(chkGabung.isSelected()==true){
                 gabung=" tgl_gabung between '"+Valid.SetTgl(Gabung1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Gabung2.getSelectedItem()+"")+"' and ";
             }
-            
+
             habis="";
             if(ChkHabis.isSelected()==true){
                 habis=" masa_berlaku between '"+Valid.SetTgl(Habis1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Habis2.getSelectedItem()+"")+"' and ";
             }
-               
-            Map<String, Object> param = new HashMap<>();  
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptAnggotaPerpustakaan.jasper","report","::[ Data Anggota Perpustakaan ]::",
                     "select no_anggota, nama_anggota, tmp_lahir, tgl_lahir, j_kel, alamat, no_telp, email,"+
                     "tgl_gabung, masa_berlaku, jenis_anggota, nomer_id from perpustakaan_anggota where "+
@@ -841,7 +841,7 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
                     "order by no_anggota",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -849,7 +849,7 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -861,11 +861,11 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbJnsPerawatan.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -873,14 +873,14 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         ChkHabis.setSelected(false);
         chkGabung.setSelected(false);
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -889,7 +889,7 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnPrint,BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -898,7 +898,7 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbJnsPerawatanMouseClicked
+    }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -907,31 +907,31 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
                 TCari.requestFocus();
             }
         }
-}//GEN-LAST:event_tbJnsPerawatanKeyPressed
+    }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
-private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
-}//GEN-LAST:event_ChkInputActionPerformed
+    private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
+  isForm();
+    }//GEN-LAST:event_ChkInputActionPerformed
 
-private void TmpLahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TmpLahirKeyPressed
+    private void TmpLahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TmpLahirKeyPressed
         Valid.pindah(evt,NmAnggota,TglLahir);
-}//GEN-LAST:event_TmpLahirKeyPressed
+    }//GEN-LAST:event_TmpLahirKeyPressed
 
-private void NmAnggotaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmAnggotaKeyPressed
+    private void NmAnggotaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmAnggotaKeyPressed
         Valid.pindah(evt,NoAnggota,TmpLahir);
-}//GEN-LAST:event_NmAnggotaKeyPressed
+    }//GEN-LAST:event_NmAnggotaKeyPressed
 
-private void NoIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoIDKeyPressed
+    private void NoIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoIDKeyPressed
         Valid.pindah(evt,Jenis,Gabung);
-}//GEN-LAST:event_NoIDKeyPressed
+    }//GEN-LAST:event_NoIDKeyPressed
 
-private void NoTelpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoTelpKeyPressed
+    private void NoTelpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoTelpKeyPressed
         Valid.pindah(evt,JK,Email);
-}//GEN-LAST:event_NoTelpKeyPressed
+    }//GEN-LAST:event_NoTelpKeyPressed
 
-private void EmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmailKeyPressed
+    private void EmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmailKeyPressed
         Valid.pindah(evt,NoTelp,Jenis);
-}//GEN-LAST:event_EmailKeyPressed
+    }//GEN-LAST:event_EmailKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         runBackground(() ->tampil());
@@ -1009,14 +1009,14 @@ private void EmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Ema
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             if(tbJnsPerawatan.getSelectedRow()> -1){
-                Map<String, Object> param = new HashMap<>();  
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptKartuAnggota.jasper","report","::[ Kartu Anggota Perpustakaan ]::",
                         "select no_anggota, nama_anggota, tmp_lahir, tgl_lahir, j_kel, alamat, no_telp, email,"+
                         "tgl_gabung, masa_berlaku, jenis_anggota, nomer_id from perpustakaan_anggota where no_anggota='"+NoAnggota.getText()+"'",param);
@@ -1108,12 +1108,12 @@ private void EmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Ema
             if(chkGabung.isSelected()==true){
                 gabung=" tgl_gabung between '"+Valid.SetTgl(Gabung1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Gabung2.getSelectedItem()+"")+"' and ";
             }
-            
+
             habis="";
             if(ChkHabis.isSelected()==true){
                 habis=" masa_berlaku between '"+Valid.SetTgl(Habis1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Habis2.getSelectedItem()+"")+"' and ";
             }
-               
+
             ps=koneksi.prepareStatement(
                 "select perpustakaan_anggota.no_anggota,perpustakaan_anggota.nama_anggota,perpustakaan_anggota.tmp_lahir,perpustakaan_anggota.tgl_lahir,perpustakaan_anggota.j_kel,perpustakaan_anggota.alamat,perpustakaan_anggota.no_telp,"+
                 "perpustakaan_anggota.email,perpustakaan_anggota.tgl_gabung,perpustakaan_anggota.masa_berlaku,perpustakaan_anggota.jenis_anggota,perpustakaan_anggota.nomer_id from perpustakaan_anggota where "+
@@ -1183,21 +1183,21 @@ private void EmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Ema
     public JTable getTable(){
         return tbJnsPerawatan;
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,156));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getanggota_perpustakaan());
         BtnHapus.setEnabled(akses.getanggota_perpustakaan());
@@ -1229,7 +1229,7 @@ private void EmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Ema
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

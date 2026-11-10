@@ -13,7 +13,7 @@
     }
     $header = $newhead;
     $method = $_SERVER['REQUEST_METHOD'];
-    
+
     if(!empty($url[0])){
         if ($method == 'POST') {
             if ((!empty($header['username'])) && (!empty($header['password'])) && (!empty($header['url']))) {
@@ -45,7 +45,7 @@
                     if($url[0]=="jadikanpdf"){
                         $konten = trim(file_get_contents("php://input"));
                         $decode = json_decode($konten, true);
-                        if(empty($decode['file'])) { 
+                        if(empty($decode['file'])) {
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'file tidak boleh kosong',
@@ -53,23 +53,23 @@
                                 )
                             );
                             http_response_code(201);
-                        }elseif (empty($decode['nik'])) { 
+                        }elseif (empty($decode['nik'])) {
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'nik tidak boleh kosong ',
                                     'code' => 201
                                 )
-                            ); 
+                            );
                             http_response_code(201);
-                        }elseif (strlen($decode['nik']) <> 16) { 
+                        }elseif (strlen($decode['nik']) <> 16) {
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'nik harus 16 digit ',
                                     'code' => 201
                                 )
-                            ); 
+                            );
                             http_response_code(201);
-                        }else if (!preg_match("/^[0-9]{16}$/",$decode['nik'])){ 
+                        }else if (!preg_match("/^[0-9]{16}$/",$decode['nik'])){
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'format nik tidak sesuai',
@@ -77,7 +77,7 @@
                                 )
                             );
                             http_response_code(201);
-                        }else if(empty($decode['passphrase'])) { 
+                        }else if(empty($decode['passphrase'])) {
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'passphrase tidak boleh kosong',
@@ -93,7 +93,7 @@
                                 )
                             );
                             http_response_code(201);
-                        }else if(empty($decode['tampilan'])) { 
+                        }else if(empty($decode['tampilan'])) {
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'tampilan tidak boleh kosong',
@@ -109,7 +109,7 @@
                                 )
                             );
                             http_response_code(201);
-                        }else if(!(($decode['tampilan']=="visible")||($decode['tampilan']=="invisible"))){ 
+                        }else if(!(($decode['tampilan']=="visible")||($decode['tampilan']=="invisible"))){
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'format tampilan tidak sesuai',
@@ -117,7 +117,7 @@
                                 )
                             );
                             http_response_code(201);
-                        }else if(empty($decode['image'])) { 
+                        }else if(empty($decode['image'])) {
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'image tidak boleh kosong',
@@ -133,7 +133,7 @@
                                 )
                             );
                             http_response_code(201);
-                        }else if(!(($decode['image']=="true")||($decode['image']=="false"))){ 
+                        }else if(!(($decode['image']=="true")||($decode['image']=="false"))){
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'format image tidak sesuai',
@@ -141,7 +141,7 @@
                                 )
                             );
                             http_response_code(201);
-                        }else if(empty($decode['linkQR'])) { 
+                        }else if(empty($decode['linkQR'])) {
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'linkQR tidak boleh kosong',
@@ -157,7 +157,7 @@
                                 )
                             );
                             http_response_code(201);
-                        }else if(empty($decode['width'])) { 
+                        }else if(empty($decode['width'])) {
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'width tidak boleh kosong',
@@ -173,7 +173,7 @@
                                 )
                             );
                             http_response_code(201);
-                        }else if(empty($decode['height'])) { 
+                        }else if(empty($decode['height'])) {
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'height tidak boleh kosong',
@@ -189,7 +189,7 @@
                                 )
                             );
                             http_response_code(201);
-                        }else if(empty($decode['tag_koordinat'])) { 
+                        }else if(empty($decode['tag_koordinat'])) {
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'tag_koordinat tidak boleh kosong',
@@ -318,7 +318,7 @@
             );
             http_response_code(201);
         }
-        
+
         if (!empty($response)) {
             echo json_encode($response);
         } else {
@@ -327,7 +327,7 @@
     }else{
         tampil();
     }
-    
+
     function tampil(){
         echo "Selamat Datang di Web Service E-Sign";
         echo "\n\n";
@@ -356,7 +356,7 @@
         echo '   }'."\n";
         echo '}'."\n\n";
     }
-    
+
     function validTeks($data){
         $save=str_replace("'","",$data);
         $save=str_replace("\\","",$save);

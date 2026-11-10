@@ -17,9 +17,9 @@
 		<![CDATA[select dapurpengeluaran.no_keluar,dapurpengeluaran.tanggal,dapurpengeluaran.nip,
                     dapurpengeluaran.keterangan,petugas.nama,dapurdetailpengeluaran.kode_brng,
                     dapurbarang.nama_brng,kodesatuan.satuan,dapurdetailpengeluaran.jumlah,
-                    dapurdetailpengeluaran.harga,dapurdetailpengeluaran.total from dapurpengeluaran 
-                    inner join petugas inner join dapurbarang inner join kodesatuan inner join 
-                    dapurdetailpengeluaran on dapurpengeluaran.nip=petugas.nip and dapurpengeluaran.no_keluar=dapurdetailpengeluaran.no_keluar 
+                    dapurdetailpengeluaran.harga,dapurdetailpengeluaran.total from dapurpengeluaran
+                    inner join petugas inner join dapurbarang inner join kodesatuan inner join
+                    dapurdetailpengeluaran on dapurpengeluaran.nip=petugas.nip and dapurpengeluaran.no_keluar=dapurdetailpengeluaran.no_keluar
                     and dapurdetailpengeluaran.kode_brng=dapurbarang.kode_brng and dapurdetailpengeluaran.kode_sat=kodesatuan.kode_sat]]>
 	</queryString>
 	<field name="no_keluar" class="java.lang.String">

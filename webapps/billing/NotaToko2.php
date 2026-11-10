@@ -11,28 +11,28 @@
         </script>
 
         <?php
-            reportsqlinjection();      
+            reportsqlinjection();
             $usere      = trim(isset($_GET['usere']))?trim($_GET['usere']):NULL;
             $passwordte = trim(isset($_GET['passwordte']))?trim($_GET['passwordte']):NULL;
             if((USERHYBRIDWEB==$usere)&&(PASHYBRIDWEB==$passwordte)){
-                $nonota    = validTeks4(str_replace("_"," ",$_GET['nonota']),20); 
-                $_sql      = "SELECT tokopenjualan.tgl_jual,tokopenjualan.nip,tokopenjualan.no_member,tokopenjualan.nm_member,tokopenjualan.keterangan,tokopenjualan.ongkir,tokopenjualan.ppn from tokopenjualan where tokopenjualan.nota_jual='$nonota'";  
+                $nonota    = validTeks4(str_replace("_"," ",$_GET['nonota']),20);
+                $_sql      = "SELECT tokopenjualan.tgl_jual,tokopenjualan.nip,tokopenjualan.no_member,tokopenjualan.nm_member,tokopenjualan.keterangan,tokopenjualan.ongkir,tokopenjualan.ppn from tokopenjualan where tokopenjualan.nota_jual='$nonota'";
                 $hasil     = mysqli_fetch_array(bukaquery($_sql));
-                $tanggal   = $hasil["tgl_jual"]; 
+                $tanggal   = $hasil["tgl_jual"];
                 $catatan   = $hasil["keterangan"];
                 $nomember  = $hasil["no_member"];
-                $member    = $hasil["nm_member"]; 
+                $member    = $hasil["nm_member"];
                 $ongkir    = $hasil["ongkir"];
                 $besarppn  = $hasil["ppn"];
-                $petugas   = getOne("select petugas.nama from petugas where petugas.nip='".$hasil["nip"]."'"); 
+                $petugas   = getOne("select petugas.nama from petugas where petugas.nip='".$hasil["nip"]."'");
                 $_sql      = "select toko_detail_jual.kode_brng,tokobarang.nama_brng, toko_detail_jual.kode_sat,
-                                kodesatuan.satuan,toko_detail_jual.h_jual, toko_detail_jual.jumlah, 
+                                kodesatuan.satuan,toko_detail_jual.h_jual, toko_detail_jual.jumlah,
                                 toko_detail_jual.subtotal, toko_detail_jual.dis, toko_detail_jual.bsr_dis,
-                                toko_detail_jual.tambahan,toko_detail_jual.total from 
-                                toko_detail_jual inner join tokobarang inner join kodesatuan 
-                                on toko_detail_jual.kode_brng=tokobarang.kode_brng 
-                                and toko_detail_jual.kode_sat=kodesatuan.kode_sat where 
-                                toko_detail_jual.nota_jual='$nonota'";            
+                                toko_detail_jual.tambahan,toko_detail_jual.total from
+                                toko_detail_jual inner join tokobarang inner join kodesatuan
+                                on toko_detail_jual.kode_brng=tokobarang.kode_brng
+                                and toko_detail_jual.kode_sat=kodesatuan.kode_sat where
+                                toko_detail_jual.nota_jual='$nonota'";
                 $hasil    = bukaquery($_sql);
 
 
@@ -51,7 +51,7 @@
                                                   <font color='000000' size='2'  face='Tahoma'>
                                                       ".$setting["alamat_instansi"].", ".$setting["kabupaten"].", ".$setting["propinsi"]."<br/>
                                                       ".$setting["kontak"].", E-mail : ".$setting["email"]."
-                                                  </font> 
+                                                  </font>
                                               </center>
                                           </td>
                                       </tr>
@@ -73,8 +73,8 @@
                                       </td>
                                       <td width='25%'>
                                          <font color='000000' size='2' face='Tahoma'>: $nonota</font>
-                                      </td>                                                                
-                                   </tr> 
+                                      </td>
+                                   </tr>
                                    <tr class='isi14'>
                                       <td width='25%'>
                                          <font color='000000' size='2' face='Tahoma'>Nama Member</font>
@@ -87,8 +87,8 @@
                                       </td>
                                       <td width='25%'>
                                          <font color='000000' size='2' face='Tahoma'>: $tanggal</font>
-                                      </td>                                                                
-                                   </tr> 
+                                      </td>
+                                   </tr>
                                    <tr class='isi14'>
                                       <td width='25%'>
                                          <font color='000000' size='2' face='Tahoma'>Alamat Member</font>
@@ -102,16 +102,16 @@
                                       </td>
                                       <td width='25%'>
                                          <font color='000000' size='2' face='Tahoma'>: $petugas</font>
-                                      </td>                                                                
-                                   </tr> 
+                                      </td>
+                                   </tr>
                                    <tr class='isi14'>
                                       <td width='25%'>
                                          <font color='000000' size='2' face='Tahoma'>Catatan</font>
                                       </td>
                                       <td width='25%' colspan='3'>
                                          <font color='000000' size='2' face='Tahoma'>: $catatan</font>
-                                      </td>                                                              
-                                   </tr> 
+                                      </td>
+                                   </tr>
                                </table>
                            </td>
                        </tr>
@@ -126,7 +126,7 @@
                                  </tr>";
                                         $ttlpesan=0;
                                         $i=1;
-                                        while($barispesan = mysqli_fetch_array($hasil)) { 
+                                        while($barispesan = mysqli_fetch_array($hasil)) {
                                             $ttlpesan=$ttlpesan+$barispesan["total"];
                                             echo "
                                               <tr class='isi'>
@@ -135,31 +135,31 @@
                                                   <td><font color='000000' size='2'  face='Tahoma'>".$barispesan["nama_brng"]."</font></td>
                                                   <td align=right><font color='000000' size='2'  face='Tahoma'>".formatDuit2($barispesan["total"])."</font></td>
                                              </tr>";$i++;
-                                        }    
+                                        }
                                echo " <tr class='isi14'>
                                         <td colspan=2></td>
                                         <td align='right'><font color='000000' size='2'  face='Tahoma'>Jumlah Total</font></td>
                                         <td align='right'><font color='000000' size='2'  face='Tahoma'>".formatDuit2($ttlpesan)."</font></td>
                                         <td></td>
-                                      </tr>  
+                                      </tr>
                                       <tr class='isi14'>
                                         <td colspan=2></td>
                                         <td align='right'><font color='000000' size='2'  face='Tahoma'>PPN</font></td>
                                         <td align='right'><font color='000000' size='2'  face='Tahoma'>".formatDuit2($besarppn)."</font></td>
                                         <td></td>
-                                      </tr>  
+                                      </tr>
                                       <tr class='isi14'>
                                         <td colspan=2></td>
                                         <td align='right'><font color='000000' size='2'  face='Tahoma'>Ongkir</font></td>
                                         <td align='right'><font color='000000' size='2'  face='Tahoma'>".formatDuit2($ongkir)."</font></td>
                                         <td></td>
-                                      </tr>  
+                                      </tr>
                                       <tr class='isi14'>
                                         <td colspan=2></td>
                                         <td align='right'><font color='000000' size='2'  face='Tahoma'>Jumlah Total+Ongkir+PPN</font></td>
                                         <td align='right'><font color='000000' size='2'  face='Tahoma'>".formatDuit2($ttlpesan+$besarppn)."</font></td>
                                         <td></td>
-                                      </tr>  
+                                      </tr>
                             </table>
                         </td>
                       </tr>

@@ -17,10 +17,10 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="parameter" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select maping_obat_apotek_bpjs.kode_brng,databarang.nama_brng,maping_obat_apotek_bpjs.kode_brng_apotek_bpjs,maping_obat_apotek_bpjs.nama_brng_apotek_bpjs 
-                   from maping_obat_apotek_bpjs inner join databarang on maping_obat_apotek_bpjs.kode_brng=databarang.kode_brng where 
-                   maping_obat_apotek_bpjs.kode_brng like $P{parameter} or databarang.nama_brng like $P{parameter} or 
-                   maping_obat_apotek_bpjs.kode_brng_apotek_bpjs like $P{parameter} or 
+		<![CDATA[select maping_obat_apotek_bpjs.kode_brng,databarang.nama_brng,maping_obat_apotek_bpjs.kode_brng_apotek_bpjs,maping_obat_apotek_bpjs.nama_brng_apotek_bpjs
+                   from maping_obat_apotek_bpjs inner join databarang on maping_obat_apotek_bpjs.kode_brng=databarang.kode_brng where
+                   maping_obat_apotek_bpjs.kode_brng like $P{parameter} or databarang.nama_brng like $P{parameter} or
+                   maping_obat_apotek_bpjs.kode_brng_apotek_bpjs like $P{parameter} or
                    maping_obat_apotek_bpjs.nama_brng_apotek_bpjs like $P{parameter} order by databarang.nama_brng]]>
 	</queryString>
 	<field name="kode_brng" class="java.lang.String">

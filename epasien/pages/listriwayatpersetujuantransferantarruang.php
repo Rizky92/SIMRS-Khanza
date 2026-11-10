@@ -23,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                             $queryperiksa = bukaquery(
                                 "select transfer_pasien_antar_ruang.no_rawat,date_format(transfer_pasien_antar_ruang.tanggal_pindah,'%d/%m/%Y %H:%m:%s') as tanggal,transfer_pasien_antar_ruang.tanggal_masuk,transfer_pasien_antar_ruang.nama_menyetujui,transfer_pasien_antar_ruang.indikasi_pindah_ruang,".
                                 "transfer_pasien_antar_ruang.diagnosa_utama from transfer_pasien_antar_ruang inner join reg_periksa on transfer_pasien_antar_ruang.no_rawat=reg_periksa.no_rawat where reg_periksa.no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."' ".

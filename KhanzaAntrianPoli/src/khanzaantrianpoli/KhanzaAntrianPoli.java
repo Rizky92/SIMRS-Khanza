@@ -19,5 +19,5 @@ public class KhanzaAntrianPoli {
           DlgAntrian antrian=new DlgAntrian(null,false);
           antrian.setVisible(true);
     }
-    
+
 }

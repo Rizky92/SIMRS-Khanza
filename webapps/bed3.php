@@ -2,9 +2,9 @@
  //fitur update kamar aplicare ini adalah penyempurnaan dari kontribusi Mas Tirta dari RSUK Ciracas Jakarta Timur
  session_start();
  require_once('conf/conf.php');
- header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
- header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT"); 
- header("Cache-Control: no-store, no-cache, must-revalidate"); 
+ header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+ header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
+ header("Cache-Control: no-store, no-cache, must-revalidate");
  header("Cache-Control: post-check=0, pre-check=0", false);
  header("Pragma: no-cache"); // HTTP/1.0
  date_default_timezone_set("Asia/Bangkok");
@@ -42,7 +42,7 @@
      </noscript>
      <?php
 		$setting=  mysqli_fetch_array(bukaquery("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting"));
-		echo "   
+		echo "
 		   <table width='100%' align='center' border='0' class='tbl_form' cellspacing='0' cellpadding='0'>
 			  <tr>
 				<td  width='10%' align='right' valign='center'>
@@ -52,20 +52,20 @@
 				   <center>
 					  <font size='7' color='#AA00AA' face='Tahoma'><b>".$setting["nama_instansi"]."</b></font><br>
 					  <font size='5' color='#AA00AA' face='Tahoma'>
-						  ".$setting["alamat_instansi"].", ".$setting["kabupaten"].", ".$setting["propinsi"]."<br>   
-					  </font> 
+						  ".$setting["alamat_instansi"].", ".$setting["kabupaten"].", ".$setting["propinsi"]."<br>
+					  </font>
 					  <font size='5' color='#AAAA00' face='Tahoma' >".date("d-M-Y", $tanggal)."  ". $jam."</font>
 					  <br><br>
 				   </center>
-				</td>   
+				</td>
 				<td  width='10%' align='left'>
 					&nbsp;
-				</td>  
+				</td>
 				<td  width='10%' align='left' valign='top'>
 					<img width='180' height='130' src='header-kanan.jpg'/>
-				</td>                                                          
+				</td>
 			 </tr>
-		  </table> "; 
+		  </table> ";
 	?>
 	<table width='100%' bgcolor='FFFFFF' border='0' align='center' cellpadding='0' cellspacing='0'>
 	     <tr class='head5'>
@@ -80,8 +80,8 @@
               <td width='20%'><div align='center'><font size='5'><b>BED KOSONG</b></font></div></td>
          </tr>
 
-	<?php  
-		$_sql="Select * From bangsal where status='1' and kd_bangsal in(select kd_bangsal from kamar)" ;  
+	<?php
+		$_sql="Select * From bangsal where status='1' and kd_bangsal in(select kd_bangsal from kamar)" ;
 		$hasil=bukaquery($_sql);
 
 		while ($data = mysqli_fetch_array ($hasil)){

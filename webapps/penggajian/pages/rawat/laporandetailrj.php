@@ -22,10 +22,10 @@
         $id        = validTeks($_GET['id']);
         $_sql      = "SELECT pegawai.nik,pegawai.nama FROM pegawai where pegawai.id='$id'";
         $hasil     = bukaquery($_sql);
-        $baris     = mysqli_fetch_row($hasil); 
+        $baris     = mysqli_fetch_row($hasil);
         $nik       = $baris[0];
         $nama      = $baris[1];
-        $_sql      = "select rawatjalan.tgl,rawatjalan.id,rawatjalan.tnd,master_tindakan.nama,rawatjalan.jm,rawatjalan.nm_pasien,rawatjalan.kamar,rawatjalan.diagnosa,rawatjalan.jmlh 
+        $_sql      = "select rawatjalan.tgl,rawatjalan.id,rawatjalan.tnd,master_tindakan.nama,rawatjalan.jm,rawatjalan.nm_pasien,rawatjalan.kamar,rawatjalan.diagnosa,rawatjalan.jmlh
                       from rawatjalan inner join master_tindakan on rawatjalan.tnd=master_tindakan.id where rawatjalan.id='$id' and rawatjalan.tgl like '%".$tahun."-".$bulan."%' ORDER BY rawatjalan.tgl ASC";
         $hasil     = bukaquery($_sql);
         $jumlah    = mysqli_num_rows($hasil);
@@ -49,8 +49,8 @@
             echo "</table>
                   <table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                         <tr class='head'>
-                            <td><div align='left'>Jumlah Total JM : Jumlah Total JM : ".formatDuit($ttljm)."</div></td>                        
-                        </tr>     
+                            <td><div align='left'>Jumlah Total JM : Jumlah Total JM : ".formatDuit($ttljm)."</div></td>
+                        </tr>
                   </table>";
         }else{
             echo "<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>

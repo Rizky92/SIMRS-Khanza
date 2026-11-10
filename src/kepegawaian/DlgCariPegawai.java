@@ -44,7 +44,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -117,11 +117,11 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
                 column.setPreferredWidth(120);
             }
         }
-        
+
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -276,11 +276,11 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbKamar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         runBackground(() ->tampil2());
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -288,12 +288,12 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -301,7 +301,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void Kd2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kd2KeyPressed
         // TODO add your handling code here:
@@ -324,7 +324,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
             }
         } catch (Exception e) {
         }
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -391,7 +391,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
     public widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {  
+    private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
             file=new File("./cache/pegawai.iyem");
@@ -421,14 +421,14 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }  
-            
+            }
+
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"pegawai\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -440,14 +440,14 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
     }
 
     public void emptTeks() {
-        Kd2.setText("");   
+        Kd2.setText("");
         TCari.requestFocus();
     }
 
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/pegawai.iyem");
@@ -483,8 +483,8 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
             response = null;
             root = null;
         }
-    } 
-    
+    }
+
     public String tampil3(String kode) {
         try {
             if(Valid.daysOld("./cache/pegawai.iyem")>7){
@@ -495,7 +495,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
                 tampil();
             }
         }
-        
+
         String iyem="";
         try {
             myObj = new FileReader("./cache/pegawai.iyem");
@@ -522,7 +522,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
         }
         return iyem;
     }
-    
+
     public String tampilJbatan(String kode) {
         try {
             if(Valid.daysOld("./cache/pegawai.iyem")>7){
@@ -533,7 +533,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
                 tampil();
             }
         }
-        
+
         String iyem="";
         try {
             myObj = new FileReader("./cache/pegawai.iyem");
@@ -559,7 +559,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
         }
         return iyem;
     }
-    
+
     public String tampilDepartemen(String kode) {
         try {
             if(Valid.daysOld("./cache/pegawai.iyem")>7){
@@ -570,7 +570,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
                 tampil();
             }
         }
-        
+
         String iyem="";
         try {
             myObj = new FileReader("./cache/pegawai.iyem");
@@ -596,7 +596,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
         }
         return iyem;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -622,7 +622,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

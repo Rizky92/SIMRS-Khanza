@@ -34,8 +34,8 @@
                 hasil_pemeriksaan_usg_abdomen.esofagus,hasil_pemeriksaan_usg_abdomen.colon,hasil_pemeriksaan_usg_abdomen.gaster,
                 hasil_pemeriksaan_usg_abdomen.hepar,hasil_pemeriksaan_usg_abdomen.gall_blader,hasil_pemeriksaan_usg_abdomen.lien,
                 hasil_pemeriksaan_usg_abdomen.pancreas,hasil_pemeriksaan_usg_abdomen.ginjal_dextra,hasil_pemeriksaan_usg_abdomen.ginjal_sinistra,
-                hasil_pemeriksaan_usg_abdomen.kesimpulan from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                inner join hasil_pemeriksaan_usg_abdomen on reg_periksa.no_rawat=hasil_pemeriksaan_usg_abdomen.no_rawat 
+                hasil_pemeriksaan_usg_abdomen.kesimpulan from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                inner join hasil_pemeriksaan_usg_abdomen on reg_periksa.no_rawat=hasil_pemeriksaan_usg_abdomen.no_rawat
                 inner join dokter on hasil_pemeriksaan_usg_abdomen.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

@@ -9,8 +9,8 @@
                             "where penilaian_bishop_scor.no_rawat='"+norawat+"'").executeQuery();
                     if(rs2.next()){
                         htmlContent.append(
-                          "<tr class='isi'>").append( 
-                            "<td valign='top' width='2%'></td>").append(        
+                          "<tr class='isi'>").append(
+                            "<td valign='top' width='2%'></td>").append(
                             "<td valign='top' width='18%'>Penilaian Skor Bishop</td>").append(
                             "<td valign='top' width='1%' align='center'>:</td>").append(
                             "<td valign='top' width='79%'>").append(
@@ -20,7 +20,7 @@
                             htmlContent.append(
                                  "<tr>").append(
                                     "<td valign='top'>").append(
-                                       "YANG MELAKUKAN PENILAIAN").append(  
+                                       "YANG MELAKUKAN PENILAIAN").append(
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
                                           "<tr>").append(
                                               "<td width='30%' border='0'>Tanggal : ").append(rs2.getString("tanggal")).append("</td>").append(
@@ -31,7 +31,7 @@
                                  "</tr>").append(
                                  "<tr>").append(
                                     "<td valign='top'>").append(
-                                       "I. HASIL SKRINING").append(  
+                                       "I. HASIL SKRINING").append(
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
                                           "<tr>").append(
                                               "<td valign='top' width='4%' bgcolor='#FFFAF8' align='center'>No.</td>").append(
@@ -74,7 +74,7 @@
                                  "</tr>").append(
                                  "<tr>").append(
                                     "<td valign='top'>").append(
-                                       "II. INTERPRETASI").append(  
+                                       "II. INTERPRETASI").append(
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
                                           "<tr>").append(
                                               "<td width='25%' border='0'>Total Skor : <b>").append(rs2.getString("skor")).append("</b></td>").append(
@@ -84,7 +84,7 @@
                                        "</table>").append(
                                     "</td>").append(
                                  "</tr>"
-                            ); 
+                            );
                         }while(rs2.next());
                         htmlContent.append(
                               "</table>").append(

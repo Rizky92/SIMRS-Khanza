@@ -53,13 +53,13 @@ public class frmUtama extends javax.swing.JFrame {
         initComponents();
         try {
             otorisasi=koneksiDB.USERPCARE()+":"+koneksiDB.PASSPCARE()+":095";
-            URL=koneksiDB.URLAPIPCARE(); 
+            URL=koneksiDB.URLAPIPCARE();
         } catch (Exception e) {
             TeksArea.append("E : "+e);
-        } 
-        
+        }
+
         this.setSize(390,340);
-        
+
         jam();
     }
 
@@ -318,7 +318,7 @@ public class frmUtama extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -432,7 +432,7 @@ public class frmUtama extends javax.swing.JFrame {
                     if(menit.equals("01")&&detik.equals("01")){
                         TeksArea.setText("");
                     }
-                    
+
                     try {
                         koneksi=koneksiDB.condb();
                         TeksArea.append("MEMULAI PENGIRIMAN DATA\n");
@@ -453,7 +453,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     headers.setContentType(MediaType.TEXT_PLAIN);
                                     headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
                                     utc=String.valueOf(api.GetUTCdatetimeAsString());
-                                    headers.add("X-timestamp",utc);            
+                                    headers.add("X-timestamp",utc);
                                     headers.add("X-signature",api.getHmac());
                                     headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                                     headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -482,7 +482,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     TeksArea.append("code : "+nameNode.path("code").asText()+"\n");
                                     TeksArea.append("message : "+nameNode.path("message").asText()+"\n");
                                     if(nameNode.path("code").asText().equals("201")){
-                                        response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc)).path("message");   
+                                        response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc)).path("message");
                                         if(Sequel.cariInteger("select count(no_rawat) from pemeriksaan_ralan where no_rawat=?",rs.getString("no_rawat"))<=0){
                                             Sequel.menyimpan2("pemeriksaan_ralan","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",21,new String[]{
                                                 rs.getString("no_rawat"),rs.getString("tglDaftar"),Sequel.cariIsi("select current_time()"),
@@ -491,7 +491,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "","","","",rs.getString("kd_dokter")
                                             });
                                         }
-                                            
+
                                         Sequel.mengedit("pcare_pendaftaran","no_rawat=?","noUrut=?,status='Terkirim'",2,new String[]{response.asText(),rs.getString("no_rawat")});
                                     }
                                 }catch (Exception ex) {
@@ -526,7 +526,7 @@ public class frmUtama extends javax.swing.JFrame {
                             }
                         }
                         TeksArea.append("Pengiriman data pendaftaran PCare selesai\n\n");
-                        
+
                         TeksArea.append("Pengiriman data kunjungan PCare dimulai\n");
                         ps=koneksi.prepareStatement(
                             "select pcare_pendaftaran.no_rawat,pcare_pendaftaran.tglDaftar,pcare_pendaftaran.no_rkm_medis,"+
@@ -541,7 +541,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 try {
                                     NoKartu.setText(rs.getString("noKartu"));
                                     TPasien.setText(rs.getString("nm_pasien"));
-                                    setNoRm2(rs.getString("no_rawat"));  
+                                    setNoRm2(rs.getString("no_rawat"));
                                     if(TinggiBadan.getText().equals("")||TinggiBadan.getText().equals("0")||BeratBadan.getText().equals("")||BeratBadan.getText().equals("0")||Sistole.getText().equals("")||Sistole.getText().equals("0")||
                                         Keluhan.getText().equals("")||Keluhan.getText().equals("0")||Diastole.getText().equals("")||Diastole.getText().equals("0")||Respiratory.getText().equals("")||Respiratory.getText().equals("0")||
                                         Heartrate.getText().equals("")||Heartrate.getText().equals("0")||KdSadar.getText().equals("")||NmSadar.getText().equals("")||TSuhu.getText().equals("")||TSuhu.getText().equals("0")){
@@ -561,7 +561,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                         headerscari.setContentType(MediaType.TEXT_PLAIN);
                                                         headerscari.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
                                                         utc=String.valueOf(api.GetUTCdatetimeAsString());
-                                                        headerscari.add("X-timestamp",utc);            
+                                                        headerscari.add("X-timestamp",utc);
                                                         headerscari.add("X-signature",api.getHmac());
                                                         headerscari.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                                                         headerscari.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -681,8 +681,8 @@ public class frmUtama extends javax.swing.JFrame {
                                                         }else if(ex.toString().contains("refused")){
                                                             TeksArea.append("BPJSe ngelu...!\n");
                                                         }
-                                                    }         
-                                                }      
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -701,7 +701,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 ps.close();
                             }
                         }
-                        
+
                         ps=koneksi.prepareStatement(
                             "select pcare_kunjungan_umum.no_rawat,pcare_kunjungan_umum.nm_pasien,pcare_kunjungan_umum.noKartu from pcare_kunjungan_umum where pcare_kunjungan_umum.status='Gagal'");
                         try {
@@ -709,13 +709,13 @@ public class frmUtama extends javax.swing.JFrame {
                             while(rs.next()){
                                 NoKartu.setText(rs.getString("noKartu"));
                                 TPasien.setText(rs.getString("nm_pasien"));
-                                setNoRm2(rs.getString("no_rawat")); 
+                                setNoRm2(rs.getString("no_rawat"));
                                 TeksArea.append("No.Rawat : "+rs.getString("no_rawat")+" ditemukan, proses mengirim kunjungan ke server PCare BPJS.. "+"\n");
                                 headerscari = new HttpHeaders();
                                 headerscari.setContentType(MediaType.TEXT_PLAIN);
                                 headerscari.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
                                 utc=String.valueOf(api.GetUTCdatetimeAsString());
-                                headerscari.add("X-timestamp",utc);            
+                                headerscari.add("X-timestamp",utc);
                                 headerscari.add("X-signature",api.getHmac());
                                 headerscari.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                                 headerscari.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -797,9 +797,9 @@ public class frmUtama extends javax.swing.JFrame {
                                 ps.close();
                             }
                         }
-                        
+
                         TeksArea.append("Pengiriman data kunjungan PCare selesai\n\n");
-                        
+
                         TeksArea.append("Pengiriman data obat & tindakan PCare dimulai\n");
                         ps=koneksi.prepareStatement(
                             "select pcare_kunjungan_umum.no_rawat,pcare_kunjungan_umum.noKunjungan,pcare_kunjungan_umum.no_rkm_medis,pcare_kunjungan_umum.nm_pasien from pcare_kunjungan_umum where pcare_kunjungan_umum.status='Terkirim'");
@@ -832,14 +832,14 @@ public class frmUtama extends javax.swing.JFrame {
                                                 }
                                             } catch (Exception a) {
                                                 signa2="1";
-                                            }  
+                                            }
 
                                             try {
                                                 headers = new HttpHeaders();
                                                 headers.setContentType(MediaType.TEXT_PLAIN);
                                                 headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
                                                 utc=String.valueOf(api.GetUTCdatetimeAsString());
-                                                headers.add("X-timestamp",utc);            
+                                                headers.add("X-timestamp",utc);
                                                 headers.add("X-signature",api.getHmac());
                                                 headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                                                 headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -863,7 +863,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 root = mapper.readTree(requestJson);
                                                 nameNode = root.path("metaData");
                                                 TeksArea.append("code : "+nameNode.path("code").asText()+"\n");
-                                                TeksArea.append("message : "+nameNode.path("message").asText()+"\n"); 
+                                                TeksArea.append("message : "+nameNode.path("message").asText()+"\n");
                                                 if(nameNode.path("code").asText().equals("201")){
                                                     response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
                                                     kdObatSK="";
@@ -895,7 +895,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 }else if(ex.toString().contains("204")){
                                                     TeksArea.append("Data tidak ditemukan...!\n");
                                                 }
-                                            } 
+                                            }
                                         }
                                     }
                                     if(rscari.getRow()==0){
@@ -926,7 +926,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                                 headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
                                                 utc=String.valueOf(api.GetUTCdatetimeAsString());
-                                                headers.add("X-timestamp",utc);            
+                                                headers.add("X-timestamp",utc);
                                                 headers.add("X-signature",api.getHmac());
                                                 headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                                                 headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -945,13 +945,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                 root = mapper.readTree(requestJson);
                                                 nameNode = root.path("metaData");
                                                 TeksArea.append("code : "+nameNode.path("code").asText()+"\n");
-                                                TeksArea.append("message : "+nameNode.path("message").asText()+"\n"); 
+                                                TeksArea.append("message : "+nameNode.path("message").asText()+"\n");
                                                 if(nameNode.path("code").asText().equals("201")){
                                                     response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
                                                     Sequel.menyimpan2("pcare_tindakan_ralan_diberikan","?,?,?,?,?,?,?,?,?,?,?,?,?",13,new String[]{
                                                         rs.getString("no_rawat"),rs.getString("noKunjungan"), response.path("message").asText(),
-                                                        rscari.getString("tgl_perawatan"),rscari.getString("jam_rawat"),rscari.getString("kd_jenis_prw"),rscari.getString("material"), 
-                                                        rscari.getString("bhp"),rscari.getString("tarif_tindakandr"),"0",rscari.getString("kso"), 
+                                                        rscari.getString("tgl_perawatan"),rscari.getString("jam_rawat"),rscari.getString("kd_jenis_prw"),rscari.getString("material"),
+                                                        rscari.getString("bhp"),rscari.getString("tarif_tindakandr"),"0",rscari.getString("kso"),
                                                         rscari.getString("menejemen"),rscari.getString("biaya_rawat")
                                                     });
                                                 }
@@ -972,7 +972,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 }else if(ex.toString().contains("204")){
                                                     TeksArea.append("Data tidak ditemukan...!\n");
                                                 }
-                                            } 
+                                            }
                                         }
                                     }
                                     if(rscari.getRow()==0){
@@ -1003,7 +1003,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                                 headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
                                                 utc=String.valueOf(api.GetUTCdatetimeAsString());
-                                                headers.add("X-timestamp",utc);            
+                                                headers.add("X-timestamp",utc);
                                                 headers.add("X-signature",api.getHmac());
                                                 headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                                                 headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -1022,13 +1022,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                 root = mapper.readTree(requestJson);
                                                 nameNode = root.path("metaData");
                                                 TeksArea.append("code : "+nameNode.path("code").asText()+"\n");
-                                                TeksArea.append("message : "+nameNode.path("message").asText()+"\n"); 
+                                                TeksArea.append("message : "+nameNode.path("message").asText()+"\n");
                                                 if(nameNode.path("code").asText().equals("201")){
                                                     response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
                                                     Sequel.menyimpan2("pcare_tindakan_ralan_diberikan","?,?,?,?,?,?,?,?,?,?,?,?,?",13,new String[]{
                                                         rs.getString("no_rawat"),rs.getString("noKunjungan"), response.path("message").asText(),
-                                                        rscari.getString("tgl_perawatan"),rscari.getString("jam_rawat"),rscari.getString("kd_jenis_prw"),rscari.getString("material"), 
-                                                        rscari.getString("bhp"),"0",rscari.getString("tarif_tindakanpr"),rscari.getString("kso"), 
+                                                        rscari.getString("tgl_perawatan"),rscari.getString("jam_rawat"),rscari.getString("kd_jenis_prw"),rscari.getString("material"),
+                                                        rscari.getString("bhp"),"0",rscari.getString("tarif_tindakanpr"),rscari.getString("kso"),
                                                         rscari.getString("menejemen"),rscari.getString("biaya_rawat")
                                                     });
                                                 }
@@ -1049,7 +1049,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 }else if(ex.toString().contains("204")){
                                                     TeksArea.append("Data tidak ditemukan...!\n");
                                                 }
-                                            } 
+                                            }
                                         }
                                     }
                                     if(rscari.getRow()==0){
@@ -1080,7 +1080,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                                 headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
                                                 utc=String.valueOf(api.GetUTCdatetimeAsString());
-                                                headers.add("X-timestamp",utc);            
+                                                headers.add("X-timestamp",utc);
                                                 headers.add("X-signature",api.getHmac());
                                                 headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                                                 headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -1099,13 +1099,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                 root = mapper.readTree(requestJson);
                                                 nameNode = root.path("metaData");
                                                 TeksArea.append("code : "+nameNode.path("code").asText()+"\n");
-                                                TeksArea.append("message : "+nameNode.path("message").asText()+"\n"); 
+                                                TeksArea.append("message : "+nameNode.path("message").asText()+"\n");
                                                 if(nameNode.path("code").asText().equals("201")){
                                                     response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
                                                     Sequel.menyimpan2("pcare_tindakan_ralan_diberikan","?,?,?,?,?,?,?,?,?,?,?,?,?",13,new String[]{
                                                         rs.getString("no_rawat"),rs.getString("noKunjungan"), response.path("message").asText(),
-                                                        rscari.getString("tgl_perawatan"),rscari.getString("jam_rawat"),rscari.getString("kd_jenis_prw"),rscari.getString("material"), 
-                                                        rscari.getString("bhp"),rscari.getString("tarif_tindakandr"),rscari.getString("tarif_tindakanpr"),rscari.getString("kso"), 
+                                                        rscari.getString("tgl_perawatan"),rscari.getString("jam_rawat"),rscari.getString("kd_jenis_prw"),rscari.getString("material"),
+                                                        rscari.getString("bhp"),rscari.getString("tarif_tindakandr"),rscari.getString("tarif_tindakanpr"),rscari.getString("kso"),
                                                         rscari.getString("menejemen"),rscari.getString("biaya_rawat")
                                                     });
                                                 }
@@ -1126,7 +1126,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 }else if(ex.toString().contains("204")){
                                                     TeksArea.append("Data tidak ditemukan...!\n");
                                                 }
-                                            } 
+                                            }
                                         }
                                     }
                                     if(rscari.getRow()==0){
@@ -1157,7 +1157,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                                 headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
                                                 utc=String.valueOf(api.GetUTCdatetimeAsString());
-                                                headers.add("X-timestamp",utc);            
+                                                headers.add("X-timestamp",utc);
                                                 headers.add("X-signature",api.getHmac());
                                                 headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                                                 headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -1176,13 +1176,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                 root = mapper.readTree(requestJson);
                                                 nameNode = root.path("metaData");
                                                 TeksArea.append("code : "+nameNode.path("code").asText()+"\n");
-                                                TeksArea.append("message : "+nameNode.path("message").asText()+"\n"); 
+                                                TeksArea.append("message : "+nameNode.path("message").asText()+"\n");
                                                 if(nameNode.path("code").asText().equals("201")){
                                                     response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
                                                     Sequel.menyimpan2("pcare_tindakan_ranap_diberikan","?,?,?,?,?,?,?,?,?,?,?,?,?",13,new String[]{
                                                         rs.getString("no_rawat"),rs.getString("noKunjungan"), response.path("message").asText(),
-                                                        rscari.getString("tgl_perawatan"),rscari.getString("jam_rawat"),rscari.getString("kd_jenis_prw"),rscari.getString("material"), 
-                                                        rscari.getString("bhp"),rscari.getString("tarif_tindakandr"),"0",rscari.getString("kso"), 
+                                                        rscari.getString("tgl_perawatan"),rscari.getString("jam_rawat"),rscari.getString("kd_jenis_prw"),rscari.getString("material"),
+                                                        rscari.getString("bhp"),rscari.getString("tarif_tindakandr"),"0",rscari.getString("kso"),
                                                         rscari.getString("menejemen"),rscari.getString("biaya_rawat")
                                                     });
                                                 }
@@ -1203,7 +1203,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 }else if(ex.toString().contains("204")){
                                                     TeksArea.append("Data tidak ditemukan...!\n");
                                                 }
-                                            } 
+                                            }
                                         }
                                     }
                                     if(rscari.getRow()==0){
@@ -1234,7 +1234,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                                 headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
                                                 utc=String.valueOf(api.GetUTCdatetimeAsString());
-                                                headers.add("X-timestamp",utc);            
+                                                headers.add("X-timestamp",utc);
                                                 headers.add("X-signature",api.getHmac());
                                                 headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                                                 headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -1253,13 +1253,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                 root = mapper.readTree(requestJson);
                                                 nameNode = root.path("metaData");
                                                 TeksArea.append("code : "+nameNode.path("code").asText()+"\n");
-                                                TeksArea.append("message : "+nameNode.path("message").asText()+"\n"); 
+                                                TeksArea.append("message : "+nameNode.path("message").asText()+"\n");
                                                 if(nameNode.path("code").asText().equals("201")){
                                                     response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
                                                     Sequel.menyimpan2("pcare_tindakan_ranap_diberikan","?,?,?,?,?,?,?,?,?,?,?,?,?",13,new String[]{
                                                         rs.getString("no_rawat"),rs.getString("noKunjungan"), response.path("message").asText(),
-                                                        rscari.getString("tgl_perawatan"),rscari.getString("jam_rawat"),rscari.getString("kd_jenis_prw"),rscari.getString("material"), 
-                                                        rscari.getString("bhp"),"0",rscari.getString("tarif_tindakanpr"),rscari.getString("kso"), 
+                                                        rscari.getString("tgl_perawatan"),rscari.getString("jam_rawat"),rscari.getString("kd_jenis_prw"),rscari.getString("material"),
+                                                        rscari.getString("bhp"),"0",rscari.getString("tarif_tindakanpr"),rscari.getString("kso"),
                                                         rscari.getString("menejemen"),rscari.getString("biaya_rawat")
                                                     });
                                                 }
@@ -1280,7 +1280,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 }else if(ex.toString().contains("204")){
                                                     TeksArea.append("Data tidak ditemukan...!\n");
                                                 }
-                                            } 
+                                            }
                                         }
                                     }
                                     if(rscari.getRow()==0){
@@ -1311,7 +1311,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                                 headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
                                                 utc=String.valueOf(api.GetUTCdatetimeAsString());
-                                                headers.add("X-timestamp",utc);            
+                                                headers.add("X-timestamp",utc);
                                                 headers.add("X-signature",api.getHmac());
                                                 headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                                                 headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -1330,13 +1330,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                 root = mapper.readTree(requestJson);
                                                 nameNode = root.path("metaData");
                                                 TeksArea.append("code : "+nameNode.path("code").asText()+"\n");
-                                                TeksArea.append("message : "+nameNode.path("message").asText()+"\n"); 
+                                                TeksArea.append("message : "+nameNode.path("message").asText()+"\n");
                                                 if(nameNode.path("code").asText().equals("201")){
                                                     response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
                                                     Sequel.menyimpan2("pcare_tindakan_ranap_diberikan","?,?,?,?,?,?,?,?,?,?,?,?,?",13,new String[]{
                                                         rs.getString("no_rawat"),rs.getString("noKunjungan"), response.path("message").asText(),
-                                                        rscari.getString("tgl_perawatan"),rscari.getString("jam_rawat"),rscari.getString("kd_jenis_prw"),rscari.getString("material"), 
-                                                        rscari.getString("bhp"),rscari.getString("tarif_tindakandr"),rscari.getString("tarif_tindakanpr"),rscari.getString("kso"), 
+                                                        rscari.getString("tgl_perawatan"),rscari.getString("jam_rawat"),rscari.getString("kd_jenis_prw"),rscari.getString("material"),
+                                                        rscari.getString("bhp"),rscari.getString("tarif_tindakandr"),rscari.getString("tarif_tindakanpr"),rscari.getString("kso"),
                                                         rscari.getString("menejemen"),rscari.getString("biaya_rawat")
                                                     });
                                                 }
@@ -1357,7 +1357,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 }else if(ex.toString().contains("204")){
                                                     TeksArea.append("Data tidak ditemukan...!\n");
                                                 }
-                                            } 
+                                            }
                                         }
                                     }
                                     if(rscari.getRow()==0){
@@ -1395,7 +1395,7 @@ public class frmUtama extends javax.swing.JFrame {
         // Timer
         new Timer(1000, taskPerformer).start();
     }
-    
+
     public void setNoRm2(String norwt) {
         TNoRw.setText(norwt);
         try{
@@ -1442,7 +1442,7 @@ public class frmUtama extends javax.swing.JFrame {
                     pscari.close();
                 }
             }
-            
+
             pscari=koneksi.prepareStatement(
                     "select maping_poliklinik_pcare.kd_poli_pcare,maping_poliklinik_pcare.nm_poli_pcare from maping_poliklinik_pcare where maping_poliklinik_pcare.kd_poli_rs=?");
             try{
@@ -1464,7 +1464,7 @@ public class frmUtama extends javax.swing.JFrame {
                     pscari.close();
                 }
             }
-            
+
             pscari=koneksi.prepareStatement(
                     "select maping_dokter_pcare.kd_dokter_pcare,maping_dokter_pcare.nm_dokter_pcare from maping_dokter_pcare where maping_dokter_pcare.kd_dokter=?");
             try{
@@ -1486,7 +1486,7 @@ public class frmUtama extends javax.swing.JFrame {
                     pscari.close();
                 }
             }
-            
+
             pscari=koneksi.prepareStatement(
                     "select diagnosa_pasien.kd_penyakit,penyakit.nm_penyakit,diagnosa_pasien.prioritas "+
                     "from diagnosa_pasien inner join penyakit on diagnosa_pasien.kd_penyakit=penyakit.kd_penyakit "+
@@ -1499,12 +1499,12 @@ public class frmUtama extends javax.swing.JFrame {
                         KdDiagnosa1.setText(rscari.getString("kd_penyakit"));
                         NmDiagnosa1.setText(rscari.getString("nm_penyakit"));
                     }
-                    
+
                     if(rscari.getInt("prioritas")==2){
                         KdDiagnosa2.setText(rscari.getString("kd_penyakit"));
                         NmDiagnosa2.setText(rscari.getString("nm_penyakit"));
                     }
-                    
+
                     if(rscari.getInt("prioritas")==3){
                         KdDiagnosa3.setText(rscari.getString("kd_penyakit"));
                         NmDiagnosa3.setText(rscari.getString("nm_penyakit"));
@@ -1520,7 +1520,7 @@ public class frmUtama extends javax.swing.JFrame {
                     pscari.close();
                 }
             }
-            
+
             pscari=koneksi.prepareStatement(
                     "select databarang.nama_brng,sum(detail_pemberian_obat.jml) as jml,jenis.nama from detail_pemberian_obat "+
                     "inner join databarang on detail_pemberian_obat.kode_brng=databarang.kode_brng "+
@@ -1550,7 +1550,7 @@ public class frmUtama extends javax.swing.JFrame {
                     pscari.close();
                 }
             }
-            
+
             if(Perawatan.getSelectedIndex()==0){
                 TanggalPulang.setDate(TanggalKunjungan.getDate());
                 pscari=koneksi.prepareStatement(
@@ -1571,7 +1571,7 @@ public class frmUtama extends javax.swing.JFrame {
                         } catch (Exception e) {
                             Sistole.setText("0");
                         }
-                        
+
                         try {
                             if(!arrSplit[1].equals("")){
                                 Diastole.setText(arrSplit[1]);
@@ -1597,7 +1597,7 @@ public class frmUtama extends javax.swing.JFrame {
                         }else if(rscari.getString("kesadaran").equals("Coma")){
                             KdSadar.setText("04");
                         }
-                        
+
                         if(rscari.getString("penilaian").toLowerCase().contains("sanam")||rscari.getString("penilaian").toLowerCase().contains("sembuh")){
                             KdPrognosa.setText("01");
                             NmPrognosa.setText("Sanam (Sembuh)");
@@ -1617,7 +1617,7 @@ public class frmUtama extends javax.swing.JFrame {
                             KdPrognosa.setText("02");
                             NmPrognosa.setText("Bonam (Baik)");
                         }
-                        
+
                         if(rscari.getString("alergi").toLowerCase().contains("seafood")){
                             KdAlergiMakanan.setText("01");
                             NmAlergiMakanan.setText("Seafood");
@@ -1637,7 +1637,7 @@ public class frmUtama extends javax.swing.JFrame {
                             KdAlergiMakanan.setText("00");
                             NmAlergiMakanan.setText("Tidak Ada");
                         }
-                        
+
                         if(rscari.getString("alergi").toLowerCase().contains("udara panas")){
                             KdAlergiUdara.setText("01");
                             NmAlergiUdara.setText("Udara Panas");
@@ -1651,7 +1651,7 @@ public class frmUtama extends javax.swing.JFrame {
                             KdAlergiUdara.setText("00");
                             NmAlergiUdara.setText("Tidak Ada");
                         }
-                        
+
                         if(rscari.getString("alergi").toLowerCase().contains("antibiotik")){
                             KdAlergiObat.setText("01");
                             NmAlergiObat.setText("Antibiotik");
@@ -1743,7 +1743,7 @@ public class frmUtama extends javax.swing.JFrame {
                         pscari.close();
                     }
                 }
-                
+
                 pscari=koneksi.prepareStatement(
                         "select pemeriksaan_ranap.tensi, pemeriksaan_ranap.nadi, pemeriksaan_ranap.respirasi, pemeriksaan_ranap.tinggi, pemeriksaan_ranap.berat, pemeriksaan_ranap.keluhan,pemeriksaan_ranap.kesadaran,pemeriksaan_ranap.penilaian,"+
                         "pemeriksaan_ranap.alergi,pemeriksaan_ranap.suhu_tubuh,pemeriksaan_ranap.pemeriksaan,pemeriksaan_ranap.instruksi from pemeriksaan_ranap where pemeriksaan_ranap.no_rawat=? order by pemeriksaan_ranap.tgl_perawatan,pemeriksaan_ranap.jam_rawat desc limit 1");
@@ -1759,7 +1759,7 @@ public class frmUtama extends javax.swing.JFrame {
                         } catch (Exception e) {
                             Sistole.setText("0");
                         }
-                        
+
                         try {
                             if(!arrSplit[1].equals("")){
                                 Diastole.setText(arrSplit[1]);
@@ -1785,7 +1785,7 @@ public class frmUtama extends javax.swing.JFrame {
                         }else if(rscari.getString("kesadaran").equals("Coma")){
                             KdSadar.setText("04");
                         }
-                        
+
                         if(rscari.getString("penilaian").toLowerCase().contains("sanam")||rscari.getString("penilaian").toLowerCase().contains("sembuh")){
                             KdPrognosa.setText("01");
                             NmPrognosa.setText("Sanam (Sembuh)");
@@ -1805,7 +1805,7 @@ public class frmUtama extends javax.swing.JFrame {
                             KdPrognosa.setText("02");
                             NmPrognosa.setText("Bonam (Baik)");
                         }
-                        
+
                         if(rscari.getString("alergi").toLowerCase().contains("seafood")){
                             KdAlergiMakanan.setText("01");
                             NmAlergiMakanan.setText("Seafood");
@@ -1825,7 +1825,7 @@ public class frmUtama extends javax.swing.JFrame {
                             KdAlergiMakanan.setText("00");
                             NmAlergiMakanan.setText("Tidak Ada");
                         }
-                        
+
                         if(rscari.getString("alergi").toLowerCase().contains("udara panas")){
                             KdAlergiUdara.setText("01");
                             NmAlergiUdara.setText("Udara Panas");
@@ -1839,7 +1839,7 @@ public class frmUtama extends javax.swing.JFrame {
                             KdAlergiUdara.setText("00");
                             NmAlergiUdara.setText("Tidak Ada");
                         }
-                        
+
                         if(rscari.getString("alergi").toLowerCase().contains("antibiotik")){
                             KdAlergiObat.setText("01");
                             NmAlergiObat.setText("Antibiotik");
@@ -1897,12 +1897,12 @@ public class frmUtama extends javax.swing.JFrame {
                         pscari.close();
                     }
                 }
-            }   
+            }
         }catch(Exception e){
             TeksArea.append("Notifikasi : "+e);
-        }          
+        }
     }
-    
+
     private void emptTeks(){
         TNoRw.setText("");
         TPasien.setText("");

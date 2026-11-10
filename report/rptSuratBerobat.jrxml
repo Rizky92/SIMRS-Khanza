@@ -17,10 +17,10 @@
 		<![CDATA[select surat_keterangan_berobat.no_surat,surat_keterangan_berobat.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,date_format(reg_periksa.tgl_registrasi,'%d-%m-%Y') as tgl_registrasi,
                         reg_periksa.jam_reg,pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,pasien.jk,pasien.pekerjaan,reg_periksa.umurdaftar,
                         reg_periksa.sttsumur,date_format(surat_keterangan_berobat.tanggal_surat,'%d-%m-%Y') as tanggal_surat,poliklinik.nm_poli,reg_periksa.kd_dokter,
-                        dokter.nm_dokter from surat_keterangan_berobat inner join reg_periksa on surat_keterangan_berobat.no_rawat=reg_periksa.no_rawat 
-                        inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on dokter.kd_dokter=reg_periksa.kd_dokter 
-                        inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
-                        inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join propinsi on pasien.kd_prop=propinsi.kd_prop 
+                        dokter.nm_dokter from surat_keterangan_berobat inner join reg_periksa on surat_keterangan_berobat.no_rawat=reg_periksa.no_rawat
+                        inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on dokter.kd_dokter=reg_periksa.kd_dokter
+                        inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
+                        inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join propinsi on pasien.kd_prop=propinsi.kd_prop
                         inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli]]>
 	</queryString>
 	<field name="no_surat" class="java.lang.String">

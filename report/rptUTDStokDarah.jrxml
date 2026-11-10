@@ -18,7 +18,7 @@ utd_stok_darah.asal_darah,utd_stok_darah.status,
 utd_komponen_darah.jasa_sarana,utd_komponen_darah.paket_bhp,
 utd_komponen_darah.kso,utd_komponen_darah.manajemen,
 utd_komponen_darah.total,utd_komponen_darah.pembatalan,utd_stok_darah.kode_komponen
-from utd_komponen_darah inner join utd_stok_darah 
+from utd_komponen_darah inner join utd_stok_darah
 on utd_stok_darah.kode_komponen=utd_komponen_darah.kode]]>
 	</queryString>
 	<field name="no_kantong" class="java.lang.String">

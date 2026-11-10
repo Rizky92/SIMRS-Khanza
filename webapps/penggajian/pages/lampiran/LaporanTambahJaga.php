@@ -41,7 +41,7 @@
                             <tr class='head'>
                                 <td width='90%'><div align='center'>Jml.Tambahan Jaga</div></td>
                             </tr>";
-                    while($baris = mysqli_fetch_array($hasil)) {                        
+                    while($baris = mysqli_fetch_array($hasil)) {
                       echo "<tr class='isi'>
                                 <td>$baris[2]</td>
                            </tr>";

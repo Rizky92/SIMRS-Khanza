@@ -27,9 +27,9 @@
 	<parameter name="parameter" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select mapping_penyakit_smart_klaim_bpjs.kode_snomed,mapping_penyakit_smart_klaim_bpjs.display,mapping_penyakit_smart_klaim_bpjs.system,
-                   mapping_penyakit_smart_klaim_bpjs.icd10,penyakit.nm_penyakit from mapping_penyakit_smart_klaim_bpjs inner join penyakit 
-                   on mapping_penyakit_smart_klaim_bpjs.icd10=penyakit.kd_penyakit where mapping_penyakit_smart_klaim_bpjs.kode_snomed like $P{parameter} 
-                   or mapping_penyakit_smart_klaim_bpjs.display like $P{parameter} or mapping_penyakit_smart_klaim_bpjs.icd10 like $P{parameter} or penyakit.nm_penyakit like $P{parameter} 
+                   mapping_penyakit_smart_klaim_bpjs.icd10,penyakit.nm_penyakit from mapping_penyakit_smart_klaim_bpjs inner join penyakit
+                   on mapping_penyakit_smart_klaim_bpjs.icd10=penyakit.kd_penyakit where mapping_penyakit_smart_klaim_bpjs.kode_snomed like $P{parameter}
+                   or mapping_penyakit_smart_klaim_bpjs.display like $P{parameter} or mapping_penyakit_smart_klaim_bpjs.icd10 like $P{parameter} or penyakit.nm_penyakit like $P{parameter}
                    order by mapping_penyakit_smart_klaim_bpjs.kode_snomed]]>
 	</queryString>
 	<field name="kode_snomed" class="java.lang.String">

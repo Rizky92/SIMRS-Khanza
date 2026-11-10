@@ -14,27 +14,27 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.KeyEvent;
 import java.awt.geom.Path2D;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.BorderFactory;
-import javax.swing.InputMap;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
-import javax.swing.plaf.ActionMapUIResource;
-import javax.swing.plaf.InputMapUIResource;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.KeyStroke;
 import javax.swing.ListCellRenderer;
+import javax.swing.SwingUtilities;
 import javax.swing.border.AbstractBorder;
+import javax.swing.plaf.ActionMapUIResource;
+import javax.swing.plaf.InputMapUIResource;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
@@ -44,10 +44,10 @@ import javax.swing.plaf.basic.ComboPopup;
 public final class ComboBox extends JComboBox {
     private static final long serialVersionUID = 2L;
     static final Color AKSEN     = new Color(0x16A05D);
-    static final Color BORDER    = new Color(0x96BEA5);   
+    static final Color BORDER    = new Color(0x96BEA5);
     static final Color HOVER     = new Color(0x5A9170);
     static final Color PEMISAH   = new Color(0xD3DDD7);
-    static final Color TINT      = new Color(0x16, 0xA0, 0x5D, 30);   
+    static final Color TINT      = new Color(0x16, 0xA0, 0x5D, 30);
     static final Color TEKS      = new Color(50, 50, 50);
     static final Color TEKS_OFF  = new Color(0x55625B);
     static final Color PILIH_BG  = new Color(0xD5EFE0);
@@ -154,7 +154,7 @@ public final class ComboBox extends JComboBox {
                                                       boolean isSelected, boolean cellHasFocus) {
             super.getListCellRendererComponent(list, value, index, isSelected, false);
             setBorder(BorderFactory.createEmptyBorder(0, 6, 0, 6));
-            if (index >= 0) {                       
+            if (index >= 0) {
                 setOpaque(true);
                 setBackground(isSelected ? PILIH_BG : Color.WHITE);
                 setForeground(isSelected ? PILIH_FG : TEKS);
@@ -175,7 +175,7 @@ public final class ComboBox extends JComboBox {
 
         private static final String NEXT = "khanzaPilihBerikut";
         private static final String PREV = "khanzaPilihSebelum";
-        
+
         private static final InputMap PETA_TOMBOL = buatPetaTombol();
         private static final Navigasi AKSI_NEXT = new Navigasi(1);
         private static final Navigasi AKSI_PREV = new Navigasi(-1);
@@ -342,7 +342,7 @@ public final class ComboBox extends JComboBox {
                     g2.setColor(TINT);
                     g2.fill(new RoundRectangle2D.Float(1, 1, w - 2, h - 2, RADIUS * 2f - 3, RADIUS * 2f - 3));
                 }
-                
+
                 g2.setColor(PEMISAH);
                 g2.drawLine(0, 3, 0, h - 4);
 

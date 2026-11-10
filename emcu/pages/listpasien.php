@@ -25,7 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                            $querypasien = bukaquery("select pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.umur,pasien.no_ktp,pasien.nip,pasien.alamat from pasien where pasien.perusahaan_pasien='".validTeks4(encrypt_decrypt($_SESSION["ses_emcu"],"d"),20)."'");
                            while($rsquerypasien = mysqli_fetch_array($querypasien)) {
                                echo "<tr>

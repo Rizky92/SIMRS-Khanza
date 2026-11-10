@@ -9,7 +9,6 @@ import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
-import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -56,13 +55,13 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
     private String finger="";
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     public SuratPengajuanCutiPerawatan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(8,1);
         setSize(628,674);
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Pernyataan","No.Rawat","No.R.M.","Nama Pasien","Umur","J.K.","Tgl.Lahir","Tanggal",
             "Kode Ruang","Nama Ruang","Pembuat Pengajuan","Tgl.Lahir P.P.","J.K.P.P.","No.HP P.P",
@@ -129,23 +128,23 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
-        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));    
-        NIK.setDocument(new batasInput((byte)20).getKata(NIK));  
+
+        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
+        NIK.setDocument(new batasInput((byte)20).getKata(NIK));
         NoSurat.setDocument(new batasInput((byte)20).getKata(NoSurat));
         PembuatPengajuan.setDocument(new batasInput((int)50).getKata(PembuatPengajuan));
         AlamatPembuatPengajuan.setDocument(new batasInput((int)100).getKata(AlamatPembuatPengajuan));
         NoHpPembuatPengajuan.setDocument(new batasInput((int)30).getKata(NoHpPembuatPengajuan));
         AlasanCuti.setDocument(new batasInput((int)100).getKata(AlasanCuti));
         AlamatSelamaCuti.setDocument(new batasInput((int)100).getKata(AlamatSelamaCuti));
-        TCari.setDocument(new batasInput((int)100).getKata(TCari));  
-        
+        TCari.setDocument(new batasInput((int)100).getKata(TCari));
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         ChkAccor.setSelected(false);
         isPhoto();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML2.setEditable(true);
         LoadHTML2.setEditorKit(kit);
@@ -166,9 +165,9 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
         LoadHTML2.setDocument(doc);
-        
+
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -993,7 +992,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
@@ -1016,9 +1015,9 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         }else{
             if(Sequel.menyimpantf("surat_pengajuan_cuti_pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",16,new String[]{
                     NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),
-                    KodeRuang.getText(),PembuatPengajuan.getText(),AlamatPembuatPengajuan.getText(),Valid.SetTgl(TanggalLahirPembuatPengajuan.getSelectedItem()+""), 
-                    JKPembuatPengajuan.getSelectedItem().toString().substring(0,1),HubunganDenganPasien.getSelectedItem().toString(),NoHpPembuatPengajuan.getText(), 
-                    AlasanCuti.getText(),Valid.SetTgl(MulaiCuti.getSelectedItem()+"")+" "+MulaiCuti.getSelectedItem().toString().substring(11,19),AlamatSelamaCuti.getText(), 
+                    KodeRuang.getText(),PembuatPengajuan.getText(),AlamatPembuatPengajuan.getText(),Valid.SetTgl(TanggalLahirPembuatPengajuan.getSelectedItem()+""),
+                    JKPembuatPengajuan.getSelectedItem().toString().substring(0,1),HubunganDenganPasien.getSelectedItem().toString(),NoHpPembuatPengajuan.getText(),
+                    AlasanCuti.getText(),Valid.SetTgl(MulaiCuti.getSelectedItem()+"")+" "+MulaiCuti.getSelectedItem().toString().substring(11,19),AlamatSelamaCuti.getText(),
                     Valid.SetTgl(Kembali.getSelectedItem()+"")+" "+Kembali.getSelectedItem().toString().substring(11,19),NIK.getText(),KodeDokter.getText()
                 })==true){
                 tabMode.addRow(new String[]{
@@ -1034,7 +1033,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
                 emptTeks();
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1042,19 +1041,19 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,AlamatSelamaCuti,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
         isForm();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()>-1){
@@ -1069,9 +1068,9 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }   
+        }
 
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1079,7 +1078,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
@@ -1115,7 +1114,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
             }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1123,17 +1122,17 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnKeluarActionPerformed(null);
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1143,7 +1142,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             try{
                 htmlContent = new StringBuilder();
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.Pernyataan</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.Rawat</b></td>"+
@@ -1208,7 +1207,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
                     "</html>"
                 );
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1223,8 +1222,8 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
                 );
                 bg.close();
 
-                File f = new File("DataPengajuanCutiPerawatanPasien.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("DataPengajuanCutiPerawatanPasien.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='2400px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1233,19 +1232,19 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA PENGAJUAN CUTI PERAWATAN PASIEN<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA PENGAJUAN CUTI PERAWATAN PASIEN<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1253,7 +1252,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1263,11 +1262,11 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1275,12 +1274,12 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1289,9 +1288,9 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TPasien);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
-   
-                                  
+    }//GEN-LAST:event_BtnAllKeyPressed
+
+
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
@@ -1304,7 +1303,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbObatMouseClicked
+    }//GEN-LAST:event_tbObatMouseClicked
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
        isForm();
@@ -1332,15 +1331,15 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         NIK.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NamaPegawai.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     NIK.requestFocus();
                     petugas=null;
                 }
             });
-            
+
             petugas.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
@@ -1357,7 +1356,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         if (!petugas.isVisible()) {
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
@@ -1429,23 +1428,23 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
                         KodeDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                         NamaDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                         KodeDokter.requestFocus();
-                    }  
+                    }
                     dokter=null;
                 }
             });
             dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             dokter.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (dokter == null) return;
         if (!dokter.isVisible()) {
-            dokter.isCek();    
+            dokter.isCek();
             dokter.emptTeks();
-        }  
+        }
         if (dokter.isVisible()) {
             dokter.toFront();
             return;
-        }    
+        }
         dokter.setVisible(true);
     }//GEN-LAST:event_BtnDokterActionPerformed
 
@@ -1504,23 +1503,23 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
                         KodeRuang.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),0).toString());
                         NamaRuang.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),1).toString());
                         KodeRuang.requestFocus();
-                    }  
+                    }
                     kamar=null;
                 }
             });
             kamar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             kamar.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (kamar == null) return;
         if (!kamar.isVisible()) {
-            kamar.isCek();    
+            kamar.isCek();
             kamar.emptTeks();
-        }  
+        }
         if (kamar.isVisible()) {
             kamar.toFront();
             return;
-        }    
+        }
         kamar.setVisible(true);
     }//GEN-LAST:event_BtnRuangActionPerformed
 
@@ -1730,7 +1729,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
                     "surat_pengajuan_cuti_pasien.nip like ? or petugas.nama like ? or surat_pengajuan_cuti_pasien.kd_dokter like ? or dokter.nm_dokter like ?) "+
                     "order by surat_pengajuan_cuti_pasien.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1749,7 +1748,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
                     ps.setString(11,"%"+TCari.getText()+"%");
                     ps.setString(12,"%"+TCari.getText()+"%");
                 }
-                  
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                      tabMode.addRow(new String[]{
@@ -1796,7 +1795,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         autonomor();
     }
 
- 
+
     private void getData() {
          if(tbObat.getSelectedRow()!= -1){
             NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -1855,7 +1854,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
@@ -1864,42 +1863,42 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         ChkInput.setSelected(true);
         isForm();
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,255));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-       
-    
+
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsurat_pengajuan_cuti_pasien());
         BtnHapus.setEnabled(akses.getsurat_pengajuan_cuti_pasien());
         BtnEdit.setEnabled(akses.getsurat_pengajuan_cuti_pasien());
-        BtnPrint.setEnabled(akses.getsurat_pengajuan_cuti_pasien()); 
+        BtnPrint.setEnabled(akses.getsurat_pengajuan_cuti_pasien());
         if(akses.getjml2()>=1){
             NIK.setEditable(false);
             BtnPegawai.setEnabled(false);
             NIK.setText(akses.getkode());
             NamaPegawai.setText(Sequel.CariPegawai(NIK.getText()));
-        }           
+        }
     }
-  
+
     private void ganti() {
         if(Sequel.mengedittf("surat_pengajuan_cuti_pasien","no_surat=?","no_surat=?,no_rawat=?,tanggal=?,kd_bangsal=?,pembuat_pengajuan=?,alamat_pembuat_pengajuan=?,tgl_lahir_pembuat_pengajuan=?,jk_pembuat_pengajuan=?,hubungan_pembuat_pengajuan=?,"+
             "notelp=?,alasan_cuti=?,mulai_cuti=?,alamat_selama_cuti=?,kembali_dari_cuti=?,nip=?,kd_dokter=?",17,new String[]{
             NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),
-            KodeRuang.getText(),PembuatPengajuan.getText(),AlamatPembuatPengajuan.getText(),Valid.SetTgl(TanggalLahirPembuatPengajuan.getSelectedItem()+""), 
-            JKPembuatPengajuan.getSelectedItem().toString().substring(0,1),HubunganDenganPasien.getSelectedItem().toString(),NoHpPembuatPengajuan.getText(), 
-            AlasanCuti.getText(),Valid.SetTgl(MulaiCuti.getSelectedItem()+"")+" "+MulaiCuti.getSelectedItem().toString().substring(11,19),AlamatSelamaCuti.getText(), 
+            KodeRuang.getText(),PembuatPengajuan.getText(),AlamatPembuatPengajuan.getText(),Valid.SetTgl(TanggalLahirPembuatPengajuan.getSelectedItem()+""),
+            JKPembuatPengajuan.getSelectedItem().toString().substring(0,1),HubunganDenganPasien.getSelectedItem().toString(),NoHpPembuatPengajuan.getText(),
+            AlasanCuti.getText(),Valid.SetTgl(MulaiCuti.getSelectedItem()+"")+" "+MulaiCuti.getSelectedItem().toString().substring(11,19),AlamatSelamaCuti.getText(),
             Valid.SetTgl(Kembali.getSelectedItem()+"")+" "+Kembali.getSelectedItem().toString().substring(11,19),NIK.getText(),KodeDokter.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
         })==true){
             tbObat.setValueAt(NoSurat.getText(),tbObat.getSelectedRow(),0);
@@ -1941,24 +1940,24 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
     }
-    
+
     private void autonomor(){
         Valid.autoNomer3(
             "select ifnull(MAX(CONVERT(RIGHT(surat_pengajuan_cuti_pasien.no_surat,4),signed)),0) from surat_pengajuan_cuti_pasien where date_format(surat_pengajuan_cuti_pasien.tanggal,'%Y-%m-%d')='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",
             "PCP"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),4,NoSurat
-        );  
+        );
     }
-    
+
     private void isPhoto(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(480,HEIGHT));
-            FormPhoto.setVisible(true);  
+            FormPhoto.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){    
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormPhoto.setVisible(false);  
+            FormPhoto.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
@@ -1975,7 +1974,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
                             LoadHTML2.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
                         }else{
                             LoadHTML2.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/pengajuancutiperawatan/"+rs.getString("photo")+"' alt='photo' width='500' height='500'/></center></body></html>");
-                        }  
+                        }
                     }else{
                         LoadHTML2.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
                     }
@@ -1994,7 +1993,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2020,7 +2019,7 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

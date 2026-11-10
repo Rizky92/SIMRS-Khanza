@@ -2,16 +2,16 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["norawat"])) {
         $norawat    = validTeks3($iyem["norawat"],20);
         $tglperiksa = validTeks3($iyem["tglperiksa"],10);
         $jam        = validTeks4($iyem["jam"],10);
         $querytanggalperiksalab = bukaquery(
             "select periksa_lab.tgl_periksa,periksa_lab.jam from periksa_lab where periksa_lab.kategori='MB' and periksa_lab.no_rawat='".$norawat."' and periksa_lab.tgl_periksa='".$tglperiksa."' ".
-            "and periksa_lab.jam='".$jam."' group by concat(periksa_lab.no_rawat,periksa_lab.tgl_periksa,periksa_lab.jam) order by periksa_lab.tgl_periksa,periksa_lab.jam" 
+            "and periksa_lab.jam='".$jam."' group by concat(periksa_lab.no_rawat,periksa_lab.tgl_periksa,periksa_lab.jam) order by periksa_lab.tgl_periksa,periksa_lab.jam"
         );
         if(mysqli_num_rows($querytanggalperiksalab)!=0) {
             echo "<div class='row clearfix'>
@@ -45,14 +45,14 @@
                                     <td valign='top'>".$rsqueryperiksalab["nm_perawatan"]."</td>
                                     <td valign='top'>".$rsqueryperiksalab["nm_dokter"]."</td>
                                     <td valign='top'>".$rsqueryperiksalab["nama"]."</td>
-                                </tr>"; 
+                                </tr>";
                     }else{
                         echo"   <tr>
                                     <td valign='top' align='center'></td>
                                     <td valign='top'>".$rsqueryperiksalab["nm_perawatan"]."</td>
                                     <td valign='top'>".$rsqueryperiksalab["nm_dokter"]."</td>
                                     <td valign='top'>".$rsqueryperiksalab["nama"]."</td>
-                                </tr>"; 
+                                </tr>";
                     }
 
                     $querydetailperiksalab = bukaquery(
@@ -77,7 +77,7 @@
                                             <td valign='top'>".$rsquerydetailperiksalab["Pemeriksaan"]."</td>
                                             <td valign='top' style='color:#0000FF'>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai"])))." ".$rsquerydetailperiksalab["satuan"]."</td>
                                             <td valign='top'>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai_rujukan"])))."</td>
-                                          </tr>"; 
+                                          </tr>";
                                     break;
                                 case "h":
                                     echo "<tr>
@@ -85,7 +85,7 @@
                                             <td valign='top'>".$rsquerydetailperiksalab["Pemeriksaan"]."</td>
                                             <td valign='top' style='color:#FF0000'>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai"])))." ".$rsquerydetailperiksalab["satuan"]."</td>
                                             <td valign='top'>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai_rujukan"])))."</td>
-                                          </tr>"; 
+                                          </tr>";
                                     break;
                                 case "t":
                                     echo "<tr>
@@ -93,7 +93,7 @@
                                             <td valign='top'>".$rsquerydetailperiksalab["Pemeriksaan"]."</td>
                                             <td valign='top'><b>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai"])))." ".$rsquerydetailperiksalab["satuan"]."</b></td>
                                             <td valign='top'>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai_rujukan"])))."</td>
-                                          </tr>"; 
+                                          </tr>";
                                     break;
                                 default:
                                     echo "<tr>
@@ -101,7 +101,7 @@
                                             <td valign='top'>".$rsquerydetailperiksalab["Pemeriksaan"]."</td>
                                             <td valign='top'>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai"])))." ".$rsquerydetailperiksalab["satuan"]."</td>
                                             <td valign='top'>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai_rujukan"])))."</td>
-                                          </tr>"; 
+                                          </tr>";
                             }
                         }
                     }
@@ -124,7 +124,7 @@
                                     <td valign='top' border='0' width='100%'>Saran : ".$querysarankesanperiksalab["saran"]."</td>
                                 </tr>
                             </table>";
-            }                 
+            }
             echo "          <center><a href='index.php?act=AntrianPemeriksaanLab&hal=AntrianTindakan' class='btn btn-danger waves-effect'>Kembali</a></center>
                             </div>
                         </div>

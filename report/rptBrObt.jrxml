@@ -15,11 +15,11 @@
  detail_pemberian_obat.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,
  detail_pemberian_obat.kode_brng,databarang.nama_brng,detail_pemberian_obat.embalase,
  detail_pemberian_obat.tuslah,
-                   detail_pemberian_obat.jml,detail_pemberian_obat.biaya_obat,detail_pemberian_obat.total 
-                   from detail_pemberian_obat inner join reg_periksa inner join pasien inner join databarang 
-                   on detail_pemberian_obat.no_rawat=reg_periksa.no_rawat 
-                   and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                   and detail_pemberian_obat.kode_brng=databarang.kode_brng 
+                   detail_pemberian_obat.jml,detail_pemberian_obat.biaya_obat,detail_pemberian_obat.total
+                   from detail_pemberian_obat inner join reg_periksa inner join pasien inner join databarang
+                   on detail_pemberian_obat.no_rawat=reg_periksa.no_rawat
+                   and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                   and detail_pemberian_obat.kode_brng=databarang.kode_brng
 ORDER BY
      detail_pemberian_obat.tgl_perawatan ASC]]>
 	</queryString>

@@ -17,9 +17,9 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select DATE_FORMAT(nota_inap.tanggal,'%d-%m-%Y') as tanggal,nota_inap.no_nota,nota_inap.no_rawat,reg_periksa.no_rkm_medis,
-pasien.nm_pasien,detail_nota_inap.nama_bayar,detail_nota_inap.besar_bayar 
+pasien.nm_pasien,detail_nota_inap.nama_bayar,detail_nota_inap.besar_bayar
 from nota_inap inner join reg_periksa on nota_inap.no_rawat=reg_periksa.no_rawat
-inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis 
+inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis
 inner join detail_nota_inap on detail_nota_inap.no_rawat=reg_periksa.no_rawat]]>
 	</queryString>
 	<field name="tanggal" class="java.lang.String">

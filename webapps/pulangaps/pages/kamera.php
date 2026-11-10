@@ -2,18 +2,18 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $namars        = getOne("select setting.nama_instansi from setting");
     $nopernyataan  = "";
     $norawat       = "";
-    
-    $_sql          = "select * from antriaps" ;  
+
+    $_sql          = "select * from antriaps" ;
     $hasil         = bukaquery2($_sql);
     while ($data = mysqli_fetch_array ($hasil)){
         $nopernyataan = $data['no_pernyataan'];
         $norawat      = $data['no_rawat'];
     }
-    
+
     $no_rkm_medis = "";
     $nm_pasien    = "";
     $jk           = "";
@@ -21,14 +21,14 @@
     $tgl_lahir    = "";
     $alamat       = "";
     $no_tlp       = "";
-    
+
     $_sql2  = "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','LAKI-LAKI','PEREMPUAN') as jk,
-               pasien.umur,DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, 
-               pasien.no_tlp from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+               pasien.umur,DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,
+               pasien.no_tlp from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
-               inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
+               inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
                inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
-               where reg_periksa.no_rawat='".$norawat."'" ;  
+               where reg_periksa.no_rawat='".$norawat."'" ;
     $hasil2 = bukaquery2($_sql2);
     while ($data2  = mysqli_fetch_array ($hasil2)){
         $no_rkm_medis = $data2['no_rkm_medis'];
@@ -39,7 +39,7 @@
         $alamat       = $data2['alamat'];
         $no_tlp       = $data2['no_tlp'];
     }
-    
+
     $tgl_pulang     = "";
     $rs_pilihan     = "";
     $nama_pj        = "";
@@ -51,8 +51,8 @@
     $saksi_keluarga = "";
     $_sql2  = "select DATE_FORMAT(surat_pulang_atas_permintaan_sendiri.tgl_pulang,'%d-%m-%Y') as tgl_pulang,surat_pulang_atas_permintaan_sendiri.rs_pilihan,surat_pulang_atas_permintaan_sendiri.nama_pj,
                DATE_FORMAT(surat_pulang_atas_permintaan_sendiri.lahir,'%d-%m-%Y') as lahir,surat_pulang_atas_permintaan_sendiri.umur,if(surat_pulang_atas_permintaan_sendiri.jkpj='L','LAKI-LAKI','PEREMPUAN') as jkpj,
-               surat_pulang_atas_permintaan_sendiri.alamat,surat_pulang_atas_permintaan_sendiri.hubungan,surat_pulang_atas_permintaan_sendiri.saksi_keluarga 
-               from surat_pulang_atas_permintaan_sendiri where surat_pulang_atas_permintaan_sendiri.no_surat='$nopernyataan'" ;  
+               surat_pulang_atas_permintaan_sendiri.alamat,surat_pulang_atas_permintaan_sendiri.hubungan,surat_pulang_atas_permintaan_sendiri.saksi_keluarga
+               from surat_pulang_atas_permintaan_sendiri where surat_pulang_atas_permintaan_sendiri.no_surat='$nopernyataan'" ;
     $hasil2 = bukaquery2($_sql2);
     while ($data2  = mysqli_fetch_array ($hasil2)){
         $tgl_pulang     = $data2['tgl_pulang'];
@@ -115,7 +115,7 @@
             </table>
             <br/>
             <h7 class="text-dark">
-                Terhadap Pasien : 
+                Terhadap Pasien :
             </h7>
             <table class="default" width="100%" border="0" align="center" cellpadding="3px" cellspacing="0px">
                 <tr class="text-dark">
@@ -137,7 +137,7 @@
             </table>
             <br/>
             <h7 class="text-dark">
-                Dengan ini menyatakan bahwa : 
+                Dengan ini menyatakan bahwa :
             </h7>
             <br/>
             <table class="default" width="100%" border="0" align="center" cellpadding="3px" cellspacing="0px">
@@ -174,7 +174,7 @@
             </div>
         </form>
     </div>
-    
+
     <script language="JavaScript">
         Webcam.set({
             width: 490,
@@ -194,4 +194,3 @@
     </script>
 </body>
 </html>
-

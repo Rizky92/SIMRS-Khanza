@@ -23,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                             $queryresep = bukaquery(
                                 "select resep_obat.no_rawat,date_format(resep_obat.tgl_perawatan,'%d/%m/%Y') as tgl_perawatan,resep_obat.jam,dokter.nm_dokter,resep_obat.no_resep,date_format(resep_obat.tgl_peresepan,'%d/%m/%Y') as tgl_peresepan,resep_obat.jam_peresepan,resep_obat.tgl_penyerahan ".
                                 "from resep_obat inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat inner join dokter on resep_obat.kd_dokter=dokter.kd_dokter where resep_obat.status='ralan' and reg_periksa.no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."' ".

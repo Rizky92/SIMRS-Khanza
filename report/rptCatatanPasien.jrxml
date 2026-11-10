@@ -14,7 +14,7 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select catatan_pasien.no_rkm_medis,pasien.nm_pasien,catatan_pasien.catatan 
+		<![CDATA[select catatan_pasien.no_rkm_medis,pasien.nm_pasien,catatan_pasien.catatan
 from catatan_pasien inner join pasien on catatan_pasien.no_rkm_medis=pasien.no_rkm_medis where
 catatan_pasien.no_rkm_medis like $P{parameter} or pasien.nm_pasien like $P{parameter} or catatan_pasien.catatan like $P{parameter} order by catatan_pasien.no_rkm_medis]]>
 	</queryString>

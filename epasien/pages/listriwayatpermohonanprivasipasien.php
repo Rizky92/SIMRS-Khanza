@@ -21,7 +21,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                             $queryperiksa = bukaquery(
                                 "select surat_permohonan_privasi.no_surat,date_format(surat_permohonan_privasi.tanggal,'%d/%m/%Y') as tanggal,surat_permohonan_privasi.nip,pegawai.nama,ifnull(surat_permohonan_privasi_pembuat_permohonan.photo,'') as photo from surat_permohonan_privasi ".
                                 "inner join reg_periksa on surat_permohonan_privasi.no_rawat=reg_periksa.no_rawat inner join pegawai on surat_permohonan_privasi.nip=pegawai.nik left join surat_permohonan_privasi_pembuat_permohonan on surat_permohonan_privasi_pembuat_permohonan.no_surat=surat_permohonan_privasi.no_surat where ".

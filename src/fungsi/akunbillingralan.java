@@ -36,7 +36,7 @@ public class akunbillingralan {
         } catch (Exception e) {
             System.out.println("Notif Rekening : "+e);
         }
-        
+
         try (
             PreparedStatement ps = koneksi.prepareStatement(
                 "select set_akun.PPN_Keluaran from set_akun"
@@ -52,7 +52,7 @@ public class akunbillingralan {
             System.out.println("Notif Pengaturan Akun PPN Keluaran Ralan : "+e);
         }
     }
-    
+
     public static String getTindakan_Ralan(){return akunbillingralan.Tindakan_Ralan;}
     public static String getLaborat_Ralan(){return akunbillingralan.Laborat_Ralan;}
     public static String getRadiologi_Ralan(){return akunbillingralan.Radiologi_Ralan;}

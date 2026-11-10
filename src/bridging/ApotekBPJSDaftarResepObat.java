@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -15,21 +15,16 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import java.awt.Dimension;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import inventory.riwayatobat;
 import java.awt.Cursor;
 import java.awt.Desktop;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -46,9 +41,11 @@ import java.util.concurrent.RejectedExecutionException;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.X509TrustManager;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
@@ -144,7 +141,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
             }
         }
         tbResep.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeDetail=new DefaultTableModel(null,new Object[]{
                 "No.Racik","Kode Obat","Nama Obat","Signa 1","Signa 2","Jml.Obat","Permintaan","Jml.Harian"
             }){
@@ -174,7 +171,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
             }
         }
         tbDetailResep.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRekap=new DefaultTableModel(null,new Object[]{
                 "No.SEP Asal","No.SEP Apotek","Tanggal SEP","No.Rawat","No.RM","Nama Pasien","No.Kartu","Jenis","ID User SEP","No.Resep","Tgl.Resep",
                 "Tgl.Pelayanan","Iterasi","PPK Rujukan","No.Racik","Kode Obat","Nama Obat","Signa 1","Signa 2","Jml.Obat","Permintaan","Jml.Harian"
@@ -235,19 +232,19 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
             }
         }
         tbRekapResep.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         ChkAccor.setSelected(false);
         PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-        scrollPaneDetail.setVisible(false); 
-        
+        scrollPaneDetail.setVisible(false);
+
         try {
             link=koneksiDB.URLAPIAPOTEKBPJS();
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -265,7 +262,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         try {
             JADIKANPIUTANGAPOTEKBPJS = koneksiDB.JADIKANPIUTANGAPOTEKBPJS();
         } catch (Exception e) {
@@ -273,8 +270,8 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
             JADIKANPIUTANGAPOTEKBPJS = "no";
         }
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -596,7 +593,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                 TCari.requestFocus();
             }else if(tabMode.getRowCount()!=0){
                 try{
-                    File g = new File("file2.css");            
+                    File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                     bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -611,7 +608,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                     );
                     bg.close();
 
-                    File f;            
+                    File f;
                     BufferedWriter bw;
                     StringBuilder htmlContent;
 
@@ -661,8 +658,8 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                     "</html>"
                                 );
 
-                                f = new File("DataResepApolBPJS.html");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataResepApolBPJS.html");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -671,12 +668,12 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA RESEP APOTEK ONLINE BPJS<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA RESEP APOTEK ONLINE BPJS<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 2 (WPS)":
@@ -723,8 +720,8 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                     "</html>"
                                 );
 
-                                f = new File("DataResepApolBPJS.wps");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataResepApolBPJS.wps");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -733,29 +730,29 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA RESEP APOTEK ONLINE BPJS<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA RESEP APOTEK ONLINE BPJS<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 3 (CSV)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "\"No.SEP Asal\";\"No.SEP Apotek\";\"Tanggal SEP\";\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"No.Kartu\";\"Jenis\";\"ID User SEP\";\"No.Resep\";\"Tgl.Resep\";\"Tgl.Pelayanan\";\"Iterasi\";\"PPK Rujukan\"\n"
-                                ); 
+                                );
                                 for (int i = 0; i < tabMode.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbResep.getValueAt(i,0).toString()).append("\";\"").append(tbResep.getValueAt(i,1).toString()).append("\";\"").append(tbResep.getValueAt(i,2).toString()).append("\";\"").append(tbResep.getValueAt(i,3).toString()).append("\";\"").append(tbResep.getValueAt(i,4).toString()).append("\";\"").append(tbResep.getValueAt(i,5).toString()).append("\";\"").append(tbResep.getValueAt(i,6).toString()).append("\";\"").append(tbResep.getValueAt(i,7).toString()).append("\";\"").append(tbResep.getValueAt(i,8).toString()).append("\";\"").append(tbResep.getValueAt(i,9).toString()).append("\";\"").append(tbResep.getValueAt(i,10).toString()).append("\";\"").append(tbResep.getValueAt(i,11).toString()).append("\";\"").append(tbResep.getValueAt(i,12).toString()).append("\";\"").append(tbResep.getValueAt(i,13).toString()).append("\"\n");
                                 }
-                                f = new File("DataResepApolBPJS.csv");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataResepApolBPJS.csv");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(htmlContent.toString());
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
-                            break; 
-                    }   
+                            break;
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi : "+e);
                 }
@@ -768,7 +765,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                 TCari.requestFocus();
             }else if(tabModeRekap.getRowCount()!=0){
                 try{
-                    File g = new File("file2.css");            
+                    File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                     bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -783,7 +780,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                     );
                     bg.close();
 
-                    File f;            
+                    File f;
                     BufferedWriter bw;
                     StringBuilder htmlContent;
 
@@ -849,8 +846,8 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                     "</html>"
                                 );
 
-                                f = new File("DataRekapResepApolBPJS.html");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataRekapResepApolBPJS.html");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='1900px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -859,12 +856,12 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA REKAP RESEP APOTEK ONLINE BPJS<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA REKAP RESEP APOTEK ONLINE BPJS<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 2 (WPS)":
@@ -927,8 +924,8 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                     "</html>"
                                 );
 
-                                f = new File("DataRekapResepApolBPJS.wps");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataRekapResepApolBPJS.wps");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='1900px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -937,35 +934,35 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA REKAP RESEP APOTEK ONLINE BPJS<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA REKAP RESEP APOTEK ONLINE BPJS<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 3 (CSV)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "\"No.SEP Asal\";\"No.SEP Apotek\";\"Tanggal SEP\";\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"No.Kartu\";\"Jenis\";\"ID User SEP\";\"No.Resep\";\"Tgl.Resep\";\"Tgl.Pelayanan\";\"Iterasi\";\"PPK Rujukan\";\"No.Racik\";\"Kode Obat\";\"Nama Obat\";\"Signa 1\";\"Signa 2\";\"Jml.Obat\";\"Permintaan\";\"Jml.Harian\"\n"
-                                ); 
+                                );
                                 for (int i = 0; i < tabModeRekap.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbRekapResep.getValueAt(i,0).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,1).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,2).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,3).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,4).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,5).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,6).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,7).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,8).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,9).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,10).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,11).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,12).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,13).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,14).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,15).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,16).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,17).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,18).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,19).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,20).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,21).toString()).append("\"\n");
                                 }
-                                f = new File("DataRekapResepApolBPJS.csv");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataRekapResepApolBPJS.csv");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(htmlContent.toString());
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
-                            break; 
-                    }   
+                            break;
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi : "+e);
                 }
             }
             this.setCursor(Cursor.getDefaultCursor());
-        }       
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
@@ -1000,7 +997,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                     reply = JOptionPane.showConfirmDialog(rootPane, "Eeiiiiiits, udah yakin data No.SEP Apotek : "+tbResep.getValueAt(tbResep.getSelectedRow(),1).toString()+",\nNo.SEP Asal : "+tbResep.getValueAt(tbResep.getSelectedRow(),0).toString()+", No.Resep : "+tbResep.getValueAt(tbResep.getSelectedRow(),9).toString()+"\nmau dihapus beserta seluruh obatnya...?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
                     if (reply == JOptionPane.YES_OPTION) {
                         sukses=true;
-                        for(i=0;i<tbDetailResep.getRowCount();i++){ 
+                        for(i=0;i<tbDetailResep.getRowCount();i++){
                             try {
                                 HapusDetailResep(
                                     tbResep.getValueAt(tbResep.getSelectedRow(),1).toString(),tbResep.getValueAt(tbResep.getSelectedRow(),9).toString().substring(tbResep.getValueAt(tbResep.getSelectedRow(),9).toString().length()-5),tbDetailResep.getValueAt(i,1).toString(),tbDetailResep.getValueAt(i,0).toString(),i
@@ -1009,7 +1006,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                 System.out.println("Notifikasi Bridging : "+ex);
                             }
                         }
-                        
+
                         if(sukses==true){
                             try {
                                 nopiutang=tbResep.getValueAt(tbResep.getSelectedRow(),1).toString();
@@ -1018,7 +1015,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                 System.out.println("Notifikasi Bridging : "+ex);
                             }
                         }
-                        
+
                         if(sukses==true){
                             if(JADIKANPIUTANGAPOTEKBPJS.equals("yes")){
                                 try {
@@ -1054,10 +1051,10 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                                Sequel.queryu("delete from tampjurnal");
                                                if(Sequel.menyimpantf2("tampjurnal","'"+Sequel.cariIsi("select set_akun.Piutang_Obat from set_akun")+"','PIUTANG PASIEN','0','"+rs.getString("sisapiutang")+"'","Rekening")==false){
                                                   sukses=false;
-                                               }    
+                                               }
                                                if(Sequel.menyimpantf2("tampjurnal","'"+Sequel.cariIsi("select set_akun.Kontra_Piutang_Obat from set_akun")+"','KAS DI TANGAN','"+rs.getString("sisapiutang")+"','0'","Rekening")==false){
                                                   sukses=false;
-                                               } 
+                                               }
                                                if(sukses==true){
                                                   sukses=jur.simpanJurnal(rs.getString("nota_piutang"),"U","BATAL PIUTANG OBAT DI "+Sequel.CariBangsal(rs.getString("kd_bangsal")).toUpperCase()+", OLEH "+akses.getkode());
                                                }
@@ -1073,7 +1070,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                            }
 
                                            Sequel.AutoComitTrue();
-                                       } 
+                                       }
                                     } catch (Exception e) {
                                         System.out.println("Notif : "+e);
                                     } finally{
@@ -1136,7 +1133,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
@@ -1189,7 +1186,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
                 }
-                
+
                 try {
                     ps=koneksi.prepareStatement(
                         "select bridging_resep_apotek_bpjs_nonracikan.kode_brng_apotek_bpjs,maping_obat_apotek_bpjs.nama_brng_apotek_bpjs,bridging_resep_apotek_bpjs_nonracikan.signa1,"+
@@ -1333,8 +1330,8 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
-    }  
-    
+    }
+
     private void tampil2() {
         Valid.tabelKosong(tabModeRekap);
         try{
@@ -1385,7 +1382,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                 "select bridging_resep_apotek_bpjs.no_sep,bridging_resep_apotek_bpjs.no_sep_apotek,bridging_resep_apotek_bpjs.tgl_sep,bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,"+
                 "bridging_sep.no_kartu,bridging_resep_apotek_bpjs.kdjenis,bridging_resep_apotek_bpjs.id_user_sep,bridging_resep_apotek_bpjs.no_resep,bridging_resep_apotek_bpjs.tgl_resep,"+
@@ -1436,12 +1433,12 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabModeRekap.getRowCount());
-    }  
+    }
 
     public JTable getTable(){
         return tbResep;
     }
-    
+
     public static class HttpEntityEnclosingDeleteRequest extends HttpEntityEnclosingRequestBase {
         public HttpEntityEnclosingDeleteRequest(final URI uri) {
             super();
@@ -1468,7 +1465,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
         sslContext.init(null,trustManagers , new SecureRandom());
         SSLSocketFactory sslFactory=new SSLSocketFactory(sslContext,SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
         Scheme scheme=new Scheme("https",443,sslFactory);
-    
+
         HttpComponentsClientHttpRequestFactory factory=new HttpComponentsClientHttpRequestFactory(){
             @Override
             protected HttpUriRequest createHttpUriRequest(HttpMethod httpMethod, URI uri) {
@@ -1480,7 +1477,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
         };
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
         restTemplate.setRequestFactory(factory);
-        
+
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -1509,7 +1506,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                     }
                 }
             }
-        } catch (Exception e) {   
+        } catch (Exception e) {
             sukses=false;
             System.out.println("Notif : "+e);
             if(e.toString().contains("UnknownHostException")){
@@ -1517,7 +1514,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
             }
         }
     }
-    
+
     @Test
     public void HapusResep() throws Exception {
         RestTemplate restTemplate = new RestTemplate();
@@ -1532,7 +1529,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
         sslContext.init(null,trustManagers , new SecureRandom());
         SSLSocketFactory sslFactory=new SSLSocketFactory(sslContext,SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
         Scheme scheme=new Scheme("https",443,sslFactory);
-    
+
         HttpComponentsClientHttpRequestFactory factory=new HttpComponentsClientHttpRequestFactory(){
             @Override
             protected HttpUriRequest createHttpUriRequest(HttpMethod httpMethod, URI uri) {
@@ -1544,7 +1541,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
         };
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
         restTemplate.setRequestFactory(factory);
-        
+
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -1554,7 +1551,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
             headers.add("x-signature", api.getHmac(utc));
             headers.add("user_key", koneksiDB.USERKEYAPIAPOTEKBPJS());
             URL = link+"/hapusresep";
-            requestJson ="{\"nosjp\":\""+tbResep.getValueAt(tbResep.getSelectedRow(),1).toString()+"\",\"refasalsjp\":\""+tbResep.getValueAt(tbResep.getSelectedRow(),0).toString()+"\",\"noresep\":\""+tbResep.getValueAt(tbResep.getSelectedRow(),9).toString().substring(tbResep.getValueAt(tbResep.getSelectedRow(),9).toString().length()-5)+"\"}";            
+            requestJson ="{\"nosjp\":\""+tbResep.getValueAt(tbResep.getSelectedRow(),1).toString()+"\",\"refasalsjp\":\""+tbResep.getValueAt(tbResep.getSelectedRow(),0).toString()+"\",\"noresep\":\""+tbResep.getValueAt(tbResep.getSelectedRow(),9).toString().substring(tbResep.getValueAt(tbResep.getSelectedRow(),9).toString().length()-5)+"\"}";
             System.out.println(URL);
             System.out.println("JSON Dikirim : "+requestJson);
             requestEntity = new HttpEntity(requestJson,headers);
@@ -1575,7 +1572,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                         rs=ps.executeQuery();
                         while(rs.next()){
                             Sequel.meghapus("resep_obat","no_resep",rs.getString("no_resep"));
-                        } 
+                        }
                     } catch (Exception e) {
                         System.out.println("Notif : "+e);
                     } finally{
@@ -1591,7 +1588,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                 Valid.tabelKosong(tabModeDetail);
                 tabMode.removeRow(tbResep.getSelectedRow());
             }
-        } catch (Exception e) {   
+        } catch (Exception e) {
             sukses=false;
             System.out.println("Notif : "+e);
             if(e.toString().contains("UnknownHostException")){
@@ -1599,7 +1596,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1625,7 +1622,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

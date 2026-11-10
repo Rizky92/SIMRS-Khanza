@@ -27,7 +27,7 @@
 	<queryString>
 		<![CDATA[select kesling_mutu_air_limbah.nip,petugas.nama,kesling_mutu_air_limbah.tanggal,
 kesling_mutu_air_limbah.meteran,kesling_mutu_air_limbah.jumlahharian,
-kesling_mutu_air_limbah.ph,kesling_mutu_air_limbah.suhu,kesling_mutu_air_limbah.tds,kesling_mutu_air_limbah.ec,kesling_mutu_air_limbah.salt 
+kesling_mutu_air_limbah.ph,kesling_mutu_air_limbah.suhu,kesling_mutu_air_limbah.tds,kesling_mutu_air_limbah.ec,kesling_mutu_air_limbah.salt
 from kesling_mutu_air_limbah inner join petugas on kesling_mutu_air_limbah.nip=petugas.nip]]>
 	</queryString>
 	<field name="nip" class="java.lang.String">

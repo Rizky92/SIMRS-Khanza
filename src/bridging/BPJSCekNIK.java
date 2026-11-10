@@ -34,20 +34,20 @@ public class BPJSCekNIK {
     private ApiBPJS api=new ApiBPJS();
     private HttpHeaders headers;
     private HttpEntity requestEntity;
-    private ObjectMapper mapper = new ObjectMapper();   
+    private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode nameNode;
     private JsonNode response;
-        
+
     public BPJSCekNIK(){
         super();
         try {
-            link=koneksiDB.URLAPIBPJS();  
+            link=koneksiDB.URLAPIBPJS();
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
     }
-    
+
     public void tampil(String nik) {
         try {
             headers = new HttpHeaders();
@@ -58,7 +58,7 @@ public class BPJSCekNIK {
 	    headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
 	    requestEntity = new HttpEntity(headers);
-            URL = link+"/Peserta/nik/"+nik+"/tglSEP/"+dateFormat.format(date);	
+            URL = link+"/Peserta/nik/"+nik+"/tglSEP/"+dateFormat.format(date);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
             System.out.println("code : "+nameNode.path("code").asText());
@@ -98,8 +98,8 @@ public class BPJSCekNIK {
                 umurumurSekarang=response.path("peserta").path("umur").path("umurSekarang").asText();
                 informasi="OK";
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }   
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi Peserta : "+ex);
             if(ex.toString().contains("UnknownHostException")){
@@ -107,5 +107,5 @@ public class BPJSCekNIK {
             }
         }
     }
-    
+
 }

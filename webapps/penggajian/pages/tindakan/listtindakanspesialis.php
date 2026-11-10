@@ -14,14 +14,14 @@
 ?>
 
 <div id="post">
-    <div class="entry">  
+    <div class="entry">
         <div align="center" class="link">
             <a href=?act=DetailTindakan&action=TAMBAH>| Master Tindakan |</a>
             <a href=?act=ListTindakan>| Tindakan Paramedis |</a>
             <a href=?act=ListTindakanDokter>| Tindakan Dokter |</a>
             <a href=?act=ListTindakanSpesialis>| Tindakan Spesialis |</a>
             <a href=?act=HomeAdmin>| Menu Utama |</a>
-        </div>   
+        </div>
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                     echo "";
@@ -75,7 +75,7 @@
                                     <td><a href=?act=InputTindakanSpesialis&action=TAMBAH&id=$baris[0]>".formatDuit($baris[5])."</a></td>
                                  </tr>";
                             }
-                    echo "</table>";           
+                    echo "</table>";
                 } else {
                     echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                             <tr class='head'>
@@ -94,8 +94,8 @@
         <?php
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah, Ttl.JM : ".formatDuit($ttljm)."  <a target=_blank href=../penggajian/pages/tindakan/laporantindakanspesialis.php?&keyword=$keyword>| Laporan |</a></div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah, Ttl.JM : ".formatDuit($ttljm)."  <a target=_blank href=../penggajian/pages/tindakan/laporantindakanspesialis.php?&keyword=$keyword>| Laporan |</a></div></td>
+                    </tr>
                  </table>");
         ?>
     </div>

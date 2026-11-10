@@ -17,7 +17,7 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select DATE_FORMAT(penjualan.tgl_jual,'%d-%m-%Y') as tanggal,penjualan.nota_jual,penjualan.jns_jual,penjualan.no_rkm_medis,
-penjualan.nm_pasien,penjualan.nama_bayar,(penjualan.ongkir+sum(detailjual.total)) as total 
+penjualan.nm_pasien,penjualan.nama_bayar,(penjualan.ongkir+sum(detailjual.total)) as total
 from penjualan inner join detailjual on detailjual.nota_jual=penjualan.nota_jual]]>
 	</queryString>
 	<field name="tanggal" class="java.lang.String">

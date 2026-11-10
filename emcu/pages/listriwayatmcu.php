@@ -2,12 +2,12 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $perusahaan   = validTeks4(encrypt_decrypt($_SESSION["ses_emcu"],"d"),20);
     $nm_pasien    = "";
     $no_rkm_medis = "";
     $iyem         = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem         = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem         = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["no_rkm_medis"])) {
         $nm_pasien    = $iyem["nm_pasien"];
         $no_rkm_medis = $iyem["no_rkm_medis"];
@@ -34,7 +34,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                            $queryriwayat = bukaquery(
                                 "select booking_mcu_perusahaan.no_mcu,booking_mcu_perusahaan.tanggal_mcu,booking_mcu_perusahaan_berhasil_registrasi.no_rawat,dokter.nm_dokter from booking_mcu_perusahaan ".
                                 "inner join booking_mcu_perusahaan_berhasil_registrasi on booking_mcu_perusahaan_berhasil_registrasi.no_mcu=booking_mcu_perusahaan.no_mcu ".

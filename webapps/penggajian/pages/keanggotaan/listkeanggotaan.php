@@ -4,14 +4,14 @@
     }
 ?>
 <div id="post">
-    <div class="entry"> 
+    <div class="entry">
     <div align="center" class="link">
         <a href=?act=DetailBpjs&action=TAMBAH>| Stts BPJS |</a>
         <a href=?act=DetailJamsostek&action=TAMBAH>| Stts Jamsostek |</a>
         <a href=?act=DetailKoperasi&action=TAMBAH>| Stts Koperasi |</a>
         <a href=?act=ListKeanggotaan>| List Keanggotaan |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
+    </div>
 	<form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                 $action  = isset($_GET['action'])?$_GET['action']:NULL;
@@ -29,7 +29,7 @@
             </table><br>
             <div style="width: 100%; height: 78%; overflow: auto;">
             <?php
-                $_sql   = "select pegawai.id,pegawai.nik,pegawai.nama,keanggotaan.koperasi,keanggotaan.jamsostek,keanggotaan.bpjs from keanggotaan right OUTER JOIN pegawai on keanggotaan.id=pegawai.id where pegawai.stts_aktif='AKTIF' and 
+                $_sql   = "select pegawai.id,pegawai.nik,pegawai.nama,keanggotaan.koperasi,keanggotaan.jamsostek,keanggotaan.bpjs from keanggotaan right OUTER JOIN pegawai on keanggotaan.id=pegawai.id where pegawai.stts_aktif='AKTIF' and
                          (pegawai.nik like '%".$keyword."%' or pegawai.nama like '%".$keyword."%' or keanggotaan.koperasi like '%".$keyword."%' or keanggotaan.bpjs like '%".$keyword."%' or keanggotaan.jamsostek like '%".$keyword."%') order by pegawai.id ASC ";
                 $hasil  = bukaquery($_sql);
                 $jumlah = mysqli_num_rows($hasil);
@@ -57,7 +57,7 @@
                                         <td>$baris[5] &nbsp;</td>
                                      </tr>";
                             }
-                    echo "</table>";           
+                    echo "</table>";
                 } else {
                     echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                             <tr class='head'>
@@ -73,11 +73,11 @@
             ?>
             </div>
 	</form>
-        <?php      
+        <?php
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah <a target=_blank href=../penggajian/pages/keanggotaan/LaporanKeanggotaan.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">| Laporan |</a></div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah <a target=_blank href=../penggajian/pages/keanggotaan/LaporanKeanggotaan.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">| Laporan |</a></div></td>
+                    </tr>
                  </table>");
         ?>
     </div>

@@ -10,26 +10,26 @@
             window.onload = function() { window.print(); }
         </script>
         <?php
-            reportsqlinjection();      
+            reportsqlinjection();
             $usere      = trim(isset($_GET['usere']))?trim($_GET['usere']):NULL;
             $passwordte = trim(isset($_GET['passwordte']))?trim($_GET['passwordte']):NULL;
             if((USERHYBRIDWEB==$usere)&&(PASHYBRIDWEB==$passwordte)){
-                $nonota    =validTeks4(str_replace("_"," ",$_GET['nonota']),20);  
-                $_sql      ="select piutang.nota_piutang,piutang.tgl_piutang,piutang.nip,petugas.nama,piutang.ppn, 
+                $nonota    =validTeks4(str_replace("_"," ",$_GET['nonota']),20);
+                $_sql      ="select piutang.nota_piutang,piutang.tgl_piutang,piutang.nip,petugas.nama,piutang.ppn,
                             piutang.no_rkm_medis,piutang.nm_pasien,piutang.catatan,piutang.jns_jual,piutang.ongkir,
-                            piutang.uangmuka,piutang.sisapiutang,detailpiutang.kode_brng,databarang.nama_brng, 
-                            detailpiutang.kode_sat,kodesatuan.satuan,detailpiutang.h_jual,detailpiutang.jumlah, 
+                            piutang.uangmuka,piutang.sisapiutang,detailpiutang.kode_brng,databarang.nama_brng,
+                            detailpiutang.kode_sat,kodesatuan.satuan,detailpiutang.h_jual,detailpiutang.jumlah,
                             detailpiutang.subtotal,detailpiutang.dis,detailpiutang.bsr_dis,detailpiutang.total,
-                            piutang.tgltempo from piutang inner join petugas on piutang.nip=petugas.nip 
+                            piutang.tgltempo from piutang inner join petugas on piutang.nip=petugas.nip
                             inner join detailpiutang on piutang.nota_piutang=detailpiutang.nota_piutang
                             inner join databarang on detailpiutang.kode_brng=databarang.kode_brng
                             inner join kodesatuan on detailpiutang.kode_sat=kodesatuan.kode_sat
-                            where piutang.nota_piutang='$nonota' ";            
+                            where piutang.nota_piutang='$nonota' ";
                 $hasil=bukaquery($_sql);
                 $barisdata=  mysqli_fetch_array($hasil);
 
                 $nota_piutang   = $barisdata["nota_piutang"];
-                $tgl_piutang    = $barisdata["tgl_piutang"]; 
+                $tgl_piutang    = $barisdata["tgl_piutang"];
                 $nip            = $barisdata["nip"];
                 $nama           = $barisdata["nama"];
                 $ongkir         = $barisdata["ongkir"];
@@ -41,11 +41,11 @@
                 $catatan        = $barisdata["catatan"];
                 $hasil2=bukaquery($_sql);
 
-                $_sqlins  = "select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting";            
+                $_sqlins  = "select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting";
                 $hasilins = bukaquery($_sqlins);
                 $setting  = mysqli_fetch_array($hasilins);
 
-                if(mysqli_num_rows($hasil)!=0) { 
+                if(mysqli_num_rows($hasil)!=0) {
                   echo "<table width='".getOne("select notaapotek from set_nota")."'  border='0' align='left' cellpadding='0' cellspacing='0' class='tbl_form'>
                          <tr class='isi14'>
                                <td width=50% colspan=4 align=left>
@@ -60,7 +60,7 @@
                                                                                                 <font color='000000' size='2'  face='Tahoma'>
                                                                                                     ".$setting["alamat_instansi"].", ".$setting["kabupaten"].", ".$setting["propinsi"]."<br/>
                                                                                                     ".$setting["kontak"].", E-mail : ".$setting["email"]."
-                                                                                                </font> 
+                                                                                                </font>
                                                                                 </center>
                                                                                 </td>
                                                                         </tr>
@@ -76,14 +76,14 @@
                             </td>
                             <td width='30%'>: $nota_piutang</td>
                             <td width='50%' colspan=2>$setting[2], ".substr($tgl_piutang,8,2)."-".substr($tgl_piutang,5,2)."-".substr($tgl_piutang,0,4)."</td>
-                         </tr> 
+                         </tr>
                          <tr class='isi14'>
                             <td width='20%'>
                                <font color='000000' size='2' face='Tahoma'>Sales</font>
                             </td>
                             <td width='30%'>: $nama</td>
                             <td width='50%' colspan=2>Nama Pasien : $nm_pasien</td>
-                         </tr> 
+                         </tr>
                          <tr class='isi14'>
                             <td width='20%'>
                                <font color='000000' size='2' face='Tahoma'></font>
@@ -110,7 +110,7 @@
                                        </tr>";
                                               $ttlpesan=0;
                                               $i=1;
-                                              while($barisdata = mysqli_fetch_array($hasil2)) { 
+                                              while($barisdata = mysqli_fetch_array($hasil2)) {
                                                   $ttlpesan=$ttlpesan+$barisdata["total"];
                                                   echo "
                                                     <tr class='isi15'>
@@ -121,12 +121,12 @@
                                                         <td align=right>".formatDuit2($barisdata["bsr_dis"])."</td>
                                                         <td align=right>".formatDuit2($barisdata["total"])."</td>
                                                    </tr>";$i++;
-                                              }    
+                                              }
                                      echo " <tr class='isi14'>
                                               <td colspan=4></td>
                                               <td>Grand Total</td>
                                               <td align='right'>".formatDuit2($ttlpesan)."</td>
-                                            </tr> 
+                                            </tr>
                                             <tr class='isi14'>
                                               <td colspan=4></td>
                                               <td>PPN</td>
@@ -141,19 +141,19 @@
                                               <td colspan=4></td>
                                               <td>Ongkir</td>
                                               <td align='right'>".formatDuit2($ongkir)."<br/><hr/></td>
-                                            </tr> 
+                                            </tr>
 
                                             <tr class='isi14'>
                                               <td colspan=4></td>
                                               <td>Uang Muka</td>
                                               <td align='right'>".formatDuit2($uangmuka)."<br/><hr/></td>
-                                            </tr> 
+                                            </tr>
 
                                             <tr class='isi14'>
                                               <td colspan=4></td>
                                               <td><b>Sisa Piutang</b></td>
                                               <td align='right'><b>".formatDuit2($ttlpesan+$ongkir-$uangmuka)."</b></td>
-                                            </tr>    
+                                            </tr>
                                   </table>
                                   <br/>
                               </td>
@@ -162,7 +162,7 @@
                 } else {echo "<b>Data pesan masih kosong !</b>";}
             }else {
                 exit(header("Location:../index.php"));
-            } 
+            }
         ?>
 
     </body>

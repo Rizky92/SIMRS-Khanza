@@ -15,8 +15,8 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="parameter" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select maping_tindakan_ranap_pcare.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,maping_tindakan_ranap_pcare.kd_tindakan_pcare,maping_tindakan_ranap_pcare.nm_tindakan_pcare 
-                   from maping_tindakan_ranap_pcare inner join jns_perawatan_inap on maping_tindakan_ranap_pcare.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw where 
+		<![CDATA[select maping_tindakan_ranap_pcare.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,maping_tindakan_ranap_pcare.kd_tindakan_pcare,maping_tindakan_ranap_pcare.nm_tindakan_pcare
+                   from maping_tindakan_ranap_pcare inner join jns_perawatan_inap on maping_tindakan_ranap_pcare.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw where
                    maping_tindakan_ranap_pcare.kd_jenis_prw like $P{parameter} or jns_perawatan_inap.nm_perawatan like $P{parameter} or maping_tindakan_ranap_pcare.kd_tindakan_pcare like $P{parameter} or maping_tindakan_ranap_pcare.nm_tindakan_pcare like $P{parameter} order by jns_perawatan_inap.nm_perawatan]]>
 	</queryString>
 	<field name="kd_jenis_prw" class="java.lang.String">

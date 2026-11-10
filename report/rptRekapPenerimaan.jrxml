@@ -12,22 +12,22 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select pemesanan.tgl_pesan,pemesanan.no_faktur,pemesanan.kode_suplier,datasuplier.nama_suplier, 
-pemesanan.nip,petugas.nama,bangsal.nm_bangsal,pemesanan.tgl_faktur, 
+		<![CDATA[select pemesanan.tgl_pesan,pemesanan.no_faktur,pemesanan.kode_suplier,datasuplier.nama_suplier,
+pemesanan.nip,petugas.nama,bangsal.nm_bangsal,pemesanan.tgl_faktur,
 pemesanan.tgl_tempo,pemesanan.status,pemesanan.total2,pemesanan.ppn,
-pemesanan.meterai,pemesanan.tagihan,pemesanan.no_order,detailpesan.kode_brng,databarang.nama_brng, 
-detailpesan.kode_sat,kodesatuan.satuan,detailpesan.jumlah,detailpesan.h_pesan, 
+pemesanan.meterai,pemesanan.tagihan,pemesanan.no_order,detailpesan.kode_brng,databarang.nama_brng,
+detailpesan.kode_sat,kodesatuan.satuan,detailpesan.jumlah,detailpesan.h_pesan,
 detailpesan.subtotal,detailpesan.dis,detailpesan.besardis,detailpesan.total,
 detailpesan.no_batch,industrifarmasi.nama_industri,detailpesan.kadaluarsa
-from pemesanan inner join datasuplier inner join petugas inner join bangsal  
+from pemesanan inner join datasuplier inner join petugas inner join bangsal
  inner join detailpesan inner join databarang inner join kodesatuan
- inner join jenis inner join industrifarmasi 
- on detailpesan.kode_brng=databarang.kode_brng 
- and detailpesan.kode_sat=kodesatuan.kode_sat 
+ inner join jenis inner join industrifarmasi
+ on detailpesan.kode_brng=databarang.kode_brng
+ and detailpesan.kode_sat=kodesatuan.kode_sat
  and pemesanan.kd_bangsal=bangsal.kd_bangsal
- and pemesanan.no_faktur=detailpesan.no_faktur 
- and pemesanan.kode_suplier=datasuplier.kode_suplier 
- and databarang.kode_industri=industrifarmasi.kode_industri 
+ and pemesanan.no_faktur=detailpesan.no_faktur
+ and pemesanan.kode_suplier=datasuplier.kode_suplier
+ and databarang.kode_industri=industrifarmasi.kode_industri
  and pemesanan.nip=petugas.nip and databarang.kdjns=jenis.kdjns]]>
 	</queryString>
 	<field name="tgl_pesan" class="java.sql.Date">

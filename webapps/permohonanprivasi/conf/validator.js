@@ -30,7 +30,7 @@ var http_request = false;
       if (http_request.readyState == 4) {
          if (http_request.status == 200) {
             result = http_request.responseText;
-            document.getElementById('myspan').innerHTML = result;            
+            document.getElementById('myspan').innerHTML = result;
          } else {
             alert('ada masalah.');
          }
@@ -56,7 +56,7 @@ function validasiLogin()
  	var TxtPassword 	= document.getElementById("TxtPassword");
         var MsgUser  		= document.getElementById("MsgUser");
  	var MsgPassword 	= document.getElementById("MsgPassword");
- 	
+
  	if (TxtUser.value.length == 0)
  	{
   		kedip("document.getElementById('TxtUser').style.backgroundColor = ");
@@ -222,7 +222,7 @@ function validasiIsi()
 
         var TxtIsi12  		= document.getElementById("TxtIsi12");
         var MsgIsi12 		= document.getElementById("MsgIsi12");
-        
+
         var TxtIsi13  		= document.getElementById("TxtIsi13");
         var MsgIsi13 		= document.getElementById("MsgIsi13");
 
@@ -725,7 +725,3 @@ function validasiPengguna()
           return true;
          }
 }
-
-
-
-

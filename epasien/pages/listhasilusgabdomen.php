@@ -2,9 +2,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["norawat"])) {
         $norawat    = validTeks3($iyem["norawat"],20);
         $queryusgabdomen = bukaquery(
@@ -33,52 +33,52 @@
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Esofagus</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgabdomen["esofagus"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Colon</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgabdomen["colon"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Gaster</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgabdomen["gaster"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Hepar</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgabdomen["hepar"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Gall Blader</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgabdomen["gall_blader"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Lien</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgabdomen["lien"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Pancreas</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgabdomen["pancreas"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Ginjal Dextra</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgabdomen["ginjal_dextra"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Ginjal Sinistra</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgabdomen["ginjal_sinistra"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Kesimpulan</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgabdomen["kesimpulan"]."</td>
                                     </tr>";
             $querygambarusg= bukaquery(

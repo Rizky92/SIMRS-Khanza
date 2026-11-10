@@ -8,7 +8,7 @@
         <a href=?act=InputBidang&action=TAMBAH>| Input Data |</a>
         <a href=?act=ListBidang>| List Data |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>  
+    </div>
     <div class="entry">
         <form name="frm_ruang" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php

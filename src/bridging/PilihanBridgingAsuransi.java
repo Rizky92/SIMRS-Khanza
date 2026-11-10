@@ -29,8 +29,8 @@ public final class PilihanBridgingAsuransi extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -246,15 +246,15 @@ public final class PilihanBridgingAsuransi extends javax.swing.JDialog {
     public void setTinggi(int tinggi){
         this.tinggi=tinggi;
     }
-    
+
     public void setLebar(int lebar){
         this.lebar=lebar;
     }
-    
+
     public void setNoKa(String noka){
         this.noka=noka;
     }
-    
+
     public void isCek(){
         btnCekBPJSKartu.setEnabled(akses.getbpjs_cek_kartu());
         btnCekBPJSRujukanKartuPCare.setEnabled(akses.getbpjs_cek_rujukan_kartu_pcare());
@@ -262,5 +262,5 @@ public final class PilihanBridgingAsuransi extends javax.swing.JDialog {
         btnCekEligibilitasInhealth.setEnabled(akses.getinhealth_cek_eligibilitas());
         btnPCarePendaftaran.setEnabled(akses.getbridging_pcare_daftar());
     }
- 
+
 }

@@ -2,7 +2,7 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $json       = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
     $json       = json_decode(encrypt_decrypt($json,"d"),true);
     if (isset($json["kd_dokter"])) {
@@ -106,7 +106,7 @@
                     if($insert){
                         Ubah3("skdp_bpjs","status='Sudah Periksa' where no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."' and tanggal_datang='$tanggal'");
                         Ubah3("booking_registrasi","status='Terdaftar' where no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."' and tanggal_periksa='$tanggal' and kd_dokter='$kd_dokter' and kd_poli='$kd_poli' and kd_pj='$kd_pj'");
-                        
+
                         echo "<div class='block-header'>
                                     <h2><center>Proses cekin berhasil</center></h2>
                               </div>
@@ -135,7 +135,7 @@
                                     </div>
                                  </div>
                               </div>";
-                        JSRedirect2("index.php?act=HomeUser&hal=Beranda",4); 
+                        JSRedirect2("index.php?act=HomeUser&hal=Beranda",4);
                     }
                 }else{
                     echo "<div class='block-header'>
@@ -152,7 +152,7 @@
                              </div>
                           </div>";
                     JSRedirect2("index.php?act=HomeUser&hal=Beranda",5);
-                }   
+                }
             }
         }
     }else{
@@ -171,6 +171,5 @@
                   </div>";
             JSRedirect2("index.php?act=HomeUser&hal=Beranda",5);
     }
-        
-?>
 
+?>

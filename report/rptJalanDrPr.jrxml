@@ -13,13 +13,13 @@
 	<queryString>
 		<![CDATA[select rawat_jl_drpr.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,
 jns_perawatan.nm_perawatan,rawat_jl_drpr.kd_dokter,dokter.nm_dokter,
-rawat_jl_drpr.nip,petugas.nama,rawat_jl_drpr.tgl_perawatan,rawat_jl_drpr.jam_rawat,rawat_jl_drpr.biaya_rawat 
-from pasien inner join reg_periksa inner join jns_perawatan inner join 
-dokter inner join rawat_jl_drpr inner join 
-petugas on rawat_jl_drpr.no_rawat=reg_periksa.no_rawat 
-and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-and rawat_jl_drpr.kd_jenis_prw=jns_perawatan.kd_jenis_prw 
-and rawat_jl_drpr.kd_dokter=dokter.kd_dokter 
+rawat_jl_drpr.nip,petugas.nama,rawat_jl_drpr.tgl_perawatan,rawat_jl_drpr.jam_rawat,rawat_jl_drpr.biaya_rawat
+from pasien inner join reg_periksa inner join jns_perawatan inner join
+dokter inner join rawat_jl_drpr inner join
+petugas on rawat_jl_drpr.no_rawat=reg_periksa.no_rawat
+and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+and rawat_jl_drpr.kd_jenis_prw=jns_perawatan.kd_jenis_prw
+and rawat_jl_drpr.kd_dokter=dokter.kd_dokter
 and rawat_jl_drpr.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

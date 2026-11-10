@@ -25,9 +25,9 @@
 	<parameter name="no_rawat" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select no_rawat, noKunjungan, tglDaftar, no_rkm_medis, nm_pasien, noKartu,
-                kdPoli, nmPoli, keluhan, kdSadar, nmSadar, sistole, diastole, beratBadan, 
-                tinggiBadan, respRate, heartRate, terapi, kdStatusPulang, nmStatusPulang, 
-                tglPulang, kdDokter, nmDokter, kdDiag1, nmDiag1, kdDiag2, nmDiag2, kdDiag3, 
+                kdPoli, nmPoli, keluhan, kdSadar, nmSadar, sistole, diastole, beratBadan,
+                tinggiBadan, respRate, heartRate, terapi, kdStatusPulang, nmStatusPulang,
+                tglPulang, kdDokter, nmDokter, kdDiag1, nmDiag1, kdDiag2, nmDiag2, kdDiag3,
                 nmDiag3 from pcare_kunjungan_umum  where no_rawat= $P{no_rawat} ]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

@@ -18,9 +18,9 @@
 		<![CDATA[select piutang.nota_piutang,piutang.tgl_piutang,
 piutang.no_rkm_medis,piutang.nm_pasien,databarang.nama_brng,
 detailpiutang.aturan_pakai,detailpiutang.jumlah,kodesatuan.satuan
-from piutang inner join detailpiutang on piutang.nota_piutang=detailpiutang.nota_piutang 
-inner join databarang on detailpiutang.kode_brng=databarang.kode_brng 
-inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat 
+from piutang inner join detailpiutang on piutang.nota_piutang=detailpiutang.nota_piutang
+inner join databarang on detailpiutang.kode_brng=databarang.kode_brng
+inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat
 where detailpiutang.aturan_pakai<>'']]>
 	</queryString>
 	<field name="nota_piutang" class="java.lang.String">

@@ -11,11 +11,11 @@
 
 package setting;
 
+import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.WarnaTable;
 import java.awt.Canvas;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -349,17 +349,17 @@ public class DlgRunTeksApotek extends javax.swing.JDialog {
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TTeks.getText().trim().equals("")){
             Valid.textKosong(TTeks,"Teks");
-        }else { 
+        }else {
             if(EGb.getText().trim().equals("")){
                 Sequel.mengedit("runtextapotek","teks='"+TTeks.getText()+"'","aktifkan='"+YesNo.getSelectedItem()+"'");
             }else{
                 Sequel.mengedit("runtextapotek","teks='"+TTeks.getText()+"'","aktifkan='"+YesNo.getSelectedItem()+"',gambar=?",EGb);
-                
-            }            
+
+            }
             runBackground(() ->tampil());
             emptTeks();
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -368,7 +368,7 @@ public class DlgRunTeksApotek extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbAdminMouseClicked
+    }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -379,7 +379,7 @@ public class DlgRunTeksApotek extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbAdminKeyPressed
+    }//GEN-LAST:event_tbAdminKeyPressed
 
     private void BtnCariGbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariGbActionPerformed
         jfc.setAcceptAllFileFilterUsed(false);
@@ -406,7 +406,7 @@ public class DlgRunTeksApotek extends javax.swing.JDialog {
         }else if(EGb.getText().trim().equals("")){
             YesNo.setSelectedItem("No");
             EGb.setText("./setting/wallpaper.png");
-        }else if(tabMode.getRowCount()==0){  
+        }else if(tabMode.getRowCount()==0){
             Sequel.menyimpan("runtextapotek","'"+TTeks.getText()+"','"+YesNo.getSelectedItem()+"'","Display",EGb);
             runBackground(() ->tampil());
             emptTeks();
@@ -477,9 +477,9 @@ public class DlgRunTeksApotek extends javax.swing.JDialog {
         Valid.pindah(evt, TTeks,BtnSimpan);
     }//GEN-LAST:event_YesNoKeyPressed
 
-private void TTeksKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTeksKeyPressed
+    private void TTeksKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTeksKeyPressed
         Valid.pindah(evt,BtnKeluar,EGb);
-}//GEN-LAST:event_TTeksKeyPressed
+    }//GEN-LAST:event_TTeksKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         runBackground(() ->tampil());
@@ -573,8 +573,8 @@ private void TTeksKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTe
         YesNo.setSelectedItem("No");
         TTeks.requestFocus();
     }
-    
-    
+
+
     private String gambar(String id) {
         return folder + File.separator + id.trim() + ".jpg";
     }
@@ -608,11 +608,11 @@ private void TTeksKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTe
             g.drawImage(image, (int) x, 0, (int) (w), this.getHeight(), this);
         }
     }
-    
+
     private void cetak(String str) {
         System.out.println(str);
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -638,11 +638,11 @@ private void TTeksKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTe
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    
+
 }

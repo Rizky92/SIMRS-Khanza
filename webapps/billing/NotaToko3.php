@@ -11,28 +11,28 @@
         </script>
 
         <?php
-            reportsqlinjection();      
+            reportsqlinjection();
             $usere      = trim(isset($_GET['usere']))?trim($_GET['usere']):NULL;
             $passwordte = trim(isset($_GET['passwordte']))?trim($_GET['passwordte']):NULL;
             if((USERHYBRIDWEB==$usere)&&(PASHYBRIDWEB==$passwordte)){
-                $nonota    = validTeks4(str_replace("_"," ",$_GET['nonota']),20);  
-                $petugas   = validTeks4(str_replace("_"," ",$_GET['petugas']),70); 
-                $muka      = validTeks4($_GET['muka'],20); 
-                $ongkir    = validTeks4($_GET['ongkir'],20); 
-                $tanggal   = validTeks4($_GET['tanggal'],20); 
-                $nomember  = validTeks4(str_replace("_"," ",$_GET['nomember']),70); 
-                $member    = validTeks4(str_replace("_"," ",$_GET['member']),70); 
-                $tgltempo  = validTeks4($_GET['tgltempo'],20); 
-                $catatan   = validTeks4(str_replace("_"," ",$_GET['catatan']),70); 
+                $nonota    = validTeks4(str_replace("_"," ",$_GET['nonota']),20);
+                $petugas   = validTeks4(str_replace("_"," ",$_GET['petugas']),70);
+                $muka      = validTeks4($_GET['muka'],20);
+                $ongkir    = validTeks4($_GET['ongkir'],20);
+                $tanggal   = validTeks4($_GET['tanggal'],20);
+                $nomember  = validTeks4(str_replace("_"," ",$_GET['nomember']),70);
+                $member    = validTeks4(str_replace("_"," ",$_GET['member']),70);
+                $tgltempo  = validTeks4($_GET['tgltempo'],20);
+                $catatan   = validTeks4(str_replace("_"," ",$_GET['catatan']),70);
 
-                $_sql = "SELECT temporary_toko.no,temporary_toko.temp1,temporary_toko.temp2,temporary_toko.temp3,temporary_toko.temp4,temporary_toko.temp5,temporary_toko.temp6,temporary_toko.temp7, temporary_toko.temp8, temporary_toko.temp9, temporary_toko.temp10, temporary_toko.temp11, temporary_toko.temp12, temporary_toko.temp13 from temporary_toko order by temporary_toko.no asc";            
+                $_sql = "SELECT temporary_toko.no,temporary_toko.temp1,temporary_toko.temp2,temporary_toko.temp3,temporary_toko.temp4,temporary_toko.temp5,temporary_toko.temp6,temporary_toko.temp7, temporary_toko.temp8, temporary_toko.temp9, temporary_toko.temp10, temporary_toko.temp11, temporary_toko.temp12, temporary_toko.temp13 from temporary_toko order by temporary_toko.no asc";
                 $hasil=bukaquery($_sql);
 
-                $_sqlins = "select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting";            
+                $_sqlins = "select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting";
                 $hasilins=bukaquery($_sqlins);
                 $setting = mysqli_fetch_array($hasilins);
 
-                if(mysqli_num_rows($hasil)!=0) { 
+                if(mysqli_num_rows($hasil)!=0) {
                   echo "<table width='".getOne("select set_nota.notatoko from set_nota")."'  border='0' align='left' cellpadding='0' cellspacing='0' class='tbl_form'>
                          <tr class='isi14'>
                                <td width=50% colspan=4 align=left>
@@ -47,7 +47,7 @@
                                                     <font color='000000' size='2'  face='Tahoma'>
                                                         ".$setting["alamat_instansi"].", ".$setting["kabupaten"].", ".$setting["propinsi"]."<br/>
                                                         ".$setting["kontak"].", E-mail : ".$setting["email"]."
-                                                    </font> 
+                                                    </font>
                                                 </center>
                                             </td>
                                         </tr>
@@ -69,8 +69,8 @@
                                         </td>
                                         <td width='25%'>
                                            <font color='000000' size='2' face='Tahoma'>: $nonota</font>
-                                        </td>                                                                
-                                     </tr> 
+                                        </td>
+                                     </tr>
                                      <tr class='isi14'>
                                         <td width='25%'>
                                            <font color='000000' size='2' face='Tahoma'>Nama Member</font>
@@ -83,8 +83,8 @@
                                         </td>
                                         <td width='25%'>
                                            <font color='000000' size='2' face='Tahoma'>: ".$tanggal."</font>
-                                        </td>                                                                
-                                     </tr> 
+                                        </td>
+                                     </tr>
                                      <tr class='isi14'>
                                         <td width='25%'>
                                            <font color='000000' size='2' face='Tahoma'>Alamat Member</font>
@@ -97,22 +97,22 @@
                                         </td>
                                         <td width='25%'>
                                            <font color='000000' size='2' face='Tahoma'>: $petugas</font>
-                                        </td>                                                                
-                                     </tr> 
+                                        </td>
+                                     </tr>
                                      <tr class='isi14'>
                                         <td width='25%'>
                                            <font color='000000' size='2' face='Tahoma'>Catatan</font>
                                         </td>
                                         <td width='25%'>
                                            <font color='000000' size='2' face='Tahoma'>: $catatan</font>
-                                        </td>  
+                                        </td>
                                         <td width='25%'>
                                            <font color='000000' size='2' face='Tahoma'>Tanggal Tempo</font>
                                         </td>
                                         <td width='25%'>
                                            <font color='000000' size='2' face='Tahoma'>: ".$tgltempo."</font>
-                                        </td>                                                             
-                                     </tr> 
+                                        </td>
+                                     </tr>
                                  </table>
                             </td>
                          </tr>
@@ -133,7 +133,7 @@
                                        </tr>";
                                               $ttlpesan=0;
                                               $i=1;
-                                              while($barispesan = mysqli_fetch_array($hasil)) { 
+                                              while($barispesan = mysqli_fetch_array($hasil)) {
                                                   $ttlpesan=$ttlpesan+$barispesan[9];
                                                   echo "
                                                     <tr class='isi'>
@@ -145,27 +145,27 @@
                                                         <td align=right>".formatDuit2($barispesan[8])."</td>
                                                         <td align=right>".formatDuit2($barispesan[9])."</td>
                                                    </tr>";$i++;
-                                              }    
+                                              }
                                      echo " <tr class='isi14'>
                                               <td colspan=5></td>
                                               <td>Ttl.Piutang</td>
                                               <td align='right'>".formatDuit2($ttlpesan)."</td>
-                                            </tr> 
+                                            </tr>
                                             <tr class='isi14'>
                                               <td colspan=5></td>
                                               <td>Ongkir</td>
                                               <td align='right'>".formatDuit2($ongkir)."<br/><hr/></td>
-                                            </tr>   
+                                            </tr>
                                             <tr class='isi14'>
                                               <td colspan=5></td>
                                               <td>Uang Muka</td>
                                               <td align='right'>".formatDuit2($muka)."<br/><hr/></td>
-                                            </tr>                                    
+                                            </tr>
                                             <tr class='isi14'>
                                               <td colspan=5></td>
                                               <td><b>Total</b></td>
                                               <td align='right'><b>".formatDuit2($ttlpesan+$ongkir-$muka)."</b></td>
-                                            </tr>  
+                                            </tr>
                                   </table>
                               </td>
                             </tr>

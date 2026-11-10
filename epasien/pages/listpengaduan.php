@@ -41,7 +41,7 @@
 <script src="js/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(my_function());
-    
+
     $(function() {
         $("#frmPesan").bind('submit',function() {
              $.post('pages/pengaduan.php',{pesan:$('#pesan').val()},null);
@@ -50,9 +50,9 @@
              return false;
         });
     });
-    
-    setInterval("my_function();",60000); 
-    
+
+    setInterval("my_function();",60000);
+
     function my_function(){
         $('#screen').load('pages/daftarpengaduan.php');
     }

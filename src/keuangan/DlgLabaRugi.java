@@ -1,9 +1,9 @@
 package keuangan;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -26,7 +26,7 @@ public class DlgLabaRugi extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private ResultSet rs,rs2,rs3,rs4,rs5,rs6,rs7,rs8,rs9,rs10,rs11,rs12,rs13;
-    private DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");    
+    private DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");
     private double pendapatan=0,biaya=0,modal=0,aktiva=0,pasiva=0,saldoawal,debkret,saldoakhir;
     private Connection koneksi=koneksiDB.condb();
     private int no=0;
@@ -39,7 +39,7 @@ public class DlgLabaRugi extends javax.swing.JDialog {
     public DlgLabaRugi(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{"","","",""}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -61,8 +61,8 @@ public class DlgLabaRugi extends javax.swing.JDialog {
                 column.setMaxWidth(0);
             }
         }
-        Table1.setDefaultRenderer(Object.class, new WarnaTable());       
-     
+        Table1.setDefaultRenderer(Object.class, new WarnaTable());
+
         tabMode2=new DefaultTableModel(null,new Object[]{"","","",""}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -84,8 +84,8 @@ public class DlgLabaRugi extends javax.swing.JDialog {
                 column.setMaxWidth(0);
             }
         }
-        Table2.setDefaultRenderer(Object.class, new WarnaTable());  
-        
+        Table2.setDefaultRenderer(Object.class, new WarnaTable());
+
         tabMode3=new DefaultTableModel(null,new Object[]{"","","",""}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -107,9 +107,9 @@ public class DlgLabaRugi extends javax.swing.JDialog {
                 column.setMaxWidth(0);
             }
         }
-        Table3.setDefaultRenderer(Object.class, new WarnaTable());  
+        Table3.setDefaultRenderer(Object.class, new WarnaTable());
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -359,9 +359,9 @@ public class DlgLabaRugi extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 /*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
@@ -370,43 +370,43 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             Tgl1.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            
+
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
             no=0;
-            for(int i=0;i<row;i++){  
+            for(int i=0;i<row;i++){
                 Sequel.menyimpan("temporary","'"+no+"','"+
                                 tabMode.getValueAt(i,0).toString()+"','"+
                                 tabMode.getValueAt(i,1).toString()+"','"+
-                                tabMode.getValueAt(i,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan"); 
+                                tabMode.getValueAt(i,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
                 no++;
             }
             no++;
             int row2=tabMode2.getRowCount();
-            for(int i=0;i<row2;i++){  
+            for(int i=0;i<row2;i++){
                 Sequel.menyimpan("temporary","'"+no+"','"+
                                 tabMode2.getValueAt(i,0).toString()+"','"+
                                 tabMode2.getValueAt(i,1).toString()+"','"+
-                                tabMode2.getValueAt(i,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan"); 
+                                tabMode2.getValueAt(i,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
                 no++;
             }
             no++;
             int row3=tabMode3.getRowCount();
-            for(int i=0;i<row3;i++){  
+            for(int i=0;i<row3;i++){
                 Sequel.menyimpan("temporary","'"+no+"','"+
                                 tabMode3.getValueAt(i,0).toString()+"','"+
                                 tabMode3.getValueAt(i,1).toString()+"','"+
-                                tabMode3.getValueAt(i,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan"); 
+                                tabMode3.getValueAt(i,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
                 no++;
             }
-            
-            Map<String, Object> param = new HashMap<>();    
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
+            param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabaRugi.jasper","report","::[ Laporan Keuangan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
@@ -448,7 +448,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_formWindowOpened
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
-        
+
     }//GEN-LAST:event_TabRawatMouseClicked
 
     private void RiwayatTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RiwayatTransaksiActionPerformed
@@ -493,7 +493,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     this.setCursor(Cursor.getDefaultCursor());
                 }else{
                     JOptionPane.showMessageDialog(null,"Maaf, pilih dulu data yang mau ditampilkan riwayat transaksinya.\nKlik data pada table untuk memilih...!!!!");
-                }   break;   
+                }   break;
             default:
                 break;
         }
@@ -541,7 +541,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.ScrollPane scrollPane3;
     // End of variables declaration//GEN-END:variables
 
-    
+
     private void prosesCari(){
         String[] data = {"","",""};
         pendapatan=0;biaya=0;modal=0;aktiva=0;pasiva=0;
@@ -2013,13 +2013,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             System.out.println("Notifikasi : "+e);
         }
     }
-    
-    
+
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getkeuangan());
         RiwayatTransaksi.setEnabled(akses.getbuku_besar());
     }
-     
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2045,7 +2045,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -28,12 +28,12 @@
 	<queryString>
 		<![CDATA[select satu_sehat_mapping_lokasi_ranap.kd_kamar,bangsal.nm_bangsal,satu_sehat_mapping_lokasi_ranap.id_lokasi_satusehat,
                    satu_sehat_mapping_lokasi_ranap.longitude,satu_sehat_mapping_lokasi_ranap.latitude,satu_sehat_mapping_lokasi_ranap.altittude,
-                   satu_sehat_mapping_departemen.dep_id,departemen.nama,satu_sehat_mapping_lokasi_ranap.id_organisasi_satusehat 
-                   from satu_sehat_mapping_lokasi_ranap inner join kamar on satu_sehat_mapping_lokasi_ranap.kd_kamar=kamar.kd_kamar 
-                   inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal inner join satu_sehat_mapping_departemen 
-                   on satu_sehat_mapping_lokasi_ranap.id_organisasi_satusehat=satu_sehat_mapping_departemen.id_organisasi_satusehat 
+                   satu_sehat_mapping_departemen.dep_id,departemen.nama,satu_sehat_mapping_lokasi_ranap.id_organisasi_satusehat
+                   from satu_sehat_mapping_lokasi_ranap inner join kamar on satu_sehat_mapping_lokasi_ranap.kd_kamar=kamar.kd_kamar
+                   inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal inner join satu_sehat_mapping_departemen
+                   on satu_sehat_mapping_lokasi_ranap.id_organisasi_satusehat=satu_sehat_mapping_departemen.id_organisasi_satusehat
                    inner join departemen on satu_sehat_mapping_departemen.dep_id=departemen.dep_id
-                   where satu_sehat_mapping_departemen.dep_id like $P{parameter}  or departemen.nama like $P{parameter}  or 
+                   where satu_sehat_mapping_departemen.dep_id like $P{parameter}  or departemen.nama like $P{parameter}  or
                    bangsal.nm_bangsal like $P{parameter}  or satu_sehat_mapping_lokasi_ranap.kd_kamar like $P{parameter}  order by departemen.nama]]>
 	</queryString>
 	<field name="kd_kamar" class="java.lang.String">

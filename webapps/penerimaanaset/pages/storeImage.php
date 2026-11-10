@@ -1,11 +1,11 @@
 <?php
     require_once('../../conf/conf.php');
     session_start();
-    
+
     if(file_exists(host()."/webapps/penerimaanaset/pages/upload/".$_SESSION["nofaktur"].".jpeg")){
         @unlink(host()."/webapps/penerimaanaset/pages/upload/".$_SESSION["nofaktur"].".jpeg");
     }
-    
+
     $img            = $_POST["image"];
     $folderPath     = "upload/";
     $image_parts    = explode(";base64,", $img);

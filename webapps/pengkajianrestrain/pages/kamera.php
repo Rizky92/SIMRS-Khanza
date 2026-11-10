@@ -2,16 +2,16 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $namars        = getOne("select setting.nama_instansi from setting");
     $norawat       = "";
-    
-    $_sql          = "select * from antripengkajianrestrain" ;  
+
+    $_sql          = "select * from antripengkajianrestrain" ;
     $hasil         = bukaquery2($_sql);
     while ($data = mysqli_fetch_array ($hasil)){
         $norawat      = $data['no_rawat'];
     }
-    
+
     $no_rkm_medis = "";
     $nm_pasien    = "";
     $jk           = "";
@@ -19,14 +19,14 @@
     $tgl_lahir    = "";
     $alamat       = "";
     $no_tlp       = "";
-    
+
     $_sql2  = "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','LAKI-LAKI','PEREMPUAN') as jk,
-               pasien.umur,DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, 
-               pasien.no_tlp from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+               pasien.umur,DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,
+               pasien.no_tlp from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
-               inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
+               inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
                inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
-               where reg_periksa.no_rawat='".$norawat."'" ;  
+               where reg_periksa.no_rawat='".$norawat."'" ;
     $hasil2 = bukaquery2($_sql2);
     while ($data2  = mysqli_fetch_array ($hasil2)){
         $no_rkm_medis = $data2['no_rkm_medis'];
@@ -37,49 +37,49 @@
         $alamat       = $data2['alamat'];
         $no_tlp       = $data2['no_tlp'];
     }
-    
+
     $tanggal                    = "";
-    $gcs                        = "";    
-    $refleka_cahaya_ka          = "";    
-    $refleka_cahaya_ki          = "";    
-    $ukuran_pupil_ka            = "";    
-    $ukuran_pupil_ki            = "";    
-    $td                         = "";    
-    $suhu                       = "";    
-    $rr                         = "";    
-    $nadi                       = "";    
-    $hasil_observasi            = "";    
-    $pertimbangan_klinis        = "";    
-    $restrain_non_farmakologi   = "";    
-    $restrain_non_farmakologi_keterangan = "";    
-    $restrain_farmakologi       = "";    
-    $sudah_dijelaskan_keluarga  = "";    
+    $gcs                        = "";
+    $refleka_cahaya_ka          = "";
+    $refleka_cahaya_ki          = "";
+    $ukuran_pupil_ka            = "";
+    $ukuran_pupil_ki            = "";
+    $td                         = "";
+    $suhu                       = "";
+    $rr                         = "";
+    $nadi                       = "";
+    $hasil_observasi            = "";
+    $pertimbangan_klinis        = "";
+    $restrain_non_farmakologi   = "";
+    $restrain_non_farmakologi_keterangan = "";
+    $restrain_farmakologi       = "";
+    $sudah_dijelaskan_keluarga  = "";
     $keluarga_yang_menyetujui   ="";
-    
+
     $_sql2  = "select DATE_FORMAT(pengkajian_restrain.tanggal,'%d-%m-%Y %H:%i:%s') as tanggal,pengkajian_restrain.gcs,pengkajian_restrain.refleka_cahaya_ka,
                pengkajian_restrain.refleka_cahaya_ki,pengkajian_restrain.ukuran_pupil_ka,pengkajian_restrain.ukuran_pupil_ki,pengkajian_restrain.td,
                pengkajian_restrain.suhu,pengkajian_restrain.rr,pengkajian_restrain.nadi,pengkajian_restrain.hasil_observasi,
                pengkajian_restrain.pertimbangan_klinis,pengkajian_restrain.restrain_non_farmakologi,pengkajian_restrain.restrain_non_farmakologi_keterangan,
                pengkajian_restrain.restrain_farmakologi,pengkajian_restrain.sudah_dijelaskan_keluarga,pengkajian_restrain.keluarga_yang_menyetujui
-               from pengkajian_restrain where pengkajian_restrain.no_rawat='$norawat'" ;  
+               from pengkajian_restrain where pengkajian_restrain.no_rawat='$norawat'" ;
     $hasil2 = bukaquery2($_sql2);
     while ($data2  = mysqli_fetch_array ($hasil2)){
         $tanggal                    = $data2['tanggal'];
-        $gcs                        = $data2['gcs'];    
-        $refleka_cahaya_ka          = $data2['refleka_cahaya_ka'];    
-        $refleka_cahaya_ki          = $data2['refleka_cahaya_ki'];    
-        $ukuran_pupil_ka            = $data2['ukuran_pupil_ka'];    
-        $ukuran_pupil_ki            = $data2['ukuran_pupil_ki'];    
-        $td                         = $data2['td'];    
-        $suhu                       = $data2['suhu'];    
-        $rr                         = $data2['rr'];    
-        $nadi                       = $data2['nadi'];    
-        $hasil_observasi            = $data2['hasil_observasi'];    
-        $pertimbangan_klinis        = $data2['pertimbangan_klinis'];    
-        $restrain_non_farmakologi   = $data2['restrain_non_farmakologi'];    
-        $restrain_non_farmakologi_keterangan = $data2['restrain_non_farmakologi_keterangan'];    
-        $restrain_farmakologi       = $data2['restrain_farmakologi'];    
-        $sudah_dijelaskan_keluarga  = $data2['sudah_dijelaskan_keluarga'];    
+        $gcs                        = $data2['gcs'];
+        $refleka_cahaya_ka          = $data2['refleka_cahaya_ka'];
+        $refleka_cahaya_ki          = $data2['refleka_cahaya_ki'];
+        $ukuran_pupil_ka            = $data2['ukuran_pupil_ka'];
+        $ukuran_pupil_ki            = $data2['ukuran_pupil_ki'];
+        $td                         = $data2['td'];
+        $suhu                       = $data2['suhu'];
+        $rr                         = $data2['rr'];
+        $nadi                       = $data2['nadi'];
+        $hasil_observasi            = $data2['hasil_observasi'];
+        $pertimbangan_klinis        = $data2['pertimbangan_klinis'];
+        $restrain_non_farmakologi   = $data2['restrain_non_farmakologi'];
+        $restrain_non_farmakologi_keterangan = $data2['restrain_non_farmakologi_keterangan'];
+        $restrain_farmakologi       = $data2['restrain_farmakologi'];
+        $sudah_dijelaskan_keluarga  = $data2['sudah_dijelaskan_keluarga'];
         $keluarga_yang_menyetujui   = $data2['keluarga_yang_menyetujui'];
     }
 ?>
@@ -102,7 +102,7 @@
         <form method="POST" action="pages/storeImage.php" onsubmit="return validasiIsi();" enctype=multipart/form-data>
             <input type="hidden" name="norawat" value="<?=$norawat;?>">
             <h7 class="text-dark">
-                Terhadap Pasien : 
+                Terhadap Pasien :
             </h7>
             <table class="default" width="98%" border="0" align="center" cellpadding="3px" cellspacing="0px">
                 <tr class="text-dark">
@@ -124,7 +124,7 @@
             </table>
             <br/>
             <h7 class="text-dark">
-                Pengkajian Restrain : 
+                Pengkajian Restrain :
             </h7>
             <table class="default" width="98%" align="center" cellpadding="3px" cellspacing="0px">
                 <tr class="text-dark">
@@ -210,7 +210,7 @@
             </div>
         </form>
     </div>
-    
+
     <script language="JavaScript">
         Webcam.set({
             width: 490,
@@ -230,4 +230,3 @@
     </script>
 </body>
 </html>
-

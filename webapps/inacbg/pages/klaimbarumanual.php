@@ -4,7 +4,7 @@
     }
 ?>
 <div id="post">
-    <div class="entry">   
+    <div class="entry">
 	<form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
                 echo "";
@@ -13,7 +13,7 @@
                 $tanggalawal    = validTeks4((isset($_GET['tanggalawal'])?$_GET['tanggalawal']:NULL),2);
                 $tahunakhir     = validTeks4((isset($_GET['tahunakhir'])?$_GET['tahunakhir']:NULL),4);
                 $bulanakhir     = validTeks4((isset($_GET['bulanakhir'])?$_GET['bulanakhir']:NULL),2);
-                $tanggalakhir   = validTeks4((isset($_GET['tanggalakhir'])?$_GET['tanggalakhir']:NULL),2);  
+                $tanggalakhir   = validTeks4((isset($_GET['tanggalakhir'])?$_GET['tanggalakhir']:NULL),2);
                 $action         = validTeks(isset($_GET['action'])?$_GET['action']:NULL);
                 $no_sep         = validTeks4((isset($_GET['no_sep'])?$_GET['no_sep']:NULL),30);
                 $norawat        = validTeks4((isset($_GET['norawat'])?$_GET['norawat']:NULL),20);
@@ -25,7 +25,7 @@
         <div style="width: 100%; height: 85%; overflow: auto;">
         <?php
             $BtnCari  = isset($_POST['BtnCari'])?$_POST['BtnCari']:NULL;
-            if (isset($BtnCari)) {  
+            if (isset($BtnCari)) {
                     $keyword        =isset($_POST['keyword'])?trim($_POST['keyword']):NULL;
                     $keyword        = validTeks4($keyword,20);
                     $tahunawal      = validTeks4(trim($_POST['tahunawal']),4);
@@ -34,8 +34,8 @@
                     $tahunakhir     = validTeks4(trim($_POST['tahunakhir']),4);
                     $bulanakhir     = validTeks4(trim($_POST['bulanakhir']),2);
                     $tanggalakhir   = validTeks4(trim($_POST['tanggalakhir']),2);
-                    $codernik       = validTeks4(trim($_POST['codernik']),30);      
-                    $statuskirim    = validTeks((str_replace("_"," ",isset($_POST['statuskirim']))?str_replace("_"," ",trim($_POST['statuskirim'])):NULL),40);          
+                    $codernik       = validTeks4(trim($_POST['codernik']),30);
+                    $statuskirim    = validTeks((str_replace("_"," ",isset($_POST['statuskirim']))?str_replace("_"," ",trim($_POST['statuskirim'])):NULL),40);
             }
             if(empty($tahunawal)){
                 $tahunawal=date('Y');
@@ -61,30 +61,30 @@
                     if(bridging_sep.jnspelayanan='1','1. Rawat Inap','2. Rawat Jalan') as jenispelayanan,bridging_sep.catatan,bridging_sep.diagawal,
                     bridging_sep.nmdiagnosaawal,bridging_sep.kdpolitujuan,bridging_sep.nmpolitujuan,
                     if(bridging_sep.klsrawat='1','1. Kelas 1',if(bridging_sep.klsrawat='2','2. Kelas 2','3. Kelas 3')) as kelas,
-                    if(bridging_sep.lakalantas='0','2. Bukan Kasus Kecelakaan','1. Kasus Kecelakaan') as lakalantas,bridging_sep.user, 
-                    bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu,bridging_sep.tglpulang 
+                    if(bridging_sep.lakalantas='0','2. Bukan Kasus Kecelakaan','1. Kasus Kecelakaan') as lakalantas,bridging_sep.user,
+                    bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu,bridging_sep.tglpulang
                     from bridging_sep inner join reg_periksa on reg_periksa.no_rawat=bridging_sep.no_rawat
-                    inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter where 
-                    bridging_sep.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' ". 
-                    (!empty($keyword)?"and (bridging_sep.no_sep like '%".$keyword."%' or bridging_sep.nomr like '%".$keyword."%' or bridging_sep.nama_pasien like '%".$keyword."%' or 
+                    inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter where
+                    bridging_sep.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' ".
+                    (!empty($keyword)?"and (bridging_sep.no_sep like '%".$keyword."%' or bridging_sep.nomr like '%".$keyword."%' or bridging_sep.nama_pasien like '%".$keyword."%' or
                     bridging_sep.no_rawat like '%".$keyword."%' or bridging_sep.no_kartu like '%".$keyword."%') ":"")."order by bridging_sep.tglsep";
             $hasil=bukaquery($_sql);
-            
+
             $_sqlinternal = "select bridging_sep_internal.no_sep, bridging_sep_internal.no_rawat,bridging_sep_internal.nomr,bridging_sep_internal.nama_pasien,
                     bridging_sep_internal.tglsep,bridging_sep_internal.tglrujukan,bridging_sep_internal.no_rujukan,bridging_sep_internal.kdppkrujukan,
                     bridging_sep_internal.nmppkrujukan,bridging_sep_internal.kdppkpelayanan,bridging_sep_internal.nmppkpelayanan,reg_periksa.kd_dokter,dokter.nm_dokter,
                     if(bridging_sep_internal.jnspelayanan='1','1. Rawat Inap','2. Rawat Jalan') as jenispelayanan,bridging_sep_internal.catatan,bridging_sep_internal.diagawal,
                     bridging_sep_internal.nmdiagnosaawal,bridging_sep_internal.kdpolitujuan,bridging_sep_internal.nmpolitujuan,
                     if(bridging_sep_internal.klsrawat='1','1. Kelas 1',if(bridging_sep_internal.klsrawat='2','2. Kelas 2','3. Kelas 3')) as kelas,
-                    if(bridging_sep_internal.lakalantas='0','2. Bukan Kasus Kecelakaan','1. Kasus Kecelakaan') as lakalantas,bridging_sep_internal.user, 
-                    bridging_sep_internal.tanggal_lahir,bridging_sep_internal.peserta,bridging_sep_internal.jkel,bridging_sep_internal.no_kartu,bridging_sep_internal.tglpulang 
+                    if(bridging_sep_internal.lakalantas='0','2. Bukan Kasus Kecelakaan','1. Kasus Kecelakaan') as lakalantas,bridging_sep_internal.user,
+                    bridging_sep_internal.tanggal_lahir,bridging_sep_internal.peserta,bridging_sep_internal.jkel,bridging_sep_internal.no_kartu,bridging_sep_internal.tglpulang
                     from bridging_sep_internal inner join reg_periksa on reg_periksa.no_rawat=bridging_sep_internal.no_rawat
-                    inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter where 
-                    bridging_sep_internal.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and 
+                    inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter where
+                    bridging_sep_internal.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and
                     (bridging_sep_internal.no_sep like '%".$keyword."%' or bridging_sep_internal.nomr like '%".$keyword."%' or bridging_sep_internal.nama_pasien like '%".$keyword."%' or
                     bridging_sep_internal.no_rawat like '%".$keyword."%' or bridging_sep_internal.no_kartu like '%".$keyword."%') order by bridging_sep_internal.tglsep";
             $hasilinternal=bukaquery($_sqlinternal);
-            
+
             $jumlah=0;
             if((mysqli_num_rows($hasil)+mysqli_num_rows($hasilinternal))!=0) {
                 echo "<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
@@ -118,7 +118,7 @@
                                                 $penyakit=$barispenyakit["kd_penyakit"];
                                             }else{
                                                 $penyakit=$penyakit.", ".$barispenyakit["kd_penyakit"];
-                                            }                
+                                            }
                                             $a++;
                                         }
                                         echo $penyakit."<br>";
@@ -131,9 +131,9 @@
                                                 $prosedur=$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
                                             }else{
                                                 $prosedur=$prosedur.", ".$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
-                                            }                
+                                            }
                                             $a++;
-                                        } 
+                                        }
                                         echo $prosedur;
                                  echo  "</td>
                                         <td valign='middle' align='center'>
@@ -145,7 +145,7 @@
                                  $jumlah++;
                             }
                         }
-                        
+
                         while($baris = mysqli_fetch_array($hasilinternal)) {
                             $statuskirim =str_replace(" ","_",$statuskirim)?str_replace(" ","_",$statuskirim):NULL;
                             $status="<a href='?act=KlaimBaruManual&action=KirimInternal&no_sep=".$baris["no_sep"]."&tahunawal=$tahunawal&bulanawal=$bulanawal&tanggalawal=$tanggalawal&tahunakhir=$tahunakhir&bulanakhir=$bulanakhir&tanggalakhir=$tanggalakhir&codernik=$codernik&statuskirim=$statuskirim'>[Kirim]</a>";
@@ -169,7 +169,7 @@
                                                 $penyakit=$barispenyakit["kd_penyakit"];
                                             }else{
                                                 $penyakit=$penyakit.", ".$barispenyakit["kd_penyakit"];
-                                            }                
+                                            }
                                             $a++;
                                         }
                                         echo $penyakit."<br>";
@@ -182,9 +182,9 @@
                                                 $prosedur=$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
                                             }else{
                                                 $prosedur=$prosedur.", ".$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
-                                            }                
+                                            }
                                             $a++;
-                                        } 
+                                        }
                                         echo $prosedur;
                                  echo  "</td>
                                         <td valign='middle' align='center'>
@@ -196,7 +196,7 @@
                                      $jumlah++;
                             }
                         }
-                echo "</table>";           
+                echo "</table>";
             }else{
                 echo "<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                         <tr class='head2'>
@@ -207,7 +207,7 @@
                             <td width='10%'><div align='center'>Status Data</div></td>
                         </tr>
                        </table>";
-            }         
+            }
 
             if($action=="Kirim") {
                 $_sql   = "select bridging_sep.no_kartu,bridging_sep.no_sep,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tanggal_lahir,bridging_sep.jkel,bridging_sep.tglsep,bridging_sep.tglpulang,bridging_sep.jnspelayanan,bridging_sep.klsrawat,bridging_sep.no_rawat,bridging_sep.asal_rujukan,bridging_sep.klsnaik from bridging_sep where bridging_sep.no_sep='".$no_sep."'";
@@ -228,9 +228,9 @@
                         $prosedur=$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
                     }else{
                         $prosedur=$prosedur."#".$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
-                    }                
+                    }
                     $a++;
-                }            
+                }
 
                 $penyakit="";
                 $a=1;
@@ -240,10 +240,10 @@
                         $penyakit=$barispenyakit["kd_penyakit"];
                     }else{
                         $penyakit=$penyakit."#".$barispenyakit["kd_penyakit"];
-                    }                
+                    }
                     $a++;
-                } 
-                
+                }
+
                 $procedureinacbg="";
                 $a=1;
                 $hasilprosedur=bukaquery("select prosedur_pasien.kode,prosedur_pasien.jumlah from prosedur_pasien inner join icd9 on prosedur_pasien.kode=icd9.kode where icd9.im='0' and prosedur_pasien.no_rawat='".$baris["no_rawat"]."' order by prosedur_pasien.prioritas asc");
@@ -252,9 +252,9 @@
                         $procedureinacbg=$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
                     }else{
                         $procedureinacbg=$procedureinacbg."#".$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
-                    }                
+                    }
                     $a++;
-                }            
+                }
 
                 $diagnosainacbg="";
                 $a=1;
@@ -264,9 +264,9 @@
                         $diagnosainacbg=$barispenyakit["kd_penyakit"];
                     }else{
                         $diagnosainacbg=$diagnosainacbg."#".$barispenyakit["kd_penyakit"];
-                    }                
+                    }
                     $a++;
-                } 
+                }
 
                 $discharge_status="5";
                 if(getOne("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.stts_pulang='Sembuh' and kamar_inap.no_rawat='".$baris["no_rawat"]."'")>0){
@@ -292,7 +292,7 @@
                 }else{
                     $discharge_status="1";
                 }
-                
+
                 $nm_dokter2="";
                 $a=1;
                 $hasildokter=bukaquery("select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='".$baris["no_rawat"]."'");
@@ -301,9 +301,9 @@
                         $nm_dokter2=$barisdokter["nm_dokter"];
                     }else{
                         $nm_dokter2=$nm_dokter2."#".$barisdokter["nm_dokter"];
-                    }                
+                    }
                     $a++;
-                } 
+                }
 
                 $nm_dokter    = "";
                 if(!empty($nm_dokter2)){
@@ -321,7 +321,7 @@
                 }else{
                     $asalrujukan="other";
                 }
-                
+
                 $upgrade_class_ind="0";
                 if(!empty($naikkelas)){
                     $upgrade_class_ind="1";
@@ -335,11 +335,11 @@
                         $naikkelas="kelas_2";
                     }else{
                         $naikkelas="";
-                    }   
+                    }
                 }else{
                     $naikkelas="";
                 }
-        
+
                 $sistole="120";
                 $diastole="90";
                 if($baris["jnspelayanan"]=="1"){
@@ -384,9 +384,9 @@
                         $prosedur=$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
                     }else{
                         $prosedur=$prosedur."#".$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
-                    }                
+                    }
                     $a++;
-                }            
+                }
 
                 $penyakit="";
                 $a=1;
@@ -396,10 +396,10 @@
                         $penyakit=$barispenyakit["kd_penyakit"];
                     }else{
                         $penyakit=$penyakit."#".$barispenyakit["kd_penyakit"];
-                    }                
+                    }
                     $a++;
-                } 
-                
+                }
+
                 $procedureinacbg="";
                 $a=1;
                 $hasilprosedur=bukaquery("select prosedur_pasien.kode,prosedur_pasien.jumlah from prosedur_pasien inner join icd9 on prosedur_pasien.kode=icd9.kode where icd9.im='0' and prosedur_pasien.no_rawat='".$baris["no_rawat"]."' order by prosedur_pasien.prioritas asc");
@@ -408,9 +408,9 @@
                         $procedureinacbg=$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
                     }else{
                         $procedureinacbg=$procedureinacbg."#".$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
-                    }                
+                    }
                     $a++;
-                }            
+                }
 
                 $diagnosainacbg="";
                 $a=1;
@@ -420,9 +420,9 @@
                         $diagnosainacbg=$barispenyakit["kd_penyakit"];
                     }else{
                         $diagnosainacbg=$diagnosainacbg."#".$barispenyakit["kd_penyakit"];
-                    }                
+                    }
                     $a++;
-                } 
+                }
 
                 $discharge_status="5";
                 if(getOne("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.stts_pulang='Sembuh' and kamar_inap.no_rawat='".$baris["no_rawat"]."'")>0){
@@ -458,9 +458,9 @@
                         $nm_dokter2=$barisdokter["nm_dokter"];
                     }else{
                         $nm_dokter2=$nm_dokter2."#".$barisdokter["nm_dokter"];
-                    }                
+                    }
                     $a++;
-                } 
+                }
 
                 $nm_dokter    = "";
                 if(!empty($nm_dokter2)){
@@ -478,7 +478,7 @@
                 }else{
                     $asalrujukan="other";
                 }
-                
+
                 $upgrade_class_ind="0";
                 if(!empty($naikkelas)){
                     $upgrade_class_ind="1";
@@ -492,11 +492,11 @@
                         $naikkelas="Kelas 2";
                     }else{
                         $naikkelas="";
-                    }   
+                    }
                 }else{
                     $naikkelas="";
                 }
-                
+
                 $sistole="120";
                 $diastole="90";
                 if($baris["jnspelayanan"]=="1"){
@@ -536,30 +536,30 @@
         ?>
         </div>
             <table width="100%" align="center" border="0" align="center" cellpadding="0" cellspacing="0">
-                <tr class="head3">					
+                <tr class="head3">
                     <td width="100%">
-                        Periode : 
+                        Periode :
                         <select name="tanggalawal" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi3'));" id="TxtIsi3">
                              <?php
                                 if(!$tanggalawal==""){
                                     echo "<option id='TxtIsi3' value=$tanggalawal>$tanggalawal</option>";
-                                }                                    
+                                }
                                 loadTglnow();
                              ?>
-                        </select>                        
+                        </select>
                         <select name="bulanawal" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi2'));" id="TxtIsi2">
                              <?php
                                 if(!$bulanawal==""){
                                     echo "<option id='TxtIsi2' value=$bulanawal>$bulanawal</option>";
-                                }                                    
+                                }
                                 loadBlnnow();
                              ?>
-                        </select>                        
+                        </select>
                         <select name="tahunawal" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" id="TxtIsi1">
                              <?php
                                 if(!$tahunawal==""){
                                     echo "<option id='TxtIsi1' value=$tahunawal>$tahunawal</option>";
-                                }                                    
+                                }
                                 loadThnnow();
                              ?>
                         </select>
@@ -568,15 +568,15 @@
                              <?php
                                 if(!$tanggalakhir==""){
                                     echo "<option id='TxtIsi6' value=$tanggalakhir>$tanggalakhir</option>";
-                                }                                    
+                                }
                                 loadTglnow();
                              ?>
-                        </select>                        
+                        </select>
                         <select name="bulanakhir" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi5'));" id="TxtIsi5">
                              <?php
                                 if(!$bulanakhir==""){
                                     echo "<option id='TxtIsi5' value=$bulanakhir>$bulanakhir</option>";
-                                }                                    
+                                }
                                 loadBlnnow();
                              ?>
                         </select>
@@ -584,7 +584,7 @@
                              <?php
                                 if(!$tahunakhir==""){
                                     echo "<option id='TxtIsi4' value=$tahunakhir>$tahunakhir</option>";
-                                }                                    
+                                }
                                 loadThnnow();
                              ?>
                         </select>
@@ -602,7 +602,7 @@
                         </select>
                     </td>
                 </tr>
-                <tr class="head3">					
+                <tr class="head3">
                     <td width="100%">
                         Keyword : <input name="keyword" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" type=text id="TxtIsi1" value="<?php echo $keyword;?>" size="47" maxlength="20" pattern="[a-zA-Z0-9, ./@_]{1,20}" title=" a-zA-Z0-9, ./@_ (Maksimal 20 karakter)" autocomplete="off" autocomplete="off" autofocus />
                         <input name=BtnCari type=submit class="button" value="&nbsp;&nbsp;Cari&nbsp;&nbsp;" />&nbsp;&nbsp;&nbsp;

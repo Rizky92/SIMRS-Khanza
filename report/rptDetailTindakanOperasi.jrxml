@@ -16,55 +16,55 @@
 	<parameter name="tanggal2" class="java.lang.String"/>
 	<parameter name="cari" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select operasi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, 
+		<![CDATA[select operasi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,
 operasi.kode_paket,paket_operasi.nm_perawatan,operasi.tgl_operasi,
 penjab.png_jawab,if(operasi.status='Ralan',(select nm_poli from poliklinik where poliklinik.kd_poli=reg_periksa.kd_poli),
-(select bangsal.nm_bangsal from kamar_inap inner join kamar inner join bangsal on kamar_inap.kd_kamar=kamar.kd_kamar 
+(select bangsal.nm_bangsal from kamar_inap inner join kamar inner join bangsal on kamar_inap.kd_kamar=kamar.kd_kamar
 and kamar.kd_bangsal=bangsal.kd_bangsal where kamar_inap.no_rawat=operasi.no_rawat limit 1 )) as ruangan,
 (select nm_dokter from dokter where dokter.kd_dokter=operasi.operator1) as operator1,operasi.biayaoperator1,
-(select nm_dokter from dokter where dokter.kd_dokter=operasi.operator2) as operator2,operasi.biayaoperator2, 
+(select nm_dokter from dokter where dokter.kd_dokter=operasi.operator2) as operator2,operasi.biayaoperator2,
 (select nm_dokter from dokter where dokter.kd_dokter=operasi.operator3) as operator3,operasi.biayaoperator3,
-(select nama from petugas where petugas.nip=operasi.asisten_operator1) as asisten_operator1,operasi.biayaasisten_operator1, 
-(select nama from petugas where petugas.nip=operasi.asisten_operator2) as asisten_operator2,operasi.biayaasisten_operator2, 
-(select nama from petugas where petugas.nip=operasi.asisten_operator3) as asisten_operator3,operasi.biayaasisten_operator3, 
+(select nama from petugas where petugas.nip=operasi.asisten_operator1) as asisten_operator1,operasi.biayaasisten_operator1,
+(select nama from petugas where petugas.nip=operasi.asisten_operator2) as asisten_operator2,operasi.biayaasisten_operator2,
+(select nama from petugas where petugas.nip=operasi.asisten_operator3) as asisten_operator3,operasi.biayaasisten_operator3,
 (select nama from petugas where petugas.nip=operasi.instrumen) as instrumen,operasi.biayainstrumen,
-(select nm_dokter from dokter where dokter.kd_dokter=operasi.dokter_anak) as dokter_anak,operasi.biayadokter_anak, 
+(select nm_dokter from dokter where dokter.kd_dokter=operasi.dokter_anak) as dokter_anak,operasi.biayadokter_anak,
 (select nama from petugas where petugas.nip=operasi.perawaat_resusitas) as perawaat_resusitas,operasi.biayaperawaat_resusitas,
-(select nm_dokter from dokter where dokter.kd_dokter=operasi.dokter_anestesi) as dokter_anestesi,operasi.biayadokter_anestesi, 
+(select nm_dokter from dokter where dokter.kd_dokter=operasi.dokter_anestesi) as dokter_anestesi,operasi.biayadokter_anestesi,
 (select nama from petugas where petugas.nip=operasi.asisten_anestesi) as asisten_anestesi,operasi.biayaasisten_anestesi,
 (select nama from petugas where petugas.nip=operasi.asisten_anestesi2) as asisten_anestesi2,operasi.biayaasisten_anestesi2,
-(select nama from petugas where petugas.nip=operasi.bidan) as bidan,operasi.biayabidan, 
+(select nama from petugas where petugas.nip=operasi.bidan) as bidan,operasi.biayabidan,
 (select nama from petugas where petugas.nip=operasi.bidan2) as bidan2,operasi.biayabidan2,
 (select nama from petugas where petugas.nip=operasi.bidan3) as bidan3,operasi.biayabidan3,
-(select nama from petugas where petugas.nip=operasi.perawat_luar) as perawat_luar,operasi.biayaperawat_luar, 
-(select nama from petugas where petugas.nip=operasi.omloop) as omloop,operasi.biaya_omloop, 
-(select nama from petugas where petugas.nip=operasi.omloop2) as omloop2,operasi.biaya_omloop2, 
+(select nama from petugas where petugas.nip=operasi.perawat_luar) as perawat_luar,operasi.biayaperawat_luar,
+(select nama from petugas where petugas.nip=operasi.omloop) as omloop,operasi.biaya_omloop,
+(select nama from petugas where petugas.nip=operasi.omloop2) as omloop2,operasi.biaya_omloop2,
 (select nama from petugas where petugas.nip=operasi.omloop3) as omloop3,operasi.biaya_omloop3,
-(select nama from petugas where petugas.nip=operasi.omloop4) as omloop4,operasi.biaya_omloop4, 
+(select nama from petugas where petugas.nip=operasi.omloop4) as omloop4,operasi.biaya_omloop4,
 (select nama from petugas where petugas.nip=operasi.omloop5) as omloop5,operasi.biaya_omloop5,
 (select nm_dokter from dokter where dokter.kd_dokter=operasi.dokter_pjanak) as dokter_pjanak,operasi.biaya_dokter_pjanak,
 (select nm_dokter from dokter where dokter.kd_dokter=operasi.dokter_umum) as dokter_umum,operasi.biaya_dokter_umum,
-operasi.biayaalat,operasi.biayasewaok,operasi.akomodasi,operasi.bagian_rs,operasi.biayasarpras, (operasi.biayaoperator1+operasi.biayaoperator2+operasi.biayaoperator3+operasi.biayaasisten_operator1+operasi.biayaasisten_operator2+operasi.biayaasisten_operator3+operasi.biayainstrumen+operasi.biayadokter_anak+operasi.biayaperawaat_resusitas+operasi.biayadokter_anestesi+operasi.biayaasisten_anestesi+operasi.biayaasisten_anestesi2+operasi.biayabidan+operasi.biayabidan2+operasi.biayabidan3+operasi.biayaperawat_luar+operasi.biaya_omloop+operasi.biaya_omloop2+operasi.biaya_omloop3+operasi.biaya_omloop4+operasi.biaya_omloop5+operasi.biaya_dokter_pjanak+operasi.biaya_dokter_umum+operasi.biayaalat+operasi.biayasewaok+operasi.akomodasi+operasi.bagian_rs+operasi.biayasarpras) as total 
-from operasi inner join reg_periksa inner join pasien 
+operasi.biayaalat,operasi.biayasewaok,operasi.akomodasi,operasi.bagian_rs,operasi.biayasarpras, (operasi.biayaoperator1+operasi.biayaoperator2+operasi.biayaoperator3+operasi.biayaasisten_operator1+operasi.biayaasisten_operator2+operasi.biayaasisten_operator3+operasi.biayainstrumen+operasi.biayadokter_anak+operasi.biayaperawaat_resusitas+operasi.biayadokter_anestesi+operasi.biayaasisten_anestesi+operasi.biayaasisten_anestesi2+operasi.biayabidan+operasi.biayabidan2+operasi.biayabidan3+operasi.biayaperawat_luar+operasi.biaya_omloop+operasi.biaya_omloop2+operasi.biaya_omloop3+operasi.biaya_omloop4+operasi.biaya_omloop5+operasi.biaya_dokter_pjanak+operasi.biaya_dokter_umum+operasi.biayaalat+operasi.biayasewaok+operasi.akomodasi+operasi.bagian_rs+operasi.biayasarpras) as total
+from operasi inner join reg_periksa inner join pasien
 inner join paket_operasi inner join penjab
 on operasi.no_rawat=reg_periksa.no_rawat and
-reg_periksa.no_rkm_medis=pasien.no_rkm_medis and 
-operasi.kode_paket=paket_operasi.kode_paket and 
-reg_periksa.kd_pj=penjab.kd_pj 
-where operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and operasi.no_rawat like $P{cari} or 
-operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and reg_periksa.no_rkm_medis like $P{cari} or 
-operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and pasien.nm_pasien like $P{cari} or 
-operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and operasi.kode_paket like $P{cari} or 
-operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and paket_operasi.nm_perawatan like $P{cari} or 
-operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and penjab.png_jawab like $P{cari} or 
-operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nm_dokter from dokter where dokter.kd_dokter=operasi.operator1) like $P{cari} or 
-operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nm_dokter from dokter where dokter.kd_dokter=operasi.operator2) like $P{cari} or 
-operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nm_dokter from dokter where dokter.kd_dokter=operasi.operator3) like $P{cari} or 
-operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nama from petugas where petugas.nip=operasi.asisten_operator1) like $P{cari} or 
-operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nama from petugas where petugas.nip=operasi.asisten_operator2) like $P{cari} or 
-operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nama from petugas where petugas.nip=operasi.asisten_operator3) like $P{cari} or 
-operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nama from petugas where petugas.nip=operasi.bidan) like $P{cari} or 
-operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nm_dokter from dokter where dokter.kd_dokter=operasi.dokter_anestesi) like $P{cari} 
+reg_periksa.no_rkm_medis=pasien.no_rkm_medis and
+operasi.kode_paket=paket_operasi.kode_paket and
+reg_periksa.kd_pj=penjab.kd_pj
+where operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and operasi.no_rawat like $P{cari} or
+operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and reg_periksa.no_rkm_medis like $P{cari} or
+operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and pasien.nm_pasien like $P{cari} or
+operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and operasi.kode_paket like $P{cari} or
+operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and paket_operasi.nm_perawatan like $P{cari} or
+operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and penjab.png_jawab like $P{cari} or
+operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nm_dokter from dokter where dokter.kd_dokter=operasi.operator1) like $P{cari} or
+operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nm_dokter from dokter where dokter.kd_dokter=operasi.operator2) like $P{cari} or
+operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nm_dokter from dokter where dokter.kd_dokter=operasi.operator3) like $P{cari} or
+operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nama from petugas where petugas.nip=operasi.asisten_operator1) like $P{cari} or
+operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nama from petugas where petugas.nip=operasi.asisten_operator2) like $P{cari} or
+operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nama from petugas where petugas.nip=operasi.asisten_operator3) like $P{cari} or
+operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nama from petugas where petugas.nip=operasi.bidan) like $P{cari} or
+operasi.tgl_operasi between $P{tanggal1} and $P{tanggal2} and (select nm_dokter from dokter where dokter.kd_dokter=operasi.dokter_anestesi) like $P{cari}
 order by operasi.no_rawat desc]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

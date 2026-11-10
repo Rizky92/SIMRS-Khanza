@@ -26,9 +26,9 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select ipsrspembelian.tgl_beli,ipsrspembelian.no_faktur,ipsrssuplier.nama_suplier,ipsrspembelian.nip,
-                petugas.nama,rekening.nm_rek,ipsrspembelian.tagihan from ipsrspembelian 
-                inner join ipsrssuplier on ipsrspembelian.kode_suplier=ipsrssuplier.kode_suplier 
-                inner join petugas on petugas.nip=ipsrspembelian.nip 
+                petugas.nama,rekening.nm_rek,ipsrspembelian.tagihan from ipsrspembelian
+                inner join ipsrssuplier on ipsrspembelian.kode_suplier=ipsrssuplier.kode_suplier
+                inner join petugas on petugas.nip=ipsrspembelian.nip
                 inner join rekening on rekening.kd_rek=ipsrspembelian.kd_rek]]>
 	</queryString>
 	<field name="tgl_beli" class="java.sql.Date">

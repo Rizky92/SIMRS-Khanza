@@ -11,7 +11,7 @@
                           <h2>Ketersediaan Stok Darah</h2>
                      </div>
                 </div>
-                       
+
                 <div class="col-md-12 col-sm-12">
                      <div class="news-thumb wow fadeInUp" data-wow-delay="0.3s">
                          <form id="cariKamar" name="frmCariDarah" method="post" action="" enctype=multipart/form-data>
@@ -32,7 +32,7 @@
                                    <th width="20%"><center>Resus</center></th>
                                    <th width="20%"><center>Jumlah</center></th>
                                </tr>
-                               <?php 
+                               <?php
                                   $darah      = trim(isset($_POST['darah']))?trim($_POST['darah']):NULL;
                                   $darah      = cleankar($darah);
                                   if(strlen($darah)>20){
@@ -49,7 +49,7 @@
                                         }
                                   }
                               ?>
-                           </table> 
+                           </table>
                          </div>
                      </div>
                 </div>

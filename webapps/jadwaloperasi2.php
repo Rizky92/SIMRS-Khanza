@@ -1,9 +1,9 @@
 <?php
  session_start();
  require_once('conf/conf.php');
- header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
- header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT"); 
- header("Cache-Control: no-store, no-cache, must-revalidate"); 
+ header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+ header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
+ header("Cache-Control: no-store, no-cache, must-revalidate");
  header("Cache-Control: post-check=0, pre-check=0", false);
  header("Pragma: no-cache"); // HTTP/1.0
  $tanggal= mktime(date("m"),date("d"),date("Y"));
@@ -41,7 +41,7 @@
      </noscript>
      <?php
 		$setting=  mysqli_fetch_array(bukaquery("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting"));
-		echo "   
+		echo "
 		   <table width='100%' align='center' border='0' class='tbl_form' cellspacing='0' cellpadding='0'>
 			  <tr>
 				<td  width='10%' align='right' valign='center'>
@@ -51,20 +51,20 @@
 				   <center>
 					  <font size='7' color='#AA00AA' face='Tahoma'>".$setting["nama_instansi"]."</font><br>
 					  <font size='5' color='#AA00AA' face='Tahoma'>
-						  ".$setting["alamat_instansi"].", ".$setting["kabupaten"].", ".$setting["propinsi"]."<br>   
-					  </font> 
+						  ".$setting["alamat_instansi"].", ".$setting["kabupaten"].", ".$setting["propinsi"]."<br>
+					  </font>
 					  <font size='5' color='#AAAA00' face='Tahoma' >".date("d-M-Y", $tanggal)."  ". $jam."</font>
 					  <br><br>
 				   </center>
-				</td>   
+				</td>
 				<td  width='10%' align='left'>
 					&nbsp;
-				</td>  
+				</td>
 				<td  width='10%' align='left' valign='top'>
 					<img width='180' height='130' src='header-kanan.jpg'/>
-				</td>                                                          
+				</td>
 			 </tr>
-		  </table> "; 
+		  </table> ";
 	?>
 	<table width='100%' bgcolor='FFFFFF' border='0' align='center' cellpadding='0' cellspacing='0'>
 	     <tr class='head5'>
@@ -83,15 +83,15 @@
               <td width='20%'><div align='center'><font size='5'><b>Operator</b></font></div></td>
          </tr>
 
-	<?php  
-	    
+	<?php
+
 		$_sql="select booking_operasi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,booking_operasi.tanggal,
                      booking_operasi.jam_mulai,booking_operasi.jam_selesai,booking_operasi.status,booking_operasi.kd_dokter,
                      dokter.nm_dokter,booking_operasi.kode_paket,paket_operasi.nm_perawatan,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) as umur,pasien.jk
-                     from booking_operasi inner join reg_periksa inner join pasien inner join paket_operasi inner join dokter 
-                     on booking_operasi.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                     and booking_operasi.kd_dokter=dokter.kd_dokter and booking_operasi.kode_paket=paket_operasi.kode_paket 
-                     where tanggal='".date("Y-m-d", $tanggal)."' order by booking_operasi.tanggal,booking_operasi.jam_mulai" ;  
+                     from booking_operasi inner join reg_periksa inner join pasien inner join paket_operasi inner join dokter
+                     on booking_operasi.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                     and booking_operasi.kd_dokter=dokter.kd_dokter and booking_operasi.kode_paket=paket_operasi.kode_paket
+                     where tanggal='".date("Y-m-d", $tanggal)."' order by booking_operasi.tanggal,booking_operasi.jam_mulai" ;
 		$hasil=bukaquery($_sql);
 
 		while ($data = mysqli_fetch_array ($hasil)){

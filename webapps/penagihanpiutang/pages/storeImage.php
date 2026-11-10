@@ -1,11 +1,11 @@
 <?php
     require_once('../../conf/conf.php');
     session_start();
-    
+
     if(file_exists(host()."/webapps/penagihanpiutang/pages/upload/".$_SESSION["notagihan"].".jpeg")){
         @unlink(host()."/webapps/penagihanpiutang/pages/upload/".$_SESSION["notagihan"].".jpeg");
     }
-    
+
     $img            = $_POST["image"];
     $folderPath     = "upload/";
     $image_parts    = explode(";base64,", $img);

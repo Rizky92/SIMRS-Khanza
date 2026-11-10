@@ -26,10 +26,10 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select pembelian.tgl_beli,pembelian.no_faktur,datasuplier.nama_suplier,pembelian.nip,
-                petugas.nama,rekening.nm_rek,pembelian.tagihan from pembelian 
-                inner join datasuplier on pembelian.kode_suplier=datasuplier.kode_suplier 
-                inner join petugas on petugas.nip=pembelian.nip 
-                inner join rekening on rekening.kd_rek=pembelian.kd_rek 
+                petugas.nama,rekening.nm_rek,pembelian.tagihan from pembelian
+                inner join datasuplier on pembelian.kode_suplier=datasuplier.kode_suplier
+                inner join petugas on petugas.nip=pembelian.nip
+                inner join rekening on rekening.kd_rek=pembelian.kd_rek
                 ]]>
 	</queryString>
 	<field name="tgl_beli" class="java.sql.Date">

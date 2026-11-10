@@ -18,5 +18,5 @@ public class KhanzaHMSAnjungan {
         DlgPilihPoli poli=new DlgPilihPoli(null, true);
         poli.setVisible(true);
     }
-    
+
 }

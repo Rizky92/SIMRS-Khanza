@@ -17,7 +17,7 @@ public class editorpane extends JEditorPane {
     private static final long serialVersionUID = 2L;
 
     static final Color AKSEN   = new Color(22, 160, 93);
-    static final Color GARIS   = new Color(239, 244, 234);   
+    static final Color GARIS   = new Color(239, 244, 234);
     static final Color TEKS    = new Color(50, 50, 50);
 
     private static final Border PADDING         = new EmptyBorder(6, 8, 6, 8);
@@ -27,7 +27,7 @@ public class editorpane extends JEditorPane {
     public editorpane() {
         super();
         setFont(new Font("Tahoma", Font.PLAIN, 11));
-        setForeground(TEKS);
+setForeground(TEKS);
         setBackground(Color.WHITE);
         setSelectionColor(new Color(0xCDEBDA));
         setSelectedTextColor(new Color(0x0E3B24));

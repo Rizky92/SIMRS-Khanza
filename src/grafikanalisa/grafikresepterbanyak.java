@@ -16,18 +16,16 @@ package grafikanalisa;
 
 
 import fungsi.koneksiDB;
-import java.awt.Font;
-
-import javax.swing.JPanel;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
@@ -54,9 +52,9 @@ public class grafikresepterbanyak extends JDialog {
       public grafikresepterbanyak(String title,String symbol) {
          setTitle(title);
          JPanel chartPanel = createDemoPanel(symbol);
-         
+
          chartPanel.setSize(screen.width,screen.height);
-         setContentPane(chartPanel);       
+         setContentPane(chartPanel);
          setModal(true);
          setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
          pack();
@@ -74,7 +72,7 @@ public class grafikresepterbanyak extends JDialog {
           DefaultCategoryDataset result = new DefaultCategoryDataset();
           String series1 = "Obat Resep";
           String series2 = "Nilai Barang(Rp)";
-          DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###"); 
+          DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");
 
             try {
                 Statement stat = koneksiDB.condb().createStatement();
@@ -198,4 +196,3 @@ public class grafikresepterbanyak extends JDialog {
 //
 //         }
 }
-

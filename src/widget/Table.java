@@ -27,13 +27,13 @@ import javax.swing.table.TableColumnModel;
 
 public class Table extends JTable {
     private static final long serialVersionUID = 3L;
-    static final Color AKSEN        = new Color(22, 160, 93);     
-    static final Color PILIH_PASIF  = new Color(220, 234, 226);   
-    static final Color LAPIS_CUSTOM = new Color(22, 160, 93, 28); 
+    static final Color AKSEN        = new Color(22, 160, 93);
+    static final Color PILIH_PASIF  = new Color(220, 234, 226);
+    static final Color LAPIS_CUSTOM = new Color(22, 160, 93, 28);
     static final Color TEKS         = new Color(50, 50, 50);
-    static final Color GARIS_BARIS  = new Color(228, 235, 230);   
-    static final Color GARIS_KOLOM  = new Color(238, 242, 239);   
-    static final Color TEKS_PILIH   = new Color(14, 59, 36);      
+    static final Color GARIS_BARIS  = new Color(228, 235, 230);
+    static final Color GARIS_KOLOM  = new Color(238, 242, 239);
+    static final Color TEKS_PILIH   = new Color(14, 59, 36);
     static final int   TINGGI_HEADER = 22;
     static final int   ARC_PILIH     = 8;
     private JViewport viewportTerpasang;
@@ -51,7 +51,7 @@ public class Table extends JTable {
         setShowHorizontalLines(false);
         setShowVerticalLines(false);
         setIntercellSpacing(new Dimension(0, 0));
-        setOpaque(false);   
+        setOpaque(false);
 
         getTableHeader().setForeground(new Color(50, 50, 50));
         getTableHeader().setBackground(new Color(255, 250, 250));
@@ -114,7 +114,7 @@ public class Table extends JTable {
             }
             c.setForeground(pilih && aktif() ? Color.WHITE : getForeground());
         }
-        
+
         return c;
     }
 
@@ -229,7 +229,7 @@ public class Table extends JTable {
 
         boolean adaSeleksi = getRowSelectionAllowed();
         int x1 = clip.x + clip.width;
-        int blokY = -1;  
+        int blokY = -1;
 
         for (int row = awal; row <= akhir; row++) {
             Rectangle r = getCellRect(row, 0, true);
@@ -282,7 +282,7 @@ public class Table extends JTable {
 
         private Border padding() {
             if (padding == null) {
-                int kiri = 2, kanan = 2;   
+                int kiri = 2, kanan = 2;
                 Border b = javax.swing.UIManager.getBorder("TableHeader.cellBorder");
                 if (b != null) {
                     try {

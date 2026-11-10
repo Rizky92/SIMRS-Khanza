@@ -14,8 +14,8 @@
 		<![CDATA[select data_batch.no_batch,data_batch.kode_brng,databarang.nama_brng,
 kodesatuan.satuan,data_batch.tgl_beli,data_batch.tgl_kadaluarsa,
 data_batch.asal,data_batch.no_faktur,data_batch.h_beli,data_batch.jumlahbeli,
-data_batch.sisa from data_batch inner join databarang inner join kodesatuan 
-on data_batch.kode_brng=databarang.kode_brng and 
+data_batch.sisa from data_batch inner join databarang inner join kodesatuan
+on data_batch.kode_brng=databarang.kode_brng and
 kodesatuan.kode_sat=databarang.kode_sat]]>
 	</queryString>
 	<field name="no_batch" class="java.lang.String">

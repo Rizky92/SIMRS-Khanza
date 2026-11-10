@@ -11,6 +11,7 @@ import java.awt.Dialog.ModalExclusionType;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -26,6 +27,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -50,8 +52,6 @@ import widget.Button;
 import widget.ComboBox;
 import widget.Tanggal;
 import widget.TextArea;
-import java.io.File;
-import java.util.concurrent.TimeUnit;
 import widget.TextBox;
 /**
  *
@@ -63,12 +63,12 @@ public final class validasi {
     private final Connection connect=koneksiDB.condb();
     private final sekuel sek=new sekuel();
     private final java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
-    private final DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");  
-    private final DecimalFormat df4 = new DecimalFormat("###,###,###,###,###,###,###.#################");  
-    private final DecimalFormat df5 = new DecimalFormat("###,###,###,###,###,###,###.##");  
-    private final DecimalFormat df3 = new DecimalFormat("######"); 
-    private final DecimalFormat df6 = new DecimalFormat("######.###"); 
-    private final DecimalFormat df7 = new DecimalFormat("######.#"); 
+    private final DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");
+    private final DecimalFormat df4 = new DecimalFormat("###,###,###,###,###,###,###.#################");
+    private final DecimalFormat df5 = new DecimalFormat("###,###,###,###,###,###,###.##");
+    private final DecimalFormat df3 = new DecimalFormat("######");
+    private final DecimalFormat df6 = new DecimalFormat("######.###");
+    private final DecimalFormat df7 = new DecimalFormat("######.#");
     private PreparedStatement ps;
     private ResultSet rs;
     private File file;
@@ -77,12 +77,12 @@ public final class validasi {
     private final int year=(now.get(Calendar.YEAR));
     private String[] nomina={"","satu","dua","tiga","empat","lima","enam",
                          "tujuh","delapan","sembilan","sepuluh","sebelas"};
-    
+
     public validasi(){
         super();
     };
 
-    public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){        
+    public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){
         s=Integer.toString(tabMode.getRowCount()+1);
         j=s.length();
         s1="";
@@ -104,14 +104,14 @@ public final class validasi {
                for(i = 1;i<=pnj-j;i++){
                    s1=s1+"0";
                }
-               teks.setText(strAwal+s1+s);      
+               teks.setText(strAwal+s1+s);
             }catch(Exception e){
                System.out.println("Notifikasi : "+e);
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -120,7 +120,7 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void autoNomer2(String sql,String strAwal,Integer pnj,javax.swing.JTextField teks){
         try {
             ps=connect.prepareStatement(sql);
@@ -140,7 +140,7 @@ public final class validasi {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -149,16 +149,16 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void autoNomer3(String sql,String strAwal,Integer pnj,javax.swing.JTextField teks){
         try {
             ps=connect.prepareStatement(sql);
-            try{   
+            try{
                 rs=ps.executeQuery();
                 s="1";
                 while(rs.next()){
                     s=Integer.toString(Integer.parseInt(rs.getString(1))+1);
-                }            
+                }
 
                 j=s.length();
                 s1="";
@@ -173,7 +173,7 @@ public final class validasi {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -182,16 +182,16 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void autoNomer4(String sql,String strAwal,Integer pnj,javax.swing.JTextField teks){
         try {
             ps=connect.prepareStatement(sql);
-            try{   
+            try{
                 rs=ps.executeQuery();
                 s="1";
                 while(rs.next()){
                     s=Integer.toString(Integer.parseInt(rs.getString(1))+1);
-                }            
+                }
 
                 j=s.length();
                 s1="";
@@ -206,7 +206,7 @@ public final class validasi {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -215,16 +215,16 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void autoNomer5(String sql,String strAwal,Integer pnj,javax.swing.JTextField teks){
         try {
             ps=connect.prepareStatement(sql);
-            try{   
+            try{
                 rs=ps.executeQuery();
                 s="1";
                 while(rs.next()){
                     s=Integer.toString(Integer.parseInt(rs.getString(1))+1);
-                }            
+                }
 
                 j=s.length();
                 s1="";
@@ -239,7 +239,7 @@ public final class validasi {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -248,16 +248,16 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void autoNomer6(String sql,String strAwal,Integer pnj,javax.swing.JTextField teks){
         try {
             ps=connect.prepareStatement(sql);
-            try{   
+            try{
                 rs=ps.executeQuery();
                 s="1";
                 while(rs.next()){
                     s=Integer.toString(Integer.parseInt(rs.getString(1))+1);
-                }            
+                }
 
                 j=s.length();
                 s1="";
@@ -272,7 +272,7 @@ public final class validasi {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -281,7 +281,7 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void autoNomer7(String nomorterakhir,String strAwal,Integer pnj,javax.swing.JTextField teks){
         try {
             s=Integer.toString(Integer.parseInt(nomorterakhir)+1);
@@ -295,12 +295,12 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public String autoNomer(String tabel,String strAwal,Integer pnj){
         try {
             auto="";
             ps=connect.prepareStatement("select * from "+tabel);
-            try{        
+            try{
                 rs=ps.executeQuery();
                 rs.last();
                 s=Integer.toString(rs.getRow()+1);
@@ -309,7 +309,7 @@ public final class validasi {
                 for(i = 1;i<=pnj-j;i++){
                     s1=s1+"0";
                 }
-                auto=strAwal+s1+s;             
+                auto=strAwal+s1+s;
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
                 JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
@@ -317,7 +317,7 @@ public final class validasi {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -325,10 +325,10 @@ public final class validasi {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
-        return auto;        
+
+        return auto;
     }
-    
+
     public String autoNomer3(String sql,String strAwal,Integer pnj){
         try {
             auto="";
@@ -338,7 +338,7 @@ public final class validasi {
                 s="1";
                 while(rs.next()){
                     s=Integer.toString(Integer.parseInt(rs.getString(1))+1);
-                }            
+                }
 
                 j=s.length();
                 s1="";
@@ -353,7 +353,7 @@ public final class validasi {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -361,7 +361,7 @@ public final class validasi {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
         return auto;
     }
 
@@ -371,11 +371,11 @@ public final class validasi {
             nilai_field.requestFocus();
         }else if(nilai_field.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.getText().trim().equals("")){            
-            sek.mengedit(table,field_acuan+"='"+nilai_field.getText()+"'", update);                 
+        }else if(! nilai_field.getText().trim().equals("")){
+            sek.mengedit(table,field_acuan+"='"+nilai_field.getText()+"'", update);
         }
     }
-    
+
     public boolean editTabletf(DefaultTableModel tabMode,String table,String field_acuan,JTextField nilai_field,String update) {
         status=true;
         if(tabMode.getRowCount()==0){
@@ -385,30 +385,30 @@ public final class validasi {
         }else if(nilai_field.getText().trim().equals("")){
             status=false;
             JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.getText().trim().equals("")){            
-            status=sek.mengedittf(table,field_acuan+"='"+nilai_field.getText()+"'", update);                 
+        }else if(! nilai_field.getText().trim().equals("")){
+            status=sek.mengedittf(table,field_acuan+"='"+nilai_field.getText()+"'", update);
         }
         return status;
     }
-    
+
     public void editTable(String table,String field_acuan,JTextField nilai_field,String update) {
         if(nilai_field.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.getText().trim().equals("")){            
-            sek.mengedit(table,field_acuan+"='"+nilai_field.getText()+"'", update);                 
+        }else if(! nilai_field.getText().trim().equals("")){
+            sek.mengedit(table,field_acuan+"='"+nilai_field.getText()+"'", update);
         }
     }
-    
+
     public void editTable(DefaultTableModel tabMode,String table,String field_acuan,String nilai_field,String update,int i, String[] a) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else if(nilai_field.trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.trim().equals("")){            
-            sek.mengedit(table,field_acuan+"="+nilai_field, update,i,a);                 
+        }else if(! nilai_field.trim().equals("")){
+            sek.mengedit(table,field_acuan+"="+nilai_field, update,i,a);
         }
     }
-    
+
     public boolean editTabletf(DefaultTableModel tabMode,String table,String field_acuan,String nilai_field,String update,int i, String[] a) {
         status=true;
         if(tabMode.getRowCount()==0){
@@ -417,8 +417,8 @@ public final class validasi {
         }else if(nilai_field.trim().equals("")){
             status=false;
             JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.trim().equals("")){            
-            status=sek.mengedittf(table,field_acuan+"="+nilai_field, update,i,a);                 
+        }else if(! nilai_field.trim().equals("")){
+            status=sek.mengedittf(table,field_acuan+"="+nilai_field, update,i,a);
         }
         return status;
     }
@@ -429,9 +429,9 @@ public final class validasi {
             nilai_field.requestFocus();
         }else if(nilai_field.getSelectedItem().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
-        }else if(nilai_field.getSelectedItem()!=""){            
-            sek.mengedit(table,field_acuan+"='"+nilai_field.getSelectedItem()+"'", update);            
-            
+        }else if(nilai_field.getSelectedItem()!=""){
+            sek.mengedit(table,field_acuan+"='"+nilai_field.getSelectedItem()+"'", update);
+
         }
     }
 
@@ -441,16 +441,16 @@ public final class validasi {
             nilai_field.requestFocus();
         }else if(nilai_field.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.getText().trim().equals("")){            
-            sek.mengedit(table,field_acuan+"='"+nilai_field.getText()+"'", update);            
-            
+        }else if(! nilai_field.getText().trim().equals("")){
+            sek.mengedit(table,field_acuan+"='"+nilai_field.getText()+"'", update);
+
         }
     }
-    
+
     public void fillData(DefaultTableModel model,JTable table, File file) {
         try {
             WritableWorkbook workbook1 = Workbook.createWorkbook(file);
-            WritableSheet sheet1 = workbook1.createSheet("First Sheet", 0); 
+            WritableSheet sheet1 = workbook1.createSheet("First Sheet", 0);
             model = (DefaultTableModel) table.getModel();
 
             for (i = 0; i < model.getColumnCount(); i++) {
@@ -459,7 +459,7 @@ public final class validasi {
             }
             for (i = 0; i < model.getRowCount(); i++) {
                 for (j = 0; j < model.getColumnCount(); j++) {
-                    Label row = new Label(j, i + 1, 
+                    Label row = new Label(j, i + 1,
                             model.getValueAt(i, j).toString());
                     sheet1.addCell(row);
                 }
@@ -477,11 +477,11 @@ public final class validasi {
             nilai_field.requestFocus();
         }else if(nilai_field.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.getText().trim().equals("")){            
-            sek.meghapus(table,field,nilai_field.getText());   
+        }else if(! nilai_field.getText().trim().equals("")){
+            sek.meghapus(table,field,nilai_field.getText());
         }
     }
-    
+
     public boolean hapusTabletf(DefaultTableModel tabMode,JTextField nilai_field,String table,String field) {
         status=true;
         if(tabMode.getRowCount()==0){
@@ -491,8 +491,8 @@ public final class validasi {
         }else if(nilai_field.getText().trim().equals("")){
             status=false;
             JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.getText().trim().equals("")){            
-            status=sek.meghapustf(table,field,nilai_field.getText());   
+        }else if(! nilai_field.getText().trim().equals("")){
+            status=sek.meghapustf(table,field,nilai_field.getText());
         }
         return status;
     }
@@ -503,9 +503,9 @@ public final class validasi {
             nilai_field.requestFocus();
         }else if(nilai_field.getSelectedItem().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
-        }else if(nilai_field.getSelectedItem()!=""){            
+        }else if(nilai_field.getSelectedItem()!=""){
             String data=nilai_field.getSelectedItem().toString();
-            sek.meghapus(table,field,data);     
+            sek.meghapus(table,field,data);
         }
     }
 
@@ -519,14 +519,14 @@ public final class validasi {
                     String item=rs.getString(1);
                     cmb.addItem(item);
                     a++;
-                }          
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -535,31 +535,31 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
-    public int hariAkhad(int month,int year){ 
-        j=0; 
-        Calendar calendar=Calendar.getInstance(); 
-        calendar.set(year, month-1,1); 
-        int days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH); 
-        
-        for(i=1;i<=days;i++) { 
-            calendar.set(year, month-1, i); 
-            int day=calendar.get(Calendar.DAY_OF_WEEK); 
+
+    public int hariAkhad(int month,int year){
+        j=0;
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(year, month-1,1);
+        int days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        for(i=1;i<=days;i++) {
+            calendar.set(year, month-1, i);
+            int day=calendar.get(Calendar.DAY_OF_WEEK);
             if(day==1){
                 j++ ;
-            }  
-        } 
-        
-        return j; 
-    } 
-    
-    public int jumlahHari(int month,int year){ 
-        Calendar calendar=Calendar.getInstance(); 
-        calendar.set(year, month-1,1); 
-        int days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH); 
-        return days; 
-    } 
-    
+            }
+        }
+
+        return j;
+    }
+
+    public int jumlahHari(int month,int year){
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(year, month-1,1);
+        int days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        return days;
+    }
+
     public void loadCombo(JComboBox cmb,String query){
         cmb.removeAllItems();
         try {
@@ -570,14 +570,14 @@ public final class validasi {
                     String item=rs.getString(1);
                     cmb.addItem(item);
                     a++;
-                }          
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -587,15 +587,15 @@ public final class validasi {
         }
     }
 
-    public void LoadTahun(JComboBox cmb){        
+    public void LoadTahun(JComboBox cmb){
         cmb.removeAllItems();
         for(i =(year+1);i>=1980;i--){
             cmb.addItem(i);
         }
         cmb.setSelectedItem(year);
     }
-    
-    public void LoadTahun2(JComboBox cmb){        
+
+    public void LoadTahun2(JComboBox cmb){
         cmb.removeAllItems();
         cmb.addItem("");
         for(i =year;i>=1980;i--){
@@ -638,10 +638,10 @@ public final class validasi {
         try {
             try (Statement stm = connect.createStatement()) {
                 try {
-                    
+
                     String namafile="./"+reportDirName+"/"+reportName;
                     JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters, connect);
-                    
+
                     JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
                     jasperViewer.setTitle(judul);
                     Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
@@ -658,7 +658,7 @@ public final class validasi {
             System.out.println(e);
         }
     }
-    
+
     @SuppressWarnings("empty-statement")
     public void MyReportPDF(String reportName,String reportDirName,String judul,Map parameters){
         Properties systemProp = System.getProperties();
@@ -684,7 +684,7 @@ public final class validasi {
         try {
             try (Statement stm = connect.createStatement()) {
                 try {
-                    File f = new File("./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf")); 
+                    File f = new File("./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf"));
                     String namafile="./"+reportDirName+"/"+reportName;
                     JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters, connect);
                     JasperExportManager.exportReportToPdfFile(jasperPrint,"./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf"));
@@ -698,7 +698,7 @@ public final class validasi {
             System.out.println(e);
         }
     }
-    
+
     @SuppressWarnings("empty-statement")
     public void MyReportPDF2(String reportName,String reportDirName,String judul,Map parameters){
         Properties systemProp = System.getProperties();
@@ -724,7 +724,7 @@ public final class validasi {
         try {
             try (Statement stm = connect.createStatement()) {
                 try {
-                    File f = new File("./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf")); 
+                    File f = new File("./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf"));
                     String namafile="./"+reportDirName+"/"+reportName;
                     JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters, connect);
                     JasperExportManager.exportReportToPdfFile(jasperPrint,"./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf"));
@@ -737,7 +737,7 @@ public final class validasi {
             System.out.println(e);
         }
     }
-    
+
     @SuppressWarnings("empty-statement")
     public void MyReport2(String reportName,String reportDirName,String judul,Map parameters){
         Properties systemProp = System.getProperties();
@@ -763,10 +763,10 @@ public final class validasi {
         try {
             try (Statement stm = connect.createStatement()) {
                 try {
-                    
+
                     String namafile="./"+reportDirName+"/"+reportName;
                     JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters, connect);
-                    
+
                     JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
                     jasperViewer.setTitle(judul);
                     Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
@@ -783,7 +783,7 @@ public final class validasi {
             System.out.println(e);
         }
     }
-    
+
     public void MyReportqry(String reportName,String reportDirName,String judul,String qry,Map parameters){
         Properties systemProp = System.getProperties();
 
@@ -811,7 +811,7 @@ public final class validasi {
                 String namafile="./"+reportDirName+"/"+reportName;
                 rs=ps.executeQuery();
                 JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
-                
+
                 JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters,rsdt);
 
                 JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
@@ -836,7 +836,7 @@ public final class validasi {
             System.out.println(e);
         }
     }
-    
+
     public void MyReportqrypdf(String reportName,String reportDirName,String judul,String qry,Map parameters){
         Properties systemProp = System.getProperties();
 
@@ -862,7 +862,7 @@ public final class validasi {
             ps=connect.prepareStatement(qry);
             try {
                 String namafile="./"+reportDirName+"/"+reportName;
-                File f = new File("./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf")); 
+                File f = new File("./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf"));
                 rs=ps.executeQuery();
                 JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
                 JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters,rsdt);
@@ -884,7 +884,7 @@ public final class validasi {
         }
     }
 
-    
+
     public void MyReport(String reportName,Map parameters,String title){
         try {
                 JasperViewer jasperViewer =new JasperViewer(JasperFillManager.fillReport("./report/"+reportName,parameters,connect), false);
@@ -894,7 +894,7 @@ public final class validasi {
                 //JasperViewer.viewReport(JasperFillManager.fillReport(JasperCompileManager.compileReport("./report/"+reportName),parameters,connect),false);
         } catch (Exception ex) {
            System.out.println("Notifikasi : "+ex);
-        } 
+        }
     }
 
 
@@ -905,7 +905,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JCheckBox kanan){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -913,7 +913,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JTextField kanan,JTextField bawah){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -923,7 +923,7 @@ public final class validasi {
             bawah.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JTextField kiri,JTextField kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -931,7 +931,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(KeyEvent evt, Button kiri, Button kanan) {
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -939,7 +939,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JTextField kiri,JTextArea kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -947,7 +947,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JTextArea kiri,JTextArea kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -955,7 +955,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JTextArea kiri,JTextField kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -963,7 +963,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JTextArea kiri,JButton kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -971,7 +971,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JTextField kiri,JComboBox kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -979,7 +979,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JComboBox kiri,JComboBox kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -987,7 +987,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JComboBox kiri,JTextField kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -995,7 +995,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JComboBox kiri,JTextArea kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1003,7 +1003,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JButton kiri,JTextArea kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1019,7 +1019,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(KeyEvent evt, Tanggal kiri, Button kanan) {
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1035,7 +1035,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JTextField kiri,JButton kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1043,7 +1043,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(KeyEvent evt, ComboBox kiri, Button kanan) {
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1067,7 +1067,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JTextArea kanan) {
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -1075,7 +1075,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(java.awt.event.KeyEvent evt,JTextArea kiri,JTextArea kanan) {
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -1099,7 +1099,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JButton kanan,JTextField bawah){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -1125,7 +1125,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(java.awt.event.KeyEvent evt,JButton kiri,JCheckBox kanan){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -1165,7 +1165,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(java.awt.event.KeyEvent evt,JCheckBox kiri,JDateTimePicker kanan){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -1173,7 +1173,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(KeyEvent evt, Button kiri, TextArea kanan) {
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -1229,11 +1229,11 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void panggilUrl(String url){
         String os = System.getProperty("os.name").toLowerCase();
-        Runtime rt = Runtime.getRuntime();                                
-        try{ 
+        Runtime rt = Runtime.getRuntime();
+        try{
             if(os.contains("win")) {
                 rt.exec( "rundll32 url.dll,FileProtocolHandler " + "http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+url);
             }else if (os.contains("mac")) {
@@ -1244,16 +1244,16 @@ public final class validasi {
                 StringBuilder cmd = new StringBuilder();
                 for(i=0; i<browsers.length; i++) cmd.append(i==0  ? "" : " || ").append(browsers[i]).append(" \"").append("http://").append(koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()).append("/").append(koneksiDB.HYBRIDWEB()).append("/").append(url).append( "\" ");
                 rt.exec(new String[] { "sh", "-c", cmd.toString() });
-            } 
+            }
         }catch (Exception e){
             System.out.println("Notif Browser : "+e);
-        } 
+        }
     }
-    
+
     public void panggilUrl2(String url){
         String os = System.getProperty("os.name").toLowerCase();
-        Runtime rt = Runtime.getRuntime();                                
-        try{ 
+        Runtime rt = Runtime.getRuntime();
+        try{
             if(os.contains("win")) {
                 rt.exec( "rundll32 url.dll,FileProtocolHandler "+url);
             }else if (os.contains("mac")) {
@@ -1264,15 +1264,15 @@ public final class validasi {
                 StringBuilder cmd = new StringBuilder();
                 for(i=0; i<browsers.length; i++) cmd.append(i==0  ? "" : " || ").append(browsers[i]).append(" \"").append(url).append( "\" ");
                 rt.exec(new String[] { "sh", "-c", cmd.toString() });
-            } 
+            }
         }catch (Exception e){
             System.out.println("Notif Browser : "+e);
-        } 
+        }
     }
-    
+
     public void printUrl(String url) throws URISyntaxException{
         try{
-           desktop.print(new File(new java.net.URI("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+url)));  
+           desktop.print(new File(new java.net.URI("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+url)));
         }catch (Exception e) {
            System.out.println(e);
         }
@@ -1287,47 +1287,47 @@ public final class validasi {
            dtp.setDate(new Date());
         }
     }
-    
+
     public String SetTgl(String original){
         original=original.replaceAll("'","");
         s = "";
         try {
             s=original.substring(6,10)+"-"+original.substring(3,5)+"-"+original.substring(0,2);
         }catch (Exception e) {
-        }   
+        }
         return s;
     }
-    
+
     public String SetTglJam(String original){
         original=original.replaceAll("'","");
         s = "";
         try {
             s=original.substring(6,10)+"-"+original.substring(3,5)+"-"+original.substring(0,2)+" "+original.substring(11,19);
         }catch (Exception e) {
-        }   
+        }
         return s;
     }
-    
+
     public String SetTgl3(String original){
         original=original.replaceAll("'","");
         s = "";
         try {
             s=original.substring(8,10)+"-"+original.substring(5,7)+"-"+original.substring(0,4);
         }catch (Exception e) {
-        }   
+        }
         return s;
     }
-    
+
     public String SetTgl5(String original){
         original=original.replaceAll("'","");
         s = "";
         try {
             s=original.substring(8,10)+"-"+original.substring(5,7)+"-"+original.substring(0,4)+" "+original.substring(11,19);
         }catch (Exception e) {
-        }   
+        }
         return s;
     }
-    
+
     public String MaxTeks(String original,int max){
         if(original.length()>=max){
             s=original.substring(0,(max-1));
@@ -1336,8 +1336,8 @@ public final class validasi {
         }
         return original;
     }
-    
-    public void SetTgl(JDateTimePicker dtp,String tgl){            
+
+    public void SetTgl(JDateTimePicker dtp,String tgl){
         try {
            Date dtpa = new SimpleDateFormat("yyyy-MM-dd").parse(tgl.replaceAll("'",""));
            dtp.setDate(dtpa);
@@ -1345,8 +1345,8 @@ public final class validasi {
            dtp.setDate(new Date());
         }
     }
-    
-    public void SetTgl2(JDateTimePicker dtp,String tgl){            
+
+    public void SetTgl2(JDateTimePicker dtp,String tgl){
         try {
            Date dtpa = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(tgl.replaceAll("'",""));
            dtp.setDate(dtpa);
@@ -1354,7 +1354,7 @@ public final class validasi {
            dtp.setDate(new Date());
         }
     }
-    
+
     public Date SetTgl2(String tgl){
         try {
            Date dtpa = new SimpleDateFormat("yyyy-MM-dd").parse(tgl.replaceAll("'",""));
@@ -1363,17 +1363,17 @@ public final class validasi {
            return new Date();
         }
     }
-    
+
     public String SetTgl4(String original){
         original=original.replaceAll("'","");
         s = "";
         try {
             s=original.substring(6,10)+original.substring(3,5)+original.substring(0,2);
         }catch (Exception e) {
-        }   
+        }
         return s;
     }
-    
+
     public void textKosong(JTextField teks,String pesan){
         JOptionPane.showMessageDialog(null,"Maaf, "+pesan+" tidak boleh kosong...!!!");
         teks.requestFocus();
@@ -1383,7 +1383,7 @@ public final class validasi {
         JOptionPane.showMessageDialog(null,"Maaf, "+pesan+" tidak boleh kosong...!!!");
         teks.requestFocus();
     }
-    
+
     public void textKosong(JButton teks,String pesan){
         JOptionPane.showMessageDialog(null,"Maaf, "+pesan+" tidak boleh kosong...!!!");
         teks.requestFocus();
@@ -1397,41 +1397,41 @@ public final class validasi {
         JOptionPane.showMessageDialog(null,"Maaf, "+pesan+" tidak boleh kosong...!!!");
         teks.requestFocus();
     }
-    
-    public String SetAngka(double nilai){        
+
+    public String SetAngka(double nilai){
        return df2.format(nilai);
     }
-    
-    public String SetAngka3(double nilai){        
+
+    public String SetAngka3(double nilai){
        return df4.format(nilai);
     }
-    
-    public String SetAngka4(double nilai){        
+
+    public String SetAngka4(double nilai){
        return df5.format(nilai);
     }
-    
-    public String SetAngka2(double nilai){        
+
+    public String SetAngka2(double nilai){
        return df3.format(nilai);
     }
-    
-    public String SetAngka5(double nilai){        
+
+    public String SetAngka5(double nilai){
        return df6.format(nilai);
     }
-    
-    public String SetAngka6(double nilai){        
+
+    public String SetAngka6(double nilai){
        return df7.format(nilai);
     }
-    
-    public double SetAngka7(double nilai){        
+
+    public double SetAngka7(double nilai){
        return Double.parseDouble(df7.format(nilai));
     }
-    
-    public double SetAngka8(double value,int places){      
+
+    public double SetAngka8(double value,int places){
         return new BigDecimal(value).setScale(places, RoundingMode.HALF_UP).doubleValue();
     }
-    
+
     public double SetAngka(String txt){
-        double x;   
+        double x;
         try {
             if(txt.equals("")){
                 x=0;
@@ -1441,12 +1441,12 @@ public final class validasi {
         } catch (Exception e) {
             x=0;
         }
-            
+
         return x;
     }
-    
+
     public int SetInteger(String txt){
-        int x;   
+        int x;
         try {
             if(txt.equals("")){
                 x=0;
@@ -1456,10 +1456,10 @@ public final class validasi {
         } catch (Exception e) {
             x=0;
         }
-            
+
         return x;
     }
-    
+
     public double roundUp(double number, int multiple) {
         if(PEMBULATANHARGAOBAT.equals("yes")){
             result = multiple;
@@ -1476,57 +1476,57 @@ public final class validasi {
             return Math.round(number);
         }
     }
-    
+
     public String terbilang(double angka){
         if(angka<12)
         {
           return nomina[(int)angka];
         }
-        
+
         if(angka>=12 && angka <=19)
         {
             return nomina[(int)angka%10] +" belas ";
         }
-        
+
         if(angka>=20 && angka <=99)
         {
             return nomina[(int)angka/10] +" puluh "+nomina[(int)angka%10];
         }
-        
+
         if(angka>=100 && angka <=199)
         {
             return "seratus "+ terbilang(angka%100);
         }
-        
+
         if(angka>=200 && angka <=999)
         {
             return nomina[(int)angka/100]+" ratus "+terbilang(angka%100);
         }
-        
+
         if(angka>=1000 && angka <=1999)
         {
             return "seribu "+ terbilang(angka%1000);
         }
-        
+
         if(angka >= 2000 && angka <=999999)
         {
             return terbilang((int)angka/1000)+" ribu "+ terbilang(angka%1000);
         }
-        
+
         if(angka >= 1000000 && angka <=999999999)
         {
             return terbilang((int)angka/1000000)+" juta "+ terbilang(angka%1000000);
         }
-        
+
         return "";
-    }  
-    
+    }
+
     public int daysOld(String path) {
         file=new File(path);
         if (file.lastModified() < 1) return 0;
         return milliToDay(Calendar.getInstance().getTimeInMillis() - file.lastModified());
     }
-    
+
     public long minutesOld(String path) {
         file = new File(path);
         if (file.lastModified() < 1) return 0;

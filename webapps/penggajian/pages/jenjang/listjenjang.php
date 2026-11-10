@@ -4,12 +4,12 @@
     }
 ?>
 <div id="post">
-    <div class="entry">   
+    <div class="entry">
     <div align="center" class="link">
         <a href=?act=InputJenjang&action=TAMBAH>| Input Data |</a>
         <a href=?act=ListJenjang>| List Data |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
+    </div>
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
                 $action  = isset($_GET['action'])?$_GET['action']:NULL;
@@ -57,7 +57,7 @@
                              </tr>";
                     }
             echo "</table>";
-            
+
         } else {
             echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
@@ -67,9 +67,9 @@
                         <td width='20%'><div align='center'>Tunjangan Jabatan</div></td>
                         <td width='10%'><div align='center'>Index</div></td>
                     </tr>
-                  </table>";    
+                  </table>";
         }
-        
+
         $aksi=isset($_GET['action'])?$_GET['action']:NULL;
         if ($aksi=="HAPUS") {
             try {
@@ -85,7 +85,7 @@
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
                         <td><div align='left'>Data : $jumlah | <a target=_blank href=../penggajian/pages/jenjang/LaporanJenjang.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Laporan</a> | <a target=_blank href=../penggajian/pages/jenjang/LaporanJenjangExel.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Excel</a> |</div></td>
-                    </tr>     
+                    </tr>
                  </table>");
         }
     ?>

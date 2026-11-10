@@ -11,7 +11,7 @@
                           <h2>Asuransi Yang Bekerja Sama</h2>
                      </div>
                 </div>
-                       
+
                 <div class="col-md-12 col-sm-12">
                      <div class="news-thumb wow fadeInUp" data-wow-delay="0.3s">
                          <form id="cariKamar" name="frmCariAsuransi" method="post" action="" enctype=multipart/form-data>
@@ -32,7 +32,7 @@
                                    <th width="35%"><center>Alamat Perusahaan</center></th>
                                    <th width="10%"><center>No.Telp</center></th>
                                </tr>
-                               <?php 
+                               <?php
                                   $asuransi      = trim(isset($_POST['asuransi']))?trim($_POST['asuransi']):NULL;
                                   $asuransi      = cleankar($asuransi);
                                   if(strlen($asuransi)>20){
@@ -46,10 +46,10 @@
                                                     <td align='left'>".$rsqueryasuransi["alamat_asuransi"]."</td>
                                                     <td align='center'>".$rsqueryasuransi["no_telp"]."</td>
                                                   </tr>";
-                                        }  
-                                  } 
+                                        }
+                                  }
                               ?>
-                           </table> 
+                           </table>
                          </div>
                      </div>
                 </div>

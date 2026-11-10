@@ -2,9 +2,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["norawat"])) {
         $norawat    = validTeks3($iyem["norawat"],20);
         $queryendoskopi = bukaquery(
@@ -39,32 +39,32 @@
                                             <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                                 <tr width='100%'>
                                                     <td valign='middle' width='30%'>- Kavum Nasi</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["kavum_nasi_kanan"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>- Konka Inferior</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["konka_inferior_kanan"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>- Meatus Medius</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["meatus_medius_kanan"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>- Septum</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["septum_kanan"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>- Nasofaring</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["nasofaring_kanan"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>- Lain-lain</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["lainlain_kanan"]."</td>
                                                 </tr>
                                             </table>
@@ -76,32 +76,32 @@
                                             <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                                 <tr width='100%'>
                                                     <td valign='middle' width='30%'>- Kavum Nasi</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["kavum_nasi_kiri"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>- Konka Inferior</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["konka_inferior_kiri"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>- Meatus Medius</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["meatus_medius_kiri"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>- Septum</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["septum_kiri"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>- Nasofaring</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["nasofaring_kiri"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>- Lain-lain</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["lainlain_kiri"]."</td>
                                                 </tr>
                                             </table>

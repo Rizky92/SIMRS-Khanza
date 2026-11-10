@@ -24,7 +24,7 @@
                     skrining_puma.napas_pendek,skrining_puma.nilai_napas_pendek,skrining_puma.punya_dahak,
                     skrining_puma.nilai_punya_dahak,skrining_puma.biasa_batuk,skrining_puma.nilai_biasa_batuk,
                     skrining_puma.spirometri,skrining_puma.nilai_spirometri,skrining_puma.nilai_total,
-                    skrining_puma.keterangan_hasil_skrining from skrining_puma inner join reg_periksa on skrining_puma.no_rawat=reg_periksa.no_rawat 
+                    skrining_puma.keterangan_hasil_skrining from skrining_puma inner join reg_periksa on skrining_puma.no_rawat=reg_periksa.no_rawat
                     inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_puma.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

@@ -17,7 +17,7 @@
         $blncaripiutang2 = validTeks(trim(isset($_POST['tgl_cari_piutang2']))?substr($_POST['tgl_cari_piutang2'],3,2):$blnsekarang);
         $tglcaripiutang2 = validTeks(trim(isset($_POST['tgl_cari_piutang2']))?substr($_POST['tgl_cari_piutang2'],0,2):$tglsekarang);
     }
-    
+
     $tglAwalPiutang  = $thncaripiutang."-".$blncaripiutang."-".$tglcaripiutang;
     $tglAkhirPiutang = $thncaripiutang2."-".$blncaripiutang2."-".$tglcaripiutang2;
     $akunList        = [];
@@ -30,7 +30,7 @@
             'rawatinap'  => 0
         ];
     }
-    
+
     $tanggalAkun     = [];
     $bulanAkun       = [];
     $tanggalKategori = [];
@@ -67,7 +67,7 @@
             $bulanKategori[$blnP]["rawatjalan"]   += $bayar;
         }
     }
-    
+
     $queryInap = bukaquery(
         "select nota_inap.no_rawat,nota_inap.tanggal ".
         "from piutang_pasien inner join nota_inap on piutang_pasien.no_rawat=nota_inap.no_rawat ".
@@ -99,7 +99,7 @@
             $bulanKategori[$blnP]["rawatinap"]   += $bayar;
         }
     }
-    
+
     ksort($tanggalAkun);
     ksort($bulanAkun);
     ksort($tanggalKategori);
@@ -108,21 +108,21 @@
         'rawatjalan' => 'Rawat Jalan',
         'rawatinap'  => 'Rawat Inap'
     ];
-    
+
     $kategoriTotal = $kategoriKosong;
     foreach($tanggalKategori as $nilaiPerKategori) {
         foreach($nilaiPerKategori as $kk => $vv) {
             $kategoriTotal[$kk] += $vv;
         }
     }
-    
+
     $kategoriAktif = [];
     foreach($kategoriLabel as $kk => $lbl) {
         if($kategoriTotal[$kk]>0) {
             $kategoriAktif[] = $kk;
         }
     }
-    
+
     $dataPieAkun = [];
     foreach($akunList as $akun) {
         if($akun["total"]>0) {
@@ -132,7 +132,7 @@
             ];
         }
     }
-    
+
     $akunAktifIdx = [];
     foreach($akunList as $idx => $akun) {
         if($akun["total"]>0) {

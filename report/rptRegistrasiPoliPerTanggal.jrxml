@@ -1170,7 +1170,7 @@
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement mode="Opaque" x="201" y="0" width="25" height="35" isPrintWhenDetailOverflows="true" backcolor="#FF9632" uuid="b5860ec5-6d7d-42db-adbc-f057900698bb">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<printWhenExpression><![CDATA[($P{jd1}.equals("(Mg)") ? 
+					<printWhenExpression><![CDATA[($P{jd1}.equals("(Mg)") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">

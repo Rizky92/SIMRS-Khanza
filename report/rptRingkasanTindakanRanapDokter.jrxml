@@ -33,7 +33,7 @@ sum(rawat_inap_dr.material) as material,sum(rawat_inap_dr.bhp) as bhp,sum(rawat_
 sum(rawat_inap_dr.kso) as kso,sum(rawat_inap_dr.menejemen) as menejemen,sum(rawat_inap_dr.biaya_rawat) as biaya_rawat,count(rawat_inap_dr.kd_jenis_prw) as jumlah
 from pasien inner join reg_periksa on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 inner join rawat_inap_dr on rawat_inap_dr.no_rawat=reg_periksa.no_rawat
-inner join jns_perawatan_inap on rawat_inap_dr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw 
+inner join jns_perawatan_inap on rawat_inap_dr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw
 inner join dokter on rawat_inap_dr.kd_dokter=dokter.kd_dokter
 inner join penjab on reg_periksa.kd_pj=penjab.kd_pj]]>
 	</queryString>

@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class WarnaTable extends DefaultTableCellRenderer implements UIResource {
     private static final long serialVersionUID = 4L;
     private static final Color PUTIH = new Color(255, 255, 255);
-    private static final Color ZEBRA = new Color(245, 250, 245); 
+    private static final Color ZEBRA = new Color(245, 250, 245);
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {

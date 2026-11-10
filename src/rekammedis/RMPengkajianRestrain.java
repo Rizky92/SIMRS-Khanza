@@ -5,18 +5,17 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -43,7 +42,7 @@ import kepegawaian.DlgCariPetugas;
 
 
 /**
- * 
+ *
  * @author windiartohugroho
  */
 public final class RMPengkajianRestrain extends javax.swing.JDialog {
@@ -60,13 +59,13 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
     private StringBuilder htmlContent;
     private String finger="",lokasifile="";
     private String TANGGALMUNDUR="yes";
-    
+
     public RMPengkajianRestrain(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(8,1);
         setSize(628,674);
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.R.M.","Nama Pasien","Umur","J.K.","Tgl.Lahir","Tanggal","GCS(E,V,M)","Refleka Kanan","Refleka Kiri",
             "Pupil Kanan","Pupil Kiri","TD(mmHg)","Suhu(°C)","RR(x/menit)","Nadi(x/menit)","Hasil Observasi","Pertimbangan Klinis",
@@ -136,28 +135,28 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
-        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));  
-        TCari.setDocument(new batasInput((int)100).getKata(TCari));  
-        ReflekaCahayaKanan.setDocument(new batasInput((int)3).getKata(ReflekaCahayaKanan));  
-        ReflekaCahayaKiri.setDocument(new batasInput((int)3).getKata(ReflekaCahayaKiri));  
-        UkuranPupilKanan.setDocument(new batasInput((int)3).getKata(UkuranPupilKanan));  
-        UkuranPupilKiri.setDocument(new batasInput((int)3).getKata(UkuranPupilKiri));  
-        GCS.setDocument(new batasInput((int)5).getKata(GCS));  
-        TD.setDocument(new batasInput((int)8).getKata(TD));  
-        Suhu.setDocument(new batasInput((int)5).getKata(Suhu));  
+
+        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
+        TCari.setDocument(new batasInput((int)100).getKata(TCari));
+        ReflekaCahayaKanan.setDocument(new batasInput((int)3).getKata(ReflekaCahayaKanan));
+        ReflekaCahayaKiri.setDocument(new batasInput((int)3).getKata(ReflekaCahayaKiri));
+        UkuranPupilKanan.setDocument(new batasInput((int)3).getKata(UkuranPupilKanan));
+        UkuranPupilKiri.setDocument(new batasInput((int)3).getKata(UkuranPupilKiri));
+        GCS.setDocument(new batasInput((int)5).getKata(GCS));
+        TD.setDocument(new batasInput((int)8).getKata(TD));
+        Suhu.setDocument(new batasInput((int)5).getKata(Suhu));
         Nadi.setDocument(new batasInput((int)5).getKata(Nadi));
         RR.setDocument(new batasInput((int)5).getKata(RR));
         KeteranganNonRestrainFarmakologi.setDocument(new batasInput((int)50).getKata(KeteranganNonRestrainFarmakologi));
         RestrainFarmakologi.setDocument(new batasInput((int)200).getKata(RestrainFarmakologi));
         Keluarga.setDocument(new batasInput((int)100).getKata(Keluarga));
-        
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         ChkAccor.setSelected(false);
         isPhoto();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -178,18 +177,18 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
         LoadHTML2.setEditable(true);
         LoadHTML2.setEditorKit(kit);
         LoadHTML2.setDocument(doc);
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
             TANGGALMUNDUR="yes";
         }
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -1156,7 +1155,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
@@ -1174,7 +1173,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1182,19 +1181,19 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,Keluarga,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm();  
-}//GEN-LAST:event_BtnBatalActionPerformed
+        isForm();
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()>-1){
@@ -1211,9 +1210,9 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }   
+        }
 
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1221,7 +1220,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
@@ -1250,7 +1249,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
             }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1258,17 +1257,17 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnKeluarActionPerformed(null);
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1278,7 +1277,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             try{
                 htmlContent = new StringBuilder();
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.R.M.</b></td>"+
@@ -1307,7 +1306,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Petugas</b></td>"+
                     "</tr>"
                 );
-                
+
                 for (i = 0; i < tabMode.getRowCount(); i++) {
                     htmlContent.append(
                         "<tr class='isi'>"+
@@ -1338,7 +1337,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                             "<td valign='top'>"+tbObat.getValueAt(i,24).toString()+"</td>"+
                         "</tr>");
                 }
-                
+
                 LoadHTML.setText(
                     "<html>"+
                       "<table width='2500px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
@@ -1347,7 +1346,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                     "</html>"
                 );
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1362,8 +1361,8 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                 );
                 bg.close();
 
-                File f = new File("DataPengkajianRestrain.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("DataPengkajianRestrain.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='2500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1372,12 +1371,12 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA PENGKAJIAN RESTRAIN<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA PENGKAJIAN RESTRAIN<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
 
             }catch(Exception e){
@@ -1385,7 +1384,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
             }
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1393,7 +1392,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1403,11 +1402,11 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1415,12 +1414,12 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1429,9 +1428,9 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TPasien);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
-   
-                                  
+    }//GEN-LAST:event_BtnAllKeyPressed
+
+
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
@@ -1444,7 +1443,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbObatMouseClicked
+    }//GEN-LAST:event_tbObatMouseClicked
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
        isForm();
@@ -1513,10 +1512,10 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas.requestFocus();
                     petugas=null;
                 }
@@ -1527,15 +1526,15 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
         }
-        petugas.setVisible(true); 
+        petugas.setVisible(true);
     }//GEN-LAST:event_BtnPetugasActionPerformed
 
     private void BtnPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPetugasKeyPressed
@@ -1811,7 +1810,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                     "(reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or pengkajian_restrain.nip like ? or petugas.nama like ?) "+
                     "order by pengkajian_restrain.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1825,7 +1824,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
                 }
-                  
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1833,7 +1832,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                         rs.getString("jk"),rs.getDate("tgl_lahir"),rs.getString("tanggal"),rs.getString("gcs"),rs.getString("refleka_cahaya_ka"),rs.getString("refleka_cahaya_ki"),
                         rs.getString("ukuran_pupil_ka"),rs.getString("ukuran_pupil_ki"),rs.getString("td"),rs.getString("suhu"),rs.getString("rr"),rs.getString("nadi"),
                         rs.getString("hasil_observasi"),rs.getString("pertimbangan_klinis"),rs.getString("restrain_non_farmakologi"),rs.getString("restrain_non_farmakologi_keterangan"),
-                        rs.getString("restrain_farmakologi"),rs.getString("sudah_dijelaskan_keluarga"),rs.getString("keluarga_yang_menyetujui"),rs.getString("nip"),rs.getString("nama") 
+                        rs.getString("restrain_farmakologi"),rs.getString("sudah_dijelaskan_keluarga"),rs.getString("keluarga_yang_menyetujui"),rs.getString("nip"),rs.getString("nama")
                     });
                 }
             } catch (Exception e) {
@@ -1873,7 +1872,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
         ReflekaCahayaKanan.requestFocus();
     }
 
- 
+
     private void getData() {
          if(tbObat.getSelectedRow()!= -1){
             TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -1882,22 +1881,22 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
             Umur.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
             JK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
             LahirPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            GCS.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()); 
-            ReflekaCahayaKanan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString()); 
-            ReflekaCahayaKiri.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString()); 
-            UkuranPupilKanan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString()); 
-            UkuranPupilKiri.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()); 
-            TD.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString()); 
-            Suhu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()); 
-            RR.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString()); 
-            Nadi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString()); 
-            HasilObservasi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString()); 
+            GCS.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
+            ReflekaCahayaKanan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
+            ReflekaCahayaKiri.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
+            UkuranPupilKanan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
+            UkuranPupilKiri.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+            TD.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
+            Suhu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
+            RR.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
+            Nadi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
+            HasilObservasi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
             PertimbanganKlinis.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            RestrainNonFarmakologi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString()); 
-            KeteranganNonRestrainFarmakologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString()); 
-            RestrainFarmakologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString()); 
-            SudahDijelaskan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString()); 
-            Keluarga.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString()); 
+            RestrainNonFarmakologi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
+            KeteranganNonRestrainFarmakologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
+            RestrainFarmakologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
+            SudahDijelaskan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
+            Keluarga.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
             Valid.SetTgl2(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
         }
     }
@@ -1934,7 +1933,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
@@ -1949,28 +1948,28 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
             if(internalFrame1.getHeight()>618){
                 ChkInput.setVisible(false);
                 PanelInput.setPreferredSize(new Dimension(WIDTH,446));
-                FormInput.setVisible(true);      
+                FormInput.setVisible(true);
                 ChkInput.setVisible(true);
             }else{
                 ChkInput.setVisible(false);
                 PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-175));
-                FormInput.setVisible(true);      
+                FormInput.setVisible(true);
                 ChkInput.setVisible(true);
             }
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-       
-    
+
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpengkajian_restrain());
         BtnHapus.setEnabled(akses.getpengkajian_restrain());
         BtnEdit.setEnabled(akses.getpengkajian_restrain());
-        BtnPrint.setEnabled(akses.getpengkajian_restrain()); 
+        BtnPrint.setEnabled(akses.getpengkajian_restrain());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             BtnPetugas.setEnabled(false);
@@ -1980,7 +1979,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }    
+        }
 
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
@@ -1989,15 +1988,15 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
             }
         }
     }
-  
+
     private void ganti() {
         if(Sequel.mengedittf("pengkajian_restrain","no_rawat=?","no_rawat=?,tanggal=?,nip=?,gcs=?,refleka_cahaya_ka=?,refleka_cahaya_ki=?,ukuran_pupil_ka=?,ukuran_pupil_ki=?,"+
             "td=?,suhu=?,rr=?,nadi=?,hasil_observasi=?,pertimbangan_klinis=?,restrain_non_farmakologi=?,restrain_non_farmakologi_keterangan=?,restrain_farmakologi=?,"+
             "sudah_dijelaskan_keluarga=?,keluarga_yang_menyetujui=?",20,new String[]{
             TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),KdPetugas.getText(),
-            GCS.getText(),ReflekaCahayaKanan.getText(),ReflekaCahayaKiri.getText(),UkuranPupilKanan.getText(),UkuranPupilKiri.getText(),TD.getText(), 
-            Suhu.getText(),RR.getText(),Nadi.getText(),HasilObservasi.getSelectedItem().toString(),PertimbanganKlinis.getSelectedItem().toString(), 
-            RestrainNonFarmakologi.getSelectedItem().toString(),KeteranganNonRestrainFarmakologi.getText(),RestrainFarmakologi.getText(), 
+            GCS.getText(),ReflekaCahayaKanan.getText(),ReflekaCahayaKiri.getText(),UkuranPupilKanan.getText(),UkuranPupilKiri.getText(),TD.getText(),
+            Suhu.getText(),RR.getText(),Nadi.getText(),HasilObservasi.getSelectedItem().toString(),PertimbanganKlinis.getSelectedItem().toString(),
+            RestrainNonFarmakologi.getSelectedItem().toString(),KeteranganNonRestrainFarmakologi.getText(),RestrainFarmakologi.getText(),
             SudahDijelaskan.getSelectedItem().toString(),Keluarga.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
         })==true){
             tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
@@ -2039,17 +2038,17 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
     }
-    
+
     private void isPhoto(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(480,HEIGHT));
-            FormPhoto.setVisible(true);  
+            FormPhoto.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){    
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormPhoto.setVisible(false);  
+            FormPhoto.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
@@ -2069,7 +2068,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                         }else{
                             lokasifile=rs.getString("photo");
                             LoadHTML2.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/pengkajianrestrain/"+rs.getString("photo")+"' alt='photo' width='500' height='500'/></center></body></html>");
-                        }  
+                        }
                     }else{
                         lokasifile="";
                         LoadHTML2.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
@@ -2094,9 +2093,9 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
     private void simpan() {
         if(Sequel.menyimpantf("pengkajian_restrain","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",19,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),KdPetugas.getText(),
-                GCS.getText(),ReflekaCahayaKanan.getText(),ReflekaCahayaKiri.getText(),UkuranPupilKanan.getText(),UkuranPupilKiri.getText(),TD.getText(), 
-                Suhu.getText(),RR.getText(),Nadi.getText(),HasilObservasi.getSelectedItem().toString(),PertimbanganKlinis.getSelectedItem().toString(), 
-                RestrainNonFarmakologi.getSelectedItem().toString(),KeteranganNonRestrainFarmakologi.getText(),RestrainFarmakologi.getText(), 
+                GCS.getText(),ReflekaCahayaKanan.getText(),ReflekaCahayaKiri.getText(),UkuranPupilKanan.getText(),UkuranPupilKiri.getText(),TD.getText(),
+                Suhu.getText(),RR.getText(),Nadi.getText(),HasilObservasi.getSelectedItem().toString(),PertimbanganKlinis.getSelectedItem().toString(),
+                RestrainNonFarmakologi.getSelectedItem().toString(),KeteranganNonRestrainFarmakologi.getText(),RestrainFarmakologi.getText(),
                 SudahDijelaskan.getSelectedItem().toString(),Keluarga.getText()
             })==true){
             tabMode.addRow(new Object[]{
@@ -2109,7 +2108,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
             emptTeks();
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2135,13 +2134,10 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
 }
-
-
-

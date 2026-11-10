@@ -18,17 +18,15 @@ package grafikanalisa;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import java.awt.Font;
-
-import javax.swing.JPanel;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -54,10 +52,10 @@ public class grafiksql2 extends JDialog {
         // super(title);
          setTitle(title);
          JPanel chartPanel = createDemoPanel(query,Kolom);
-         
+
          chartPanel.setSize(screen.width,screen.height);
-         setContentPane(chartPanel);       
-         
+         setContentPane(chartPanel);
+
          //setSize(screen.width,screen.height);
          setModal(true);
          //setUndecorated(true);
@@ -200,4 +198,3 @@ public class grafiksql2 extends JDialog {
 //
 //         }
 }
-

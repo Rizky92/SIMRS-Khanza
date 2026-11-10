@@ -18,17 +18,15 @@ package grafikanalisa;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import java.awt.Font;
-
-import javax.swing.JPanel;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
@@ -52,9 +50,9 @@ public class grafikperiksaralanibutahun extends JDialog {
       public grafikperiksaralanibutahun(String title,String symbol) {
          setTitle(title);
          JPanel chartPanel = createDemoPanel(symbol);
-         
+
          chartPanel.setSize(screen.width,screen.height);
-         setContentPane(chartPanel);       
+         setContentPane(chartPanel);
          setModal(true);
          setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
          pack();
@@ -66,7 +64,7 @@ public class grafikperiksaralanibutahun extends JDialog {
 
           DefaultCategoryDataset result = new DefaultCategoryDataset();
           String series1 = "Registrasi Pertahun";
-          
+
             try {
                 Statement stat = koneksiDB.condb().createStatement();
                 ResultSet rs = stat.executeQuery(symbol);
@@ -140,4 +138,3 @@ public class grafikperiksaralanibutahun extends JDialog {
          }
 
 }
-

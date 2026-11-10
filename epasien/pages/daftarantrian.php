@@ -2,21 +2,19 @@
     ob_start();
     session_start();
     require_once('../conf/conf.php');
-    
+
     switch (URUTNOREG) {
-        case "poli" : 
+        case "poli" :
             echo "<p class='col-pink'>".getOne("select count(no_rawat) from reg_periksa where stts = 'Belum' and kd_poli='".cleankar2($_SESSION["kd_poli"])."' and tgl_registrasi='".cleankar2($_SESSION["tgl_registrasi"])."' and no_reg < '".cleankar2($_SESSION["no_reg"])."' ")." Antrian Lagi</p>";
             break;
-        case "dokter" : 
+        case "dokter" :
             echo "<p class='col-pink'>".getOne("select count(no_rawat) from reg_periksa where stts = 'Belum' and kd_dokter='".cleankar2($_SESSION["kd_dokter"])."' and tgl_registrasi='".cleankar2($_SESSION["tgl_registrasi"])."' and no_reg < '".cleankar2($_SESSION["no_reg"])."'")." Antrian Lagi</p>";
             break;
-        case "dokter + poli" : 
+        case "dokter + poli" :
             echo "<p class='col-pink'>".getOne("select count(no_rawat) from reg_periksa where stts = 'Belum' and kd_poli='".cleankar2($_SESSION["kd_poli"])."' and kd_dokter='".cleankar2($_SESSION["kd_dokter"])."' and tgl_registrasi='".cleankar2($_SESSION["tgl_registrasi"])."' and no_reg < '".cleankar2($_SESSION["no_reg"])."'")." Antrian Lagi</p>";
             break;
-        default : 
+        default :
             echo "<p class='col-pink'>".getOne("select count(no_rawat) from reg_periksa where stts = 'Belum' and kd_dokter='".cleankar2($_SESSION["kd_dokter"])."' and tgl_registrasi='".cleankar2($_SESSION["tgl_registrasi"])."' and no_reg < '".cleankar2($_SESSION["no_reg"])."'")." Antrian Lagi</p>";
             break;
     }
 ?>
-    
-

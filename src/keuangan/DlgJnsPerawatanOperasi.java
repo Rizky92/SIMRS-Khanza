@@ -11,11 +11,11 @@
 
 package keuangan;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
@@ -89,14 +89,14 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                 java.lang.Boolean.class, java.lang.Object.class,java.lang.Object.class,java.lang.Object.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
+                 java.lang.Boolean.class, java.lang.Object.class,java.lang.Object.class,java.lang.Object.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
                  java.lang.String.class,java.lang.String.class
              };
              @Override
@@ -129,7 +129,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             }
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
 
         TKd.setDocument(new batasInput((byte)15).getKata(TKd));
         TNm.setDocument(new batasInput((byte)80).getKata(TNm));
@@ -159,12 +159,12 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         TOmloop4.setDocument(new batasInput((byte)13).getOnlyAngka(TOmloop4));
         TOmloop5.setDocument(new batasInput((byte)13).getOnlyAngka(TOmloop5));
         TSarpras.setDocument(new batasInput((byte)13).getOnlyAngka(TSarpras));
-        TdrPJAnak.setDocument(new batasInput((byte)13).getOnlyAngka(TdrPJAnak));        
+        TdrPJAnak.setDocument(new batasInput((byte)13).getOnlyAngka(TdrPJAnak));
         TdrUmum.setDocument(new batasInput((byte)13).getOnlyAngka(TdrUmum));
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -1111,11 +1111,11 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
 
     private void TKdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
         Valid.pindah(evt,TCari,TNm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 
     private void TNmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmKeyPressed
         Valid.pindah(evt,TKd,Kategori);
-}//GEN-LAST:event_TNmKeyPressed
+    }//GEN-LAST:event_TNmKeyPressed
 
     private void TOperator1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TOperator1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -1127,7 +1127,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             isjml();
             TOperator2.requestFocus();
         }
-}//GEN-LAST:event_TOperator1KeyPressed
+    }//GEN-LAST:event_TOperator1KeyPressed
 
     private void TAsisOperator1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAsisOperator1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -1139,7 +1139,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             isjml();
             TAsisOperator2.requestFocus();
         }
-}//GEN-LAST:event_TAsisOperator1KeyPressed
+    }//GEN-LAST:event_TAsisOperator1KeyPressed
 
     private void TAlatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAlatKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -1151,7 +1151,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             isjml();
             TdrUmum.requestFocus();
         }
-}//GEN-LAST:event_TAlatKeyPressed
+    }//GEN-LAST:event_TAlatKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TKd.getText().trim().equals("")){
@@ -1228,7 +1228,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             runBackground(() ->tampil());
             emptTeks();
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1236,28 +1236,28 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,Kelas,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
 
-        emptTeks();        
-}//GEN-LAST:event_BtnBatalActionPerformed
+        emptTeks();
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbJnsPerawatan.getRowCount();i++){ 
+        for(i=0;i<tbJnsPerawatan.getRowCount();i++){
             if(tbJnsPerawatan.getValueAt(i,0).toString().equals("true")){
                 Sequel.mengedit("paket_operasi","kode_paket='"+tbJnsPerawatan.getValueAt(i,1).toString()+"'","status='0'");
             }
-        } 
+        }
         runBackground(() ->tampil());
         emptTeks();
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1265,7 +1265,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TKd.getText().trim().equals("")){
@@ -1343,10 +1343,10 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
                         "dokter_umum='"+TdrUmum.getText()+"',kd_pj='"+kdpnj.getText()+"',kelas='"+Kelas.getSelectedItem()+"'");
                 if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
-            }                
+            }
         }
-        
-}//GEN-LAST:event_BtnEditActionPerformed
+
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1354,17 +1354,17 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1374,15 +1374,15 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-            Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPaketOperasi.jasper","report","::[ Data Paket Operasi ]::",
                    "select paket_operasi.kode_paket, paket_operasi.nm_perawatan,(paket_operasi.operator1+paket_operasi.operator2+paket_operasi.operator3+"+
                        "paket_operasi.asisten_operator1+paket_operasi.asisten_operator2+paket_operasi.asisten_operator3+paket_operasi.instrumen+"+
@@ -1399,7 +1399,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
                    "paket_operasi.status='1' and penjab.png_jawab like '%"+TCari.getText()+"%' order by paket_operasi.kode_paket ",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1407,7 +1407,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnEdit, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1417,11 +1417,11 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1429,12 +1429,12 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1443,7 +1443,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -1456,7 +1456,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbJnsPerawatanMouseClicked
+    }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -1472,15 +1472,15 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
                     Kelas.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),34).toString());
                 } catch (java.lang.NullPointerException e) {
                 }
-            }else if(evt.getKeyCode()==KeyEvent.VK_A){                
-                for(i=0;i<tbJnsPerawatan.getRowCount();i++){ 
+            }else if(evt.getKeyCode()==KeyEvent.VK_A){
+                for(i=0;i<tbJnsPerawatan.getRowCount();i++){
                     tbJnsPerawatan.setValueAt(true,i,0);
                 }
-            } 
+            }
         }
-}//GEN-LAST:event_tbJnsPerawatanKeyPressed
+    }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
-private void TSewaOKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TSewaOKKeyPressed
+    private void TSewaOKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TSewaOKKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1490,9 +1490,9 @@ private void TSewaOKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
             isjml();
             TPerawatLuar.requestFocus();
         }
-}//GEN-LAST:event_TSewaOKKeyPressed
+    }//GEN-LAST:event_TSewaOKKeyPressed
 
-private void TAnastesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAnastesiKeyPressed
+    private void TAnastesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAnastesiKeyPressed
        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1502,9 +1502,9 @@ private void TAnastesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             isjml();
             TAnak.requestFocus();
         }
-}//GEN-LAST:event_TAnastesiKeyPressed
+    }//GEN-LAST:event_TAnastesiKeyPressed
 
-private void TAsisAnastesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAsisAnastesiKeyPressed
+    private void TAsisAnastesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAsisAnastesiKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1514,9 +1514,9 @@ private void TAsisAnastesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
             isjml();
             TAsisAnastesi1.requestFocus();
         }
-}//GEN-LAST:event_TAsisAnastesiKeyPressed
+    }//GEN-LAST:event_TAsisAnastesiKeyPressed
 
-private void TPerawatLuarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPerawatLuarKeyPressed
+    private void TPerawatLuarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPerawatLuarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1526,9 +1526,9 @@ private void TPerawatLuarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:ev
             isjml();
             TSarpras.requestFocus();
         }
-}//GEN-LAST:event_TPerawatLuarKeyPressed
+    }//GEN-LAST:event_TPerawatLuarKeyPressed
 
-private void TOperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TOperator2KeyPressed
+    private void TOperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TOperator2KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1538,9 +1538,9 @@ private void TOperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             isjml();
             TOperator3.requestFocus();
         }
-}//GEN-LAST:event_TOperator2KeyPressed
+    }//GEN-LAST:event_TOperator2KeyPressed
 
-private void TOperator3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TOperator3KeyPressed
+    private void TOperator3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TOperator3KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1550,9 +1550,9 @@ private void TOperator3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             isjml();
             TAnastesi.requestFocus();
         }
-}//GEN-LAST:event_TOperator3KeyPressed
+    }//GEN-LAST:event_TOperator3KeyPressed
 
-private void TAsisOperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAsisOperator2KeyPressed
+    private void TAsisOperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAsisOperator2KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1562,9 +1562,9 @@ private void TAsisOperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
             isjml();
             TAsisOperator3.requestFocus();
         }
-}//GEN-LAST:event_TAsisOperator2KeyPressed
+    }//GEN-LAST:event_TAsisOperator2KeyPressed
 
-private void TInstrumenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TInstrumenKeyPressed
+    private void TInstrumenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TInstrumenKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1574,9 +1574,9 @@ private void TInstrumenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             isjml();
             TAsisOperator1.requestFocus();
         }
-}//GEN-LAST:event_TInstrumenKeyPressed
+    }//GEN-LAST:event_TInstrumenKeyPressed
 
-private void TAnakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAnakKeyPressed
+    private void TAnakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAnakKeyPressed
        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1586,9 +1586,9 @@ private void TAnakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAn
             isjml();
             TBagianRS.requestFocus();
         }
-}//GEN-LAST:event_TAnakKeyPressed
+    }//GEN-LAST:event_TAnakKeyPressed
 
-private void TResusitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TResusitasKeyPressed
+    private void TResusitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TResusitasKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1597,10 +1597,10 @@ private void TResusitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
             TAkomodasi.requestFocus();
-        } 
-}//GEN-LAST:event_TResusitasKeyPressed
+        }
+    }//GEN-LAST:event_TResusitasKeyPressed
 
-private void TBidan1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TBidan1KeyPressed
+    private void TBidan1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TBidan1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1610,9 +1610,9 @@ private void TBidan1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
             isjml();
             TBidan2.requestFocus();
         }
-}//GEN-LAST:event_TBidan1KeyPressed
+    }//GEN-LAST:event_TBidan1KeyPressed
 
-private void TBagianRSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TBagianRSKeyPressed
+    private void TBagianRSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TBagianRSKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1622,9 +1622,9 @@ private void TBagianRSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             isjml();
             TAlat.requestFocus();
         }
-}//GEN-LAST:event_TBagianRSKeyPressed
+    }//GEN-LAST:event_TBagianRSKeyPressed
 
-private void TAkomodasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAkomodasiKeyPressed
+    private void TAkomodasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAkomodasiKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1634,9 +1634,9 @@ private void TAkomodasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             isjml();
             TSewaOK.requestFocus();
         }
-}//GEN-LAST:event_TAkomodasiKeyPressed
+    }//GEN-LAST:event_TAkomodasiKeyPressed
 
-private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TOmloop1KeyPressed
+    private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TOmloop1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1646,7 +1646,7 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             isjml();
             TOmloop2.requestFocus();
         }
-}//GEN-LAST:event_TOmloop1KeyPressed
+    }//GEN-LAST:event_TOmloop1KeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         runBackground(() ->tampil());
@@ -1671,7 +1671,7 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void KategoriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KategoriKeyPressed
@@ -1792,33 +1792,33 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     if(penjab.getTable().getSelectedRow()!= -1){
                         kdpnj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                         nmpnj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                    }    
+                    }
                     kdpnj.requestFocus();
                     penjab=null;
                 }
-            }); 
+            });
 
             penjab.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         penjab.dispose();
-                    } 
+                    }
                 }
-            });   
+            });
             penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             penjab.setLocationRelativeTo(internalFrame1);
         }
-               
+
         if (penjab == null) return;
         if (!penjab.isVisible()) {
             penjab.emptTeks();
             penjab.isCek();
-        }  
+        }
         if (penjab.isVisible()) {
             penjab.toFront();
             return;
-        }    
+        }
         penjab.setVisible(true);
     }//GEN-LAST:event_BtnPenjabActionPerformed
 
@@ -1830,22 +1830,22 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     }//GEN-LAST:event_MnRestoreActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        if(this.getHeight()<540){   
+        if(this.getHeight()<540){
             Scroll1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
             FormInput.setPreferredSize(new Dimension(FormInput.WIDTH,390));
             if(this.getWidth()<760){
-                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);                                
+                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
                 FormInput.setPreferredSize(new Dimension(740,390));
             }else{
-                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);                
+                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             }
         }else{
-            Scroll1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);            
+            Scroll1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
             if(this.getWidth()<760){
-                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);                                
+                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
                 FormInput.setPreferredSize(new Dimension(740,FormInput.HEIGHT));
             }else{
-                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);                
+                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             }
         }
     }//GEN-LAST:event_formWindowActivated
@@ -2018,7 +2018,7 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             pstampil=koneksi.prepareStatement(
                        "select paket_operasi.kode_paket, paket_operasi.nm_perawatan,paket_operasi.kategori,"+
                        "paket_operasi.operator1, paket_operasi.operator2, paket_operasi.operator3, "+
@@ -2048,43 +2048,43 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 pstampil.setString(3,"%"+TCari.getText()+"%");
                 pstampil.setString(4,"%"+TCari.getText()+"%");
                 rs=pstampil.executeQuery();
-                while(rs.next()){                    
+                while(rs.next()){
                     tabMode.addRow(new Object[]{false,rs.getString("kode_paket"),
                                    rs.getString("nm_perawatan"),
-                                   rs.getString("kategori"), 
-                                   rs.getDouble("operator1"), 
-                                   rs.getDouble("operator2"), 
-                                   rs.getDouble("operator3"), 
-                                   rs.getDouble("asisten_operator1"), 
-                                   rs.getDouble("asisten_operator2"), 
-                                   rs.getDouble("asisten_operator3"), 
-                                   rs.getDouble("instrumen"), 
-                                   rs.getDouble("dokter_anestesi"), 
+                                   rs.getString("kategori"),
+                                   rs.getDouble("operator1"),
+                                   rs.getDouble("operator2"),
+                                   rs.getDouble("operator3"),
+                                   rs.getDouble("asisten_operator1"),
+                                   rs.getDouble("asisten_operator2"),
+                                   rs.getDouble("asisten_operator3"),
+                                   rs.getDouble("instrumen"),
+                                   rs.getDouble("dokter_anestesi"),
                                    rs.getDouble("asisten_anestesi"),
-                                   rs.getDouble("asisten_anestesi2"), 
-                                   rs.getDouble("dokter_anak"), 
-                                   rs.getDouble("perawaat_resusitas"), 
-                                   rs.getDouble("bidan"), 
-                                   rs.getDouble("bidan2"), 
-                                   rs.getDouble("bidan3"), 
-                                   rs.getDouble("perawat_luar"), 
-                                   rs.getDouble("alat"), 
-                                   rs.getDouble("sewa_ok"), 
-                                   rs.getDouble("akomodasi"), 
-                                   rs.getDouble("bagian_rs"), 
-                                   rs.getDouble("omloop"), 
-                                   rs.getDouble("omloop2"), 
-                                   rs.getDouble("omloop3"), 
-                                   rs.getDouble("omloop4"), 
-                                   rs.getDouble("omloop5"), 
-                                   rs.getDouble("sarpras"), 
-                                   rs.getDouble("dokter_pjanak"), 
-                                   rs.getDouble("dokter_umum"), 
+                                   rs.getDouble("asisten_anestesi2"),
+                                   rs.getDouble("dokter_anak"),
+                                   rs.getDouble("perawaat_resusitas"),
+                                   rs.getDouble("bidan"),
+                                   rs.getDouble("bidan2"),
+                                   rs.getDouble("bidan3"),
+                                   rs.getDouble("perawat_luar"),
+                                   rs.getDouble("alat"),
+                                   rs.getDouble("sewa_ok"),
+                                   rs.getDouble("akomodasi"),
+                                   rs.getDouble("bagian_rs"),
+                                   rs.getDouble("omloop"),
+                                   rs.getDouble("omloop2"),
+                                   rs.getDouble("omloop3"),
+                                   rs.getDouble("omloop4"),
+                                   rs.getDouble("omloop5"),
+                                   rs.getDouble("sarpras"),
+                                   rs.getDouble("dokter_pjanak"),
+                                   rs.getDouble("dokter_umum"),
                                    rs.getDouble("jumlah"),
                                    rs.getString("png_jawab"),
                                    rs.getString("kelas")
                     });
-                }  
+                }
             } catch(Exception e){
                 System.out.println(e);
             } finally{
@@ -2112,7 +2112,7 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         TAsisOperator3.setText("0");
         TInstrumen.setText("0");
         TAnastesi.setText("0");
-        TAsisAnastesi.setText("0");        
+        TAsisAnastesi.setText("0");
         TAsisAnastesi1.setText("0");
         TAnak.setText("0");
         TResusitas.setText("0");
@@ -2131,7 +2131,7 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         TOmloop4.setText("0");
         TOmloop5.setText("0");
         TSarpras.setText("0");
-        TdrPJAnak.setText("0");        
+        TdrPJAnak.setText("0");
         TdrUmum.setText("0");
         TTotal.setText("0");
         Kelas.setSelectedIndex(0);
@@ -2181,98 +2181,98 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     }
 
 
-    private void isjml(){       
+    private void isjml(){
 
         if((!TOperator1.getText().equals(""))){
-           operator1=Double.parseDouble(TOperator1.getText().trim());            
+           operator1=Double.parseDouble(TOperator1.getText().trim());
         }
         if((!TOperator2.getText().equals(""))){
-           operator2=Double.parseDouble(TOperator2.getText().trim());            
+           operator2=Double.parseDouble(TOperator2.getText().trim());
         }
         if((!TOperator3.getText().equals(""))){
-           operator3=Double.parseDouble(TOperator3.getText().trim());            
+           operator3=Double.parseDouble(TOperator3.getText().trim());
         }
         if((!TAsisOperator1.getText().equals(""))){
-           asistenoperator1=Double.parseDouble(TAsisOperator1.getText().trim());            
+           asistenoperator1=Double.parseDouble(TAsisOperator1.getText().trim());
         }
         if((!TAsisOperator2.getText().equals(""))){
-           asistenoperator2=Double.parseDouble(TAsisOperator2.getText().trim());            
+           asistenoperator2=Double.parseDouble(TAsisOperator2.getText().trim());
         }
         if((!TAsisOperator3.getText().equals(""))){
-           asistenoperator3=Double.parseDouble(TAsisOperator3.getText().trim());            
+           asistenoperator3=Double.parseDouble(TAsisOperator3.getText().trim());
         }
         if((!TInstrumen.getText().equals(""))){
-           instrumen=Double.parseDouble(TInstrumen.getText().trim());            
+           instrumen=Double.parseDouble(TInstrumen.getText().trim());
         }
         if((!TAnastesi.getText().equals(""))){
-           anastesi=Double.parseDouble(TAnastesi.getText().trim());            
+           anastesi=Double.parseDouble(TAnastesi.getText().trim());
         }
         if((!TAsisAnastesi.getText().equals(""))){
-           asistenanas=Double.parseDouble(TAsisAnastesi.getText().trim());            
+           asistenanas=Double.parseDouble(TAsisAnastesi.getText().trim());
         }
         if((!TAsisAnastesi1.getText().equals(""))){
-           asistenanas2=Double.parseDouble(TAsisAnastesi1.getText().trim());            
+           asistenanas2=Double.parseDouble(TAsisAnastesi1.getText().trim());
         }
         if((!TAnak.getText().equals(""))){
-           dokteranak=Double.parseDouble(TAnak.getText().trim());            
+           dokteranak=Double.parseDouble(TAnak.getText().trim());
         }
         if((!TResusitas.getText().equals(""))){
-           perawatresusitas=Double.parseDouble(TResusitas.getText().trim());            
+           perawatresusitas=Double.parseDouble(TResusitas.getText().trim());
         }
         if((!TBidan1.getText().equals(""))){
-           bidan1=Double.parseDouble(TBidan1.getText().trim());            
+           bidan1=Double.parseDouble(TBidan1.getText().trim());
         }
         if((!TBidan2.getText().equals(""))){
-           bidan2=Double.parseDouble(TBidan2.getText().trim());            
+           bidan2=Double.parseDouble(TBidan2.getText().trim());
         }
         if((!TBidan3.getText().equals(""))){
-           bidan3=Double.parseDouble(TBidan3.getText().trim());            
+           bidan3=Double.parseDouble(TBidan3.getText().trim());
         }
         if((!TAlat.getText().equals(""))){
-           alat=Double.parseDouble(TAlat.getText().trim());            
+           alat=Double.parseDouble(TAlat.getText().trim());
         }
         if((!TSewaOK.getText().equals(""))){
-           sewaok=Double.parseDouble(TSewaOK.getText().trim());            
+           sewaok=Double.parseDouble(TSewaOK.getText().trim());
         }
         if((!TPerawatLuar.getText().equals(""))){
-           perawatluar=Double.parseDouble(TPerawatLuar.getText().trim());            
+           perawatluar=Double.parseDouble(TPerawatLuar.getText().trim());
         }
         if((!TAkomodasi.getText().equals(""))){
-           sewavk=Double.parseDouble(TAkomodasi.getText().trim());            
+           sewavk=Double.parseDouble(TAkomodasi.getText().trim());
         }
         if((!TBagianRS.getText().equals(""))){
-           bagianrs=Double.parseDouble(TBagianRS.getText().trim());            
+           bagianrs=Double.parseDouble(TBagianRS.getText().trim());
         }
         if((!TOmloop1.getText().equals(""))){
-           omloop1=Double.parseDouble(TOmloop1.getText().trim());            
+           omloop1=Double.parseDouble(TOmloop1.getText().trim());
         }
         if((!TOmloop2.getText().equals(""))){
-           omloop2=Double.parseDouble(TOmloop2.getText().trim());            
+           omloop2=Double.parseDouble(TOmloop2.getText().trim());
         }
         if((!TOmloop3.getText().equals(""))){
-           omloop3=Double.parseDouble(TOmloop3.getText().trim());            
+           omloop3=Double.parseDouble(TOmloop3.getText().trim());
         }
         if((!TOmloop4.getText().equals(""))){
-           omloop4=Double.parseDouble(TOmloop4.getText().trim());            
+           omloop4=Double.parseDouble(TOmloop4.getText().trim());
         }
         if((!TOmloop5.getText().equals(""))){
-           omloop5=Double.parseDouble(TOmloop5.getText().trim());            
+           omloop5=Double.parseDouble(TOmloop5.getText().trim());
         }
         if((!TSarpras.getText().equals(""))){
-           sarpras=Double.parseDouble(TSarpras.getText().trim());            
+           sarpras=Double.parseDouble(TSarpras.getText().trim());
         }
         if((!TdrPJAnak.getText().equals(""))){
-           dokterpjanak=Double.parseDouble(TdrPJAnak.getText().trim());            
+           dokterpjanak=Double.parseDouble(TdrPJAnak.getText().trim());
         }
         if((!TdrUmum.getText().equals(""))){
-           dokterumum=Double.parseDouble(TdrUmum.getText().trim());            
+           dokterumum=Double.parseDouble(TdrUmum.getText().trim());
         }
         TTotal.setText(Valid.SetAngka2(operator1+operator2+operator3+asistenoperator1+
                 asistenoperator2+asistenoperator3+instrumen+dokteranak+perawatresusitas+bidan1+bidan2+bidan3+
                 alat+anastesi+perawatluar+asistenanas+asistenanas2+sewaok+sewavk+bagianrs+omloop1+omloop2+
                 omloop3+omloop4+omloop5+sarpras+dokterpjanak+dokterumum));
     }
-    
+
     public JTextField getTextField(){
         return TKd;
     }
@@ -2283,8 +2283,8 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 
     public void setTabData(){
         TabRawat.setSelectedIndex(1);
-    }     
-    
+    }
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.gettarif_operasi());
         BtnHapus.setEnabled(akses.gettarif_operasi());
@@ -2294,9 +2294,9 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             MnRestore.setEnabled(true);
         }else{
             MnRestore.setEnabled(false);
-        } 
+        }
     }
-    
+
     public JTable getTable(){
         return tbJnsPerawatan;
     }
@@ -2326,11 +2326,11 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    
+
 }

@@ -28,22 +28,22 @@
                     sisrute_rujukan_keluar.anamnesis_pemeriksaan,sisrute_rujukan_keluar.kesadaran,sisrute_rujukan_keluar.tekanan_darah,
                     sisrute_rujukan_keluar.nadi,sisrute_rujukan_keluar.suhu,sisrute_rujukan_keluar.respirasi,
                     sisrute_rujukan_keluar.keadaan_umum,sisrute_rujukan_keluar.tingkat_nyeri,sisrute_rujukan_keluar.alergi,
-                    sisrute_rujukan_keluar.laboratorium,sisrute_rujukan_keluar.radiologi,sisrute_rujukan_keluar.terapitindakan from sisrute_rujukan_keluar where 
-                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.no_rawat like $P{parameter} or 
-                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.no_rujuk like $P{parameter} or 
-                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.no_rkm_medis like $P{parameter} or 
-                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.nm_pasien like $P{parameter} or 
-                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.no_ktp like $P{parameter} or 
-                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.no_peserta like $P{parameter} or 
-                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.alamat like $P{parameter} or 
-                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.jns_rujukan like $P{parameter} or 
-                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.nm_faskes_tujuan like $P{parameter} or 
-                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.alasan_rujuk like $P{parameter} or 
-                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.kd_diagnosa like $P{parameter} or 
-                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.diagnosa_rujuk like $P{parameter} or 
-                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.dokter_perujuk like $P{parameter} or 
-                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.petugas_entry like $P{parameter} or 
-                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.kesadaran like $P{parameter} 
+                    sisrute_rujukan_keluar.laboratorium,sisrute_rujukan_keluar.radiologi,sisrute_rujukan_keluar.terapitindakan from sisrute_rujukan_keluar where
+                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.no_rawat like $P{parameter} or
+                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.no_rujuk like $P{parameter} or
+                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.no_rkm_medis like $P{parameter} or
+                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.nm_pasien like $P{parameter} or
+                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.no_ktp like $P{parameter} or
+                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.no_peserta like $P{parameter} or
+                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.alamat like $P{parameter} or
+                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.jns_rujukan like $P{parameter} or
+                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.nm_faskes_tujuan like $P{parameter} or
+                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.alasan_rujuk like $P{parameter} or
+                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.kd_diagnosa like $P{parameter} or
+                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.diagnosa_rujuk like $P{parameter} or
+                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.dokter_perujuk like $P{parameter} or
+                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.petugas_entry like $P{parameter} or
+                    sisrute_rujukan_keluar.tgl_rujuk between $P{tanggal1} and $P{tanggal2} and sisrute_rujukan_keluar.kesadaran like $P{parameter}
                     order by sisrute_rujukan_keluar.tgl_rujuk desc]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

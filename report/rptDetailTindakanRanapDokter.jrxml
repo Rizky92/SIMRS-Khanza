@@ -19,26 +19,26 @@
 pasien.nm_pasien,rawat_inap_dr.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,
 rawat_inap_dr.kd_dokter,dokter.nm_dokter,rawat_inap_dr.tgl_perawatan,
 rawat_inap_dr.jam_rawat,penjab.png_jawab,
-(select bangsal.nm_bangsal from kamar_inap 
-inner join kamar inner join bangsal on 
-kamar_inap.kd_kamar=kamar.kd_kamar 
+(select bangsal.nm_bangsal from kamar_inap
+inner join kamar inner join bangsal on
+kamar_inap.kd_kamar=kamar.kd_kamar
 and kamar.kd_bangsal=bangsal.kd_bangsal where kamar_inap.no_rawat=rawat_inap_dr.no_rawat limit 1 ) as nm_bangsal ,  +
 rawat_inap_dr.material,rawat_inap_dr.bhp,rawat_inap_dr.tarif_tindakandr,
-rawat_inap_dr.kso,rawat_inap_dr.menejemen,rawat_inap_dr.biaya_rawat 
-from pasien inner join reg_periksa inner join jns_perawatan_inap inner join 
-dokter inner join rawat_inap_dr inner join penjab 
-on rawat_inap_dr.no_rawat=reg_periksa.no_rawat 
-and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-and reg_periksa.kd_pj=penjab.kd_pj 
-and rawat_inap_dr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw 
-and rawat_inap_dr.kd_dokter=dokter.kd_dokter 
-where rawat_inap_dr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and rawat_inap_dr.no_rawat like $P{cari} or 
- rawat_inap_dr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and reg_periksa.no_rkm_medis like $P{cari} or 
- rawat_inap_dr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and pasien.nm_pasien like $P{cari} or 
- rawat_inap_dr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and jns_perawatan_inap.nm_perawatan like $P{cari} or 
- rawat_inap_dr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and rawat_inap_dr.kd_dokter like $P{cari} or 
- rawat_inap_dr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and dokter.nm_dokter like $P{cari} or 
- rawat_inap_dr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and penjab.png_jawab like $P{cari} 
+rawat_inap_dr.kso,rawat_inap_dr.menejemen,rawat_inap_dr.biaya_rawat
+from pasien inner join reg_periksa inner join jns_perawatan_inap inner join
+dokter inner join rawat_inap_dr inner join penjab
+on rawat_inap_dr.no_rawat=reg_periksa.no_rawat
+and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+and reg_periksa.kd_pj=penjab.kd_pj
+and rawat_inap_dr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw
+and rawat_inap_dr.kd_dokter=dokter.kd_dokter
+where rawat_inap_dr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and rawat_inap_dr.no_rawat like $P{cari} or
+ rawat_inap_dr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and reg_periksa.no_rkm_medis like $P{cari} or
+ rawat_inap_dr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and pasien.nm_pasien like $P{cari} or
+ rawat_inap_dr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and jns_perawatan_inap.nm_perawatan like $P{cari} or
+ rawat_inap_dr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and rawat_inap_dr.kd_dokter like $P{cari} or
+ rawat_inap_dr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and dokter.nm_dokter like $P{cari} or
+ rawat_inap_dr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and penjab.png_jawab like $P{cari}
  order by rawat_inap_dr.no_rawat desc]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

@@ -57,7 +57,7 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         Object[] row={"Kode Bayar","Cara Bayar"};
         tabMode=new DefaultTableModel(null,row){
@@ -91,7 +91,7 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
         kdpj.setDocument(new batasInput((byte)3).getKata(kdpj));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -416,7 +416,7 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }  
+                }
                 kdpj.requestFocus();
             }
             @Override
@@ -428,7 +428,7 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -436,7 +436,7 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     penjab.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -644,11 +644,11 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
             ps=koneksi.prepareStatement(
                    "select set_input_parsial.kd_pj,penjab.png_jawab "+
                    "from set_input_parsial inner join penjab "+
-                   "on set_input_parsial.kd_pj=penjab.kd_pj where penjab.png_jawab like ? order by set_input_parsial.kd_pj"); 
+                   "on set_input_parsial.kd_pj=penjab.kd_pj where penjab.png_jawab like ? order by set_input_parsial.kd_pj");
             try{
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery();
-                while(rs.next()){                
+                while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2)
                     });
@@ -665,7 +665,7 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }            
+        }
         LCount.setText(""+tabMode.getRowCount());
     }
 
@@ -683,7 +683,7 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
             nmpj.setText(tabMode.getValueAt(row,1).toString());
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -709,7 +709,7 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

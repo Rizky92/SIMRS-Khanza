@@ -21,7 +21,7 @@
         function PopupCenter(pageURL, title,w,h) {
             var left = (screen.width/2)-(w/2);
             var top = (screen.height/2)-(h/2);
-            var targetWin = window.open (pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);        
+            var targetWin = window.open (pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
         }
     </script>
 </head>
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                     </form>
-                    <?php 
+                    <?php
                         $BtnLogin=isset($_POST['BtnLogin'])?$_POST['BtnLogin']:NULL;
                         if (isset($BtnLogin)) {
                             if(@$_SESSION["Capcay"]==getOne2("select aes_encrypt(".validTeks4($_POST["inputcaptcha"],10).",'windi')")){
@@ -97,7 +97,7 @@
                                        exit(header("Location:index.php"));
                                     }else{
                                        echo "Username/Password ada yang salah. Silahkan ulangi...!";
-                                    }  
+                                    }
                                 }else{
                                     echo "Username/Password ada yang salah. Silahkan ulangi...!";
                                 }
@@ -110,7 +110,7 @@
             </div>
         </div>
     </div>
-    
+
     <script src="plugins/jquery/jquery.min.js"></script>
     <script src="plugins/bootstrap/js/bootstrap.js"></script>
     <script src="plugins/bootstrap-select/js/bootstrap-select.js"></script>

@@ -34,14 +34,14 @@
 	skp_kategori_penilaian.nama_kategori,
 	skp_kategori_penilaian.sasaran
 FROM skp_kriteria_penilaian
-	inner join skp_kategori_penilaian ON 
-	 skp_kategori_penilaian.kode_kategori = skp_kriteria_penilaian.kode_kategori 
-WHERE 
-	 skp_kriteria_penilaian.kode_kriteria LIKE $P{parameter} 
-	 OR skp_kriteria_penilaian.nama_kriteria LIKE $P{parameter} 
-	 OR skp_kriteria_penilaian.kode_kategori LIKE $P{parameter} 
-	 OR skp_kategori_penilaian.nama_kategori LIKE $P{parameter} 
-	 OR skp_kategori_penilaian.sasaran LIKE $P{parameter} 
+	inner join skp_kategori_penilaian ON
+	 skp_kategori_penilaian.kode_kategori = skp_kriteria_penilaian.kode_kategori
+WHERE
+	 skp_kriteria_penilaian.kode_kriteria LIKE $P{parameter}
+	 OR skp_kriteria_penilaian.nama_kriteria LIKE $P{parameter}
+	 OR skp_kriteria_penilaian.kode_kategori LIKE $P{parameter}
+	 OR skp_kategori_penilaian.nama_kategori LIKE $P{parameter}
+	 OR skp_kategori_penilaian.sasaran LIKE $P{parameter}
 ORDER BY skp_kategori_penilaian.sasaran DESC,
 	skp_kriteria_penilaian.kode_kategori DESC]]>
 	</queryString>

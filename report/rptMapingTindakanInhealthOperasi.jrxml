@@ -23,7 +23,7 @@ paket_operasi.dokter_anak+paket_operasi.perawaat_resusitas+paket_operasi.alat+pa
 paket_operasi.asisten_anestesi2+paket_operasi.bidan+paket_operasi.bidan2+paket_operasi.bidan3+paket_operasi.perawat_luar+
 paket_operasi.sewa_ok+paket_operasi.akomodasi+paket_operasi.bagian_rs+paket_operasi.omloop+paket_operasi.omloop2+paket_operasi.omloop3+
 paket_operasi.omloop4+paket_operasi.omloop5+paket_operasi.sarpras+paket_operasi.dokter_pjanak+paket_operasi.dokter_umum) as total_byr,inhealth_tindakan_operasi.kd_inhealth
-from inhealth_tindakan_operasi inner join paket_operasi on inhealth_tindakan_operasi.kode_paket=paket_operasi.kode_paket  where 
+from inhealth_tindakan_operasi inner join paket_operasi on inhealth_tindakan_operasi.kode_paket=paket_operasi.kode_paket  where
 inhealth_tindakan_operasi.kode_paket like $P{parameter} or paket_operasi.nm_perawatan like $P{parameter} or inhealth_tindakan_operasi.kd_inhealth like $P{parameter} order by paket_operasi.nm_perawatan
 ]]>
 	</queryString>

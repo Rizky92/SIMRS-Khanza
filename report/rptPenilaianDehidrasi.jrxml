@@ -25,9 +25,9 @@ penilaian_dehidrasi.penilaian4,penilaian_dehidrasi.penilaian_nilai4,
 penilaian_dehidrasi.penilaian5,penilaian_dehidrasi.penilaian_nilai5,
 penilaian_dehidrasi.penilaian6,penilaian_dehidrasi.penilaian_nilai6,
 penilaian_dehidrasi.penilaian_totalnilai,penilaian_dehidrasi.hasil_penilaian,
-penilaian_dehidrasi.kd_dokter,dokter.nm_dokter 
-from penilaian_dehidrasi inner join reg_periksa on penilaian_dehidrasi.no_rawat=reg_periksa.no_rawat 
-inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+penilaian_dehidrasi.kd_dokter,dokter.nm_dokter
+from penilaian_dehidrasi inner join reg_periksa on penilaian_dehidrasi.no_rawat=reg_periksa.no_rawat
+inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 inner join dokter on penilaian_dehidrasi.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

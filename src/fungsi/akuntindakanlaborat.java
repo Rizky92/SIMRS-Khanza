@@ -18,7 +18,7 @@ public final class akuntindakanlaborat {
             Beban_Jasa_Medik_Petugas_Laborat_Ralan="",Utang_Jasa_Medik_Petugas_Laborat_Ralan="",Beban_Kso_Laborat_Ralan="",Utang_Kso_Laborat_Ralan="",
             HPP_Persediaan_Laborat_Rawat_Jalan="",Persediaan_BHP_Laborat_Rawat_Jalan="",Beban_Jasa_Sarana_Laborat_Ralan="",Utang_Jasa_Sarana_Laborat_Ralan="",
             Beban_Jasa_Perujuk_Laborat_Ralan="",Utang_Jasa_Perujuk_Laborat_Ralan="",Beban_Jasa_Menejemen_Laborat_Ralan="",Utang_Jasa_Menejemen_Laborat_Ralan="";
-    
+
     public static void SetAkunTindakanLaborat() {
         try (
             PreparedStatement ps = koneksi.prepareStatement(
@@ -54,7 +54,7 @@ public final class akuntindakanlaborat {
         } catch (Exception e) {
             System.out.println("Notif Rekening : "+e);
         }
-        
+
         try (
             PreparedStatement ps = koneksi.prepareStatement(
                 "select set_akun_ralan.Suspen_Piutang_Laborat_Ralan,set_akun_ralan.Laborat_Ralan,"+
@@ -90,7 +90,7 @@ public final class akuntindakanlaborat {
             System.out.println("Notif Rekening : "+e);
         }
     }
-    
+
     public static String getSuspen_Piutang_Laborat_Ranap(){return akuntindakanlaborat.Suspen_Piutang_Laborat_Ranap;}
     public static String getLaborat_Ranap(){return akuntindakanlaborat.Laborat_Ranap;}
     public static String getBeban_Jasa_Medik_Dokter_Laborat_Ranap(){return akuntindakanlaborat.Beban_Jasa_Medik_Dokter_Laborat_Ranap;}

@@ -36,43 +36,43 @@ insiden_keselamatan_pasien.nip,petugas.nama,insiden_keselamatan_pasien.lokasi,
 insiden_keselamatan_pasien.kode_insiden,insiden_keselamatan.nama_insiden,
 insiden_keselamatan.jenis_insiden,insiden_keselamatan.dampak,insiden_keselamatan_pasien.unit_terkait,
 insiden_keselamatan_pasien.akibat,insiden_keselamatan_pasien.tindakan_insiden,
-insiden_keselamatan_pasien.identifikasi_masalah,insiden_keselamatan_pasien.rtl 
-from insiden_keselamatan_pasien inner join reg_periksa inner join pasien 
-inner join insiden_keselamatan inner join petugas on 
-insiden_keselamatan_pasien.no_rawat=reg_periksa.no_rawat 
+insiden_keselamatan_pasien.identifikasi_masalah,insiden_keselamatan_pasien.rtl
+from insiden_keselamatan_pasien inner join reg_periksa inner join pasien
+inner join insiden_keselamatan inner join petugas on
+insiden_keselamatan_pasien.no_rawat=reg_periksa.no_rawat
 and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and insiden_keselamatan_pasien.kode_insiden=
-insiden_keselamatan.kode_insiden and insiden_keselamatan_pasien.nip=petugas.nip where 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
-and insiden_keselamatan_pasien.no_rawat like $P{parameter} or 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
-and reg_periksa.no_rkm_medis like $P{parameter} or 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
-and pasien.nm_pasien like $P{parameter} or 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
-and insiden_keselamatan_pasien.nip like $P{parameter} or 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
-and petugas.nama like $P{parameter} or 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
-and insiden_keselamatan_pasien.lokasi like $P{parameter} or 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
-and insiden_keselamatan_pasien.kode_insiden like $P{parameter} or 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
-and insiden_keselamatan.nama_insiden like $P{parameter} or 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
-and insiden_keselamatan.jenis_insiden like $P{parameter} or 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
-and insiden_keselamatan.dampak like $P{parameter} or 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
-and insiden_keselamatan_pasien.unit_terkait like $P{parameter} or 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
-and insiden_keselamatan_pasien.akibat like $P{parameter} or 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
-and insiden_keselamatan_pasien.tindakan_insiden like $P{parameter} or 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
-and insiden_keselamatan_pasien.identifikasi_masalah like $P{parameter} or 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
-and insiden_keselamatan_pasien.kronologis like $P{parameter} or 
-insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2} 
+insiden_keselamatan.kode_insiden and insiden_keselamatan_pasien.nip=petugas.nip where
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
+and insiden_keselamatan_pasien.no_rawat like $P{parameter} or
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
+and reg_periksa.no_rkm_medis like $P{parameter} or
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
+and pasien.nm_pasien like $P{parameter} or
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
+and insiden_keselamatan_pasien.nip like $P{parameter} or
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
+and petugas.nama like $P{parameter} or
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
+and insiden_keselamatan_pasien.lokasi like $P{parameter} or
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
+and insiden_keselamatan_pasien.kode_insiden like $P{parameter} or
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
+and insiden_keselamatan.nama_insiden like $P{parameter} or
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
+and insiden_keselamatan.jenis_insiden like $P{parameter} or
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
+and insiden_keselamatan.dampak like $P{parameter} or
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
+and insiden_keselamatan_pasien.unit_terkait like $P{parameter} or
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
+and insiden_keselamatan_pasien.akibat like $P{parameter} or
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
+and insiden_keselamatan_pasien.tindakan_insiden like $P{parameter} or
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
+and insiden_keselamatan_pasien.identifikasi_masalah like $P{parameter} or
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
+and insiden_keselamatan_pasien.kronologis like $P{parameter} or
+insiden_keselamatan_pasien.tgl_kejadian between $P{tanggal1} and $P{tanggal2}
 and insiden_keselamatan_pasien.rtl like $P{parameter} order by insiden_keselamatan_pasien.tgl_kejadian]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

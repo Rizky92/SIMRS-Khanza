@@ -6,12 +6,12 @@
 <div id="post">
     <div align="center" class="link">
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
-    <div class="entry">   
+    </div>
+    <div class="entry">
 	<form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                 $action  = isset($_GET['action'])?$_GET['action']:NULL;
-                $keyword = trim(isset($_POST['keyword']))?trim($_POST['keyword']):NULL;        
+                $keyword = trim(isset($_POST['keyword']))?trim($_POST['keyword']):NULL;
                 $keyword = validTeks($keyword);
                 echo "<input type=hidden name=keyword value=$keyword><input type=hidden name=action value=$action>";
             ?>
@@ -49,8 +49,8 @@
                                         <td><a href=?act=InputRiwayatPencapaian&action=TAMBAH&id=$baris[0]>$baris[3]</a></td>
                                         <td>
                                             <a href=?act=InputRiwayatPencapaian&action=TAMBAH&id=$baris[0]>";
-                                $_sqlkinerja  = "Select pencapaian_kinerja_pegawai.tahun,pencapaian_kinerja_pegawai.bulan,pencapaian_kinerja.nama_pencapaian,pencapaian_kinerja_pegawai.keterangan 
-                                                 from pencapaian_kinerja_pegawai inner join pencapaian_kinerja on pencapaian_kinerja_pegawai.kode_pencapaian=pencapaian_kinerja.kode_pencapaian 
+                                $_sqlkinerja  = "Select pencapaian_kinerja_pegawai.tahun,pencapaian_kinerja_pegawai.bulan,pencapaian_kinerja.nama_pencapaian,pencapaian_kinerja_pegawai.keterangan
+                                                 from pencapaian_kinerja_pegawai inner join pencapaian_kinerja on pencapaian_kinerja_pegawai.kode_pencapaian=pencapaian_kinerja.kode_pencapaian
                                                  where pencapaian_kinerja_pegawai.id='$baris[0]' order by pencapaian_kinerja_pegawai.tahun,pencapaian_kinerja_pegawai.bulan ASC ";
                                 $hasilkinerja = bukaquery($_sqlkinerja);
                                 if(mysqli_num_rows($hasilkinerja)!=0) {
@@ -61,7 +61,7 @@
                                                     <td width='50%' align='center'>Hasil Pencapaian</td>
                                                     <td width='40%' align='center'>Keterangan</td>
                                                 </tr>";
-                                    while($bariskinerja = mysqli_fetch_array($hasilkinerja)) {                        
+                                    while($bariskinerja = mysqli_fetch_array($hasilkinerja)) {
                                         echo "  <tr class='isi'>
                                                     <td align='center'>".$bariskinerja["tahun"]."</td>
                                                     <td align='center'>".$bariskinerja["bulan"]."</td>
@@ -76,7 +76,7 @@
                                         </td>
                                       </tr>";
                             }
-                    echo "</table>";           
+                    echo "</table>";
                 } else {
                     echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                             <tr class='head'>
@@ -94,8 +94,8 @@
         <?php
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah</div></td>
+                    </tr>
                  </table>");
 
         ?>

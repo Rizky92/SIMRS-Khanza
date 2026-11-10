@@ -22,15 +22,15 @@
 	<parameter name="tanggal2" class="java.lang.String"/>
 	<parameter name="barang" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select detail_surat_pemesanan_non_medis.kode_brng,ipsrsbarang.nama_brng,ipsrsjenisbarang.nm_jenis as namajenis, 
+		<![CDATA[select detail_surat_pemesanan_non_medis.kode_brng,ipsrsbarang.nama_brng,ipsrsjenisbarang.nm_jenis as namajenis,
 detail_surat_pemesanan_non_medis.kode_sat,kodesatuan.satuan,sum(detail_surat_pemesanan_non_medis.jumlah) as jumlah,
-sum(detail_surat_pemesanan_non_medis.total) as total from surat_pemesanan_non_medis 
-inner join ipsrssuplier inner join pegawai  
+sum(detail_surat_pemesanan_non_medis.total) as total from surat_pemesanan_non_medis
+inner join ipsrssuplier inner join pegawai
  inner join detail_surat_pemesanan_non_medis inner join ipsrsbarang
  inner join kodesatuan inner join ipsrsjenisbarang
- on detail_surat_pemesanan_non_medis.kode_brng=ipsrsbarang.kode_brng 
+ on detail_surat_pemesanan_non_medis.kode_brng=ipsrsbarang.kode_brng
 and detail_surat_pemesanan_non_medis.kode_sat=kodesatuan.kode_sat
-and surat_pemesanan_non_medis.no_pemesanan=detail_surat_pemesanan_non_medis.no_pemesanan 
+and surat_pemesanan_non_medis.no_pemesanan=detail_surat_pemesanan_non_medis.no_pemesanan
  and surat_pemesanan_non_medis.kode_suplier=ipsrssuplier.kode_suplier
  and surat_pemesanan_non_medis.nip=pegawai.nik and ipsrsbarang.jenis=ipsrsjenisbarang.kd_jenis]]>
 	</queryString>

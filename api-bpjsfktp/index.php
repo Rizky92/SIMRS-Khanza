@@ -14,7 +14,7 @@
     }
     $header = $newhead;
     $method = $_SERVER['REQUEST_METHOD'];
-    
+
     if ($method == 'GET') {
         $hash_user = hash_pass(validTeks4($header['x-username'],20), 12);
         switch ($url[0]) {
@@ -51,7 +51,7 @@
                                         'message' => 'Format Tanggal Tidak Sesuai, format yang benar adalah yyyy-mm-dd',
                                         'code' => 201
                                     )
-                                );  
+                                );
                                 http_response_code(201);
                             }else if(date("Y-m-d")>$tanggaldaftar){
                                 $response = array(
@@ -59,7 +59,7 @@
                                         'message' => 'Tanggal Periksa Tidak Berlaku',
                                         'code' => 201
                                     )
-                                );  
+                                );
                                 http_response_code(201);
                             }else{
                                 if( getOne("SELECT nm_poli FROM maping_poliklinik_pcare inner join poliklinik ON maping_poliklinik_pcare.kd_poli_rs=poliklinik.kd_poli WHERE kd_poli_pcare='".validTeks4($kodepolipcare,20)."'")==""){
@@ -81,7 +81,7 @@
                                             WHERE reg_periksa.tgl_registrasi='".validTeks4($tanggaldaftar,20)."' AND maping_poliklinik_pcare.kd_poli_pcare='".validTeks4($kodepolipcare,20)."'"
                                         )
                                     );
-                                    
+
                                     if ($data['nm_poli_pcare'] != '') {
                                         $hari     = strtoupper(hariindo(validTeks4($tanggaldaftar,20)));
                                         $jampraktek = getOne2("SELECT concat(left(jadwal.jam_mulai,5),'-',left(jadwal.jam_selesai,5)) FROM jadwal WHERE jadwal.kd_poli='".$data['kd_poli']."' and jadwal.kd_dokter='".$data['kd_dokter']."' and jadwal.hari_kerja='$hari'");
@@ -97,7 +97,7 @@
                                             'kodedokter' => $data['kd_dokter_pcare'],
                                             'namadokter' => $data['nm_dokter_pcare'],
                                             'jampraktek' => $jampraktek
-                                        ); 
+                                        );
                                         $response = array(
                                             'response' => $dataarray,
                                             'metadata' => array(
@@ -116,7 +116,7 @@
                                         http_response_code(200);
                                     }
                                 }
-                            } 
+                            }
                         }else{
                             $response = array(
                                 'metadata' => array(
@@ -133,7 +133,7 @@
                             $no_peserta=isset($url[2])?$url[2]:null;
                             $kodepolipcare=isset($url[3])?$url[3]:null;
                             $tanggaldaftar=isset($url[4])?$url[4]:null;
-                            
+
                             if(strpos($kodepolipcare,"'")||strpos($kodepolipcare,"\\")){
                                 $response = array(
                                     'metadata' => array(
@@ -148,7 +148,7 @@
                                         'message' => 'Format Tanggal Tidak Sesuai, format yang benar adalah yyyy-mm-dd',
                                         'code' => 201
                                     )
-                                );  
+                                );
                                 http_response_code(201);
                             }else if(date("Y-m-d")>$tanggaldaftar){
                                 $response = array(
@@ -156,9 +156,9 @@
                                         'message' => 'Tanggal Periksa Tidak Berlaku',
                                         'code' => 201
                                     )
-                                );  
+                                );
                                 http_response_code(201);
-                            }else if (empty($no_peserta)){ 
+                            }else if (empty($no_peserta)){
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Nomor kartu Tidak Boleh Kosong',
@@ -166,7 +166,7 @@
                                     )
                                 );
                                 http_response_code(201);
-                            }else if (mb_strlen($no_peserta, 'UTF-8') <> 13){ 
+                            }else if (mb_strlen($no_peserta, 'UTF-8') <> 13){
                                 $response = array(
                                     'metadata' => array(
                                         'message' => 'Nomor kartu harus 13 digit',
@@ -223,7 +223,7 @@
                                             )
                                         );
                                         http_response_code(201);
-                                    } 
+                                    }
                                 }
                             }
                         }else{
@@ -239,16 +239,16 @@
                 break;
         }
     }
-  
+
     if (($method == 'POST') && (!empty($header['x-username'])) && (!empty($header['x-token']))) {
         $hash_user = hash_pass(validTeks4($header['x-username'],20), 12);
         switch ($url[0]) {
             case "antrean":
                 $konten = trim(file_get_contents("php://input"));
                 $decode = json_decode($konten, true);
-                
+
                 if((!empty($header['x-token'])) && (!empty($header['x-username'])) && (USERNAME==validTeks4($header['x-username'],20)) && (cektoken($header['x-token'])=='true')){
-                    if (empty($decode['nomorkartu'])){ 
+                    if (empty($decode['nomorkartu'])){
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Nomor Kartu tidak boleh kosong',
@@ -256,7 +256,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if (mb_strlen($decode['nomorkartu'], 'UTF-8') <> 13){ 
+                    }else if (mb_strlen($decode['nomorkartu'], 'UTF-8') <> 13){
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Nomor Kartu harus 13 digit',
@@ -264,7 +264,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if (!preg_match("/^[0-9]{13}$/",$decode['nomorkartu'])){ 
+                    }else if (!preg_match("/^[0-9]{13}$/",$decode['nomorkartu'])){
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Format Nomor Kartu tidak sesuai',
@@ -272,23 +272,23 @@
                             )
                         );
                         http_response_code(201);
-                    }elseif (empty($decode['nik'])) { 
+                    }elseif (empty($decode['nik'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'NIK tidak boleh kosong ',
                                 'code' => 201
                             )
-                        ); 
+                        );
                         http_response_code(201);
-                    }elseif (strlen($decode['nik']) <> 16) { 
+                    }elseif (strlen($decode['nik']) <> 16) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'NIK harus 16 digit ',
                                 'code' => 201
                             )
-                        ); 
+                        );
                         http_response_code(201);
-                    }else if (!preg_match("/^[0-9]{16}$/",$decode['nik'])){ 
+                    }else if (!preg_match("/^[0-9]{16}$/",$decode['nik'])){
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Format NIK tidak sesuai',
@@ -296,7 +296,7 @@
                             )
                         );
                         http_response_code(201);
-                    }elseif(empty($decode['nohp'])) { 
+                    }elseif(empty($decode['nohp'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'No.HP tidak boleh kosong',
@@ -312,7 +312,7 @@
                             )
                         );
                         http_response_code(201);
-                   }elseif(empty($decode['kodepoli'])) { 
+                   }elseif(empty($decode['kodepoli'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Kode Poli tidak boleh kosong',
@@ -328,7 +328,7 @@
                             )
                         );
                         http_response_code(201);
-                   }else if(empty($decode['kodedokter'])) { 
+                   }else if(empty($decode['kodedokter'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Kode Dokter tidak boleh kosong',
@@ -344,7 +344,7 @@
                             )
                         );
                         http_response_code(201);
-                    }elseif(empty($decode['tanggalperiksa'])) { 
+                    }elseif(empty($decode['tanggalperiksa'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Tanggal tidak boleh kosong',
@@ -358,7 +358,7 @@
                                 'message' => 'Format Tanggal tidak sesuai, format yang benar adalah yyyy-mm-dd',
                                 'code' => 201
                             )
-                        );  
+                        );
                         http_response_code(201);
                     }else if(date("Y-m-d")>$decode['tanggalperiksa']){
                         $response = array(
@@ -366,9 +366,9 @@
                                 'message' => 'Tanggal Periksa tidak berlaku mundur',
                                 'code' => 201
                             )
-                        );  
+                        );
                         http_response_code(201);
-                    }else if(empty($decode['jampraktek'])) { 
+                    }else if(empty($decode['jampraktek'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Jam Praktek tidak boleh kosong',
@@ -384,7 +384,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if(empty($decode['keluhan'])) { 
+                    }else if(empty($decode['keluhan'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Keluhan tidak boleh kosong',
@@ -406,7 +406,7 @@
                         $kddokter   = getOne2("SELECT maping_dokter_pcare.kd_dokter FROM maping_dokter_pcare WHERE maping_dokter_pcare.kd_dokter_pcare='".validTeks4($decode['kodedokter'],20)."'");
                         $hari       = strtoupper(hariindo(validTeks4($decode['tanggalperiksa'],20)));
                         $kdpoli     = getOne2("SELECT maping_poliklinik_pcare.kd_poli_rs FROM maping_poliklinik_pcare WHERE maping_poliklinik_pcare.kd_poli_pcare='".validTeks($decode["kodepoli"])."'");
-                        if(empty($kdpoli)) { 
+                        if(empty($kdpoli)) {
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'Poli tidak ditemukan',
@@ -414,7 +414,7 @@
                                 )
                             );
                             http_response_code(201);
-                        }else if(empty($kddokter)) { 
+                        }else if(empty($kddokter)) {
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'Dokter tidak ditemukan',
@@ -423,8 +423,8 @@
                             );
                             http_response_code(201);
                         }else{
-                            $jadwal = fetch_array(bukaquery2("select jadwal.kd_dokter,dokter.nm_dokter,jadwal.hari_kerja,jadwal.jam_mulai,jadwal.jam_selesai,jadwal.kd_poli,poliklinik.nm_poli,jadwal.kuota 
-                                            from jadwal inner join poliklinik ON poliklinik.kd_poli=jadwal.kd_poli inner join dokter ON jadwal.kd_dokter=dokter.kd_dokter 
+                            $jadwal = fetch_array(bukaquery2("select jadwal.kd_dokter,dokter.nm_dokter,jadwal.hari_kerja,jadwal.jam_mulai,jadwal.jam_selesai,jadwal.kd_poli,poliklinik.nm_poli,jadwal.kuota
+                                            from jadwal inner join poliklinik ON poliklinik.kd_poli=jadwal.kd_poli inner join dokter ON jadwal.kd_dokter=dokter.kd_dokter
                                             where jadwal.hari_kerja='$hari' and jadwal.kd_dokter='$kddokter' and jadwal.kd_poli='$kdpoli' and jadwal.jam_mulai='$jammulai:00' and jadwal.jam_selesai='$jamselesai:00'"));
                             if(empty($jadwal['kuota'])) {
                                 $response = array(
@@ -435,24 +435,24 @@
                                 );
                                 http_response_code(201);
                             }else{
-                                if(empty(cekpasien(validTeks4($decode['nik'],20),validTeks4($decode['nomorkartu'],20)))){ 
+                                if(empty(cekpasien(validTeks4($decode['nik'],20),validTeks4($decode['nomorkartu'],20)))){
                                     /* Silahkan aktifkan ini jika tidak ingin BPJS bisa menginsert data pasien baru
                                      * $response = array(
                                         'metadata' => array(
                                             'message' =>  'Data pasien ini tidak ditemukan, silahkan melakukan registrasi pasien baru ke loket administrasi Kami',
                                             'code' => 201
                                         )
-                                    ); 
+                                    );
                                     http_response_code(201);*/
                                     $response = array(
                                         'metadata' => array(
                                             'message' =>  'Data pasien ini tidak ditemukan',
                                             'code' => 202
                                         )
-                                    ); 
+                                    );
                                     http_response_code(202);
                                 }else{
-                                    /*if(empty($decode['norm'])) { 
+                                    /*if(empty($decode['norm'])) {
                                         $response = array(
                                             'metadata' => array(
                                                 'message' => 'No.RM tidak boleh kosong',
@@ -477,7 +477,7 @@
                                                     'message' =>  "Nomor Antrean hanya dapat diambil 1 kali pada Tanggal, Dokter dan Poli yang sama",
                                                     'code' => 201
                                                 )
-                                            ); 
+                                            );
                                         }else{
                                             $sekarang  = date("Y-m-d");
                                             $interval  = getOne2("select (TO_DAYS('".validTeks4($decode["tanggalperiksa"],20)."')-TO_DAYS('$sekarang'))");
@@ -487,7 +487,7 @@
                                                         'message' => 'Pendaftaran ke Poli ini sudah tutup',
                                                         'code' => 201
                                                     )
-                                                );  
+                                                );
                                                 http_response_code(201);
                                             }else{
                                                 $sisakuota=getOne2("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli='$kdpoli' and reg_periksa.kd_dokter='$kddokter' and reg_periksa.tgl_registrasi='".validTeks4($decode['tanggalperiksa'],20)."' and reg_periksa.stts<>'Batal'");
@@ -498,7 +498,7 @@
                                                     $no_rawat        = str_replace("-","/",validTeks4($decode['tanggalperiksa'],20)."/").sprintf("%06s", $max);
                                                     $statuspoli      = getOne2("select if((select count(no_rkm_medis) from reg_periksa where no_rkm_medis='$datapeserta[no_rkm_medis]' and kd_poli='$kdpoli')>0,'Lama','Baru' )");
                                                     $statusdaftar    = $datapeserta['tgl_daftar']==$decode['tanggalperiksa']?"1":"0";
-                                                    
+
                                                     if($datapeserta["tahun"] > 0){
                                                         $umur       = $datapeserta["tahun"];
                                                         $sttsumur   = "Th";
@@ -511,7 +511,7 @@
                                                             $sttsumur   = "Hr";
                                                         }
                                                     }
-                                                    
+
                                                     $query = bukaquery2("insert into reg_periksa values('$noReg', '$no_rawat', '".validTeks4($decode['tanggalperiksa'],20)."','".$jadwal['jam_mulai']."', '$kddokter', '$datapeserta[no_rkm_medis]', '$kdpoli', '$datapeserta[namakeluarga]', '$datapeserta[alamatpj], $datapeserta[kelurahanpj], $datapeserta[kecamatanpj], $datapeserta[kabupatenpj], $datapeserta[propinsipj]', '$datapeserta[keluarga]', '".getOne2("select poliklinik.registrasilama from poliklinik where poliklinik.kd_poli='$kdpoli'")."', 'Belum','".str_replace("0","Lama",str_replace("1","Baru",$statusdaftar))."','Ralan', '".CARABAYAR."', '$umur','$sttsumur','Belum Bayar', '$statuspoli')");
                                                     if ($query) {
                                                         $response = array(
@@ -538,14 +538,14 @@
                                                             )
                                                         );
                                                         http_response_code(401);
-                                                    } 
+                                                    }
                                                 }else{
                                                     $response = array(
                                                         'metadata' => array(
                                                             'message' => 'Kuota penuuuh...!',
                                                             'code' => 201
                                                         )
-                                                    ); 
+                                                    );
                                                     http_response_code(201);
                                                 }
                                             }
@@ -569,7 +569,7 @@
                 $konten = trim(file_get_contents("php://input"));
                 $decode = json_decode($konten, true);
                 if((!empty($header['x-token'])) && (USERNAME==validTeks4($header['x-username'],20)) && (cektoken($header['x-token'])=='true')){
-                    if (empty($decode['nomorkartu'])){ 
+                    if (empty($decode['nomorkartu'])){
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Nomor Kartu tidak boleh kosong',
@@ -577,7 +577,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if (mb_strlen($decode['nomorkartu'], 'UTF-8') <> 13){ 
+                    }else if (mb_strlen($decode['nomorkartu'], 'UTF-8') <> 13){
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Nomor Kartu harus 13 digit',
@@ -585,7 +585,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if (!preg_match("/^[0-9]{13}$/",$decode['nomorkartu'])){ 
+                    }else if (!preg_match("/^[0-9]{13}$/",$decode['nomorkartu'])){
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Format Nomor Kartu tidak sesuai',
@@ -593,23 +593,23 @@
                             )
                         );
                         http_response_code(201);
-                    }elseif (empty($decode['nik'])) { 
+                    }elseif (empty($decode['nik'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'NIK tidak boleh kosong ',
                                 'code' => 201
                             )
-                        ); 
+                        );
                         http_response_code(201);
-                    }elseif (strlen($decode['nik']) <> 16) { 
+                    }elseif (strlen($decode['nik']) <> 16) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'NIK harus 16 digit ',
                                 'code' => 201
                             )
-                        ); 
+                        );
                         http_response_code(201);
-                    }else if (!preg_match("/^[0-9]{16}$/",$decode['nik'])){ 
+                    }else if (!preg_match("/^[0-9]{16}$/",$decode['nik'])){
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Format NIK tidak sesuai',
@@ -617,23 +617,23 @@
                             )
                         );
                         http_response_code(201);
-                    }elseif (empty($decode['nomorkk'])) { 
+                    }elseif (empty($decode['nomorkk'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Nomor KK tidak boleh kosong ',
                                 'code' => 201
                             )
-                        ); 
+                        );
                         http_response_code(201);
-                    }elseif (strlen($decode['nomorkk']) <> 16) { 
+                    }elseif (strlen($decode['nomorkk']) <> 16) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Nomor KK harus 16 digit ',
                                 'code' => 201
                             )
-                        ); 
+                        );
                         http_response_code(201);
-                    }else if (!preg_match("/^[0-9]{16}$/",$decode['nomorkk'])){ 
+                    }else if (!preg_match("/^[0-9]{16}$/",$decode['nomorkk'])){
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Format Nomor KK tidak sesuai',
@@ -641,7 +641,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if(empty($decode['nama'])) { 
+                    }else if(empty($decode['nama'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Nama tidak boleh kosong',
@@ -657,7 +657,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if(empty($decode['jeniskelamin'])) { 
+                    }else if(empty($decode['jeniskelamin'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Jenis Kelamin tidak boleh kosong',
@@ -673,7 +673,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if(!(($decode['jeniskelamin']=="L")||($decode['jeniskelamin']=="P"))){ 
+                    }else if(!(($decode['jeniskelamin']=="L")||($decode['jeniskelamin']=="P"))){
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Jenis Kelmain tidak ditemukan',
@@ -681,7 +681,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if(empty($decode['tanggallahir'])) { 
+                    }else if(empty($decode['tanggallahir'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Tanggal Lahir tidak boleh kosong',
@@ -695,7 +695,7 @@
                                 'message' => 'Format Tanggal Lahir tidak sesuai, format yang benar adalah yyyy-mm-dd',
                                 'code' => 201
                             )
-                        );  
+                        );
                         http_response_code(201);
                     }else if($decode['tanggallahir']>date("Y-m-d")){
                         $response = array(
@@ -703,9 +703,9 @@
                                 'message' => 'Tanggal lahir pasien salah',
                                 'code' => 201
                             )
-                        );  
+                        );
                         http_response_code(201);
-                    }else if(empty($decode['alamat'])) { 
+                    }else if(empty($decode['alamat'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Alamat tidak boleh kosong',
@@ -721,7 +721,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if(empty($decode['kodeprop'])) { 
+                    }else if(empty($decode['kodeprop'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Kode Propinsi tidak boleh kosong',
@@ -737,7 +737,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if(empty($decode['namaprop'])) { 
+                    }else if(empty($decode['namaprop'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Nama Propinsi tidak boleh kosong',
@@ -753,7 +753,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if(empty($decode['kodedati2'])) { 
+                    }else if(empty($decode['kodedati2'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Kode Dati II tidak boleh kosong',
@@ -769,7 +769,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if(empty($decode['namadati2'])) { 
+                    }else if(empty($decode['namadati2'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Nama Dati II tidak boleh kosong',
@@ -785,7 +785,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if(empty($decode['kodekec'])) { 
+                    }else if(empty($decode['kodekec'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Kode Kecamatan tidak boleh kosong',
@@ -801,7 +801,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if(empty($decode['namakec'])) { 
+                    }else if(empty($decode['namakec'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Nama Kecamatan tidak boleh kosong',
@@ -817,7 +817,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if(empty($decode['kodekel'])) { 
+                    }else if(empty($decode['kodekel'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Kode Kelurahan tidak boleh kosong',
@@ -833,7 +833,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if(empty($decode['namakel'])) { 
+                    }else if(empty($decode['namakel'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Nama Kelurahan tidak boleh kosong',
@@ -849,7 +849,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if(empty($decode['rw'])) { 
+                    }else if(empty($decode['rw'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'RW tidak boleh kosong',
@@ -865,7 +865,7 @@
                             )
                         );
                         http_response_code(201);
-                    }else if(empty($decode['rt'])) { 
+                    }else if(empty($decode['rt'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'RT tidak boleh kosong',
@@ -882,7 +882,7 @@
                         );
                         http_response_code(201);
                     }else{
-                        if(!empty(cekpasien($decode['nik'],$decode['nomorkartu']))){ 
+                        if(!empty(cekpasien($decode['nik'],$decode['nomorkartu']))){
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'Pasien dengan NIK dan No.Kartu tersebut sudah terdaftar',
@@ -938,7 +938,7 @@
                                         $max    = getOne2("select ifnull(MAX(CONVERT(CONCAT(SUBSTRING(LEFT(no_rkm_medis,6),3,2),SUBSTRING(LEFT(no_rkm_medis,6),1,2),SUBSTRING(LEFT(no_rkm_medis,6),5,2)),signed)),0)+1 from set_no_rkm_medis");
                                         $nourut = substr(sprintf("%06s", $max),2,2).substr(sprintf("%06s", $max),0,2).substr(sprintf("%06s", $max),4,2);
                                         break;
-                                }            
+                                }
                             }
 
                             if($setrm["posisi_tahun_bulan"]=="Depan"){
@@ -948,7 +948,7 @@
                                     $norm=$nourut."-".$awalanbulan.$awalantahun;
                                 }else{
                                     $norm=$nourut;
-                                }            
+                                }
                             }
 
                             bukaquery3("insert ignore into kelurahan values('0','".validTeks4($decode['namakel'],30)."')");
@@ -993,7 +993,7 @@
                 break;
         }
     }
-    
+
     if (($method == 'PUT') && (!empty($header['x-username'])) && (!empty($header['x-token']))) {
         $hash_user = hash_pass(validTeks4($header['x-username'],20), 12);
         switch ($url[0]) {
@@ -1003,7 +1003,7 @@
                     $decode = json_decode($konten, true);
 
                     if((!empty($header['x-token'])) && (!empty($header['x-username'])) && (USERNAME==validTeks4($header['x-username'],20)) && (cektoken($header['x-token'])=='true')){
-                        if (empty($decode['nomorkartu'])){ 
+                        if (empty($decode['nomorkartu'])){
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'Nomor kartu Tidak Boleh Kosong',
@@ -1011,7 +1011,7 @@
                                 )
                             );
                             http_response_code(201);
-                        }else if (mb_strlen($decode['nomorkartu'], 'UTF-8') <> 13){ 
+                        }else if (mb_strlen($decode['nomorkartu'], 'UTF-8') <> 13){
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'Nomor kartu harus 13 digit',
@@ -1019,7 +1019,7 @@
                                 )
                             );
                             http_response_code(201);
-                        }else if (!preg_match("/^[0-9]{13}$/",$decode['nomorkartu'])){ 
+                        }else if (!preg_match("/^[0-9]{13}$/",$decode['nomorkartu'])){
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'Format Nomor Kartu Tidak Sesuai',
@@ -1027,7 +1027,7 @@
                                 )
                             );
                             http_response_code(201);
-                        }else if(empty($decode['kodepoli'])) { 
+                        }else if(empty($decode['kodepoli'])) {
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'Kode Poli Tidak Boleh Kosong',
@@ -1043,7 +1043,7 @@
                                 )
                             );
                             http_response_code(201);
-                       }else if(empty($decode['tanggalperiksa'])) { 
+                       }else if(empty($decode['tanggalperiksa'])) {
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'Tanggal Tidak Boleh Kosong',
@@ -1057,9 +1057,9 @@
                                     'message' => 'Format Tanggal Tidak Sesuai, format yang benar adalah yyyy-mm-dd',
                                     'code' => 201
                                 )
-                            );  
+                            );
                             http_response_code(201);
-                        }else if(empty($decode['keterangan'])) { 
+                        }else if(empty($decode['keterangan'])) {
                             $response = array(
                                 'metadata' => array(
                                     'message' => 'Keterangan tidak boleh kosong',
@@ -1137,7 +1137,7 @@
                 break;
         }
     }
-    
+
     if (!empty($response)) {
         echo json_encode($response);
     } else {

@@ -19,23 +19,23 @@
 pasien.nm_pasien,rawat_jl_pr.kd_jenis_prw,jns_perawatan.nm_perawatan,
 rawat_jl_pr.nip,petugas.nama,rawat_jl_pr.tgl_perawatan,
 rawat_jl_pr.jam_rawat,penjab.png_jawab,poliklinik.nm_poli, rawat_jl_pr.material,rawat_jl_pr.bhp,rawat_jl_pr.tarif_tindakanpr,
-rawat_jl_pr.kso,rawat_jl_pr.menejemen,rawat_jl_pr.biaya_rawat 
-from pasien inner join reg_periksa inner join jns_perawatan inner join 
-petugas inner join rawat_jl_pr inner join poliklinik inner join penjab 
+rawat_jl_pr.kso,rawat_jl_pr.menejemen,rawat_jl_pr.biaya_rawat
+from pasien inner join reg_periksa inner join jns_perawatan inner join
+petugas inner join rawat_jl_pr inner join poliklinik inner join penjab
 on rawat_jl_pr.no_rawat=reg_periksa.no_rawat
-and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-and reg_periksa.kd_pj=penjab.kd_pj 
-and reg_periksa.kd_poli=poliklinik.kd_poli 
-and rawat_jl_pr.kd_jenis_prw=jns_perawatan.kd_jenis_prw 
+and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+and reg_periksa.kd_pj=penjab.kd_pj
+and reg_periksa.kd_poli=poliklinik.kd_poli
+and rawat_jl_pr.kd_jenis_prw=jns_perawatan.kd_jenis_prw
 and rawat_jl_pr.nip=petugas.nip
-where rawat_jl_pr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and rawat_jl_pr.no_rawat like $P{cari} or 
-rawat_jl_pr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and reg_periksa.no_rkm_medis like $P{cari} or 
+where rawat_jl_pr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and rawat_jl_pr.no_rawat like $P{cari} or
+rawat_jl_pr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and reg_periksa.no_rkm_medis like $P{cari} or
 rawat_jl_pr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and pasien.nm_pasien like $P{cari} or
-rawat_jl_pr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and jns_perawatan.nm_perawatan like $P{cari} or 
-rawat_jl_pr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and rawat_jl_pr.nip like $P{cari} or 
-rawat_jl_pr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and petugas.nama like $P{cari} or 
-rawat_jl_pr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and penjab.png_jawab like $P{cari} or 
-rawat_jl_pr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and poliklinik.nm_poli like $P{cari} 
+rawat_jl_pr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and jns_perawatan.nm_perawatan like $P{cari} or
+rawat_jl_pr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and rawat_jl_pr.nip like $P{cari} or
+rawat_jl_pr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and petugas.nama like $P{cari} or
+rawat_jl_pr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and penjab.png_jawab like $P{cari} or
+rawat_jl_pr.tgl_perawatan between $P{tanggal1} and $P{tanggal2} and poliklinik.nm_poli like $P{cari}
  order by rawat_jl_pr.no_rawat desc]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

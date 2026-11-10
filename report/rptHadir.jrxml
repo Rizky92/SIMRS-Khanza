@@ -346,7 +346,7 @@
 		<band height="12" splitType="Stretch">
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="800" height="12" forecolor="#000000" backcolor="#F7F7F7" uuid="d4ad2806-cf56-418d-bb04-45c3170488e9">
-					<printWhenExpression><![CDATA[($V{REPORT_COUNT}.intValue() % 2==0 ? 
+					<printWhenExpression><![CDATA[($V{REPORT_COUNT}.intValue() % 2==0 ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Middle">

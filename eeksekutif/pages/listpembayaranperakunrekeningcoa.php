@@ -17,7 +17,7 @@
         $blncaribayar2 = validTeks(trim(isset($_POST['tgl_cari_bayar2']))?substr($_POST['tgl_cari_bayar2'],3,2):$blnsekarang);
         $tglcaribayar2 = validTeks(trim(isset($_POST['tgl_cari_bayar2']))?substr($_POST['tgl_cari_bayar2'],0,2):$tglsekarang);
     }
-    
+
     $akunList  = [];
     $queryAkun = bukaquery(
         "select rekening.kd_rek,rekening.nm_rek from rekening where ".
@@ -38,7 +38,7 @@
             'labkesling'    => 0
         ];
     }
-    
+
     $allTotal        = 0;
     $lainLainTotal   = 0;
     $tanggalAkun     = [];
@@ -90,17 +90,17 @@
                 }
             }
         }
-        
+
         $tglBayar = substr($rstagihan["tgl_bayar"],0,10);
         $blnBayar = substr($rstagihan["tgl_bayar"],0,7);
         if(!isset($tanggalKategori[$tglBayar])) {
             $tanggalKategori[$tglBayar] = $kategoriKosong;
         }
-        
+
         if(!isset($bulanKategori[$blnBayar])) {
             $bulanKategori[$blnBayar] = $kategoriKosong;
         }
-        
+
         if(!$tidakditemukan) {
             $allTotal += $rstagihan["jumlah_bayar"];
             $kat = "";
@@ -158,7 +158,7 @@
             $bulanKategori[$blnBayar]["lainlain"] += $rstagihan["jumlah_bayar"];
         }
     }
-    
+
     ksort($tanggalAkun);
     ksort($bulanAkun);
     ksort($tanggalKategori);
@@ -172,21 +172,21 @@
         'labkesling'    => 'Lab Kesehatan Lingkungan',
         'lainlain'      => 'Transaksi Lain-lain'
     ];
-    
+
     $kategoriTotal = $kategoriKosong;
     foreach($tanggalKategori as $nilaiPerKategori) {
         foreach($nilaiPerKategori as $kk => $vv) {
             $kategoriTotal[$kk] += $vv;
         }
     }
-    
+
     $kategoriAktif = [];
     foreach($kategoriLabel as $kk => $lbl) {
         if($kategoriTotal[$kk]>0) {
             $kategoriAktif[] = $kk;
         }
     }
-    
+
     $dataPieAkun = [];
     foreach($akunList as $akun) {
         if($akun["total"]>0) {
@@ -196,7 +196,7 @@
             ];
         }
     }
-    
+
     $akunAktifIdx = [];
     foreach($akunList as $idx => $akun) {
         if($akun["total"]>0) {

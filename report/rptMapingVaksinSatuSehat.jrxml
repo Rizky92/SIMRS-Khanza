@@ -29,10 +29,10 @@
 		<![CDATA[select satu_sehat_mapping_vaksin.kode_brng,databarang.nama_brng,satu_sehat_mapping_vaksin.vaksin_code,satu_sehat_mapping_vaksin.vaksin_system,
                    satu_sehat_mapping_vaksin.vaksin_display,satu_sehat_mapping_vaksin.route_code,satu_sehat_mapping_vaksin.route_system,
                    satu_sehat_mapping_vaksin.route_display,satu_sehat_mapping_vaksin.dose_quantity_code,satu_sehat_mapping_vaksin.dose_quantity_system,
-                   satu_sehat_mapping_vaksin.dose_quantity_unit from satu_sehat_mapping_vaksin inner join databarang 
-                   on satu_sehat_mapping_vaksin.kode_brng=databarang.kode_brng 
-                   where satu_sehat_mapping_vaksin.kode_brng like $P{parameter} or databarang.nama_brng like $P{parameter} or 
-                   satu_sehat_mapping_vaksin.vaksin_code like $P{parameter} or satu_sehat_mapping_vaksin.vaksin_display like $P{parameter} or satu_sehat_mapping_vaksin.route_display like $P{parameter} 
+                   satu_sehat_mapping_vaksin.dose_quantity_unit from satu_sehat_mapping_vaksin inner join databarang
+                   on satu_sehat_mapping_vaksin.kode_brng=databarang.kode_brng
+                   where satu_sehat_mapping_vaksin.kode_brng like $P{parameter} or databarang.nama_brng like $P{parameter} or
+                   satu_sehat_mapping_vaksin.vaksin_code like $P{parameter} or satu_sehat_mapping_vaksin.vaksin_display like $P{parameter} or satu_sehat_mapping_vaksin.route_display like $P{parameter}
                     order by satu_sehat_mapping_vaksin.vaksin_code]]>
 	</queryString>
 	<field name="kode_brng" class="java.lang.String">

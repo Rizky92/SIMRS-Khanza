@@ -29,11 +29,11 @@
 		<![CDATA[select satu_sehat_mapping_obat.kode_brng,databarang.nama_brng,satu_sehat_mapping_obat.obat_code,satu_sehat_mapping_obat.obat_system,
                    satu_sehat_mapping_obat.obat_display,satu_sehat_mapping_obat.form_code,satu_sehat_mapping_obat.form_system,
                    satu_sehat_mapping_obat.form_display,satu_sehat_mapping_obat.numerator_code,satu_sehat_mapping_obat.numerator_system,
-                   satu_sehat_mapping_obat.denominator_code,satu_sehat_mapping_obat.denominator_system from satu_sehat_mapping_obat inner join databarang 
+                   satu_sehat_mapping_obat.denominator_code,satu_sehat_mapping_obat.denominator_system from satu_sehat_mapping_obat inner join databarang
                    on satu_sehat_mapping_obat.kode_brng=databarang.kode_brng
-                   where satu_sehat_mapping_obat.kode_brng like $P{parameter} or databarang.nama_brng like $P{parameter} or 
-                   satu_sehat_mapping_obat.obat_code like $P{parameter} or satu_sehat_mapping_obat.obat_system like $P{parameter} or 
-                   satu_sehat_mapping_obat.form_display like $P{parameter} 
+                   where satu_sehat_mapping_obat.kode_brng like $P{parameter} or databarang.nama_brng like $P{parameter} or
+                   satu_sehat_mapping_obat.obat_code like $P{parameter} or satu_sehat_mapping_obat.obat_system like $P{parameter} or
+                   satu_sehat_mapping_obat.form_display like $P{parameter}
                     order by satu_sehat_mapping_obat.obat_code]]>
 	</queryString>
 	<field name="kode_brng" class="java.lang.String">
