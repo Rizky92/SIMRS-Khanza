@@ -474,6 +474,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkLaporanTindakan = new widget.CekBox();
         chkDokumentasiTindakanESWL = new widget.CekBox();
         chkPerencanaanPemulangan = new widget.CekBox();
+        chkMPPSmc = new widget.CekBox();
         chkLayananKedokteranFisikRehabilitasi = new widget.CekBox();
         chkLayananProgramKFR = new widget.CekBox();
         chkUjiFungsiKFR = new widget.CekBox();
@@ -2008,6 +2009,13 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkPerencanaanPemulangan.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkPerencanaanPemulangan);
 
+        chkMPPSmc.setSelected(true);
+        chkMPPSmc.setText("Manajer Pelayanan Pasien (MPP)");
+        chkMPPSmc.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkMPPSmc.setName("chkMPPSmc"); // NOI18N
+        chkMPPSmc.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkMPPSmc);
+
         chkLayananKedokteranFisikRehabilitasi.setSelected(true);
         chkLayananKedokteranFisikRehabilitasi.setText("Layanan Kedokteran Fisik & Rehabilitasi");
         chkLayananKedokteranFisikRehabilitasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -3229,6 +3237,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             chkReaksiTranfusi.setSelected(true);
             chkPenilaianGRACEScore.setSelected(true);
             chkPenilaianBishop.setSelected(true);
+            chkMPPSmc.setSelected(true);
         }else{
             chkTriase.setSelected(false);
             chkAsuhanKeperawatanRalan.setSelected(false);
@@ -3442,6 +3451,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             chkReaksiTranfusi.setSelected(false);
             chkPenilaianGRACEScore.setSelected(false);
             chkPenilaianBishop.setSelected(false);
+            chkMPPSmc.setSelected(false);
         }
     }//GEN-LAST:event_chkSemuaItemStateChanged
 
@@ -4176,6 +4186,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private widget.CekBox chkLaporanTindakan;
     private widget.CekBox chkLayananKedokteranFisikRehabilitasi;
     private widget.CekBox chkLayananProgramKFR;
+    private widget.CekBox chkMPPSmc;
     private widget.CekBox chkMonitoringGizi;
     private widget.CekBox chkMonitoringReaksiTranfusi;
     private widget.CekBox chkMonitoringSelamaTOLAC;
@@ -4947,6 +4958,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     menampilkanPenilaianBishop(rs.getString("no_rawat"));
                     menampilkanEdukasiPasienTerintegrasiRawatJalan(rs.getString("no_rawat"));
                     menampilkanPerencanaanPemulangan(rs.getString("no_rawat"));
+                    menampilkanMPPSmc(rs.getString("no_rawat"));
                     menampilkanMonitoringSelamaTOLAC(rs.getString("no_rawat"));
                     menampilkanCatatanObservasi(rs.getString("no_rawat"));
                     menampilkanPemeriksaanRanap(rs.getString("no_rawat"));
@@ -39859,6 +39871,216 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             } catch (Exception e) {
                 System.out.println("Notif Pengkajian Tindakan Invasif non Bedah : " + e);
             }
+        }
+    }
+
+    private String teksHTMLSmc(String teks) {
+        if (teks == null) {
+            return "";
+        }
+        return teks.trim().replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replaceAll("(\\r\\n|\\r|\\n)", "<br />");
+    }
+
+    private void menampilkanMPPSmc(String norawat) {
+        if (chkMPPSmc.isSelected()) {
+            StringBuilder isi = new StringBuilder();
+            tampilSkriningMPPSmc(norawat, isi);
+            tampilEvaluasiAwalMPPSmc(norawat, isi);
+            tampilCatatanImplementasiMPPSmc(norawat, isi);
+            if (isi.length() > 0) {
+                htmlContent.append("<tr class='isi'>")
+                    .append("<td valign='top' width='2%'></td>")
+                    .append("<td valign='top' width='18%'>Manajer Pelayanan Pasien (MPP)</td>")
+                    .append("<td valign='top' width='1%' align='center'>:</td>")
+                    .append("<td valign='top' width='79%'>")
+                    .append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>")
+                    .append(isi)
+                    .append("</table></td></tr>");
+            }
+        }
+    }
+
+    private void tampilSkriningMPPSmc(String norawat, StringBuilder isi) {
+        String[] parameter = {
+            "Keluhan pembiayaan",
+            "Penundaan tindakan diagnostik",
+            "Keluhan pembiayaan atau biaya klaim melebihi selama masa perawatan",
+            "Berisiko tinggi terjadinya komplain",
+            "Sering masuk IGD dalam waktu 1x24 jam",
+            "Usia >65 tahun dengan ketergantungan",
+            "Kasus kompleks (penyakit kronis, multiple diagnosa yang membutuhkan penanganan khusus, memerlukan biaya tinggi)",
+            "Pasien APS (Atas Permintaan Sendiri)",
+            "Tidak ada keluarga",
+            "Ditangani lebih dari 2 dokter spesialis dengan diagnose bermasalah",
+            "Penolakan tindakan diagnostik",
+            "Penolakan tindakan keperawatan",
+            "Penolakan tindakan medis",
+            "Penundaan tindakan medis",
+            "Riwayat gangguan mental, upaya bunuh diri, terlantar, kekerasan, pelecehan, tinggal sendiri, pemakai narkoba",
+            "Membutuhkan kontinuitas pelayanan pasca discharge"
+        };
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select mpp_skrining.tanggal, mpp_skrining.param1, mpp_skrining.param2, mpp_skrining.param3, mpp_skrining.param4, mpp_skrining.param5, mpp_skrining.param6, mpp_skrining.param7, " +
+            "mpp_skrining.param8, mpp_skrining.param9, mpp_skrining.param10, mpp_skrining.param11, mpp_skrining.param12, mpp_skrining.param13, mpp_skrining.param14, mpp_skrining.param15, " +
+            "mpp_skrining.param16, mpp_skrining.nip, pegawai.nama from mpp_skrining left join pegawai on mpp_skrining.nip = pegawai.nik where mpp_skrining.no_rawat = ? order by mpp_skrining.tanggal"
+        )) {
+            ps.setString(1, norawat);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    isi.append("<tr>")
+                        .append("<td valign='middle' bgcolor='#FFFAF8' align='center'>SKRINING MPP</td>")
+                        .append("</tr>");
+                    do {
+                        isi.append("<tr>")
+                            .append("<td valign='top'>")
+                            .append("YANG MELAKUKAN SKRINING")
+                            .append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>")
+                            .append("<tr>")
+                            .append("<td width='50%' border='0'>Tanggal : ").append(teksHTMLSmc(rs.getString("tanggal"))).append("</td>")
+                            .append("<td width='50%' border='0'>Petugas MPP : ").append(teksHTMLSmc(rs.getString("nip"))).append(" ").append(teksHTMLSmc(rs.getString("nama"))).append("</td>")
+                            .append("</tr>")
+                            .append("</table>")
+                            .append("</td>")
+                            .append("</tr>")
+                            .append("<tr>")
+                            .append("<td valign='top'>")
+                            .append("PARAMETER SKRINING")
+                            .append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>")
+                            .append("<tr>")
+                            .append("<td valign='top' width='4%' bgcolor='#FFFAF8' align='center'>No.</td>")
+                            .append("<td valign='top' width='80%' bgcolor='#FFFAF8' align='center'>Parameter</td>")
+                            .append("<td valign='top' width='16%' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>")
+                            .append("</tr>");
+                        for (int no = 1; no <= parameter.length; no++) {
+                            isi.append("<tr>")
+                                .append("<td width='4%' align='center'>").append(no).append(".</td>")
+                                .append("<td width='80%'>").append(teksHTMLSmc(parameter[no - 1])).append("</td>")
+                                .append("<td width='16%' align='center'>").append(teksHTMLSmc(rs.getString("param" + no))).append("</td>")
+                                .append("</tr>");
+                        }
+                        isi.append("</table>")
+                            .append("</td>")
+                            .append("</tr>");
+                    } while (rs.next());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Skrining MPP : " + e);
+        }
+    }
+
+    private void tampilEvaluasiAwalMPPSmc(String norawat, StringBuilder isi) {
+        try (
+            PreparedStatement ps = koneksi.prepareStatement(
+                "select mpp_evaluasi.tanggal, date_format(mpp_evaluasi.tanggal, '%Y-%m-%d %H:%i:%s') as tgl_evaluasi, mpp_evaluasi.kd_dokter, dpjp.nm_dokter as nm_dpjp, mpp_evaluasi.kd_konsulan, " +
+                "konsulan.nm_dokter as nm_konsulan, mpp_evaluasi.diagnosis, mpp_evaluasi.kelompok, mpp_evaluasi.assesmen, mpp_evaluasi.identifikasi, mpp_evaluasi.rencana, mpp_evaluasi.nip, " +
+                "ifnull(petugas.nama, pegawai.nama) as nama from mpp_evaluasi left join dokter dpjp on mpp_evaluasi.kd_dokter = dpjp.kd_dokter left join dokter konsulan on mpp_evaluasi.kd_konsulan = konsulan.kd_dokter " +
+                "left join petugas on mpp_evaluasi.nip = petugas.nip left join pegawai on mpp_evaluasi.nip = pegawai.nik where mpp_evaluasi.no_rawat = ? order by mpp_evaluasi.tanggal"
+            );
+            PreparedStatement psMasalah = koneksi.prepareStatement(
+                "select master_masalah_mpp.kode_masalah, master_masalah_mpp.nama_masalah from mpp_evaluasi_masalah inner join master_masalah_mpp on mpp_evaluasi_masalah.kode_masalah = " +
+                "master_masalah_mpp.kode_masalah where mpp_evaluasi_masalah.no_rawat = ? and mpp_evaluasi_masalah.tanggal = ? order by master_masalah_mpp.kode_masalah"
+            )
+        ) {
+            ps.setString(1, norawat);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    isi.append("<tr>")
+                        .append("<td valign='middle' bgcolor='#FFFAF8' align='center'>EVALUASI AWAL MPP (FORM A)</td>")
+                        .append("</tr>");
+                    do {
+                        isi.append("<tr>")
+                            .append("<td valign='top'>")
+                            .append("YANG MELAKUKAN EVALUASI")
+                            .append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>")
+                            .append("<tr>")
+                            .append("<td width='50%' border='0'>Tanggal : ").append(teksHTMLSmc(rs.getString("tgl_evaluasi"))).append("</td>")
+                            .append("<td width='50%' border='0'>Petugas MPP : ").append(teksHTMLSmc(rs.getString("nip"))).append(" ").append(teksHTMLSmc(rs.getString("nama"))).append("</td>")
+                            .append("</tr>")
+                            .append("<tr>")
+                            .append("<td width='50%' border='0'>Dokter P.J. : ").append(teksHTMLSmc(rs.getString("kd_dokter"))).append(" ").append(teksHTMLSmc(rs.getString("nm_dpjp"))).append("</td>")
+                            .append("<td width='50%' border='0'>Dokter Konsulan : ").append(teksHTMLSmc(rs.getString("kd_konsulan"))).append(" ").append(teksHTMLSmc(rs.getString("nm_konsulan"))).append("</td>")
+                            .append("</tr>")
+                            .append("</table>")
+                            .append("</td>")
+                            .append("</tr>")
+                            .append("<tr>")
+                            .append("<td valign='top'>")
+                            .append("EVALUASI AWAL")
+                            .append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>")
+                            .append("<tr>")
+                            .append("<td width='50%' border='0' valign='top'>Diagnosis : ").append(teksHTMLSmc(rs.getString("diagnosis"))).append("</td>")
+                            .append("<td width='50%' border='0' valign='top'>Kelompok Resiko : ").append(teksHTMLSmc(rs.getString("kelompok"))).append("</td>")
+                            .append("</tr>")
+                            .append("<tr>")
+                            .append("<td width='100%' border='0' valign='top' colspan='2'>Assesmen : ").append(teksHTMLSmc(rs.getString("assesmen"))).append("</td>")
+                            .append("</tr>")
+                            .append("<tr>")
+                            .append("<td width='100%' border='0' valign='top' colspan='2'>Masalah : ");
+                        psMasalah.setString(1, norawat);
+                        psMasalah.setTimestamp(2, rs.getTimestamp("tanggal"));
+                        try (ResultSet rsMasalah = psMasalah.executeQuery()) {
+                            while (rsMasalah.next()) {
+                                isi.append("<br />").append(teksHTMLSmc(rsMasalah.getString("kode_masalah"))).append(" ").append(teksHTMLSmc(rsMasalah.getString("nama_masalah")));
+                            }
+                        }
+                        isi.append("</td>")
+                            .append("</tr>")
+                            .append("<tr>")
+                            .append("<td width='100%' border='0' valign='top' colspan='2'>Identifikasi Masalah : ").append(teksHTMLSmc(rs.getString("identifikasi"))).append("</td>")
+                            .append("</tr>")
+                            .append("<tr>")
+                            .append("<td width='100%' border='0' valign='top' colspan='2'>Perencanaan : ").append(teksHTMLSmc(rs.getString("rencana"))).append("</td>")
+                            .append("</tr>")
+                            .append("</table>")
+                            .append("</td>")
+                            .append("</tr>");
+                    } while (rs.next());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Evaluasi Awal MPP : " + e);
+        }
+    }
+
+    private void tampilCatatanImplementasiMPPSmc(String norawat, StringBuilder isi) {
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select date_format(mpp_evaluasi_catatan.tgl_implementasi, '%Y-%m-%d %H:%i:%s') as tgl_implementasi, mpp_evaluasi_catatan.masalah, mpp_evaluasi_catatan.tinjut, mpp_evaluasi_catatan.evaluasi, " +
+            "mpp_evaluasi_catatan.nip, ifnull(petugas.nama, pegawai.nama) as nama from mpp_evaluasi_catatan left join petugas on mpp_evaluasi_catatan.nip = petugas.nip " +
+            "left join pegawai on mpp_evaluasi_catatan.nip = pegawai.nik where mpp_evaluasi_catatan.no_rawat = ? order by mpp_evaluasi_catatan.tgl_implementasi"
+        )) {
+            ps.setString(1, norawat);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    isi.append("<tr>")
+                        .append("<td valign='middle' bgcolor='#FFFAF8' align='center'>CATATAN IMPLEMENTASI MPP (FORM B)</td>")
+                        .append("</tr>")
+                        .append("<tr>")
+                        .append("<td valign='top'>")
+                        .append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>")
+                        .append("<tr align='center'>")
+                        .append("<td valign='top' width='15%' bgcolor='#FFFAF8'>Tanggal</td>")
+                        .append("<td valign='top' width='22%' bgcolor='#FFFAF8'>Masalah</td>")
+                        .append("<td valign='top' width='22%' bgcolor='#FFFAF8'>Tindak Lanjut</td>")
+                        .append("<td valign='top' width='22%' bgcolor='#FFFAF8'>Evaluasi</td>")
+                        .append("<td valign='top' width='19%' bgcolor='#FFFAF8'>Petugas MPP</td>")
+                        .append("</tr>");
+                    do {
+                        isi.append("<tr>")
+                            .append("<td valign='top' align='center'>").append(teksHTMLSmc(rs.getString("tgl_implementasi"))).append("</td>")
+                            .append("<td valign='top'>").append(teksHTMLSmc(rs.getString("masalah"))).append("</td>")
+                            .append("<td valign='top'>").append(teksHTMLSmc(rs.getString("tinjut"))).append("</td>")
+                            .append("<td valign='top'>").append(teksHTMLSmc(rs.getString("evaluasi"))).append("</td>")
+                            .append("<td valign='top'>").append(teksHTMLSmc(rs.getString("nip"))).append(" ").append(teksHTMLSmc(rs.getString("nama"))).append("</td>")
+                            .append("</tr>");
+                    } while (rs.next());
+                    isi.append("</table>")
+                        .append("</td>")
+                        .append("</tr>");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Catatan Implementasi MPP : " + e);
         }
     }
 
