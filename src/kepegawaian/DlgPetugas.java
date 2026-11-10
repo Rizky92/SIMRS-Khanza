@@ -893,9 +893,9 @@ public final class DlgPetugas extends javax.swing.JDialog {
         try {
             if(Sequel.mengedittf("petugas","nip='"+TNip.getText()+"'","status='0'")==true){
                 if(tbPetugas.getSelectedRow()!= -1){
-                    tabMode.removeRow(tbPetugas.getSelectedRow());
+                    tabMode.removeRow(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()));
                     emptTeks();
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText(""+tbPetugas.getRowCount());
                 }
             }
         } catch (Exception ex) {
@@ -916,10 +916,10 @@ public final class DlgPetugas extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbPetugas.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1090,7 +1090,7 @@ public final class DlgPetugas extends javax.swing.JDialog {
     }//GEN-LAST:event_CmbCrSttsKeyPressed
 
     private void tbPetugasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPetugasMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPetugas.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1225,7 +1225,7 @@ public final class DlgPetugas extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRestoreActionPerformed
 
     private void tbPetugasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPetugasKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbPetugas.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1237,10 +1237,10 @@ public final class DlgPetugas extends javax.swing.JDialog {
 
     private void MnKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKartuActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbPetugas.getRowCount()!=0){
             if(tbPetugas.getSelectedRow()> -1){
                 Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
@@ -1264,10 +1264,10 @@ public final class DlgPetugas extends javax.swing.JDialog {
 
     private void MnKartu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKartu1ActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbPetugas.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
@@ -1410,7 +1410,7 @@ public final class DlgPetugas extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPetugas.getRowCount());
     }
 
     public void emptTeks() {

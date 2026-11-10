@@ -2457,10 +2457,10 @@ public final class SisruteRujukanKeluar extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         if(TabRujukan.getSelectedIndex()==0){
-            if(tabMode.getRowCount()==0){
+            if(tbObat.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari.requestFocus();
-            }else if(tabMode.getRowCount()!=0){
+            }else if(tbObat.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -2554,7 +2554,7 @@ public final class SisruteRujukanKeluar extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                getData();
             } catch (java.lang.NullPointerException e) {
@@ -2563,7 +2563,7 @@ public final class SisruteRujukanKeluar extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                    getData();
@@ -2908,7 +2908,7 @@ public final class SisruteRujukanKeluar extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSuratRujukanActionPerformed
 
     private void ppRiwayatBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRiwayatBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
@@ -3334,7 +3334,7 @@ public final class SisruteRujukanKeluar extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     private void tampilData2(){
@@ -3455,7 +3455,7 @@ public final class SisruteRujukanKeluar extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode2.getRowCount());
+        LCount.setText(""+tbObat2.getRowCount());
     }
 
     private void emptTeks(){

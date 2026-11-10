@@ -544,7 +544,7 @@ public class LabKeslingPelanggan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -553,7 +553,7 @@ public class LabKeslingPelanggan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -601,7 +601,7 @@ public class LabKeslingPelanggan extends javax.swing.JDialog {
             Valid.editTable(tabMode,"labkesling_pelanggan","kode_pelanggan","?","kode_pelanggan=?,nama_pelanggan=?,alamat=?,kota=?,no_telp=?,kegiatan_usaha=?,personal_dihubungi=?",8,new String[]{
                 Kode.getText(),Nama.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),KegiatanUsaha.getText(),PersonalDihubungi.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
             });
-            if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+            if(tbDokter.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
 
         }
@@ -617,10 +617,10 @@ public class LabKeslingPelanggan extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbDokter.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
@@ -892,7 +892,7 @@ public class LabKeslingPelanggan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }
 
     public void emptTeks() {
@@ -909,13 +909,13 @@ public class LabKeslingPelanggan extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            Kode.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            Nama.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),1).toString());
-            Alamat.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),2).toString());
-            Kota.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString());
-            Telp.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),4).toString());
-            KegiatanUsaha.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),5).toString());
-            PersonalDihubungi.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),6).toString());
+            Kode.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+            Nama.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+            Alamat.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString());
+            Kota.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
+            Telp.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
+            KegiatanUsaha.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString());
+            PersonalDihubungi.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString());
         }
     }
 

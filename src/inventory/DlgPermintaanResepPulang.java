@@ -749,12 +749,12 @@ public class DlgPermintaanResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_DELETE){
                 int row=tbDokter.getSelectedRow();
                 if(row!= -1){
-                    tabMode.setValueAt("", row,0);
-                    tabMode.setValueAt("", row,10);
+                    tbDokter.setValueAt("", row,0);
+                    tbDokter.setValueAt("", row,10);
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
@@ -793,7 +793,7 @@ public class DlgPermintaanResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -812,7 +812,7 @@ public class DlgPermintaanResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_JeniskelasKeyPressed
 
     private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 try {
                     getData();
@@ -1283,7 +1283,7 @@ public class DlgPermintaanResepPulang extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
                         tbDokter.setValueAt("",tbDokter.getSelectedRow(),0);
                     }else{
-                        tbDokter.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString())*Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),7).toString()),tbDokter.getSelectedRow(),9);
+                        tbDokter.setValueAt(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())*Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()),tbDokter.getSelectedRow(),9);
                     }
                 }
             } catch (Exception e) {
@@ -1291,11 +1291,11 @@ public class DlgPermintaanResepPulang extends javax.swing.JDialog {
             }
 
             ttl=0;
-            for(int r=0;r<tabMode.getRowCount();r++){
+            for(int r=0;r<tbDokter.getRowCount();r++){
                  y=0;
                  try {
-                     y=Double.parseDouble(tabMode.getValueAt(r,0).toString())*
-                       Double.parseDouble(tabMode.getValueAt(r,7).toString());
+                     y=Double.parseDouble(tbDokter.getValueAt(r,0).toString())*
+                       Double.parseDouble(tbDokter.getValueAt(r,7).toString());
                  } catch (Exception e) {
                      y=0;
                  }
@@ -1379,7 +1379,7 @@ public class DlgPermintaanResepPulang extends javax.swing.JDialog {
         for(i=0;i<tbDokter.getRowCount();i++){
             if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
                 if(Sequel.menyimpantf2("detail_permintaan_resep_pulang","?,?,?,?","Permintaan Stok Obat Pasien",4,new String[]{
-                        NoResep.getText(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,10).toString()
+                        NoResep.getText(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,10).toString()
                     })==false){
                     sukses=false;
                 }
@@ -1696,11 +1696,11 @@ public class DlgPermintaanResepPulang extends javax.swing.JDialog {
 
     private void hitungPermintaan() {
         ttl=0;
-        for(int r=0;r<tabMode.getRowCount();r++){
+        for(int r=0;r<tbDokter.getRowCount();r++){
              y=0;
              try {
-                 y=Double.parseDouble(tabMode.getValueAt(r,0).toString())*
-                   Double.parseDouble(tabMode.getValueAt(r,7).toString());
+                 y=Double.parseDouble(tbDokter.getValueAt(r,0).toString())*
+                   Double.parseDouble(tbDokter.getValueAt(r,7).toString());
              } catch (Exception e) {
                  y=0;
              }

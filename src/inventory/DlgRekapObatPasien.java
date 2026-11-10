@@ -588,10 +588,10 @@ public class DlgRekapObatPasien extends javax.swing.JDialog {
                 "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
             }, "Laporan 5 (Jasper)");
             if(TabRawat1.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbDokter.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     //TCari.requestFocus();
-                }else if(tabMode.getRowCount()!=0){
+                }else if(tbDokter.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("RekapObatPasien.html", "Rekap Penggunaan Obat Per Pasien", tbDokter);
@@ -607,19 +607,19 @@ public class DlgRekapObatPasien extends javax.swing.JDialog {
                             break;
                         case "Laporan 5 (Jasper)":
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                            int row=tabMode.getRowCount();
+                            int row=tbDokter.getRowCount();
                             for(int r=0;r<row;r++){
                                 Sequel.menyimpan("temporary","'"+r+"','"+
-                                                tabMode.getValueAt(r,0).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,9).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Obat Perdokter Poli");
+                                                tbDokter.getValueAt(r,0).toString().replaceAll("'","`")+"','"+
+                                                tbDokter.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                                tbDokter.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                                tbDokter.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                                tbDokter.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                                tbDokter.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
+                                                tbDokter.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
+                                                tbDokter.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
+                                                tbDokter.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
+                                                tbDokter.getValueAt(r,9).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Obat Perdokter Poli");
                             }
                             Map<String, Object> param = new HashMap<>();
                             param.put("namars",akses.getnamars());
@@ -634,10 +634,10 @@ public class DlgRekapObatPasien extends javax.swing.JDialog {
                     }
                 }
             }else if(TabRawat1.getSelectedIndex()==1){
-                if(tabMode2.getRowCount()==0){
+                if(tbDokter2.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     //TCari.requestFocus();
-                }else if(tabMode2.getRowCount()!=0){
+                }else if(tbDokter2.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("RekapObatPasien.html", "Rekap Penggunaan Obat Per Pasien", tbDokter2);
@@ -653,19 +653,19 @@ public class DlgRekapObatPasien extends javax.swing.JDialog {
                             break;
                         case "Laporan 5 (Jasper)":
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                            int row=tabMode2.getRowCount();
+                            int row=tbDokter2.getRowCount();
                             for(int r=0;r<row;r++){
                                 Sequel.menyimpan("temporary","'"+r+"','"+
-                                                tabMode2.getValueAt(r,0).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,9).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Obat Perdokter Poli");
+                                                tbDokter2.getValueAt(r,0).toString().replaceAll("'","`")+"','"+
+                                                tbDokter2.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                                tbDokter2.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                                tbDokter2.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                                tbDokter2.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                                tbDokter2.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
+                                                tbDokter2.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
+                                                tbDokter2.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
+                                                tbDokter2.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
+                                                tbDokter2.getValueAt(r,9).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Obat Perdokter Poli");
                             }
                             Map<String, Object> param = new HashMap<>();
                             param.put("namars",akses.getnamars());

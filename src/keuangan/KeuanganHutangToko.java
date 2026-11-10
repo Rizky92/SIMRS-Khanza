@@ -818,10 +818,10 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbBangsal.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -846,20 +846,20 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        int row=tabMode.getRowCount();
+                        int row=tbBangsal.getRowCount();
                         for(i=0;i<row;i++){
                                 Sequel.menyimpan("temporary","'"+i+"','"+
-                                            tabMode.getValueAt(i,1).toString()+"','"+
-                                            tabMode.getValueAt(i,2).toString()+"','"+
-                                            tabMode.getValueAt(i,3).toString()+"','"+
-                                            tabMode.getValueAt(i,4).toString()+"','"+
-                                            tabMode.getValueAt(i,5).toString()+"','"+
-                                            tabMode.getValueAt(i,6).toString()+"','"+
-                                            tabMode.getValueAt(i,7).toString()+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()))+"','"+
-                                            tabMode.getValueAt(i,12).toString()+"','"+
-                                            tabMode.getValueAt(i,13).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Hutang");
+                                            tbBangsal.getValueAt(i,1).toString()+"','"+
+                                            tbBangsal.getValueAt(i,2).toString()+"','"+
+                                            tbBangsal.getValueAt(i,3).toString()+"','"+
+                                            tbBangsal.getValueAt(i,4).toString()+"','"+
+                                            tbBangsal.getValueAt(i,5).toString()+"','"+
+                                            tbBangsal.getValueAt(i,6).toString()+"','"+
+                                            tbBangsal.getValueAt(i,7).toString()+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i,8).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i,9).toString()))+"','"+
+                                            tbBangsal.getValueAt(i,12).toString()+"','"+
+                                            tbBangsal.getValueAt(i,13).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Hutang");
                         }
                         i++;
                         Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Hutang");
@@ -918,7 +918,7 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(evt.getClickCount()==1){
                 if(tbBangsal.getSelectedColumn()==0){
                     if(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),10).toString().equals("0")){
@@ -939,7 +939,7 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 if(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().equals("true")){
                     tbBangsal.setValueAt(
@@ -1089,13 +1089,13 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
             Valid.textKosong(KdPetugas,"Petugas");
         }else if(AkunBayar.getSelectedItem().toString().trim().equals("")){
             Valid.textKosong(AkunBayar,"Akun Bayar");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
         }else if(Keterangan.getText().trim().equals("")){
             Valid.textKosong(Keterangan,"Keterangan");
         }else if(bayar==0){
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih tagihan yang mau dibayar...!!!!");
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbBangsal.getRowCount()!=0){
             koderekening="";
             try {
                 myObj = new FileReader("./cache/akunbayarhutang.iyem");
@@ -1152,28 +1152,28 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
                 }else{
                     Sequel.AutoComitFalse();
                     sukses=true;
-                    row=tabMode.getRowCount();
+                    row=tbBangsal.getRowCount();
                     for(int i=0;i<row;i++){
-                        if(tabMode.getValueAt(i,0).toString().equals("true")){
+                        if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                             if(Double.parseDouble(tbBangsal.getValueAt(i,10).toString())>0){
                                 if(Sequel.menyimpantf("toko_bayar_pemesanan","?,?,?,?,?,?,?","Data", 7,new String[]{
-                                    Valid.SetTgl(TglBayar.getSelectedItem()+""),tabMode.getValueAt(i,1).toString(),KdPetugas.getText(),
-                                    tabMode.getValueAt(i,10).toString(),Keterangan.getText(),AkunBayar.getSelectedItem().toString(),
+                                    Valid.SetTgl(TglBayar.getSelectedItem()+""),tbBangsal.getValueAt(i,1).toString(),KdPetugas.getText(),
+                                    tbBangsal.getValueAt(i,10).toString(),Keterangan.getText(),AkunBayar.getSelectedItem().toString(),
                                     NoBukti.getText()
                                 })==true){
-                                    if((Double.parseDouble(tabMode.getValueAt(i,9).toString())<=0)||(Double.parseDouble(tabMode.getValueAt(i,9).toString())<=-0)){
-                                        Sequel.mengedit("tokopemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Sudah Dibayar'");
+                                    if((Double.parseDouble(tbBangsal.getValueAt(i,9).toString())<=0)||(Double.parseDouble(tbBangsal.getValueAt(i,9).toString())<=-0)){
+                                        Sequel.mengedit("tokopemesanan","no_faktur='"+tbBangsal.getValueAt(i,1).toString()+"'","status='Sudah Dibayar'");
                                     }else{
-                                        Sequel.mengedit("tokopemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
+                                        Sequel.mengedit("tokopemesanan","no_faktur='"+tbBangsal.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
                                     }
                                     Sequel.deleteTampJurnal();
-                                    if(Sequel.insertTampJurnal(Bayar_Pemesanan_Toko, "HUTANG BARANG TOKO", tabMode.getValueAt(i,10).toString(), "0")==false){
+                                    if(Sequel.insertTampJurnal(Bayar_Pemesanan_Toko, "HUTANG BARANG TOKO", tbBangsal.getValueAt(i,10).toString(), "0")==false){
                                         sukses=false;
                                     }
-                                    if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", tabMode.getValueAt(i,10).toString())==false){
+                                    if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", tbBangsal.getValueAt(i,10).toString())==false){
                                         sukses=false;
                                     }
-                                    if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG TOKO NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
+                                    if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG TOKO NO.FAKTUR "+tbBangsal.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
                                         sukses=false;
                                     }
                                 }else{
@@ -1196,7 +1196,7 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
                         LCount1.setText("0");
                         for(i=0;i<tbBangsal.getRowCount();i++){
                             if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                                tabMode.removeRow(i);
+                                tabMode.removeRow(tbBangsal.convertRowIndexToModel(i));
                                 i--;
                             }
                         }
@@ -1381,23 +1381,23 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
             try{
                 Sequel.AutoComitFalse();
                 sukses=true;
-                row=tabMode.getRowCount();
+                row=tbBangsal.getRowCount();
                 for(int i=0;i<row;i++){
-                    if(tabMode.getValueAt(i,0).toString().equals("true")){
+                    if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                         if(Double.parseDouble(tbBangsal.getValueAt(i,10).toString())>0){
                             if(Sequel.menyimpantf("toko_bayar_pemesanan","?,?,?,?,?,?,?","Data", 7,new String[]{
-                                Valid.SetTgl(TglBayar.getSelectedItem()+""),tabMode.getValueAt(i,1).toString(),KdPetugas.getText(),
-                                tabMode.getValueAt(i,10).toString(),Keterangan.getText(),AkunBayar.getSelectedItem().toString(),
+                                Valid.SetTgl(TglBayar.getSelectedItem()+""),tbBangsal.getValueAt(i,1).toString(),KdPetugas.getText(),
+                                tbBangsal.getValueAt(i,10).toString(),Keterangan.getText(),AkunBayar.getSelectedItem().toString(),
                                 NoBukti.getText()
                             })==true){
                                 Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran,6),signed)),0) from pembayaran_pihak_ke3_bankmandiri where left(pembayaran_pihak_ke3_bankmandiri.tgl_pembayaran,10)='"+Valid.SetTgl(TglBayar.getSelectedItem()+"")+"' ",kodemcm+"14"+TglBayar.getSelectedItem().toString().replaceAll("-",""),6,NoBukti);
-                                if((Double.parseDouble(tabMode.getValueAt(i,9).toString())<=0)||(Double.parseDouble(tabMode.getValueAt(i,9).toString())<=-0)){
-                                    Sequel.mengedit("tokopemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Sudah Dibayar'");
+                                if((Double.parseDouble(tbBangsal.getValueAt(i,9).toString())<=0)||(Double.parseDouble(tbBangsal.getValueAt(i,9).toString())<=-0)){
+                                    Sequel.mengedit("tokopemesanan","no_faktur='"+tbBangsal.getValueAt(i,1).toString()+"'","status='Sudah Dibayar'");
                                 }else{
-                                    Sequel.mengedit("tokopemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
+                                    Sequel.mengedit("tokopemesanan","no_faktur='"+tbBangsal.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
                                 }
                                 if(Sequel.menyimpantf("pembayaran_pihak_ke3_bankmandiri","?,now(),?,?,?,?,?,?,?,?,?,?,?","No.Bukti", 12,new String[]{
-                                        NoBukti.getText(),norekening,NoRekening.getText(),RekeningAtasNama.getText(),KotaAtasNamaRekening.getText(),tabMode.getValueAt(i,10).toString(),tabMode.getValueAt(i,1).toString(),KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),"Bayar Pesan Aset/Inventaris","Baru"
+                                        NoBukti.getText(),norekening,NoRekening.getText(),RekeningAtasNama.getText(),KotaAtasNamaRekening.getText(),tbBangsal.getValueAt(i,10).toString(),tbBangsal.getValueAt(i,1).toString(),KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),"Bayar Pesan Aset/Inventaris","Baru"
                                     })==false){
                                     sukses=false;
                                 }else{
@@ -1407,13 +1407,13 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
                                             sukses=false;
                                         }
                                     }
-                                    if(Sequel.insertTampJurnal(Bayar_Pemesanan_Toko, "HUTANG BARANG TOKO", tabMode.getValueAt(i,10).toString(), "0")==false){
+                                    if(Sequel.insertTampJurnal(Bayar_Pemesanan_Toko, "HUTANG BARANG TOKO", tbBangsal.getValueAt(i,10).toString(), "0")==false){
                                         sukses=false;
                                     }
-                                    if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, (Valid.SetAngka(BiayaTransaksi.getText())+Valid.SetAngka(tabMode.getValueAt(i,10).toString())))==false){
+                                    if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, (Valid.SetAngka(BiayaTransaksi.getText())+Valid.SetAngka(tbBangsal.getValueAt(i,10).toString())))==false){
                                         sukses=false;
                                     }
-                                    if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG TOKO NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
+                                    if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG TOKO NO.FAKTUR "+tbBangsal.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
                                         sukses=false;
                                     }
                                 }
@@ -1430,7 +1430,7 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
                     LCount1.setText("0");
                     for(i=0;i<tbBangsal.getRowCount();i++){
                         if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                            tabMode.removeRow(i);
+                            tabMode.removeRow(tbBangsal.convertRowIndexToModel(i));
                             i--;
                         }
                     }

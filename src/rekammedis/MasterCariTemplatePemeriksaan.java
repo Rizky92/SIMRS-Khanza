@@ -1105,7 +1105,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                         }
                     }
 
-                    if(tabModeRadiologi.getRowCount()>0){
+                    if(tbPermintaanRadiologi.getRowCount()>0){
                         nomor=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_radiologi.noorder,4),signed)),0) from permintaan_radiologi where permintaan_radiologi.tgl_permintaan='"+tanggaldilakukan+"'","PR"+tanggaldilakukan.replaceAll("-",""),4);
                         if(Sequel.menyimpantf2("permintaan_radiologi","?,?,?,?,?,?,?,?,?,?,?,?","No.Permintaan Radiologi",12,new String[]{
                                 nomor,noperawatan,tanggaldilakukan,jamdilakukan,"0000-00-00","00:00:00","0000-00-00","00:00:00",kodedokter,"ralan","-",Asesmen.getText()
@@ -1122,7 +1122,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                         }
                     }
 
-                    if(tabModePK.getRowCount()>0){
+                    if(tbPermintaanPK.getRowCount()>0){
                         nomor=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_lab.noorder,4),signed)),0) from permintaan_lab where permintaan_lab.tgl_permintaan='"+tanggaldilakukan+"' ","PK"+tanggaldilakukan.replaceAll("-",""),4);
                         if(Sequel.menyimpantf2("permintaan_lab","?,?,?,?,?,?,?,?,?,?,?,?","No.Permintaan",12,new String[]{
                                 nomor,noperawatan,tanggaldilakukan,jamdilakukan,"0000-00-00","00:00:00","0000-00-00","00:00:00",kodedokter,"ralan","-",Asesmen.getText()
@@ -1149,7 +1149,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                         }
                     }
 
-                    if(tabModePA.getRowCount()>0){
+                    if(tbPermintaanPA.getRowCount()>0){
                         nomor=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_labpa.noorder,4),signed)),0) from permintaan_labpa where permintaan_labpa.tgl_permintaan='"+tanggaldilakukan+"' ","PA"+tanggaldilakukan.replaceAll("-",""),4);
                         if(Sequel.menyimpantf2("permintaan_labpa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Permintaan",20,new String[]{
                                 nomor,noperawatan,tanggaldilakukan,jamdilakukan,"0000-00-00","00:00:00","0000-00-00","00:00:00",kodedokter,"ralan","-",Asesmen.getText(),tanggaldilakukan,"-","-","-","-","0000-00-00","-","-"
@@ -1166,7 +1166,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                         }
                     }
 
-                    if(tabModeMB.getRowCount()>0){
+                    if(tbPermintaanMB.getRowCount()>0){
                         nomor=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_labmb.noorder,4),signed)),0) from permintaan_labmb where permintaan_labmb.tgl_permintaan='"+tanggaldilakukan+"' ","MB"+tanggaldilakukan.replaceAll("-",""),4);
                         if(Sequel.menyimpantf2("permintaan_labmb","?,?,?,?,?,?,?,?,?,?,?,?","No.Permintaan",12,new String[]{
                                 nomor,noperawatan,tanggaldilakukan,jamdilakukan,"0000-00-00","00:00:00","0000-00-00","00:00:00",kodedokter,"ralan","-",Asesmen.getText()
@@ -1193,7 +1193,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                         }
                     }
 
-                    if((tabModeObatUmum.getRowCount()>0)||(tabModeObatRacikan.getRowCount()>0)){
+                    if((tbObatNonRacikan.getRowCount()>0)||(tbObatRacikan.getRowCount()>0)){
                         nomor = Sequel.autonomorSmc("", "", "resep_obat", "no_resep", 4, "0", tanggaldilakukan);
                         if (Sequel.menyimpantfSmc(
                             "resep_obat", "no_resep, tgl_perawatan, jam, no_rawat, kd_dokter, tgl_peresepan, jam_peresepan, status, tgl_penyerahan, jam_penyerahan",
@@ -1236,7 +1236,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                         }
                     }
 
-                    if(TabModeTindakan.getRowCount()>0){
+                    if(tbTindakan.getRowCount()>0){
                         ttljmdokter=0;ttlkso=0;ttlpendapatan=0;ttljasasarana=0;ttlbhp=0;ttlmenejemen=0;
                         for(i=0;i<tbTindakan.getRowCount();i++){
                             if(Sequel.menyimpantf2("rawat_jl_dr","?,?,?,?,?,?,?,?,?,?,?,?","Tindakan/Pemeriksaan "+tbTindakan.getValueAt(i,1).toString(),12,new String[]{
@@ -1502,7 +1502,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }
 
     public void tampil2() {
@@ -1562,15 +1562,15 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
     }
 
     private void tampilDetailTemplate() {
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if(tbDokter.getSelectedRow()>-1){
                 try {
-                    Subjek.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString());
-                    Objek.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),4).toString());
-                    Asesmen.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),5).toString());
-                    Plan.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),6).toString());
-                    Instruksi.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),7).toString());
-                    Evaluasi.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),8).toString());
+                    Subjek.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
+                    Objek.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
+                    Asesmen.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString());
+                    Plan.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString());
+                    Instruksi.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString());
+                    Evaluasi.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString());
 
                     Valid.tabelKosong(tabModeDiagnosa);
                     ps=koneksi.prepareStatement(
@@ -1580,7 +1580,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             "inner join kategori_penyakit on penyakit.kd_ktg=kategori_penyakit.kd_ktg where "+
                             "template_pemeriksaan_dokter_penyakit.no_template=? order by template_pemeriksaan_dokter_penyakit.urut");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModeDiagnosa.addRow(new Object[]{
@@ -1604,7 +1604,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             "from template_pemeriksaan_dokter_prosedur inner join icd9 on template_pemeriksaan_dokter_prosedur.kode=icd9.kode where template_pemeriksaan_dokter_prosedur.no_template=? "+
                             "order by template_pemeriksaan_dokter_prosedur.urut");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModeProsedur.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)});
@@ -1626,7 +1626,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             "inner join jns_perawatan_radiologi on template_pemeriksaan_dokter_permintaan_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw "+
                             "where template_pemeriksaan_dokter_permintaan_radiologi.no_template=?");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModeRadiologi.addRow(new Object[]{rs.getString("kd_jenis_prw"),rs.getString("nm_perawatan")});
@@ -1649,7 +1649,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             "inner join jns_perawatan_lab on template_pemeriksaan_dokter_permintaan_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
                             "where template_pemeriksaan_dokter_permintaan_lab.no_template=? and jns_perawatan_lab.kategori='PK'");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModePK.addRow(new Object[]{rs.getString("kd_jenis_prw"),rs.getString("nm_perawatan")});
@@ -1659,7 +1659,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                                         "select template_pemeriksaan_dokter_detail_permintaan_lab.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa "+
                                         "from template_pemeriksaan_dokter_detail_permintaan_lab inner join template_laboratorium on template_pemeriksaan_dokter_detail_permintaan_lab.id_template=template_laboratorium.id_template where template_pemeriksaan_dokter_detail_permintaan_lab.no_template=? and "+
                                         "template_pemeriksaan_dokter_detail_permintaan_lab.kd_jenis_prw=? order by template_laboratorium.urut");
-                                ps2.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                                ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                                 ps2.setString(2,rs.getString("kd_jenis_prw"));
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
@@ -1708,7 +1708,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             "inner join jns_perawatan_lab on template_pemeriksaan_dokter_permintaan_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
                             "where template_pemeriksaan_dokter_permintaan_lab.no_template=? and jns_perawatan_lab.kategori='PA'");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModePA.addRow(new Object[]{rs.getString("kd_jenis_prw"),rs.getString("nm_perawatan")});
@@ -1731,7 +1731,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             "inner join jns_perawatan_lab on template_pemeriksaan_dokter_permintaan_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
                             "where template_pemeriksaan_dokter_permintaan_lab.no_template=? and jns_perawatan_lab.kategori='MB'");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModeMB.addRow(new Object[]{rs.getString("kd_jenis_prw"),rs.getString("nm_perawatan")});
@@ -1741,7 +1741,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                                         "select template_pemeriksaan_dokter_detail_permintaan_lab.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa "+
                                         "from template_pemeriksaan_dokter_detail_permintaan_lab inner join template_laboratorium on template_pemeriksaan_dokter_detail_permintaan_lab.id_template=template_laboratorium.id_template where template_pemeriksaan_dokter_detail_permintaan_lab.no_template=? and "+
                                         "template_pemeriksaan_dokter_detail_permintaan_lab.kd_jenis_prw=? order by template_laboratorium.urut");
-                                ps2.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                                ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                                 ps2.setString(2,rs.getString("kd_jenis_prw"));
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
@@ -1790,7 +1790,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             "databarang.kapasitas,databarang.letak_barang from template_pemeriksaan_dokter_resep inner join databarang on template_pemeriksaan_dokter_resep.kode_brng=databarang.kode_brng inner join kodesatuan on kodesatuan.kode_sat=databarang.kode_sat "+
                             "inner join jenis on databarang.kdjns=jenis.kdjns inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri where template_pemeriksaan_dokter_resep.no_template=? order by databarang.nama_brng");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModeObatUmum.addRow(new Object[]{
@@ -1815,7 +1815,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             "template_pemeriksaan_dokter_resep_racikan.keterangan from template_pemeriksaan_dokter_resep_racikan inner join metode_racik on metode_racik.kd_racik=template_pemeriksaan_dokter_resep_racikan.kd_racik where template_pemeriksaan_dokter_resep_racikan.no_template=? "+
                             "order by template_pemeriksaan_dokter_resep_racikan.no_racik");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModeObatRacikan.addRow(new Object[]{
@@ -1828,7 +1828,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                                         "industrifarmasi.nama_industri,databarang.letak_barang from template_pemeriksaan_dokter_resep_racikan_detail inner join databarang on template_pemeriksaan_dokter_resep_racikan_detail.kode_brng=databarang.kode_brng "+
                                         "inner join jenis on databarang.kdjns=jenis.kdjns inner join kodesatuan on kodesatuan.kode_sat=databarang.kode_sat inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                                         "where template_pemeriksaan_dokter_resep_racikan_detail.no_template=? and template_pemeriksaan_dokter_resep_racikan_detail.no_racik=? order by template_pemeriksaan_dokter_resep_racikan_detail.kode_brng");
-                                ps2.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                                ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                                 ps2.setString(2,rs.getString("no_racik"));
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
@@ -1867,7 +1867,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             "on template_pemeriksaan_dokter_tindakan.kd_jenis_prw=jns_perawatan.kd_jenis_prw inner join kategori_perawatan on kategori_perawatan.kd_kategori=jns_perawatan.kd_kategori "+
                             "where template_pemeriksaan_dokter_tindakan.no_template=?");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             TabModeTindakan.addRow(new Object[]{

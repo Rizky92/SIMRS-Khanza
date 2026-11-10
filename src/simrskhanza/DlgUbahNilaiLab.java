@@ -713,8 +713,8 @@ public final class DlgUbahNilaiLab extends javax.swing.JDialog {
                     belumFinal = false;
 
                     Map<String, Integer> map = new HashMap<>();
-                    for (int row = 0; row < tabMode.getRowCount(); row++) {
-                        map.put(tabMode.getValueAt(row, 5).toString(), row);
+                    for (int row = 0; row < tbPemeriksaan.getRowCount(); row++) {
+                        map.put(tbPemeriksaan.getValueAt(row, 5).toString(), row);
                     }
 
                     for (JsonNode result : sortedResults) {
@@ -745,9 +745,9 @@ public final class DlgUbahNilaiLab extends javax.swing.JDialog {
                         }
 
                         if (row != null) {
-                            tabMode.setValueAt(resultValue, row, 1);
-                            tabMode.setValueAt(nilaiRujukan, row, 3);
-                            tabMode.setValueAt(result.path("Flag").asText(""), row, 4);
+                            tbPemeriksaan.setValueAt(resultValue, row, 1);
+                            tbPemeriksaan.setValueAt(nilaiRujukan, row, 3);
+                            tbPemeriksaan.setValueAt(result.path("Flag").asText(""), row, 4);
                         }
                     }
 

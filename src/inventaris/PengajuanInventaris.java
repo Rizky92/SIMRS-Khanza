@@ -989,10 +989,10 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbObat.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1095,7 +1095,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1153,7 +1153,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void tbObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1271,7 +1271,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_KeteranganKeyPressed
 
     private void ppProsesBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppProsesBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
         }else{
             if(tbObat.getSelectedRow()> -1){
@@ -1301,7 +1301,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_ppProsesBtnPrintActionPerformed
 
     private void ppDosetujuiBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDosetujuiBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
         }else{
             if(tbObat.getSelectedRow()> -1){
@@ -1331,7 +1331,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_ppDosetujuiBtnPrintActionPerformed
 
     private void ppDitolakBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDitolakBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
         }else{
             if(tbObat.getSelectedRow()> -1){
@@ -1502,7 +1502,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
         LCount1.setText(Valid.SetAngka(total));
     }
 
@@ -1585,8 +1585,8 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
 
     private void hapus() {
         if(Sequel.meghapustf("pengajuan_inventaris","no_pengajuan",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString())==true){
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");

@@ -1078,10 +1078,10 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbObat.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1165,7 +1165,7 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
     }//GEN-LAST:event_TNoRMKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1175,7 +1175,7 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1491,7 +1491,7 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        LCount.setText(String.valueOf(tabMode.getRowCount()));
+        LCount.setText(String.valueOf(tbObat.getRowCount()));
     }
 
     public void emptTeks() {
@@ -1690,8 +1690,8 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
             tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString().substring(0, 10),
             tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString().substring(11)
         )) {
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(String.valueOf(tabMode.getRowCount()));
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(String.valueOf(tbObat.getRowCount()));
             emptTeks();
         } else {
             JOptionPane.showMessageDialog(null, "Gagal menghapus..!!");
@@ -1711,7 +1711,7 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
                 TMP.getText(), UFR.getText(), Tensi.getText(), Nadi.getText(), Suhu.getText(), SpO2.getText(), RR.getText(),
                 UFG.getText(), UFV.getText(), Tindakan.getText(), BarcodeHF.getText(), KdPetugas.getText(), NmPetugas.getText()
             });
-            LCount.setText(String.valueOf(tabMode.getRowCount()));
+            LCount.setText(String.valueOf(tbObat.getRowCount()));
             emptTeks();
         }
     }

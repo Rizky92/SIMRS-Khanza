@@ -433,10 +433,10 @@ public class DapurNilaiPenerimaanVendorPerBulan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbDokter.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -461,24 +461,24 @@ public class DapurNilaiPenerimaanVendorPerBulan extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        int row=tabMode.getRowCount();
+                        int row=tbDokter.getRowCount();
                         for(i=0;i<row;i++){
                             Sequel.menyimpan("temporary","'"+i+"','"+
-                                            tabMode.getValueAt(i,0).toString()+"','"+
-                                            tabMode.getValueAt(i,1).toString()+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,2).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,3).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,4).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()))+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penerimaan");
+                                            tbDokter.getValueAt(i,0).toString()+"','"+
+                                            tbDokter.getValueAt(i,1).toString()+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,2).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,3).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,4).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,5).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,6).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,7).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,8).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,9).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,10).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,11).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,12).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,13).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,14).toString()))+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penerimaan");
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
@@ -695,7 +695,7 @@ public class DapurNilaiPenerimaanVendorPerBulan extends javax.swing.JDialog {
                         rs.getString("kode_suplier"),rs.getString("nama_suplier"),januari,februari,maret,april,mei,juni,juli,agustus,september,oktober,november,desember,tagihan
                     });
                 }
-                if(tabMode.getRowCount()>0){
+                if(tbDokter.getRowCount()>0){
                     tabMode.addRow(new Object[]{
                         "Total :","",totaljanuari,totalfebruari,totalmaret,totalapril,totalmei,totaljuni,totaljuli,totalagustus,totalseptember,totaloktober,totalnovember,totaldesember,totaltagihan
                     });

@@ -1855,10 +1855,10 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbDokter.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1883,22 +1883,22 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        int row=tabMode.getRowCount();
+                        int row=tbDokter.getRowCount();
                         for(int i=0;i<row;i++){
                             Sequel.menyimpan("temporary","'"+i+"','"+
-                                            tabMode.getValueAt(i,0).toString()+"','"+
-                                            tabMode.getValueAt(i,1).toString()+"','"+
-                                            tabMode.getValueAt(i,2).toString()+"','"+
-                                            tabMode.getValueAt(i,3).toString()+"','"+
-                                            tabMode.getValueAt(i,4).toString()+"','"+
-                                            tabMode.getValueAt(i,33).toString()+"','"+
-                                            tabMode.getValueAt(i,34).toString()+"','"+
-                                            tabMode.getValueAt(i,35).toString()+"','"+
-                                            tabMode.getValueAt(i,36).toString()+"','"+
-                                            tabMode.getValueAt(i,37).toString()+"','"+
-                                            tabMode.getValueAt(i,38).toString()+"','"+
-                                            tabMode.getValueAt(i,39).toString()+"','"+
-                                            tabMode.getValueAt(i,40).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi operasi");
+                                            tbDokter.getValueAt(i,0).toString()+"','"+
+                                            tbDokter.getValueAt(i,1).toString()+"','"+
+                                            tbDokter.getValueAt(i,2).toString()+"','"+
+                                            tbDokter.getValueAt(i,3).toString()+"','"+
+                                            tbDokter.getValueAt(i,4).toString()+"','"+
+                                            tbDokter.getValueAt(i,33).toString()+"','"+
+                                            tbDokter.getValueAt(i,34).toString()+"','"+
+                                            tbDokter.getValueAt(i,35).toString()+"','"+
+                                            tbDokter.getValueAt(i,36).toString()+"','"+
+                                            tbDokter.getValueAt(i,37).toString()+"','"+
+                                            tbDokter.getValueAt(i,38).toString()+"','"+
+                                            tbDokter.getValueAt(i,39).toString()+"','"+
+                                            tbDokter.getValueAt(i,40).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi operasi");
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
@@ -1938,7 +1938,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1949,7 +1949,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -2463,7 +2463,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             Valid.textKosong(kdpjanak,"dr Pj Anak");
         }else if(kddrumum.getText().trim().equals("")||nmdrumum.getText().trim().equals("")){
             Valid.textKosong(kddrumum,"dr Umum");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else{
@@ -3689,7 +3689,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
 
     private void ppBerkasDigitalBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBerkasDigitalBtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else{
@@ -4144,7 +4144,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private void getData() {
         int row=tbDokter.getSelectedRow();
         if(row!= -1){
-            Kd2.setText(tabMode.getValueAt(row,0).toString());
+            Kd2.setText(tbDokter.getValueAt(row,0).toString());
         }
     }
 

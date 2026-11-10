@@ -838,7 +838,7 @@ public class DlgInputStok extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -847,7 +847,7 @@ public class DlgInputStok extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_DELETE){
                 try {
                     if(tbDokter.getSelectedColumn()==0){
@@ -1160,7 +1160,7 @@ public class DlgInputStok extends javax.swing.JDialog {
     }//GEN-LAST:event_ppStokActionPerformed
 
     private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)||(evt.getKeyCode()==KeyEvent.VK_RIGHT)){
                 try {
                     getData();
@@ -1225,10 +1225,10 @@ public class DlgInputStok extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data kosong..!!!!");
             tbDokter.requestFocus();
         }else{
-            if(tabMode.getRowCount()==0){
+            if(tbDokter.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari.requestFocus();
-            }else if(tabMode.getRowCount()!=0){
+            }else if(tbDokter.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1253,15 +1253,15 @@ public class DlgInputStok extends javax.swing.JDialog {
                             break;
                         case "Laporan 5 (Jasper)":
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                            int row=tabMode.getRowCount();
+                            int row=tbDokter.getRowCount();
                             for(int i=0;i<row;i++){
                                 Sequel.menyimpan("temporary","'"+i+"','"+
-                                                tabMode.getValueAt(i,1).toString()+"','"+
-                                                tabMode.getValueAt(i,2).toString()+"','"+
-                                                tabMode.getValueAt(i,3).toString()+"','"+
-                                                tabMode.getValueAt(i,4).toString()+"','"+
-                                                tabMode.getValueAt(i,5).toString()+"','"+
-                                                tabMode.getValueAt(i,6).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penerimaan");
+                                                tbDokter.getValueAt(i,1).toString()+"','"+
+                                                tbDokter.getValueAt(i,2).toString()+"','"+
+                                                tbDokter.getValueAt(i,3).toString()+"','"+
+                                                tbDokter.getValueAt(i,4).toString()+"','"+
+                                                tbDokter.getValueAt(i,5).toString()+"','"+
+                                                tbDokter.getValueAt(i,6).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penerimaan");
                             }
                             Map<String, Object> param = new HashMap<>();
                             param.put("namars",akses.getnamars());
@@ -2254,7 +2254,7 @@ public class DlgInputStok extends javax.swing.JDialog {
         }else if(i!= -1){
             if(!tbDokter.getValueAt(i,0).toString().equals("")){
                 try {
-                    if(Double.parseDouble(tabMode.getValueAt(i,0).toString())>=0){
+                    if(Double.parseDouble(tbDokter.getValueAt(i,0).toString())>=0){
                         stokbarang=0;
                         if(aktifkanbatch.equals("yes")){
                             psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");

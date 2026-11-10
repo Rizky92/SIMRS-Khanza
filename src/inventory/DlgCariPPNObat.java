@@ -558,10 +558,10 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
             }, "Laporan 5 (Jasper)");
             switch (TabRawat.getSelectedIndex()) {
                 case 0:
-                    if(tabMode.getRowCount()==0){
+                    if(tbPengadaan.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tabMode.getRowCount()!=0){
+                    }else if(tbPengadaan.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("PPNPembelian.html", "PPN Pengadaan Barang", tbPengadaan);
@@ -593,10 +593,10 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
                     }
                     break;
                 case 1:
-                    if(tabMode2.getRowCount()==0){
+                    if(tbPembelian.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tabMode2.getRowCount()!=0){
+                    }else if(tbPembelian.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("PPNPemesanan.html", "PPN Penerimaan Barang", tbPembelian);
@@ -628,10 +628,10 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
                     }
                     break;
                 case 2:
-                    if(tabMode3.getRowCount()==0){
+                    if(tbRawatJalan.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tabMode3.getRowCount()!=0){
+                    }else if(tbRawatJalan.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("PPNRalan.html", "Laporan PPN Obat Ralan", tbRawatJalan);
@@ -647,14 +647,14 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
                                 break;
                             case "Laporan 5 (Jasper)":
                                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                                for(int r=0;r<tabMode3.getRowCount();r++){
+                                for(int r=0;r<tbRawatJalan.getRowCount();r++){
                                         Sequel.menyimpan("temporary","'"+r+"','"+
-                                                    tabMode3.getValueAt(r,0).toString()+"','"+
-                                                    tabMode3.getValueAt(r,1).toString()+"','"+
-                                                    tabMode3.getValueAt(r,2).toString()+"','"+
-                                                    Valid.SetAngka(Double.parseDouble(tabMode3.getValueAt(r,3).toString()))+"','"+
-                                                    Valid.SetAngka(Double.parseDouble(tabMode3.getValueAt(r,4).toString()))+"','"+
-                                                    Valid.SetAngka(Double.parseDouble(tabMode3.getValueAt(r,5).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                                    tbRawatJalan.getValueAt(r,0).toString()+"','"+
+                                                    tbRawatJalan.getValueAt(r,1).toString()+"','"+
+                                                    tbRawatJalan.getValueAt(r,2).toString()+"','"+
+                                                    Valid.SetAngka(Double.parseDouble(tbRawatJalan.getValueAt(r,3).toString()))+"','"+
+                                                    Valid.SetAngka(Double.parseDouble(tbRawatJalan.getValueAt(r,4).toString()))+"','"+
+                                                    Valid.SetAngka(Double.parseDouble(tbRawatJalan.getValueAt(r,5).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                                 }
                                 Valid.MyReportqry("rptPPNRalan.jasper","report","::[ Laporan PPN Obat Ralan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                                 break;
@@ -662,10 +662,10 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
                     }
                     break;
                 case 3:
-                    if(tabMode4.getRowCount()==0){
+                    if(tbObatJualBebas.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tabMode4.getRowCount()!=0){
+                    }else if(tbObatJualBebas.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("PPNJualBebas.html", "PPN Obat Jual Bebas", tbObatJualBebas);
@@ -698,10 +698,10 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
                     }
                     break;
                 case 4:
-                    if(tabMode5.getRowCount()==0){
+                    if(tbRawatInap.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tabMode5.getRowCount()!=0){
+                    }else if(tbRawatInap.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("PPNRanap.html", "Laporan PPN Obat Ranap", tbRawatInap);
@@ -717,14 +717,14 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
                                 break;
                             case "Laporan 5 (Jasper)":
                                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                                for(int r=0;r<tabMode5.getRowCount();r++){
+                                for(int r=0;r<tbRawatInap.getRowCount();r++){
                                         Sequel.menyimpan("temporary","'"+r+"','"+
-                                                    tabMode5.getValueAt(r,0).toString()+"','"+
-                                                    tabMode5.getValueAt(r,1).toString()+"','"+
-                                                    tabMode5.getValueAt(r,2).toString()+"','"+
-                                                    Valid.SetAngka(Double.parseDouble(tabMode5.getValueAt(r,3).toString()))+"','"+
-                                                    Valid.SetAngka(Double.parseDouble(tabMode5.getValueAt(r,4).toString()))+"','"+
-                                                    Valid.SetAngka(Double.parseDouble(tabMode5.getValueAt(r,5).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                                    tbRawatInap.getValueAt(r,0).toString()+"','"+
+                                                    tbRawatInap.getValueAt(r,1).toString()+"','"+
+                                                    tbRawatInap.getValueAt(r,2).toString()+"','"+
+                                                    Valid.SetAngka(Double.parseDouble(tbRawatInap.getValueAt(r,3).toString()))+"','"+
+                                                    Valid.SetAngka(Double.parseDouble(tbRawatInap.getValueAt(r,4).toString()))+"','"+
+                                                    Valid.SetAngka(Double.parseDouble(tbRawatInap.getValueAt(r,5).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                                 }
                                 Valid.MyReportqry("rptPPNRanap.jasper","report","::[ Laporan PPN Obat Ranap ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                                 break;
@@ -732,10 +732,10 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
                     }
                     break;
                 case 5:
-                    if(tabMode6.getRowCount()==0){
+                    if(tbPiutangObat.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tabMode6.getRowCount()!=0){
+                    }else if(tbPiutangObat.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("PPNPiutangObat.html", "PPN Piutang Obat & BHP", tbPiutangObat);

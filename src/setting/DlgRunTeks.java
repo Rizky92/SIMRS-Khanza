@@ -363,7 +363,7 @@ public class DlgRunTeks extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -372,7 +372,7 @@ public class DlgRunTeks extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -407,11 +407,11 @@ public class DlgRunTeks extends javax.swing.JDialog {
         }else if(EGb.getText().trim().equals("")){
             YesNo.setSelectedItem("No");
             EGb.setText("./setting/wallpaper.png");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbAdmin.getRowCount()==0){
             Sequel.menyimpan("runtext","'"+TTeks.getText()+"','"+YesNo.getSelectedItem()+"'","Display",EGb);
             runBackground(() ->tampil());
             emptTeks();
-        }else if(tabMode.getRowCount()>0){
+        }else if(tbAdmin.getRowCount()>0){
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu runtext ...!!!!");
             TTeks.requestFocus();
         }
@@ -436,7 +436,7 @@ public class DlgRunTeks extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbAdmin.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TTeks.requestFocus();
         }else if(TTeks.getText().trim().equals("")){
@@ -554,13 +554,13 @@ public class DlgRunTeks extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            TTeks.setText(tabMode.getValueAt(row,0).toString());
-            YesNo.setSelectedItem(tabMode.getValueAt(row,1).toString());
+            TTeks.setText(tbAdmin.getValueAt(row,0).toString());
+            YesNo.setSelectedItem(tbAdmin.getValueAt(row,1).toString());
             try {
                 ResultSet hasil = koneksi.createStatement().executeQuery(
-                        "select gambar from runtext where teks='"+tabMode.getValueAt(row,0).toString()+"'");
+                        "select gambar from runtext where teks='"+tbAdmin.getValueAt(row,0).toString()+"'");
                 for (int I = 0; hasil.next(); I++) {
-                    ((Painter) PhotoGambar).setImage(gambar(tabMode.getValueAt(row,0).toString()));
+                    ((Painter) PhotoGambar).setImage(gambar(tbAdmin.getValueAt(row,0).toString()));
                     Blob blob = hasil.getBlob(1);
                     ((Painter) PhotoGambar).setImageIcon(new javax.swing.ImageIcon(
                         blob.getBytes(1, (int) (blob.length()))));

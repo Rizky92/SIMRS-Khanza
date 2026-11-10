@@ -656,7 +656,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
                     Code.getText(),RadiologiSystem.getText(),KodePemeriksaan.getText(),NamaPemeriksaan.getText(),Display.getText(),SampelCode.getText(),SampelRadiologiSystem.getText(),SampelDisplay.getText()
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbJnsPerawatan.getRowCount());
             }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -679,9 +679,9 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,KodePemeriksaan,"satu_sehat_mapping_lab","id_template")==true){
-            tabMode.removeRow(tbJnsPerawatan.getSelectedRow());
+            tabMode.removeRow(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()));
             emptTeks();
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbJnsPerawatan.getRowCount());
         }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -713,14 +713,14 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
                 if(Sequel.mengedittf("satu_sehat_mapping_lab","id_template=?","id_template=?,code=?,system=?,display=?,sampel_code=?,sampel_system=?,sampel_display=?",8,new String[]{
                         KodePemeriksaan.getText(),Code.getText(),RadiologiSystem.getText(),Display.getText(),SampelCode.getText(),SampelRadiologiSystem.getText(),SampelDisplay.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()
                     })==true){
-                    tabMode.setValueAt(Code.getText(),tbJnsPerawatan.getSelectedRow(),0);
-                    tabMode.setValueAt(RadiologiSystem.getText(),tbJnsPerawatan.getSelectedRow(),1);
-                    tabMode.setValueAt(KodePemeriksaan.getText(),tbJnsPerawatan.getSelectedRow(),2);
-                    tabMode.setValueAt(NamaPemeriksaan.getText(),tbJnsPerawatan.getSelectedRow(),3);
-                    tabMode.setValueAt(Display.getText(),tbJnsPerawatan.getSelectedRow(),4);
-                    tabMode.setValueAt(SampelCode.getText(),tbJnsPerawatan.getSelectedRow(),5);
-                    tabMode.setValueAt(SampelRadiologiSystem.getText(),tbJnsPerawatan.getSelectedRow(),6);
-                    tabMode.setValueAt(SampelDisplay.getText(),tbJnsPerawatan.getSelectedRow(),7);
+                    tbJnsPerawatan.setValueAt(Code.getText(),tbJnsPerawatan.getSelectedRow(),0);
+                    tbJnsPerawatan.setValueAt(RadiologiSystem.getText(),tbJnsPerawatan.getSelectedRow(),1);
+                    tbJnsPerawatan.setValueAt(KodePemeriksaan.getText(),tbJnsPerawatan.getSelectedRow(),2);
+                    tbJnsPerawatan.setValueAt(NamaPemeriksaan.getText(),tbJnsPerawatan.getSelectedRow(),3);
+                    tbJnsPerawatan.setValueAt(Display.getText(),tbJnsPerawatan.getSelectedRow(),4);
+                    tbJnsPerawatan.setValueAt(SampelCode.getText(),tbJnsPerawatan.getSelectedRow(),5);
+                    tbJnsPerawatan.setValueAt(SampelRadiologiSystem.getText(),tbJnsPerawatan.getSelectedRow(),6);
+                    tbJnsPerawatan.setValueAt(SampelDisplay.getText(),tbJnsPerawatan.getSelectedRow(),7);
                     emptTeks();
                 }
             }
@@ -747,10 +747,10 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbJnsPerawatan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbJnsPerawatan.getRowCount()!=0){
                 Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
@@ -810,7 +810,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -819,7 +819,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
 }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1165,7 +1165,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {

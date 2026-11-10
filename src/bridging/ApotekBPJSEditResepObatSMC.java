@@ -132,7 +132,7 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
 
-        for (int i = 0; i < tabModeObat.getColumnCount(); i++) {
+        for (int i = 0; i < tbObat.getColumnCount(); i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(40);
@@ -196,7 +196,7 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
         tbRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbRacikan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        for (int i = 0; i < tabModeRacikan.getColumnCount(); i++) {
+        for (int i = 0; i < tbRacikan.getColumnCount(); i++) {
             TableColumn column = tbRacikan.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(25);
@@ -245,7 +245,7 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
         tbDetailRacikanObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbDetailRacikanObat.setDefaultRenderer(Object.class, new WarnaTable());
 
-        for (int i = 0; i < tabModeDetailRacikanObat.getColumnCount(); i++) {
+        for (int i = 0; i < tbDetailRacikanObat.getColumnCount(); i++) {
             TableColumn column = tbDetailRacikanObat.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(25);
@@ -1192,11 +1192,11 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeek5ActionPerformed
 
     private void BtnTambah1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambah1ActionPerformed
-        if (tabModeRacikan.getRowCount() >= 98) {
+        if (tbRacikan.getRowCount() >= 98) {
             JOptionPane.showMessageDialog(null, "Maksimal 98 Racikan..!!");
         } else {
             tabModeRacikan.addRow(new Object[] {
-                String.valueOf(tabModeRacikan.getRowCount() + 1), "", "", "", 0, "", ""
+                String.valueOf(tbRacikan.getRowCount() + 1), "", "", "", 0, "", ""
             });
         }
     }//GEN-LAST:event_BtnTambah1ActionPerformed
@@ -1212,10 +1212,10 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
                 if (JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menghapus resep racikan ini?", "Hapus Racikan", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     for (int i = tbDetailRacikanObat.getRowCount() - 1; i >= 0; i--) {
                         if (tbDetailRacikanObat.getValueAt(i, 0).toString().equals(tbRacikan.getValueAt(tbRacikan.getSelectedRow(), 0).toString())) {
-                            tabModeDetailRacikanObat.removeRow(i);
+                            tabModeDetailRacikanObat.removeRow(tbDetailRacikanObat.convertRowIndexToModel(i));
                         }
                     }
-                    tabModeRacikan.removeRow(tbRacikan.getSelectedRow());
+                    tabModeRacikan.removeRow(tbRacikan.convertRowIndexToModel(tbRacikan.getSelectedRow()));
                 }
             }
         }
@@ -2060,16 +2060,16 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
     private void updateTotal() {
         double subtotal = 0, total = 0;
 
-        for (int i = 0; i < tabModeObat.getRowCount(); i++) {
-            subtotal = Valid.SetAngka(tabModeObat.getValueAt(i, 7).toString()) * Valid.SetAngka(tabModeObat.getValueAt(i, 0).toString());
+        for (int i = 0; i < tbObat.getRowCount(); i++) {
+            subtotal = Valid.SetAngka(tbObat.getValueAt(i, 7).toString()) * Valid.SetAngka(tbObat.getValueAt(i, 0).toString());
             total += subtotal;
-            tabModeObat.setValueAt(subtotal, i, 8);
+            tbObat.setValueAt(subtotal, i, 8);
         }
 
-        for (int i = 0; i < tabModeDetailRacikanObat.getRowCount(); i++) {
-            subtotal = Valid.SetAngka(tabModeDetailRacikanObat.getValueAt(i, 8).toString()) * Valid.SetAngka(tabModeDetailRacikanObat.getValueAt(i, 1).toString());
+        for (int i = 0; i < tbDetailRacikanObat.getRowCount(); i++) {
+            subtotal = Valid.SetAngka(tbDetailRacikanObat.getValueAt(i, 8).toString()) * Valid.SetAngka(tbDetailRacikanObat.getValueAt(i, 1).toString());
             total += subtotal;
-            tabModeDetailRacikanObat.setValueAt(subtotal, i, 9);
+            tbDetailRacikanObat.setValueAt(subtotal, i, 9);
         }
 
         LTotal.setText(Valid.SetAngka(total));

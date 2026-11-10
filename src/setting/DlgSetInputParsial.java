@@ -523,7 +523,7 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
         }else{
             if(tbSpesialis.getSelectedRow()>-1){
                 Sequel.mengedit("set_input_parsial","kd_pj=?","kd_pj=?",2,new String[]{
-                    kdpj.getText(),tabMode.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
+                    kdpj.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
                 });
                 runBackground(() ->tampil());
                 emptTeks();
@@ -576,7 +576,7 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -587,7 +587,7 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisKeyPressed
 
     private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -664,7 +664,7 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbSpesialis.getRowCount());
     }
 
     public void emptTeks() {
@@ -677,8 +677,8 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
     private void getData() {
         int row=tbSpesialis.getSelectedRow();
         if(row!= -1){
-            kdpj.setText(tabMode.getValueAt(row,0).toString());
-            nmpj.setText(tabMode.getValueAt(row,1).toString());
+            kdpj.setText(tbSpesialis.getValueAt(row,0).toString());
+            nmpj.setText(tbSpesialis.getValueAt(row,1).toString());
         }
     }
 

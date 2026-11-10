@@ -479,10 +479,10 @@ public final class ApotekBPJSDaftarPermintaanResepIterasi extends javax.swing.JD
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbResep.getRowCount()!=0){
             try{
                 File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -521,7 +521,7 @@ public final class ApotekBPJSDaftarPermintaanResepIterasi extends javax.swing.JD
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Iterasi</b></td>").
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl & Jam Penyerahan</b></td>").
                                         append("</tr>");
-                            for (int i = 0; i < tabMode.getRowCount(); i++) {
+                            for (int i = 0; i < tbResep.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
                                                 append("<td valign='top'>").append(tbResep.getValueAt(i,0).toString()).append("</td>").
                                                 append("<td valign='top'>").append(tbResep.getValueAt(i,1).toString()).append("</td>").
@@ -579,7 +579,7 @@ public final class ApotekBPJSDaftarPermintaanResepIterasi extends javax.swing.JD
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Iterasi</b></td>").
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl & Jam Penyerahan</b></td>").
                                         append("</tr>");
-                            for (int i = 0; i < tabMode.getRowCount(); i++) {
+                            for (int i = 0; i < tbResep.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
                                                 append("<td valign='top'>").append(tbResep.getValueAt(i,0).toString()).append("</td>").
                                                 append("<td valign='top'>").append(tbResep.getValueAt(i,1).toString()).append("</td>").
@@ -626,7 +626,7 @@ public final class ApotekBPJSDaftarPermintaanResepIterasi extends javax.swing.JD
                             htmlContent.append(
                                 "\"No.SEP Asal\";\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"No.Kartu\";\"No.Resep Awal\";\"Tgl.Resep Awal\";\"No.Resep Iter\";\"Status Iter\";\"Dokter Peresep\";\"Tgl.Iterasi\";\"Tgl & Jam Penyerahan\"\n"
                             );
-                            for (int i = 0; i < tabMode.getRowCount(); i++) {
+                            for (int i = 0; i < tbResep.getRowCount(); i++) {
                                 htmlContent.append("\"").append(tbResep.getValueAt(i,0).toString()).append("\";\"").append(tbResep.getValueAt(i,1).toString()).append("\";\"").append(tbResep.getValueAt(i,2).toString()).append("\";\"").append(tbResep.getValueAt(i,3).toString()).append("\";\"").append(tbResep.getValueAt(i,4).toString()).append("\";\"").append(tbResep.getValueAt(i,5).toString()).append("\";\"").append(tbResep.getValueAt(i,6).toString()).append("\";\"").append(tbResep.getValueAt(i,7).toString()).append("\";\"").append(tbResep.getValueAt(i,8).toString()).append("\";\"").append(tbResep.getValueAt(i,9).toString()).append("\";\"").append(tbResep.getValueAt(i,10).toString()).append("\";\"").append(tbResep.getValueAt(i,11).toString()).append("\"\n");
                             }
                             f = new File("DataPermintaanResepIterasi.csv");
@@ -861,7 +861,7 @@ public final class ApotekBPJSDaftarPermintaanResepIterasi extends javax.swing.JD
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbResep.getRowCount());
     }
 
     private void panggilPhoto() {

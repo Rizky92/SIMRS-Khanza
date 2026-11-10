@@ -884,7 +884,7 @@ public final class DapurStokOpname extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
         LTotalBeli.setText(Valid.SetAngka(totalreal));
         LTotal.setText(Valid.SetAngka(total));
         LTotal2.setText(Valid.SetAngka(totallebih));

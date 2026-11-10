@@ -472,7 +472,7 @@ public class DlgVakum extends javax.swing.JDialog {
                 }
             }
 
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbAdmin.getRowCount());
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }

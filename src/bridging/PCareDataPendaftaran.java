@@ -3250,10 +3250,10 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
             return;
         }
         if(TabRawat.getSelectedIndex()==1){
-            if(tabMode.getRowCount()==0){
+            if(tbPendaftaran.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari.requestFocus();
-            }else if(tabMode.getRowCount()!=0){
+            }else if(tbPendaftaran.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -3297,10 +3297,10 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }else if(TabRawat.getSelectedIndex()==2){
-            if(tabMode2.getRowCount()==0){
+            if(tbKunjungan.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari1.requestFocus();
-            }else if(tabMode2.getRowCount()!=0){
+            }else if(tbKunjungan.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -3344,10 +3344,10 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }else if(TabRawat.getSelectedIndex()==3){
-            if(tabMode3.getRowCount()==0){
+            if(tbSpesialis.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari1.requestFocus();
-            }else if(tabMode3.getRowCount()!=0){
+            }else if(tbSpesialis.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -3442,7 +3442,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbPendaftaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPendaftaranMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPendaftaran.getRowCount()!=0){
             try {
                 emptTeks();
                 getData();
@@ -3456,7 +3456,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPendaftaranMouseClicked
 
     private void tbPendaftaranKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPendaftaranKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbPendaftaran.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                    emptTeks();
@@ -4516,7 +4516,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_chkKunjunganKeyPressed
 
     private void tbKunjunganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKunjunganMouseClicked
-        if(tabMode2.getRowCount()!=0){
+        if(tbKunjungan.getRowCount()!=0){
             try {
                 emptTeks();
                 getData2();
@@ -4538,7 +4538,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKunjunganMouseClicked
 
     private void tbKunjunganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKunjunganKeyPressed
-        if(tabMode2.getRowCount()!=0){
+        if(tbKunjungan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     emptTeks();
@@ -4586,7 +4586,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void ppRiwayatBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRiwayatBtnPrintActionPerformed
-        if(tabMode2.getRowCount()==0){
+        if(tbKunjungan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TCari1.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -4604,7 +4604,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_ppRiwayatBtnPrintActionPerformed
 
     private void MnBarcodeRM9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnBarcodeRM9ActionPerformed
-        if(tabMode2.getRowCount()==0){
+        if(tbKunjungan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TCari1.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -4743,7 +4743,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLabelTrackerActionPerformed
 
     private void MnGelang6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang6ActionPerformed
-        if(tabMode2.getRowCount()==0){
+        if(tbKunjungan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data kunjungan sudah habis...!!!!");
             TCari1.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -4767,7 +4767,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGelang6ActionPerformed
 
     private void MnGelang5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang5ActionPerformed
-        if(tabMode2.getRowCount()==0){
+        if(tbKunjungan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data kunjungan sudah habis...!!!!");
             TCari1.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -4791,7 +4791,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGelang5ActionPerformed
 
     private void MnGelang4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang4ActionPerformed
-        if(tabMode2.getRowCount()==0){
+        if(tbKunjungan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data kunjungan sudah habis...!!!!");
             TCari1.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -4815,7 +4815,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGelang4ActionPerformed
 
     private void MnGelang3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang3ActionPerformed
-        if(tabMode2.getRowCount()==0){
+        if(tbKunjungan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data kunjungan sudah habis...!!!!");
             TCari1.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -4839,7 +4839,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGelang3ActionPerformed
 
     private void MnGelang2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang2ActionPerformed
-        if(tabMode2.getRowCount()==0){
+        if(tbKunjungan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data kunjungan sudah habis...!!!!");
             TCari1.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -4863,7 +4863,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGelang2ActionPerformed
 
     private void MnGelang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang1ActionPerformed
-        if(tabMode2.getRowCount()==0){
+        if(tbKunjungan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data kunjungan sudah habis...!!!!");
             TCari1.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -4887,7 +4887,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGelang1ActionPerformed
 
     private void MnPemberianObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemberianObatActionPerformed
-        if(tabMode2.getRowCount()==0){
+        if(tbKunjungan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari1.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -4938,7 +4938,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPemberianObatActionPerformed
 
     private void MnTIndakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnTIndakanActionPerformed
-        if(tabMode2.getRowCount()==0){
+        if(tbKunjungan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari1.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -4987,7 +4987,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_MnTIndakanActionPerformed
 
     private void MnPemberianObat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemberianObat1ActionPerformed
-        if(tabMode2.getRowCount()==0){
+        if(tbKunjungan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari1.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -5006,7 +5006,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPemberianObat1ActionPerformed
 
     private void MnTIndakan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnTIndakan1ActionPerformed
-        if(tabMode2.getRowCount()==0){
+        if(tbKunjungan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari1.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -5025,7 +5025,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_MnTIndakan1ActionPerformed
 
     private void ppBuktiKunjunganBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBuktiKunjunganBtnPrintActionPerformed
-        if(tabMode2.getRowCount()==0){
+        if(tbKunjungan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data kunjungan sudah habis...!!!!");
             TCari1.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -5785,7 +5785,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_LingkarPerutKeyPressed
 
     private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-        if(tabMode2.getRowCount()!=0){
+        if(tbKunjungan.getRowCount()!=0){
             try {
                 emptTeks();
                 getData3();
@@ -5804,7 +5804,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisMouseClicked
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if(tabMode3.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     emptTeks();
@@ -6397,7 +6397,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCountPendaftaran.setText(""+tabMode.getRowCount());
+            LCountPendaftaran.setText(""+tbPendaftaran.getRowCount());
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
@@ -6466,7 +6466,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCountKunjungan.setText(""+tabMode2.getRowCount());
+            LCountKunjungan.setText(""+tbKunjungan.getRowCount());
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
@@ -6541,7 +6541,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCountSpesialis.setText(""+tabMode3.getRowCount());
+            LCountSpesialis.setText(""+tbSpesialis.getRowCount());
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }

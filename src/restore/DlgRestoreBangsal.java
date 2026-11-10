@@ -426,7 +426,7 @@ public final class DlgRestoreBangsal extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     private void runBackground(Runnable task) {

@@ -671,10 +671,10 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbObat.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -828,7 +828,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try{
                 if(tbObat.getSelectedRow()!= -1){
                     if(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString().equals("")){
@@ -2105,7 +2105,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void BtnRiwayatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRiwayatActionPerformed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if(tbObat.getSelectedRow()!= -1){
                 if (resume == null || !resume.isDisplayable()) {
                     resume=new RMRiwayatPerawatan(null,false);
@@ -2356,7 +2356,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void isCek(){

@@ -246,10 +246,10 @@ public final class SisruteCekReferensiAlasanRujuk extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbKamar.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -274,12 +274,12 @@ public final class SisruteCekReferensiAlasanRujuk extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        int row=tabMode.getRowCount();
+                        int row=tbKamar.getRowCount();
                         for(int r=0;r<row;r++){
                             Sequel.menyimpan("temporary","'"+r+"','"+
-                                            tabMode.getValueAt(r,0).toString()+"','"+
-                                            tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
-                                            tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
+                                            tbKamar.getValueAt(r,0).toString()+"','"+
+                                            tbKamar.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                            tbKamar.getValueAt(r,2).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());

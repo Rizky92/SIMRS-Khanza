@@ -470,7 +470,7 @@ public final class DlgCariReg extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
 
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPetugas.getRowCount());
     }
 
     public JTable getTable(){

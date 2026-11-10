@@ -756,12 +756,12 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
         JTable invoker = (JTable) ppCek.getInvoker();
         if (invoker == tbObat) {
-            for (int i = 0; i < tabModeObat.getRowCount(); i++) {
-                tabModeObat.setValueAt(true, i, 0);
+            for (int i = 0; i < tbObat.getRowCount(); i++) {
+                tbObat.setValueAt(true, i, 0);
             }
         } else if (invoker == tbDetailRacikanObat) {
-            for (int i = 0; i < tabModeDetailRacikanObat.getRowCount(); i++) {
-                tabModeDetailRacikanObat.setValueAt(true, i, 0);
+            for (int i = 0; i < tbDetailRacikanObat.getRowCount(); i++) {
+                tbDetailRacikanObat.setValueAt(true, i, 0);
             }
         }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
@@ -769,12 +769,12 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         JTable invoker = (JTable) ppCek.getInvoker();
         if (invoker == tbObat) {
-            for (int i = 0; i < tabModeObat.getRowCount(); i++) {
-                tabModeObat.setValueAt(false, i, 0);
+            for (int i = 0; i < tbObat.getRowCount(); i++) {
+                tbObat.setValueAt(false, i, 0);
             }
         } else if (invoker == tbDetailRacikanObat) {
-            for (int i = 0; i < tabModeDetailRacikanObat.getRowCount(); i++) {
-                tabModeDetailRacikanObat.setValueAt(false, i, 0);
+            for (int i = 0; i < tbDetailRacikanObat.getRowCount(); i++) {
+                tbDetailRacikanObat.setValueAt(false, i, 0);
             }
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
@@ -894,7 +894,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        LCount.setText("" + tabMode.getRowCount());
+        LCount.setText("" + tbKamar.getRowCount());
     }
 
     public JTable getTable() {
@@ -1010,7 +1010,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
 
     private void hapus() {
         sukses = true;
-        if (tabModeObat.getRowCount() > 0 || tabModeDetailRacikanObat.getRowCount() > 0) {
+        if (tbObat.getRowCount() > 0 || tbDetailRacikanObat.getRowCount() > 0) {
             if (JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menghapus obat-obat yang dipilih?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 hapusObat();
                 hapusObatRacikan();
@@ -1018,7 +1018,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
         }
 
         if (sukses) {
-            if (tabModeObat.getRowCount() == 0 && tabModeDetailRacikanObat.getRowCount() == 0) {
+            if (tbObat.getRowCount() == 0 && tbDetailRacikanObat.getRowCount() == 0) {
                 hapusResep();
             }
         }
@@ -1090,8 +1090,8 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                         System.out.println("Hapus obat " + tbObat.getValueAt(i, 9).toString() + " " + tbObat.getValueAt(i, 10).toString() + " : " + metadata.path("code").asText() + " " + metadata.path("message").asText());
                         if (metadata.path("code").asText().equals("200")) {
                             if (Sequel.menghapustfSmc("bridging_apotek_bpjs_obat", "no_sjp = ? and kode_brng_apotek_bpjs = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(), tbObat.getValueAt(i, 9).toString())) {
-                                kodeobat.add(tabModeObat.getValueAt(i, 2).toString());
-                                tabModeObat.removeRow(i);
+                                kodeobat.add(tbObat.getValueAt(i, 2).toString());
+                                tabModeObat.removeRow(tbObat.convertRowIndexToModel(i));
                             } else {
                                 JOptionPane.showMessageDialog(null, "Gagal menghapus " + tbObat.getValueAt(i, 2).toString() + " - " + tbObat.getValueAt(i, 3).toString() + " dari resep..!!", "Error", JOptionPane.ERROR_MESSAGE);
                             }
@@ -1099,8 +1099,8 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                             if (metadata.path("message").asText().contains("tidak ditemukan")) {
                                 if (JOptionPane.showConfirmDialog(null, "Obat " + tbObat.getValueAt(i, 2).toString() + " - " + tbObat.getValueAt(i, 3).toString() + " " + metadata.path("message").asText() + ",\napakah anda ingin menghapus obat ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                                     if (Sequel.menghapustfSmc("bridging_apotek_bpjs_obat", "no_sjp = ? and kode_brng_apotek_bpjs = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(), tbObat.getValueAt(i, 9).toString())) {
-                                        kodeobat.add(tabModeObat.getValueAt(i, 2).toString());
-                                        tabModeObat.removeRow(i);
+                                        kodeobat.add(tbObat.getValueAt(i, 2).toString());
+                                        tabModeObat.removeRow(tbObat.convertRowIndexToModel(i));
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Gagal menghapus " + tbObat.getValueAt(i, 2).toString() + " - " + tbObat.getValueAt(i, 3).toString() + " dari resep..!!", "Error", JOptionPane.ERROR_MESSAGE);
                                     }
@@ -1149,8 +1149,8 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                         System.out.println("Hapus obat " + tbDetailRacikanObat.getValueAt(i, 11).toString() + " " + tbDetailRacikanObat.getValueAt(i, 12).toString() + " : " + metadata.path("code").asText() + " " + metadata.path("message").asText());
                         if (metadata.path("code").asText().equals("200")) {
                             if (Sequel.menghapustfSmc("bridging_apotek_bpjs_obat", "no_sjp = ? and kode_brng_apotek_bpjs = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(), tbDetailRacikanObat.getValueAt(i, 11).toString())) {
-                                kodeobat.add(tabModeDetailRacikanObat.getValueAt(i, 3).toString());
-                                tabModeDetailRacikanObat.removeRow(i);
+                                kodeobat.add(tbDetailRacikanObat.getValueAt(i, 3).toString());
+                                tabModeDetailRacikanObat.removeRow(tbDetailRacikanObat.convertRowIndexToModel(i));
                             } else {
                                 JOptionPane.showMessageDialog(null, "Gagal menghapus " + tbDetailRacikanObat.getValueAt(i, 3).toString() + " - " + tbDetailRacikanObat.getValueAt(i, 4).toString() + " dari resep..!!", "Error", JOptionPane.ERROR_MESSAGE);
                             }
@@ -1158,8 +1158,8 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                             if (metadata.path("message").asText().contains("tidak ditemukan")) {
                                 if (JOptionPane.showConfirmDialog(null, "Obat " + tbDetailRacikanObat.getValueAt(i, 3).toString() + " - " + tbDetailRacikanObat.getValueAt(i, 4).toString() + " " + metadata.path("message").asText() + ",\napakah anda ingin menghapus obat ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                                     if (Sequel.menghapustfSmc("bridging_apotek_bpjs_obat", "no_sjp = ? and kode_brng_apotek_bpjs = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(), tbDetailRacikanObat.getValueAt(i, 11).toString())) {
-                                        kodeobat.add(tabModeDetailRacikanObat.getValueAt(i, 3).toString());
-                                        tabModeDetailRacikanObat.removeRow(i);
+                                        kodeobat.add(tbDetailRacikanObat.getValueAt(i, 3).toString());
+                                        tabModeDetailRacikanObat.removeRow(tbDetailRacikanObat.convertRowIndexToModel(i));
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Gagal menghapus " + tbDetailRacikanObat.getValueAt(i, 3).toString() + " - " + tbDetailRacikanObat.getValueAt(i, 4).toString() + " dari resep..!!", "Error", JOptionPane.ERROR_MESSAGE);
                                     }

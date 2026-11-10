@@ -1034,7 +1034,7 @@ public class UTDPenyerahanDarah extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbDarahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDarahMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDarah.getRowCount()!=0){
             if(tbDarah.getSelectedColumn()==0){
                 try {
                     getData();
@@ -1045,7 +1045,7 @@ public class UTDPenyerahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDarahMouseClicked
 
     private void tbDarahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDarahKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDarah.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 try {
                     getData();
@@ -1315,7 +1315,7 @@ public class UTDPenyerahanDarah extends javax.swing.JDialog {
             Valid.textKosong(nmpengambil,"Pengambil Darah");
         }else if(alamatpengambil.getText().trim().equals("")){
             Valid.textKosong(alamatpengambil,"Alamat Pengambil Darah");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbDarah.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             tbDarah.requestFocus();
         }else if(ttl<=0){
@@ -1325,16 +1325,16 @@ public class UTDPenyerahanDarah extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            row=tabMode.getRowCount();
+            row=tbDarah.getRowCount();
             for(i=0;i<row;i++){
                 try {
                     if(tbDarah.getValueAt(i,0).toString().equals("true")){
                            Sequel.menyimpan("temporary","'"+i+"','"+
-                                   tabMode.getValueAt(i,1).toString()+"','"+
-                                   tabMode.getValueAt(i,2).toString()+"','"+
-                                   tabMode.getValueAt(i,3).toString()+"','"+
-                                   tabMode.getValueAt(i,4).toString()+"','"+
-                                   tabMode.getValueAt(i,13).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penjualan Darah");
+                                   tbDarah.getValueAt(i,1).toString()+"','"+
+                                   tbDarah.getValueAt(i,2).toString()+"','"+
+                                   tbDarah.getValueAt(i,3).toString()+"','"+
+                                   tbDarah.getValueAt(i,4).toString()+"','"+
+                                   tbDarah.getValueAt(i,13).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penjualan Darah");
                     }
                 } catch (Exception e) {
                 }
@@ -1474,15 +1474,15 @@ public class UTDPenyerahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_tanggalKeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            int row2=tabMode.getRowCount();
+            int row2=tbDarah.getRowCount();
             for(int r=0;r<row2;r++){
-                tabMode.setValueAt("",r,0);
-                tabMode.setValueAt(0,r,6);
-                tabMode.setValueAt(0,r,7);
-                tabMode.setValueAt(0,r,8);
-                tabMode.setValueAt(0,r,9);
-                tabMode.setValueAt(0,r,10);
-                tabMode.setValueAt(0,r,11);
+                tbDarah.setValueAt("",r,0);
+                tbDarah.setValueAt(0,r,6);
+                tbDarah.setValueAt(0,r,7);
+                tbDarah.setValueAt(0,r,8);
+                tbDarah.setValueAt(0,r,9);
+                tbDarah.setValueAt(0,r,10);
+                tbDarah.setValueAt(0,r,11);
             }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 

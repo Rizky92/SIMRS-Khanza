@@ -366,10 +366,10 @@ public class DlgRHPaketBHP extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbDokter.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -394,15 +394,15 @@ public class DlgRHPaketBHP extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        int row=tabMode.getRowCount();
+                        int row=tbDokter.getRowCount();
                         for(int r=0;r<row;r++){
                             Sequel.menyimpan("temporary","'"+r+"','"+
-                                            tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
-                                            tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
-                                            tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                                            tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
-                                            tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
-                                            tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
+                                            tbDokter.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
+                                            tbDokter.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                            tbDokter.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                            tbDokter.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                            tbDokter.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                            tbDokter.getValueAt(r,5).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
                         }
 
                         Map<String, Object> param = new HashMap<>();

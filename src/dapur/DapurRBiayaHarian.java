@@ -219,10 +219,10 @@ public class DapurRBiayaHarian extends javax.swing.JDialog {
     */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbDokter.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -247,11 +247,11 @@ public class DapurRBiayaHarian extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        int row=tabMode.getRowCount();
+                        int row=tbDokter.getRowCount();
                         for(int r=0;r<row;r++){
                             Sequel.menyimpan("temporary","'"+r+"','"+
-                                            tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
-                                            tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Dapur");
+                                            tbDokter.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
+                                            tbDokter.getValueAt(r,1).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Dapur");
                         }
 
                         Map<String, Object> param = new HashMap<>();

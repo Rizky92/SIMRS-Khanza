@@ -1082,7 +1082,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
             Valid.textKosong(NoTagihan,"No.Bayar");
         }else if(KdDokter.getText().trim().equals("")||NmDokter.getText().trim().equals("")){
             Valid.textKosong(KdDokter,"Petugas");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda simpan...!!!!");
         }else if(Keterangan.getText().trim().equals("")){
             Valid.textKosong(Keterangan,"Keterangan");
@@ -1140,7 +1140,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
                             })==true){
                                 row=tbBangsal.getRowCount();
                                 for(i=0;i<row;i++){
-                                    if(tabMode.getValueAt(i,0).toString().equals("true")){
+                                    if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                                         if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Jalan Dr")){
                                             if(Sequel.menyimpantf2("bayar_rawat_jl_dr","?,?,?,?,?,?",6,new String[]{
                                                 NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
@@ -1417,7 +1417,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
                                 autoNomor();
                                 for(i=0;i<tbBangsal.getRowCount();i++){
                                     if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                                        tabMode.removeRow(i);
+                                        tabMode.removeRow(tbBangsal.convertRowIndexToModel(i));
                                         i--;
                                     }
                                 }
@@ -1572,7 +1572,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_AkunBayarKeyPressed
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 getData();
             }
@@ -1580,7 +1580,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(tbBangsal.getSelectedColumn()==0){
                 getData();
             }
@@ -1603,23 +1603,23 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         }else{
             if(bayar==0){
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih jasa medis yang mau dibayar...!!!!");
-            }else if(tabMode.getRowCount()==0){
+            }else if(tbBangsal.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-            }else if(tabMode.getRowCount()!=0){
+            }else if(tbBangsal.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                 //"P","Tanggal","Jam","No.Rawat","No.RM","Nama Pasien","Kode","Tindakan Medis","Status","Jasa Medis","Id Detail"
                 row=1;
-                for(i=0;i<tabMode.getRowCount();i++){
-                    if(tabMode.getValueAt(i,0).toString().equals("true")){
+                for(i=0;i<tbBangsal.getRowCount();i++){
+                    if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                         Sequel.menyimpan("temporary","'"+row+"','"+
-                            tabMode.getValueAt(i,1).toString().replaceAll("'","`")+" "+tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
-                            tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
-                            tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
-                            tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
-                            tabMode.getValueAt(i,6).toString().replaceAll("'","`")+"','"+
-                            tabMode.getValueAt(i,7).toString().replaceAll("'","`")+"','"+
-                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString().replaceAll("'","`")))+
+                            tbBangsal.getValueAt(i,1).toString().replaceAll("'","`")+" "+tbBangsal.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
+                            tbBangsal.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
+                            tbBangsal.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
+                            tbBangsal.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
+                            tbBangsal.getValueAt(i,6).toString().replaceAll("'","`")+"','"+
+                            tbBangsal.getValueAt(i,7).toString().replaceAll("'","`")+"','"+
+                            Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i,10).toString().replaceAll("'","`")))+
                             "','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter"
                         );
                         row++;
@@ -1700,7 +1700,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
                 })==true){
                     row=tbBangsal.getRowCount();
                     for(i=0;i<row;i++){
-                        if(tabMode.getValueAt(i,0).toString().equals("true")){
+                        if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                             if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Jalan Dr")){
                                 if(Sequel.menyimpantf2("bayar_rawat_jl_dr","?,?,?,?,?,?",6,new String[]{
                                     NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
@@ -1989,7 +1989,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
                     autoNomor();
                     for(i=0;i<tbBangsal.getRowCount();i++){
                         if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                            tabMode.removeRow(i);
+                            tabMode.removeRow(tbBangsal.convertRowIndexToModel(i));
                             i--;
                         }
                     }

@@ -448,7 +448,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
                     false,TKd.getText(),TNm.getText()
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbBangsal.getRowCount());
             }else{
                 TKd.requestFocus();
             }
@@ -477,11 +477,11 @@ public final class DlgBangsal extends javax.swing.JDialog {
         for(i=0;i<tbBangsal.getRowCount();i++){
             if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                 Sequel.mengedit("bangsal","kd_bangsal='"+tbBangsal.getValueAt(i,1).toString()+"'","status='0'");
-                tabMode.removeRow(i);
+                tabMode.removeRow(tbBangsal.convertRowIndexToModel(i));
                 i--;
             }
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbBangsal.getRowCount());
         emptTeks();
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -501,8 +501,8 @@ public final class DlgBangsal extends javax.swing.JDialog {
         }else{
             if(tbBangsal.getSelectedRow()>-1){
                 if(Sequel.mengedittf("bangsal","kd_bangsal=?","nm_bangsal=?,kd_bangsal=?",3,new String[]{TNm.getText(),TKd.getText(),tbBangsal.getValueAt(tbBangsal.getSelectedRow(), 1).toString()})==true){
-                    tabMode.setValueAt(TKd.getText(),tbBangsal.getSelectedRow(),1);
-                    tabMode.setValueAt(TNm.getText(),tbBangsal.getSelectedRow(),2);
+                    tbBangsal.setValueAt(TKd.getText(),tbBangsal.getSelectedRow(),1);
+                    tbBangsal.setValueAt(TNm.getText(),tbBangsal.getSelectedRow(),2);
                     emptTeks();
                 }
             }
@@ -532,10 +532,10 @@ public final class DlgBangsal extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbBangsal.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -625,7 +625,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -635,7 +635,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -679,7 +679,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRestoreActionPerformed
 
     private void tbBangsalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -761,7 +761,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbBangsal.getRowCount());
     }
 
     public void emptTeks() {

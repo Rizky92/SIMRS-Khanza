@@ -100,7 +100,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
 
-        for (int i = 0; i < tabModeObat.getColumnCount(); i++) {
+        for (int i = 0; i < tbObat.getColumnCount(); i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(40);
@@ -164,7 +164,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         tbRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbRacikan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        for (int i = 0; i < tabModeRacikan.getColumnCount(); i++) {
+        for (int i = 0; i < tbRacikan.getColumnCount(); i++) {
             TableColumn column = tbRacikan.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(25);
@@ -213,7 +213,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         tbDetailRacikanObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbDetailRacikanObat.setDefaultRenderer(Object.class, new WarnaTable());
 
-        for (int i = 0; i < tabModeDetailRacikanObat.getColumnCount(); i++) {
+        for (int i = 0; i < tbDetailRacikanObat.getColumnCount(); i++) {
             TableColumn column = tbDetailRacikanObat.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(25);
@@ -897,11 +897,11 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if (tbObat.getSelectedRow() != -1) {
-            tabModeObat.removeRow(tbObat.getSelectedRow());
+            tabModeObat.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
         }
 
         if (tbDetailRacikanObat.getSelectedRow() != -1) {
-            tabModeDetailRacikanObat.removeRow(tbDetailRacikanObat.getSelectedRow());
+            tabModeDetailRacikanObat.removeRow(tbDetailRacikanObat.convertRowIndexToModel(tbDetailRacikanObat.getSelectedRow()));
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -1672,12 +1672,12 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
 
     private void updateTotal() {
         double total = 0;
-        for (int i = 0; i < tabModeObat.getRowCount(); i++) {
-            total += (Double) tabModeObat.getValueAt(i, 8);
+        for (int i = 0; i < tbObat.getRowCount(); i++) {
+            total += (Double) tbObat.getValueAt(i, 8);
         }
 
-        for (int i = 0; i < tabModeDetailRacikanObat.getRowCount(); i++) {
-            total += (Double) tabModeDetailRacikanObat.getValueAt(i, 9);
+        for (int i = 0; i < tbDetailRacikanObat.getRowCount(); i++) {
+            total += (Double) tbDetailRacikanObat.getValueAt(i, 9);
         }
         LTotal.setText(Valid.SetAngka(total));
     }

@@ -193,7 +193,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         tbScanLog.setModel(tabModeScan);
         tbScanLog.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbScanLog.getTableHeader().setReorderingAllowed(false);
-        for (int i = 0; i < tabModeScan.getColumnCount(); i++) {
+        for (int i = 0; i < tbScanLog.getColumnCount(); i++) {
             TableColumn column = tbScanLog.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(80);
@@ -910,10 +910,10 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if (tabMode.getRowCount() == 0) {
+        if (tbKehadiran.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        } else if (tabMode.getRowCount() != 0) {
+        } else if (tbKehadiran.getRowCount() != 0) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1543,7 +1543,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbKehadiran.getRowCount() + "");
                     DlgKehadiranSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }
@@ -1627,7 +1627,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
                 }
 
                 tbLogPresensi.getRowSorter().setSortKeys(urutan);
-                LCount.setText(tabModeLog.getRowCount() + "");
+                LCount.setText(tbLogPresensi.getRowCount() + "");
                 DlgKehadiranSMC.this.setCursor(Cursor.getDefaultCursor());
                 ceksukses = false;
             }
@@ -1691,7 +1691,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         tbKehadiran.getColumnModel().getColumn(1).setPreferredWidth(200);
         tbKehadiran.getColumnModel().getColumn(2).setPreferredWidth(100);
 
-        int kolomRekap = tabMode.getColumnCount() - KOLOM_REKAP.length;
+        int kolomRekap = tbKehadiran.getColumnCount() - KOLOM_REKAP.length;
         for (int i = KOLOM_TANGGAL_AWAL; i < kolomRekap; i++) {
             tbKehadiran.getColumnModel().getColumn(i).setPreferredWidth(45);
         }
@@ -1769,7 +1769,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         tbRekapFinger.getColumnModel().getColumn(1).setPreferredWidth(180);
         tbRekapFinger.getColumnModel().getColumn(2).setPreferredWidth(110);
 
-        for (int i = KOLOM_TANGGAL_AWAL; i < tabModeImport.getColumnCount(); i++) {
+        for (int i = KOLOM_TANGGAL_AWAL; i < tbRekapFinger.getColumnCount(); i++) {
             tbRekapFinger.getColumnModel().getColumn(i).setPreferredWidth(115);
         }
 
@@ -2652,7 +2652,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            if (JAM_KOSONG.equals(table.getModel().getValueAt(table.convertRowIndexToModel(row), KOLOM_LOG_JAM))) {
+            if (JAM_KOSONG.equals(table.getValueAt(row, KOLOM_LOG_JAM))) {
                 component.setBackground(WARNA_TIDAK_LENGKAP);
             }
             return component;

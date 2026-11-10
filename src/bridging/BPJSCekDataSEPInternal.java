@@ -316,10 +316,10 @@ public final class BPJSCekDataSEPInternal extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbKamar.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -344,34 +344,34 @@ public final class BPJSCekDataSEPInternal extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        int row=tabMode.getRowCount();
+                        int row=tbKamar.getRowCount();
                         for(int r=0;r<row;r++){
                             Sequel.menyimpan("temporary","'"+r+"','"+
-                                            tabMode.getValueAt(r,0).toString()+"','"+
-                                            tabMode.getValueAt(r,1).toString()+"','"+
-                                            tabMode.getValueAt(r,2).toString()+"','"+
-                                            tabMode.getValueAt(r,3).toString()+"','"+
-                                            tabMode.getValueAt(r,4).toString()+"','"+
-                                            tabMode.getValueAt(r,5).toString()+"','"+
-                                            tabMode.getValueAt(r,6).toString()+"','"+
-                                            tabMode.getValueAt(r,7).toString()+"','"+
-                                            tabMode.getValueAt(r,8).toString()+"','"+
-                                            tabMode.getValueAt(r,9).toString()+"','"+
-                                            tabMode.getValueAt(r,10).toString()+"','"+
-                                            tabMode.getValueAt(r,11).toString()+"','"+
-                                            tabMode.getValueAt(r,12).toString()+"','"+
-                                            tabMode.getValueAt(r,13).toString()+"','"+
-                                            tabMode.getValueAt(r,14).toString()+"','"+
-                                            tabMode.getValueAt(r,15).toString()+"','"+
-                                            tabMode.getValueAt(r,16).toString()+"','"+
-                                            tabMode.getValueAt(r,17).toString()+"','"+
-                                            tabMode.getValueAt(r,18).toString()+"','"+
-                                            tabMode.getValueAt(r,19).toString()+"','"+
-                                            tabMode.getValueAt(r,20).toString()+"','"+
-                                            tabMode.getValueAt(r,21).toString()+"','"+
-                                            tabMode.getValueAt(r,22).toString()+"','"+
-                                            tabMode.getValueAt(r,23).toString()+"','"+
-                                            tabMode.getValueAt(r,24).toString()+"','','','','','','','','','','','','"+akses.getalamatip()+"'","Data");
+                                            tbKamar.getValueAt(r,0).toString()+"','"+
+                                            tbKamar.getValueAt(r,1).toString()+"','"+
+                                            tbKamar.getValueAt(r,2).toString()+"','"+
+                                            tbKamar.getValueAt(r,3).toString()+"','"+
+                                            tbKamar.getValueAt(r,4).toString()+"','"+
+                                            tbKamar.getValueAt(r,5).toString()+"','"+
+                                            tbKamar.getValueAt(r,6).toString()+"','"+
+                                            tbKamar.getValueAt(r,7).toString()+"','"+
+                                            tbKamar.getValueAt(r,8).toString()+"','"+
+                                            tbKamar.getValueAt(r,9).toString()+"','"+
+                                            tbKamar.getValueAt(r,10).toString()+"','"+
+                                            tbKamar.getValueAt(r,11).toString()+"','"+
+                                            tbKamar.getValueAt(r,12).toString()+"','"+
+                                            tbKamar.getValueAt(r,13).toString()+"','"+
+                                            tbKamar.getValueAt(r,14).toString()+"','"+
+                                            tbKamar.getValueAt(r,15).toString()+"','"+
+                                            tbKamar.getValueAt(r,16).toString()+"','"+
+                                            tbKamar.getValueAt(r,17).toString()+"','"+
+                                            tbKamar.getValueAt(r,18).toString()+"','"+
+                                            tbKamar.getValueAt(r,19).toString()+"','"+
+                                            tbKamar.getValueAt(r,20).toString()+"','"+
+                                            tbKamar.getValueAt(r,21).toString()+"','"+
+                                            tbKamar.getValueAt(r,22).toString()+"','"+
+                                            tbKamar.getValueAt(r,23).toString()+"','"+
+                                            tbKamar.getValueAt(r,24).toString()+"','','','','','','','','','','','','"+akses.getalamatip()+"'","Data");
                         }
 
                         Map<String, Object> param = new HashMap<>();

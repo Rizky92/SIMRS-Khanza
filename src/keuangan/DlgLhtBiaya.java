@@ -260,10 +260,10 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbBangsal.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -288,34 +288,34 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        int row=tabMode.getRowCount();
+                        int row=tbBangsal.getRowCount();
                         for(int r=0;r<row;r++){
                             biaya="";
                             try{
-                                biaya=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,3).toString()));
+                                biaya=Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(r,3).toString()));
                             }catch(Exception e){
                                 biaya="";
                             }
                             tambahan="";
                             try{
-                                tambahan=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,5).toString()));
+                                tambahan=Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(r,5).toString()));
                             }catch(Exception e){
                                 tambahan="";
                             }
                             totalx="";
                             try{
-                                totalx=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,6).toString()));
+                                totalx=Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(r,6).toString()));
                             }catch(Exception e){
                                 totalx="";
                             }
                             jml="";
                             try{
-                                jml=tabMode.getValueAt(r,4).toString();
+                                jml=tbBangsal.getValueAt(r,4).toString();
                             }catch(Exception e){
                                 jml="";
                             }
-                            Sequel.menyimpan("temporary","'"+r+"','"+tabMode.getValueAt(r,0).toString()+"','"+
-                                tabMode.getValueAt(r,1).toString()+"','"+tabMode.getValueAt(r,2).toString()+"','"+
+                            Sequel.menyimpan("temporary","'"+r+"','"+tbBangsal.getValueAt(r,0).toString()+"','"+
+                                tbBangsal.getValueAt(r,1).toString()+"','"+tbBangsal.getValueAt(r,2).toString()+"','"+
                                 biaya+"','"+jml+"','"+tambahan+"','"+totalx+"','','','','','','','','','','','',"+
                                 "'','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran"
                             );
@@ -445,9 +445,9 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
                 }
                 //rs.close();
                 all=0;y=0;
-                for(i=0;i<tabMode.getRowCount();i++){
+                for(i=0;i<tbBangsal.getRowCount();i++){
                     try {
-                        y=Double.parseDouble(tabMode.getValueAt(i,6).toString());
+                        y=Double.parseDouble(tbBangsal.getValueAt(i,6).toString());
                      } catch (Exception e) {
                          y=0;
                      }

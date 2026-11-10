@@ -368,10 +368,10 @@ public class DlgRekapPermintaanNonMedis extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbDokter.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -383,16 +383,16 @@ public class DlgRekapPermintaanNonMedis extends javax.swing.JDialog {
                 }, "Laporan 5 (Jasper)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                        Valid.exportHtmlSmc("RekapPermintaanNonMedis.html", "Laporan Ringkasan Permintaan Barang Non Medis", tbDokter, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportHtmlSmc("RekapPermintaanNonMedis.html", "Laporan Ringkasan Permintaan Barang Non Medis", tbDokter, IntStream.rangeClosed(1, tbDokter.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 2 (WPS)":
-                        Valid.exportWPSSmc("RekapPermintaanNonMedis.wps", "Laporan Ringkasan Permintaan Barang Non Medis", tbDokter, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportWPSSmc("RekapPermintaanNonMedis.wps", "Laporan Ringkasan Permintaan Barang Non Medis", tbDokter, IntStream.rangeClosed(1, tbDokter.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 3 (CSV)":
-                        Valid.exportCSVSmc("RekapPermintaanNonMedis.csv", tbDokter, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportCSVSmc("RekapPermintaanNonMedis.csv", tbDokter, IntStream.rangeClosed(1, tbDokter.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 4 (XLSX)":
-                        Valid.exportXlsxSmc("RekapPermintaanNonMedis.xlsx", tbDokter, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportXlsxSmc("RekapPermintaanNonMedis.xlsx", tbDokter, IntStream.rangeClosed(1, tbDokter.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
@@ -545,10 +545,10 @@ public class DlgRekapPermintaanNonMedis extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnPrint1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda pilih...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbDokter.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             IPSRSSuratPemesanan form=new IPSRSSuratPemesanan(null,false);
             form.tampilkan=false;

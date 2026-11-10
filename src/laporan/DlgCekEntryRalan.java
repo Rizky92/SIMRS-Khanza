@@ -258,9 +258,9 @@ public final class DlgCekEntryRalan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...");
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbBangsal.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -293,23 +293,23 @@ public final class DlgCekEntryRalan extends javax.swing.JDialog {
                         param.put("emailrs",akses.getemailrs());
                         param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        for(int r=0;r<tabMode.getRowCount();r++){
+                        for(int r=0;r<tbBangsal.getRowCount();r++){
                             if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
                                 Sequel.menyimpan("temporary","'"+r+"','"+
-                                                tabMode.getValueAt(r,0).toString()+"','"+
-                                                tabMode.getValueAt(r,1).toString()+"','"+
-                                                tabMode.getValueAt(r,2).toString()+"','"+
-                                                tabMode.getValueAt(r,3).toString()+"','"+
-                                                tabMode.getValueAt(r,4).toString()+"','"+
-                                                tabMode.getValueAt(r,5).toString()+"','"+
-                                                tabMode.getValueAt(r,6).toString()+"','"+
-                                                tabMode.getValueAt(r,7).toString()+"','"+
-                                                tabMode.getValueAt(r,8).toString()+"','"+
-                                                tabMode.getValueAt(r,9).toString()+"','"+
-                                                tabMode.getValueAt(r,10).toString()+"','"+
-                                                tabMode.getValueAt(r,11).toString()+"','"+
-                                                tabMode.getValueAt(r,12).toString()+"','"+
-                                                tabMode.getValueAt(r,13).toString()+"','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                                tbBangsal.getValueAt(r,0).toString()+"','"+
+                                                tbBangsal.getValueAt(r,1).toString()+"','"+
+                                                tbBangsal.getValueAt(r,2).toString()+"','"+
+                                                tbBangsal.getValueAt(r,3).toString()+"','"+
+                                                tbBangsal.getValueAt(r,4).toString()+"','"+
+                                                tbBangsal.getValueAt(r,5).toString()+"','"+
+                                                tbBangsal.getValueAt(r,6).toString()+"','"+
+                                                tbBangsal.getValueAt(r,7).toString()+"','"+
+                                                tbBangsal.getValueAt(r,8).toString()+"','"+
+                                                tbBangsal.getValueAt(r,9).toString()+"','"+
+                                                tbBangsal.getValueAt(r,10).toString()+"','"+
+                                                tbBangsal.getValueAt(r,11).toString()+"','"+
+                                                tbBangsal.getValueAt(r,12).toString()+"','"+
+                                                tbBangsal.getValueAt(r,13).toString()+"','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                             }
                         }
                         Valid.MyReportqry("rptCekEntryRalan.jasper","report","::[ Laporan Pengecekan Entry Ralan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
@@ -341,7 +341,7 @@ public final class DlgCekEntryRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -350,7 +350,7 @@ public final class DlgCekEntryRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -480,7 +480,7 @@ public final class DlgCekEntryRalan extends javax.swing.JDialog {
     private void getData() {
         int row=tbBangsal.getSelectedRow();
         if(row!= -1){
-            TKd.setText(tabMode.getValueAt(row,0).toString());
+            TKd.setText(tbBangsal.getValueAt(row,0).toString());
         }
     }
 

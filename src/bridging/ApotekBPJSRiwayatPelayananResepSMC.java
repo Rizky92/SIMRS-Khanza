@@ -288,10 +288,10 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbKamar.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        } else if (tabMode.getRowCount() != 0) {
+        } else if (tbKamar.getRowCount() != 0) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -316,11 +316,11 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.deleteTemporary();
-                        for (int i = 0; i < tabMode.getRowCount(); i++) {
-                            Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2),
-                                (String) tabMode.getValueAt(i, 3), (String) tabMode.getValueAt(i, 4), (String) tabMode.getValueAt(i, 5), (String) tabMode.getValueAt(i, 6),
-                                (String) tabMode.getValueAt(i, 7), Valid.SetAngka((Double) tabMode.getValueAt(i, 8)), Valid.SetAngka((Double) tabMode.getValueAt(i, 9)),
-                                (String) tabMode.getValueAt(i, 10), (String) tabMode.getValueAt(i, 11));
+                        for (int i = 0; i < tbKamar.getRowCount(); i++) {
+                            Sequel.temporary(String.valueOf(i + 1), (String) tbKamar.getValueAt(i, 0), (String) tbKamar.getValueAt(i, 1), (String) tbKamar.getValueAt(i, 2),
+                                (String) tbKamar.getValueAt(i, 3), (String) tbKamar.getValueAt(i, 4), (String) tbKamar.getValueAt(i, 5), (String) tbKamar.getValueAt(i, 6),
+                                (String) tbKamar.getValueAt(i, 7), Valid.SetAngka((Double) tbKamar.getValueAt(i, 8)), Valid.SetAngka((Double) tbKamar.getValueAt(i, 9)),
+                                (String) tbKamar.getValueAt(i, 10), (String) tbKamar.getValueAt(i, 11));
                         }
 
                         Map<String, Object> param = new HashMap<>();
@@ -440,6 +440,6 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
                 JOptionPane.showMessageDialog(null, "Koneksi ke server BPJS terputus..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             }
         }
-        LCount.setText(tabMode.getRowCount() + "");
+        LCount.setText(tbKamar.getRowCount() + "");
     }
 }

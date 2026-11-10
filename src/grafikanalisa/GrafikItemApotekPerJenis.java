@@ -313,10 +313,10 @@ public class GrafikItemApotekPerJenis extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbBangsal.getRowCount()!=0){
 
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -327,11 +327,11 @@ public class GrafikItemApotekPerJenis extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Sequel.queryu("delete from temporary_grafik");
-            for(int r=0;r<tabMode.getRowCount();r++){
+            for(int r=0;r<tbBangsal.getRowCount();r++){
                 Sequel.menyimpan("temporary_grafik","'0','"+
-                    tabMode.getValueAt(r,0).toString()+"','"+
-                    tabMode.getValueAt(r,1).toString()+"','"+
-                    tabMode.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap");
+                    tbBangsal.getValueAt(r,0).toString()+"','"+
+                    tbBangsal.getValueAt(r,1).toString()+"','"+
+                    tbBangsal.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap");
             }
 
             Valid.MyReport("rptItemApotekPerJenis.jasper","report","::[ Laporan Jumlah Item Apotek Per Jenis ]::",param);
@@ -380,7 +380,7 @@ public class GrafikItemApotekPerJenis extends javax.swing.JDialog {
                     total=total+rs.getDouble(2);
                     tabMode.addRow(new Object[]{rs.getString(3)+" ("+rs.getString(1)+")",rs.getString(2)});
                 }
-                if(tabMode.getRowCount()>0){
+                if(tbBangsal.getRowCount()>0){
                     tabMode.addRow(new Object[]{"Jumlah : ",total+"","100 %"});
                     for(i=0;i<tbBangsal.getRowCount();i++){
                         tbBangsal.setValueAt(Valid.SetAngka6((Double.parseDouble(tbBangsal.getValueAt(i,1).toString())/total)*100)+" %",i,2);

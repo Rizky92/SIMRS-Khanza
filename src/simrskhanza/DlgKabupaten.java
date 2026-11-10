@@ -348,9 +348,9 @@ public class DlgKabupaten extends javax.swing.JDialog {
         }else{
             if(tbkabupaten.getSelectedRow()!= -1){
                 if(Sequel.meghapustf("kabupaten","nm_kab",Nama.getText())==true){
-                    tabMode.removeRow(tbkabupaten.getSelectedRow());
+                    tabMode.removeRow(tbkabupaten.convertRowIndexToModel(tbkabupaten.getSelectedRow()));
                     emptTeks();
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText(""+tbkabupaten.getRowCount());
                 }
             }
         }
@@ -412,7 +412,7 @@ public class DlgKabupaten extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbkabupatenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbkabupatenMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbkabupaten.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -424,7 +424,7 @@ public class DlgKabupaten extends javax.swing.JDialog {
     }//GEN-LAST:event_tbkabupatenMouseClicked
 
     private void tbkabupatenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbkabupatenKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbkabupaten.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -551,7 +551,7 @@ public class DlgKabupaten extends javax.swing.JDialog {
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbkabupaten.getRowCount());
     }
 
     private void tampil2() {
@@ -578,7 +578,7 @@ public class DlgKabupaten extends javax.swing.JDialog {
                 }
             }
             myObj.close();
-            if(tabMode.getRowCount()==0){
+            if(tbkabupaten.getRowCount()==0){
                 ps=koneksi.prepareStatement("select kabupaten.nm_kab,kabupaten.kd_kab from kabupaten where kabupaten.nm_kab like ?");
                 try {
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
@@ -604,7 +604,7 @@ public class DlgKabupaten extends javax.swing.JDialog {
             response = null;
             root = null;
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbkabupaten.getRowCount());
     }
 
     public String tampil3(String nama) {

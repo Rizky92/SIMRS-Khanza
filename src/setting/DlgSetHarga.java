@@ -1669,7 +1669,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TabSetting.getSelectedIndex()==0){
-            if(tabModePengaturanUmum.getRowCount()>0){
+            if(tbPengaturanUmum.getRowCount()>0){
                 JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                 cmbPengaturan.requestFocus();
             }else{
@@ -1682,7 +1682,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
                 emptTeks();
             }
         }else if(TabSetting.getSelectedIndex()==1){
-            if(tabModePengaturanHargaUmum.getRowCount()>0){
+            if(tbPengaturanHargaUmum.getRowCount()>0){
                 JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                 ralanumum.requestFocus();
             }else{
@@ -1812,7 +1812,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
             runBackground(() ->tampilpengaturanumum());
             emptTeks();
         }else if(TabSetting.getSelectedIndex()==1){
-            if(tabModePengaturanHargaUmum.getRowCount()==0){
+            if(tbPengaturanHargaUmum.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 ranapvipumum.requestFocus();
             }else if(ranapvvipumum.getText().trim().equals("")){
@@ -1823,7 +1823,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
                 emptTeks();
             }
         }else if(TabSetting.getSelectedIndex()==2){
-            if(tabMode.getRowCount()==0){
+            if(tbAdmin.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 ranapvip.requestFocus();
             }else if(ranapvvip.getText().trim().equals("")){
@@ -1834,7 +1834,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
                 emptTeks();
             }
         }else if(TabSetting.getSelectedIndex()==3){
-            if(tabModePengaturanHargaPerBarang.getRowCount()==0){
+            if(tbPengaturanHargaPerBarang.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 ranapvipperbarang.requestFocus();
             }else if(ranapvvipperbarang.getText().trim().equals("")){
@@ -1856,11 +1856,11 @@ public class DlgSetHarga extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        if(tabModePengaturanUmum.getRowCount()==0){
+        if(tbPengaturanUmum.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, pengaturan harga tidak boleh kosong ...!!!!");
             TabSetting.setSelectedIndex(0);
             cmbPengaturan.requestFocus();
-        }else if(! (tabModePengaturanUmum.getRowCount()==0)) {
+        }else if(! (tbPengaturanUmum.getRowCount()==0)) {
             dispose();
         }
     }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -1872,7 +1872,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1881,7 +1881,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -2240,7 +2240,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
     }//GEN-LAST:event_TabSettingMouseClicked
 
     private void tbPengaturanUmumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPengaturanUmumMouseClicked
-        if(tabModePengaturanUmum.getRowCount()!=0){
+        if(tbPengaturanUmum.getRowCount()!=0){
             try {
                 getDataPengaturanUmum();
             } catch (java.lang.NullPointerException e) {
@@ -2249,7 +2249,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPengaturanUmumMouseClicked
 
     private void tbPengaturanUmumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPengaturanUmumKeyPressed
-        if(tabModePengaturanUmum.getRowCount()!=0){
+        if(tbPengaturanUmum.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataPengaturanUmum();
@@ -2424,7 +2424,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
     }//GEN-LAST:event_ranaputamaumumKeyPressed
 
     private void tbPengaturanHargaUmumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPengaturanHargaUmumMouseClicked
-        if(tabModePengaturanHargaUmum.getRowCount()!=0){
+        if(tbPengaturanHargaUmum.getRowCount()!=0){
             try {
                 getDataPengaturanHargaUmum();
             } catch (java.lang.NullPointerException e) {
@@ -2433,7 +2433,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPengaturanHargaUmumMouseClicked
 
     private void tbPengaturanHargaUmumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPengaturanHargaUmumKeyPressed
-        if(tabModePengaturanHargaUmum.getRowCount()!=0){
+        if(tbPengaturanHargaUmum.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataPengaturanHargaUmum();
@@ -2663,7 +2663,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnbarangActionPerformed
 
     private void tbPengaturanHargaPerBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPengaturanHargaPerBarangMouseClicked
-        if(tabModePengaturanHargaPerBarang.getRowCount()!=0){
+        if(tbPengaturanHargaPerBarang.getRowCount()!=0){
             try {
                 getDataPengaturanHargaPerBarang();
             } catch (java.lang.NullPointerException e) {
@@ -2672,7 +2672,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPengaturanHargaPerBarangMouseClicked
 
     private void tbPengaturanHargaPerBarangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPengaturanHargaPerBarangKeyPressed
-        if(tabModePengaturanHargaPerBarang.getRowCount()!=0){
+        if(tbPengaturanHargaPerBarang.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataPengaturanHargaPerBarang();
@@ -2961,7 +2961,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbAdmin.getRowCount());
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -3053,7 +3053,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount1.setText(""+tabModePengaturanHargaPerBarang.getRowCount());
+            LCount1.setText(""+tbPengaturanHargaPerBarang.getRowCount());
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -3062,60 +3062,60 @@ public class DlgSetHarga extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            ralan.setText(tabMode.getValueAt(row,0).toString());
-            ranapk1.setText(tabMode.getValueAt(row,1).toString());
-            ranapk2.setText(tabMode.getValueAt(row,2).toString());
-            ranapk3.setText(tabMode.getValueAt(row,3).toString());
-            ranaputama.setText(tabMode.getValueAt(row,4).toString());
-            ranapvip.setText(tabMode.getValueAt(row,5).toString());
-            ranapvvip.setText(tabMode.getValueAt(row,6).toString());
-            beliluar.setText(tabMode.getValueAt(row,7).toString());
-            jualbebas.setText(tabMode.getValueAt(row,8).toString());
-            karyawan.setText(tabMode.getValueAt(row,9).toString());
-            kdjns.setText(tabMode.getValueAt(row,10).toString());
-            nmjns.setText(tabMode.getValueAt(row,11).toString());
+            ralan.setText(tbAdmin.getValueAt(row,0).toString());
+            ranapk1.setText(tbAdmin.getValueAt(row,1).toString());
+            ranapk2.setText(tbAdmin.getValueAt(row,2).toString());
+            ranapk3.setText(tbAdmin.getValueAt(row,3).toString());
+            ranaputama.setText(tbAdmin.getValueAt(row,4).toString());
+            ranapvip.setText(tbAdmin.getValueAt(row,5).toString());
+            ranapvvip.setText(tbAdmin.getValueAt(row,6).toString());
+            beliluar.setText(tbAdmin.getValueAt(row,7).toString());
+            jualbebas.setText(tbAdmin.getValueAt(row,8).toString());
+            karyawan.setText(tbAdmin.getValueAt(row,9).toString());
+            kdjns.setText(tbAdmin.getValueAt(row,10).toString());
+            nmjns.setText(tbAdmin.getValueAt(row,11).toString());
         }
     }
 
     private void getDataPengaturanHargaUmum() {
         int row=tbPengaturanHargaUmum.getSelectedRow();
         if(row!= -1){
-            ralanumum.setText(tabModePengaturanHargaUmum.getValueAt(row,0).toString());
-            ranapk1umum.setText(tabModePengaturanHargaUmum.getValueAt(row,1).toString());
-            ranapk2umum.setText(tabModePengaturanHargaUmum.getValueAt(row,2).toString());
-            ranapk3umum.setText(tabModePengaturanHargaUmum.getValueAt(row,3).toString());
-            ranaputamaumum.setText(tabModePengaturanHargaUmum.getValueAt(row,4).toString());
-            ranapvipumum.setText(tabModePengaturanHargaUmum.getValueAt(row,5).toString());
-            ranapvvipumum.setText(tabModePengaturanHargaUmum.getValueAt(row,6).toString());
-            beliluarumum.setText(tabModePengaturanHargaUmum.getValueAt(row,7).toString());
-            jualbebasumum.setText(tabModePengaturanHargaUmum.getValueAt(row,8).toString());
-            karyawanumum.setText(tabModePengaturanHargaUmum.getValueAt(row,9).toString());
+            ralanumum.setText(tbPengaturanHargaUmum.getValueAt(row,0).toString());
+            ranapk1umum.setText(tbPengaturanHargaUmum.getValueAt(row,1).toString());
+            ranapk2umum.setText(tbPengaturanHargaUmum.getValueAt(row,2).toString());
+            ranapk3umum.setText(tbPengaturanHargaUmum.getValueAt(row,3).toString());
+            ranaputamaumum.setText(tbPengaturanHargaUmum.getValueAt(row,4).toString());
+            ranapvipumum.setText(tbPengaturanHargaUmum.getValueAt(row,5).toString());
+            ranapvvipumum.setText(tbPengaturanHargaUmum.getValueAt(row,6).toString());
+            beliluarumum.setText(tbPengaturanHargaUmum.getValueAt(row,7).toString());
+            jualbebasumum.setText(tbPengaturanHargaUmum.getValueAt(row,8).toString());
+            karyawanumum.setText(tbPengaturanHargaUmum.getValueAt(row,9).toString());
         }
     }
 
     private void getDataPengaturanUmum() {
         int row=tbPengaturanUmum.getSelectedRow();
         if(row!= -1){
-            cmbPengaturan.setSelectedItem(tabModePengaturanUmum.getValueAt(row,0).toString());
-            cmbHargaDasar.setSelectedItem(tabModePengaturanUmum.getValueAt(row,1).toString());
+            cmbPengaturan.setSelectedItem(tbPengaturanUmum.getValueAt(row,0).toString());
+            cmbHargaDasar.setSelectedItem(tbPengaturanUmum.getValueAt(row,1).toString());
         }
     }
 
     private void getDataPengaturanHargaPerBarang() {
         int row=tbPengaturanHargaPerBarang.getSelectedRow();
         if(row!= -1){
-            ralanperbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(row,0).toString());
-            ranapk1perbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(row,1).toString());
-            ranapk2perbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(row,2).toString());
-            ranapk3perbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(row,3).toString());
-            ranaputamaperbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(row,4).toString());
-            ranapvipperbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(row,5).toString());
-            ranapvvipperbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(row,6).toString());
-            beliluarperbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(row,7).toString());
-            jualbebasperbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(row,8).toString());
-            karyawanperbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(row,9).toString());
-            kdbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(row,10).toString());
-            nmbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(row,11).toString());
+            ralanperbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,0).toString());
+            ranapk1perbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,1).toString());
+            ranapk2perbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,2).toString());
+            ranapk3perbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,3).toString());
+            ranaputamaperbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,4).toString());
+            ranapvipperbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,5).toString());
+            ranapvvipperbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,6).toString());
+            beliluarperbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,7).toString());
+            jualbebasperbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,8).toString());
+            karyawanperbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,9).toString());
+            kdbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,10).toString());
+            nmbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,11).toString());
         }
     }
 

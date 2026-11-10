@@ -4231,7 +4231,7 @@ public class DlgUser extends javax.swing.JDialog {
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbUser.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -4245,7 +4245,7 @@ public class DlgUser extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbUser.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TKd.requestFocus();
         }else if(TPass.getText().trim().equals("")){
@@ -4253,9 +4253,9 @@ public class DlgUser extends javax.swing.JDialog {
         }else if(! TPass.getText().trim().equals("")){
             if(Sequel.queryutf("delete from user where id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')")==true){
                 if(tbUser.getSelectedRow()!= -1){
-                    tabMode.removeRow(tbUser.getSelectedRow());
+                    tabMode.removeRow(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()));
                     emptTeks();
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText(""+tbUser.getRowCount());
                 }
             }
         }
@@ -5615,10 +5615,10 @@ public class DlgUser extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbUser.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TKd.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbUser.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
@@ -5627,12 +5627,12 @@ public class DlgUser extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            int row=tabMode.getRowCount();
+            int row=tbUser.getRowCount();
             for(i=0;i<row;i++){
                 Sequel.menyimpan("temporary","'"+i+"','"+
-                                tabMode.getValueAt(i,0).toString()+"','"+
-                                tabMode.getValueAt(i,1).toString()+"','"+
-                                tabMode.getValueAt(i,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Data User");
+                                tbUser.getValueAt(i,0).toString()+"','"+
+                                tbUser.getValueAt(i,1).toString()+"','"+
+                                tbUser.getValueAt(i,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Data User");
             }
             Valid.MyReportqry("rptUser.jasper","report","::[ Data User ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
@@ -5722,7 +5722,7 @@ public class DlgUser extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void MnCopyHakAksesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCopyHakAksesActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbUser.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data user...!!!!");
             TCari.requestFocus();
         }else if(TKd.getText().trim().equals("")){
@@ -5769,7 +5769,7 @@ public class DlgUser extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSetUserActionPerformed
 
     private void tbUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUserMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbUser.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -7036,7 +7036,7 @@ public class DlgUser extends javax.swing.JDialog {
     }//GEN-LAST:event_tbUserMouseClicked
 
     private void tbUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbUserKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbUser.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();

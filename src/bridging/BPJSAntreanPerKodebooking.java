@@ -231,13 +231,13 @@ public final class BPJSAntreanPerKodebooking extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbJnsPerawatan.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-        } else if (tabMode.getRowCount() != 0) {
+        } else if (tbJnsPerawatan.getRowCount() != 0) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.deleteTemporary();
             for (int i = 0; i < tbJnsPerawatan.getRowCount(); i++) {
-                Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2));
+                Sequel.temporary(String.valueOf(i + 1), (String) tbJnsPerawatan.getValueAt(i, 0), (String) tbJnsPerawatan.getValueAt(i, 1), (String) tbJnsPerawatan.getValueAt(i, 2));
             }
 
             Map<String, Object> param = new HashMap<>();

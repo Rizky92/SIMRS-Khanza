@@ -404,7 +404,7 @@ public final class MandiriMetodePembayaran extends javax.swing.JDialog {
                     TKd.getText(),TNm.getText(),Double.parseDouble(Biaya.getText())
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbJabatan.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -430,9 +430,9 @@ public final class MandiriMetodePembayaran extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbJabatan.getSelectedRow()!= -1){
             if(Sequel.meghapustf("metode_pembayaran_bankmandiri","kode_metode",tbJabatan.getValueAt(tbJabatan.getSelectedRow(),0).toString())==true){
-                tabMode.removeRow(tbJabatan.getSelectedRow());
+                tabMode.removeRow(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()));
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbJabatan.getRowCount());
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus...!!!!");
@@ -459,9 +459,9 @@ public final class MandiriMetodePembayaran extends javax.swing.JDialog {
                 if(Sequel.mengedittf("metode_pembayaran_bankmandiri","kode_metode=?","kode_metode=?,nama_metode=?,biaya_transaksi=?",4,new String[]{
                         TKd.getText(),TNm.getText(),Biaya.getText(),tbJabatan.getValueAt(tbJabatan.getSelectedRow(), 0).toString()
                     })==true){
-                    tabMode.setValueAt(TKd.getText(),tbJabatan.getSelectedRow(),0);
-                    tabMode.setValueAt(TNm.getText(),tbJabatan.getSelectedRow(),1);
-                    tabMode.setValueAt(Double.parseDouble(Biaya.getText()),tbJabatan.getSelectedRow(),2);
+                    tbJabatan.setValueAt(TKd.getText(),tbJabatan.getSelectedRow(),0);
+                    tbJabatan.setValueAt(TNm.getText(),tbJabatan.getSelectedRow(),1);
+                    tbJabatan.setValueAt(Double.parseDouble(Biaya.getText()),tbJabatan.getSelectedRow(),2);
                     emptTeks();
                 }
             }else{
@@ -528,7 +528,7 @@ public final class MandiriMetodePembayaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJabatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJabatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJabatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -537,7 +537,7 @@ public final class MandiriMetodePembayaran extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJabatanMouseClicked
 
     private void tbJabatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJabatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJabatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -650,7 +650,7 @@ public final class MandiriMetodePembayaran extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJabatan.getRowCount());
     }
 
     private void getData() {

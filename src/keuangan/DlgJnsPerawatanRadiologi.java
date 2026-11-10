@@ -756,7 +756,7 @@ public final class DlgJnsPerawatanRadiologi extends javax.swing.JDialog {
                 TKd.getText(),TNm.getText(),BagianRs.getText(),JMLaborat.getText(),TotalBiaya.getText(),kdpnj.getText(),JMDokter.getText(),JMPerujuk.getText(),Bhp.getText(),
                 KSO.getText(),Menejemen.getText(),Kelas.getSelectedItem().toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString()
             });
-            if(tabMode.getRowCount()!=0){BtnCariActionPerformed(evt);}
+            if(tbJnsPerawatan.getRowCount()!=0){BtnCariActionPerformed(evt);}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -784,10 +784,10 @@ public final class DlgJnsPerawatanRadiologi extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbJnsPerawatan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbJnsPerawatan.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -799,16 +799,16 @@ public final class DlgJnsPerawatanRadiologi extends javax.swing.JDialog {
                 }, "Laporan 5 (Jasper)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                        Valid.exportHtmlSmc("TarifRad.html", "Data Tarif Radiologi", tbJnsPerawatan, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportHtmlSmc("TarifRad.html", "Data Tarif Radiologi", tbJnsPerawatan, IntStream.rangeClosed(1, tbJnsPerawatan.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 2 (WPS)":
-                        Valid.exportWPSSmc("TarifRad.wps", "Data Tarif Radiologi", tbJnsPerawatan, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportWPSSmc("TarifRad.wps", "Data Tarif Radiologi", tbJnsPerawatan, IntStream.rangeClosed(1, tbJnsPerawatan.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 3 (CSV)":
-                        Valid.exportCSVSmc("TarifRad.csv", tbJnsPerawatan, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportCSVSmc("TarifRad.csv", tbJnsPerawatan, IntStream.rangeClosed(1, tbJnsPerawatan.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 4 (XLSX)":
-                        Valid.exportXlsxSmc("TarifRad.xlsx", tbJnsPerawatan, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportXlsxSmc("TarifRad.xlsx", tbJnsPerawatan, IntStream.rangeClosed(1, tbJnsPerawatan.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
@@ -883,7 +883,7 @@ public final class DlgJnsPerawatanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -892,7 +892,7 @@ public final class DlgJnsPerawatanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_A){
                 for(i=0;i<tbJnsPerawatan.getRowCount();i++){
                     tbJnsPerawatan.setValueAt(true,i,0);
@@ -1093,7 +1093,7 @@ public final class DlgJnsPerawatanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_KelasKeyPressed
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1212,7 +1212,7 @@ public final class DlgJnsPerawatanRadiologi extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {

@@ -970,7 +970,7 @@ public class SatuSehatBridgingTTE extends JDialog {
                 modelPasien.addRow(b);
             }
         }
-        labelJmlPasien.setText("  " + modelPasien.getRowCount() + " pasien");
+        labelJmlPasien.setText("  " + tabelPasien.getRowCount() + " pasien");
     }
 
     /** Isi combo Filter Berkas dari jenis berkas pasien terpilih + reset ke "Semua". */
@@ -1106,8 +1106,8 @@ public class SatuSehatBridgingTTE extends JDialog {
         if (row < 0) {
             return;
         }
-        final String noRawat = String.valueOf(modelPasien.getValueAt(row, 1));
-        final String namaPasien = String.valueOf(modelPasien.getValueAt(row, 3));
+        final String noRawat = String.valueOf(tabelPasien.getValueAt(row, 1));
+        final String namaPasien = String.valueOf(tabelPasien.getValueAt(row, 3));
         labelDok.setText("Memuat berkas " + namaPasien + "...");
         tombolTandatangani.setEnabled(false);
         tombolUpdate.setEnabled(false);

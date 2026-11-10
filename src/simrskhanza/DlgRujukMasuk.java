@@ -986,7 +986,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
         for(int i=0;i<tbObat.getRowCount();i++){
             if(tbObat.getValueAt(i,0).toString().equals("true")){
                 if(Sequel.meghapustf("rujuk_masuk","no_rawat",tbObat.getValueAt(i,4).toString())==true){
-                    tabMode.removeRow(i);
+                    tabMode.removeRow(tbObat.convertRowIndexToModel(i));
                     i--;
                 }
             }
@@ -1025,7 +1025,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
                     "jm_perujuk='"+JMPerujuk.getText()+"',dokter_perujuk='"+Dokter.getText()+"',kd_penyakit='"+kdDiagnosa.getText()+"',"+
                     "kategori_rujuk='"+KategoriRujuk.getSelectedItem().toString()+"',keterangan='"+Keterangan.getText()+"',"+
                     "no_balasan='"+NoBalasan.getText()+"'");
-            if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+            if(tbObat.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -1053,10 +1053,10 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbObat.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1081,25 +1081,25 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        for(int i=0;i<tabMode.getRowCount();i++){
+                        for(int i=0;i<tbObat.getRowCount();i++){
                             Sequel.menyimpan("temporary","'"+i+"','"+
-                                tabMode.getValueAt(i,1).toString()+"','"+
-                                tabMode.getValueAt(i,2).toString()+"','"+
-                                tabMode.getValueAt(i,3).toString()+"','"+
-                                tabMode.getValueAt(i,6).toString()+"','"+
-                                tabMode.getValueAt(i,7).toString()+"','"+
-                                tabMode.getValueAt(i,8).toString()+"','"+
-                                tabMode.getValueAt(i,9).toString()+"','"+
-                                tabMode.getValueAt(i,10).toString()+"','"+
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()))+"','"+
-                                tabMode.getValueAt(i,12).toString()+"','"+
-                                tabMode.getValueAt(i,13).toString()+"','"+
-                                tabMode.getValueAt(i,14).toString()+"','"+
-                                tabMode.getValueAt(i,15).toString()+"','"+
-                                tabMode.getValueAt(i,16).toString()+"','"+
-                                tabMode.getValueAt(i,17).toString()+"','"+
-                                tabMode.getValueAt(i,18).toString()+"','"+
-                                tabMode.getValueAt(i,19).toString()+"','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rujukan Masuk");
+                                tbObat.getValueAt(i,1).toString()+"','"+
+                                tbObat.getValueAt(i,2).toString()+"','"+
+                                tbObat.getValueAt(i,3).toString()+"','"+
+                                tbObat.getValueAt(i,6).toString()+"','"+
+                                tbObat.getValueAt(i,7).toString()+"','"+
+                                tbObat.getValueAt(i,8).toString()+"','"+
+                                tbObat.getValueAt(i,9).toString()+"','"+
+                                tbObat.getValueAt(i,10).toString()+"','"+
+                                Valid.SetAngka(Double.parseDouble(tbObat.getValueAt(i,11).toString()))+"','"+
+                                tbObat.getValueAt(i,12).toString()+"','"+
+                                tbObat.getValueAt(i,13).toString()+"','"+
+                                tbObat.getValueAt(i,14).toString()+"','"+
+                                tbObat.getValueAt(i,15).toString()+"','"+
+                                tbObat.getValueAt(i,16).toString()+"','"+
+                                tbObat.getValueAt(i,17).toString()+"','"+
+                                tbObat.getValueAt(i,18).toString()+"','"+
+                                tbObat.getValueAt(i,19).toString()+"','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rujukan Masuk");
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
@@ -1169,7 +1169,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_TNoRMKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1234,7 +1234,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCariRujukKeyPressed
 
     private void tbPerujukMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPerujukMouseClicked
-        if(tabMode2.getRowCount()!=0){
+        if(tbPerujuk.getRowCount()!=0){
             if(akses.getform().equals("DlgRujukMasuk")){
                 try {
                     getData2();
@@ -1246,7 +1246,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPerujukMouseClicked
 
     private void tbPerujukKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPerujukKeyPressed
-        if(tabMode2.getRowCount()!=0){
+        if(tbPerujuk.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData2();
@@ -1675,7 +1675,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_MnBalasanRujukan2ActionPerformed
 
     private void tbObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1881,7 +1881,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void tampil3() {
@@ -2005,7 +2005,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
         } finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
-        LCount1.setText(""+tabMode2.getRowCount());
+        LCount1.setText(""+tbPerujuk.getRowCount());
     }
 
     public void tampil4() {
@@ -2047,7 +2047,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
             response = null;
             root = null;
         }
-        LCount1.setText(""+tabMode2.getRowCount());
+        LCount1.setText(""+tbPerujuk.getRowCount());
     }
 
     private void getData2() {

@@ -455,7 +455,7 @@ public final class DlgRestorePetugas extends javax.swing.JDialog {
                         rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),
                         rs.getString(9),rs.getString(10),rs.getString(11)});
                 }
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbObat.getRowCount());
             } catch (SQLException e) {
                 System.out.println("Notifikasi : " + e);
             } finally{

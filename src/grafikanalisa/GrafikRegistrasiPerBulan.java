@@ -365,10 +365,10 @@ public class GrafikRegistrasiPerBulan extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbBangsal.getRowCount()!=0){
 
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -380,11 +380,11 @@ public class GrafikRegistrasiPerBulan extends javax.swing.JDialog {
             param.put("periode","Periode "+Tanggal1.getSelectedItem()+" s.d. "+Tanggal2.getSelectedItem());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Sequel.queryu("delete from temporary_grafik");
-            for(int r=0;r<tabMode.getRowCount();r++){
+            for(int r=0;r<tbBangsal.getRowCount();r++){
                 Sequel.menyimpan("temporary_grafik","'0','"+
-                    tabMode.getValueAt(r,0).toString()+"','"+
-                    tabMode.getValueAt(r,1).toString()+"','"+
-                    tabMode.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap Nota Pembayaran");
+                    tbBangsal.getValueAt(r,0).toString()+"','"+
+                    tbBangsal.getValueAt(r,1).toString()+"','"+
+                    tbBangsal.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap Nota Pembayaran");
             }
 
             Valid.MyReport("rptKunjunganPerBulan.jasper","report","::[ Laporan Jumlah Registrasi Per Bulan ]::",param);

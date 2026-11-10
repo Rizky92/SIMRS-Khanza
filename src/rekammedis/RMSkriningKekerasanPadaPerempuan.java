@@ -1250,10 +1250,10 @@ public final class RMSkriningKekerasanPadaPerempuan extends javax.swing.JDialog 
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbObat.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1333,7 +1333,7 @@ public final class RMSkriningKekerasanPadaPerempuan extends javax.swing.JDialog 
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1342,7 +1342,7 @@ public final class RMSkriningKekerasanPadaPerempuan extends javax.swing.JDialog 
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1725,7 +1725,7 @@ public final class RMSkriningKekerasanPadaPerempuan extends javax.swing.JDialog 
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -1974,8 +1974,8 @@ public final class RMSkriningKekerasanPadaPerempuan extends javax.swing.JDialog 
         if(Sequel.queryu2tf("delete from skrining_kekerasan_pada_perempuan where no_rawat=?",1,new String[]{
             tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
         })==true){
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
@@ -2010,7 +2010,7 @@ public final class RMSkriningKekerasanPadaPerempuan extends javax.swing.JDialog 
                 PertanyaanLanjutan2.getSelectedItem().toString(),NilaiPertanyaanLanjutan2.getText(),PertanyaanLanjutan3.getSelectedItem().toString(),NilaiPertanyaanLanjutan3.getText(),PertanyaanLanjutan4.getSelectedItem().toString(),NilaiPertanyaanLanjutan4.getText(),
                 PertanyaanLanjutan5.getSelectedItem().toString(),NilaiPertanyaanLanjutan5.getText(),PertanyaanLanjutan6.getSelectedItem().toString(),NilaiPertanyaanLanjutan6.getText(),TotalHasil.getText(),HasilSkrining.getText()
             });
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
         }
     }

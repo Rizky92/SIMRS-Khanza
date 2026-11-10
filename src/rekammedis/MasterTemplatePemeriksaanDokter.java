@@ -1974,7 +1974,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1990,7 +1990,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -2539,7 +2539,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllTindakanActionPerformed
 
     private void tbPermintaanPKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPermintaanPKMouseClicked
-        if(tabModePK.getRowCount()!=0){
+        if(tbPermintaanPK.getRowCount()!=0){
             try {
                 Valid.tabelKosong(tabModeDetailPK);
                 tampilDetailPK();
@@ -2549,7 +2549,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPermintaanPKMouseClicked
 
     private void tbPermintaanMBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPermintaanMBMouseClicked
-        if(tabModeMB.getRowCount()!=0){
+        if(tbPermintaanMB.getRowCount()!=0){
             try {
                 Valid.tabelKosong(tabModeDetailMB);
                 tampilDetailMB();
@@ -2559,7 +2559,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPermintaanMBMouseClicked
 
     private void BtnTambah1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambah1ActionPerformed
-        i=tabModeObatRacikan.getRowCount()+1;
+        i=tbObatRacikan.getRowCount()+1;
         if(i==99){
             JOptionPane.showMessageDialog(null,"Maksimal 98 Racikan..!!");
         }else{
@@ -2569,7 +2569,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
 
     private void BtnHapus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapus1ActionPerformed
         if(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),1).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),4).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),5).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),6).equals("")){
-            tabModeObatRacikan.removeRow(tbObatRacikan.getSelectedRow());
+            tabModeObatRacikan.removeRow(tbObatRacikan.convertRowIndexToModel(tbObatRacikan.getSelectedRow()));
         }else{
             JOptionPane.showMessageDialog(null,"Maaf sudah terisi, gak boleh dihapus..!!");
         }
@@ -2787,7 +2787,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSemuaActionPerformed
 
     private void tbDiagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDiagnosaKeyPressed
-        if(tabModeDiagnosa.getRowCount()!=0){
+        if(tbDiagnosa.getRowCount()!=0){
             try {
                 if(tbDiagnosa.getSelectedRow()!= -1){
                     if(tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),0).toString().equals("true")&&tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),7).toString().equals("0")){
@@ -2808,7 +2808,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDiagnosaKeyPressed
 
     private void tbDiagnosaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDiagnosaMouseClicked
-        if(tabModeDiagnosa.getRowCount()!=0){
+        if(tbDiagnosa.getRowCount()!=0){
             try {
                 if(tbDiagnosa.getSelectedRow()!= -1){
                     if(tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),0).toString().equals("true")&&tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),7).toString().equals("0")){
@@ -2853,7 +2853,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDiagnosaPropertyChange
 
     private void tbProsedurKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbProsedurKeyPressed
-        if(tabModeProsedur.getRowCount()!=0){
+        if(tbProsedur.getRowCount()!=0){
             try {
                 if(tbProsedur.getSelectedRow()!= -1){
                     if(tbProsedur.getValueAt(tbProsedur.getSelectedRow(),0).toString().equals("true")){
@@ -2878,7 +2878,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_tbProsedurKeyPressed
 
     private void tbProsedurMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProsedurMouseClicked
-        if(tabModeProsedur.getRowCount()!=0){
+        if(tbProsedur.getRowCount()!=0){
             try {
                 if(tbProsedur.getSelectedRow()!= -1){
                     if(tbProsedur.getValueAt(tbProsedur.getSelectedRow(),0).toString().equals("true")){
@@ -3168,7 +3168,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }
 
     public void emptTeks() {
@@ -3209,13 +3209,13 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            Kd.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            Subjek.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString());
-            Objek.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),4).toString());
-            Asesmen.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),5).toString());
-            Plan.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),6).toString());
-            Instruksi.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),7).toString());
-            Evaluasi.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),8).toString());
+            Kd.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+            Subjek.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
+            Objek.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
+            Asesmen.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString());
+            Plan.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString());
+            Instruksi.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString());
+            Evaluasi.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString());
         }
     }
 
@@ -4310,32 +4310,32 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
                     htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td valign='top' align='left' width='100%'>").append(
-                                "Subjek : ").append(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString()).append(
+                                "Subjek : ").append(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()).append(
                             "</td>").append(
                         "</tr>").append(
                         "<tr class='isi'>").append(
                             "<td valign='top' align='left' width='100%'>").append(
-                                "Objek : ").append(tabMode.getValueAt(tbDokter.getSelectedRow(),4).toString()).append(
+                                "Objek : ").append(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString()).append(
                             "</td>").append(
                         "</tr>").append(
                         "<tr class='isi'>").append(
                             "<td valign='top' align='left' width='100%'>").append(
-                                "Asesmen : ").append(tabMode.getValueAt(tbDokter.getSelectedRow(),5).toString()).append(
+                                "Asesmen : ").append(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString()).append(
                             "</td>").append(
                         "</tr>").append(
                         "<tr class='isi'>").append(
                             "<td valign='top' align='left' width='100%'>").append(
-                                "Plan : ").append(tabMode.getValueAt(tbDokter.getSelectedRow(),6).toString()).append(
+                                "Plan : ").append(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString()).append(
                             "</td>").append(
                         "</tr>").append(
                         "<tr class='isi'>").append(
                             "<td valign='top' align='left' width='100%'>").append(
-                                "Instruksi : ").append(tabMode.getValueAt(tbDokter.getSelectedRow(),7).toString()).append(
+                                "Instruksi : ").append(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()).append(
                             "</td>").append(
                         "</tr>").append(
                         "<tr class='isi'>").append(
                             "<td valign='top' align='left' width='100%'>").append(
-                                "Evaluasi : ").append(tabMode.getValueAt(tbDokter.getSelectedRow(),8).toString()).append(
+                                "Evaluasi : ").append(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString()).append(
                             "</td>").append(
                         "</tr>"
                     );
@@ -4348,7 +4348,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
                             "inner join kategori_penyakit on penyakit.kd_ktg=kategori_penyakit.kd_ktg where "+
                             "template_pemeriksaan_dokter_penyakit.no_template=? order by template_pemeriksaan_dokter_penyakit.urut");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
                             htmlContent.append(
@@ -4397,7 +4397,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
                             "select template_pemeriksaan_dokter_prosedur.kode,icd9.deskripsi_panjang,icd9.deskripsi_pendek,icd9.validcode,icd9.accpdx,icd9.im,template_pemeriksaan_dokter_prosedur.urut,template_pemeriksaan_dokter_prosedur.jumlah "+
                             "from template_pemeriksaan_dokter_prosedur inner join icd9 on template_pemeriksaan_dokter_prosedur.kode=icd9.kode where template_pemeriksaan_dokter_prosedur.no_template=? order by template_pemeriksaan_dokter_prosedur.urut");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
                             htmlContent.append(
@@ -4449,7 +4449,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
                             "inner join jns_perawatan_radiologi on template_pemeriksaan_dokter_permintaan_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw "+
                             "where template_pemeriksaan_dokter_permintaan_radiologi.no_template=?");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
                             htmlContent.append(
@@ -4496,7 +4496,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
                             "inner join jns_perawatan_lab on template_pemeriksaan_dokter_permintaan_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
                             "where template_pemeriksaan_dokter_permintaan_lab.no_template=? and jns_perawatan_lab.kategori='PK'");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
                             htmlContent.append(
@@ -4525,7 +4525,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
                                             "select template_pemeriksaan_dokter_detail_permintaan_lab.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa "+
                                             "from template_pemeriksaan_dokter_detail_permintaan_lab inner join template_laboratorium on template_pemeriksaan_dokter_detail_permintaan_lab.id_template=template_laboratorium.id_template where template_pemeriksaan_dokter_detail_permintaan_lab.no_template=? and "+
                                             "template_pemeriksaan_dokter_detail_permintaan_lab.kd_jenis_prw=? order by template_laboratorium.urut");
-                                    ps2.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                                    ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                                     ps2.setString(2,rs.getString("kd_jenis_prw"));
                                     rs2=ps2.executeQuery();
                                     if(rs2.next()){
@@ -4605,7 +4605,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
                             "inner join jns_perawatan_lab on template_pemeriksaan_dokter_permintaan_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
                             "where template_pemeriksaan_dokter_permintaan_lab.no_template=? and jns_perawatan_lab.kategori='PA'");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
                             htmlContent.append(
@@ -4652,7 +4652,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
                             "inner join jns_perawatan_lab on template_pemeriksaan_dokter_permintaan_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
                             "where template_pemeriksaan_dokter_permintaan_lab.no_template=? and jns_perawatan_lab.kategori='MB'");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
                             htmlContent.append(
@@ -4681,7 +4681,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
                                             "select template_pemeriksaan_dokter_detail_permintaan_lab.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa "+
                                             "from template_pemeriksaan_dokter_detail_permintaan_lab inner join template_laboratorium on template_pemeriksaan_dokter_detail_permintaan_lab.id_template=template_laboratorium.id_template where template_pemeriksaan_dokter_detail_permintaan_lab.no_template=? and "+
                                             "template_pemeriksaan_dokter_detail_permintaan_lab.kd_jenis_prw=? order by template_laboratorium.urut");
-                                    ps2.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                                    ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                                     ps2.setString(2,rs.getString("kd_jenis_prw"));
                                     rs2=ps2.executeQuery();
                                     if(rs2.next()){
@@ -4761,7 +4761,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
                             "databarang.kapasitas,databarang.letak_barang from template_pemeriksaan_dokter_resep inner join databarang on template_pemeriksaan_dokter_resep.kode_brng=databarang.kode_brng inner join kodesatuan on kodesatuan.kode_sat=databarang.kode_sat "+
                             "inner join jenis on databarang.kdjns=jenis.kdjns inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri where template_pemeriksaan_dokter_resep.no_template=? order by databarang.nama_brng");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
                             htmlContent.append(
@@ -4815,7 +4815,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
                             "template_pemeriksaan_dokter_resep_racikan.keterangan from template_pemeriksaan_dokter_resep_racikan inner join metode_racik on metode_racik.kd_racik=template_pemeriksaan_dokter_resep_racikan.kd_racik where template_pemeriksaan_dokter_resep_racikan.no_template=? "+
                             "order by template_pemeriksaan_dokter_resep_racikan.no_racik");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
                             htmlContent.append(
@@ -4854,7 +4854,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
                                             "industrifarmasi.nama_industri,databarang.letak_barang from template_pemeriksaan_dokter_resep_racikan_detail inner join databarang on template_pemeriksaan_dokter_resep_racikan_detail.kode_brng=databarang.kode_brng "+
                                             "inner join jenis on databarang.kdjns=jenis.kdjns inner join kodesatuan on kodesatuan.kode_sat=databarang.kode_sat inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                                             "where template_pemeriksaan_dokter_resep_racikan_detail.no_template=? and template_pemeriksaan_dokter_resep_racikan_detail.no_racik=? order by template_pemeriksaan_dokter_resep_racikan_detail.kode_brng");
-                                    ps2.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                                    ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                                     ps2.setString(2,rs.getString("no_racik"));
                                     rs2=ps2.executeQuery();
                                     if(rs2.next()){
@@ -4925,7 +4925,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
                             "on template_pemeriksaan_dokter_tindakan.kd_jenis_prw=jns_perawatan.kd_jenis_prw inner join kategori_perawatan on kategori_perawatan.kd_kategori=jns_perawatan.kd_kategori "+
                             "where template_pemeriksaan_dokter_tindakan.no_template=?");
                     try {
-                        ps.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
                             htmlContent.append(
@@ -5093,7 +5093,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),KdDokter.getText(),NmDokter.getText(),Subjek.getText(),Objek.getText(),Asesmen.getText(),Plan.getText(),Instruksi.getText(),Evaluasi.getText()
                 });
-                tabMode.removeRow(tbDokter.getSelectedRow());
+                tabMode.removeRow(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()));
                 ChkAccor.setSelected(false);
                 isDetail();
                 TabRawat.setSelectedIndex(1);
@@ -5107,8 +5107,8 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
         if(Sequel.queryu2tf("delete from template_pemeriksaan_dokter where no_template=?",1,new String[]{
             tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
         })==true){
-            tabMode.removeRow(tbDokter.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            tabMode.removeRow(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()));
+            LCount.setText(""+tbDokter.getRowCount());
             LoadHTML.setText("");
             TabRawat.setSelectedIndex(1);
         }else{

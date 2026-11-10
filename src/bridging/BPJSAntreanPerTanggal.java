@@ -496,9 +496,9 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if (tabMode.getRowCount() == 0) {
+        if (tbJnsPerawatan.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-        } else if (tabMode.getRowCount() != 0) {
+        } else if (tbJnsPerawatan.getRowCount() != 0) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -523,12 +523,12 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.deleteTemporary();
-                        for (int i = 0; i < tabMode.getRowCount(); i++) {
-                            Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2),
-                                (String) tabMode.getValueAt(i, 3), (String) tabMode.getValueAt(i, 4), (String) tabMode.getValueAt(i, 5), (String) tabMode.getValueAt(i, 6),
-                                (String) tabMode.getValueAt(i, 7), (String) tabMode.getValueAt(i, 8), (String) tabMode.getValueAt(i, 9), (String) tabMode.getValueAt(i, 10),
-                                (String) tabMode.getValueAt(i, 11), (String) tabMode.getValueAt(i, 12), (String) tabMode.getValueAt(i, 13), (String) tabMode.getValueAt(i, 14),
-                                (String) tabMode.getValueAt(i, 15), (String) tabMode.getValueAt(i, 16));
+                        for (int i = 0; i < tbJnsPerawatan.getRowCount(); i++) {
+                            Sequel.temporary(String.valueOf(i + 1), (String) tbJnsPerawatan.getValueAt(i, 0), (String) tbJnsPerawatan.getValueAt(i, 1), (String) tbJnsPerawatan.getValueAt(i, 2),
+                                (String) tbJnsPerawatan.getValueAt(i, 3), (String) tbJnsPerawatan.getValueAt(i, 4), (String) tbJnsPerawatan.getValueAt(i, 5), (String) tbJnsPerawatan.getValueAt(i, 6),
+                                (String) tbJnsPerawatan.getValueAt(i, 7), (String) tbJnsPerawatan.getValueAt(i, 8), (String) tbJnsPerawatan.getValueAt(i, 9), (String) tbJnsPerawatan.getValueAt(i, 10),
+                                (String) tbJnsPerawatan.getValueAt(i, 11), (String) tbJnsPerawatan.getValueAt(i, 12), (String) tbJnsPerawatan.getValueAt(i, 13), (String) tbJnsPerawatan.getValueAt(i, 14),
+                                (String) tbJnsPerawatan.getValueAt(i, 15), (String) tbJnsPerawatan.getValueAt(i, 16));
                         }
 
                         Map<String, Object> param = new HashMap<>();
@@ -725,7 +725,7 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
         mjkn_capaian = (mjkn_selesai/sep)*100;
         jkn_capaian_angka = (int)jkn_capaian;
         mjkn_capaian_angka = (int)mjkn_capaian;
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
         SEPTerbit.setText(""+sep);
         TotBelum.setText(""+tot_belum);
         TotSelesai.setText(""+tot_selesai);

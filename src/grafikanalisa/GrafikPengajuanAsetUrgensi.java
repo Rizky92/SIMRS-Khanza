@@ -432,10 +432,10 @@ public class GrafikPengajuanAsetUrgensi extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbBangsal.getRowCount()!=0){
 
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -447,13 +447,13 @@ public class GrafikPengajuanAsetUrgensi extends javax.swing.JDialog {
             param.put("periode","Periode "+Tanggal1.getSelectedItem()+" s.d. "+Tanggal2.getSelectedItem());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Sequel.queryu("delete from temporary_grafik");
-            for(int r=0;r<tabMode.getRowCount();r++){
+            for(int r=0;r<tbBangsal.getRowCount();r++){
                     Sequel.menyimpan("temporary_grafik","'0','"+
-                                    tabMode.getValueAt(r,0).toString()+"','"+
-                                    tabMode.getValueAt(r,1).toString()+"','"+
-                                    tabMode.getValueAt(r,2).toString()+"','"+
-                                    Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,3).toString()))+"','"+
-                                    tabMode.getValueAt(r,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap Nota Pembayaran");
+                                    tbBangsal.getValueAt(r,0).toString()+"','"+
+                                    tbBangsal.getValueAt(r,1).toString()+"','"+
+                                    tbBangsal.getValueAt(r,2).toString()+"','"+
+                                    Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(r,3).toString()))+"','"+
+                                    tbBangsal.getValueAt(r,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap Nota Pembayaran");
             }
 
             Valid.MyReport("rptPengajuanAsetUrgensi.jasper","report","::[ Laporan Pengajuan Aset/Inventaris Per Urgensi ]::",param);
@@ -510,7 +510,7 @@ public class GrafikPengajuanAsetUrgensi extends javax.swing.JDialog {
                     jumlah=jumlah+rs.getDouble("jumlah");
                     tabMode.addRow(new Object[]{rs.getString("urgensi"),rs.getString("jumlah"),"0",rs.getDouble("total"),"0"});
                 }
-                if(tabMode.getRowCount()>0){
+                if(tbBangsal.getRowCount()>0){
                     tabMode.addRow(new Object[]{"Jumlah : ",jumlah+"","100 %",total,"100 %"});
                     for(i=0;i<tbBangsal.getRowCount();i++){
                         tbBangsal.setValueAt(Valid.SetAngka6((Double.parseDouble(tbBangsal.getValueAt(i,1).toString())/jumlah)*100)+" %",i,2);

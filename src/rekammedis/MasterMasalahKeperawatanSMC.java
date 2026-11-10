@@ -46,7 +46,7 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
         tbSpesialis.setModel(tabMode);
         tbSpesialis.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbSpesialis.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbSpesialis.getColumnCount(); i++) {
             TableColumn column = tbSpesialis.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(70);
@@ -375,7 +375,7 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
             if (Sequel.menyimpantfSmc("smc_master_masalah_keperawatan", "", menu.getSelectedItem().toString(), kode.getText(), masalah.getText())) {
                 tabMode.addRow(new Object[] {menu.getSelectedItem().toString(), kode.getText(), masalah.getText()});
                 emptTeks();
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbSpesialis.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -405,9 +405,9 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
             if (Sequel.menghapustfSmc("smc_master_masalah_keperawatan", "menu = ? and kode_masalah = ?",
                 tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 0).toString(), tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 1).toString()
             )) {
-                tabMode.removeRow(tbSpesialis.getSelectedRow());
+                tabMode.removeRow(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()));
                 emptTeks();
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbSpesialis.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
@@ -431,9 +431,9 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
                     menu.getSelectedItem().toString(), kode.getText(), masalah.getText(), tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 0).toString(),
                     tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 1).toString()
                 )) {
-                    tabMode.setValueAt(menu.getSelectedItem().toString(), tbSpesialis.getSelectedRow(), 0);
-                    tabMode.setValueAt(kode.getText(), tbSpesialis.getSelectedRow(), 1);
-                    tabMode.setValueAt(masalah.getText(), tbSpesialis.getSelectedRow(), 2);
+                    tbSpesialis.setValueAt(menu.getSelectedItem().toString(), tbSpesialis.getSelectedRow(), 0);
+                    tbSpesialis.setValueAt(kode.getText(), tbSpesialis.getSelectedRow(), 1);
+                    tbSpesialis.setValueAt(masalah.getText(), tbSpesialis.getSelectedRow(), 2);
                     emptTeks();
                 }
             }
@@ -502,7 +502,7 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbSpesialis.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -511,7 +511,7 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisMouseClicked
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbSpesialis.getRowCount() != 0) {
             if (evt.getKeyCode() == KeyEvent.VK_SHIFT) {
                 TCari.setText("");
                 TCari.requestFocus();
@@ -552,7 +552,7 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbSpesialisKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyReleased
-        if (tabMode.getRowCount() != 0) {
+        if (tbSpesialis.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
@@ -650,7 +650,7 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbSpesialis.getRowCount() + "");
                     MasterMasalahKeperawatanSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

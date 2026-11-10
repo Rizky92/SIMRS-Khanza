@@ -234,7 +234,7 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
             Valid.textKosong(KdPeriksa,"Pemeriksaan");
         }else{
             if(tbKamar.getSelectedRow()>-1){
-                tabMode.insertRow(tbKamar.getSelectedRow(),new Object[]{"","","","","","","",0,0,0,0,0,0,0,0,"",""});
+                tabMode.insertRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),new Object[]{"","","","","","","",0,0,0,0,0,0,0,0,"",""});
             }else{
                 tabMode.addRow(new Object[]{"","","","","","","",0,0,0,0,0,0,0,0,"",""});
                 tbKamar.requestFocus();
@@ -294,12 +294,12 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null,"Maaf, pemeriksaan yang sudah memiliki tarif tidak boleh dihapus...!!!");
                 }else{
                     Sequel.meghapus("template_laboratorium","id_template",tbKamar.getValueAt(tbKamar.getSelectedRow(),15).toString());
-                    tabMode.removeRow(tbKamar.getSelectedRow());
+                    tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
                     urut();
                 }
             }else{
                 Sequel.meghapus("template_laboratorium","id_template",tbKamar.getValueAt(tbKamar.getSelectedRow(),15).toString());
-                tabMode.removeRow(tbKamar.getSelectedRow());
+                tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
                 urut();
             }
         }catch(Exception ex){

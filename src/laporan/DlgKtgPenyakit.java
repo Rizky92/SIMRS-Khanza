@@ -494,7 +494,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
             Valid.editTable(tabMode,"kategori_penyakit","kd_ktg","?","kd_ktg=?,nm_kategori=?,ciri_umum=?",4,new String[]{
                 TKd.getText(),TNm.getText(),TCiri.getText(),tbKtgPny.getValueAt(tbKtgPny.getSelectedRow(),1).toString()
             });
-            if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+            if(tbKtgPny.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -522,10 +522,10 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbKtgPny.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbKtgPny.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -620,7 +620,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKtgPnyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKtgPnyMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKtgPny.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -629,7 +629,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKtgPnyMouseClicked
 
     private void tbKtgPnyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKtgPnyKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKtgPny.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -741,7 +741,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKtgPny.getRowCount());
     }
 
     public void emptTeks() {

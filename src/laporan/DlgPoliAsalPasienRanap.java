@@ -309,9 +309,9 @@ public final class DlgPoliAsalPasienRanap extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbBangsal.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -346,8 +346,8 @@ public final class DlgPoliAsalPasienRanap extends javax.swing.JDialog {
                         param.put("tanggal",Tgl2.getDate());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        for(int r=0;r<tabMode.getRowCount();r++){
-                            Sequel.menyimpan("temporary","'"+r+"','"+tabMode.getValueAt(r,0).toString()+"','"+tabMode.getValueAt(r,1).toString()+"','"+tabMode.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
+                        for(int r=0;r<tbBangsal.getRowCount();r++){
+                            Sequel.menyimpan("temporary","'"+r+"','"+tbBangsal.getValueAt(r,0).toString()+"','"+tbBangsal.getValueAt(r,1).toString()+"','"+tbBangsal.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
                         }
                         Valid.MyReportqry("rptPoliAsalPasienRanap.jasper","report","::[ Laporan Poli Asal Pasien Ranap ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;

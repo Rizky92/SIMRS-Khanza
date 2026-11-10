@@ -277,7 +277,7 @@ public final class BPJSCekRiwayatRujukanTerakhir extends javax.swing.JDialog {
                     }
                 }
             }
-            if(tabMode.getRowCount()==0){
+            if(tbKamar.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Tidak ditemukan rujukan...!!");
             }
         } catch (Exception ex) {

@@ -2551,7 +2551,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnViewKeyPressed
 
     private void tbBillingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBillingMouseClicked
-       if(tabModeRwJlDr.getRowCount()!=0){
+       if(tbBilling.getRowCount()!=0){
             if(evt.getClickCount()==1){
                 int kolom=tbBilling.getSelectedColumn();
                 if(kolom==1){
@@ -3408,7 +3408,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         Sequel.queryu("delete from tambahan_biaya where no_rawat='"+norawattambahan.getText()+"' and nama_biaya='"+tbTambahan.getValueAt(tbTambahan.getSelectedRow(),0).toString() +"'");
-        tabModeTambahan.removeRow(tbTambahan.getSelectedRow());
+        tabModeTambahan.removeRow(tbTambahan.convertRowIndexToModel(tbTambahan.getSelectedRow()));
         isRawat();
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -3471,7 +3471,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
 
     private void BtnHapusPotonganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusPotonganActionPerformed
         Sequel.queryu("delete from pengurangan_biaya where no_rawat='"+norawatpotongan.getText()+"' and nama_pengurangan='"+tbPotongan.getValueAt(tbPotongan.getSelectedRow(),0).toString() +"'");
-        tabModePotongan.removeRow(tbPotongan.getSelectedRow());
+        tabModePotongan.removeRow(tbPotongan.convertRowIndexToModel(tbPotongan.getSelectedRow()));
         isRawat();
     }//GEN-LAST:event_BtnHapusPotonganActionPerformed
 
@@ -3581,40 +3581,40 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             Valid.textKosong(norawatubahlama,"Data");
         }else{
             sukses = true;
-            z = tabModeKamIn.getRowCount();
+            z = tbUbahLama.getRowCount();
             String tglkeluar, jamkeluar;
             Sequel.AutoComitFalse();
             for (r = 0; r < z; r++) {
-                if (((Double) tabModeKamIn.getValueAt(r, 6)) > -1) {
-                    tglkeluar = tabModeKamIn.getValueAt(r, 4).toString();
-                    jamkeluar = tabModeKamIn.getValueAt(r, 5).toString();
+                if (((Double) tbUbahLama.getValueAt(r, 6)) > -1) {
+                    tglkeluar = tbUbahLama.getValueAt(r, 4).toString();
+                    jamkeluar = tbUbahLama.getValueAt(r, 5).toString();
                     if (tglkeluar.isBlank()) {
                         tglkeluar = "0000-00-00";
                     }
                     if (jamkeluar.isBlank()) {
                         jamkeluar = "00:00:00";
                     }
-                    if (tabModeKamIn.getValueAt(r, 7).toString().equals("Pindah Kamar")) {
+                    if (tbUbahLama.getValueAt(r, 7).toString().equals("Pindah Kamar")) {
                         int kamarTujuan = posisiWaktuPindahKamarTujuan(tglkeluar, jamkeluar);
                         if (kamarTujuan >= 0) {
                             if (!Sequel.mengupdatetfSmc("kamar_inap", "tgl_masuk = ?, jam_masuk = ?, tgl_keluar = ?, jam_keluar = ?, " +
                                 "lama = ?, ttl_biaya = ? * trf_kamar", "no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ?",
-                                tabModeKamIn.getValueAt(r, 2).toString(), tabModeKamIn.getValueAt(r, 3).toString(), tglkeluar, jamkeluar,
-                                tabModeKamIn.getValueAt(r, 6).toString(), tabModeKamIn.getValueAt(r, 6).toString(), norawatubahlama.getText(),
-                                tabModeKamIn.getValueAt(r, 0).toString(), tabModeKamIn.getValueAt(r, 8).toString(), tabModeKamIn.getValueAt(r, 9).toString())
+                                tbUbahLama.getValueAt(r, 2).toString(), tbUbahLama.getValueAt(r, 3).toString(), tglkeluar, jamkeluar,
+                                tbUbahLama.getValueAt(r, 6).toString(), tbUbahLama.getValueAt(r, 6).toString(), norawatubahlama.getText(),
+                                tbUbahLama.getValueAt(r, 0).toString(), tbUbahLama.getValueAt(r, 8).toString(), tbUbahLama.getValueAt(r, 9).toString())
                             ) {
                                 sukses = false;
                             }
                         } else {
                             sukses = false;
-                            JOptionPane.showMessageDialog(null, "Tidak dapat menemukan kamar tujuan pindah dari kamar " + tabModeKamIn.getValueAt(r, 0).toString() + "..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Tidak dapat menemukan kamar tujuan pindah dari kamar " + tbUbahLama.getValueAt(r, 0).toString() + "..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                         }
                     } else {
                         if (!Sequel.mengupdatetfSmc("kamar_inap", "tgl_masuk = ?, jam_masuk = ?, tgl_keluar = ?, jam_keluar = ?, " +
                             "lama = ?, ttl_biaya = ? * trf_kamar", "no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ?",
-                            tabModeKamIn.getValueAt(r, 2).toString(), tabModeKamIn.getValueAt(r, 3).toString(), tglkeluar, jamkeluar,
-                            tabModeKamIn.getValueAt(r, 6).toString(), tabModeKamIn.getValueAt(r, 6).toString(), norawatubahlama.getText(),
-                            tabModeKamIn.getValueAt(r, 0).toString(), tabModeKamIn.getValueAt(r, 8).toString(), tabModeKamIn.getValueAt(r, 9).toString())
+                            tbUbahLama.getValueAt(r, 2).toString(), tbUbahLama.getValueAt(r, 3).toString(), tglkeluar, jamkeluar,
+                            tbUbahLama.getValueAt(r, 6).toString(), tbUbahLama.getValueAt(r, 6).toString(), norawatubahlama.getText(),
+                            tbUbahLama.getValueAt(r, 0).toString(), tbUbahLama.getValueAt(r, 8).toString(), tbUbahLama.getValueAt(r, 9).toString())
                         ) {
                             sukses = false;
                         }
@@ -3949,10 +3949,10 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                     }
                     Sequel.menyimpan("temporary_bayar_ranap","'"+i+"','SISA PIUTANG',':','','','','','<b>"+Valid.SetAngka(piutang)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter");
                     i++;
-                    row2=tabModeAkunPiutang.getRowCount();
+                    row2=tbAkunPiutang.getRowCount();
                     for(r=0;r<row2;r++){
-                        if(Valid.SetAngka(tabModeAkunPiutang.getValueAt(r,3).toString())>0){
-                            Sequel.menyimpan("temporary_bayar_ranap","'"+i+"','-  "+tabModeAkunPiutang.getValueAt(r,0).toString()+"',':','','','','','<b>"+Valid.SetAngka(Valid.SetAngka(tabModeAkunPiutang.getValueAt(r,3).toString()))+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter");
+                        if(Valid.SetAngka(tbAkunPiutang.getValueAt(r,3).toString())>0){
+                            Sequel.menyimpan("temporary_bayar_ranap","'"+i+"','-  "+tbAkunPiutang.getValueAt(r,0).toString()+"',':','','','','','<b>"+Valid.SetAngka(Valid.SetAngka(tbAkunPiutang.getValueAt(r,3).toString()))+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter");
                             i++;
                         }
                     }
@@ -4321,12 +4321,12 @@ public class DlgBilingRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_TtlSemuaKeyPressed
 
     private void tbAkunBayarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAkunBayarKeyPressed
-        if(tabModeAkunBayar.getRowCount()!=0){
+        if(tbAkunBayar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 if(tbAkunBayar.getRowCount()!=0){
                     if((tbAkunBayar.getSelectedColumn()==2)||(tbAkunBayar.getSelectedColumn()==3)||(tbAkunBayar.getSelectedColumn()==4)){
                         try {
-                            if(!tabModeAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),2).toString().equals("")){
+                            if(!tbAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),2).toString().equals("")){
                                 tbAkunBayar.setValueAt(
                                     Valid.roundUp((Valid.SetAngka(tbAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),3).toString())/100)*
                                         Valid.SetAngka(tbAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),2).toString()),100),tbAkunBayar.getSelectedRow(),4);
@@ -4344,7 +4344,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAkunBayarKeyPressed
 
     private void tbAkunPiutangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAkunPiutangKeyPressed
-        if(tabModeAkunBayar.getRowCount()!=0){
+        if(tbAkunBayar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 if(ChkPiutang.isSelected()==true){
                     isHitung();
@@ -5816,16 +5816,16 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         ttlLaborat=0;ttlRadiologi=0;ttlOperasi=0;ttlObat=0;ttlRanap_Dokter=0;ttlRanap_Paramedis=0;ttlRalan_Dokter=0;
         ttlRalan_Paramedis=0;ttlTambahan=0;ttlPotongan=0;ttlKamar=0;ttlRegistrasi=0;ttlHarian=0;ttlRetur_Obat=0;ttlResep_Pulang=0;
         ttlService=0;
-        int row=tabModeRwJlDr.getRowCount();
+        int row=tbBilling.getRowCount();
         if(row>0){
             for(int r=0;r<row;r++){
                 y=0;
                 try {
-                    y=Double.parseDouble(tabModeRwJlDr.getValueAt(r,7).toString());
+                    y=Double.parseDouble(tbBilling.getValueAt(r,7).toString());
                 } catch (Exception e) {
                    y=0;
                 }
-                switch (tabModeRwJlDr.getValueAt(r,8).toString()) {
+                switch (tbBilling.getValueAt(r,8).toString()) {
                     case "Laborat":
                         ttlLaborat=ttlLaborat+y;
                         break;
@@ -5933,31 +5933,31 @@ public class DlgBilingRanap extends javax.swing.JDialog {
     public void isKembali(){
         TtlSemua.setText(Valid.SetAngka3(ttl));
         bayar=0;total=0;besarppn=0;tagihanppn=0;y=0;piutang=0;kekurangan=0;countbayar=0;sisadeposit=0;
-        row2=tabModeAkunBayar.getRowCount();
+        row2=tbAkunBayar.getRowCount();
         for(r=0;r<row2;r++){
-            if(!tabModeAkunBayar.getValueAt(r,2).toString().equals("")){
+            if(!tbAkunBayar.getValueAt(r,2).toString().equals("")){
                 countbayar++;
                 try {
-                    bayar=bayar+Double.parseDouble(tabModeAkunBayar.getValueAt(r,2).toString());
+                    bayar=bayar+Double.parseDouble(tbAkunBayar.getValueAt(r,2).toString());
                 } catch (Exception e) {
                     bayar=bayar+0;
                 }
             }
 
-            if(!tabModeAkunBayar.getValueAt(r,4).toString().equals("")){
+            if(!tbAkunBayar.getValueAt(r,4).toString().equals("")){
                 try {
-                    besarppn=besarppn+Valid.roundUp(Double.parseDouble(tabModeAkunBayar.getValueAt(r,4).toString()),100);
+                    besarppn=besarppn+Valid.roundUp(Double.parseDouble(tbAkunBayar.getValueAt(r,4).toString()),100);
                 } catch (Exception e) {
                     besarppn=besarppn+0;
                 }
             }
         }
 
-        row2=tabModeAkunPiutang.getRowCount();
+        row2=tbAkunPiutang.getRowCount();
         for(r=0;r<row2;r++){
-            if(!tabModeAkunPiutang.getValueAt(r,3).toString().equals("")){
+            if(!tbAkunPiutang.getValueAt(r,3).toString().equals("")){
                 try {
-                    piutang=piutang+Double.parseDouble(tabModeAkunPiutang.getValueAt(r,3).toString());
+                    piutang=piutang+Double.parseDouble(tbAkunPiutang.getValueAt(r,3).toString());
                 } catch (Exception e) {
                     piutang=piutang+0;
                 }
@@ -7017,18 +7017,18 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             jml = 0;
             ArrayList<Map<String, Object>> rows = new ArrayList<>();
             ArrayList<String> akunbayardipilih = new ArrayList<>();
-            for (int i = 0; i < tabModeAkunBayar.getRowCount(); i++) {
-                if (!tabModeAkunBayar.getValueAt(i, 2).toString().isBlank()) {
+            for (int i = 0; i < tbAkunBayar.getRowCount(); i++) {
+                if (!tbAkunBayar.getValueAt(i, 2).toString().isBlank()) {
                     jml++;
                     Map<String, Object> row = new HashMap<>();
-                    row.put("namaakunbayar", tabModeAkunBayar.getValueAt(i, 0));
-                    row.put("koderekbayar", tabModeAkunBayar.getValueAt(i, 1));
-                    row.put("bayar", tabModeAkunBayar.getValueAt(i, 2));
-                    row.put("ppnpersen", tabModeAkunBayar.getValueAt(i, 3));
-                    row.put("ppnbesar", tabModeAkunBayar.getValueAt(i, 4));
-                    row.put("keterangan", tabModeAkunBayar.getValueAt(i, 5));
+                    row.put("namaakunbayar", tbAkunBayar.getValueAt(i, 0));
+                    row.put("koderekbayar", tbAkunBayar.getValueAt(i, 1));
+                    row.put("bayar", tbAkunBayar.getValueAt(i, 2));
+                    row.put("ppnpersen", tbAkunBayar.getValueAt(i, 3));
+                    row.put("ppnbesar", tbAkunBayar.getValueAt(i, 4));
+                    row.put("keterangan", tbAkunBayar.getValueAt(i, 5));
                     rows.add(row);
-                    akunbayardipilih.add(tabModeAkunBayar.getValueAt(i, 0).toString());
+                    akunbayardipilih.add(tbAkunBayar.getValueAt(i, 0).toString());
                 }
             }
             Valid.tabelKosong(tabModeAkunBayar);
@@ -7269,7 +7269,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                 while(rsakunpiutang.next()){
                     tabModeAkunPiutang.addRow(new Object[]{rsakunpiutang.getString(1),rsakunpiutang.getString(2),rsakunpiutang.getString(3),rsakunpiutang.getString(4),rsakunpiutang.getString(5)});
                 }
-                if(tabModeAkunPiutang.getRowCount()>0){
+                if(tbAkunPiutang.getRowCount()>0){
                     ChkPiutang.setSelected(true);
                 }
             }catch (Exception e) {
@@ -7574,20 +7574,20 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                 }
 
                 itempiutang=0;
-                row2=tabModeAkunPiutang.getRowCount();
+                row2=tbAkunPiutang.getRowCount();
                 for(r=0;r<row2;r++){
-                    if(Valid.SetAngka(tabModeAkunPiutang.getValueAt(r,3).toString())>0){
+                    if(Valid.SetAngka(tbAkunPiutang.getValueAt(r,3).toString())>0){
                         try {
-                            itempiutang=Double.parseDouble(tabModeAkunPiutang.getValueAt(r,3).toString());
+                            itempiutang=Double.parseDouble(tbAkunPiutang.getValueAt(r,3).toString());
                         } catch (Exception e) {
                             itempiutang=0;
                         }
 
                         if(Sequel.menyimpantf2("detail_piutang_pasien","?,?,?,?,?,?","Akun Piutang",6,new String[]{
-                            TNoRw.getText(),tabModeAkunPiutang.getValueAt(r,0).toString(),tabModeAkunPiutang.getValueAt(r,2).toString(),
-                            Double.toString(itempiutang),Double.toString(itempiutang),Valid.SetTgl(tabModeAkunPiutang.getValueAt(r,4).toString())
+                            TNoRw.getText(),tbAkunPiutang.getValueAt(r,0).toString(),tbAkunPiutang.getValueAt(r,2).toString(),
+                            Double.toString(itempiutang),Double.toString(itempiutang),Valid.SetTgl(tbAkunPiutang.getValueAt(r,4).toString())
                         })==true){
-                            if(Sequel.insertOrUpdateTampJurnal(tabModeAkunPiutang.getValueAt(r, 1).toString(), tabModeAkunPiutang.getValueAt(r, 0).toString(), itempiutang, 0)==false){
+                            if(Sequel.insertOrUpdateTampJurnal(tbAkunPiutang.getValueAt(r, 1).toString(), tbAkunPiutang.getValueAt(r, 0).toString(), itempiutang, 0)==false){
                                 sukses=false;
                             }
                         }else{
@@ -7784,8 +7784,8 @@ public class DlgBilingRanap extends javax.swing.JDialog {
     }
 
     private int posisiWaktuPindahKamarTujuan(String tgl, String jam) {
-        for (int i = 0; i < tabModeKamIn.getRowCount(); i++) {
-            if (tgl.equals(tabModeKamIn.getValueAt(i, 2).toString()) && jam.equals(tabModeKamIn.getValueAt(i, 3).toString())) {
+        for (int i = 0; i < tbUbahLama.getRowCount(); i++) {
+            if (tgl.equals(tbUbahLama.getValueAt(i, 2).toString()) && jam.equals(tbUbahLama.getValueAt(i, 3).toString())) {
                 return i;
             }
         }

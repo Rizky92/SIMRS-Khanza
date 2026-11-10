@@ -923,7 +923,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(TabRawat.getSelectedIndex()==0){
-            if(tabMode.getRowCount()==0){
+            if(Table1.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 kddokter.requestFocus();
             }else if(nmtindakan.getText().trim().equals("")){
@@ -934,7 +934,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                 emptTeks();
             }
         }else if(TabRawat.getSelectedIndex()==1){
-            if(tabMode2.getRowCount()==0){
+            if(Table2.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 kdpj2.requestFocus();
             }else if(nmtindakan2.getText().trim().equals("")){
@@ -945,7 +945,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                 emptTeks2();
             }
         }else if(TabRawat.getSelectedIndex()==2){
-            if(tabMode3.getRowCount()==0){
+            if(Table3.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 kddokter3.requestFocus();
             }else if(nmtindakan3.getText().trim().equals("")){
@@ -970,10 +970,10 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         runBackground(() ->tampil());
-        if(tabMode.getRowCount()==0){
+        if(Table1.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(Table1.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
@@ -1133,7 +1133,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeek1KeyPressed
 
     private void Table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Table1MouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(Table1.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1142,7 +1142,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_Table1MouseClicked
 
     private void Table1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Table1KeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(Table1.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1263,7 +1263,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_TabRawatMouseClicked
 
     private void Table2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Table2MouseClicked
-        if(tabMode2.getRowCount()!=0){
+        if(Table2.getRowCount()!=0){
             try {
                 getData2();
             } catch (java.lang.NullPointerException e) {
@@ -1272,7 +1272,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_Table2MouseClicked
 
     private void Table2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Table2KeyPressed
-        if(tabMode2.getRowCount()!=0){
+        if(Table2.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData2();
@@ -1564,7 +1564,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPenjab2ActionPerformed
 
     private void Table3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Table3MouseClicked
-        if(tabMode3.getRowCount()!=0){
+        if(Table3.getRowCount()!=0){
             try {
                 getData3();
             } catch (java.lang.NullPointerException e) {
@@ -1573,7 +1573,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_Table3MouseClicked
 
     private void Table3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Table3KeyPressed
-        if(tabMode3.getRowCount()!=0){
+        if(Table3.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData3();
@@ -1710,7 +1710,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
             System.out.println("setting.DlgSetOtoRalan.tampil() : "+e);
         }
 
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+Table1.getRowCount());
     }
 
     private void tampil2() {
@@ -1753,7 +1753,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
             System.out.println("setting.DlgSetOtoRalan.tampil2() : "+e);
         }
 
-        LCount.setText(""+tabMode2.getRowCount());
+        LCount.setText(""+Table2.getRowCount());
     }
 
     private void tampil3() {
@@ -1803,7 +1803,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
             System.out.println("setting.DlgSetOtoRalan.tampil3() : "+e);
         }
 
-        LCount.setText(""+tabMode3.getRowCount());
+        LCount.setText(""+Table3.getRowCount());
     }
 
     public void emptTeks() {

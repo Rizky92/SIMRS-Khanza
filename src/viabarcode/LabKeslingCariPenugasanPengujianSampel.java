@@ -850,10 +850,10 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         if(TabData.getSelectedIndex()==0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            if(tabModePenugasan.getRowCount()==0){
+            if(tbPenugasan.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari.requestFocus();
-            }else if(tabModePenugasan.getRowCount()!=0){
+            }else if(tbPenugasan.getRowCount()!=0){
                 try{
                     File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -893,7 +893,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Status Hasil</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Catatan</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tabModePenugasan.getRowCount(); i++) {
+                                for (int i = 0; i < tbPenugasan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbPenugasan.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbPenugasan.getValueAt(i,1).toString()).append("</td>").
@@ -953,7 +953,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Status Hasil</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Catatan</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tabModePenugasan.getRowCount(); i++) {
+                                for (int i = 0; i < tbPenugasan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbPenugasan.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbPenugasan.getValueAt(i,1).toString()).append("</td>").
@@ -1001,7 +1001,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                 htmlContent.append(
                                     "\"Tgl.Penugasan\";\"No.Penugasan\";\"NIP PJ\";\"Nama PJ\";\"NIP Analis\";\"Nama Analis\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Hasil\";\"Catatan\"\n"
                                 );
-                                for (int i = 0; i < tabModePenugasan.getRowCount(); i++) {
+                                for (int i = 0; i < tbPenugasan.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbPenugasan.getValueAt(i,0).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,1).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,2).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,3).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,4).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,5).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,6).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,7).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,8).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,9).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,10).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,11).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,12).toString()).append("\"\n");
                                 }
                                 f = new File("DataPenugasanPengujianSampel.csv");
@@ -1018,10 +1018,10 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
             this.setCursor(Cursor.getDefaultCursor());
         }else if(TabData.getSelectedIndex()==1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            if(tabModeRekapPenugasan.getRowCount()==0){
+            if(tbRekapPenugasan.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari.requestFocus();
-            }else if(tabModeRekapPenugasan.getRowCount()!=0){
+            }else if(tbRekapPenugasan.getRowCount()!=0){
                 try{
                     File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -1067,7 +1067,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kategori</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nilai Normal</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tabModeRekapPenugasan.getRowCount(); i++) {
+                                for (int i = 0; i < tbRekapPenugasan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,1).toString()).append("</td>").
@@ -1139,7 +1139,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kategori</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nilai Normal</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tabModeRekapPenugasan.getRowCount(); i++) {
+                                for (int i = 0; i < tbRekapPenugasan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,1).toString()).append("</td>").
@@ -1193,7 +1193,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                 htmlContent.append(
                                     "\"Tgl.Penugasan\";\"No.Penugasan\";\"NIP PJ\";\"Nama PJ\";\"NIP Analis\";\"Nama Analis\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Hasil\";\"Catatan\";\"Kode Param\";\"Nama Parameter\";\"Metode Pengujian\";\"Satuan\";\"Kategori\";\"Nilai Normal\"\n"
                                 );
-                                for (int i = 0; i < tabModeRekapPenugasan.getRowCount(); i++) {
+                                for (int i = 0; i < tbRekapPenugasan.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbRekapPenugasan.getValueAt(i,0).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,1).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,2).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,3).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,4).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,5).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,6).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,7).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,8).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,9).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,10).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,11).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,12).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,13).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,14).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,15).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,16).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,17).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,18).toString()).append("\"\n");
                                 }
                                 f = new File("DataRekapPenugasanPengujianSampel.csv");
@@ -1495,8 +1495,8 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                         if(Sequel.cariInteger("select count(labkesling_penugasan_pengujian_sampel.no_permintaan) from labkesling_penugasan_pengujian_sampel where labkesling_penugasan_pengujian_sampel.no_permintaan=?",tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),6).toString())==0){
                             Sequel.queryu("update labkesling_permintaan_pengujian_sampel_dilayani set status='Belum Ada Penugasan' where no_permintaan='"+tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),6).toString()+"'");
                         }
-                        tabModePenugasan.removeRow(tbPenugasan.getSelectedRow());
-                        LTotal.setText(tabModePenugasan.getRowCount()+"");
+                        tabModePenugasan.removeRow(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()));
+                        LTotal.setText(tbPenugasan.getRowCount()+"");
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Sudah keluar hasil, tidak bisa dihapus...!");
@@ -1508,8 +1508,8 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
             if(tbRekapPenugasan.getSelectedRow()!= -1){
                 if(tbRekapPenugasan.getValueAt(tbRekapPenugasan.getSelectedRow(),11).toString().equals("Belum Keluar Hasil")){
                     if(Sequel.queryutf("delete from labkesling_detail_penugasan_pengujian_sampel where no_penugasan='"+tbRekapPenugasan.getValueAt(tbRekapPenugasan.getSelectedRow(),1).toString()+"' and kode_parameter='"+tbRekapPenugasan.getValueAt(tbRekapPenugasan.getSelectedRow(),13).toString()+"'")==true){
-                        tabModeRekapPenugasan.removeRow(tbRekapPenugasan.getSelectedRow());
-                        LTotal.setText(tabModeRekapPenugasan.getRowCount()+"");
+                        tabModeRekapPenugasan.removeRow(tbRekapPenugasan.convertRowIndexToModel(tbRekapPenugasan.getSelectedRow()));
+                        LTotal.setText(tbRekapPenugasan.getRowCount()+"");
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Sudah keluar hasil, tidak bisa dihapus...!");
@@ -1660,7 +1660,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                         rs.getString("catatan")
                     });
                 }
-                LTotal.setText(tabModePenugasan.getRowCount()+"");
+                LTotal.setText(tbPenugasan.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{
@@ -1728,7 +1728,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                         rs.getString("nilai_normal")
                     });
                 }
-                LTotal.setText(tabModeRekapPenugasan.getRowCount()+"");
+                LTotal.setText(tbRekapPenugasan.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{

@@ -485,7 +485,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
                                     if(Sequel.mengedittf2("booking_mcu_perusahaan_pasien_baru","no_pengajuan=?","status='Sudah Dikonfirmasi'",1,new String[]{
                                         tbDokter.getValueAt(i,1).toString()
                                     })==true){
-                                        tabMode.removeRow(i);
+                                        tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                                         i--;
                                     }
                                 }
@@ -500,7 +500,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
                                 if(Sequel.mengedittf2("booking_mcu_perusahaan_pasien_baru","no_pengajuan=?","status='Sudah Dikonfirmasi'",1,new String[]{
                                     tbDokter.getValueAt(i,1).toString()
                                 })==true){
-                                    tabMode.removeRow(i);
+                                    tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                                     i--;
                                 }
                             }
@@ -515,7 +515,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
                             if(Sequel.mengedittf2("booking_mcu_perusahaan_pasien_baru","no_pengajuan=?","status='Sudah Dikonfirmasi'",1,new String[]{
                                 tbDokter.getValueAt(i,1).toString()
                             })==true){
-                                tabMode.removeRow(i);
+                                tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                                 i--;
                             }
                         }
@@ -530,7 +530,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
                         if(Sequel.mengedittf2("booking_mcu_perusahaan_pasien_baru","no_pengajuan=?","status='Sudah Dikonfirmasi'",1,new String[]{
                             tbDokter.getValueAt(i,1).toString()
                         })==true){
-                            tabMode.removeRow(i);
+                            tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                             i--;
                         }
                     }
@@ -538,7 +538,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
             }
         }
 
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             status="Selesai";
             this.dispose();
         }
@@ -583,7 +583,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 if(tbDokter.getSelectedRow()!= -1){
                     if(tbDokter.getSelectedColumn()==2){
@@ -606,13 +606,13 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
         for(i=0;i<tbDokter.getRowCount();i++){
             if(tbDokter.getValueAt(i,0).toString().equals("true")&&tbDokter.getValueAt(i,34).toString().equals("Menunggu Konfirmasi")){
                 if(Sequel.meghapustf("booking_mcu_perusahaan_pasien_baru","no_pengajuan",tbDokter.getValueAt(i,1).toString())==true){
-                    tabMode.removeRow(i);
+                    tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                     i--;
                 }
             }
         }
 
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -782,7 +782,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbDokter.getRowCount());
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }

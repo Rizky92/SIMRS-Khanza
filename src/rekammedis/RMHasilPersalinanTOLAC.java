@@ -1258,10 +1258,10 @@ public final class RMHasilPersalinanTOLAC extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbObat.getRowCount()!=0){
             try{
                 File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -1314,7 +1314,7 @@ public final class RMHasilPersalinanTOLAC extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan</b></td>"+
                                 "</tr>"
                             );
-                            for (i = 0; i < tabMode.getRowCount(); i++) {
+                            for (i = 0; i < tbObat.getRowCount(); i++) {
                                 htmlContent.append(
                                     "<tr class='isi'>"+
                                        "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
@@ -1401,7 +1401,7 @@ public final class RMHasilPersalinanTOLAC extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan</b></td>"+
                                 "</tr>"
                             );
-                            for (i = 0; i < tabMode.getRowCount(); i++) {
+                            for (i = 0; i < tbObat.getRowCount(); i++) {
                                 htmlContent.append(
                                     "<tr class='isi'>"+
                                        "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
@@ -1462,7 +1462,7 @@ public final class RMHasilPersalinanTOLAC extends javax.swing.JDialog {
                             htmlContent.append(
                                 "\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"Tgl.Lahir\";\"Kode Dokter\";\"Nama Dokter\";\"Tgl/Jam Lahir Bayi\";\"Awitan\";\"Augmentasi\";\"CTG Kontinu\";\"Cara Persalinan\";\"Indikasi Gagal\";\"Kala II (menit)\";\"Ruptur Uteri\";\"Perdarahan (ml)\";\"Transfusi\";\"Histerektomi\";\"Komplikasi Lain\";\"Luaran Perinatal\";\"BB Lahir (gram)\";\"APGAR 1\";\"APGAR 5\";\"HIE\";\"Masuk NICU\";\"Keterangan\"\n"
                             );
-                            for (i = 0; i < tabMode.getRowCount(); i++) {
+                            for (i = 0; i < tbObat.getRowCount(); i++) {
                                 htmlContent.append(
                                     "\""+tbObat.getValueAt(i,0).toString()+"\";\""+tbObat.getValueAt(i,1).toString()+"\";\""+tbObat.getValueAt(i,2).toString()+"\";\""+tbObat.getValueAt(i,3).toString()+"\";\""+tbObat.getValueAt(i,4).toString()+"\";\""+tbObat.getValueAt(i,5).toString()+"\";\""+tbObat.getValueAt(i,6).toString()+"\";\""+tbObat.getValueAt(i,7).toString()+"\";\""+tbObat.getValueAt(i,8).toString()+"\";\""+tbObat.getValueAt(i,9).toString()+"\";\""+tbObat.getValueAt(i,10).toString()+"\";\""+tbObat.getValueAt(i,11).toString()+"\";\""+tbObat.getValueAt(i,12).toString()+"\";\""+tbObat.getValueAt(i,13).toString()+"\";\""+tbObat.getValueAt(i,14).toString()+"\";\""+tbObat.getValueAt(i,15).toString()+"\";\""+tbObat.getValueAt(i,16).toString()+"\";\""+tbObat.getValueAt(i,17).toString()+"\";\""+tbObat.getValueAt(i,18).toString()+"\";\""+tbObat.getValueAt(i,19).toString()+"\";\""+tbObat.getValueAt(i,20).toString()+"\";\""+tbObat.getValueAt(i,21).toString()+"\";\""+tbObat.getValueAt(i,22).toString()+"\";\""+tbObat.getValueAt(i,23).toString()+"\";\""+tbObat.getValueAt(i,24).toString()+"\"\n"
                                 );
@@ -1530,7 +1530,7 @@ public final class RMHasilPersalinanTOLAC extends javax.swing.JDialog {
 }//GEN-LAST:event_TanggalKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1539,7 +1539,7 @@ public final class RMHasilPersalinanTOLAC extends javax.swing.JDialog {
 }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1904,7 +1904,7 @@ public final class RMHasilPersalinanTOLAC extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -2143,8 +2143,8 @@ public final class RMHasilPersalinanTOLAC extends javax.swing.JDialog {
         if(Sequel.queryu2tf("delete from hasil_persalinan_tolac where no_rawat=?",1,new String[]{
             tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
         })==true){
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
@@ -2164,7 +2164,7 @@ public final class RMHasilPersalinanTOLAC extends javax.swing.JDialog {
                 JumlahPerdarahan.getText(),Tranfusi.getSelectedItem().toString(),HisterokTomi.getSelectedItem().toString(),KomplikasiLain.getText(),LuaranPerinatal.getSelectedItem().toString(),BBLahir.getText(),APGAR1.getText(),APGAR5.getText(),
                 HIE.getSelectedItem().toString(),MasukNICU.getSelectedItem().toString(),Keterangan.getText()
             });
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
         }
     }

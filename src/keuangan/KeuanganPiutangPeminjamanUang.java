@@ -744,7 +744,7 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     NoNota.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),KdPetugas.getText(),NmPetugas.getText(),KdPeminjam.getText(),NmPeminjam.getText(),koderekening,AkunBayar.getSelectedItem(),Keterangan.getText(),Valid.SetTgl(Tempo.getSelectedItem()+""),Double.parseDouble(NominalPinjam.getText()),Double.parseDouble(NominalPinjam.getText()),"Belum Lunas"
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbKamar.getRowCount());
                 total=total+Double.parseDouble(NominalPinjam.getText());
                 LTotal.setText(Valid.SetAngka(total));
                 sisapiutang=sisapiutang+Double.parseDouble(NominalPinjam.getText());
@@ -820,8 +820,8 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
                 LTotal.setText(Valid.SetAngka(total));
                 sisapiutang=sisapiutang-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString());
                 LTotal1.setText(Valid.SetAngka(sisapiutang));
-                tabMode.removeRow(tbKamar.getSelectedRow());
-                LCount.setText(""+tabMode.getRowCount());
+                tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
+                LCount.setText(""+tbKamar.getRowCount());
                 emptTeks();
             }
         }else{
@@ -852,10 +852,10 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnKeluar.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbKamar.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1109,7 +1109,7 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
     }//GEN-LAST:event_KdPeminjamKeyPressed
 
     private void ppBayarPiutangBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBayarPiutangBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbKamar.getSelectedRow()<= -1){
@@ -1253,7 +1253,7 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
         LTotal.setText(Valid.SetAngka(total));
         LTotal1.setText(Valid.SetAngka(sisapiutang));
     }

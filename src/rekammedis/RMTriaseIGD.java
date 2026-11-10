@@ -2202,7 +2202,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbTriase.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else{
@@ -2275,10 +2275,10 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbTriase.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbTriase.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             keputusan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Laporan Triase IGD",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1","Laporan 2"},"Laporan 1");
             switch (keputusan) {
@@ -2323,7 +2323,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                             "</tr>"
                         );
 
-                        for(i=0;i<tabMode.getRowCount();i++){
+                        for(i=0;i<tbTriase.getRowCount();i++){
                             htmlContent.append(
                                 "<tr class='isi'>"+
                                     "<td valign='top' cellpadding='0' cellspacing='0'>"+
@@ -2913,7 +2913,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbTriaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTriaseMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbTriase.getRowCount()!=0){
             try {
                 ChkAccor.setSelected(true);
                 isMenu();
@@ -2924,7 +2924,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_tbTriaseMouseClicked
 
     private void tbTriaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTriaseKeyPressed
-       if(tabMode.getRowCount()!=0){
+       if(tbTriase.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -3556,7 +3556,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahSkala1ActionPerformed
 
     private void tbPemeriksaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemeriksaanKeyPressed
-        if(tabModePemeriksaan.getRowCount()!=0){
+        if(tbPemeriksaan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCariPemeriksaan.setText("");
                 TCariPemeriksaan.requestFocus();
@@ -3565,7 +3565,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemeriksaanKeyPressed
 
     private void tbPemeriksaanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemeriksaanKeyReleased
-        if(tabModePemeriksaan.getRowCount()!=0){
+        if(tbPemeriksaan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     runBackground(() ->LoadSkalaPrimer());
@@ -3576,7 +3576,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemeriksaanKeyReleased
 
     private void tbPemeriksaanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemeriksaanMouseClicked
-        if(tabModePemeriksaan.getRowCount()!=0){
+        if(tbPemeriksaan.getRowCount()!=0){
             try {
                 runBackground(() ->LoadSkalaPrimer());
             } catch (java.lang.NullPointerException e) {
@@ -3655,7 +3655,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahPemeriksaan1ActionPerformed
 
     private void tbPemeriksaan2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemeriksaan2MouseClicked
-        if(tabModePemeriksaan2.getRowCount()!=0){
+        if(tbPemeriksaan2.getRowCount()!=0){
             try {
                 runBackground(() ->LoadSkalaSekunder());
             } catch (java.lang.NullPointerException e) {
@@ -3664,7 +3664,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemeriksaan2MouseClicked
 
     private void tbPemeriksaan2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemeriksaan2KeyPressed
-        if(tabModePemeriksaan2.getRowCount()!=0){
+        if(tbPemeriksaan2.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCariPemeriksaan2.setText("");
                 TCariPemeriksaan2.requestFocus();
@@ -3673,7 +3673,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemeriksaan2KeyPressed
 
     private void tbPemeriksaan2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemeriksaan2KeyReleased
-        if(tabModePemeriksaan2.getRowCount()!=0){
+        if(tbPemeriksaan2.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     runBackground(() ->LoadSkalaSekunder());
@@ -3863,7 +3863,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_SekunderTanggalTriaseKeyPressed
 
     private void tbTriaseKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTriaseKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbTriase.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -4729,7 +4729,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbTriase.getRowCount());
     }
 
     private void LoadData(){

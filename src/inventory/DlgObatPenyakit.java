@@ -653,10 +653,10 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbObatPenyakit.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbObatPenyakit.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -863,7 +863,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_btnobatKeyPressed
 
     private void tbObatPenyakitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatPenyakitMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObatPenyakit.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -872,7 +872,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatPenyakitMouseClicked
 
     private void tbObatPenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatPenyakitKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObatPenyakit.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1126,7 +1126,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObatPenyakit.getRowCount());
     }
 
     public void emptTeks() {

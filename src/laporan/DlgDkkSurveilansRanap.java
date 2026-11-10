@@ -360,10 +360,10 @@ public final class DlgDkkSurveilansRanap extends javax.swing.JDialog {
                 "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
             }, "Laporan 5 (Jasper)");
             if(TabRawat.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbBangsal.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     //TCari.requestFocus();
-                }else if(tabMode.getRowCount()!=0){
+                }else if(tbBangsal.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("SurveilansRanap.html", "Surveilans PD3I", tbBangsal);
@@ -382,28 +382,28 @@ public final class DlgDkkSurveilansRanap extends javax.swing.JDialog {
                             Map<String, Object> param = new HashMap<>();
                             param.put("tanggal",Tgl2.getDate());
                             param.put("jmltotal",jmltotal+"");
-                            for(int r=0;r<tabMode.getRowCount();r++){
+                            for(int r=0;r<tbBangsal.getRowCount();r++){
                                 Sequel.menyimpan("temporary","'"+r+"','"+
-                                                tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
-                                                tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,14).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,15).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,16).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
-                                                tabMode.getValueAt(r,19).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                                tbBangsal.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
+                                                tbBangsal.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,14).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,15).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,16).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal.getValueAt(r,19).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                             }
                             param.put("namars",akses.getnamars());
                             param.put("alamatrs",akses.getalamatrs());
@@ -414,10 +414,10 @@ public final class DlgDkkSurveilansRanap extends javax.swing.JDialog {
                     }
                 }
             }else if(TabRawat.getSelectedIndex()==1){
-                if(tabMode2.getRowCount()==0){
+                if(tbBangsal2.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     //TCari.requestFocus();
-                }else if(tabMode2.getRowCount()!=0){
+                }else if(tbBangsal2.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("SurveilansRanap.html", "Surveilans PD3I", tbBangsal2);
@@ -436,28 +436,28 @@ public final class DlgDkkSurveilansRanap extends javax.swing.JDialog {
                             Map<String, Object> param = new HashMap<>();
                             param.put("tanggal",Tgl2.getDate());
                             param.put("jmltotal",jmltotal+"");
-                            for(int r=0;r<tabMode2.getRowCount();r++){
+                            for(int r=0;r<tbBangsal2.getRowCount();r++){
                                 Sequel.menyimpan("temporary","'"+r+"','"+
-                                                tabMode2.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
-                                                tabMode2.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,14).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,15).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,16).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
-                                                tabMode2.getValueAt(r,19).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                                tbBangsal2.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
+                                                tbBangsal2.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,14).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,15).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,16).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
+                                                tbBangsal2.getValueAt(r,19).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                             }
                             param.put("namars",akses.getnamars());
                             param.put("alamatrs",akses.getalamatrs());

@@ -998,7 +998,7 @@ public final class SatuSehatMapingObatAlkesSMC extends javax.swing.JDialog {
                     DenominatorSystem.getText(), RouteCode.getText(), RouteSystem.getText(), RouteDisplay.getText()
                 });
                 emptTeks();
-                LCount.setText(String.valueOf(tabMode.getRowCount()));
+                LCount.setText(String.valueOf(tbJnsPerawatan.getRowCount()));
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -1025,9 +1025,9 @@ public final class SatuSehatMapingObatAlkesSMC extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if (Valid.hapusTabletf(tabMode, NamaBarang, "satu_sehat_mapping_obat", "kode_brng") == true) {
-            tabMode.removeRow(tbJnsPerawatan.getSelectedRow());
+            tabMode.removeRow(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()));
             emptTeks();
-            LCount.setText("" + tabMode.getRowCount());
+            LCount.setText("" + tbJnsPerawatan.getRowCount());
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -1078,23 +1078,23 @@ public final class SatuSehatMapingObatAlkesSMC extends javax.swing.JDialog {
                     FormDisplay.getText(), NumeratorCode.getText(), NumeratorSystem.getText(), DenominatorCode.getText(), DenominatorSystem.getText(),
                     RouteCode.getText(), RouteSystem.getText(), RouteDisplay.getText(), tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 2).toString()
                 )) {
-                    tabMode.setValueAt(KFACode.getText(), tbJnsPerawatan.getSelectedRow(), 0);
-                    tabMode.setValueAt(KFASystem.getText(), tbJnsPerawatan.getSelectedRow(), 1);
-                    tabMode.setValueAt(KodeBarang.getText(), tbJnsPerawatan.getSelectedRow(), 2);
-                    tabMode.setValueAt(NamaBarang.getText(), tbJnsPerawatan.getSelectedRow(), 3);
-                    tabMode.setValueAt(Satuan.getText(), tbJnsPerawatan.getSelectedRow(), 4);
-                    tabMode.setValueAt(Kategori.getText(), tbJnsPerawatan.getSelectedRow(), 5);
-                    tabMode.setValueAt(KFADisplay.getText(), tbJnsPerawatan.getSelectedRow(), 6);
-                    tabMode.setValueAt(FormCode.getText(), tbJnsPerawatan.getSelectedRow(), 7);
-                    tabMode.setValueAt(FormSystem.getText(), tbJnsPerawatan.getSelectedRow(), 8);
-                    tabMode.setValueAt(FormDisplay.getText(), tbJnsPerawatan.getSelectedRow(), 9);
-                    tabMode.setValueAt(NumeratorCode.getText(), tbJnsPerawatan.getSelectedRow(), 10);
-                    tabMode.setValueAt(NumeratorSystem.getText(), tbJnsPerawatan.getSelectedRow(), 11);
-                    tabMode.setValueAt(DenominatorCode.getText(), tbJnsPerawatan.getSelectedRow(), 12);
-                    tabMode.setValueAt(DenominatorSystem.getText(), tbJnsPerawatan.getSelectedRow(), 13);
-                    tabMode.setValueAt(RouteCode.getText(), tbJnsPerawatan.getSelectedRow(), 14);
-                    tabMode.setValueAt(RouteSystem.getText(), tbJnsPerawatan.getSelectedRow(), 15);
-                    tabMode.setValueAt(RouteDisplay.getText(), tbJnsPerawatan.getSelectedRow(), 16);
+                    tbJnsPerawatan.setValueAt(KFACode.getText(), tbJnsPerawatan.getSelectedRow(), 0);
+                    tbJnsPerawatan.setValueAt(KFASystem.getText(), tbJnsPerawatan.getSelectedRow(), 1);
+                    tbJnsPerawatan.setValueAt(KodeBarang.getText(), tbJnsPerawatan.getSelectedRow(), 2);
+                    tbJnsPerawatan.setValueAt(NamaBarang.getText(), tbJnsPerawatan.getSelectedRow(), 3);
+                    tbJnsPerawatan.setValueAt(Satuan.getText(), tbJnsPerawatan.getSelectedRow(), 4);
+                    tbJnsPerawatan.setValueAt(Kategori.getText(), tbJnsPerawatan.getSelectedRow(), 5);
+                    tbJnsPerawatan.setValueAt(KFADisplay.getText(), tbJnsPerawatan.getSelectedRow(), 6);
+                    tbJnsPerawatan.setValueAt(FormCode.getText(), tbJnsPerawatan.getSelectedRow(), 7);
+                    tbJnsPerawatan.setValueAt(FormSystem.getText(), tbJnsPerawatan.getSelectedRow(), 8);
+                    tbJnsPerawatan.setValueAt(FormDisplay.getText(), tbJnsPerawatan.getSelectedRow(), 9);
+                    tbJnsPerawatan.setValueAt(NumeratorCode.getText(), tbJnsPerawatan.getSelectedRow(), 10);
+                    tbJnsPerawatan.setValueAt(NumeratorSystem.getText(), tbJnsPerawatan.getSelectedRow(), 11);
+                    tbJnsPerawatan.setValueAt(DenominatorCode.getText(), tbJnsPerawatan.getSelectedRow(), 12);
+                    tbJnsPerawatan.setValueAt(DenominatorSystem.getText(), tbJnsPerawatan.getSelectedRow(), 13);
+                    tbJnsPerawatan.setValueAt(RouteCode.getText(), tbJnsPerawatan.getSelectedRow(), 14);
+                    tbJnsPerawatan.setValueAt(RouteSystem.getText(), tbJnsPerawatan.getSelectedRow(), 15);
+                    tbJnsPerawatan.setValueAt(RouteDisplay.getText(), tbJnsPerawatan.getSelectedRow(), 16);
                     emptTeks();
                 }
             }
@@ -1122,10 +1122,10 @@ public final class SatuSehatMapingObatAlkesSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbJnsPerawatan.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        } else if (tabMode.getRowCount() != 0) {
+        } else if (tbJnsPerawatan.getRowCount() != 0) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1213,7 +1213,7 @@ public final class SatuSehatMapingObatAlkesSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbJnsPerawatan.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1222,7 +1222,7 @@ public final class SatuSehatMapingObatAlkesSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
-        if (tabMode.getRowCount() != 0) {
+        if (tbJnsPerawatan.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
@@ -1474,7 +1474,7 @@ public final class SatuSehatMapingObatAlkesSMC extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        LCount.setText(String.valueOf(tabMode.getRowCount()));
+        LCount.setText(String.valueOf(tbJnsPerawatan.getRowCount()));
     }
 
     public void emptTeks() {

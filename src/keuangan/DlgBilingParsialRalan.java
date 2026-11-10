@@ -2754,7 +2754,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllTindakanKeyPressed
 
     private void tbTindakanDrBayarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTindakanDrBayarMouseClicked
-        if(TabModeTindakanDrBayar.getRowCount()!=0){
+        if(tbTindakanDrBayar.getRowCount()!=0){
             if(evt.getClickCount()==1){
                 if(tbTindakanDrBayar.getSelectedColumn()==0){
                     tampilhapus();
@@ -2772,7 +2772,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbTindakanPrKeyPressed
 
     private void tbTindakanPrBayarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTindakanPrBayarMouseClicked
-        if(TabModeTindakanPrBayar.getRowCount()!=0){
+        if(tbTindakanPrBayar.getRowCount()!=0){
             if(evt.getClickCount()==1){
                 if(tbTindakanPrBayar.getSelectedColumn()==0){
                     tampilhapus();
@@ -2826,11 +2826,11 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAkunBayarPropertyChange
 
     private void tbAkunBayarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAkunBayarKeyPressed
-        if(tabModeAkunBayar.getRowCount()!=0){
+        if(tbAkunBayar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 if(tbAkunBayar.getRowCount()!=0){
                     if((tbAkunBayar.getSelectedColumn()==2)||(tbAkunBayar.getSelectedColumn()==3)||(tbAkunBayar.getSelectedColumn()==4)){
-                        if(!tabModeAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),2).toString().equals("")){
+                        if(!tbAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),2).toString().equals("")){
                             tbAkunBayar.setValueAt(
                                     Valid.roundUp((Valid.SetAngka(tbAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),3).toString())/100)*
                                     Valid.SetAngka(tbAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),2).toString()),100),tbAkunBayar.getSelectedRow(),4);
@@ -2890,19 +2890,19 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     private void BtnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNotaActionPerformed
         if(TNoRw.getText().trim().equals("")||TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
-        }else if(tabModeBilling.getRowCount()==0){
+        }else if(tbBilling.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabModeBilling.getRowCount()!=0){
+        }else if(tbBilling.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try{
                 Sequel.AutoComitFalse();
                 Sequel.queryu2("delete from temporary_bayar_ralan where temp9='"+akses.getkode()+"'");
-                z=tabModeBilling.getRowCount();
+                z=tbBilling.getRowCount();
                 for(i=0;i<z;i++){
                     biaya="";
                     try {
-                        biaya=Valid.SetAngka(Double.parseDouble(tabModeBilling.getValueAt(i,3).toString()));
+                        biaya=Valid.SetAngka(Double.parseDouble(tbBilling.getValueAt(i,3).toString()));
                     } catch (Exception e) {
                         biaya="";
                     }
@@ -2911,24 +2911,24 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
 
                     totals="";
                     try {
-                        totals=Valid.SetAngka(Double.parseDouble(tabModeBilling.getValueAt(i,5).toString()));
+                        totals=Valid.SetAngka(Double.parseDouble(tbBilling.getValueAt(i,5).toString()));
                     } catch (Exception e) {
                         totals="";
                     }
 
                     jmls="";
                     try {
-                        jmls=Valid.SetAngka(Double.parseDouble(tabModeBilling.getValueAt(i,4).toString()));
+                        jmls=Valid.SetAngka(Double.parseDouble(tbBilling.getValueAt(i,4).toString()));
                     } catch (Exception e) {
                         jmls="";
                     }
 
                     Sequel.menyimpan("temporary_bayar_ralan","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
-                        ""+i,tabModeBilling.getValueAt(i,0).toString().replaceAll("'",""),
-                        tabModeBilling.getValueAt(i,1).toString().replaceAll("'",""),
-                        tabModeBilling.getValueAt(i,2).toString().replaceAll("'",""),
+                        ""+i,tbBilling.getValueAt(i,0).toString().replaceAll("'",""),
+                        tbBilling.getValueAt(i,1).toString().replaceAll("'",""),
+                        tbBilling.getValueAt(i,2).toString().replaceAll("'",""),
                         biaya,jmls,tambahan,totals,
-                        tabModeBilling.getValueAt(i,6).toString().replaceAll("'",""),
+                        tbBilling.getValueAt(i,6).toString().replaceAll("'",""),
                         akses.getkode(),"","","","","","","","",""
                     });
                 }
@@ -2992,7 +2992,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBillingKeyPressed
 
     private void tbRadiologiBayarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRadiologiBayarMouseClicked
-        if(TabModeRadiologiBayar.getRowCount()!=0){
+        if(tbRadiologiBayar.getRowCount()!=0){
             if(evt.getClickCount()==1){
                 if(tbRadiologiBayar.getSelectedColumn()==0){
                     tampilhapus();
@@ -3093,7 +3093,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_Scroll13MouseClicked
 
     private void tbObatBayarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatBayarMouseClicked
-        if(TabModeObatBayar.getRowCount()!=0){
+        if(tbObatBayar.getRowCount()!=0){
             if(evt.getClickCount()==1){
                 if(tbObatBayar.getSelectedColumn()==0){
                     tampilhapus();
@@ -3107,7 +3107,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_TtlSemuaKeyPressed
 
     private void tbTindakanDrPrBayarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTindakanDrPrBayarMouseClicked
-        if(TabModeTindakanDrPrBayar.getRowCount()!=0){
+        if(tbTindakanDrPrBayar.getRowCount()!=0){
             if(evt.getClickCount()==1){
                 if(tbTindakanDrPrBayar.getSelectedColumn()==0){
                     tampilhapus();
@@ -3245,7 +3245,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSemuaDetailLaboratActionPerformed
 
     private void tbLaboratBayarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLaboratBayarMouseClicked
-        if(TabModeLaboratBayar.getRowCount()!=0){
+        if(tbLaboratBayar.getRowCount()!=0){
             if(evt.getClickCount()==1){
                 if(tbLaboratBayar.getSelectedColumn()==0){
                     tampilhapus();
@@ -3286,7 +3286,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbDetailLaboratBayarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDetailLaboratBayarMouseClicked
-        if(TabModeDetailLaboratBayar.getRowCount()!=0){
+        if(tbDetailLaboratBayar.getRowCount()!=0){
             if(evt.getClickCount()==1){
                 if(tbDetailLaboratBayar.getSelectedColumn()==0){
                     tampilhapus();
@@ -5747,11 +5747,11 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
         z=tbBilling.getRowCount();
         for(i=0;i<z;i++){
             try {
-                y=Double.parseDouble(tabModeBilling.getValueAt(i,5).toString());
+                y=Double.parseDouble(tbBilling.getValueAt(i,5).toString());
             } catch (Exception e) {
                 y=0;
             }
-            switch (tabModeBilling.getValueAt(i,6).toString()) {
+            switch (tbBilling.getValueAt(i,6).toString()) {
                 case "Laborat":
                         ttlLaborat=ttlLaborat+y;
                         break;
@@ -5782,20 +5782,20 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     public void isKembali(){
         bayar=0;total=0;ppn=0;besarppn=0;tagihanppn=0;kekurangan=0;y=0;countbayar=0;
 
-        z=tabModeAkunBayar.getRowCount();
+        z=tbAkunBayar.getRowCount();
         for(i=0;i<z;i++){
-            if(!tabModeAkunBayar.getValueAt(i,2).toString().equals("")){
+            if(!tbAkunBayar.getValueAt(i,2).toString().equals("")){
                 countbayar++;
                 try {
-                    bayar=bayar+Double.parseDouble(tabModeAkunBayar.getValueAt(i,2).toString());
+                    bayar=bayar+Double.parseDouble(tbAkunBayar.getValueAt(i,2).toString());
                 } catch (Exception e) {
                     bayar=bayar+0;
                 }
             }
 
-            if(!tabModeAkunBayar.getValueAt(i,4).toString().equals("")){
+            if(!tbAkunBayar.getValueAt(i,4).toString().equals("")){
                 try {
-                    besarppn=besarppn+Valid.roundUp(Double.parseDouble(tabModeAkunBayar.getValueAt(i,4).toString()),100);
+                    besarppn=besarppn+Valid.roundUp(Double.parseDouble(tbAkunBayar.getValueAt(i,4).toString()),100);
                 } catch (Exception e) {
                     besarppn=besarppn+0;
                 }

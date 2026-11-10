@@ -385,10 +385,10 @@ public final class KeuanganValidasiPersetujuanPengajuanBiaya extends javax.swing
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbBangsal.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -508,7 +508,7 @@ public final class KeuanganValidasiPersetujuanPengajuanBiaya extends javax.swing
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
-            tabMode.removeRow(tbBangsal.getSelectedRow());
+            tabMode.removeRow(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()));
             this.setCursor(Cursor.getDefaultCursor());
         }else{
             JOptionPane.showMessageDialog(null,"Silahkan pilih No.Pengajuan yang diajukan..!!");
@@ -725,7 +725,7 @@ public final class KeuanganValidasiPersetujuanPengajuanBiaya extends javax.swing
 
     private void hitung(){
         belumdivalidasi=0;
-        for(i=0;i<tabMode.getRowCount();i++){
+        for(i=0;i<tbBangsal.getRowCount();i++){
             belumdivalidasi=belumdivalidasi+Valid.SetAngka(tbBangsal.getValueAt(i,13).toString());
         }
         LCount.setText(""+Valid.SetAngka(belumdivalidasi));

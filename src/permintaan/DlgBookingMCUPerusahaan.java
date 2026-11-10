@@ -683,7 +683,7 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
                             if(Sequel.mengedittf2("booking_mcu_perusahaan","no_mcu=?","status='Menunggu Hasil'",1,new String[]{
                                     tbDokter.getValueAt(i,6).toString()
                                 })==true){
-                                tabMode.removeRow(i);
+                                tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                                 i--;
                             }
                         }
@@ -700,7 +700,7 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
                                 if(Sequel.mengedittf2("booking_mcu_perusahaan","no_mcu=?","status='Menunggu Hasil'",1,new String[]{
                                         tbDokter.getValueAt(i,6).toString()
                                     })==true){
-                                    tabMode.removeRow(i);
+                                    tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                                     i--;
                                 }
                             }
@@ -717,7 +717,7 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
                                     if(Sequel.mengedittf2("booking_mcu_perusahaan","no_mcu=?","status='Menunggu Hasil'",1,new String[]{
                                             tbDokter.getValueAt(i,6).toString()
                                         })==true){
-                                        tabMode.removeRow(i);
+                                        tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                                         i--;
                                     }
                                 }
@@ -734,7 +734,7 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
                                         if(Sequel.mengedittf2("booking_mcu_perusahaan","no_mcu=?","status='Menunggu Hasil'",1,new String[]{
                                                 tbDokter.getValueAt(i,6).toString()
                                             })==true){
-                                            tabMode.removeRow(i);
+                                            tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                                             i--;
                                         }
                                     }
@@ -751,7 +751,7 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
                                             if(Sequel.mengedittf2("booking_mcu_perusahaan","no_mcu=?","status='Menunggu Hasil'",1,new String[]{
                                                     tbDokter.getValueAt(i,6).toString()
                                                 })==true){
-                                                tabMode.removeRow(i);
+                                                tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                                                 i--;
                                             }
                                         }
@@ -763,7 +763,7 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
                 }
             }
 
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbDokter.getRowCount());
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -940,7 +940,7 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPerusahaanKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 if(tbDokter.getSelectedRow()!= -1){
                     if(tbDokter.getSelectedColumn()==2){
@@ -1019,13 +1019,13 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
         for(i=0;i<tbDokter.getRowCount();i++){
             if(tbDokter.getValueAt(i,0).toString().equals("true")){
                 if(Sequel.meghapustf("booking_mcu_perusahaan","no_mcu",tbDokter.getValueAt(i,6).toString())==true){
-                    tabMode.removeRow(i);
+                    tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                     i--;
                 }
             }
         }
 
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -1215,7 +1215,7 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbDokter.getRowCount());
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }

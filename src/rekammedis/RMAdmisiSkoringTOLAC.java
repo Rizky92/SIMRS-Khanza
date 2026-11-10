@@ -1275,10 +1275,10 @@ public final class RMAdmisiSkoringTOLAC extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbObat.getRowCount()!=0){
             try{
                 File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -1333,7 +1333,7 @@ public final class RMAdmisiSkoringTOLAC extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan</b></td>"+
                                 "</tr>"
                             );
-                            for (i = 0; i < tabMode.getRowCount(); i++) {
+                            for (i = 0; i < tbObat.getRowCount(); i++) {
                                 htmlContent.append(
                                     "<tr class='isi'>"+
                                        "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
@@ -1424,7 +1424,7 @@ public final class RMAdmisiSkoringTOLAC extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan</b></td>"+
                                 "</tr>"
                             );
-                            for (i = 0; i < tabMode.getRowCount(); i++) {
+                            for (i = 0; i < tbObat.getRowCount(); i++) {
                                 htmlContent.append(
                                     "<tr class='isi'>"+
                                        "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
@@ -1487,7 +1487,7 @@ public final class RMAdmisiSkoringTOLAC extends javax.swing.JDialog {
                             htmlContent.append(
                                 "\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"Tgl.Lahir\";\"Kode Dokter\";\"Nama Dokter\";\"Tanggal\";\"His (x/10 mnt)\";\"Durasi (detik)\";\"DJJ\";\"Pembukaan (cm)\";\"Pendataran (%)\";\"Kepala\";\"Usia Ibu\";\"Skor Usia\";\"Riwayat Pervaginam\";\"Skor Riwayat\";\"Indikasi SC\";\"Skor Indikasi\";\"Pendataran Serviks\";\"Skor Pendataran\";\"Pembukaan Serviks\";\"Skor Pembukaan\";\"Total Skor\";\"Peluang VBAC (%)\";\"Keputusan\";\"Keterangan\"\n"
                             );
-                            for (i = 0; i < tabMode.getRowCount(); i++) {
+                            for (i = 0; i < tbObat.getRowCount(); i++) {
                                 htmlContent.append(
                                     "\""+tbObat.getValueAt(i,0).toString()+"\";\""+tbObat.getValueAt(i,1).toString()+"\";\""+tbObat.getValueAt(i,2).toString()+"\";\""+tbObat.getValueAt(i,3).toString()+"\";\""+tbObat.getValueAt(i,4).toString()+"\";\""+tbObat.getValueAt(i,5).toString()+"\";\""+tbObat.getValueAt(i,6).toString()+"\";\""+tbObat.getValueAt(i,7).toString()+"\";\""+tbObat.getValueAt(i,8).toString()+"\";\""+tbObat.getValueAt(i,9).toString()+"\";\""+tbObat.getValueAt(i,10).toString()+"\";\""+tbObat.getValueAt(i,11).toString()+"\";\""+tbObat.getValueAt(i,12).toString()+"\";\""+tbObat.getValueAt(i,13).toString()+"\";\""+tbObat.getValueAt(i,14).toString()+"\";\""+tbObat.getValueAt(i,15).toString()+"\";\""+tbObat.getValueAt(i,16).toString()+"\";\""+tbObat.getValueAt(i,17).toString()+"\";\""+tbObat.getValueAt(i,18).toString()+"\";\""+tbObat.getValueAt(i,19).toString()+"\";\""+tbObat.getValueAt(i,20).toString()+"\";\""+tbObat.getValueAt(i,21).toString()+"\";\""+tbObat.getValueAt(i,22).toString()+"\";\""+tbObat.getValueAt(i,23).toString()+"\";\""+tbObat.getValueAt(i,24).toString()+"\";\""+tbObat.getValueAt(i,25).toString()+"\";\""+tbObat.getValueAt(i,26).toString()+"\"\n"
                                 );
@@ -1559,7 +1559,7 @@ public final class RMAdmisiSkoringTOLAC extends javax.swing.JDialog {
 }//GEN-LAST:event_TNoRMKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1568,7 +1568,7 @@ public final class RMAdmisiSkoringTOLAC extends javax.swing.JDialog {
 }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1967,7 +1967,7 @@ public final class RMAdmisiSkoringTOLAC extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -2211,8 +2211,8 @@ public final class RMAdmisiSkoringTOLAC extends javax.swing.JDialog {
         if(Sequel.queryu2tf("delete from admisi_skoring_tolac where no_rawat=?",1,new String[]{
             tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
         })==true){
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
@@ -2241,7 +2241,7 @@ public final class RMAdmisiSkoringTOLAC extends javax.swing.JDialog {
                 PembukaanServiks.getSelectedItem().toString(),NilaiPembukaanServiks.getText(),NilaiFlammGeiger.getText(),
                 PeluangVBAC.getText(),Keputusan.getSelectedItem().toString(),Keterangan.getText()
             });
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
         }
     }

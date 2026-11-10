@@ -1485,24 +1485,24 @@ public class DlgSetRM extends javax.swing.JDialog {
             case 0:
                 if(norm.getText().trim().equals("")){
                     Valid.textKosong(norm,"No.RM Terakhir");
-                }else if(tabMode.getRowCount()==0){
+                }else if(tbNoRM.getRowCount()==0){
                     Sequel.menyimpan("set_no_rkm_medis","'"+norm.getText()+"'","No.RM Terakhir");
                     runBackground(() ->tampilnorm());
                     emptTeks();
-                }else if(tabMode.getRowCount()>0){
+                }else if(tbNoRM.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     norm.requestFocus();
                 }   break;
             case 1:
-                if(tabMode2.getRowCount()==0){
+                if(tbNoUrut.getRowCount()==0){
                     Sequel.menyimpan("set_urut_no_rkm_medis","'"+cmburut.getSelectedItem()+"','"+cmbYesTahun.getSelectedItem()+"','"+cmbYesBulan.getSelectedItem()+"','"+cmbPosisi.getSelectedItem()+"'","Pengurutan");
                     runBackground(() ->tampilurut());
-                }else if(tabMode2.getRowCount()>0){
+                }else if(tbNoUrut.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     cmburut.requestFocus();
                 }   break;
             case 2:
-                if(tabMode3.getRowCount()==0){
+                if(tbAlamat.getRowCount()==0){
                     Sequel.menyimpan("set_alamat_pasien",
                             "'"+Kelurahan.getSelectedItem().toString().replaceAll("Yes","true").replaceAll("No","false")+"',"+
                             "'"+Kecamatan.getSelectedItem().toString().replaceAll("Yes","true").replaceAll("No","false")+"',"+
@@ -1510,7 +1510,7 @@ public class DlgSetRM extends javax.swing.JDialog {
                             "'"+Propinsi.getSelectedItem().toString().replaceAll("Yes","true").replaceAll("No","false")+"'","Pengaturan Alamat"
                     );
                     runBackground(() ->tampilalamat());
-                }else if(tabMode3.getRowCount()>0){
+                }else if(tbAlamat.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     cmburut.requestFocus();
                 }   break;
@@ -1553,7 +1553,7 @@ public class DlgSetRM extends javax.swing.JDialog {
                     Valid.textKosong(PanjangPropinsi,"Panjang Propinsi");
                 }else if(PanjangPropinsiPJ.getText().trim().equals("")){
                     Valid.textKosong(PanjangPropinsiPJ,"Panjang Propinsi P.J.");
-                }else if(tabMode4.getRowCount()==0){
+                }else if(tbKelengkapan.getRowCount()==0){
                     if(Sequel.menyimpantf("set_kelengkapan_data_pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Set Kelengkapan",38,new String[]{
                         YesNoKTP.getSelectedItem().toString(), PanjangKTP.getText(),YesNoTmpLahir.getSelectedItem().toString(),PanjangTmpLahir.getText(),
                         YesNoNamaIbu.getSelectedItem().toString(),PanjangNamaIbu.getText(),YesNoAlamat.getSelectedItem().toString(),PanjangAlamat.getText(),
@@ -1569,37 +1569,37 @@ public class DlgSetRM extends javax.swing.JDialog {
                         runBackground(() ->tampilkelengkapan());
                         emptTeks2();
                     }
-                }else if(tabMode4.getRowCount()>0){
+                }else if(tbKelengkapan.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     norm.requestFocus();
                 }   break;
             case 4:
-                if(tabMode5.getRowCount()==0){
+                if(tbValidasiRegistrasi.getRowCount()==0){
                     Sequel.menyimpan("set_validasi_registrasi",
                             "'"+ValidasiRegistrasi.getSelectedItem().toString()+"'","Pengaturan Validasi Registrasi"
                     );
                     runBackground(() ->tampilvalidasiregistrasi());
-                }else if(tabMode5.getRowCount()>0){
+                }else if(tbValidasiRegistrasi.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     ValidasiRegistrasi.requestFocus();
                 }   break;
             case 5:
-                if(tabMode6.getRowCount()==0){
+                if(tbValidasiCatatan.getRowCount()==0){
                     Sequel.menyimpan("set_validasi_catatan",
                             "'"+ValidasiCatatan.getSelectedItem().toString()+"'","Pengaturan Validasi Catatan"
                     );
                     runBackground(() ->tampilvalidasicatatan());
-                }else if(tabMode6.getRowCount()>0){
+                }else if(tbValidasiCatatan.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     ValidasiCatatan.requestFocus();
                 }   break;
             case 6:
-                if(tabMode7.getRowCount()==0){
+                if(tbTniPolri.getRowCount()==0){
                     Sequel.menyimpan("set_tni_polri",
                             "'"+TampilkanTNI.getSelectedItem().toString()+"'","Pengaturan Validasi Catatan"
                     );
                     runBackground(() ->tampiltni());
-                }else if(tabMode7.getRowCount()>0){
+                }else if(tbTniPolri.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     TampilkanTNI.requestFocus();
                 }   break;
@@ -1676,10 +1676,10 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbNoRM.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data No.RM Terakhir tidak boleh kosong ...!!!!");
             norm.requestFocus();
-        }else if(! (tabMode.getRowCount()==0)) {
+        }else if(! (tbNoRM.getRowCount()==0)) {
             dispose();
         }
     }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -1691,7 +1691,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbNoRMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNoRMMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbNoRM.getRowCount()!=0){
             try {
                 getDatanorm();
             } catch (java.lang.NullPointerException e) {
@@ -1700,7 +1700,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_tbNoRMMouseClicked
 
     private void tbNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbNoRMKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbNoRM.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDatanorm();
@@ -1760,7 +1760,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbYesTahunKeyPressed
 
     private void tbNoUrutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbNoUrutKeyPressed
-        if(tabMode2.getRowCount()!=0){
+        if(tbNoUrut.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataurut();
@@ -1771,7 +1771,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_tbNoUrutKeyPressed
 
     private void tbNoUrutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNoUrutMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbNoRM.getRowCount()!=0){
             try {
                 getDataurut();
             } catch (java.lang.NullPointerException e) {
@@ -1788,7 +1788,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbPosisiKeyPressed
 
     private void tbAlamatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAlamatMouseClicked
-        if(tabMode3.getRowCount()!=0){
+        if(tbAlamat.getRowCount()!=0){
             try {
                 getDataAlamat();
             } catch (java.lang.NullPointerException e) {
@@ -1797,7 +1797,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAlamatMouseClicked
 
     private void tbAlamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAlamatKeyPressed
-        if(tabMode3.getRowCount()!=0){
+        if(tbAlamat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataAlamat();
@@ -1820,7 +1820,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_KabupatenKeyPressed
 
     private void tbKelengkapanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKelengkapanMouseClicked
-        if(tabMode4.getRowCount()!=0){
+        if(tbKelengkapan.getRowCount()!=0){
             try {
                 getDataKelengkapan();
             } catch (java.lang.NullPointerException e) {
@@ -1829,7 +1829,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKelengkapanMouseClicked
 
     private void tbKelengkapanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKelengkapanKeyPressed
-        if(tabMode4.getRowCount()!=0){
+        if(tbKelengkapan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataKelengkapan();
@@ -1980,7 +1980,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_PanjangKabupatenPJKeyPressed
 
     private void tbValidasiRegistrasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbValidasiRegistrasiMouseClicked
-        if(tabMode5.getRowCount()!=0){
+        if(tbValidasiRegistrasi.getRowCount()!=0){
             try {
                 getDataValidasiRegistrasi();
             } catch (java.lang.NullPointerException e) {
@@ -1989,7 +1989,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_tbValidasiRegistrasiMouseClicked
 
     private void tbValidasiRegistrasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbValidasiRegistrasiKeyPressed
-        if(tabMode5.getRowCount()!=0){
+        if(tbValidasiRegistrasi.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataValidasiRegistrasi();
@@ -2004,7 +2004,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_ValidasiRegistrasiKeyPressed
 
     private void tbValidasiCatatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbValidasiCatatanMouseClicked
-        if(tabMode6.getRowCount()!=0){
+        if(tbValidasiCatatan.getRowCount()!=0){
             try {
                 getDataValidasiCatatan();
             } catch (java.lang.NullPointerException e) {
@@ -2013,7 +2013,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_tbValidasiCatatanMouseClicked
 
     private void tbValidasiCatatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbValidasiCatatanKeyPressed
-        if(tabMode6.getRowCount()!=0){
+        if(tbValidasiCatatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataValidasiCatatan();
@@ -2028,7 +2028,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_ValidasiCatatanKeyPressed
 
     private void tbTniPolriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTniPolriMouseClicked
-        if(tabMode7.getRowCount()!=0){
+        if(tbTniPolri.getRowCount()!=0){
             try {
                 getDataTampilkanTNI();
             } catch (java.lang.NullPointerException e) {
@@ -2037,7 +2037,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_tbTniPolriMouseClicked
 
     private void tbTniPolriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTniPolriKeyPressed
-        if(tabMode7.getRowCount()!=0){
+        if(tbTniPolri.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataTampilkanTNI();

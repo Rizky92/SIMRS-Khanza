@@ -430,7 +430,7 @@ public final class DlgRestoreDapurBarang extends javax.swing.JDialog {
                         false, rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("satuan"),rs.getString("jenis"),rs.getDouble("stok"),rs.getDouble("harga")
                     });
                 }
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbObat.getRowCount());
             } catch (SQLException e) {
                 System.out.println("Notifikasi : " + e);
             } finally{

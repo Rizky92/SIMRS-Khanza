@@ -740,7 +740,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
                 TNm.getText(),TCiri.getText(),TKeterangan.getText(),kd_ktg.getText(),TKd.getText(),cmbStatus.getSelectedItem().toString(),cmbValidCode.getSelectedItem().toString(),cmbACCPDX.getSelectedItem().toString(),
                 cmbAsterisk.getSelectedItem().toString(),cmbIM.getSelectedItem().toString(),tbPenyakit.getValueAt(tbPenyakit.getSelectedRow(),1).toString()
             })==true){
-                if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+                if(tbPenyakit.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
             }
         }
@@ -769,10 +769,10 @@ public final class DlgPenyakit extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbPenyakit.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbPenyakit.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -917,7 +917,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKtgKeyPressed
 
     private void tbPenyakitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPenyakitMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPenyakit.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -926,7 +926,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPenyakitMouseClicked
 
     private void tbPenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPenyakitKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbPenyakit.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1157,7 +1157,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPenyakit.getRowCount());
     }
 
     public void emptTeks() {

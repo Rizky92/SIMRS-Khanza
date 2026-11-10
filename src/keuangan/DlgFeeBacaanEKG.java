@@ -331,10 +331,10 @@ public class DlgFeeBacaanEKG extends javax.swing.JDialog {
     */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbDokter.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -359,32 +359,32 @@ public class DlgFeeBacaanEKG extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        for(i=0;i<tabMode.getRowCount();i++){
+                        for(i=0;i<tbDokter.getRowCount();i++){
                             try {
-                                sjmlbacaan=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
+                                sjmlbacaan=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,6).toString()));
                             } catch (Exception e) {
                                 sjmlbacaan="";
                             }
 
                             try {
-                                sfeebacaan=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()));
+                                sfeebacaan=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,7).toString()));
                             } catch (Exception e) {
                                 sfeebacaan="";
                             }
 
                             try {
-                                sjasa=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()));
+                                sjasa=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,8).toString()));
                             } catch (Exception e) {
                                 sjasa="";
                             }
 
                             Sequel.menyimpan("temporary","'"+i+"','"+
-                                            tabMode.getValueAt(i,0).toString().replaceAll("'","`") +"','"+
-                                            tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
-                                            tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
-                                            tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
-                                            tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
-                                            tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
+                                            tbDokter.getValueAt(i,0).toString().replaceAll("'","`") +"','"+
+                                            tbDokter.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
+                                            tbDokter.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
+                                            tbDokter.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
+                                            tbDokter.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
+                                            tbDokter.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
                                             sjmlbacaan+"','"+
                                             sfeebacaan+"','"+
                                             sjasa+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter");

@@ -1041,10 +1041,10 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
         }
         switch (TabRawat.getSelectedIndex()) {
             case 0:
-                if(tabMode.getRowCount()==0){
+                if(tbDokter.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     TCari.requestFocus();
-                }else if(tabMode.getRowCount()!=0){
+                }else if(tbDokter.getRowCount()!=0){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     try {
                         try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1069,24 +1069,24 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
                                 break;
                             case "Laporan 5 (Jasper)":
                                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                                int row=tabMode.getRowCount();
+                                int row=tbDokter.getRowCount();
                                 for(i=0;i<row;i++){
                                     Sequel.menyimpan("temporary","'"+i+"','"+
-                                                    tabMode.getValueAt(i,0).toString()+"','"+
-                                                    tabMode.getValueAt(i,1).toString()+"','"+
-                                                    tabMode.getValueAt(i,2).toString()+"','"+
-                                                    tabMode.getValueAt(i,3).toString()+"','"+
-                                                    tabMode.getValueAt(i,4).toString()+"','"+
-                                                    tabMode.getValueAt(i,5).toString()+"','"+
-                                                    tabMode.getValueAt(i,6).toString()+"','"+
-                                                    tabMode.getValueAt(i,7).toString()+"','"+
-                                                    tabMode.getValueAt(i,8).toString()+"','"+
-                                                    tabMode.getValueAt(i,9).toString()+"','"+
-                                                    tabMode.getValueAt(i,10).toString()+"','"+
-                                                    tabMode.getValueAt(i,11).toString()+"','"+
-                                                    tabMode.getValueAt(i,12).toString()+"','"+
-                                                    tabMode.getValueAt(i,13).toString()+"','"+
-                                                    tabMode.getValueAt(i,14).toString()+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penjualan");
+                                                    tbDokter.getValueAt(i,0).toString()+"','"+
+                                                    tbDokter.getValueAt(i,1).toString()+"','"+
+                                                    tbDokter.getValueAt(i,2).toString()+"','"+
+                                                    tbDokter.getValueAt(i,3).toString()+"','"+
+                                                    tbDokter.getValueAt(i,4).toString()+"','"+
+                                                    tbDokter.getValueAt(i,5).toString()+"','"+
+                                                    tbDokter.getValueAt(i,6).toString()+"','"+
+                                                    tbDokter.getValueAt(i,7).toString()+"','"+
+                                                    tbDokter.getValueAt(i,8).toString()+"','"+
+                                                    tbDokter.getValueAt(i,9).toString()+"','"+
+                                                    tbDokter.getValueAt(i,10).toString()+"','"+
+                                                    tbDokter.getValueAt(i,11).toString()+"','"+
+                                                    tbDokter.getValueAt(i,12).toString()+"','"+
+                                                    tbDokter.getValueAt(i,13).toString()+"','"+
+                                                    tbDokter.getValueAt(i,14).toString()+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penjualan");
                                 }
                                 i++;
                                 Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penjualan");
@@ -1171,7 +1171,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
 
     private void ppCetakNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCetakNotaActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1179,7 +1179,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
         }else{
             if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Nota");
-            }else if(tabMode.getRowCount()==0){
+            }else if(tbDokter.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 kdbar.requestFocus();
             }else {
@@ -1190,7 +1190,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppCetakNotaActionPerformed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1404,7 +1404,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void ppVerifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppVerifActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1430,7 +1430,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_TabRawatMouseClicked
 
     private void ppResepObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObatActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1478,7 +1478,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppResepObatActionPerformed
 
     private void ppResepObat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObat1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1528,7 +1528,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppResepObat1ActionPerformed
 
     private void ppResepObat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObat2ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){

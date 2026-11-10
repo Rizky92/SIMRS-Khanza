@@ -622,7 +622,7 @@ public final class DlgUbahPeriksaLab extends javax.swing.JDialog {
             Valid.textKosong(KdPtg,"Petugas");
         }else if(KodePerujuk.getText().equals("")||NmPerujuk.getText().equals("")){
             Valid.textKosong(KodePerujuk,"Dokter Perujuk");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbPemeriksaan.getRowCount()==0){
             Valid.textKosong(Pemeriksaan,"Data Pemeriksaan");
         }else if(jml==0){
             Valid.textKosong(Pemeriksaan,"Data Pemeriksaan");
@@ -1099,7 +1099,7 @@ public final class DlgUbahPeriksaLab extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
    try{
-       tabMode.removeRow(tbPemeriksaan.getSelectedRow());
+       tabMode.removeRow(tbPemeriksaan.convertRowIndexToModel(tbPemeriksaan.getSelectedRow()));
    }catch(Exception ex){
        JOptionPane.showMessageDialog(null,"Pilih dulu data yang mau dihapus..!!");
    }
@@ -1125,7 +1125,7 @@ public final class DlgUbahPeriksaLab extends javax.swing.JDialog {
     }//GEN-LAST:event_btnTarifActionPerformed
 
     private void tbTarifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTarifMouseClicked
-        if(tabMode2.getRowCount()!=0){
+        if(tbTarif.getRowCount()!=0){
             try {
                 runBackground(() ->tampil());
             } catch (java.lang.NullPointerException e) {

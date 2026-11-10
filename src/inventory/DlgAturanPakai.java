@@ -314,7 +314,7 @@ public class DlgAturanPakai extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     Nama.getText()
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbkabupaten.getRowCount());
                 emptTeks();
             }
         }
@@ -341,9 +341,9 @@ public class DlgAturanPakai extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,Nama,"master_aturan_pakai","aturan")==true){
             if(tbkabupaten.getSelectedRow()!= -1){
-                tabMode.removeRow(tbkabupaten.getSelectedRow());
+                tabMode.removeRow(tbkabupaten.convertRowIndexToModel(tbkabupaten.getSelectedRow()));
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbkabupaten.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
@@ -426,7 +426,7 @@ public class DlgAturanPakai extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbkabupatenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbkabupatenMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbkabupaten.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -438,7 +438,7 @@ public class DlgAturanPakai extends javax.swing.JDialog {
     }//GEN-LAST:event_tbkabupatenMouseClicked
 
     private void tbkabupatenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbkabupatenKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbkabupaten.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 dispose();
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
@@ -457,7 +457,7 @@ public class DlgAturanPakai extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void tbkabupatenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbkabupatenKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbkabupaten.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -526,7 +526,7 @@ public class DlgAturanPakai extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbkabupaten.getRowCount());
     }
 
     public void emptTeks() {

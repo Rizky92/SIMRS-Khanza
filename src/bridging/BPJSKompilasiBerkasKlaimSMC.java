@@ -2111,28 +2111,28 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                             setFlagKlaim();
                             switch (flagklaim) {
                                 case 1:
-                                    tabMode.setValueAt("Selesai", selectedTableModelRow, 11);
-                                    tabMode.setValueAt(1, selectedTableModelRow, 12);
+                                    tbKompilasi.setValueAt("Selesai", selectedRow, 11);
+                                    tbKompilasi.setValueAt(1, selectedRow, 12);
                                     break;
                                 case 2:
-                                    tabMode.setValueAt("INACBG Final", selectedTableModelRow, 11);
-                                    tabMode.setValueAt(2, selectedTableModelRow, 12);
+                                    tbKompilasi.setValueAt("INACBG Final", selectedRow, 11);
+                                    tbKompilasi.setValueAt(2, selectedRow, 12);
                                     break;
                                 case 3:
-                                    tabMode.setValueAt("INACBG Grouping", selectedTableModelRow, 11);
-                                    tabMode.setValueAt(3, selectedTableModelRow, 12);
+                                    tbKompilasi.setValueAt("INACBG Grouping", selectedRow, 11);
+                                    tbKompilasi.setValueAt(3, selectedRow, 12);
                                     break;
                                 case 4:
-                                    tabMode.setValueAt("IDRG Final", selectedTableModelRow, 11);
-                                    tabMode.setValueAt(4, selectedTableModelRow, 12);
+                                    tbKompilasi.setValueAt("IDRG Final", selectedRow, 11);
+                                    tbKompilasi.setValueAt(4, selectedRow, 12);
                                     break;
                                 case 5:
-                                    tabMode.setValueAt("IDRG Grouping", selectedTableModelRow, 11);
-                                    tabMode.setValueAt(5, selectedTableModelRow, 12);
+                                    tbKompilasi.setValueAt("IDRG Grouping", selectedRow, 11);
+                                    tbKompilasi.setValueAt(5, selectedRow, 12);
                                     break;
                                 default:
-                                    tabMode.setValueAt("Belum", selectedTableModelRow, 11);
-                                    tabMode.setValueAt(6, selectedTableModelRow, 12);
+                                    tbKompilasi.setValueAt("Belum", selectedRow, 11);
+                                    tbKompilasi.setValueAt(6, selectedRow, 12);
                                     break;
                             }
                             tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
@@ -2962,7 +2962,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_CmbPilihanAplikasiPDFItemStateChanged
 
     private void tbKompilasiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKompilasiKeyReleased
-        if (tabMode.getRowCount() != 0) {
+        if (tbKompilasi.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 SwingUtilities.invokeLater(() -> updateSelection());
             }
@@ -3023,10 +3023,10 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if (tabMode.getRowCount() == 0) {
+        if (tbKompilasi.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        } else if (tabMode.getRowCount() != 0) {
+        } else if (tbKompilasi.getRowCount() != 0) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -3038,23 +3038,23 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                 }, "Laporan 5 (Jasper)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                        Valid.exportHtmlSmc("DataKompilasiBerkasKlaimSMC.html", "Data Kompilasi Berkas Klaim", tbKompilasi, IntStream.rangeClosed(1, tabMode.getColumnCount() - 2).toArray());
+                        Valid.exportHtmlSmc("DataKompilasiBerkasKlaimSMC.html", "Data Kompilasi Berkas Klaim", tbKompilasi, IntStream.rangeClosed(1, tbKompilasi.getColumnCount() - 2).toArray());
                         break;
                     case "Laporan 2 (WPS)":
-                        Valid.exportWPSSmc("DataKompilasiBerkasKlaimSMC.wps", "Data Kompilasi Berkas Klaim", tbKompilasi, IntStream.rangeClosed(1, tabMode.getColumnCount() - 2).toArray());
+                        Valid.exportWPSSmc("DataKompilasiBerkasKlaimSMC.wps", "Data Kompilasi Berkas Klaim", tbKompilasi, IntStream.rangeClosed(1, tbKompilasi.getColumnCount() - 2).toArray());
                         break;
                     case "Laporan 3 (CSV)":
-                        Valid.exportCSVSmc("DataKompilasiBerkasKlaimSMC.csv", tbKompilasi, IntStream.rangeClosed(1, tabMode.getColumnCount() - 2).toArray());
+                        Valid.exportCSVSmc("DataKompilasiBerkasKlaimSMC.csv", tbKompilasi, IntStream.rangeClosed(1, tbKompilasi.getColumnCount() - 2).toArray());
                         break;
                     case "Laporan 4 (XLSX)":
-                        Valid.exportXlsxSmc("DataKompilasiBerkasKlaimSMC.xlsx", tbKompilasi, IntStream.rangeClosed(1, tabMode.getColumnCount() - 2).toArray());
+                        Valid.exportXlsxSmc("DataKompilasiBerkasKlaimSMC.xlsx", tbKompilasi, IntStream.rangeClosed(1, tbKompilasi.getColumnCount() - 2).toArray());
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.deleteTemporary();
-                        for (int i = 0; i < tabMode.getRowCount(); i++) {
-                            Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2), (String) tabMode.getValueAt(i, 3),
-                                (String) tabMode.getValueAt(i, 4), (String) tabMode.getValueAt(i, 5), (String) tabMode.getValueAt(i, 6), (String) tabMode.getValueAt(i, 7),
-                                (String) tabMode.getValueAt(i, 8), (String) tabMode.getValueAt(i, 9), (String) tabMode.getValueAt(i, 10), (String) tabMode.getValueAt(i, 11)
+                        for (int i = 0; i < tbKompilasi.getRowCount(); i++) {
+                            Sequel.temporary(String.valueOf(i + 1), (String) tbKompilasi.getValueAt(i, 1), (String) tbKompilasi.getValueAt(i, 2), (String) tbKompilasi.getValueAt(i, 3),
+                                (String) tbKompilasi.getValueAt(i, 4), (String) tbKompilasi.getValueAt(i, 5), (String) tbKompilasi.getValueAt(i, 6), (String) tbKompilasi.getValueAt(i, 7),
+                                (String) tbKompilasi.getValueAt(i, 8), (String) tbKompilasi.getValueAt(i, 9), (String) tbKompilasi.getValueAt(i, 10), (String) tbKompilasi.getValueAt(i, 11)
                             );
                         }
                         Map<String, Object> param = new HashMap<>();
@@ -3368,7 +3368,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(String.valueOf(tabMode.getRowCount()));
+                    LCount.setText(String.valueOf(tbKompilasi.getRowCount()));
                     TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(tabMode);
                     tbKompilasi.setRowSorter(sorter);
                     sorter.setSortKeys(sortKeys);

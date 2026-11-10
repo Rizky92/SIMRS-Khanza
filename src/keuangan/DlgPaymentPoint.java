@@ -398,10 +398,10 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(Tabel.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(Tabel.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -426,12 +426,12 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary_payment");
-                        for(int r=0;r<tabMode.getRowCount();r++){
+                        for(int r=0;r<Tabel.getRowCount();r++){
                             Sequel.menyimpan("temporary_payment","'0',?,?,?,?,?,?,?,'','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''",7,new String[]{
-                                tabMode.getValueAt(r,0).toString(),tabMode.getValueAt(r,1).toString(),
-                                tabMode.getValueAt(r,2).toString(),tabMode.getValueAt(r,3).toString(),
-                                tabMode.getValueAt(r,4).toString(),Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,5).toString())),
-                                tabMode.getValueAt(r,6).toString()
+                                Tabel.getValueAt(r,0).toString(),Tabel.getValueAt(r,1).toString(),
+                                Tabel.getValueAt(r,2).toString(),Tabel.getValueAt(r,3).toString(),
+                                Tabel.getValueAt(r,4).toString(),Valid.SetAngka(Double.parseDouble(Tabel.getValueAt(r,5).toString())),
+                                Tabel.getValueAt(r,6).toString()
                             });
                         }
                         Map<String, Object> param = new HashMap<>();

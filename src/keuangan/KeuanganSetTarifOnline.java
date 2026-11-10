@@ -402,7 +402,7 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObatPenyakit.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             kdpj.requestFocus();
         }else if(nmpj.getText().trim().equals("")){
@@ -516,7 +516,7 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeekKeyPressed
 
     private void tbObatPenyakitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatPenyakitMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObatPenyakit.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -525,7 +525,7 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatPenyakitMouseClicked
 
     private void tbObatPenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatPenyakitKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObatPenyakit.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -650,7 +650,7 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObatPenyakit.getRowCount());
     }
 
     private void emptTeks() {

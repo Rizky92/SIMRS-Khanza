@@ -503,7 +503,7 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
                     KodeMetode.getText(),MetodePembayaran.getText(),KodeBank.getText(),BankTujuan.getText(),KodeTransaksi.getText()
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbJnsPerawatan.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -529,9 +529,9 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
             if(Sequel.queryu2tf("delete from kodetransaksi_tujuan_transfer_bankmandiri where kode_metode=? and kode_bank=?",2,new String[]{
                 tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()
                 })==true){
-                tabMode.removeRow(tbJnsPerawatan.getSelectedRow());
+                tabMode.removeRow(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()));
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbJnsPerawatan.getRowCount());
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, gagal menghapus data...!!!!");
             }
@@ -558,11 +558,11 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
                 if(Sequel.mengedittf("kodetransaksi_tujuan_transfer_bankmandiri","kode_metode=? and kode_bank=?","kode_metode=?,kode_bank=?,kode_transaksi=?",5,new String[]{
                         KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()
                     })==true){
-                    tabMode.setValueAt(KodeMetode.getText(),tbJnsPerawatan.getSelectedRow(),0);
-                    tabMode.setValueAt(MetodePembayaran.getText(),tbJnsPerawatan.getSelectedRow(),1);
-                    tabMode.setValueAt(KodeBank.getText(),tbJnsPerawatan.getSelectedRow(),2);
-                    tabMode.setValueAt(BankTujuan.getText(),tbJnsPerawatan.getSelectedRow(),3);
-                    tabMode.setValueAt(KodeTransaksi.getText(),tbJnsPerawatan.getSelectedRow(),4);
+                    tbJnsPerawatan.setValueAt(KodeMetode.getText(),tbJnsPerawatan.getSelectedRow(),0);
+                    tbJnsPerawatan.setValueAt(MetodePembayaran.getText(),tbJnsPerawatan.getSelectedRow(),1);
+                    tbJnsPerawatan.setValueAt(KodeBank.getText(),tbJnsPerawatan.getSelectedRow(),2);
+                    tbJnsPerawatan.setValueAt(BankTujuan.getText(),tbJnsPerawatan.getSelectedRow(),3);
+                    tbJnsPerawatan.setValueAt(KodeTransaksi.getText(),tbJnsPerawatan.getSelectedRow(),4);
                     emptTeks();
                 }else{
                     JOptionPane.showMessageDialog(null,"Maaf, gagal mengubah data...!!!!");
@@ -594,10 +594,10 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbJnsPerawatan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbJnsPerawatan.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -685,7 +685,7 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -694,7 +694,7 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -863,7 +863,7 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {

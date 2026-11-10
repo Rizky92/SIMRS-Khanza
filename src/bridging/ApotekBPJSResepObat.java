@@ -344,10 +344,10 @@ public final class ApotekBPJSResepObat extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbKamar.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -372,20 +372,20 @@ public final class ApotekBPJSResepObat extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        for(int i=0;i<tabMode.getRowCount();i++){
+                        for(int i=0;i<tbKamar.getRowCount();i++){
                             Sequel.menyimpan("temporary","'"+i+"','"+
-                                            tabMode.getValueAt(i,0).toString()+"','"+
-                                            tabMode.getValueAt(i,1).toString()+"','"+
-                                            tabMode.getValueAt(i,2).toString()+"','"+
-                                            tabMode.getValueAt(i,3).toString()+"','"+
-                                            tabMode.getValueAt(i,4).toString()+"','"+
-                                            tabMode.getValueAt(i,5).toString()+"','"+
-                                            tabMode.getValueAt(i,6).toString()+"','"+
-                                            tabMode.getValueAt(i,7).toString()+"','"+
-                                            tabMode.getValueAt(i,8).toString()+"','"+
-                                            tabMode.getValueAt(i,9).toString()+"','"+
-                                            tabMode.getValueAt(i,10).toString()+"','"+
-                                            tabMode.getValueAt(i,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Daftar Pelayanan Obat Apotek BPJS");
+                                            tbKamar.getValueAt(i,0).toString()+"','"+
+                                            tbKamar.getValueAt(i,1).toString()+"','"+
+                                            tbKamar.getValueAt(i,2).toString()+"','"+
+                                            tbKamar.getValueAt(i,3).toString()+"','"+
+                                            tbKamar.getValueAt(i,4).toString()+"','"+
+                                            tbKamar.getValueAt(i,5).toString()+"','"+
+                                            tbKamar.getValueAt(i,6).toString()+"','"+
+                                            tbKamar.getValueAt(i,7).toString()+"','"+
+                                            tbKamar.getValueAt(i,8).toString()+"','"+
+                                            tbKamar.getValueAt(i,9).toString()+"','"+
+                                            tbKamar.getValueAt(i,10).toString()+"','"+
+                                            tbKamar.getValueAt(i,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Daftar Pelayanan Obat Apotek BPJS");
                         }
 
                         Map<String, Object> param = new HashMap<>();
@@ -773,7 +773,7 @@ public final class ApotekBPJSResepObat extends javax.swing.JDialog {
             System.out.println("code : "+nameNode.path("code").asText());
             System.out.println("message : "+nameNode.path("message").asText());
             if(nameNode.path("code").asText().equals("200")){
-                tabMode.removeRow(tbKamar.getSelectedRow());
+                tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
             }else{
                 JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
             }

@@ -375,9 +375,9 @@ public final class TokoPendapatanHarian extends javax.swing.JDialog {
                 "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
             }, "Laporan 5 (Jasper)");
             if(TabRawat.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbPenjualan.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                }else if(tabMode.getRowCount()!=0){
+                }else if(tbPenjualan.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("PendapatanHarian1Toko.html", "Penjualan Harian Toko", tbPenjualan);
@@ -401,9 +401,9 @@ public final class TokoPendapatanHarian extends javax.swing.JDialog {
                     }
                 }
             }else if(TabRawat.getSelectedIndex()==1){
-                if(tabMode2.getRowCount()==0){
+                if(tbPiutang.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                }else if(tabMode2.getRowCount()!=0){
+                }else if(tbPiutang.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("PendapatanHarian2Toko.html", "Piutang Harian Toko", tbPiutang);

@@ -677,10 +677,10 @@ public final class DlgSensusHarianRalan extends javax.swing.JDialog {
                 "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
             }, "Laporan 5 (Jasper)");
             if(TabRawat.getSelectedIndex()==0){
-                if(tabmode.getRowCount()==0){
+                if(table.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     //TCari.requestFocus();
-                }else if(tabmode.getRowCount()!=0){
+                }else if(table.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("SensusHarianRalan.html", "Laporan Sensus Harian Ralan", table);
@@ -696,15 +696,15 @@ public final class DlgSensusHarianRalan extends javax.swing.JDialog {
                             break;
                         case "Laporan 5 (Jasper)":
                             Sequel.queryu("delete from temporary_sensus_harian");
-                            for(int r=0;r<tabmode.getRowCount();r++){
+                            for(int r=0;r<table.getRowCount();r++){
                                 Sequel.menyimpan("temporary_sensus_harian","'0',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'','','','','','','','','','','','','','','',''",21,new String[]{
-                                        tabmode.getValueAt(r,0).toString(),tabmode.getValueAt(r,1).toString(),tabmode.getValueAt(r,2).toString(),
-                                        tabmode.getValueAt(r,3).toString(),tabmode.getValueAt(r,4).toString(),tabmode.getValueAt(r,5).toString(),
-                                        tabmode.getValueAt(r,6).toString(),tabmode.getValueAt(r,7).toString(),tabmode.getValueAt(r,8).toString(),
-                                        tabmode.getValueAt(r,9).toString(),tabmode.getValueAt(r,10).toString(),tabmode.getValueAt(r,11).toString(),
-                                        tabmode.getValueAt(r,12).toString(),tabmode.getValueAt(r,13).toString(),tabmode.getValueAt(r,14).toString(),
-                                        tabmode.getValueAt(r,15).toString(),tabmode.getValueAt(r,16).toString(),tabmode.getValueAt(r,17).toString(),
-                                        tabmode.getValueAt(r,18).toString(),tabmode.getValueAt(r,19).toString(),tabmode.getValueAt(r,20).toString()
+                                        table.getValueAt(r,0).toString(),table.getValueAt(r,1).toString(),table.getValueAt(r,2).toString(),
+                                        table.getValueAt(r,3).toString(),table.getValueAt(r,4).toString(),table.getValueAt(r,5).toString(),
+                                        table.getValueAt(r,6).toString(),table.getValueAt(r,7).toString(),table.getValueAt(r,8).toString(),
+                                        table.getValueAt(r,9).toString(),table.getValueAt(r,10).toString(),table.getValueAt(r,11).toString(),
+                                        table.getValueAt(r,12).toString(),table.getValueAt(r,13).toString(),table.getValueAt(r,14).toString(),
+                                        table.getValueAt(r,15).toString(),table.getValueAt(r,16).toString(),table.getValueAt(r,17).toString(),
+                                        table.getValueAt(r,18).toString(),table.getValueAt(r,19).toString(),table.getValueAt(r,20).toString()
                                 });
                             }
                             Valid.MyReport("rptSensusHarianRalan.jasper","report","::[ Laporan Sensus Harian Ralan ]::",param);
@@ -712,10 +712,10 @@ public final class DlgSensusHarianRalan extends javax.swing.JDialog {
                     }
                 }
             }else if(TabRawat.getSelectedIndex()==1){
-                if(tabmode2.getRowCount()==0){
+                if(table2.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     //TCari.requestFocus();
-                }else if(tabmode2.getRowCount()!=0){
+                }else if(table2.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("SensusHarianRalan.html", "Laporan Sensus Harian Ralan", table2);
@@ -731,15 +731,15 @@ public final class DlgSensusHarianRalan extends javax.swing.JDialog {
                             break;
                         case "Laporan 5 (Jasper)":
                             Sequel.queryu("delete from temporary_sensus_harian");
-                            for(int r=0;r<tabmode2.getRowCount();r++){
+                            for(int r=0;r<table2.getRowCount();r++){
                                 Sequel.menyimpan("temporary_sensus_harian","'0',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'','','','','','','','','','','','','','','',''",21,new String[]{
-                                        tabmode2.getValueAt(r,0).toString(),tabmode2.getValueAt(r,1).toString(),tabmode2.getValueAt(r,2).toString(),
-                                        tabmode2.getValueAt(r,3).toString(),tabmode2.getValueAt(r,4).toString(),tabmode2.getValueAt(r,5).toString(),
-                                        tabmode2.getValueAt(r,6).toString(),tabmode2.getValueAt(r,7).toString(),tabmode2.getValueAt(r,8).toString(),
-                                        tabmode2.getValueAt(r,9).toString(),tabmode2.getValueAt(r,10).toString(),tabmode2.getValueAt(r,11).toString(),
-                                        tabmode2.getValueAt(r,12).toString(),tabmode2.getValueAt(r,13).toString(),tabmode2.getValueAt(r,14).toString(),
-                                        tabmode2.getValueAt(r,15).toString(),tabmode2.getValueAt(r,16).toString(),tabmode2.getValueAt(r,17).toString(),
-                                        tabmode2.getValueAt(r,18).toString(),tabmode2.getValueAt(r,19).toString(),tabmode2.getValueAt(r,20).toString()
+                                        table2.getValueAt(r,0).toString(),table2.getValueAt(r,1).toString(),table2.getValueAt(r,2).toString(),
+                                        table2.getValueAt(r,3).toString(),table2.getValueAt(r,4).toString(),table2.getValueAt(r,5).toString(),
+                                        table2.getValueAt(r,6).toString(),table2.getValueAt(r,7).toString(),table2.getValueAt(r,8).toString(),
+                                        table2.getValueAt(r,9).toString(),table2.getValueAt(r,10).toString(),table2.getValueAt(r,11).toString(),
+                                        table2.getValueAt(r,12).toString(),table2.getValueAt(r,13).toString(),table2.getValueAt(r,14).toString(),
+                                        table2.getValueAt(r,15).toString(),table2.getValueAt(r,16).toString(),table2.getValueAt(r,17).toString(),
+                                        table2.getValueAt(r,18).toString(),table2.getValueAt(r,19).toString(),table2.getValueAt(r,20).toString()
                                 });
                             }
                             Valid.MyReport("rptSensusHarianRalan.jasper","report","::[ Laporan Sensus Harian Ralan ]::",param);

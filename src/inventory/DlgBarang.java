@@ -1351,7 +1351,7 @@ public class DlgBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbObat.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1360,7 +1360,7 @@ public class DlgBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbObat.getRowCount() != 0) {
             if (evt.getKeyCode() == KeyEvent.VK_SHIFT) {
                 TCari.setText("");
                 TCari.requestFocus();
@@ -1376,11 +1376,11 @@ public class DlgBarang extends javax.swing.JDialog {
         for (i = 0; i < tbObat.getRowCount(); i++) {
             if (tbObat.getValueAt(i, 0).toString().equals("true")) {
                 Sequel.mengedit("databarang","kode_brng='"+tbObat.getValueAt(i, 1).toString()+"'","status='0'");
-                tabMode.removeRow(i);
+                tabMode.removeRow(tbObat.convertRowIndexToModel(i));
                 i--;
             }
         }
-        LCount.setText("" + tabMode.getRowCount());
+        LCount.setText("" + tbObat.getRowCount());
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1501,10 +1501,10 @@ public class DlgBarang extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if (tabMode.getRowCount() == 0) {
+        if (tbObat.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        } else if (tabMode.getRowCount() != 0) {
+        } else if (tbObat.getRowCount() != 0) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1692,7 +1692,7 @@ public class DlgBarang extends javax.swing.JDialog {
                     Double.parseDouble(jualbebas.getText()),Double.parseDouble(karyawan.getText()),Double.parseDouble(stok_minimal.getText()),kdjns.getText(),nmjns.getText(),
                     tanggal,KdIF.getText(),NmIF.getText(),kdkategori.getText(),nmkategori.getText(),kdgolongan.getText(),nmgolongan.getText()
                 });
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbObat.getRowCount());
                 emptTeks();
             }
         }
@@ -1880,10 +1880,10 @@ public class DlgBarang extends javax.swing.JDialog {
 
     private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBarcodeBtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if (tabMode.getRowCount() == 0) {
+        if (tbObat.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        } else if (tabMode.getRowCount() != 0) {
+        } else if (tbObat.getRowCount() != 0) {
             Map<String, Object> param = new HashMap<>();
             param.put("namars", akses.getnamars());
             param.put("alamatrs", akses.getalamatrs());
@@ -1920,13 +1920,13 @@ public class DlgBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBarcodeBtnPrintActionPerformed
 
     private void ppBarcodeItemBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBarcodeItemBtnPrintActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbObat.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         } else if (Nm.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Maaf, Pilih dulu data yang akan Anda hapus dengan menklik data pada tabel...!!!");
             tbObat.requestFocus();
-        } else if (tabMode.getRowCount() != 0) {
+        } else if (tbObat.getRowCount() != 0) {
             int jml;
             try {
                 jml = Integer.parseInt(JOptionPane.showInputDialog("Masukkan jumlah barcode yang mau dicetak !!!"));
@@ -2267,7 +2267,7 @@ public class DlgBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnGolonganActionPerformed
 
     private void tbObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyReleased
-        if (tabMode.getRowCount() != 0) {
+        if (tbObat.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
@@ -2563,7 +2563,7 @@ public class DlgBarang extends javax.swing.JDialog {
                             rs.getString("golongan")
                         });
                     }
-                    LCount.setText("" + tabMode.getRowCount());
+                    LCount.setText("" + tbObat.getRowCount());
                 } catch (Exception e) {
                     System.out.println("Notifikasi : " + e);
                 } finally{
@@ -2655,7 +2655,7 @@ public class DlgBarang extends javax.swing.JDialog {
                             rs.getString("no_faktur")
                         });
                     }
-                    LCount.setText("" + tabMode.getRowCount());
+                    LCount.setText("" + tbObat.getRowCount());
                 } catch (Exception e) {
                     System.out.println("Notifikasi : " + e);
                 } finally{
@@ -3041,8 +3041,8 @@ public class DlgBarang extends javax.swing.JDialog {
                             ps4.close();
                         }
                     }
-                    LCount.setText("" + tabMode.getRowCount());
-                    if(tabMode.getRowCount()==0){
+                    LCount.setText("" + tbObat.getRowCount());
+                    if(tbObat.getRowCount()==0){
                        tampil();
                     }
                 } catch (Exception e) {
@@ -3115,8 +3115,8 @@ public class DlgBarang extends javax.swing.JDialog {
                             ps4.close();
                         }
                     }
-                    LCount.setText("" + tabMode.getRowCount());
-                    if(tabMode.getRowCount()==0){
+                    LCount.setText("" + tbObat.getRowCount());
+                    if(tbObat.getRowCount()==0){
                        tampil();
                     }
                 } catch (Exception e) {

@@ -798,7 +798,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                     tbRalan.getValueAt(tbRalan.getSelectedRow(), 2).toString(),
                     tbRalan.getValueAt(tbRalan.getSelectedRow(), 4).toString())
                 ) {
-                    tabModeRalan.removeRow(tbRalan.getSelectedRow());
+                    tabModeRalan.removeRow(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()));
                     emptTeks();
                 }
             } else {
@@ -811,7 +811,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                     tbRanap.getValueAt(tbRanap.getSelectedRow(), 2).toString(),
                     tbRanap.getValueAt(tbRanap.getSelectedRow(), 4).toString())
                 ) {
-                    tabModeRanap.removeRow(tbRanap.getSelectedRow());
+                    tabModeRanap.removeRow(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()));
                     emptTeks();
                 }
             } else {
@@ -829,7 +829,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPilihCaraBayarRanapActionPerformed
 
     private void tbRanapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRanapMouseClicked
-        if (tabModeRanap.getRowCount() != 0) {
+        if (tbRanap.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {}
@@ -837,7 +837,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     }//GEN-LAST:event_tbRanapMouseClicked
 
     private void tbRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRalanMouseClicked
-        if (tabModeRalan.getRowCount() != 0) {
+        if (tbRalan.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {}

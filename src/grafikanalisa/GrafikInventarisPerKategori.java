@@ -412,10 +412,10 @@ public class GrafikInventarisPerKategori extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbInventaris.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbInventaris.getRowCount()!=0){
 
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -426,13 +426,13 @@ public class GrafikInventarisPerKategori extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Sequel.queryu("delete from temporary_grafik");
-            for(int r=0;r<tabMode.getRowCount();r++){
+            for(int r=0;r<tbInventaris.getRowCount();r++){
                 Sequel.menyimpan("temporary_grafik","'0','"+
-                    tabMode.getValueAt(r,0).toString()+"','"+
-                    tabMode.getValueAt(r,1).toString()+"','"+
-                    tabMode.getValueAt(r,2).toString()+"','"+
-                    Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,3).toString()))+"','"+
-                    tabMode.getValueAt(r,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap");
+                    tbInventaris.getValueAt(r,0).toString()+"','"+
+                    tbInventaris.getValueAt(r,1).toString()+"','"+
+                    tbInventaris.getValueAt(r,2).toString()+"','"+
+                    Valid.SetAngka(Double.parseDouble(tbInventaris.getValueAt(r,3).toString()))+"','"+
+                    tbInventaris.getValueAt(r,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap");
             }
 
             Valid.MyReport("rptInventarisPerKategori.jasper","report","::[ Laporan Jumlah Inventaris Per Kategori Inventaris ]::",param);
@@ -484,7 +484,7 @@ public class GrafikInventarisPerKategori extends javax.swing.JDialog {
                     totalaset=totalaset+rs.getDouble("harga");
                     tabMode.addRow(new Object[]{rs.getString(3)+" ("+rs.getString(1)+")",rs.getString(2),"",rs.getDouble(4),""});
                 }
-                if(tabMode.getRowCount()>0){
+                if(tbInventaris.getRowCount()>0){
                     tabMode.addRow(new Object[]{"Jumlah : ",total,"100 %",totalaset,"100 %"});
                     for(i=0;i<tbInventaris.getRowCount();i++){
                         tbInventaris.setValueAt(Math.round((Double.parseDouble(tbInventaris.getValueAt(i,1).toString())/total)*100)+" %",i,2);

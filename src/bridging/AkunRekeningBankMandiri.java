@@ -614,14 +614,14 @@ public class AkunRekeningBankMandiri extends javax.swing.JDialog {
             Valid.textKosong(KodeMCM,"Kode MCM");
         }else if(NoRekening.getText().trim().equals("")){
             Valid.textKosong(NoRekening,"No.Rekening");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbSpesialis.getRowCount()==0){
             if(Sequel.menyimpantf("set_akun_mandiri","?,?,aes_encrypt(?,'nur'),aes_encrypt(?,'windi'),aes_encrypt(?,'nur'),aes_encrypt(?,'windi'),?,?,?","Akun Rekening",9,new String[]{
                 kdrek.getText(),KdRekBiaya.getText(),Username.getText(),Password.getText(),ClientID.getText(),ClientSecret.getText(),KodeFaskes.getText(),KodeMCM.getText(),NoRekening.getText()
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();
             }
-        }else if(tabMode.getRowCount()>0){
+        }else if(tbSpesialis.getRowCount()>0){
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu akun pengaturan ...!!!!");
             Username.requestFocus();
         }
@@ -629,7 +629,7 @@ public class AkunRekeningBankMandiri extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -640,7 +640,7 @@ public class AkunRekeningBankMandiri extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisKeyPressed
 
     private void tbSpesialisMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -830,17 +830,17 @@ public class AkunRekeningBankMandiri extends javax.swing.JDialog {
     private void getData() {
         int row=tbSpesialis.getSelectedRow();
         if(row!= -1){
-            kdrek.setText(tabMode.getValueAt(row,0).toString());
-            nmrek.setText(tabMode.getValueAt(row,1).toString());
-            KdRekBiaya.setText(tabMode.getValueAt(row,2).toString());
-            NmRekBiaya.setText(tabMode.getValueAt(row,3).toString());
-            Username.setText(tabMode.getValueAt(row,4).toString());
-            Password.setText(tabMode.getValueAt(row,5).toString());
-            ClientID.setText(tabMode.getValueAt(row,6).toString());
-            ClientSecret.setText(tabMode.getValueAt(row,7).toString());
-            KodeFaskes.setText(tabMode.getValueAt(row,8).toString());
-            KodeMCM.setText(tabMode.getValueAt(row,9).toString());
-            NoRekening.setText(tabMode.getValueAt(row,10).toString());
+            kdrek.setText(tbSpesialis.getValueAt(row,0).toString());
+            nmrek.setText(tbSpesialis.getValueAt(row,1).toString());
+            KdRekBiaya.setText(tbSpesialis.getValueAt(row,2).toString());
+            NmRekBiaya.setText(tbSpesialis.getValueAt(row,3).toString());
+            Username.setText(tbSpesialis.getValueAt(row,4).toString());
+            Password.setText(tbSpesialis.getValueAt(row,5).toString());
+            ClientID.setText(tbSpesialis.getValueAt(row,6).toString());
+            ClientSecret.setText(tbSpesialis.getValueAt(row,7).toString());
+            KodeFaskes.setText(tbSpesialis.getValueAt(row,8).toString());
+            KodeMCM.setText(tbSpesialis.getValueAt(row,9).toString());
+            NoRekening.setText(tbSpesialis.getValueAt(row,10).toString());
         }
     }
 

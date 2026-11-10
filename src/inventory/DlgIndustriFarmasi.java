@@ -510,7 +510,7 @@ public class DlgIndustriFarmasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -519,7 +519,7 @@ public class DlgIndustriFarmasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -565,7 +565,7 @@ public class DlgIndustriFarmasi extends javax.swing.JDialog {
             Valid.editTable(tabMode,"industrifarmasi","kode_industri","?","kode_industri=?,nama_industri=?,alamat=?,kota=?,no_telp=?",6,new String[]{
                 Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
             });
-            if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+            if(tbDokter.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
 
         }
@@ -584,10 +584,10 @@ public class DlgIndustriFarmasi extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbDokter.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -778,7 +778,7 @@ public class DlgIndustriFarmasi extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -875,7 +875,7 @@ public class DlgIndustriFarmasi extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }
 
     public void emptTeks() {
@@ -891,11 +891,11 @@ public class DlgIndustriFarmasi extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            Kd.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            Nm.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),1).toString());
-            Alamat.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),2).toString());
-            Kota.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString());
-            Telp.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),4).toString());
+            Kd.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+            Nm.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+            Alamat.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString());
+            Kota.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
+            Telp.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
         }
     }
 

@@ -63,7 +63,7 @@ public class IPSRSStokAkhirPerTanggalSMC extends javax.swing.JDialog {
         tbDokter.setModel(tabMode);
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbDokter.getColumnCount(); i++) {
             if (i == 0) {
                 tbDokter.getColumnModel().getColumn(i).setPreferredWidth(110);
             } else if (i == 1) {
@@ -271,10 +271,10 @@ public class IPSRSStokAkhirPerTanggalSMC extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if (tabMode.getRowCount() == 0) {
+        if (tbDokter.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnPrint.requestFocus();
-        } else if (tabMode.getRowCount() != 0) {
+        } else if (tbDokter.getRowCount() != 0) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -443,7 +443,7 @@ public class IPSRSStokAkhirPerTanggalSMC extends javax.swing.JDialog {
                 column.setPreferredWidth(75);
             }
 
-            for (; i < tabMode.getColumnCount(); i++) {
+            for (; i < tbDokter.getColumnCount(); i++) {
                 TableColumn column = tbDokter.getColumnModel().getColumn(i);
                 column.setHeaderValue("");
                 column.setMinWidth(0);

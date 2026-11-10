@@ -924,12 +924,12 @@ public class DapurReturBeli extends javax.swing.JDialog {
         if(row!= -1){
             if(!tbDokter.getValueAt(row,0).toString().equals("")){
                 kolom=tbDokter.getSelectedColumn();
-                if(Valid.SetAngka(tabMode.getValueAt(row,0).toString())>0){
+                if(Valid.SetAngka(tbDokter.getValueAt(row,0).toString())>0){
                     try {
-                        stokbarang=Double.parseDouble(tabMode.getValueAt(row,7).toString());
+                        stokbarang=Double.parseDouble(tbDokter.getValueAt(row,7).toString());
                         y=Valid.SetAngka(tbDokter.getValueAt(row,0).toString());
                         if(stokbarang<y){
-                            tabMode.setValueAt("",row,0);
+                            tbDokter.setValueAt("",row,0);
                             JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
                             tbDokter.requestFocus();
                         }else{

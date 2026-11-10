@@ -882,10 +882,10 @@ public class TokoCariPiutang extends javax.swing.JDialog {
         }
         switch (TabRawat.getSelectedIndex()) {
             case 0:
-                if(tabMode.getRowCount()==0){
+                if(tbDokter.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     TCari.requestFocus();
-                }else if(tabMode.getRowCount()!=0){
+                }else if(tbDokter.getRowCount()!=0){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     try {
                         try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -910,16 +910,16 @@ public class TokoCariPiutang extends javax.swing.JDialog {
                                 break;
                             case "Laporan 5 (Jasper)":
                                 Sequel.queryu("delete from temporary_toko");
-                                int row=tabMode.getRowCount();
+                                int row=tbDokter.getRowCount();
                                 for(int i=0;i<row;i++){
                                     Sequel.menyimpan("temporary_toko","'0','"+
-                                        tabMode.getValueAt(i,0).toString()+"','"+
-                                        tabMode.getValueAt(i,1).toString()+"','"+
-                                        tabMode.getValueAt(i,2).toString()+"','"+
-                                        tabMode.getValueAt(i,3).toString()+"','"+
-                                        tabMode.getValueAt(i,4).toString()+"','"+
-                                        tabMode.getValueAt(i,5).toString()+"','"+
-                                        tabMode.getValueAt(i,6).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Penjualan");
+                                        tbDokter.getValueAt(i,0).toString()+"','"+
+                                        tbDokter.getValueAt(i,1).toString()+"','"+
+                                        tbDokter.getValueAt(i,2).toString()+"','"+
+                                        tbDokter.getValueAt(i,3).toString()+"','"+
+                                        tbDokter.getValueAt(i,4).toString()+"','"+
+                                        tbDokter.getValueAt(i,5).toString()+"','"+
+                                        tbDokter.getValueAt(i,6).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Penjualan");
                                 }
                                 Sequel.menyimpan("temporary_toko","'0','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Penjualan");
                                 Sequel.menyimpan("temporary_toko","'0','','','Total Ongkir : "+df2.format(ttlongkir)+"','Total Uang Muka : "+df2.format(ttluangmuka)+"','','Jumlah Total :','"+LTotal.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Penjualan");
@@ -1001,7 +1001,7 @@ public class TokoCariPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void ppCetakNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCetakNotaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1014,7 +1014,7 @@ public class TokoCariPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_ppCetakNotaActionPerformed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-    if(tabMode.getRowCount()==0){
+    if(tbDokter.getRowCount()==0){
         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         TCari.requestFocus();
     }else if(tbDokter.getSelectedRow()<= -1){
@@ -1135,7 +1135,7 @@ public class TokoCariPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_TabRawatMouseClicked
 
     private void MnDetailCicilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailCicilanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){

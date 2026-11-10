@@ -389,7 +389,7 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
                     Kd.getText(),Nm.getText()
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbKamar.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -415,9 +415,9 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbKamar.getSelectedRow()!= -1){
             if(Sequel.meghapustf("kategori_piutang_jasa_perusahaan","kode_kategori",tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString())==true){
-                tabMode.removeRow(tbKamar.getSelectedRow());
+                tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbKamar.getRowCount());
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus...!!!!");
@@ -442,8 +442,8 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
                 if(Sequel.mengedittf("kategori_piutang_jasa_perusahaan","kode_kategori=?","kode_kategori=?,nama_kategori=?",3,new String[]{
                         Kd.getText(),Nm.getText(),tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString()
                     })==true){
-                    tabMode.setValueAt(Kd.getText(),tbKamar.getSelectedRow(),0);
-                    tabMode.setValueAt(Nm.getText(),tbKamar.getSelectedRow(),1);
+                    tbKamar.setValueAt(Kd.getText(),tbKamar.getSelectedRow(),0);
+                    tbKamar.setValueAt(Nm.getText(),tbKamar.getSelectedRow(),1);
                     emptTeks();
                 }
             }else{
@@ -475,10 +475,10 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbKamar.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -566,7 +566,7 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -575,7 +575,7 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -692,7 +692,7 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     private void emptTeks() {

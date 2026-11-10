@@ -232,9 +232,9 @@ public class DlgJumlahPorsiDiet extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbJadwal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbJadwal.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -259,42 +259,42 @@ public class DlgJumlahPorsiDiet extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary_gizi");
-                        int row=tabMode.getRowCount();
+                        int row=tbJadwal.getRowCount();
                         for(int r=0;r<row;r++){
                             Sequel.menyimpan("temporary_gizi","'0','"+
-                                            tabMode.getValueAt(r,1).toString()+"','"+
-                                            tabMode.getValueAt(r,2).toString()+"','"+
-                                            tabMode.getValueAt(r,3).toString()+"','"+
-                                            tabMode.getValueAt(r,4).toString()+"','"+
-                                            tabMode.getValueAt(r,5).toString()+"','"+
-                                            tabMode.getValueAt(r,6).toString()+"','"+
-                                            tabMode.getValueAt(r,7).toString()+"','"+
-                                            tabMode.getValueAt(r,8).toString()+"','"+
-                                            tabMode.getValueAt(r,9).toString()+"','"+
-                                            tabMode.getValueAt(r,10).toString()+"','"+
-                                            tabMode.getValueAt(r,11).toString()+"','"+
-                                            tabMode.getValueAt(r,12).toString()+"','"+
-                                            tabMode.getValueAt(r,13).toString()+"','"+
-                                            tabMode.getValueAt(r,14).toString()+"','"+
-                                            tabMode.getValueAt(r,15).toString()+"','"+
-                                            tabMode.getValueAt(r,16).toString()+"','"+
-                                            tabMode.getValueAt(r,17).toString()+"','"+
-                                            tabMode.getValueAt(r,18).toString()+"','"+
-                                            tabMode.getValueAt(r,19).toString()+"','"+
-                                            tabMode.getValueAt(r,20).toString()+"','"+
-                                            tabMode.getValueAt(r,21).toString()+"','"+
-                                            tabMode.getValueAt(r,22).toString()+"','"+
-                                            tabMode.getValueAt(r,23).toString()+"','"+
-                                            tabMode.getValueAt(r,24).toString()+"','"+
-                                            tabMode.getValueAt(r,25).toString()+"','"+
-                                            tabMode.getValueAt(r,26).toString()+"','"+
-                                            tabMode.getValueAt(r,27).toString()+"','"+
-                                            tabMode.getValueAt(r,28).toString()+"','"+
-                                            tabMode.getValueAt(r,29).toString()+"','"+
-                                            tabMode.getValueAt(r,30).toString()+"','"+
-                                            tabMode.getValueAt(r,31).toString()+"','"+
-                                            tabMode.getValueAt(r,32).toString()+"','"+
-                                            tabMode.getValueAt(r,33).toString()+"','','','',''","Rekap Gizi");
+                                            tbJadwal.getValueAt(r,1).toString()+"','"+
+                                            tbJadwal.getValueAt(r,2).toString()+"','"+
+                                            tbJadwal.getValueAt(r,3).toString()+"','"+
+                                            tbJadwal.getValueAt(r,4).toString()+"','"+
+                                            tbJadwal.getValueAt(r,5).toString()+"','"+
+                                            tbJadwal.getValueAt(r,6).toString()+"','"+
+                                            tbJadwal.getValueAt(r,7).toString()+"','"+
+                                            tbJadwal.getValueAt(r,8).toString()+"','"+
+                                            tbJadwal.getValueAt(r,9).toString()+"','"+
+                                            tbJadwal.getValueAt(r,10).toString()+"','"+
+                                            tbJadwal.getValueAt(r,11).toString()+"','"+
+                                            tbJadwal.getValueAt(r,12).toString()+"','"+
+                                            tbJadwal.getValueAt(r,13).toString()+"','"+
+                                            tbJadwal.getValueAt(r,14).toString()+"','"+
+                                            tbJadwal.getValueAt(r,15).toString()+"','"+
+                                            tbJadwal.getValueAt(r,16).toString()+"','"+
+                                            tbJadwal.getValueAt(r,17).toString()+"','"+
+                                            tbJadwal.getValueAt(r,18).toString()+"','"+
+                                            tbJadwal.getValueAt(r,19).toString()+"','"+
+                                            tbJadwal.getValueAt(r,20).toString()+"','"+
+                                            tbJadwal.getValueAt(r,21).toString()+"','"+
+                                            tbJadwal.getValueAt(r,22).toString()+"','"+
+                                            tbJadwal.getValueAt(r,23).toString()+"','"+
+                                            tbJadwal.getValueAt(r,24).toString()+"','"+
+                                            tbJadwal.getValueAt(r,25).toString()+"','"+
+                                            tbJadwal.getValueAt(r,26).toString()+"','"+
+                                            tbJadwal.getValueAt(r,27).toString()+"','"+
+                                            tbJadwal.getValueAt(r,28).toString()+"','"+
+                                            tbJadwal.getValueAt(r,29).toString()+"','"+
+                                            tbJadwal.getValueAt(r,30).toString()+"','"+
+                                            tbJadwal.getValueAt(r,31).toString()+"','"+
+                                            tbJadwal.getValueAt(r,32).toString()+"','"+
+                                            tbJadwal.getValueAt(r,33).toString()+"','','','',''","Rekap Gizi");
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());

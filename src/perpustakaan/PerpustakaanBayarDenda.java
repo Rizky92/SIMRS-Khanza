@@ -1129,7 +1129,7 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
     }//GEN-LAST:event_TabRawatMouseClicked
 
     private void tbBayarDendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBayarDendaMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBayarDenda.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1138,7 +1138,7 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBayarDendaMouseClicked
 
     private void tbBayarDendaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBayarDendaKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbBayarDenda.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1149,7 +1149,7 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBayarDendaKeyReleased
 
     private void tbDendaLainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDendaLainMouseClicked
-        if(tabMode2.getRowCount()!=0){
+        if(tbDendaLain.getRowCount()!=0){
             try {
                 getData2();
             } catch (java.lang.NullPointerException e) {
@@ -1158,7 +1158,7 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDendaLainMouseClicked
 
     private void tbDendaLainKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDendaLainKeyReleased
-        if(tabMode2.getRowCount()!=0){
+        if(tbDendaLain.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData2();
@@ -1240,7 +1240,7 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnDendaKeyPressed
 
     private void tbBayarDendaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBayarDendaKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBayarDenda.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -1249,7 +1249,7 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBayarDendaKeyPressed
 
     private void tbDendaLainKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDendaLainKeyPressed
-        if(tabMode2.getRowCount()!=0){
+        if(tbDendaLain.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -1280,10 +1280,10 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
                 "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
             }, "Laporan 5 (Jasper)");
             if(TabRawat.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbBayarDenda.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     BtnBatal.requestFocus();
-                }else if(tabMode.getRowCount()!=0){
+                }else if(tbBayarDenda.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("DendaTrlmbt.html", "Data Inventaris Perpustakaan", tbBayarDenda);
@@ -1314,10 +1314,10 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
                     }
                 }
             }else if(TabRawat.getSelectedIndex()==1){
-                if(tabMode2.getRowCount()==0){
+                if(tbDendaLain.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     BtnBatal.requestFocus();
-                }else if(tabMode2.getRowCount()!=0){
+                }else if(tbDendaLain.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("DendaLain.html", "Data Pembayaran Denda Lain-lain", tbDendaLain);
@@ -1485,7 +1485,7 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbBayarDenda.getRowCount());
             LCount1.setText(Valid.SetAngka(besardenda));
         } catch (Exception e) {
             System.out.println("Notif : "+e);
@@ -1540,7 +1540,7 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode2.getRowCount());
+            LCount.setText(""+tbDendaLain.getRowCount());
             LCount1.setText(Valid.SetAngka(besardenda));
         } catch (Exception e) {
             System.out.println("Notif : "+e);

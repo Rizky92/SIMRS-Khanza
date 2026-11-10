@@ -348,9 +348,9 @@ public class DlgKecamatan extends javax.swing.JDialog {
         }else{
             if(tbkecamatan.getSelectedRow()!= -1){
                 if(Sequel.meghapustf("kecamatan","nm_kec",Nama.getText())==true){
-                    tabMode.removeRow(tbkecamatan.getSelectedRow());
+                    tabMode.removeRow(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()));
                     emptTeks();
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText(""+tbkecamatan.getRowCount());
                 }
             }
         }
@@ -412,7 +412,7 @@ public class DlgKecamatan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbkecamatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbkecamatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbkecamatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -424,7 +424,7 @@ public class DlgKecamatan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbkecamatanMouseClicked
 
     private void tbkecamatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbkecamatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbkecamatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -550,7 +550,7 @@ public class DlgKecamatan extends javax.swing.JDialog {
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbkecamatan.getRowCount());
     }
 
     private void tampil2() {
@@ -577,7 +577,7 @@ public class DlgKecamatan extends javax.swing.JDialog {
                 }
             }
             myObj.close();
-            if(tabMode.getRowCount()==0){
+            if(tbkecamatan.getRowCount()==0){
                 ps=koneksi.prepareStatement("select kecamatan.nm_kec,kecamatan.kd_kec from kecamatan where kecamatan.nm_kec like ? ");
                 try {
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
@@ -603,7 +603,7 @@ public class DlgKecamatan extends javax.swing.JDialog {
             response = null;
             root = null;
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbkecamatan.getRowCount());
     }
 
     public String tampil3(String nama) {

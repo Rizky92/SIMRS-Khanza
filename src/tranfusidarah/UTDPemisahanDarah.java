@@ -1025,7 +1025,7 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbPemisahanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemisahanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPemisahan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1034,7 +1034,7 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemisahanMouseClicked
 
     private void tbPemisahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemisahanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbPemisahan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1049,10 +1049,10 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
            // BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbPemisahan.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1077,21 +1077,21 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        jml=tabMode.getRowCount();
+                        jml=tbPemisahan.getRowCount();
                         for(i=0;i<jml;i++){
                             Sequel.menyimpan("temporary","'"+i+"','"+
-                                tabMode.getValueAt(i,0).toString()+"','"+
-                                tabMode.getValueAt(i,1).toString()+"','"+
-                                tabMode.getValueAt(i,2).toString()+"','"+
-                                tabMode.getValueAt(i,3).toString()+"','"+
-                                tabMode.getValueAt(i,4).toString()+"','"+
-                                tabMode.getValueAt(i,5).toString()+"','"+
-                                tabMode.getValueAt(i,6).toString()+"','"+
-                                tabMode.getValueAt(i,7).toString()+"','"+
-                                tabMode.getValueAt(i,8).toString()+"','"+
-                                tabMode.getValueAt(i,9).toString()+"','"+
-                                tabMode.getValueAt(i,10).toString()+"','"+
-                                tabMode.getValueAt(i,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian");
+                                tbPemisahan.getValueAt(i,0).toString()+"','"+
+                                tbPemisahan.getValueAt(i,1).toString()+"','"+
+                                tbPemisahan.getValueAt(i,2).toString()+"','"+
+                                tbPemisahan.getValueAt(i,3).toString()+"','"+
+                                tbPemisahan.getValueAt(i,4).toString()+"','"+
+                                tbPemisahan.getValueAt(i,5).toString()+"','"+
+                                tbPemisahan.getValueAt(i,6).toString()+"','"+
+                                tbPemisahan.getValueAt(i,7).toString()+"','"+
+                                tbPemisahan.getValueAt(i,8).toString()+"','"+
+                                tbPemisahan.getValueAt(i,9).toString()+"','"+
+                                tbPemisahan.getValueAt(i,10).toString()+"','"+
+                                tbPemisahan.getValueAt(i,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian");
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
@@ -1144,7 +1144,7 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbPemisahan.getSelectedRow()<= -1){
@@ -1571,7 +1571,7 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_ppTampilkanBHPPenunjangDanMedisActionPerformed
 
     private void ppHapusBHPMedisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusBHPMedisActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbPemisahan.getSelectedRow()<= -1){
@@ -1722,7 +1722,7 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_ppHapusBHPMedisDanNonMedisActionPerformed
 
     private void ppHapusPemisahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusPemisahanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbPemisahan.getSelectedRow()<= -1){
@@ -2052,7 +2052,7 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPemisahan.getRowCount());
     }
 
     public void emptTeks() {
@@ -2309,7 +2309,7 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeKomponen.getRowCount());
+        LCount.setText(""+tbKomponen.getRowCount());
     }
 
     private void LoadData(){

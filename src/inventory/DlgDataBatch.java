@@ -1054,7 +1054,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbDokter.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1063,7 +1063,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbDokter.getRowCount() != 0) {
             if (evt.getKeyCode() == KeyEvent.VK_SHIFT) {
                 TCari.setText("");
                 TCari.requestFocus();
@@ -1141,7 +1141,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
                         JmlBeli.getText(),Sisa.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(), 3).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(),
                         tbDokter.getValueAt(tbDokter.getSelectedRow(), 4).toString()
                     })==true){
-                        if (tabMode.getRowCount() != 0) {
+                        if (tbDokter.getRowCount() != 0) {
                             runBackground(() ->tampil());
                         }
                         emptTeks();
@@ -1163,10 +1163,10 @@ public class DlgDataBatch extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if (tabMode.getRowCount() == 0) {
+        if (tbDokter.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        } else if (tabMode.getRowCount() != 0) {
+        } else if (tbDokter.getRowCount() != 0) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1561,7 +1561,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
     }//GEN-LAST:event_DTPExpiredKeyPressed
 
     private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyReleased
-        if (tabMode.getRowCount() != 0) {
+        if (tbDokter.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
@@ -1812,7 +1812,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
                         rs.getDouble("jumlahbeli"),rs.getDouble("sisa")
                     });
                 }
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbDokter.getRowCount());
             } catch (Exception e) {
                 System.out.println("Notifikasi : " + e);
             } finally{

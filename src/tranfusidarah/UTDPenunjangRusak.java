@@ -808,15 +808,15 @@ public class UTDPenunjangRusak extends javax.swing.JDialog {
     }//GEN-LAST:event_KeteranganKeyPressed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 if(tbDokter.getSelectedColumn()==1){
                     try {
-                        if(Valid.SetAngka(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString())>0){
+                        if(Valid.SetAngka(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())>0){
                             tbDokter.setValueAt(
                                     Double.toString(
-                                            Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString())*
-                                            Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString())
+                                            Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())*
+                                            Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString())
                                     ),
                                     tbDokter.getSelectedRow(),4);
                         }
@@ -830,11 +830,11 @@ public class UTDPenunjangRusak extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
                 if(tbDokter.getSelectedColumn()==1){
                     try {
-                        if(Valid.SetAngka(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString())>0){
+                        if(Valid.SetAngka(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())>0){
                             tbDokter.setValueAt(
                                     Double.toString(
-                                            Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString())*
-                                            Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString())
+                                            Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())*
+                                            Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString())
                                     ),
                                     tbDokter.getSelectedRow(),4);
                         }else{
@@ -848,8 +848,8 @@ public class UTDPenunjangRusak extends javax.swing.JDialog {
                     try {
                         tbDokter.setValueAt(
                                     Double.toString(
-                                            Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString())*
-                                            Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString())
+                                            Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())*
+                                            Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString())
                                     ),
                                     tbDokter.getSelectedRow(),4);
                     } catch (Exception e) {
@@ -859,8 +859,8 @@ public class UTDPenunjangRusak extends javax.swing.JDialog {
                     try {
                         tbDokter.setValueAt(
                                     Double.toString(
-                                            Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString())*
-                                            Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString())
+                                            Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())*
+                                            Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString())
                                     ),
                                     tbDokter.getSelectedRow(),4);
                     } catch (Exception e) {
@@ -928,7 +928,7 @@ public class UTDPenunjangRusak extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode2.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari2.requestFocus();
         }else if(tbKamar.getSelectedRow()<= -1){
@@ -959,7 +959,7 @@ public class UTDPenunjangRusak extends javax.swing.JDialog {
 
     private void BtnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCetakActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode2.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             BtnKeluar.requestFocus();
         }else {
@@ -1144,11 +1144,11 @@ public class UTDPenunjangRusak extends javax.swing.JDialog {
 
     private void isTotal(){
         subtotal=0;
-        for(int r=0;r<tabMode.getRowCount();r++){
+        for(int r=0;r<tbDokter.getRowCount();r++){
             y=0;
             try {
-                if(Double.parseDouble(tabMode.getValueAt(r,0).toString())>0){
-                    y=Double.parseDouble(tabMode.getValueAt(r,4).toString());
+                if(Double.parseDouble(tbDokter.getValueAt(r,0).toString())>0){
+                    y=Double.parseDouble(tbDokter.getValueAt(r,4).toString());
                 }
             } catch (Exception e) {
                 y=0;
@@ -1209,7 +1209,7 @@ public class UTDPenunjangRusak extends javax.swing.JDialog {
                     });
                     subtotal=subtotal+rs2.getDouble("total");
                 }
-                LCount.setText(""+tabMode2.getRowCount());
+                LCount.setText(""+tbKamar.getRowCount());
                 LTotal2.setText(Valid.SetAngka(subtotal));
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -1224,7 +1224,7 @@ public class UTDPenunjangRusak extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode2.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     private void runBackground(Runnable task) {

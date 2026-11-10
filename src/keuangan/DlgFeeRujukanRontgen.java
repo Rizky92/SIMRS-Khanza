@@ -325,10 +325,10 @@ public class DlgFeeRujukanRontgen extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbDokter.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -353,25 +353,25 @@ public class DlgFeeRujukanRontgen extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        for(i=0;i<tabMode.getRowCount();i++){
+                        for(i=0;i<tbDokter.getRowCount();i++){
                             try {
-                                sfeeradiologi=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString()));
+                                sfeeradiologi=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,5).toString()));
                             } catch (Exception e) {
                                 sfeeradiologi="";
                             }
 
                             try {
-                                sfeeusg=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
+                                sfeeusg=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,6).toString()));
                             } catch (Exception e) {
                                 sfeeusg="";
                             }
 
                             Sequel.menyimpan("temporary","'"+i+"','"+
-                                            tabMode.getValueAt(i,0).toString().replaceAll("'","`") +"','"+
-                                            tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
-                                            tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
-                                            tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
-                                            tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
+                                            tbDokter.getValueAt(i,0).toString().replaceAll("'","`") +"','"+
+                                            tbDokter.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
+                                            tbDokter.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
+                                            tbDokter.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
+                                            tbDokter.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
                                             sfeeradiologi+"','"+
                                             sfeeusg+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter");
                         }

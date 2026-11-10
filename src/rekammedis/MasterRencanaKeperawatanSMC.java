@@ -50,7 +50,7 @@ public class MasterRencanaKeperawatanSMC extends javax.swing.JDialog {
         tbSpesialis.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbSpesialis.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbSpesialis.getColumnCount(); i++) {
             TableColumn column = tbSpesialis.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setMinWidth(0);
@@ -427,7 +427,7 @@ public class MasterRencanaKeperawatanSMC extends javax.swing.JDialog {
         } else {
             if (Sequel.menyimpantfSmc("smc_master_rencana_keperawatan", "", menu.getSelectedItem().toString(), kodeMasalah.getText(), kodeRencana.getText(), namaRencana.getText())) {
                 tabMode.addRow(new Object[] {kodeMasalah.getText(), namaMasalah.getText(), kodeRencana.getText(), namaRencana.getText(), menu.getSelectedItem().toString()});
-                LCount.setText(tabMode.getRowCount() + "");
+                LCount.setText(tbSpesialis.getRowCount() + "");
                 emptTeks();
             }
         }
@@ -459,8 +459,8 @@ public class MasterRencanaKeperawatanSMC extends javax.swing.JDialog {
             if (Sequel.menghapustfSmc("smc_master_rencana_keperawatan", "menu = ? and kode_masalah = ? and kode_rencana = ?", tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 4).toString(),
                 tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 0).toString(), tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 1).toString()
             )) {
-                tabMode.removeRow(tbSpesialis.getSelectedRow());
-                LCount.setText(tabMode.getRowCount() + "");
+                tabMode.removeRow(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()));
+                LCount.setText(tbSpesialis.getRowCount() + "");
                 emptTeks();
             }
         }
@@ -485,11 +485,11 @@ public class MasterRencanaKeperawatanSMC extends javax.swing.JDialog {
                     menu.getSelectedItem().toString(), kodeMasalah.getText(), kodeRencana.getText(), namaRencana.getText(), tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 4).toString(),
                     tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 0).toString(), tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 2).toString()
                 )) {
-                    tabMode.setValueAt(kodeMasalah.getText(), tbSpesialis.getSelectedRow(), 0);
-                    tabMode.setValueAt(namaMasalah.getText(), tbSpesialis.getSelectedRow(), 1);
-                    tabMode.setValueAt(kodeRencana.getText(), tbSpesialis.getSelectedRow(), 2);
-                    tabMode.setValueAt(namaRencana.getText(), tbSpesialis.getSelectedRow(), 3);
-                    tabMode.setValueAt(menu.getSelectedItem().toString(), tbSpesialis.getSelectedRow(), 4);
+                    tbSpesialis.setValueAt(kodeMasalah.getText(), tbSpesialis.getSelectedRow(), 0);
+                    tbSpesialis.setValueAt(namaMasalah.getText(), tbSpesialis.getSelectedRow(), 1);
+                    tbSpesialis.setValueAt(kodeRencana.getText(), tbSpesialis.getSelectedRow(), 2);
+                    tbSpesialis.setValueAt(namaRencana.getText(), tbSpesialis.getSelectedRow(), 3);
+                    tbSpesialis.setValueAt(menu.getSelectedItem().toString(), tbSpesialis.getSelectedRow(), 4);
                     emptTeks();
                 }
             }
@@ -558,7 +558,7 @@ public class MasterRencanaKeperawatanSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbSpesialis.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -567,7 +567,7 @@ public class MasterRencanaKeperawatanSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisMouseClicked
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbSpesialis.getRowCount() != 0) {
             if (evt.getKeyCode() == KeyEvent.VK_SHIFT) {
                 TCari.setText("");
                 TCari.requestFocus();
@@ -609,7 +609,7 @@ public class MasterRencanaKeperawatanSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbSpesialisKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyReleased
-        if (tabMode.getRowCount() != 0) {
+        if (tbSpesialis.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
@@ -750,7 +750,7 @@ public class MasterRencanaKeperawatanSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbSpesialis.getRowCount() + "");
                     MasterRencanaKeperawatanSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

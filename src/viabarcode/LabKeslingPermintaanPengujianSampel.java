@@ -953,7 +953,7 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
             Valid.textKosong(KondisiWadah,"Kondisi Wadah");
         }else if(KodeSampel.getText().equals("")||NamaSampel.getText().equals("")){
             Valid.textKosong(BtnSampel,"Sampel");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbPermintaan.getRowCount()==0){
             Valid.textKosong(TCariPeriksa,"Data Permintaan");
         }else if(jml==0){
             Valid.textKosong(TCariPeriksa,"Data Permintaan");
@@ -1127,7 +1127,7 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
             Valid.textKosong(KondisiWadah,"Kondisi Wadah");
         }else if(KodeSampel.getText().equals("")||NamaSampel.getText().equals("")){
             Valid.textKosong(BtnSampel,"Sampel");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbPermintaan.getRowCount()==0){
             Valid.textKosong(TCariPeriksa,"Data Permintaan");
         }else if(jml==0){
             Valid.textKosong(TCariPeriksa,"Data Permintaan");
@@ -1529,7 +1529,7 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPermintaan.getRowCount());
     }
 
     private void tampil2() {
@@ -1630,7 +1630,7 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
             response = null;
             root = null;
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPermintaan.getRowCount());
     }
 
     public void isReset(){

@@ -432,7 +432,7 @@ public class MasterTemplateHasilRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -444,7 +444,7 @@ public class MasterTemplateHasilRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -467,8 +467,8 @@ public class MasterTemplateHasilRadiologi extends javax.swing.JDialog {
         }else{
             if(Valid.hapusTabletf(tabMode,Kd,"template_hasil_radiologi","no_template")==true){
                 if(tbDokter.getSelectedRow()!= -1){
-                    tabMode.removeRow(tbDokter.getSelectedRow());
-                    LCount.setText(""+tabMode.getRowCount());
+                    tabMode.removeRow(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()));
+                    LCount.setText(""+tbDokter.getRowCount());
                     emptTeks();
                 }
             }
@@ -693,7 +693,7 @@ public class MasterTemplateHasilRadiologi extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }
 
     public void emptTeks() {
@@ -707,9 +707,9 @@ public class MasterTemplateHasilRadiologi extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            Kd.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            Nm.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),1).toString());
-            Template.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),2).toString());
+            Kd.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+            Nm.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+            Template.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString());
         }
     }
 

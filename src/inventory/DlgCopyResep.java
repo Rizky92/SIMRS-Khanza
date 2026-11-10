@@ -319,7 +319,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbPemisahanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemisahanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPemisahan.getRowCount()!=0){
             if(evt.getClickCount()==2){
                 if(akses.getberi_obat()==true){
                     BtnTambahActionPerformed(null);
@@ -329,7 +329,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemisahanMouseClicked
 
     private void tbPemisahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemisahanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbPemisahan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 if(akses.getberi_obat()==true){
                     BtnTambahActionPerformed(null);
@@ -349,7 +349,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else if(tbPemisahan.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data resep dokter..!!");
@@ -393,7 +393,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkTanggalItemStateChanged
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else if(tbPemisahan.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data resep dokter..!!");
@@ -431,7 +431,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else if(tbPemisahan.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data resep dokter..!!");

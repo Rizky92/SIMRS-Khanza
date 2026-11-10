@@ -699,10 +699,10 @@ public class LabKeslingRekapPelayanan extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabModeRekapPelayanan.getRowCount()==0){
+        if(tbRekapPelayanan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeRekapPelayanan.getRowCount()!=0){
+        }else if(tbRekapPelayanan.getRowCount()!=0){
             try{
                 File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -787,7 +787,7 @@ public class LabKeslingRekapPelayanan extends javax.swing.JDialog {
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jasa Manajemen</b></td>").
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Total</b></td>").
                                         append("</tr>");
-                            for (int i = 0; i < tabModeRekapPelayanan.getRowCount(); i++) {
+                            for (int i = 0; i < tbRekapPelayanan.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
                                                 append("<td valign='top'>").append(tbRekapPelayanan.getValueAt(i,0).toString()).append("</td>").
                                                 append("<td valign='top'>").append(tbRekapPelayanan.getValueAt(i,1).toString()).append("</td>").
@@ -937,7 +937,7 @@ public class LabKeslingRekapPelayanan extends javax.swing.JDialog {
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jasa Manajemen</b></td>").
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Total</b></td>").
                                         append("</tr>");
-                            for (int i = 0; i < tabModeRekapPelayanan.getRowCount(); i++) {
+                            for (int i = 0; i < tbRekapPelayanan.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
                                                 append("<td valign='top'>").append(tbRekapPelayanan.getValueAt(i,0).toString()).append("</td>").
                                                 append("<td valign='top'>").append(tbRekapPelayanan.getValueAt(i,1).toString()).append("</td>").
@@ -1030,7 +1030,7 @@ public class LabKeslingRekapPelayanan extends javax.swing.JDialog {
                             htmlContent.append(
                                 "\"Waktu Diterima\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Alamat Pelanggan\";\"Kegiatan Usaha\";\"Personal Dihubungi\";\"Kontak Pelanggan\";\"NIP\";\"Sampel Diterima Oleh\";\"Waktu Sampling\";\"Lokasi Sampling\";\"Deskripsi Sampel\";\"Jenis Sampel\";\"Jml.Sampel\";\"Sampling Dilakukan Oleh\";\"Volume Sampel\";\"Wadah Sampel\";\"Kondisi Wadah Sampel\";\"Kode Sampel\";\"Nama Sampel\";\"Baku Mutu\";\"Tanggal Penugasan\";\"Nomor Penugasan\";\"Catatan Penugasan\";\"NIP PJ Pengujian\";\"Nama PJ Pengujian\";\"NIP Analis\";\"Nama Analis\";\"Mulai Pengujian\";\"Selesai Pengujian\";\"Tanggal Verifikasi\";\"No.Verifikasi\";\"Catatan Verifikasi\";\"NIP PJ Verifikasi\";\"Nama PJ Verifikasi\";\"Tanggal Validasi\";\"No.Validasi\";\"Catatan Validasi\";\"NIP PJ Validasi\";\"Nama PJ Validasi\";\"Kode\";\"Nama Parameter\";\"Metode Pengujian\";\"Satuan\";\"Kategori\";\"Nilai Normal\";\"Hasil Pemeriksaan\";\"Keterangan\";\"Jasa Sarana\";\"Paket BHP\";\"Jasa P.J. Lab/Validasi\";\"Jasa P.J. Pengujian\";\"Jasa P.J.Verifikasi\";\"Jasa Petugas/Analis\";\"K.S.O\";\"Jasa Manajemen\";\"Total\"\n"
                             );
-                            for (int i = 0; i < tabModeRekapPelayanan.getRowCount(); i++) {
+                            for (int i = 0; i < tbRekapPelayanan.getRowCount(); i++) {
                                 htmlContent.append("\"").append(tbRekapPelayanan.getValueAt(i,0).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,1).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,2).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,3).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,4).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,5).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,6).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,7).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,8).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,9).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,10).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,11).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,12).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,13).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,14).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,15).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,16).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,17).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,18).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,19).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,20).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,21).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,22).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,23).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,24).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,25).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,26).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,27).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,28).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,29).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,30).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,31).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,32).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,33).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,34).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,35).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,36).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,37).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,38).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,39).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,40).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,41).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,42).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,43).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,44).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,45).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,46).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,47).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,48).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,49).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,50).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,51).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,52).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,53).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,54).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,55).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,56).toString()).append("\";\"").append(tbRekapPelayanan.getValueAt(i,57).toString()).append("\"\n");
                             }
                             f = new File("DataRekapPelayananLabkesling.csv");
@@ -1289,8 +1289,8 @@ public class LabKeslingRekapPelayanan extends javax.swing.JDialog {
                     jasa_menejemen=jasa_menejemen+rs.getDouble("jasa_menejemen");
                     total=total+rs.getDouble("total");
                 }
-                LTotal.setText(tabModeRekapPelayanan.getRowCount()+"");
-                if(tabModeRekapPelayanan.getRowCount()>0){
+                LTotal.setText(tbRekapPelayanan.getRowCount()+"");
+                if(tbRekapPelayanan.getRowCount()>0){
                     tabModeRekapPelayanan.addRow(new Object[]{
                         ">> Total :","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",jasa_sarana,paket_bhp,jasa_pj_lab,jasa_pj_pengujian,jasa_verifikator,jasa_petugas,kso,jasa_menejemen,total
                     });

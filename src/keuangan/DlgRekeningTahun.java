@@ -597,7 +597,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
             Valid.textKosong(Nm,"Saldo");
         }else{
             Valid.editTable(tabMode,"rekeningtahun","thn='"+Tahun.getSelectedItem()+"' and kd_rek",Kd,"saldo_awal='"+Saldo.getText()+"' ");
-            if(tabMode.getRowCount()!=0){BtnCariActionPerformed(evt);}
+            if(tbKamar.getRowCount()!=0){BtnCariActionPerformed(evt);}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -629,10 +629,10 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbKamar.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -657,18 +657,18 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        int row=tabMode.getRowCount();
+                        int row=tbKamar.getRowCount();
                         for(int i=0;i<row;i++){
                             Sequel.menyimpan("temporary","'"+i+"','"+
-                                            tabMode.getValueAt(i,0).toString()+"','"+
-                                            tabMode.getValueAt(i,1).toString()+"','"+
-                                            tabMode.getValueAt(i,2).toString()+"','"+
-                                            tabMode.getValueAt(i,3).toString()+"','"+
-                                            tabMode.getValueAt(i,4).toString()+"','"+
-                                            tabMode.getValueAt(i,5).toString()+"','"+
-                                            tabMode.getValueAt(i,6).toString()+"','"+
-                                            tabMode.getValueAt(i,7).toString()+"','"+
-                                            tabMode.getValueAt(i,8).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekening Tahun");
+                                            tbKamar.getValueAt(i,0).toString()+"','"+
+                                            tbKamar.getValueAt(i,1).toString()+"','"+
+                                            tbKamar.getValueAt(i,2).toString()+"','"+
+                                            tbKamar.getValueAt(i,3).toString()+"','"+
+                                            tbKamar.getValueAt(i,4).toString()+"','"+
+                                            tbKamar.getValueAt(i,5).toString()+"','"+
+                                            tbKamar.getValueAt(i,6).toString()+"','"+
+                                            tbKamar.getValueAt(i,7).toString()+"','"+
+                                            tbKamar.getValueAt(i,8).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekening Tahun");
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
@@ -736,7 +736,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -745,7 +745,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1096,7 +1096,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbKamar.getRowCount() + "");
                     DlgRekeningTahun.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

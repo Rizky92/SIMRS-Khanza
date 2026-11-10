@@ -697,10 +697,10 @@ public class TokoCariPengajuanBarang extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbDokter.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -725,14 +725,14 @@ public class TokoCariPengajuanBarang extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary_toko");
-                        no=tabMode.getRowCount();
+                        no=tbDokter.getRowCount();
                         for(i=0;i<no;i++){
                             Sequel.menyimpan("temporary_toko","'0','"+
-                                tabMode.getValueAt(i,0).toString()+"','"+
-                                tabMode.getValueAt(i,1).toString()+"','"+
-                                tabMode.getValueAt(i,2).toString()+"','"+
-                                tabMode.getValueAt(i,3).toString()+"','"+
-                                tabMode.getValueAt(i,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Pengajuan");
+                                tbDokter.getValueAt(i,0).toString()+"','"+
+                                tbDokter.getValueAt(i,1).toString()+"','"+
+                                tbDokter.getValueAt(i,2).toString()+"','"+
+                                tbDokter.getValueAt(i,3).toString()+"','"+
+                                tbDokter.getValueAt(i,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Pengajuan");
                         }
                         Sequel.menyimpan("temporary_toko","'0','Total :','','','','"+LTotal.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Pengajuan");
                         Map<String, Object> param = new HashMap<>();

@@ -811,7 +811,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
             Valid.textKosong(KodePerujuk,"Dokter Perujuk");
         }else if(KodePj.getText().equals("")||NmDokterPj.getText().equals("")){
             Valid.textKosong(KodePj,"Dokter Penanggung Jawab");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbPemeriksaan.getRowCount()==0){
             Valid.textKosong(Pemeriksaan,"Data Pemeriksaan");
         }else if(jml==0){
             Valid.textKosong(Pemeriksaan,"Data Pemeriksaan");
@@ -871,7 +871,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
             Valid.textKosong(KodePerujuk,"Dokter Pengirim");
         }else if(KodePj.getText().equals("")||NmDokterPj.getText().equals("")){
             Valid.textKosong(KodePj,"Dokter Penanggung Jawab");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbPemeriksaan.getRowCount()==0){
             Valid.textKosong(Pemeriksaan,"Data Pemeriksaan");
         }else if(jml==0){
             Valid.textKosong(Pemeriksaan,"Data Pemeriksaan");
@@ -1030,7 +1030,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
     }//GEN-LAST:event_PenjabKeyPressed
 
     private void tbTarifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTarifMouseClicked
-        if(tabMode2.getRowCount()!=0){
+        if(tbTarif.getRowCount()!=0){
             try {
                 Valid.tabelKosong(tabMode);
                 tampil();
@@ -1099,7 +1099,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
 
     private void BtnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNotaActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbPemeriksaan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             Pemeriksaan.requestFocus();
         }else {

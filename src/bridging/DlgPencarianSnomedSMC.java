@@ -72,7 +72,7 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
         tbKamar.setModel(tabMode);
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbKamar.getColumnCount(); i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(70);
@@ -94,7 +94,7 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
         tbKamar1.setModel(tabModeDetail);
         tbKamar1.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < tabModeDetail.getColumnCount(); i++) {
+        for (int i = 0; i < tbKamar1.getColumnCount(); i++) {
             TableColumn column = tbKamar1.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(250);
@@ -535,7 +535,7 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
                 LCount.setText("0 / 0");
             }
 
-            final int offset = tabMode.getRowCount();
+            final int offset = tbKamar.getRowCount();
 
             new SwingWorker<Void, Object[]>() {
                 private int totalRecords = 0;
@@ -588,7 +588,7 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + " / " + totalRecords);
+                    LCount.setText(tbKamar.getRowCount() + " / " + totalRecords);
                     DlgPencarianSnomedSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

@@ -611,7 +611,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
              JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
              TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){
@@ -647,10 +647,10 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbResep.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -675,10 +675,10 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary_resep where temp37='"+akses.getalamatip()+"'");
-                        for(int i=0;i<tabMode.getRowCount();i++){
+                        for(int i=0;i<tbResep.getRowCount();i++){
                             Sequel.menyimpan("temporary_resep","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                                ""+i,tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,2).toString(),
-                                tabMode.getValueAt(i,3).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",akses.getalamatip()
+                                ""+i,tbResep.getValueAt(i,0).toString(),tbResep.getValueAt(i,1).toString(),tbResep.getValueAt(i,2).toString(),
+                                tbResep.getValueAt(i,3).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",akses.getalamatip()
                             });
                         }
                         Map<String, Object> param = new HashMap<>();
@@ -873,7 +873,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarInput4ActionPerformed
 
     private void ppUbahAturanPakaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUbahAturanPakaiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){
@@ -888,7 +888,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
     }//GEN-LAST:event_ppUbahAturanPakaiActionPerformed
 
     private void ppUbahAturanPakai1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUbahAturanPakai1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){
@@ -903,7 +903,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
     }//GEN-LAST:event_ppUbahAturanPakai1ActionPerformed
 
     private void BtnResepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnResepActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){

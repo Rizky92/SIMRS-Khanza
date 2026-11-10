@@ -124,7 +124,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         };
         tbJadwal.setModel(tabMode);
 
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbJadwal.getColumnCount(); i++) {
             TableColumn column = tbJadwal.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(35);
@@ -511,7 +511,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
 
         Set<String> kodeSah = getKodeShift();
         Set<String> kodeAsing = new LinkedHashSet<>();
-        for (i = 0; i < tabMode.getRowCount(); i++) {
+        for (i = 0; i < tbJadwal.getRowCount(); i++) {
             for (int hari = 0; hari < ym.lengthOfMonth(); hari++) {
                 String kode = getKode(i, hari);
                 if (!kode.isEmpty() && !kodeSah.contains(kode)) {
@@ -528,8 +528,8 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         Set<String> idTampil = new LinkedHashSet<>();
         Set<String> pinTerpakai = new LinkedHashSet<>();
         Set<String> pinKembar = new LinkedHashSet<>();
-        for (i = 0; i < tabMode.getRowCount(); i++) {
-            idTampil.add(tabMode.getValueAt(i, KOLOM_ID).toString());
+        for (i = 0; i < tbJadwal.getRowCount(); i++) {
+            idTampil.add(tbJadwal.getValueAt(i, KOLOM_ID).toString());
             String pin = getPin(i);
             if (!pin.isEmpty() && !pinTerpakai.add(pin)) {
                 pinKembar.add(pin);
@@ -541,10 +541,10 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         }
 
         Set<String> pinBentrok = new LinkedHashSet<>();
-        for (i = 0; i < tabMode.getRowCount(); i++) {
+        for (i = 0; i < tbJadwal.getRowCount(); i++) {
             String pin = getPin(i);
             String pemilik = pemilikPin.get(pin);
-            if (!pin.isEmpty() && null != pemilik && !pemilik.equals(tabMode.getValueAt(i, KOLOM_ID).toString()) && !idTampil.contains(pemilik)) {
+            if (!pin.isEmpty() && null != pemilik && !pemilik.equals(tbJadwal.getValueAt(i, KOLOM_ID).toString()) && !idTampil.contains(pemilik)) {
                 pinBentrok.add(pin);
             }
         }
@@ -560,8 +560,8 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         boolean sukses = true;
         try {
             Sequel.AutoComitFalse();
-            for (i = 0; i < tabMode.getRowCount(); i++) {
-                String id = tabMode.getValueAt(i, KOLOM_ID).toString();
+            for (i = 0; i < tbJadwal.getRowCount(); i++) {
+                String id = tbJadwal.getValueAt(i, KOLOM_ID).toString();
                 if (simpanPin(id, getPin(i), pinLama.getOrDefault(id, ""))) {
                     pinBerubah++;
                 }
@@ -602,9 +602,9 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if (tabMode.getRowCount() != 0) {
+        if (tbJadwal.getRowCount() != 0) {
             if (tbJadwal.getSelectedRow() != -1) {
-                String id = tabMode.getValueAt(tbJadwal.getSelectedRow(), KOLOM_ID).toString();
+                String id = tbJadwal.getValueAt(tbJadwal.getSelectedRow(), KOLOM_ID).toString();
                 Sequel.menghapustfSmc(tabelSmc(), "id=? and tanggal between ? and ?", id,
                     ym.atDay(1).toString(), ym.atEndOfMonth().toString());
                 Sequel.menghapustfSmc(tabelLegacy(), "id=? and tahun=? and bulan=?", id,
@@ -765,7 +765,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if (tabMode.getRowCount() == 0) {
+        if (tbJadwal.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda ekspor...!!!!");
             return;
         }
@@ -804,10 +804,10 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
             }
 
             int nomor = IMPOR_BARIS_AWAL;
-            for (int baris = 0; baris < tabMode.getRowCount(); baris++) {
+            for (int baris = 0; baris < tbJadwal.getRowCount(); baris++) {
                 Row keluar = sheet.createRow(nomor++);
-                keluar.createCell(IMPOR_KOLOM_NAMA).setCellValue(tabMode.getValueAt(baris, 4).toString());
-                keluar.createCell(IMPOR_KOLOM_PIN).setCellValue(tabMode.getValueAt(baris, KOLOM_PIN).toString());
+                keluar.createCell(IMPOR_KOLOM_NAMA).setCellValue(tbJadwal.getValueAt(baris, 4).toString());
+                keluar.createCell(IMPOR_KOLOM_PIN).setCellValue(tbJadwal.getValueAt(baris, KOLOM_PIN).toString());
                 for (int hari = 0; hari < ym.lengthOfMonth(); hari++) {
                     String kode = getKode(baris, hari);
                     if (!kode.isEmpty()) {
@@ -861,9 +861,9 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if (tabMode.getRowCount() == 0) {
+        if (tbJadwal.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-        } else if (tabMode.getRowCount() != 0) {
+        } else if (tbJadwal.getRowCount() != 0) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -967,7 +967,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJadwalKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbJadwal.getRowCount() != 0) {
             if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
                 int baris = tbJadwal.getSelectedRow();
                 int kolom = tbJadwal.getSelectedColumn();
@@ -994,7 +994,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                         if (-1 != terpilih) {
                             Object kode = jammasuk.getTable().getValueAt(terpilih, 1);
                             batalkanEditSmc();
-                            tabMode.setValueAt(null == kode ? "" : kode.toString(), baris, kolom);
+                            tbJadwal.setValueAt(null == kode ? "" : kode.toString(), baris, kolom);
                         }
                         tbJadwal.changeSelection(baris, kolom, false, false);
                         tbJadwal.requestFocus();
@@ -1042,7 +1042,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                 if (-1 != tbJadwal.getSelectedRow() && -1 != tbJadwal.getSelectedColumn()) {
                     evt.consume();
                     batalkanEditSmc();
-                    tabMode.setValueAt("", tbJadwal.getSelectedRow(), tbJadwal.getSelectedColumn());
+                    tbJadwal.setValueAt("", tbJadwal.getSelectedRow(), tbJadwal.getSelectedColumn());
                 }
             }
         }
@@ -1137,7 +1137,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
     }
 
     private String getKode(int baris, int hari) {
-        Object nilai = tabMode.getValueAt(baris, KOLOM_HARI_AWAL + hari);
+        Object nilai = tbJadwal.getValueAt(baris, KOLOM_HARI_AWAL + hari);
         if (nilai == null) {
             return "";
         }
@@ -1259,7 +1259,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                 isi.append("\n");
             }
 
-            int baris = tbJadwal.convertRowIndexToModel(terpilih[i]);
+            int baris = terpilih[i];
             for (int hari = 0; hari < ym.lengthOfMonth(); hari++) {
                 if (0 < hari) {
                     isi.append("\t");
@@ -1344,9 +1344,9 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
             }
 
             String[] sumber = 1 == jadwal.size() ? jadwal.get(0) : jadwal.get(i);
-            int baris = tbJadwal.convertRowIndexToModel(terpilih[i]);
+            int baris = terpilih[i];
             for (int hari = 0; hari < ym.lengthOfMonth(); hari++) {
-                tabMode.setValueAt(hari < sumber.length ? sumber[hari].trim().toUpperCase() : "", baris, KOLOM_HARI_AWAL + hari);
+                tbJadwal.setValueAt(hari < sumber.length ? sumber[hari].trim().toUpperCase() : "", baris, KOLOM_HARI_AWAL + hari);
             }
             ditempel++;
         }
@@ -1357,7 +1357,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
     }
 
     private String getPin(int baris) {
-        Object nilai = tabMode.getValueAt(baris, KOLOM_PIN);
+        Object nilai = tbJadwal.getValueAt(baris, KOLOM_PIN);
         if (nilai == null) {
             return "";
         }
@@ -1574,7 +1574,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                 }
             }
 
-            for (; i < tabMode.getColumnCount(); i++) {
+            for (; i < tbJadwal.getColumnCount(); i++) {
                 TableColumn column = tbJadwal.getColumnModel().getColumn(i);
                 column.setCellRenderer(null);
                 column.setHeaderRenderer(null);
@@ -1629,7 +1629,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                             int nomor = 1;
                             while (rs.next()) {
                                 String[] shift = jadwal.getOrDefault(rs.getString("id"), new String[31]);
-                                Object[] baris = new Object[tabMode.getColumnCount()];
+                                Object[] baris = new Object[tbJadwal.getColumnCount()];
                                 baris[0] = String.valueOf(nomor++);
                                 baris[KOLOM_ID] = rs.getString("id");
                                 baris[2] = rs.getString("nik");
@@ -1660,7 +1660,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbJadwal.getRowCount() + "");
                     DlgJadwalPegawaiSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

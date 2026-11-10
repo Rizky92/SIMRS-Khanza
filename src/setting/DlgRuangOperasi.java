@@ -454,7 +454,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
         }else{
             if(tbBangsal.getSelectedRow()>-1){
                 Sequel.mengedit("ruang_ok","kd_ruang_ok=?","nm_ruang_ok=?,kd_ruang_ok=?",3,new String[]{TNm.getText(),TKd.getText(),tbBangsal.getValueAt(tbBangsal.getSelectedRow(), 0).toString()});
-                if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+                if(tbBangsal.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
             }
         }
@@ -480,10 +480,10 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbBangsal.getRowCount()!=0){
                 Map<String, Object> param = new HashMap<>();
                 param.put("parameter","%"+TCari.getText().trim()+"%");
                 param.put("namars",akses.getnamars());
@@ -545,7 +545,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -555,7 +555,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -592,7 +592,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbBangsalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -670,7 +670,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbBangsal.getRowCount());
     }
 
     public void emptTeks() {

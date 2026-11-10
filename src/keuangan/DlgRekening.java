@@ -779,10 +779,10 @@ public final class DlgRekening extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbKamar.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -816,13 +816,13 @@ public final class DlgRekening extends javax.swing.JDialog {
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                         if(TCari.getText().trim().equals("")){
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                            int row=tabMode.getRowCount();
+                            int row=tbKamar.getRowCount();
                             for(int i=0;i<row;i++){
                                 Sequel.menyimpan("temporary","'"+i+"','"+
-                                                tabMode.getValueAt(i,2).toString()+"','"+
-                                                tabMode.getValueAt(i,3).toString()+"','"+
-                                                tabMode.getValueAt(i,4).toString()+"','"+
-                                                tabMode.getValueAt(i,5).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
+                                                tbKamar.getValueAt(i,2).toString()+"','"+
+                                                tbKamar.getValueAt(i,3).toString()+"','"+
+                                                tbKamar.getValueAt(i,4).toString()+"','"+
+                                                tbKamar.getValueAt(i,5).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
                             }
                             Valid.MyReportqry("rptRekening2.jasper","report","::[ Data Rekening ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         }else{
@@ -962,7 +962,7 @@ public final class DlgRekening extends javax.swing.JDialog {
     }//GEN-LAST:event_Balan1KeyPressed
 
     private void MnSubAkunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSubAkunActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(Nm.getText().trim().equals("")){
@@ -980,7 +980,7 @@ public final class DlgRekening extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSubAkunActionPerformed
 
     private void MnJadikanSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnJadikanSubActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(Nm.getText().trim().equals("")){
@@ -1041,7 +1041,7 @@ public final class DlgRekening extends javax.swing.JDialog {
     }//GEN-LAST:event_KdSubIndukKeyPressed
 
     private void MnJadikanUtamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnJadikanUtamaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(Nm.getText().trim().equals("")){
@@ -1509,7 +1509,7 @@ public final class DlgRekening extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     public void tampil3() {
@@ -1547,7 +1547,7 @@ public final class DlgRekening extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     public void emptTeks() {

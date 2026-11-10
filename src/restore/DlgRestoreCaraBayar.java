@@ -429,7 +429,7 @@ public final class DlgRestoreCaraBayar extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     private void runBackground(Runnable task) {

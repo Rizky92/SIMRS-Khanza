@@ -265,9 +265,9 @@ public final class DlgLhtCatatanPasien extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbBangsal.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -342,7 +342,7 @@ public final class DlgLhtCatatanPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(evt.getClickCount()==2){
                 kolom=tbBangsal.getSelectedColumn();
                 if((kolom==0)||(kolom==1)||(kolom==2)){
@@ -375,7 +375,7 @@ public final class DlgLhtCatatanPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 if((kolom==1)||(kolom==2)||(kolom==0)){
                     DlgCatatan catatan=new DlgCatatan(null,true);
@@ -429,7 +429,7 @@ public final class DlgLhtCatatanPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void MnCatatanPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanPasienActionPerformed
-    if(tabMode.getRowCount()==0){
+    if(tbBangsal.getRowCount()==0){
         JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
         TCari.requestFocus();
     }else if(tbBangsal.getSelectedRow()!= -1){

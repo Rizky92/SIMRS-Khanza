@@ -1273,10 +1273,10 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbObat.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1314,7 +1314,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='70px'><b>Nama Petugas</b></td>"+
                             "</tr>"
                         );
-                        for (i = 0; i < tabMode.getRowCount(); i++) {
+                        for (i = 0; i < tbObat.getRowCount(); i++) {
                             masalahidentifikasi="";
                             ps2=koneksi.prepareStatement(
                                 "select master_masalah_mpp.kode_masalah,master_masalah_mpp.nama_masalah from master_masalah_mpp "+
@@ -1468,7 +1468,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 ChkAccor.setSelected(true);
                 isMenu();
@@ -1479,7 +1479,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     ChkAccor.setSelected(true);
@@ -2037,7 +2037,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -2049,8 +2049,8 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
         Assemen.setText("");
         Identifikasi.setText("");
         Perencanaan.setText("");
-        for (i = 0; i < tabModeMasalah.getRowCount(); i++) {
-            tabModeMasalah.setValueAt(false,i,0);
+        for (i = 0; i < tbIdentifikasiMPP.getRowCount(); i++) {
+            tbIdentifikasiMPP.setValueAt(false,i,0);
         }
         TabRawat.setSelectedIndex(0);
         TDiagnosis.requestFocus();
@@ -2331,8 +2331,8 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             Valid.tabelKosong(tabModeDetailMasalah);
             ChkAccor.setSelected(false);
             isMenu();
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(""+tbObat.getRowCount());
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }

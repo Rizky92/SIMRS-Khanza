@@ -681,10 +681,10 @@ public final class InhealthTagihan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbSJP.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbSJP.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -739,7 +739,7 @@ public final class InhealthTagihan extends javax.swing.JDialog {
     }//GEN-LAST:event_TNoRMActionPerformed
 
     private void tbSJPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSJPMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbSJP.getRowCount()!=0){
             try {
                 ChkAccor.setSelected(true);
                 isMenu();
@@ -750,7 +750,7 @@ public final class InhealthTagihan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSJPMouseClicked
 
     private void tbSJPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSJPKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbSJP.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -891,7 +891,7 @@ public final class InhealthTagihan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbSJP.getRowCount());
     }
 
 

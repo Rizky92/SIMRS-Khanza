@@ -1057,7 +1057,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
 
     private void BtnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNotaActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbPemeriksaan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCariPeriksa.requestFocus();
         }else {
@@ -1125,7 +1125,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahPeriksaActionPerformed
 
     private void tbPemeriksaanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemeriksaanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPemeriksaan.getRowCount()!=0){
             try {
                // getData2();
             } catch (java.lang.NullPointerException e) {
@@ -1203,7 +1203,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahBhpActionPerformed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPemeriksaan.getRowCount()!=0){
             try {
                 //getData();
             } catch (java.lang.NullPointerException e) {
@@ -1212,7 +1212,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbPemeriksaan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 try {
                     //getData();
@@ -1231,7 +1231,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
                 int row=tbObat.getSelectedRow();
                 if(row!= -1){
-                    tabMode.setValueAt("", row,0);
+                    tbObat.setValueAt("", row,0);
                 }
             }
         }
@@ -1270,7 +1270,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
             Valid.textKosong(KodePerujuk,"Dokter Perujuk");
         }else if(KodePj.getText().equals("")||NmDokterPj.getText().equals("")){
             Valid.textKosong(KodePj,"Dokter Penanggung Jawab");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbPemeriksaan.getRowCount()==0){
             Valid.textKosong(TCariPeriksa,"Data Pemeriksaan");
         }else{
             jmlparsial=0;
@@ -1343,7 +1343,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
             Valid.textKosong(KodePerujuk,"Dokter Pengirim");
         }else if(KodePj.getText().equals("")||NmDokterPj.getText().equals("")){
             Valid.textKosong(KodePj,"Dokter Penanggung Jawab");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbPemeriksaan.getRowCount()==0){
             Valid.textKosong(TCariPeriksa,"Data Pemeriksaan");
         }else if(jml==0){
             Valid.textKosong(TCariPeriksa,"Data Pemeriksaan");
@@ -1827,12 +1827,12 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         satuan=new String[jml];
 
         index=0;
-        for(i=0;i<tabMode2.getRowCount();i++){
-            if(!tabMode2.getValueAt(i,0).toString().equals("")){
-                jumlah[index]=Double.parseDouble(tabMode2.getValueAt(i,0).toString());
-                kodebarang[index]=tabMode2.getValueAt(i,1).toString();
-                namabarang[index]=tabMode2.getValueAt(i,2).toString();
-                satuan[index]=tabMode2.getValueAt(i,3).toString();
+        for(i=0;i<tbObat.getRowCount();i++){
+            if(!tbObat.getValueAt(i,0).toString().equals("")){
+                jumlah[index]=Double.parseDouble(tbObat.getValueAt(i,0).toString());
+                kodebarang[index]=tbObat.getValueAt(i,1).toString();
+                namabarang[index]=tbObat.getValueAt(i,2).toString();
+                satuan[index]=tbObat.getValueAt(i,3).toString();
                 index++;
             }
         }

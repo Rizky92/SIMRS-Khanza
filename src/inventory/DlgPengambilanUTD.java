@@ -500,7 +500,7 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
                                                     "stok=stok+"+tbDokter.getValueAt(i,0).toString()+",hargaterakhir='"+tbDokter.getValueAt(i,3).toString()+"'","kode_brng='"+tbDokter.getValueAt(i,1).toString()+"'");
                                 if(aktifkanbatch.equals("yes")){
                                     Sequel.mengedit("data_batch","no_batch=? and kode_brng=? and no_faktur=?","sisa=sisa-?",4,new String[]{
-                                        ""+tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,8).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,9).toString()
+                                        ""+tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,8).toString(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,9).toString()
                                     });
                                     Trackobat.catatRiwayat(tbDokter.getValueAt(i,1).toString(),0,Valid.SetAngka(tbDokter.getValueAt(i,0).toString()),"Pengambilan Medis",akses.getkode(),kddari.getText(),"Simpan",tbDokter.getValueAt(i,8).toString(),tbDokter.getValueAt(i,9).toString(),"UTD/BD, "+Keterangan.getText());
                                     Sequel.menyimpan("gudangbarang","'"+tbDokter.getValueAt(i,1).toString()+"','"+kddari.getText()+"','-"+tbDokter.getValueAt(i,0).toString()+"','"+tbDokter.getValueAt(i,8).toString()+"','"+tbDokter.getValueAt(i,9).toString()+"'",
@@ -685,7 +685,7 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
     }//GEN-LAST:event_KeteranganKeyPressed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 if(tbDokter.getSelectedColumn()==1){
                     isTotal();
@@ -697,15 +697,15 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
                     isTotal();
                 }else if(tbDokter.getSelectedColumn()==2){
                     try {
-                        tbDokter.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString())*
-                                            Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString()),tbDokter.getSelectedRow(),4);
+                        tbDokter.setValueAt(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())*
+                                            Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()),tbDokter.getSelectedRow(),4);
                     } catch (Exception e) {
                         tbDokter.setValueAt(0,tbDokter.getSelectedRow(),4);
                     }
                 }else if(tbDokter.getSelectedColumn()==3){
                     try {
-                        tbDokter.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString())*
-                                            Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString()),tbDokter.getSelectedRow(),4);
+                        tbDokter.setValueAt(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())*
+                                            Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()),tbDokter.getSelectedRow(),4);
                     } catch (Exception e) {
                         tbDokter.setValueAt(0,tbDokter.getSelectedRow(),4);
                     }
@@ -735,9 +735,9 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
                     psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
                     try {
                         psstok.setString(1,kddari.getText());
-                        psstok.setString(2,tabMode.getValueAt(i,1).toString());
-                        psstok.setString(3,tabMode.getValueAt(i,8).toString());
-                        psstok.setString(4,tabMode.getValueAt(i,9).toString());
+                        psstok.setString(2,tbDokter.getValueAt(i,1).toString());
+                        psstok.setString(3,tbDokter.getValueAt(i,8).toString());
+                        psstok.setString(4,tbDokter.getValueAt(i,9).toString());
                         rsstok=psstok.executeQuery();
                         if(rsstok.next()){
                             stok_asal=rsstok.getDouble(1);
@@ -756,7 +756,7 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
                     psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                     try {
                         psstok.setString(1,kddari.getText());
-                        psstok.setString(2,tabMode.getValueAt(i,1).toString());
+                        psstok.setString(2,tbDokter.getValueAt(i,1).toString());
                         rsstok=psstok.executeQuery();
                         if(rsstok.next()){
                             stok_asal=rsstok.getDouble(1);
@@ -777,7 +777,7 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
                 stok_tujuan=0;
                 psstok2=koneksi.prepareStatement("select ifnull(stok,'0') from utd_stok_medis where kode_brng=?");
                 try {
-                    psstok2.setString(1,tabMode.getValueAt(i,1).toString());
+                    psstok2.setString(1,tbDokter.getValueAt(i,1).toString());
                     rsstok=psstok2.executeQuery();
                     if(rsstok.next()){
                         stok_tujuan=rsstok.getDouble(1);
@@ -976,15 +976,15 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
         }else if(row!= -1){
             if(!tbDokter.getValueAt(row,0).toString().equals("")){
                 try {
-                    if(Double.parseDouble(tabMode.getValueAt(row,0).toString())>0){
+                    if(Double.parseDouble(tbDokter.getValueAt(row,0).toString())>0){
                         stok_asal=0;
                         if(aktifkanbatch.equals("yes")){
                             psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
                             try {
                                 psstok.setString(1,kddari.getText());
-                                psstok.setString(2,tabMode.getValueAt(row,1).toString());
-                                psstok.setString(3,tabMode.getValueAt(row,8).toString());
-                                psstok.setString(4,tabMode.getValueAt(row,9).toString());
+                                psstok.setString(2,tbDokter.getValueAt(row,1).toString());
+                                psstok.setString(3,tbDokter.getValueAt(row,8).toString());
+                                psstok.setString(4,tbDokter.getValueAt(row,9).toString());
                                 rsstok=psstok.executeQuery();
                                 if(rsstok.next()){
                                     stok_asal=rsstok.getDouble(1);
@@ -1003,7 +1003,7 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
                             psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                             try {
                                 psstok.setString(1,kddari.getText());
-                                psstok.setString(2,tabMode.getValueAt(row,1).toString());
+                                psstok.setString(2,tbDokter.getValueAt(row,1).toString());
                                 rsstok=psstok.executeQuery();
                                 if(rsstok.next()){
                                     stok_asal=rsstok.getDouble(1);
@@ -1024,7 +1024,7 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
                         stok_tujuan=0;
                         psstok2=koneksi.prepareStatement("select ifnull(stok,'0') from utd_stok_medis where kode_brng=?");
                         try {
-                            psstok2.setString(1,tabMode.getValueAt(row,1).toString());
+                            psstok2.setString(1,tbDokter.getValueAt(row,1).toString());
                             rsstok=psstok2.executeQuery();
                             if(rsstok.next()){
                                 stok_tujuan=rsstok.getDouble(1);
@@ -1065,10 +1065,10 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
         }
 
         subtotal=0;
-        for(int r=0;r<tabMode.getRowCount();r++){
+        for(int r=0;r<tbDokter.getRowCount();r++){
             y=0;
             try {
-                y=Double.parseDouble(tabMode.getValueAt(r,4).toString());
+                y=Double.parseDouble(tbDokter.getValueAt(r,4).toString());
             } catch (Exception e) {
                 y=0;
             }

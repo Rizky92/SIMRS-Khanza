@@ -425,10 +425,10 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbBangsal.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -453,20 +453,20 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        int row=tabMode.getRowCount();
+                        int row=tbBangsal.getRowCount();
                         for(i=0;i<row;i++){
                                 Sequel.menyimpan("temporary","'"+i+"','"+
-                                            tabMode.getValueAt(i,0).toString()+"','"+
-                                            tabMode.getValueAt(i,1).toString()+"','"+
-                                            tabMode.getValueAt(i,2).toString()+"','"+
-                                            tabMode.getValueAt(i,3).toString()+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,4).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()))+"','"+
-                                            tabMode.getValueAt(i,10).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Piutang Pasien");
+                                            tbBangsal.getValueAt(i,0).toString()+"','"+
+                                            tbBangsal.getValueAt(i,1).toString()+"','"+
+                                            tbBangsal.getValueAt(i,2).toString()+"','"+
+                                            tbBangsal.getValueAt(i,3).toString()+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i,4).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i,5).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i,6).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i,7).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i,8).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i,9).toString()))+"','"+
+                                            tbBangsal.getValueAt(i,10).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Piutang Pasien");
                         }
 
                         Map<String, Object> param = new HashMap<>();
@@ -523,7 +523,7 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(tbBangsal.getSelectedRow()!= -1){
                 if(evt.getClickCount()==2){
                     int kolom=tbBangsal.getSelectedColumn();
@@ -552,7 +552,7 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(tbBangsal.getSelectedRow()!= -1){
                 if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                     int kolom=tbBangsal.getSelectedColumn();
@@ -603,7 +603,7 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailPiutangActionPerformed
-    if(tabMode.getRowCount()==0){
+    if(tbBangsal.getRowCount()==0){
         JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
         TCari.requestFocus();
     }else{
@@ -640,7 +640,7 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_MnDetailPiutangActionPerformed
 
     private void MnDetailCicilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailCicilanActionPerformed
-   if(tabMode.getRowCount()==0){
+   if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -854,8 +854,8 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
                 }
             }
 
-            LCount2.setText(""+tabMode.getRowCount());
-            if(tabMode.getRowCount()>0){
+            LCount2.setText(""+tbBangsal.getRowCount());
+            if(tbBangsal.getRowCount()>0){
                 tabMode.addRow(new Object[]{
                     "TOTAL",":","","",totalpiutang,totaluangmuka,totalcicilan,totaldiskon,totaltidakterbayar,sisapiutang,"",""
                 });

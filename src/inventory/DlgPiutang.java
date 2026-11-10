@@ -1046,7 +1046,7 @@ public class DlgPiutang extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1055,7 +1055,7 @@ public class DlgPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1388,7 +1388,7 @@ public class DlgPiutang extends javax.swing.JDialog {
             Valid.textKosong(kdgudang,"Lokasi");
         }else if(UangMuka.getText().trim().equals("")){
             Valid.textKosong(UangMuka,"Bayar");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             kdbar.requestFocus();
         }else{
@@ -1609,7 +1609,7 @@ public class DlgPiutang extends javax.swing.JDialog {
             Valid.textKosong(kdpasien,"Pasien");
         }else if(nmptg.getText().trim().equals("")){
             Valid.textKosong(kdptg,"Petugas");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             kdbar.requestFocus();
         }else {
@@ -1907,17 +1907,17 @@ public class DlgPiutang extends javax.swing.JDialog {
     private void getData() {
        int row=tbDokter.getSelectedRow();
         if(row!= -1){
-            kdbar.setText(tabMode.getValueAt(row,0).toString());
-            nmbar.setText(tabMode.getValueAt(row,1).toString());
-            satuanbar.setText(tabMode.getValueAt(row,2).toString());
-            HrgJual.setText(tabMode.getValueAt(row,3).toString());
-            Jmljual.setText(tabMode.getValueAt(row,4).toString());
-            subtotal.setText(tabMode.getValueAt(row,5).toString());
-            Disc.setText(tabMode.getValueAt(row,6).toString());
-            Bsrdisc.setText(tabMode.getValueAt(row,7).toString());
-            Total.setText(tabMode.getValueAt(row,8).toString());
-            NoBatch.setText(tabMode.getValueAt(row,9).toString());
-            NoFaktur.setText(tabMode.getValueAt(row,10).toString());
+            kdbar.setText(tbDokter.getValueAt(row,0).toString());
+            nmbar.setText(tbDokter.getValueAt(row,1).toString());
+            satuanbar.setText(tbDokter.getValueAt(row,2).toString());
+            HrgJual.setText(tbDokter.getValueAt(row,3).toString());
+            Jmljual.setText(tbDokter.getValueAt(row,4).toString());
+            subtotal.setText(tbDokter.getValueAt(row,5).toString());
+            Disc.setText(tbDokter.getValueAt(row,6).toString());
+            Bsrdisc.setText(tbDokter.getValueAt(row,7).toString());
+            Total.setText(tbDokter.getValueAt(row,8).toString());
+            NoBatch.setText(tbDokter.getValueAt(row,9).toString());
+            NoFaktur.setText(tbDokter.getValueAt(row,10).toString());
         }
     }
 

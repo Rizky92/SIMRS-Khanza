@@ -654,14 +654,14 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
             if(tbObat.getSelectedRow()!=-1){
                 int reply = JOptionPane.showConfirmDialog(rootPane,"Yakin mau dihapus obat "+tbObat.getValueAt(tbObat.getSelectedRow(),2)+"...?","Konfirmasi",JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
-                    tabModeobat.removeRow(tbObat.getSelectedRow());
+                    tabModeobat.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
                 }
             }
         }else if(TabRawat.getSelectedIndex()==1){
             if(tbDetailObatRacikan.getSelectedRow()!=-1){
                 int reply = JOptionPane.showConfirmDialog(rootPane,"Yakin mau dihapus obat "+tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(), 3)+"...?","Konfirmasi",JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
-                    tabModeDetailObatRacikan.removeRow(tbDetailObatRacikan.getSelectedRow());
+                    tabModeDetailObatRacikan.removeRow(tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getSelectedRow()));
                 }
             }
         }

@@ -549,7 +549,7 @@ public class DlgJurnal extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -558,7 +558,7 @@ public class DlgJurnal extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -605,7 +605,7 @@ public class DlgJurnal extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Pilih dulu data yang akan Anda hapus dengan menklik data pada tabel...!!!");
             tbDokter.requestFocus();
         }else{
-            tabMode.removeRow(tbDokter.getSelectedRow());
+            tabMode.removeRow(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()));
             tampil();
             emptTeks();
         }
@@ -710,7 +710,7 @@ public class DlgJurnal extends javax.swing.JDialog {
             Valid.textKosong(NoBukti,"No.Bukti");
         }else if(Ktg.getText().trim().equals("")){
             Valid.textKosong(Ktg,"Keterangan");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             kdrek.requestFocus();
         }else if(ttldebet!=ttlkredit){
@@ -727,12 +727,12 @@ public class DlgJurnal extends javax.swing.JDialog {
                     if(Sequel.menyimpantf2("jurnal","?,?,?,?,?,?","No.Jurnal",6,new String[]{
                         NoJur.getText(),NoBukti.getText(),Valid.SetTgl(TglJurnal.getSelectedItem()+""),TglJurnal.getSelectedItem().toString().substring(11,19),Jenis.getSelectedItem().toString().substring(0,1),Ktg.getText()+", OLEH "+akses.getkode()
                     })==true){
-                        row=tabMode.getRowCount();
+                        row=tbDokter.getRowCount();
 
                         for(i=0;i<row;i++){
-                            if(!tabMode.getValueAt(i,0).toString().equals("")){
+                            if(!tbDokter.getValueAt(i,0).toString().equals("")){
                                 if(Sequel.menyimpantf2("detailjurnal","?,?,?,?","Kode Rekening",4,new String[]{
-                                    NoJur.getText(),tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,2).toString(),tabMode.getValueAt(i,3).toString()
+                                    NoJur.getText(),tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,2).toString(),tbDokter.getValueAt(i,3).toString()
                                 })==false){
                                     sukses=false;
                                 }
@@ -892,14 +892,14 @@ public class DlgJurnal extends javax.swing.JDialog {
     public void tampil() {
         try{
             ttldebet=0;ttlkredit=0;
-            row=tabMode.getRowCount();
+            row=tbDokter.getRowCount();
 
             for(i=0;i<row;i++){
-                ttldebet=ttldebet+Valid.SetAngka(tabMode.getValueAt(i,2).toString());
-                ttlkredit=ttlkredit+Valid.SetAngka(tabMode.getValueAt(i,3).toString());
+                ttldebet=ttldebet+Valid.SetAngka(tbDokter.getValueAt(i,2).toString());
+                ttlkredit=ttlkredit+Valid.SetAngka(tbDokter.getValueAt(i,3).toString());
             }
 
-            if(tabMode.getRowCount()>0){
+            if(tbDokter.getRowCount()>0){
                 LCount1.setText("Total Debet : "+df2.format(ttldebet));
                 LCount2.setText("Total Debet : "+df2.format(ttldebet));
             }
@@ -923,7 +923,7 @@ public class DlgJurnal extends javax.swing.JDialog {
         int row=tbDokter.getSelectedRow();
         if(row!= -1){
             try {
-                kdrek.setText(tabMode.getValueAt(row,0).toString());
+                kdrek.setText(tbDokter.getValueAt(row,0).toString());
                 ps=koneksi.prepareStatement("select rekening.nm_rek, rekening.tipe, rekening.balance from rekening where rekening.kd_rek=?");
                 try {
                     ps.setString(1,kdrek.getText());
@@ -944,8 +944,8 @@ public class DlgJurnal extends javax.swing.JDialog {
                     }
                 }
                 Sequel.cariIsi("select rekeningtahun.saldo_awal from rekeningtahun where rekeningtahun.kd_rek=? order by rekeningtahun.thn desc limit 1",saldoawal,kdrek.getText());
-                debet.setText(tabMode.getValueAt(row,2).toString());
-                kredit.setText(tabMode.getValueAt(row,3).toString());
+                debet.setText(tbDokter.getValueAt(row,2).toString());
+                kredit.setText(tbDokter.getValueAt(row,3).toString());
             } catch (Exception ex) {
                 System.out.println(ex);
             }

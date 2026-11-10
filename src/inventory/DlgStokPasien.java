@@ -508,8 +508,8 @@ public final class DlgStokPasien extends javax.swing.JDialog {
                             Sequel.menyimpan("gudangbarang","'"+tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString()+"','"+tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString()+"','"+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString()+"','',''",
                                          "stok=stok+'"+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString()+"'","kode_brng='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString()+"' and kd_bangsal='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString()+"' and no_batch='' and no_faktur=''");
                         }
-                        tabMode.removeRow(tbKamar.getSelectedRow());
-                        LCount.setText(""+tabMode.getRowCount());
+                        tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
+                        LCount.setText(""+tbKamar.getRowCount());
                     }
                 }
             }
@@ -539,10 +539,10 @@ public final class DlgStokPasien extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbKamar.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -693,7 +693,7 @@ public final class DlgStokPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void ppResepObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObatActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbKamar.getSelectedRow()<= -1){
@@ -1002,7 +1002,7 @@ public final class DlgStokPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_ppResepObatActionPerformed
 
     private void ppResepObat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObat1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbKamar.getSelectedRow()<= -1){
@@ -1310,7 +1310,7 @@ public final class DlgStokPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_ppResepObat1ActionPerformed
 
     private void ppResepObat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObat2ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbKamar.getSelectedRow()<= -1){
@@ -1643,7 +1643,7 @@ public final class DlgStokPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_ppLabelObatActionPerformed
 
     private void ppLabelObat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppLabelObat2ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbKamar.getSelectedRow()<= -1){
@@ -2092,7 +2092,7 @@ public final class DlgStokPasien extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     public JButton getButton(){

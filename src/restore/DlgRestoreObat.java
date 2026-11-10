@@ -511,7 +511,7 @@ public final class DlgRestoreObat extends javax.swing.JDialog {
                         rs.getString("nama_industri")
                     });
                 }
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbObat.getRowCount());
             } catch (SQLException e) {
                 System.out.println("Notifikasi : " + e);
             } finally{

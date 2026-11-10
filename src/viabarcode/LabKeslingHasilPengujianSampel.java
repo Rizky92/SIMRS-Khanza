@@ -663,7 +663,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
             Valid.textKosong(TNoPenugasan,"Nomor Penugasan");
         }else if(KodeSampel.getText().equals("")||NamaSampel.getText().equals("")){
             Valid.textKosong(TCariPeriksa,"Sampel");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbPengujian.getRowCount()==0){
             Valid.textKosong(TCariPeriksa,"Data Hasil Peengujian");
         }else if(jml==0){
             Valid.textKosong(TCariPeriksa,"Data Hasil Peengujian");
@@ -934,7 +934,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
             response = null;
             root = null;
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPengujian.getRowCount());
     }
 
     public void setData(String nopenugasan,String nopermintaan,String kodepelanggan,String namapelanggan,String kodesampel,String namasampel,String kodeanalis,String namaanalis) {

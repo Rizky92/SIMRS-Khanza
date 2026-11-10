@@ -548,7 +548,7 @@ public class InventorySuplier extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -557,7 +557,7 @@ public class InventorySuplier extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -577,8 +577,8 @@ public class InventorySuplier extends javax.swing.JDialog {
             tbDokter.requestFocus();
         }else{
             if(Valid.hapusTabletf(tabMode,Kd,"datasuplier","kode_suplier")==true){
-                tabMode.removeRow(tbDokter.getSelectedRow());
-                LCount.setText(""+tabMode.getRowCount());
+                tabMode.removeRow(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()));
+                LCount.setText(""+tbDokter.getRowCount());
                 emptTeks();
             }
         }
@@ -611,13 +611,13 @@ public class InventorySuplier extends javax.swing.JDialog {
             if(Valid.editTabletf(tabMode,"datasuplier","kode_suplier","?","kode_suplier=?,nama_suplier=?,alamat=?,kota=?,no_telp=?,nama_bank=?,rekening=?",8,new String[]{
                 Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),Bank.getText(),NoRek.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
             })==true){
-                tabMode.setValueAt(Kd.getText(),tbDokter.getSelectedRow(),0);
-                tabMode.setValueAt(Nm.getText(),tbDokter.getSelectedRow(),1);
-                tabMode.setValueAt(Alamat.getText(),tbDokter.getSelectedRow(),2);
-                tabMode.setValueAt(Kota.getText(),tbDokter.getSelectedRow(),3);
-                tabMode.setValueAt(Telp.getText(),tbDokter.getSelectedRow(),4);
-                tabMode.setValueAt(Bank.getText(),tbDokter.getSelectedRow(),5);
-                tabMode.setValueAt(NoRek.getText(),tbDokter.getSelectedRow(),6);
+                tbDokter.setValueAt(Kd.getText(),tbDokter.getSelectedRow(),0);
+                tbDokter.setValueAt(Nm.getText(),tbDokter.getSelectedRow(),1);
+                tbDokter.setValueAt(Alamat.getText(),tbDokter.getSelectedRow(),2);
+                tbDokter.setValueAt(Kota.getText(),tbDokter.getSelectedRow(),3);
+                tbDokter.setValueAt(Telp.getText(),tbDokter.getSelectedRow(),4);
+                tbDokter.setValueAt(Bank.getText(),tbDokter.getSelectedRow(),5);
+                tbDokter.setValueAt(NoRek.getText(),tbDokter.getSelectedRow(),6);
                 emptTeks();
             }
         }
@@ -636,10 +636,10 @@ public class InventorySuplier extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbDokter.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -743,7 +743,7 @@ public class InventorySuplier extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),Bank.getText(),NoRek.getText()
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbDokter.getRowCount());
                 emptTeks();
             }
         }
@@ -932,7 +932,7 @@ public class InventorySuplier extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }
 
     public void emptTeks() {
@@ -950,13 +950,13 @@ public class InventorySuplier extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            Kd.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            Nm.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),1).toString());
-            Alamat.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),2).toString());
-            Kota.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString());
-            Telp.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),4).toString());
-            Bank.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),5).toString());
-            NoRek.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),6).toString());
+            Kd.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+            Nm.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+            Alamat.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString());
+            Kota.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
+            Telp.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
+            Bank.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString());
+            NoRek.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString());
         }
     }
 

@@ -280,11 +280,11 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
             Valid.textKosong(Embalase,"Embalase");
         }else if(Tuslah.getText().trim().equals("")){
             Valid.textKosong(Tuslah,"Tuslah");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbAdmin.getRowCount()==0){
             Sequel.menyimpan("set_embalase","'"+Embalase.getText()+"','"+Tuslah.getText()+"'","Embalase & Tuslah");
             runBackground(() ->tampil());
             emptTeks();
-        }else if(tabMode.getRowCount()>0){
+        }else if(tbAdmin.getRowCount()>0){
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Set Embalase & Tuslah ...!!!!");
             Embalase.requestFocus();
         }
@@ -309,7 +309,7 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbAdmin.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             Embalase.requestFocus();
         }else if(Embalase.getText().trim().equals("")){
@@ -330,10 +330,10 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbAdmin.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data Embalase & Tuslah tidak boleh kosong ...!!!!");
             Embalase.requestFocus();
-        }else if(! (tabMode.getRowCount()==0)) {
+        }else if(! (tbAdmin.getRowCount()==0)) {
             dispose();
         }
     }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -345,7 +345,7 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -354,7 +354,7 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
