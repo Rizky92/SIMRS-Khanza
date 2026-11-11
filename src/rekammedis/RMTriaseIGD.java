@@ -5763,7 +5763,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                                         TNoRw.getText(),tbSkala1.getValueAt(i,1).toString()
                                     })==true){
                                     */
-                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala1", "", TNoRw.getText(), tbSkala1.getValueAt(i, 1).toString())) {
+                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala1", "no_rawat, kode_skala1", TNoRw.getText(), tbSkala1.getValueAt(i, 1).toString())) {
                                         tbSkala1.setValueAt(false,i,0);
                                     }else{
                                         sukses=false;
@@ -5778,7 +5778,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                                         TNoRw.getText(),tbSkala2.getValueAt(i,1).toString()
                                     })==true){
                                     */
-                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala2", "", TNoRw.getText(), tbSkala2.getValueAt(i, 1).toString())) {
+                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala2", "no_rawat, kode_skala2", TNoRw.getText(), tbSkala2.getValueAt(i, 1).toString())) {
                                         tbSkala2.setValueAt(false,i,0);
                                     }else{
                                         sukses=false;
@@ -5871,7 +5871,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                                         TNoRw.getText(),tbSkala3.getValueAt(i,1).toString()
                                     })==true){
                                     */
-                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala3", "", TNoRw.getText(), tbSkala3.getValueAt(i, 1).toString())) {
+                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala3", "no_rawat, kode_skala3", TNoRw.getText(), tbSkala3.getValueAt(i, 1).toString())) {
                                         tbSkala3.setValueAt(false,i,0);
                                     }else{
                                         sukses=false;
@@ -5886,7 +5886,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                                         TNoRw.getText(),tbSkala4.getValueAt(i,1).toString()
                                     })==true){
                                     */
-                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala4", "", TNoRw.getText(), tbSkala4.getValueAt(i, 1).toString())) {
+                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala4", "no_rawat, kode_skala4", TNoRw.getText(), tbSkala4.getValueAt(i, 1).toString())) {
                                         tbSkala4.setValueAt(false,i,0);
                                     }else{
                                         sukses=false;
@@ -5901,7 +5901,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                                         TNoRw.getText(),tbSkala5.getValueAt(i,1).toString()
                                     })==true){
                                     */
-                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala5", "", TNoRw.getText(), tbSkala5.getValueAt(i, 1).toString())) {
+                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala5", "no_rawat, kode_skala5", TNoRw.getText(), tbSkala5.getValueAt(i, 1).toString())) {
                                         tbSkala5.setValueAt(false,i,0);
                                     }else{
                                         sukses=false;
