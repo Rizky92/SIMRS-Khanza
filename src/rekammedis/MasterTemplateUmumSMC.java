@@ -37,7 +37,7 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
     private final validasi Valid = new validasi();
     private DlgCariDokter dokter;
     private volatile boolean ceksukses = false;
-    private boolean memuat = false;
+    private boolean isLoading = false;
 
     static {
         Map<String, String> laporanTindakan = new LinkedHashMap<>();
@@ -47,6 +47,17 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
         laporanTindakan.put("kesimpulan", "Kesimpulan");
         DAFTARMENU.put("RMLaporanTindakan", "Laporan Tindakan");
         DAFTARFIELD.put("RMLaporanTindakan", laporanTindakan);
+
+        Map<String, String> penilaianPreOperasi = new LinkedHashMap<>();
+        penilaianPreOperasi.put("ringkasan_klinik", "Ringkasan Klinik");
+        penilaianPreOperasi.put("pemeriksaan_fisik", "Pemeriksaan Fisik");
+        penilaianPreOperasi.put("pemeriksaan_diagnostik", "Pemeriksaan Diagnostik");
+        penilaianPreOperasi.put("diagnosa_pre_operasi", "Diagnosa Pre Operasi");
+        penilaianPreOperasi.put("rencana_tindakan_bedah", "Rencana Tindakan Bedah");
+        penilaianPreOperasi.put("hal_hal_yang_perludi_persiapkan", "Hal-hal Yang Perlu Dipersiapkan");
+        penilaianPreOperasi.put("terapi_pre_operasi", "Terapi Pre Operasi");
+        DAFTARMENU.put("RMPenilaianPreOperasi", "Pengkajian Pre Operasi");
+        DAFTARFIELD.put("RMPenilaianPreOperasi", penilaianPreOperasi);
     }
 
     public MasterTemplateUmumSMC(java.awt.Frame parent, boolean modal) {
@@ -490,7 +501,9 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
                     menu.getSelectedItem().toString(), field.getSelectedItem().toString(), noTemplate.getText(), namaTemplate.getText(),
                     kdDokter.getText().trim(), getNamaDokter(), isiTemplate.getText(), getKodeMenu(), getKodeField()
                 });
-                emptTeks();
+                isiTemplate.setText("");
+                autonomor();
+                isiTemplate.requestFocus();
                 LCount.setText("" + tabMode.getRowCount());
             } else {
                 JOptionPane.showMessageDialog(null, "Gagal menyimpan template, kemungkinan nomor template sudah digunakan..!!");
@@ -942,7 +955,7 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
     }
 
     private void autonomor() {
-        if (memuat) {
+        if (isLoading) {
             return;
         }
 
@@ -978,10 +991,10 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
     private void getData() {
         if (tbTemplate.getSelectedRow() != -1) {
             int row = tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow());
-            memuat = true;
+            isLoading = true;
             menu.setSelectedKey(tabMode.getValueAt(row, 7).toString());
             field.setSelectedKey(tabMode.getValueAt(row, 8).toString());
-            memuat = false;
+            isLoading = false;
             noTemplate.setText(tabMode.getValueAt(row, 2).toString());
             namaTemplate.setText(tabMode.getValueAt(row, 3).toString());
             kdDokter.setText(tabMode.getValueAt(row, 4).toString());
