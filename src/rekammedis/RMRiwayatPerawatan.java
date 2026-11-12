@@ -1,16 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * DlgLhtBiaya.java
- *
- * Created on 12 Jul 10, 16:21:34
- */
-
 package rekammedis;
 
+import bridging.ApiSatuSehat;
+import bridging.SatuSehatCekNIK;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itextpdf.html2pdf.HtmlConverter;
@@ -47,6 +38,13 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
+import static javafx.concurrent.Worker.State.FAILED;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -56,6 +54,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
+import netscape.javascript.JSObject;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
@@ -67,6 +66,11 @@ import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import simrskhanza.DlgCariPasien;
 
 
@@ -93,6 +97,12 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private JsonNode root;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
+    private ApiSatuSehat api=new ApiSatuSehat();
+    private JFXPanel PanelRMESatuSehat;
+    private WebEngine webRMESatuSehat;
+    private volatile String NoRMSatuSehat="";
+    private String bodySatuSehat="";
+    private final KriptoSatuSehat kriptoSatuSehat=new KriptoSatuSehat();
 
     /** Creates new form DlgLhtBiaya
      * @param parent
@@ -560,6 +570,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         LoadHTMLRetensi = new widget.editorpane();
         Scroll6 = new widget.ScrollPane();
         LoadHTMLWearable = new widget.editorpane();
+        PanelSatuSehat = new widget.PanelBiasa();
+        PanelWebSatuSehat = new widget.PanelBiasa();
         PanelInput = new javax.swing.JPanel();
         ChkInput = new widget.CekBox();
         FormInput = new widget.panelisi();
@@ -688,7 +700,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         WindowPhrase.getContentPane().add(internalFrame8, java.awt.BorderLayout.CENTER);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-11-2026 22:51:55" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2026 11:22:29" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         Tanggal.setName("Tanggal"); // NOI18N
 
@@ -2590,6 +2602,19 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
 
         TabRawat.addTab("Wearable", Scroll6);
 
+        PanelSatuSehat.setBackground(new java.awt.Color(255, 255, 255));
+        PanelSatuSehat.setBorder(null);
+        PanelSatuSehat.setName("PanelSatuSehat"); // NOI18N
+        PanelSatuSehat.setLayout(new java.awt.BorderLayout(1, 1));
+
+        PanelWebSatuSehat.setBackground(new java.awt.Color(255, 255, 255));
+        PanelWebSatuSehat.setBorder(null);
+        PanelWebSatuSehat.setName("PanelWebSatuSehat"); // NOI18N
+        PanelWebSatuSehat.setLayout(new java.awt.BorderLayout(1, 1));
+        PanelSatuSehat.add(PanelWebSatuSehat, java.awt.BorderLayout.CENTER);
+
+        TabRawat.addTab("RME Satu Sehat", PanelSatuSehat);
+
         internalFrame1.add(TabRawat, java.awt.BorderLayout.CENTER);
 
         PanelInput.setBackground(new java.awt.Color(255, 255, 255));
@@ -3001,6 +3026,9 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                 break;
             case 9:
                 runBackground(() -> tampilWearable());
+                break;
+            case 10:
+                runBackground(() -> tampilSatuSehat());
                 break;
             default:
                 break;
@@ -4023,6 +4051,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private widget.TextBox NoRawat;
     private widget.PanelBiasa PanelAccor;
     private javax.swing.JPanel PanelInput;
+    private widget.PanelBiasa PanelSatuSehat;
+    private widget.PanelBiasa PanelWebSatuSehat;
     private widget.TextBox Pekerjaan;
     private widget.TextBox Pendidikan;
     private widget.PasswordBox Phrase;
@@ -40163,6 +40193,276 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif Penilaian Skor BISHOP : "+e);
         }
+    }
+
+    private void tampilSatuSehat() {
+        String norm = NoRM.getText();
+        if (norm.equals(NoRMSatuSehat)) {
+            return;
+        }
+        try {
+            SatuSehatCekNIK cekID = new SatuSehatCekNIK();
+            String idpasien = cekID.tampilIDPasien(Sequel.cariIsi("select pasien.no_ktp from pasien where pasien.no_rkm_medis=?", norm));
+            if (idpasien.equals("")) {
+                JOptionPane.showMessageDialog(null, "Pasien belum terdaftar di SATUSEHAT atau NIK pasien belum diisi");
+                return;
+            }
+            String idpraktisi = cekID.tampilIDParktisi(Sequel.cariIsi("select pegawai.no_ktp from pegawai where pegawai.nik=?", akses.getkode()));
+            if (idpraktisi.equals("")) {
+                JOptionPane.showMessageDialog(null, "Praktisi belum terdaftar di SATUSEHAT atau NIK praktisi belum diisi");
+                return;
+            }
+            bodySatuSehat = "{" +
+                    "\"patient_id\": \"" + idpasien + "\"," +
+                    "\"patient_name\": \"" + NmPasien.getText() + "\"," +
+                    "\"practitioner_id\": \"" + idpraktisi + "\"," +
+                    "\"practitioner_name\": \"" + Sequel.cariIsi("select pegawai.nama from pegawai where pegawai.nik=?", akses.getkode()) + "\"," +
+                    "\"organization_id\": \"" + koneksiDB.IDSATUSEHAT() + "\"," +
+                    "\"organization_name\": \"" + akses.getnamars() + "\"" +
+                 "}";
+            System.out.println("Request JSON : " + bodySatuSehat);
+            NoRMSatuSehat = norm;
+            try {
+                loadURLSatuSehat(ambilLinkSatuSehat("shl"));
+            } catch (Exception e) {
+                System.out.println("Notifikasi SHL : " + e.getMessage());
+                loadURLSatuSehat(ambilLinkSatuSehat("chl"));
+                Thread cek = new Thread(() -> {
+                    for (int i = 0; i < 120; i++) {
+                        try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException ex) {
+                            return;
+                        }
+                        if (!isDisplayable() || !norm.equals(NoRMSatuSehat)) {
+                            return;
+                        }
+                        try {
+                            loadURLSatuSehat(ambilLinkSatuSehat("shl"));
+                            return;
+                        } catch (Exception ex) {
+                            System.out.println("Menunggu persetujuan akses SATUSEHAT : " + ex.getMessage());
+                        }
+                    }
+                    NoRMSatuSehat = "";
+                });
+                cek.setDaemon(true);
+                cek.start();
+                JOptionPane.showMessageDialog(null, "Minta pasien membagikan Kode Akses dari SATUSEHAT Mobile, lalu masukkan di halaman persetujuan.\nRME Nasional akan terbuka otomatis setelah kode diterima");
+            }
+        } catch (Exception e) {
+            NoRMSatuSehat = "";
+            System.out.println("Notifikasi Bridging : " + e);
+            JOptionPane.showMessageDialog(null, "Gagal : " + e.getMessage());
+            if (e.getMessage() != null && e.getMessage().contains("belum dibagikan")) {
+                JOptionPane.showMessageDialog(null, "Pasien belum mengaktifkan berbagi resume medis.\n\nMinta pasien:\n"
+                        + "1. Membuka aplikasi SATUSEHAT Mobile\n2. Melakukan verifikasi identitas (KYC)\n"
+                        + "3. Mengaktifkan 'Bagikan Resume Medis' di pengaturan aplikasi");
+            }
+        }
+    }
+
+    private String ambilLinkSatuSehat(String endpoint) throws Exception {
+        HttpHeaders hdr = new HttpHeaders();
+        hdr.setContentType(MediaType.APPLICATION_JSON);
+        hdr.add("Authorization", "Bearer " + api.TokenSatuSehat());
+        String hasil;
+        try {
+            hasil = api.getRest().exchange(koneksiDB.URLRMESATUSEHAT() + "/" + endpoint, HttpMethod.POST, new org.springframework.http.HttpEntity(bodySatuSehat, hdr), String.class).getBody();
+        } catch (HttpClientErrorException | HttpServerErrorException ex) {
+            hasil = ex.getResponseBodyAsString();
+        }
+        System.out.println("Result JSON " + endpoint + " : " + hasil);
+        JsonNode data = mapper.readTree(hasil);
+        String tautan = data.path("data").path(endpoint.equals("chl") ? "verificationUrl" : "shlinkUrl").asText();
+        if (tautan.equals("")) {
+            throw new Exception(data.path("message").asText());
+        }
+        return tautan;
+    }
+
+    private void createSceneSatuSehat() {
+        Platform.runLater(new Runnable() {
+            public void run() {
+                WebView view = new WebView();
+
+                webRMESatuSehat = view.getEngine();
+                webRMESatuSehat.setJavaScriptEnabled(true);
+                webRMESatuSehat.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15");
+
+                webRMESatuSehat.setCreatePopupHandler(p -> webRMESatuSehat);
+
+                webRMESatuSehat.setOnAlert(e -> System.out.println("Notifikasi WebView : "+e.getData()));
+
+                webRMESatuSehat.documentProperty().addListener((o, lama, baru) -> {
+                    if (baru != null) {
+                        pasangKriptoSatuSehat();
+                    }
+                });
+
+                webRMESatuSehat.getLoadWorker().exceptionProperty().addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
+                    if (webRMESatuSehat.getLoadWorker().getState() == FAILED) {
+                        SwingUtilities.invokeLater(() -> {
+                            JOptionPane.showMessageDialog(
+                                    PanelWebSatuSehat,
+                                    (value != null) ?
+                                            webRMESatuSehat.getLocation() + "\n" + value.getMessage() :
+                                            webRMESatuSehat.getLocation() + "\nUnexpected Catatan.",
+                                    "Loading Catatan...",
+                                    JOptionPane.ERROR_MESSAGE);
+                        });
+                    }
+                });
+
+                PanelRMESatuSehat.setScene(new Scene(view));
+            }
+        });
+    }
+
+    @SuppressWarnings("removal")
+    private void pasangKriptoSatuSehat() {
+        try {
+            ((JSObject) webRMESatuSehat.executeScript("window")).setMember("kriptoJava", kriptoSatuSehat);
+            webRMESatuSehat.executeScript(JS_KRIPTO_SATUSEHAT);
+        } catch (Exception e) {
+            System.out.println("Notifikasi Kripto WebView : " + e);
+        }
+    }
+
+    private static final String JS_KRIPTO_SATUSEHAT = """
+        (function(){
+        if(!window.crypto||window.crypto.subtle||!window.kriptoJava)return;
+        var J=window.kriptoJava;
+        var HL={'SHA-1':20,'SHA-256':32,'SHA-384':48,'SHA-512':64};
+        function u8(x){return x instanceof ArrayBuffer?new Uint8Array(x):new Uint8Array(x.buffer,x.byteOffset,x.byteLength);}
+        function enc(x){var a=u8(x),s='',i;for(i=0;i<a.length;i+=8192)s+=String.fromCharCode.apply(null,a.subarray(i,i+8192));return btoa(s).split('+').join('-').split('/').join('_').replace(/=+$/,'');}
+        function dec(s){s=s.split('-').join('+').split('_').join('/');while(s.length%4)s+='=';var t=atob(s),a=new Uint8Array(t.length),i;for(i=0;i<t.length;i++)a[i]=t.charCodeAt(i);return a;}
+        function buf(a){return a.buffer.slice(a.byteOffset,a.byteOffset+a.byteLength);}
+        function cat(){var n=0,i,o,p=0;for(i=0;i<arguments.length;i++)n+=arguments[i].length;o=new Uint8Array(n);for(i=0;i<arguments.length;i++){o.set(arguments[i],p);p+=arguments[i].length;}return o;}
+        function nm(a){return typeof a==='string'?a:a.name;}
+        function hs(h){return (typeof h==='string'?h:h.name).toUpperCase();}
+        function sz(c){return c==='P-384'?48:32;}
+        function Kunci(t,a,e,u,o){this.type=t;this.algorithm=a;this.extractable=e;this.usages=u;this._=o;}
+        function sec(a,e,u,k){var n=nm(a),al={name:n};if(a.hash)al.hash={name:hs(a.hash)};if(n==='HMAC')al.length=a.length||k.length*8;if(n.indexOf('AES')===0)al.length=k.length*8;return new Kunci('secret',al,e,u,{k:k});}
+        function ec(a,e,u,c,d,x,y){return new Kunci(d?'private':'public',{name:'ECDH',namedCurve:c},e,u,{c:c,d:d,x:x,y:y});}
+        function hmac(h,k,d){return dec(J.hmac(h,enc(k),enc(d)));}
+        function hkdf(h,ikm,salt,info,n){var l=HL[h],prk=hmac(h,salt.length?salt:new Uint8Array(l),ikm),t=new Uint8Array(0),o=new Uint8Array(0),i=1;while(o.length<n){t=hmac(h,prk,cat(t,info,new Uint8Array([i++])));o=cat(o,t);}return o.subarray(0,n);}
+        var S={
+        async digest(a,d){return buf(dec(J.digest(hs(a),enc(d))));},
+        async generateKey(a,e,u){var n=nm(a),p;if(n==='ECDH'){p=J.ecGenerate(a.namedCurve).split('.');return{privateKey:ec(a,e,u,a.namedCurve,p[0],p[1],p[2]),publicKey:ec(a,true,[],a.namedCurve,null,p[1],p[2])};}
+        if(n==='AES-GCM'){p=new Uint8Array(a.length/8);window.crypto.getRandomValues(p);return sec(a,e,u,p);}
+        throw new Error('NotSupportedError: generateKey '+n);},
+        async importKey(f,d,a,e,u){var n=nm(a),r,s=sz(a.namedCurve);
+        if(n==='ECDH'){if(f==='raw'){r=u8(d);if(r.length!==2*s+1||r[0]!==4)throw new Error('DataError: raw EC key');return ec(a,e,u,a.namedCurve,null,enc(r.subarray(1,1+s)),enc(r.subarray(1+s)));}
+        if(f==='jwk'){if(d.kty!=='EC'||d.crv!==a.namedCurve||!d.x||!d.y)throw new Error('DataError: jwk EC key');return ec(a,e,u,a.namedCurve,d.d||null,d.x,d.y);}
+        throw new Error('NotSupportedError: importKey '+f+' '+n);}
+        if(f==='raw')return sec(a,e,u,new Uint8Array(u8(d)));
+        if(f==='jwk'&&d.kty==='oct')return sec(a,e,u,dec(d.k));
+        throw new Error('NotSupportedError: importKey '+f+' '+n);},
+        async exportKey(f,k){var o=k._,r;if(!k.extractable)throw new Error('InvalidAccessError: key not extractable');
+        if(k.algorithm.name==='ECDH'){if(f==='raw'){if(o.d)throw new Error('InvalidAccessError: private key');return buf(cat(new Uint8Array([4]),dec(o.x),dec(o.y)));}
+        if(f==='jwk'){r={kty:'EC',crv:o.c,x:o.x,y:o.y,ext:true,key_ops:k.usages};if(o.d)r.d=o.d;return r;}}
+        else{if(f==='raw')return buf(o.k);if(f==='jwk')return{kty:'oct',k:enc(o.k),ext:true,key_ops:k.usages};}
+        throw new Error('NotSupportedError: exportKey '+f);},
+        async deriveBits(a,k,n){var o=k._,r;
+        if(nm(a)==='ECDH'){r=dec(J.ecdh(o.c,o.d,a.public._.x,a.public._.y));return buf(n?r.subarray(0,n>>3):r);}
+        if(nm(a)==='HKDF')return buf(hkdf(hs(a.hash),o.k,u8(a.salt),u8(a.info),n>>3));
+        throw new Error('NotSupportedError: deriveBits '+nm(a));},
+        async sign(a,k,d){if(nm(a)!=='HMAC')throw new Error('NotSupportedError: sign '+nm(a));return buf(hmac(k.algorithm.hash.name,k._.k,u8(d)));},
+        async encrypt(a,k,d){return buf(dec(J.gcm(true,enc(k._.k),enc(a.iv),enc(a.additionalData||new Uint8Array(0)),enc(d))));},
+        async decrypt(a,k,d){return buf(dec(J.gcm(false,enc(k._.k),enc(a.iv),enc(a.additionalData||new Uint8Array(0)),enc(d))));}
+        };
+        Object.defineProperty(window.crypto,'subtle',{value:S,configurable:true});
+        })();
+        """;
+
+    public static class KriptoSatuSehat {
+        private static java.security.spec.ECParameterSpec kurva(String nama) throws Exception {
+            java.security.AlgorithmParameters ap = java.security.AlgorithmParameters.getInstance("EC");
+            ap.init(new java.security.spec.ECGenParameterSpec(nama.equals("P-384") ? "secp384r1" : "secp256r1"));
+            return ap.getParameterSpec(java.security.spec.ECParameterSpec.class);
+        }
+
+        private static byte[] tetap(java.math.BigInteger v, int n) {
+            byte[] b = v.toByteArray(), h = new byte[n];
+            if (b.length > n) {
+                System.arraycopy(b, b.length - n, h, 0, n);
+            } else {
+                System.arraycopy(b, 0, h, n - b.length, b.length);
+            }
+            return h;
+        }
+
+        private static String enc(byte[] b) {
+            return Base64.getUrlEncoder().withoutPadding().encodeToString(b);
+        }
+
+        private static byte[] dec(String s) {
+            return Base64.getUrlDecoder().decode(s);
+        }
+
+        public String ecGenerate(String crv) throws Exception {
+            java.security.spec.ECParameterSpec sp = kurva(crv);
+            java.security.KeyPairGenerator kpg = java.security.KeyPairGenerator.getInstance("EC");
+            kpg.initialize(sp);
+            java.security.KeyPair kp = kpg.generateKeyPair();
+            int n = (sp.getOrder().bitLength() + 7) / 8;
+            java.security.spec.ECPoint w = ((java.security.interfaces.ECPublicKey) kp.getPublic()).getW();
+            return enc(tetap(((java.security.interfaces.ECPrivateKey) kp.getPrivate()).getS(), n)) + "." + enc(tetap(w.getAffineX(), n)) + "." + enc(tetap(w.getAffineY(), n));
+        }
+
+        public String ecdh(String crv, String d, String x, String y) throws Exception {
+            java.security.spec.ECParameterSpec sp = kurva(crv);
+            java.security.KeyFactory kf = java.security.KeyFactory.getInstance("EC");
+            javax.crypto.KeyAgreement ka = javax.crypto.KeyAgreement.getInstance("ECDH");
+            ka.init(kf.generatePrivate(new java.security.spec.ECPrivateKeySpec(new java.math.BigInteger(1, dec(d)), sp)));
+            ka.doPhase(kf.generatePublic(new java.security.spec.ECPublicKeySpec(new java.security.spec.ECPoint(new java.math.BigInteger(1, dec(x)), new java.math.BigInteger(1, dec(y))), sp)), true);
+            return enc(ka.generateSecret());
+        }
+
+        public String hmac(String hash, String key, String data) throws Exception {
+            javax.crypto.Mac m = javax.crypto.Mac.getInstance("Hmac" + hash.replace("-", ""));
+            byte[] k = dec(key);
+            m.init(new javax.crypto.spec.SecretKeySpec(k.length == 0 ? new byte[1] : k, m.getAlgorithm()));
+            return enc(m.doFinal(dec(data)));
+        }
+
+        public String digest(String hash, String data) throws Exception {
+            return enc(java.security.MessageDigest.getInstance(hash).digest(dec(data)));
+        }
+
+        public String gcm(boolean sandi, String key, String iv, String aad, String data) throws Exception {
+            javax.crypto.Cipher c = javax.crypto.Cipher.getInstance("AES/GCM/NoPadding");
+            c.init(sandi ? javax.crypto.Cipher.ENCRYPT_MODE : javax.crypto.Cipher.DECRYPT_MODE, new javax.crypto.spec.SecretKeySpec(dec(key), "AES"), new javax.crypto.spec.GCMParameterSpec(128, dec(iv)));
+            byte[] a = dec(aad);
+            if (a.length > 0) {
+                c.updateAAD(a);
+            }
+            return enc(c.doFinal(dec(data)));
+        }
+    }
+
+    private void loadURLSatuSehat(String url) {
+        SwingUtilities.invokeLater(() -> {
+            if (PanelRMESatuSehat == null) {
+                PanelRMESatuSehat = new JFXPanel();
+                PanelWebSatuSehat.add(PanelRMESatuSehat, java.awt.BorderLayout.CENTER);
+                PanelWebSatuSehat.revalidate();
+            }
+            Platform.setImplicitExit(false);
+            try {
+                createSceneSatuSehat();
+            } catch (Exception e) {
+            }
+
+            Platform.runLater(() -> {
+                try {
+                    webRMESatuSehat.load(url);
+                } catch (Exception exception) {
+                    webRMESatuSehat.load(url);
+                }
+            });
+        });
     }
 
     private void runBackground(Runnable task) {

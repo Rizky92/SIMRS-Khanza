@@ -7,8 +7,11 @@
 /*.html
 /*.html_files
 /build/
+/Claude outputs/
 /dist/
 /lib/
+/ssrme_tab/
+/tanggal_baru/
 /setting/*.ini
 /setting/*.xml
 report/.settings/org.eclipse.core.resources.prefs

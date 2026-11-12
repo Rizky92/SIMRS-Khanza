@@ -2182,6 +2182,15 @@ public class koneksiDB {
         return var;
     }
 
+    public static String URLRMESATUSEHAT() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("URLRMESATUSEHAT", "");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     public static String IDORGBPJSSATUSEHAT() {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
