@@ -836,7 +836,7 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnJawabKeyPressed
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -847,7 +847,7 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1079,7 +1079,7 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
                         }
                     }
                 }
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbBangsal.getRowCount());
             }else {
                 JOptionPane.showMessageDialog(null,root.path("detail").asText());
             }

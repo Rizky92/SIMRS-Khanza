@@ -688,7 +688,7 @@ public class DlgReturBeli extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -697,7 +697,7 @@ public class DlgReturBeli extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -809,7 +809,7 @@ public class DlgReturBeli extends javax.swing.JDialog {
             if(Valid.hapusTabletf(tabMode,Kdbar," tampreturbeli","no_batch='"+NoBatch.getText()+"' and no_faktur='"+NoFaktur.getText()+"' and petugas='"+akses.getkode()+"' and kode_brng")==true){
                 ttlretur=ttlretur-Double.parseDouble(Subtotal.getText());
                 LTotal.setText(""+Valid.SetAngka(ttlretur));
-                tabMode.removeRow(tbDokter.getSelectedRow());
+                tabMode.removeRow(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()));
                 emptTeks();
             }
         }
@@ -909,7 +909,7 @@ public class DlgReturBeli extends javax.swing.JDialog {
             Valid.textKosong(kdgudang,"Lokasi");
         }else if(nmsup.getText().trim().equals("")){
             Valid.textKosong(kdsup,"Suplier");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             Kdbar.requestFocus();
         }else{
@@ -1357,14 +1357,14 @@ public class DlgReturBeli extends javax.swing.JDialog {
     private void getData() {
        int row=tbDokter.getSelectedRow();
         if(row!= -1){
-            NoFaktur.setText(tabMode.getValueAt(row,0).toString());
-            Kdbar.setText(tabMode.getValueAt(row,1).toString());
-            nmbar.setText(tabMode.getValueAt(row,2).toString());
-            Satuanbar.setText(tabMode.getValueAt(row,3).toString());
-            Hargaretur.setText(tabMode.getValueAt(row,4).toString());
-            Jmlretur.setText(tabMode.getValueAt(row,5).toString());
-            NoBatch.setText(tabMode.getValueAt(row,7).toString());
-            Kadaluwarsa.setText(tabMode.getValueAt(row,8).toString());
+            NoFaktur.setText(tbDokter.getValueAt(row,0).toString());
+            Kdbar.setText(tbDokter.getValueAt(row,1).toString());
+            nmbar.setText(tbDokter.getValueAt(row,2).toString());
+            Satuanbar.setText(tbDokter.getValueAt(row,3).toString());
+            Hargaretur.setText(tbDokter.getValueAt(row,4).toString());
+            Jmlretur.setText(tbDokter.getValueAt(row,5).toString());
+            NoBatch.setText(tbDokter.getValueAt(row,7).toString());
+            Kadaluwarsa.setText(tbDokter.getValueAt(row,8).toString());
             isHitung();
         }
     }

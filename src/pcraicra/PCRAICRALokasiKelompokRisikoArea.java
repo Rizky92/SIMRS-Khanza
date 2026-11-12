@@ -373,7 +373,7 @@ public final class PCRAICRALokasiKelompokRisikoArea extends javax.swing.JDialog 
                     KodeArea.getText(),NamaLokasiArea.getText()
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbKelompokRisikoArea.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -399,9 +399,9 @@ public final class PCRAICRALokasiKelompokRisikoArea extends javax.swing.JDialog 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbKelompokRisikoArea.getSelectedRow()!= -1){
             if(Sequel.meghapustf("pcra_icra_lokasi_kelompok_risiko_area","kode_area",tbKelompokRisikoArea.getValueAt(tbKelompokRisikoArea.getSelectedRow(),0).toString())==true){
-                tabMode.removeRow(tbKelompokRisikoArea.getSelectedRow());
+                tabMode.removeRow(tbKelompokRisikoArea.convertRowIndexToModel(tbKelompokRisikoArea.getSelectedRow()));
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbKelompokRisikoArea.getRowCount());
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus...!!!!");
@@ -426,8 +426,8 @@ public final class PCRAICRALokasiKelompokRisikoArea extends javax.swing.JDialog 
                 if(Sequel.mengedittf("pcra_icra_lokasi_kelompok_risiko_area","kode_area=?","kode_area=?,nama_area=?",3,new String[]{
                         KodeArea.getText(),NamaLokasiArea.getText(),tbKelompokRisikoArea.getValueAt(tbKelompokRisikoArea.getSelectedRow(), 0).toString()
                     })==true){
-                    tabMode.setValueAt(KodeArea.getText(),tbKelompokRisikoArea.getSelectedRow(),0);
-                    tabMode.setValueAt(NamaLokasiArea.getText(),tbKelompokRisikoArea.getSelectedRow(),1);
+                    tbKelompokRisikoArea.setValueAt(KodeArea.getText(),tbKelompokRisikoArea.getSelectedRow(),0);
+                    tbKelompokRisikoArea.setValueAt(NamaLokasiArea.getText(),tbKelompokRisikoArea.getSelectedRow(),1);
                     emptTeks();
                 }
             }else{
@@ -494,7 +494,7 @@ public final class PCRAICRALokasiKelompokRisikoArea extends javax.swing.JDialog 
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKelompokRisikoAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKelompokRisikoAreaMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKelompokRisikoArea.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -503,7 +503,7 @@ public final class PCRAICRALokasiKelompokRisikoArea extends javax.swing.JDialog 
     }//GEN-LAST:event_tbKelompokRisikoAreaMouseClicked
 
     private void tbKelompokRisikoAreaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKelompokRisikoAreaKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKelompokRisikoArea.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -611,7 +611,7 @@ public final class PCRAICRALokasiKelompokRisikoArea extends javax.swing.JDialog 
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKelompokRisikoArea.getRowCount());
     }
 
     private void getData() {

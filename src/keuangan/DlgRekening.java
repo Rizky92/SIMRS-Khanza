@@ -962,7 +962,7 @@ public final class DlgRekening extends javax.swing.JDialog {
     }//GEN-LAST:event_Balan1KeyPressed
 
     private void MnSubAkunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSubAkunActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(Nm.getText().trim().equals("")){
@@ -980,7 +980,7 @@ public final class DlgRekening extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSubAkunActionPerformed
 
     private void MnJadikanSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnJadikanSubActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(Nm.getText().trim().equals("")){
@@ -1041,7 +1041,7 @@ public final class DlgRekening extends javax.swing.JDialog {
     }//GEN-LAST:event_KdSubIndukKeyPressed
 
     private void MnJadikanUtamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnJadikanUtamaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(Nm.getText().trim().equals("")){
@@ -1509,7 +1509,7 @@ public final class DlgRekening extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     public void tampil3() {
@@ -1547,7 +1547,7 @@ public final class DlgRekening extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     public void emptTeks() {

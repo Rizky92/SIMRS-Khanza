@@ -86,7 +86,7 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
         tbJadwal.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbJadwal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbJadwal.getColumnCount(); i++) {
             TableColumn column = tbJadwal.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(20);
@@ -500,7 +500,7 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbJadwalMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJadwalMouseReleased
-        if (tabMode.getRowCount() > 0) {
+        if (tbJadwal.getRowCount() > 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -536,7 +536,7 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
                     false, kdPintu.getText(), nmPintu.getText(), kddokter.getText(), nmdokter.getText(), KdPoli.getText(), TPoli.getText()
                 });
                 emptTeks();
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbJadwal.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -550,7 +550,7 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
             if (tbJadwal.getValueAt(i, 0).toString().equals("true")) {
                 if (Sequel.queryutf("delete from set_pintu_smc where kd_pintu='" + tbJadwal.getValueAt(i, 1).toString() + "' and kd_dokter='" + tbJadwal.getValueAt(i, 3).toString() + "' " +
                     "and kd_poli='" + tbJadwal.getValueAt(i, 5).toString() + "'") == true) {
-                    tabMode.removeRow(i);
+                    tabMode.removeRow(tbJadwal.convertRowIndexToModel(i));
                     i--;
                 }
             }
@@ -638,7 +638,7 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void tbJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJadwalKeyPressed
-        if (tabMode.getRowCount() > 0) {
+        if (tbJadwal.getRowCount() > 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
@@ -824,7 +824,7 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
 
-        LCount.setText("" + tabMode.getRowCount());
+        LCount.setText("" + tbJadwal.getRowCount());
     }
 
     public void emptTeks() {

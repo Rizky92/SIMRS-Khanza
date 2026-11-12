@@ -3246,7 +3246,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbDataSEPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDataSEPMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDataSEP.getRowCount()!=0){
             try {
                getData();
             } catch (java.lang.NullPointerException e) {
@@ -3267,7 +3267,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDataSEPMouseClicked
 
     private void tbDataSEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDataSEPKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDataSEP.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                    getData();
@@ -5720,7 +5720,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     }//GEN-LAST:event_ppDaftarRujukanBtnPrintActionPerformed
 
     private void tbDataSEPInternalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDataSEPInternalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDataSEP.getRowCount()!=0){
             try {
                getDataInternal();
             } catch (java.lang.NullPointerException e) {
@@ -5741,7 +5741,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDataSEPInternalMouseClicked
 
     private void tbDataSEPInternalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDataSEPInternalKeyPressed
-        if(tabModeInternal.getRowCount()!=0){
+        if(tbDataSEPInternal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                    getDataInternal();
@@ -6352,7 +6352,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDataSEP.getRowCount());
     }
 
     public void tampilInternal() {
@@ -6470,7 +6470,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeInternal.getRowCount());
+        LCount.setText(""+tbDataSEPInternal.getRowCount());
     }
 
     private void isRawat() {
@@ -6828,7 +6828,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
             if(nameNode.path("code").asText().equals("200")){
                 Sequel.meghapus("bridging_sep","no_sep",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
-                tabMode.removeRow(tbDataSEP.getSelectedRow());
+                tabMode.removeRow(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()));
                 emptTeks();
             }
         } catch (Exception e) {
@@ -6898,7 +6898,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                     tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),43).toString(),
                     tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),5).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),15).toString()
                 });
-                tabModeInternal.removeRow(tbDataSEPInternal.getSelectedRow());
+                tabModeInternal.removeRow(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()));
                 emptTeks();
             }
         } catch (Exception e) {

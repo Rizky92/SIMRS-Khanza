@@ -1171,7 +1171,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
 
     private void ppCetakNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCetakNotaActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1179,7 +1179,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
         }else{
             if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Nota");
-            }else if(tabMode.getRowCount()==0){
+            }else if(tbDokter.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 kdbar.requestFocus();
             }else {
@@ -1190,7 +1190,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppCetakNotaActionPerformed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1404,7 +1404,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void ppVerifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppVerifActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1430,7 +1430,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_TabRawatMouseClicked
 
     private void ppResepObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObatActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1478,7 +1478,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppResepObatActionPerformed
 
     private void ppResepObat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObat1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1528,7 +1528,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppResepObat1ActionPerformed
 
     private void ppResepObat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObat2ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){

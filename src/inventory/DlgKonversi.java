@@ -630,7 +630,7 @@ public final class DlgKonversi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -639,7 +639,7 @@ public final class DlgKonversi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -686,7 +686,7 @@ public final class DlgKonversi extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbKamarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -773,7 +773,7 @@ public final class DlgKonversi extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        int b=tabMode.getRowCount();
+        int b=tbKamar.getRowCount();
         LCount.setText(""+b);
     }
 
@@ -788,10 +788,10 @@ public final class DlgKonversi extends javax.swing.JDialog {
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            n1.setText(tabMode.getValueAt(row,0).toString());
-            kdsat1.setSelectedItem(tabMode.getValueAt(row,1).toString());
-            n2.setText(tabMode.getValueAt(row,3).toString());
-            kdsat2.setSelectedItem(tabMode.getValueAt(row,4).toString());
+            n1.setText(tbKamar.getValueAt(row,0).toString());
+            kdsat1.setSelectedItem(tbKamar.getValueAt(row,1).toString());
+            n2.setText(tbKamar.getValueAt(row,3).toString());
+            kdsat2.setSelectedItem(tbKamar.getValueAt(row,4).toString());
         }
     }
 

@@ -699,7 +699,7 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
             Valid.textKosong(NoBayar,"Nomor Verifikasi");
         }else if(KodeSampel.getText().equals("")||NamaSampel.getText().equals("")){
             Valid.textKosong(NoBayar,"Sampel");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbValidasi.getRowCount()==0){
             Valid.textKosong(NoBayar,"Data Pembayaran");
         }else if(Sequel.cariInteger("select count(labkesling_pembayaran_pengujian_sampel.no_permintaan) from labkesling_pembayaran_pengujian_sampel where labkesling_pembayaran_pengujian_sampel.no_permintaan=? ",NoPermintaan.getText())>0){
             JOptionPane.showMessageDialog(null,"Maaf, data tagihan pengujian dengan No.Permintaan tersebut sudah pernah disimpan...!!!");
@@ -889,11 +889,11 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
     }//GEN-LAST:event_tbAkunBayarPropertyChange
 
     private void tbAkunBayarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAkunBayarKeyPressed
-        if(tabModeAkunBayar.getRowCount()!=0){
+        if(tbAkunBayar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 if(tbAkunBayar.getRowCount()!=0){
                     if((tbAkunBayar.getSelectedColumn()==2)||(tbAkunBayar.getSelectedColumn()==3)||(tbAkunBayar.getSelectedColumn()==4)){
-                        if(!tabModeAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),2).toString().equals("")){
+                        if(!tbAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),2).toString().equals("")){
                             tbAkunBayar.setValueAt(
                                     Valid.roundUp((Valid.SetAngka(tbAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),3).toString())/100)*
                                     Valid.SetAngka(tbAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),2).toString()),100),tbAkunBayar.getSelectedRow(),4);
@@ -1210,19 +1210,19 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
     private void isKembali(){
         bayar=0;besarppn=0;tagihanppn=0;countbayar=0;kekurangan=0;
 
-        for(i=0;i<tabModeAkunBayar.getRowCount();i++){
-            if(!tabModeAkunBayar.getValueAt(i,2).toString().equals("")){
+        for(i=0;i<tbAkunBayar.getRowCount();i++){
+            if(!tbAkunBayar.getValueAt(i,2).toString().equals("")){
                 countbayar++;
                 try {
-                    bayar=bayar+Double.parseDouble(tabModeAkunBayar.getValueAt(i,2).toString());
+                    bayar=bayar+Double.parseDouble(tbAkunBayar.getValueAt(i,2).toString());
                 } catch (Exception e) {
                     bayar=bayar+0;
                 }
             }
 
-            if(!tabModeAkunBayar.getValueAt(i,4).toString().equals("")){
+            if(!tbAkunBayar.getValueAt(i,4).toString().equals("")){
                 try {
-                    besarppn=besarppn+Valid.roundUp(Double.parseDouble(tabModeAkunBayar.getValueAt(i,4).toString()),100);
+                    besarppn=besarppn+Valid.roundUp(Double.parseDouble(tbAkunBayar.getValueAt(i,4).toString()),100);
                 } catch (Exception e) {
                     besarppn=besarppn+0;
                 }

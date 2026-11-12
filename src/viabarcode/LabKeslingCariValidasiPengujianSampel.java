@@ -1494,7 +1494,7 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                             Sequel.queryu("update labkesling_verifikasi_pengujian_sampel set status='Belum Divalidasi' where no_permintaan='"+tbValidasi.getValueAt(tbValidasi.getSelectedRow(),4).toString()+"'");
                             Sequel.Commit();
                             JOptionPane.showMessageDialog(null,"Proses hapus selesai...!");
-                            tabModeValidasi.removeRow(tbValidasi.getSelectedRow());
+                            tabModeValidasi.removeRow(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()));
                             LTotal.setText(tbValidasi.getRowCount()+"");
                             Valid.tabelKosong(tabModeDetailValidasi);
                         }else{
@@ -1688,7 +1688,7 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                         rs.getString("kode_sampel"),rs.getString("nama_sampel"),rs.getString("status"),rs.getString("catatan"),rs.getString("nip_verifikator"),rs.getString("pjverifikasi")
                     });
                 }
-                LTotal.setText(tabModeValidasi.getRowCount()+"");
+                LTotal.setText(tbValidasi.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{
@@ -1759,7 +1759,7 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                         rs.getString("nip_analis"),rs.getString("analis"),rs.getString("nip_pjpengujian"),rs.getString("pjpengujian")
                     });
                 }
-                LTotal.setText(tabModeRekapValidasi.getRowCount()+"");
+                LTotal.setText(tbRekapValidasi.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{

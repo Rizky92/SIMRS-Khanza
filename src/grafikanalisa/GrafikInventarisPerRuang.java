@@ -481,7 +481,7 @@ public class GrafikInventarisPerRuang extends javax.swing.JDialog {
                     totalaset=totalaset+rs.getDouble("harga");
                     tabMode.addRow(new Object[]{rs.getString(3)+" ("+rs.getString(1)+")",rs.getString(2),"",rs.getDouble(4),""});
                 }
-                if(tabMode.getRowCount()>0){
+                if(tbBangsal.getRowCount()>0){
                     tabMode.addRow(new Object[]{"Jumlah : ",total,"100 %",totalaset,"100 %"});
                     for(i=0;i<tbBangsal.getRowCount();i++){
                         tbBangsal.setValueAt(Math.round((Double.parseDouble(tbBangsal.getValueAt(i,1).toString())/total)*100)+" %",i,2);

@@ -828,7 +828,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try{
                 if(tbObat.getSelectedRow()!= -1){
                     if(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString().equals("")){
@@ -2105,7 +2105,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void BtnRiwayatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRiwayatActionPerformed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if(tbObat.getSelectedRow()!= -1){
                 if (resume == null || !resume.isDisplayable()) {
                     resume=new RMRiwayatPerawatan(null,false);
@@ -2356,7 +2356,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void isCek(){

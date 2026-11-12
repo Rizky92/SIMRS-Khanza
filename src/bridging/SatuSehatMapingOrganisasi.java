@@ -535,7 +535,7 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
                             KodeDepartemen.getText(),NamaDepartemen.getText(),response.asText()
                         });
                         emptTeks();
-                        LCount.setText(""+tabMode.getRowCount());
+                        LCount.setText(""+tbJnsPerawatan.getRowCount());
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
@@ -662,9 +662,9 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
                     response = root.path("id");
                     if(!response.asText().equals("")){
                         if(Valid.hapusTabletf(tabMode,KodeDepartemen,"satu_sehat_mapping_departemen","dep_id")==true){
-                            tabMode.removeRow(tbJnsPerawatan.getSelectedRow());
+                            tabMode.removeRow(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()));
                             emptTeks();
-                            LCount.setText(""+tabMode.getRowCount());
+                            LCount.setText(""+tbJnsPerawatan.getRowCount());
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
@@ -786,9 +786,9 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
                         if(Sequel.mengedittf("satu_sehat_mapping_departemen","dep_id=?","dep_id=?,id_organisasi_satusehat=?",3,new String[]{
                                 KodeDepartemen.getText(),response.asText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
                             })==true){
-                            tabMode.setValueAt(KodeDepartemen.getText(),tbJnsPerawatan.getSelectedRow(),0);
-                            tabMode.setValueAt(NamaDepartemen.getText(),tbJnsPerawatan.getSelectedRow(),1);
-                            tabMode.setValueAt(response.asText(),tbJnsPerawatan.getSelectedRow(),3);
+                            tbJnsPerawatan.setValueAt(KodeDepartemen.getText(),tbJnsPerawatan.getSelectedRow(),0);
+                            tbJnsPerawatan.setValueAt(NamaDepartemen.getText(),tbJnsPerawatan.getSelectedRow(),1);
+                            tbJnsPerawatan.setValueAt(response.asText(),tbJnsPerawatan.getSelectedRow(),3);
                             emptTeks();
                         }
                     }else{
@@ -918,7 +918,7 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -954,7 +954,7 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1039,7 +1039,7 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {

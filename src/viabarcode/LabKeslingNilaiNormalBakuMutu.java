@@ -496,7 +496,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
                     KodeParameter.getText(),NamaParameter.getText(),MetodePengujian.getText(),Satuan.getText(),
                     NilaiNormal.getText(),KodeSampel.getText(),NamaSampel.getText(),BakuMutu.getText()
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbBangsal.getRowCount());
                 emptTeks();
             }
         }
@@ -524,9 +524,9 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
         if(Sequel.queryu2tf("delete from labkesling_nilai_normal_baku_mutu where kode_sampel=? and kode_parameter=?",2,
             new String[]{KodeSampel.getText(),KodeParameter.getText()})==true){
             if(tbBangsal.getSelectedRow()!= -1){
-                tabMode.removeRow(tbBangsal.getSelectedRow());
+                tabMode.removeRow(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()));
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbBangsal.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
@@ -650,7 +650,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -660,7 +660,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -909,7 +909,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbBangsal.getRowCount());
     }
 
     public void emptTeks() {

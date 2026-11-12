@@ -820,7 +820,7 @@ public final class TokoStokOpname extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
         LTotalBeli.setText(df2.format(totalreal));
         LTotal.setText(df2.format(total));
     }

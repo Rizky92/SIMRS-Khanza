@@ -386,7 +386,7 @@ public final class DlgSetResepPerCaraBayar extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     KodeBayar.getText(),NamaBayar.getText(),KodeObat.getText(),NamaObat.getText()
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbObatPenyakit.getRowCount());
             }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -410,7 +410,7 @@ public final class DlgSetResepPerCaraBayar extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObatPenyakit.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             KodeBayar.requestFocus();
         }else if(NamaBayar.getText().trim().equals("")&&NamaObat.getText().trim().equals("")){
@@ -418,8 +418,8 @@ public final class DlgSetResepPerCaraBayar extends javax.swing.JDialog {
         }else if((!NamaBayar.getText().trim().equals(""))&&(!NamaObat.getText().trim().equals(""))){
             if(Sequel.meghapustf("set_resep_per_cara_bayar","kd_pj","kode_brng",KodeBayar.getText(),KodeObat.getText())==true){
                 if(tbObatPenyakit.getSelectedRow()!= -1){
-                    tabMode.removeRow(tbObatPenyakit.getSelectedRow());
-                    LCount.setText(""+tabMode.getRowCount());
+                    tabMode.removeRow(tbObatPenyakit.convertRowIndexToModel(tbObatPenyakit.getSelectedRow()));
+                    LCount.setText(""+tbObatPenyakit.getRowCount());
                 }
             }
         }
@@ -523,7 +523,7 @@ public final class DlgSetResepPerCaraBayar extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCaraBayarKeyPressed
 
     private void tbObatPenyakitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatPenyakitMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObatPenyakit.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -532,7 +532,7 @@ public final class DlgSetResepPerCaraBayar extends javax.swing.JDialog {
 }//GEN-LAST:event_tbObatPenyakitMouseClicked
 
     private void tbObatPenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatPenyakitKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObatPenyakit.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -691,7 +691,7 @@ public final class DlgSetResepPerCaraBayar extends javax.swing.JDialog {
         }catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObatPenyakit.getRowCount());
     }
 
     private void emptTeks() {

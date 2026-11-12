@@ -57,7 +57,7 @@ public final class SatuSehatReferensiNumeratorSMC extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbKamar.getColumnCount(); i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(80);
@@ -243,7 +243,7 @@ public final class SatuSehatReferensiNumeratorSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbKamar.getRowCount() != 0) {
             if (evt.getClickCount() == 2) {
                 dispose();
             }
@@ -251,7 +251,7 @@ public final class SatuSehatReferensiNumeratorSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbKamar.getRowCount() != 0) {
             if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
                 dispose();
             } else if (evt.getKeyCode() == KeyEvent.VK_SHIFT) {
@@ -387,7 +387,7 @@ public final class SatuSehatReferensiNumeratorSMC extends javax.swing.JDialog {
                     }
 
                     tabMode.fireTableDataChanged();
-                    LCount.setText("" + tabMode.getRowCount());
+                    LCount.setText("" + tbKamar.getRowCount());
                     SatuSehatReferensiNumeratorSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }
@@ -449,7 +449,7 @@ public final class SatuSehatReferensiNumeratorSMC extends javax.swing.JDialog {
                         }
 
                         tabMode.fireTableDataChanged();
-                        LCount.setText("" + tabMode.getRowCount());
+                        LCount.setText("" + tbKamar.getRowCount());
                         SatuSehatReferensiNumeratorSMC.this.setCursor(Cursor.getDefaultCursor());
                         ceksukses = false;
                     }

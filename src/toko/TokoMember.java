@@ -777,7 +777,7 @@ public final class TokoMember extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbPetugasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPetugasMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPetugas.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -820,7 +820,7 @@ public final class TokoMember extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbPetugasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPetugasKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbPetugas.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -836,10 +836,10 @@ public final class TokoMember extends javax.swing.JDialog {
 
     private void MnKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKartuActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbPetugas.getRowCount()!=0){
             if(tbPetugas.getSelectedRow()> -1){
                 Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
@@ -953,7 +953,7 @@ public final class TokoMember extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPetugas.getRowCount());
     }
 
     public void emptTeks() {

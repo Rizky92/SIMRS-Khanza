@@ -590,7 +590,7 @@ public class UTDKomponenDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbKomponenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKomponenMouseClicked
-        if(tabModeKomponen.getRowCount()!=0){
+        if(tbKomponen.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -599,7 +599,7 @@ public class UTDKomponenDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKomponenMouseClicked
 
     private void tbKomponenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKomponenKeyPressed
-        if(tabModeKomponen.getRowCount()!=0){
+        if(tbKomponen.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -656,7 +656,7 @@ public class UTDKomponenDarah extends javax.swing.JDialog {
                    "paket_bhp=?,kso=?,manajemen=?,total=?,pembatalan=?",10,new String[]{
                 Kode.getText(),Nama.getText(),Lama.getText(),JasaSarana.getText(),PaketBHP.getText(),
                 KSO.getText(),Manajemen.getText(),Total.getText(),Pembatalan.getText(),
-                tabModeKomponen.getValueAt(tbKomponen.getSelectedRow(),0).toString()
+                tbKomponen.getValueAt(tbKomponen.getSelectedRow(),0).toString()
               })==true){
                 emptTeks();
                 runBackground(() ->tampil());
@@ -1005,7 +1005,7 @@ public class UTDKomponenDarah extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeKomponen.getRowCount());
+        LCount.setText(""+tbKomponen.getRowCount());
     }
 
     public void emptTeks() {
@@ -1024,15 +1024,15 @@ public class UTDKomponenDarah extends javax.swing.JDialog {
 
     private void getData() {
         if(tbKomponen.getSelectedRow()!= -1){
-            Kode.setText(tabModeKomponen.getValueAt(tbKomponen.getSelectedRow(),0).toString());
-            Nama.setText(tabModeKomponen.getValueAt(tbKomponen.getSelectedRow(),1).toString());
-            Lama.setText(tabModeKomponen.getValueAt(tbKomponen.getSelectedRow(),2).toString());
-            JasaSarana.setText(""+Math.round(Double.parseDouble(tabModeKomponen.getValueAt(tbKomponen.getSelectedRow(),3).toString())));
-            PaketBHP.setText(""+Math.round(Double.parseDouble(tabModeKomponen.getValueAt(tbKomponen.getSelectedRow(),4).toString())));
-            KSO.setText(""+Math.round(Double.parseDouble(tabModeKomponen.getValueAt(tbKomponen.getSelectedRow(),5).toString())));
-            Manajemen.setText(""+Math.round(Double.parseDouble(tabModeKomponen.getValueAt(tbKomponen.getSelectedRow(),6).toString())));
-            Total.setText(""+Math.round(Double.parseDouble(tabModeKomponen.getValueAt(tbKomponen.getSelectedRow(),7).toString())));
-            Pembatalan.setText(""+Math.round(Double.parseDouble(tabModeKomponen.getValueAt(tbKomponen.getSelectedRow(),8).toString())));
+            Kode.setText(tbKomponen.getValueAt(tbKomponen.getSelectedRow(),0).toString());
+            Nama.setText(tbKomponen.getValueAt(tbKomponen.getSelectedRow(),1).toString());
+            Lama.setText(tbKomponen.getValueAt(tbKomponen.getSelectedRow(),2).toString());
+            JasaSarana.setText(""+Math.round(Double.parseDouble(tbKomponen.getValueAt(tbKomponen.getSelectedRow(),3).toString())));
+            PaketBHP.setText(""+Math.round(Double.parseDouble(tbKomponen.getValueAt(tbKomponen.getSelectedRow(),4).toString())));
+            KSO.setText(""+Math.round(Double.parseDouble(tbKomponen.getValueAt(tbKomponen.getSelectedRow(),5).toString())));
+            Manajemen.setText(""+Math.round(Double.parseDouble(tbKomponen.getValueAt(tbKomponen.getSelectedRow(),6).toString())));
+            Total.setText(""+Math.round(Double.parseDouble(tbKomponen.getValueAt(tbKomponen.getSelectedRow(),7).toString())));
+            Pembatalan.setText(""+Math.round(Double.parseDouble(tbKomponen.getValueAt(tbKomponen.getSelectedRow(),8).toString())));
         }
     }
 

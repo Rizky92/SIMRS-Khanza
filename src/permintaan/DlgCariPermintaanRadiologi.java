@@ -1606,7 +1606,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void tbRadiologiRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRadiologiRalanMouseClicked
-    if(tabMode.getRowCount()!=0){
+    if(tbRadiologiRalan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1615,7 +1615,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbRadiologiRalanMouseClicked
 
     private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbRadiologiRalanKeyPressed
-   if(tabMode.getRowCount()!=0){
+   if(tbRadiologiRalan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1628,11 +1628,11 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private void TabRawatJalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatJalanMouseClicked
         TeksKosong();
         if(TabRawatJalan.getSelectedIndex()==0){
-            if(tabMode.getRowCount()==0){
+            if(tbRadiologiRalan.getRowCount()==0){
                 runBackground(() -> tampil());
             }
         }else if(TabRawatJalan.getSelectedIndex()==1){
-            if(tabMode2.getRowCount()==0){
+            if(tbRadiologiRalan2.getRowCount()==0){
                 runBackground(() -> tampil2());
             }
         }
@@ -1971,21 +1971,21 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         TeksKosong();
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbRadiologiRalan.getRowCount()==0){
                     runBackground(() -> tampil());
                 }
             }else if(TabRawatJalan.getSelectedIndex()==1){
-                if(tabMode2.getRowCount()==0){
+                if(tbRadiologiRalan2.getRowCount()==0){
                     runBackground(() -> tampil2());
                 }
             }
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
-                if(tabMode3.getRowCount()==0){
+                if(tbRadiologiRanap.getRowCount()==0){
                     runBackground(() -> tampil3());
                 }
             }else if(TabRawatInap.getSelectedIndex()==1){
-                if(tabMode4.getRowCount()==0){
+                if(tbRadiologiRanap2.getRowCount()==0){
                     runBackground(() -> tampil4());
                 }
             }
@@ -1993,7 +1993,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_TabPilihRawatMouseClicked
 
     private void tbRadiologiRanapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRadiologiRanapMouseClicked
-        if(tabMode3.getRowCount()!=0){
+        if(tbRadiologiRanap.getRowCount()!=0){
             try {
                 getData2();
             } catch (java.lang.NullPointerException e) {
@@ -2002,7 +2002,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbRadiologiRanapMouseClicked
 
     private void tbRadiologiRanapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbRadiologiRanapKeyPressed
-        if(tabMode3.getRowCount()!=0){
+        if(tbRadiologiRanap.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData2();
@@ -2023,11 +2023,11 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private void TabRawatInapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatInapMouseClicked
         TeksKosong();
         if(TabRawatInap.getSelectedIndex()==0){
-            if(tabMode3.getRowCount()==0){
+            if(tbRadiologiRanap.getRowCount()==0){
                 runBackground(() -> tampil3());
             }
         }else if(TabRawatInap.getSelectedIndex()==1){
-            if(tabMode4.getRowCount()==0){
+            if(tbRadiologiRanap2.getRowCount()==0){
                 runBackground(() -> tampil4());
             }
         }
@@ -2908,7 +2908,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode2.getRowCount());
+            LCount.setText(""+tbRadiologiRalan2.getRowCount());
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
@@ -3216,7 +3216,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode4.getRowCount());
+            LCount.setText(""+tbRadiologiRanap2.getRowCount());
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }

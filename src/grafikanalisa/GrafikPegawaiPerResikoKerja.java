@@ -544,7 +544,7 @@ public class GrafikPegawaiPerResikoKerja extends javax.swing.JDialog {
                     totalp=totalp+jmlp;
                     tabMode.addRow(new Object[]{rs.getString(3)+" ("+rs.getString(1)+")",rs.getString(2),"",jmll+"","",jmlp+"",""});
                 }
-                if(tabMode.getRowCount()>0){
+                if(tbBangsal.getRowCount()>0){
                     tabMode.addRow(new Object[]{"Jumlah : ",total+"","100 %",totall+"","100 %",totalp+"","100 %"});
                     for(i=0;i<tbBangsal.getRowCount();i++){
                         tbBangsal.setValueAt(Math.round((Double.parseDouble(tbBangsal.getValueAt(i,1).toString())/total)*100)+" %",i,2);

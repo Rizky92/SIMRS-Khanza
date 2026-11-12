@@ -1512,7 +1512,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
    try{
        for(i=0;i<tbDetailPK.getRowCount();i++){
           if(tbDetailPK.getValueAt(i,0).toString().equals("true")){
-              tabMode.removeRow(i);
+              tabMode.removeRow(tbDetailPK.convertRowIndexToModel(i));
           }
        }
    }catch(Exception ex){
@@ -1520,7 +1520,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
    try{
        for(i=0;i<tbDetailMB.getRowCount();i++){
           if(tbDetailMB.getValueAt(i,0).toString().equals("true")){
-              tabModeDetailMB.removeRow(i);
+              tabModeDetailMB.removeRow(tbDetailMB.convertRowIndexToModel(i));
           }
        }
    }catch(Exception ex){
@@ -1540,7 +1540,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
     }//GEN-LAST:event_PenjabKeyPressed
 
     private void tbTarifPKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTarifPKMouseClicked
-        if(tabMode2.getRowCount()!=0){
+        if(tbTarifPK.getRowCount()!=0){
             try {
                 Valid.tabelKosong(tabMode);
                 runBackground(() -> tampil());
@@ -1804,7 +1804,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
     }//GEN-LAST:event_PemeriksaanMBKeyPressed
 
     private void tbTarifMBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTarifMBMouseClicked
-        if(tabModeMB.getRowCount()!=0){
+        if(tbTarifMB.getRowCount()!=0){
             try {
                 Valid.tabelKosong(tabModeDetailMB);
                 runBackground(() -> tampildetailmb());

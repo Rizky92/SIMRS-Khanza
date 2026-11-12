@@ -4751,7 +4751,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                     });
                     i++;
                 }
-                if(tabModeDetailLaborat.getRowCount()>0){
+                if(tbDetailLaborat.getRowCount()>0){
                     tabModeDetailLaborat.addRow(new Object[]{
                         "","","Jumlah Total :",material,bhp,jmdokter,jmpetugas,jmperujuk,kso,menejemen,total,item
                     });
@@ -4912,10 +4912,10 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
     }
 
     private void CetakRalanDokter() {
-        if(tabModeRalanDokter.getRowCount()==0){
+        if(tbRalanDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeRalanDokter.getRowCount()!=0){
+        }else if(tbRalanDokter.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -5039,10 +5039,10 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
     }
 
     private void CetakRalanParamedis() {
-        if(tabModeRalanParamedis.getRowCount()==0){
+        if(tbRalanParamedis.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeRalanParamedis.getRowCount()!=0){
+        }else if(tbRalanParamedis.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -5169,10 +5169,10 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
     }
 
     private void CetakRalanDokterParamedis() {
-        if(tabModeRalanDokterParamedis.getRowCount()==0){
+        if(tbRalanDokterParamedis.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeRalanDokterParamedis.getRowCount()!=0){
+        }else if(tbRalanDokterParamedis.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -5305,10 +5305,10 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
     }
 
     private void CetakOperasi() {
-        if(tabModeOperasi.getRowCount()==0){
+        if(tbOperasi.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeOperasi.getRowCount()!=0){
+        }else if(tbOperasi.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -5507,10 +5507,10 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
     }
 
     private void CetakRanapDokter() {
-        if(tabModeRanapDokter.getRowCount()==0){
+        if(tbRanapDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeRanapDokter.getRowCount()!=0){
+        }else if(tbRanapDokter.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -5631,10 +5631,10 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
     }
 
     private void CetakRanapParamedis() {
-        if(tabModeRanapParamedis.getRowCount()==0){
+        if(tbRanapParamedis.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeRanapParamedis.getRowCount()!=0){
+        }else if(tbRanapParamedis.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -5755,10 +5755,10 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
     }
 
     private void CetakRanapDokterParamedis() {
-        if(tabModeRanapDokterParamedis.getRowCount()==0){
+        if(tbRanapDokterParamedis.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeRanapDokterParamedis.getRowCount()!=0){
+        }else if(tbRanapDokterParamedis.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -5891,10 +5891,10 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
     }
 
     private void CetakRadiologi() {
-        if(tabModeRadiologi.getRowCount()==0){
+        if(tbRadiologi.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeRadiologi.getRowCount()!=0){
+        }else if(tbRadiologi.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -6033,10 +6033,10 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
     }
 
     private void CetakLaborat() {
-        if(tabModeLaborat.getRowCount()==0){
+        if(tbLaborat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeLaborat.getRowCount()!=0){
+        }else if(tbLaborat.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -6175,10 +6175,10 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
     }
 
     private void CetakDetailLaborat() {
-        if(tabModeDetailLaborat.getRowCount()==0){
+        if(tbDetailLaborat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeDetailLaborat.getRowCount()!=0){
+        }else if(tbDetailLaborat.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {

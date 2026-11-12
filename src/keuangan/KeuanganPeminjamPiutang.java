@@ -548,7 +548,7 @@ public final class KeuanganPeminjamPiutang extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     KdPeminjam.getText(),NmPeminjam.getText(),AlamatPeminjam.getText(),NoTelp.getText(),KodeRekening.getText(),NamaRekening.getText()
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbKamar.getRowCount());
                 emptTeks();
             }
         }
@@ -579,9 +579,9 @@ public final class KeuanganPeminjamPiutang extends javax.swing.JDialog {
             if(Sequel.mengedittf("peminjampiutang","kode_peminjam=?","status='0'",1,new String[]{
                 tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString()
             })==true){
-                tabMode.removeRow(tbKamar.getSelectedRow());
+                tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbKamar.getRowCount());
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data pada tabel terlebih dahulu");
@@ -744,7 +744,7 @@ public final class KeuanganPeminjamPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -753,7 +753,7 @@ public final class KeuanganPeminjamPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -971,7 +971,7 @@ public final class KeuanganPeminjamPiutang extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     public void emptTeks() {

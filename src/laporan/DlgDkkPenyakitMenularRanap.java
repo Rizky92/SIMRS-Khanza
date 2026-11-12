@@ -444,7 +444,7 @@ public final class DlgDkkPenyakitMenularRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -453,7 +453,7 @@ public final class DlgDkkPenyakitMenularRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -837,7 +837,7 @@ public final class DlgDkkPenyakitMenularRanap extends javax.swing.JDialog {
     private void getData() {
         int row=tbBangsal.getSelectedRow();
         if(row!= -1){
-            TKd.setText(tabMode.getValueAt(row,0).toString());
+            TKd.setText(tbBangsal.getValueAt(row,0).toString());
         }
     }
 

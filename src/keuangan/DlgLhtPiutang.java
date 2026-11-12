@@ -523,7 +523,7 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(tbBangsal.getSelectedRow()!= -1){
                 if(evt.getClickCount()==2){
                     int kolom=tbBangsal.getSelectedColumn();
@@ -552,7 +552,7 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(tbBangsal.getSelectedRow()!= -1){
                 if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                     int kolom=tbBangsal.getSelectedColumn();
@@ -603,7 +603,7 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailPiutangActionPerformed
-    if(tabMode.getRowCount()==0){
+    if(tbBangsal.getRowCount()==0){
         JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
         TCari.requestFocus();
     }else{
@@ -640,7 +640,7 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_MnDetailPiutangActionPerformed
 
     private void MnDetailCicilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailCicilanActionPerformed
-   if(tabMode.getRowCount()==0){
+   if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -854,8 +854,8 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
                 }
             }
 
-            LCount2.setText(""+tabMode.getRowCount());
-            if(tabMode.getRowCount()>0){
+            LCount2.setText(""+tbBangsal.getRowCount());
+            if(tbBangsal.getRowCount()>0){
                 tabMode.addRow(new Object[]{
                     "TOTAL",":","","",totalpiutang,totaluangmuka,totalcicilan,totaldiskon,totaltidakterbayar,sisapiutang,"",""
                 });

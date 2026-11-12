@@ -834,7 +834,7 @@ public class DlgCariBookingMCUPerusahaan extends javax.swing.JDialog {
                 if(Sequel.meghapustf("booking_mcu_perusahaan_berhasil_registrasi","no_mcu",tbDokter.getValueAt(i,8).toString())==true){
                     if(Sequel.meghapustf("reg_periksa","no_rawat",tbDokter.getValueAt(i,14).toString())==true){
                         Sequel.mengedit3("booking_mcu_perusahaan","no_mcu=?","status='Terdaftar'",1,new String[]{tbDokter.getValueAt(i,8).toString()});
-                        tabMode.removeRow(i);
+                        tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                         i--;
                     }else{
                         Sequel.menyimpan2("booking_mcu_perusahaan_berhasil_registrasi","?,?",2,new String[]{
@@ -844,11 +844,11 @@ public class DlgCariBookingMCUPerusahaan extends javax.swing.JDialog {
                 }
             }
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }//GEN-LAST:event_ppBatalMCUActionPerformed
 
     private void ppRiwayatPerawatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRiwayatPerawatanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
         }else{
             if(tbDokter.getSelectedRow()!= -1){
@@ -1015,7 +1015,7 @@ public class DlgCariBookingMCUPerusahaan extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbDokter.getRowCount());
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }

@@ -1045,7 +1045,7 @@ public class frmPengaduan extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPengaduan.getRowCount());
     }
 
     private void jam(){

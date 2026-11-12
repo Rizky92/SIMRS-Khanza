@@ -2925,7 +2925,7 @@ public final class BPJSCekRujukanKartuPCare extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void ChkCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkCariActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             nosep="";
             ChkCari.setSelected(false);
             isForm();

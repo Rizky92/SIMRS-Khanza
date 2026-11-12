@@ -1023,7 +1023,7 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1032,7 +1032,7 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1062,7 +1062,7 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCetakActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             BtnKeluar.requestFocus();
         }else {
@@ -1563,7 +1563,7 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
         LTotalMutasi.setText(df2.format(nilaitotal));
     }
 
@@ -1574,19 +1574,19 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            kddari.setText(tabMode.getValueAt(row,0).toString());
-            nmdari.setText(tabMode.getValueAt(row,1).toString());
-            kdke.setText(tabMode.getValueAt(row,2).toString());
-            nmke.setText(tabMode.getValueAt(row,3).toString());
-            kdbarang.setText(tabMode.getValueAt(row,4).toString());
-            nmbarang.setText(tabMode.getValueAt(row,5).toString());
-            jumlah.setText(tabMode.getValueAt(row,6).toString());
-            harga.setText(tabMode.getValueAt(row,7).toString());
-            total.setText(tabMode.getValueAt(row,8).toString());
-            Keterangan.setText(tabMode.getValueAt(row,10).toString());
-            nobatch.setText(tabMode.getValueAt(row,11).toString());
-            nofaktur.setText(tabMode.getValueAt(row,12).toString());
-            Valid.SetTgl2(Tanggal,tabMode.getValueAt(row,9).toString());
+            kddari.setText(tbKamar.getValueAt(row,0).toString());
+            nmdari.setText(tbKamar.getValueAt(row,1).toString());
+            kdke.setText(tbKamar.getValueAt(row,2).toString());
+            nmke.setText(tbKamar.getValueAt(row,3).toString());
+            kdbarang.setText(tbKamar.getValueAt(row,4).toString());
+            nmbarang.setText(tbKamar.getValueAt(row,5).toString());
+            jumlah.setText(tbKamar.getValueAt(row,6).toString());
+            harga.setText(tbKamar.getValueAt(row,7).toString());
+            total.setText(tbKamar.getValueAt(row,8).toString());
+            Keterangan.setText(tbKamar.getValueAt(row,10).toString());
+            nobatch.setText(tbKamar.getValueAt(row,11).toString());
+            nofaktur.setText(tbKamar.getValueAt(row,12).toString());
+            Valid.SetTgl2(Tanggal,tbKamar.getValueAt(row,9).toString());
         }
     }
 
@@ -1625,8 +1625,8 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
             Sequel.AutoComitTrue();
             if(sukses==true){
                 LTotalMutasi.setText(""+Valid.SetAngka(nilaitotal-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString())));
-                tabMode.removeRow(tbKamar.getSelectedRow());
-                LCount.setText(""+tabMode.getRowCount());
+                tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
+                LCount.setText(""+tbKamar.getRowCount());
             }
         }else{
             JOptionPane.showMessageDialog(null,"Silahkan pilih data untuk menghapus..!!");

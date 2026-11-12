@@ -920,7 +920,7 @@ public class SuratKontrol extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TanggalSurat.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -955,8 +955,8 @@ public class SuratKontrol extends javax.swing.JDialog {
                             );
                         }
                     }
-                    tabMode.removeRow(tbObat.getSelectedRow());
-                    LCount.setText("" + tabMode.getRowCount());
+                    tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+                    LCount.setText("" + tbObat.getRowCount());
                     emptTeks();
                 }
             }else{
@@ -1100,7 +1100,7 @@ public class SuratKontrol extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1572,7 +1572,7 @@ public class SuratKontrol extends javax.swing.JDialog {
     }//GEN-LAST:event_NoRegKeyPressed
 
     private void MnSuratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSuratActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TanggalSurat.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -1592,24 +1592,24 @@ public class SuratKontrol extends javax.swing.JDialog {
                 param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),14).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),13).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString()));
                 Sequel.queryu("delete from temporary_booking_registrasi");
                 Sequel.menyimpan("temporary_booking_registrasi","'0','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),0).toString()+"','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),1).toString()+"','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),2).toString()+"','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),3).toString()+"','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),4).toString()+"','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),5).toString()+"','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),6).toString()+"','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),7).toString()+"','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),8).toString()+"','"+
+                    tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"','"+
+                    tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()+"','"+
+                    tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()+"','"+
+                    tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()+"','"+
+                    tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()+"','"+
+                    tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()+"','"+
+                    tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"','"+
+                    tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()+"','"+
+                    tbObat.getValueAt(tbObat.getSelectedRow(),8).toString()+"','"+
                     TanggalPeriksa.getSelectedItem()+"','"+
                     TanggalSurat.getSelectedItem()+"','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),11).toString()+"','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),12).toString()+"','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),13).toString()+"','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),14).toString()+"','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),15).toString()+"','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),16).toString()+"','"+
-                    tabMode.getValueAt(tbObat.getSelectedRow(),17).toString()+"','','','','','','','','','','','','','','','','','','',''","Surat Kotrol");
+                    tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()+"','"+
+                    tbObat.getValueAt(tbObat.getSelectedRow(),12).toString()+"','"+
+                    tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()+"','"+
+                    tbObat.getValueAt(tbObat.getSelectedRow(),14).toString()+"','"+
+                    tbObat.getValueAt(tbObat.getSelectedRow(),15).toString()+"','"+
+                    tbObat.getValueAt(tbObat.getSelectedRow(),16).toString()+"','"+
+                    tbObat.getValueAt(tbObat.getSelectedRow(),17).toString()+"','','','','','','','','','','','','','','','','','','',''","Surat Kotrol");
 
                 Valid.MyReport("rptSuratSKDPBPJS.jasper","report","::[ Surat Kontrol ]::",param);
                 this.setCursor(Cursor.getDefaultCursor());
@@ -1620,7 +1620,7 @@ public class SuratKontrol extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSuratActionPerformed
 
     private void tbObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1826,7 +1826,7 @@ public class SuratKontrol extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        LCount.setText("" + tabMode.getRowCount());
+        LCount.setText("" + tbObat.getRowCount());
     }
 
 
@@ -2086,7 +2086,7 @@ public class SuratKontrol extends javax.swing.JDialog {
                 NoAntrian.getText(), NoReg.getText(), KdDokter.getText(), NmDokter.getText(), KdPoli.getText(), NmPoli.getText(), Status.getSelectedItem().toString()
             });
             emptTeks();
-            LCount.setText("" + tabMode.getRowCount());
+            LCount.setText("" + tbObat.getRowCount());
         } else {
             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat membuat surat kontrol..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         }

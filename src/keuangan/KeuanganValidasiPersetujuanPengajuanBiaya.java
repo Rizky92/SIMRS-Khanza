@@ -508,7 +508,7 @@ public final class KeuanganValidasiPersetujuanPengajuanBiaya extends javax.swing
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
-            tabMode.removeRow(tbBangsal.getSelectedRow());
+            tabMode.removeRow(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()));
             this.setCursor(Cursor.getDefaultCursor());
         }else{
             JOptionPane.showMessageDialog(null,"Silahkan pilih No.Pengajuan yang diajukan..!!");
@@ -725,7 +725,7 @@ public final class KeuanganValidasiPersetujuanPengajuanBiaya extends javax.swing
 
     private void hitung(){
         belumdivalidasi=0;
-        for(i=0;i<tabMode.getRowCount();i++){
+        for(i=0;i<tbBangsal.getRowCount();i++){
             belumdivalidasi=belumdivalidasi+Valid.SetAngka(tbBangsal.getValueAt(i,13).toString());
         }
         LCount.setText(""+Valid.SetAngka(belumdivalidasi));

@@ -1938,7 +1938,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1949,7 +1949,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -2463,7 +2463,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             Valid.textKosong(kdpjanak,"dr Pj Anak");
         }else if(kddrumum.getText().trim().equals("")||nmdrumum.getText().trim().equals("")){
             Valid.textKosong(kddrumum,"dr Umum");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else{
@@ -3689,7 +3689,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
 
     private void ppBerkasDigitalBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBerkasDigitalBtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else{
@@ -4144,7 +4144,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private void getData() {
         int row=tbDokter.getSelectedRow();
         if(row!= -1){
-            Kd2.setText(tabMode.getValueAt(row,0).toString());
+            Kd2.setText(tbDokter.getValueAt(row,0).toString());
         }
     }
 

@@ -783,7 +783,7 @@ public class IPSRSNilaiPenerimaanVendorNonMedisPerBulan extends javax.swing.JDia
                         rs.getString("kode_suplier"),rs.getString("nama_suplier"),januari,februari,maret,april,mei,juni,juli,agustus,september,oktober,november,desember,tagihan
                     });
                 }
-                if(tabMode.getRowCount()>0){
+                if(tbDokter.getRowCount()>0){
                     tabMode.addRow(new Object[]{
                         "Total :","",totaljanuari,totalfebruari,totalmaret,totalapril,totalmei,totaljuni,totaljuli,totalagustus,totalseptember,totaloktober,totalnovember,totaldesember,totaltagihan
                     });

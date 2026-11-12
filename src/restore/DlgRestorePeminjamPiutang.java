@@ -257,8 +257,8 @@ public final class DlgRestorePeminjamPiutang extends javax.swing.JDialog {
             if(Sequel.mengedittf("peminjampiutang","kode_peminjam=?","status='1'",1,new String[]{
                 tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString()
             })==true){
-                tabMode.removeRow(tbKamar.getSelectedRow());
-                LCount.setText(""+tabMode.getRowCount());
+                tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
+                LCount.setText(""+tbKamar.getRowCount());
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data pada tabel terlebih dahulu");
@@ -277,8 +277,8 @@ public final class DlgRestorePeminjamPiutang extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbKamar.getSelectedRow()>-1){
             if(Sequel.meghapustf("peminjampiutang","kode_peminjam",tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString())==true){
-                tabMode.removeRow(tbKamar.getSelectedRow());
-                LCount.setText(""+tabMode.getRowCount());
+                tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
+                LCount.setText(""+tbKamar.getRowCount());
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data pada tabel terlebih dahulu");
@@ -428,7 +428,7 @@ public final class DlgRestorePeminjamPiutang extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     private void runBackground(Runnable task) {

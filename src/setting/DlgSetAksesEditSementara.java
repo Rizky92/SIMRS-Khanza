@@ -521,7 +521,7 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
             return;
         }
         if (Sequel.menghapustfSmc("set_akses_edit_sementara", "id_user = ?", tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
-            tabMode.removeRow(tbUser.getSelectedRow());
+            tabMode.removeRow(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()));
             emptTeks();
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
@@ -539,9 +539,9 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         } else {
             if (Sequel.mengupdatetfSmc("set_akses_edit_sementara", "tgl_selesai = ?", "id_user = ?",
                 Valid.getTglJamSmc(DTPTgl1, CmbJam1, CmbMenit1, CmbDetik1),
-                tabMode.getValueAt(tbUser.getSelectedRow(), 0).toString()
+                tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString()
             )) {
-                tabMode.setValueAt(Valid.getTglJamSmc(DTPTgl1, CmbJam1, CmbMenit1, CmbDetik1), tbUser.getSelectedRow(), 3);
+                tbUser.setValueAt(Valid.getTglJamSmc(DTPTgl1, CmbJam1, CmbMenit1, CmbDetik1), tbUser.getSelectedRow(), 3);
                 emptTeks();
             }
         }
@@ -638,7 +638,7 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
                     tabMode.addRow(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)});
                 }
             }
-            LCount.setText(String.valueOf(tabMode.getRowCount()));
+            LCount.setText(String.valueOf(tbUser.getRowCount()));
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }

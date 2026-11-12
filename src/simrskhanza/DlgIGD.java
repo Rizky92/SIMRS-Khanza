@@ -5212,7 +5212,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                         KdDokter.getText(),TDokter.getText(),TNoRM.getText(),TPasien.getText(),JK.getText(),umur+" "+sttsumur,"IGD",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),Valid.SetAngka(biaya),
                         TStatus.getText(),nmpnj.getText(),"Belum",kdpnj.getText(),"Belum Bayar"
                     });
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText(""+tbPetugas.getRowCount());
                     emptTeks();
                     ceksukses=false;
                 }
@@ -5244,13 +5244,13 @@ public final class DlgIGD extends javax.swing.JDialog {
         for(i=0;i<tbPetugas.getRowCount();i++){
             if(tbPetugas.getValueAt(i,0).toString().equals("true")){
                 if(Sequel.meghapustf("reg_periksa","no_rawat",tbPetugas.getValueAt(i,2).toString())==true){
-                    tabMode.removeRow(i);
+                    tabMode.removeRow(tbPetugas.convertRowIndexToModel(i));
                     i--;
                 }
             }
         }
 
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPetugas.getRowCount());
         emptTeks();
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -5394,24 +5394,24 @@ public final class DlgIGD extends javax.swing.JDialog {
                                 KdDokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),""+biaya,THbngn.getText(),
                                 TStatus.getText(),kdpnj.getText(),umur,sttsumur,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString()
                             })==true){
-                            tabMode.setValueAt(TNoReg.getText(),tbPetugas.getSelectedRow(),1);
-                            tabMode.setValueAt(TNoRw.getText(),tbPetugas.getSelectedRow(),2);
-                            tabMode.setValueAt(Valid.SetTgl(DTPReg.getSelectedItem()+""),tbPetugas.getSelectedRow(),3);
-                            tabMode.setValueAt(CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),tbPetugas.getSelectedRow(),4);
-                            tabMode.setValueAt(KdDokter.getText(),tbPetugas.getSelectedRow(),5);
-                            tabMode.setValueAt(TDokter.getText(),tbPetugas.getSelectedRow(),6);
-                            tabMode.setValueAt(TNoRM.getText(),tbPetugas.getSelectedRow(),7);
-                            tabMode.setValueAt(TPasien.getText(),tbPetugas.getSelectedRow(),8);
-                            tabMode.setValueAt(JK.getText(),tbPetugas.getSelectedRow(),9);
-                            tabMode.setValueAt(umur+" "+sttsumur,tbPetugas.getSelectedRow(),10);
-                            tabMode.setValueAt("IGD",tbPetugas.getSelectedRow(),11);
-                            tabMode.setValueAt(TPngJwb.getText(),tbPetugas.getSelectedRow(),12);
-                            tabMode.setValueAt(TAlmt.getText(),tbPetugas.getSelectedRow(),13);
-                            tabMode.setValueAt(THbngn.getText(),tbPetugas.getSelectedRow(),14);
-                            tabMode.setValueAt(Valid.SetAngka(biaya),tbPetugas.getSelectedRow(),15);
-                            tabMode.setValueAt(TStatus.getText(),tbPetugas.getSelectedRow(),16);
-                            tabMode.setValueAt(nmpnj.getText(),tbPetugas.getSelectedRow(),17);
-                            tabMode.setValueAt(kdpnj.getText(),tbPetugas.getSelectedRow(),19);
+                            tbPetugas.setValueAt(TNoReg.getText(),tbPetugas.getSelectedRow(),1);
+                            tbPetugas.setValueAt(TNoRw.getText(),tbPetugas.getSelectedRow(),2);
+                            tbPetugas.setValueAt(Valid.SetTgl(DTPReg.getSelectedItem()+""),tbPetugas.getSelectedRow(),3);
+                            tbPetugas.setValueAt(CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),tbPetugas.getSelectedRow(),4);
+                            tbPetugas.setValueAt(KdDokter.getText(),tbPetugas.getSelectedRow(),5);
+                            tbPetugas.setValueAt(TDokter.getText(),tbPetugas.getSelectedRow(),6);
+                            tbPetugas.setValueAt(TNoRM.getText(),tbPetugas.getSelectedRow(),7);
+                            tbPetugas.setValueAt(TPasien.getText(),tbPetugas.getSelectedRow(),8);
+                            tbPetugas.setValueAt(JK.getText(),tbPetugas.getSelectedRow(),9);
+                            tbPetugas.setValueAt(umur+" "+sttsumur,tbPetugas.getSelectedRow(),10);
+                            tbPetugas.setValueAt("IGD",tbPetugas.getSelectedRow(),11);
+                            tbPetugas.setValueAt(TPngJwb.getText(),tbPetugas.getSelectedRow(),12);
+                            tbPetugas.setValueAt(TAlmt.getText(),tbPetugas.getSelectedRow(),13);
+                            tbPetugas.setValueAt(THbngn.getText(),tbPetugas.getSelectedRow(),14);
+                            tbPetugas.setValueAt(Valid.SetAngka(biaya),tbPetugas.getSelectedRow(),15);
+                            tbPetugas.setValueAt(TStatus.getText(),tbPetugas.getSelectedRow(),16);
+                            tbPetugas.setValueAt(nmpnj.getText(),tbPetugas.getSelectedRow(),17);
+                            tbPetugas.setValueAt(kdpnj.getText(),tbPetugas.getSelectedRow(),19);
                             emptTeks();
                         }
                     }else{
@@ -5459,7 +5459,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         if (!tbPetugas.isRowSelected(r)) {
             tbPetugas.changeSelection(r, c, false, false);
         }
-        if(tabMode.getRowCount()!=0){
+        if(tbPetugas.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -6283,11 +6283,11 @@ public final class DlgIGD extends javax.swing.JDialog {
                                 if(Sequel.queryu2tf("delete from reg_periksa where no_rawat=?",1,new String[]{norawatdipilih})==true){
                                     for(i=0;i<tbPetugas.getRowCount();i++){
                                         if(tbPetugas.getValueAt(i,2).toString().equals(norawatdipilih)){
-                                            tabMode.removeRow(i);
+                                            tabMode.removeRow(tbPetugas.convertRowIndexToModel(i));
                                         }
                                     }
                                     emptTeks();
-                                    LCount.setText(""+tabMode.getRowCount());
+                                    LCount.setText(""+tbPetugas.getRowCount());
                                 }
                             }else{
                                 JOptionPane.showMessageDialog(rootPane,"Tidak bisa digabung karena No.RM berbeda");
@@ -6325,7 +6325,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPetugasMousePressed
 
     private void tbPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPetugasKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbPetugas.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 i=tbPetugas.getSelectedColumn();
                 if(i==1){
@@ -6404,7 +6404,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnDokterActionPerformed
 
     private void MnKamarInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKamarInapActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -6435,7 +6435,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnKamarInapActionPerformed
 
     private void MnRawatJalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRawatJalanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -6479,7 +6479,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRawatJalanActionPerformed
 
     private void MnRujukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRujukActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -6499,7 +6499,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRujukActionPerformed
 
     private void MnPemberianObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemberianObatActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -6523,7 +6523,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPemberianObatActionPerformed
 
     private void MnBillingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnBillingActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -6653,7 +6653,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppGrafikPerTanggalActionPerformed
 
     private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeriksaLabActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -6677,7 +6677,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPeriksaLabActionPerformed
 
     private void MnCetakSuratSakitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratSakitActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -6976,7 +6976,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPenjabActionPerformed
 
     private void MnLaporanRekapKunjunganPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanRekapKunjunganPoliActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else{
@@ -6985,7 +6985,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLaporanRekapKunjunganPoliActionPerformed
 
     private void MnLaporanRekapKunjunganDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanRekapKunjunganDokterActionPerformed
-       if(tabMode.getRowCount()==0){
+       if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else{
@@ -6994,7 +6994,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLaporanRekapKunjunganDokterActionPerformed
 
     private void MnLaporanRekapJenisBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanRekapJenisBayarActionPerformed
-     if(tabMode.getRowCount()==0){
+     if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else{
@@ -7003,7 +7003,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLaporanRekapJenisBayarActionPerformed
 
     private void MnLaporanRekapRawatDaruratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanRekapRawatDaruratActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else{
@@ -7012,7 +7012,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLaporanRekapRawatDaruratActionPerformed
 
     private void MnLaporanRekapKunjunganBulananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanRekapKunjunganBulananActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else{
@@ -7021,7 +7021,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLaporanRekapKunjunganBulananActionPerformed
 
     private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanRekapKunjunganBulananPoliActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else{
@@ -7341,7 +7341,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeek5ActionPerformed
 
     private void MnOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnOperasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -7354,7 +7354,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnOperasiActionPerformed
 
     private void MnGelang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TCari.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -7378,7 +7378,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGelang1ActionPerformed
 
     private void MnGelang2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang2ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TCari.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -7613,7 +7613,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnHapusObatOperasiActionPerformed
 
     private void MnGelang3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang3ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TCari.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -7643,7 +7643,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGelang3ActionPerformed
 
     private void MnSEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSEPActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -7689,7 +7689,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLembarCasemixActionPerformed
 
     private void ppCatatanPasienBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCatatanPasienBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -7786,7 +7786,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSPBKActionPerformed
 
     private void ppRiwayatBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRiwayatBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -7841,7 +7841,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnResepDOkterActionPerformed
 
     private void ppBerkasBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBerkasBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
@@ -7851,7 +7851,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Diterima',now(),now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRw.getText()+"'");
             Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Berkas Diterima'");
             if(tbPetugas.getSelectedRow()>-1){
-                tabMode.setValueAt("Berkas Diterima",tbPetugas.getSelectedRow(),18);
+                tbPetugas.setValueAt("Berkas Diterima",tbPetugas.getSelectedRow(),18);
             }
         }
     }//GEN-LAST:event_ppBerkasBtnPrintActionPerformed
@@ -7865,7 +7865,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             }else {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Sudah'");
                 if(tbPetugas.getSelectedRow()>-1){
-                    tabMode.setValueAt("Sudah",tbPetugas.getSelectedRow(),18);
+                    tbPetugas.setValueAt("Sudah",tbPetugas.getSelectedRow(),18);
                 }
             }
         }
@@ -7880,7 +7880,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             }else {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Belum'");
                 if(tbPetugas.getSelectedRow()>-1){
-                    tabMode.setValueAt("Belum",tbPetugas.getSelectedRow(),18);
+                    tbPetugas.setValueAt("Belum",tbPetugas.getSelectedRow(),18);
                 }
             }
 
@@ -7899,7 +7899,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 }else{
                     Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Batal',biaya_reg='0'");
                     if(tbPetugas.getSelectedRow()>-1){
-                        tabMode.setValueAt("Batal",tbPetugas.getSelectedRow(),18);
+                        tbPetugas.setValueAt("Batal",tbPetugas.getSelectedRow(),18);
                     }
                 }
             }
@@ -7916,7 +7916,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Dirujuk'");
                 MnRujukActionPerformed(evt);
                 if(tbPetugas.getSelectedRow()>-1){
-                    tabMode.setValueAt("Dirujuk",tbPetugas.getSelectedRow(),18);
+                    tbPetugas.setValueAt("Dirujuk",tbPetugas.getSelectedRow(),18);
                 }
             }
         }
@@ -7932,7 +7932,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Dirawat'");
                 MnKamarInapActionPerformed(evt);
                 if(tbPetugas.getSelectedRow()>-1){
-                    tabMode.setValueAt("Dirawat",tbPetugas.getSelectedRow(),18);
+                    tbPetugas.setValueAt("Dirawat",tbPetugas.getSelectedRow(),18);
                 }
             }
         }
@@ -7954,7 +7954,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 dlgPasienMati.isCek();
                 dlgPasienMati.setVisible(true);
                 if(tbPetugas.getSelectedRow()>-1){
-                    tabMode.setValueAt("Meninggal",tbPetugas.getSelectedRow(),18);
+                    tbPetugas.setValueAt("Meninggal",tbPetugas.getSelectedRow(),18);
                 }
             }
 
@@ -8076,7 +8076,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnBarcode1ActionPerformed
 
     private void MnGelang4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang4ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TCari.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8106,7 +8106,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGelang4ActionPerformed
 
     private void MnGelang5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang5ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TCari.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8136,7 +8136,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGelang5ActionPerformed
 
     private void MnGelang6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang6ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TCari.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8263,7 +8263,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSPBK1ActionPerformed
 
     private void MnLembarRalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLembarRalanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8303,7 +8303,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLembarRalanActionPerformed
 
     private void MnBarcodeRM9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnBarcodeRM9ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8332,7 +8332,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnBarcodeRM9ActionPerformed
 
     private void ppBerkasDigitalBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBerkasDigitalBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8360,7 +8360,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBerkasDigitalBtnPrintActionPerformed
 
     private void MnSJPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSJPActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8380,7 +8380,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSJPActionPerformed
 
     private void ppIKPBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppIKPBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8399,7 +8399,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppIKPBtnPrintActionPerformed
 
     private void MnPoliInternalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPoliInternalActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8417,7 +8417,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPoliInternalActionPerformed
 
     private void MnJadwalOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnJadwalOperasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -8435,7 +8435,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnJadwalOperasiActionPerformed
 
     private void SuratKontrolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuratKontrolActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -8454,7 +8454,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_SuratKontrolActionPerformed
 
     private void MnPermintaanLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPermintaanLabActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8478,7 +8478,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPermintaanLabActionPerformed
 
     private void MnPermintaanRadiologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPermintaanRadiologiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8510,7 +8510,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             }else {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Pulang Paksa'");
                 if(tbPetugas.getSelectedRow()>-1){
-                    tabMode.setValueAt("Pulang Paksa",tbPetugas.getSelectedRow(),18);
+                    tbPetugas.setValueAt("Pulang Paksa",tbPetugas.getSelectedRow(),18);
                 }
             }
         }
@@ -8522,7 +8522,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         }else{
             Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"status_poli='Baru'");
             if(tbPetugas.getSelectedRow()>-1){
-                tabMode.setValueAt("Baru",tbPetugas.getSelectedRow(),16);
+                tbPetugas.setValueAt("Baru",tbPetugas.getSelectedRow(),16);
             }
         }
     }//GEN-LAST:event_MnStatusBaruActionPerformed
@@ -8533,13 +8533,13 @@ public final class DlgIGD extends javax.swing.JDialog {
         }else{
             Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"status_poli='Lama'");
             if(tbPetugas.getSelectedRow()>-1){
-                tabMode.setValueAt("Lama",tbPetugas.getSelectedRow(),18);
+                tbPetugas.setValueAt("Lama",tbPetugas.getSelectedRow(),18);
             }
         }
     }//GEN-LAST:event_MnStatusLamaActionPerformed
 
     private void MnBillingParsialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnBillingParsialActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8590,7 +8590,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnBillingParsialActionPerformed
 
     private void tbPetugasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPetugasKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbPetugas.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -8625,7 +8625,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnBlangkoResepActionPerformed
 
     private void MnRujukSisruteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRujukSisruteActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8694,7 +8694,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSuratJaminanPelayananIGDActionPerformed
 
     private void MnLembarKeluarMasuk2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLembarKeluarMasuk2ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8726,7 +8726,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLembarKeluarMasuk2ActionPerformed
 
     private void MnDataTriaseIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDataTriaseIGDActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8747,7 +8747,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnDataTriaseIGDActionPerformed
 
     private void ppResumeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResumeBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8768,7 +8768,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppResumeBtnPrintActionPerformed
 
     private void ppPerawatanCoronaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPerawatanCoronaBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8789,7 +8789,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppPerawatanCoronaBtnPrintActionPerformed
 
     private void ppPasienCoronaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPasienCoronaBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8808,7 +8808,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppPasienCoronaBtnPrintActionPerformed
 
     private void ppDeteksiDIniCoronaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDeteksiDIniCoronaBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8830,7 +8830,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppDeteksiDIniCoronaBtnPrintActionPerformed
 
     private void MnCetakSuratHamilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratHamilActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8850,7 +8850,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCetakSuratHamilActionPerformed
 
     private void MnCetakBebasNarkobaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakBebasNarkobaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8872,7 +8872,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCetakBebasNarkobaActionPerformed
 
     private void MnPCareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPCareActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8911,7 +8911,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnBarcode3ActionPerformed
 
     private void MnCetakSuratCovidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratCovidActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8933,7 +8933,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCetakSuratCovidActionPerformed
 
     private void MnHemodialisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHemodialisaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8974,7 +8974,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnTeridentifikasiTBActionPerformed
 
     private void MnCetakSuratCutiHamilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratCutiHamilActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8996,7 +8996,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCetakSuratCutiHamilActionPerformed
 
     private void MnPeriksaLabPAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeriksaLabPAActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9018,7 +9018,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPeriksaLabPAActionPerformed
 
     private void MnPermintaanRanapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPermintaanRanapActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9041,7 +9041,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPermintaanRanapActionPerformed
 
     private void ppSuratKontrolBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSuratKontrolBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
@@ -9084,7 +9084,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSuratKontrolBtnPrintActionPerformed
 
     private void ppSuratPRIBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSuratPRIBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
@@ -9128,7 +9128,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSuratPRIBtnPrintActionPerformed
 
     private void MnCetakSuratSakitPihak2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratSakitPihak2ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
@@ -9151,7 +9151,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCetakSuratSakitPihak2ActionPerformed
 
     private void MnCetakSuratBebasTBCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratBebasTBCActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9173,7 +9173,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCetakSuratBebasTBCActionPerformed
 
     private void MnSuratButaWarnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSuratButaWarnaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9195,7 +9195,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSuratButaWarnaActionPerformed
 
     private void MnSuratBebasTatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSuratBebasTatoActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9215,7 +9215,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSuratBebasTatoActionPerformed
 
     private void MnSuratKewaspadaanKesehatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSuratKewaspadaanKesehatanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9235,7 +9235,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSuratKewaspadaanKesehatanActionPerformed
 
     private void MnPeniliaianAwalMedisIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeniliaianAwalMedisIGDActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9257,7 +9257,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPeniliaianAwalMedisIGDActionPerformed
 
     private void MnPenilaianFisioterapiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianFisioterapiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9279,7 +9279,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianFisioterapiActionPerformed
 
     private void ppProgramPRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppProgramPRBActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
@@ -9327,7 +9327,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppProgramPRBActionPerformed
 
     private void ppSuplesiJasaRaharjaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSuplesiJasaRaharjaBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
@@ -9370,7 +9370,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSuplesiJasaRaharjaBtnPrintActionPerformed
 
     private void ppDataIndukKecelakaanBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDataIndukKecelakaanBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
@@ -9413,7 +9413,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppDataIndukKecelakaanBtnPrintActionPerformed
 
     private void MnPenilaianAwalKeperawatanIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianAwalKeperawatanIGDActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9454,7 +9454,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCetakRegister2ActionPerformed
 
     private void MnCatatanObservasiIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanObservasiIGDActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9499,7 +9499,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCopyResepActionPerformed
 
     private void MnPenilaianPsikologActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPsikologActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9521,7 +9521,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianPsikologActionPerformed
 
     private void MnPersetujuanPenolakanTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPersetujuanPenolakanTindakanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9543,7 +9543,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPersetujuanPenolakanTindakanActionPerformed
 
     private void MnPemantauanPEWSAnakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemantauanPEWSAnakActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9565,7 +9565,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPemantauanPEWSAnakActionPerformed
 
     private void MnPeriksaLabMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeriksaLabMBActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9589,7 +9589,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPeriksaLabMBActionPerformed
 
     private void MnPenilaianPreOpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPreOpActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9611,7 +9611,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianPreOpActionPerformed
 
     private void MnPenilaianPreAnestesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPreAnestesiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9633,7 +9633,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianPreAnestesiActionPerformed
 
     private void MnPulangAtasPermintaanSendiriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPulangAtasPermintaanSendiriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9655,7 +9655,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPulangAtasPermintaanSendiriActionPerformed
 
     private void MnPenilaianRisikoJatuhDewasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianRisikoJatuhDewasaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9677,7 +9677,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianRisikoJatuhDewasaActionPerformed
 
     private void MnPenilaianRisikoJatuhAnakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianRisikoJatuhAnakActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9699,7 +9699,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianRisikoJatuhAnakActionPerformed
 
     private void MnPenilaianTambahanGeriatriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianTambahanGeriatriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9721,7 +9721,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianTambahanGeriatriActionPerformed
 
     private void ppSkriningNutrisiDewasaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSkriningNutrisiDewasaBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9743,7 +9743,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSkriningNutrisiDewasaBtnPrintActionPerformed
 
     private void ppSkriningNutrisiLansiaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSkriningNutrisiLansiaBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9765,7 +9765,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSkriningNutrisiLansiaBtnPrintActionPerformed
 
     private void ppSkriningNutrisiAnakBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSkriningNutrisiAnakBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9787,7 +9787,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSkriningNutrisiAnakBtnPrintActionPerformed
 
     private void ppSkriningGiziBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSkriningGiziBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9809,7 +9809,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSkriningGiziBtnPrintActionPerformed
 
     private void ppAsuhanGiziBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppAsuhanGiziBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9831,7 +9831,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppAsuhanGiziBtnPrintActionPerformed
 
     private void ppMonitoringAsuhanGiziBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppMonitoringAsuhanGiziBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9853,7 +9853,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppMonitoringAsuhanGiziBtnPrintActionPerformed
 
     private void MnPernyataanPasienUmumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPernyataanPasienUmumActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9875,7 +9875,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPernyataanPasienUmumActionPerformed
 
     private void MnKonselingFarmasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKonselingFarmasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9897,7 +9897,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnKonselingFarmasiActionPerformed
 
     private void MnPermintaanInformasiObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPermintaanInformasiObatActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9921,7 +9921,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPermintaanInformasiObatActionPerformed
 
     private void MnPersetujuanUmumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPersetujuanUmumActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9943,7 +9943,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPersetujuanUmumActionPerformed
 
     private void MnTransferAntarRuangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnTransferAntarRuangActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9965,7 +9965,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnTransferAntarRuangActionPerformed
 
     private void MnCatatanCekGDSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanCekGDSActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9987,7 +9987,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCatatanCekGDSActionPerformed
 
     private void MnChecklistPreOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnChecklistPreOperasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10009,7 +10009,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnChecklistPreOperasiActionPerformed
 
     private void MnSignInSebelumAnestesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSignInSebelumAnestesiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10031,7 +10031,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSignInSebelumAnestesiActionPerformed
 
     private void MnTimeOutSebelumInsisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnTimeOutSebelumInsisiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10053,7 +10053,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnTimeOutSebelumInsisiActionPerformed
 
     private void MnSignOutSebelumMenutupLukaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSignOutSebelumMenutupLukaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10075,7 +10075,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSignOutSebelumMenutupLukaActionPerformed
 
     private void MnChecklistPostOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnChecklistPostOperasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10097,7 +10097,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnChecklistPostOperasiActionPerformed
 
     private void MnRekonsiliasiObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRekonsiliasiObatActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10119,7 +10119,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRekonsiliasiObatActionPerformed
 
     private void MnPenilaianPasienTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPasienTerminalActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10141,7 +10141,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianPasienTerminalActionPerformed
 
     private void MnPersetujuanRawatInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPersetujuanRawatInapActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10163,7 +10163,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPersetujuanRawatInapActionPerformed
 
     private void MnMonitoringReaksiTranfusiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnMonitoringReaksiTranfusiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10185,7 +10185,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnMonitoringReaksiTranfusiActionPerformed
 
     private void MnPenilaianKorbanKekerasanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianKorbanKekerasanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10207,7 +10207,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianKorbanKekerasanActionPerformed
 
     private void MnPenilaianRisikoJatuhLansiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianRisikoJatuhLansiaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10229,7 +10229,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianRisikoJatuhLansiaActionPerformed
 
     private void MnPenilaianPasienPenyakitMenularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPasienPenyakitMenularActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10251,7 +10251,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianPasienPenyakitMenularActionPerformed
 
     private void MnEdukasiPasienKeluargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnEdukasiPasienKeluargaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10273,7 +10273,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnEdukasiPasienKeluargaActionPerformed
 
     private void MnPemantauanPEWSDewasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemantauanPEWSDewasaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10295,7 +10295,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPemantauanPEWSDewasaActionPerformed
 
     private void MnPenilaianTambahanBunuhDiriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianTambahanBunuhDiriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10317,7 +10317,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianTambahanBunuhDiriActionPerformed
 
     private void MnPenilaianTambahanPerilakuKekerasanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianTambahanPerilakuKekerasanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10339,7 +10339,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianTambahanPerilakuKekerasanActionPerformed
 
     private void MnPenilaianTambahanMelarikanDiriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianTambahanMelarikanDiriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10361,7 +10361,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianTambahanMelarikanDiriActionPerformed
 
     private void MnPersetujuanPenundaanPelayananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPersetujuanPenundaanPelayananActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10383,7 +10383,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPersetujuanPenundaanPelayananActionPerformed
 
     private void MnPenilaianPasienKeracunanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPasienKeracunanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10405,7 +10405,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianPasienKeracunanActionPerformed
 
     private void MnPemantauanMEOWSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemantauanMEOWSActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10427,7 +10427,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPemantauanMEOWSActionPerformed
 
     private void ppCatatanADIMEGiziBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCatatanADIMEGiziBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10455,7 +10455,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnBelumTerbitSEPActionPerformed
 
     private void MnCheckListKriteriaMasukHCUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCheckListKriteriaMasukHCUActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10477,7 +10477,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCheckListKriteriaMasukHCUActionPerformed
 
     private void MnPenolakanAnjuranMedisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenolakanAnjuranMedisActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10499,7 +10499,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenolakanAnjuranMedisActionPerformed
 
     private void MnCheckListKriteriaMasukICUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCheckListKriteriaMasukICUActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10521,7 +10521,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCheckListKriteriaMasukICUActionPerformed
 
     private void MnPenilaianRisikoJatuhNeonatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianRisikoJatuhNeonatusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10543,7 +10543,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianRisikoJatuhNeonatusActionPerformed
 
     private void MnPenilaianRisikoJatuhGeriatriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianRisikoJatuhGeriatriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10565,7 +10565,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianRisikoJatuhGeriatriActionPerformed
 
     private void MnPemantauanEWSNeonatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemantauanEWSNeonatusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10587,7 +10587,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPemantauanEWSNeonatusActionPerformed
 
     private void MnRiwayatPerawatanICareNIKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRiwayatPerawatanICareNIKActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10613,7 +10613,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRiwayatPerawatanICareNIKActionPerformed
 
     private void MnRiwayatPerawatanICareNoKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRiwayatPerawatanICareNoKartuActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10639,7 +10639,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRiwayatPerawatanICareNoKartuActionPerformed
 
     private void MnGabungNoRawatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGabungNoRawatActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10664,7 +10664,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGabungNoRawatActionPerformed
 
     private void MnRiwayatPerawatanICareNIK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRiwayatPerawatanICareNIK1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10690,7 +10690,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRiwayatPerawatanICareNIK1ActionPerformed
 
     private void MnRiwayatPerawatanICareNoKartu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRiwayatPerawatanICareNoKartu1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10716,7 +10716,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRiwayatPerawatanICareNoKartu1ActionPerformed
 
     private void MnPeniliaianAwalMedisHemodialisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeniliaianAwalMedisHemodialisaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10738,7 +10738,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPeniliaianAwalMedisHemodialisaActionPerformed
 
     private void MnPenilaianRisikoJatuhPsikiatriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianRisikoJatuhPsikiatriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10760,7 +10760,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianRisikoJatuhPsikiatriActionPerformed
 
     private void MnPenilaianLanjutanSkriningFungsionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianLanjutanSkriningFungsionalActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10782,7 +10782,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianLanjutanSkriningFungsionalActionPerformed
 
     private void MnPeniliaianAwalMedisIGDPsikiatriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeniliaianAwalMedisIGDPsikiatriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10804,7 +10804,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPeniliaianAwalMedisIGDPsikiatriActionPerformed
 
     private void MnPenilaianUlangNyeriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianUlangNyeriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10827,7 +10827,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianUlangNyeriActionPerformed
 
     private void MnPengkajianRestrainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPengkajianRestrainActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10901,7 +10901,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCheckList9ActionPerformed
 
     private void MnCatatanKeperawatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanKeperawatanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10923,7 +10923,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCatatanKeperawatanActionPerformed
 
     private void MnCatatanPersalinanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanPersalinanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10945,7 +10945,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCatatanPersalinanActionPerformed
 
     private void MnSkorAldrettePascaAnestesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSkorAldrettePascaAnestesiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10967,7 +10967,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSkorAldrettePascaAnestesiActionPerformed
 
     private void MnSkorStewardPascaAnestesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSkorStewardPascaAnestesiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10989,7 +10989,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSkorStewardPascaAnestesiActionPerformed
 
     private void MnSkorBromagePascaAnestesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSkorBromagePascaAnestesiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11011,7 +11011,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSkorBromagePascaAnestesiActionPerformed
 
     private void MnPenilaianPreInduksiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11033,7 +11033,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnHasilPemeriksaanEKGActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11060,7 +11060,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPenilaianPasienImunitasRendahActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11082,7 +11082,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanKeseimbanganCairanActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11105,7 +11105,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanObservasiCHBPActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11127,7 +11127,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanObservasiInduksiPersalinanActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11150,7 +11150,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnDataOperasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11171,7 +11171,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningMerokokUsiaSekolahRemajaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11193,7 +11193,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningKekerasanPadaWanitaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11215,7 +11215,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningObesitasActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11237,7 +11237,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningRisikoKankerPayudaraActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11259,7 +11259,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningRisikoKankerParuActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11281,7 +11281,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningKesehatanGigiMulutRemajaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11303,7 +11303,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningTBCActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11325,7 +11325,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanAnastesiSedasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11347,7 +11347,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningPUMAActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11369,7 +11369,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningAdiksiNikotinActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11391,7 +11391,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningThalassemiaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11413,7 +11413,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningInstrumenSDQActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11435,7 +11435,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningInstrumenSRQActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11457,7 +11457,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnChecklistPemberianFibrinolitikActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11479,7 +11479,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningKankerKolorektalActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11501,7 +11501,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPenilaianPsikologKlinisActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11523,7 +11523,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPenilaianDerajatDehidrasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11545,7 +11545,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnHasilPemeriksaanECHOActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11567,7 +11567,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPenilaianBayiBaruLahirActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11589,7 +11589,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningDiabetesMelitusActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11611,7 +11611,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnLaporanTindakanActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11633,7 +11633,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPelaksanaanInformasiEdukasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11656,7 +11656,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningAnemiaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11678,7 +11678,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningHipertensiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11700,7 +11700,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningKesehatanPenglihatanActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11722,7 +11722,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanObservasiHemodialisaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11744,7 +11744,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningKesehatanGigiMulutDewasaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11766,7 +11766,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningKesehatanGigiMulutBalitaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11788,7 +11788,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningRisikoKankerServiksActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11810,7 +11810,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanCairanHemodialisaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11833,7 +11833,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningKesehatanGigiMulutLansiaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11855,7 +11855,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningIndraPendengaranActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11877,7 +11877,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanPengkajianPaskaOperasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11899,7 +11899,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningFrailtySyndromeActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11921,7 +11921,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanObservasiBayiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11944,7 +11944,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCheckListKesiapanAnestesiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11966,7 +11966,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnHasilPemeriksaanSlitLampActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11988,7 +11988,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnHasilPemeriksaanOCTActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12010,7 +12010,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCetakSuratKeteranganLayakTerbangActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12030,7 +12030,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPersetujuanPemeriksaanHIVActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12053,7 +12053,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningInstrumenACRSActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12075,7 +12075,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPernyataanMemilihDPJPActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12095,7 +12095,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningInstrumenMentalEmosionalActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12117,7 +12117,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCheckListKriteriaMasukNICUActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12139,7 +12139,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCheckListKriteriaMasukPICUActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12161,7 +12161,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningInstrumenAMTActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12183,7 +12183,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningPneumoniaSeverityIndexActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12205,7 +12205,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnHasilPemeriksaanTreadmillActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12227,7 +12227,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnHasilPemeriksaanECHOPediatrikActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12249,7 +12249,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningInstrumenESATActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12271,7 +12271,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningCURB65ActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12293,7 +12293,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12316,7 +12316,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSerahTerimaBarangAnggotaTubuhActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12336,7 +12336,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPermintaanKonsultasiMedikActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12359,7 +12359,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPermintaanKonsultasiPerawatActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12382,7 +12382,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPersetujuanBimbinganRohaniActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12404,7 +12404,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPermintaanPerlindunganDariKekerasanActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12426,7 +12426,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSuratPermohonanPrivasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12448,7 +12448,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSuratPermintaanSecondOpinionActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12470,7 +12470,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCetakSuratKeteranganBerobatActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12490,7 +12490,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSuratPenolakanResusitasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12512,7 +12512,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanObservasiRuangOperasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12534,7 +12534,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnIntervensiNyeriFarmakologiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12556,7 +12556,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnIntervensiNyeriNonFarmakologiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12578,7 +12578,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPengajuanCutiPerawatanPasienActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12600,7 +12600,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCheckListKriteriaMasukIsolasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12622,7 +12622,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningTOLACActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12644,7 +12644,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnAdmisiSkoringTOLACActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12666,7 +12666,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnMonitoringTOLACActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12688,7 +12688,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnHasilPersalinanTOLACActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12710,7 +12710,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnLaporanReaksiTranfusiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12732,7 +12732,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPenilaianGRACEScoreActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12754,7 +12754,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPenilaianBISHOPScoreActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -15185,7 +15185,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText("" + tabMode.getRowCount());
+                    LCount.setText("" + tbPetugas.getRowCount());
                     ceksukses = false;
                 }
             }.execute();
@@ -15193,7 +15193,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPengkajianInvasifNonBedahSMCActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){

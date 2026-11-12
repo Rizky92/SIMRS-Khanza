@@ -4231,7 +4231,7 @@ public class DlgUser extends javax.swing.JDialog {
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbUser.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -4245,7 +4245,7 @@ public class DlgUser extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbUser.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TKd.requestFocus();
         }else if(TPass.getText().trim().equals("")){
@@ -4253,9 +4253,9 @@ public class DlgUser extends javax.swing.JDialog {
         }else if(! TPass.getText().trim().equals("")){
             if(Sequel.queryutf("delete from user where id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')")==true){
                 if(tbUser.getSelectedRow()!= -1){
-                    tabMode.removeRow(tbUser.getSelectedRow());
+                    tabMode.removeRow(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()));
                     emptTeks();
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText(""+tbUser.getRowCount());
                 }
             }
         }
@@ -5722,7 +5722,7 @@ public class DlgUser extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void MnCopyHakAksesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCopyHakAksesActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbUser.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data user...!!!!");
             TCari.requestFocus();
         }else if(TKd.getText().trim().equals("")){
@@ -5769,7 +5769,7 @@ public class DlgUser extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSetUserActionPerformed
 
     private void tbUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUserMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbUser.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -7036,7 +7036,7 @@ public class DlgUser extends javax.swing.JDialog {
     }//GEN-LAST:event_tbUserMouseClicked
 
     private void tbUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbUserKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbUser.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();

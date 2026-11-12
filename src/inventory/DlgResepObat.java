@@ -1281,7 +1281,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -1413,7 +1413,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbResepMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbResepMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbResep.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1422,7 +1422,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_tbResepMouseClicked
 
     private void tbResepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbResepKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbResep.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -1530,7 +1530,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkRMItemStateChanged
 
     private void ppResepObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObatActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -1591,7 +1591,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_ppResepObatActionPerformed
 
     private void ppLembarObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppLembarObatActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -1664,7 +1664,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluar1ActionPerformed
 
     private void ppUbahAturanPakaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUbahAturanPakaiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -1679,7 +1679,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_ppUbahAturanPakaiActionPerformed
 
     private void ppUbahAturanPakai1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUbahAturanPakai1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -1795,7 +1795,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluar2ActionPerformed
 
     private void ppResepObat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObat1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -1856,7 +1856,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_ppResepObat1ActionPerformed
 
     private void ppResepObat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObat2ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -1926,7 +1926,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_tbResepKeyReleased
 
     private void ppLembarObat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppLembarObat1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -2076,7 +2076,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_DTPBeriItemStateChanged
 
     private void ppLabelDataObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppLabelDataObatActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -2192,7 +2192,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTelaahActionPerformed
 
     private void ppLembarObat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppLembarObat2ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){

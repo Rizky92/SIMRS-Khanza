@@ -376,7 +376,7 @@ public final class PCRAICRATindakanPengendalian extends javax.swing.JDialog {
                     KodePengendalian.getText(),NamaPengendalian.getText()
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbJabatan.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -402,9 +402,9 @@ public final class PCRAICRATindakanPengendalian extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbJabatan.getSelectedRow()!= -1){
             if(Sequel.meghapustf("pcra_icra_tindakan_pengendalian","kode_pengendalian",tbJabatan.getValueAt(tbJabatan.getSelectedRow(),0).toString())==true){
-                tabMode.removeRow(tbJabatan.getSelectedRow());
+                tabMode.removeRow(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()));
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbJabatan.getRowCount());
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus...!!!!");
@@ -429,8 +429,8 @@ public final class PCRAICRATindakanPengendalian extends javax.swing.JDialog {
                 if(Sequel.mengedittf("pcra_icra_tindakan_pengendalian","kode_pengendalian=?","kode_pengendalian=?,nama_pengendalian=?",3,new String[]{
                         KodePengendalian.getText(),NamaPengendalian.getText(),tbJabatan.getValueAt(tbJabatan.getSelectedRow(), 0).toString()
                     })==true){
-                    tabMode.setValueAt(KodePengendalian.getText(),tbJabatan.getSelectedRow(),0);
-                    tabMode.setValueAt(NamaPengendalian.getText(),tbJabatan.getSelectedRow(),1);
+                    tbJabatan.setValueAt(KodePengendalian.getText(),tbJabatan.getSelectedRow(),0);
+                    tbJabatan.setValueAt(NamaPengendalian.getText(),tbJabatan.getSelectedRow(),1);
                     emptTeks();
                 }
             }else{
@@ -497,7 +497,7 @@ public final class PCRAICRATindakanPengendalian extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJabatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJabatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJabatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -506,7 +506,7 @@ public final class PCRAICRATindakanPengendalian extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJabatanMouseClicked
 
     private void tbJabatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJabatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJabatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -614,7 +614,7 @@ public final class PCRAICRATindakanPengendalian extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJabatan.getRowCount());
     }
 
     private void getData() {

@@ -666,7 +666,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllPeriksaKeyPressed
 
     private void tbPemeriksaanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemeriksaanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPemeriksaan.getRowCount()!=0){
             try {
                // getData2();
             } catch (java.lang.NullPointerException e) {
@@ -721,7 +721,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
             Valid.textKosong(InformasiTambahan,"Informasi Tambahan");
         }else if(DiagnosisKlinis.getText().isBlank()){
             Valid.textKosong(DiagnosisKlinis,"Diagnosis Klinis");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbPemeriksaan.getRowCount()==0){
             Valid.textKosong(TCariPeriksa,"Data Permintaan");
         }else if(jml==0){
             Valid.textKosong(TCariPeriksa,"Data Permintaan");

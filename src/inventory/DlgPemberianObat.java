@@ -819,7 +819,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
             bangsal=tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),13).toString();
         }
 
-        if(tabModePO.getRowCount()==0){
+        if(tbPemberianObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -870,8 +870,8 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                     }
                     Sequel.AutoComitTrue();
                     if(hapusdata==true){
-                        tabModePO.removeRow(tbPemberianObat.getSelectedRow());
-                        LCount.setText(""+tabModePO.getRowCount());
+                        tabModePO.removeRow(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()));
+                        LCount.setText(""+tbPemberianObat.getRowCount());
                         LCount1.setText(""+Valid.SetAngka(jumlahtotal-ttljual));
                     } else {
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -1063,7 +1063,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbDtkKeyPressed
 
     private void tbPemberianObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemberianObatMouseClicked
-        if(tabModePO.getRowCount()!=0){
+        if(tbPemberianObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1072,7 +1072,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemberianObatMouseClicked
 
     private void tbPemberianObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemberianObatKeyPressed
-        if(tabModePO.getRowCount()!=0){
+        if(tbPemberianObat.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -1159,7 +1159,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnObat3ActionPerformed
 
     private void ppResepObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObatActionPerformed
-        if(tabModePO.getRowCount()==0){
+        if(tbPemberianObat.getRowCount()==0){
              JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
              TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -1179,10 +1179,10 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     private void ppNoRawatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppNoRawatActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         tampilPO();
-        if(tabModePO.getRowCount()==0){
+        if(tbPemberianObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModePO.getRowCount()!=0){
+        }else if(tbPemberianObat.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
@@ -1252,7 +1252,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     }//GEN-LAST:event_ppLokasiBtnPrintActionPerformed
 
     private void tbPemberianObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemberianObatKeyReleased
-        if(tabModePO.getRowCount()!=0){
+        if(tbPemberianObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1433,7 +1433,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModePO.getRowCount());
+        LCount.setText(""+tbPemberianObat.getRowCount());
         LCount1.setText(""+Valid.SetAngka(jumlahtotal));
     }
 
@@ -1501,7 +1501,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModePO.getRowCount());
+        LCount.setText(""+tbPemberianObat.getRowCount());
         LCount1.setText(""+Valid.SetAngka(jumlahtotal));
     }
 

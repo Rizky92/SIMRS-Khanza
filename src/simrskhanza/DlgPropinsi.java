@@ -345,8 +345,8 @@ public class DlgPropinsi extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,Nama,"propinsi","nm_prop")==true){
             if(tbpropinsi.getSelectedRow()!= -1){
-                tabMode.removeRow(tbpropinsi.getSelectedRow());
-                LCount.setText(""+tabMode.getRowCount());
+                tabMode.removeRow(tbpropinsi.convertRowIndexToModel(tbpropinsi.getSelectedRow()));
+                LCount.setText(""+tbpropinsi.getRowCount());
                 emptTeks();
             }
         }
@@ -408,7 +408,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbpropinsiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbpropinsiMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbpropinsi.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -420,7 +420,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbpropinsiMouseClicked
 
     private void tbpropinsiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbpropinsiKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbpropinsi.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -546,7 +546,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbpropinsi.getRowCount());
     }
 
     private void tampil2() {
@@ -573,7 +573,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
                 }
             }
             myObj.close();
-            if(tabMode.getRowCount()==0){
+            if(tbpropinsi.getRowCount()==0){
                 ps=koneksi.prepareStatement("select propinsi.nm_prop,propinsi.kd_prop from propinsi where propinsi.nm_prop like ?");
                 try {
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
@@ -599,7 +599,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
             response = null;
             root = null;
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbpropinsi.getRowCount());
     }
 
     public String tampil3(String nama) {

@@ -733,7 +733,7 @@ public final class DlgAuditFasilitasAPD extends javax.swing.JDialog {
                 Audit5.getSelectedItem().toString(),Audit6.getSelectedItem().toString(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),
                 tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
             });
-            if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+            if(tbObat.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -872,7 +872,7 @@ public final class DlgAuditFasilitasAPD extends javax.swing.JDialog {
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -881,7 +881,7 @@ public final class DlgAuditFasilitasAPD extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();

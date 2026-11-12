@@ -454,7 +454,7 @@ public final class DlgSatuan extends javax.swing.JDialog {
             Valid.editTable(tabMode,"kodesatuan","kode_sat","?","satuan=?,kode_sat=?",3,new String[]{
                 Nm.getText(),Kd.getText(),tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString()
             });
-            if(tabMode.getRowCount()!=0){BtnCariActionPerformed(evt);}
+            if(tbKamar.getRowCount()!=0){BtnCariActionPerformed(evt);}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -572,7 +572,7 @@ public final class DlgSatuan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -581,7 +581,7 @@ public final class DlgSatuan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -689,7 +689,7 @@ public final class DlgSatuan extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     public void emptTeks() {

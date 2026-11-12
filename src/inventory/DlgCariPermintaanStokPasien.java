@@ -257,7 +257,7 @@ public class DlgCariPermintaanStokPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkTanggalItemStateChanged
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else if(tbPemisahan.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data permintaan dokter..!!");

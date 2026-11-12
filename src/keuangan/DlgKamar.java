@@ -672,7 +672,7 @@ public final class DlgKamar extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     false,TKd.getText(),kd_bangsal.getText(),TBangsal.getText(),Kelas.getSelectedItem().toString(),Double.parseDouble(TTarif.getText()),CmbStatus.getSelectedItem().toString()
                 });
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbKamar.getRowCount());
                 emptTeks();
             }
         }
@@ -706,7 +706,7 @@ public final class DlgKamar extends javax.swing.JDialog {
                     tabMode.removeRow(tbKamar.convertRowIndexToModel(i));
                 }
             }
-            LCount.setText("" + tabMode.getRowCount());
+            LCount.setText("" + tbKamar.getRowCount());
             ceksukses = false;
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
@@ -949,7 +949,7 @@ public final class DlgKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKamarKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -959,7 +959,7 @@ public final class DlgKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -1064,7 +1064,7 @@ public final class DlgKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRestoreActionPerformed
 
     private void tbKamarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1201,7 +1201,7 @@ public final class DlgKamar extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        LCount.setText("" + tabMode.getRowCount());
+        LCount.setText("" + tbKamar.getRowCount());
     }
 
     public void tampil2() {
@@ -1333,7 +1333,7 @@ public final class DlgKamar extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText("" + tabMode.getRowCount());
+                    LCount.setText("" + tbKamar.getRowCount());
                     DlgKamar.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

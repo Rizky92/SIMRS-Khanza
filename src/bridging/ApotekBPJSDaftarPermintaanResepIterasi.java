@@ -861,7 +861,7 @@ public final class ApotekBPJSDaftarPermintaanResepIterasi extends javax.swing.JD
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbResep.getRowCount());
     }
 
     private void panggilPhoto() {

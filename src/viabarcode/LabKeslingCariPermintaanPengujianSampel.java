@@ -1824,9 +1824,9 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
             if(tbPermintaan.getSelectedRow()!= -1){
                 if(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),22).toString().equals("Permintaan Baru")){
                     if(Sequel.queryutf("delete from labkesling_permintaan_pengujian_sampel where no_permintaan='"+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString()+"'")==true){
-                        tabModePermintaan.removeRow(tbPermintaan.getSelectedRow());
+                        tabModePermintaan.removeRow(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()));
                         Valid.tabelKosong(tabModeDetailPermintaan);
-                        LTotal.setText(tabModePermintaan.getRowCount()+"");
+                        LTotal.setText(tbPermintaan.getRowCount()+"");
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Bukan permintaan baru, tidak bisa dihapus...!");
@@ -1838,8 +1838,8 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
             if(tbRekapPermintaan.getSelectedRow()!= -1){
                 if(tbRekapPermintaan.getValueAt(tbRekapPermintaan.getSelectedRow(),22).toString().equals("Permintaan Baru")){
                     if(Sequel.queryutf("delete from labkesling_detail_permintaan_pengujian_sampel where no_permintaan='"+tbRekapPermintaan.getValueAt(tbRekapPermintaan.getSelectedRow(),1).toString()+"' and kode_parameter='"+tbRekapPermintaan.getValueAt(tbRekapPermintaan.getSelectedRow(),23).toString()+"'")==true){
-                        tabModeRekapPermintaan.removeRow(tbRekapPermintaan.getSelectedRow());
-                        LTotal.setText(tabModeRekapPermintaan.getRowCount()+"");
+                        tabModeRekapPermintaan.removeRow(tbRekapPermintaan.convertRowIndexToModel(tbRekapPermintaan.getSelectedRow()));
+                        LTotal.setText(tbRekapPermintaan.getRowCount()+"");
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Bukan permintaan baru, tidak bisa dihapus...!");
@@ -2114,7 +2114,7 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
                         rs.getString("kode_sampel"),rs.getString("nama_sampel"),rs.getString("baku_mutu"),rs.getString("status")
                     });
                 }
-                LTotal.setText(tabModePermintaan.getRowCount()+"");
+                LTotal.setText(tbPermintaan.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{
@@ -2182,7 +2182,7 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
                         rs.getString("satuan"),rs.getString("kategori"),rs.getString("nilai_normal")
                     });
                 }
-                LTotal.setText(tabModeRekapPermintaan.getRowCount()+"");
+                LTotal.setText(tbRekapPermintaan.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{

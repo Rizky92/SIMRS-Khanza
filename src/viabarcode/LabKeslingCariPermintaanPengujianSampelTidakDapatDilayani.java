@@ -873,9 +873,9 @@ public class LabKeslingCariPermintaanPengujianSampelTidakDapatDilayani extends j
         if(tbTidakDapatDilayani.getSelectedRow()!= -1){
             if(Sequel.queryutf("delete from labkesling_permintaan_pengujian_sampel_tidak_dilayani where no_permintaan='"+tbTidakDapatDilayani.getValueAt(tbTidakDapatDilayani.getSelectedRow(),1).toString()+"'")==true){
                 Sequel.queryu("update labkesling_permintaan_pengujian_sampel set status='Permintaan Baru' where no_permintaan='"+tbTidakDapatDilayani.getValueAt(tbTidakDapatDilayani.getSelectedRow(),1).toString()+"'");
-                tabModeTidakDapatDilayani.removeRow(tbTidakDapatDilayani.getSelectedRow());
+                tabModeTidakDapatDilayani.removeRow(tbTidakDapatDilayani.convertRowIndexToModel(tbTidakDapatDilayani.getSelectedRow()));
                 Valid.tabelKosong(tabModeDetailPermintaan);
-                LTotal.setText(tabModeTidakDapatDilayani.getRowCount()+"");
+                LTotal.setText(tbTidakDapatDilayani.getRowCount()+"");
             }
         }else{
             JOptionPane.showMessageDialog(null,"Silahkan pilih data tidak dapat dilayani...!!!");
@@ -1059,7 +1059,7 @@ public class LabKeslingCariPermintaanPengujianSampelTidakDapatDilayani extends j
                         rs.getString("waktu_diterima"),rs.getString("no_permintaan"),rs.getString("kode_pelanggan"),rs.getString("nama_pelanggan"),rs.getString("kode_sampel"),rs.getString("nama_sampel"),rs.getString("keterangan")
                     });
                 }
-                LTotal.setText(tabModeTidakDapatDilayani.getRowCount()+"");
+                LTotal.setText(tbTidakDapatDilayani.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{

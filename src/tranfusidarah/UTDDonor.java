@@ -1599,7 +1599,7 @@ public final class UTDDonor extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabModeTranfusi.getRowCount()==0){
+        if(tbTranfusiDarah.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbTranfusiDarah.getSelectedRow()<= -1){
@@ -1682,7 +1682,7 @@ public final class UTDDonor extends javax.swing.JDialog {
             Valid.textKosong(KdPetugas,"Petugas Aftap");
         }else if(KdPetugas2.getText().trim().equals("")||NmPetugas2.getText().trim().equals("")){
             Valid.textKosong(KdPetugas2,"Petugas Uji Saring");
-        }else if(tabModeTranfusi.getRowCount()==0){
+        }else if(tbTranfusiDarah.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbTranfusiDarah.getSelectedRow()<= -1){
@@ -2084,7 +2084,7 @@ public final class UTDDonor extends javax.swing.JDialog {
     }//GEN-LAST:event_ppTampilkanBHPPenunjangDanMedisActionPerformed
 
     private void ppHapusBHPMedisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusBHPMedisActionPerformed
-        if(tabModeTranfusi.getRowCount()==0){
+        if(tbTranfusiDarah.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbTranfusiDarah.getSelectedRow()<= -1){
@@ -2128,7 +2128,7 @@ public final class UTDDonor extends javax.swing.JDialog {
     }//GEN-LAST:event_ppHapusBHPMedisActionPerformed
 
     private void ppHapusBHPNonMedisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusBHPNonMedisActionPerformed
-        if(tabModeTranfusi.getRowCount()==0){
+        if(tbTranfusiDarah.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbTranfusiDarah.getSelectedRow()<= -1){
@@ -2172,7 +2172,7 @@ public final class UTDDonor extends javax.swing.JDialog {
     }//GEN-LAST:event_ppHapusBHPNonMedisActionPerformed
 
     private void ppHapusBHPMedisDanNonMedisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusBHPMedisDanNonMedisActionPerformed
-        if(tabModeTranfusi.getRowCount()==0){
+        if(tbTranfusiDarah.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbTranfusiDarah.getSelectedRow()<= -1){
@@ -2235,7 +2235,7 @@ public final class UTDDonor extends javax.swing.JDialog {
     }//GEN-LAST:event_ppHapusBHPMedisDanNonMedisActionPerformed
 
     private void ppUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUbahActionPerformed
-        if(tabModeTranfusi.getRowCount()==0){
+        if(tbTranfusiDarah.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbTranfusiDarah.getSelectedRow()<= -1){
@@ -2322,7 +2322,7 @@ public final class UTDDonor extends javax.swing.JDialog {
     }//GEN-LAST:event_ppUbahActionPerformed
 
     private void ppCekalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCekalActionPerformed
-        if(tabModeTranfusi.getRowCount()==0){
+        if(tbTranfusiDarah.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbTranfusiDarah.getSelectedRow()<= -1){

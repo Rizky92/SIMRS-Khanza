@@ -744,9 +744,9 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
                     Sequel.queryu("update labkesling_validasi_pengujian_sampel set status='Belum Bayar' where no_permintaan='"+tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(),3).toString()+"'");
                     Sequel.Commit();
                     JOptionPane.showMessageDialog(null,"Proses hapus berhasil...!");
-                    tabModePembayaran.removeRow(tbPembayaran.getSelectedRow());
+                    tabModePembayaran.removeRow(tbPembayaran.convertRowIndexToModel(tbPembayaran.getSelectedRow()));
                     Valid.tabelKosong(tabModeDetailPermintaan);
-                    LTotal.setText(tabModePembayaran.getRowCount()+"");
+                    LTotal.setText(tbPembayaran.getRowCount()+"");
                 }else{
                     JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     Sequel.RollBack();
@@ -1093,7 +1093,7 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
                     });
                     total=total+rs.getDouble("pembayaran");
                 }
-                LTotal.setText(tabModePembayaran.getRowCount()+"");
+                LTotal.setText(tbPembayaran.getRowCount()+"");
                 LTotalBayar.setText(Valid.SetAngka(total));
             } catch (Exception e) {
                 System.out.println("Note : "+e);

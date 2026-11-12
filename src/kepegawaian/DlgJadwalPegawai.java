@@ -342,44 +342,44 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
 
-        for(i=0;i<tabMode.getRowCount();i++){
+        for(i=0;i<tbJadwal.getRowCount();i++){
             Sequel.menyimpan2("jadwal_pegawai","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", 34,
                 new String[]{
-                    tabMode.getValueAt(i,1).toString(),
+                    tbJadwal.getValueAt(i,1).toString(),
                     ThnCari.getSelectedItem().toString(),
                     BlnCari.getSelectedItem().toString(),
-                    tabMode.getValueAt(i,5).toString(),
-                    tabMode.getValueAt(i,6).toString(),
-                    tabMode.getValueAt(i,7).toString(),
-                    tabMode.getValueAt(i,8).toString(),
-                    tabMode.getValueAt(i,9).toString(),tabMode.getValueAt(i,10).toString(),
-                    tabMode.getValueAt(i,11).toString(),tabMode.getValueAt(i,12).toString(),tabMode.getValueAt(i,13).toString(),
-                    tabMode.getValueAt(i,14).toString(),tabMode.getValueAt(i,15).toString(),tabMode.getValueAt(i,16).toString(),
-                    tabMode.getValueAt(i,17).toString(),tabMode.getValueAt(i,18).toString(),tabMode.getValueAt(i,19).toString(),
-                    tabMode.getValueAt(i,20).toString(),tabMode.getValueAt(i,21).toString(),tabMode.getValueAt(i,22).toString(),
-                    tabMode.getValueAt(i,23).toString(),tabMode.getValueAt(i,24).toString(),tabMode.getValueAt(i,25).toString(),
-                    tabMode.getValueAt(i,26).toString(),tabMode.getValueAt(i,27).toString(),tabMode.getValueAt(i,28).toString(),
-                    tabMode.getValueAt(i,29).toString(),tabMode.getValueAt(i,30).toString(),tabMode.getValueAt(i,31).toString(),
-                    tabMode.getValueAt(i,32).toString(),tabMode.getValueAt(i,33).toString(),tabMode.getValueAt(i,34).toString(),
-                    tabMode.getValueAt(i,35).toString()
+                    tbJadwal.getValueAt(i,5).toString(),
+                    tbJadwal.getValueAt(i,6).toString(),
+                    tbJadwal.getValueAt(i,7).toString(),
+                    tbJadwal.getValueAt(i,8).toString(),
+                    tbJadwal.getValueAt(i,9).toString(),tbJadwal.getValueAt(i,10).toString(),
+                    tbJadwal.getValueAt(i,11).toString(),tbJadwal.getValueAt(i,12).toString(),tbJadwal.getValueAt(i,13).toString(),
+                    tbJadwal.getValueAt(i,14).toString(),tbJadwal.getValueAt(i,15).toString(),tbJadwal.getValueAt(i,16).toString(),
+                    tbJadwal.getValueAt(i,17).toString(),tbJadwal.getValueAt(i,18).toString(),tbJadwal.getValueAt(i,19).toString(),
+                    tbJadwal.getValueAt(i,20).toString(),tbJadwal.getValueAt(i,21).toString(),tbJadwal.getValueAt(i,22).toString(),
+                    tbJadwal.getValueAt(i,23).toString(),tbJadwal.getValueAt(i,24).toString(),tbJadwal.getValueAt(i,25).toString(),
+                    tbJadwal.getValueAt(i,26).toString(),tbJadwal.getValueAt(i,27).toString(),tbJadwal.getValueAt(i,28).toString(),
+                    tbJadwal.getValueAt(i,29).toString(),tbJadwal.getValueAt(i,30).toString(),tbJadwal.getValueAt(i,31).toString(),
+                    tbJadwal.getValueAt(i,32).toString(),tbJadwal.getValueAt(i,33).toString(),tbJadwal.getValueAt(i,34).toString(),
+                    tbJadwal.getValueAt(i,35).toString()
                 },
                 "id=? and tahun=? and bulan=?","h1=?,h2=?,h3=?,h4=?,h5=?,h6=?,h7=?,h8=?,h9=?,h10=?,h11=?,h12=?,h13=?,h14=?,"+
                 "h15=?,h16=?,h17=?,h18=?,h19=?,h20=?,h21=?,h22=?,h23=?,h24=?,h25=?,h26=?,h27=?,h28=?,h29=?,h30=?,h31=?",34,
                 new String[]{
-                    tabMode.getValueAt(i,5).toString(),
-                    tabMode.getValueAt(i,6).toString(),
-                    tabMode.getValueAt(i,7).toString(),
-                    tabMode.getValueAt(i,8).toString(),
-                    tabMode.getValueAt(i,9).toString(),tabMode.getValueAt(i,10).toString(),
-                    tabMode.getValueAt(i,11).toString(),tabMode.getValueAt(i,12).toString(),tabMode.getValueAt(i,13).toString(),
-                    tabMode.getValueAt(i,14).toString(),tabMode.getValueAt(i,15).toString(),tabMode.getValueAt(i,16).toString(),
-                    tabMode.getValueAt(i,17).toString(),tabMode.getValueAt(i,18).toString(),tabMode.getValueAt(i,19).toString(),
-                    tabMode.getValueAt(i,20).toString(),tabMode.getValueAt(i,21).toString(),tabMode.getValueAt(i,22).toString(),
-                    tabMode.getValueAt(i,23).toString(),tabMode.getValueAt(i,24).toString(),tabMode.getValueAt(i,25).toString(),
-                    tabMode.getValueAt(i,26).toString(),tabMode.getValueAt(i,27).toString(),tabMode.getValueAt(i,28).toString(),
-                    tabMode.getValueAt(i,29).toString(),tabMode.getValueAt(i,30).toString(),tabMode.getValueAt(i,31).toString(),
-                    tabMode.getValueAt(i,32).toString(),tabMode.getValueAt(i,33).toString(),tabMode.getValueAt(i,34).toString(),
-                    tabMode.getValueAt(i,35).toString(),tabMode.getValueAt(i,1).toString(),ThnCari.getSelectedItem().toString(),
+                    tbJadwal.getValueAt(i,5).toString(),
+                    tbJadwal.getValueAt(i,6).toString(),
+                    tbJadwal.getValueAt(i,7).toString(),
+                    tbJadwal.getValueAt(i,8).toString(),
+                    tbJadwal.getValueAt(i,9).toString(),tbJadwal.getValueAt(i,10).toString(),
+                    tbJadwal.getValueAt(i,11).toString(),tbJadwal.getValueAt(i,12).toString(),tbJadwal.getValueAt(i,13).toString(),
+                    tbJadwal.getValueAt(i,14).toString(),tbJadwal.getValueAt(i,15).toString(),tbJadwal.getValueAt(i,16).toString(),
+                    tbJadwal.getValueAt(i,17).toString(),tbJadwal.getValueAt(i,18).toString(),tbJadwal.getValueAt(i,19).toString(),
+                    tbJadwal.getValueAt(i,20).toString(),tbJadwal.getValueAt(i,21).toString(),tbJadwal.getValueAt(i,22).toString(),
+                    tbJadwal.getValueAt(i,23).toString(),tbJadwal.getValueAt(i,24).toString(),tbJadwal.getValueAt(i,25).toString(),
+                    tbJadwal.getValueAt(i,26).toString(),tbJadwal.getValueAt(i,27).toString(),tbJadwal.getValueAt(i,28).toString(),
+                    tbJadwal.getValueAt(i,29).toString(),tbJadwal.getValueAt(i,30).toString(),tbJadwal.getValueAt(i,31).toString(),
+                    tbJadwal.getValueAt(i,32).toString(),tbJadwal.getValueAt(i,33).toString(),tbJadwal.getValueAt(i,34).toString(),
+                    tbJadwal.getValueAt(i,35).toString(),tbJadwal.getValueAt(i,1).toString(),ThnCari.getSelectedItem().toString(),
                     BlnCari.getSelectedItem().toString()
                 });
         }
@@ -397,10 +397,10 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()!=0){
+        if(tbJadwal.getRowCount()!=0){
             if(tbJadwal.getSelectedRow()!= -1){
                 Sequel.queryu2("delete from jadwal_pegawai where id=? and tahun=? and bulan=?",3,new String[]{
-                        tabMode.getValueAt(tbJadwal.getSelectedRow(),1).toString(),
+                        tbJadwal.getValueAt(tbJadwal.getSelectedRow(),1).toString(),
                         ThnCari.getSelectedItem().toString(),BlnCari.getSelectedItem().toString()
                 });
                 runBackground(() ->tampil());
@@ -626,7 +626,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJadwalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJadwal.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 DlgJamMasuk jammasuk=new DlgJamMasuk(null,false);
                 jammasuk.addWindowListener(new WindowListener() {
@@ -638,7 +638,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
                     public void windowClosed(WindowEvent e) {
                         if(jammasuk.getTable().getSelectedRow()!= -1){
                             if(tbJadwal.getSelectedColumn()>4){
-                                tabMode.setValueAt(jammasuk.getTable().getValueAt(jammasuk.getTable().getSelectedRow(),1).toString(),tbJadwal.getSelectedRow(),tbJadwal.getSelectedColumn());
+                                tbJadwal.setValueAt(jammasuk.getTable().getValueAt(jammasuk.getTable().getSelectedRow(),1).toString(),tbJadwal.getSelectedRow(),tbJadwal.getSelectedColumn());
                             }
                         }
                         tbJadwal.requestFocus();
@@ -670,7 +670,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
                 jammasuk.setLocationRelativeTo(internalFrame1);
                 jammasuk.setVisible(true);
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
-                tabMode.setValueAt("",tbJadwal.getSelectedRow(),tbJadwal.getSelectedColumn());
+                tbJadwal.setValueAt("",tbJadwal.getSelectedRow(),tbJadwal.getSelectedColumn());
             }
         }
     }//GEN-LAST:event_tbJadwalKeyPressed
@@ -904,7 +904,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJadwal.getRowCount());
     }
 
     public void isCek(){

@@ -492,7 +492,7 @@ public class DapurPengeluaran extends javax.swing.JDialog {
                                 NoKeluar.getText(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,3).toString(),
                                 tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,5).toString(),tbDokter.getValueAt(i,6).toString()
                             })==true){
-                                Trackbarang.catatRiwayat(tabMode.getValueAt(i,1).toString(),0,Valid.SetAngka(tabMode.getValueAt(i,0).toString()),"Stok Keluar", akses.getkode(),"Simpan");
+                                Trackbarang.catatRiwayat(tbDokter.getValueAt(i,1).toString(),0,Valid.SetAngka(tbDokter.getValueAt(i,0).toString()),"Stok Keluar", akses.getkode(),"Simpan");
                                 Sequel.mengedit("dapurbarang","kode_brng=?","stok=stok-?",2,new String[]{
                                     tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,1).toString()
                                 });

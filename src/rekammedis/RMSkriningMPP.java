@@ -1207,7 +1207,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                         param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,param11,param12,param13,param14,param15,param16,KdPetugas.getText(),NmPetugas.getText()
                     });
                     emptTeks();
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText(""+tbObat.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -1422,7 +1422,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1431,7 +1431,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1524,7 +1524,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     }//GEN-LAST:event_TglSkriningKeyPressed
 
     private void MnEvaluasiFormAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnEvaluasiFormAActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -1543,7 +1543,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     }//GEN-LAST:event_MnEvaluasiFormAActionPerformed
 
     private void MnEvaluasiFormBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnEvaluasiFormBActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -1805,7 +1805,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -2001,9 +2001,9 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
         if(Sequel.queryu2tf("delete from mpp_skrining where no_rawat=? and tanggal=?",2,new String[]{
             tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()
         })==true){
-            tabMode.removeRow(tbObat.getSelectedRow());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
             emptTeks();
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbObat.getRowCount());
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }

@@ -709,7 +709,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDataDiet.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -721,7 +721,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
                         "and tanggal='"+Valid.SetTgl(Tanggal.getText()+"")+"' " +
                         "and waktu='"+WaktuDiet.getText()+"' " +
                         "and kd_kamar='"+Kamar.getText()+"'")==true){
-                    tabMode.removeRow(tbDataDiet.getSelectedRow());
+                    tabMode.removeRow(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()));
                     hitung();
                 }
             }
@@ -860,7 +860,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbDataDietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDataDietMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDataDiet.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -869,7 +869,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDataDietMouseClicked
 
     private void tbDataDietKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDataDietKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDataDiet.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1127,7 +1127,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
 
     public void hitung(){
         hewani=0;nabati=0;karbo=0;sayur=0;buah=0;x=0;
-        for(i=0;i<tabMode.getRowCount();i++){
+        for(i=0;i<tbDataDiet.getRowCount();i++){
             if(!tbDataDiet.getValueAt(i,0).toString().equals("")){
                 karbo=karbo+Valid.SetInteger(tbDataDiet.getValueAt(i,6).toString());
                 hewani=hewani+Valid.SetInteger(tbDataDiet.getValueAt(i,7).toString());
@@ -1136,12 +1136,12 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
                 buah=buah+Valid.SetInteger(tbDataDiet.getValueAt(i,10).toString());
                 x++;
             }else{
-                tabMode.removeRow(i);
+                tabMode.removeRow(tbDataDiet.convertRowIndexToModel(i));
                 i--;
             }
         }
-        LCount.setText(""+tabMode.getRowCount());
-        if(tabMode.getRowCount()>0){
+        LCount.setText(""+tbDataDiet.getRowCount());
+        if(tbDataDiet.getRowCount()>0){
             tabMode.addRow(new Object[]{
                 "","Rata-rata Persentase Sisa Makanan","","","","",(karbo/x)+"",(hewani/x)+"",(nabati/x)+"",(sayur/x)+"",(buah/x)+"",""
             });

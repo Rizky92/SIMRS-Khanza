@@ -1153,7 +1153,7 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbObat.getRowCount() + "");
                     SatuSehatKirimObservationRadiologi.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

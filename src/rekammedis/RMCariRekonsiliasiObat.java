@@ -826,7 +826,7 @@ public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-    if(tabMode.getRowCount()==0){
+    if(tbDokter.getRowCount()==0){
         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         TCari.requestFocus();
     }else if(tbDokter.getSelectedRow()<= -1){
@@ -859,7 +859,7 @@ public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKonfirmasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKonfirmasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){

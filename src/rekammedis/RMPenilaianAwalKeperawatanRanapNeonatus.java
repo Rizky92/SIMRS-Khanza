@@ -6289,7 +6289,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 ChkAccor.setSelected(true);
                 isMenu();
@@ -6303,7 +6303,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     ChkAccor.setSelected(true);
@@ -6665,7 +6665,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
     }//GEN-LAST:event_DiperolehDariKeyPressed
 
     private void tbMasalahKeperawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMasalahKeperawatanMouseClicked
-        if(tabModeMasalah.getRowCount()!=0){
+        if(tbMasalahKeperawatan.getRowCount()!=0){
             try {
                 runBackground(() ->tampilRencana2());
             } catch (java.lang.NullPointerException e) {
@@ -6674,7 +6674,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
     }//GEN-LAST:event_tbMasalahKeperawatanMouseClicked
 
     private void tbMasalahKeperawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbMasalahKeperawatanKeyPressed
-        if(tabModeMasalah.getRowCount()!=0){
+        if(tbMasalahKeperawatan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCariMasalah.setText("");
                 TCariMasalah.requestFocus();
@@ -6683,7 +6683,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
     }//GEN-LAST:event_tbMasalahKeperawatanKeyPressed
 
     private void tbMasalahKeperawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbMasalahKeperawatanKeyReleased
-        if(tabModeMasalah.getRowCount()!=0){
+        if(tbMasalahKeperawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     runBackground(() ->tampilRencana2());
@@ -8496,7 +8496,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -8732,8 +8732,8 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         CaraTransportasiPulang.setSelectedIndex(0);
         TransportasiYangDigunakan.setSelectedIndex(0);
         Rencana.setText("");
-        for (i = 0; i < tabModeMasalah.getRowCount(); i++) {
-            tabModeMasalah.setValueAt(false,i,0);
+        for (i = 0; i < tbMasalahKeperawatan.getRowCount(); i++) {
+            tbMasalahKeperawatan.setValueAt(false,i,0);
         }
         Valid.tabelKosong(tabModeRencana);
         TabRawat.setSelectedIndex(0);
@@ -9157,8 +9157,8 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             Valid.tabelKosong(tabModeDetailRencana);
             ChkAccor.setSelected(false);
             isMenu();
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(""+tbObat.getRowCount());
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
@@ -9737,7 +9737,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                     SkalaResiko5.getSelectedItem().toString(),NilaiResiko5.getText(),SkalaResiko6.getSelectedItem().toString(),NilaiResiko6.getText(),SkalaResiko7.getSelectedItem().toString(),NilaiResiko7.getText(),NilaiResikoTotal.getText(),KeteranganTingkatRisiko.getText(),SkalaNIPS1.getSelectedItem().toString(),NilaiNIPS1.getText(),SkalaNIPS2.getSelectedItem().toString(),NilaiNIPS2.getText(),SkalaNIPS3.getSelectedItem().toString(),NilaiNIPS3.getText(),SkalaNIPS4.getSelectedItem().toString(),NilaiNIPS4.getText(),SkalaNIPS5.getSelectedItem().toString(),NilaiNIPS5.getText(),TotalNIPS.getText(),
                     KeteranganPenilaianNyeri.getText(),InformasiPerencanaanPulang.getSelectedItem().toString(),LamaRatarata.getText(),Valid.SetTgl(TanggalPulang.getSelectedItem()+""),KondisiPulang.getText(),PerawatanLanjutan.getText(),CaraTransportasiPulang.getSelectedItem().toString(),TransportasiYangDigunakan.getSelectedItem().toString(),Rencana.getText()
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbObat.getRowCount());
                 Valid.tabelKosong(tabModeDetailMasalah);
                 Valid.tabelKosong(tabModeDetailRencana);
                 for (i = 0; i < tbMasalahKeperawatan.getRowCount(); i++) {

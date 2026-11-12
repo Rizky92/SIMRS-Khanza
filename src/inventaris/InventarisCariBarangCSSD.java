@@ -402,7 +402,7 @@ public final class InventarisCariBarangCSSD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 isPhoto();
                 panggilPhoto();
@@ -412,7 +412,7 @@ public final class InventarisCariBarangCSSD extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -630,7 +630,7 @@ public final class InventarisCariBarangCSSD extends javax.swing.JDialog {
 
             fileWriter.close();
             iyembuilder=null;
-            LCount.setText(tabMode.getRowCount()+"");
+            LCount.setText(tbJnsPerawatan.getRowCount()+"");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         } finally {
@@ -709,7 +709,7 @@ public final class InventarisCariBarangCSSD extends javax.swing.JDialog {
             response = null;
             root = null;
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public JTable getTable(){

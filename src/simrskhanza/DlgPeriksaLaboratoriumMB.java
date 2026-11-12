@@ -833,7 +833,7 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
             Valid.textKosong(KodePerujuk,"Dokter Perujuk");
         }else if(KodePj.getText().equals("")||NmDokterPj.getText().equals("")){
             Valid.textKosong(KodePj,"Dokter Penanggung Jawab");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbPemeriksaan.getRowCount()==0){
             Valid.textKosong(Pemeriksaan,"Data Pemeriksaan");
         }else if(jml==0){
             Valid.textKosong(Pemeriksaan,"Data Pemeriksaan");
@@ -1047,7 +1047,7 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
         try{
             for(i=0;i<tbPemeriksaan.getRowCount();i++){
                 if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
-                    tabMode.removeRow(i);
+                    tabMode.removeRow(tbPemeriksaan.convertRowIndexToModel(i));
                 }
             }
         }catch(Exception ex){
@@ -1078,7 +1078,7 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
     }//GEN-LAST:event_PenjabKeyPressed
 
     private void tbTarifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTarifMouseClicked
-        if(tabMode2.getRowCount()!=0){
+        if(tbTarif.getRowCount()!=0){
             try {
                 Valid.tabelKosong(tabMode);
                 runBackground(() ->tampil());

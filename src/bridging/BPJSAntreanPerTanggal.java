@@ -725,7 +725,7 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
         mjkn_capaian = (mjkn_selesai/sep)*100;
         jkn_capaian_angka = (int)jkn_capaian;
         mjkn_capaian_angka = (int)mjkn_capaian;
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
         SEPTerbit.setText(""+sep);
         TotBelum.setText(""+tot_belum);
         TotSelesai.setText(""+tot_selesai);

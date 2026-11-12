@@ -1025,7 +1025,7 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbPemisahanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemisahanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPemisahan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1034,7 +1034,7 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemisahanMouseClicked
 
     private void tbPemisahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemisahanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbPemisahan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1144,7 +1144,7 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbPemisahan.getSelectedRow()<= -1){
@@ -1571,7 +1571,7 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_ppTampilkanBHPPenunjangDanMedisActionPerformed
 
     private void ppHapusBHPMedisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusBHPMedisActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbPemisahan.getSelectedRow()<= -1){
@@ -1722,7 +1722,7 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_ppHapusBHPMedisDanNonMedisActionPerformed
 
     private void ppHapusPemisahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusPemisahanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbPemisahan.getSelectedRow()<= -1){
@@ -2052,7 +2052,7 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPemisahan.getRowCount());
     }
 
     public void emptTeks() {
@@ -2309,7 +2309,7 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeKomponen.getRowCount());
+        LCount.setText(""+tbKomponen.getRowCount());
     }
 
     private void LoadData(){

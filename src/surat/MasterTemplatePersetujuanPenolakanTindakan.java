@@ -677,7 +677,7 @@ public class MasterTemplatePersetujuanPenolakanTindakan extends javax.swing.JDia
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -689,7 +689,7 @@ public class MasterTemplatePersetujuanPenolakanTindakan extends javax.swing.JDia
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -712,8 +712,8 @@ public class MasterTemplatePersetujuanPenolakanTindakan extends javax.swing.JDia
         }else{
             if(Valid.hapusTabletf(tabMode,Kd,"template_persetujuan_penolakan_tindakan","kode_template")==true){
                 if(tbDokter.getSelectedRow()!= -1){
-                    tabMode.removeRow(tbDokter.getSelectedRow());
-                    LCount.setText(""+tabMode.getRowCount());
+                    tabMode.removeRow(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()));
+                    LCount.setText(""+tbDokter.getRowCount());
                     emptTeks();
                 }
             }
@@ -739,7 +739,7 @@ public class MasterTemplatePersetujuanPenolakanTindakan extends javax.swing.JDia
             Valid.textKosong(TindakanKedokteran,"Tindakan Kedokteran");
         }else{
             if(Valid.editTabletf(tabMode,"template_persetujuan_penolakan_tindakan","kode_template","?","kode_template=?,diagnosa=?,tindakan=?,indikasi_tindakan=?,tata_cara=?,tujuan=?,risiko=?,komplikasi=?,prognosis=?,alternatif_dan_risikonya=?,lain_lain=?,biaya=?",13,new String[]{
-                Kd.getText(),Diagnosa.getText(),TindakanKedokteran.getText(),IndikasiTindakan.getText(),TataCara.getText(),Tujuan.getText(),Risiko.getText(),Komplikasi.getText(),Prognosis.getText(),AlternatifResiko.getText(),LainLain.getText(),Biaya.getText(),tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString()
+                Kd.getText(),Diagnosa.getText(),TindakanKedokteran.getText(),IndikasiTindakan.getText(),TataCara.getText(),Tujuan.getText(),Risiko.getText(),Komplikasi.getText(),Prognosis.getText(),AlternatifResiko.getText(),LainLain.getText(),Biaya.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
             })==true){
                 tbDokter.setValueAt(Kd.getText(),tbDokter.getSelectedRow(),0);
                 tbDokter.setValueAt(Diagnosa.getText(),tbDokter.getSelectedRow(),1);
@@ -808,7 +808,7 @@ public class MasterTemplatePersetujuanPenolakanTindakan extends javax.swing.JDia
                     Risiko.getText(),Komplikasi.getText(),Prognosis.getText(),AlternatifResiko.getText(),LainLain.getText(),Biaya.getText()
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbDokter.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -1022,7 +1022,7 @@ public class MasterTemplatePersetujuanPenolakanTindakan extends javax.swing.JDia
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }
 
     public void emptTeks() {
@@ -1045,18 +1045,18 @@ public class MasterTemplatePersetujuanPenolakanTindakan extends javax.swing.JDia
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            Kd.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            Diagnosa.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),1).toString());
-            TindakanKedokteran.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),2).toString());
-            IndikasiTindakan.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString());
-            TataCara.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),4).toString());
-            Tujuan.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),5).toString());
-            Risiko.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),6).toString());
-            Komplikasi.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),7).toString());
-            Prognosis.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),8).toString());
-            AlternatifResiko.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),9).toString());
-            LainLain.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),10).toString());
-            Biaya.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),11).toString());
+            Kd.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+            Diagnosa.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+            TindakanKedokteran.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString());
+            IndikasiTindakan.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
+            TataCara.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
+            Tujuan.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString());
+            Risiko.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString());
+            Komplikasi.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString());
+            Prognosis.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString());
+            AlternatifResiko.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString());
+            LainLain.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString());
+            Biaya.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),11).toString());
         }
     }
 

@@ -829,9 +829,9 @@ public class LabKeslingCariHasilPengujianSampel extends javax.swing.JDialog {
                     if(Sequel.cariInteger("select count(labkesling_hasil_pengujian_sampel.no_penugasan) from labkesling_hasil_pengujian_sampel where no_penugasan=?",tbHasilPengujian.getValueAt(tbHasilPengujian.getSelectedRow(),8).toString())==0){
                         Sequel.queryu("update labkesling_penugasan_pengujian_sampel set status='Belum Keluar Hasil' where no_penugasan='"+tbHasilPengujian.getValueAt(tbHasilPengujian.getSelectedRow(),8).toString()+"'");
                     }
-                    tabModeHasilPengujian.removeRow(tbHasilPengujian.getSelectedRow());
+                    tabModeHasilPengujian.removeRow(tbHasilPengujian.convertRowIndexToModel(tbHasilPengujian.getSelectedRow()));
                     Valid.tabelKosong(tabModeDetailPermintaan);
-                    LTotal.setText(tabModeHasilPengujian.getRowCount()+"");
+                    LTotal.setText(tbHasilPengujian.getRowCount()+"");
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Sudah dilakukan verifikasi, tidak bisa dihapus...!");
@@ -858,11 +858,11 @@ public class LabKeslingCariHasilPengujianSampel extends javax.swing.JDialog {
                     NoPermintaan.setText(tbHasilPengujian.getValueAt(tbHasilPengujian.getSelectedRow(),1).toString());
                     for(i=0;i<tbHasilPengujian.getRowCount();i++){
                         if(!tbHasilPengujian.getValueAt(i,1).toString().equals(NoPermintaan.getText())){
-                            tabModeHasilPengujian.removeRow(i);
+                            tabModeHasilPengujian.removeRow(tbHasilPengujian.convertRowIndexToModel(i));
                             i--;
                         }
                     }
-                    if(tabModeHasilPengujian.getRowCount()!=tabModeDetailPermintaan.getRowCount()){
+                    if(tbHasilPengujian.getRowCount()!=tbDetailPermintaan.getRowCount()){
                         int reply = JOptionPane.showConfirmDialog(rootPane,"Jumlah data permintaan dengan jumlah data pengujian tidak sama.\nApakah mau dilanjutkan...???","Konfirmasi",JOptionPane.YES_NO_OPTION);
                         if (reply == JOptionPane.YES_OPTION) {
                             verifikasi();
@@ -1186,7 +1186,7 @@ public class LabKeslingCariHasilPengujianSampel extends javax.swing.JDialog {
                         rs.getString("nama_sampel")
                     });
                 }
-                LTotal.setText(tabModeHasilPengujian.getRowCount()+"");
+                LTotal.setText(tbHasilPengujian.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{

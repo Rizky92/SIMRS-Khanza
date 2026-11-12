@@ -611,7 +611,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
              JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
              TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){
@@ -873,7 +873,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarInput4ActionPerformed
 
     private void ppUbahAturanPakaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUbahAturanPakaiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){
@@ -888,7 +888,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
     }//GEN-LAST:event_ppUbahAturanPakaiActionPerformed
 
     private void ppUbahAturanPakai1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUbahAturanPakai1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){
@@ -903,7 +903,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
     }//GEN-LAST:event_ppUbahAturanPakai1ActionPerformed
 
     private void BtnResepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnResepActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){

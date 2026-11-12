@@ -1312,7 +1312,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
                         ",sewa_ok='"+TSewaOK.getText()+"',akomodasi='"+TAkomodasi.getText()+"',bagian_rs='"+TBagianRS.getText()+"',omloop='"+TOmloop1.getText()+"',"+
                         "omloop2='"+TOmloop2.getText()+"',omloop3='"+TOmloop3.getText()+"',omloop4='"+TOmloop4.getText()+"',omloop5='"+TOmloop5.getText()+"',sarpras='"+TSarpras.getText()+"',dokter_pjanak='"+TdrPJAnak.getText()+"',"+
                         "dokter_umum='"+TdrUmum.getText()+"',kd_pj='"+kdpnj.getText()+"',kelas='"+Kelas.getSelectedItem()+"'");
-                if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+                if(tbJnsPerawatan.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
             }
         }
@@ -1445,7 +1445,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
                 if(evt.getClickCount()==2){
@@ -1458,7 +1458,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -2097,7 +2097,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {

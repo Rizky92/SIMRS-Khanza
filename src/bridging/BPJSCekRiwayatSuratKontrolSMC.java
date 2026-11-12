@@ -82,7 +82,7 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < tabMode.getColumnCount(); i++) {
+        for (i = 0; i < tbKamar.getColumnCount(); i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(120);

@@ -4371,7 +4371,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         switch (TabRawat.getSelectedIndex()) {
             case 0:
-                if(tabModeDr.getRowCount()==0){
+                if(tbRawatDr.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TNoRw.requestFocus();
                 }else{
@@ -4486,11 +4486,11 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                         Sequel.Commit();
                         for(i=0;i<tbRawatDr.getRowCount();i++){
                             if (tbRawatDr.getValueAt(i, 0).toString().equals("true") && TNoRw.getText().equals(tbRawatDr.getValueAt(i, 1).toString())) {
-                                tabModeDr.removeRow(i);
+                                tabModeDr.removeRow(tbRawatDr.convertRowIndexToModel(i));
                                 i--;
                             }
                         }
-                        LCount.setText(""+tabModeDr.getRowCount());
+                        LCount.setText(""+tbRawatDr.getRowCount());
                     }else{
                         sukses=false;
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -4499,7 +4499,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     Sequel.AutoComitTrue();
                 }   break;
             case 1:
-                if(tabModePr.getRowCount()==0){
+                if(tbRawatPr.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TNoRw.requestFocus();
                 }else{
@@ -4614,11 +4614,11 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                         Sequel.Commit();
                         for(i=0;i<tbRawatPr.getRowCount();i++){
                             if (tbRawatPr.getValueAt(i, 0).toString().equals("true") && TNoRw.getText().equals(tbRawatPr.getValueAt(i, 1).toString())) {
-                                tabModePr.removeRow(i);
+                                tabModePr.removeRow(tbRawatPr.convertRowIndexToModel(i));
                                 i--;
                             }
                         }
-                        LCount.setText(""+tabModePr.getRowCount());
+                        LCount.setText(""+tbRawatPr.getRowCount());
                     }else{
                         sukses=false;
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -4627,7 +4627,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     Sequel.AutoComitTrue();
                 }   break;
             case 2:
-                if(tabModeDrPr.getRowCount()==0){
+                if(tbRawatDrPr.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TNoRw.requestFocus();
                 }else{
@@ -4752,11 +4752,11 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                         Sequel.Commit();
                         if (tbRawatDrPr.getValueAt(i, 0).toString().equals("true") && TNoRw.getText().equals(tbRawatDrPr.getValueAt(i, 1).toString())) {
                             if (tbRawatDrPr.getValueAt(i, 0).toString().equals("true")) {
-                                tabModeDrPr.removeRow(i);
+                                tabModeDrPr.removeRow(tbRawatDrPr.convertRowIndexToModel(i));
                                 i--;
                             }
                         }
-                        LCount.setText(""+tabModeDrPr.getRowCount());
+                        LCount.setText(""+tbRawatDrPr.getRowCount());
                     }else{
                         sukses=false;
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -4765,7 +4765,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     Sequel.AutoComitTrue();
                 }   break;
             case 3:
-                if(tabModePemeriksaan.getRowCount()==0){
+                if(tbPemeriksaan.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TNoRw.requestFocus();
                 }else{
@@ -4775,7 +4775,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                 Sequel.queryu("delete from pemeriksaan_ranap where no_rawat='"+tbPemeriksaan.getValueAt(i,1).toString()+
                                         "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,4).toString()+
                                         "' and jam_rawat='"+tbPemeriksaan.getValueAt(i,5).toString()+"' ");
-                                tabModePemeriksaan.removeRow(i);
+                                tabModePemeriksaan.removeRow(tbPemeriksaan.convertRowIndexToModel(i));
                                 i--;
                             }else{
                                 if(Sequel.cekTanggal48jam(tbPemeriksaan.getValueAt(i,4).toString()+" "+tbPemeriksaan.getValueAt(i,5).toString(),Sequel.ambiltanggalsekarang())==true){
@@ -4783,7 +4783,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                         Sequel.queryu("delete from pemeriksaan_ranap where no_rawat='"+tbPemeriksaan.getValueAt(i,1).toString()+
                                                 "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,4).toString()+
                                                 "' and jam_rawat='"+tbPemeriksaan.getValueAt(i,5).toString()+"' ");
-                                        tabModePemeriksaan.removeRow(i);
+                                        tabModePemeriksaan.removeRow(tbPemeriksaan.convertRowIndexToModel(i));
                                         i--;
                                     }else{
                                         JOptionPane.showMessageDialog(null,"Hanya bisa dihapus oleh dokter/petugas yang bersangkutan..!!");
@@ -4794,7 +4794,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     }
                 }   break;
             case 4:
-                if(tabModeObstetri.getRowCount()==0){
+                if(tbPemeriksaanObstetri.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TNoRw.requestFocus();
                 }else{
@@ -4804,14 +4804,14 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                 Sequel.queryu("delete from pemeriksaan_obstetri_ranap where no_rawat='"+tbPemeriksaanObstetri.getValueAt(i,1).toString()+
                                         "' and tgl_perawatan='"+tbPemeriksaanObstetri.getValueAt(i,4).toString()+
                                         "' and jam_rawat='"+tbPemeriksaanObstetri.getValueAt(i,5).toString()+"' ");
-                                tabModeObstetri.removeRow(i);
+                                tabModeObstetri.removeRow(tbPemeriksaanObstetri.convertRowIndexToModel(i));
                                 i--;
                             }else{
                                 if(Sequel.cekTanggal48jam(tbPemeriksaanObstetri.getValueAt(i,4).toString()+" "+tbPemeriksaanObstetri.getValueAt(i,5).toString(),Sequel.ambiltanggalsekarang())==true){
                                     Sequel.queryu("delete from pemeriksaan_obstetri_ranap where no_rawat='"+tbPemeriksaanObstetri.getValueAt(i,1).toString()+
                                             "' and tgl_perawatan='"+tbPemeriksaanObstetri.getValueAt(i,4).toString()+
                                             "' and jam_rawat='"+tbPemeriksaanObstetri.getValueAt(i,5).toString()+"' ");
-                                    tabModeObstetri.removeRow(i);
+                                    tabModeObstetri.removeRow(tbPemeriksaanObstetri.convertRowIndexToModel(i));
                                     i--;
                                 }
                             }
@@ -4819,7 +4819,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     }
                 }   break;
             case 5:
-                if(tabModeGinekologi.getRowCount()==0){
+                if(tbPemeriksaanGinekologi.getRowCount()==0){
                     JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!");
                     TNoRw.requestFocus();
 
@@ -4830,14 +4830,14 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                 Sequel.queryu("delete from pemeriksaan_ginekologi_ranap where no_rawat='"+tbPemeriksaanGinekologi.getValueAt(i,1).toString()+
                                         "' and tgl_perawatan='"+tbPemeriksaanGinekologi.getValueAt(i,4).toString()+
                                         "' and jam_rawat='"+tbPemeriksaanGinekologi.getValueAt(i,5).toString()+"' ");
-                                tabModeGinekologi.removeRow(i);
+                                tabModeGinekologi.removeRow(tbPemeriksaanGinekologi.convertRowIndexToModel(i));
                                 i--;
                             }else{
                                 if(Sequel.cekTanggal48jam(tbPemeriksaanGinekologi.getValueAt(i,4).toString()+" "+tbPemeriksaanGinekologi.getValueAt(i,5).toString(),Sequel.ambiltanggalsekarang())==true){
                                     Sequel.queryu("delete from pemeriksaan_ginekologi_ranap where no_rawat='"+tbPemeriksaanGinekologi.getValueAt(i,1).toString()+
                                         "' and tgl_perawatan='"+tbPemeriksaanGinekologi.getValueAt(i,4).toString()+
                                         "' and jam_rawat='"+tbPemeriksaanGinekologi.getValueAt(i,5).toString()+"' ");
-                                    tabModeGinekologi.removeRow(i);
+                                    tabModeGinekologi.removeRow(tbPemeriksaanGinekologi.convertRowIndexToModel(i));
                                     i--;
                                 }
                             }
@@ -5309,7 +5309,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPasienKeyPressed
 
     private void tbRawatDrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRawatDrMouseClicked
-        if(tabModeDr.getRowCount()!=0){
+        if(tbRawatDr.getRowCount()!=0){
             try {
                 getDataDr();
             } catch (java.lang.NullPointerException e) {
@@ -5318,7 +5318,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     }//GEN-LAST:event_tbRawatDrMouseClicked
 
     private void tbRawatPrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRawatPrMouseClicked
-        if(tabModePr.getRowCount()!=0){
+        if(tbRawatPr.getRowCount()!=0){
             try {
                 getDataPr();
             } catch (java.lang.NullPointerException e) {
@@ -5730,7 +5730,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnEditKeyPressed
 
     private void tbRawatDrPrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRawatDrPrMouseClicked
-        if(tabModeDrPr.getRowCount()!=0){
+        if(tbRawatDrPr.getRowCount()!=0){
             try {
                 getDataDrPr();
             } catch (java.lang.NullPointerException e) {
@@ -5739,7 +5739,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     }//GEN-LAST:event_tbRawatDrPrMouseClicked
 
     private void tbPemeriksaanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemeriksaanMouseClicked
-        if(tabModePemeriksaan.getRowCount()!=0){
+        if(tbPemeriksaan.getRowCount()!=0){
             try {
                 getDataPemeriksaan();
             } catch (java.lang.NullPointerException e) {
@@ -5943,7 +5943,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
 
     private void tbPemeriksaanObstetriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemeriksaanObstetriMouseClicked
         // TODO add your handling code here:
-        if(tabModeObstetri.getRowCount()!=0) {
+        if(tbPemeriksaanObstetri.getRowCount()!=0) {
             try {
                 getDataPemeriksaanObstetri();
             } catch (java.lang.NullPointerException e) {
@@ -6387,7 +6387,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
 
     private void tbPemeriksaanGinekologiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemeriksaanGinekologiMouseClicked
         // TODO add your handling code here:
-        if(tabModeGinekologi.getRowCount()!=0) {
+        if(tbPemeriksaanGinekologi.getRowCount()!=0) {
             try {
                 getDataPemeriksaanGinekologi();
             } catch (java.lang.NullPointerException e) {
@@ -6572,7 +6572,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbRawatDrKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbRawatDrKeyReleased
-        if(tabModeDr.getRowCount()!=0){
+        if(tbRawatDr.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataDr();
@@ -6583,7 +6583,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     }//GEN-LAST:event_tbRawatDrKeyReleased
 
     private void tbRawatPrKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbRawatPrKeyReleased
-        if(tabModePr.getRowCount()!=0){
+        if(tbRawatPr.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataPr();
@@ -6594,7 +6594,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     }//GEN-LAST:event_tbRawatPrKeyReleased
 
     private void tbRawatDrPrKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbRawatDrPrKeyReleased
-        if(tabModeDrPr.getRowCount()!=0){
+        if(tbRawatDrPr.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataDrPr();
@@ -6605,7 +6605,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     }//GEN-LAST:event_tbRawatDrPrKeyReleased
 
     private void tbPemeriksaanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemeriksaanKeyReleased
-        if(tabModePemeriksaan.getRowCount()!=0){
+        if(tbPemeriksaan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataPemeriksaan();
@@ -6616,7 +6616,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemeriksaanKeyReleased
 
     private void tbPemeriksaanObstetriKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemeriksaanObstetriKeyReleased
-        if(tabModeObstetri.getRowCount()!=0) {
+        if(tbPemeriksaanObstetri.getRowCount()!=0) {
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)) {
                 try {
                     getDataPemeriksaanObstetri();
@@ -6627,7 +6627,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemeriksaanObstetriKeyReleased
 
     private void tbPemeriksaanGinekologiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemeriksaanGinekologiKeyReleased
-        if(tabModeGinekologi.getRowCount()!=0) {
+        if(tbPemeriksaanGinekologi.getRowCount()!=0) {
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)) {
                 try {
                     getDataPemeriksaanGinekologi();
@@ -9544,7 +9544,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeDr.getRowCount());
+        LCount.setText(""+tbRawatDr.getRowCount());
     }
 
     private void getDataDr() {
@@ -9632,7 +9632,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModePr.getRowCount());
+        LCount.setText(""+tbRawatPr.getRowCount());
     }
 
     private void getDataPr() {
@@ -9723,7 +9723,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeDrPr.getRowCount());
+        LCount.setText(""+tbRawatDrPr.getRowCount());
     }
 
     private void getDataDrPr() {
@@ -10562,7 +10562,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModePemeriksaan.getRowCount());
+        LCount.setText(""+tbPemeriksaan.getRowCount());
     }
 
     private void getDataPemeriksaan() {
@@ -10663,7 +10663,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notifikasi :" +e);
         }
-        LCount.setText(""+tabModeObstetri.getRowCount());
+        LCount.setText(""+tbPemeriksaanObstetri.getRowCount());
     }
 
     private void getDataPemeriksaanObstetri() {
@@ -10763,7 +10763,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notifikasi :" +e);
         }
-        LCount.setText(""+tabModeGinekologi.getRowCount());
+        LCount.setText(""+tbPemeriksaanGinekologi.getRowCount());
     }
 
     private void getDataPemeriksaanGinekologi() {
@@ -11815,7 +11815,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                 cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),Double.valueOf(TTnd.getText()),TKdPrw.getText(),JmDokter.getText(),KSO.getText(),
                                 BagianRS.getText(),Bhp.getText(),Menejemen.getText()
                             });
-                            LCount.setText(""+tabModeDr.getRowCount());
+                            LCount.setText(""+tbRawatDr.getRowCount());
                             emptTeks();
                         }else{
                             JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -11902,7 +11902,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                 cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),Double.valueOf(TTnd.getText()),TKdPrwPetugas.getText(),
                                 JmPerawat.getText(),KSO.getText(),BagianRS.getText(),Bhp.getText(),Menejemen.getText()
                             });
-                            LCount.setText(""+tabModePr.getRowCount());
+                            LCount.setText(""+tbRawatPr.getRowCount());
                             emptTeks();
                         }else{
                             JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -12000,7 +12000,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                 Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),Double.valueOf(TTnd.getText()),
                                 TKdPrwDokterPetugas.getText(),JmDokter.getText(),JmPerawat.getText(),KSO.getText(),BagianRS.getText(),Bhp.getText(),Menejemen.getText()
                             });
-                            LCount.setText(""+tabModeDrPr.getRowCount());
+                            LCount.setText(""+tbRawatDrPr.getRowCount());
                             emptTeks();
                         }else{
                             JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -12039,7 +12039,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                     TKeluhan.getText(),TPemeriksaan.getText(),TAlergi.getText(),TPenilaian.getText(),TindakLanjut.getText(),TInstruksi.getText(),TEvaluasi.getText(),KdPeg.getText(),TPegawai.getText(),
                                     Jabatan.getText()
                                 });
-                                LCount.setText(""+tabModePemeriksaan.getRowCount());
+                                LCount.setText(""+tbPemeriksaan.getRowCount());
                                 emptTeks();
                             }
                         }else{
@@ -12056,7 +12056,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                         TKeluhan.getText(),TPemeriksaan.getText(),TAlergi.getText(),TPenilaian.getText(),TindakLanjut.getText(),TInstruksi.getText(),TEvaluasi.getText(),KdPeg.getText(),TPegawai.getText(),
                                         Jabatan.getText()
                                     });
-                                    LCount.setText(""+tabModePemeriksaan.getRowCount());
+                                    LCount.setText(""+tbPemeriksaan.getRowCount());
                                     emptTeks();
                                 }
                             }else{
@@ -12092,7 +12092,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             cmbAlbus.setSelectedIndex(0);TVulva.setText("");TPortio.setText("");cmbDalam.setSelectedIndex(0);TTebal.setText("");
                             cmbArah.setSelectedIndex(0);TPembukaan.setText("");TPenurunan.setText("");TDenominator.setText("");cmbKetuban.setSelectedIndex(0);
                             cmbFeto.getSelectedItem().toString();
-                            LCount.setText(""+tabModeObstetri.getRowCount());
+                            LCount.setText(""+tbPemeriksaanObstetri.getRowCount());
                     }
                 }   break;
             case 5:
@@ -12124,7 +12124,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             TBentuk.setText(""); TCavumUteri.setText(""); cmbMobilitas.setSelectedIndex(0);
                             TUkuran.setText(""); cmbNyeriTekan.setSelectedIndex(0);
                             TAdnexaKanan.setText(""); TAdnexaKiri.setText(""); TCavumDouglas.getText();
-                            LCount.setText(""+tabModeGinekologi.getRowCount());
+                            LCount.setText(""+tbPemeriksaanGinekologi.getRowCount());
                     }
                 } break;
             default:

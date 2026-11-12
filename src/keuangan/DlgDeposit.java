@@ -854,7 +854,7 @@ public class DlgDeposit extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             DTPTgl.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -868,18 +868,18 @@ public class DlgDeposit extends javax.swing.JDialog {
                     Sequel.AutoComitFalse();
                     sukses=true;
 
-                    if (Sequel.menghapustfSmc("deposit", "no_deposit = ?", tabMode.getValueAt(tbObat.getSelectedRow(), 0).toString())) {
+                    if (Sequel.menghapustfSmc("deposit", "no_deposit = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())) {
                         Sequel.deleteTampJurnal();
-                        if(Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", Valid.setAngkaSmc(tabMode.getValueAt(tbObat.getSelectedRow(), 6).toString()), 0)==false){
+                        if(Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", Valid.setAngkaSmc(tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString()), 0)==false){
                             sukses=false;
                         }
-                        if(Sequel.insertTampJurnal(tbObat.getValueAt(tbObat.getSelectedRow(), 12).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString(), 0, Valid.setAngkaSmc(tabMode.getValueAt(tbObat.getSelectedRow(), 6).toString()))==false){
+                        if(Sequel.insertTampJurnal(tbObat.getValueAt(tbObat.getSelectedRow(), 12).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString(), 0, Valid.setAngkaSmc(tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString()))==false){
                             sukses=false;
                         }
                         if(sukses==true){
                             sukses=jur.simpanJurnal(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(), "U", "PEMBATALAN DEPOSIT PASIEN " + TNoRw.getText() + " " + TNoRM.getText() + " " + TPasien.getText() + ", OLEH " + akses.getkode());
                         }
-                        if (sukses) sukses = Sequel.menghapustfSmc("tagihan_sadewa", "no_nota = ?", tabMode.getValueAt(tbObat.getSelectedRow(), 0).toString());
+                        if (sukses) sukses = Sequel.menghapustfSmc("tagihan_sadewa", "no_nota = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
                     } else {
                         sukses = false;
                     }
@@ -1027,7 +1027,7 @@ public class DlgDeposit extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1174,7 +1174,7 @@ public class DlgDeposit extends javax.swing.JDialog {
     }//GEN-LAST:event_DTPTglItemStateChanged
 
     private void tbObatMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 tbObat.changeSelection(tbObat.rowAtPoint(evt.getPoint()), tbObat.columnAtPoint(evt.getPoint()), false, false);
                 getData();
@@ -1310,8 +1310,8 @@ public class DlgDeposit extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
-        if(tabMode.getRowCount()>0){
+        LCount.setText(""+tbObat.getRowCount());
+        if(tbObat.getRowCount()>0){
             tabMode.addRow(new Object[]{
                 "","Total :","","","","",Valid.SetAngka(totaldeposit),"",Valid.SetAngka(totalppn),Valid.SetAngka(tottaldibayar),"","","",""
             });

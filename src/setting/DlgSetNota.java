@@ -1662,7 +1662,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                     KwitansiRanap.getText().trim().equals("")||NotaApotek.getText().trim().equals("")||NotaLab.getText().trim().equals("")||NotaToko.getText().trim().equals("")||
                     NotaLabkesling.getText().trim().equals("")||KwitansiLabKesling.getText().trim().equals("")){
                 Valid.textKosong(NotaRalan,"Semua field");
-            }else if(tabMode.getRowCount()==0){
+            }else if(tbAdmin.getRowCount()==0){
                 if(Sequel.menyimpantf("set_nota","'"+NotaRalan.getText()+"','"+KwitansiRalan.getText()+"','"+Nota1Ranap.getText()+"',"+
                         "'"+Nota2Ranap.getText()+"','"+KwitansiRanap.getText()+"','"+NotaApotek.getText()+"','"+NotaLab.getText()+"','"+NotaToko.getText()+"',"+
                         "'"+NotaLabkesling.getText()+"','"+KwitansiLabKesling.getText()+"','"+cmbYesRalan.getSelectedItem()+"','"+cmbYesRanap.getSelectedItem()+"',"+
@@ -1676,7 +1676,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                     runBackground(() ->tampil());
                     emptTeks();
                 }
-            }else if(tabMode.getRowCount()>0){
+            }else if(tbAdmin.getRowCount()>0){
                 JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Set Nota, Kwitansi, Verifikasi Penjualan...!!!!");
                 NotaRalan.requestFocus();
             }
@@ -1695,7 +1695,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                     (chkResepPulang.isSelected()==false)){
                 JOptionPane.showMessageDialog(null,"Maaf, Minimal harus ada 1 pilihan biaya yang dipakai ...!!!!");
                 chkLaborat.requestFocus();
-            }else if(tabMode2.getRowCount()==0){
+            }else if(tbAdmin2.getRowCount()==0){
                 laborat="No";radiologi="No";operasi="No";obat="No";
                 ranap_dokter="No";ranap_paramedis="No";ralan_dokter="No";
                 ralan_paramedis="No";tambahan="No";potongan="No";
@@ -1738,7 +1738,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                     runBackground(() ->tampil2());
                     emptTeks2();
                 }
-            }else if(tabMode2.getRowCount()>0){
+            }else if(tbAdmin2.getRowCount()>0){
                 JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Set Biaya Service Rawat Inap...!!!!");
                 NamaService.requestFocus();
             }
@@ -1757,7 +1757,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                     (chkResepPulang1.isSelected()==false)){
                 JOptionPane.showMessageDialog(null,"Maaf, Minimal harus ada 1 pilihan biaya yang dipakai ...!!!!");
                 chkLaborat.requestFocus();
-            }else if(tabMode3.getRowCount()==0){
+            }else if(tbAdmin3.getRowCount()==0){
                 laborat="No";radiologi="No";operasi="No";obat="No";
                 ranap_dokter="No";ranap_paramedis="No";ralan_dokter="No";
                 ralan_paramedis="No";tambahan="No";potongan="No";
@@ -1800,7 +1800,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                     runBackground(() ->tampil3());
                     emptTeks3();
                 }
-            }else if(tabMode3.getRowCount()>0){
+            }else if(tbAdmin3.getRowCount()>0){
                 JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Set Biaya Service Rawat Inap...!!!!");
                 NamaService.requestFocus();
             }
@@ -1841,7 +1841,7 @@ public class DlgSetNota extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(TabSetting.getSelectedIndex()==0){
-            if(tabMode.getRowCount()==0){
+            if(tbAdmin.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 NotaRalan.requestFocus();
             }else if(NotaRalan.getText().trim().equals("")){
@@ -1852,7 +1852,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                 emptTeks();
             }
         }else if(TabSetting.getSelectedIndex()==1){
-            if(tabMode2.getRowCount()==0){
+            if(tbAdmin2.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 NamaService.requestFocus();
             }else if(NamaService.getText().trim().equals("")){
@@ -1863,7 +1863,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                 emptTeks2();
             }
         }else if(TabSetting.getSelectedIndex()==2){
-            if(tabMode3.getRowCount()==0){
+            if(tbAdmin3.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 NamaService1.requestFocus();
             }else if(NamaService1.getText().trim().equals("")){
@@ -1886,10 +1886,10 @@ public class DlgSetNota extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbAdmin.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data jam minimal tidak boleh kosong ...!!!!");
             NotaRalan.requestFocus();
-        }else if(! (tabMode.getRowCount()==0)) {
+        }else if(! (tbAdmin.getRowCount()==0)) {
             dispose();
         }
     }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -1901,7 +1901,7 @@ public class DlgSetNota extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1910,7 +1910,7 @@ public class DlgSetNota extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -2254,7 +2254,7 @@ public class DlgSetNota extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkInput2ActionPerformed
 
     private void tbAdmin2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdmin2MouseClicked
-        if(tabMode2.getRowCount()!=0){
+        if(tbAdmin2.getRowCount()!=0){
             try {
                 getData2();
             } catch (java.lang.NullPointerException e) {
@@ -2263,7 +2263,7 @@ public class DlgSetNota extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdmin2MouseClicked
 
     private void tbAdmin2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdmin2KeyPressed
-        if(tabMode2.getRowCount()!=0){
+        if(tbAdmin2.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData2();
@@ -2274,7 +2274,7 @@ public class DlgSetNota extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdmin2KeyPressed
 
     private void tbAdmin3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdmin3MouseClicked
-        if(tabMode3.getRowCount()!=0){
+        if(tbAdmin3.getRowCount()!=0){
             try {
                 getData3();
             } catch (java.lang.NullPointerException e) {
@@ -2283,7 +2283,7 @@ public class DlgSetNota extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdmin3MouseClicked
 
     private void tbAdmin3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdmin3KeyPressed
-        if(tabMode3.getRowCount()!=0){
+        if(tbAdmin3.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData3();

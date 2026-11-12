@@ -1783,7 +1783,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                             TCari.requestFocus();
                         }else if((i==9)||(i==10)){
                             try {
-                                if(!tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),9).toString().equals("")){
+                                if(!tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),9).toString().equals("")){
                                     tbDetailObatRacikan.setValueAt(
                                         Valid.SetAngka8((Double.parseDouble(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),4).toString())
                                             *Double.parseDouble(tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),9).toString()))
@@ -1808,7 +1808,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 }else if((evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                     try {
                         if((i==9)||(i==10)){
-                            if(!tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),9).toString().equals("")){
+                            if(!tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),9).toString().equals("")){
                                 tbDetailObatRacikan.setValueAt(
                                     Valid.SetAngka8((Double.parseDouble(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),4).toString())
                                     *Valid.SetAngka(tbDetailObatRacikan.getValueAt(row,9).toString()))
@@ -1836,7 +1836,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 }else if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
                     if((i==9)||(i==10)){
                         try {
-                            if(!tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),9).toString().equals("")){
+                            if(!tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),9).toString().equals("")){
                                 tbDetailObatRacikan.setValueAt(
                                     Valid.SetAngka8((Double.parseDouble(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),4).toString())
                                     *Valid.SetAngka(tbDetailObatRacikan.getValueAt(row,9).toString()))
@@ -1886,7 +1886,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     }//GEN-LAST:event_TabRawatMouseClicked
 
     private void BtnTambah1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambah1ActionPerformed
-        i=tabModeObatRacikan.getRowCount()+1;
+        i=tbObatRacikan.getRowCount()+1;
         if(i==99){
             JOptionPane.showMessageDialog(null,"Maksimal 98 Racikan..!!");
         }else{
@@ -1896,7 +1896,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),1).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),4).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),5).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),6).equals("")){
-            tabModeObatRacikan.removeRow(tbObatRacikan.getSelectedRow());
+            tabModeObatRacikan.removeRow(tbObatRacikan.convertRowIndexToModel(tbObatRacikan.getSelectedRow()));
         }else{
             JOptionPane.showMessageDialog(null,"Maaf sudah terisi, gak boleh dihapus..!!");
         }

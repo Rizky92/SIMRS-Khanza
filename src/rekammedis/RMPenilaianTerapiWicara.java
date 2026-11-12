@@ -2088,7 +2088,7 @@ public final class RMPenilaianTerapiWicara extends javax.swing.JDialog {
                         KemampuanIramaKelancaran.getSelectedItem().toString(),KemampuanMenelan.getText(),Pernapasan.getText(),Pendengaran.getText(),Penglihatan.getText(),Kinesek.getText(),Bicara.getText(),Tulisan.getText(),Mimik.getText(),
                         Gesture.getText(),PenunjangMedis.getText(),TujuanTerapiWicara.getText(),ProgramTerapiWicara.getText(),Edukasi.getText(),TindakLanjut.getText(),KdPetugas.getText(),NmPetugas.getText()
                     });
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText(""+tbObat.getRowCount());
                     emptTeks();
             }
         }
@@ -2268,7 +2268,7 @@ public final class RMPenilaianTerapiWicara extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -2280,7 +2280,7 @@ public final class RMPenilaianTerapiWicara extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -2939,7 +2939,7 @@ public final class RMPenilaianTerapiWicara extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -3138,8 +3138,8 @@ public final class RMPenilaianTerapiWicara extends javax.swing.JDialog {
         if(Sequel.queryu2tf("delete from penilaian_terapi_wicara where no_rawat=?",1,new String[]{
             tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
         })==true){
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(""+tbObat.getRowCount());
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }

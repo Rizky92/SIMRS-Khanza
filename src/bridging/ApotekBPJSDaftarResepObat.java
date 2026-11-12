@@ -1334,7 +1334,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbResep.getRowCount());
     }
 
     private void tampil2() {
@@ -1437,7 +1437,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeRekap.getRowCount());
+        LCount.setText(""+tbRekapResep.getRowCount());
     }
 
     public JTable getTable(){
@@ -1591,7 +1591,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                 }
                 Sequel.meghapus("bridging_resep_apotek_bpjs","no_sep_apotek",tbResep.getValueAt(tbResep.getSelectedRow(),1).toString());
                 Valid.tabelKosong(tabModeDetail);
-                tabMode.removeRow(tbResep.getSelectedRow());
+                tabMode.removeRow(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()));
             }
         } catch (Exception e) {
             sukses=false;

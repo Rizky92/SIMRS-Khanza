@@ -1057,7 +1057,7 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbObat.getRowCount() + "");
                     SatuSehatKirimSpecimenRadiologi.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

@@ -1182,7 +1182,7 @@ public class LabKeslingPembayaranPengujianSampel extends javax.swing.JDialog {
                         rs.getString("pjverifikasi")
                     });
                 }
-                LTotal.setText(tabModeValidasi.getRowCount()+"");
+                LTotal.setText(tbValidasi.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{

@@ -89,7 +89,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
         tbJadwal.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbJadwal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbJadwal.getColumnCount(); i++) {
             TableColumn column = tbJadwal.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(20);
@@ -632,11 +632,11 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
                 Valid.getJamSmc(cmbJam1, cmbMnt1, cmbDtk1), Valid.getJamSmc(cmbJam2, cmbMnt2, cmbDtk2), tbJadwal.getValueAt(tbJadwal.getSelectedRow(), 1).toString()
             )) {
                 if (simpanMappingShift(kode)) {
-                    tabMode.setValueAt(kode, tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 1);
-                    tabMode.setValueAt(TNama.getText().trim(), tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 2);
-                    tabMode.setValueAt(Valid.getJamSmc(cmbJam1, cmbMnt1, cmbDtk1), tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 3);
-                    tabMode.setValueAt(Valid.getJamSmc(cmbJam2, cmbMnt2, cmbDtk2), tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 4);
-                    tabMode.setValueAt(cmbShift.getSelectedItem().toString(), tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 5);
+                    tbJadwal.setValueAt(kode, tbJadwal.getSelectedRow(), 1);
+                    tbJadwal.setValueAt(TNama.getText().trim(), tbJadwal.getSelectedRow(), 2);
+                    tbJadwal.setValueAt(Valid.getJamSmc(cmbJam1, cmbMnt1, cmbDtk1), tbJadwal.getSelectedRow(), 3);
+                    tbJadwal.setValueAt(Valid.getJamSmc(cmbJam2, cmbMnt2, cmbDtk2), tbJadwal.getSelectedRow(), 4);
+                    tbJadwal.setValueAt(cmbShift.getSelectedItem().toString(), tbJadwal.getSelectedRow(), 5);
                     emptTeks();
                 }
             } else {
@@ -861,7 +861,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJadwalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJadwalMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbJadwal.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -870,7 +870,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJadwalMouseClicked
 
     private void tbJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJadwalKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbJadwal.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
@@ -1006,7 +1006,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbJadwal.getRowCount() + "");
                     DlgJamMasukSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

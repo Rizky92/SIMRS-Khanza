@@ -59,7 +59,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         tbKelahiran.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKelahiran.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbKelahiran.getColumnCount(); i++) {
             TableColumn column = tbKelahiran.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(105);
@@ -620,14 +620,14 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbKelahiran.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis..!!");
         } else {
             if (tbKelahiran.getSelectedRow() < 0) {
                 JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data yang mau dihapus..!!");
             } else {
                 if (Sequel.menghapustfSmc("inacbg_data_klaim_persalinan_smc", "no_sep = ? and delivery_sequence = ?", noSEP.getText(), (String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 4))) {
-                    tabMode.removeRow(tbKelahiran.getSelectedRow());
+                    tabMode.removeRow(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()));
                     emptTeks();
                 } else {
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus data kelahiran..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
@@ -637,7 +637,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbKelahiran.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis..!!");
         } else {
             if (tbKelahiran.getSelectedRow() < 0) {
@@ -716,7 +716,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbKelahiranMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKelahiranMouseReleased
-        if (tabMode.getRowCount() > 0) {
+        if (tbKelahiran.getRowCount() > 0) {
             try {
                 int row = tbKelahiran.rowAtPoint(evt.getPoint());
                 int col = tbKelahiran.columnAtPoint(evt.getPoint());
@@ -883,7 +883,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbKelahiran.getRowCount() + "");
                     INACBGDataPersalinanIbuSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

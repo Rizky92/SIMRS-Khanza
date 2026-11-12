@@ -977,7 +977,7 @@ public final class KeuanganHutangObatBelumLunas extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(tbBangsal.getSelectedRow()!= -1){
                 if(evt.getClickCount()==1){
                     if(tbBangsal.getSelectedColumn()==0){
@@ -1002,7 +1002,7 @@ public final class KeuanganHutangObatBelumLunas extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(tbBangsal.getSelectedRow()!= -1){
                 if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                     if(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().equals("true")){
@@ -1154,13 +1154,13 @@ public final class KeuanganHutangObatBelumLunas extends javax.swing.JDialog {
             Valid.textKosong(KdPetugas,"Petugas");
         }else if(AkunBayar.getSelectedItem().toString().trim().equals("")){
             Valid.textKosong(AkunBayar,"Akun Bayar");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda bayar...!!!!");
         }else if(Keterangan.getText().trim().equals("")){
             Valid.textKosong(Keterangan,"Keterangan");
         }else if(bayar==0){
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih tagihan yang mau dibayar...!!!!");
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbBangsal.getRowCount()!=0){
             koderekening="";
             try {
                 myObj = new FileReader("./cache/akunbayarhutang.iyem");
@@ -1217,28 +1217,28 @@ public final class KeuanganHutangObatBelumLunas extends javax.swing.JDialog {
                 }else{
                     Sequel.AutoComitFalse();
                     sukses=true;
-                    row=tabMode.getRowCount();
+                    row=tbBangsal.getRowCount();
                     for(int i=0;i<row;i++){
-                        if(tabMode.getValueAt(i,0).toString().equals("true")){
+                        if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                             if(Double.parseDouble(tbBangsal.getValueAt(i,11).toString())>0){
                                 if(Sequel.menyimpantf("bayar_pemesanan","?,?,?,?,?,?,?","Data", 7,new String[]{
-                                    Valid.SetTgl(TglBayar.getSelectedItem()+""),tabMode.getValueAt(i,1).toString(),KdPetugas.getText(),
-                                    tabMode.getValueAt(i,11).toString(),Keterangan.getText(),AkunBayar.getSelectedItem().toString(),
+                                    Valid.SetTgl(TglBayar.getSelectedItem()+""),tbBangsal.getValueAt(i,1).toString(),KdPetugas.getText(),
+                                    tbBangsal.getValueAt(i,11).toString(),Keterangan.getText(),AkunBayar.getSelectedItem().toString(),
                                     NoBukti.getText()
                                 })==true){
-                                    if((Double.parseDouble(tabMode.getValueAt(i,10).toString())<=0)||(Double.parseDouble(tabMode.getValueAt(i,10).toString())<=-0)){
-                                        Sequel.mengedit("pemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Sudah Dibayar'");
+                                    if((Double.parseDouble(tbBangsal.getValueAt(i,10).toString())<=0)||(Double.parseDouble(tbBangsal.getValueAt(i,10).toString())<=-0)){
+                                        Sequel.mengedit("pemesanan","no_faktur='"+tbBangsal.getValueAt(i,1).toString()+"'","status='Sudah Dibayar'");
                                     }else{
-                                        Sequel.mengedit("pemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
+                                        Sequel.mengedit("pemesanan","no_faktur='"+tbBangsal.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
                                     }
                                     Sequel.deleteTampJurnal();
-                                    if(Sequel.insertTampJurnal(Bayar_Pemesanan_Obat, "HUTANG USAHA", tabMode.getValueAt(i, 11).toString(), "0")==false){
+                                    if(Sequel.insertTampJurnal(Bayar_Pemesanan_Obat, "HUTANG USAHA", tbBangsal.getValueAt(i, 11).toString(), "0")==false){
                                         sukses=false;
                                     }
-                                    if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", tabMode.getValueAt(i, 11).toString())==false){
+                                    if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", tbBangsal.getValueAt(i, 11).toString())==false){
                                         sukses=false;
                                     }
-                                    if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG OBAT/BHP/ALKES NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
+                                    if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG OBAT/BHP/ALKES NO.FAKTUR "+tbBangsal.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
                                         sukses=false;
                                     }
                                 }else{
@@ -1247,7 +1247,7 @@ public final class KeuanganHutangObatBelumLunas extends javax.swing.JDialog {
                             }
                         }else{
                             if(!notagihan.equals("")){
-                                Sequel.mengedit("pemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
+                                Sequel.mengedit("pemesanan","no_faktur='"+tbBangsal.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
                             }
                         }
                     }
@@ -1269,7 +1269,7 @@ public final class KeuanganHutangObatBelumLunas extends javax.swing.JDialog {
                         LCount1.setText("0");
                         for(i=0;i<tbBangsal.getRowCount();i++){
                             if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                                tabMode.removeRow(i);
+                                tabMode.removeRow(tbBangsal.convertRowIndexToModel(i));
                                 i--;
                             }
                         }
@@ -1446,23 +1446,23 @@ public final class KeuanganHutangObatBelumLunas extends javax.swing.JDialog {
             try{
                 Sequel.AutoComitFalse();
                 sukses=true;
-                row=tabMode.getRowCount();
+                row=tbBangsal.getRowCount();
                 for(i=0;i<row;i++){
-                    if(tabMode.getValueAt(i,0).toString().equals("true")){
+                    if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                         if(Double.parseDouble(tbBangsal.getValueAt(i,11).toString())>0){
                             Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran,6),signed)),0) from pembayaran_pihak_ke3_bankmandiri where left(pembayaran_pihak_ke3_bankmandiri.tgl_pembayaran,10)='"+Valid.SetTgl(TglBayar.getSelectedItem()+"")+"' ",kodemcm+"14"+TglBayar.getSelectedItem().toString().replaceAll("-",""),6,NoBukti);
                             if(Sequel.menyimpantf("bayar_pemesanan","?,?,?,?,?,?,?","Data", 7,new String[]{
-                                Valid.SetTgl(TglBayar.getSelectedItem()+""),tabMode.getValueAt(i,1).toString(),KdPetugas.getText(),
-                                tabMode.getValueAt(i,11).toString(),Keterangan.getText(),AkunBayar.getSelectedItem().toString(),
+                                Valid.SetTgl(TglBayar.getSelectedItem()+""),tbBangsal.getValueAt(i,1).toString(),KdPetugas.getText(),
+                                tbBangsal.getValueAt(i,11).toString(),Keterangan.getText(),AkunBayar.getSelectedItem().toString(),
                                 NoBukti.getText()
                             })==true){
-                                if((Double.parseDouble(tabMode.getValueAt(i,10).toString())<=0)||(Double.parseDouble(tabMode.getValueAt(i,10).toString())<=-0)){
-                                    Sequel.mengedit("pemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Sudah Dibayar'");
+                                if((Double.parseDouble(tbBangsal.getValueAt(i,10).toString())<=0)||(Double.parseDouble(tbBangsal.getValueAt(i,10).toString())<=-0)){
+                                    Sequel.mengedit("pemesanan","no_faktur='"+tbBangsal.getValueAt(i,1).toString()+"'","status='Sudah Dibayar'");
                                 }else{
-                                    Sequel.mengedit("pemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
+                                    Sequel.mengedit("pemesanan","no_faktur='"+tbBangsal.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
                                 }
                                 if(Sequel.menyimpantf("pembayaran_pihak_ke3_bankmandiri","?,now(),?,?,?,?,?,?,?,?,?,?,?","No.Bukti", 12,new String[]{
-                                        NoBukti.getText(),norekening,NoRekening.getText(),RekeningAtasNama.getText(),KotaAtasNamaRekening.getText(),tabMode.getValueAt(i,11).toString(),tabMode.getValueAt(i,1).toString(),KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),"Bayar Pesan Obat/BHP","Baru"
+                                        NoBukti.getText(),norekening,NoRekening.getText(),RekeningAtasNama.getText(),KotaAtasNamaRekening.getText(),tbBangsal.getValueAt(i,11).toString(),tbBangsal.getValueAt(i,1).toString(),KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),"Bayar Pesan Obat/BHP","Baru"
                                     })==false){
                                     sukses=false;
                                 }else{
@@ -1472,13 +1472,13 @@ public final class KeuanganHutangObatBelumLunas extends javax.swing.JDialog {
                                             sukses=false;
                                         }
                                     }
-                                    if(Sequel.insertTampJurnal(Bayar_Pemesanan_Obat, "HUTANG USAHA", tabMode.getValueAt(i,11).toString(), "0")==false){
+                                    if(Sequel.insertTampJurnal(Bayar_Pemesanan_Obat, "HUTANG USAHA", tbBangsal.getValueAt(i,11).toString(), "0")==false){
                                         sukses=false;
                                     }
-                                    if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, (Valid.SetAngka(BiayaTransaksi.getText())+Valid.SetAngka(tabMode.getValueAt(i,11).toString())))==false){
+                                    if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, (Valid.SetAngka(BiayaTransaksi.getText())+Valid.SetAngka(tbBangsal.getValueAt(i,11).toString())))==false){
                                         sukses=false;
                                     }
-                                    if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG OBAT/BHP/ALKES NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
+                                    if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG OBAT/BHP/ALKES NO.FAKTUR "+tbBangsal.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
                                         sukses=false;
                                     }
                                 }
@@ -1488,7 +1488,7 @@ public final class KeuanganHutangObatBelumLunas extends javax.swing.JDialog {
                         }
                     }else{
                         if(!notagihan.equals("")){
-                            Sequel.mengedit("pemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
+                            Sequel.mengedit("pemesanan","no_faktur='"+tbBangsal.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
                         }
                     }
                 }
@@ -1503,7 +1503,7 @@ public final class KeuanganHutangObatBelumLunas extends javax.swing.JDialog {
                     LCount1.setText("0");
                     for(i=0;i<tbBangsal.getRowCount();i++){
                         if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                            tabMode.removeRow(i);
+                            tabMode.removeRow(tbBangsal.convertRowIndexToModel(i));
                             i--;
                         }
                     }

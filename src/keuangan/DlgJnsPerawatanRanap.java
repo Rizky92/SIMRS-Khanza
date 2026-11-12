@@ -999,7 +999,7 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
                         TJmlPr.getText(),kdpnj.getText(),KdKamar.getText(),TJmlDrPr.getText(),BhpMedis.getText(),KSO.getText(),Menejemen.getText(),
                         Kelas.getSelectedItem().toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString()
                     });
-            if(tabMode.getRowCount()!=0){BtnCariActionPerformed(evt);}
+            if(tbJnsPerawatan.getRowCount()!=0){BtnCariActionPerformed(evt);}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -1131,7 +1131,7 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1140,7 +1140,7 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_A){
                 for(i=0;i<tbJnsPerawatan.getRowCount();i++){
                     tbJnsPerawatan.setValueAt(true,i,0);
@@ -1326,7 +1326,7 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_KelasKeyPressed
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1461,7 +1461,7 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {

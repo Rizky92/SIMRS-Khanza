@@ -62,7 +62,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
         tbObat.setModel(tabMode);
         tbObat.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbObat.getColumnCount(); i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(95);
@@ -113,7 +113,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
         tbObat2.setModel(tabMode2);
         tbObat2.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbObat2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < tabMode2.getColumnCount(); i++) {
+        for (int i = 0; i < tbObat2.getColumnCount(); i++) {
             TableColumn column = tbObat2.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(95);
@@ -938,7 +938,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
         if (tbObat.getSelectedRow() >= 0) {
             if ("Proses Pengajuan".equals(tbObat.getValueAt(tbObat.getSelectedRow(), 14).toString())) {
                 if (Sequel.menghapustfSmc("pengajuan_izin_smc", "no_pengajuan = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())) {
-                    tabMode.removeRow(tbObat.getSelectedRow());
+                    tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
                     emptTeks();
                 } else {
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus pengajuan izin..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
@@ -1138,7 +1138,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbObat.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1261,8 +1261,8 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
         if (tbObat2.getSelectedRow() > -1) {
             if ("Proses Pengajuan".equals(tbObat2.getValueAt(tbObat2.getSelectedRow(), 14).toString())) {
                 if (Sequel.mengupdatetfSmc("pengajuan_izin_smc", "status = 'Disetujui', normatif = 'Tidak'", "no_pengajuan = ?", tbObat2.getValueAt(tbObat2.getSelectedRow(), 0).toString())) {
-                    tabMode2.setValueAt("Disetujui", tbObat2.getSelectedRow(), 14);
-                    tabMode2.setValueAt("Tidak", tbObat2.getSelectedRow(), 15);
+                    tbObat2.setValueAt("Disetujui", tbObat2.getSelectedRow(), 14);
+                    tbObat2.setValueAt("Tidak", tbObat2.getSelectedRow(), 15);
                     tampil2Smc();
                 }
             }
@@ -1273,8 +1273,8 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
         if (tbObat2.getSelectedRow() > -1) {
             if ("Proses Pengajuan".equals(tbObat2.getValueAt(tbObat2.getSelectedRow(), 14).toString())) {
                 if (Sequel.mengupdatetfSmc("pengajuan_izin_smc", "status = 'Disetujui', normatif = 'Ya'", "no_pengajuan = ?", tbObat2.getValueAt(tbObat2.getSelectedRow(), 0).toString())) {
-                    tabMode2.setValueAt("Disetujui", tbObat2.getSelectedRow(), 14);
-                    tabMode2.setValueAt("Ya", tbObat2.getSelectedRow(), 15);
+                    tbObat2.setValueAt("Disetujui", tbObat2.getSelectedRow(), 14);
+                    tbObat2.setValueAt("Ya", tbObat2.getSelectedRow(), 15);
                     tampil2Smc();
                 }
             }
@@ -1284,7 +1284,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
     private void ppTolakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTolakActionPerformed
         if ("Proses Pengajuan".equals(tbObat2.getValueAt(tbObat2.getSelectedRow(), 14).toString())) {
             if (Sequel.mengupdatetfSmc("pengajuan_izin_smc", "status = 'Ditolak'", "no_pengajuan = ?", tbObat2.getValueAt(tbObat2.getSelectedRow(), 0).toString())) {
-                tabMode2.setValueAt("Ditolak", tbObat2.getSelectedRow(), 14);
+                tbObat2.setValueAt("Ditolak", tbObat2.getSelectedRow(), 14);
                 tampil2Smc();
             }
         }
@@ -1595,7 +1595,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount1.setText(tabMode.getRowCount() + "");
+                    LCount1.setText(tbObat.getRowCount() + "");
                     PengajuanIzinPegawaiSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }
@@ -1665,7 +1665,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode2.fireTableDataChanged();
-                    LCount2.setText(tabMode2.getRowCount() + "");
+                    LCount2.setText(tbObat2.getRowCount() + "");
                     PengajuanIzinPegawaiSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

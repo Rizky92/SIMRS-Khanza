@@ -1093,7 +1093,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1102,7 +1102,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1507,7 +1507,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbObat.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Data table masih kosong..!!");
         } else {
             for (int i = tbObat.getRowCount() - 1; i >= 0; --i) {
@@ -1522,7 +1522,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                                     "status_bayar = 'Belum Bayar' and not exists(select * from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat)",
                                     tbObat.getValueAt(i, 27).toString(), tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString()
                                 );
-                                tabMode.removeRow(i);
+                                tabMode.removeRow(tbObat.convertRowIndexToModel(i));
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "Maaf, booking sudah diberikan pelayanan..!!");
@@ -1531,7 +1531,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                         }
                     } else {
                         if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?", tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString())) {
-                            tabMode.removeRow(i);
+                            tabMode.removeRow(tbObat.convertRowIndexToModel(i));
                         }
                     }
                 }
@@ -1603,16 +1603,16 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                 "\"No.HP\";\"Isi Pesan\"\n"
             );
 
-            for(i=0;i<tabMode.getRowCount();i++){
+            for(i=0;i<tbObat.getRowCount();i++){
                 try {
                     nohp="";
-                    if(tabMode.getValueAt(i,26).toString().substring(0,1).equals("0")){
-                        nohp="62"+tabMode.getValueAt(i,26).toString().substring(1,tabMode.getValueAt(i,26).toString().length());
+                    if(tbObat.getValueAt(i,26).toString().substring(0,1).equals("0")){
+                        nohp="62"+tbObat.getValueAt(i,26).toString().substring(1,tbObat.getValueAt(i,26).toString().length());
                     }else{
-                        nohp=tabMode.getValueAt(i,26).toString();
+                        nohp=tbObat.getValueAt(i,26).toString();
                     }
                     htmlContent.append(
-                        "\" "+nohp+"\";\""+"Mengingatkan kembali kepada saudara "+tabMode.getValueAt(i,4)+" dengan No.RM "+tabMode.getValueAt(i,3)+", berdasarkan booking pada tanggal "+tabMode.getValueAt(i,1)+" "+tabMode.getValueAt(i,2)+" dengan tujuan pemeriksaan di "+tabMode.getValueAt(i,9)+" pada tanggal "+tabMode.getValueAt(i,5)+" agar bisa datang dengan nomor antrian "+tabMode.getValueAt(i,10)+". Customer Service "+akses.getnamars()+"\"\n"
+                        "\" "+nohp+"\";\""+"Mengingatkan kembali kepada saudara "+tbObat.getValueAt(i,4)+" dengan No.RM "+tbObat.getValueAt(i,3)+", berdasarkan booking pada tanggal "+tbObat.getValueAt(i,1)+" "+tbObat.getValueAt(i,2)+" dengan tujuan pemeriksaan di "+tbObat.getValueAt(i,9)+" pada tanggal "+tbObat.getValueAt(i,5)+" agar bisa datang dengan nomor antrian "+tbObat.getValueAt(i,10)+". Customer Service "+akses.getnamars()+"\"\n"
                     );
                 } catch (Exception e) {
                 }
@@ -1770,7 +1770,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
 

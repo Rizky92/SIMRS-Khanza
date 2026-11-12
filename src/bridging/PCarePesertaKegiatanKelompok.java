@@ -753,7 +753,7 @@ public class PCarePesertaKegiatanKelompok extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }
 
     private void tampil2() {

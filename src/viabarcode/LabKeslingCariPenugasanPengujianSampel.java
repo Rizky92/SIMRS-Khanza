@@ -1495,8 +1495,8 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                         if(Sequel.cariInteger("select count(labkesling_penugasan_pengujian_sampel.no_permintaan) from labkesling_penugasan_pengujian_sampel where labkesling_penugasan_pengujian_sampel.no_permintaan=?",tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),6).toString())==0){
                             Sequel.queryu("update labkesling_permintaan_pengujian_sampel_dilayani set status='Belum Ada Penugasan' where no_permintaan='"+tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),6).toString()+"'");
                         }
-                        tabModePenugasan.removeRow(tbPenugasan.getSelectedRow());
-                        LTotal.setText(tabModePenugasan.getRowCount()+"");
+                        tabModePenugasan.removeRow(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()));
+                        LTotal.setText(tbPenugasan.getRowCount()+"");
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Sudah keluar hasil, tidak bisa dihapus...!");
@@ -1508,8 +1508,8 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
             if(tbRekapPenugasan.getSelectedRow()!= -1){
                 if(tbRekapPenugasan.getValueAt(tbRekapPenugasan.getSelectedRow(),11).toString().equals("Belum Keluar Hasil")){
                     if(Sequel.queryutf("delete from labkesling_detail_penugasan_pengujian_sampel where no_penugasan='"+tbRekapPenugasan.getValueAt(tbRekapPenugasan.getSelectedRow(),1).toString()+"' and kode_parameter='"+tbRekapPenugasan.getValueAt(tbRekapPenugasan.getSelectedRow(),13).toString()+"'")==true){
-                        tabModeRekapPenugasan.removeRow(tbRekapPenugasan.getSelectedRow());
-                        LTotal.setText(tabModeRekapPenugasan.getRowCount()+"");
+                        tabModeRekapPenugasan.removeRow(tbRekapPenugasan.convertRowIndexToModel(tbRekapPenugasan.getSelectedRow()));
+                        LTotal.setText(tbRekapPenugasan.getRowCount()+"");
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Sudah keluar hasil, tidak bisa dihapus...!");
@@ -1660,7 +1660,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                         rs.getString("catatan")
                     });
                 }
-                LTotal.setText(tabModePenugasan.getRowCount()+"");
+                LTotal.setText(tbPenugasan.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{
@@ -1728,7 +1728,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                         rs.getString("nilai_normal")
                     });
                 }
-                LTotal.setText(tabModeRekapPenugasan.getRowCount()+"");
+                LTotal.setText(tbRekapPenugasan.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{

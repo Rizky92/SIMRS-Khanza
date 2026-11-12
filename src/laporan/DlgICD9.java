@@ -597,7 +597,7 @@ public final class DlgICD9 extends javax.swing.JDialog {
                 Panjang.getText(),Pendek.getText(),Kode.getText(),cmbValidCode.getSelectedItem().toString(),cmbACCPDX.getSelectedItem().toString(),
                 cmbIM.getSelectedItem().toString(),tbPenyakit.getValueAt(tbPenyakit.getSelectedRow(),1).toString()
             })==true){
-                if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+                if(tbPenyakit.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
             }
         }
@@ -719,7 +719,7 @@ public final class DlgICD9 extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbPenyakitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPenyakitMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPenyakit.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -728,7 +728,7 @@ public final class DlgICD9 extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPenyakitMouseClicked
 
     private void tbPenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPenyakitKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbPenyakit.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -867,7 +867,7 @@ public final class DlgICD9 extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPenyakit.getRowCount());
     }
 
     public void emptTeks() {

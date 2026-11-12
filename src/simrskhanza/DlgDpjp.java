@@ -661,7 +661,7 @@ public class DlgDpjp extends javax.swing.JDialog {
                     }
                 }
             }
-            LCount.setText(""+TabModePasien.getRowCount());
+            LCount.setText(""+tbPasien.getRowCount());
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -701,12 +701,12 @@ public class DlgDpjp extends javax.swing.JDialog {
                     if(Sequel.queryu2tf("delete from dpjp_ranap where no_rawat=? and kd_dokter=?",2,new String[]{
                         tbPasien.getValueAt(i,2).toString(),tbPasien.getValueAt(i,5).toString()
                     })==true){
-                        TabModePasien.removeRow(i);
+                        TabModePasien.removeRow(tbPasien.convertRowIndexToModel(i));
                         i--;
                     }
                 }
             }
-            LCount.setText(""+TabModePasien.getRowCount());
+            LCount.setText(""+tbPasien.getRowCount());
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -869,7 +869,7 @@ public class DlgDpjp extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeek4KeyPressed
 
     private void tbPasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPasienMouseClicked
-        if(TabModePasien.getRowCount()!=0){
+        if(tbPasien.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -880,7 +880,7 @@ public class DlgDpjp extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPasienMouseClicked
 
     private void tbPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPasienKeyPressed
-        if(TabModePasien.getRowCount()!=0){
+        if(tbPasien.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1104,7 +1104,7 @@ public class DlgDpjp extends javax.swing.JDialog {
                     ps2.close();
                 }
             }
-            LCount.setText(""+TabModePasien.getRowCount());
+            LCount.setText(""+tbPasien.getRowCount());
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }

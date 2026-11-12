@@ -431,14 +431,14 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
             Valid.textKosong(kdrek,"Akun Rekening");
         }else if(TKd.getText().trim().equals("")){
             Valid.textKosong(TKd,"Kode Instansi");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbSpesialis.getRowCount()==0){
             if(Sequel.menyimpantf("set_akun_bankjabar","?,?","Akun Rekening",2,new String[]{
                 kdrek.getText(),TKd.getText()
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();
             }
-        }else if(tabMode.getRowCount()>0){
+        }else if(tbSpesialis.getRowCount()>0){
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu akun pengaturan ...!!!!");
             TKd.requestFocus();
         }
@@ -446,7 +446,7 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -457,7 +457,7 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisKeyPressed
 
     private void tbSpesialisMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -546,9 +546,9 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
     private void getData() {
         int row=tbSpesialis.getSelectedRow();
         if(row!= -1){
-            kdrek.setText(tabMode.getValueAt(row,0).toString());
-            nmrek.setText(tabMode.getValueAt(row,1).toString());
-            TKd.setText(tabMode.getValueAt(row,2).toString());
+            kdrek.setText(tbSpesialis.getValueAt(row,0).toString());
+            nmrek.setText(tbSpesialis.getValueAt(row,1).toString());
+            TKd.setText(tbSpesialis.getValueAt(row,2).toString());
         }
     }
 

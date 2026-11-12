@@ -2951,7 +2951,7 @@ public final class RMPenilaianAwalKeperawatanRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 ChkAccor.setSelected(true);
                 isMenu();
@@ -2965,7 +2965,7 @@ public final class RMPenilaianAwalKeperawatanRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     ChkAccor.setSelected(true);
@@ -3506,7 +3506,7 @@ public final class RMPenilaianAwalKeperawatanRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllRencanaKeyPressed
 
     private void tbMasalahKeperawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbMasalahKeperawatanKeyPressed
-        if(tabModeMasalah.getRowCount()!=0){
+        if(tbMasalahKeperawatan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCariMasalah.setText("");
                 TCariMasalah.requestFocus();
@@ -3515,7 +3515,7 @@ public final class RMPenilaianAwalKeperawatanRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbMasalahKeperawatanKeyPressed
 
     private void tbMasalahKeperawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbMasalahKeperawatanKeyReleased
-        if(tabModeMasalah.getRowCount()!=0){
+        if(tbMasalahKeperawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     runBackground(() ->tampilRencana2());
@@ -3526,7 +3526,7 @@ public final class RMPenilaianAwalKeperawatanRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbMasalahKeperawatanKeyReleased
 
     private void tbMasalahKeperawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMasalahKeperawatanMouseClicked
-        if(tabModeMasalah.getRowCount()!=0){
+        if(tbMasalahKeperawatan.getRowCount()!=0){
             try {
                 runBackground(() ->tampilRencana2());
             } catch (java.lang.NullPointerException e) {
@@ -3850,7 +3850,7 @@ public final class RMPenilaianAwalKeperawatanRalan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -3909,8 +3909,8 @@ public final class RMPenilaianAwalKeperawatanRalan extends javax.swing.JDialog {
         PadaDokter.setSelectedIndex(0);
         KetDokter.setText("");
         Rencana.setText("");
-        for (i = 0; i < tabModeMasalah.getRowCount(); i++) {
-            tabModeMasalah.setValueAt(false,i,0);
+        for (i = 0; i < tbMasalahKeperawatan.getRowCount(); i++) {
+            tbMasalahKeperawatan.setValueAt(false,i,0);
         }
         Valid.tabelKosong(tabModeRencana);
         TabRawat.setSelectedIndex(0);
@@ -4362,8 +4362,8 @@ public final class RMPenilaianAwalKeperawatanRalan extends javax.swing.JDialog {
             Valid.tabelKosong(tabModeDetailRencana);
             ChkAccor.setSelected(false);
             isMenu();
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(""+tbObat.getRowCount());
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
@@ -4496,7 +4496,7 @@ public final class RMPenilaianAwalKeperawatanRalan extends javax.swing.JDialog {
                     Quality.getSelectedItem().toString(),KetQuality.getText(),Lokasi.getText(),Menyebar.getSelectedItem().toString(),SkalaNyeri.getSelectedItem().toString(),Durasi.getText(),NyeriHilang.getSelectedItem().toString(),KetNyeri.getText(),
                     PadaDokter.getSelectedItem().toString(),KetDokter.getText(),Rencana.getText(),KdPetugas.getText(),NmPetugas.getText()
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbObat.getRowCount());
                 Valid.tabelKosong(tabModeDetailMasalah);
                 Valid.tabelKosong(tabModeDetailRencana);
                 for (i = 0; i < tbMasalahKeperawatan.getRowCount(); i++) {

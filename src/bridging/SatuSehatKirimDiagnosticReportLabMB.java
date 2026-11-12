@@ -1097,7 +1097,7 @@ public final class SatuSehatKirimDiagnosticReportLabMB extends javax.swing.JDial
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void isCek(){

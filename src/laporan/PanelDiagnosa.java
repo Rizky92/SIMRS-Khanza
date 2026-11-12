@@ -618,7 +618,7 @@ public class PanelDiagnosa extends widget.panelisi {
     }//GEN-LAST:event_MnStatusLamaActionPerformed
 
     private void tbDiagnosaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDiagnosaMouseClicked
-        if(tabModeDiagnosa.getRowCount()!=0){
+        if(tbDiagnosa.getRowCount()!=0){
             try {
                 if(tbDiagnosa.getSelectedRow()!= -1){
                     if(tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),0).toString().equals("true")&&tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),7).toString().equals("0")){
@@ -639,7 +639,7 @@ public class PanelDiagnosa extends widget.panelisi {
     }//GEN-LAST:event_tbDiagnosaMouseClicked
 
     private void tbDiagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDiagnosaKeyPressed
-        if(tabModeDiagnosa.getRowCount()!=0){
+        if(tbDiagnosa.getRowCount()!=0){
             try {
                 if(tbDiagnosa.getSelectedRow()!= -1){
                     if(tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),0).toString().equals("true")&&tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),7).toString().equals("0")){
@@ -684,7 +684,7 @@ public class PanelDiagnosa extends widget.panelisi {
     }//GEN-LAST:event_tbDiagnosaPropertyChange
 
     private void tbProsedurMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProsedurMouseClicked
-        if(tabModeProsedur.getRowCount()!=0){
+        if(tbProsedur.getRowCount()!=0){
             try {
                 if(tbProsedur.getSelectedRow()!= -1){
                     if(tbProsedur.getValueAt(tbProsedur.getSelectedRow(),0).toString().equals("true")){
@@ -709,7 +709,7 @@ public class PanelDiagnosa extends widget.panelisi {
     }//GEN-LAST:event_tbProsedurMouseClicked
 
     private void tbProsedurKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbProsedurKeyPressed
-        if(tabModeProsedur.getRowCount()!=0){
+        if(tbProsedur.getRowCount()!=0){
             try {
                 if(tbProsedur.getSelectedRow()!= -1){
                     if(tbProsedur.getValueAt(tbProsedur.getSelectedRow(),0).toString().equals("true")){
@@ -1299,7 +1299,7 @@ public class PanelDiagnosa extends widget.panelisi {
 
     public void hapus(){
         if(TabRawat.getSelectedIndex()==1){
-            if(TabModeDiagnosaPasien.getRowCount()==0){
+            if(tbDiagnosaPasien.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             }else{
                 for(i=0;i<tbDiagnosaPasien.getRowCount();i++){
@@ -1311,7 +1311,7 @@ public class PanelDiagnosa extends widget.panelisi {
                 }
             }
         }else if(TabRawat.getSelectedIndex()==2){
-            if(TabModeTindakanPasien.getRowCount()==0){
+            if(tbTindakanPasien.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             }else{
                 for(i=0;i<tbTindakanPasien.getRowCount();i++){
@@ -1329,9 +1329,9 @@ public class PanelDiagnosa extends widget.panelisi {
     public void cetak(){
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(TabRawat.getSelectedIndex()==1){
-            if(TabModeDiagnosaPasien.getRowCount()==0){
+            if(tbDiagnosaPasien.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-            }else if(TabModeDiagnosaPasien.getRowCount()!=0){
+            }else if(tbDiagnosaPasien.getRowCount()!=0){
                 Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
@@ -1357,9 +1357,9 @@ public class PanelDiagnosa extends widget.panelisi {
                         "order by reg_periksa.tgl_registrasi,diagnosa_pasien.prioritas ",param);
             }
         }else if(TabRawat.getSelectedIndex()==2){
-            if(TabModeTindakanPasien.getRowCount()==0){
+            if(tbTindakanPasien.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-            }else if(TabModeTindakanPasien.getRowCount()!=0){
+            }else if(tbTindakanPasien.getRowCount()!=0){
                 Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());

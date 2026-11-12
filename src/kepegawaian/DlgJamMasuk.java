@@ -655,7 +655,7 @@ public class DlgJamMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJadwalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJadwalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJadwal.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -664,7 +664,7 @@ public class DlgJamMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJadwalMouseClicked
 
     private void tbJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJadwalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJadwal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -773,7 +773,7 @@ public class DlgJamMasuk extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        int b=tabMode.getRowCount();
+        int b=tbJadwal.getRowCount();
         LCount.setText(""+b);
     }
 
@@ -792,13 +792,13 @@ public class DlgJamMasuk extends javax.swing.JDialog {
     private void getData() {
         int row=tbJadwal.getSelectedRow();
         if(row!= -1){
-            cmbShift.setSelectedItem(tabMode.getValueAt(row,1).toString());
-            cmbJam1.setSelectedItem(tabMode.getValueAt(row,2).toString().substring(0,2));
-            cmbMnt1.setSelectedItem(tabMode.getValueAt(row,2).toString().substring(3,5));
-            cmbDtk1.setSelectedItem(tabMode.getValueAt(row,2).toString().substring(6,8));
-            cmbJam2.setSelectedItem(tabMode.getValueAt(row,3).toString().substring(0,2));
-            cmbMnt2.setSelectedItem(tabMode.getValueAt(row,3).toString().substring(3,5));
-            cmbDtk2.setSelectedItem(tabMode.getValueAt(row,3).toString().substring(6,8));
+            cmbShift.setSelectedItem(tbJadwal.getValueAt(row,1).toString());
+            cmbJam1.setSelectedItem(tbJadwal.getValueAt(row,2).toString().substring(0,2));
+            cmbMnt1.setSelectedItem(tbJadwal.getValueAt(row,2).toString().substring(3,5));
+            cmbDtk1.setSelectedItem(tbJadwal.getValueAt(row,2).toString().substring(6,8));
+            cmbJam2.setSelectedItem(tbJadwal.getValueAt(row,3).toString().substring(0,2));
+            cmbMnt2.setSelectedItem(tbJadwal.getValueAt(row,3).toString().substring(3,5));
+            cmbDtk2.setSelectedItem(tbJadwal.getValueAt(row,3).toString().substring(6,8));
         }
     }
 

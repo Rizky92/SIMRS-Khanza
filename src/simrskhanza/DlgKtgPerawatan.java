@@ -388,7 +388,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
                 TKd.getText(),TNm.getText()
             })==true){
                 tabMode.addRow(new Object[]{false,TKd.getText(),TNm.getText()});
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbKategori.getRowCount());
                 emptTeks();
             }
         }
@@ -416,12 +416,12 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
         for(i=0;i<tbKategori.getRowCount();i++){
             if(tbKategori.getValueAt(i,0).toString().equals("true")){
                 if(Sequel.meghapustf("kategori_perawatan","kd_kategori",tbKategori.getValueAt(i,1).toString())==true){
-                    tabMode.removeRow(i);
+                    tabMode.removeRow(tbKategori.convertRowIndexToModel(i));
                     i--;
                 }
             }
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKategori.getRowCount());
         emptTeks();
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -511,7 +511,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKategoriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKategoriMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKategori.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -520,7 +520,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKategoriMouseClicked
 
     private void tbKategoriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKategoriKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKategori.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -626,7 +626,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKategori.getRowCount());
     }
 
     private void getData() {

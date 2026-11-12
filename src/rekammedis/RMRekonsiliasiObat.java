@@ -775,7 +775,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbPemeriksaan.getSelectedRow()>-1){
-            tabMode.removeRow(tbPemeriksaan.getSelectedRow());
+            tabMode.removeRow(tbPemeriksaan.convertRowIndexToModel(tbPemeriksaan.getSelectedRow()));
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
         }
@@ -832,7 +832,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
             Valid.textKosong(BtnPetugas,"Petugas");
         }else if(TNoRekonsialiasi.getText().trim().equals("")||TNoRekonsialiasi.getText().trim().equals("-")){
             Valid.textKosong(TNoRekonsialiasi,"No.Rekonsiliasi");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbPemeriksaan.getRowCount()==0){
             Valid.textKosong(TNoRekonsialiasi,"Data Obat Rekonsiliasi");
         }else{
             reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);

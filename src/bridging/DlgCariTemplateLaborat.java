@@ -270,7 +270,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getClickCount()==2){
                 dispose();
             }
@@ -282,7 +282,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 dispose();
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
@@ -410,7 +410,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbKamar.getRowCount() + "");
                     DlgCariTemplateLaborat.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }
@@ -463,7 +463,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
                             System.out.println("Notif : " + e);
                         }
                         tabMode.fireTableDataChanged();
-                        LCount.setText(tabMode.getRowCount() + "");
+                        LCount.setText(tbKamar.getRowCount() + "");
                         DlgCariTemplateLaborat.this.setCursor(Cursor.getDefaultCursor());
                         ceksukses = false;
                     }

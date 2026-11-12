@@ -518,7 +518,7 @@ public class DlgAkunPenagihanPiutang extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     false,kdrek.getText(),nmrek.getText(),NamaBank.getText(),AtasNama.getText(),NoRekening.getText()
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbJadwal.getRowCount());
                 emptTeks();
             }
         }
@@ -546,12 +546,12 @@ public class DlgAkunPenagihanPiutang extends javax.swing.JDialog {
         for(int i=0;i<tbJadwal.getRowCount();i++){
             if(tbJadwal.getValueAt(i,0).toString().equals("true")){
                 if(Sequel.meghapustf("akun_penagihan_piutang","kd_rek",tbJadwal.getValueAt(i,1).toString())==true){
-                    tabMode.removeRow(i);
+                    tabMode.removeRow(tbJadwal.convertRowIndexToModel(i));
                     i--;
                 }
             }
         }
-        LCount.setText("" + tabMode.getRowCount());
+        LCount.setText("" + tbJadwal.getRowCount());
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -708,7 +708,7 @@ public class DlgAkunPenagihanPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJadwalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJadwalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJadwal.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -717,7 +717,7 @@ public class DlgAkunPenagihanPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJadwalMouseClicked
 
     private void tbJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJadwalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJadwal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -917,7 +917,7 @@ public class DlgAkunPenagihanPiutang extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJadwal.getRowCount());
     }
 
 
@@ -935,11 +935,11 @@ public class DlgAkunPenagihanPiutang extends javax.swing.JDialog {
     private void getData() {
         int row=tbJadwal.getSelectedRow();
         if(row!= -1){
-            kdrek.setText(tabMode.getValueAt(row,1).toString());
-            nmrek.setText(tabMode.getValueAt(row,2).toString());
-            NamaBank.setText(tabMode.getValueAt(row,3).toString());
-            AtasNama.setText(tabMode.getValueAt(row,4).toString());
-            NoRekening.setText(tabMode.getValueAt(row,5).toString());
+            kdrek.setText(tbJadwal.getValueAt(row,1).toString());
+            nmrek.setText(tbJadwal.getValueAt(row,2).toString());
+            NamaBank.setText(tbJadwal.getValueAt(row,3).toString());
+            AtasNama.setText(tbJadwal.getValueAt(row,4).toString());
+            NoRekening.setText(tbJadwal.getValueAt(row,5).toString());
         }
     }
 

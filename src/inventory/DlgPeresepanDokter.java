@@ -1580,16 +1580,16 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             if (JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menghapus resep racikan ini?", "Hapus Racikan", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 for (int i = tbDetailResepObatRacikan.getRowCount() - 1; i >= 0; i--) {
                     if (tbDetailResepObatRacikan.getValueAt(i, 0).toString().equals(tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(), 0).toString())) {
-                        tabModeDetailResepRacikan.removeRow(i);
+                        tabModeDetailResepRacikan.removeRow(tbDetailResepObatRacikan.convertRowIndexToModel(i));
                     }
                 }
-                tabModeResepRacikan.removeRow(tbObatResepRacikan.getSelectedRow());
+                tabModeResepRacikan.removeRow(tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()));
             }
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnTambah1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambah1ActionPerformed
-        i=tabModeResepRacikan.getRowCount()+1;
+        i=tbObatResepRacikan.getRowCount()+1;
         if(i==99){
             JOptionPane.showMessageDialog(null,"Maksimal 98 Racikan..!!");
         }else{
@@ -4374,13 +4374,13 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private void hitungResep() {
         ttl=0;
         y=0;
-        row2=tabModeResep.getRowCount();
+        row2=tbResep.getRowCount();
         for(r=0;r<row2;r++){
             try {
-                if(Double.parseDouble(tabModeResep.getValueAt(r,1).toString())>0){
+                if(Double.parseDouble(tbResep.getValueAt(r,1).toString())>0){
                     try {
-                        y=Math.round(Double.parseDouble(tabModeResep.getValueAt(r,1).toString())*
-                          Double.parseDouble(tabModeResep.getValueAt(r,7).toString()));
+                        y=Math.round(Double.parseDouble(tbResep.getValueAt(r,1).toString())*
+                          Double.parseDouble(tbResep.getValueAt(r,7).toString()));
                     } catch (Exception e) {
                         y=0;
                     }
@@ -4389,12 +4389,12 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             } catch (Exception e) {
             }
         }
-        row2=tabModeDetailResepRacikan.getRowCount();
+        row2=tbDetailResepObatRacikan.getRowCount();
         for(r=0;r<row2;r++){
             if(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(r,13).toString())>0){
                 try {
-                    y=Math.round(Double.parseDouble(tabModeDetailResepRacikan.getValueAt(r,13).toString())*
-                      Double.parseDouble(tabModeDetailResepRacikan.getValueAt(r,4).toString()));
+                    y=Math.round(Double.parseDouble(tbDetailResepObatRacikan.getValueAt(r,13).toString())*
+                      Double.parseDouble(tbDetailResepObatRacikan.getValueAt(r,4).toString()));
                 } catch (Exception e) {
                     y=0;
                 }

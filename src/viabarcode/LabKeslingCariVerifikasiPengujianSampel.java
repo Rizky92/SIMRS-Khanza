@@ -1509,7 +1509,7 @@ public class LabKeslingCariVerifikasiPengujianSampel extends javax.swing.JDialog
                         for(i=0;i<tbDetailVerifikasi.getRowCount();i++){
                             Sequel.queryu("update labkesling_hasil_pengujian_sampel set status='Belum Diverifikasi' where no_penugasan='"+tbDetailVerifikasi.getValueAt(i,8).toString()+"' and kode_parameter='"+tbDetailVerifikasi.getValueAt(i,0).toString()+"'");
                         }
-                        tabModeVerifikasi.removeRow(tbVerifikasi.getSelectedRow());
+                        tabModeVerifikasi.removeRow(tbVerifikasi.convertRowIndexToModel(tbVerifikasi.getSelectedRow()));
                         Valid.tabelKosong(tabModeDetailVerifikasi);
                         LTotal.setText(tbVerifikasi.getRowCount()+"");
                     }
@@ -1651,7 +1651,7 @@ public class LabKeslingCariVerifikasiPengujianSampel extends javax.swing.JDialog
                         rs.getString("kode_sampel"),rs.getString("nama_sampel"),rs.getString("status"),rs.getString("catatan"),rs.getString("mulai_pengujian"),rs.getString("selesai_pengujian")
                     });
                 }
-                LTotal.setText(tabModeVerifikasi.getRowCount()+"");
+                LTotal.setText(tbVerifikasi.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{
@@ -1724,7 +1724,7 @@ public class LabKeslingCariVerifikasiPengujianSampel extends javax.swing.JDialog
                         rs.getString("no_penugasan"),rs.getString("nip_pelaksana"),rs.getString("analis"),rs.getString("nippengujian"),rs.getString("pjpengujian")
                     });
                 }
-                LTotal.setText(tabModeRekapVerifikasi.getRowCount()+"");
+                LTotal.setText(tbRekapVerifikasi.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{

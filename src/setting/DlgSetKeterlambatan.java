@@ -312,11 +312,11 @@ public class DlgSetKeterlambatan extends javax.swing.JDialog {
             Valid.textKosong(Toleransi,"Embalase");
         }else if(Terlambat1.getText().trim().equals("")){
             Valid.textKosong(Terlambat1,"Terlambat 1");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbAdmin.getRowCount()==0){
             Sequel.menyimpan("set_keterlambatan","'"+Toleransi.getText()+"','"+Terlambat1.getText()+"','"+Terlambat2.getText()+"'","Set Keterlambatan");
             runBackground(() ->tampil());
             emptTeks();
-        }else if(tabMode.getRowCount()>0){
+        }else if(tbAdmin.getRowCount()>0){
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Set Keterlambatan ...!!!!");
             Toleransi.requestFocus();
         }
@@ -341,7 +341,7 @@ public class DlgSetKeterlambatan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbAdmin.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             Toleransi.requestFocus();
         }else if(Toleransi.getText().trim().equals("")){
@@ -362,10 +362,10 @@ public class DlgSetKeterlambatan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbAdmin.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data tidak boleh kosong ...!!!!");
             Toleransi.requestFocus();
-        }else if(! (tabMode.getRowCount()==0)) {
+        }else if(! (tbAdmin.getRowCount()==0)) {
             dispose();
         }
     }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -377,7 +377,7 @@ public class DlgSetKeterlambatan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -386,7 +386,7 @@ public class DlgSetKeterlambatan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();

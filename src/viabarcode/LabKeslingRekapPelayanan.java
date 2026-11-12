@@ -1289,8 +1289,8 @@ public class LabKeslingRekapPelayanan extends javax.swing.JDialog {
                     jasa_menejemen=jasa_menejemen+rs.getDouble("jasa_menejemen");
                     total=total+rs.getDouble("total");
                 }
-                LTotal.setText(tabModeRekapPelayanan.getRowCount()+"");
-                if(tabModeRekapPelayanan.getRowCount()>0){
+                LTotal.setText(tbRekapPelayanan.getRowCount()+"");
+                if(tbRekapPelayanan.getRowCount()>0){
                     tabModeRekapPelayanan.addRow(new Object[]{
                         ">> Total :","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",jasa_sarana,paket_bhp,jasa_pj_lab,jasa_pj_pengujian,jasa_verifikator,jasa_petugas,kso,jasa_menejemen,total
                     });

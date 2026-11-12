@@ -1822,7 +1822,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbResepRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbResepRalanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbResepRalan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1836,7 +1836,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     }//GEN-LAST:event_tbResepRalanMouseClicked
 
     private void tbResepRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbResepRalanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbResepRalan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 try {
                     getData();
@@ -2238,7 +2238,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
                 if(akses.getberi_obat()==true){
-                    if(tabMode.getRowCount()==0){
+                    if(tbResepRalan.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -2277,7 +2277,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
                 if(akses.getberi_obat()==true){
-                    if(tabMode3.getRowCount()==0){
+                    if(tbResepRanap.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -2302,7 +2302,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==2){
                 if(akses.getstok_obat_pasien()==true){
-                    if(tabMode5.getRowCount()==0){
+                    if(tbPermintaanStok.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -2327,7 +2327,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==4){
                 if(akses.getresep_pulang()==true){
-                    if(tabMode7.getRowCount()==0){
+                    if(tbPermintaanResepPulang.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -2375,7 +2375,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbResepRalan.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -2401,7 +2401,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             }
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
-                if(tabMode3.getRowCount()==0){
+                if(tbResepRanap.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -2440,7 +2440,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan buka Daftar Resep...!!!!");
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==2){
-                if(tabMode5.getRowCount()==0){
+                if(tbPermintaanStok.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -2480,7 +2480,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan buka Permintaan Stok...!!!!");
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==4){
-                if(tabMode7.getRowCount()==0){
+                if(tbPermintaanResepPulang.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -2553,7 +2553,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     }//GEN-LAST:event_TabPilihRawatMouseClicked
 
     private void tbResepRanapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbResepRanapMouseClicked
-        if(tabMode3.getRowCount()!=0){
+        if(tbResepRanap.getRowCount()!=0){
             try {
                 getData2();
             } catch (java.lang.NullPointerException e) {
@@ -2567,7 +2567,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     }//GEN-LAST:event_tbResepRanapMouseClicked
 
     private void tbResepRanapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbResepRanapKeyPressed
-        if(tabMode3.getRowCount()!=0){
+        if(tbResepRanap.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 try {
                     getData2();
@@ -2723,7 +2723,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
                 if(akses.getresep_dokter()==true){
-                    if(tabMode.getRowCount()==0){
+                    if(tbResepRalan.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -2733,7 +2733,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                             if(Sequel.meghapustf("resep_obat","no_resep",NoResep)==true){
                                 TeksKosong();
                                 if(tbResepRalan.getSelectedRow()!= -1){
-                                    tabMode.removeRow(tbResepRalan.getSelectedRow());
+                                    tabMode.removeRow(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()));
                                 }
                             }
                         }else{
@@ -2743,7 +2743,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                 if(Sequel.meghapustf("resep_obat","no_resep",NoResep)==true){
                                     TeksKosong();
                                     if(tbResepRalan.getSelectedRow()!= -1){
-                                        tabMode.removeRow(tbResepRalan.getSelectedRow());
+                                        tabMode.removeRow(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()));
                                     }
                                 }
                             }
@@ -2757,7 +2757,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
                 if(akses.getresep_dokter()==true){
-                    if(tabMode3.getRowCount()==0){
+                    if(tbResepRanap.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -2767,7 +2767,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                             if(Sequel.meghapustf("resep_obat","no_resep",NoResep)==true){
                                 TeksKosong();
                                 if(tbResepRanap.getSelectedRow()!= -1){
-                                    tabMode3.removeRow(tbResepRanap.getSelectedRow());
+                                    tabMode3.removeRow(tbResepRanap.convertRowIndexToModel(tbResepRanap.getSelectedRow()));
                                 }
                             }
                         }else{
@@ -2777,7 +2777,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                 if(Sequel.meghapustf("resep_obat","no_resep",NoResep)==true){
                                     TeksKosong();
                                     if(tbResepRanap.getSelectedRow()!= -1){
-                                        tabMode3.removeRow(tbResepRanap.getSelectedRow());
+                                        tabMode3.removeRow(tbResepRanap.convertRowIndexToModel(tbResepRanap.getSelectedRow()));
                                     }
                                 }
                             }
@@ -2789,7 +2789,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==2){
                 if(akses.getpermintaan_stok_obat_pasien()==true){
-                    if(tabMode5.getRowCount()==0){
+                    if(tbPermintaanStok.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -2799,7 +2799,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                             if(Sequel.meghapustf("permintaan_stok_obat_pasien","no_permintaan",NoResep)==true){
                                 TeksKosong();
                                 if(tbPermintaanStok.getSelectedRow()!= -1){
-                                    tabMode5.removeRow(tbPermintaanStok.getSelectedRow());
+                                    tabMode5.removeRow(tbPermintaanStok.convertRowIndexToModel(tbPermintaanStok.getSelectedRow()));
                                 }
                             }
                         }else{
@@ -2809,7 +2809,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                 if(Sequel.meghapustf("permintaan_stok_obat_pasien","no_permintaan",NoResep)==true){
                                     TeksKosong();
                                     if(tbPermintaanStok.getSelectedRow()!= -1){
-                                        tabMode5.removeRow(tbPermintaanStok.getSelectedRow());
+                                        tabMode5.removeRow(tbPermintaanStok.convertRowIndexToModel(tbPermintaanStok.getSelectedRow()));
                                     }
                                 }
                             }
@@ -2821,7 +2821,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==4){
                 if(akses.getpermintaan_resep_pulang()==true){
-                    if(tabMode7.getRowCount()==0){
+                    if(tbPermintaanResepPulang.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -2831,7 +2831,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                             if(Sequel.meghapustf("permintaan_resep_pulang","no_permintaan",NoResep)==true){
                                 TeksKosong();
                                 if(tbPermintaanResepPulang.getSelectedRow()!= -1){
-                                    tabMode7.removeRow(tbPermintaanResepPulang.getSelectedRow());
+                                    tabMode7.removeRow(tbPermintaanResepPulang.convertRowIndexToModel(tbPermintaanResepPulang.getSelectedRow()));
                                 }
                             }
                         }else{
@@ -2841,7 +2841,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                 if(Sequel.meghapustf("permintaan_resep_pulang","no_permintaan",NoResep)==true){
                                     TeksKosong();
                                     if(tbPermintaanResepPulang.getSelectedRow()!= -1){
-                                        tabMode7.removeRow(tbPermintaanResepPulang.getSelectedRow());
+                                        tabMode7.removeRow(tbPermintaanResepPulang.convertRowIndexToModel(tbPermintaanResepPulang.getSelectedRow()));
                                     }
                                 }
                             }
@@ -2868,7 +2868,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void tbPermintaanStokMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPermintaanStokMouseClicked
-        if(tabMode5.getRowCount()!=0){
+        if(tbPermintaanStok.getRowCount()!=0){
             try {
                 getData3();
             } catch (java.lang.NullPointerException e) {
@@ -2882,7 +2882,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPermintaanStokMouseClicked
 
     private void tbPermintaanStokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPermintaanStokKeyPressed
-        if(tabMode5.getRowCount()!=0){
+        if(tbPermintaanStok.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 try {
                     getData3();
@@ -2899,7 +2899,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
                 if(akses.getberi_obat()==true){
-                    if(tabMode.getRowCount()==0){
+                    if(tbResepRalan.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -2933,7 +2933,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPenyerahanKeyPressed
 
     private void tbPermintaanResepPulangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPermintaanResepPulangMouseClicked
-        if(tabMode7.getRowCount()!=0){
+        if(tbPermintaanResepPulang.getRowCount()!=0){
             try {
                 getData4();
             } catch (java.lang.NullPointerException e) {
@@ -2947,7 +2947,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPermintaanResepPulangMouseClicked
 
     private void tbPermintaanResepPulangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPermintaanResepPulangKeyPressed
-        if(tabMode7.getRowCount()!=0){
+        if(tbPermintaanResepPulang.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 try {
                     getData4();
@@ -2968,7 +2968,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
                 if(akses.getberi_obat()==true){
-                    if(tabMode.getRowCount()==0){
+                    if(tbResepRalan.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -3015,7 +3015,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
                 if(akses.getberi_obat()==true){
-                    if(tabMode3.getRowCount()==0){
+                    if(tbResepRanap.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -3060,7 +3060,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==2){
                 if(akses.getstok_obat_pasien()==true){
-                    if(tabMode5.getRowCount()==0){
+                    if(tbPermintaanStok.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -3089,7 +3089,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==4){
                 if(akses.getresep_pulang()==true){
-                    if(tabMode7.getRowCount()==0){
+                    if(tbPermintaanResepPulang.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -3121,7 +3121,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private void BtnPiutangObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPiutangObatActionPerformed
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbResepRalan.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3159,7 +3159,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             }
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
-                if(tabMode3.getRowCount()==0){
+                if(tbResepRanap.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3195,7 +3195,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan buka Daftar Resep...!!!!");
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==2){
-                if(tabMode5.getRowCount()==0){
+                if(tbPermintaanStok.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3231,7 +3231,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan buka Permintaan Stok...!!!!");
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==4){
-                if(tabMode7.getRowCount()==0){
+                if(tbPermintaanResepPulang.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3273,7 +3273,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private void BtnKonselingFarmasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKonselingFarmasiActionPerformed
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbResepRalan.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3311,7 +3311,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             }
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
-                if(tabMode3.getRowCount()==0){
+                if(tbResepRanap.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3347,7 +3347,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan buka Daftar Resep...!!!!");
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==2){
-                if(tabMode5.getRowCount()==0){
+                if(tbPermintaanStok.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3396,7 +3396,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
                 if(akses.getberi_obat()==true){
-                    if(tabMode.getRowCount()==0){
+                    if(tbResepRalan.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -3437,7 +3437,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
                 if(akses.getberi_obat()==true){
-                    if(tabMode3.getRowCount()==0){
+                    if(tbResepRanap.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -3476,7 +3476,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==2){
                 if(akses.getstok_obat_pasien()==true){
-                    if(tabMode5.getRowCount()==0){
+                    if(tbPermintaanStok.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -3515,7 +3515,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==4){
                 if(akses.getresep_pulang()==true){
-                    if(tabMode7.getRowCount()==0){
+                    if(tbPermintaanResepPulang.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     }else if(NoRawat.equals("")){
@@ -3559,7 +3559,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private void BtnInformasiObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInformasiObatActionPerformed
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbResepRalan.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3597,7 +3597,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             }
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
-                if(tabMode3.getRowCount()==0){
+                if(tbResepRanap.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3633,7 +3633,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan buka Daftar Resep...!!!!");
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==2){
-                if(tabMode5.getRowCount()==0){
+                if(tbPermintaanStok.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3669,7 +3669,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan buka Permintaan Stok...!!!!");
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==4){
-                if(tabMode7.getRowCount()==0){
+                if(tbPermintaanResepPulang.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3711,7 +3711,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private void BtnSEPBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSEPBPJSActionPerformed
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbResepRalan.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3754,7 +3754,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private void BtnObat23HariBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnObat23HariBPJSActionPerformed
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbResepRalan.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3815,7 +3815,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             }
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
-                if(tabMode3.getRowCount()==0){
+                if(tbResepRanap.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3880,7 +3880,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private void BtnResepLuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnResepLuarActionPerformed
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbResepRalan.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3917,7 +3917,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             }
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
-                if(tabMode3.getRowCount()==0){
+                if(tbResepRanap.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3952,7 +3952,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan buka Daftar Resep...!!!!");
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==2){
-                if(tabMode5.getRowCount()==0){
+                if(tbPermintaanStok.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -3987,7 +3987,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan buka Permintaan Stok...!!!!");
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==4){
-                if(tabMode7.getRowCount()==0){
+                if(tbPermintaanResepPulang.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -4028,7 +4028,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private void BtnResepAwalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnResepAwalActionPerformed
          if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbResepRalan.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -4144,7 +4144,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             }
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
-                if(tabMode3.getRowCount()==0){
+                if(tbResepRanap.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -4267,7 +4267,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private void BtnTelaahResepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTelaahResepActionPerformed
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbResepRalan.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -4305,7 +4305,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             }
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
-                if(tabMode3.getRowCount()==0){
+                if(tbResepRanap.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -4341,7 +4341,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan buka Daftar Resep...!!!!");
                 TCari.requestFocus();
             }else if(TabRawatInap.getSelectedIndex()==2){
-                if(tabMode5.getRowCount()==0){
+                if(tbPermintaanStok.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                     TCari.requestFocus();
                 }else if(NoRawat.equals("")){
@@ -4419,7 +4419,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         if (TabPilihRawat.getSelectedIndex() == 0) {
             if (TabRawatJalan.getSelectedIndex() == 0) {
                 if (akses.getberi_obat()) {
-                    if (tabMode.getRowCount() == 0) {
+                    if (tbResepRalan.getRowCount() == 0) {
                         JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!");
                         WindowJamPenyerahan.dispose();
                         TCari.requestFocus();
@@ -4628,7 +4628,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         if (TabPilihRawat.getSelectedIndex() == 0) {
             if (TabRawatJalan.getSelectedIndex() == 0) {
                 if (akses.getbpjs_kirim_obat_smc()) {
-                    if (tabMode.getRowCount() == 0) {
+                    if (tbResepRalan.getRowCount() == 0) {
                         JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     } else if (NoRawat.equals("")) {
@@ -4657,7 +4657,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         if (TabPilihRawat.getSelectedIndex() == 0) {
             if (TabRawatJalan.getSelectedIndex() == 0) {
                 if (akses.getbpjs_daftar_pelayanan_obat_apotek()) {
-                    if (tabMode.getRowCount() == 0) {
+                    if (tbResepRalan.getRowCount() == 0) {
                         JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     } else {
@@ -4692,7 +4692,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         if (TabPilihRawat.getSelectedIndex() == 0) {
             if (TabRawatJalan.getSelectedIndex() == 0) {
                 if (akses.getbpjs_riwayat_pelayanan_obat()) {
-                    if (tabMode.getRowCount() == 0) {
+                    if (tbResepRalan.getRowCount() == 0) {
                         JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
                     } else if (NoRM.equals("")) {
@@ -5212,34 +5212,34 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
 
     private void getData() {
         if(tbResepRalan.getSelectedRow()!= -1){
-            NoResep=tabMode.getValueAt(tbResepRalan.getSelectedRow(),0).toString();
-            TglPeresepan=tabMode.getValueAt(tbResepRalan.getSelectedRow(),1).toString();
-            JamPeresepan=tabMode.getValueAt(tbResepRalan.getSelectedRow(),2).toString();
-            NoRawat=tabMode.getValueAt(tbResepRalan.getSelectedRow(),3).toString();
-            NoRM=tabMode.getValueAt(tbResepRalan.getSelectedRow(),4).toString();
-            Pasien=tabMode.getValueAt(tbResepRalan.getSelectedRow(),5).toString();
-            DokterPeresep=tabMode.getValueAt(tbResepRalan.getSelectedRow(),6).toString();
-            Status=tabMode.getValueAt(tbResepRalan.getSelectedRow(),7).toString();
-            KodeDokter=tabMode.getValueAt(tbResepRalan.getSelectedRow(),8).toString();
-            Ruang=tabMode.getValueAt(tbResepRalan.getSelectedRow(),9).toString();
-            KodeRuang=tabMode.getValueAt(tbResepRalan.getSelectedRow(),10).toString();
+            NoResep=tabMode.getValueAt(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()),0).toString();
+            TglPeresepan=tabMode.getValueAt(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()),1).toString();
+            JamPeresepan=tabMode.getValueAt(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()),2).toString();
+            NoRawat=tabMode.getValueAt(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()),3).toString();
+            NoRM=tabMode.getValueAt(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()),4).toString();
+            Pasien=tabMode.getValueAt(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()),5).toString();
+            DokterPeresep=tabMode.getValueAt(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()),6).toString();
+            Status=tabMode.getValueAt(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()),7).toString();
+            KodeDokter=tabMode.getValueAt(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()),8).toString();
+            Ruang=tabMode.getValueAt(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()),9).toString();
+            KodeRuang=tabMode.getValueAt(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()),10).toString();
             baris=tbResepRalan.getSelectedRow();
         }
     }
 
     private void getData2() {
         if(tbResepRanap.getSelectedRow()!= -1){
-            NoResep=tabMode3.getValueAt(tbResepRanap.getSelectedRow(),0).toString();
-            TglPeresepan=tabMode3.getValueAt(tbResepRanap.getSelectedRow(),1).toString();
-            JamPeresepan=tabMode3.getValueAt(tbResepRanap.getSelectedRow(),2).toString();
-            NoRawat=tabMode3.getValueAt(tbResepRanap.getSelectedRow(),3).toString();
-            NoRM=tabMode3.getValueAt(tbResepRanap.getSelectedRow(),4).toString();
-            Pasien=tabMode3.getValueAt(tbResepRanap.getSelectedRow(),5).toString();
-            DokterPeresep=tabMode3.getValueAt(tbResepRanap.getSelectedRow(),6).toString();
-            Status=tabMode3.getValueAt(tbResepRanap.getSelectedRow(),7).toString();
-            KodeDokter=tabMode3.getValueAt(tbResepRanap.getSelectedRow(),8).toString();
-            Ruang=tabMode3.getValueAt(tbResepRanap.getSelectedRow(),9).toString();
-            KodeRuang=tabMode3.getValueAt(tbResepRanap.getSelectedRow(),10).toString();
+            NoResep=tabMode3.getValueAt(tbResepRanap.convertRowIndexToModel(tbResepRanap.getSelectedRow()),0).toString();
+            TglPeresepan=tabMode3.getValueAt(tbResepRanap.convertRowIndexToModel(tbResepRanap.getSelectedRow()),1).toString();
+            JamPeresepan=tabMode3.getValueAt(tbResepRanap.convertRowIndexToModel(tbResepRanap.getSelectedRow()),2).toString();
+            NoRawat=tabMode3.getValueAt(tbResepRanap.convertRowIndexToModel(tbResepRanap.getSelectedRow()),3).toString();
+            NoRM=tabMode3.getValueAt(tbResepRanap.convertRowIndexToModel(tbResepRanap.getSelectedRow()),4).toString();
+            Pasien=tabMode3.getValueAt(tbResepRanap.convertRowIndexToModel(tbResepRanap.getSelectedRow()),5).toString();
+            DokterPeresep=tabMode3.getValueAt(tbResepRanap.convertRowIndexToModel(tbResepRanap.getSelectedRow()),6).toString();
+            Status=tabMode3.getValueAt(tbResepRanap.convertRowIndexToModel(tbResepRanap.getSelectedRow()),7).toString();
+            KodeDokter=tabMode3.getValueAt(tbResepRanap.convertRowIndexToModel(tbResepRanap.getSelectedRow()),8).toString();
+            Ruang=tabMode3.getValueAt(tbResepRanap.convertRowIndexToModel(tbResepRanap.getSelectedRow()),9).toString();
+            KodeRuang=tabMode3.getValueAt(tbResepRanap.convertRowIndexToModel(tbResepRanap.getSelectedRow()),10).toString();
             baris=tbResepRanap.getSelectedRow();
         }
     }
@@ -5314,7 +5314,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 public void windowClosed(WindowEvent e) {
                     TeksKosong();
                     if(obatralan.sukses==true){
-                        tabMode.setValueAt("Sudah Terlayani",baris, 7);
+                        tabMode.setValueAt("Sudah Terlayani",tbResepRalan.convertRowIndexToModel(baris), 7);
                     }
                     obatralan=null;
                 }
@@ -7534,15 +7534,15 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                     LCount.setText("" + i);
                     DlgDaftarPermintaanResep.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
-                    if (!isopening && autoValidasiRalan && autoaksi && tabMode.getRowCount() > 0) {
+                    if (!isopening && autoValidasiRalan && autoaksi && tbResepRalan.getRowCount() > 0) {
                         SwingUtilities.invokeLater(() -> {
                             isopening = true;
                             tbResepRalan.setRowSelectionInterval(0, 0);
                             getData();
-                            String tglValidasi = tabMode.getValueAt(tbResepRalan.getSelectedRow(), 12).toString(),
-                                   jamValidasi = tabMode.getValueAt(tbResepRalan.getSelectedRow(), 13).toString(),
-                                   tglPenyerahan = tabMode.getValueAt(tbResepRalan.getSelectedRow(), 14).toString(),
-                                   jamPenyerahan = tabMode.getValueAt(tbResepRalan.getSelectedRow(), 15).toString();
+                            String tglValidasi = tabMode.getValueAt(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()), 12).toString(),
+                                   jamValidasi = tabMode.getValueAt(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()), 13).toString(),
+                                   tglPenyerahan = tabMode.getValueAt(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()), 14).toString(),
+                                   jamPenyerahan = tabMode.getValueAt(tbResepRalan.convertRowIndexToModel(tbResepRalan.getSelectedRow()), 15).toString();
 
                             if (tglValidasi.isBlank() && jamValidasi.isBlank()) {
                                 if (i > 1) {
@@ -7900,13 +7900,13 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                     LCount.setText("" + i);
                     DlgDaftarPermintaanResep.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
-                    if (!isopening && autoValidasiRanap && autoaksi && tabMode3.getRowCount() > 0) {
+                    if (!isopening && autoValidasiRanap && autoaksi && tbResepRanap.getRowCount() > 0) {
                         isopening = true;
                         SwingUtilities.invokeLater(() -> {
                             tbResepRanap.setRowSelectionInterval(0, 0);
                             getData2();
-                            String tglValidasi = tabMode3.getValueAt(tbResepRanap.getSelectedRow(), 12).toString(),
-                                   jamValidasi = tabMode3.getValueAt(tbResepRanap.getSelectedRow(), 13).toString();
+                            String tglValidasi = tabMode3.getValueAt(tbResepRanap.convertRowIndexToModel(tbResepRanap.getSelectedRow()), 12).toString(),
+                                   jamValidasi = tabMode3.getValueAt(tbResepRanap.convertRowIndexToModel(tbResepRanap.getSelectedRow()), 13).toString();
 
                             if (tglValidasi.isBlank() && jamValidasi.isBlank()) {
                                 if (i > 1) {

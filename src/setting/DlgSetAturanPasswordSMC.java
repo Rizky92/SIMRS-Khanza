@@ -36,7 +36,7 @@ public class DlgSetAturanPasswordSMC extends javax.swing.JDialog {
         tbAturan.setModel(tabMode);
         tbAturan.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbAturan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbAturan.getColumnCount(); i++) {
             tbAturan.getColumnModel().getColumn(i).setPreferredWidth(i == 5 ? 130 : 90);
         }
         tbAturan.setDefaultRenderer(Object.class, new WarnaTable());
@@ -243,7 +243,7 @@ public class DlgSetAturanPasswordSMC extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
-        if (tabMode.getRowCount() > 0) {
+        if (tbAturan.getRowCount() > 0) {
             tbAturan.setRowSelectionInterval(0, 0);
             getData();
         }
@@ -306,7 +306,7 @@ public class DlgSetAturanPasswordSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbAturan.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
         } else if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Hapus aturan password? Password baru tidak akan dibatasi dan user tidak akan diingatkan untuk mengubah password.", "Konfirmasi", JOptionPane.YES_NO_OPTION)) {
             if (Sequel.menghapustfSmc("set_aturan_password_smc")) {

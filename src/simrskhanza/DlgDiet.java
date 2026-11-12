@@ -380,7 +380,7 @@ public class DlgDiet extends javax.swing.JDialog {
                     TKd.getText(),TNm.getText()
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbSpesialis.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -406,9 +406,9 @@ public class DlgDiet extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbSpesialis.getSelectedRow()!= -1){
             if(Sequel.meghapustf("diet","kd_diet",tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString())==true){
-                tabMode.removeRow(tbSpesialis.getSelectedRow());
+                tabMode.removeRow(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()));
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbSpesialis.getRowCount());
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus...!!!!");
@@ -433,8 +433,8 @@ public class DlgDiet extends javax.swing.JDialog {
                 if(Sequel.mengedittf("diet","kd_diet=?","kd_diet=?,nama_diet=?",3,new String[]{
                         TKd.getText(),TNm.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 0).toString()
                     })==true){
-                    tabMode.setValueAt(TKd.getText(),tbSpesialis.getSelectedRow(),0);
-                    tabMode.setValueAt(TNm.getText(),tbSpesialis.getSelectedRow(),1);
+                    tbSpesialis.setValueAt(TKd.getText(),tbSpesialis.getSelectedRow(),0);
+                    tbSpesialis.setValueAt(TNm.getText(),tbSpesialis.getSelectedRow(),1);
                     emptTeks();
                 }
             }else{
@@ -501,7 +501,7 @@ public class DlgDiet extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -510,7 +510,7 @@ public class DlgDiet extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisMouseClicked
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -614,7 +614,7 @@ public class DlgDiet extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbSpesialis.getRowCount());
     }
 
     public void emptTeks() {

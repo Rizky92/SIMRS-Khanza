@@ -710,7 +710,7 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
                     AlamatAsuransi.getText(), NoTelp.getText(), Email.getText(),
                     Attn.getText(), NoNPWP.getText()
                 });
-                LCount.setText(String.valueOf(tabMode.getRowCount()));
+                LCount.setText(String.valueOf(tbKamar.getRowCount()));
                 emptTeks();
             }
         }
@@ -899,7 +899,7 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             try {
                 getData();
                 isPhoto();
@@ -910,7 +910,7 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1114,7 +1114,7 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        LCount.setText(String.valueOf(tabMode.getRowCount()));
+        LCount.setText(String.valueOf(tbKamar.getRowCount()));
     }
 
     public void emptTeks() {

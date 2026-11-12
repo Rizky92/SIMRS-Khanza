@@ -527,11 +527,11 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbJnsPerawatan.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!");
         } else {
             boolean adaTask99 = false;
-            for (int i = 0; i < tabMode.getRowCount(); i++) {
+            for (int i = 0; i < tbJnsPerawatan.getRowCount(); i++) {
                 if (tbJnsPerawatan.getValueAt(i, 0).toString().equals("true")) {
                     if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs_taskid where no_rawat = ? and taskid = '99'", tbJnsPerawatan.getValueAt(i, 1).toString())) {
                         adaTask99 = true;
@@ -563,10 +563,10 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnCheckinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCheckinActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbJnsPerawatan.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!");
         } else {
-            for (int i = 0; i < tabMode.getRowCount(); i++) {
+            for (int i = 0; i < tbJnsPerawatan.getRowCount(); i++) {
                 if (tbJnsPerawatan.getValueAt(i, 0).toString().equals("true")) {
                     if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Checkin',validasi=now()",1,new String[]{
                         tbJnsPerawatan.getValueAt(i,15).toString()
@@ -588,10 +588,10 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCheckinKeyPressed
 
     private void BtnBelumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBelumActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbJnsPerawatan.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!");
         } else {
-            for (int i = 0; i < tabMode.getRowCount(); i++) {
+            for (int i = 0; i < tbJnsPerawatan.getRowCount(); i++) {
                 if (tbJnsPerawatan.getValueAt(i, 0).toString().equals("true")) {
                     if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Belum',validasi='0000-00-00 00:00:00'",1,new String[]{
                         tbJnsPerawatan.getValueAt(i,15).toString()
@@ -748,7 +748,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     private void runBackground(Runnable task) {

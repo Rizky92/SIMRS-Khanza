@@ -1320,7 +1320,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
                     laporan_reaksi_transfusi=rs.getBoolean("laporan_reaksi_transfusi");penilaian_grace_scor=rs.getBoolean("penilaian_grace_scor");penilaian_bishop_scor=rs.getBoolean("penilaian_bishop_scor");
                     setTampil();setTampil2();
                 }
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbUser.getRowCount());
             } catch (Exception e) {
                 System.out.println(e);
             } finally{

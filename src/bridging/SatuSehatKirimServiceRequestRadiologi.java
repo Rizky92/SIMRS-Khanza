@@ -1099,7 +1099,7 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbObat.getRowCount() + "");
                     SatuSehatKirimServiceRequestRadiologi.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

@@ -485,7 +485,7 @@ public final class KeuanganRincianPiutangPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(tbBangsal.getSelectedRow()!= -1){
                 if(evt.getClickCount()==2){
                     int kolom=tbBangsal.getSelectedColumn();
@@ -534,7 +534,7 @@ public final class KeuanganRincianPiutangPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(tbBangsal.getSelectedRow()!= -1){
                 if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                     if(!tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().equals(">>Total")){

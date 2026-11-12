@@ -71,7 +71,7 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbKamar.getColumnCount(); i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(90);
@@ -340,7 +340,7 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbKamar.getRowCount() != 0) {
             if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
                 dispose();
             } else if (evt.getKeyCode() == KeyEvent.VK_SHIFT) {
@@ -506,7 +506,7 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbKamar.getRowCount() + "");
                     DlgCariPegawaiSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }
@@ -567,7 +567,7 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbKamar.getRowCount() + "");
                     DlgCariPegawaiSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

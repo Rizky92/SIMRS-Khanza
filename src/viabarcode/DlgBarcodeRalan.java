@@ -889,7 +889,7 @@ public final class DlgBarcodeRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariTindakanKeyPressed
 
     private void tbObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyReleased
-        if(tabModeObat.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 try {
                     getDataObat();
@@ -907,7 +907,7 @@ public final class DlgBarcodeRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatKeyReleased
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabModeObat.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getDataObat();
             } catch (java.lang.NullPointerException e) {
@@ -1460,9 +1460,9 @@ public final class DlgBarcodeRalan extends javax.swing.JDialog {
         if(bangsal.equals("")){
              Valid.textKosong(TCariObat,"Asal Stok");
         }else if(row!= -1){
-             if(!tabModeObat.getValueAt(row,1).toString().equals("")){
+             if(!tbObat.getValueAt(row,1).toString().equals("")){
                 try {
-                    if(Double.parseDouble(tabModeObat.getValueAt(row,1).toString())>0){
+                    if(Double.parseDouble(tbObat.getValueAt(row,1).toString())>0){
                         stokbarang=0;
                         if(aktifkanbatch.equals("yes")){
                             psobat=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");

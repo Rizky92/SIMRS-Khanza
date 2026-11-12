@@ -1480,7 +1480,7 @@ public final class DlgKunjunganRalan extends javax.swing.JDialog {
     private void getData() {
         int row=table1.getSelectedRow();
         if(row!= -1){
-            TKd.setText(tabMode.getValueAt(row,0).toString());
+            TKd.setText(table1.getValueAt(row,0).toString());
         }
     }
 

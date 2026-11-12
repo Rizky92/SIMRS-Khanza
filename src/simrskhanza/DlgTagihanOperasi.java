@@ -1898,9 +1898,9 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_DetikKeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            int row2=tabMode.getRowCount();
+            int row2=tbtindakan.getRowCount();
             for(int r=0;r<row2;r++){
-                tabMode.setValueAt("",r,0);
+                tbtindakan.setValueAt("",r,0);
             }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -2033,7 +2033,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
                 int row=tbObat.getSelectedRow();
                 if(row!= -1){
-                    tabMode.setValueAt("", row,0);
+                    tbObat.setValueAt("", row,0);
                 }
             }
         }
@@ -2916,7 +2916,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         jml=0;
         for(i=0;i<tbtindakan.getRowCount();i++){
-            if(tabMode.getValueAt(i,0).toString().equals("true")){
+            if(tbtindakan.getValueAt(i,0).toString().equals("true")){
                 jml++;
             }
         }
@@ -2971,7 +2971,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
             Valid.textKosong(kdpjanak,"dr Pj Anak");
         }else if(kddrumum.getText().trim().equals("")||nmdrumum.getText().trim().equals("")){
             Valid.textKosong(kddrumum,"dr Umum");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbtindakan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, pilihan operasi kosong...!!!!");
             TCari.requestFocus();
         }else if(jml==0){
@@ -2988,7 +2988,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
                 sukses=true;
                 ttljmdokter=0;ttljmpetugas=0;ttlpendapatan=0;ttlbhp=0;
                 for(i=0;i<tbtindakan.getRowCount();i++){
-                    if(tabMode.getValueAt(i,0).toString().equals("true")){
+                    if(tbtindakan.getValueAt(i,0).toString().equals("true")){
                         if(Sequel.menyimpantf2("operasi","'"+TNoRw.getText()+"','"+Valid.getTglJamSmc(tgl,Jam,Menit,Detik)
                             +"','"+jenis.getText()+"','"+Kategori.getSelectedItem()+"','"+kdoperator1.getText()+"','"+kdoperator2.getText()+"','"+kdoperator3.getText()
                             +"','"+kdasistoperator1.getText()+"','"+kdasistoperator2.getText()+"','"+kdasistoperator3.getText()+"','"+kdInstrumen.getText()
@@ -3661,8 +3661,8 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
     private void tampil() {
         jml=0;
-        for(i=0;i<tabMode.getRowCount();i++){
-            if(tabMode.getValueAt(i,0).toString().equals("true")){
+        for(i=0;i<tbtindakan.getRowCount();i++){
+            if(tbtindakan.getValueAt(i,0).toString().equals("true")){
                 jml++;
             }
         }
@@ -3735,41 +3735,41 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         ttltindakan=null;
         ttltindakan=new double[jml];
         index=0;
-        for(i=0;i<tabMode.getRowCount();i++){
-            if(tabMode.getValueAt(i,0).toString().equals("true")){
+        for(i=0;i<tbtindakan.getRowCount();i++){
+            if(tbtindakan.getValueAt(i,0).toString().equals("true")){
                 pilih[index]=true;
-                kode_paket[index]=tabMode.getValueAt(i,1).toString();
-                nm_perawatan[index]=tabMode.getValueAt(i,2).toString();
-                kategori[index]=tabMode.getValueAt(i,3).toString();
-                operator1[index]=Double.parseDouble(tabMode.getValueAt(i,4).toString());
-                operator2[index]=Double.parseDouble(tabMode.getValueAt(i,5).toString());
-                operator3[index]=Double.parseDouble(tabMode.getValueAt(i,6).toString());
-                asisten_operator1[index]=Double.parseDouble(tabMode.getValueAt(i,7).toString());
-                asisten_operator2[index]=Double.parseDouble(tabMode.getValueAt(i,8).toString());
-                asisten_operator3[index]=Double.parseDouble(tabMode.getValueAt(i,9).toString());
-                instrumen[index]=Double.parseDouble(tabMode.getValueAt(i,10).toString());
-                dokter_anak[index]=Double.parseDouble(tabMode.getValueAt(i,11).toString());
-                perawaat_resusitas[index]=Double.parseDouble(tabMode.getValueAt(i,12).toString());
-                dokter_anestesi[index]=Double.parseDouble(tabMode.getValueAt(i,13).toString());
-                asisten_anestesi[index]=Double.parseDouble(tabMode.getValueAt(i,14).toString());
-                asisten_anestesi2[index]=Double.parseDouble(tabMode.getValueAt(i,15).toString());
-                bidan[index]=Double.parseDouble(tabMode.getValueAt(i,16).toString());
-                bidan2[index]=Double.parseDouble(tabMode.getValueAt(i,17).toString());
-                bidan3[index]=Double.parseDouble(tabMode.getValueAt(i,18).toString());
-                perawat_luar[index]=Double.parseDouble(tabMode.getValueAt(i,19).toString());
-                alat[index]=Double.parseDouble(tabMode.getValueAt(i,20).toString());
-                sewa_ok[index]=Double.parseDouble(tabMode.getValueAt(i,21).toString());
-                akomodasi[index]=Double.parseDouble(tabMode.getValueAt(i,22).toString());
-                bagian_rs[index]=Double.parseDouble(tabMode.getValueAt(i,23).toString());
-                omloop[index]=Double.parseDouble(tabMode.getValueAt(i,24).toString());
-                omloop2[index]=Double.parseDouble(tabMode.getValueAt(i,25).toString());
-                omloop3[index]=Double.parseDouble(tabMode.getValueAt(i,26).toString());
-                omloop4[index]=Double.parseDouble(tabMode.getValueAt(i,27).toString());
-                omloop5[index]=Double.parseDouble(tabMode.getValueAt(i,28).toString());
-                sarpras[index]=Double.parseDouble(tabMode.getValueAt(i,29).toString());
-                dokter_pjanak[index]=Double.parseDouble(tabMode.getValueAt(i,30).toString());
-                dokter_umum[index]=Double.parseDouble(tabMode.getValueAt(i,31).toString());
-                ttltindakan[index]=Double.parseDouble(tabMode.getValueAt(i,32).toString());
+                kode_paket[index]=tbtindakan.getValueAt(i,1).toString();
+                nm_perawatan[index]=tbtindakan.getValueAt(i,2).toString();
+                kategori[index]=tbtindakan.getValueAt(i,3).toString();
+                operator1[index]=Double.parseDouble(tbtindakan.getValueAt(i,4).toString());
+                operator2[index]=Double.parseDouble(tbtindakan.getValueAt(i,5).toString());
+                operator3[index]=Double.parseDouble(tbtindakan.getValueAt(i,6).toString());
+                asisten_operator1[index]=Double.parseDouble(tbtindakan.getValueAt(i,7).toString());
+                asisten_operator2[index]=Double.parseDouble(tbtindakan.getValueAt(i,8).toString());
+                asisten_operator3[index]=Double.parseDouble(tbtindakan.getValueAt(i,9).toString());
+                instrumen[index]=Double.parseDouble(tbtindakan.getValueAt(i,10).toString());
+                dokter_anak[index]=Double.parseDouble(tbtindakan.getValueAt(i,11).toString());
+                perawaat_resusitas[index]=Double.parseDouble(tbtindakan.getValueAt(i,12).toString());
+                dokter_anestesi[index]=Double.parseDouble(tbtindakan.getValueAt(i,13).toString());
+                asisten_anestesi[index]=Double.parseDouble(tbtindakan.getValueAt(i,14).toString());
+                asisten_anestesi2[index]=Double.parseDouble(tbtindakan.getValueAt(i,15).toString());
+                bidan[index]=Double.parseDouble(tbtindakan.getValueAt(i,16).toString());
+                bidan2[index]=Double.parseDouble(tbtindakan.getValueAt(i,17).toString());
+                bidan3[index]=Double.parseDouble(tbtindakan.getValueAt(i,18).toString());
+                perawat_luar[index]=Double.parseDouble(tbtindakan.getValueAt(i,19).toString());
+                alat[index]=Double.parseDouble(tbtindakan.getValueAt(i,20).toString());
+                sewa_ok[index]=Double.parseDouble(tbtindakan.getValueAt(i,21).toString());
+                akomodasi[index]=Double.parseDouble(tbtindakan.getValueAt(i,22).toString());
+                bagian_rs[index]=Double.parseDouble(tbtindakan.getValueAt(i,23).toString());
+                omloop[index]=Double.parseDouble(tbtindakan.getValueAt(i,24).toString());
+                omloop2[index]=Double.parseDouble(tbtindakan.getValueAt(i,25).toString());
+                omloop3[index]=Double.parseDouble(tbtindakan.getValueAt(i,26).toString());
+                omloop4[index]=Double.parseDouble(tbtindakan.getValueAt(i,27).toString());
+                omloop5[index]=Double.parseDouble(tbtindakan.getValueAt(i,28).toString());
+                sarpras[index]=Double.parseDouble(tbtindakan.getValueAt(i,29).toString());
+                dokter_pjanak[index]=Double.parseDouble(tbtindakan.getValueAt(i,30).toString());
+                dokter_umum[index]=Double.parseDouble(tbtindakan.getValueAt(i,31).toString());
+                ttltindakan[index]=Double.parseDouble(tbtindakan.getValueAt(i,32).toString());
                 index++;
             }
         }
@@ -3927,14 +3927,14 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         ttlobat=new double[jml];
 
         index=0;
-        for(i=0;i<tabMode2.getRowCount();i++){
-            if(!tabMode2.getValueAt(i,0).toString().equals("")){
-                jmlobat[index]=Double.parseDouble(tabMode2.getValueAt(i,0).toString());
-                kd_obat[index]=tabMode2.getValueAt(i,1).toString();
-                nm_obat[index]=tabMode2.getValueAt(i,2).toString();
-                satuan[index]=tabMode2.getValueAt(i,3).toString();
-                hargasatuan[index]=Double.parseDouble(tabMode2.getValueAt(i,4).toString());
-                ttlobat[index]=Double.parseDouble(tabMode2.getValueAt(i,5).toString());
+        for(i=0;i<tbObat.getRowCount();i++){
+            if(!tbObat.getValueAt(i,0).toString().equals("")){
+                jmlobat[index]=Double.parseDouble(tbObat.getValueAt(i,0).toString());
+                kd_obat[index]=tbObat.getValueAt(i,1).toString();
+                nm_obat[index]=tbObat.getValueAt(i,2).toString();
+                satuan[index]=tbObat.getValueAt(i,3).toString();
+                hargasatuan[index]=Double.parseDouble(tbObat.getValueAt(i,4).toString());
+                ttlobat[index]=Double.parseDouble(tbObat.getValueAt(i,5).toString());
                 index++;
             }
         }

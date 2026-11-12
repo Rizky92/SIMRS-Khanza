@@ -1191,7 +1191,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbObat.getRowCount() + "");
                     SatuSehatKirimDiagnosticReportRadiologi.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

@@ -704,28 +704,28 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
                         for(i=0;i<tbDokter.getRowCount();i++){
                            if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
                                 if(Sequel.menyimpantf2("stok_obat_pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Stok Obat Pasien",33,new String[]{
-                                    Valid.SetTgl(Tgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),norawat.getText(),tabMode.getValueAt(i,1).toString(),
-                                    tabMode.getValueAt(i,0).toString(),kdgudang.getText(),tabMode.getValueAt(i,10).toString(),tabMode.getValueAt(i,11).toString(),tabMode.getValueAt(i,12).toString(),
-                                    tabMode.getValueAt(i,13).toString(),tabMode.getValueAt(i,14).toString(),tabMode.getValueAt(i,15).toString(),tabMode.getValueAt(i,16).toString(),tabMode.getValueAt(i,17).toString(),
-                                    tabMode.getValueAt(i,18).toString(),tabMode.getValueAt(i,19).toString(),tabMode.getValueAt(i,20).toString(),tabMode.getValueAt(i,21).toString(),tabMode.getValueAt(i,22).toString(),
-                                    tabMode.getValueAt(i,23).toString(),tabMode.getValueAt(i,24).toString(),tabMode.getValueAt(i,25).toString(),tabMode.getValueAt(i,26).toString(),tabMode.getValueAt(i,27).toString(),
-                                    tabMode.getValueAt(i,28).toString(),tabMode.getValueAt(i,29).toString(),tabMode.getValueAt(i,30).toString(),tabMode.getValueAt(i,31).toString(),tabMode.getValueAt(i,32).toString(),
-                                    tabMode.getValueAt(i,33).toString(),tabMode.getValueAt(i,34).toString(),tabMode.getValueAt(i,35).toString(),tabMode.getValueAt(i,36).toString()
+                                    Valid.SetTgl(Tgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),norawat.getText(),tbDokter.getValueAt(i,1).toString(),
+                                    tbDokter.getValueAt(i,0).toString(),kdgudang.getText(),tbDokter.getValueAt(i,10).toString(),tbDokter.getValueAt(i,11).toString(),tbDokter.getValueAt(i,12).toString(),
+                                    tbDokter.getValueAt(i,13).toString(),tbDokter.getValueAt(i,14).toString(),tbDokter.getValueAt(i,15).toString(),tbDokter.getValueAt(i,16).toString(),tbDokter.getValueAt(i,17).toString(),
+                                    tbDokter.getValueAt(i,18).toString(),tbDokter.getValueAt(i,19).toString(),tbDokter.getValueAt(i,20).toString(),tbDokter.getValueAt(i,21).toString(),tbDokter.getValueAt(i,22).toString(),
+                                    tbDokter.getValueAt(i,23).toString(),tbDokter.getValueAt(i,24).toString(),tbDokter.getValueAt(i,25).toString(),tbDokter.getValueAt(i,26).toString(),tbDokter.getValueAt(i,27).toString(),
+                                    tbDokter.getValueAt(i,28).toString(),tbDokter.getValueAt(i,29).toString(),tbDokter.getValueAt(i,30).toString(),tbDokter.getValueAt(i,31).toString(),tbDokter.getValueAt(i,32).toString(),
+                                    tbDokter.getValueAt(i,33).toString(),tbDokter.getValueAt(i,34).toString(),tbDokter.getValueAt(i,35).toString(),tbDokter.getValueAt(i,36).toString()
                                 })==true){
-                                    ttlhpp=ttlhpp+(Valid.SetAngka(tabMode.getValueAt(i,0).toString())*Valid.SetAngka(tabMode.getValueAt(i,8).toString()));
-                                    ttljual=ttljual+(Valid.SetAngka(tabMode.getValueAt(i,0).toString())*Valid.SetAngka(tabMode.getValueAt(i,7).toString()));
+                                    ttlhpp=ttlhpp+(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())*Valid.SetAngka(tbDokter.getValueAt(i,8).toString()));
+                                    ttljual=ttljual+(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())*Valid.SetAngka(tbDokter.getValueAt(i,7).toString()));
 
                                     if(aktifkanbatch.equals("yes")){
                                         Sequel.mengedit3("data_batch","no_batch=? and kode_brng=? and no_faktur=?","sisa=sisa-?",4,new String[]{
-                                            ""+tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,10).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,11).toString()
+                                            ""+tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,10).toString(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,11).toString()
                                         });
-                                        Trackobat.catatRiwayat(tabMode.getValueAt(i,1).toString(),0,Valid.SetAngka(tabMode.getValueAt(i,0).toString()),"Stok Pasien Ranap",akses.getkode(),kdgudang.getText(),"Simpan",tabMode.getValueAt(i,10).toString(),tabMode.getValueAt(i,11).toString(),norawat.getText()+" "+nm_pasien.getText());
-                                        Sequel.menyimpan("gudangbarang","'"+tabMode.getValueAt(i,1).toString()+"','"+kdgudang.getText()+"','-"+tabMode.getValueAt(i,0).toString()+"','"+tabMode.getValueAt(i,10).toString()+"','"+tabMode.getValueAt(i,11).toString()+"'",
-                                                        "stok=stok-'"+tabMode.getValueAt(i,0).toString()+"'","kode_brng='"+tabMode.getValueAt(i,1).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='"+tabMode.getValueAt(i,10).toString()+"' and no_faktur='"+tabMode.getValueAt(i,11).toString()+"'");
+                                        Trackobat.catatRiwayat(tbDokter.getValueAt(i,1).toString(),0,Valid.SetAngka(tbDokter.getValueAt(i,0).toString()),"Stok Pasien Ranap",akses.getkode(),kdgudang.getText(),"Simpan",tbDokter.getValueAt(i,10).toString(),tbDokter.getValueAt(i,11).toString(),norawat.getText()+" "+nm_pasien.getText());
+                                        Sequel.menyimpan("gudangbarang","'"+tbDokter.getValueAt(i,1).toString()+"','"+kdgudang.getText()+"','-"+tbDokter.getValueAt(i,0).toString()+"','"+tbDokter.getValueAt(i,10).toString()+"','"+tbDokter.getValueAt(i,11).toString()+"'",
+                                                        "stok=stok-'"+tbDokter.getValueAt(i,0).toString()+"'","kode_brng='"+tbDokter.getValueAt(i,1).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='"+tbDokter.getValueAt(i,10).toString()+"' and no_faktur='"+tbDokter.getValueAt(i,11).toString()+"'");
                                     }else{
-                                        Trackobat.catatRiwayat(tabMode.getValueAt(i,1).toString(),0,Valid.SetAngka(tabMode.getValueAt(i,0).toString()),"Stok Pasien Ranap",akses.getkode(),kdgudang.getText(),"Simpan","","",norawat.getText()+" "+nm_pasien.getText());
-                                        Sequel.menyimpan("gudangbarang","'"+tabMode.getValueAt(i,1).toString()+"','"+kdgudang.getText()+"','-"+tabMode.getValueAt(i,0).toString()+"','',''",
-                                                        "stok=stok-'"+tabMode.getValueAt(i,0).toString()+"'","kode_brng='"+tabMode.getValueAt(i,1).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='' and no_faktur=''");
+                                        Trackobat.catatRiwayat(tbDokter.getValueAt(i,1).toString(),0,Valid.SetAngka(tbDokter.getValueAt(i,0).toString()),"Stok Pasien Ranap",akses.getkode(),kdgudang.getText(),"Simpan","","",norawat.getText()+" "+nm_pasien.getText());
+                                        Sequel.menyimpan("gudangbarang","'"+tbDokter.getValueAt(i,1).toString()+"','"+kdgudang.getText()+"','-"+tbDokter.getValueAt(i,0).toString()+"','',''",
+                                                        "stok=stok-'"+tbDokter.getValueAt(i,0).toString()+"'","kode_brng='"+tbDokter.getValueAt(i,1).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='' and no_faktur=''");
                                     }
                                 }else{
                                     sukses=false;
@@ -933,11 +933,11 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_norawatKeyPressed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_DELETE){
                 int row=tbDokter.getSelectedRow();
                 if(row!= -1){
-                    tabMode.setValueAt("", row,0);
+                    tbDokter.setValueAt("", row,0);
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
@@ -976,7 +976,7 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -999,7 +999,7 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_kelasKeyPressed
 
     private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 try {
                     getData();
@@ -2082,11 +2082,11 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
             }
 
             ttl=0;
-            for(int r=0;r<tabMode.getRowCount();r++){
+            for(int r=0;r<tbDokter.getRowCount();r++){
                  y=0;
                  try {
-                     y=Double.parseDouble(tabMode.getValueAt(r,0).toString())*
-                       Double.parseDouble(tabMode.getValueAt(r,7).toString());
+                     y=Double.parseDouble(tbDokter.getValueAt(r,0).toString())*
+                       Double.parseDouble(tbDokter.getValueAt(r,7).toString());
                  } catch (Exception e) {
                      y=0;
                  }
@@ -2151,9 +2151,9 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
         if(nmgudang.getText().trim().equals("")){
              Valid.textKosong(kdgudang,"Asal Stok");
         }else if(row!= -1){
-             if(!tabMode.getValueAt(row,0).toString().equals("")){
+             if(!tbDokter.getValueAt(row,0).toString().equals("")){
                 try {
-                    if(Double.parseDouble(tabMode.getValueAt(row,0).toString())>0){
+                    if(Double.parseDouble(tbDokter.getValueAt(row,0).toString())>0){
                         stokobat=0;
                         if(aktifkanbatch.equals("yes")){
                             pstampil=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
@@ -2200,7 +2200,7 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
                         tbDokter.setValueAt(stokobat,row,6);
                         y=0;
                         try {
-                            y=Double.parseDouble(tabMode.getValueAt(row,0).toString());
+                            y=Double.parseDouble(tbDokter.getValueAt(row,0).toString());
                         } catch (Exception e) {
                             y=0;
                         }
@@ -2208,27 +2208,27 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
                         if(stokobat<y){
                               JOptionPane.showMessageDialog(null,"Maaf, Stok tidak cukup....!!!");
                               TCari.requestFocus();
-                              tabMode.setValueAt("", row,0);
-                              tabMode.setValueAt(0, row,9);
+                              tbDokter.setValueAt("", row,0);
+                              tbDokter.setValueAt(0, row,9);
                         }else{
-                              y=Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString())*
-                                  Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),7).toString());
+                              y=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())*
+                                  Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString());
                               tbDokter.setValueAt(y,tbDokter.getSelectedRow(),9);
                               TCari.setText("");
                         }
                     }
                 } catch (Exception e) {
-                    tabMode.setValueAt("", row,0);
-                    tabMode.setValueAt(0, row,9);
+                    tbDokter.setValueAt("", row,0);
+                    tbDokter.setValueAt(0, row,9);
                 }
              }
 
              ttl=0;
-             for(int r=0;r<tabMode.getRowCount();r++){
+             for(int r=0;r<tbDokter.getRowCount();r++){
                  y=0;
                  try {
-                     y=Double.parseDouble(tabMode.getValueAt(r,0).toString())*
-                       Double.parseDouble(tabMode.getValueAt(r,7).toString());
+                     y=Double.parseDouble(tbDokter.getValueAt(r,0).toString())*
+                       Double.parseDouble(tbDokter.getValueAt(r,7).toString());
                  } catch (Exception e) {
                      y=0;
                  }

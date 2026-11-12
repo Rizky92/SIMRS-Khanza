@@ -739,7 +739,7 @@ public final class InhealthTagihan extends javax.swing.JDialog {
     }//GEN-LAST:event_TNoRMActionPerformed
 
     private void tbSJPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSJPMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbSJP.getRowCount()!=0){
             try {
                 ChkAccor.setSelected(true);
                 isMenu();
@@ -750,7 +750,7 @@ public final class InhealthTagihan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSJPMouseClicked
 
     private void tbSJPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSJPKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbSJP.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -891,7 +891,7 @@ public final class InhealthTagihan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbSJP.getRowCount());
     }
 
 

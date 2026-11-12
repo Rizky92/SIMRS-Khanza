@@ -700,7 +700,7 @@ public class DlgReturPiutang extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -709,7 +709,7 @@ public class DlgReturPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -837,7 +837,7 @@ public class DlgReturPiutang extends javax.swing.JDialog {
             Valid.textKosong(kdgudang,"Lokasi");
         }else if(nmmem.getText().trim().equals("")){
             Valid.textKosong(kdmem,"Member");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             Kdbar.requestFocus();
         }else{
@@ -1039,7 +1039,7 @@ public class DlgReturPiutang extends javax.swing.JDialog {
             Valid.textKosong(Kdptg,"Petugas");
         }else if(nmmem.getText().trim().equals("")){
             Valid.textKosong(kdmem,"Member");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             Kdbar.requestFocus();
         }else {
@@ -1329,14 +1329,14 @@ public class DlgReturPiutang extends javax.swing.JDialog {
     private void getData() {
        int row=tbDokter.getSelectedRow();
         if(row!= -1){
-             NoNota.setText(tabMode.getValueAt(row,0).toString());
-             Kdbar.setText(tabMode.getValueAt(row,1).toString());
-             nmbar.setText(tabMode.getValueAt(row,2).toString());
-             Satuanbar.setText(tabMode.getValueAt(row,3).toString());
-             Hargaretur.setText(tabMode.getValueAt(row,4).toString());
-             Jmlretur.setText(tabMode.getValueAt(row,5).toString());
-             NoBatch.setText(tabMode.getValueAt(row,7).toString());
-             NoFaktur.setText(tabMode.getValueAt(row,8).toString());
+             NoNota.setText(tbDokter.getValueAt(row,0).toString());
+             Kdbar.setText(tbDokter.getValueAt(row,1).toString());
+             nmbar.setText(tbDokter.getValueAt(row,2).toString());
+             Satuanbar.setText(tbDokter.getValueAt(row,3).toString());
+             Hargaretur.setText(tbDokter.getValueAt(row,4).toString());
+             Jmlretur.setText(tbDokter.getValueAt(row,5).toString());
+             NoBatch.setText(tbDokter.getValueAt(row,7).toString());
+             NoFaktur.setText(tbDokter.getValueAt(row,8).toString());
              isHitung();
         }
     }

@@ -4557,7 +4557,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeSuhu.getRowCount());
+        LCount.setText(""+tbSuhu.getRowCount());
     }
 
     private void tampilrespirasi() {
@@ -4653,7 +4653,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeRespirasi.getRowCount());
+        LCount.setText(""+tbRespirasi.getRowCount());
     }
 
     private void tampilnadi() {
@@ -4749,7 +4749,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeNadi.getRowCount());
+        LCount.setText(""+tbNadi.getRowCount());
     }
 
     private void tampilspo2() {
@@ -4845,7 +4845,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeSpO2.getRowCount());
+        LCount.setText(""+tbSpO2.getRowCount());
     }
 
     private void tampilgcs() {
@@ -4941,7 +4941,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeGCS.getRowCount());
+        LCount.setText(""+tbGCS.getRowCount());
     }
 
     private void tampilkesadaran() {
@@ -5037,7 +5037,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeKesadaran.getRowCount());
+        LCount.setText(""+tbKesadaran.getRowCount());
     }
 
     private void tampiltensi() {
@@ -5133,7 +5133,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeTensi.getRowCount());
+        LCount.setText(""+tbTensi.getRowCount());
     }
 
     private void tampiltb() {
@@ -5229,7 +5229,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeTB.getRowCount());
+        LCount.setText(""+tbTB.getRowCount());
     }
 
     private void tampilbb() {
@@ -5325,7 +5325,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeBB.getRowCount());
+        LCount.setText(""+tbBB.getRowCount());
     }
 
     private void tampillp() {
@@ -5377,7 +5377,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeLP.getRowCount());
+        LCount.setText(""+tbLP.getRowCount());
     }
 
     public void isCek(){

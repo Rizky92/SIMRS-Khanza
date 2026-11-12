@@ -334,7 +334,7 @@ public class InformasiJadwal extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
 
-        LCount.setText(tabMode.getRowCount() + "");
+        LCount.setText(tbJadwal.getRowCount() + "");
     }
 
     private void tampil2() {
@@ -376,7 +376,7 @@ public class InformasiJadwal extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJadwal.getRowCount());
     }
 
     private void runBackground(Runnable task) {

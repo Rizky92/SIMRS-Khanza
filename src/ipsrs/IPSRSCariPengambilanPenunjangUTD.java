@@ -335,7 +335,7 @@ public final class IPSRSCariPengambilanPenunjangUTD extends javax.swing.JDialog 
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbKamar.getSelectedRow()<= -1){
@@ -439,7 +439,7 @@ public final class IPSRSCariPengambilanPenunjangUTD extends javax.swing.JDialog 
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCetakActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             BtnKeluar.requestFocus();
         }else {
@@ -607,7 +607,7 @@ public final class IPSRSCariPengambilanPenunjangUTD extends javax.swing.JDialog 
                     });
                     total=total+rs.getDouble("total");
                 }
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbKamar.getRowCount());
                 LTotal.setText(Valid.SetAngka(total));
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -622,7 +622,7 @@ public final class IPSRSCariPengambilanPenunjangUTD extends javax.swing.JDialog 
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     public void setHapus(){

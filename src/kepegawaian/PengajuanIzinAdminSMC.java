@@ -61,7 +61,7 @@ public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
         tbObat.setModel(tabMode);
         tbObat.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbObat.getColumnCount(); i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(95);
@@ -762,7 +762,7 @@ public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
         if (tbObat.getSelectedRow() >= 0) {
             if (akses.getadmin()) {
                 if (Sequel.menghapustfSmc("pengajuan_izin_smc", "no_pengajuan = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())) {
-                    tabMode.removeRow(tbObat.getSelectedRow());
+                    tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
                     emptTeks();
                 } else {
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus pengajuan izin..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
@@ -770,7 +770,7 @@ public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
             } else {
                 if ("Proses Pengajuan".equals(tbObat.getValueAt(tbObat.getSelectedRow(), 16).toString())) {
                     if (Sequel.menghapustfSmc("pengajuan_izin_smc", "no_pengajuan = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())) {
-                        tabMode.removeRow(tbObat.getSelectedRow());
+                        tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
                         emptTeks();
                     } else {
                         JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus pengajuan izin..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
@@ -920,7 +920,7 @@ public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbObat.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1335,7 +1335,7 @@ public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount1.setText(tabMode.getRowCount() + "");
+                    LCount1.setText(tbObat.getRowCount() + "");
                     PengajuanIzinAdminSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

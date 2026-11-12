@@ -729,7 +729,7 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnInKeyPressed
 
     private void BtnOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOutActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamIn.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, Tabel kosong. Tidak ada data yang bisa Anda edit..!!!!");
             BtnIn.requestFocus();
         }else if(merk.getText().trim().equals("")){
@@ -759,7 +759,7 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnOutKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-       if(tabMode.getRowCount()==0){
+       if(tbKamIn.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             no_inventaris.requestFocus();
         }else if(nama_barang.getText().trim().equals("")){
@@ -1032,7 +1032,7 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_TOutKeyPressed
 
     private void tbKamInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamInMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamIn.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1043,7 +1043,7 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamInMouseClicked
 
     private void tbKamInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamInKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamIn.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.requestFocus();
             }
@@ -1219,7 +1219,7 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tlpKeyPressed
 
     private void tbKamInKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamInKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbKamIn.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1384,7 +1384,7 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamIn.getRowCount());
     }
 
     public void emptTeks() {

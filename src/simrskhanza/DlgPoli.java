@@ -552,7 +552,7 @@ public final class DlgPoli extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     false,Kd.getText(),Nm.getText(),Double.parseDouble(By.getText()),Double.parseDouble(ByLm.getText())
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbKamar.getRowCount());
                 emptTeks();
             }
         }
@@ -580,12 +580,12 @@ public final class DlgPoli extends javax.swing.JDialog {
         for(i=0;i<tbKamar.getRowCount();i++){
             if(tbKamar.getValueAt(i,0).toString().equals("true")){
                 Sequel.mengedit("poliklinik","kd_poli='"+tbKamar.getValueAt(i,1).toString()+"'","status='0'");
-                tabMode.removeRow(i);
+                tabMode.removeRow(tbKamar.convertRowIndexToModel(i));
                 i--;
             }
         }
         emptTeks();
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -730,7 +730,7 @@ public final class DlgPoli extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -789,7 +789,7 @@ public final class DlgPoli extends javax.swing.JDialog {
     }//GEN-LAST:event_ByLmKeyPressed
 
     private void tbKamarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -895,7 +895,7 @@ public final class DlgPoli extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
 
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     public void emptTeks() {

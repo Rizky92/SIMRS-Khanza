@@ -591,7 +591,7 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
             System.out.println("code : "+nameNode.path("code").asText());
             System.out.println("message : "+nameNode.path("message").asText());
             if(nameNode.path("code").asText().equals("200")){
-                tabMode.removeRow(tbKamar.getSelectedRow());
+                tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
             }else{
                 JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
             }

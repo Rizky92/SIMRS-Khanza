@@ -592,7 +592,7 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
         }else{
             DlgBilingRalan billing=new DlgBilingRalan(null,false);
-            billing.TNoRw.setText(tabMode.getValueAt(tbBangsal.getSelectedRow(), 1).toString());
+            billing.TNoRw.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(), 1).toString());
             billing.isCek();
             billing.isRawat();
             billing.setPiutang();

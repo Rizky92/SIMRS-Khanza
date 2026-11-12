@@ -465,7 +465,7 @@ public class DlgSetTarif extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbAdmin.getRowCount()==0){
             Sequel.menyimpan("set_tarif","?,?,?,?,?,?,?,?,?,?,?,?","Set Tarif",12,new String[]{
                 YesNo1.getSelectedItem().toString(),YesNo2.getSelectedItem().toString(),YesNo3.getSelectedItem().toString(),
                 YesNo4.getSelectedItem().toString(),YesNo5.getSelectedItem().toString(),YesNo6.getSelectedItem().toString(),
@@ -474,7 +474,7 @@ public class DlgSetTarif extends javax.swing.JDialog {
             });
             runBackground(() ->tampil());
             emptTeks();
-        }else if(tabMode.getRowCount()>0){
+        }else if(tbAdmin.getRowCount()>0){
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu record ...!!!!");
 
         }
@@ -533,10 +533,10 @@ public class DlgSetTarif extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbAdmin.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data Set Tarif tidak boleh kosong ...!!!!");
             YesNo1.requestFocus();
-        }else if(! (tabMode.getRowCount()==0)) {
+        }else if(! (tbAdmin.getRowCount()==0)) {
             dispose();
         }
     }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -548,7 +548,7 @@ public class DlgSetTarif extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -557,7 +557,7 @@ public class DlgSetTarif extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();

@@ -1022,7 +1022,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         try {
             ArrayNode tindakan = mapper.createArrayNode();
             Set<String> where = new HashSet<>();
-            for (int i = 0; i < tabMode.getRowCount(); i++) {
+            for (int i = 0; i < tbKamar.getRowCount(); i++) {
                 if ((Boolean) tbKamar.getValueAt(i, 0)
                     || (Boolean) tbKamar.getValueAt(i, 1)
                     || (Boolean) tbKamar.getValueAt(i, 2)
@@ -1229,7 +1229,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
                     try {
                         get();
                         isLoading = false;
-                        LCount.setText("" + tabMode.getRowCount());
+                        LCount.setText("" + tbKamar.getRowCount());
                         DlgCariPerawatanRanap2.this.setCursor(Cursor.getDefaultCursor());
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);

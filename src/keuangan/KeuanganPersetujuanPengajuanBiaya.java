@@ -716,14 +716,14 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
     }//GEN-LAST:event_BtnSetujuiKeyPressed
 
     private void BtnTolakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTolakActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
         }else{
             if(tbBangsal.getSelectedRow()> -1){
                 if(Sequel.mengedittf("pengajuan_biaya","no_pengajuan=?","status='Ditolak'",1,new String[]{
                         tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString()
                     })==true){
-                        tabMode.removeRow(tbBangsal.getSelectedRow());
+                        tabMode.removeRow(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()));
                         hitung();
                 }
             }else{
@@ -761,7 +761,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
                     if(Sequel.mengedittf("pengajuan_biaya","no_pengajuan=?","status='Disetujui'",1,new String[]{
                             tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString()
                         })==true){
-                            tabMode.removeRow(tbBangsal.getSelectedRow());
+                            tabMode.removeRow(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()));
                             hitung();
                     }
                     DlgPersetujuan.dispose();
@@ -785,7 +785,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
     }//GEN-LAST:event_HargaKeyPressed
 
     private void tbBangsalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -796,7 +796,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
     }//GEN-LAST:event_tbBangsalKeyReleased
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -936,7 +936,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
 
     private void hitung(){
         belumdisetujui=0;
-        for(i=0;i<tabMode.getRowCount();i++){
+        for(i=0;i<tbBangsal.getRowCount();i++){
             belumdisetujui=belumdisetujui+Valid.SetAngka(tbBangsal.getValueAt(i,13).toString());
         }
         LCount.setText(""+Valid.SetAngka(belumdisetujui));

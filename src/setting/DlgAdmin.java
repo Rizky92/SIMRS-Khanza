@@ -295,11 +295,11 @@ public class DlgAdmin extends javax.swing.JDialog {
             Valid.textKosong(TKd,"ID Admin");
         }else if(TNm.getText().trim().equals("")){
             Valid.textKosong(TNm,"Password");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbAdmin.getRowCount()==0){
             Sequel.menyimpan("admin","AES_ENCRYPT('"+TKd.getText()+"','nur'),AES_ENCRYPT('"+TNm.getText()+"','windi')","Kode Admin");
             runBackground(() ->tampil());
             emptTeks();
-        }else if(tabMode.getRowCount()>0){
+        }else if(tbAdmin.getRowCount()>0){
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Admin Utama ...!!!!");
             TKd.requestFocus();
         }
@@ -324,7 +324,7 @@ public class DlgAdmin extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbAdmin.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TKd.requestFocus();
         }else if(TNm.getText().trim().equals("")){
@@ -352,7 +352,7 @@ public class DlgAdmin extends javax.swing.JDialog {
         }else{
             Sequel.queryu("delete from admin");
             Sequel.menyimpan("admin","AES_ENCRYPT('"+TKd.getText()+"','nur'),AES_ENCRYPT('"+TNm.getText()+"','windi')","Kode Admin");
-            if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+            if(tbAdmin.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -366,10 +366,10 @@ public class DlgAdmin extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbAdmin.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data admin tidak boleh kosong ...!!!!");
             TKd.requestFocus();
-        }else if(! (tabMode.getRowCount()==0)) {
+        }else if(! (tbAdmin.getRowCount()==0)) {
             dispose();
         }
     }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -381,7 +381,7 @@ public class DlgAdmin extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -390,7 +390,7 @@ public class DlgAdmin extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -470,8 +470,8 @@ public class DlgAdmin extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            String kode=tabMode.getValueAt(row,0).toString();
-            String nama=tabMode.getValueAt(row,1).toString();
+            String kode=tbAdmin.getValueAt(row,0).toString();
+            String nama=tbAdmin.getValueAt(row,1).toString();
             TKd.setText(kode);
             TNm.setText(nama);
         }

@@ -529,7 +529,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
                     TKd.getText(), TNmUser.getText(), Jabatan.getText(), "**********", "Belum Pernah"
                 });
                 emptTeks();
-                LCount.setText(String.valueOf(tabMode.getRowCount()));
+                LCount.setText(String.valueOf(tbUser.getRowCount()));
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -543,7 +543,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbUser.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
             TKd.requestFocus();
         } else if (TPass.getText().trim().isBlank()) {
@@ -552,9 +552,9 @@ public class DlgUserSmc extends javax.swing.JDialog {
             if (tbUser.getSelectedRow() != -1) {
                 if (Sequel.executeRawSmc("delete from user where id_user = aes_encrypt(?, 'nur') and password = aes_encrypt(?, 'windi')", TKd.getText(), TPass.getText())) {
                     Sequel.executeRawSmc("delete from user_password_smc where user_password_smc.id_user = aes_encrypt(?, 'nur')", TKd.getText());
-                    tabMode.removeRow(tbUser.getSelectedRow());
+                    tabMode.removeRow(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()));
                     emptTeks();
-                    LCount.setText(String.valueOf(tabMode.getRowCount()));
+                    LCount.setText(String.valueOf(tbUser.getRowCount()));
                 }
             }
         }
@@ -583,7 +583,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
                             TKd.getText(), tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString()
                         );
                     }
-                    tabMode.setValueAt(TKd.getText(), tbUser.getSelectedRow(), 0);
+                    tbUser.setValueAt(TKd.getText(), tbUser.getSelectedRow(), 0);
                     emptTeks();
                 }
             }
@@ -735,7 +735,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void MnCopyHakAksesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCopyHakAksesActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbUser.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data user...!!!!");
             TCari.requestFocus();
         } else if (TKd.getText().trim().isBlank()) {
@@ -763,7 +763,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSetUserActionPerformed
 
     private void tbUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUserMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbUser.getRowCount() != 0) {
             if (copyhakakses.equals("copy")) {
                 if (userdicopy.equals(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
                     userdicopy = "";
@@ -834,7 +834,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
     }//GEN-LAST:event_tbUserMouseClicked
 
     private void tbUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbUserKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbUser.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
@@ -948,7 +948,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbUser.getRowCount() + "");
                     DlgUserSmc.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }

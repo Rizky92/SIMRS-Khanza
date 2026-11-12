@@ -838,7 +838,7 @@ public class DlgInputStok extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -847,7 +847,7 @@ public class DlgInputStok extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_DELETE){
                 try {
                     if(tbDokter.getSelectedColumn()==0){
@@ -1160,7 +1160,7 @@ public class DlgInputStok extends javax.swing.JDialog {
     }//GEN-LAST:event_ppStokActionPerformed
 
     private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)||(evt.getKeyCode()==KeyEvent.VK_RIGHT)){
                 try {
                     getData();
@@ -2254,7 +2254,7 @@ public class DlgInputStok extends javax.swing.JDialog {
         }else if(i!= -1){
             if(!tbDokter.getValueAt(i,0).toString().equals("")){
                 try {
-                    if(Double.parseDouble(tabMode.getValueAt(i,0).toString())>=0){
+                    if(Double.parseDouble(tbDokter.getValueAt(i,0).toString())>=0){
                         stokbarang=0;
                         if(aktifkanbatch.equals("yes")){
                             psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");

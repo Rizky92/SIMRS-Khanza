@@ -537,7 +537,7 @@ public class DlgRBObatDokterRalan extends javax.swing.JDialog {
         if(tbDokter.getRowCount()!=0){
             if(tbDokter.getSelectedRow()>-1){
                 if(evt.getKeyCode()==KeyEvent.VK_DELETE){
-                    tabMode.removeRow(tbDokter.getSelectedRow());
+                    tabMode.removeRow(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()));
                 }
                 a=0;
                 for(i=0;i<tbDokter.getRowCount();i++){

@@ -435,13 +435,13 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_TCari1KeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             runBackground(() ->tampil2());
         }
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 runBackground(() ->tampil2());
             }
@@ -576,7 +576,7 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbKamar.getRowCount());
         }
     }
 

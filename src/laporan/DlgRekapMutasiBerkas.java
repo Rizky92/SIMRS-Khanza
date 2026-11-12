@@ -495,7 +495,7 @@ public final class DlgRekapMutasiBerkas extends javax.swing.JDialog {
                         rs.getString("ranap"),rs.getString("status_lanjut")
                     });
                 }
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbBangsal.getRowCount());
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } finally{

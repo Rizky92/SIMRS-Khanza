@@ -473,11 +473,11 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
                     })==true){
                         if(aktifkanbatch.equals("yes")){
                             Sequel.mengedit3("data_batch","no_batch=? and kode_brng=? and no_faktur=?","sisa=sisa-?",4,new String[]{
-                                ""+tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,8).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,9).toString()
+                                ""+tbKamar.getValueAt(i,0).toString(),tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,1).toString(),tbKamar.getValueAt(i,9).toString()
                             });
                             Trackobat.catatRiwayat(tbKamar.getValueAt(i,1).toString(),0,Valid.SetAngka(tbKamar.getValueAt(i,0).toString()),"Resep Pulang",akses.getkode(),kdgudang.getText(),"Simpan",tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,9).toString(),TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText());
-                            Sequel.menyimpan("gudangbarang","'"+tbKamar.getValueAt(i,1).toString()+"','"+kdgudang.getText()+"','-"+tbKamar.getValueAt(i,0).toString()+"','"+tabMode.getValueAt(i,8).toString()+"','"+tabMode.getValueAt(i,9).toString()+"'",
-                                         "stok=stok-'"+tbKamar.getValueAt(i,0).toString()+"'","kode_brng='"+tbKamar.getValueAt(i,1).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='"+tabMode.getValueAt(i,8).toString()+"' and no_faktur='"+tabMode.getValueAt(i,9).toString()+"'");
+                            Sequel.menyimpan("gudangbarang","'"+tbKamar.getValueAt(i,1).toString()+"','"+kdgudang.getText()+"','-"+tbKamar.getValueAt(i,0).toString()+"','"+tbKamar.getValueAt(i,8).toString()+"','"+tbKamar.getValueAt(i,9).toString()+"'",
+                                         "stok=stok-'"+tbKamar.getValueAt(i,0).toString()+"'","kode_brng='"+tbKamar.getValueAt(i,1).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='"+tbKamar.getValueAt(i,8).toString()+"' and no_faktur='"+tbKamar.getValueAt(i,9).toString()+"'");
                         }else{
                             Trackobat.catatRiwayat(tbKamar.getValueAt(i,1).toString(),0,Valid.SetAngka(tbKamar.getValueAt(i,0).toString()),"Resep Pulang",akses.getkode(),kdgudang.getText(),"Simpan","","",TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText());
                             Sequel.menyimpan("gudangbarang","'"+tbKamar.getValueAt(i,1).toString()+"','"+kdgudang.getText()+"','-"+tbKamar.getValueAt(i,0).toString()+"','',''",
@@ -603,7 +603,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_JeniskelasKeyPressed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 if(tbKamar.getSelectedColumn()!=4){
                     dispose();
@@ -657,7 +657,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_kelasKeyPressed
 
     private void tbKamarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 try {
                     getData();
@@ -675,7 +675,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarKeyReleased
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1296,9 +1296,9 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
         if(kdgudang.getText().trim().equals("")){
              Valid.textKosong(TCari,"Asal Stok");
         }else if(row!= -1){
-             if(!tabMode.getValueAt(row,0).toString().equals("")){
+             if(!tbKamar.getValueAt(row,0).toString().equals("")){
                 try {
-                    if(Double.parseDouble(tabMode.getValueAt(row,0).toString())>0){
+                    if(Double.parseDouble(tbKamar.getValueAt(row,0).toString())>0){
                         stokbarang=0;
                         if(aktifkanbatch.equals("yes")){
                             psobat=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
@@ -1345,7 +1345,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
                         tbKamar.setValueAt(stokbarang,row,10);
                         y=0;
                         try {
-                            y=Double.parseDouble(tabMode.getValueAt(row,0).toString());
+                            y=Double.parseDouble(tbKamar.getValueAt(row,0).toString());
                         } catch (Exception e) {
                             y=0;
                         }
@@ -1353,11 +1353,11 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
                         if(stokbarang<y){
                               JOptionPane.showMessageDialog(null,"Maaf, Stok tidak cukup....!!!");
                               TCari.requestFocus();
-                              tabMode.setValueAt("", row,0);
+                              tbKamar.setValueAt("", row,0);
                         }
                     }
                 } catch (Exception e) {
-                    tabMode.setValueAt("", row,0);
+                    tbKamar.setValueAt("", row,0);
                 }
              }
         }

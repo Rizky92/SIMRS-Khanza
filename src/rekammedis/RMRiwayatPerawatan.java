@@ -3747,11 +3747,11 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanTandaTanganActionPerformed
 
     private void tbRegistrasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbRegistrasiKeyPressed
-        if(tabModeRegistrasi.getRowCount()!=0){
+        if(tbRegistrasi.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 try {
                     R4.setSelected(true);
-                    NoRawat.setText(tabModeRegistrasi.getValueAt(tbRegistrasi.getSelectedRow(),1).toString());
+                    NoRawat.setText(tbRegistrasi.getValueAt(tbRegistrasi.getSelectedRow(),1).toString());
                     TabRawat.setSelectedIndex(2);
                     tampilPerawatan();
                 } catch (java.lang.NullPointerException e) {
@@ -3761,11 +3761,11 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbRegistrasiKeyPressed
 
     private void tbRegistrasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRegistrasiMouseClicked
-        if(tabModeRegistrasi.getRowCount()!=0){
+        if(tbRegistrasi.getRowCount()!=0){
             if((evt.getClickCount()==2)){
                 try {
                     R4.setSelected(true);
-                    NoRawat.setText(tabModeRegistrasi.getValueAt(tbRegistrasi.getSelectedRow(),1).toString());
+                    NoRawat.setText(tbRegistrasi.getValueAt(tbRegistrasi.getSelectedRow(),1).toString());
                     TabRawat.setSelectedIndex(2);
                     tampilPerawatan();
                 } catch (java.lang.NullPointerException e) {

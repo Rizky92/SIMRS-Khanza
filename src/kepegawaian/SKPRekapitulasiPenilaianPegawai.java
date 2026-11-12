@@ -943,7 +943,7 @@ public class SKPRekapitulasiPenilaianPegawai extends javax.swing.JDialog {
     }//GEN-LAST:event_btnDinilaiActionPerformed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 if(tbDokter.getSelectedRow()!= -1){
                     if(tbDokter.getSelectedColumn()==2){

@@ -597,7 +597,7 @@ public final class IPSRSBarang extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     kode_brng.getText(),nama_brng.getText(),nama_sat.getText(),nmjenis.getText(),Double.parseDouble(stok.getText()),Double.parseDouble(harga.getText())
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbJnsPerawatan.getRowCount());
                 emptTeks();
             }
         }
@@ -625,8 +625,8 @@ public final class IPSRSBarang extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Sequel.mengedittf("ipsrsbarang","kode_brng='"+kode_brng.getText()+"'","status='0'")==true){
-            tabMode.removeRow(tbJnsPerawatan.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            tabMode.removeRow(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()));
+            LCount.setText(""+tbJnsPerawatan.getRowCount());
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -653,12 +653,12 @@ public final class IPSRSBarang extends javax.swing.JDialog {
             if(Sequel.mengedittf("ipsrsbarang","kode_brng=?","kode_brng=?,nama_brng=?,kode_sat=?,jenis=?,stok=?,harga=?",7,new String[]{
                     kode_brng.getText(),nama_brng.getText(),kode_sat.getText(),kdjenis.getText(),stok.getText(),harga.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
             })==true){
-                tabMode.setValueAt(kode_brng.getText(),tbJnsPerawatan.getSelectedRow(),0);
-                tabMode.setValueAt(nama_brng.getText(),tbJnsPerawatan.getSelectedRow(),1);
-                tabMode.setValueAt(nama_sat.getText(),tbJnsPerawatan.getSelectedRow(),2);
-                tabMode.setValueAt(nmjenis.getText(),tbJnsPerawatan.getSelectedRow(),3);
-                tabMode.setValueAt(Double.parseDouble(stok.getText()),tbJnsPerawatan.getSelectedRow(),4);
-                tabMode.setValueAt(Double.parseDouble(harga.getText()),tbJnsPerawatan.getSelectedRow(),5);
+                tbJnsPerawatan.setValueAt(kode_brng.getText(),tbJnsPerawatan.getSelectedRow(),0);
+                tbJnsPerawatan.setValueAt(nama_brng.getText(),tbJnsPerawatan.getSelectedRow(),1);
+                tbJnsPerawatan.setValueAt(nama_sat.getText(),tbJnsPerawatan.getSelectedRow(),2);
+                tbJnsPerawatan.setValueAt(nmjenis.getText(),tbJnsPerawatan.getSelectedRow(),3);
+                tbJnsPerawatan.setValueAt(Double.parseDouble(stok.getText()),tbJnsPerawatan.getSelectedRow(),4);
+                tbJnsPerawatan.setValueAt(Double.parseDouble(harga.getText()),tbJnsPerawatan.getSelectedRow(),5);
                 emptTeks();
             }
         }
@@ -786,7 +786,7 @@ public final class IPSRSBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -795,7 +795,7 @@ public final class IPSRSBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1042,7 +1042,7 @@ public final class IPSRSBarang extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {

@@ -1034,7 +1034,7 @@ public class UTDPenyerahanDarah extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbDarahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDarahMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDarah.getRowCount()!=0){
             if(tbDarah.getSelectedColumn()==0){
                 try {
                     getData();
@@ -1045,7 +1045,7 @@ public class UTDPenyerahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDarahMouseClicked
 
     private void tbDarahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDarahKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDarah.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 try {
                     getData();
@@ -1474,15 +1474,15 @@ public class UTDPenyerahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_tanggalKeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            int row2=tabMode.getRowCount();
+            int row2=tbDarah.getRowCount();
             for(int r=0;r<row2;r++){
-                tabMode.setValueAt("",r,0);
-                tabMode.setValueAt(0,r,6);
-                tabMode.setValueAt(0,r,7);
-                tabMode.setValueAt(0,r,8);
-                tabMode.setValueAt(0,r,9);
-                tabMode.setValueAt(0,r,10);
-                tabMode.setValueAt(0,r,11);
+                tbDarah.setValueAt("",r,0);
+                tbDarah.setValueAt(0,r,6);
+                tbDarah.setValueAt(0,r,7);
+                tbDarah.setValueAt(0,r,8);
+                tbDarah.setValueAt(0,r,9);
+                tbDarah.setValueAt(0,r,10);
+                tbDarah.setValueAt(0,r,11);
             }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 

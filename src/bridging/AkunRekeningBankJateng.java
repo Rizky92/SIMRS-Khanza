@@ -460,14 +460,14 @@ public class AkunRekeningBankJateng extends javax.swing.JDialog {
             Valid.textKosong(TKd,"User Name");
         }else if(TPass.getText().trim().equals("")){
             Valid.textKosong(TPass,"Password");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbSpesialis.getRowCount()==0){
             if(Sequel.menyimpantf("set_akun_bankjateng","?,aes_encrypt(?,'nur'),aes_encrypt(?,'windi')","Akun Rekening",3,new String[]{
                 kdrek.getText(),TKd.getText(),TPass.getText()
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();
             }
-        }else if(tabMode.getRowCount()>0){
+        }else if(tbSpesialis.getRowCount()>0){
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu akun pengaturan ...!!!!");
             TKd.requestFocus();
         }
@@ -475,7 +475,7 @@ public class AkunRekeningBankJateng extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -486,7 +486,7 @@ public class AkunRekeningBankJateng extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisKeyPressed
 
     private void tbSpesialisMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -582,10 +582,10 @@ public class AkunRekeningBankJateng extends javax.swing.JDialog {
     private void getData() {
         int row=tbSpesialis.getSelectedRow();
         if(row!= -1){
-            kdrek.setText(tabMode.getValueAt(row,0).toString());
-            nmrek.setText(tabMode.getValueAt(row,1).toString());
-            TKd.setText(tabMode.getValueAt(row,2).toString());
-            TPass.setText(tabMode.getValueAt(row,3).toString());
+            kdrek.setText(tbSpesialis.getValueAt(row,0).toString());
+            nmrek.setText(tbSpesialis.getValueAt(row,1).toString());
+            TKd.setText(tbSpesialis.getValueAt(row,2).toString());
+            TPass.setText(tbSpesialis.getValueAt(row,3).toString());
         }
     }
 

@@ -3027,7 +3027,7 @@ public class DlgFrekuensiPenyakitRanap extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            label9.setText("Record : "+tabMode.getRowCount());
+            label9.setText("Record : "+tbDokter.getRowCount());
         }catch(SQLException e){
             System.out.println("Catatan  "+e);
         }
@@ -3286,7 +3286,7 @@ public class DlgFrekuensiPenyakitRanap extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            label9.setText("Record : "+tabMode2.getRowCount());
+            label9.setText("Record : "+tbDokter2.getRowCount());
         }catch(SQLException e){
             System.out.println("Catatan  "+e);
         }

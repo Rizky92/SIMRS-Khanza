@@ -479,7 +479,7 @@ public final class BPJSMapingDokterDPJP extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     kdpoli.getText(),TPoli.getText(),KdPoliPCare.getText(),NmPoliPCare.getText()
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbJnsPerawatan.getRowCount());
                 emptTeks();
             }
         }
@@ -503,7 +503,7 @@ public final class BPJSMapingDokterDPJP extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,kdpoli,"maping_dokter_dpjpvclaim","kd_dokter")==true){
-            tabMode.removeRow(tbJnsPerawatan.getSelectedRow());
+            tabMode.removeRow(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()));
             emptTeks();
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
@@ -526,10 +526,10 @@ public final class BPJSMapingDokterDPJP extends javax.swing.JDialog {
                 if(Sequel.mengedittf("maping_dokter_dpjpvclaim","kd_dokter=?","kd_dokter=?,kd_dokter_bpjs=?,nm_dokter_bpjs=?",4,new String[]{
                         kdpoli.getText(),KdPoliPCare.getText(),NmPoliPCare.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
                     })==true){
-                    tabMode.setValueAt(kdpoli.getText(),tbJnsPerawatan.getSelectedRow(), 0);
-                    tabMode.setValueAt(TPoli.getText(),tbJnsPerawatan.getSelectedRow(), 1);
-                    tabMode.setValueAt(KdPoliPCare.getText(),tbJnsPerawatan.getSelectedRow(), 2);
-                    tabMode.setValueAt(NmPoliPCare.getText(),tbJnsPerawatan.getSelectedRow(), 3);
+                    tbJnsPerawatan.setValueAt(kdpoli.getText(),tbJnsPerawatan.getSelectedRow(), 0);
+                    tbJnsPerawatan.setValueAt(TPoli.getText(),tbJnsPerawatan.getSelectedRow(), 1);
+                    tbJnsPerawatan.setValueAt(KdPoliPCare.getText(),tbJnsPerawatan.getSelectedRow(), 2);
+                    tbJnsPerawatan.setValueAt(NmPoliPCare.getText(),tbJnsPerawatan.getSelectedRow(), 3);
                     emptTeks();
                 }
             }
@@ -650,7 +650,7 @@ public final class BPJSMapingDokterDPJP extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -659,7 +659,7 @@ public final class BPJSMapingDokterDPJP extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -821,7 +821,7 @@ public final class BPJSMapingDokterDPJP extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {

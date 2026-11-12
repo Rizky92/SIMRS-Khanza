@@ -124,7 +124,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         tbListDicom.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbListDicom.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < tabModeDicom.getColumnCount(); i++) {
+        for (i = 0; i < tbListDicom.getColumnCount(); i++) {
             TableColumn column = tbListDicom.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(100);
@@ -1381,7 +1381,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-    if(tabMode.getRowCount()==0){
+    if(tbDokter.getRowCount()==0){
         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         TCari.requestFocus();
     }else if(tbDokter.getSelectedRow()<= -1){
@@ -1622,7 +1622,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-   if(tabMode.getRowCount()!=0){
+   if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1634,7 +1634,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
 
     private void MnCetakNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakNotaActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1833,7 +1833,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrint1KeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -2018,7 +2018,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPetugas1ActionPerformed
 
     private void MnUbahDokterPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUbahDokterPetugasActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -2039,7 +2039,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
 
     private void ppBerkasDigitalBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBerkasDigitalBtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -2080,7 +2080,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
 
     private void btnAmbilPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbilPhotoActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -2135,7 +2135,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAmbilPhoto1ActionPerformed
 
     private void btnDicomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDicomActionPerformed
-        if(tabModeDicom.getRowCount()==0){
+        if(tbListDicom.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else {
@@ -2164,7 +2164,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_TabDataMouseClicked
 
     private void tbListDicomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListDicomMouseClicked
-        if(tabModeDicom.getRowCount()!=0){
+        if(tbListDicom.getRowCount()!=0){
             if(evt.getClickCount()==2){
                 btnDicomActionPerformed(null);
             }
@@ -2172,7 +2172,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbListDicomMouseClicked
 
     private void tbListDicomKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbListDicomKeyPressed
-        if(tabModeDicom.getRowCount()!=0){
+        if(tbListDicom.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 btnDicomActionPerformed(null);
             }
@@ -2180,7 +2180,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbListDicomKeyPressed
 
     private void ppRiwayatBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRiwayatBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -2244,7 +2244,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnDicomRouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDicomRouterActionPerformed
-        if(tabModeDicom.getRowCount()==0){
+        if(tbListDicom.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else {
@@ -2280,7 +2280,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_btnDicomRouterActionPerformed
 
     private void btnUploudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploudActionPerformed
-        if(tabModeDicom.getRowCount()==0){
+        if(tbListDicom.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else {
@@ -2326,7 +2326,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_btnUploudActionPerformed
 
     private void tbDokterMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             int row = tbDokter.rowAtPoint(evt.getPoint());
             if(row >= 0){
                 tbDokter.setRowSelectionInterval(row, row);

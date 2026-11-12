@@ -385,7 +385,7 @@ public final class DlgCariKategoriPemasukanLain extends javax.swing.JDialog {
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     private void tampil2() {
@@ -423,7 +423,7 @@ public final class DlgCariKategoriPemasukanLain extends javax.swing.JDialog {
             response = null;
             root = null;
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     public JTable getTabel(){

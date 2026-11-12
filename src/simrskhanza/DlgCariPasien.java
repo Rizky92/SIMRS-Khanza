@@ -351,7 +351,7 @@ public class DlgCariPasien extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbPasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPasienMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPasien.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -360,7 +360,7 @@ public class DlgCariPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPasienMouseClicked
 
     private void tbPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPasienKeyPressed
-       if(tabMode.getRowCount()!=0){
+       if(tbPasien.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 try {
                     getData();
@@ -439,7 +439,7 @@ public class DlgCariPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_CarialamatKeyPressed
 
     private void tbPasienKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPasienKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbPasien.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -694,7 +694,7 @@ public class DlgCariPasien extends javax.swing.JDialog {
             System.out.println(e);
         }
 
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPasien.getRowCount());
     }
 
     public void emptTeks() {

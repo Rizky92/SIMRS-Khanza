@@ -1252,7 +1252,7 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJadwal.getRowCount());
     }
 
     String konversi(int year, int month, int day){

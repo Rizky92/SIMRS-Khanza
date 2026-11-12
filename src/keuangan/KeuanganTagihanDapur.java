@@ -708,7 +708,7 @@ public final class KeuanganTagihanDapur extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(kdsup.getText().trim().equals("")||nmsup.getText().trim().equals("")){
                 tbBangsal.setValueAt(false,tbBangsal.getSelectedRow(),0);
                 Valid.textKosong(BtnSuplier,"Suplier");
@@ -726,7 +726,7 @@ public final class KeuanganTagihanDapur extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(tbBangsal.getSelectedRow()!= -1){
                 if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                     getData();
@@ -848,7 +848,7 @@ public final class KeuanganTagihanDapur extends javax.swing.JDialog {
             Valid.textKosong(NoTagihan,"No.Tagihan");
         }else if(KdPetugas.getText().trim().equals("")||NmPetugas.getText().trim().equals("")){
             Valid.textKosong(KdPetugas,"Petugas");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda simpan...!!!!");
         }else if(Keterangan.getText().trim().equals("")){
             Valid.textKosong(Keterangan,"Keterangan");
@@ -865,7 +865,7 @@ public final class KeuanganTagihanDapur extends javax.swing.JDialog {
                 })==true){
                     row=tbBangsal.getRowCount();
                     for(i=0;i<row;i++){
-                        if(tabMode.getValueAt(i,0).toString().equals("true")){
+                        if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                             if(Sequel.menyimpantf2("dapur_detail_titip_faktur","?,?","Detail Tagihan",2,new String[]{
                                 NoTagihan.getText(),tbBangsal.getValueAt(i,1).toString(),
                             })==false){
@@ -895,7 +895,7 @@ public final class KeuanganTagihanDapur extends javax.swing.JDialog {
                     for(i=0;i<tbBangsal.getRowCount();i++){
                         if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                             sisahutang=sisahutang-Double.parseDouble(tbBangsal.getValueAt(i,9).toString());
-                            tabMode.removeRow(i);
+                            tabMode.removeRow(tbBangsal.convertRowIndexToModel(i));
                             i--;
                         }
                     }

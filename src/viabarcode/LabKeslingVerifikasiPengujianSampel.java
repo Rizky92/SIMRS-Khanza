@@ -586,7 +586,7 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
             Valid.textKosong(TNoVerifikasi,"Nomor Verifikasi");
         }else if(KodeSampel.getText().equals("")||NamaSampel.getText().equals("")){
             Valid.textKosong(TNoVerifikasi,"Sampel");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbVerifikasi.getRowCount()==0){
             Valid.textKosong(TNoVerifikasi,"Data Verifikasi");
         }else{
             int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
@@ -850,7 +850,7 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
             response = null;
             root = null;
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbVerifikasi.getRowCount());
     }
 
     public void setData(String nopermintaan,String kodepelanggan,String namapelanggan,String kodesampel,String namasampel) {

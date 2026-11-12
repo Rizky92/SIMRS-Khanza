@@ -492,7 +492,7 @@ public class KeuanganNilaiPiutangPerJenisBayarPerBulan extends javax.swing.JDial
                         rs.getString("kd_pj"),rs.getString("png_jawab"),januari,februari,maret,april,mei,juni,juli,agustus,september,oktober,november,desember,tagihan
                     });
                 }
-                if(tabMode.getRowCount()>0){
+                if(tbDokter.getRowCount()>0){
                     tabMode.addRow(new Object[]{
                         "Total :","",totaljanuari,totalfebruari,totalmaret,totalapril,totalmei,totaljuni,totaljuli,totalagustus,totalseptember,totaloktober,totalnovember,totaldesember,totaltagihan
                     });

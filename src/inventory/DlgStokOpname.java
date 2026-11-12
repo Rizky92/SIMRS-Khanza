@@ -1009,8 +1009,8 @@ public final class DlgStokOpname extends javax.swing.JDialog {
             LTotalReal.setText(df2.format(totalreal));
             LTotalHilang.setText(df2.format(total));
             LTotalLebih.setText(df2.format(totallebih));
-            LCount.setText(""+tabMode.getRowCount());
-            tabMode.removeRow(tbKamar.getSelectedRow());
+            LCount.setText(""+tbKamar.getRowCount());
+            tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -1666,7 +1666,7 @@ public final class DlgStokOpname extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
         LTotalReal.setText(df2.format(totalreal));
         LTotalHilang.setText(df2.format(total));
         LTotalLebih.setText(df2.format(totallebih));

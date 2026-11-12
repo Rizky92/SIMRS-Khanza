@@ -917,7 +917,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
                                 tabMode.addRow(new Object[]{
                                     Valid.SetTgl(Tanggal.getSelectedItem()+""),KdPemberiHutang.getText(),NmPemberiHutang.getText(),Double.parseDouble(Cicilan.getText()),Keterangan.getText(),NoHutang.getText(),koderekening,AkunBayar.getSelectedItem().toString(),NoBukti.getText()
                                 });
-                                LCount.setText(""+tabMode.getRowCount());
+                                LCount.setText(""+tbKamar.getRowCount());
                                 total=total+Double.parseDouble(Cicilan.getText());
                                 LTotal.setText(Valid.SetAngka(total));
                                 emptTeks();
@@ -1000,8 +1000,8 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
             if(sukses==true){
                 total=total-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString());
                 LTotal.setText(Valid.SetAngka(total));
-                tabMode.removeRow(tbKamar.getSelectedRow());
-                LCount.setText(""+tabMode.getRowCount());
+                tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
+                LCount.setText(""+tbKamar.getRowCount());
                 emptTeks();
             }
         }else{
@@ -1116,7 +1116,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1125,7 +1125,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1583,7 +1583,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
         LTotal.setText(Valid.SetAngka(total));
     }
 

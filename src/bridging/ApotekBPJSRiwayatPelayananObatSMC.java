@@ -522,7 +522,7 @@ public final class ApotekBPJSRiwayatPelayananObatSMC extends javax.swing.JDialog
                             }
                         }
                         tabMode.fireTableDataChanged();
-                        LCount.setText(tabMode.getRowCount() + "");
+                        LCount.setText(tbKamar.getRowCount() + "");
                         ApotekBPJSRiwayatPelayananObatSMC.this.setCursor(Cursor.getDefaultCursor());
                         ceksukses = false;
                     }

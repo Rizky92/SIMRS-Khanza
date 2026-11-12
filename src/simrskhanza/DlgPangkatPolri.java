@@ -340,9 +340,9 @@ public class DlgPangkatPolri extends javax.swing.JDialog {
         }else{
             if(tbkecamatan.getSelectedRow()!= -1){
                 if(Sequel.meghapustf("pangkat_polri","id",tbkecamatan.getValueAt(tbkecamatan.getSelectedRow(),0).toString())==true){
-                    tabMode.removeRow(tbkecamatan.getSelectedRow());
+                    tabMode.removeRow(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()));
                     emptTeks();
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText(""+tbkecamatan.getRowCount());
                 }
             }
         }
@@ -405,7 +405,7 @@ public class DlgPangkatPolri extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbkecamatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbkecamatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbkecamatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -417,7 +417,7 @@ public class DlgPangkatPolri extends javax.swing.JDialog {
     }//GEN-LAST:event_tbkecamatanMouseClicked
 
     private void tbkecamatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbkecamatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbkecamatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -519,7 +519,7 @@ public class DlgPangkatPolri extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbkecamatan.getRowCount());
     }
 
     public void emptTeks() {

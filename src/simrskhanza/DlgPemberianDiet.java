@@ -740,7 +740,7 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
                     tabMode.addRow(new Object[]{
                         TNoRw.getText(),TPasien.getText(),Ruang.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),WaktuDiet.getText(),JamDiet.getText(),NmDiet.getText(),"-",Kamar.getText(),KdDiet.getText()
                     });
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText(""+tbDataDiet.getRowCount());
                     emptTeks();
                 }
             }
@@ -771,7 +771,7 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(TabRawat.getSelectedIndex()==0){
-            if(tabMode.getRowCount()==0){
+            if(tbDataDiet.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 DTPTgl.requestFocus();
             }else if(TPasien.getText().trim().equals("")){
@@ -783,8 +783,8 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
                             "and tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"' " +
                             "and waktu='"+WaktuDiet.getText()+"' " +
                             "and kd_diet='"+KdDiet.getText()+"'")==true){
-                        tabMode.removeRow(tbDataDiet.getSelectedRow());
-                        LCount.setText(""+tabMode.getRowCount());
+                        tabMode.removeRow(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()));
+                        LCount.setText(""+tbDataDiet.getRowCount());
                     }
                 }
             }
@@ -933,7 +933,7 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbDataDietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDataDietMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDataDiet.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -942,7 +942,7 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDataDietMouseClicked
 
     private void tbDataDietKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDataDietKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDataDiet.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1067,10 +1067,10 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLabelDietActionPerformed
 
     private void MnLabelDiet1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLabelDiet1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDataDiet.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbDataDiet.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -1383,7 +1383,7 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbDataDiet.getRowCount());
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }

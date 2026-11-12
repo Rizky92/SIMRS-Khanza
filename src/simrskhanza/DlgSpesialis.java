@@ -380,7 +380,7 @@ public class DlgSpesialis extends javax.swing.JDialog {
                     TKd.getText(),TNm.getText()
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbSpesialis.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -406,8 +406,8 @@ public class DlgSpesialis extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,TKd,"spesialis","kd_sps")==true){
             if(tbSpesialis.getSelectedRow()!= -1){
-                tabMode.removeRow(tbSpesialis.getSelectedRow());
-                LCount.setText(""+tabMode.getRowCount());
+                tabMode.removeRow(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()));
+                LCount.setText(""+tbSpesialis.getRowCount());
                 emptTeks();
             }
         }
@@ -429,8 +429,8 @@ public class DlgSpesialis extends javax.swing.JDialog {
         }else{
             if(Valid.editTabletf(tabMode,"spesialis","kd_sps",TKd,"nm_sps='"+TNm.getText()+"'")==true){
                 if(tbSpesialis.getSelectedRow()>-1){
-                    tabMode.setValueAt(TKd.getText(),tbSpesialis.getSelectedRow(),0);
-                    tabMode.setValueAt(TNm.getText(),tbSpesialis.getSelectedRow(),1);
+                    tbSpesialis.setValueAt(TKd.getText(),tbSpesialis.getSelectedRow(),0);
+                    tbSpesialis.setValueAt(TNm.getText(),tbSpesialis.getSelectedRow(),1);
                     emptTeks();
                 }
             }
@@ -495,7 +495,7 @@ public class DlgSpesialis extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -504,7 +504,7 @@ public class DlgSpesialis extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisMouseClicked
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -610,7 +610,7 @@ public class DlgSpesialis extends javax.swing.JDialog {
         }catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbSpesialis.getRowCount());
     }
 
     public void emptTeks() {

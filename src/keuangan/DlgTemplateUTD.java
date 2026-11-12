@@ -229,7 +229,7 @@ public final class DlgTemplateUTD extends javax.swing.JDialog {
             Valid.textKosong(KdPeriksa,"Pemeriksaan");
         }else{
             if(tbKamar.getSelectedRow()>-1){
-                tabMode.insertRow(tbKamar.getSelectedRow(),new Object[]{"","",0,0,0,0,0,0,0,0,"",""});
+                tabMode.insertRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),new Object[]{"","",0,0,0,0,0,0,0,0,"",""});
             }else{
                 tabMode.addRow(new Object[]{"","",0,0,0,0,0,0,0,0,"",""});
                 tbKamar.requestFocus();
@@ -272,7 +272,7 @@ public final class DlgTemplateUTD extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
    try{
        Sequel.meghapus("template_utd","id_template",tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString());
-       tabMode.removeRow(tbKamar.getSelectedRow());
+       tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
        urut();
    }catch(Exception ex){
        JOptionPane.showMessageDialog(null,"Pilih dulu data yang mau dihapus..!!");

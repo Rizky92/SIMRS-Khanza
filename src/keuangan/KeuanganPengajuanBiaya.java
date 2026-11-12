@@ -1059,7 +1059,7 @@ public final class KeuanganPengajuanBiaya extends javax.swing.JDialog {
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1117,7 +1117,7 @@ public final class KeuanganPengajuanBiaya extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void tbObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1470,17 +1470,17 @@ public final class KeuanganPengajuanBiaya extends javax.swing.JDialog {
 
     private void hitung(){
         total=0;
-        for(i=0;i<tabMode.getRowCount();i++){
+        for(i=0;i<tbObat.getRowCount();i++){
             total=total+Valid.SetAngka(tbObat.getValueAt(i,13).toString());
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
         LCount1.setText(Valid.SetAngka(total));
     }
 
     private void hapus() {
         if(Sequel.meghapustf("pengajuan_biaya","no_pengajuan",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString())==true){
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
             hitung();
         }else{

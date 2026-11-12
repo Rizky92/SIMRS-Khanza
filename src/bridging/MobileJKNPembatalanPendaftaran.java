@@ -525,7 +525,7 @@ public final class MobileJKNPembatalanPendaftaran extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     private void runBackground(Runnable task) {

@@ -1454,7 +1454,7 @@ KirimTriaseIGDSekunder();
     }//GEN-LAST:event_tbIGDPrimerMouseClicked
 
     private void tbIGDPrimerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbIGDPrimerKeyReleased
-        if(tabModeIGDPrimer.getRowCount()!=0){
+        if(tbIGDPrimer.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 if(tbIGDPrimer.getSelectedRow()!= -1){
                     getDataIGDPrimer();
@@ -1482,7 +1482,7 @@ KirimTriaseIGDSekunder();
     }//GEN-LAST:event_tbIGDSekunderMouseClicked
 
     private void tbIGDSekunderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbIGDSekunderKeyPressed
-        if(tabModeIGDSekunder.getRowCount()!=0){
+        if(tbIGDSekunder.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 if(tbIGDSekunder.getSelectedRow()!= -1){
                     getDataIGDSekunder();
@@ -1512,7 +1512,7 @@ KirimTriaseIGDSekunder();
     }//GEN-LAST:event_ChkAccorAwalKeperawatanIGDActionPerformed
 
     private void tbAwalKeperawatanIGDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAwalKeperawatanIGDKeyPressed
-        if(tabModeAwalKeperawatanIGD.getRowCount()!=0){
+        if(tbAwalKeperawatanIGD.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 if(tbAwalKeperawatanIGD.getSelectedRow()!= -1){
                     getDataIGDSekunder();
@@ -1657,7 +1657,7 @@ KirimTriaseIGDSekunder();
         }catch(Exception e){
             System.out.println("Notifikasi IGD Primer : "+e);
         }
-        LCount.setText(""+tabModeIGDPrimer.getRowCount());
+        LCount.setText(""+tbIGDPrimer.getRowCount());
     }
 
     private void tampilIGDSekunder() {
@@ -1708,7 +1708,7 @@ KirimTriaseIGDSekunder();
         }catch(Exception e){
             System.out.println("Notifikasi IGD Sekunder : "+e);
         }
-        LCount.setText(""+tabModeIGDSekunder.getRowCount());
+        LCount.setText(""+tbIGDSekunder.getRowCount());
     }
 
     private void tampilAwalKeperawatanIGD() {
@@ -1782,7 +1782,7 @@ KirimTriaseIGDSekunder();
         }catch(Exception e){
             System.out.println("Notifikasi Awal Keperawatan IGD : "+e);
         }
-        LCount.setText(""+tabModeAwalKeperawatanIGD.getRowCount());
+        LCount.setText(""+tbAwalKeperawatanIGD.getRowCount());
     }
 
     public void isCek(){

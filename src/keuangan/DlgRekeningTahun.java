@@ -597,7 +597,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
             Valid.textKosong(Nm,"Saldo");
         }else{
             Valid.editTable(tabMode,"rekeningtahun","thn='"+Tahun.getSelectedItem()+"' and kd_rek",Kd,"saldo_awal='"+Saldo.getText()+"' ");
-            if(tabMode.getRowCount()!=0){BtnCariActionPerformed(evt);}
+            if(tbKamar.getRowCount()!=0){BtnCariActionPerformed(evt);}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -736,7 +736,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -745,7 +745,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1096,7 +1096,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbKamar.getRowCount() + "");
                     DlgRekeningTahun.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }
