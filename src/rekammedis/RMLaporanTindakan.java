@@ -60,6 +60,7 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private StringBuilder htmlContent;
+    private String keywordTemplateSmc = "";
     private String finger="";
     private String TANGGALMUNDUR="yes";
 
@@ -1803,10 +1804,12 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
                         teks.setText(template.getIsiTemplate());
                     }
                 }
+                keywordTemplateSmc = template.getKeyword();
                 teks.requestFocus();
             }
         });
         template.setTemplate("RMLaporanTindakan", field, KdDokter.getText());
+        template.setKeyword(keywordTemplateSmc);
         template.setBatas(batas);
         template.isCek();
         template.emptTeks();

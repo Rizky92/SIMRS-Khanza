@@ -36,6 +36,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.text.Document;
+import javax.swing.text.JTextComponent;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
@@ -57,6 +58,7 @@ public final class RMPenilaianPreOperasi extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private StringBuilder htmlContent;
+    private String keywordTemplateSmc = "";
     private String TANGGALMUNDUR="yes";
 
     /** Creates new form DlgRujuk
@@ -206,6 +208,13 @@ public final class RMPenilaianPreOperasi extends javax.swing.JDialog {
         jSeparator7 = new javax.swing.JSeparator();
         scrollPane20 = new widget.ScrollPane();
         TerapiPreOp = new widget.TextArea();
+        BtnTemplateRingkasanKlinikSmc = new widget.Button();
+        BtnTemplatePemeriksaanFisikSmc = new widget.Button();
+        BtnTemplatePemeriksaanDiagnostikSmc = new widget.Button();
+        BtnTemplateDiagnosaPreOperasiSmc = new widget.Button();
+        BtnTemplateRencanaTindakanBedahSmc = new widget.Button();
+        BtnTemplateHalYangDipersiapkanSmc = new widget.Button();
+        BtnTemplateTerapiPreOpSmc = new widget.Button();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -502,7 +511,7 @@ public final class RMPenilaianPreOperasi extends javax.swing.JDialog {
         label11.setBounds(538, 40, 52, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-02-2026 20:53:47" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-06-2026 13:37:27" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -535,7 +544,7 @@ public final class RMPenilaianPreOperasi extends javax.swing.JDialog {
         scrollPane14.setViewportView(RingkasanKlinik);
 
         FormInput.add(scrollPane14);
-        scrollPane14.setBounds(44, 90, 680, 63);
+        scrollPane14.setBounds(44, 90, 649, 63);
 
         jLabel110.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel110.setText("II. Pemeriksaan Fisik :");
@@ -565,7 +574,7 @@ public final class RMPenilaianPreOperasi extends javax.swing.JDialog {
         scrollPane15.setViewportView(PemeriksaanFisik);
 
         FormInput.add(scrollPane15);
-        scrollPane15.setBounds(44, 180, 680, 63);
+        scrollPane15.setBounds(44, 180, 649, 63);
 
         jLabel111.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel111.setText("III. Pemeriksaan Diagnostik :");
@@ -595,7 +604,7 @@ public final class RMPenilaianPreOperasi extends javax.swing.JDialog {
         scrollPane16.setViewportView(PemeriksaanDiagnostik);
 
         FormInput.add(scrollPane16);
-        scrollPane16.setBounds(44, 270, 680, 63);
+        scrollPane16.setBounds(44, 270, 649, 63);
 
         jLabel112.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel112.setText("IV. Diagnosa Pre Operasi :");
@@ -625,7 +634,7 @@ public final class RMPenilaianPreOperasi extends javax.swing.JDialog {
         scrollPane17.setViewportView(DiagnosaPreOperasi);
 
         FormInput.add(scrollPane17);
-        scrollPane17.setBounds(44, 360, 680, 63);
+        scrollPane17.setBounds(44, 360, 649, 63);
 
         jLabel113.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel113.setText("V. Rencana Tindakan Bedah :");
@@ -655,7 +664,7 @@ public final class RMPenilaianPreOperasi extends javax.swing.JDialog {
         scrollPane18.setViewportView(RencanaTindakanBedah);
 
         FormInput.add(scrollPane18);
-        scrollPane18.setBounds(44, 450, 680, 63);
+        scrollPane18.setBounds(44, 450, 649, 63);
 
         jLabel114.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel114.setText("VI. Hal-hal Yang Perlu Dipersiapkan :");
@@ -685,7 +694,7 @@ public final class RMPenilaianPreOperasi extends javax.swing.JDialog {
         scrollPane19.setViewportView(HalYangDipersiapkan);
 
         FormInput.add(scrollPane19);
-        scrollPane19.setBounds(44, 540, 680, 63);
+        scrollPane19.setBounds(44, 540, 649, 63);
 
         jLabel115.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel115.setText("VII. Terapi Pre Operasi :");
@@ -715,7 +724,91 @@ public final class RMPenilaianPreOperasi extends javax.swing.JDialog {
         scrollPane20.setViewportView(TerapiPreOp);
 
         FormInput.add(scrollPane20);
-        scrollPane20.setBounds(44, 630, 680, 63);
+        scrollPane20.setBounds(44, 630, 649, 63);
+
+        BtnTemplateRingkasanKlinikSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnTemplateRingkasanKlinikSmc.setToolTipText("Template Ringkasan Klinik");
+        BtnTemplateRingkasanKlinikSmc.setName("BtnTemplateRingkasanKlinikSmc"); // NOI18N
+        BtnTemplateRingkasanKlinikSmc.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnTemplateRingkasanKlinikSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTemplateRingkasanKlinikSmcActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnTemplateRingkasanKlinikSmc);
+        BtnTemplateRingkasanKlinikSmc.setBounds(696, 90, 28, 23);
+
+        BtnTemplatePemeriksaanFisikSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnTemplatePemeriksaanFisikSmc.setToolTipText("Template Pemeriksaan Fisik");
+        BtnTemplatePemeriksaanFisikSmc.setName("BtnTemplatePemeriksaanFisikSmc"); // NOI18N
+        BtnTemplatePemeriksaanFisikSmc.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnTemplatePemeriksaanFisikSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTemplatePemeriksaanFisikSmcActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnTemplatePemeriksaanFisikSmc);
+        BtnTemplatePemeriksaanFisikSmc.setBounds(696, 180, 28, 23);
+
+        BtnTemplatePemeriksaanDiagnostikSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnTemplatePemeriksaanDiagnostikSmc.setToolTipText("Template Pemeriksaan Diagnostik");
+        BtnTemplatePemeriksaanDiagnostikSmc.setName("BtnTemplatePemeriksaanDiagnostikSmc"); // NOI18N
+        BtnTemplatePemeriksaanDiagnostikSmc.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnTemplatePemeriksaanDiagnostikSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTemplatePemeriksaanDiagnostikSmcActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnTemplatePemeriksaanDiagnostikSmc);
+        BtnTemplatePemeriksaanDiagnostikSmc.setBounds(696, 270, 28, 23);
+
+        BtnTemplateDiagnosaPreOperasiSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnTemplateDiagnosaPreOperasiSmc.setToolTipText("Template Diagnosa Pre Operasi");
+        BtnTemplateDiagnosaPreOperasiSmc.setName("BtnTemplateDiagnosaPreOperasiSmc"); // NOI18N
+        BtnTemplateDiagnosaPreOperasiSmc.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnTemplateDiagnosaPreOperasiSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTemplateDiagnosaPreOperasiSmcActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnTemplateDiagnosaPreOperasiSmc);
+        BtnTemplateDiagnosaPreOperasiSmc.setBounds(696, 360, 28, 23);
+
+        BtnTemplateRencanaTindakanBedahSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnTemplateRencanaTindakanBedahSmc.setToolTipText("Template Rencana Tindakan Bedah");
+        BtnTemplateRencanaTindakanBedahSmc.setName("BtnTemplateRencanaTindakanBedahSmc"); // NOI18N
+        BtnTemplateRencanaTindakanBedahSmc.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnTemplateRencanaTindakanBedahSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTemplateRencanaTindakanBedahSmcActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnTemplateRencanaTindakanBedahSmc);
+        BtnTemplateRencanaTindakanBedahSmc.setBounds(696, 450, 28, 23);
+
+        BtnTemplateHalYangDipersiapkanSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnTemplateHalYangDipersiapkanSmc.setToolTipText("Template Hal-hal Yang Perlu Dipersiapkan");
+        BtnTemplateHalYangDipersiapkanSmc.setName("BtnTemplateHalYangDipersiapkanSmc"); // NOI18N
+        BtnTemplateHalYangDipersiapkanSmc.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnTemplateHalYangDipersiapkanSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTemplateHalYangDipersiapkanSmcActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnTemplateHalYangDipersiapkanSmc);
+        BtnTemplateHalYangDipersiapkanSmc.setBounds(696, 540, 28, 23);
+
+        BtnTemplateTerapiPreOpSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnTemplateTerapiPreOpSmc.setToolTipText("Template Terapi Pre Operasi");
+        BtnTemplateTerapiPreOpSmc.setName("BtnTemplateTerapiPreOpSmc"); // NOI18N
+        BtnTemplateTerapiPreOpSmc.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnTemplateTerapiPreOpSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTemplateTerapiPreOpSmcActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnTemplateTerapiPreOpSmc);
+        BtnTemplateTerapiPreOpSmc.setBounds(696, 630, 28, 23);
 
         scrollInput.setViewportView(FormInput);
 
@@ -758,7 +851,7 @@ public final class RMPenilaianPreOperasi extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-02-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-06-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -772,7 +865,7 @@ public final class RMPenilaianPreOperasi extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-02-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-06-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1159,6 +1252,34 @@ public final class RMPenilaianPreOperasi extends javax.swing.JDialog {
         Valid.pindah2(evt,HalYangDipersiapkan,BtnSimpan);
     }//GEN-LAST:event_TerapiPreOpKeyPressed
 
+    private void BtnTemplateRingkasanKlinikSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTemplateRingkasanKlinikSmcActionPerformed
+        tampilTemplateSmc("ringkasan_klinik", RingkasanKlinik);
+    }//GEN-LAST:event_BtnTemplateRingkasanKlinikSmcActionPerformed
+
+    private void BtnTemplatePemeriksaanFisikSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTemplatePemeriksaanFisikSmcActionPerformed
+        tampilTemplateSmc("pemeriksaan_fisik", PemeriksaanFisik);
+    }//GEN-LAST:event_BtnTemplatePemeriksaanFisikSmcActionPerformed
+
+    private void BtnTemplatePemeriksaanDiagnostikSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTemplatePemeriksaanDiagnostikSmcActionPerformed
+        tampilTemplateSmc("pemeriksaan_diagnostik", PemeriksaanDiagnostik);
+    }//GEN-LAST:event_BtnTemplatePemeriksaanDiagnostikSmcActionPerformed
+
+    private void BtnTemplateDiagnosaPreOperasiSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTemplateDiagnosaPreOperasiSmcActionPerformed
+        tampilTemplateSmc("diagnosa_pre_operasi", DiagnosaPreOperasi);
+    }//GEN-LAST:event_BtnTemplateDiagnosaPreOperasiSmcActionPerformed
+
+    private void BtnTemplateRencanaTindakanBedahSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTemplateRencanaTindakanBedahSmcActionPerformed
+        tampilTemplateSmc("rencana_tindakan_bedah", RencanaTindakanBedah);
+    }//GEN-LAST:event_BtnTemplateRencanaTindakanBedahSmcActionPerformed
+
+    private void BtnTemplateHalYangDipersiapkanSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTemplateHalYangDipersiapkanSmcActionPerformed
+        tampilTemplateSmc("hal_hal_yang_perludi_persiapkan", HalYangDipersiapkan);
+    }//GEN-LAST:event_BtnTemplateHalYangDipersiapkanSmcActionPerformed
+
+    private void BtnTemplateTerapiPreOpSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTemplateTerapiPreOpSmcActionPerformed
+        tampilTemplateSmc("terapi_pre_operasi", TerapiPreOp);
+    }//GEN-LAST:event_BtnTemplateTerapiPreOpSmcActionPerformed
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -1210,6 +1331,13 @@ public final class RMPenilaianPreOperasi extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
+    private widget.Button BtnTemplateDiagnosaPreOperasiSmc;
+    private widget.Button BtnTemplateHalYangDipersiapkanSmc;
+    private widget.Button BtnTemplatePemeriksaanDiagnostikSmc;
+    private widget.Button BtnTemplatePemeriksaanFisikSmc;
+    private widget.Button BtnTemplateRencanaTindakanBedahSmc;
+    private widget.Button BtnTemplateRingkasanKlinikSmc;
+    private widget.Button BtnTemplateTerapiPreOpSmc;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
     private widget.TextArea DiagnosaPreOperasi;
@@ -1497,6 +1625,27 @@ public final class RMPenilaianPreOperasi extends javax.swing.JDialog {
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
         }
+    }
+
+    private void tampilTemplateSmc(String field, JTextComponent teks) {
+        MasterCariTemplateUmumSMC template = new MasterCariTemplateUmumSMC(null, false);
+        template.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (template.getTable().getSelectedRow() != -1) {
+                    teks.setText(template.getIsiTemplate());
+                }
+                keywordTemplateSmc = template.getKeyword();
+                teks.requestFocus();
+            }
+        });
+        template.setTemplate("RMPenilaianPreOperasi", field, KdDokter.getText());
+        template.setKeyword(keywordTemplateSmc);
+        template.isCek();
+        template.emptTeks();
+        template.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        template.setLocationRelativeTo(internalFrame1);
+        template.setVisible(true);
     }
 
     private void runBackground(Runnable task) {

@@ -476,6 +476,14 @@ public class MasterCariTemplateUmumSMC extends javax.swing.JDialog {
         this.batas = batas;
     }
 
+    public void setKeyword(String kataKunci) {
+        TCari.setText(kataKunci);
+    }
+
+    public String getKeyword() {
+        return TCari.getText().trim();
+    }
+
     public void isCek() {
         BtnTambah.setEnabled(akses.gettemplate_umum_smc());
     }
