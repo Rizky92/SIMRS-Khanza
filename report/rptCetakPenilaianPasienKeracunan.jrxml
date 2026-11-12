@@ -27,9 +27,9 @@
                 penilaian_pasien_keracunan.keterangan_bau_bahan,penilaian_pasien_keracunan.pupil,penilaian_pasien_keracunan.keterangan_pupil,penilaian_pasien_keracunan.kesadaran,
                 penilaian_pasien_keracunan.td,penilaian_pasien_keracunan.nadi,penilaian_pasien_keracunan.rr,penilaian_pasien_keracunan.suhu,penilaian_pasien_keracunan.spo,
                 penilaian_pasien_keracunan.urine,penilaian_pasien_keracunan.pengobatan_sebelum_igd,penilaian_pasien_keracunan.diagnosis,penilaian_pasien_keracunan.pemeriksaan_penunjang,
-                penilaian_pasien_keracunan.penatalaksanaan_diberikan,penilaian_pasien_keracunan.tindak_lanjut,dokter.nm_dokter 
-                from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                inner join penilaian_pasien_keracunan on reg_periksa.no_rawat=penilaian_pasien_keracunan.no_rawat 
+                penilaian_pasien_keracunan.penatalaksanaan_diberikan,penilaian_pasien_keracunan.tindak_lanjut,dokter.nm_dokter
+                from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                inner join penilaian_pasien_keracunan on reg_periksa.no_rawat=penilaian_pasien_keracunan.no_rawat
                 inner join dokter on penilaian_pasien_keracunan.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

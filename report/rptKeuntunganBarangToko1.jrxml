@@ -24,11 +24,11 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select tokopenjualan.tgl_jual,tokopenjualan.nota_jual,toko_detail_jual.kode_brng,tokobarang.nama_brng,kodesatuan.satuan,toko_detail_jual.h_jual,toko_detail_jual.jumlah, 
-toko_detail_jual.subtotal,toko_detail_jual.dis,toko_detail_jual.bsr_dis,toko_detail_jual.tambahan,toko_detail_jual.total, toko_detail_jual.h_beli,(toko_detail_jual.h_beli * toko_detail_jual.jumlah) as total_asal, 
-(toko_detail_jual.total-(toko_detail_jual.h_beli * toko_detail_jual.jumlah)) as keuntungan 
-from tokopenjualan inner join toko_detail_jual on tokopenjualan.nota_jual=toko_detail_jual.nota_jual 
-inner join tokobarang on toko_detail_jual.kode_brng=tokobarang.kode_brng 
+		<![CDATA[select tokopenjualan.tgl_jual,tokopenjualan.nota_jual,toko_detail_jual.kode_brng,tokobarang.nama_brng,kodesatuan.satuan,toko_detail_jual.h_jual,toko_detail_jual.jumlah,
+toko_detail_jual.subtotal,toko_detail_jual.dis,toko_detail_jual.bsr_dis,toko_detail_jual.tambahan,toko_detail_jual.total, toko_detail_jual.h_beli,(toko_detail_jual.h_beli * toko_detail_jual.jumlah) as total_asal,
+(toko_detail_jual.total-(toko_detail_jual.h_beli * toko_detail_jual.jumlah)) as keuntungan
+from tokopenjualan inner join toko_detail_jual on tokopenjualan.nota_jual=toko_detail_jual.nota_jual
+inner join tokobarang on toko_detail_jual.kode_brng=tokobarang.kode_brng
 inner join kodesatuan on toko_detail_jual.kode_sat=kodesatuan.kode_sat]]>
 	</queryString>
 	<field name="tgl_jual" class="java.sql.Date">

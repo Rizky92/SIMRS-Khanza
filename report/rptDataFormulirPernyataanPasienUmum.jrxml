@@ -20,9 +20,9 @@
                     reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,surat_pernyataan_pasien_umum.tanggal,surat_pernyataan_pasien_umum.nama_pj,
                     surat_pernyataan_pasien_umum.no_ktppj,surat_pernyataan_pasien_umum.tempat_lahirpj,surat_pernyataan_pasien_umum.lahirpj,
                     surat_pernyataan_pasien_umum.jkpj,surat_pernyataan_pasien_umum.alamatpj,surat_pernyataan_pasien_umum.hubungan,
-                    surat_pernyataan_pasien_umum.no_telp,surat_pernyataan_pasien_umum.nip,petugas.nama from surat_pernyataan_pasien_umum 
-                    inner join reg_periksa on surat_pernyataan_pasien_umum.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    surat_pernyataan_pasien_umum.no_telp,surat_pernyataan_pasien_umum.nip,petugas.nama from surat_pernyataan_pasien_umum
+                    inner join reg_periksa on surat_pernyataan_pasien_umum.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join petugas on surat_pernyataan_pasien_umum.nip=petugas.nip ]]>
 	</queryString>
 	<field name="no_surat" class="java.lang.String">

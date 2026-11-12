@@ -30,8 +30,8 @@ penilaian_psikologi.tanggal,penilaian_psikologi.nip,penilaian_psikologi.anamnesi
 penilaian_psikologi.tujuan_pemeriksaan,penilaian_psikologi.ket_anamnesis,penilaian_psikologi.rupa,penilaian_psikologi.bentuk_tubuh,
 penilaian_psikologi.tindakan,penilaian_psikologi.pakaian,penilaian_psikologi.ekspresi,penilaian_psikologi.berbicara,
 penilaian_psikologi.penggunaan_kata,penilaian_psikologi.ciri_menyolok,penilaian_psikologi.hasil_psikotes,penilaian_psikologi.kepribadian,
-penilaian_psikologi.psikodinamika,penilaian_psikologi.kesimpulan_psikolog,petugas.nama from reg_periksa 
-inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join penilaian_psikologi 
+penilaian_psikologi.psikodinamika,penilaian_psikologi.kesimpulan_psikolog,petugas.nama from reg_periksa
+inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join penilaian_psikologi
 on reg_periksa.no_rawat=penilaian_psikologi.no_rawat inner join petugas on penilaian_psikologi.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

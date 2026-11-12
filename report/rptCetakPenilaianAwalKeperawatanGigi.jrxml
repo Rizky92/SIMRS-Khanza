@@ -41,11 +41,11 @@
                         penilaian_awal_keperawatan_gigi.lokasi,penilaian_awal_keperawatan_gigi.skala_nyeri,penilaian_awal_keperawatan_gigi.durasi,penilaian_awal_keperawatan_gigi.frekuensi,penilaian_awal_keperawatan_gigi.nyeri_hilang,
                         penilaian_awal_keperawatan_gigi.ket_nyeri,penilaian_awal_keperawatan_gigi.pada_dokter,penilaian_awal_keperawatan_gigi.ket_dokter,penilaian_awal_keperawatan_gigi.kebersihan_mulut,penilaian_awal_keperawatan_gigi.mukosa_mulut,
                         penilaian_awal_keperawatan_gigi.karies,penilaian_awal_keperawatan_gigi.karang_gigi,penilaian_awal_keperawatan_gigi.gingiva,penilaian_awal_keperawatan_gigi.palatum,penilaian_awal_keperawatan_gigi.rencana,
-                        penilaian_awal_keperawatan_gigi.nip,petugas.nama 
-                        from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                        inner join penilaian_awal_keperawatan_gigi on reg_periksa.no_rawat=penilaian_awal_keperawatan_gigi.no_rawat 
-                        inner join petugas on penilaian_awal_keperawatan_gigi.nip=petugas.nip 
-                        inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien 
+                        penilaian_awal_keperawatan_gigi.nip,petugas.nama
+                        from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                        inner join penilaian_awal_keperawatan_gigi on reg_periksa.no_rawat=penilaian_awal_keperawatan_gigi.no_rawat
+                        inner join petugas on penilaian_awal_keperawatan_gigi.nip=petugas.nip
+                        inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien
                         inner join cacat_fisik on cacat_fisik.id=pasien.cacat_fisik]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

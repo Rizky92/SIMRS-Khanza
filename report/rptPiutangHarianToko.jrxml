@@ -25,9 +25,9 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select tokopiutang.nota_piutang,tokopiutang.tgl_piutang,tokopiutang.nip,petugas.nama,
-tokopiutang.ongkir,(tokopiutang.ongkir+tokopiutang.uangmuka+tokopiutang.sisapiutang) as total, 
-tokopiutang.no_member,tokopiutang.nm_member,tokopiutang.catatan, 
-tokopiutang.jns_jual,tokopiutang.uangmuka,tokopiutang.sisapiutang 
+tokopiutang.ongkir,(tokopiutang.ongkir+tokopiutang.uangmuka+tokopiutang.sisapiutang) as total,
+tokopiutang.no_member,tokopiutang.nm_member,tokopiutang.catatan,
+tokopiutang.jns_jual,tokopiutang.uangmuka,tokopiutang.sisapiutang
 from tokopiutang inner join petugas on tokopiutang.nip=petugas.nip]]>
 	</queryString>
 	<field name="nota_piutang" class="java.lang.String">

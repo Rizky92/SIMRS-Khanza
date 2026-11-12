@@ -21,15 +21,15 @@
 	<parameter name="tanggal2" class="java.lang.String"/>
 	<parameter name="barang" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select detreturjual.kode_brng,databarang.nama_brng,jenis.nama as namajenis, 
-detreturjual.kode_sat,kodesatuan.satuan,sum(detreturjual.jml_retur) as jumlah, 
-sum(detreturjual.subtotal) as total 
+		<![CDATA[select detreturjual.kode_brng,databarang.nama_brng,jenis.nama as namajenis,
+detreturjual.kode_sat,kodesatuan.satuan,sum(detreturjual.jml_retur) as jumlah,
+sum(detreturjual.subtotal) as total
  from returjual inner join petugas inner join pasien inner join bangsal
- inner join detreturjual inner join databarang inner join kodesatuan inner join jenis 
+ inner join detreturjual inner join databarang inner join kodesatuan inner join jenis
 on detreturjual.kode_brng=databarang.kode_brng
-and returjual.kd_bangsal=bangsal.kd_bangsal 
-and returjual.no_rkm_medis=pasien.no_rkm_medis 
-and detreturjual.kode_sat=kodesatuan.kode_sat 
+and returjual.kd_bangsal=bangsal.kd_bangsal
+and returjual.no_rkm_medis=pasien.no_rkm_medis
+and detreturjual.kode_sat=kodesatuan.kode_sat
 and returjual.no_retur_jual=detreturjual.no_retur_jual
 and returjual.nip=petugas.nip and databarang.kdjns=jenis.kdjns]]>
 	</queryString>

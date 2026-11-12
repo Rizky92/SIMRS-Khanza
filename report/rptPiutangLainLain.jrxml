@@ -17,7 +17,7 @@
 	<queryString>
 		<![CDATA[select piutang_lainlain.nota_piutang,piutang_lainlain.tgl_piutang,piutang_lainlain.nip,petugas.nama,piutang_lainlain.kode_peminjam,
 peminjampiutang.nama_peminjam,piutang_lainlain.kd_rek,piutang_lainlain.nama_bayar,piutang_lainlain.keterangan,piutang_lainlain.tgltempo,
-piutang_lainlain.nominal from piutang_lainlain inner join petugas on petugas.nip=piutang_lainlain.nip 
+piutang_lainlain.nominal from piutang_lainlain inner join petugas on petugas.nip=piutang_lainlain.nip
 inner join peminjampiutang on piutang_lainlain.kode_peminjam=peminjampiutang.kode_peminjam]]>
 	</queryString>
 	<field name="nota_piutang" class="java.lang.String">

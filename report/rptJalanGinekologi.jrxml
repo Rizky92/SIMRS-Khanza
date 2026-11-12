@@ -14,15 +14,15 @@
 		<![CDATA[select pemeriksaan_ginekologi_ralan.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,
 pemeriksaan_ginekologi_ralan.tgl_perawatan,pemeriksaan_ginekologi_ralan.jam_rawat,
 pemeriksaan_ginekologi_ralan.inspeksi,pemeriksaan_ginekologi_ralan.inspeksi_vulva,
-pemeriksaan_ginekologi_ralan.inspekulo_gine, 
+pemeriksaan_ginekologi_ralan.inspekulo_gine,
 pemeriksaan_ginekologi_ralan.fluxus_gine,pemeriksaan_ginekologi_ralan.fluor_gine,
 pemeriksaan_ginekologi_ralan.vulva_inspekulo,
 pemeriksaan_ginekologi_ralan.portio_inspekulo,pemeriksaan_ginekologi_ralan.sondage,
 pemeriksaan_ginekologi_ralan.portio_dalam,pemeriksaan_ginekologi_ralan.bentuk,
 pemeriksaan_ginekologi_ralan.cavum_uteri,pemeriksaan_ginekologi_ralan.mobilitas,
 pemeriksaan_ginekologi_ralan.ukuran, pemeriksaan_ginekologi_ralan.nyeri_tekan, pemeriksaan_ginekologi_ralan.adnexa_kanan, pemeriksaan_ginekologi_ralan.adnexa_kiri,
-pemeriksaan_ginekologi_ralan.cavum_douglas 
-from pasien inner join reg_periksa inner join pemeriksaan_ginekologi_ralan 
+pemeriksaan_ginekologi_ralan.cavum_douglas
+from pasien inner join reg_periksa inner join pemeriksaan_ginekologi_ralan
 on pemeriksaan_ginekologi_ralan.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

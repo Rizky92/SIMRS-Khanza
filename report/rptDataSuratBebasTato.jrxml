@@ -16,7 +16,7 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select surat_bebas_tato.no_surat,surat_bebas_tato.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,
-surat_bebas_tato.tanggalperiksa,surat_bebas_tato.hasilperiksa,reg_periksa.kd_dokter,dokter.nm_dokter,surat_bebas_tato.keperluan 
+surat_bebas_tato.tanggalperiksa,surat_bebas_tato.hasilperiksa,reg_periksa.kd_dokter,dokter.nm_dokter,surat_bebas_tato.keperluan
 from surat_bebas_tato inner join reg_periksa on surat_bebas_tato.no_rawat=reg_periksa.no_rawat
 inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on dokter.kd_dokter=reg_periksa.kd_dokter]]>
 	</queryString>

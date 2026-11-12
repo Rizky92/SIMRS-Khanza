@@ -26,7 +26,7 @@
 	<queryString>
 		<![CDATA[select surat_keterangan_rawat_inap.no_surat,surat_keterangan_rawat_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,
 surat_keterangan_rawat_inap.tanggalawal,surat_keterangan_rawat_inap.tanggalakhir
-from surat_keterangan_rawat_inap inner join reg_periksa on surat_keterangan_rawat_inap.no_rawat=reg_periksa.no_rawat 
+from surat_keterangan_rawat_inap inner join reg_periksa on surat_keterangan_rawat_inap.no_rawat=reg_periksa.no_rawat
 inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis ]]>
 	</queryString>
 	<field name="no_surat" class="java.lang.String">

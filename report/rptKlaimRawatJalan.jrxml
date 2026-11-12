@@ -24,15 +24,15 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,reg_periksa.tgl_registrasi, 
+		<![CDATA[select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,reg_periksa.tgl_registrasi,
                         jns_perawatan.nm_perawatan,piutang_pasien.totalpiutang,piutang_pasien.status,piutang_pasien.uangmuka
-                                               from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                        inner join penjab on reg_periksa.kd_pj=penjab.kd_pj 
-                        inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter 
-                        inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli 
-                        inner join piutang_pasien on piutang_pasien.no_rawat=reg_periksa.no_rawat 
-                        inner join rawat_jl_dr on rawat_jl_dr.no_rawat=reg_periksa.no_rawat 
-                        inner join jns_perawatan on rawat_jl_dr.kd_jenis_prw=jns_perawatan.kd_jenis_prw 
+                                               from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                        inner join penjab on reg_periksa.kd_pj=penjab.kd_pj
+                        inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter
+                        inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli
+                        inner join piutang_pasien on piutang_pasien.no_rawat=reg_periksa.no_rawat
+                        inner join rawat_jl_dr on rawat_jl_dr.no_rawat=reg_periksa.no_rawat
+                        inner join jns_perawatan on rawat_jl_dr.kd_jenis_prw=jns_perawatan.kd_jenis_prw
                         inner join perusahaan_pasien on perusahaan_pasien.kode_perusahaan=pasien.perusahaan_pasien]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

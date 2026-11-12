@@ -29,9 +29,9 @@ is divided into following sections:
         </condition>
     </fail>
     <target depends="test,jar,javadoc" description="Build and test whole project." name="default"/>
-    <!-- 
+    <!--
                 ======================
-                INITIALIZATION SECTION 
+                INITIALIZATION SECTION
                 ======================
             -->
     <target name="-pre-init">
@@ -151,11 +151,11 @@ is divided into following sections:
         <fail unless="platform.javac">Must set platform.javac</fail>
         <fail if="platform.invalid">
  The J2SE Platform is not correctly set up.
- Your active platform is: ${platform.active}, but the corresponding property "platforms.${platform.active}.home" is not found in the project's properties files. 
+ Your active platform is: ${platform.active}, but the corresponding property "platforms.${platform.active}.home" is not found in the project's properties files.
  Either open the project in the IDE and setup the Platform with the same name or add it manually.
  For example like this:
      ant -Duser.properties.file=&lt;path_to_property_file&gt; jar (where you put the property "platforms.${platform.active}.home" in a .properties file)
-  or ant -Dplatforms.${platform.active}.home=&lt;path_to_JDK_home&gt; jar (where no properties file is used) 
+  or ant -Dplatforms.${platform.active}.home=&lt;path_to_JDK_home&gt; jar (where no properties file is used)
   </fail>
         <available file="${manifest.file}" property="manifest.available"/>
         <condition property="splashscreen.available">

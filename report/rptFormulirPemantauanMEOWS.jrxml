@@ -26,9 +26,9 @@
                     pemantauan_meows_obstetri.skor_kesadaran,pemantauan_meows_obstetri.parameter_ketuban,pemantauan_meows_obstetri.skor_ketuban,
                     pemantauan_meows_obstetri.parameter_discharge,pemantauan_meows_obstetri.skor_discharge,pemantauan_meows_obstetri.parameter_proteinuria,
                     pemantauan_meows_obstetri.skor_proteinuria,pemantauan_meows_obstetri.skor_total,pemantauan_meows_obstetri.parameter_total,
-                    pemantauan_meows_obstetri.code_blue,pemantauan_meows_obstetri.nip,petugas.nama,date_format(pasien.tgl_lahir,'%d-%m-%Y') as lahir 
-                    from pemantauan_meows_obstetri inner join reg_periksa on pemantauan_meows_obstetri.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    pemantauan_meows_obstetri.code_blue,pemantauan_meows_obstetri.nip,petugas.nama,date_format(pasien.tgl_lahir,'%d-%m-%Y') as lahir
+                    from pemantauan_meows_obstetri inner join reg_periksa on pemantauan_meows_obstetri.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join petugas on pemantauan_meows_obstetri.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

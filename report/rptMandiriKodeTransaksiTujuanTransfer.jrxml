@@ -17,10 +17,10 @@
 	<parameter name="parameter" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select kodetransaksi_tujuan_transfer_bankmandiri.kode_metode,metode_pembayaran_bankmandiri.nama_metode,kodetransaksi_tujuan_transfer_bankmandiri.kode_bank,bank_tujuan_transfer_bankmandiri.nama_bank,
-                   kodetransaksi_tujuan_transfer_bankmandiri.kode_transaksi from kodetransaksi_tujuan_transfer_bankmandiri inner join metode_pembayaran_bankmandiri 
-                   on kodetransaksi_tujuan_transfer_bankmandiri.kode_metode=metode_pembayaran_bankmandiri.kode_metode inner join bank_tujuan_transfer_bankmandiri 
-                   on bank_tujuan_transfer_bankmandiri.kode_bank=kodetransaksi_tujuan_transfer_bankmandiri.kode_bank where kodetransaksi_tujuan_transfer_bankmandiri.kode_metode  like $P{parameter} 
-                   or metode_pembayaran_bankmandiri.nama_metode like $P{parameter} or kodetransaksi_tujuan_transfer_bankmandiri.kode_bank like  $P{parameter} or bank_tujuan_transfer_bankmandiri.nama_bank like $P{parameter} 
+                   kodetransaksi_tujuan_transfer_bankmandiri.kode_transaksi from kodetransaksi_tujuan_transfer_bankmandiri inner join metode_pembayaran_bankmandiri
+                   on kodetransaksi_tujuan_transfer_bankmandiri.kode_metode=metode_pembayaran_bankmandiri.kode_metode inner join bank_tujuan_transfer_bankmandiri
+                   on bank_tujuan_transfer_bankmandiri.kode_bank=kodetransaksi_tujuan_transfer_bankmandiri.kode_bank where kodetransaksi_tujuan_transfer_bankmandiri.kode_metode  like $P{parameter}
+                   or metode_pembayaran_bankmandiri.nama_metode like $P{parameter} or kodetransaksi_tujuan_transfer_bankmandiri.kode_bank like  $P{parameter} or bank_tujuan_transfer_bankmandiri.nama_bank like $P{parameter}
                    order by kodetransaksi_tujuan_transfer_bankmandiri.kode_metode]]>
 	</queryString>
 	<field name="kode_metode" class="java.lang.String">

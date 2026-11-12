@@ -16,8 +16,8 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="parameter" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select maping_poli_bpjs.kd_poli_rs,poliklinik.nm_poli,maping_poli_bpjs.kd_poli_bpjs,maping_poli_bpjs.nm_poli_bpjs 
-                   from maping_poli_bpjs inner join poliklinik on maping_poli_bpjs.kd_poli_rs=poliklinik.kd_poli where 
+		<![CDATA[select maping_poli_bpjs.kd_poli_rs,poliklinik.nm_poli,maping_poli_bpjs.kd_poli_bpjs,maping_poli_bpjs.nm_poli_bpjs
+                   from maping_poli_bpjs inner join poliklinik on maping_poli_bpjs.kd_poli_rs=poliklinik.kd_poli where
                    maping_poli_bpjs.kd_poli_rs like $P{parameter} or poliklinik.nm_poli like $P{parameter} or maping_poli_bpjs.kd_poli_bpjs like $P{parameter} or maping_poli_bpjs.nm_poli_bpjs like $P{parameter} order by poliklinik.nm_poli]]>
 	</queryString>
 	<field name="kd_poli_rs" class="java.lang.String">

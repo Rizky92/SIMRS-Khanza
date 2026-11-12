@@ -27,8 +27,8 @@
 	<parameter name="parameter" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select satu_sehat_mapping_tarifkamar_kptl.kd_kamar,bangsal.nm_bangsal,satu_sehat_mapping_tarifkamar_kptl.code,satu_sehat_mapping_tarifkamar_kptl.system,
-                   satu_sehat_mapping_tarifkamar_kptl.display from satu_sehat_mapping_tarifkamar_kptl inner join kamar on satu_sehat_mapping_tarifkamar_kptl.kd_kamar=kamar.kd_kamar 
-                   inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where satu_sehat_mapping_tarifkamar_kptl.kd_kamar like $P{parameter} or 
+                   satu_sehat_mapping_tarifkamar_kptl.display from satu_sehat_mapping_tarifkamar_kptl inner join kamar on satu_sehat_mapping_tarifkamar_kptl.kd_kamar=kamar.kd_kamar
+                   inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where satu_sehat_mapping_tarifkamar_kptl.kd_kamar like $P{parameter} or
                    bangsal.nm_bangsal like $P{parameter} or satu_sehat_mapping_tarifkamar_kptl.code like $P{parameter} or satu_sehat_mapping_tarifkamar_kptl.display like $P{parameter} order by satu_sehat_mapping_tarifkamar_kptl.code]]>
 	</queryString>
 	<field name="kd_kamar" class="java.lang.String">

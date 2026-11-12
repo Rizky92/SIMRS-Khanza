@@ -21,17 +21,17 @@
 		<![CDATA[select no_rawat,noKunjungan,tglDaftar,no_rkm_medis,nm_pasien,noKartu,kdPoli,nmPoli,keluhan,
             kdSadar,nmSadar,sistole, diastole,beratBadan,tinggiBadan,respRate,heartRate,lingkarPerut,terapi,
             kdStatusPulang,nmStatusPulang,tglPulang, kdDokter,nmDokter,kdDiag1,nmDiag1,kdDiag2,
-            nmDiag2,kdDiag3,nmDiag3,tglEstRujuk,kdPPK,nmPPK,kdSubSpesialis, 
-            nmSubSpesialis,kdSarana,nmSarana,kdTACC,nmTACC,alasanTACC from pcare_rujuk_subspesialis where 
-                    tglDaftar between $P{tanggal1} and $P{tanggal2} and no_rawat like $P{parameter} or 
-                    tglDaftar between $P{tanggal1} and $P{tanggal2} and noKunjungan like $P{parameter} or 
-                    tglDaftar between $P{tanggal1} and $P{tanggal2} and no_rkm_medis like $P{parameter} or 
-                    tglDaftar between $P{tanggal1} and $P{tanggal2} and nm_pasien like $P{parameter} or 
-                    tglDaftar between $P{tanggal1} and $P{tanggal2} and noKartu like $P{parameter} or 
-                    tglDaftar between $P{tanggal1} and $P{tanggal2} and nmPoli like $P{parameter} or 
-                    tglDaftar between $P{tanggal1} and $P{tanggal2} and nmSadar like $P{parameter} or 
-                    tglDaftar between $P{tanggal1} and $P{tanggal2} and nmStatusPulang like $P{parameter} or 
-                    tglDaftar between $P{tanggal1} and $P{tanggal2} and nmDokter like $P{parameter} or 
+            nmDiag2,kdDiag3,nmDiag3,tglEstRujuk,kdPPK,nmPPK,kdSubSpesialis,
+            nmSubSpesialis,kdSarana,nmSarana,kdTACC,nmTACC,alasanTACC from pcare_rujuk_subspesialis where
+                    tglDaftar between $P{tanggal1} and $P{tanggal2} and no_rawat like $P{parameter} or
+                    tglDaftar between $P{tanggal1} and $P{tanggal2} and noKunjungan like $P{parameter} or
+                    tglDaftar between $P{tanggal1} and $P{tanggal2} and no_rkm_medis like $P{parameter} or
+                    tglDaftar between $P{tanggal1} and $P{tanggal2} and nm_pasien like $P{parameter} or
+                    tglDaftar between $P{tanggal1} and $P{tanggal2} and noKartu like $P{parameter} or
+                    tglDaftar between $P{tanggal1} and $P{tanggal2} and nmPoli like $P{parameter} or
+                    tglDaftar between $P{tanggal1} and $P{tanggal2} and nmSadar like $P{parameter} or
+                    tglDaftar between $P{tanggal1} and $P{tanggal2} and nmStatusPulang like $P{parameter} or
+                    tglDaftar between $P{tanggal1} and $P{tanggal2} and nmDokter like $P{parameter} or
                     tglDaftar between $P{tanggal1} and $P{tanggal2} and nmDiag1 like $P{parameter} order by tglDaftar]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

@@ -36,9 +36,9 @@
                 penilaian_medis_ralan_bedah.abdomen,penilaian_medis_ralan_bedah.ekstremitas,penilaian_medis_ralan_bedah.genetalia,penilaian_medis_ralan_bedah.columna,
                 penilaian_medis_ralan_bedah.muskulos,penilaian_medis_ralan_bedah.lainnya,penilaian_medis_ralan_bedah.ket_lokalis,penilaian_medis_ralan_bedah.lab,
                 penilaian_medis_ralan_bedah.rad,penilaian_medis_ralan_bedah.pemeriksaan,penilaian_medis_ralan_bedah.diagnosis,penilaian_medis_ralan_bedah.diagnosis2,
-                penilaian_medis_ralan_bedah.permasalahan,penilaian_medis_ralan_bedah.terapi,penilaian_medis_ralan_bedah.tindakan,penilaian_medis_ralan_bedah.edukasi,dokter.nm_dokter 
-                from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                inner join penilaian_medis_ralan_bedah on reg_periksa.no_rawat=penilaian_medis_ralan_bedah.no_rawat 
+                penilaian_medis_ralan_bedah.permasalahan,penilaian_medis_ralan_bedah.terapi,penilaian_medis_ralan_bedah.tindakan,penilaian_medis_ralan_bedah.edukasi,dokter.nm_dokter
+                from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                inner join penilaian_medis_ralan_bedah on reg_periksa.no_rawat=penilaian_medis_ralan_bedah.no_rawat
                 inner join dokter on penilaian_medis_ralan_bedah.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

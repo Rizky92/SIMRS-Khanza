@@ -16,15 +16,15 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,concat(reg_periksa.no_rkm_medis,' ',pasien.nm_pasien) as namapasien,
-concat(stok_obat_pasien.kode_brng,' ',databarang.nama_brng) as namabarang, stok_obat_pasien.jumlah, concat(stok_obat_pasien.kd_bangsal,' ',bangsal.nm_bangsal) as namabangsal, 
+concat(stok_obat_pasien.kode_brng,' ',databarang.nama_brng) as namabarang, stok_obat_pasien.jumlah, concat(stok_obat_pasien.kd_bangsal,' ',bangsal.nm_bangsal) as namabangsal,
 stok_obat_pasien.kode_brng,stok_obat_pasien.kd_bangsal,stok_obat_pasien.no_batch,stok_obat_pasien.no_faktur,stok_obat_pasien.aturan_pakai,
 stok_obat_pasien.jam00,stok_obat_pasien.jam01,stok_obat_pasien.jam02,stok_obat_pasien.jam03,stok_obat_pasien.jam04,stok_obat_pasien.jam05,
 stok_obat_pasien.jam06,stok_obat_pasien.jam07,stok_obat_pasien.jam08,stok_obat_pasien.jam09,stok_obat_pasien.jam10,stok_obat_pasien.jam11,
 stok_obat_pasien.jam12,stok_obat_pasien.jam13,stok_obat_pasien.jam14,stok_obat_pasien.jam15,stok_obat_pasien.jam16,stok_obat_pasien.jam17,
 stok_obat_pasien.jam18,stok_obat_pasien.jam19,stok_obat_pasien.jam20,stok_obat_pasien.jam21,stok_obat_pasien.jam22,stok_obat_pasien.jam23
 from stok_obat_pasien inner join reg_periksa on stok_obat_pasien.no_rawat=reg_periksa.no_rawat
-inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-inner join databarang on stok_obat_pasien.kode_brng=databarang.kode_brng 
+inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+inner join databarang on stok_obat_pasien.kode_brng=databarang.kode_brng
 inner join bangsal on stok_obat_pasien.kd_bangsal=bangsal.kd_bangsal]]>
 	</queryString>
 	<field name="tanggal" class="java.sql.Date">

@@ -600,7 +600,7 @@
 			</line>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="135" y="1" width="81" height="13" forecolor="#0000FF" uuid="17d6ff84-9390-4ef9-97ad-d3a16c440757">
-					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("l") || $F{temp5}.toLowerCase().equals("kl") ? 
+					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("l") || $F{temp5}.toLowerCase().equals("kl") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -611,7 +611,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="135" y="1" width="81" height="13" forecolor="#FF0000" uuid="37932bd8-eb70-4a76-8c1a-90eb8cd4aabf">
-					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("h") || $F{temp5}.toLowerCase().equals("kh") || $F{temp5}.toLowerCase().equals("tn") ? 
+					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("h") || $F{temp5}.toLowerCase().equals("kh") || $F{temp5}.toLowerCase().equals("tn") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -622,7 +622,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="135" y="1" width="81" height="13" forecolor="#000000" uuid="da15d82d-9303-409f-bc60-d287cd9a3fd5">
-					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("t") ? 
+					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("t") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">

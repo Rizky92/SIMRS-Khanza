@@ -15,9 +15,9 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select * from master_berkas_pegawai 
-where kode like $P{parameter} 
-or kategori like $P{parameter} or nama_berkas like $P{parameter}  
+		<![CDATA[select * from master_berkas_pegawai
+where kode like $P{parameter}
+or kategori like $P{parameter} or nama_berkas like $P{parameter}
 order by kategori,no_urut]]>
 	</queryString>
 	<field name="kode" class="java.lang.String">

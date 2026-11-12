@@ -88,10 +88,10 @@
                 penilaian_awal_keperawatan_ranap_neonatus.skala_nips_keterangan,penilaian_awal_keperawatan_ranap_neonatus.informasi_perencanaan_pulang,penilaian_awal_keperawatan_ranap_neonatus.lama_ratarata,penilaian_awal_keperawatan_ranap_neonatus.perencanaan_pulang,
                 penilaian_awal_keperawatan_ranap_neonatus.kondisi_klinis_pulang,penilaian_awal_keperawatan_ranap_neonatus.perawatan_lanjutan_dirumah,penilaian_awal_keperawatan_ranap_neonatus.cara_transportasi_pulang,penilaian_awal_keperawatan_ranap_neonatus.transportasi_digunakan,
                 penilaian_awal_keperawatan_ranap_neonatus.rencana,penilaian_awal_keperawatan_ranap_neonatus.nip1,penilaian_awal_keperawatan_ranap_neonatus.nip2,penilaian_awal_keperawatan_ranap_neonatus.kd_dokter,pasien.tgl_lahir,pasien.jk,pengkaji1.nama as pengkaji1,pengkaji2.nama as pengkaji2,
-                dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                inner join penilaian_awal_keperawatan_ranap_neonatus on reg_periksa.no_rawat=penilaian_awal_keperawatan_ranap_neonatus.no_rawat 
-                inner join petugas as pengkaji1 on penilaian_awal_keperawatan_ranap_neonatus.nip1=pengkaji1.nip 
-                inner join petugas as pengkaji2 on penilaian_awal_keperawatan_ranap_neonatus.nip2=pengkaji2.nip 
+                dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                inner join penilaian_awal_keperawatan_ranap_neonatus on reg_periksa.no_rawat=penilaian_awal_keperawatan_ranap_neonatus.no_rawat
+                inner join petugas as pengkaji1 on penilaian_awal_keperawatan_ranap_neonatus.nip1=pengkaji1.nip
+                inner join petugas as pengkaji2 on penilaian_awal_keperawatan_ranap_neonatus.nip2=pengkaji2.nip
                 inner join dokter on penilaian_awal_keperawatan_ranap_neonatus.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

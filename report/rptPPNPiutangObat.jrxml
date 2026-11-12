@@ -17,10 +17,10 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="periode" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select piutang.tgl_piutang,piutang.nota_piutang,piutang.no_rkm_medis,pasien.nm_pasien, 
-                    piutang.nip,petugas.nama,round(piutang.ppn) as ppn,sum(detailpiutang.total) as total 
-                    from piutang inner join pasien on piutang.no_rkm_medis=pasien.no_rkm_medis 
-                    inner join petugas on piutang.nip=petugas.nip inner join detailpiutang on piutang.nota_piutang=detailpiutang.nota_piutang 
+		<![CDATA[select piutang.tgl_piutang,piutang.nota_piutang,piutang.no_rkm_medis,pasien.nm_pasien,
+                    piutang.nip,petugas.nama,round(piutang.ppn) as ppn,sum(detailpiutang.total) as total
+                    from piutang inner join pasien on piutang.no_rkm_medis=pasien.no_rkm_medis
+                    inner join petugas on piutang.nip=petugas.nip inner join detailpiutang on piutang.nota_piutang=detailpiutang.nota_piutang
                     group by piutang.nota_piutang order by piutang.tgl_piutang,piutang.nota_piutang]]>
 	</queryString>
 	<field name="tgl_piutang" class="java.sql.Date">

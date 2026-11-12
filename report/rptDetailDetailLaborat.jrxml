@@ -22,33 +22,33 @@ petugas.nama,periksa_lab.dokter_perujuk,penjab.png_jawab,
 (select nm_dokter from dokter where dokter.kd_dokter=periksa_lab.dokter_perujuk ) as perujuk,
 detail_periksa_lab.tgl_periksa,detail_periksa_lab.jam,
 if(periksa_lab.status='Ralan',(select nm_poli from poliklinik where poliklinik.kd_poli=reg_periksa.kd_poli),
-(select bangsal.nm_bangsal from kamar_inap inner join kamar inner join bangsal on kamar_inap.kd_kamar=kamar.kd_kamar 
+(select bangsal.nm_bangsal from kamar_inap inner join kamar inner join bangsal on kamar_inap.kd_kamar=kamar.kd_kamar
 and kamar.kd_bangsal=bangsal.kd_bangsal where kamar_inap.no_rawat=periksa_lab.no_rawat limit 1 )) as ruangan,
 detail_periksa_lab.bagian_rs,detail_periksa_lab.bhp,detail_periksa_lab.bagian_perujuk,
 detail_periksa_lab.bagian_dokter,detail_periksa_lab.bagian_laborat,
 detail_periksa_lab.kso,detail_periksa_lab.menejemen,
-detail_periksa_lab.biaya_item from detail_periksa_lab 
-inner join reg_periksa inner join pasien inner join template_laboratorium 
-inner join jns_perawatan_lab inner join periksa_lab 
-inner join dokter inner join petugas inner join penjab 
-on detail_periksa_lab.no_rawat=reg_periksa.no_rawat 
-and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and periksa_lab.no_rawat=detail_periksa_lab.no_rawat 
-and periksa_lab.kd_jenis_prw=detail_periksa_lab.kd_jenis_prw 
-and reg_periksa.kd_pj=penjab.kd_pj and periksa_lab.kd_dokter=dokter.kd_dokter 
-and periksa_lab.nip=petugas.nip and periksa_lab.tgl_periksa=detail_periksa_lab.tgl_periksa 
-and periksa_lab.jam=detail_periksa_lab.jam and detail_periksa_lab.id_template=template_laboratorium.id_template 
-and jns_perawatan_lab.kd_jenis_prw=detail_periksa_lab.kd_jenis_prw 
-where detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and detail_periksa_lab.no_rawat like $P{cari} or 
-detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and reg_periksa.no_rkm_medis like $P{cari} or 
-detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and pasien.nm_pasien like $P{cari} or 
-detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and detail_periksa_lab.kd_jenis_prw like $P{cari} or 
-detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and jns_perawatan_lab.nm_perawatan like $P{cari} or 
-detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_lab.kd_dokter like $P{cari} or 
-detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and dokter.nm_dokter like $P{cari} or 
-detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_lab.nip like $P{cari} or 
-detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and petugas.nama like $P{cari} or 
-detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_lab.dokter_perujuk like $P{cari} or 
-detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and penjab.png_jawab like $P{cari} 
+detail_periksa_lab.biaya_item from detail_periksa_lab
+inner join reg_periksa inner join pasien inner join template_laboratorium
+inner join jns_perawatan_lab inner join periksa_lab
+inner join dokter inner join petugas inner join penjab
+on detail_periksa_lab.no_rawat=reg_periksa.no_rawat
+and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and periksa_lab.no_rawat=detail_periksa_lab.no_rawat
+and periksa_lab.kd_jenis_prw=detail_periksa_lab.kd_jenis_prw
+and reg_periksa.kd_pj=penjab.kd_pj and periksa_lab.kd_dokter=dokter.kd_dokter
+and periksa_lab.nip=petugas.nip and periksa_lab.tgl_periksa=detail_periksa_lab.tgl_periksa
+and periksa_lab.jam=detail_periksa_lab.jam and detail_periksa_lab.id_template=template_laboratorium.id_template
+and jns_perawatan_lab.kd_jenis_prw=detail_periksa_lab.kd_jenis_prw
+where detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and detail_periksa_lab.no_rawat like $P{cari} or
+detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and reg_periksa.no_rkm_medis like $P{cari} or
+detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and pasien.nm_pasien like $P{cari} or
+detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and detail_periksa_lab.kd_jenis_prw like $P{cari} or
+detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and jns_perawatan_lab.nm_perawatan like $P{cari} or
+detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_lab.kd_dokter like $P{cari} or
+detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and dokter.nm_dokter like $P{cari} or
+detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_lab.nip like $P{cari} or
+detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and petugas.nama like $P{cari} or
+detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and periksa_lab.dokter_perujuk like $P{cari} or
+detail_periksa_lab.tgl_periksa between $P{tanggal1} and $P{tanggal2} and penjab.png_jawab like $P{cari}
  order by detail_periksa_lab.tgl_periksa]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

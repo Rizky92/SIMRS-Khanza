@@ -16,11 +16,11 @@
 	<queryString>
 		<![CDATA[select resep_pulang.no_rawat,resep_pulang.tanggal,jenis.nama,
 reg_periksa.no_rkm_medis,pasien.nm_pasien,databarang.nama_brng,
-resep_pulang.dosis,resep_pulang.jml_barang,kodesatuan.satuan 
-from resep_pulang inner join reg_periksa on resep_pulang.no_rawat=reg_periksa.no_rawat 
-inner join databarang on resep_pulang.kode_brng=databarang.kode_brng 
-inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat 
-inner join jenis on databarang.kdjns= jenis.kdjns 
+resep_pulang.dosis,resep_pulang.jml_barang,kodesatuan.satuan
+from resep_pulang inner join reg_periksa on resep_pulang.no_rawat=reg_periksa.no_rawat
+inner join databarang on resep_pulang.kode_brng=databarang.kode_brng
+inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat
+inner join jenis on databarang.kdjns= jenis.kdjns
 inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">
@@ -81,7 +81,7 @@ inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis]]>
 		<band height="103" splitType="Stretch">
 			<rectangle>
 				<reportElement mode="Opaque" x="0" y="0" width="174" height="103" forecolor="#9999FF" backcolor="#9999FF" uuid="6d6908a5-d802-4091-b350-205f5577a8bd">
-					<printWhenExpression><![CDATA[($F{nama}.toLowerCase().equals("obat luar")||$F{nama}.toLowerCase().equals("suntik") ? 
+					<printWhenExpression><![CDATA[($F{nama}.toLowerCase().equals("obat luar")||$F{nama}.toLowerCase().equals("suntik") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>

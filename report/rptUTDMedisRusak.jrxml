@@ -13,7 +13,7 @@
 	<queryString>
 		<![CDATA[select utd_medis_rusak.kode_brng,databarang.nama_brng,utd_medis_rusak.jml,utd_medis_rusak.hargabeli,
 utd_medis_rusak.total,utd_medis_rusak.nip,petugas.nama,utd_medis_rusak.tanggal,
-utd_medis_rusak.keterangan,databarang.kode_sat from utd_medis_rusak inner join databarang inner join petugas 
+utd_medis_rusak.keterangan,databarang.kode_sat from utd_medis_rusak inner join databarang inner join petugas
 on utd_medis_rusak.kode_brng=databarang.kode_brng and utd_medis_rusak.nip=petugas.nip]]>
 	</queryString>
 	<field name="kode_brng" class="java.lang.String">

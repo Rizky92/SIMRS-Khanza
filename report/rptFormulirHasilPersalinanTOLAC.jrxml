@@ -15,7 +15,7 @@
 	<queryString>
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,reg_periksa.umurdaftar,reg_periksa.sttsumur,hasil_persalinan_tolac.kd_dokter,dokter.nm_dokter,
 hasil_persalinan_tolac.tanggal,hasil_persalinan_tolac.awitan_persalinan,hasil_persalinan_tolac.augmentasi,hasil_persalinan_tolac.ctg_kontinu,hasil_persalinan_tolac.cara_persalinan,hasil_persalinan_tolac.indikasi_gagal,hasil_persalinan_tolac.lama_kala2_menit,hasil_persalinan_tolac.ruptur_uteri,hasil_persalinan_tolac.jumlah_perdarahan_ml,hasil_persalinan_tolac.transfusi,hasil_persalinan_tolac.histerektomi,hasil_persalinan_tolac.komplikasi_lain,hasil_persalinan_tolac.luaran_perinatal,hasil_persalinan_tolac.bb_lahir_gram,hasil_persalinan_tolac.apgar_1,hasil_persalinan_tolac.apgar_5,hasil_persalinan_tolac.hie,hasil_persalinan_tolac.masuk_nicu,hasil_persalinan_tolac.keterangan
-from hasil_persalinan_tolac inner join reg_periksa on hasil_persalinan_tolac.no_rawat=reg_periksa.no_rawat 
+from hasil_persalinan_tolac inner join reg_periksa on hasil_persalinan_tolac.no_rawat=reg_periksa.no_rawat
 inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on hasil_persalinan_tolac.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String"/>

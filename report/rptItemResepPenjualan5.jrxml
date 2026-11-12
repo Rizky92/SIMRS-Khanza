@@ -16,10 +16,10 @@
 	<queryString>
 		<![CDATA[select penjualan.nota_jual,penjualan.tgl_jual,
 penjualan.no_rkm_medis,penjualan.nm_pasien,databarang.nama_brng,
-detailjual.aturan_pakai,detailjual.jumlah,kodesatuan.satuan 
-from penjualan inner join detailjual on penjualan.nota_jual=detailjual.nota_jual 
-inner join databarang on detailjual.kode_brng=databarang.kode_brng 
-inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat 
+detailjual.aturan_pakai,detailjual.jumlah,kodesatuan.satuan
+from penjualan inner join detailjual on penjualan.nota_jual=detailjual.nota_jual
+inner join databarang on detailjual.kode_brng=databarang.kode_brng
+inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat
 where detailjual.aturan_pakai<>'']]>
 	</queryString>
 	<field name="nota_jual" class="java.lang.String">

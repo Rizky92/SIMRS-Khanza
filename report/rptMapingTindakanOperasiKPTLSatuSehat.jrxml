@@ -27,8 +27,8 @@
 	<parameter name="parameter" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select satu_sehat_mapping_tindakanoperasi_kptl.kode_paket,paket_operasi.nm_perawatan,satu_sehat_mapping_tindakanoperasi_kptl.code,satu_sehat_mapping_tindakanoperasi_kptl.system,
-                   satu_sehat_mapping_tindakanoperasi_kptl.display from satu_sehat_mapping_tindakanoperasi_kptl inner join paket_operasi on satu_sehat_mapping_tindakanoperasi_kptl.kode_paket=paket_operasi.kode_paket 
-                   where satu_sehat_mapping_tindakanoperasi_kptl.kode_paket like $P{parameter} or paket_operasi.nm_perawatan like $P{parameter} or 
+                   satu_sehat_mapping_tindakanoperasi_kptl.display from satu_sehat_mapping_tindakanoperasi_kptl inner join paket_operasi on satu_sehat_mapping_tindakanoperasi_kptl.kode_paket=paket_operasi.kode_paket
+                   where satu_sehat_mapping_tindakanoperasi_kptl.kode_paket like $P{parameter} or paket_operasi.nm_perawatan like $P{parameter} or
                    satu_sehat_mapping_tindakanoperasi_kptl.code like $P{parameter} or satu_sehat_mapping_tindakanoperasi_kptl.display like $P{parameter}
                     order by satu_sehat_mapping_tindakanoperasi_kptl.code]]>
 	</queryString>

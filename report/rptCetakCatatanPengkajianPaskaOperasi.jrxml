@@ -32,8 +32,8 @@
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,catatan_pengkajian_paska_operasi.tanggal,
                 catatan_pengkajian_paska_operasi.kd_dokter,catatan_pengkajian_paska_operasi.rawat_paska_operasi,catatan_pengkajian_paska_operasi.cairan,catatan_pengkajian_paska_operasi.antibiotika,
                 catatan_pengkajian_paska_operasi.analgetika,catatan_pengkajian_paska_operasi.medikamentosa_lain,catatan_pengkajian_paska_operasi.diet,catatan_pengkajian_paska_operasi.pemeriksaan_laborat,
-                catatan_pengkajian_paska_operasi.tranfusi,catatan_pengkajian_paska_operasi.lainlain,dokter.nm_dokter from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                inner join catatan_pengkajian_paska_operasi on reg_periksa.no_rawat=catatan_pengkajian_paska_operasi.no_rawat 
+                catatan_pengkajian_paska_operasi.tranfusi,catatan_pengkajian_paska_operasi.lainlain,dokter.nm_dokter from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                inner join catatan_pengkajian_paska_operasi on reg_periksa.no_rawat=catatan_pengkajian_paska_operasi.no_rawat
                 inner join dokter on catatan_pengkajian_paska_operasi.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

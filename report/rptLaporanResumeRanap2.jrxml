@@ -44,10 +44,10 @@
                     resume_pasien_ranap.diet,resume_pasien_ranap.lab_belum,resume_pasien_ranap.edukasi,resume_pasien_ranap.cara_keluar,resume_pasien_ranap.ket_keluar,resume_pasien_ranap.keadaan,
                     resume_pasien_ranap.ket_keadaan,resume_pasien_ranap.dilanjutkan,resume_pasien_ranap.ket_dilanjutkan,resume_pasien_ranap.kontrol,resume_pasien_ranap.obat_pulang,reg_periksa.kd_pj,penjab.png_jawab,
                     reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.pekerjaan,pasien.jk,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat
-                   
-                    from resume_pasien_ranap inner join reg_periksa on resume_pasien_ranap.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                    inner join dokter on resume_pasien_ranap.kd_dokter=dokter.kd_dokter inner join dokter as pengirim on reg_periksa.kd_dokter=pengirim.kd_dokter 
-                    inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab 
+
+                    from resume_pasien_ranap inner join reg_periksa on resume_pasien_ranap.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                    inner join dokter on resume_pasien_ranap.kd_dokter=dokter.kd_dokter inner join dokter as pengirim on reg_periksa.kd_dokter=pengirim.kd_dokter
+                    inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
                     inner join penjab on penjab.kd_pj=reg_periksa.kd_pj
 where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 	</queryString>
@@ -1706,7 +1706,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" x="189" y="776" width="164" height="22" uuid="fae1507e-cf7f-423f-9d85-4c84604706d3">
-					<printWhenExpression><![CDATA[(!$P{namadokter2}.toLowerCase().equals("") ? 
+					<printWhenExpression><![CDATA[(!$P{namadokter2}.toLowerCase().equals("") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -1717,7 +1717,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="189" y="714" width="164" height="11" uuid="d284ebcf-9d5f-4513-919b-ee8e3c96a6d9">
-					<printWhenExpression><![CDATA[(!$P{namadokter2}.toLowerCase().equals("") ? 
+					<printWhenExpression><![CDATA[(!$P{namadokter2}.toLowerCase().equals("") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -1729,7 +1729,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 			<componentElement>
 				<reportElement positionType="Float" x="193" y="727" width="157" height="49" isRemoveLineWhenBlank="true" uuid="048d3d12-a99d-4b7e-9f96-7b9a4c98a0ed">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<printWhenExpression><![CDATA[(!$P{namadokter2}.toLowerCase().equals("") ? 
+					<printWhenExpression><![CDATA[(!$P{namadokter2}.toLowerCase().equals("") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" errorCorrectionLevel="H">
@@ -1738,7 +1738,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 			</componentElement>
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" x="7" y="776" width="164" height="22" uuid="8d9bd58a-1076-4fcb-a6c4-321344f19078">
-					<printWhenExpression><![CDATA[(!$P{namadokter3}.toLowerCase().equals("") ? 
+					<printWhenExpression><![CDATA[(!$P{namadokter3}.toLowerCase().equals("") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -1750,7 +1750,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 			<componentElement>
 				<reportElement positionType="Float" x="11" y="727" width="157" height="49" isRemoveLineWhenBlank="true" uuid="f3e41863-9d58-4531-9429-8a1c97b56bd8">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<printWhenExpression><![CDATA[(!$P{namadokter3}.toLowerCase().equals("") ? 
+					<printWhenExpression><![CDATA[(!$P{namadokter3}.toLowerCase().equals("") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" errorCorrectionLevel="H">
@@ -1759,7 +1759,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 			</componentElement>
 			<staticText>
 				<reportElement positionType="Float" x="7" y="714" width="164" height="11" uuid="d7e956d3-251c-4999-99d5-3eb04bebd3b6">
-					<printWhenExpression><![CDATA[(!$P{namadokter3}.toLowerCase().equals("") ? 
+					<printWhenExpression><![CDATA[(!$P{namadokter3}.toLowerCase().equals("") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">

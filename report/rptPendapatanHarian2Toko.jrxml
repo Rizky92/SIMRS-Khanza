@@ -16,7 +16,7 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select tokopiutang.tgl_piutang,tokopiutang.nip,petugas.nama,sum(tokopiutang.ongkir) as ongkir,
-sum(tokopiutang.ongkir+tokopiutang.uangmuka+tokopiutang.sisapiutang) as total, 
+sum(tokopiutang.ongkir+tokopiutang.uangmuka+tokopiutang.sisapiutang) as total,
 sum(tokopiutang.uangmuka) as uangmuka,sum(tokopiutang.sisapiutang) as sisapiutang
 from tokopiutang inner join petugas on tokopiutang.nip=petugas.nip]]>
 	</queryString>

@@ -18,9 +18,9 @@
 	<queryString>
 		<![CDATA[select reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,
                     pasien.jk,pasien.tgl_lahir,intervensi_nyeri_farmakologi.tgl_perawatan,intervensi_nyeri_farmakologi.jam_rawat,intervensi_nyeri_farmakologi.nama_obat,
-                    intervensi_nyeri_farmakologi.dosis_efek,intervensi_nyeri_farmakologi.rute,intervensi_nyeri_farmakologi.nip,petugas.nama 
-                    from intervensi_nyeri_farmakologi inner join reg_periksa on intervensi_nyeri_farmakologi.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    intervensi_nyeri_farmakologi.dosis_efek,intervensi_nyeri_farmakologi.rute,intervensi_nyeri_farmakologi.nip,petugas.nama
+                    from intervensi_nyeri_farmakologi inner join reg_periksa on intervensi_nyeri_farmakologi.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join petugas on intervensi_nyeri_farmakologi.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

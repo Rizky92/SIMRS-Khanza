@@ -25,8 +25,8 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select surat_persetujuan_pemeriksaan_hiv.no_surat,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,
-                    reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,surat_persetujuan_pemeriksaan_hiv.tanggal,surat_persetujuan_pemeriksaan_hiv.nik,pegawai.nama 
-                    from surat_persetujuan_pemeriksaan_hiv inner join reg_periksa on surat_persetujuan_pemeriksaan_hiv.no_rawat=reg_periksa.no_rawat 
+                    reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,surat_persetujuan_pemeriksaan_hiv.tanggal,surat_persetujuan_pemeriksaan_hiv.nik,pegawai.nama
+                    from surat_persetujuan_pemeriksaan_hiv inner join reg_periksa on surat_persetujuan_pemeriksaan_hiv.no_rawat=reg_periksa.no_rawat
                     inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join pegawai on surat_persetujuan_pemeriksaan_hiv.nik=pegawai.nik]]>
 	</queryString>
 	<field name="no_surat" class="java.lang.String">

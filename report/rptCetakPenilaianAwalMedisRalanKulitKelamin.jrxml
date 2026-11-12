@@ -31,9 +31,9 @@
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,penilaian_medis_ralan_kulitdankelamin.tanggal,
                 penilaian_medis_ralan_kulitdankelamin.kd_dokter,penilaian_medis_ralan_kulitdankelamin.anamnesis,penilaian_medis_ralan_kulitdankelamin.hubungan,penilaian_medis_ralan_kulitdankelamin.keluhan_utama,penilaian_medis_ralan_kulitdankelamin.rps,penilaian_medis_ralan_kulitdankelamin.rpd,penilaian_medis_ralan_kulitdankelamin.rpo,penilaian_medis_ralan_kulitdankelamin.rpk,
                 penilaian_medis_ralan_kulitdankelamin.kesadaran,penilaian_medis_ralan_kulitdankelamin.status,penilaian_medis_ralan_kulitdankelamin.td,penilaian_medis_ralan_kulitdankelamin.nadi,penilaian_medis_ralan_kulitdankelamin.suhu,penilaian_medis_ralan_kulitdankelamin.rr,penilaian_medis_ralan_kulitdankelamin.bb,penilaian_medis_ralan_kulitdankelamin.nyeri,penilaian_medis_ralan_kulitdankelamin.gcs,
-                penilaian_medis_ralan_kulitdankelamin.statusderma,penilaian_medis_ralan_kulitdankelamin.pemeriksaan,penilaian_medis_ralan_kulitdankelamin.diagnosis,penilaian_medis_ralan_kulitdankelamin.diagnosis2,penilaian_medis_ralan_kulitdankelamin.permasalahan,penilaian_medis_ralan_kulitdankelamin.terapi,penilaian_medis_ralan_kulitdankelamin.tindakan,penilaian_medis_ralan_kulitdankelamin.edukasi,dokter.nm_dokter 
-                from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                inner join penilaian_medis_ralan_kulitdankelamin on reg_periksa.no_rawat=penilaian_medis_ralan_kulitdankelamin.no_rawat 
+                penilaian_medis_ralan_kulitdankelamin.statusderma,penilaian_medis_ralan_kulitdankelamin.pemeriksaan,penilaian_medis_ralan_kulitdankelamin.diagnosis,penilaian_medis_ralan_kulitdankelamin.diagnosis2,penilaian_medis_ralan_kulitdankelamin.permasalahan,penilaian_medis_ralan_kulitdankelamin.terapi,penilaian_medis_ralan_kulitdankelamin.tindakan,penilaian_medis_ralan_kulitdankelamin.edukasi,dokter.nm_dokter
+                from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                inner join penilaian_medis_ralan_kulitdankelamin on reg_periksa.no_rawat=penilaian_medis_ralan_kulitdankelamin.no_rawat
                 inner join dokter on penilaian_medis_ralan_kulitdankelamin.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

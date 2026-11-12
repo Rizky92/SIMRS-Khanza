@@ -21,16 +21,16 @@
 	<parameter name="tanggal2" class="java.lang.String"/>
 	<parameter name="barang" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select detreturbeli.kode_brng,databarang.nama_brng, 
-                    detreturbeli.kode_sat,kodesatuan.satuan,jenis.nama as namajenis, 
-                    sum(detreturbeli.jml_retur2) as jumlah,sum(detreturbeli.total) as total 
-                     from returbeli inner join petugas inner join bangsal inner join jenis  
-                     inner join detreturbeli inner join databarang inner join kodesatuan inner join datasuplier 
-                     on detreturbeli.kode_brng=databarang.kode_brng 
-                     and databarang.kode_sat=kodesatuan.kode_sat 
-                     and returbeli.kd_bangsal=bangsal.kd_bangsal 
-                     and returbeli.kode_suplier=datasuplier.kode_suplier 
-                     and returbeli.no_retur_beli=detreturbeli.no_retur_beli 
+		<![CDATA[select detreturbeli.kode_brng,databarang.nama_brng,
+                    detreturbeli.kode_sat,kodesatuan.satuan,jenis.nama as namajenis,
+                    sum(detreturbeli.jml_retur2) as jumlah,sum(detreturbeli.total) as total
+                     from returbeli inner join petugas inner join bangsal inner join jenis
+                     inner join detreturbeli inner join databarang inner join kodesatuan inner join datasuplier
+                     on detreturbeli.kode_brng=databarang.kode_brng
+                     and databarang.kode_sat=kodesatuan.kode_sat
+                     and returbeli.kd_bangsal=bangsal.kd_bangsal
+                     and returbeli.kode_suplier=datasuplier.kode_suplier
+                     and returbeli.no_retur_beli=detreturbeli.no_retur_beli
                      and returbeli.nip=petugas.nip and databarang.kdjns=jenis.kdjns]]>
 	</queryString>
 	<field name="kode_brng" class="java.lang.String">

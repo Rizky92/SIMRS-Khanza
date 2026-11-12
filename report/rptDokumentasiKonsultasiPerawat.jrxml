@@ -23,10 +23,10 @@
                     reg_periksa.sttsumur,pasien.no_tlp,penjab.png_jawab,konsultasi_perawat.tanggal as tanggalkonsultasi,konsultasi_perawat.nip,petugas.nama,
                     konsultasi_perawat.kd_dokter_dikonsuli,dokter.nm_dokter,konsultasi_perawat.situation,konsultasi_perawat.background,konsultasi_perawat.assessment,
                     konsultasi_perawat.recomendation,jawaban_konsultasi_perawat.tanggal as tanggaljawaban,jawaban_konsultasi_perawat.respon,
-                    jawaban_konsultasi_perawat.instruksi,jawaban_konsultasi_perawat.rencana 
-                    from konsultasi_perawat inner join reg_periksa on konsultasi_perawat.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join penjab on reg_periksa.kd_pj=penjab.kd_pj  
-                    inner join petugas on konsultasi_perawat.nip=petugas.nip inner join dokter on konsultasi_perawat.kd_dokter_dikonsuli=dokter.kd_dokter 
+                    jawaban_konsultasi_perawat.instruksi,jawaban_konsultasi_perawat.rencana
+                    from konsultasi_perawat inner join reg_periksa on konsultasi_perawat.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join penjab on reg_periksa.kd_pj=penjab.kd_pj
+                    inner join petugas on konsultasi_perawat.nip=petugas.nip inner join dokter on konsultasi_perawat.kd_dokter_dikonsuli=dokter.kd_dokter
                     inner join jawaban_konsultasi_perawat on jawaban_konsultasi_perawat.no_permintaan=konsultasi_perawat.no_permintaan]]>
 	</queryString>
 	<field name="no_permintaan" class="java.lang.String">

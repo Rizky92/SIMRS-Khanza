@@ -16,13 +16,13 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,surat_lepas_rawat.kd_dokter,dokter.nm_dokter,reg_periksa.umurdaftar,reg_periksa.sttsumur, 
-pasien.tgl_lahir,pasien.alamat,pasien.pekerjaan,surat_lepas_rawat.tanggal_rawat,surat_lepas_rawat.tanggal_pulang,surat_lepas_rawat.tanggal_control, 
-surat_lepas_rawat.tempat,surat_lepas_rawat.kd_poli,poliklinik.nm_poli,surat_lepas_rawat.diagnosa,surat_lepas_rawat.terapi, 
-surat_lepas_rawat.nip,petugas.nama from surat_lepas_rawat inner join reg_periksa on surat_lepas_rawat.no_rawat=reg_periksa.no_rawat 
-inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-inner join dokter on surat_lepas_rawat.kd_dokter=dokter.kd_dokter 
-inner join poliklinik on surat_lepas_rawat.kd_poli=poliklinik.kd_poli 
+		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,surat_lepas_rawat.kd_dokter,dokter.nm_dokter,reg_periksa.umurdaftar,reg_periksa.sttsumur,
+pasien.tgl_lahir,pasien.alamat,pasien.pekerjaan,surat_lepas_rawat.tanggal_rawat,surat_lepas_rawat.tanggal_pulang,surat_lepas_rawat.tanggal_control,
+surat_lepas_rawat.tempat,surat_lepas_rawat.kd_poli,poliklinik.nm_poli,surat_lepas_rawat.diagnosa,surat_lepas_rawat.terapi,
+surat_lepas_rawat.nip,petugas.nama from surat_lepas_rawat inner join reg_periksa on surat_lepas_rawat.no_rawat=reg_periksa.no_rawat
+inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+inner join dokter on surat_lepas_rawat.kd_dokter=dokter.kd_dokter
+inner join poliklinik on surat_lepas_rawat.kd_poli=poliklinik.kd_poli
 inner join petugas on surat_indikasi_pasien.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

@@ -20,7 +20,7 @@
                     skrining_obesitas.kebiasaan_makan_manis,skrining_obesitas.aktifitas_fisik_setiap_hari,skrining_obesitas.istirahat_cukup,skrining_obesitas.risiko_merokok,
                     skrining_obesitas.riwayat_minum_alkohol_merokok_keluarga,skrining_obesitas.riwayat_penggunaan_obat_steroid,skrining_obesitas.berat_badan,skrining_obesitas.tinggi_badan,
                     skrining_obesitas.imt,skrining_obesitas.kasifikasi_imt,skrining_obesitas.lingkar_pinggang,skrining_obesitas.risiko_lingkar_pinggang,skrining_obesitas.status_obesitas,
-                    skrining_obesitas.keterangan from skrining_obesitas inner join reg_periksa on skrining_obesitas.no_rawat=reg_periksa.no_rawat 
+                    skrining_obesitas.keterangan from skrining_obesitas inner join reg_periksa on skrining_obesitas.no_rawat=reg_periksa.no_rawat
                     inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_obesitas.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

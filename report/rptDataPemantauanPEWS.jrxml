@@ -18,9 +18,9 @@
 	<queryString>
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,
 pasien.jk,pemantauan_pews.tanggal,pemantauan_pews.parameter_perilaku,pemantauan_pews.skor_perilaku,pemantauan_pews.parameter_crt_atau_warna_kulit,pemantauan_pews.skor_crt_atau_warna_kulit,pemantauan_pews.parameter_perespirasi,pemantauan_pews.skor_perespirasi,
-pemantauan_pews.skor_total,pemantauan_pews.parameter_total,pemantauan_pews.nip,petugas.nama,date_format(pasien.tgl_lahir,'%d-%m-%Y') as lahir 
-from pemantauan_pews inner join reg_periksa on pemantauan_pews.no_rawat=reg_periksa.no_rawat 
-inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+pemantauan_pews.skor_total,pemantauan_pews.parameter_total,pemantauan_pews.nip,petugas.nama,date_format(pasien.tgl_lahir,'%d-%m-%Y') as lahir
+from pemantauan_pews inner join reg_periksa on pemantauan_pews.no_rawat=reg_periksa.no_rawat
+inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 inner join petugas on pemantauan_pews.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

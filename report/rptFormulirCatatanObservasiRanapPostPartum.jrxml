@@ -30,8 +30,8 @@ pasien.jk,pasien.tgl_lahir,catatan_observasi_ranap_postpartum.tgl_perawatan,cata
 catatan_observasi_ranap_postpartum.td,catatan_observasi_ranap_postpartum.hr,catatan_observasi_ranap_postpartum.rr,catatan_observasi_ranap_postpartum.suhu,
 catatan_observasi_ranap_postpartum.spo2,catatan_observasi_ranap_postpartum.tfu,catatan_observasi_ranap_postpartum.kontraksi,
 catatan_observasi_ranap_postpartum.perdarahan,catatan_observasi_ranap_postpartum.keterangan,catatan_observasi_ranap_postpartum.nip,
-petugas.nama from catatan_observasi_ranap_postpartum inner join reg_periksa on catatan_observasi_ranap_postpartum.no_rawat=reg_periksa.no_rawat 
-inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+petugas.nama from catatan_observasi_ranap_postpartum inner join reg_periksa on catatan_observasi_ranap_postpartum.no_rawat=reg_periksa.no_rawat
+inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 inner join petugas on catatan_observasi_ranap_postpartum.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

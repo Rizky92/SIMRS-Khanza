@@ -25,9 +25,9 @@
                     penilaian_risiko_jatuh_neonatus.edukasi4,penilaian_risiko_jatuh_neonatus.edukasi5,penilaian_risiko_jatuh_neonatus.sasaran1,
                     penilaian_risiko_jatuh_neonatus.sasaran2,penilaian_risiko_jatuh_neonatus.sasaran3,penilaian_risiko_jatuh_neonatus.sasaran4,
                     penilaian_risiko_jatuh_neonatus.evaluasi1,penilaian_risiko_jatuh_neonatus.evaluasi2,penilaian_risiko_jatuh_neonatus.evaluasi3,
-                    penilaian_risiko_jatuh_neonatus.nip,petugas.nama 
-                    from penilaian_risiko_jatuh_neonatus inner join reg_periksa on penilaian_risiko_jatuh_neonatus.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    penilaian_risiko_jatuh_neonatus.nip,petugas.nama
+                    from penilaian_risiko_jatuh_neonatus inner join reg_periksa on penilaian_risiko_jatuh_neonatus.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join petugas on petugas.nip=penilaian_risiko_jatuh_neonatus.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

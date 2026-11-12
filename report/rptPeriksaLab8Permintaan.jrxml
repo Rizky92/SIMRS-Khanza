@@ -468,7 +468,7 @@
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement key="textField-3" stretchType="RelativeToTallestObject" x="300" y="-11" width="191" height="14" forecolor="#0000FF" uuid="8d395fdc-367c-4f69-8ee1-03db26f4a47e">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("l") || $F{temp5}.toLowerCase().equals("kl") ? 
+					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("l") || $F{temp5}.toLowerCase().equals("kl") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -480,7 +480,7 @@
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement key="textField-4" stretchType="RelativeToTallestObject" x="300" y="-11" width="191" height="14" forecolor="#FF0000" uuid="c0348cdc-c9b6-4441-9546-a40d35b5d503">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("h") || $F{temp5}.toLowerCase().equals("kh") || $F{temp5}.toLowerCase().equals("tn") ? 
+					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("h") || $F{temp5}.toLowerCase().equals("kh") || $F{temp5}.toLowerCase().equals("tn") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -492,7 +492,7 @@
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement key="textField-4" stretchType="RelativeToTallestObject" x="300" y="-11" width="191" height="14" forecolor="#000000" uuid="f7b82de1-8c45-4009-9fd0-47f88cce9375">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("t") ? 
+					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("t") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">

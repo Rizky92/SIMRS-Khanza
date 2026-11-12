@@ -37,9 +37,9 @@
                 penilaian_pre_induksi.lain_lain_tatalaksana,penilaian_pre_induksi.intubasi_sesudah_tidur,penilaian_pre_induksi.intubasi_oral,penilaian_pre_induksi.intubasi_tracheostomi,
                 penilaian_pre_induksi.intubasi_keterangan,penilaian_pre_induksi.sulit_ventilasi,penilaian_pre_induksi.sulit_intubasi,penilaian_pre_induksi.ventilasi,penilaian_pre_induksi.teknik_regional_jenis,
                 penilaian_pre_induksi.teknik_regional_lokasi,penilaian_pre_induksi.teknik_regional_jenis_jarum,penilaian_pre_induksi.teknik_regional_kateter,penilaian_pre_induksi.teknik_regional_kateter_viksasi,
-                penilaian_pre_induksi.teknik_regional_obat_obatan,penilaian_pre_induksi.teknik_regional_komplikasi,penilaian_pre_induksi.teknik_regional_hasil,dokter.nm_dokter 
-                from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                inner join penilaian_pre_induksi on reg_periksa.no_rawat=penilaian_pre_induksi.no_rawat 
+                penilaian_pre_induksi.teknik_regional_obat_obatan,penilaian_pre_induksi.teknik_regional_komplikasi,penilaian_pre_induksi.teknik_regional_hasil,dokter.nm_dokter
+                from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                inner join penilaian_pre_induksi on reg_periksa.no_rawat=penilaian_pre_induksi.no_rawat
                 inner join dokter on penilaian_pre_induksi.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

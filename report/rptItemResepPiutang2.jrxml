@@ -16,11 +16,11 @@
 	<queryString>
 		<![CDATA[select piutang.nota_piutang,piutang.tgl_piutang,
 piutang.no_rkm_medis,piutang.nm_pasien,databarang.nama_brng,
-detailpiutang.aturan_pakai,detailpiutang.jumlah,kodesatuan.satuan,jenis.nama as jenis 
-from piutang inner join detailpiutang on piutang.nota_piutang=detailpiutang.nota_piutang 
+detailpiutang.aturan_pakai,detailpiutang.jumlah,kodesatuan.satuan,jenis.nama as jenis
+from piutang inner join detailpiutang on piutang.nota_piutang=detailpiutang.nota_piutang
 inner join databarang on detailpiutang.kode_brng=databarang.kode_brng
-inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat 
-inner join jenis on databarang.kdjns=jenis.kdjns 
+inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat
+inner join jenis on databarang.kdjns=jenis.kdjns
 where detailpiutang.aturan_pakai<>'']]>
 	</queryString>
 	<field name="nota_piutang" class="java.lang.String">
@@ -67,7 +67,7 @@ where detailpiutang.aturan_pakai<>'']]>
 		<band height="103" splitType="Stretch">
 			<rectangle>
 				<reportElement mode="Opaque" x="0" y="0" width="174" height="103" forecolor="#9999FF" backcolor="#9999FF" uuid="6d6908a5-d802-4091-b350-205f5577a8bd">
-					<printWhenExpression><![CDATA[($F{jenis}.toLowerCase().equals("obat luar")||$F{jenis}.toLowerCase().equals("suntik") ? 
+					<printWhenExpression><![CDATA[($F{jenis}.toLowerCase().equals("obat luar")||$F{jenis}.toLowerCase().equals("suntik") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>

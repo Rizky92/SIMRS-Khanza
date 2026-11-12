@@ -21,8 +21,8 @@
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,checklist_kriteria_keluar_isolasi.tanggal,
                     checklist_kriteria_keluar_isolasi.gejala_membaik,checklist_kriteria_keluar_isolasi.tidak_ada_indikasi_transmisi,checklist_kriteria_keluar_isolasi.hasil_penunjang_memenuhi,
                     checklist_kriteria_keluar_isolasi.kriteria_pedoman_terpenuhi,checklist_kriteria_keluar_isolasi.persetujuan_dpjp,checklist_kriteria_keluar_isolasi.keputusan,
-                    checklist_kriteria_keluar_isolasi.alasan,checklist_kriteria_keluar_isolasi.nik,pegawai.nama 
-                    from checklist_kriteria_keluar_isolasi inner join reg_periksa on checklist_kriteria_keluar_isolasi.no_rawat=reg_periksa.no_rawat 
+                    checklist_kriteria_keluar_isolasi.alasan,checklist_kriteria_keluar_isolasi.nik,pegawai.nama
+                    from checklist_kriteria_keluar_isolasi inner join reg_periksa on checklist_kriteria_keluar_isolasi.no_rawat=reg_periksa.no_rawat
                     inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join pegawai on pegawai.nik=checklist_kriteria_keluar_isolasi.nik]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

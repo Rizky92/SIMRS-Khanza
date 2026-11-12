@@ -42,14 +42,14 @@
 	template_laboratorium.`Pemeriksaan`,
 	detail_periksa_lab.nilai
 FROM detail_periksa_lab
-	inner join template_laboratorium ON 
-	 detail_periksa_lab.id_template = template_laboratorium.id_template 
-	inner join jns_perawatan_lab ON 
-	 detail_periksa_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw 
-WHERE 
-	 detail_periksa_lab.no_rawat = $P{noperiksa} 
-	 AND detail_periksa_lab.tgl_periksa = $P{tgl_periksa} 
-	 AND detail_periksa_lab.jam = $P{jam} 
+	inner join template_laboratorium ON
+	 detail_periksa_lab.id_template = template_laboratorium.id_template
+	inner join jns_perawatan_lab ON
+	 detail_periksa_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw
+WHERE
+	 detail_periksa_lab.no_rawat = $P{noperiksa}
+	 AND detail_periksa_lab.tgl_periksa = $P{tgl_periksa}
+	 AND detail_periksa_lab.jam = $P{jam}
 ORDER BY jns_perawatan_lab.kd_jenis_prw ASC,
 	template_laboratorium.urut ASC]]>
 	</queryString>

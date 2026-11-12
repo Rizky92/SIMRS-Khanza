@@ -15,15 +15,15 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select dapurpembelian.tgl_beli,dapurpembelian.no_faktur, 
-                dapurpembelian.kode_suplier,dapursuplier.nama_suplier, 
-                dapurpembelian.nip,petugas.nama, dapurdetailbeli.kode_brng,dapurbarang.nama_brng, 
-                 dapurdetailbeli.kode_sat,kodesatuan.satuan, dapurdetailbeli.jumlah, dapurdetailbeli.harga, 
-                 dapurdetailbeli.subtotal, dapurdetailbeli.dis, dapurdetailbeli.besardis, dapurdetailbeli.total 
-                 from dapurpembelian inner join dapursuplier on dapurpembelian.kode_suplier=dapursuplier.kode_suplier 
-                 inner join petugas on dapurpembelian.nip=petugas.nip 
-                 inner join dapurdetailbeli on dapurpembelian.no_faktur= dapurdetailbeli.no_faktur 
-                 inner join dapurbarang on dapurdetailbeli.kode_brng=dapurbarang.kode_brng 
+		<![CDATA[select dapurpembelian.tgl_beli,dapurpembelian.no_faktur,
+                dapurpembelian.kode_suplier,dapursuplier.nama_suplier,
+                dapurpembelian.nip,petugas.nama, dapurdetailbeli.kode_brng,dapurbarang.nama_brng,
+                 dapurdetailbeli.kode_sat,kodesatuan.satuan, dapurdetailbeli.jumlah, dapurdetailbeli.harga,
+                 dapurdetailbeli.subtotal, dapurdetailbeli.dis, dapurdetailbeli.besardis, dapurdetailbeli.total
+                 from dapurpembelian inner join dapursuplier on dapurpembelian.kode_suplier=dapursuplier.kode_suplier
+                 inner join petugas on dapurpembelian.nip=petugas.nip
+                 inner join dapurdetailbeli on dapurpembelian.no_faktur= dapurdetailbeli.no_faktur
+                 inner join dapurbarang on dapurdetailbeli.kode_brng=dapurbarang.kode_brng
                  inner join kodesatuan on dapurdetailbeli.kode_sat=kodesatuan.kode_sat ]]>
 	</queryString>
 	<field name="tgl_beli" class="java.sql.Date">

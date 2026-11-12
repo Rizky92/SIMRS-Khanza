@@ -24,9 +24,9 @@
                     penilaian_lanjutan_resiko_jatuh_lansia.penilaian_jatuhmorse_skala5,penilaian_lanjutan_resiko_jatuh_lansia.penilaian_jatuhmorse_nilai5,
                     penilaian_lanjutan_resiko_jatuh_lansia.penilaian_jatuhmorse_skala6,penilaian_lanjutan_resiko_jatuh_lansia.penilaian_jatuhmorse_nilai6,
                     penilaian_lanjutan_resiko_jatuh_lansia.penilaian_jatuhmorse_totalnilai,penilaian_lanjutan_resiko_jatuh_lansia.hasil_skrining,
-                    penilaian_lanjutan_resiko_jatuh_lansia.saran,penilaian_lanjutan_resiko_jatuh_lansia.nip,petugas.nama 
-                    from penilaian_lanjutan_resiko_jatuh_lansia inner join reg_periksa on penilaian_lanjutan_resiko_jatuh_lansia.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    penilaian_lanjutan_resiko_jatuh_lansia.saran,penilaian_lanjutan_resiko_jatuh_lansia.nip,petugas.nama
+                    from penilaian_lanjutan_resiko_jatuh_lansia inner join reg_periksa on penilaian_lanjutan_resiko_jatuh_lansia.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join petugas on penilaian_lanjutan_resiko_jatuh_lansia.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

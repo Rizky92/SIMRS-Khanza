@@ -19,9 +19,9 @@
                     pasien.jk,pasien.tgl_lahir,catatan_keseimbangan_cairan.tgl_perawatan,catatan_keseimbangan_cairan.jam_rawat,catatan_keseimbangan_cairan.infus,
                     catatan_keseimbangan_cairan.tranfusi,catatan_keseimbangan_cairan.minum,catatan_keseimbangan_cairan.urine,catatan_keseimbangan_cairan.drain,
                     catatan_keseimbangan_cairan.ngt,catatan_keseimbangan_cairan.iwl,catatan_keseimbangan_cairan.keseimbangan,catatan_keseimbangan_cairan.keterangan,
-                    catatan_keseimbangan_cairan.nip,petugas.nama 
-                    from catatan_keseimbangan_cairan inner join reg_periksa on catatan_keseimbangan_cairan.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    catatan_keseimbangan_cairan.nip,petugas.nama
+                    from catatan_keseimbangan_cairan inner join reg_periksa on catatan_keseimbangan_cairan.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join petugas on catatan_keseimbangan_cairan.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

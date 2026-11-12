@@ -24,11 +24,11 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select pasien_mati.tanggal,pasien_mati.jam,pasien_mati.no_rkm_medis,pasien.nm_pasien, 
-pasien.jk,pasien.tmp_lahir,pasien.tgl_lahir,pasien.gol_darah,pasien.stts_nikah, 
+		<![CDATA[select pasien_mati.tanggal,pasien_mati.jam,pasien_mati.no_rkm_medis,pasien.nm_pasien,
+pasien.jk,pasien.tmp_lahir,pasien.tgl_lahir,pasien.gol_darah,pasien.stts_nikah,
 pasien.agama,pasien_mati.keterangan,pasien_mati.temp_meninggal,pasien_mati.icd1,pasien_mati.icd2,
-pasien_mati.icd3,pasien_mati.icd4,pasien_mati.kd_dokter,dokter.nm_dokter 
-from pasien_mati inner join pasien on pasien_mati.no_rkm_medis=pasien.no_rkm_medis 
+pasien_mati.icd3,pasien_mati.icd4,pasien_mati.kd_dokter,dokter.nm_dokter
+from pasien_mati inner join pasien on pasien_mati.no_rkm_medis=pasien.no_rkm_medis
 inner join dokter on pasien_mati.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="tanggal" class="java.sql.Date">

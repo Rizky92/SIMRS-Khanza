@@ -31,8 +31,8 @@
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,hasil_pemeriksaan_usg_urologi.tanggal,
                 hasil_pemeriksaan_usg_urologi.kd_dokter,dokter.nm_dokter,hasil_pemeriksaan_usg_urologi.diagnosa_klinis,hasil_pemeriksaan_usg_urologi.kiriman_dari,
                 hasil_pemeriksaan_usg_urologi.ginjal_kanan,hasil_pemeriksaan_usg_urologi.ginjal_kiri,hasil_pemeriksaan_usg_urologi.vesica_urinaria,
-                hasil_pemeriksaan_usg_urologi.tambahan from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                inner join hasil_pemeriksaan_usg_urologi on reg_periksa.no_rawat=hasil_pemeriksaan_usg_urologi.no_rawat 
+                hasil_pemeriksaan_usg_urologi.tambahan from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                inner join hasil_pemeriksaan_usg_urologi on reg_periksa.no_rawat=hasil_pemeriksaan_usg_urologi.no_rawat
                 inner join dokter on hasil_pemeriksaan_usg_urologi.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

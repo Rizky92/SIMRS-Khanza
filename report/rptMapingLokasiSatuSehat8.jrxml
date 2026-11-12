@@ -27,11 +27,11 @@
 	<queryString>
 		<![CDATA[select satu_sehat_mapping_lokasi_depo_farmasi.kd_bangsal,bangsal.nm_bangsal,satu_sehat_mapping_lokasi_depo_farmasi.id_lokasi_satusehat,
                    satu_sehat_mapping_lokasi_depo_farmasi.longitude,satu_sehat_mapping_lokasi_depo_farmasi.latitude,satu_sehat_mapping_lokasi_depo_farmasi.altittude,
-                   satu_sehat_mapping_departemen.dep_id,departemen.nama,satu_sehat_mapping_lokasi_depo_farmasi.id_organisasi_satusehat 
-                   from satu_sehat_mapping_lokasi_depo_farmasi inner join bangsal on satu_sehat_mapping_lokasi_depo_farmasi.kd_bangsal=bangsal.kd_bangsal 
-                   inner join satu_sehat_mapping_departemen on satu_sehat_mapping_lokasi_depo_farmasi.id_organisasi_satusehat=satu_sehat_mapping_departemen.id_organisasi_satusehat 
-                   inner join departemen on satu_sehat_mapping_departemen.dep_id=departemen.dep_id 
-                   where satu_sehat_mapping_departemen.dep_id like  $P{parameter} or departemen.nama like $P{parameter} or 
+                   satu_sehat_mapping_departemen.dep_id,departemen.nama,satu_sehat_mapping_lokasi_depo_farmasi.id_organisasi_satusehat
+                   from satu_sehat_mapping_lokasi_depo_farmasi inner join bangsal on satu_sehat_mapping_lokasi_depo_farmasi.kd_bangsal=bangsal.kd_bangsal
+                   inner join satu_sehat_mapping_departemen on satu_sehat_mapping_lokasi_depo_farmasi.id_organisasi_satusehat=satu_sehat_mapping_departemen.id_organisasi_satusehat
+                   inner join departemen on satu_sehat_mapping_departemen.dep_id=departemen.dep_id
+                   where satu_sehat_mapping_departemen.dep_id like  $P{parameter} or departemen.nama like $P{parameter} or
                    bangsal.nm_bangsal like $P{parameter} or satu_sehat_mapping_lokasi_depo_farmasi.kd_bangsal like $P{parameter} order by departemen.nama]]>
 	</queryString>
 	<field name="kd_bangsal" class="java.lang.String">

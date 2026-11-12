@@ -34,9 +34,9 @@
                         penilaian_medis_ralan_bedah_mulut.keterangan_ekstremitas,penilaian_medis_ralan_bedah_mulut.wajah,penilaian_medis_ralan_bedah_mulut.intra,penilaian_medis_ralan_bedah_mulut.gigigeligi,
                         penilaian_medis_ralan_bedah_mulut.lab,penilaian_medis_ralan_bedah_mulut.rad,penilaian_medis_ralan_bedah_mulut.penunjang,penilaian_medis_ralan_bedah_mulut.diagnosis,
                         penilaian_medis_ralan_bedah_mulut.diagnosis2,penilaian_medis_ralan_bedah_mulut.permasalahan,penilaian_medis_ralan_bedah_mulut.terapi,penilaian_medis_ralan_bedah_mulut.tindakan,
-                        penilaian_medis_ralan_bedah_mulut.edukasi,dokter.nm_dokter 
-                        from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                        inner join penilaian_medis_ralan_bedah_mulut on reg_periksa.no_rawat=penilaian_medis_ralan_bedah_mulut.no_rawat 
+                        penilaian_medis_ralan_bedah_mulut.edukasi,dokter.nm_dokter
+                        from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                        inner join penilaian_medis_ralan_bedah_mulut on reg_periksa.no_rawat=penilaian_medis_ralan_bedah_mulut.no_rawat
                         inner join dokter on penilaian_medis_ralan_bedah_mulut.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

@@ -20,8 +20,8 @@
                     petugas.nama,skrining_adiksi_nikotin.tanggal,skrining_adiksi_nikotin.rokok_dihisap,skrining_adiksi_nikotin.nilai_rokok_dihisap,skrining_adiksi_nikotin.menyalakan_rokok,
                     skrining_adiksi_nikotin.nilai_menyalakan_rokok,skrining_adiksi_nikotin.tidak_rela,skrining_adiksi_nikotin.nilai_tidak_rela,skrining_adiksi_nikotin.jam_pertama,
                     skrining_adiksi_nikotin.nilai_jam_pertama,skrining_adiksi_nikotin.rasa_ingin,skrining_adiksi_nikotin.nilai_rasa_ingin,skrining_adiksi_nikotin.sakit_berat,
-                    skrining_adiksi_nikotin.nilai_sakit_berat,skrining_adiksi_nikotin.nilai_total,skrining_adiksi_nikotin.keterangan_hasil_skrining,skrining_adiksi_nikotin.skala_motivasi 
-                    from skrining_adiksi_nikotin inner join reg_periksa on skrining_adiksi_nikotin.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    skrining_adiksi_nikotin.nilai_sakit_berat,skrining_adiksi_nikotin.nilai_total,skrining_adiksi_nikotin.keterangan_hasil_skrining,skrining_adiksi_nikotin.skala_motivasi
+                    from skrining_adiksi_nikotin inner join reg_periksa on skrining_adiksi_nikotin.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join petugas on skrining_adiksi_nikotin.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

@@ -26,9 +26,9 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select inventaris_pembelian.tgl_beli,inventaris_pembelian.no_faktur,inventaris_suplier.nama_suplier,inventaris_pembelian.nip,
-                petugas.nama,rekening.nm_rek,inventaris_pembelian.tagihan from inventaris_pembelian 
-                inner join inventaris_suplier on inventaris_pembelian.kode_suplier=inventaris_suplier.kode_suplier 
-                inner join petugas on petugas.nip=inventaris_pembelian.nip 
+                petugas.nama,rekening.nm_rek,inventaris_pembelian.tagihan from inventaris_pembelian
+                inner join inventaris_suplier on inventaris_pembelian.kode_suplier=inventaris_suplier.kode_suplier
+                inner join petugas on petugas.nip=inventaris_pembelian.nip
                 inner join rekening on rekening.kd_rek=inventaris_pembelian.kd_rek]]>
 	</queryString>
 	<field name="tgl_beli" class="java.sql.Date">

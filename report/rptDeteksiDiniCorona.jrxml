@@ -29,9 +29,9 @@ pasien.no_ktp,pasien.no_tlp,pasien.pekerjaan,pasien.tgl_lahir,deteksi_dini_coron
 deteksi_dini_corona.gejala_sesak,deteksi_dini_corona.gejala_tanggal_pertama,deteksi_dini_corona.gejala_riwayat_sakit,deteksi_dini_corona.gejala_riwayat_periksa,
 deteksi_dini_corona.faktor_riwayat_perjalanan,deteksi_dini_corona.faktor_asal_daerah,deteksi_dini_corona.faktor_tanggal_kedatangan,deteksi_dini_corona.faktor_paparan_kontakpositif,
 deteksi_dini_corona.faktor_paparan_kontakpdp,deteksi_dini_corona.faktor_paparan_faskespositif,deteksi_dini_corona.faktor_paparan_perjalananln,deteksi_dini_corona.faktor_paparan_pasarhewan,
-deteksi_dini_corona.kesimpulan,deteksi_dini_corona.tindak_lanjut from pasien inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel 
+deteksi_dini_corona.kesimpulan,deteksi_dini_corona.tindak_lanjut from pasien inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
 inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
-inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab 
+inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
 inner join reg_periksa on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 inner join deteksi_dini_corona on deteksi_dini_corona.no_rawat=reg_periksa.no_rawat
 inner join petugas on deteksi_dini_corona.nip=petugas.nip]]>

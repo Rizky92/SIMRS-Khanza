@@ -18,7 +18,7 @@
 		<![CDATA[select DATE_FORMAT(bayar_piutang.tgl_bayar,'%d-%m-%Y') as tanggal,bayar_piutang.no_rawat,bayar_piutang.no_rkm_medis,pasien.nm_pasien,
 rekening.nm_rek,rekening2.nm_rek,bayar_piutang.besar_cicilan
 from bayar_piutang inner join pasien on bayar_piutang.no_rkm_medis=pasien.no_rkm_medis
-inner join rekening on rekening.kd_rek=bayar_piutang.kd_rek 
+inner join rekening on rekening.kd_rek=bayar_piutang.kd_rek
 inner join rekening as rekening2 on rekening2.kd_rek=bayar_piutang.kd_rek_kontra]]>
 	</queryString>
 	<field name="tanggal" class="java.lang.String">

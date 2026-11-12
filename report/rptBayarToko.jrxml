@@ -16,7 +16,7 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select toko_bayar_piutang.tgl_bayar, toko_bayar_piutang.no_member,tokomember.nama, toko_bayar_piutang.besar_cicilan,
-toko_bayar_piutang.catatan, toko_bayar_piutang.nota_piutang from toko_bayar_piutang 
+toko_bayar_piutang.catatan, toko_bayar_piutang.nota_piutang from toko_bayar_piutang
 inner join tokomember on toko_bayar_piutang.no_member=tokomember.no_member]]>
 	</queryString>
 	<field name="tgl_bayar" class="java.sql.Date">

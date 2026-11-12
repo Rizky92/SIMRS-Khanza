@@ -14,10 +14,10 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select set_otomatis_tindakan_ralan.kd_dokter,dokter.nm_dokter, 
-set_otomatis_tindakan_ralan.kd_jenis_prw,jns_perawatan.nm_perawatan 
-                   from set_otomatis_tindakan_ralan inner join dokter inner join jns_perawatan on  
-                   set_otomatis_tindakan_ralan.kd_dokter=dokter.kd_dokter and 
+		<![CDATA[select set_otomatis_tindakan_ralan.kd_dokter,dokter.nm_dokter,
+set_otomatis_tindakan_ralan.kd_jenis_prw,jns_perawatan.nm_perawatan
+                   from set_otomatis_tindakan_ralan inner join dokter inner join jns_perawatan on
+                   set_otomatis_tindakan_ralan.kd_dokter=dokter.kd_dokter and
                    set_otomatis_tindakan_ralan.kd_jenis_prw=jns_perawatan.kd_jenis_prw order by dokter.nm_dokter]]>
 	</queryString>
 	<field name="kd_dokter" class="java.lang.String">

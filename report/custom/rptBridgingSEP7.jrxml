@@ -1143,7 +1143,7 @@ where no_sep = $P{parameter}]]>
 					<font fontName="Tahoma" size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["LEMBAR BUKTI PELAYANAN PESERTA BPJS\n" +
-"RAWAT JALAN TINGKAT LANJUT (RJTL)\n" + 
+"RAWAT JALAN TINGKAT LANJUT (RJTL)\n" +
 $P{namars}]]></textFieldExpression>
 			</textField>
 			<staticText>

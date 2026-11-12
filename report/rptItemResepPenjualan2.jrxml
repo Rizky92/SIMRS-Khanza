@@ -17,8 +17,8 @@
 		<![CDATA[select penjualan.nota_jual,penjualan.tgl_jual,
 penjualan.no_rkm_medis,penjualan.nm_pasien,obat_racikan_jual.nama_racik,
 obat_racikan_jual.aturan_pakai,obat_racikan_jual.jml_dr,metode_racik.nm_racik
-from penjualan inner join obat_racikan_jual on penjualan.nota_jual=obat_racikan_jual.nota_jual 
-inner join metode_racik on obat_racikan_jual.kd_racik=metode_racik.kd_racik 
+from penjualan inner join obat_racikan_jual on penjualan.nota_jual=obat_racikan_jual.nota_jual
+inner join metode_racik on obat_racikan_jual.kd_racik=metode_racik.kd_racik
 where obat_racikan_jual.aturan_pakai<>'']]>
 	</queryString>
 	<field name="nota_jual" class="java.lang.String">

@@ -19,8 +19,8 @@
 		<![CDATA[select pengajuan_inventaris.no_pengajuan,pengajuan_inventaris.tanggal,pengajuan_inventaris.nik,peg1.nama as namapengaju,
 peg1.bidang,peg1.departemen,pengajuan_inventaris.urgensi,pengajuan_inventaris.latar_belakang,pengajuan_inventaris.nama_barang,
 pengajuan_inventaris.spesifikasi,pengajuan_inventaris.jumlah,pengajuan_inventaris.harga,pengajuan_inventaris.total,
-pengajuan_inventaris.keterangan,pengajuan_inventaris.nik_pj,peg2.nama as namapj,pengajuan_inventaris.status 
-from pengajuan_inventaris inner join pegawai as peg1 inner join pegawai as peg2 on 
+pengajuan_inventaris.keterangan,pengajuan_inventaris.nik_pj,peg2.nama as namapj,pengajuan_inventaris.status
+from pengajuan_inventaris inner join pegawai as peg1 inner join pegawai as peg2 on
 pengajuan_inventaris.nik=peg1.nik and pengajuan_inventaris.nik_pj=peg2.nik]]>
 	</queryString>
 	<field name="no_pengajuan" class="java.lang.String">

@@ -24,7 +24,7 @@
                     skrining_nutrisi_lansia.sg3,skrining_nutrisi_lansia.nilai3,skrining_nutrisi_lansia.sg4,skrining_nutrisi_lansia.nilai4,
                     skrining_nutrisi_lansia.sg5,skrining_nutrisi_lansia.nilai5,skrining_nutrisi_lansia.sg6,skrining_nutrisi_lansia.nilai6,
                     skrining_nutrisi_lansia.total_hasil,skrining_nutrisi_lansia.skor_nutrisi,skrining_nutrisi_lansia.nip,petugas.nama,
-                    pasien.jk from skrining_nutrisi_lansia inner join reg_periksa on skrining_nutrisi_lansia.no_rawat=reg_periksa.no_rawat 
+                    pasien.jk from skrining_nutrisi_lansia inner join reg_periksa on skrining_nutrisi_lansia.no_rawat=reg_periksa.no_rawat
                     inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_nutrisi_lansia.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

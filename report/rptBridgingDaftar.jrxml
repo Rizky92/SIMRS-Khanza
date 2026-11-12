@@ -24,28 +24,28 @@
                     if(bridging_sep.jnspelayanan='1','1. Ranap','2. Ralan'),bridging_sep.catatan,bridging_sep.diagawal,
                     bridging_sep.nmdiagnosaawal,bridging_sep.kdpolitujuan,bridging_sep.nmpolitujuan,
                     if(bridging_sep.klsrawat='1','1. Kelas 1',if(bridging_sep.klsrawat='2','2. Kelas 2','3. Kelas 3')),
-                    if(bridging_sep.lakalantas='0','0. Tidak','1. Ya'),bridging_sep.user, 
+                    if(bridging_sep.lakalantas='0','0. Tidak','1. Ya'),bridging_sep.user,
                     bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu,bridging_sep.tglpulang,
                     bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.notelep,
                     bridging_sep.katarak,bridging_sep.tglkkl,bridging_sep.keterangankkl,
                     bridging_sep.suplesi,bridging_sep.no_sep_suplesi,bridging_sep.kdprop,
                     bridging_sep.nmprop,bridging_sep.kdkab,
                     bridging_sep.nmkab,bridging_sep.kdkec,bridging_sep.nmkec,bridging_sep.noskdp,
-                    bridging_sep.kddpjp,bridging_sep.nmdpdjp from bridging_sep where 
-                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.no_sep like $P{parameter} or 
-                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nomr like $P{parameter} or 
-                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nama_pasien like $P{parameter} or 
-                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nmppkrujukan like $P{parameter} or 
-                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.diagawal like $P{parameter} or 
-                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nmdiagnosaawal like $P{parameter} or 
-                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.no_rawat like $P{parameter} or 
-                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.no_kartu like $P{parameter} or 
-                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nmprop like $P{parameter} or 
-                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nmkab like $P{parameter} or 
-                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nmkec like $P{parameter} or 
-                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nmdpdjp like $P{parameter} or 
-                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.asal_rujukan like $P{parameter} or 
-                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.notelep like $P{parameter} or 
+                    bridging_sep.kddpjp,bridging_sep.nmdpdjp from bridging_sep where
+                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.no_sep like $P{parameter} or
+                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nomr like $P{parameter} or
+                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nama_pasien like $P{parameter} or
+                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nmppkrujukan like $P{parameter} or
+                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.diagawal like $P{parameter} or
+                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nmdiagnosaawal like $P{parameter} or
+                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.no_rawat like $P{parameter} or
+                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.no_kartu like $P{parameter} or
+                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nmprop like $P{parameter} or
+                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nmkab like $P{parameter} or
+                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nmkec like $P{parameter} or
+                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nmdpdjp like $P{parameter} or
+                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.asal_rujukan like $P{parameter} or
+                    bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.notelep like $P{parameter} or
                     bridging_sep.tglsep between $P{tanggal1} and $P{tanggal2} and bridging_sep.nmpolitujuan like $P{parameter} order by bridging_sep.tglsep]]>
 	</queryString>
 	<field name="no_sep" class="java.lang.String">

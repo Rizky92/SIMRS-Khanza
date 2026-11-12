@@ -38,9 +38,9 @@ penilaian_medis_ranap.kepala,penilaian_medis_ranap.mata,penilaian_medis_ranap.gi
 penilaian_medis_ranap.jantung,penilaian_medis_ranap.paru,penilaian_medis_ranap.abdomen,penilaian_medis_ranap.ekstremitas,
 penilaian_medis_ranap.genital,penilaian_medis_ranap.kulit,penilaian_medis_ranap.ket_fisik,penilaian_medis_ranap.ket_lokalis,penilaian_medis_ranap.lab,
 penilaian_medis_ranap.rad,penilaian_medis_ranap.penunjang,penilaian_medis_ranap.diagnosis,penilaian_medis_ranap.tata,
-penilaian_medis_ranap.edukasi,dokter.nm_dokter 
+penilaian_medis_ranap.edukasi,dokter.nm_dokter
 from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
-inner join penilaian_medis_ranap on reg_periksa.no_rawat=penilaian_medis_ranap.no_rawat 
+inner join penilaian_medis_ranap on reg_periksa.no_rawat=penilaian_medis_ranap.no_rawat
 inner join dokter on penilaian_medis_ranap.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

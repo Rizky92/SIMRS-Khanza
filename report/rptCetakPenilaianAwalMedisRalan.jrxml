@@ -35,7 +35,7 @@ penilaian_medis_ralan.keadaan,penilaian_medis_ralan.gcs,penilaian_medis_ralan.ke
 penilaian_medis_ralan.rr,penilaian_medis_ralan.suhu,penilaian_medis_ralan.spo,
 penilaian_medis_ralan.bb,penilaian_medis_ralan.tb,penilaian_medis_ralan.kepala,penilaian_medis_ralan.gigi,
 penilaian_medis_ralan.tht,penilaian_medis_ralan.thoraks,penilaian_medis_ralan.abdomen,penilaian_medis_ralan.ekstremitas,penilaian_medis_ralan.genital,penilaian_medis_ralan.kulit,
-penilaian_medis_ralan.ket_fisik,penilaian_medis_ralan.ket_lokalis,penilaian_medis_ralan.penunjang,penilaian_medis_ralan.diagnosis,penilaian_medis_ralan.tata,penilaian_medis_ralan.konsulrujuk,dokter.nm_dokter 
+penilaian_medis_ralan.ket_fisik,penilaian_medis_ralan.ket_lokalis,penilaian_medis_ralan.penunjang,penilaian_medis_ralan.diagnosis,penilaian_medis_ralan.tata,penilaian_medis_ralan.konsulrujuk,dokter.nm_dokter
 from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 inner join penilaian_medis_ralan on reg_periksa.no_rawat=penilaian_medis_ralan.no_rawat
 inner join dokter on penilaian_medis_ralan.kd_dokter=dokter.kd_dokter ]]>

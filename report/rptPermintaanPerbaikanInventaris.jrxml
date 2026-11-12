@@ -28,13 +28,13 @@
 inventaris.kode_barang,inventaris_barang.nama_barang,inventaris_merk.nama_merk,inventaris_barang.thn_produksi,
 inventaris_kategori.nama_kategori,inventaris_jenis.nama_jenis,inventaris_ruang.nama_ruang,permintaan_perbaikan_inventaris.nik,
 pegawai.nama,pegawai.departemen,permintaan_perbaikan_inventaris.deskripsi_kerusakan,
-permintaan_perbaikan_inventaris.tanggal from permintaan_perbaikan_inventaris 
-inner join inventaris on permintaan_perbaikan_inventaris.no_inventaris=inventaris.no_inventaris 
-inner join inventaris_barang on inventaris.kode_barang=inventaris_barang.kode_barang 
-inner join inventaris_merk on inventaris_barang.id_merk=inventaris_merk.id_merk 
-inner join inventaris_kategori on inventaris_barang.id_kategori=inventaris_kategori.id_kategori 
-inner join inventaris_jenis on inventaris_barang.id_jenis=inventaris_jenis.id_jenis 
-inner join inventaris_ruang on inventaris.id_ruang=inventaris_ruang.id_ruang 
+permintaan_perbaikan_inventaris.tanggal from permintaan_perbaikan_inventaris
+inner join inventaris on permintaan_perbaikan_inventaris.no_inventaris=inventaris.no_inventaris
+inner join inventaris_barang on inventaris.kode_barang=inventaris_barang.kode_barang
+inner join inventaris_merk on inventaris_barang.id_merk=inventaris_merk.id_merk
+inner join inventaris_kategori on inventaris_barang.id_kategori=inventaris_kategori.id_kategori
+inner join inventaris_jenis on inventaris_barang.id_jenis=inventaris_jenis.id_jenis
+inner join inventaris_ruang on inventaris.id_ruang=inventaris_ruang.id_ruang
 inner join pegawai on permintaan_perbaikan_inventaris.nik=pegawai.nik]]>
 	</queryString>
 	<field name="no_permintaan" class="java.lang.String">

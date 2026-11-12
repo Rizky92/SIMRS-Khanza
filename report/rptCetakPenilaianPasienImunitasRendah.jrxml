@@ -32,8 +32,8 @@
                 penilaian_pasien_imunitas_rendah.kd_dokter,penilaian_pasien_imunitas_rendah.anamnesis,penilaian_pasien_imunitas_rendah.hubungan,penilaian_pasien_imunitas_rendah.pasien_mengetahui_kondisi_penyakitnya,
                 penilaian_pasien_imunitas_rendah.kebutuhan_ruang_perawatan,penilaian_pasien_imunitas_rendah.riwayat_penyakit_keluhan,penilaian_pasien_imunitas_rendah.riwayat_penyakit_keluarga,penilaian_pasien_imunitas_rendah.riwayat_alergi,
                 penilaian_pasien_imunitas_rendah.riwayat_vaksinasi,penilaian_pasien_imunitas_rendah.riwayat_pengobatan,penilaian_pasien_imunitas_rendah.diagnosa_utama,penilaian_pasien_imunitas_rendah.diagnosa_tambahan,
-                dokter.nm_dokter from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                inner join penilaian_pasien_imunitas_rendah on reg_periksa.no_rawat=penilaian_pasien_imunitas_rendah.no_rawat 
+                dokter.nm_dokter from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                inner join penilaian_pasien_imunitas_rendah on reg_periksa.no_rawat=penilaian_pasien_imunitas_rendah.no_rawat
                 inner join dokter on penilaian_pasien_imunitas_rendah.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

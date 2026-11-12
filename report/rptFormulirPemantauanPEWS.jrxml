@@ -19,8 +19,8 @@
 	<queryString>
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,
 pasien.jk,pemantauan_pews.tanggal,pemantauan_pews.monitoring,pemantauan_pews.evaluasi,
-pemantauan_pews.nip,petugas.nama 
-from pemantauan_pews inner join reg_periksa on pemantauan_pews.no_rawat=reg_periksa.no_rawat 
+pemantauan_pews.nip,petugas.nama
+from pemantauan_pews inner join reg_periksa on pemantauan_pews.no_rawat=reg_periksa.no_rawat
 inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 inner join petugas on pemantauan_pews.nip=petugas.nip]]>
 	</queryString>

@@ -11,20 +11,20 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select ipsrspemesanan.tgl_pesan,ipsrspemesanan.no_faktur, 
-ipsrspemesanan.kode_suplier,ipsrssuplier.nama_suplier, 
-ipsrspemesanan.nip,petugas.nama,ipsrspemesanan.tgl_faktur, 
+		<![CDATA[select ipsrspemesanan.tgl_pesan,ipsrspemesanan.no_faktur,
+ipsrspemesanan.kode_suplier,ipsrssuplier.nama_suplier,
+ipsrspemesanan.nip,petugas.nama,ipsrspemesanan.tgl_faktur,
 ipsrspemesanan.tgl_tempo,ipsrspemesanan.status,ipsrspemesanan.total2,ipsrspemesanan.ppn,
 ipsrspemesanan.meterai,ipsrspemesanan.tagihan,ipsrspemesanan.no_order,ipsrsdetailpesan.kode_brng,
-ipsrsbarang.nama_brng, 
-ipsrsdetailpesan.kode_sat,kodesatuan.satuan,ipsrsdetailpesan.jumlah,ipsrsdetailpesan.harga, 
-ipsrsdetailpesan.subtotal,ipsrsdetailpesan.dis,ipsrsdetailpesan.besardis,ipsrsdetailpesan.total 
- from ipsrspemesanan inner join ipsrssuplier inner join petugas 
- inner join ipsrsdetailpesan inner join ipsrsbarang inner join kodesatuan 
- inner join ipsrsjenisbarang 
- on ipsrsdetailpesan.kode_brng=ipsrsbarang.kode_brng 
- and ipsrsdetailpesan.kode_sat=kodesatuan.kode_sat 
- and ipsrspemesanan.no_faktur=ipsrsdetailpesan.no_faktur 
+ipsrsbarang.nama_brng,
+ipsrsdetailpesan.kode_sat,kodesatuan.satuan,ipsrsdetailpesan.jumlah,ipsrsdetailpesan.harga,
+ipsrsdetailpesan.subtotal,ipsrsdetailpesan.dis,ipsrsdetailpesan.besardis,ipsrsdetailpesan.total
+ from ipsrspemesanan inner join ipsrssuplier inner join petugas
+ inner join ipsrsdetailpesan inner join ipsrsbarang inner join kodesatuan
+ inner join ipsrsjenisbarang
+ on ipsrsdetailpesan.kode_brng=ipsrsbarang.kode_brng
+ and ipsrsdetailpesan.kode_sat=kodesatuan.kode_sat
+ and ipsrspemesanan.no_faktur=ipsrsdetailpesan.no_faktur
  and ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier
  and ipsrspemesanan.nip=petugas.nip and ipsrsbarang.jenis=ipsrsjenisbarang.kd_jenis]]>
 	</queryString>

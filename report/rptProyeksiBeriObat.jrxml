@@ -12,13 +12,13 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select detail_pemberian_obat.tgl_perawatan,detail_pemberian_obat.no_rawat,
-detail_pemberian_obat.kode_brng,databarang.nama_brng, kodesatuan.satuan,detail_pemberian_obat.biaya_obat,detail_pemberian_obat.jml, 
-(detail_pemberian_obat.biaya_obat*detail_pemberian_obat.jml) as subtotal,(detail_pemberian_obat.embalase+detail_pemberian_obat.tuslah) as tambahan,detail_pemberian_obat.total, 
-databarang.h_beli,(databarang.h_beli * detail_pemberian_obat.jml) as total_asal, 
-(detail_pemberian_obat.total-(databarang.h_beli * detail_pemberian_obat.jml)) as keuntungan 
-from detail_pemberian_obat inner join databarang inner join kodesatuan 
-on detail_pemberian_obat.kode_brng=databarang.kode_brng 
-and databarang.kode_sat=kodesatuan.kode_sat 
+detail_pemberian_obat.kode_brng,databarang.nama_brng, kodesatuan.satuan,detail_pemberian_obat.biaya_obat,detail_pemberian_obat.jml,
+(detail_pemberian_obat.biaya_obat*detail_pemberian_obat.jml) as subtotal,(detail_pemberian_obat.embalase+detail_pemberian_obat.tuslah) as tambahan,detail_pemberian_obat.total,
+databarang.h_beli,(databarang.h_beli * detail_pemberian_obat.jml) as total_asal,
+(detail_pemberian_obat.total-(databarang.h_beli * detail_pemberian_obat.jml)) as keuntungan
+from detail_pemberian_obat inner join databarang inner join kodesatuan
+on detail_pemberian_obat.kode_brng=databarang.kode_brng
+and databarang.kode_sat=kodesatuan.kode_sat
  order by detail_pemberian_obat.tgl_perawatan,detail_pemberian_obat.no_rawat]]>
 	</queryString>
 	<field name="tgl_perawatan" class="java.sql.Date">

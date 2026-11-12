@@ -22,14 +22,14 @@
                     pcare_pendaftaran.kdPoli,pcare_pendaftaran.nmPoli,pcare_pendaftaran.keluhan,pcare_pendaftaran.kunjSakit,
                     pcare_pendaftaran.sistole,pcare_pendaftaran.diastole,pcare_pendaftaran.beratBadan,pcare_pendaftaran.tinggiBadan,
                     pcare_pendaftaran.respRate,pcare_pendaftaran.heartRate,pcare_pendaftaran.rujukBalik,pcare_pendaftaran.kdTkp,
-                    pcare_pendaftaran.noUrut from pcare_pendaftaran where 
-                    pcare_pendaftaran.tglDaftar between $P{tanggal1} and $P{tanggal2} and pcare_pendaftaran.no_rawat like $P{parameter} or 
-                    pcare_pendaftaran.tglDaftar between $P{tanggal1} and $P{tanggal2} and pcare_pendaftaran.no_rkm_medis like $P{parameter} or 
-                    pcare_pendaftaran.tglDaftar between $P{tanggal1} and $P{tanggal2} and pcare_pendaftaran.nm_pasien like $P{parameter} or 
-                    pcare_pendaftaran.tglDaftar between $P{tanggal1} and $P{tanggal2} and pcare_pendaftaran.noKartu like $P{parameter} or 
-                    pcare_pendaftaran.tglDaftar between $P{tanggal1} and $P{tanggal2} and pcare_pendaftaran.nmPoli like $P{parameter} or 
-                    pcare_pendaftaran.tglDaftar between $P{tanggal1} and $P{tanggal2} and pcare_pendaftaran.kunjSakit like $P{parameter} or 
-                    pcare_pendaftaran.tglDaftar between $P{tanggal1} and $P{tanggal2} and pcare_pendaftaran.kdTkp like $P{parameter} or 
+                    pcare_pendaftaran.noUrut from pcare_pendaftaran where
+                    pcare_pendaftaran.tglDaftar between $P{tanggal1} and $P{tanggal2} and pcare_pendaftaran.no_rawat like $P{parameter} or
+                    pcare_pendaftaran.tglDaftar between $P{tanggal1} and $P{tanggal2} and pcare_pendaftaran.no_rkm_medis like $P{parameter} or
+                    pcare_pendaftaran.tglDaftar between $P{tanggal1} and $P{tanggal2} and pcare_pendaftaran.nm_pasien like $P{parameter} or
+                    pcare_pendaftaran.tglDaftar between $P{tanggal1} and $P{tanggal2} and pcare_pendaftaran.noKartu like $P{parameter} or
+                    pcare_pendaftaran.tglDaftar between $P{tanggal1} and $P{tanggal2} and pcare_pendaftaran.nmPoli like $P{parameter} or
+                    pcare_pendaftaran.tglDaftar between $P{tanggal1} and $P{tanggal2} and pcare_pendaftaran.kunjSakit like $P{parameter} or
+                    pcare_pendaftaran.tglDaftar between $P{tanggal1} and $P{tanggal2} and pcare_pendaftaran.kdTkp like $P{parameter} or
                     pcare_pendaftaran.tglDaftar between $P{tanggal1} and $P{tanggal2} and pcare_pendaftaran.keluhan like $P{parameter} order by pcare_pendaftaran.tglDaftar]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

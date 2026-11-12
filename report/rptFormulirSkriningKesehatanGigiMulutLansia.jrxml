@@ -19,8 +19,8 @@
 	<queryString>
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,skrining_kesehatan_gigi_mulut_lansia.nip,petugas.nama,skrining_kesehatan_gigi_mulut_lansia.tanggal,
                     skrining_kesehatan_gigi_mulut_lansia.kontrol_gigi,skrining_kesehatan_gigi_mulut_lansia.pola_makan,skrining_kesehatan_gigi_mulut_lansia.sikat_gigi,skrining_kesehatan_gigi_mulut_lansia.gigi_palsu,
-                    skrining_kesehatan_gigi_mulut_lansia.gigi_berfungsi,skrining_kesehatan_gigi_mulut_lansia.mukosa_mulut,skrining_kesehatan_gigi_mulut_lansia.hasil_skrining,skrining_kesehatan_gigi_mulut_lansia.keterangan 
-                    from skrining_kesehatan_gigi_mulut_lansia inner join reg_periksa on skrining_kesehatan_gigi_mulut_lansia.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    skrining_kesehatan_gigi_mulut_lansia.gigi_berfungsi,skrining_kesehatan_gigi_mulut_lansia.mukosa_mulut,skrining_kesehatan_gigi_mulut_lansia.hasil_skrining,skrining_kesehatan_gigi_mulut_lansia.keterangan
+                    from skrining_kesehatan_gigi_mulut_lansia inner join reg_periksa on skrining_kesehatan_gigi_mulut_lansia.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join petugas on skrining_kesehatan_gigi_mulut_lansia.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

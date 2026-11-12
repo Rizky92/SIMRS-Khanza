@@ -28,11 +28,11 @@ surat_keterangan_covid.igg,surat_keterangan_covid.sehat,surat_keterangan_covid.t
 pasien.jk,pasien.pekerjaan,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,
 surat_keterangan_covid.berlakuselsai from surat_keterangan_covid inner join reg_periksa on surat_keterangan_covid.no_rawat=reg_periksa.no_rawat
 inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
-inner join dokter on surat_keterangan_covid.kd_dokter=dokter.kd_dokter 
+inner join dokter on surat_keterangan_covid.kd_dokter=dokter.kd_dokter
 inner join petugas on surat_keterangan_covid.nip=petugas.nip
 inner join spesialis on dokter.kd_sps=spesialis.kd_sps
-inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel 
-inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
+inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
+inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
 inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab]]>
 	</queryString>
 	<field name="no_surat" class="java.lang.String">

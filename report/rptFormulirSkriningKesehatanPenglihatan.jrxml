@@ -21,8 +21,8 @@
                     skrining_kesehatan_penglihatan.mata_luar,skrining_kesehatan_penglihatan.tajam_kiri,skrining_kesehatan_penglihatan.tajam_kanan,skrining_kesehatan_penglihatan.buta_warna_kiri,
                     skrining_kesehatan_penglihatan.buta_warna_kanan,skrining_kesehatan_penglihatan.kacamata,skrining_kesehatan_penglihatan.visus_kiri,skrining_kesehatan_penglihatan.visus_kanan,
                     skrining_kesehatan_penglihatan.refraksi_kiri,skrining_kesehatan_penglihatan.refraksi_kanan,skrining_kesehatan_penglihatan.rujuk_refraksi,skrining_kesehatan_penglihatan.katarak_kiri,
-                    skrining_kesehatan_penglihatan.katarak_kanan,skrining_kesehatan_penglihatan.rujuk_katarak,skrining_kesehatan_penglihatan.hasil_skrining,skrining_kesehatan_penglihatan.keterangan 
-                    from skrining_kesehatan_penglihatan inner join reg_periksa on skrining_kesehatan_penglihatan.no_rawat=reg_periksa.no_rawat 
+                    skrining_kesehatan_penglihatan.katarak_kanan,skrining_kesehatan_penglihatan.rujuk_katarak,skrining_kesehatan_penglihatan.hasil_skrining,skrining_kesehatan_penglihatan.keterangan
+                    from skrining_kesehatan_penglihatan inner join reg_periksa on skrining_kesehatan_penglihatan.no_rawat=reg_periksa.no_rawat
                     inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_kesehatan_penglihatan.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

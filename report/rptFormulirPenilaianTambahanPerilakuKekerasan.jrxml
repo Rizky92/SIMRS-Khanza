@@ -43,9 +43,9 @@
                     penilaian_tambahan_perilaku_kekerasan.dinamis_skorseksual_tidak_wajar,penilaian_tambahan_perilaku_kekerasan.dinamis_hilangnya_kontrol_diri,
                     penilaian_tambahan_perilaku_kekerasan.dinamis_skorhilangnya_kontrol_diri,penilaian_tambahan_perilaku_kekerasan.dinamis_pengguaan_napza,
                     penilaian_tambahan_perilaku_kekerasan.dinamis_skorpengguaan_napza,penilaian_tambahan_perilaku_kekerasan.dinamis_skortotal,penilaian_tambahan_perilaku_kekerasan.faktor_faktor_pencegahan,
-                    penilaian_tambahan_perilaku_kekerasan.total_skor,penilaian_tambahan_perilaku_kekerasan.level_skor,penilaian_tambahan_perilaku_kekerasan.nip,petugas.nama,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.umurdaftar,reg_periksa.sttsumur 
-                    from penilaian_tambahan_perilaku_kekerasan inner join reg_periksa on penilaian_tambahan_perilaku_kekerasan.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter 
+                    penilaian_tambahan_perilaku_kekerasan.total_skor,penilaian_tambahan_perilaku_kekerasan.level_skor,penilaian_tambahan_perilaku_kekerasan.nip,petugas.nama,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.umurdaftar,reg_periksa.sttsumur
+                    from penilaian_tambahan_perilaku_kekerasan inner join reg_periksa on penilaian_tambahan_perilaku_kekerasan.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter
                     inner join petugas on penilaian_tambahan_perilaku_kekerasan.nip=petugas.nip inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

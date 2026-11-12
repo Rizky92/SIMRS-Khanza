@@ -30,8 +30,8 @@
                         penatalaksanaan_terapi_okupasi.anamnesa_general,penatalaksanaan_terapi_okupasi.tanda_vital,penatalaksanaan_terapi_okupasi.pemeriksaan_penunjang,
                         penatalaksanaan_terapi_okupasi.spesialisasi,penatalaksanaan_terapi_okupasi.keterangan_spesialisasi,penatalaksanaan_terapi_okupasi.pemeriksaan_okupasi_terapi,
                         penatalaksanaan_terapi_okupasi.aset,penatalaksanaan_terapi_okupasi.limitasi,penatalaksanaan_terapi_okupasi.diagnosa_terapi_okupasi,penatalaksanaan_terapi_okupasi.rencana_intervensi,
-                        petugas.nama from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                        inner join penatalaksanaan_terapi_okupasi on reg_periksa.no_rawat=penatalaksanaan_terapi_okupasi.no_rawat 
+                        petugas.nama from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                        inner join penatalaksanaan_terapi_okupasi on reg_periksa.no_rawat=penatalaksanaan_terapi_okupasi.no_rawat
                         inner join petugas on penatalaksanaan_terapi_okupasi.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

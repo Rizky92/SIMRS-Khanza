@@ -36,9 +36,9 @@
                         penilaian_medis_ralan_paru.abdomen,penilaian_medis_ralan_paru.muskulos,penilaian_medis_ralan_paru.lainnya,
                         penilaian_medis_ralan_paru.ket_lokalis,penilaian_medis_ralan_paru.lab,
                         penilaian_medis_ralan_paru.rad,penilaian_medis_ralan_paru.pemeriksaan,penilaian_medis_ralan_paru.diagnosis,penilaian_medis_ralan_paru.diagnosis2,
-                        penilaian_medis_ralan_paru.permasalahan,penilaian_medis_ralan_paru.terapi,penilaian_medis_ralan_paru.tindakan,penilaian_medis_ralan_paru.edukasi,dokter.nm_dokter 
-                        from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                        inner join penilaian_medis_ralan_paru on reg_periksa.no_rawat=penilaian_medis_ralan_paru.no_rawat 
+                        penilaian_medis_ralan_paru.permasalahan,penilaian_medis_ralan_paru.terapi,penilaian_medis_ralan_paru.tindakan,penilaian_medis_ralan_paru.edukasi,dokter.nm_dokter
+                        from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                        inner join penilaian_medis_ralan_paru on reg_periksa.no_rawat=penilaian_medis_ralan_paru.no_rawat
                         inner join dokter on penilaian_medis_ralan_paru.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

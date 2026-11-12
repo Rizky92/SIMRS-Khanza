@@ -20,8 +20,8 @@
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,skrining_instrumen_esat.nip,petugas.nama,skrining_instrumen_esat.tanggal,reg_periksa.sttsumur,reg_periksa.umurdaftar,
                     skrining_instrumen_esat.pernyataanesat1,skrining_instrumen_esat.pernyataanesat2,skrining_instrumen_esat.pernyataanesat3,skrining_instrumen_esat.pernyataanesat4,
                     skrining_instrumen_esat.pernyataanesat5,skrining_instrumen_esat.pernyataanesat6,skrining_instrumen_esat.pernyataanesat7,skrining_instrumen_esat.pernyataanesat8,
-                    skrining_instrumen_esat.pernyataanesat9,skrining_instrumen_esat.pernyataanesat10,skrining_instrumen_esat.kesimpulan,skrining_instrumen_esat.catatan from skrining_instrumen_esat 
-                    inner join reg_periksa on skrining_instrumen_esat.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    skrining_instrumen_esat.pernyataanesat9,skrining_instrumen_esat.pernyataanesat10,skrining_instrumen_esat.kesimpulan,skrining_instrumen_esat.catatan from skrining_instrumen_esat
+                    inner join reg_periksa on skrining_instrumen_esat.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join petugas on skrining_instrumen_esat.nip=petugas.nip ]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

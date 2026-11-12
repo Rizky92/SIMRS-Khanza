@@ -25,24 +25,24 @@
                 k3rs_peristiwa.penyebab_langsung_kondisi,k3rs_peristiwa.penyebab_langsung_tindakan,k3rs_peristiwa.penyebab_tidak_langsung_pribadi,k3rs_peristiwa.penyebab_tidak_langsung_pekerjaan,
                 k3rs_peristiwa.barang_bukti,k3rs_peristiwa.kode_dampak,k3rs_dampak_cidera.dampak_cidera,k3rs_peristiwa.nik_pelapor,peg2.nama as pelapor,k3rs_peristiwa.perbaikan_jenis_tindakan,
                 k3rs_peristiwa.perbaikan_rencana_tindakan,k3rs_peristiwa.perbaikan_target,k3rs_peristiwa.perbaikan_wewenang,k3rs_peristiwa.nik_timk3,peg3.nama as timk3,
-                k3rs_peristiwa.catatan from k3rs_peristiwa inner join k3rs_jenis_pekerjaan inner join k3rs_bagian_tubuh inner join k3rs_dampak_cidera 
-                inner join k3rs_jenis_cidera inner join k3rs_jenis_luka inner join k3rs_lokasi_kejadian inner join k3rs_penyebab inner join pegawai as peg1 
-                inner join pegawai as peg2 inner join pegawai as peg3 on k3rs_peristiwa.kode_pekerjaan=k3rs_jenis_pekerjaan.kode_pekerjaan and 
-                k3rs_peristiwa.kode_lokasi=k3rs_lokasi_kejadian.kode_lokasi and k3rs_peristiwa.kode_penyebab=k3rs_penyebab.kode_penyebab and 
-                k3rs_peristiwa.kode_cidera=k3rs_jenis_cidera.kode_cidera and k3rs_peristiwa.kode_luka=k3rs_jenis_luka.kode_luka and k3rs_peristiwa.kode_bagian=k3rs_bagian_tubuh.kode_bagian and 
-                k3rs_peristiwa.kode_dampak=k3rs_dampak_cidera.kode_dampak and k3rs_peristiwa.nik=peg1.nik and k3rs_peristiwa.nik_pelapor=peg2.nik and k3rs_peristiwa.nik_timk3=peg3.nik 
-                where k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_peristiwa.no_k3rs like $P{parameter} or 
-                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_jenis_pekerjaan.jenis_pekerjaan like $P{parameter} or 
-                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_lokasi_kejadian.lokasi_kejadian like $P{parameter} or 
-                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_penyebab.penyebab_kecelakaan like $P{parameter} or 
-                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_jenis_cidera.jenis_cidera like $P{parameter} or 
-                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_jenis_luka.jenis_luka like $P{parameter} or 
-                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_bagian_tubuh.bagian_tubuh like $P{parameter} or 
-                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_dampak_cidera.dampak_cidera like $P{parameter} or 
-                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and peg1.nama like $P{parameter} or 
-                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and peg2.nama like $P{parameter} or 
-                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and peg3.nama like $P{parameter} or 
-                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_peristiwa.kategori_cidera like $P{parameter} or 
+                k3rs_peristiwa.catatan from k3rs_peristiwa inner join k3rs_jenis_pekerjaan inner join k3rs_bagian_tubuh inner join k3rs_dampak_cidera
+                inner join k3rs_jenis_cidera inner join k3rs_jenis_luka inner join k3rs_lokasi_kejadian inner join k3rs_penyebab inner join pegawai as peg1
+                inner join pegawai as peg2 inner join pegawai as peg3 on k3rs_peristiwa.kode_pekerjaan=k3rs_jenis_pekerjaan.kode_pekerjaan and
+                k3rs_peristiwa.kode_lokasi=k3rs_lokasi_kejadian.kode_lokasi and k3rs_peristiwa.kode_penyebab=k3rs_penyebab.kode_penyebab and
+                k3rs_peristiwa.kode_cidera=k3rs_jenis_cidera.kode_cidera and k3rs_peristiwa.kode_luka=k3rs_jenis_luka.kode_luka and k3rs_peristiwa.kode_bagian=k3rs_bagian_tubuh.kode_bagian and
+                k3rs_peristiwa.kode_dampak=k3rs_dampak_cidera.kode_dampak and k3rs_peristiwa.nik=peg1.nik and k3rs_peristiwa.nik_pelapor=peg2.nik and k3rs_peristiwa.nik_timk3=peg3.nik
+                where k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_peristiwa.no_k3rs like $P{parameter} or
+                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_jenis_pekerjaan.jenis_pekerjaan like $P{parameter} or
+                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_lokasi_kejadian.lokasi_kejadian like $P{parameter} or
+                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_penyebab.penyebab_kecelakaan like $P{parameter} or
+                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_jenis_cidera.jenis_cidera like $P{parameter} or
+                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_jenis_luka.jenis_luka like $P{parameter} or
+                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_bagian_tubuh.bagian_tubuh like $P{parameter} or
+                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_dampak_cidera.dampak_cidera like $P{parameter} or
+                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and peg1.nama like $P{parameter} or
+                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and peg2.nama like $P{parameter} or
+                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and peg3.nama like $P{parameter} or
+                k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_peristiwa.kategori_cidera like $P{parameter} or
                 k3rs_peristiwa.tgl_pelaporan between $P{tanggal1} and $P{tanggal2} and k3rs_peristiwa.perbaikan_jenis_tindakan like $P{parameter} order by k3rs_peristiwa.tgl_pelaporan desc]]>
 	</queryString>
 	<field name="no_k3rs" class="java.lang.String">

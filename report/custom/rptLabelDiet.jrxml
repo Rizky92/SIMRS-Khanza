@@ -15,13 +15,13 @@
 	<parameter name="kontakrs" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select detail_beri_diet.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, pasien.tgl_lahir,
-concat(detail_beri_diet.kd_kamar,', ',bangsal.nm_bangsal) as kamar,detail_beri_diet.tanggal,detail_beri_diet.waktu,jam_diet_pasien.jam,diet.nama_diet 
-from detail_beri_diet inner join reg_periksa inner join pasien inner join diet inner join kamar inner join bangsal inner join jam_diet_pasien 
-on detail_beri_diet.no_rawat=reg_periksa.no_rawat 
-and detail_beri_diet.kd_kamar=kamar.kd_kamar 
-and kamar.kd_bangsal=bangsal.kd_bangsal 
-and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-and detail_beri_diet.kd_diet=diet.kd_diet 
+concat(detail_beri_diet.kd_kamar,', ',bangsal.nm_bangsal) as kamar,detail_beri_diet.tanggal,detail_beri_diet.waktu,jam_diet_pasien.jam,diet.nama_diet
+from detail_beri_diet inner join reg_periksa inner join pasien inner join diet inner join kamar inner join bangsal inner join jam_diet_pasien
+on detail_beri_diet.no_rawat=reg_periksa.no_rawat
+and detail_beri_diet.kd_kamar=kamar.kd_kamar
+and kamar.kd_bangsal=bangsal.kd_bangsal
+and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+and detail_beri_diet.kd_diet=diet.kd_diet
 and detail_beri_diet.waktu=jam_diet_pasien.waktu]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

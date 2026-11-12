@@ -30,9 +30,9 @@
                     skrining_perilaku_merokok_sekolah_remaja.tahu_merokok_pintu_masuk_narkoba,skrining_perilaku_merokok_sekolah_remaja.melihat_orang_merokok_di_sekolah,
                     skrining_perilaku_merokok_sekolah_remaja.orang_yang_paling_sering_merokok_disekolah,skrining_perilaku_merokok_sekolah_remaja.orang_yang_paling_sering_merokok_disekolah_keterangan,
                     skrining_perilaku_merokok_sekolah_remaja.ada_anggota_keluarga_di_rumah_yang_merokok,skrining_perilaku_merokok_sekolah_remaja.teman_dekat_banyakyang_merokok,
-                    skrining_perilaku_merokok_sekolah_remaja.dilakukan_pemeriksaan_kadar_co_pernapasan,skrining_perilaku_merokok_sekolah_remaja.hasil_pemeriksaan_co_pernapasan 
-                    from skrining_perilaku_merokok_sekolah_remaja inner join reg_periksa on skrining_perilaku_merokok_sekolah_remaja.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_perilaku_merokok_sekolah_remaja.nip=petugas.nip 
+                    skrining_perilaku_merokok_sekolah_remaja.dilakukan_pemeriksaan_kadar_co_pernapasan,skrining_perilaku_merokok_sekolah_remaja.hasil_pemeriksaan_co_pernapasan
+                    from skrining_perilaku_merokok_sekolah_remaja inner join reg_periksa on skrining_perilaku_merokok_sekolah_remaja.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_perilaku_merokok_sekolah_remaja.nip=petugas.nip
                     inner join master_sekolah on master_sekolah.kd_sekolah=skrining_perilaku_merokok_sekolah_remaja.kd_sekolah]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

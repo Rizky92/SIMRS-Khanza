@@ -27,16 +27,16 @@
 	<parameter name="tanggal2" class="java.lang.String"/>
 	<parameter name="cari" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select periksa_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan, 
+		<![CDATA[select periksa_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,
 sum(periksa_radiologi.bagian_rs) as bagian_rs,sum(periksa_radiologi.bhp) as bhp,sum(periksa_radiologi.tarif_perujuk) as tarif_perujuk,
 sum(periksa_radiologi.tarif_tindakan_dokter) as tarif_tindakan_dokter,sum(periksa_radiologi.tarif_tindakan_petugas) as tarif_tindakan_petugas,
 sum(periksa_radiologi.kso) as kso,sum(periksa_radiologi.menejemen) as menejemen,sum(periksa_radiologi.biaya) as biaya,count(periksa_radiologi.kd_jenis_prw) as jumlah
-from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat 
-inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat
+inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 inner join dokter on periksa_radiologi.kd_dokter=dokter.kd_dokter
-inner join dokter as perujuk on periksa_radiologi.dokter_perujuk=perujuk.kd_dokter 
-inner join petugas on periksa_radiologi.nip=petugas.nip 
-inner join penjab on reg_periksa.kd_pj=penjab.kd_pj 
+inner join dokter as perujuk on periksa_radiologi.dokter_perujuk=perujuk.kd_dokter
+inner join petugas on periksa_radiologi.nip=petugas.nip
+inner join penjab on reg_periksa.kd_pj=penjab.kd_pj
 inner join jns_perawatan_radiologi on periksa_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw]]>
 	</queryString>
 	<field name="kd_jenis_prw" class="java.lang.String">

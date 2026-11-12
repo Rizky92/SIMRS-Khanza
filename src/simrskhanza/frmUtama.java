@@ -8142,6 +8142,7 @@ public class frmUtama extends javax.swing.JFrame {
         }else{
             isTampil();
         }
+        label35.requestFocus();
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnMenuActionPerformed
 

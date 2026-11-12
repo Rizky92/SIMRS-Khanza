@@ -24,10 +24,10 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select surat_skbn.no_surat,surat_skbn.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, 
-surat_skbn.tanggalsurat,surat_skbn.kategori,surat_skbn.kd_dokter,dokter.nm_dokter,surat_skbn.keperluan, 
+		<![CDATA[select surat_skbn.no_surat,surat_skbn.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,
+surat_skbn.tanggalsurat,surat_skbn.kategori,surat_skbn.kd_dokter,dokter.nm_dokter,surat_skbn.keperluan,
 surat_skbn.opiat,surat_skbn.ganja,surat_skbn.amphetamin,surat_skbn.methamphetamin,surat_skbn.benzodiazepin,surat_skbn.cocain
-from surat_skbn inner join reg_periksa on surat_skbn.no_rawat=reg_periksa.no_rawat 
+from surat_skbn inner join reg_periksa on surat_skbn.no_rawat=reg_periksa.no_rawat
 inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 inner join dokter on surat_skbn.kd_dokter=dokter.kd_dokter]]>
 	</queryString>

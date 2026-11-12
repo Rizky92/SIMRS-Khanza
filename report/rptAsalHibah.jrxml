@@ -24,7 +24,7 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select pemberihibah.kode_pemberi, pemberihibah.nama_pemberi, 
+		<![CDATA[select pemberihibah.kode_pemberi, pemberihibah.nama_pemberi,
  pemberihibah.alamat,pemberihibah.kota, pemberihibah.no_telp from pemberihibah]]>
 	</queryString>
 	<field name="kode_pemberi" class="java.lang.String">

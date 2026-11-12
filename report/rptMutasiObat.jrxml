@@ -28,9 +28,9 @@
 mutasibarang.kd_bangsalke,bangsalke.nm_bangsal as ke,
 mutasibarang.kode_brng,databarang.nama_brng,mutasibarang.jml,mutasibarang.harga,(mutasibarang.jml*mutasibarang.harga)  as total,
 mutasibarang.tanggal,mutasibarang.keterangan,mutasibarang.no_batch,mutasibarang.no_faktur
-from mutasibarang inner join databarang on mutasibarang.kode_brng=databarang.kode_brng 
-inner join bangsal as bangsaldari on mutasibarang.kd_bangsaldari=bangsaldari.kd_bangsal 
-inner join bangsal as bangsalke on mutasibarang.kd_bangsalke=bangsalke.kd_bangsal 
+from mutasibarang inner join databarang on mutasibarang.kode_brng=databarang.kode_brng
+inner join bangsal as bangsaldari on mutasibarang.kd_bangsaldari=bangsaldari.kd_bangsal
+inner join bangsal as bangsalke on mutasibarang.kd_bangsalke=bangsalke.kd_bangsal
 inner join jenis on databarang.kdjns=jenis.kdjns
 inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode
 inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode ]]>

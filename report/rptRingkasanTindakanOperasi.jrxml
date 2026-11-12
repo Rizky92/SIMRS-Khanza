@@ -32,12 +32,12 @@
                        sum(operasi.biaya_omloop5) as biaya_omloop5,sum(operasi.biaya_dokter_pjanak) as biaya_dokter_pjanak,
                        sum(operasi.biaya_dokter_umum) as biaya_dokter_umum,sum(operasi.biayaalat) as biayaalat,
                        sum(operasi.biayasewaok) as biayasewaok,sum(operasi.akomodasi) as akomodasi,
-                       sum(operasi.bagian_rs) as bagian_rs,sum(operasi.biayasarpras) as biayasarpras,count(operasi.kode_paket) as jumlah 
-                       from operasi inner join reg_periksa on operasi.no_rawat=reg_periksa.no_rawat 
-                       inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                       inner join paket_operasi on operasi.kode_paket=paket_operasi.kode_paket 
-                       inner join penjab on reg_periksa.kd_pj=penjab.kd_pj 
-                       inner join dokter as operator1 on operator1.kd_dokter=operasi.operator1 
+                       sum(operasi.bagian_rs) as bagian_rs,sum(operasi.biayasarpras) as biayasarpras,count(operasi.kode_paket) as jumlah
+                       from operasi inner join reg_periksa on operasi.no_rawat=reg_periksa.no_rawat
+                       inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                       inner join paket_operasi on operasi.kode_paket=paket_operasi.kode_paket
+                       inner join penjab on reg_periksa.kd_pj=penjab.kd_pj
+                       inner join dokter as operator1 on operator1.kd_dokter=operasi.operator1
                        inner join petugas as asisten_operator1 on asisten_operator1.nip=operasi.asisten_operator1]]>
 	</queryString>
 	<field name="kode_paket" class="java.lang.String">

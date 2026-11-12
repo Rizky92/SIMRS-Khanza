@@ -26,12 +26,12 @@
 pasien.nm_pasien,booking_registrasi.tanggal_periksa,booking_registrasi.kd_dokter,pasien.no_tlp,
 dokter.nm_dokter,booking_registrasi.kd_poli,poliklinik.nm_poli,booking_registrasi.no_reg,
 pasien.namakeluarga,pasien.alamatpj,pasien.kelurahanpj,pasien.kecamatanpj,
-pasien.kabupatenpj,pasien.propinsipj,pasien.keluarga,pasien.kd_pj,TIMESTAMPDIFF(YEAR, pasien.tgl_lahir, CURDATE()) as tahun, 
-(TIMESTAMPDIFF(MONTH, pasien.tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, pasien.tgl_lahir, CURDATE()) div 12) * 12)) as bulan, 
+pasien.kabupatenpj,pasien.propinsipj,pasien.keluarga,pasien.kd_pj,TIMESTAMPDIFF(YEAR, pasien.tgl_lahir, CURDATE()) as tahun,
+(TIMESTAMPDIFF(MONTH, pasien.tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, pasien.tgl_lahir, CURDATE()) div 12) * 12)) as bulan,
 TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(pasien.tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, pasien.tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, pasien.tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, pasien.tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()) as hari,
 booking_registrasi.limit_reg,booking_registrasi.status,booking_registrasi.kd_pj,penjab.png_jawab from booking_registrasi inner join pasien
-inner join dokter inner join poliklinik inner join penjab on 
-booking_registrasi.no_rkm_medis=pasien.no_rkm_medis and booking_registrasi.kd_pj=penjab.kd_pj and 
+inner join dokter inner join poliklinik inner join penjab on
+booking_registrasi.no_rkm_medis=pasien.no_rkm_medis and booking_registrasi.kd_pj=penjab.kd_pj and
 booking_registrasi.kd_dokter=dokter.kd_dokter and booking_registrasi.kd_poli=poliklinik.kd_poli]]>
 	</queryString>
 	<field name="tanggal_booking" class="java.sql.Date">

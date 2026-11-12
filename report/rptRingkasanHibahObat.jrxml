@@ -22,15 +22,15 @@
 	<parameter name="barang" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select detailhibah_obat_bhp.kode_brng,databarang.nama_brng,databarang.kode_sat,kodesatuan.satuan,
-jenis.nama as namajenis,sum(detailhibah_obat_bhp.jumlah2) as jumlah,sum(detailhibah_obat_bhp.subtotaldiakui) as total 
-from hibah_obat_bhp inner join pemberihibah inner join petugas inner join bangsal  
-inner join detailhibah_obat_bhp inner join databarang inner join kodesatuan inner join jenis 
- inner join industrifarmasi on detailhibah_obat_bhp.kode_brng=databarang.kode_brng 
+jenis.nama as namajenis,sum(detailhibah_obat_bhp.jumlah2) as jumlah,sum(detailhibah_obat_bhp.subtotaldiakui) as total
+from hibah_obat_bhp inner join pemberihibah inner join petugas inner join bangsal
+inner join detailhibah_obat_bhp inner join databarang inner join kodesatuan inner join jenis
+ inner join industrifarmasi on detailhibah_obat_bhp.kode_brng=databarang.kode_brng
 and databarang.kode_sat=kodesatuan.kode_sat
-and hibah_obat_bhp.kd_bangsal=bangsal.kd_bangsal 
- and hibah_obat_bhp.no_hibah=detailhibah_obat_bhp.no_hibah 
-and hibah_obat_bhp.kode_pemberi=pemberihibah.kode_pemberi 
-and databarang.kode_industri=industrifarmasi.kode_industri 
+and hibah_obat_bhp.kd_bangsal=bangsal.kd_bangsal
+ and hibah_obat_bhp.no_hibah=detailhibah_obat_bhp.no_hibah
+and hibah_obat_bhp.kode_pemberi=pemberihibah.kode_pemberi
+and databarang.kode_industri=industrifarmasi.kode_industri
 and hibah_obat_bhp.nip=petugas.nip and databarang.kdjns=jenis.kdjns]]>
 	</queryString>
 	<field name="kode_brng" class="java.lang.String">

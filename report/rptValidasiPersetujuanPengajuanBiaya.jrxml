@@ -26,9 +26,9 @@
 		<![CDATA[select pengajuan_biaya.no_pengajuan,pengajuan_biaya.tanggal,pengajuan_biaya.nik,peg1.nama as namapengaju,
                    peg1.bidang,peg1.departemen,pengajuan_biaya.urgensi,pengajuan_biaya.uraian_latar_belakang,pengajuan_biaya.tujuan_pengajuan,
                    pengajuan_biaya.target_sasaran,pengajuan_biaya.lokasi_kegiatan,pengajuan_biaya_disetujui.jumlah,pengajuan_biaya_disetujui.harga,
-                   pengajuan_biaya_disetujui.total,pengajuan_biaya.keterangan,pengajuan_biaya.nik_pj,peg2.nama as namapj,pengajuan_biaya.status 
-                   from pengajuan_biaya inner join pegawai as peg1 on pengajuan_biaya.nik=peg1.nik 
-                   inner join pegawai as peg2 on pengajuan_biaya.nik_pj=peg2.nik 
+                   pengajuan_biaya_disetujui.total,pengajuan_biaya.keterangan,pengajuan_biaya.nik_pj,peg2.nama as namapj,pengajuan_biaya.status
+                   from pengajuan_biaya inner join pegawai as peg1 on pengajuan_biaya.nik=peg1.nik
+                   inner join pegawai as peg2 on pengajuan_biaya.nik_pj=peg2.nik
                    inner join pengajuan_biaya_disetujui on pengajuan_biaya_disetujui.no_pengajuan=pengajuan_biaya.no_pengajuan]]>
 	</queryString>
 	<field name="no_pengajuan" class="java.lang.String">

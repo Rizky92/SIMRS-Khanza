@@ -21,8 +21,8 @@
 	kamar.status
 FROM bangsal,
 	kamar
-WHERE 
-	 kamar.kd_bangsal = bangsal.kd_bangsal 
+WHERE
+	 kamar.kd_bangsal = bangsal.kd_bangsal
 ORDER BY kd_kamar DESC]]>
 	</queryString>
 	<field name="kd_kamar" class="java.lang.String">

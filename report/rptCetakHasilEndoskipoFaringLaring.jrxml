@@ -34,9 +34,9 @@
                 hasil_endoskopi_faring_laring.faring_tonsil,hasil_endoskopi_faring_laring.laring_tonsil_lingual,hasil_endoskopi_faring_laring.laring_valekula,
                 hasil_endoskopi_faring_laring.laring_sinus_piriformis,hasil_endoskopi_faring_laring.laring_epiglotis,hasil_endoskopi_faring_laring.laring_arytenoid,
                 hasil_endoskopi_faring_laring.laring_plika_ventrikularis,hasil_endoskopi_faring_laring.laring_pita_suara,hasil_endoskopi_faring_laring.laring_rima_vocalis,
-                hasil_endoskopi_faring_laring.laring_lainlain,hasil_endoskopi_faring_laring.kesan,hasil_endoskopi_faring_laring.saran 
-                from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                inner join hasil_endoskopi_faring_laring on reg_periksa.no_rawat=hasil_endoskopi_faring_laring.no_rawat 
+                hasil_endoskopi_faring_laring.laring_lainlain,hasil_endoskopi_faring_laring.kesan,hasil_endoskopi_faring_laring.saran
+                from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                inner join hasil_endoskopi_faring_laring on reg_periksa.no_rawat=hasil_endoskopi_faring_laring.no_rawat
                 inner join dokter on hasil_endoskopi_faring_laring.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

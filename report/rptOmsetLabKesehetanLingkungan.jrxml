@@ -17,9 +17,9 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select DATE_FORMAT(labkesling_pembayaran_pengujian_sampel.tanggal,'%Y-%m-%d'),labkesling_pembayaran_pengujian_sampel.no_pembayaran,labkesling_pembayaran_pengujian_sampel.no_permintaan,
-                    labkesling_permintaan_pengujian_sampel.kode_pelanggan,labkesling_pelanggan.nama_pelanggan,labkesling_detail_pembayaran_pengujian_sampel.nama_bayar,labkesling_detail_pembayaran_pengujian_sampel.besar_bayar 
-                    from labkesling_pembayaran_pengujian_sampel inner join labkesling_permintaan_pengujian_sampel on labkesling_pembayaran_pengujian_sampel.no_permintaan=labkesling_permintaan_pengujian_sampel.no_permintaan 
-                    inner join labkesling_pelanggan on labkesling_permintaan_pengujian_sampel.kode_pelanggan=labkesling_pelanggan.kode_pelanggan 
+                    labkesling_permintaan_pengujian_sampel.kode_pelanggan,labkesling_pelanggan.nama_pelanggan,labkesling_detail_pembayaran_pengujian_sampel.nama_bayar,labkesling_detail_pembayaran_pengujian_sampel.besar_bayar
+                    from labkesling_pembayaran_pengujian_sampel inner join labkesling_permintaan_pengujian_sampel on labkesling_pembayaran_pengujian_sampel.no_permintaan=labkesling_permintaan_pengujian_sampel.no_permintaan
+                    inner join labkesling_pelanggan on labkesling_permintaan_pengujian_sampel.kode_pelanggan=labkesling_pelanggan.kode_pelanggan
                     inner join labkesling_detail_pembayaran_pengujian_sampel on labkesling_detail_pembayaran_pengujian_sampel.no_pembayaran=labkesling_pembayaran_pengujian_sampel.no_pembayaran]]>
 	</queryString>
 	<field name="DATE_FORMAT(labkesling_pembayaran_pengujian_sampel.tanggal,&apos;%Y-%m-%d&apos;)" class="java.lang.String">

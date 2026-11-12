@@ -28,7 +28,7 @@
 perawatan_corona.kantong_jenazah,perawatan_corona.peti_jenazah,perawatan_corona.plastik_erat,perawatan_corona.desinfektan_jenazah,
 perawatan_corona.mobil_jenazah,perawatan_corona.desinfektan_mobil_jenazah,perawatan_corona.covid19_status_cd,perawatan_corona.nomor_kartu_t,
 perawatan_corona.episodes1,perawatan_corona.episodes2,perawatan_corona.episodes3,perawatan_corona.episodes4,perawatan_corona.episodes5,
-perawatan_corona.episodes6,perawatan_corona.covid19_cc_ind from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+perawatan_corona.episodes6,perawatan_corona.covid19_cc_ind from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 inner join perawatan_corona on perawatan_corona.no_rawat=reg_periksa.no_rawat]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">
@@ -208,7 +208,7 @@ Jenazah]]></text>
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Ruang ICU 
+				<text><![CDATA[Ruang ICU
 Tanpa Ventilator]]></text>
 			</staticText>
 			<staticText>
@@ -409,7 +409,7 @@ Mobil Jenazah]]></text>
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Ruang ICU 
+				<text><![CDATA[Ruang ICU
 Dengan Ventilator]]></text>
 			</staticText>
 			<line>

@@ -31,7 +31,7 @@
     reg_periksa.biaya_reg,
     reg_periksa.stts_daftar,
     penjab.png_jawab
-from reg_periksa 
+from reg_periksa
 inner join dokter on reg_periksa.kd_dokter = dokter.kd_dokter
 inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis
 inner join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli

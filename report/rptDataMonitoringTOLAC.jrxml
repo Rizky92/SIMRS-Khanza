@@ -21,8 +21,8 @@
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,
 monitoring_tolac.tgl_perawatan,monitoring_tolac.jam_rawat,monitoring_tolac.his_frekuensi,monitoring_tolac.his_durasi_detik,monitoring_tolac.djj,
 monitoring_tolac.nadi,monitoring_tolac.td,monitoring_tolac.pembukaan_cm,monitoring_tolac.tanda_bahaya,monitoring_tolac.keterangan,
-monitoring_tolac.nip,petugas.nama from monitoring_tolac inner join reg_periksa on monitoring_tolac.no_rawat=reg_periksa.no_rawat 
-inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on monitoring_tolac.nip=petugas.nip 
+monitoring_tolac.nip,petugas.nama from monitoring_tolac inner join reg_periksa on monitoring_tolac.no_rawat=reg_periksa.no_rawat
+inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on monitoring_tolac.nip=petugas.nip
 order by monitoring_tolac.tgl_perawatan,monitoring_tolac.jam_rawat]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String"/>

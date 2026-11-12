@@ -24,7 +24,7 @@ if(bridging_rujukan_bpjs.jnsPelayanan='1','1. Rawat Inap','2. Rawat Jalan') as j
 bridging_rujukan_bpjs.tipeRujukan,bridging_rujukan_bpjs.catatan,
 bridging_rujukan_bpjs.diagRujukan,bridging_rujukan_bpjs.nama_diagRujukan,
 bridging_rujukan_bpjs.poliRujukan,bridging_rujukan_bpjs.nama_poliRujukan,bridging_sep.no_kartu,
-if(bridging_sep.jkel='L','Laki-Laki','Perempuan') as jkel,bridging_rujukan_bpjs.tglRencanaKunjungan  
+if(bridging_sep.jkel='L','Laki-Laki','Perempuan') as jkel,bridging_rujukan_bpjs.tglRencanaKunjungan
 from bridging_sep inner join bridging_rujukan_bpjs on bridging_rujukan_bpjs.no_sep=bridging_sep.no_sep
 where bridging_rujukan_bpjs.no_rujukan=$P{norujuk}]]>
 	</queryString>

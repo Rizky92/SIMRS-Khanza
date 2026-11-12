@@ -29,11 +29,11 @@
 	<queryString>
 		<![CDATA[select rawat_inap_pr.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,
 sum(rawat_inap_pr.material) as material,sum(rawat_inap_pr.bhp) as bhp,sum(rawat_inap_pr.tarif_tindakanpr) as tarif_tindakanpr,
-sum(rawat_inap_pr.kso) as kso,sum(rawat_inap_pr.menejemen) as menejemen,sum(rawat_inap_pr.biaya_rawat) as biaya_rawat,count(rawat_inap_pr.kd_jenis_prw) as jumlah 
+sum(rawat_inap_pr.kso) as kso,sum(rawat_inap_pr.menejemen) as menejemen,sum(rawat_inap_pr.biaya_rawat) as biaya_rawat,count(rawat_inap_pr.kd_jenis_prw) as jumlah
 from pasien inner join reg_periksa on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
-inner join rawat_inap_pr on rawat_inap_pr.no_rawat=reg_periksa.no_rawat 
+inner join rawat_inap_pr on rawat_inap_pr.no_rawat=reg_periksa.no_rawat
 inner join jns_perawatan_inap on rawat_inap_pr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw
-inner join petugas on rawat_inap_pr.nip=petugas.nip 
+inner join petugas on rawat_inap_pr.nip=petugas.nip
 inner join penjab on reg_periksa.kd_pj=penjab.kd_pj]]>
 	</queryString>
 	<field name="kd_jenis_prw" class="java.lang.String">

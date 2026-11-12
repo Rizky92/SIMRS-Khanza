@@ -25,9 +25,9 @@
                     skor_aldrette_pasca_anestesi.penilaian_skala4,skor_aldrette_pasca_anestesi.penilaian_nilai4,
                     skor_aldrette_pasca_anestesi.penilaian_skala5,skor_aldrette_pasca_anestesi.penilaian_nilai5,
                     skor_aldrette_pasca_anestesi.penilaian_totalnilai,skor_aldrette_pasca_anestesi.keluar,
-                    skor_aldrette_pasca_anestesi.instruksi,skor_aldrette_pasca_anestesi.kd_dokter,dokter.nm_dokter,skor_aldrette_pasca_anestesi.nip,petugas.nama 
-                    from skor_aldrette_pasca_anestesi inner join reg_periksa on skor_aldrette_pasca_anestesi.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    skor_aldrette_pasca_anestesi.instruksi,skor_aldrette_pasca_anestesi.kd_dokter,dokter.nm_dokter,skor_aldrette_pasca_anestesi.nip,petugas.nama
+                    from skor_aldrette_pasca_anestesi inner join reg_periksa on skor_aldrette_pasca_anestesi.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join dokter on skor_aldrette_pasca_anestesi.kd_dokter=dokter.kd_dokter
                     inner join petugas on skor_aldrette_pasca_anestesi.nip=petugas.nip]]>
 	</queryString>

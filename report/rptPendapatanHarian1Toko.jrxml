@@ -16,7 +16,7 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select tokopenjualan.tgl_jual,tokopenjualan.nip,petugas.nama,sum(tokopenjualan.ongkir)as ongkir,
-sum(tokopenjualan.total)as total,sum(tokopenjualan.ppn) as ppn 
+sum(tokopenjualan.total)as total,sum(tokopenjualan.ppn) as ppn
 from tokopenjualan inner join petugas on tokopenjualan.nip=petugas.nip]]>
 	</queryString>
 	<field name="tgl_jual" class="java.sql.Date">

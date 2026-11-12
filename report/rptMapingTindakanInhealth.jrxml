@@ -26,8 +26,8 @@
 	<parameter name="parameter" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select inhealth_tindakan_ralan.kd_jenis_prw,jns_perawatan.nm_perawatan,jns_perawatan.total_byrdr,jns_perawatan.total_byrpr,jns_perawatan.total_byrdrpr,inhealth_tindakan_ralan.kd_inhealth
-from inhealth_tindakan_ralan inner join jns_perawatan on inhealth_tindakan_ralan.kd_jenis_prw=jns_perawatan.kd_jenis_prw  where 
-inhealth_tindakan_ralan.kd_jenis_prw like $P{parameter} or jns_perawatan.nm_perawatan like $P{parameter} or inhealth_tindakan_ralan.kd_inhealth 
+from inhealth_tindakan_ralan inner join jns_perawatan on inhealth_tindakan_ralan.kd_jenis_prw=jns_perawatan.kd_jenis_prw  where
+inhealth_tindakan_ralan.kd_jenis_prw like $P{parameter} or jns_perawatan.nm_perawatan like $P{parameter} or inhealth_tindakan_ralan.kd_inhealth
 like $P{parameter} order by jns_perawatan.nm_perawatan]]>
 	</queryString>
 	<field name="kd_jenis_prw" class="java.lang.String">

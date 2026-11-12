@@ -16,8 +16,8 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select surat_kewaspadaan_kesehatan.no_surat,surat_kewaspadaan_kesehatan.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,
-surat_kewaspadaan_kesehatan.tanggalperiksa,surat_kewaspadaan_kesehatan.keluhan_saat_ini,reg_periksa.kd_dokter,dokter.nm_dokter,surat_kewaspadaan_kesehatan.keperluan 
-from surat_kewaspadaan_kesehatan inner join reg_periksa on surat_kewaspadaan_kesehatan.no_rawat=reg_periksa.no_rawat 
+surat_kewaspadaan_kesehatan.tanggalperiksa,surat_kewaspadaan_kesehatan.keluhan_saat_ini,reg_periksa.kd_dokter,dokter.nm_dokter,surat_kewaspadaan_kesehatan.keperluan
+from surat_kewaspadaan_kesehatan inner join reg_periksa on surat_kewaspadaan_kesehatan.no_rawat=reg_periksa.no_rawat
 inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on dokter.kd_dokter=reg_periksa.kd_dokter]]>
 	</queryString>
 	<field name="no_surat" class="java.lang.String">

@@ -31,11 +31,11 @@
 	<queryString>
 		<![CDATA[select sisa_diet_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,concat(sisa_diet_pasien.kd_kamar,', ',bangsal.nm_bangsal) as namakamar,
                 sisa_diet_pasien.tanggal,sisa_diet_pasien.waktu,jam_diet_pasien.jam,sisa_diet_pasien.kd_kamar,sisa_diet_pasien.karbohidrat,
-                sisa_diet_pasien.hewani,sisa_diet_pasien.nabati,sisa_diet_pasien.sayur,sisa_diet_pasien.buah  
-                from sisa_diet_pasien inner join reg_periksa on sisa_diet_pasien.no_rawat=reg_periksa.no_rawat 
-                inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                inner join kamar on sisa_diet_pasien.kd_kamar=kamar.kd_kamar 
-                inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal 
+                sisa_diet_pasien.hewani,sisa_diet_pasien.nabati,sisa_diet_pasien.sayur,sisa_diet_pasien.buah
+                from sisa_diet_pasien inner join reg_periksa on sisa_diet_pasien.no_rawat=reg_periksa.no_rawat
+                inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                inner join kamar on sisa_diet_pasien.kd_kamar=kamar.kd_kamar
+                inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal
                 inner join jam_diet_pasien on sisa_diet_pasien.waktu=jam_diet_pasien.waktu]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

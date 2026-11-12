@@ -26,9 +26,9 @@
 	<queryString>
 		<![CDATA[select tokopiutang.tgl_piutang,tokopiutang.nota_piutang,toko_detail_piutang.kode_brng,tokobarang.nama_brng,kodesatuan.satuan,toko_detail_piutang.h_jual,toko_detail_piutang.jumlah,
 toko_detail_piutang.subtotal,toko_detail_piutang.dis,toko_detail_piutang.bsr_dis,toko_detail_piutang.total, toko_detail_piutang.h_beli,(toko_detail_piutang.h_beli * toko_detail_piutang.jumlah) as total_asal,
-(toko_detail_piutang.total-(toko_detail_piutang.h_beli * toko_detail_piutang.jumlah)) as keuntungan 
-from tokopiutang inner join toko_detail_piutang on tokopiutang.nota_piutang=toko_detail_piutang.nota_piutang 
-inner join tokobarang on toko_detail_piutang.kode_brng=tokobarang.kode_brng 
+(toko_detail_piutang.total-(toko_detail_piutang.h_beli * toko_detail_piutang.jumlah)) as keuntungan
+from tokopiutang inner join toko_detail_piutang on tokopiutang.nota_piutang=toko_detail_piutang.nota_piutang
+inner join tokobarang on toko_detail_piutang.kode_brng=tokobarang.kode_brng
 inner join kodesatuan on toko_detail_piutang.kode_sat=kodesatuan.kode_sat]]>
 	</queryString>
 	<field name="tgl_piutang" class="java.sql.Date">

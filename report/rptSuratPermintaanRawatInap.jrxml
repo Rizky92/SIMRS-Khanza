@@ -18,13 +18,13 @@
 	<queryString>
 		<![CDATA[select permintaan_ranap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur,
 pasien.no_tlp,penjab.png_jawab,poliklinik.nm_poli,dokter.nm_dokter,permintaan_ranap.tanggal,permintaan_ranap.kd_kamar,kamar.kd_bangsal,
-bangsal.nm_bangsal,kamar.trf_kamar,permintaan_ranap.diagnosa,permintaan_ranap.alasan,permintaan_ranap.catatan from permintaan_ranap 
-inner join reg_periksa on permintaan_ranap.no_rawat=reg_periksa.no_rawat 
-inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-inner join penjab on reg_periksa.kd_pj=penjab.kd_pj 
+bangsal.nm_bangsal,kamar.trf_kamar,permintaan_ranap.diagnosa,permintaan_ranap.alasan,permintaan_ranap.catatan from permintaan_ranap
+inner join reg_periksa on permintaan_ranap.no_rawat=reg_periksa.no_rawat
+inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+inner join penjab on reg_periksa.kd_pj=penjab.kd_pj
 inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter
 inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli
-inner join kamar on permintaan_ranap.kd_kamar=kamar.kd_kamar 
+inner join kamar on permintaan_ranap.kd_kamar=kamar.kd_kamar
 inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal
 where permintaan_ranap.no_rawat not in (select DISTINCT no_rawat from kamar_inap)]]>
 	</queryString>

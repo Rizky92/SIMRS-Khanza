@@ -45,12 +45,12 @@ bridging_sep_internal.nmppkrujukan,bridging_sep_internal.kdppkpelayanan,bridging
 if(bridging_sep_internal.jnspelayanan='1','Rawat Inap','Rawat Jalan'),bridging_sep_internal.catatan,bridging_sep_internal.diagawal,
 bridging_sep_internal.nmdiagnosaawal,bridging_sep_internal.kdpolitujuan,bridging_sep_internal.nmpolitujuan,
 if(bridging_sep_internal.klsrawat='1','Kelas 1',if(bridging_sep_internal.klsrawat='2','Kelas 2','Kelas 3')),
-if(bridging_sep_internal.lakalantas='0','Kasus Kecelakaan','Bukan Kasus Kecelakaan'),concat(bridging_sep_internal.nmkec,', ',bridging_sep_internal.nmkab,', ',bridging_sep_internal.nmprop) as lokasilaka,bridging_sep_internal.user, 
+if(bridging_sep_internal.lakalantas='0','Kasus Kecelakaan','Bukan Kasus Kecelakaan'),concat(bridging_sep_internal.nmkec,', ',bridging_sep_internal.nmkab,', ',bridging_sep_internal.nmprop) as lokasilaka,bridging_sep_internal.user,
 bridging_sep_internal.tanggal_lahir,bridging_sep_internal.peserta,bridging_sep_internal.jkel,bridging_sep_internal.no_kartu,
 bridging_sep_internal.asal_rujukan,bridging_sep_internal.eksekutif,bridging_sep_internal.cob,bridging_sep_internal.notelep,
 bridging_sep_internal.tujuankunjungan,bridging_sep_internal.flagprosedur,bridging_sep_internal.klsnaik,bridging_sep_internal.pembiayaan,
-bridging_sep_internal.nmdpdjp,bridging_sep_internal.lakalantas from bridging_sep_internal 
-where bridging_sep_internal.no_sep= $P{no_sep} and bridging_sep_internal.noskdp=$P{noskdp}  
+bridging_sep_internal.nmdpdjp,bridging_sep_internal.lakalantas from bridging_sep_internal
+where bridging_sep_internal.no_sep= $P{no_sep} and bridging_sep_internal.noskdp=$P{noskdp}
 and bridging_sep_internal.tglrujukan=$P{tglrujukan}  and bridging_sep_internal.kdpolitujuan=$P{kdpolitujuan}]]>
 	</queryString>
 	<field name="no_sep" class="java.lang.String">

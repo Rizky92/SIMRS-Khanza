@@ -16,10 +16,10 @@
 	<queryString>
 		<![CDATA[select penjualan.nota_jual,penjualan.tgl_jual,
 penjualan.no_rkm_medis,penjualan.nm_pasien,databarang.nama_brng,
-detailjual.aturan_pakai,detailjual.jumlah,kodesatuan.satuan,jenis.nama as jenis 
-from penjualan inner join detailjual on penjualan.nota_jual=detailjual.nota_jual 
-inner join databarang on detailjual.kode_brng=databarang.kode_brng 
-inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat 
+detailjual.aturan_pakai,detailjual.jumlah,kodesatuan.satuan,jenis.nama as jenis
+from penjualan inner join detailjual on penjualan.nota_jual=detailjual.nota_jual
+inner join databarang on detailjual.kode_brng=databarang.kode_brng
+inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat
 inner join jenis on databarang.kdjns=jenis.kdjns
 where detailjual.aturan_pakai<>'']]>
 	</queryString>
@@ -67,7 +67,7 @@ where detailjual.aturan_pakai<>'']]>
 		<band height="103" splitType="Stretch">
 			<rectangle>
 				<reportElement mode="Opaque" x="0" y="0" width="174" height="103" forecolor="#9999FF" backcolor="#9999FF" uuid="6d6908a5-d802-4091-b350-205f5577a8bd">
-					<printWhenExpression><![CDATA[($F{jenis}.toLowerCase().equals("obat luar")||$F{jenis}.toLowerCase().equals("suntik") ? 
+					<printWhenExpression><![CDATA[($F{jenis}.toLowerCase().equals("obat luar")||$F{jenis}.toLowerCase().equals("suntik") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>

@@ -28,15 +28,15 @@
 dpjp_ranap.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,
 concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,date_format(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,
 reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,
-reg_periksa.stts_daftar,penjab.png_jawab,pasien.no_tlp,reg_periksa.stts,reg_periksa.status_poli, 
+reg_periksa.stts_daftar,penjab.png_jawab,pasien.no_tlp,reg_periksa.stts,reg_periksa.status_poli,
 kamar_inap.kd_kamar,bangsal.nm_bangsal,
-reg_periksa.kd_pj from reg_periksa 
+reg_periksa.kd_pj from reg_periksa
 inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 inner join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat
 inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar
 inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal
 inner join dpjp_ranap on reg_periksa.no_rawat=dpjp_ranap.no_rawat
-inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter 
+inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter
 inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where reg_periksa.no_rawat= $P{no_rawat}
 order by kamar_inap.tgl_masuk desc]]>
 	</queryString>

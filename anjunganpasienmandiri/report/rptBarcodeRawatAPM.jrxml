@@ -8,14 +8,14 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="norawat" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select 
-reg_periksa.no_rkm_medis, 
-pasien.nm_pasien, 
-pasien.tgl_lahir, 
+		<![CDATA[select
+reg_periksa.no_rkm_medis,
+pasien.nm_pasien,
+pasien.tgl_lahir,
 reg_periksa.umurdaftar,
 reg_periksa.sttsumur
-from reg_periksa 
-join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis 
+from reg_periksa
+join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis
 where reg_periksa.no_rawat = $P{norawat}]]>
 	</queryString>
 	<field name="no_rkm_medis" class="java.lang.String">

@@ -29,9 +29,9 @@
                     penilaian_lanjutan_skrining_fungsional.penilaian_skrining_skala9,penilaian_lanjutan_skrining_fungsional.penilaian_skrining_nilai9,
                     penilaian_lanjutan_skrining_fungsional.penilaian_skrining_skala10,penilaian_lanjutan_skrining_fungsional.penilaian_skrining_nilai10,
                     penilaian_lanjutan_skrining_fungsional.penilaian_skrining_totalnilai,
-                    penilaian_lanjutan_skrining_fungsional.nip,petugas.nama 
-                    from penilaian_lanjutan_skrining_fungsional inner join reg_periksa on penilaian_lanjutan_skrining_fungsional.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    penilaian_lanjutan_skrining_fungsional.nip,petugas.nama
+                    from penilaian_lanjutan_skrining_fungsional inner join reg_periksa on penilaian_lanjutan_skrining_fungsional.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join petugas on penilaian_lanjutan_skrining_fungsional.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">
@@ -617,7 +617,7 @@
 					<font fontName="Tahoma" size="7" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[4. Menggunakan WC (In/Out, Lepas 
+				<text><![CDATA[4. Menggunakan WC (In/Out, Lepas
     Pakaian/Celana, Siram)]]></text>
 			</staticText>
 			<staticText>

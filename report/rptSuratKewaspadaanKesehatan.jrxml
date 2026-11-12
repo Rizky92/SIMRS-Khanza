@@ -26,7 +26,7 @@
 pasien.nm_pasien,DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y')as tgl_lahir,pasien.tmp_lahir,pasien.no_ktp,dokter.kd_dokter,
 concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,surat_kewaspadaan_kesehatan.keperluan
 from surat_kewaspadaan_kesehatan inner join reg_periksa inner join pasien inner join dokter inner join kelurahan inner join kecamatan inner join kabupaten
-on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_dokter=dokter.kd_dokter and pasien.kd_kel=kelurahan.kd_kel and 
+on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_dokter=dokter.kd_dokter and pasien.kd_kel=kelurahan.kd_kel and
 pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab and reg_periksa.no_rawat=surat_kewaspadaan_kesehatan.no_rawat]]>
 	</queryString>
 	<field name="no_surat" class="java.lang.String">
@@ -501,9 +501,9 @@ pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab and reg_periks
 				<text><![CDATA[*Bila ada kecurigaan tertularnya penyakit tersebut anda diminta melaporkan segera ke   Puskesmas/Dinas Kesehatan terdekat.
 *Surat ini BUKAN surat bebas COVID-19
 *Surat kewaspadaan ini dipergunakan untuk kepentingan"
-1. Persyaratan berkas administratif pendidikan (melamar sekolah, beasiswa, 
+1. Persyaratan berkas administratif pendidikan (melamar sekolah, beasiswa,
   melanjutkan perkuliahan, dll)
-2. Persyaratan berkas administratif pekerjaan (bekerja, melamar pekerjaan, mutasi,  
+2. Persyaratan berkas administratif pekerjaan (bekerja, melamar pekerjaan, mutasi,
   kenaikan pangkat dll)
 ]]></text>
 			</staticText>

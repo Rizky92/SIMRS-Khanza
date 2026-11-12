@@ -15,18 +15,18 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select databarang.kode_brng, databarang.nama_brng,databarang.kode_satbesar,satuanbesar.satuan as satuanbesar, 
+		<![CDATA[select databarang.kode_brng, databarang.nama_brng,databarang.kode_satbesar,satuanbesar.satuan as satuanbesar,
  databarang.isi,databarang.kode_sat,kodesatuan.satuan,databarang.letak_barang,databarang.dasar,databarang.h_beli,
 databarang.ralan,databarang.kelas1,databarang.kelas2,databarang.kelas3,
 databarang.utama,databarang.vip,databarang.vvip,databarang.beliluar,databarang.jualbebas,
 databarang.karyawan,databarang.stokminimal, databarang.kdjns,
- jenis.nama,kapasitas,databarang.expire,databarang.kode_industri,industrifarmasi.nama_industri, 
-databarang.kode_kategori,kategori_barang.nama as kategori,databarang.kode_golongan,golongan_barang.nama as golongan 
-from databarang inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat 
-inner join kodesatuan as satuanbesar on databarang.kode_satbesar=satuanbesar.kode_sat 
- inner join jenis on databarang.kdjns=jenis.kdjns 
+ jenis.nama,kapasitas,databarang.expire,databarang.kode_industri,industrifarmasi.nama_industri,
+databarang.kode_kategori,kategori_barang.nama as kategori,databarang.kode_golongan,golongan_barang.nama as golongan
+from databarang inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat
+inner join kodesatuan as satuanbesar on databarang.kode_satbesar=satuanbesar.kode_sat
+ inner join jenis on databarang.kdjns=jenis.kdjns
  inner join industrifarmasi on databarang.kode_industri=industrifarmasi.kode_industri
-inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode 
+inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode
  inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode ]]>
 	</queryString>
 	<field name="kode_brng" class="java.lang.String">

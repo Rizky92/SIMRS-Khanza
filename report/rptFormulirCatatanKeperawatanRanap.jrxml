@@ -18,7 +18,7 @@
 	<queryString>
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,
 pasien.jk,pasien.tgl_lahir,catatan_keperawatan_ranap.tanggal,catatan_keperawatan_ranap.jam,catatan_keperawatan_ranap.uraian,
-petugas.nama from catatan_keperawatan_ranap inner join reg_periksa on catatan_keperawatan_ranap.no_rawat=reg_periksa.no_rawat 
+petugas.nama from catatan_keperawatan_ranap inner join reg_periksa on catatan_keperawatan_ranap.no_rawat=reg_periksa.no_rawat
 inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on catatan_keperawatan_ranap.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

@@ -17,10 +17,10 @@
 	<parameter name="tagihan" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select penagihan_piutang.no_tagihan,penagihan_piutang.tanggal,penagihan_piutang.tanggaltempo,bagianpenagihan.nama,
-penjab.nama_perusahaan,akun_penagihan_piutang.nama_bank,sum(detail_penagihan_piutang.sisapiutang) as total 
-from penagihan_piutang inner join pegawai as bagianpenagihan on bagianpenagihan.nik=penagihan_piutang.nip 
-inner join penjab on penagihan_piutang.kd_pj=penjab.kd_pj 
-inner join akun_penagihan_piutang on akun_penagihan_piutang.kd_rek=penagihan_piutang.kd_rek 
+penjab.nama_perusahaan,akun_penagihan_piutang.nama_bank,sum(detail_penagihan_piutang.sisapiutang) as total
+from penagihan_piutang inner join pegawai as bagianpenagihan on bagianpenagihan.nik=penagihan_piutang.nip
+inner join penjab on penagihan_piutang.kd_pj=penjab.kd_pj
+inner join akun_penagihan_piutang on akun_penagihan_piutang.kd_rek=penagihan_piutang.kd_rek
 inner join detail_penagihan_piutang on detail_penagihan_piutang.no_tagihan=penagihan_piutang.no_tagihan]]>
 	</queryString>
 	<field name="no_tagihan" class="java.lang.String">
