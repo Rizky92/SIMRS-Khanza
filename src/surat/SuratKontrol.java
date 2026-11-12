@@ -988,10 +988,10 @@ public class SuratKontrol extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbObat.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tbObat.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1024,26 +1024,26 @@ public class SuratKontrol extends javax.swing.JDialog {
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                         Sequel.queryu("delete from temporary_booking_registrasi");
-                        for(i=0;i<tbObat.getRowCount();i++){
+                        for(i=0;i<tabMode.getRowCount();i++){
                             Sequel.menyimpan("temporary_booking_registrasi","'0','"+
-                                tbObat.getValueAt(i,0).toString()+"','"+
-                                tbObat.getValueAt(i,1).toString()+"','"+
-                                tbObat.getValueAt(i,2).toString()+"','"+
-                                tbObat.getValueAt(i,3).toString()+"','"+
-                                tbObat.getValueAt(i,4).toString()+"','"+
-                                tbObat.getValueAt(i,5).toString()+"','"+
-                                tbObat.getValueAt(i,6).toString()+"','"+
-                                tbObat.getValueAt(i,7).toString()+"','"+
-                                tbObat.getValueAt(i,8).toString()+"','"+
-                                tbObat.getValueAt(i,9).toString()+"','"+
-                                tbObat.getValueAt(i,10).toString()+"','"+
-                                tbObat.getValueAt(i,11).toString()+"','"+
-                                tbObat.getValueAt(i,12).toString()+"','"+
-                                tbObat.getValueAt(i,13).toString()+"','"+
-                                tbObat.getValueAt(i,14).toString()+"','"+
-                                tbObat.getValueAt(i,15).toString()+"','"+
-                                tbObat.getValueAt(i,16).toString()+"','"+
-                                tbObat.getValueAt(i,17).toString()+"','','','','','','','','','','','','','','','','','','',''","Rekap Nota Pembayaran");
+                                tabMode.getValueAt(i,0).toString()+"','"+
+                                tabMode.getValueAt(i,1).toString()+"','"+
+                                tabMode.getValueAt(i,2).toString()+"','"+
+                                tabMode.getValueAt(i,3).toString()+"','"+
+                                tabMode.getValueAt(i,4).toString()+"','"+
+                                tabMode.getValueAt(i,5).toString()+"','"+
+                                tabMode.getValueAt(i,6).toString()+"','"+
+                                tabMode.getValueAt(i,7).toString()+"','"+
+                                tabMode.getValueAt(i,8).toString()+"','"+
+                                tabMode.getValueAt(i,9).toString()+"','"+
+                                tabMode.getValueAt(i,10).toString()+"','"+
+                                tabMode.getValueAt(i,11).toString()+"','"+
+                                tabMode.getValueAt(i,12).toString()+"','"+
+                                tabMode.getValueAt(i,13).toString()+"','"+
+                                tabMode.getValueAt(i,14).toString()+"','"+
+                                tabMode.getValueAt(i,15).toString()+"','"+
+                                tabMode.getValueAt(i,16).toString()+"','"+
+                                tabMode.getValueAt(i,17).toString()+"','','','','','','','','','','','','','','','','','','',''","Rekap Nota Pembayaran");
                         }
                         Valid.MyReport("rptSKDPBPJS.jasper","report","::[ Laporan Daftar Surat Kontrol ]::",param);
                         break;

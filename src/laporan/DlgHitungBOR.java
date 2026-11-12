@@ -475,10 +475,10 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
                 "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
             }, "Laporan 5 (Jasper)");
             if(TabRawat.getSelectedIndex()==0){
-                if(Tabel1.getRowCount()==0){
+                if(tabMode.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     //TCari.requestFocus();
-                }else if(Tabel1.getRowCount()!=0){
+                }else if(tabMode.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("HitungBor.html", "Data Hitung BOR", Tabel1);
@@ -503,18 +503,18 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
                             param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
                             param.put("tanggal",Tgl2.getDate());
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                            for(int r=0;r<Tabel1.getRowCount();r++){
+                            for(int r=0;r<tabMode.getRowCount();r++){
                                 if(!Tabel1.getValueAt(r,0).toString().contains(">>")){
                                     Sequel.menyimpan("temporary","'"+r+"','"+
-                                                    Tabel1.getValueAt(r,0).toString()+"','"+
-                                                    Tabel1.getValueAt(r,1).toString()+"','"+
-                                                    Tabel1.getValueAt(r,2).toString()+"','"+
-                                                    Tabel1.getValueAt(r,3).toString()+"','"+
-                                                    Tabel1.getValueAt(r,4).toString()+"','"+
-                                                    Tabel1.getValueAt(r,5).toString()+"','"+
-                                                    Tabel1.getValueAt(r,6).toString()+"','"+
-                                                    Tabel1.getValueAt(r,7).toString()+"','"+
-                                                    Tabel1.getValueAt(r,8).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
+                                                    tabMode.getValueAt(r,0).toString()+"','"+
+                                                    tabMode.getValueAt(r,1).toString()+"','"+
+                                                    tabMode.getValueAt(r,2).toString()+"','"+
+                                                    tabMode.getValueAt(r,3).toString()+"','"+
+                                                    tabMode.getValueAt(r,4).toString()+"','"+
+                                                    tabMode.getValueAt(r,5).toString()+"','"+
+                                                    tabMode.getValueAt(r,6).toString()+"','"+
+                                                    tabMode.getValueAt(r,7).toString()+"','"+
+                                                    tabMode.getValueAt(r,8).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
                                 }
                             }
                             Valid.MyReportqry("rptHitungBor.jasper","report","::[ Data Hitung BOR ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
@@ -522,10 +522,10 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
                     }
                 }
             }else if(TabRawat.getSelectedIndex()==1){
-                if(Tabel2.getRowCount()==0){
+                if(tabMode2.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     //TCari.requestFocus();
-                }else if(Tabel2.getRowCount()!=0){
+                }else if(tabMode2.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("HitungBor.html", "Data Hitung BOR", Tabel2);
@@ -550,18 +550,18 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
                             param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
                             param.put("tanggal",Tgl2.getDate());
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                            for(int r=0;r<Tabel2.getRowCount();r++){
+                            for(int r=0;r<tabMode2.getRowCount();r++){
                                 if(!Tabel2.getValueAt(r,0).toString().contains(">>")){
                                     Sequel.menyimpan("temporary","'"+r+"','"+
-                                                    Tabel2.getValueAt(r,0).toString()+"','"+
-                                                    Tabel2.getValueAt(r,1).toString()+"','"+
-                                                    Tabel2.getValueAt(r,2).toString()+"','"+
-                                                    Tabel2.getValueAt(r,3).toString()+"','"+
-                                                    Tabel2.getValueAt(r,4).toString()+"','"+
-                                                    Tabel2.getValueAt(r,5).toString()+"','"+
-                                                    Tabel2.getValueAt(r,6).toString()+"','"+
-                                                    Tabel2.getValueAt(r,7).toString()+"','"+
-                                                    Tabel2.getValueAt(r,8).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
+                                                    tabMode2.getValueAt(r,0).toString()+"','"+
+                                                    tabMode2.getValueAt(r,1).toString()+"','"+
+                                                    tabMode2.getValueAt(r,2).toString()+"','"+
+                                                    tabMode2.getValueAt(r,3).toString()+"','"+
+                                                    tabMode2.getValueAt(r,4).toString()+"','"+
+                                                    tabMode2.getValueAt(r,5).toString()+"','"+
+                                                    tabMode2.getValueAt(r,6).toString()+"','"+
+                                                    tabMode2.getValueAt(r,7).toString()+"','"+
+                                                    tabMode2.getValueAt(r,8).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
                                 }
                             }
                             Valid.MyReportqry("rptHitungBor.jasper","report","::[ Data Hitung BOR ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);

@@ -1232,7 +1232,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                             "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ID Observation Suhu</b></td>"+
                         "</tr>"
                     );
-                    for (i = 0; i < tbIGDPrimer.getRowCount(); i++) {
+                    for (i = 0; i < tabModeIGDPrimer.getRowCount(); i++) {
                         htmlContent.append(
                             "<tr class='isi'>"+
                                 "<td valign='top'>"+tbIGDPrimer.getValueAt(i,1).toString()+"</td>"+

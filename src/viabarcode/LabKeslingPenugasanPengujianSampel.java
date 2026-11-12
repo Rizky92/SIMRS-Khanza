@@ -932,7 +932,7 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
             Valid.textKosong(TNoPenugasan,"Nomor Penugasan");
         }else if(KodeSampel.getText().equals("")||NamaSampel.getText().equals("")){
             Valid.textKosong(TCariPeriksa,"Sampel");
-        }else if(tbPermintaan.getRowCount()==0){
+        }else if(tabMode.getRowCount()==0){
             Valid.textKosong(TCariPeriksa,"Data Permintaan");
         }else if(jml==0){
             Valid.textKosong(TCariPeriksa,"Data Permintaan");

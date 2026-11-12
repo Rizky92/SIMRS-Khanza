@@ -2894,17 +2894,17 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             switch (TabRawat.getSelectedIndex()) {
                 case 0:
-                    if(tbRegistrasi.getRowCount()==0){
+                    if(tabModeRegistrasi.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    }else if(tbRegistrasi.getRowCount()!=0){
+                    }else if(tabModeRegistrasi.getRowCount()!=0){
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         Sequel.queryu("delete from temporary_resume");
 
-                        for(int i=0;i<tbRegistrasi.getRowCount();i++){
+                        for(int i=0;i<tabModeRegistrasi.getRowCount();i++){
                             Sequel.menyimpan("temporary_resume","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                                "0",tbRegistrasi.getValueAt(i,0).toString(),tbRegistrasi.getValueAt(i,1).toString(),tbRegistrasi.getValueAt(i,2).toString(),
-                                tbRegistrasi.getValueAt(i,3).toString(),tbRegistrasi.getValueAt(i,4).toString(),tbRegistrasi.getValueAt(i,5).toString(),
-                                tbRegistrasi.getValueAt(i,6).toString(),tbRegistrasi.getValueAt(i,7).toString(),tbRegistrasi.getValueAt(i,8).toString(),
+                                "0",tabModeRegistrasi.getValueAt(i,0).toString(),tabModeRegistrasi.getValueAt(i,1).toString(),tabModeRegistrasi.getValueAt(i,2).toString(),
+                                tabModeRegistrasi.getValueAt(i,3).toString(),tabModeRegistrasi.getValueAt(i,4).toString(),tabModeRegistrasi.getValueAt(i,5).toString(),
+                                tabModeRegistrasi.getValueAt(i,6).toString(),tabModeRegistrasi.getValueAt(i,7).toString(),tabModeRegistrasi.getValueAt(i,8).toString(),
                                 "","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
                             });
                         }

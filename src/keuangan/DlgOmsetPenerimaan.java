@@ -991,147 +991,147 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
             }, "Laporan 5 (Jasper)");
             switch (pilihan) {
                 case "Laporan 1 (HTML)":
-                    if(tbRawatJalan.getRowCount()!=0){
+                    if(tabMode.getRowCount()!=0){
                         Valid.exportHtmlSmc("OmsetRalan.html", "Penerimaan Pembayaran Pasien Rawat Jalan", tbRawatJalan);
                     }
-                    if(tbRawatInap.getRowCount()!=0){
+                    if(tabMode2.getRowCount()!=0){
                         Valid.exportHtmlSmc("OmsetRanap.html", "Penerimaan Pembayaran Pasien Rawat Inap", tbRawatInap);
                     }
-                    if(tbPenjualanBebas.getRowCount()!=0){
+                    if(tabMode3.getRowCount()!=0){
                         Valid.exportHtmlSmc("OmsetPenjualanObat.html", "Penerimaan Penjualan Bebas", tbPenjualanBebas);
                     }
-                    if(tbPemasukanLain.getRowCount()!=0){
+                    if(tabMode4.getRowCount()!=0){
                         Valid.exportHtmlSmc("OmsetPemasukanLain.html", "Penerimaan Pemasukan Lain-lain", tbPemasukanLain);
                     }
-                    if(tbDeposit.getRowCount()!=0){
+                    if(tabMode5.getRowCount()!=0){
                         Valid.exportHtmlSmc("OmsetDeposit.html", "Penerimaan Deposit Pasien", tbDeposit);
                     }
-                    if(tbPiutangPasienDibayar.getRowCount()!=0){
+                    if(tabMode6.getRowCount()!=0){
                         Valid.exportHtmlSmc("OmsetPiutangDibayar.html", "Penerimaan Pembayaran Piutang", tbPiutangPasienDibayar);
                     }
-                    if(tbPiutangUangDibayar.getRowCount()!=0){
+                    if(tabMode7.getRowCount()!=0){
                         Valid.exportHtmlSmc("OmsetPiutangUangDibayar.html", "Penerimaan Pembayaran Piutang Peminjaman Uang", tbPiutangUangDibayar);
                     }
-                    if(tbPiutangJasaDibayar.getRowCount()!=0){
+                    if(tabMode8.getRowCount()!=0){
                         Valid.exportHtmlSmc("OmsetPiutangJasaDibayar.html", "Penerimaan Pembayaran Piutang Jasa Perusahaan", tbPiutangJasaDibayar);
                     }
-                    if(tbLabKesehatanLingkungan.getRowCount()!=0){
+                    if(tabMode9.getRowCount()!=0){
                         Valid.exportHtmlSmc("OmsetLabKesehetanLingkungan.html", "Penerimaan Pembayaran Laborat Kesehatan Lingkungan", tbLabKesehatanLingkungan);
                     }
-                    if(tbPenjualanToko.getRowCount()!=0){
+                    if(tabMode10.getRowCount()!=0){
                         Valid.exportHtmlSmc("OmsetPenjualanToko.html", "Penerimaan Penjualan Toko", tbPenjualanToko);
                     }
-                    if(tbPiutangTokoDibayar.getRowCount()!=0){
+                    if(tabMode11.getRowCount()!=0){
                         Valid.exportHtmlSmc("OmsetPiutangTokoDibayar.html", "Penerimaan Pembayaran Piutang Toko", tbPiutangTokoDibayar);
                     }
                     break;
                 case "Laporan 2 (WPS)":
-                    if(tbRawatJalan.getRowCount()!=0){
+                    if(tabMode.getRowCount()!=0){
                         Valid.exportWPSSmc("OmsetRalan.wps", "Penerimaan Pembayaran Pasien Rawat Jalan", tbRawatJalan);
                     }
-                    if(tbRawatInap.getRowCount()!=0){
+                    if(tabMode2.getRowCount()!=0){
                         Valid.exportWPSSmc("OmsetRanap.wps", "Penerimaan Pembayaran Pasien Rawat Inap", tbRawatInap);
                     }
-                    if(tbPenjualanBebas.getRowCount()!=0){
+                    if(tabMode3.getRowCount()!=0){
                         Valid.exportWPSSmc("OmsetPenjualanObat.wps", "Penerimaan Penjualan Bebas", tbPenjualanBebas);
                     }
-                    if(tbPemasukanLain.getRowCount()!=0){
+                    if(tabMode4.getRowCount()!=0){
                         Valid.exportWPSSmc("OmsetPemasukanLain.wps", "Penerimaan Pemasukan Lain-lain", tbPemasukanLain);
                     }
-                    if(tbDeposit.getRowCount()!=0){
+                    if(tabMode5.getRowCount()!=0){
                         Valid.exportWPSSmc("OmsetDeposit.wps", "Penerimaan Deposit Pasien", tbDeposit);
                     }
-                    if(tbPiutangPasienDibayar.getRowCount()!=0){
+                    if(tabMode6.getRowCount()!=0){
                         Valid.exportWPSSmc("OmsetPiutangDibayar.wps", "Penerimaan Pembayaran Piutang", tbPiutangPasienDibayar);
                     }
-                    if(tbPiutangUangDibayar.getRowCount()!=0){
+                    if(tabMode7.getRowCount()!=0){
                         Valid.exportWPSSmc("OmsetPiutangUangDibayar.wps", "Penerimaan Pembayaran Piutang Peminjaman Uang", tbPiutangUangDibayar);
                     }
-                    if(tbPiutangJasaDibayar.getRowCount()!=0){
+                    if(tabMode8.getRowCount()!=0){
                         Valid.exportWPSSmc("OmsetPiutangJasaDibayar.wps", "Penerimaan Pembayaran Piutang Jasa Perusahaan", tbPiutangJasaDibayar);
                     }
-                    if(tbLabKesehatanLingkungan.getRowCount()!=0){
+                    if(tabMode9.getRowCount()!=0){
                         Valid.exportWPSSmc("OmsetLabKesehetanLingkungan.wps", "Penerimaan Pembayaran Laborat Kesehatan Lingkungan", tbLabKesehatanLingkungan);
                     }
-                    if(tbPenjualanToko.getRowCount()!=0){
+                    if(tabMode10.getRowCount()!=0){
                         Valid.exportWPSSmc("OmsetPenjualanToko.wps", "Penerimaan Penjualan Toko", tbPenjualanToko);
                     }
-                    if(tbPiutangTokoDibayar.getRowCount()!=0){
+                    if(tabMode11.getRowCount()!=0){
                         Valid.exportWPSSmc("OmsetPiutangTokoDibayar.wps", "Penerimaan Pembayaran Piutang Toko", tbPiutangTokoDibayar);
                     }
                     break;
                 case "Laporan 3 (CSV)":
-                    if(tbRawatJalan.getRowCount()!=0){
+                    if(tabMode.getRowCount()!=0){
                         Valid.exportCSVSmc("OmsetRalan.csv", tbRawatJalan);
                     }
-                    if(tbRawatInap.getRowCount()!=0){
+                    if(tabMode2.getRowCount()!=0){
                         Valid.exportCSVSmc("OmsetRanap.csv", tbRawatInap);
                     }
-                    if(tbPenjualanBebas.getRowCount()!=0){
+                    if(tabMode3.getRowCount()!=0){
                         Valid.exportCSVSmc("OmsetPenjualanObat.csv", tbPenjualanBebas);
                     }
-                    if(tbPemasukanLain.getRowCount()!=0){
+                    if(tabMode4.getRowCount()!=0){
                         Valid.exportCSVSmc("OmsetPemasukanLain.csv", tbPemasukanLain);
                     }
-                    if(tbDeposit.getRowCount()!=0){
+                    if(tabMode5.getRowCount()!=0){
                         Valid.exportCSVSmc("OmsetDeposit.csv", tbDeposit);
                     }
-                    if(tbPiutangPasienDibayar.getRowCount()!=0){
+                    if(tabMode6.getRowCount()!=0){
                         Valid.exportCSVSmc("OmsetPiutangDibayar.csv", tbPiutangPasienDibayar);
                     }
-                    if(tbPiutangUangDibayar.getRowCount()!=0){
+                    if(tabMode7.getRowCount()!=0){
                         Valid.exportCSVSmc("OmsetPiutangUangDibayar.csv", tbPiutangUangDibayar);
                     }
-                    if(tbPiutangJasaDibayar.getRowCount()!=0){
+                    if(tabMode8.getRowCount()!=0){
                         Valid.exportCSVSmc("OmsetPiutangJasaDibayar.csv", tbPiutangJasaDibayar);
                     }
-                    if(tbLabKesehatanLingkungan.getRowCount()!=0){
+                    if(tabMode9.getRowCount()!=0){
                         Valid.exportCSVSmc("OmsetLabKesehetanLingkungan.csv", tbLabKesehatanLingkungan);
                     }
-                    if(tbPenjualanToko.getRowCount()!=0){
+                    if(tabMode10.getRowCount()!=0){
                         Valid.exportCSVSmc("OmsetPenjualanToko.csv", tbPenjualanToko);
                     }
-                    if(tbPiutangTokoDibayar.getRowCount()!=0){
+                    if(tabMode11.getRowCount()!=0){
                         Valid.exportCSVSmc("OmsetPiutangTokoDibayar.csv", tbPiutangTokoDibayar);
                     }
                     break;
                 case "Laporan 4 (XLSX)":
-                    if(tbRawatJalan.getRowCount()!=0){
+                    if(tabMode.getRowCount()!=0){
                         Valid.exportXlsxSmc("OmsetRalan.xlsx", tbRawatJalan);
                     }
-                    if(tbRawatInap.getRowCount()!=0){
+                    if(tabMode2.getRowCount()!=0){
                         Valid.exportXlsxSmc("OmsetRanap.xlsx", tbRawatInap);
                     }
-                    if(tbPenjualanBebas.getRowCount()!=0){
+                    if(tabMode3.getRowCount()!=0){
                         Valid.exportXlsxSmc("OmsetPenjualanObat.xlsx", tbPenjualanBebas);
                     }
-                    if(tbPemasukanLain.getRowCount()!=0){
+                    if(tabMode4.getRowCount()!=0){
                         Valid.exportXlsxSmc("OmsetPemasukanLain.xlsx", tbPemasukanLain);
                     }
-                    if(tbDeposit.getRowCount()!=0){
+                    if(tabMode5.getRowCount()!=0){
                         Valid.exportXlsxSmc("OmsetDeposit.xlsx", tbDeposit);
                     }
-                    if(tbPiutangPasienDibayar.getRowCount()!=0){
+                    if(tabMode6.getRowCount()!=0){
                         Valid.exportXlsxSmc("OmsetPiutangDibayar.xlsx", tbPiutangPasienDibayar);
                     }
-                    if(tbPiutangUangDibayar.getRowCount()!=0){
+                    if(tabMode7.getRowCount()!=0){
                         Valid.exportXlsxSmc("OmsetPiutangUangDibayar.xlsx", tbPiutangUangDibayar);
                     }
-                    if(tbPiutangJasaDibayar.getRowCount()!=0){
+                    if(tabMode8.getRowCount()!=0){
                         Valid.exportXlsxSmc("OmsetPiutangJasaDibayar.xlsx", tbPiutangJasaDibayar);
                     }
-                    if(tbLabKesehatanLingkungan.getRowCount()!=0){
+                    if(tabMode9.getRowCount()!=0){
                         Valid.exportXlsxSmc("OmsetLabKesehetanLingkungan.xlsx", tbLabKesehatanLingkungan);
                     }
-                    if(tbPenjualanToko.getRowCount()!=0){
+                    if(tabMode10.getRowCount()!=0){
                         Valid.exportXlsxSmc("OmsetPenjualanToko.xlsx", tbPenjualanToko);
                     }
-                    if(tbPiutangTokoDibayar.getRowCount()!=0){
+                    if(tabMode11.getRowCount()!=0){
                         Valid.exportXlsxSmc("OmsetPiutangTokoDibayar.xlsx", tbPiutangTokoDibayar);
                     }
                     break;
                 case "Laporan 5 (Jasper)":
-                    if(tbRawatJalan.getRowCount()!=0){
+                    if(tabMode.getRowCount()!=0){
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -1149,7 +1149,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                             "where nota_jalan.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by nota_jalan.tanggal,nota_jalan.jam ",param);
                     }
 
-                    if(tbRawatInap.getRowCount()!=0){
+                    if(tabMode2.getRowCount()!=0){
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -1167,7 +1167,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                             "where nota_inap.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by nota_inap.tanggal,nota_inap.jam ",param);
                     }
 
-                    if(tbPenjualanBebas.getRowCount()!=0){
+                    if(tabMode3.getRowCount()!=0){
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -1184,7 +1184,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                             "group by penjualan.nota_jual order by penjualan.tgl_jual,penjualan.nota_jual ",param);
                     }
 
-                    if(tbPemasukanLain.getRowCount()!=0){
+                    if(tabMode4.getRowCount()!=0){
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -1200,7 +1200,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                             "where pemasukan_lain.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00"+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by pemasukan_lain.tanggal ",param);
                     }
 
-                    if(tbDeposit.getRowCount()!=0){
+                    if(tabMode5.getRowCount()!=0){
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -1215,7 +1215,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                             "where deposit.tgl_deposit between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00"+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59"+"' order by deposit.tgl_deposit ",param);
                     }
 
-                    if(tbPiutangPasienDibayar.getRowCount()!=0){
+                    if(tabMode6.getRowCount()!=0){
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -1233,7 +1233,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                             "where bayar_piutang.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by bayar_piutang.tgl_bayar ",param);
                     }
 
-                    if(tbPiutangUangDibayar.getRowCount()!=0){
+                    if(tabMode7.getRowCount()!=0){
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -1249,7 +1249,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                             "where bayar_piutang_lainlain.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by bayar_piutang_lainlain.tgl_bayar ",param);
                     }
 
-                    if(tbPiutangJasaDibayar.getRowCount()!=0){
+                    if(tabMode8.getRowCount()!=0){
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -1265,7 +1265,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                             "where bayar_piutang_jasa_perusahaan.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by bayar_piutang_jasa_perusahaan.tgl_bayar ",param);
                     }
 
-                    if(tbLabKesehatanLingkungan.getRowCount()!=0){
+                    if(tabMode9.getRowCount()!=0){
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -1283,7 +1283,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                             "where labkesling_pembayaran_pengujian_sampel.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by labkesling_pembayaran_pengujian_sampel.tanggal ",param);
                     }
 
-                    if(tbPenjualanToko.getRowCount()!=0){
+                    if(tabMode10.getRowCount()!=0){
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -1299,7 +1299,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                             "order by tokopenjualan.tgl_jual,tokopenjualan.nota_jual ",param);
                     }
 
-                    if(tbPiutangTokoDibayar.getRowCount()!=0){
+                    if(tabMode11.getRowCount()!=0){
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());

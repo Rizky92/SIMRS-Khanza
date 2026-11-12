@@ -291,10 +291,10 @@ public final class DlgPelayananCSSD extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbBangsal.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tbBangsal.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -332,12 +332,12 @@ public final class DlgPelayananCSSD extends javax.swing.JDialog {
                         param.put("satujam",""+satujam);
                         param.put("lebihsatujam",""+lebihsatujam);
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        for(int i=0;i<tbBangsal.getRowCount();i++){
+                        for(int i=0;i<tabMode.getRowCount();i++){
                             Sequel.menyimpan("temporary","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                                ""+i,tbBangsal.getValueAt(i,0).toString(),tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),
-                                tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,4).toString(),tbBangsal.getValueAt(i,5).toString(),
-                                tbBangsal.getValueAt(i,6).toString(),tbBangsal.getValueAt(i,7).toString(),tbBangsal.getValueAt(i,8).toString(),
-                                tbBangsal.getValueAt(i,9).toString(),tbBangsal.getValueAt(i,10).toString(),"","","","","","","","","",
+                                ""+i,tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,2).toString(),
+                                tabMode.getValueAt(i,3).toString(),tabMode.getValueAt(i,4).toString(),tabMode.getValueAt(i,5).toString(),
+                                tabMode.getValueAt(i,6).toString(),tabMode.getValueAt(i,7).toString(),tabMode.getValueAt(i,8).toString(),
+                                tabMode.getValueAt(i,9).toString(),tabMode.getValueAt(i,10).toString(),"","","","","","","","","",
                                 "","","","","","","","","","","","","","","","",akses.getalamatip()
                             });
                         }

@@ -268,7 +268,7 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if (tbKamar.getRowCount() == 0) {
+        if (tabMode.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
         } else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -295,10 +295,10 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
                         break;
                     case "Laporan 4 (Jasper)":
                         Sequel.deleteTemporary();
-                        for (int i = 0; i < tbKamar.getRowCount(); i++) {
-                            Sequel.temporary(String.valueOf(i + 1), (String) tbKamar.getValueAt(i, 0), (String) tbKamar.getValueAt(i, 1), (String) tbKamar.getValueAt(i, 2),
-                                (String) tbKamar.getValueAt(i, 3), (String) tbKamar.getValueAt(i, 4), Valid.SetAngka((Double) tbKamar.getValueAt(i, 5)), (String) tbKamar.getValueAt(i, 6),
-                                (String) tbKamar.getValueAt(i, 7), (String) tbKamar.getValueAt(i, 8));
+                        for (int i = 0; i < tabMode.getRowCount(); i++) {
+                            Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2),
+                                (String) tabMode.getValueAt(i, 3), (String) tabMode.getValueAt(i, 4), Valid.SetAngka((Double) tabMode.getValueAt(i, 5)), (String) tabMode.getValueAt(i, 6),
+                                (String) tabMode.getValueAt(i, 7), (String) tabMode.getValueAt(i, 8));
                         }
 
                         Map<String, Object> param = new HashMap<>();

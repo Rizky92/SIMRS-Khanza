@@ -1044,10 +1044,10 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
             }, "Laporan 5 (Jasper)");
             switch (TabRawat.getSelectedIndex()) {
                 case 0:
-                    if (tbObat.getRowCount() == 0) {
+                    if (tabMode.getRowCount() == 0) {
                         JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         BtnBatal.requestFocus();
-                    } else if (tbObat.getRowCount() != 0) {
+                    } else if (tabMode.getRowCount() != 0) {
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("PengajuanIzinPegawaiSMC.html", "Data Pengajuan Izin", tbObat);
@@ -1078,10 +1078,10 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                     }
                     break;
                 case 1:
-                    if (tbObat2.getRowCount() == 0) {
+                    if (tabMode2.getRowCount() == 0) {
                         JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         BtnBatal.requestFocus();
-                    } else if (tbObat2.getRowCount() != 0) {
+                    } else if (tabMode2.getRowCount() != 0) {
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("PengajuanIzinPegawai2SMC.html", "Data Pengajuan Izin", tbObat2);

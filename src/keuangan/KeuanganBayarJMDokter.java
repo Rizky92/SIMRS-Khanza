@@ -1603,23 +1603,23 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         }else{
             if(bayar==0){
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih jasa medis yang mau dibayar...!!!!");
-            }else if(tbBangsal.getRowCount()==0){
+            }else if(tabMode.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-            }else if(tbBangsal.getRowCount()!=0){
+            }else if(tabMode.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                 //"P","Tanggal","Jam","No.Rawat","No.RM","Nama Pasien","Kode","Tindakan Medis","Status","Jasa Medis","Id Detail"
                 row=1;
-                for(i=0;i<tbBangsal.getRowCount();i++){
-                    if(tbBangsal.getValueAt(i,0).toString().equals("true")){
+                for(i=0;i<tabMode.getRowCount();i++){
+                    if(tabMode.getValueAt(i,0).toString().equals("true")){
                         Sequel.menyimpan("temporary","'"+row+"','"+
-                            tbBangsal.getValueAt(i,1).toString().replaceAll("'","`")+" "+tbBangsal.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
-                            tbBangsal.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
-                            tbBangsal.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
-                            tbBangsal.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
-                            tbBangsal.getValueAt(i,6).toString().replaceAll("'","`")+"','"+
-                            tbBangsal.getValueAt(i,7).toString().replaceAll("'","`")+"','"+
-                            Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i,10).toString().replaceAll("'","`")))+
+                            tabMode.getValueAt(i,1).toString().replaceAll("'","`")+" "+tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
+                            tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
+                            tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
+                            tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
+                            tabMode.getValueAt(i,6).toString().replaceAll("'","`")+"','"+
+                            tabMode.getValueAt(i,7).toString().replaceAll("'","`")+"','"+
+                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString().replaceAll("'","`")))+
                             "','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter"
                         );
                         row++;

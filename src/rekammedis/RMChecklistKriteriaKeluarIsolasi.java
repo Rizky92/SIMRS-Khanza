@@ -917,10 +917,10 @@ public final class RMChecklistKriteriaKeluarIsolasi extends javax.swing.JDialog 
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tbObat.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tbObat.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             try{
                 htmlContent = new StringBuilder();
                 htmlContent.append(
@@ -943,7 +943,7 @@ public final class RMChecklistKriteriaKeluarIsolasi extends javax.swing.JDialog 
                     "</tr>"
                 );
 
-                for (i = 0; i < tbObat.getRowCount(); i++) {
+                for (i = 0; i < tabMode.getRowCount(); i++) {
                     htmlContent.append(
                         "<tr class='isi'>"+
                            "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+

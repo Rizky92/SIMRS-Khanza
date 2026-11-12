@@ -649,10 +649,10 @@ public final class DlgKunjunganRalan extends javax.swing.JDialog {
                 "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
             }, "Laporan 5 (Jasper)");
             if(TabRawat.getSelectedIndex()==0){
-                if(table1.getRowCount()==0){
+                if(tabMode.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     BtnPrint.requestFocus();
-                }else if(table1.getRowCount()!=0){
+                }else if(tabMode.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("SurveilansRalan.html", "Surveilans PD3I", table1);
@@ -682,19 +682,19 @@ public final class DlgKunjunganRalan extends javax.swing.JDialog {
                             param.put("perempuan",per);
                             param.put("tanggal",Tgl2.getDate());
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                            for(int r=0;r<table1.getRowCount();r++){
+                            for(int r=0;r<tabMode.getRowCount();r++){
                                 if(!table1.getValueAt(r,0).toString().contains(">>")){
                                     Sequel.menyimpan("temporary","'"+r+"','"+
-                                                    table1.getValueAt(r,0).toString()+"','"+
-                                                    table1.getValueAt(r,1).toString()+"','"+
-                                                    table1.getValueAt(r,2).toString()+"','"+
-                                                    table1.getValueAt(r,3).toString()+"','"+
-                                                    table1.getValueAt(r,4).toString()+"','"+
-                                                    table1.getValueAt(r,5).toString()+"','"+
-                                                    table1.getValueAt(r,6).toString()+"','"+
-                                                    table1.getValueAt(r,7).toString()+"','"+
-                                                    table1.getValueAt(r,8).toString()+"','"+
-                                                    table1.getValueAt(r,9).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                                    tabMode.getValueAt(r,0).toString()+"','"+
+                                                    tabMode.getValueAt(r,1).toString()+"','"+
+                                                    tabMode.getValueAt(r,2).toString()+"','"+
+                                                    tabMode.getValueAt(r,3).toString()+"','"+
+                                                    tabMode.getValueAt(r,4).toString()+"','"+
+                                                    tabMode.getValueAt(r,5).toString()+"','"+
+                                                    tabMode.getValueAt(r,6).toString()+"','"+
+                                                    tabMode.getValueAt(r,7).toString()+"','"+
+                                                    tabMode.getValueAt(r,8).toString()+"','"+
+                                                    tabMode.getValueAt(r,9).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                                 }
                             }
                             Valid.MyReportqry("rptKunjunganRalan.jasper","report","::[ Laporan Kunjungan Rawat Jalan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
@@ -702,10 +702,10 @@ public final class DlgKunjunganRalan extends javax.swing.JDialog {
                     }
                 }
             }else if(TabRawat.getSelectedIndex()==1){
-                if(table2.getRowCount()==0){
+                if(tabMode2.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     BtnPrint.requestFocus();
-                }else if(table2.getRowCount()!=0){
+                }else if(tabMode2.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("SurveilansRalan.html", "Surveilans PD3I", table1);
@@ -735,19 +735,19 @@ public final class DlgKunjunganRalan extends javax.swing.JDialog {
                             param.put("perempuan",per);
                             param.put("tanggal",Tgl2.getDate());
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                            for(int r=0;r<table2.getRowCount();r++){
+                            for(int r=0;r<tabMode2.getRowCount();r++){
                                 if(!table2.getValueAt(r,0).toString().contains(">>")){
                                     Sequel.menyimpan("temporary","'"+r+"','"+
-                                                    table2.getValueAt(r,0).toString()+"','"+
-                                                    table2.getValueAt(r,1).toString()+"','"+
-                                                    table2.getValueAt(r,2).toString()+"','"+
-                                                    table2.getValueAt(r,3).toString()+"','"+
-                                                    table2.getValueAt(r,4).toString()+"','"+
-                                                    table2.getValueAt(r,5).toString()+"','"+
-                                                    table2.getValueAt(r,6).toString()+"','"+
-                                                    table2.getValueAt(r,7).toString()+"','"+
-                                                    table2.getValueAt(r,8).toString()+"','"+
-                                                    table2.getValueAt(r,9).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                                    tabMode2.getValueAt(r,0).toString()+"','"+
+                                                    tabMode2.getValueAt(r,1).toString()+"','"+
+                                                    tabMode2.getValueAt(r,2).toString()+"','"+
+                                                    tabMode2.getValueAt(r,3).toString()+"','"+
+                                                    tabMode2.getValueAt(r,4).toString()+"','"+
+                                                    tabMode2.getValueAt(r,5).toString()+"','"+
+                                                    tabMode2.getValueAt(r,6).toString()+"','"+
+                                                    tabMode2.getValueAt(r,7).toString()+"','"+
+                                                    tabMode2.getValueAt(r,8).toString()+"','"+
+                                                    tabMode2.getValueAt(r,9).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                                 }
                             }
                             Valid.MyReportqry("rptKunjunganRalan.jasper","report","::[ Laporan Kunjungan Rawat Jalan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);

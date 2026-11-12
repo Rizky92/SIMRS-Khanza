@@ -1281,10 +1281,10 @@ public final class RMSkriningTOLAC extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tbObat.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tbObat.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             try{
                 File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -1338,7 +1338,7 @@ public final class RMSkriningTOLAC extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan</b></td>"+
                                 "</tr>"
                             );
-                            for (i = 0; i < tbObat.getRowCount(); i++) {
+                            for (i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append(
                                     "<tr class='isi'>"+
                                        "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
@@ -1427,7 +1427,7 @@ public final class RMSkriningTOLAC extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan</b></td>"+
                                 "</tr>"
                             );
-                            for (i = 0; i < tbObat.getRowCount(); i++) {
+                            for (i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append(
                                     "<tr class='isi'>"+
                                        "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
@@ -1489,7 +1489,7 @@ public final class RMSkriningTOLAC extends javax.swing.JDialog {
                             htmlContent.append(
                                 "\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"Tgl.Lahir\";\"Kode Dokter\";\"Nama Dokter\";\"Tanggal\";\"G P A\";\"Diagnosa\";\"Jumlah SC\";\"SC Terakhir\";\"Indikasi SC\";\"Jenis Insisi\";\"Riwayat Pervaginam\";\"TBJ(gram)\";\"Presentasi Janin\";\"Riwayat SC ≤1x\";\"Panggul Klinis Adekuat\";\"Janin Tunggal Kepala\";\"TBJ Sesuai\";\"SC Klasik Ruptur\";\"Riwayat SC ≥ 2 Kali\";\"Plasenta Previa / Letak Lintang\";\"Kesimpulan\";\"Edukasi Diberikan\";\"Keterangan\"\n"
                             );
-                            for (i = 0; i < tbObat.getRowCount(); i++) {
+                            for (i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append(
                                     "\""+tbObat.getValueAt(i,0).toString()+"\";\""+tbObat.getValueAt(i,1).toString()+"\";\""+tbObat.getValueAt(i,2).toString()+"\";\""+tbObat.getValueAt(i,3).toString()+"\";\""+tbObat.getValueAt(i,4).toString()+"\";\""+tbObat.getValueAt(i,5).toString()+"\";\""+tbObat.getValueAt(i,6).toString()+"\";\""+tbObat.getValueAt(i,7).toString()+"\";\""+tbObat.getValueAt(i,8).toString()+"\";\""+tbObat.getValueAt(i,9).toString()+"\";\""+tbObat.getValueAt(i,10).toString()+"\";\""+tbObat.getValueAt(i,11).toString()+"\";\""+tbObat.getValueAt(i,12).toString()+"\";\""+tbObat.getValueAt(i,13).toString()+"\";\""+tbObat.getValueAt(i,14).toString()+"\";\""+tbObat.getValueAt(i,15).toString()+"\";\""+tbObat.getValueAt(i,16).toString()+"\";\""+tbObat.getValueAt(i,17).toString()+"\";\""+tbObat.getValueAt(i,18).toString()+"\";\""+tbObat.getValueAt(i,19).toString()+"\";\""+tbObat.getValueAt(i,20).toString()+"\";\""+tbObat.getValueAt(i,21).toString()+"\";\""+tbObat.getValueAt(i,22).toString()+"\";\""+tbObat.getValueAt(i,23).toString()+"\";\""+tbObat.getValueAt(i,24).toString()+"\";\""+tbObat.getValueAt(i,25).toString()+"\"\n"
                                 );

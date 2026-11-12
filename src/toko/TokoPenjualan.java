@@ -910,7 +910,7 @@ public class TokoPenjualan extends javax.swing.JDialog {
             Valid.textKosong(kdmem,"Member");
         }else if(nmptg.getText().trim().equals("")||nmptg.getText().trim().equals("")){
             Valid.textKosong(kdptg,"Petugas");
-        }else if(tbObat.getRowCount()==0){
+        }else if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             tbObat.requestFocus();
         }else if(ttl<=0){
@@ -919,22 +919,22 @@ public class TokoPenjualan extends javax.swing.JDialog {
         }else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary_toko");
-            for(i=0;i<tbObat.getRowCount();i++){
+            for(i=0;i<tabMode.getRowCount();i++){
                 try {
-                    if(Valid.SetAngka(tbObat.getValueAt(i,0).toString())>0){
+                    if(Valid.SetAngka(tabMode.getValueAt(i,0).toString())>0){
                            Sequel.menyimpan2("temporary_toko","'0','"+
-                                   tbObat.getValueAt(i,0).toString()+"','"+
-                                   tbObat.getValueAt(i,1).toString()+"','"+
-                                   tbObat.getValueAt(i,2).toString()+"','"+
-                                   tbObat.getValueAt(i,3).toString()+"','"+
-                                   tbObat.getValueAt(i,4).toString()+"','"+
-                                   tbObat.getValueAt(i,5).toString()+"','"+
-                                   tbObat.getValueAt(i,6).toString()+"','"+
-                                   tbObat.getValueAt(i,8).toString()+"','"+
-                                   tbObat.getValueAt(i,9).toString()+"','"+
-                                   tbObat.getValueAt(i,10).toString()+"','"+
-                                   tbObat.getValueAt(i,11).toString()+"','"+
-                                   tbObat.getValueAt(i,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Penjualan");
+                                   tabMode.getValueAt(i,0).toString()+"','"+
+                                   tabMode.getValueAt(i,1).toString()+"','"+
+                                   tabMode.getValueAt(i,2).toString()+"','"+
+                                   tabMode.getValueAt(i,3).toString()+"','"+
+                                   tabMode.getValueAt(i,4).toString()+"','"+
+                                   tabMode.getValueAt(i,5).toString()+"','"+
+                                   tabMode.getValueAt(i,6).toString()+"','"+
+                                   tabMode.getValueAt(i,8).toString()+"','"+
+                                   tabMode.getValueAt(i,9).toString()+"','"+
+                                   tabMode.getValueAt(i,10).toString()+"','"+
+                                   tabMode.getValueAt(i,11).toString()+"','"+
+                                   tabMode.getValueAt(i,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Penjualan");
                     }
                 } catch (Exception e) {
                 }

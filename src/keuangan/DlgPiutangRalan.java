@@ -423,10 +423,10 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbBangsal.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnPrint.requestFocus();
-        }else if(tbBangsal.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -451,14 +451,14 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.deleteTemporary();
-                        for (int i = 0; i < tbBangsal.getRowCount(); i++) {
+                        for (int i = 0; i < tabMode.getRowCount(); i++) {
                             Sequel.temporary(String.valueOf(i),
-                                (String) tbBangsal.getValueAt(i, 0), (String) tbBangsal.getValueAt(i, 1), (String) tbBangsal.getValueAt(i, 2), (String) tbBangsal.getValueAt(i, 3),
-                                (String) tbBangsal.getValueAt(i, 4), (String) tbBangsal.getValueAt(i, 5), (String) tbBangsal.getValueAt(i, 6), (String) tbBangsal.getValueAt(i, 7),
-                                (String) tbBangsal.getValueAt(i, 8), (String) tbBangsal.getValueAt(i, 9), (String) tbBangsal.getValueAt(i, 10), (String) tbBangsal.getValueAt(i, 11),
-                                (String) tbBangsal.getValueAt(i, 12), (String) tbBangsal.getValueAt(i, 13), (String) tbBangsal.getValueAt(i, 14), (String) tbBangsal.getValueAt(i, 15),
-                                (String) tbBangsal.getValueAt(i, 16), (String) tbBangsal.getValueAt(i, 17), (String) tbBangsal.getValueAt(i, 18), (String) tbBangsal.getValueAt(i, 19),
-                                (String) tbBangsal.getValueAt(i, 20), (String) tbBangsal.getValueAt(i, 21));
+                                (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2), (String) tabMode.getValueAt(i, 3),
+                                (String) tabMode.getValueAt(i, 4), (String) tabMode.getValueAt(i, 5), (String) tabMode.getValueAt(i, 6), (String) tabMode.getValueAt(i, 7),
+                                (String) tabMode.getValueAt(i, 8), (String) tabMode.getValueAt(i, 9), (String) tabMode.getValueAt(i, 10), (String) tabMode.getValueAt(i, 11),
+                                (String) tabMode.getValueAt(i, 12), (String) tabMode.getValueAt(i, 13), (String) tabMode.getValueAt(i, 14), (String) tabMode.getValueAt(i, 15),
+                                (String) tabMode.getValueAt(i, 16), (String) tabMode.getValueAt(i, 17), (String) tabMode.getValueAt(i, 18), (String) tabMode.getValueAt(i, 19),
+                                (String) tabMode.getValueAt(i, 20), (String) tabMode.getValueAt(i, 21));
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars", akses.getnamars());

@@ -1523,14 +1523,14 @@ public class DlgPenjualan extends javax.swing.JDialog {
         }else {
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             row=0;
-            for(i=0;i<tbObat.getRowCount();i++){
+            for(i=0;i<tabMode.getRowCount();i++){
                 try {
-                    if(Valid.SetAngka(tbObat.getValueAt(i,0).toString())>0){
+                    if(Valid.SetAngka(tabMode.getValueAt(i,0).toString())>0){
                         Sequel.menyimpan2("temporary","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                            ""+row,tbObat.getValueAt(i,0).toString(),tbObat.getValueAt(i,1).toString(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,3).toString(),
-                            tbObat.getValueAt(i,4).toString(),tbObat.getValueAt(i,5).toString(),tbObat.getValueAt(i,6).toString(),tbObat.getValueAt(i,8).toString(),
-                            tbObat.getValueAt(i,9).toString(),tbObat.getValueAt(i,10).toString(),tbObat.getValueAt(i,11).toString(),tbObat.getValueAt(i,12).toString(),
-                            tbObat.getValueAt(i,13).toString(),"","","","","","","","","","","","","","","","","","","","","","","",akses.getalamatip()
+                            ""+row,tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,2).toString(),tabMode.getValueAt(i,3).toString(),
+                            tabMode.getValueAt(i,4).toString(),tabMode.getValueAt(i,5).toString(),tabMode.getValueAt(i,6).toString(),tabMode.getValueAt(i,8).toString(),
+                            tabMode.getValueAt(i,9).toString(),tabMode.getValueAt(i,10).toString(),tabMode.getValueAt(i,11).toString(),tabMode.getValueAt(i,12).toString(),
+                            tabMode.getValueAt(i,13).toString(),"","","","","","","","","","","","","","","","","","","","","","","",akses.getalamatip()
                         });
                         row++;
                     }

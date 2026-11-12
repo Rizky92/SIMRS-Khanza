@@ -1799,10 +1799,10 @@ public final class UTDDonor extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbTranfusiDarah.getRowCount()==0){
+        if(tabModeTranfusi.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tbTranfusiDarah.getRowCount()!=0){
+        }else if(tabModeTranfusi.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1827,31 +1827,31 @@ public final class UTDDonor extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        jml=tbTranfusiDarah.getRowCount();
+                        jml=tabModeTranfusi.getRowCount();
                         for(i=0;i<jml;i++){
                             Sequel.menyimpan("temporary","'"+i+"','"+
-                                            tbTranfusiDarah.getValueAt(i,0).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,1).toString()+" "+tbTranfusiDarah.getValueAt(i,2).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,3).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,4).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,5).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,6).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,7).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,8).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,9).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,10).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,11).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,12).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,13).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,14).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,15).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,16).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,17).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,18).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,19).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,20).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,21).toString()+"','"+
-                                            tbTranfusiDarah.getValueAt(i,22).toString()+"','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Donor");
+                                            tabModeTranfusi.getValueAt(i,0).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,1).toString()+" "+tabModeTranfusi.getValueAt(i,2).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,3).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,4).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,5).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,6).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,7).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,8).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,9).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,10).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,11).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,12).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,13).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,14).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,15).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,16).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,17).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,18).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,19).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,20).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,21).toString()+"','"+
+                                            tabModeTranfusi.getValueAt(i,22).toString()+"','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Donor");
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());

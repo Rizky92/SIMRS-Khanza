@@ -373,10 +373,10 @@ public class DlgLabaRugi extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(Table1.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(Table1.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -401,31 +401,31 @@ public class DlgLabaRugi extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        int row=Table1.getRowCount();
+                        int row=tabMode.getRowCount();
                         no=0;
                         for(int i=0;i<row;i++){
                             Sequel.menyimpan("temporary","'"+no+"','"+
-                                            Table1.getValueAt(i,0).toString()+"','"+
-                                            Table1.getValueAt(i,1).toString()+"','"+
-                                            Table1.getValueAt(i,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
+                                            tabMode.getValueAt(i,0).toString()+"','"+
+                                            tabMode.getValueAt(i,1).toString()+"','"+
+                                            tabMode.getValueAt(i,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
                             no++;
                         }
                         no++;
-                        int row2=Table2.getRowCount();
+                        int row2=tabMode2.getRowCount();
                         for(int i=0;i<row2;i++){
                             Sequel.menyimpan("temporary","'"+no+"','"+
-                                            Table2.getValueAt(i,0).toString()+"','"+
-                                            Table2.getValueAt(i,1).toString()+"','"+
-                                            Table2.getValueAt(i,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
+                                            tabMode2.getValueAt(i,0).toString()+"','"+
+                                            tabMode2.getValueAt(i,1).toString()+"','"+
+                                            tabMode2.getValueAt(i,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
                             no++;
                         }
                         no++;
-                        int row3=Table3.getRowCount();
+                        int row3=tabMode3.getRowCount();
                         for(int i=0;i<row3;i++){
                             Sequel.menyimpan("temporary","'"+no+"','"+
-                                            Table3.getValueAt(i,0).toString()+"','"+
-                                            Table3.getValueAt(i,1).toString()+"','"+
-                                            Table3.getValueAt(i,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
+                                            tabMode3.getValueAt(i,0).toString()+"','"+
+                                            tabMode3.getValueAt(i,1).toString()+"','"+
+                                            tabMode3.getValueAt(i,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
                             no++;
                         }
 

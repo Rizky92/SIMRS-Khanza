@@ -700,7 +700,7 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
             Valid.textKosong(TNoVerifikasi,"Nomor Verifikasi");
         }else if(KodeSampel.getText().equals("")||NamaSampel.getText().equals("")){
             Valid.textKosong(TNoVerifikasi,"Sampel");
-        }else if(tbVerifikasi.getRowCount()==0){
+        }else if(tabMode.getRowCount()==0){
             Valid.textKosong(TNoVerifikasi,"Data Verifikasi");
         }else{
             Sequel.queryu("delete from temporary");

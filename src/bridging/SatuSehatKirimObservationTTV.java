@@ -1204,10 +1204,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             switch (TabRawat.getSelectedIndex()) {
                 case 0:
-                    if(tbSuhu.getRowCount()==0){
+                    if(tabModeSuhu.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tbSuhu.getRowCount()!=0){
+                    }else if(tabModeSuhu.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("DataSatuSehatObservationTTVSuhu.html", "Data Observation TTV Suhu Satu Sehat", tbSuhu);
@@ -1225,10 +1225,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     }
                     break;
                 case 1:
-                    if(tbRespirasi.getRowCount()==0){
+                    if(tabModeRespirasi.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tbRespirasi.getRowCount()!=0){
+                    }else if(tabModeRespirasi.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("DataSatuSehatObservationTTVRespirasi.html", "Data Observation TTV Respirasi Satu Sehat", tbRespirasi);
@@ -1246,10 +1246,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     }
                     break;
                 case 2:
-                    if(tbNadi.getRowCount()==0){
+                    if(tabModeNadi.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tbNadi.getRowCount()!=0){
+                    }else if(tabModeNadi.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("DataSatuSehatObservationTTVNadi.html", "Data Observation TTV Nadi Satu Sehat", tbNadi);
@@ -1267,10 +1267,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     }
                     break;
                 case 3:
-                    if(tbSpO2.getRowCount()==0){
+                    if(tabModeSpO2.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tbSpO2.getRowCount()!=0){
+                    }else if(tabModeSpO2.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("DataSatuSehatObservationTTVSpO2.html", "Data Observation TTV SpO2 Satu Sehat", tbSpO2);
@@ -1288,10 +1288,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     }
                     break;
                 case 4:
-                    if(tbGCS.getRowCount()==0){
+                    if(tabModeGCS.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tbGCS.getRowCount()!=0){
+                    }else if(tabModeGCS.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("DataSatuSehatObservationTTVGCS.html", "Data Observation TTV GCS Satu Sehat", tbGCS);
@@ -1309,10 +1309,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     }
                     break;
                 case 5:
-                    if(tbKesadaran.getRowCount()==0){
+                    if(tabModeKesadaran.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tbKesadaran.getRowCount()!=0){
+                    }else if(tabModeKesadaran.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("DataSatuSehatObservationTTVKesadaran.html", "Data Observation TTV Kesadaran Satu Sehat", tbKesadaran);
@@ -1330,10 +1330,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     }
                     break;
                 case 6:
-                    if(tbTensi.getRowCount()==0){
+                    if(tabModeTensi.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tbTensi.getRowCount()!=0){
+                    }else if(tabModeTensi.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("DataSatuSehatObservationTTVTensi.html", "Data Observation TTV Tensi Satu Sehat", tbTensi);
@@ -1351,10 +1351,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     }
                     break;
                 case 7:
-                    if(tbTB.getRowCount()==0){
+                    if(tabModeTB.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tbTB.getRowCount()!=0){
+                    }else if(tabModeTB.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("DataSatuSehatObservationTTVTinggiBadan.html", "Data Observation TTV TB Satu Sehat", tbTB);
@@ -1372,10 +1372,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     }
                     break;
                 case 8:
-                    if(tbBB.getRowCount()==0){
+                    if(tabModeBB.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tbBB.getRowCount()!=0){
+                    }else if(tabModeBB.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("DataSatuSehatObservationTTVBeratBadan.html", "Data Observation TTV BB Satu Sehat", tbBB);
@@ -1393,10 +1393,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     }
                     break;
                 case 9:
-                    if(tbLP.getRowCount()==0){
+                    if(tabModeLP.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         //TCari.requestFocus();
-                    }else if(tbLP.getRowCount()!=0){
+                    }else if(tabModeLP.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("DataSatuSehatObservationTTVLingkarPerut.html", "Data Observation TTV LP Satu Sehat", tbLP);

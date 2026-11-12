@@ -359,9 +359,9 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
             }, "Laporan 5 (Jasper)");
             switch (TabRawat.getSelectedIndex()) {
                 case 0:
-                    if(tbBangsal.getRowCount()==0){
+                    if(tabMode.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    }else if(tbBangsal.getRowCount()!=0){
+                    }else if(tabMode.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("KegiatanFarmasi1.html", "Laporan Kegiatan Farmasi", tbBangsal);
@@ -386,13 +386,13 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
                                 param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
                                 param.put("tanggal",Tgl2.getDate());
                                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                                for(int r=0;r<tbBangsal.getRowCount();r++){
+                                for(int r=0;r<tabMode.getRowCount();r++){
                                     if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
                                         Sequel.menyimpan("temporary","'"+r+"','"+
-                                                    tbBangsal.getValueAt(r,0).toString()+"','"+
-                                                    tbBangsal.getValueAt(r,1).toString()+"','"+
-                                                    tbBangsal.getValueAt(r,2).toString()+"','"+
-                                                    tbBangsal.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                                    tabMode.getValueAt(r,0).toString()+"','"+
+                                                    tabMode.getValueAt(r,1).toString()+"','"+
+                                                    tabMode.getValueAt(r,2).toString()+"','"+
+                                                    tabMode.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                                     }
                                 }
                                 Valid.MyReportqry("rptKegiatanFarmasi1.jasper","report","::[ Laporan Kegiatan Farmasi ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
@@ -401,9 +401,9 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
                     }
                     break;
                 case 1:
-                    if(tbBangsal2.getRowCount()==0){
+                    if(tabMode2.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    }else if(tbBangsal2.getRowCount()!=0){
+                    }else if(tabMode2.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("KegiatanFarmasi2.html", "Laporan Kegiatan Farmasi", tbBangsal2);
@@ -428,13 +428,13 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
                                 param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
                                 param.put("tanggal",Tgl2.getDate());
                                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                                for(int r=0;r<tbBangsal2.getRowCount();r++){
+                                for(int r=0;r<tabMode2.getRowCount();r++){
                                     if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
                                         Sequel.menyimpan("temporary","'"+r+"','"+
-                                                    tbBangsal2.getValueAt(r,0).toString()+"','"+
-                                                    tbBangsal2.getValueAt(r,1).toString()+"','"+
-                                                    tbBangsal2.getValueAt(r,2).toString()+"','"+
-                                                    tbBangsal2.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                                    tabMode2.getValueAt(r,0).toString()+"','"+
+                                                    tabMode2.getValueAt(r,1).toString()+"','"+
+                                                    tabMode2.getValueAt(r,2).toString()+"','"+
+                                                    tabMode2.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                                     }
                                 }
                                 Valid.MyReportqry("rptKegiatanFarmasi2.jasper","report","::[ Laporan Kegiatan Farmasi ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
@@ -443,9 +443,9 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
                     }
                     break;
                 case 2:
-                    if(tbBangsal3.getRowCount()==0){
+                    if(tabMode3.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    }else if(tbBangsal3.getRowCount()!=0){
+                    }else if(tabMode3.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("KegiatanFarmasi3.html", "Laporan Kegiatan Farmasi", tbBangsal3);
@@ -470,13 +470,13 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
                                 param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
                                 param.put("tanggal",Tgl2.getDate());
                                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                                for(int r=0;r<tbBangsal3.getRowCount();r++){
+                                for(int r=0;r<tabMode3.getRowCount();r++){
                                     if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
                                         Sequel.menyimpan("temporary","'"+r+"','"+
-                                                    tbBangsal3.getValueAt(r,0).toString()+"','"+
-                                                    tbBangsal3.getValueAt(r,1).toString()+"','"+
-                                                    tbBangsal3.getValueAt(r,2).toString()+"','"+
-                                                    tbBangsal3.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                                    tabMode3.getValueAt(r,0).toString()+"','"+
+                                                    tabMode3.getValueAt(r,1).toString()+"','"+
+                                                    tabMode3.getValueAt(r,2).toString()+"','"+
+                                                    tabMode3.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                                     }
                                 }
                                 Valid.MyReportqry("rptKegiatanFarmasi3.jasper","report","::[ Laporan Kegiatan Farmasi ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);

@@ -340,10 +340,10 @@ public class DlgFeeVisitDokter extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbDokter.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tbDokter.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -368,67 +368,67 @@ public class DlgFeeVisitDokter extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        for(i=0;i<tbDokter.getRowCount();i++){
+                        for(i=0;i<tabMode.getRowCount();i++){
                             try {
-                                sjmlvisit=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,6).toString()));
+                                sjmlvisit=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
                             } catch (Exception e) {
                                 sjmlvisit="";
                             }
 
                             try {
-                                sjmlbyphone=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,7).toString()));
+                                sjmlbyphone=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()));
                             } catch (Exception e) {
                                 sjmlbyphone="";
                             }
 
                             try {
-                                starifvisit=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,8).toString()));
+                                starifvisit=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()));
                             } catch (Exception e) {
                                 starifvisit="";
                             }
 
                             try {
-                                starifbyphone=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,9).toString()));
+                                starifbyphone=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()));
                             } catch (Exception e) {
                                 starifbyphone="";
                             }
 
                             try {
-                                svisit=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,10).toString()));
+                                svisit=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()));
                             } catch (Exception e) {
                                 svisit="";
                             }
 
                             try {
-                                sbyphone=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,11).toString()));
+                                sbyphone=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()));
                             } catch (Exception e) {
                                 sbyphone="";
                             }
 
                             try {
-                                sbruto=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,12).toString()));
+                                sbruto=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()));
                             } catch (Exception e) {
                                 sbruto="";
                             }
 
                             try {
-                                sjasa=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,13).toString()));
+                                sjasa=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()));
                             } catch (Exception e) {
                                 sjasa="";
                             }
 
                             try {
-                                suangrs=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,14).toString()));
+                                suangrs=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()));
                             } catch (Exception e) {
                                 suangrs="";
                             }
                             Sequel.menyimpan("temporary","'"+i+"','"+
-                                            tbDokter.getValueAt(i,0).toString().replaceAll("'","`") +"','"+
-                                            tbDokter.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
-                                            tbDokter.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
-                                            tbDokter.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
-                                            tbDokter.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
-                                            tbDokter.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,0).toString().replaceAll("'","`") +"','"+
+                                            tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
                                             sjmlvisit+"','"+
                                             sjmlbyphone+"','"+
                                             starifvisit+"','"+

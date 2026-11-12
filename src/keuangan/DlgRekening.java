@@ -779,10 +779,10 @@ public final class DlgRekening extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbKamar.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tbKamar.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -816,13 +816,13 @@ public final class DlgRekening extends javax.swing.JDialog {
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                         if(TCari.getText().trim().equals("")){
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                            int row=tbKamar.getRowCount();
+                            int row=tabMode.getRowCount();
                             for(int i=0;i<row;i++){
                                 Sequel.menyimpan("temporary","'"+i+"','"+
-                                                tbKamar.getValueAt(i,2).toString()+"','"+
-                                                tbKamar.getValueAt(i,3).toString()+"','"+
-                                                tbKamar.getValueAt(i,4).toString()+"','"+
-                                                tbKamar.getValueAt(i,5).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
+                                                tabMode.getValueAt(i,2).toString()+"','"+
+                                                tabMode.getValueAt(i,3).toString()+"','"+
+                                                tabMode.getValueAt(i,4).toString()+"','"+
+                                                tabMode.getValueAt(i,5).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
                             }
                             Valid.MyReportqry("rptRekening2.jasper","report","::[ Data Rekening ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         }else{

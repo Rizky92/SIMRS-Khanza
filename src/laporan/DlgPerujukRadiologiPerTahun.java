@@ -247,10 +247,10 @@ public final class DlgPerujukRadiologiPerTahun extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbBangsal.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tbBangsal.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -282,24 +282,24 @@ public final class DlgPerujukRadiologiPerTahun extends javax.swing.JDialog {
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        for(int r=0;r<tbBangsal.getRowCount();r++){
+                        for(int r=0;r<tabMode.getRowCount();r++){
                             if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
                                 Sequel.menyimpan("temporary","'"+r+"','"+
-                                                tbBangsal.getValueAt(r,0).toString()+"','"+
-                                                tbBangsal.getValueAt(r,1).toString()+"','"+
-                                                tbBangsal.getValueAt(r,2).toString()+"','"+
-                                                tbBangsal.getValueAt(r,3).toString()+"','"+
-                                                tbBangsal.getValueAt(r,4).toString()+"','"+
-                                                tbBangsal.getValueAt(r,5).toString()+"','"+
-                                                tbBangsal.getValueAt(r,6).toString()+"','"+
-                                                tbBangsal.getValueAt(r,7).toString()+"','"+
-                                                tbBangsal.getValueAt(r,8).toString()+"','"+
-                                                tbBangsal.getValueAt(r,9).toString()+"','"+
-                                                tbBangsal.getValueAt(r,10).toString()+"','"+
-                                                tbBangsal.getValueAt(r,11).toString()+"','"+
-                                                tbBangsal.getValueAt(r,12).toString()+"','"+
-                                                tbBangsal.getValueAt(r,13).toString()+"','"+
-                                                tbBangsal.getValueAt(r,14).toString()+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
+                                                tabMode.getValueAt(r,0).toString()+"','"+
+                                                tabMode.getValueAt(r,1).toString()+"','"+
+                                                tabMode.getValueAt(r,2).toString()+"','"+
+                                                tabMode.getValueAt(r,3).toString()+"','"+
+                                                tabMode.getValueAt(r,4).toString()+"','"+
+                                                tabMode.getValueAt(r,5).toString()+"','"+
+                                                tabMode.getValueAt(r,6).toString()+"','"+
+                                                tabMode.getValueAt(r,7).toString()+"','"+
+                                                tabMode.getValueAt(r,8).toString()+"','"+
+                                                tabMode.getValueAt(r,9).toString()+"','"+
+                                                tabMode.getValueAt(r,10).toString()+"','"+
+                                                tabMode.getValueAt(r,11).toString()+"','"+
+                                                tabMode.getValueAt(r,12).toString()+"','"+
+                                                tabMode.getValueAt(r,13).toString()+"','"+
+                                                tabMode.getValueAt(r,14).toString()+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
                             }
                         }
                         Valid.MyReportqry("rptPerujukRadiologiPerTahun.jasper","report","::[ Laporan Rekap Perujuk Laboratorium Per Tahun ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);

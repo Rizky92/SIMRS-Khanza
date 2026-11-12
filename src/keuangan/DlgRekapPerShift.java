@@ -508,9 +508,9 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
         try {
             switch (TabRawat.getSelectedIndex()) {
                 case 0:
-                    if(tbRalan.getRowCount()==0){
+                    if(tabModeRalan.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    }else if(tbRalan.getRowCount()!=0){
+                    }else if(tabModeRalan.getRowCount()!=0){
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
                             bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
@@ -534,12 +534,12 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
                                 break;
                             case "Laporan 5 (Jasper)":
                                 Sequel.deleteTemporary();
-                                for(int r=0;r<tbRalan.getRowCount();r++){
-                                    Sequel.temporary(String.valueOf(r), tbRalan.getValueAt(r,0).toString(), tbRalan.getValueAt(r,1).toString(),
-                                        tbRalan.getValueAt(r,2).toString(), tbRalan.getValueAt(r,3).toString(), tbRalan.getValueAt(r,4).toString(),
-                                        tbRalan.getValueAt(r,5).toString(), tbRalan.getValueAt(r,6).toString(), tbRalan.getValueAt(r,7).toString(),
-                                        tbRalan.getValueAt(r,8).toString(), tbRalan.getValueAt(r,9).toString(), tbRalan.getValueAt(r,10).toString(),
-                                        tbRalan.getValueAt(r,11).toString(), tbRalan.getValueAt(r,12).toString(), tbRalan.getValueAt(r,13).toString());
+                                for(int r=0;r<tabModeRalan.getRowCount();r++){
+                                    Sequel.temporary(String.valueOf(r), tabModeRalan.getValueAt(r,0).toString(), tabModeRalan.getValueAt(r,1).toString(),
+                                        tabModeRalan.getValueAt(r,2).toString(), tabModeRalan.getValueAt(r,3).toString(), tabModeRalan.getValueAt(r,4).toString(),
+                                        tabModeRalan.getValueAt(r,5).toString(), tabModeRalan.getValueAt(r,6).toString(), tabModeRalan.getValueAt(r,7).toString(),
+                                        tabModeRalan.getValueAt(r,8).toString(), tabModeRalan.getValueAt(r,9).toString(), tabModeRalan.getValueAt(r,10).toString(),
+                                        tabModeRalan.getValueAt(r,11).toString(), tabModeRalan.getValueAt(r,12).toString(), tabModeRalan.getValueAt(r,13).toString());
                                 }
                                 Map<String, Object> paramRalan = new HashMap<>();
                                 paramRalan.put("namars",akses.getnamars());
@@ -556,9 +556,9 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
                     }
                     break;
                 case 1:
-                    if(tbRanap.getRowCount()==0){
+                    if(tabModeRanap.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    }else if(tbRanap.getRowCount()!=0){
+                    }else if(tabModeRanap.getRowCount()!=0){
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
                             bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
@@ -582,14 +582,14 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
                                 break;
                             case "Laporan 5 (Jasper)":
                                 Sequel.deleteTemporary();
-                                for(int r=0;r<tbRanap.getRowCount();r++){
-                                    Sequel.temporary(String.valueOf(r), tbRanap.getValueAt(r,0).toString(), tbRanap.getValueAt(r,1).toString(),
-                                        tbRanap.getValueAt(r,2).toString(), tbRanap.getValueAt(r,3).toString(), tbRanap.getValueAt(r,4).toString(),
-                                        tbRanap.getValueAt(r,5).toString(), tbRanap.getValueAt(r,6).toString(), tbRanap.getValueAt(r,7).toString(),
-                                        tbRanap.getValueAt(r,8).toString(), tbRanap.getValueAt(r,9).toString(), tbRanap.getValueAt(r,10).toString(),
-                                        tbRanap.getValueAt(r,11).toString(), tbRanap.getValueAt(r,12).toString(), tbRanap.getValueAt(r,13).toString(),
-                                        tbRanap.getValueAt(r,14).toString(), tbRanap.getValueAt(r,15).toString(), tbRanap.getValueAt(r,16).toString(),
-                                        tbRanap.getValueAt(r,17).toString());
+                                for(int r=0;r<tabModeRanap.getRowCount();r++){
+                                    Sequel.temporary(String.valueOf(r), tabModeRanap.getValueAt(r,0).toString(), tabModeRanap.getValueAt(r,1).toString(),
+                                        tabModeRanap.getValueAt(r,2).toString(), tabModeRanap.getValueAt(r,3).toString(), tabModeRanap.getValueAt(r,4).toString(),
+                                        tabModeRanap.getValueAt(r,5).toString(), tabModeRanap.getValueAt(r,6).toString(), tabModeRanap.getValueAt(r,7).toString(),
+                                        tabModeRanap.getValueAt(r,8).toString(), tabModeRanap.getValueAt(r,9).toString(), tabModeRanap.getValueAt(r,10).toString(),
+                                        tabModeRanap.getValueAt(r,11).toString(), tabModeRanap.getValueAt(r,12).toString(), tabModeRanap.getValueAt(r,13).toString(),
+                                        tabModeRanap.getValueAt(r,14).toString(), tabModeRanap.getValueAt(r,15).toString(), tabModeRanap.getValueAt(r,16).toString(),
+                                        tabModeRanap.getValueAt(r,17).toString());
                                 }
                                 Map<String, Object> paramRanap = new HashMap<>();
                                 paramRanap.put("namars",akses.getnamars());
@@ -606,9 +606,9 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
                     }
                     break;
                 case 2:
-                    if(tbPemasukan.getRowCount()==0){
+                    if(tabModePemasukan.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    }else if(tbPemasukan.getRowCount()!=0){
+                    }else if(tabModePemasukan.getRowCount()!=0){
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
                             bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
@@ -632,9 +632,9 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
                                 break;
                             case "Laporan 5 (Jasper)":
                                 Sequel.deleteTemporary();
-                                for(int r=0;r<tbPemasukan.getRowCount();r++){
-                                    Sequel.temporary(String.valueOf(r), tbPemasukan.getValueAt(r,0).toString(), tbPemasukan.getValueAt(r,1).toString(),
-                                        tbPemasukan.getValueAt(r,2).toString(), tbPemasukan.getValueAt(r,3).toString());
+                                for(int r=0;r<tabModePemasukan.getRowCount();r++){
+                                    Sequel.temporary(String.valueOf(r), tabModePemasukan.getValueAt(r,0).toString(), tabModePemasukan.getValueAt(r,1).toString(),
+                                        tabModePemasukan.getValueAt(r,2).toString(), tabModePemasukan.getValueAt(r,3).toString());
                                 }
                                 Map<String, Object> paramPemasukan = new HashMap<>();
                                 paramPemasukan.put("namars",akses.getnamars());
@@ -651,9 +651,9 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
                     }
                     break;
                 case 3:
-                    if(tbDeposit.getRowCount()==0){
+                    if(tabModeDeposit.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    }else if(tbDeposit.getRowCount()!=0){
+                    }else if(tabModeDeposit.getRowCount()!=0){
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
                             bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
@@ -677,10 +677,10 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
                                 break;
                             case "Laporan 5 (Jasper)":
                                 Sequel.deleteTemporary();
-                                for(int r=0;r<tbDeposit.getRowCount();r++){
-                                    Sequel.temporary(String.valueOf(r), tbDeposit.getValueAt(r,0).toString(), tbDeposit.getValueAt(r,1).toString(),
-                                        tbDeposit.getValueAt(r,2).toString(), tbDeposit.getValueAt(r,3).toString(),
-                                        tbDeposit.getValueAt(r,4).toString(), tbDeposit.getValueAt(r,5).toString());
+                                for(int r=0;r<tabModeDeposit.getRowCount();r++){
+                                    Sequel.temporary(String.valueOf(r), tabModeDeposit.getValueAt(r,0).toString(), tabModeDeposit.getValueAt(r,1).toString(),
+                                        tabModeDeposit.getValueAt(r,2).toString(), tabModeDeposit.getValueAt(r,3).toString(),
+                                        tabModeDeposit.getValueAt(r,4).toString(), tabModeDeposit.getValueAt(r,5).toString());
                                 }
                                 Map<String, Object> paramDeposit = new HashMap<>();
                                 paramDeposit.put("namars",akses.getnamars());
@@ -697,9 +697,9 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
                     }
                     break;
                 case 4:
-                    if(tbPengeluaran.getRowCount()==0){
+                    if(tabModePengeluaran.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    }else if(tbPengeluaran.getRowCount()!=0){
+                    }else if(tabModePengeluaran.getRowCount()!=0){
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
                             bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
@@ -723,9 +723,9 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
                                 break;
                             case "Laporan 5 (Jasper)":
                                 Sequel.deleteTemporary();
-                                for(int r=0;r<tbPengeluaran.getRowCount();r++){
-                                    Sequel.temporary(String.valueOf(r), tbPengeluaran.getValueAt(r,0).toString(), tbPengeluaran.getValueAt(r,1).toString(),
-                                        tbPengeluaran.getValueAt(r,2).toString(), tbPengeluaran.getValueAt(r,3).toString());
+                                for(int r=0;r<tabModePengeluaran.getRowCount();r++){
+                                    Sequel.temporary(String.valueOf(r), tabModePengeluaran.getValueAt(r,0).toString(), tabModePengeluaran.getValueAt(r,1).toString(),
+                                        tabModePengeluaran.getValueAt(r,2).toString(), tabModePengeluaran.getValueAt(r,3).toString());
                                 }
                                 Map<String, Object> paramPengeluaran = new HashMap<>();
                                 paramPengeluaran.put("namars",akses.getnamars());

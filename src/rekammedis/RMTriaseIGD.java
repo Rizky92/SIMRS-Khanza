@@ -2275,10 +2275,10 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbTriase.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tbTriase.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             keputusan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Laporan Triase IGD",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1","Laporan 2"},"Laporan 1");
             switch (keputusan) {
@@ -2323,7 +2323,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                             "</tr>"
                         );
 
-                        for(i=0;i<tbTriase.getRowCount();i++){
+                        for(i=0;i<tabMode.getRowCount();i++){
                             htmlContent.append(
                                 "<tr class='isi'>"+
                                     "<td valign='top' cellpadding='0' cellspacing='0'>"+

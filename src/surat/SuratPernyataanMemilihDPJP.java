@@ -1051,10 +1051,10 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tbObat.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tbObat.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             try{
                 File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -1098,7 +1098,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nip</b></td>").
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Saksi II Petugas</b></td>").
                                         append("</tr>");
-                            for (i = 0; i < tbObat.getRowCount(); i++) {
+                            for (i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
                                                 append("<td valign='top'>").append(tbObat.getValueAt(i,0).toString()).append("</td>").
                                                 append("<td valign='top'>").append(tbObat.getValueAt(i,1).toString()).append("</td>").
@@ -1166,7 +1166,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nip</b></td>").
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Saksi II Petugas</b></td>").
                                         append("</tr>");
-                            for (i = 0; i < tbObat.getRowCount(); i++) {
+                            for (i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
                                                 append("<td valign='top'>").append(tbObat.getValueAt(i,0).toString()).append("</td>").
                                                 append("<td valign='top'>").append(tbObat.getValueAt(i,1).toString()).append("</td>").
@@ -1218,7 +1218,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                             htmlContent.append(
                                 "\"No.Pernyataan\";\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"Tgl.Lahir\";\"J.K.\";\"Tanggal\";\"Pembuat Pernyataan\";\"Alamat Pembuat Pernyataan\";\"Tgl.Lahir\";\"J.K.P.P.\";\"Hubungan\";\"Saksi I Keluarga\";\"Kode Dokter\";\"Nama Dokter\";\"Nip\";\"Saksi II Petugas\"\n"
                             );
-                            for (i = 0; i < tbObat.getRowCount(); i++) {
+                            for (i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append("\"").append(tbObat.getValueAt(i,0).toString()).append("\";\"").append(tbObat.getValueAt(i,1).toString()).append("\";\"").append(tbObat.getValueAt(i,2).toString()).append("\";\"").append(tbObat.getValueAt(i,3).toString()).append("\";\"").append(tbObat.getValueAt(i,4).toString()).append("\";\"").append(tbObat.getValueAt(i,5).toString()).append("\";\"").append(tbObat.getValueAt(i,6).toString()).append("\";\"").append(tbObat.getValueAt(i,7).toString()).append("\";\"").append(tbObat.getValueAt(i,8).toString()).append("\";\"").append(tbObat.getValueAt(i,9).toString()).append("\";\"").
                                                          append(tbObat.getValueAt(i,10).toString()).append("\";\"").append(tbObat.getValueAt(i,11).toString()).append("\";\"").append(tbObat.getValueAt(i,12).toString()).append("\";\"").append(tbObat.getValueAt(i,13).toString()).append("\";\"").append(tbObat.getValueAt(i,14).toString()).append("\";\"").append(tbObat.getValueAt(i,15).toString()).append("\";\"").append(tbObat.getValueAt(i,16).toString()).append("\"\n");
                             }

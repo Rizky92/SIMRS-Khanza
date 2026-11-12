@@ -1127,7 +1127,7 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
             Valid.textKosong(KondisiWadah,"Kondisi Wadah");
         }else if(KodeSampel.getText().equals("")||NamaSampel.getText().equals("")){
             Valid.textKosong(BtnSampel,"Sampel");
-        }else if(tbPermintaan.getRowCount()==0){
+        }else if(tabMode.getRowCount()==0){
             Valid.textKosong(TCariPeriksa,"Data Permintaan");
         }else if(jml==0){
             Valid.textKosong(TCariPeriksa,"Data Permintaan");

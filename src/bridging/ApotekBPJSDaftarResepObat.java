@@ -588,10 +588,10 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         if(TabData.getSelectedIndex()==0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            if(tbResep.getRowCount()==0){
+            if(tabMode.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari.requestFocus();
-            }else if(tbResep.getRowCount()!=0){
+            }else if(tabMode.getRowCount()!=0){
                 try{
                     File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -632,7 +632,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Iterasi</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>PPK Rujukan</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tbResep.getRowCount(); i++) {
+                                for (int i = 0; i < tabMode.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbResep.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbResep.getValueAt(i,1).toString()).append("</td>").
@@ -694,7 +694,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Iterasi</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>PPK Rujukan</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tbResep.getRowCount(); i++) {
+                                for (int i = 0; i < tabMode.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbResep.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbResep.getValueAt(i,1).toString()).append("</td>").
@@ -743,7 +743,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                 htmlContent.append(
                                     "\"No.SEP Asal\";\"No.SEP Apotek\";\"Tanggal SEP\";\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"No.Kartu\";\"Jenis\";\"ID User SEP\";\"No.Resep\";\"Tgl.Resep\";\"Tgl.Pelayanan\";\"Iterasi\";\"PPK Rujukan\"\n"
                                 );
-                                for (int i = 0; i < tbResep.getRowCount(); i++) {
+                                for (int i = 0; i < tabMode.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbResep.getValueAt(i,0).toString()).append("\";\"").append(tbResep.getValueAt(i,1).toString()).append("\";\"").append(tbResep.getValueAt(i,2).toString()).append("\";\"").append(tbResep.getValueAt(i,3).toString()).append("\";\"").append(tbResep.getValueAt(i,4).toString()).append("\";\"").append(tbResep.getValueAt(i,5).toString()).append("\";\"").append(tbResep.getValueAt(i,6).toString()).append("\";\"").append(tbResep.getValueAt(i,7).toString()).append("\";\"").append(tbResep.getValueAt(i,8).toString()).append("\";\"").append(tbResep.getValueAt(i,9).toString()).append("\";\"").append(tbResep.getValueAt(i,10).toString()).append("\";\"").append(tbResep.getValueAt(i,11).toString()).append("\";\"").append(tbResep.getValueAt(i,12).toString()).append("\";\"").append(tbResep.getValueAt(i,13).toString()).append("\"\n");
                                 }
                                 f = new File("DataResepApolBPJS.csv");
@@ -763,10 +763,10 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
             this.setCursor(Cursor.getDefaultCursor());
         }else if(TabData.getSelectedIndex()==1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            if(tbRekapResep.getRowCount()==0){
+            if(tabModeRekap.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari.requestFocus();
-            }else if(tbRekapResep.getRowCount()!=0){
+            }else if(tabModeRekap.getRowCount()!=0){
                 try{
                     File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -815,7 +815,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Permintaan</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jml.Harian</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tbRekapResep.getRowCount(); i++) {
+                                for (int i = 0; i < tabModeRekap.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbRekapResep.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbRekapResep.getValueAt(i,1).toString()).append("</td>").
@@ -893,7 +893,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Permintaan</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jml.Harian</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tbRekapResep.getRowCount(); i++) {
+                                for (int i = 0; i < tabModeRekap.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbRekapResep.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbRekapResep.getValueAt(i,1).toString()).append("</td>").
@@ -950,7 +950,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                 htmlContent.append(
                                     "\"No.SEP Asal\";\"No.SEP Apotek\";\"Tanggal SEP\";\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"No.Kartu\";\"Jenis\";\"ID User SEP\";\"No.Resep\";\"Tgl.Resep\";\"Tgl.Pelayanan\";\"Iterasi\";\"PPK Rujukan\";\"No.Racik\";\"Kode Obat\";\"Nama Obat\";\"Signa 1\";\"Signa 2\";\"Jml.Obat\";\"Permintaan\";\"Jml.Harian\"\n"
                                 );
-                                for (int i = 0; i < tbRekapResep.getRowCount(); i++) {
+                                for (int i = 0; i < tabModeRekap.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbRekapResep.getValueAt(i,0).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,1).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,2).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,3).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,4).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,5).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,6).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,7).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,8).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,9).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,10).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,11).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,12).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,13).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,14).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,15).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,16).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,17).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,18).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,19).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,20).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,21).toString()).append("\"\n");
                                 }
                                 f = new File("DataRekapResepApolBPJS.csv");

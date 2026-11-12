@@ -2457,10 +2457,10 @@ public final class SisruteRujukanKeluar extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         if(TabRujukan.getSelectedIndex()==0){
-            if(tbObat.getRowCount()==0){
+            if(tabMode.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari.requestFocus();
-            }else if(tbObat.getRowCount()!=0){
+            }else if(tabMode.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {

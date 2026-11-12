@@ -2308,30 +2308,30 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     private void BtnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNotaActionPerformed
         if(TNoRw.getText().trim().equals("")||TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
-        }else if(tbBilling.getRowCount()==0){
+        }else if(tabModeRwJlDr.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tbBilling.getRowCount()!=0){
+        }else if(tabModeRwJlDr.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try{
                 Sequel.queryu2("delete from temporary_bayar_ralan where temp9='"+akses.getkode()+"'");
-                for(i=0;i<tbBilling.getRowCount();i++){
-                    if(tbBilling.getValueAt(i,0).toString().equals("true")){
+                for(i=0;i<tabModeRwJlDr.getRowCount();i++){
+                    if(tabModeRwJlDr.getValueAt(i,0).toString().equals("true")){
                         biaya="";
                         try {
-                            biaya=Valid.SetAngka(Double.parseDouble(tbBilling.getValueAt(i,4).toString()));
+                            biaya=Valid.SetAngka(Double.parseDouble(tabModeRwJlDr.getValueAt(i,4).toString()));
                         } catch (Exception e) {
                             biaya="";
                         }
                         tambahan="";
                         try {
-                            tambahan=Valid.SetAngka(Double.parseDouble(tbBilling.getValueAt(i,6).toString()));
+                            tambahan=Valid.SetAngka(Double.parseDouble(tabModeRwJlDr.getValueAt(i,6).toString()));
                         } catch (Exception e) {
                             tambahan="";
                         }
                         totals="";
                         try {
-                            totals=Valid.SetAngka(Double.parseDouble(tbBilling.getValueAt(i,7).toString()));
+                            totals=Valid.SetAngka(Double.parseDouble(tabModeRwJlDr.getValueAt(i,7).toString()));
                         } catch (Exception e) {
                             totals="";
                         }
@@ -2339,19 +2339,19 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                         pstemporary=koneksi.prepareStatement(sqlpstemporary);
                         try {
                             pstemporary.setString(1,i+"");
-                            pstemporary.setString(2,tbBilling.getValueAt(i,1).toString().replaceAll("'",""));
-                            pstemporary.setString(3,tbBilling.getValueAt(i,2).toString().replaceAll("'",""));
-                            pstemporary.setString(4,tbBilling.getValueAt(i,3).toString().replaceAll("'",""));
+                            pstemporary.setString(2,tabModeRwJlDr.getValueAt(i,1).toString().replaceAll("'",""));
+                            pstemporary.setString(3,tabModeRwJlDr.getValueAt(i,2).toString().replaceAll("'",""));
+                            pstemporary.setString(4,tabModeRwJlDr.getValueAt(i,3).toString().replaceAll("'",""));
                             pstemporary.setString(5,biaya);
                             try {
-                                pstemporary.setString(6,tbBilling.getValueAt(i,5).toString().replaceAll("'",""));
+                                pstemporary.setString(6,tabModeRwJlDr.getValueAt(i,5).toString().replaceAll("'",""));
                             } catch (Exception e) {
                                 pstemporary.setString(6,"");
                             }
                             pstemporary.setString(7,tambahan);
                             pstemporary.setString(8,totals);
                             try {
-                                pstemporary.setString(9,tbBilling.getValueAt(i,8).toString().replaceAll("'",""));
+                                pstemporary.setString(9,tabModeRwJlDr.getValueAt(i,8).toString().replaceAll("'",""));
                             } catch (Exception e) {
                                 pstemporary.setString(9,"");
                             }
@@ -2401,10 +2401,10 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     }
                     Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','SISA PIUTANG',':','','','','','"+Valid.SetAngka(piutang)+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
                     i++;
-                    row2=tbAkunPiutang.getRowCount();
+                    row2=tabModeAkunPiutang.getRowCount();
                     for(r=0;r<row2;r++){
-                        if(Valid.SetAngka(tbAkunPiutang.getValueAt(r,3).toString())>0){
-                            Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','-  "+tbAkunPiutang.getValueAt(r,0).toString()+"',':','','','','','"+Valid.SetAngka(Valid.SetAngka(tbAkunPiutang.getValueAt(r,3).toString()))+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                        if(Valid.SetAngka(tabModeAkunPiutang.getValueAt(r,3).toString())>0){
+                            Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','-  "+tabModeAkunPiutang.getValueAt(r,0).toString()+"',':','','','','','"+Valid.SetAngka(Valid.SetAngka(tabModeAkunPiutang.getValueAt(r,3).toString()))+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
                             i++;
                         }
                     }

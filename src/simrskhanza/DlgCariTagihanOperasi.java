@@ -1855,10 +1855,10 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbDokter.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tbDokter.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1883,22 +1883,22 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        int row=tbDokter.getRowCount();
+                        int row=tabMode.getRowCount();
                         for(int i=0;i<row;i++){
                             Sequel.menyimpan("temporary","'"+i+"','"+
-                                            tbDokter.getValueAt(i,0).toString()+"','"+
-                                            tbDokter.getValueAt(i,1).toString()+"','"+
-                                            tbDokter.getValueAt(i,2).toString()+"','"+
-                                            tbDokter.getValueAt(i,3).toString()+"','"+
-                                            tbDokter.getValueAt(i,4).toString()+"','"+
-                                            tbDokter.getValueAt(i,33).toString()+"','"+
-                                            tbDokter.getValueAt(i,34).toString()+"','"+
-                                            tbDokter.getValueAt(i,35).toString()+"','"+
-                                            tbDokter.getValueAt(i,36).toString()+"','"+
-                                            tbDokter.getValueAt(i,37).toString()+"','"+
-                                            tbDokter.getValueAt(i,38).toString()+"','"+
-                                            tbDokter.getValueAt(i,39).toString()+"','"+
-                                            tbDokter.getValueAt(i,40).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi operasi");
+                                            tabMode.getValueAt(i,0).toString()+"','"+
+                                            tabMode.getValueAt(i,1).toString()+"','"+
+                                            tabMode.getValueAt(i,2).toString()+"','"+
+                                            tabMode.getValueAt(i,3).toString()+"','"+
+                                            tabMode.getValueAt(i,4).toString()+"','"+
+                                            tabMode.getValueAt(i,33).toString()+"','"+
+                                            tabMode.getValueAt(i,34).toString()+"','"+
+                                            tabMode.getValueAt(i,35).toString()+"','"+
+                                            tabMode.getValueAt(i,36).toString()+"','"+
+                                            tabMode.getValueAt(i,37).toString()+"','"+
+                                            tabMode.getValueAt(i,38).toString()+"','"+
+                                            tabMode.getValueAt(i,39).toString()+"','"+
+                                            tabMode.getValueAt(i,40).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi operasi");
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());

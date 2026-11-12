@@ -661,10 +661,10 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
         }
         switch (TabRawat.getSelectedIndex()) {
             case 0:
-                if(tbOperasi.getRowCount()==0){
+                if(tabModeOperasi.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     TCari.requestFocus();
-                }else if(tbOperasi.getRowCount()!=0){
+                }else if(tabModeOperasi.getRowCount()!=0){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     try {
                         try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -709,10 +709,10 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
                 }
                 break;
             case 1:
-                if(tbOperasi1.getRowCount()==0){
+                if(tabModeOperasi2.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     TCari.requestFocus();
-                }else if(tbOperasi1.getRowCount()!=0){
+                }else if(tabModeOperasi2.getRowCount()!=0){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     try {
                         try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {

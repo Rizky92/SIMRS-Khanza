@@ -864,10 +864,10 @@ public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
             String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
                 "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
             }, "Laporan 5 (Jasper)");
-            if (tbObat.getRowCount() == 0) {
+            if (tabMode.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            } else if (tbObat.getRowCount() != 0) {
+            } else if (tabMode.getRowCount() != 0) {
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
                         Valid.exportHtmlSmc("PengajuanIzinAdminSMC.html", "Data Pengajuan Izin", tbObat);

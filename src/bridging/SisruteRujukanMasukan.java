@@ -711,10 +711,10 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        if(tbBangsal.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tbBangsal.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -739,44 +739,44 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        int row=tbBangsal.getRowCount();
+                        int row=tabMode.getRowCount();
                         for(int r=0;r<row;r++){
                             Sequel.menyimpan("temporary","'"+r+"','"+
-                                tbBangsal.getValueAt(r,0).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,14).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,15).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,16).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,19).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,20).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,21).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,22).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,23).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,24).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,25).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,26).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,27).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,28).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,29).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,30).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,31).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,32).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,33).toString().replaceAll("'","`")+"','"+
-                                tbBangsal.getValueAt(r,34).toString().replaceAll("'","`")+"','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
+                                tabMode.getValueAt(r,0).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,14).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,15).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,16).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,19).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,20).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,21).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,22).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,23).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,24).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,25).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,26).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,27).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,28).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,29).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,30).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,31).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,32).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,33).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,34).toString().replaceAll("'","`")+"','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());

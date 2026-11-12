@@ -738,7 +738,7 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
             Valid.textKosong(NoBayar,"Nomor Verifikasi");
         }else if(KodeSampel.getText().equals("")||NamaSampel.getText().equals("")){
             Valid.textKosong(NoBayar,"Sampel");
-        }else if(tbValidasi.getRowCount()==0){
+        }else if(tabMode.getRowCount()==0){
             Valid.textKosong(NoBayar,"Data Pembayaran");
         }else{
             Sequel.queryu("delete from temporary_bayar_labkesling");

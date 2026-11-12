@@ -686,10 +686,10 @@ public final class DlgKunjunganRanap extends javax.swing.JDialog {
                 "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
             }, "Laporan 5 (Jasper)");
             if(TabRawat.getSelectedIndex()==0){
-                if(tbBangsal.getRowCount()==0){
+                if(tabMode.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     //TCari.requestFocus();
-                }else if(tbBangsal.getRowCount()!=0){
+                }else if(tabMode.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("KunjunganRanap.html", "Laporan Kunjungan Rawat Inap", tbBangsal);
@@ -705,22 +705,22 @@ public final class DlgKunjunganRanap extends javax.swing.JDialog {
                             break;
                         case "Laporan 5 (Jasper)":
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                            for(int r=0;r<tbBangsal.getRowCount();r++){
+                            for(int r=0;r<tabMode.getRowCount();r++){
                                 if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
                                     Sequel.menyimpan("temporary","'"+r+"','"+
-                                                tbBangsal.getValueAt(r,0).toString()+"','"+
-                                                tbBangsal.getValueAt(r,1).toString()+"','"+
-                                                tbBangsal.getValueAt(r,2).toString()+"','"+
-                                                tbBangsal.getValueAt(r,3).toString()+"','"+
-                                                tbBangsal.getValueAt(r,4).toString()+"','"+
-                                                tbBangsal.getValueAt(r,5).toString()+"','"+
-                                                tbBangsal.getValueAt(r,6).toString()+"','"+
-                                                tbBangsal.getValueAt(r,7).toString()+"','"+
-                                                tbBangsal.getValueAt(r,8).toString()+"','"+
-                                                tbBangsal.getValueAt(r,9).toString()+"','"+
-                                                tbBangsal.getValueAt(r,10).toString()+"','"+
-                                                tbBangsal.getValueAt(r,11).toString()+"','"+
-                                                tbBangsal.getValueAt(r,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                                tabMode.getValueAt(r,0).toString()+"','"+
+                                                tabMode.getValueAt(r,1).toString()+"','"+
+                                                tabMode.getValueAt(r,2).toString()+"','"+
+                                                tabMode.getValueAt(r,3).toString()+"','"+
+                                                tabMode.getValueAt(r,4).toString()+"','"+
+                                                tabMode.getValueAt(r,5).toString()+"','"+
+                                                tabMode.getValueAt(r,6).toString()+"','"+
+                                                tabMode.getValueAt(r,7).toString()+"','"+
+                                                tabMode.getValueAt(r,8).toString()+"','"+
+                                                tabMode.getValueAt(r,9).toString()+"','"+
+                                                tabMode.getValueAt(r,10).toString()+"','"+
+                                                tabMode.getValueAt(r,11).toString()+"','"+
+                                                tabMode.getValueAt(r,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                                 }
                             }
                             Valid.MyReportqry("rptKunjunganRanap.jasper","report","::[ Laporan Kunjungan Rawat Inap ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
@@ -728,10 +728,10 @@ public final class DlgKunjunganRanap extends javax.swing.JDialog {
                     }
                 }
             }else if(TabRawat.getSelectedIndex()==1){
-                if(tbBangsal2.getRowCount()==0){
+                if(tabMode2.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     //TCari.requestFocus();
-                }else if(tbBangsal2.getRowCount()!=0){
+                }else if(tabMode2.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("KunjunganRanap.html", "Laporan Kunjungan Rawat Inap", tbBangsal2);
@@ -747,22 +747,22 @@ public final class DlgKunjunganRanap extends javax.swing.JDialog {
                             break;
                         case "Laporan 5 (Jasper)":
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                            for(int r=0;r<tbBangsal2.getRowCount();r++){
+                            for(int r=0;r<tabMode2.getRowCount();r++){
                                 if(!tbBangsal2.getValueAt(r,0).toString().contains(">>")){
                                     Sequel.menyimpan("temporary","'"+r+"','"+
-                                                tbBangsal2.getValueAt(r,0).toString()+"','"+
-                                                tbBangsal2.getValueAt(r,1).toString()+"','"+
-                                                tbBangsal2.getValueAt(r,2).toString()+"','"+
-                                                tbBangsal2.getValueAt(r,3).toString()+"','"+
-                                                tbBangsal2.getValueAt(r,4).toString()+"','"+
-                                                tbBangsal2.getValueAt(r,5).toString()+"','"+
-                                                tbBangsal2.getValueAt(r,6).toString()+"','"+
-                                                tbBangsal2.getValueAt(r,7).toString()+"','"+
-                                                tbBangsal2.getValueAt(r,8).toString()+"','"+
-                                                tbBangsal2.getValueAt(r,9).toString()+"','"+
-                                                tbBangsal2.getValueAt(r,10).toString()+"','"+
-                                                tbBangsal2.getValueAt(r,11).toString()+"','"+
-                                                tbBangsal2.getValueAt(r,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                                tabMode2.getValueAt(r,0).toString()+"','"+
+                                                tabMode2.getValueAt(r,1).toString()+"','"+
+                                                tabMode2.getValueAt(r,2).toString()+"','"+
+                                                tabMode2.getValueAt(r,3).toString()+"','"+
+                                                tabMode2.getValueAt(r,4).toString()+"','"+
+                                                tabMode2.getValueAt(r,5).toString()+"','"+
+                                                tabMode2.getValueAt(r,6).toString()+"','"+
+                                                tabMode2.getValueAt(r,7).toString()+"','"+
+                                                tabMode2.getValueAt(r,8).toString()+"','"+
+                                                tabMode2.getValueAt(r,9).toString()+"','"+
+                                                tabMode2.getValueAt(r,10).toString()+"','"+
+                                                tabMode2.getValueAt(r,11).toString()+"','"+
+                                                tabMode2.getValueAt(r,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                                 }
                             }
                             Valid.MyReportqry("rptKunjunganRanap.jasper","report","::[ Laporan Kunjungan Rawat Inap ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);

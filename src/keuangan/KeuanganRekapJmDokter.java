@@ -452,9 +452,9 @@ public class KeuanganRekapJmDokter extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbDokter.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-        }else if(tbDokter.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -479,12 +479,12 @@ public class KeuanganRekapJmDokter extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        for(int r=0;r<tbDokter.getRowCount();r++){
+                        for(int r=0;r<tabMode.getRowCount();r++){
                                 Sequel.menyimpan("temporary","'"+r+"','"+
-                                        tbDokter.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
-                                        tbDokter.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
-                                        tbDokter.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                                        Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(r,3).toString()))+
+                                        tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
+                                        tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                        tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                        Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,3).toString()))+
                                         "','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","data");
                         }
 

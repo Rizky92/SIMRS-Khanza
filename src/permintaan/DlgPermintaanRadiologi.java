@@ -810,7 +810,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
             Valid.textKosong(TNoRw,"Pasien");
         }else if(KodePerujuk.getText().equals("")||NmPerujuk.getText().equals("")){
             Valid.textKosong(KodePerujuk,"Dokter Pengirim");
-        }else if(tbPemeriksaan.getRowCount()==0){
+        }else if(tabMode.getRowCount()==0){
             Valid.textKosong(TCariPeriksa,"Data Permintaan");
         }else if(jml==0){
             Valid.textKosong(TCariPeriksa,"Data Permintaan");

@@ -784,10 +784,10 @@ public final class DlgJnsPerawatanRadiologi extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbJnsPerawatan.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tbJnsPerawatan.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -799,16 +799,16 @@ public final class DlgJnsPerawatanRadiologi extends javax.swing.JDialog {
                 }, "Laporan 5 (Jasper)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                        Valid.exportHtmlSmc("TarifRad.html", "Data Tarif Radiologi", tbJnsPerawatan, IntStream.rangeClosed(1, tbJnsPerawatan.getColumnCount() - 1).toArray());
+                        Valid.exportHtmlSmc("TarifRad.html", "Data Tarif Radiologi", tbJnsPerawatan, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 2 (WPS)":
-                        Valid.exportWPSSmc("TarifRad.wps", "Data Tarif Radiologi", tbJnsPerawatan, IntStream.rangeClosed(1, tbJnsPerawatan.getColumnCount() - 1).toArray());
+                        Valid.exportWPSSmc("TarifRad.wps", "Data Tarif Radiologi", tbJnsPerawatan, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 3 (CSV)":
-                        Valid.exportCSVSmc("TarifRad.csv", tbJnsPerawatan, IntStream.rangeClosed(1, tbJnsPerawatan.getColumnCount() - 1).toArray());
+                        Valid.exportCSVSmc("TarifRad.csv", tbJnsPerawatan, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 4 (XLSX)":
-                        Valid.exportXlsxSmc("TarifRad.xlsx", tbJnsPerawatan, IntStream.rangeClosed(1, tbJnsPerawatan.getColumnCount() - 1).toArray());
+                        Valid.exportXlsxSmc("TarifRad.xlsx", tbJnsPerawatan, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();

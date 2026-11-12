@@ -2890,19 +2890,19 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     private void BtnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNotaActionPerformed
         if(TNoRw.getText().trim().equals("")||TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
-        }else if(tbBilling.getRowCount()==0){
+        }else if(tabModeBilling.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tbBilling.getRowCount()!=0){
+        }else if(tabModeBilling.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try{
                 Sequel.AutoComitFalse();
                 Sequel.queryu2("delete from temporary_bayar_ralan where temp9='"+akses.getkode()+"'");
-                z=tbBilling.getRowCount();
+                z=tabModeBilling.getRowCount();
                 for(i=0;i<z;i++){
                     biaya="";
                     try {
-                        biaya=Valid.SetAngka(Double.parseDouble(tbBilling.getValueAt(i,3).toString()));
+                        biaya=Valid.SetAngka(Double.parseDouble(tabModeBilling.getValueAt(i,3).toString()));
                     } catch (Exception e) {
                         biaya="";
                     }
@@ -2911,24 +2911,24 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
 
                     totals="";
                     try {
-                        totals=Valid.SetAngka(Double.parseDouble(tbBilling.getValueAt(i,5).toString()));
+                        totals=Valid.SetAngka(Double.parseDouble(tabModeBilling.getValueAt(i,5).toString()));
                     } catch (Exception e) {
                         totals="";
                     }
 
                     jmls="";
                     try {
-                        jmls=Valid.SetAngka(Double.parseDouble(tbBilling.getValueAt(i,4).toString()));
+                        jmls=Valid.SetAngka(Double.parseDouble(tabModeBilling.getValueAt(i,4).toString()));
                     } catch (Exception e) {
                         jmls="";
                     }
 
                     Sequel.menyimpan("temporary_bayar_ralan","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
-                        ""+i,tbBilling.getValueAt(i,0).toString().replaceAll("'",""),
-                        tbBilling.getValueAt(i,1).toString().replaceAll("'",""),
-                        tbBilling.getValueAt(i,2).toString().replaceAll("'",""),
+                        ""+i,tabModeBilling.getValueAt(i,0).toString().replaceAll("'",""),
+                        tabModeBilling.getValueAt(i,1).toString().replaceAll("'",""),
+                        tabModeBilling.getValueAt(i,2).toString().replaceAll("'",""),
                         biaya,jmls,tambahan,totals,
-                        tbBilling.getValueAt(i,6).toString().replaceAll("'",""),
+                        tabModeBilling.getValueAt(i,6).toString().replaceAll("'",""),
                         akses.getkode(),"","","","","","","","",""
                     });
                 }

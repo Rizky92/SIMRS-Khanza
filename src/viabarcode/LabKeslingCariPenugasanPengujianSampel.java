@@ -850,10 +850,10 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         if(TabData.getSelectedIndex()==0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            if(tbPenugasan.getRowCount()==0){
+            if(tabModePenugasan.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari.requestFocus();
-            }else if(tbPenugasan.getRowCount()!=0){
+            }else if(tabModePenugasan.getRowCount()!=0){
                 try{
                     File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -893,7 +893,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Status Hasil</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Catatan</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tbPenugasan.getRowCount(); i++) {
+                                for (int i = 0; i < tabModePenugasan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbPenugasan.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbPenugasan.getValueAt(i,1).toString()).append("</td>").
@@ -953,7 +953,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Status Hasil</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Catatan</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tbPenugasan.getRowCount(); i++) {
+                                for (int i = 0; i < tabModePenugasan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbPenugasan.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbPenugasan.getValueAt(i,1).toString()).append("</td>").
@@ -1001,7 +1001,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                 htmlContent.append(
                                     "\"Tgl.Penugasan\";\"No.Penugasan\";\"NIP PJ\";\"Nama PJ\";\"NIP Analis\";\"Nama Analis\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Hasil\";\"Catatan\"\n"
                                 );
-                                for (int i = 0; i < tbPenugasan.getRowCount(); i++) {
+                                for (int i = 0; i < tabModePenugasan.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbPenugasan.getValueAt(i,0).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,1).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,2).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,3).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,4).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,5).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,6).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,7).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,8).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,9).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,10).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,11).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,12).toString()).append("\"\n");
                                 }
                                 f = new File("DataPenugasanPengujianSampel.csv");
@@ -1018,10 +1018,10 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
             this.setCursor(Cursor.getDefaultCursor());
         }else if(TabData.getSelectedIndex()==1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            if(tbRekapPenugasan.getRowCount()==0){
+            if(tabModeRekapPenugasan.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari.requestFocus();
-            }else if(tbRekapPenugasan.getRowCount()!=0){
+            }else if(tabModeRekapPenugasan.getRowCount()!=0){
                 try{
                     File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -1067,7 +1067,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kategori</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nilai Normal</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tbRekapPenugasan.getRowCount(); i++) {
+                                for (int i = 0; i < tabModeRekapPenugasan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,1).toString()).append("</td>").
@@ -1139,7 +1139,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kategori</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nilai Normal</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tbRekapPenugasan.getRowCount(); i++) {
+                                for (int i = 0; i < tabModeRekapPenugasan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,1).toString()).append("</td>").
@@ -1193,7 +1193,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                 htmlContent.append(
                                     "\"Tgl.Penugasan\";\"No.Penugasan\";\"NIP PJ\";\"Nama PJ\";\"NIP Analis\";\"Nama Analis\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Hasil\";\"Catatan\";\"Kode Param\";\"Nama Parameter\";\"Metode Pengujian\";\"Satuan\";\"Kategori\";\"Nilai Normal\"\n"
                                 );
-                                for (int i = 0; i < tbRekapPenugasan.getRowCount(); i++) {
+                                for (int i = 0; i < tabModeRekapPenugasan.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbRekapPenugasan.getValueAt(i,0).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,1).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,2).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,3).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,4).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,5).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,6).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,7).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,8).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,9).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,10).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,11).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,12).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,13).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,14).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,15).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,16).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,17).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,18).toString()).append("\"\n");
                                 }
                                 f = new File("DataRekapPenugasanPengujianSampel.csv");

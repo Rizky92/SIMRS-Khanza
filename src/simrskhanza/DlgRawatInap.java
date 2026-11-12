@@ -4883,10 +4883,10 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }, "Laporan 5 (Jasper)");
             switch (TabRawat.getSelectedIndex()) {
                 case 0:
-                    if(tbRawatDr.getRowCount()==0){
+                    if(tabModeDr.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         BtnBatal.requestFocus();
-                    }else if(tbRawatDr.getRowCount()!=0){
+                    }else if(tabModeDr.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("InapDr.html", "Data Rawat Inap Yang Ditangani Dokter", tbRawatDr);
@@ -4926,10 +4926,10 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     }
                     break;
                 case 1:
-                    if(tbRawatPr.getRowCount()==0){
+                    if(tabModePr.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         BtnBatal.requestFocus();
-                    }else if(tbRawatPr.getRowCount()!=0){
+                    }else if(tabModePr.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("InapPr.html", "Data Rawat Inap Yang Ditangani Perawat", tbRawatPr);
@@ -4969,10 +4969,10 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     }
                     break;
                 case 2:
-                    if(tbRawatDrPr.getRowCount()==0){
+                    if(tabModeDrPr.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         BtnBatal.requestFocus();
-                    }else if(tbRawatDrPr.getRowCount()!=0){
+                    }else if(tabModeDrPr.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("InapDrPr.html", "Data Rawat Inap Yang Ditangani Dokter dan Perawat", tbRawatDrPr);
@@ -5015,10 +5015,10 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     }
                     break;
                 case 3:
-                    if(tbPemeriksaan.getRowCount()==0){
+                    if(tabModePemeriksaan.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         BtnBatal.requestFocus();
-                    }else if(tbPemeriksaan.getRowCount()!=0){
+                    }else if(tabModePemeriksaan.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("InapPemeriksaan.html", "Data Pemeriksaan Rawat Inap", tbPemeriksaan);
@@ -5054,10 +5054,10 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     }
                     break;
                 case 4:
-                    if(tbPemeriksaanObstetri.getRowCount()==0){
+                    if(tabModeObstetri.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         BtnBatal.requestFocus();
-                    }else if(tbPemeriksaanObstetri.getRowCount()!=0){
+                    }else if(tabModeObstetri.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("InapObstetri.html", "Data Pemeriksaan Obstetri Rawat Inap", tbPemeriksaanObstetri);
@@ -5094,10 +5094,10 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     }
                     break;
                 case 5:
-                    if(tbPemeriksaanGinekologi.getRowCount()==0){
+                    if(tabModeGinekologi.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         BtnBatal.requestFocus();
-                    }else if(tbPemeriksaanGinekologi.getRowCount()!=0){
+                    }else if(tabModeGinekologi.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("InapGinekologi.html", "Data Pemeriksaan Ginekologi Rawat Inap", tbPemeriksaanGinekologi);

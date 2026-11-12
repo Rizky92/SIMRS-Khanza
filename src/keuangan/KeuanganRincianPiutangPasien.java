@@ -371,10 +371,10 @@ public final class KeuanganRincianPiutangPasien extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbBangsal.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tbBangsal.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -399,35 +399,35 @@ public final class KeuanganRincianPiutangPasien extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.deleteTemporary();
-                        int row = tbBangsal.getRowCount();
+                        int row = tabMode.getRowCount();
                         for (int i = 0; i < row; i++) {
                             Sequel.temporary(
                                 String.valueOf(i + 1),
-                                tbBangsal.getValueAt(i, 0).toString(),
-                                tbBangsal.getValueAt(i, 1).toString(),
-                                tbBangsal.getValueAt(i, 2).toString(),
-                                tbBangsal.getValueAt(i, 3).toString(),
-                                tbBangsal.getValueAt(i, 4).toString(),
-                                tbBangsal.getValueAt(i, 5).toString(),
-                                tbBangsal.getValueAt(i, 6).toString(),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 7).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 8).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 9).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 10).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 11).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 12).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 13).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 14).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 15).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 16).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 17).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 18).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 19).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 20).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 21).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 22).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 23).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 24).toString()))
+                                tabMode.getValueAt(i, 0).toString(),
+                                tabMode.getValueAt(i, 1).toString(),
+                                tabMode.getValueAt(i, 2).toString(),
+                                tabMode.getValueAt(i, 3).toString(),
+                                tabMode.getValueAt(i, 4).toString(),
+                                tabMode.getValueAt(i, 5).toString(),
+                                tabMode.getValueAt(i, 6).toString(),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 7).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 8).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 9).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 10).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 11).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 12).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 13).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 14).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 15).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 16).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 17).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 18).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 19).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 20).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 21).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 22).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 23).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 24).toString()))
                             );
                         }
 

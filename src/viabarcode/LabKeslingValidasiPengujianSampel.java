@@ -787,7 +787,7 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
             Valid.textKosong(TNoValidasi,"Nomor Verifikasi");
         }else if(KodeSampel.getText().equals("")||NamaSampel.getText().equals("")){
             Valid.textKosong(TNoValidasi,"Sampel");
-        }else if(tbValidasi.getRowCount()==0){
+        }else if(tabMode.getRowCount()==0){
             Valid.textKosong(TNoValidasi,"Data Verifikasi");
         }else{
             Sequel.queryu("delete from temporary");

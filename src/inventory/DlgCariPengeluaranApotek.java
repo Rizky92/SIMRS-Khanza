@@ -895,10 +895,10 @@ public class DlgCariPengeluaranApotek extends javax.swing.JDialog {
                 "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
             }, "Laporan 5 (Jasper)");
             if(TabRawat.getSelectedIndex()==0){
-                if(tbDokter.getRowCount()==0){
+                if(tabMode.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     TCari.requestFocus();
-                }else if(tbDokter.getRowCount()!=0){
+                }else if(tabMode.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("StokKeluarMedis.html", "Data Stok Keluar Obat, Alkes & BHP", tbDokter);
@@ -914,17 +914,17 @@ public class DlgCariPengeluaranApotek extends javax.swing.JDialog {
                             break;
                         case "Laporan 5 (Jasper)":
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                            int row=tbDokter.getRowCount();
+                            int row=tabMode.getRowCount();
                             for(i=0;i<row;i++){
                                 Sequel.menyimpan("temporary","'"+i+"','"+
-                                                tbDokter.getValueAt(i,0).toString()+"','"+
-                                                tbDokter.getValueAt(i,1).toString()+"','"+
-                                                tbDokter.getValueAt(i,2).toString()+"','"+
-                                                tbDokter.getValueAt(i,3).toString()+"','"+
-                                                tbDokter.getValueAt(i,4).toString()+"','"+
-                                                tbDokter.getValueAt(i,5).toString()+"','"+
-                                                tbDokter.getValueAt(i,6).toString()+"','"+
-                                                tbDokter.getValueAt(i,7).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Stok Keluar");
+                                                tabMode.getValueAt(i,0).toString()+"','"+
+                                                tabMode.getValueAt(i,1).toString()+"','"+
+                                                tabMode.getValueAt(i,2).toString()+"','"+
+                                                tabMode.getValueAt(i,3).toString()+"','"+
+                                                tabMode.getValueAt(i,4).toString()+"','"+
+                                                tabMode.getValueAt(i,5).toString()+"','"+
+                                                tabMode.getValueAt(i,6).toString()+"','"+
+                                                tabMode.getValueAt(i,7).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Stok Keluar");
                             }
                             i++;
                             Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Stok Keluar");
@@ -944,10 +944,10 @@ public class DlgCariPengeluaranApotek extends javax.swing.JDialog {
                     }
                 }
             }else if(TabRawat.getSelectedIndex()==1){
-                if(tbDokter2.getRowCount()==0){
+                if(tabMode2.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     TCari.requestFocus();
-                }else if(tbDokter2.getRowCount()!=0){
+                }else if(tabMode2.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("StokKeluarMedis2.html", "Data Stok Keluar Obat, Alkes & BHP", tbDokter2);

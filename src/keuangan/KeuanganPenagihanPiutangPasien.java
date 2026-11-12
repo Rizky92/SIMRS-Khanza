@@ -2295,20 +2295,20 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         if (TabRawat.getSelectedIndex() == 0) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='" + akses.getalamatip() + "'");
-            for (i = 0; i < tbBelumLunas.getRowCount(); i++) {
+            for (i = 0; i < tabMode.getRowCount(); i++) {
                 if (tbBelumLunas.getValueAt(i, 0).toString().equals("true")) {
                     if (Sequel.menyimpantf2("temporary", "'" + i + "','" +
-                        tbBelumLunas.getValueAt(i, 1).toString() + "','" +
-                        tbBelumLunas.getValueAt(i, 2).toString() + "','" +
-                        tbBelumLunas.getValueAt(i, 3).toString() + "','" +
-                        tbBelumLunas.getValueAt(i, 4).toString() + "','" +
-                        tbBelumLunas.getValueAt(i, 5).toString() + "','" +
-                        Valid.SetAngka(Double.parseDouble(tbBelumLunas.getValueAt(i, 6).toString())) + "','" +
-                        tbBelumLunas.getValueAt(i, 7).toString() + "','" +
-                        tbBelumLunas.getValueAt(i, 8).toString() + "','" +
-                        tbBelumLunas.getValueAt(i, 9).toString() + "','" +
-                        tbBelumLunas.getValueAt(i, 10).toString() + "','" +
-                        tbBelumLunas.getValueAt(i, 11).toString() + "','','','','','','','','','','','','','','','','','','','','','','','','','','" + akses.getalamatip() + "'", "Transaksi") == false) {
+                        tabMode.getValueAt(i, 1).toString() + "','" +
+                        tabMode.getValueAt(i, 2).toString() + "','" +
+                        tabMode.getValueAt(i, 3).toString() + "','" +
+                        tabMode.getValueAt(i, 4).toString() + "','" +
+                        tabMode.getValueAt(i, 5).toString() + "','" +
+                        Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 6).toString())) + "','" +
+                        tabMode.getValueAt(i, 7).toString() + "','" +
+                        tabMode.getValueAt(i, 8).toString() + "','" +
+                        tabMode.getValueAt(i, 9).toString() + "','" +
+                        tabMode.getValueAt(i, 10).toString() + "','" +
+                        tabMode.getValueAt(i, 11).toString() + "','','','','','','','','','','','','','','','','','','','','','','','','','','" + akses.getalamatip() + "'", "Transaksi") == false) {
                         System.out.println("Notif : Gagal menyimpan karena ada data yang bermasalah..!! ");
                     }
                 }
@@ -2361,20 +2361,20 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         } else if (TabRawat.getSelectedIndex() == 1) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='" + akses.getalamatip() + "'");
-            for (i = 0; i < tbBelumDitagihkan.getRowCount(); i++) {
+            for (i = 0; i < tabMode2.getRowCount(); i++) {
                 if (tbBelumDitagihkan.getValueAt(i, 0).toString().equals("true")) {
                     if (Sequel.menyimpantf2("temporary", "'" + i + "','" +
-                        tbBelumDitagihkan.getValueAt(i, 1).toString() + "','" +
-                        tbBelumDitagihkan.getValueAt(i, 2).toString() + "','" +
-                        tbBelumDitagihkan.getValueAt(i, 3).toString() + "','" +
-                        tbBelumDitagihkan.getValueAt(i, 4).toString() + "','" +
-                        tbBelumDitagihkan.getValueAt(i, 5).toString() + "','" +
-                        Valid.SetAngka(Double.parseDouble(tbBelumDitagihkan.getValueAt(i, 6).toString())) + "','" +
-                        tbBelumDitagihkan.getValueAt(i, 7).toString() + "','" +
-                        tbBelumDitagihkan.getValueAt(i, 8).toString() + "','" +
-                        tbBelumDitagihkan.getValueAt(i, 9).toString() + "','" +
-                        tbBelumDitagihkan.getValueAt(i, 10).toString() + "','" +
-                        tbBelumDitagihkan.getValueAt(i, 11).toString() + "','','','','','','','','','','','','','','','','','','','','','','','','','','" + akses.getalamatip() + "'", "Transaksi") == false) {
+                        tabMode2.getValueAt(i, 1).toString() + "','" +
+                        tabMode2.getValueAt(i, 2).toString() + "','" +
+                        tabMode2.getValueAt(i, 3).toString() + "','" +
+                        tabMode2.getValueAt(i, 4).toString() + "','" +
+                        tabMode2.getValueAt(i, 5).toString() + "','" +
+                        Valid.SetAngka(Double.parseDouble(tabMode2.getValueAt(i, 6).toString())) + "','" +
+                        tabMode2.getValueAt(i, 7).toString() + "','" +
+                        tabMode2.getValueAt(i, 8).toString() + "','" +
+                        tabMode2.getValueAt(i, 9).toString() + "','" +
+                        tabMode2.getValueAt(i, 10).toString() + "','" +
+                        tabMode2.getValueAt(i, 11).toString() + "','','','','','','','','','','','','','','','','','','','','','','','','','','" + akses.getalamatip() + "'", "Transaksi") == false) {
                         System.out.println("Notif : Gagal menyimpan karena ada data yang bermasalah..!! ");
                     }
                 }

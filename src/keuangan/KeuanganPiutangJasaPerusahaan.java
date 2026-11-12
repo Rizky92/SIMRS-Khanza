@@ -1153,17 +1153,17 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        row=tbDokter.getRowCount();
+                        row=tabMode.getRowCount();
                         for(i=0;i<row;i++){
                             if(Valid.SetAngka(tbDokter.getValueAt(i,2).toString())>0){
                                 Sequel.menyimpan("temporary","'"+i+"','"+
-                                            tbDokter.getValueAt(i,1).toString()+"','"+
-                                            tbDokter.getValueAt(i,2).toString()+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,3).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,4).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,5).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,6).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,7).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pemesanan");
+                                            tabMode.getValueAt(i,1).toString()+"','"+
+                                            tabMode.getValueAt(i,2).toString()+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,3).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,4).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pemesanan");
                             }
                         }
 

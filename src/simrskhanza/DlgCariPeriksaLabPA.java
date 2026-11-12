@@ -1681,10 +1681,10 @@ public class DlgCariPeriksaLabPA extends javax.swing.JDialog {
             }, "Laporan 5 (Jasper)");
             switch (TabRawat.getSelectedIndex()) {
                 case 0:
-                    if(tbDokter.getRowCount()==0){
+                    if(tabMode.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         TCari.requestFocus();
-                    }else if(tbDokter.getRowCount()!=0){
+                    }else if(tabMode.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("DataLabPA.html", "Data Pemeriksaan Laboratorium", tbDokter);
@@ -1700,23 +1700,23 @@ public class DlgCariPeriksaLabPA extends javax.swing.JDialog {
                                 break;
                             case "Laporan 5 (Jasper)":
                                 Sequel.queryu("delete from temporary_lab where temp36 = '"+akses.getkode()+"' and temp37 = '"+akses.getalamatip()+"'");
-                                int row=tbDokter.getRowCount();
+                                int row=tabMode.getRowCount();
                                 for(i=0;i<row;i++){
                                     Sequel.temporaryLab(String.valueOf(i+1),
-                                        tbDokter.getValueAt(i, 0).toString(),
-                                        tbDokter.getValueAt(i, 1).toString(),
-                                        tbDokter.getValueAt(i, 2).toString(),
-                                        tbDokter.getValueAt(i, 3).toString(),
-                                        tbDokter.getValueAt(i, 4).toString(),
-                                        tbDokter.getValueAt(i, 5).toString(),
-                                        tbDokter.getValueAt(i, 6).toString(),
-                                        tbDokter.getValueAt(i, 7).toString(),
-                                        tbDokter.getValueAt(i, 8).toString(),
-                                        tbDokter.getValueAt(i, 9).toString(),
-                                        tbDokter.getValueAt(i, 10).toString(),
-                                        tbDokter.getValueAt(i, 11).toString(),
-                                        tbDokter.getValueAt(i, 12).toString(),
-                                        tbDokter.getValueAt(i, 13).toString());
+                                        tabMode.getValueAt(i, 0).toString(),
+                                        tabMode.getValueAt(i, 1).toString(),
+                                        tabMode.getValueAt(i, 2).toString(),
+                                        tabMode.getValueAt(i, 3).toString(),
+                                        tabMode.getValueAt(i, 4).toString(),
+                                        tabMode.getValueAt(i, 5).toString(),
+                                        tabMode.getValueAt(i, 6).toString(),
+                                        tabMode.getValueAt(i, 7).toString(),
+                                        tabMode.getValueAt(i, 8).toString(),
+                                        tabMode.getValueAt(i, 9).toString(),
+                                        tabMode.getValueAt(i, 10).toString(),
+                                        tabMode.getValueAt(i, 11).toString(),
+                                        tabMode.getValueAt(i, 12).toString(),
+                                        tabMode.getValueAt(i, 13).toString());
                                 }
                                 Map<String, Object> param = new HashMap<>();
                                 param.put("namars",akses.getnamars());

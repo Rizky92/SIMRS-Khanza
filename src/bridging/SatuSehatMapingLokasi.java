@@ -4737,10 +4737,10 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             return;
         }
         if(TabRawat.getSelectedIndex()==0){
-            if(tbJnsPerawatan.getRowCount()==0){
+            if(tabMode.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tbJnsPerawatan.getRowCount()!=0){
+            }else if(tabMode.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -4782,10 +4782,10 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }else if(TabRawat.getSelectedIndex()==1){
-            if(tbLokasiKamar.getRowCount()==0){
+            if(tabModeKamar.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tbLokasiKamar.getRowCount()!=0){
+            }else if(tabModeKamar.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -4827,10 +4827,10 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }else if(TabRawat.getSelectedIndex()==2){
-            if(tbLokasiRuangOK.getRowCount()==0){
+            if(tabModeRuangOK.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tbLokasiRuangOK.getRowCount()!=0){
+            }else if(tabModeRuangOK.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -4871,10 +4871,10 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }else if(TabRawat.getSelectedIndex()==3){
-            if(tbLokasiRuangLabPK.getRowCount()==0){
+            if(tabModeRuangLabPK.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tbLokasiRuangLabPK.getRowCount()!=0){
+            }else if(tabModeRuangLabPK.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -4915,10 +4915,10 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }else if(TabRawat.getSelectedIndex()==4){
-            if(tbLokasiRuangLabPA.getRowCount()==0){
+            if(tabModeRuangLabPA.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tbLokasiRuangLabPA.getRowCount()!=0){
+            }else if(tabModeRuangLabPA.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -4959,10 +4959,10 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }else if(TabRawat.getSelectedIndex()==5){
-            if(tbLokasiRuangLabMB.getRowCount()==0){
+            if(tabModeRuangLabMB.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tbLokasiRuangLabMB.getRowCount()!=0){
+            }else if(tabModeRuangLabMB.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -5003,10 +5003,10 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }else if(TabRawat.getSelectedIndex()==6){
-            if(tbLokasiRuangRadiologi.getRowCount()==0){
+            if(tabModeRuangRadiologi.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tbLokasiRuangRadiologi.getRowCount()!=0){
+            }else if(tabModeRuangRadiologi.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -5047,10 +5047,10 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }else if(TabRawat.getSelectedIndex()==7){
-            if(tbLokasiFarmasi.getRowCount()==0){
+            if(tabModeRuangFarmasi.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tbLokasiFarmasi.getRowCount()!=0){
+            }else if(tabModeRuangFarmasi.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {

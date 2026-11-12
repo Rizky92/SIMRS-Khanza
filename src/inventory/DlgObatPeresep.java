@@ -375,10 +375,10 @@ public class DlgObatPeresep extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbDokter.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tbDokter.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -403,52 +403,52 @@ public class DlgObatPeresep extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        for(i=0;i<tbDokter.getRowCount();i++){
+                        for(i=0;i<tabMode.getRowCount();i++){
                             No="";
                             try {
-                                No=tbDokter.getValueAt(i,0).toString();
+                                No=tabMode.getValueAt(i,0).toString();
                             } catch (Exception e) {
                                 No="";
                             }
 
                             Kode="";
                             try {
-                                Kode=tbDokter.getValueAt(i,1).toString();
+                                Kode=tabMode.getValueAt(i,1).toString();
                             } catch (Exception e) {
                                 Kode="";
                             }
 
                             Nama="";
                             try {
-                                Nama=tbDokter.getValueAt(i,2).toString();
+                                Nama=tabMode.getValueAt(i,2).toString();
                             } catch (Exception e) {
                                 Nama="";
                             }
 
                             Jml="";
                             try {
-                                Jml=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,3).toString()));
+                                Jml=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,3).toString()));
                             } catch (Exception e) {
                                 Jml="";
                             }
 
                             Satuan="";
                             try {
-                                Satuan=tbDokter.getValueAt(i,4).toString();
+                                Satuan=tabMode.getValueAt(i,4).toString();
                             } catch (Exception e) {
                                 Satuan="";
                             }
 
                             Harga="";
                             try {
-                                Harga=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,5).toString()));
+                                Harga=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString()));
                             } catch (Exception e) {
                                 Harga="";
                             }
 
                             Subtotal="";
                             try {
-                                Subtotal=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,6).toString()));
+                                Subtotal=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
                             } catch (Exception e) {
                                 Subtotal="";
                             }

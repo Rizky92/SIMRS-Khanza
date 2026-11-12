@@ -790,10 +790,10 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbDokter.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tbDokter.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -818,18 +818,18 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        int row=tbDokter.getRowCount();
+                        int row=tabMode.getRowCount();
                         for(i=0;i<row;i++){
                             Sequel.menyimpan("temporary","'"+i+"','"+
-                                            tbDokter.getValueAt(i,0).toString().replaceAll("'","`")+"','"+
-                                            tbDokter.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
-                                            tbDokter.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
-                                            tbDokter.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
-                                            tbDokter.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
-                                            tbDokter.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
-                                            tbDokter.getValueAt(i,6).toString().replaceAll("'","`")+"','"+
-                                            tbDokter.getValueAt(i,7).toString().replaceAll("'","`")+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,8).toString()))+
+                                            tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,6).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,7).toString().replaceAll("'","`")+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+
                                     "','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Data");
                         }
 

@@ -4290,10 +4290,10 @@ public class DlgPasien extends javax.swing.JDialog {
             }, "Laporan 5 (Jasper)");
             switch (TabRawat.getSelectedIndex()) {
                 case 1:
-                    if(tbPasien.getRowCount()==0){
+                    if(tabMode.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         BtnBatal.requestFocus();
-                    }else if(tbPasien.getRowCount()!=0){
+                    }else if(tabMode.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("Pasien.html", "Data Pasien", tbPasien);
@@ -4412,10 +4412,10 @@ public class DlgPasien extends javax.swing.JDialog {
                     }
                     break;
                 case 2:
-                    if(tbPasien2.getRowCount()==0){
+                    if(tabMode2.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         BtnBatal.requestFocus();
-                    }else if(tbPasien2.getRowCount()!=0){
+                    }else if(tabMode2.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("Pasien2.html", "Data Pasien Umum", tbPasien2);
@@ -4560,10 +4560,10 @@ public class DlgPasien extends javax.swing.JDialog {
                     }
                     break;
                 case 3:
-                    if(tbPasien3.getRowCount()==0){
+                    if(tabMode3.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         BtnBatal.requestFocus();
-                    }else if(tbPasien3.getRowCount()!=0){
+                    }else if(tabMode3.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("Pasien3.html", "Data Pasien Umum", tbPasien3);
@@ -5727,10 +5727,10 @@ public class DlgPasien extends javax.swing.JDialog {
 
     private void BtnPrint3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint3ActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tbPasien.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tbPasien.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             if(!Kelurahan2.getText().equals("")){
                 DlgDemografi.dispose();
                 Map<String, Object> data = new HashMap<>();

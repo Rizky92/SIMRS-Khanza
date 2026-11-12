@@ -449,62 +449,62 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%'>Tgl.Transaksi</td>"+
                             "</tr>"
                         );
-                        for(i=0;i<tbDetail.getRowCount();i++){
+                        for(i=0;i<tabMode.getRowCount();i++){
                             try {
-                                js=Valid.SetAngka(Double.parseDouble(tbDetail.getValueAt(i,15).toString()));
+                                js=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,15).toString()));
                             } catch (Exception e) {
                                 js="";
                             }
                             try {
-                                jm=Valid.SetAngka(Double.parseDouble(tbDetail.getValueAt(i,16).toString()));
+                                jm=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,16).toString()));
                             } catch (Exception e) {
                                 jm="";
                             }
                             try {
-                                tarif=Valid.SetAngka(Double.parseDouble(tbDetail.getValueAt(i,17).toString()));
+                                tarif=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,17).toString()));
                             } catch (Exception e) {
                                 tarif="";
                             }
                             try {
-                                totalsaranas=Valid.SetAngka(Double.parseDouble(tbDetail.getValueAt(i,18).toString()));
+                                totalsaranas=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,18).toString()));
                             } catch (Exception e) {
                                 totalsaranas="";
                             }
                             try {
-                                totaljms=Valid.SetAngka(Double.parseDouble(tbDetail.getValueAt(i,19).toString()));
+                                totaljms=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,19).toString()));
                             } catch (Exception e) {
                                 totaljms="";
                             }
                             try {
-                                totalbayars=Valid.SetAngka(Double.parseDouble(tbDetail.getValueAt(i,20).toString()));
+                                totalbayars=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,20).toString()));
                             } catch (Exception e) {
                                 totalbayars="";
                             }
 
                             htmlContent.append(
                                 "<tr class='isi'>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,0).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,1).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,2).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,3).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,4).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,5).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,6).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,7).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,8).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,9).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,10).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,11).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,12).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,13).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,14).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,6).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,7).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,8).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,9).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,10).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,11).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,12).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,13).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,14).toString().replaceAll("'","`")+"</td>"+
                                     "<td valign='top' align='right'>"+js+"</td>"+
                                     "<td valign='top' align='right'>"+jm+"</td>"+
                                     "<td valign='top' align='right'>"+tarif+"</td>"+
                                     "<td valign='top' align='right'>"+totalsaranas+"</td>"+
                                     "<td valign='top' align='right'>"+totaljms+"</td>"+
                                     "<td valign='top' align='right'>"+totalbayars+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,21).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,21).toString().replaceAll("'","`")+"</td>"+
                                 "</tr>"
                             );
                         }
@@ -563,62 +563,62 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%'>Tgl.Transaksi</td>"+
                             "</tr>"
                         );
-                        for(i=0;i<tbDetail.getRowCount();i++){
+                        for(i=0;i<tabMode.getRowCount();i++){
                             try {
-                                js=tbDetail.getValueAt(i,15).toString();
+                                js=tabMode.getValueAt(i,15).toString();
                             } catch (Exception e) {
                                 js="";
                             }
                             try {
-                                jm=tbDetail.getValueAt(i,16).toString();
+                                jm=tabMode.getValueAt(i,16).toString();
                             } catch (Exception e) {
                                 jm="";
                             }
                             try {
-                                tarif=tbDetail.getValueAt(i,17).toString();
+                                tarif=tabMode.getValueAt(i,17).toString();
                             } catch (Exception e) {
                                 tarif="";
                             }
                             try {
-                                totalsaranas=tbDetail.getValueAt(i,18).toString();
+                                totalsaranas=tabMode.getValueAt(i,18).toString();
                             } catch (Exception e) {
                                 totalsaranas="";
                             }
                             try {
-                                totaljms=tbDetail.getValueAt(i,19).toString();
+                                totaljms=tabMode.getValueAt(i,19).toString();
                             } catch (Exception e) {
                                 totaljms="";
                             }
                             try {
-                                totalbayars=tbDetail.getValueAt(i,20).toString();
+                                totalbayars=tabMode.getValueAt(i,20).toString();
                             } catch (Exception e) {
                                 totalbayars="";
                             }
 
                             htmlContent.append(
                                 "<tr class='isi'>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,0).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,1).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,2).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,3).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,4).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,5).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,6).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,7).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,8).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,9).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,10).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,11).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,12).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,13).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,14).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,6).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,7).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,8).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,9).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,10).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,11).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,12).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,13).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,14).toString().replaceAll("'","`")+"</td>"+
                                     "<td valign='top' align='right'>"+js+"</td>"+
                                     "<td valign='top' align='right'>"+jm+"</td>"+
                                     "<td valign='top' align='right'>"+tarif+"</td>"+
                                     "<td valign='top' align='right'>"+totalsaranas+"</td>"+
                                     "<td valign='top' align='right'>"+totaljms+"</td>"+
                                     "<td valign='top' align='right'>"+totalbayars+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,21).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,21).toString().replaceAll("'","`")+"</td>"+
                                 "</tr>"
                             );
                         }
@@ -676,62 +676,62 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%'>Tgl.Transaksi</td>"+
                             "</tr>"
                         );
-                        for(i=0;i<tbDetail.getRowCount();i++){
+                        for(i=0;i<tabMode.getRowCount();i++){
                             try {
-                                js=Valid.SetAngka(Double.parseDouble(tbDetail.getValueAt(i,15).toString()));
+                                js=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,15).toString()));
                             } catch (Exception e) {
                                 js="";
                             }
                             try {
-                                jm=Valid.SetAngka(Double.parseDouble(tbDetail.getValueAt(i,16).toString()));
+                                jm=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,16).toString()));
                             } catch (Exception e) {
                                 jm="";
                             }
                             try {
-                                tarif=Valid.SetAngka(Double.parseDouble(tbDetail.getValueAt(i,17).toString()));
+                                tarif=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,17).toString()));
                             } catch (Exception e) {
                                 tarif="";
                             }
                             try {
-                                totalsaranas=Valid.SetAngka(Double.parseDouble(tbDetail.getValueAt(i,18).toString()));
+                                totalsaranas=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,18).toString()));
                             } catch (Exception e) {
                                 totalsaranas="";
                             }
                             try {
-                                totaljms=Valid.SetAngka(Double.parseDouble(tbDetail.getValueAt(i,19).toString()));
+                                totaljms=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,19).toString()));
                             } catch (Exception e) {
                                 totaljms="";
                             }
                             try {
-                                totalbayars=Valid.SetAngka(Double.parseDouble(tbDetail.getValueAt(i,20).toString()));
+                                totalbayars=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,20).toString()));
                             } catch (Exception e) {
                                 totalbayars="";
                             }
 
                             htmlContent.append(
                                 "<tr class='isi'>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,0).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,1).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,2).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,3).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,4).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,5).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,6).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,7).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,8).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,9).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,10).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,11).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,12).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,13).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,14).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,6).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,7).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,8).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,9).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,10).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,11).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,12).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,13).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,14).toString().replaceAll("'","`")+"</td>"+
                                     "<td valign='top' align='right'>"+js+"</td>"+
                                     "<td valign='top' align='right'>"+jm+"</td>"+
                                     "<td valign='top' align='right'>"+tarif+"</td>"+
                                     "<td valign='top' align='right'>"+totalsaranas+"</td>"+
                                     "<td valign='top' align='right'>"+totaljms+"</td>"+
                                     "<td valign='top' align='right'>"+totalbayars+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,21).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,21).toString().replaceAll("'","`")+"</td>"+
                                 "</tr>"
                             );
                         }
@@ -789,62 +789,62 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%'>Tgl.Transaksi</td>"+
                             "</tr>"
                         );
-                        for(i=0;i<tbDetail.getRowCount();i++){
+                        for(i=0;i<tabMode.getRowCount();i++){
                             try {
-                                js=tbDetail.getValueAt(i,15).toString();
+                                js=tabMode.getValueAt(i,15).toString();
                             } catch (Exception e) {
                                 js="";
                             }
                             try {
-                                jm=tbDetail.getValueAt(i,16).toString();
+                                jm=tabMode.getValueAt(i,16).toString();
                             } catch (Exception e) {
                                 jm="";
                             }
                             try {
-                                tarif=tbDetail.getValueAt(i,17).toString();
+                                tarif=tabMode.getValueAt(i,17).toString();
                             } catch (Exception e) {
                                 tarif="";
                             }
                             try {
-                                totalsaranas=tbDetail.getValueAt(i,18).toString();
+                                totalsaranas=tabMode.getValueAt(i,18).toString();
                             } catch (Exception e) {
                                 totalsaranas="";
                             }
                             try {
-                                totaljms=tbDetail.getValueAt(i,19).toString();
+                                totaljms=tabMode.getValueAt(i,19).toString();
                             } catch (Exception e) {
                                 totaljms="";
                             }
                             try {
-                                totalbayars=tbDetail.getValueAt(i,20).toString();
+                                totalbayars=tabMode.getValueAt(i,20).toString();
                             } catch (Exception e) {
                                 totalbayars="";
                             }
 
                             htmlContent.append(
                                 "<tr class='isi'>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,0).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,1).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,2).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,3).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,4).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,5).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,6).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,7).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,8).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,9).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,10).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,11).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,12).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top'>"+tbDetail.getValueAt(i,13).toString().replaceAll("'","`")+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,14).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,6).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,7).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,8).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,9).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,10).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,11).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,12).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,13).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,14).toString().replaceAll("'","`")+"</td>"+
                                     "<td valign='top' align='right'>"+js+"</td>"+
                                     "<td valign='top' align='right'>"+jm+"</td>"+
                                     "<td valign='top' align='right'>"+tarif+"</td>"+
                                     "<td valign='top' align='right'>"+totalsaranas+"</td>"+
                                     "<td valign='top' align='right'>"+totaljms+"</td>"+
                                     "<td valign='top' align='right'>"+totalbayars+"</td>"+
-                                    "<td valign='top' align='center'>"+tbDetail.getValueAt(i,21).toString().replaceAll("'","`")+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,21).toString().replaceAll("'","`")+"</td>"+
                                 "</tr>"
                             );
                         }
@@ -879,40 +879,40 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
                         htmlContent.append(
                             "\"No.Rawat\";\"Nomor RM\";\"Nama Pasien\";\"Tgl.Masuk\";\"Tgl.Keluar\";\"DPJP\";\"Penindak\";\"Dokter Anestesi\";\"Dokter Anak\";\"Kode\";\"Kategori\";\"Nama Unit\";\"Ruangan\";\"Nama Tindakan\";\"Frekuensi (Jumlah)\";\"Jasa Sarana\";\"Jasa Pelayanan\";\"Tarif\";\"Total Jasa Sarana\";\"Total Jasa Pelayanan\";\"Total\";\"Tgl.Transaksi\"\n"
                         );
-                        for(i=0;i<tbDetail.getRowCount();i++){
+                        for(i=0;i<tabMode.getRowCount();i++){
                             try {
-                                js=tbDetail.getValueAt(i,15).toString();
+                                js=tabMode.getValueAt(i,15).toString();
                             } catch (Exception e) {
                                 js="";
                             }
                             try {
-                                jm=tbDetail.getValueAt(i,16).toString();
+                                jm=tabMode.getValueAt(i,16).toString();
                             } catch (Exception e) {
                                 jm="";
                             }
                             try {
-                                tarif=tbDetail.getValueAt(i,17).toString();
+                                tarif=tabMode.getValueAt(i,17).toString();
                             } catch (Exception e) {
                                 tarif="";
                             }
                             try {
-                                totalsaranas=tbDetail.getValueAt(i,18).toString();
+                                totalsaranas=tabMode.getValueAt(i,18).toString();
                             } catch (Exception e) {
                                 totalsaranas="";
                             }
                             try {
-                                totaljms=tbDetail.getValueAt(i,19).toString();
+                                totaljms=tabMode.getValueAt(i,19).toString();
                             } catch (Exception e) {
                                 totaljms="";
                             }
                             try {
-                                totalbayars=tbDetail.getValueAt(i,20).toString();
+                                totalbayars=tabMode.getValueAt(i,20).toString();
                             } catch (Exception e) {
                                 totalbayars="";
                             }
 
                             htmlContent.append(
-                                "\""+tbDetail.getValueAt(i,0).toString().replaceAll("'","`")+"\";\""+tbDetail.getValueAt(i,1).toString().replaceAll("'","`")+"\";\""+tbDetail.getValueAt(i,2).toString().replaceAll("'","`")+"\";\""+tbDetail.getValueAt(i,3).toString().replaceAll("'","`")+"\";\""+tbDetail.getValueAt(i,4).toString().replaceAll("'","`")+"\";\""+tbDetail.getValueAt(i,5).toString().replaceAll("'","`")+"\";\""+tbDetail.getValueAt(i,6).toString().replaceAll("'","`")+"\";\""+tbDetail.getValueAt(i,7).toString().replaceAll("'","`")+"\";\""+tbDetail.getValueAt(i,8).toString().replaceAll("'","`")+"\";\""+tbDetail.getValueAt(i,9).toString().replaceAll("'","`")+"\";\""+tbDetail.getValueAt(i,10).toString().replaceAll("'","`")+"\";\""+tbDetail.getValueAt(i,11).toString().replaceAll("'","`")+"\";\""+tbDetail.getValueAt(i,12).toString().replaceAll("'","`")+"\";\""+tbDetail.getValueAt(i,13).toString().replaceAll("'","`")+"\";\""+tbDetail.getValueAt(i,14).toString().replaceAll("'","`")+"\";\""+js+"\";\""+jm+"\";\""+tarif+"\";\""+totalsaranas+"\";\""+totaljms+"\";\""+totalbayars+"\";\""+tbDetail.getValueAt(i,21).toString().replaceAll("'","`")+"\"\n"
+                                "\""+tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,6).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,7).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,8).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,9).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,10).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,11).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,12).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,13).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,14).toString().replaceAll("'","`")+"\";\""+js+"\";\""+jm+"\";\""+tarif+"\";\""+totalsaranas+"\";\""+totaljms+"\";\""+totalbayars+"\";\""+tabMode.getValueAt(i,21).toString().replaceAll("'","`")+"\"\n"
                             );
                         }
 
@@ -928,40 +928,40 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
                         htmlContent.append(
                             "No.Rawat;Nomor RM;Nama Pasien;Tgl.Masuk;Tgl.Keluar;DPJP;Penindak;Dokter Anestesi;Dokter Anak;Kode;Kategori;Nama Unit;Ruangan;Nama Tindakan;Frekuensi (Jumlah);Jasa Sarana;Jasa Pelayanan;Tarif;Total Jasa Sarana;Total Jasa Pelayanan;Total;Tgl.Transaksi\n"
                         );
-                        for(i=0;i<tbDetail.getRowCount();i++){
+                        for(i=0;i<tabMode.getRowCount();i++){
                             try {
-                                js=tbDetail.getValueAt(i,15).toString();
+                                js=tabMode.getValueAt(i,15).toString();
                             } catch (Exception e) {
                                 js="";
                             }
                             try {
-                                jm=tbDetail.getValueAt(i,16).toString();
+                                jm=tabMode.getValueAt(i,16).toString();
                             } catch (Exception e) {
                                 jm="";
                             }
                             try {
-                                tarif=tbDetail.getValueAt(i,17).toString();
+                                tarif=tabMode.getValueAt(i,17).toString();
                             } catch (Exception e) {
                                 tarif="";
                             }
                             try {
-                                totalsaranas=tbDetail.getValueAt(i,18).toString();
+                                totalsaranas=tabMode.getValueAt(i,18).toString();
                             } catch (Exception e) {
                                 totalsaranas="";
                             }
                             try {
-                                totaljms=tbDetail.getValueAt(i,19).toString();
+                                totaljms=tabMode.getValueAt(i,19).toString();
                             } catch (Exception e) {
                                 totaljms="";
                             }
                             try {
-                                totalbayars=tbDetail.getValueAt(i,20).toString();
+                                totalbayars=tabMode.getValueAt(i,20).toString();
                             } catch (Exception e) {
                                 totalbayars="";
                             }
 
                             htmlContent.append(
-                                ""+tbDetail.getValueAt(i,0).toString().replaceAll("'","`")+";"+tbDetail.getValueAt(i,1).toString().replaceAll("'","`")+";"+tbDetail.getValueAt(i,2).toString().replaceAll("'","`")+";"+tbDetail.getValueAt(i,3).toString().replaceAll("'","`")+";"+tbDetail.getValueAt(i,4).toString().replaceAll("'","`")+";"+tbDetail.getValueAt(i,5).toString().replaceAll("'","`")+";"+tbDetail.getValueAt(i,6).toString().replaceAll("'","`")+";"+tbDetail.getValueAt(i,7).toString().replaceAll("'","`")+";"+tbDetail.getValueAt(i,8).toString().replaceAll("'","`")+";"+tbDetail.getValueAt(i,9).toString().replaceAll("'","`")+";"+tbDetail.getValueAt(i,10).toString().replaceAll("'","`")+";"+tbDetail.getValueAt(i,11).toString().replaceAll("'","`")+";"+tbDetail.getValueAt(i,12).toString().replaceAll("'","`")+";"+tbDetail.getValueAt(i,13).toString().replaceAll("'","`")+";"+tbDetail.getValueAt(i,14).toString().replaceAll("'","`")+";"+js+";"+jm+";"+tarif+";"+totalsaranas+";"+totaljms+";"+totalbayars+";"+tbDetail.getValueAt(i,21).toString().replaceAll("'","`")+"\n"
+                                ""+tabMode.getValueAt(i,0).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,1).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,2).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,3).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,4).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,5).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,6).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,7).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,8).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,9).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,10).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,11).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,12).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,13).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,14).toString().replaceAll("'","`")+";"+js+";"+jm+";"+tarif+";"+totalsaranas+";"+totaljms+";"+totalbayars+";"+tabMode.getValueAt(i,21).toString().replaceAll("'","`")+"\n"
                             );
                         }
 

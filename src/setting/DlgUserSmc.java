@@ -645,10 +645,10 @@ public class DlgUserSmc extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-    if (tbUser.getRowCount() == 0) {
+    if (tabMode.getRowCount() == 0) {
         JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
         TKd.requestFocus();
-    } else if (tbUser.getRowCount() != 0) {
+    } else if (tabMode.getRowCount() != 0) {
         Map<String, Object> param = new HashMap<>();
         param.put("namars", akses.getnamars());
         param.put("alamatrs", akses.getalamatrs());
@@ -657,11 +657,11 @@ public class DlgUserSmc extends javax.swing.JDialog {
         param.put("kontakrs", akses.getkontakrs());
         param.put("emailrs", akses.getemailrs());
         Sequel.deleteTemporary();
-        for (int i = 0; i < tbUser.getRowCount(); i++) {
+        for (int i = 0; i < tabMode.getRowCount(); i++) {
             Sequel.temporary(String.valueOf(i),
-                tbUser.getValueAt(i, 0).toString(),
-                tbUser.getValueAt(i, 1).toString(),
-                tbUser.getValueAt(i, 3).toString()
+                tabMode.getValueAt(i, 0).toString(),
+                tabMode.getValueAt(i, 1).toString(),
+                tabMode.getValueAt(i, 3).toString()
             );
         }
         Valid.MyReportqry("rptUser.jasper", "report", "::[ Data User ]::", "select * from temporary where temporary.temp37='" + akses.getalamatip() + "' order by temporary.no", param);

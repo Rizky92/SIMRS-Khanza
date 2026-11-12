@@ -547,10 +547,10 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tbPembayaran.getRowCount()==0){
+        if(tabModePembayaran.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tbPembayaran.getRowCount()!=0){
+        }else if(tabModePembayaran.getRowCount()!=0){
             try{
                 File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -586,7 +586,7 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Sampel</b></td>").
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Pembayaran</b></td>").
                                         append("</tr>");
-                            for (int i = 0; i < tbPembayaran.getRowCount(); i++) {
+                            for (int i = 0; i < tabModePembayaran.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
                                                 append("<td valign='top'>").append(tbPembayaran.getValueAt(i,0).toString()).append("</td>").
                                                 append("<td valign='top'>").append(tbPembayaran.getValueAt(i,1).toString()).append("</td>").
@@ -643,7 +643,7 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Sampel</b></td>").
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Pembayaran</b></td>").
                                         append("</tr>");
-                            for (int i = 0; i < tbPembayaran.getRowCount(); i++) {
+                            for (int i = 0; i < tabModePembayaran.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
                                                 append("<td valign='top'>").append(tbPembayaran.getValueAt(i,0).toString()).append("</td>").
                                                 append("<td valign='top'>").append(tbPembayaran.getValueAt(i,1).toString()).append("</td>").
@@ -690,7 +690,7 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
                     case "Laporan 3 (CSV)":
                             htmlContent = new StringBuilder();
                             htmlContent.append("\"Tanggal Bayar\";\"No.Bayar/Nota\";\"Dibayar Oleh\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Pembayaran\"\n");
-                            for (int i = 0; i < tbPembayaran.getRowCount(); i++) {
+                            for (int i = 0; i < tabModePembayaran.getRowCount(); i++) {
                                 htmlContent.append("\"").append(tbPembayaran.getValueAt(i,0).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,1).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,2).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,3).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,4).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,5).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,6).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,7).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,8).toString()).append("\"\n");
                             }
                             htmlContent.append("\"\";\"\";\"Record :\";\"").append(LTotal.getText()).append("\";\"\";\"\";\"\";\"Total Pembayaran : \";\"").append(total+"").append("\"\n");

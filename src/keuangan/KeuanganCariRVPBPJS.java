@@ -514,10 +514,10 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbBangsal.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tbBangsal.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -544,36 +544,36 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
                         Sequel.deleteTemporary();
                         ttlpiutang=0;ttliur=0;ttlsudahdibayar=0;ttlsisapiutang=0;ttlinacbg=0;total=0;rugi=0;lebih=0;
                         int i = 0;
-                        for (; i < tbBangsal.getRowCount(); i++) {
+                        for (; i < tabMode.getRowCount(); i++) {
                             sisapiutang=0;
                             try {
-                                sisapiutang=Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
+                                sisapiutang=Double.parseDouble(tabMode.getValueAt(i,10).toString());
                             } catch (Exception e) {
                                 sisapiutang=0;
                             }
-                            ttlpiutang=ttlpiutang+Double.parseDouble(tbBangsal.getValueAt(i,5).toString());
-                            ttliur=ttliur+Double.parseDouble(tbBangsal.getValueAt(i,6).toString());
-                            ttlsudahdibayar=ttlsudahdibayar+Double.parseDouble(tbBangsal.getValueAt(i,7).toString());
-                            ttlsisapiutang=ttlsisapiutang+Double.parseDouble(tbBangsal.getValueAt(i,8).toString());
-                            ttlinacbg=ttlinacbg+Double.parseDouble(tbBangsal.getValueAt(i,9).toString());
+                            ttlpiutang=ttlpiutang+Double.parseDouble(tabMode.getValueAt(i,5).toString());
+                            ttliur=ttliur+Double.parseDouble(tabMode.getValueAt(i,6).toString());
+                            ttlsudahdibayar=ttlsudahdibayar+Double.parseDouble(tabMode.getValueAt(i,7).toString());
+                            ttlsisapiutang=ttlsisapiutang+Double.parseDouble(tabMode.getValueAt(i,8).toString());
+                            ttlinacbg=ttlinacbg+Double.parseDouble(tabMode.getValueAt(i,9).toString());
                             total=total+sisapiutang;
-                            rugi=rugi+Double.parseDouble(tbBangsal.getValueAt(i,12).toString());
-                            lebih=lebih+Double.parseDouble(tbBangsal.getValueAt(i,13).toString());
+                            rugi=rugi+Double.parseDouble(tabMode.getValueAt(i,12).toString());
+                            lebih=lebih+Double.parseDouble(tabMode.getValueAt(i,13).toString());
                             Sequel.temporary(
                                 String.valueOf(i + 1),
-                                tbBangsal.getValueAt(i, 1).toString(),
-                                tbBangsal.getValueAt(i, 2).toString(),
-                                tbBangsal.getValueAt(i, 3).toString(),
-                                tbBangsal.getValueAt(i, 4).toString(),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 5).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 6).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 7).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 8).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 9).toString())),
+                                tabMode.getValueAt(i, 1).toString(),
+                                tabMode.getValueAt(i, 2).toString(),
+                                tabMode.getValueAt(i, 3).toString(),
+                                tabMode.getValueAt(i, 4).toString(),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 5).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 6).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 7).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 8).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 9).toString())),
                                 Valid.SetAngka(sisapiutang),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 11).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 12).toString())),
-                                Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(i, 13).toString()))
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 11).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 12).toString())),
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 13).toString()))
                             );
                         }
                         Sequel.temporary(

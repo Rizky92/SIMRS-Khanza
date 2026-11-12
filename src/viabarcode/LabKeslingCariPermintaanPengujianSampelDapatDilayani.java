@@ -633,10 +633,10 @@ public class LabKeslingCariPermintaanPengujianSampelDapatDilayani extends javax.
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tbDapatDilayani.getRowCount()==0){
+        if(tabModeTidakDapatDilayani.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tbDapatDilayani.getRowCount()!=0){
+        }else if(tabModeTidakDapatDilayani.getRowCount()!=0){
             try{
                 File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -671,7 +671,7 @@ public class LabKeslingCariPermintaanPengujianSampelDapatDilayani extends javax.
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Status Penugasan</b></td>").
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kebutuhan Sub Kontrak Pengujian/Keterangan Lainnya</b></td>").
                                         append("</tr>");
-                            for (int i = 0; i < tbDapatDilayani.getRowCount(); i++) {
+                            for (int i = 0; i < tabModeTidakDapatDilayani.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
                                                 append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,0).toString()).append("</td>").
                                                 append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,1).toString()).append("</td>").
@@ -721,7 +721,7 @@ public class LabKeslingCariPermintaanPengujianSampelDapatDilayani extends javax.
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Status Penugasan</b></td>").
                                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kebutuhan Sub Kontrak Pengujian/Keterangan Lainnya</b></td>").
                                         append("</tr>");
-                            for (int i = 0; i < tbDapatDilayani.getRowCount(); i++) {
+                            for (int i = 0; i < tabModeTidakDapatDilayani.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
                                                 append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,0).toString()).append("</td>").
                                                 append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,1).toString()).append("</td>").
@@ -764,7 +764,7 @@ public class LabKeslingCariPermintaanPengujianSampelDapatDilayani extends javax.
                             htmlContent.append(
                                 "\"Waktu Diterima\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Penugasan\";\"Kebutuhan Sub Kontrak Pengujian/Keterangan Lainnya\"\n"
                             );
-                            for (int i = 0; i < tbDapatDilayani.getRowCount(); i++) {
+                            for (int i = 0; i < tabModeTidakDapatDilayani.getRowCount(); i++) {
                                 htmlContent.append("\"").append(tbDapatDilayani.getValueAt(i,0).toString()).append("\";\"").append(tbDapatDilayani.getValueAt(i,1).toString()).append("\";\"").append(tbDapatDilayani.getValueAt(i,2).toString()).append("\";\"").append(tbDapatDilayani.getValueAt(i,3).toString()).append("\";\"").append(tbDapatDilayani.getValueAt(i,4).toString()).append("\";\"").append(tbDapatDilayani.getValueAt(i,5).toString()).append("\";\"").append(tbDapatDilayani.getValueAt(i,6).toString()).append("\";\"").append(tbDapatDilayani.getValueAt(i,7).toString()).append("\"\n");
                             }
                             f = new File("DataPermintaanPengujianSampelDilayani.csv");

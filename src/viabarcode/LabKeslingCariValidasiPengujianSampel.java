@@ -866,10 +866,10 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         if(TabData.getSelectedIndex()==0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            if(tbValidasi.getRowCount()==0){
+            if(tabModeValidasi.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari.requestFocus();
-            }else if(tbValidasi.getRowCount()!=0){
+            }else if(tabModeValidasi.getRowCount()!=0){
                 try{
                     File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -909,7 +909,7 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NIP PJ Verifikasi</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama PJ Verifikasi</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tbValidasi.getRowCount(); i++) {
+                                for (int i = 0; i < tabModeValidasi.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbValidasi.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbValidasi.getValueAt(i,1).toString()).append("</td>").
@@ -969,7 +969,7 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NIP PJ Verifikasi</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama PJ Verifikasi</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tbValidasi.getRowCount(); i++) {
+                                for (int i = 0; i < tabModeValidasi.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbValidasi.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbValidasi.getValueAt(i,1).toString()).append("</td>").
@@ -1017,7 +1017,7 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                                 htmlContent.append(
                                     "\"Tgl.Validasi\";\"No.Validasi\";\"NIP PJ Validasi\";\"Nama PJ Validasi\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Bayar\";\"Catatan\";\"NIP PJ Verifikasi\";\"Nama PJ Verifikasi\"\n"
                                 );
-                                for (int i = 0; i < tbValidasi.getRowCount(); i++) {
+                                for (int i = 0; i < tabModeValidasi.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbValidasi.getValueAt(i,0).toString()).append("\";\"").append(tbValidasi.getValueAt(i,1).toString()).append("\";\"").append(tbValidasi.getValueAt(i,2).toString()).append("\";\"").append(tbValidasi.getValueAt(i,3).toString()).append("\";\"").append(tbValidasi.getValueAt(i,4).toString()).append("\";\"").append(tbValidasi.getValueAt(i,5).toString()).append("\";\"").append(tbValidasi.getValueAt(i,6).toString()).append("\";\"").append(tbValidasi.getValueAt(i,7).toString()).append("\";\"").append(tbValidasi.getValueAt(i,8).toString()).append("\";\"").append(tbValidasi.getValueAt(i,9).toString()).append("\";\"").append(tbValidasi.getValueAt(i,10).toString()).append("\";\"").append(tbValidasi.getValueAt(i,11).toString()).append("\";\"").append(tbValidasi.getValueAt(i,12).toString()).append("\"\n");
                                 }
                                 f = new File("DataValidasiPengujianSampel.csv");
@@ -1034,10 +1034,10 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
             this.setCursor(Cursor.getDefaultCursor());
         }else if(TabData.getSelectedIndex()==1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            if(tbRekapValidasi.getRowCount()==0){
+            if(tabModeRekapValidasi.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari.requestFocus();
-            }else if(tbRekapValidasi.getRowCount()!=0){
+            }else if(tabModeRekapValidasi.getRowCount()!=0){
                 try{
                     File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -1089,7 +1089,7 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NIP PJ Pengujian</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama PJ Pengujian</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tbRekapValidasi.getRowCount(); i++) {
+                                for (int i = 0; i < tabModeRekapValidasi.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,1).toString()).append("</td>").
@@ -1173,7 +1173,7 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NIP PJ Pengujian</b></td>").
                                                 append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama PJ Pengujian</b></td>").
                                             append("</tr>");
-                                for (int i = 0; i < tbRekapValidasi.getRowCount(); i++) {
+                                for (int i = 0; i < tabModeRekapValidasi.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
                                                     append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,0).toString()).append("</td>").
                                                     append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,1).toString()).append("</td>").
@@ -1233,7 +1233,7 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                                 htmlContent.append(
                                     "\"Tgl.Validasi\";\"No.Validasi\";\"NIP PJ Validasi\";\"Nama PJ Validasi\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Bayar\";\"Catatan\";\"NIP PJ Verifikasi\";\"Nama PJ Verifikasi\";\"Kode\";\"Nama Parameter\";\"Satuan\";\"Hasil Pemeriksaan\";\"Keterangan\";\"Nilai Normal\";\"Metode Pengujian\";\"Kategori\";\"NIP Analis\";\"Nama Analis\";\"NIP PJ Pengujian\";\"Nama PJ Pengujian\"\n"
                                 );
-                                for (int i = 0; i < tbRekapValidasi.getRowCount(); i++) {
+                                for (int i = 0; i < tabModeRekapValidasi.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbRekapValidasi.getValueAt(i,0).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,1).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,2).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,3).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,4).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,5).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,6).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,7).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,8).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,9).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,10).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,11).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,12).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,13).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,14).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,15).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,16).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,17).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,18).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,19).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,20).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,21).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,22).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,23).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,24).toString()).append("\"\n");
                                 }
                                 f = new File("DataRekapValidasiPengujianSampel.csv");

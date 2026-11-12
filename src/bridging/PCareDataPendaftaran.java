@@ -3250,10 +3250,10 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
             return;
         }
         if(TabRawat.getSelectedIndex()==1){
-            if(tbPendaftaran.getRowCount()==0){
+            if(tabMode.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari.requestFocus();
-            }else if(tbPendaftaran.getRowCount()!=0){
+            }else if(tabMode.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -3297,10 +3297,10 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }else if(TabRawat.getSelectedIndex()==2){
-            if(tbKunjungan.getRowCount()==0){
+            if(tabMode2.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari1.requestFocus();
-            }else if(tbKunjungan.getRowCount()!=0){
+            }else if(tabMode2.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -3344,10 +3344,10 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }else if(TabRawat.getSelectedIndex()==3){
-            if(tbSpesialis.getRowCount()==0){
+            if(tabMode3.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari1.requestFocus();
-            }else if(tbSpesialis.getRowCount()!=0){
+            }else if(tabMode3.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {

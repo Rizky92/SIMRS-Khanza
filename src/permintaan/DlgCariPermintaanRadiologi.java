@@ -1299,10 +1299,10 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
             }, "Laporan 5 (Jasper)");
             if(TabPilihRawat.getSelectedIndex()==0){
                 if(TabRawatJalan.getSelectedIndex()==0){
-                    if(tbRadiologiRalan.getRowCount()==0){
+                    if(tabMode.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         TCari.requestFocus();
-                    }else if(tbRadiologiRalan.getRowCount()!=0){
+                    }else if(tabMode.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("LapPermintaanRadiologi.html", "Data Permintaan Radiologi", tbRadiologiRalan);
@@ -1318,43 +1318,43 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                                 break;
                             case "Laporan 5 (Jasper)":
                                 Sequel.queryu("delete from temporary_permintaan_radiologi");
-                                int row=tbRadiologiRalan.getRowCount();
+                                int row=tabMode.getRowCount();
                                 for(i=0;i<row;i++){
                                     tglsampel="";
                                     try {
-                                        tglsampel=tbRadiologiRalan.getValueAt(i,5).toString();
+                                        tglsampel=tabMode.getValueAt(i,5).toString();
                                     } catch (Exception e) {
                                         tglsampel="";
                                     }
                                     tglhasil="";
                                     try {
-                                        tglhasil=tbRadiologiRalan.getValueAt(i,7).toString();
+                                        tglhasil=tabMode.getValueAt(i,7).toString();
                                     } catch (Exception e) {
                                         tglhasil="";
                                     }
                                     Sequel.menyimpan("temporary_permintaan_radiologi","'0','"+
-                                        tbRadiologiRalan.getValueAt(i,0).toString()+"','"+
-                                        tbRadiologiRalan.getValueAt(i,1).toString()+"','"+
-                                        tbRadiologiRalan.getValueAt(i,2).toString()+"','"+
-                                        tbRadiologiRalan.getValueAt(i,3).toString()+"','"+
-                                        tbRadiologiRalan.getValueAt(i,4).toString()+"','"+
+                                        tabMode.getValueAt(i,0).toString()+"','"+
+                                        tabMode.getValueAt(i,1).toString()+"','"+
+                                        tabMode.getValueAt(i,2).toString()+"','"+
+                                        tabMode.getValueAt(i,3).toString()+"','"+
+                                        tabMode.getValueAt(i,4).toString()+"','"+
                                         tglsampel+"','"+
-                                        tbRadiologiRalan.getValueAt(i,6).toString()+"','"+
+                                        tabMode.getValueAt(i,6).toString()+"','"+
                                         tglhasil+"','"+
-                                        tbRadiologiRalan.getValueAt(i,8).toString()+"','"+
-                                        tbRadiologiRalan.getValueAt(i,9).toString()+"','"+
-                                        tbRadiologiRalan.getValueAt(i,10).toString()+"','"+
-                                        tbRadiologiRalan.getValueAt(i,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab");
+                                        tabMode.getValueAt(i,8).toString()+"','"+
+                                        tabMode.getValueAt(i,9).toString()+"','"+
+                                        tabMode.getValueAt(i,10).toString()+"','"+
+                                        tabMode.getValueAt(i,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab");
                                 }
                                 Valid.MyReport("rptLapPermintaanRadiologi.jasper","report","::[ Data Permintaan Radiologi ]::",param);
                                 break;
                         }
                     }
                 }else if(TabRawatJalan.getSelectedIndex()==1){
-                    if(tbRadiologiRalan2.getRowCount()==0){
+                    if(tabMode2.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         TCari.requestFocus();
-                    }else if(tbRadiologiRalan2.getRowCount()!=0){
+                    }else if(tabMode2.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("LapPermintaanRadiologi2.html", "Data Detail Permintaan Radiologi", tbRadiologiRalan2);
@@ -1370,34 +1370,34 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                                 break;
                             case "Laporan 5 (Jasper)":
                                 Sequel.queryu("delete from temporary_permintaan_radiologi");
-                                int row=tbRadiologiRalan2.getRowCount();
+                                int row=tabMode2.getRowCount();
                                 for(i=0;i<row;i++){
                                     tglsampel="";
                                     try {
-                                        tglsampel=tbRadiologiRalan2.getValueAt(i,6).toString();
+                                        tglsampel=tabMode2.getValueAt(i,6).toString();
                                     } catch (Exception e) {
                                         tglsampel="";
                                     }
                                     tglhasil="";
                                     try {
-                                        tglhasil=tbRadiologiRalan2.getValueAt(i,8).toString();
+                                        tglhasil=tabMode2.getValueAt(i,8).toString();
                                     } catch (Exception e) {
                                         tglhasil="";
                                     }
                                     Sequel.menyimpan("temporary_permintaan_radiologi","'0','"+
-                                        tbRadiologiRalan2.getValueAt(i,0).toString()+"','"+
-                                        tbRadiologiRalan2.getValueAt(i,1).toString()+"','"+
-                                        tbRadiologiRalan2.getValueAt(i,2).toString()+"','"+
-                                        tbRadiologiRalan2.getValueAt(i,3).toString()+"','"+
-                                        tbRadiologiRalan2.getValueAt(i,4).toString()+"','"+
-                                        tbRadiologiRalan2.getValueAt(i,5).toString()+"','"+
+                                        tabMode2.getValueAt(i,0).toString()+"','"+
+                                        tabMode2.getValueAt(i,1).toString()+"','"+
+                                        tabMode2.getValueAt(i,2).toString()+"','"+
+                                        tabMode2.getValueAt(i,3).toString()+"','"+
+                                        tabMode2.getValueAt(i,4).toString()+"','"+
+                                        tabMode2.getValueAt(i,5).toString()+"','"+
                                         tglsampel+"','"+
-                                        tbRadiologiRalan2.getValueAt(i,7).toString()+"','"+
+                                        tabMode2.getValueAt(i,7).toString()+"','"+
                                         tglhasil+"','"+
-                                        tbRadiologiRalan2.getValueAt(i,9).toString()+"','"+
-                                        tbRadiologiRalan2.getValueAt(i,10).toString()+"','"+
-                                        tbRadiologiRalan2.getValueAt(i,11).toString()+"','"+
-                                        tbRadiologiRalan2.getValueAt(i,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab");
+                                        tabMode2.getValueAt(i,9).toString()+"','"+
+                                        tabMode2.getValueAt(i,10).toString()+"','"+
+                                        tabMode2.getValueAt(i,11).toString()+"','"+
+                                        tabMode2.getValueAt(i,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab");
                                 }
                                 Valid.MyReport("rptLapPermintaanRadiologi2.jasper","report","::[ Data Detail Permintaan Radiologi ]::",param);
                                 break;
@@ -1406,10 +1406,10 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                 }
             }else if(TabPilihRawat.getSelectedIndex()==1){
                 if(TabRawatInap.getSelectedIndex()==0){
-                    if(tbRadiologiRanap.getRowCount()==0){
+                    if(tabMode3.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         TCari.requestFocus();
-                    }else if(tbRadiologiRanap.getRowCount()!=0){
+                    }else if(tabMode3.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("LapPermintaanRadiologi3.html", "Data Permintaan Radiologi", tbRadiologiRanap);
@@ -1425,33 +1425,33 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                                 break;
                             case "Laporan 5 (Jasper)":
                                 Sequel.queryu("delete from temporary_permintaan_radiologi");
-                                int row=tbRadiologiRanap.getRowCount();
+                                int row=tabMode3.getRowCount();
                                 for(i=0;i<row;i++){
                                     tglsampel="";
                                     try {
-                                        tglsampel=tbRadiologiRalan.getValueAt(i,5).toString();
+                                        tglsampel=tabMode.getValueAt(i,5).toString();
                                     } catch (Exception e) {
                                         tglsampel="";
                                     }
                                     tglhasil="";
                                     try {
-                                        tglhasil=tbRadiologiRalan.getValueAt(i,7).toString();
+                                        tglhasil=tabMode.getValueAt(i,7).toString();
                                     } catch (Exception e) {
                                         tglhasil="";
                                     }
                                     Sequel.menyimpan("temporary_permintaan_radiologi","'0','"+
-                                        tbRadiologiRanap.getValueAt(i,0).toString()+"','"+
-                                        tbRadiologiRanap.getValueAt(i,1).toString()+"','"+
-                                        tbRadiologiRanap.getValueAt(i,2).toString()+"','"+
-                                        tbRadiologiRanap.getValueAt(i,3).toString()+"','"+
-                                        tbRadiologiRanap.getValueAt(i,4).toString()+"','"+
+                                        tabMode3.getValueAt(i,0).toString()+"','"+
+                                        tabMode3.getValueAt(i,1).toString()+"','"+
+                                        tabMode3.getValueAt(i,2).toString()+"','"+
+                                        tabMode3.getValueAt(i,3).toString()+"','"+
+                                        tabMode3.getValueAt(i,4).toString()+"','"+
                                         tglsampel+"','"+
-                                        tbRadiologiRanap.getValueAt(i,6).toString()+"','"+
+                                        tabMode3.getValueAt(i,6).toString()+"','"+
                                         tglhasil+"','"+
-                                        tbRadiologiRanap.getValueAt(i,8).toString()+"','"+
-                                        tbRadiologiRanap.getValueAt(i,9).toString()+"','"+
-                                        tbRadiologiRanap.getValueAt(i,10).toString()+"','"+
-                                        tbRadiologiRanap.getValueAt(i,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab");
+                                        tabMode3.getValueAt(i,8).toString()+"','"+
+                                        tabMode3.getValueAt(i,9).toString()+"','"+
+                                        tabMode3.getValueAt(i,10).toString()+"','"+
+                                        tabMode3.getValueAt(i,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab");
                                 }
                                 Valid.MyReport("rptLapPermintaanRadiologi3.jasper","report","::[ Data Permintaan Radiologi ]::",param);
                                 break;
@@ -1459,10 +1459,10 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     }
                 }else if(TabRawatInap.getSelectedIndex()==1){
-                    if(tbRadiologiRanap2.getRowCount()==0){
+                    if(tabMode4.getRowCount()==0){
                         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                         TCari.requestFocus();
-                    }else if(tbRadiologiRanap2.getRowCount()!=0){
+                    }else if(tabMode4.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("LapPermintaanRadiologi4.html", "Data Detail Permintaan Radiologi", tbRadiologiRanap2);
@@ -1478,34 +1478,34 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                                 break;
                             case "Laporan 5 (Jasper)":
                                 Sequel.queryu("delete from temporary_permintaan_radiologi");
-                                int row=tbRadiologiRanap2.getRowCount();
+                                int row=tabMode4.getRowCount();
                                 for(i=0;i<row;i++){
                                     tglsampel="";
                                     try {
-                                        tglsampel=tbRadiologiRanap2.getValueAt(i,6).toString();
+                                        tglsampel=tabMode4.getValueAt(i,6).toString();
                                     } catch (Exception e) {
                                         tglsampel="";
                                     }
                                     tglhasil="";
                                     try {
-                                        tglhasil=tbRadiologiRanap2.getValueAt(i,8).toString();
+                                        tglhasil=tabMode4.getValueAt(i,8).toString();
                                     } catch (Exception e) {
                                         tglhasil="";
                                     }
                                     Sequel.menyimpan("temporary_permintaan_radiologi","'0','"+
-                                        tbRadiologiRanap2.getValueAt(i,0).toString()+"','"+
-                                        tbRadiologiRanap2.getValueAt(i,1).toString()+"','"+
-                                        tbRadiologiRanap2.getValueAt(i,2).toString()+"','"+
-                                        tbRadiologiRanap2.getValueAt(i,3).toString()+"','"+
-                                        tbRadiologiRanap2.getValueAt(i,4).toString()+"','"+
-                                        tbRadiologiRanap2.getValueAt(i,5).toString()+"','"+
+                                        tabMode4.getValueAt(i,0).toString()+"','"+
+                                        tabMode4.getValueAt(i,1).toString()+"','"+
+                                        tabMode4.getValueAt(i,2).toString()+"','"+
+                                        tabMode4.getValueAt(i,3).toString()+"','"+
+                                        tabMode4.getValueAt(i,4).toString()+"','"+
+                                        tabMode4.getValueAt(i,5).toString()+"','"+
                                         tglsampel+"','"+
-                                        tbRadiologiRanap2.getValueAt(i,7).toString()+"','"+
+                                        tabMode4.getValueAt(i,7).toString()+"','"+
                                         tglhasil+"','"+
-                                        tbRadiologiRanap2.getValueAt(i,9).toString()+"','"+
-                                        tbRadiologiRanap2.getValueAt(i,10).toString()+"','"+
-                                        tbRadiologiRanap2.getValueAt(i,11).toString()+"','"+
-                                        tbRadiologiRanap2.getValueAt(i,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab");
+                                        tabMode4.getValueAt(i,9).toString()+"','"+
+                                        tabMode4.getValueAt(i,10).toString()+"','"+
+                                        tabMode4.getValueAt(i,11).toString()+"','"+
+                                        tabMode4.getValueAt(i,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab");
                                 }
                                 Valid.MyReport("rptLapPermintaanRadiologi4.jasper","report","::[ Data Detail Permintaan Radiologi ]::",param);
                                 break;

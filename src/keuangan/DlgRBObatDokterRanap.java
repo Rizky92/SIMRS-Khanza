@@ -348,10 +348,10 @@ public class DlgRBObatDokterRanap extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbDokter.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tbDokter.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -376,36 +376,36 @@ public class DlgRBObatDokterRanap extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        for(i=0;i<tbDokter.getRowCount();i++){
+                        for(i=0;i<tabMode.getRowCount();i++){
                             jumlah="";
                             try {
-                                jumlah=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,4).toString()));
+                                jumlah=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,4).toString()));
                             } catch (Exception e) {
                                 jumlah="";
                             }
                             total="";
                             try {
-                                total=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,5).toString()));
+                                total=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString()));
                             } catch (Exception e) {
                                 total="";
                             }
                             emb="";
                             try {
-                                emb=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,6).toString()));
+                                emb=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
                             } catch (Exception e) {
                                 emb="";
                             }
                             tsl="";
                             try {
-                                tsl=Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,7).toString()));
+                                tsl=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()));
                             } catch (Exception e) {
                                 tsl="";
                             }
                             Sequel.menyimpan("temporary","'"+i+"','"+
-                                            tbDokter.getValueAt(i,0).toString().replaceAll("'","`")+"','"+
-                                            tbDokter.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
-                                            tbDokter.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
-                                            tbDokter.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
                                             jumlah+"','"+total+"','"+emb+"','"+tsl+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Obat Perdokter Poli");
                         }
 

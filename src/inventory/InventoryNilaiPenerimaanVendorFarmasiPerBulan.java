@@ -609,10 +609,10 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbDokter.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tbDokter.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -637,24 +637,24 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        int row=tbDokter.getRowCount();
+                        int row=tabMode.getRowCount();
                         for(i=0;i<row;i++){
                             Sequel.menyimpan("temporary","'"+i+"','"+
-                                            tbDokter.getValueAt(i,0).toString()+"','"+
-                                            tbDokter.getValueAt(i,1).toString()+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,2).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,3).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,4).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,5).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,6).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,7).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,8).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,9).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,10).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,11).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,12).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,13).toString()))+"','"+
-                                            Valid.SetAngka(Double.parseDouble(tbDokter.getValueAt(i,14).toString()))+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penerimaan");
+                                            tabMode.getValueAt(i,0).toString()+"','"+
+                                            tabMode.getValueAt(i,1).toString()+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,2).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,3).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,4).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()))+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penerimaan");
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());

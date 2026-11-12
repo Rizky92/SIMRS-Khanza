@@ -553,10 +553,10 @@ public class DlgAkunBayar extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbJadwal.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tbJadwal.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -568,16 +568,16 @@ public class DlgAkunBayar extends javax.swing.JDialog {
                 }, "Laporan 5 (Jasper)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                        Valid.exportHtmlSmc("AkunBayar.html", "Akun Bayar", tbJadwal, IntStream.rangeClosed(1, tbJadwal.getColumnCount() - 1).toArray());
+                        Valid.exportHtmlSmc("AkunBayar.html", "Akun Bayar", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 2 (WPS)":
-                        Valid.exportWPSSmc("AkunBayar.wps", "Akun Bayar", tbJadwal, IntStream.rangeClosed(1, tbJadwal.getColumnCount() - 1).toArray());
+                        Valid.exportWPSSmc("AkunBayar.wps", "Akun Bayar", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 3 (CSV)":
-                        Valid.exportCSVSmc("AkunBayar.csv", tbJadwal, IntStream.rangeClosed(1, tbJadwal.getColumnCount() - 1).toArray());
+                        Valid.exportCSVSmc("AkunBayar.csv", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 4 (XLSX)":
-                        Valid.exportXlsxSmc("AkunBayar.xlsx", tbJadwal, IntStream.rangeClosed(1, tbJadwal.getColumnCount() - 1).toArray());
+                        Valid.exportXlsxSmc("AkunBayar.xlsx", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();

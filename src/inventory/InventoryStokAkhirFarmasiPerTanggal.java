@@ -286,10 +286,10 @@ public class InventoryStokAkhirFarmasiPerTanggal extends javax.swing.JDialog {
     */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        if(tbDokter.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnPrint.requestFocus();
-        }else if(tbDokter.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             if(ceksukses==false){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
@@ -347,42 +347,42 @@ public class InventoryStokAkhirFarmasiPerTanggal extends javax.swing.JDialog {
                                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>31("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),31)+")</td>"+
                                     "</tr>"
                                 );
-                                for(i=0;i<tbDokter.getRowCount();i++){
+                                for(i=0;i<tabMode.getRowCount();i++){
                                     htmlContent.append(
                                         "<tr class='isi'>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,0)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,1)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,2)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,3)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,4)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,5)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,6)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,7)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,8)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,9)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,10)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,11)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,12)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,13)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,14)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,15)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,16)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,17)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,18)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,19)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,20)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,21)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,22)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,23)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,24)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,25)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,26)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,27)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,28)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,29)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,30)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,31)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,32)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,1)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,3)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,4)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,5)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,6)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,7)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,8)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,9)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,10)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,11)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,12)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,13)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,14)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,15)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,16)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,17)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,18)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,19)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,20)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,21)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,22)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,23)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,24)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,25)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,26)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,27)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,28)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,29)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,30)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,31)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,32)+"</td>"+
                                         "</tr>"
                                     );
                                 }
@@ -451,42 +451,42 @@ public class InventoryStokAkhirFarmasiPerTanggal extends javax.swing.JDialog {
                                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>31("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),31)+")</td>"+
                                     "</tr>"
                                 );
-                                for(i=0;i<tbDokter.getRowCount();i++){
+                                for(i=0;i<tabMode.getRowCount();i++){
                                     htmlContent.append(
                                         "<tr class='isi'>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,0)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,1)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,2)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,3)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,4)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,5)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,6)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,7)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,8)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,9)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,10)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,11)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,12)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,13)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,14)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,15)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,16)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,17)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,18)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,19)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,20)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,21)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,22)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,23)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,24)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,25)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,26)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,27)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,28)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,29)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,30)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,31)+"</td>"+
-                                            "<td valign='top'>"+tbDokter.getValueAt(i,32)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,1)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,3)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,4)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,5)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,6)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,7)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,8)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,9)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,10)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,11)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,12)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,13)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,14)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,15)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,16)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,17)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,18)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,19)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,20)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,21)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,22)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,23)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,24)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,25)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,26)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,27)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,28)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,29)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,30)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,31)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,32)+"</td>"+
                                         "</tr>"
                                     );
                                 }
@@ -552,41 +552,41 @@ public class InventoryStokAkhirFarmasiPerTanggal extends javax.swing.JDialog {
                                         "\"30("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),30)+")\";"+
                                         "\"31("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),31)+")\"\n"
                                 );
-                                for(i=0;i<tbDokter.getRowCount();i++){
+                                for(i=0;i<tabMode.getRowCount();i++){
                                     htmlContent.append(
-                                        "\""+tbDokter.getValueAt(i,0)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,1)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,2)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,3)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,4)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,5)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,6)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,7)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,8)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,9)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,10)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,11)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,12)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,13)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,14)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,15)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,16)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,17)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,18)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,19)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,20)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,21)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,22)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,23)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,24)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,25)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,26)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,27)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,28)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,29)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,30)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,31)+"\";"+
-                                        "\""+tbDokter.getValueAt(i,32)+"\"\n"
+                                        "\""+tabMode.getValueAt(i,0)+"\";"+
+                                        "\""+tabMode.getValueAt(i,1)+"\";"+
+                                        "\""+tabMode.getValueAt(i,2)+"\";"+
+                                        "\""+tabMode.getValueAt(i,3)+"\";"+
+                                        "\""+tabMode.getValueAt(i,4)+"\";"+
+                                        "\""+tabMode.getValueAt(i,5)+"\";"+
+                                        "\""+tabMode.getValueAt(i,6)+"\";"+
+                                        "\""+tabMode.getValueAt(i,7)+"\";"+
+                                        "\""+tabMode.getValueAt(i,8)+"\";"+
+                                        "\""+tabMode.getValueAt(i,9)+"\";"+
+                                        "\""+tabMode.getValueAt(i,10)+"\";"+
+                                        "\""+tabMode.getValueAt(i,11)+"\";"+
+                                        "\""+tabMode.getValueAt(i,12)+"\";"+
+                                        "\""+tabMode.getValueAt(i,13)+"\";"+
+                                        "\""+tabMode.getValueAt(i,14)+"\";"+
+                                        "\""+tabMode.getValueAt(i,15)+"\";"+
+                                        "\""+tabMode.getValueAt(i,16)+"\";"+
+                                        "\""+tabMode.getValueAt(i,17)+"\";"+
+                                        "\""+tabMode.getValueAt(i,18)+"\";"+
+                                        "\""+tabMode.getValueAt(i,19)+"\";"+
+                                        "\""+tabMode.getValueAt(i,20)+"\";"+
+                                        "\""+tabMode.getValueAt(i,21)+"\";"+
+                                        "\""+tabMode.getValueAt(i,22)+"\";"+
+                                        "\""+tabMode.getValueAt(i,23)+"\";"+
+                                        "\""+tabMode.getValueAt(i,24)+"\";"+
+                                        "\""+tabMode.getValueAt(i,25)+"\";"+
+                                        "\""+tabMode.getValueAt(i,26)+"\";"+
+                                        "\""+tabMode.getValueAt(i,27)+"\";"+
+                                        "\""+tabMode.getValueAt(i,28)+"\";"+
+                                        "\""+tabMode.getValueAt(i,29)+"\";"+
+                                        "\""+tabMode.getValueAt(i,30)+"\";"+
+                                        "\""+tabMode.getValueAt(i,31)+"\";"+
+                                        "\""+tabMode.getValueAt(i,32)+"\"\n"
                                     );
                                 }
 

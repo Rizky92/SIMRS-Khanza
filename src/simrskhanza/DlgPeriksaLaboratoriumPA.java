@@ -871,7 +871,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
             Valid.textKosong(KodePerujuk,"Dokter Pengirim");
         }else if(KodePj.getText().equals("")||NmDokterPj.getText().equals("")){
             Valid.textKosong(KodePj,"Dokter Penanggung Jawab");
-        }else if(tbPemeriksaan.getRowCount()==0){
+        }else if(tabMode.getRowCount()==0){
             Valid.textKosong(Pemeriksaan,"Data Pemeriksaan");
         }else if(jml==0){
             Valid.textKosong(Pemeriksaan,"Data Pemeriksaan");

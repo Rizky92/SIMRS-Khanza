@@ -362,10 +362,10 @@ public class DlgDaftarPermintaanStokPasien extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbPemisahan.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tbPemisahan.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -390,10 +390,10 @@ public class DlgDaftarPermintaanStokPasien extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary_resep where temp37='"+akses.getalamatip()+"'");
-                        for(int i=0;i<tbPemisahan.getRowCount();i++){
+                        for(int i=0;i<tabMode.getRowCount();i++){
                             Sequel.menyimpan("temporary_resep","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                                ""+i,tbPemisahan.getValueAt(i,0).toString(),tbPemisahan.getValueAt(i,1).toString(),tbPemisahan.getValueAt(i,2).toString(),
-                                tbPemisahan.getValueAt(i,3).toString(),tbPemisahan.getValueAt(i,4).toString(),tbPemisahan.getValueAt(i,5).toString().replaceAll("✓","v").replaceAll("✕","x"),
+                                ""+i,tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,2).toString(),
+                                tabMode.getValueAt(i,3).toString(),tabMode.getValueAt(i,4).toString(),tabMode.getValueAt(i,5).toString().replaceAll("✓","v").replaceAll("✕","x"),
                                 "","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",akses.getalamatip()
                             });
                         }
