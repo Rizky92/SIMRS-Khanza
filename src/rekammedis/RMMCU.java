@@ -1219,7 +1219,7 @@ public final class RMMCU extends javax.swing.JDialog {
         jLabel53.setBounds(10, 70, 180, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-10-2026 01:02:01" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-10-2026 02:13:58" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -3259,7 +3259,6 @@ public final class RMMCU extends javax.swing.JDialog {
         Scroll.setOpaque(true);
         Scroll.setPreferredSize(new java.awt.Dimension(452, 200));
 
-        tbObat.setAutoCreateRowSorter(false);
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setComponentPopupMenu(jPopupMenu1);
         tbObat.setName("tbObat"); // NOI18N
@@ -3352,6 +3351,10 @@ public final class RMMCU extends javax.swing.JDialog {
 
         internalFrame3.add(panelGlass9, java.awt.BorderLayout.PAGE_END);
 
+        TabRawat.addTab("Data Pengkajian", internalFrame3);
+
+        internalFrame1.add(TabRawat, java.awt.BorderLayout.CENTER);
+
         PanelAccor.setBackground(new java.awt.Color(255, 255, 255));
         PanelAccor.setName("PanelAccor"); // NOI18N
         PanelAccor.setPreferredSize(new java.awt.Dimension(300, 43));
@@ -3427,11 +3430,7 @@ public final class RMMCU extends javax.swing.JDialog {
 
         PanelAccor.add(FormPhoto, java.awt.BorderLayout.CENTER);
 
-        internalFrame3.add(PanelAccor, java.awt.BorderLayout.LINE_END);
-
-        TabRawat.addTab("Data Pengkajian", internalFrame3);
-
-        internalFrame1.add(TabRawat, java.awt.BorderLayout.CENTER);
+        internalFrame1.add(PanelAccor, java.awt.BorderLayout.LINE_END);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
 
@@ -4255,10 +4254,9 @@ public final class RMMCU extends javax.swing.JDialog {
 
     private void btnAmbilPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbilPhotoActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        String norm = (String) tbObat.getValueAt(tbObat.getSelectedRow(), 1);
-        if (null != norm && !norm.isBlank()) {
-            Sequel.menyimpanSmc("personal_pasien", "", norm, "", "");
-            Valid.panggilUrl("photopasien/login.php?act=login&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB() + "&norm=" + norm);
+        if (!TNoRM.getText().isBlank()) {
+            Sequel.menyimpantfSmc("personal_pasien", "", TNoRM.getText(), "", "");
+            Valid.panggilUrl("photopasien/login.php?act=login&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB() + "&norm=" + TNoRM.getText());
         } else {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data pasien terlebih dahulu...!!!!");
         }
@@ -5476,11 +5474,13 @@ public final class RMMCU extends javax.swing.JDialog {
     }
 
     private void getFotoSmc() {
-        String gambar = Sequel.cariIsiSmc("select personal_pasien.gambar from personal_pasien where personal_pasien.no_rkm_medis = ?", (String) tbObat.getValueAt(tbObat.getSelectedRow(), 1));
-        if (null != gambar && (!gambar.isBlank() || !"-".equals(gambar))) {
-            LoadHTML1.setText("<html><body><center><img src=\"http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/photopasien/" + gambar + "\" alt=\"photo\" width=\"200\" height=\"200\"/></center></body></html>");
-        } else {
-            LoadHTML1.setText("<html><body><center><br><br><font face=\"tahoma\" size=\"2\" color=\"#434343\">Kosong</font></center></body></html>");
+        if (!TNoRM.getText().isBlank()) {
+            String gambar = Sequel.cariIsiSmc("select personal_pasien.gambar from personal_pasien where personal_pasien.no_rkm_medis = ?", TNoRM.getText());
+            if (null != gambar && gambar.isBlank() && "-".equals(gambar)) {
+                LoadHTML1.setText("<html><body><center><img src=\"http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/photopasien/" + gambar + "\" alt=\"photo\" width=\"200\" height=\"200\"/></center></body></html>");
+            } else {
+                LoadHTML1.setText("<html><body><center><br><br><font face=\"tahoma\" size=\"2\" color=\"#434343\">Kosong</font></center></body></html>");
+            }
         }
     }
 

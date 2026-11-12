@@ -231,9 +231,30 @@ import dapur.DapurSuplier;
 import dapur.DapurSuratPemesanan;
 import dapur.DapurVerifikasiPenerimaan;
 import fungsi.akses;
+import fungsi.akseskamarinapralan;
+import fungsi.akunbillingralan;
+import fungsi.akunbillingranap;
+import fungsi.akunobatralan;
+import fungsi.akunobatranap;
+import fungsi.akuntindakanlaborat;
+import fungsi.akuntindakanoperasi;
+import fungsi.akuntindakanradiologi;
+import fungsi.akuntindakanralan;
+import fungsi.akuntindakanranap;
 import fungsi.batasInput;
+import fungsi.catatanpasien;
+import fungsi.closingkasir;
+import fungsi.kodebpjs;
 import fungsi.koneksiDB;
+import fungsi.lokasidepoutama;
+import fungsi.pengaturanbillingralan;
+import fungsi.pengaturanbillingranap;
+import fungsi.pengaturankamarinap;
+import fungsi.ppnralan;
+import fungsi.resepdokter;
 import fungsi.sekuel;
+import fungsi.tarifralan;
+import fungsi.tarifranap;
 import fungsi.validasi;
 import grafikanalisa.GrafikDemografiRegistrasi;
 import grafikanalisa.GrafikHemodialisaPerBulan;
@@ -14478,6 +14499,28 @@ public class frmUtama extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+
+        akseskamarinapralan.SetKamarInap();
+        akunbillingralan.SetAkunBillingRalan();
+        akunbillingranap.SetAkunBillingRanap();
+        akunobatralan.SetAkunObatRalan();
+        akunobatranap.SetAkunObatRanap();
+        akuntindakanlaborat.SetAkunTindakanLaborat();
+        akuntindakanoperasi.SetAkunTindakanOperasi();
+        akuntindakanradiologi.SetAkunTindakanRadiologi();
+        akuntindakanralan.SetAkunTindakanRalan();
+        akuntindakanranap.SetAkunTindakanRanap();
+        catatanpasien.SetCatatanPasien();
+        closingkasir.SetClosingKasir();
+        kodebpjs.SetKodeBPJS();
+        lokasidepoutama.SetLokasiDepoUtama();
+        pengaturanbillingralan.SetBillingRalan();
+        pengaturanbillingranap.SetBillingRanap();
+        pengaturankamarinap.SetKamarInap();
+        ppnralan.SetPPNRalan();
+        resepdokter.SetResepPerCaraBayar();
+        tarifralan.SetTarifRalan();
+        tarifranap.SetTarifRanap();
 
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MenuRevalidateCacheActionPerformed
