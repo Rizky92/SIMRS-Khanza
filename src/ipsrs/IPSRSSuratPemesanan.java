@@ -31,6 +31,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPegawai;
@@ -44,6 +46,8 @@ public class IPSRSSuratPemesanan extends javax.swing.JDialog {
     private ResultSet rs;
     private WarnaTable2 warna=new WarnaTable2();
     private double meterai=0,ttl=0,y=0,w=0,ttldisk=0,sbttl=0,ppn=0;
+    private boolean menghitungSmc = false;
+    private volatile boolean totalTertundaSmc = false;
     private int jml=0,i=0,row=0,index=0;
     private String[] kodebarang,namabarang,satuanbeli;
     private double[] harga,jumlah,subtotal,diskon,besardiskon,jmltotal;
@@ -87,6 +91,12 @@ public class IPSRSSuratPemesanan extends javax.swing.JDialog {
              }
         };
         tbDokter.setModel(tabMode);
+        tbDokter.setReplaceOnType(true);
+        tabMode.addTableModelListener(e -> {
+            if ((TableModelEvent.UPDATE == e.getType()) && (e.getFirstRow() == e.getLastRow()) && (TableModelEvent.ALL_COLUMNS != e.getColumn())) {
+                hitungBarisSmc(e.getFirstRow(), e.getColumn());
+            }
+        });
 
         tbDokter.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbDokter.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -120,7 +130,28 @@ public class IPSRSSuratPemesanan extends javax.swing.JDialog {
         kdsup.setDocument(new batasInput((byte)5).getKata(kdsup));
         kdptg.setDocument(new batasInput((byte)20).getKata(kdptg));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+        Meterai.setDocument(new batasInput((byte)15).getOnlyAngka(Meterai));
+        Meterai.setText("0");
         DlgCetak.setSize(550,145);
+
+        DocumentListener hitungUlang = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                jadwalkanTotalSmc();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                jadwalkanTotalSmc();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                jadwalkanTotalSmc();
+            }
+        };
+        tppn.getDocument().addDocumentListener(hitungUlang);
+        Meterai.getDocument().addDocumentListener(hitungUlang);
     }
 
     /** This method is called from within the constructor to
@@ -999,12 +1030,12 @@ public class IPSRSSuratPemesanan extends javax.swing.JDialog {
                if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==4)||(tbDokter.getSelectedColumn()==5)||(tbDokter.getSelectedColumn()==7)){
                     getData();
                }else if(tbDokter.getSelectedColumn()==6){
-                   try {
-                       tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())*
-                           (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())/100)),tbDokter.getSelectedRow(),7);
-                   } catch (Exception e) {
-                       tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
-                   }
+//                   try {
+//                       tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())*
+//                           (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())/100)),tbDokter.getSelectedRow(),7);
+//                   } catch (Exception e) {
+//                       tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
+//                   }
 
                    getData();
                }
@@ -1028,12 +1059,12 @@ public class IPSRSSuratPemesanan extends javax.swing.JDialog {
                         TCari.setText("");
                         TCari.requestFocus();
                    }else if(tbDokter.getSelectedColumn()==6){
-                       try {
-                           tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())*
-                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())/100)),tbDokter.getSelectedRow(),7);
-                       } catch (Exception e) {
-                           tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
-                       }
+//                       try {
+//                           tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())*
+//                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())/100)),tbDokter.getSelectedRow(),7);
+//                       } catch (Exception e) {
+//                           tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
+//                       }
 
                        getData();
                    }else if((tbDokter.getSelectedColumn()==7)||(tbDokter.getSelectedColumn()==8)){
@@ -1043,6 +1074,7 @@ public class IPSRSSuratPemesanan extends javax.swing.JDialog {
                 } catch (Exception e) {
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
+                /*
                 try {
                     if(tbDokter.getSelectedColumn()==0){
                         tbDokter.setValueAt(null, tbDokter.getSelectedRow(),0);
@@ -1055,6 +1087,8 @@ public class IPSRSSuratPemesanan extends javax.swing.JDialog {
                     }
                 } catch (Exception e) {
                 }
+                */
+                kosongkanSelSmc(evt);
             }else if(evt.getKeyCode()==KeyEvent.VK_BACK_SPACE){
                 try {
                     if(tbDokter.getSelectedColumn()==0){
@@ -1083,12 +1117,12 @@ public class IPSRSSuratPemesanan extends javax.swing.JDialog {
                    if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==4)||(tbDokter.getSelectedColumn()==7)){
                        getData();
                    }else if(tbDokter.getSelectedColumn()==6){
-                       try {
-                           tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())*
-                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())/100)),tbDokter.getSelectedRow(),7);
-                       } catch (Exception e) {
-                           tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
-                       }
+//                       try {
+//                           tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())*
+//                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())/100)),tbDokter.getSelectedRow(),7);
+//                       } catch (Exception e) {
+//                           tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
+//                       }
                        getData();
                    }
             }
@@ -1096,6 +1130,10 @@ public class IPSRSSuratPemesanan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDokter.isEditing() && !tbDokter.getCellEditor().stopCellEditing()) {
+            return;
+        }
+        hitungTotalSmc();
         if(NoPemesanan.getText().trim().equals("")){
             Valid.textKosong(NoPemesanan,"No.Pemesanan");
         }else if(nmsup.getText().trim().equals("")){
@@ -1550,7 +1588,101 @@ public class IPSRSSuratPemesanan extends javax.swing.JDialog {
         tampil2();
     }
 
+    private void hitungBarisSmc(int baris, int kolom) {
+        if (menghitungSmc || ((0 != kolom) && (4 != kolom) && (6 != kolom) && (7 != kolom))) {
+            return;
+        }
+        menghitungSmc = true;
+        try {
+            if (!jumlahValidSmc(tabMode.getValueAt(baris, 0))) {
+                tabMode.setValueAt("", baris, 0);
+            }
+            if (null == tabMode.getValueAt(baris, 4)) {
+                tabMode.setValueAt(0d, baris, 4);
+            }
+            double jumlahPesan = angkaSmc(tabMode.getValueAt(baris, 0)), subtotalPesan = 0, persenDiskon = angkaSmc(tabMode.getValueAt(baris, 6)), nominalDiskon = 0;
+            if (jumlahPesan > 0) {
+                subtotalPesan = jumlahPesan * angkaSmc(tabMode.getValueAt(baris, 4));
+            }
+            if (subtotalPesan > 0) {
+                if (7 == kolom) {
+                    nominalDiskon = angkaSmc(tabMode.getValueAt(baris, 7));
+                    persenDiskon = nominalDiskon * 100 / subtotalPesan;
+                } else {
+                    nominalDiskon = Math.round(subtotalPesan * persenDiskon / 100);
+                }
+            }
+            tabMode.setValueAt(subtotalPesan, baris, 5);
+            tabMode.setValueAt(persenDiskon, baris, 6);
+            tabMode.setValueAt(nominalDiskon, baris, 7);
+            tabMode.setValueAt(subtotalPesan - nominalDiskon, baris, 8);
+        } finally {
+            menghitungSmc = false;
+        }
+        jadwalkanTotalSmc();
+    }
+
+    private void kosongkanSelSmc(KeyEvent evt) {
+        int baris = tbDokter.getSelectedRow(), kolom = tbDokter.getSelectedColumn();
+        if (tbDokter.isEditing() || (-1 == baris) || (-1 == kolom)) {
+            return;
+        }
+        if (0 == kolom) {
+            tbDokter.setValueAt("", baris, kolom);
+        } else if ((4 == kolom) || (6 == kolom) || (7 == kolom)) {
+            tbDokter.setValueAt(0d, baris, kolom);
+        }
+        evt.consume();
+    }
+
+    private boolean jumlahValidSmc(Object nilai) {
+        if (null == nilai) {
+            return false;
+        }
+        String teks = nilai.toString().trim();
+        if (teks.isEmpty()) {
+            return true;
+        }
+        try {
+            Double.parseDouble(teks);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private void jadwalkanTotalSmc() {
+        if (!totalTertundaSmc) {
+            totalTertundaSmc = true;
+            SwingUtilities.invokeLater(() -> {
+                totalTertundaSmc = false;
+                hitungTotalSmc();
+            });
+        }
+    }
+
+    private void hitungTotalSmc() {
+        menghitungSmc = true;
+        try {
+            getData();
+        } finally {
+            menghitungSmc = false;
+        }
+    }
+
+    private double angkaSmc(Object nilai) {
+        if (nilai instanceof Number) {
+            return ((Number) nilai).doubleValue();
+        }
+        try {
+            return Double.parseDouble(nilai.toString().trim());
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
     private void getData(){
+        /*
         row=tbDokter.getSelectedRow();
         if(row!= -1){
             if(!tbDokter.getValueAt(row,0).toString().equals("")){
@@ -1573,13 +1705,15 @@ public class IPSRSSuratPemesanan extends javax.swing.JDialog {
                 tbDokter.setValueAt(0,row,8);
             }
         }
+        */
 
         ttl=0;sbttl=0;ppn=0;ttldisk=0;
         y=0;w=0;
         meterai=0;
-        if(!Meterai.getText().equals("")){
-            meterai=Double.parseDouble(Meterai.getText());
-        }
+//        if(!Meterai.getText().equals("")){
+//            meterai=Double.parseDouble(Meterai.getText());
+//        }
+        meterai = angkaSmc(Meterai.getText());
 
         jml=tbDokter.getRowCount();
         for(i=0;i<jml;i++){
@@ -1604,11 +1738,14 @@ public class IPSRSSuratPemesanan extends javax.swing.JDialog {
         ttl=sbttl-ttldisk;
         LTotal2.setText(Valid.SetAngka(ttl));
         ppn=0;
-        if(!tppn.getText().equals("")){
-            ppn=Math.round((Double.parseDouble(tppn.getText())/100) *(ttl));
-            LPpn.setText(Valid.SetAngka(ppn));
-            LTagiha.setText(Valid.SetAngka(ttl+ppn+meterai));
-        }
+//        if(!tppn.getText().equals("")){
+//            ppn=Math.round((Double.parseDouble(tppn.getText())/100) *(ttl));
+//            LPpn.setText(Valid.SetAngka(ppn));
+//            LTagiha.setText(Valid.SetAngka(ttl+ppn+meterai));
+//        }
+        ppn = Math.round((angkaSmc(tppn.getText().replace(',', '.')) / 100) * (ttl));
+        LPpn.setText(Valid.SetAngka(ppn));
+        LTagiha.setText(Valid.SetAngka(ttl + ppn + meterai));
 
     }
 
