@@ -25,7 +25,7 @@
             session_start();
             session_destroy();
             if (cekSessiAdmin()){
-                session_unregister("ses_admin_casemix");
+                unset($_SESSION["ses_admin_casemix"]);
             }
             $url = "index.php?act=HomeAdmin";
         }

@@ -14,7 +14,7 @@
             session_start();
             session_destroy();
             if (cekSessiAdmin()){
-                session_unregister("ses_admin");
+                unset($_SESSION["ses_admin"]);
             }
             $url = "index.php?act=HomeAdmin";
         }

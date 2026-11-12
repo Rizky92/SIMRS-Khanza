@@ -14,7 +14,7 @@
             session_start();
             session_destroy();
             if (cekSessiAdmin()){
-                session_unregister("ses_admin_gambarpemeriksaanusggynecologi");
+                unset($_SESSION["ses_admin_gambarpemeriksaanusggynecologi"]);
             }
             $url = "index.php?act=HomeAdmin";
         }

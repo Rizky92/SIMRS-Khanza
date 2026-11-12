@@ -4,7 +4,7 @@
 	require_once "conf/command.php";
 	if (cekSessiAdmin())
 	{
-	    session_unregister("ses_admin_gambarpemeriksaanslit_lamp");
+	    unset($_SESSION["ses_admin_gambarpemeriksaanslit_lamp"]);
 	}
 
 	header("Location:index.php");
