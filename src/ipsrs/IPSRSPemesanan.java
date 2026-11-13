@@ -43,7 +43,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
     private PreparedStatement ps;
     private boolean[] ganti;
     private ResultSet rs;
-    private double ttl=0,y=0,w=0,ttldisk=0,sbttl=0,ppn=0,meterai=0;
+    private double ttl=0,y=0,w=0,ttldisk=0,sbttl=0,ppn=0,meterai=0,biayaLainSmc=0;
     private int jml=0,i=0,row=0,index=0;
     private String[] kodebarang,namabarang,satuan;
     private double[] harga,jumlah,subtotal,diskon,besardiskon,jmltotal;
@@ -52,7 +52,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
     private boolean sukses=true;
     private File file;
     private FileWriter fileWriter;
-    private String Penerimaan_NonMedis="",PPN_Masukan="",Kontra_Penerimaan_NonMedis="";
+    private String Penerimaan_NonMedis="",PPN_Masukan="",Kontra_Penerimaan_NonMedis="",Biaya_Lain_Penerimaan_NonMedis="";
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode response;
@@ -123,6 +123,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
         kdsup.setDocument(new batasInput((byte)5).getKata(kdsup));
         kdptg.setDocument(new batasInput((byte)25).getKata(kdptg));
         Meterai.setDocument(new batasInput((byte)15).getOnlyAngka(Meterai));
+        BiayaLainSmc.setDocument(new batasInput((byte)15).getOnlyAngka(BiayaLainSmc));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
@@ -160,6 +161,8 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
         LPpn = new widget.Label();
         label24 = new widget.Label();
         Meterai = new widget.TextBox();
+        LabelBiayaLainSmc = new widget.Label();
+        BiayaLainSmc = new widget.TextBox();
         label19 = new widget.Label();
         LTagiha = new widget.Label();
         label21 = new widget.Label();
@@ -454,12 +457,31 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
         panelisi1.add(Meterai);
         Meterai.setBounds(520, 26, 100, 23);
 
+        LabelBiayaLainSmc.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LabelBiayaLainSmc.setText("Biaya Lain :");
+        LabelBiayaLainSmc.setName("LabelBiayaLainSmc"); // NOI18N
+        LabelBiayaLainSmc.setPreferredSize(new java.awt.Dimension(60, 30));
+        panelisi1.add(LabelBiayaLainSmc);
+        LabelBiayaLainSmc.setBounds(630, 0, 90, 30);
+
+        BiayaLainSmc.setText("0");
+        BiayaLainSmc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        BiayaLainSmc.setName("BiayaLainSmc"); // NOI18N
+        BiayaLainSmc.setPreferredSize(new java.awt.Dimension(80, 23));
+        BiayaLainSmc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BiayaLainSmcKeyPressed(evt);
+            }
+        });
+        panelisi1.add(BiayaLainSmc);
+        BiayaLainSmc.setBounds(630, 26, 100, 23);
+
         label19.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label19.setText("Jumlah Tagihan :");
         label19.setName("label19"); // NOI18N
         label19.setPreferredSize(new java.awt.Dimension(60, 30));
         panelisi1.add(label19);
-        label19.setBounds(630, 0, 130, 30);
+        label19.setBounds(740, 0, 130, 30);
 
         LTagiha.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         LTagiha.setText("0");
@@ -467,7 +489,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
         LTagiha.setName("LTagiha"); // NOI18N
         LTagiha.setPreferredSize(new java.awt.Dimension(110, 30));
         panelisi1.add(LTagiha);
-        LTagiha.setBounds(630, 20, 150, 30);
+        LTagiha.setBounds(740, 20, 150, 30);
 
         label21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label21.setText("%");
@@ -691,6 +713,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
     */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        getData();
         if(NoFaktur.getText().trim().equals("")){
             Valid.textKosong(NoFaktur,"No.Faktur");
         }else if(nmsup.getText().trim().equals("")){
@@ -701,6 +724,11 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
             Valid.textKosong(NoOrder,"No.Order");
         }else if(Meterai.getText().trim().equals("")){
             Valid.textKosong(Meterai,"meterai");
+        }else if(BiayaLainSmc.getText().trim().equals("")){
+            Valid.textKosong(BiayaLainSmc,"biaya lain");
+        }else if(biayaLainSmc>0&&Biaya_Lain_Penerimaan_NonMedis.equals("")){
+            JOptionPane.showMessageDialog(null,"Akun Biaya Lain Penerimaan Barang Non Medis belum diatur di Pengaturan Rekening...!!!!");
+            BiayaLainSmc.requestFocus();
         }else if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
@@ -712,11 +740,21 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
             if (reply == JOptionPane.YES_OPTION) {
                 Sequel.AutoComitFalse();
                 sukses=true;
+//                if(Sequel.menyimpantf2("ipsrspemesanan","?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Faktur",14,new String[]{
+//                    NoFaktur.getText(),NoOrder.getText(),kdsup.getText(),kdptg.getText(),Valid.SetTgl(TglPesan.getSelectedItem()+""),
+//                    Valid.SetTgl(TglFaktur.getSelectedItem()+""),Valid.SetTgl(TglTempo.getSelectedItem()+""),""+sbttl,""+ttldisk,""+ttl,
+//                    ""+ppn,""+meterai,""+(ttl+ppn+meterai),"Belum Dibayar"
+//                })==true){
                 if(Sequel.menyimpantf2("ipsrspemesanan","?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Faktur",14,new String[]{
                     NoFaktur.getText(),NoOrder.getText(),kdsup.getText(),kdptg.getText(),Valid.SetTgl(TglPesan.getSelectedItem()+""),
                     Valid.SetTgl(TglFaktur.getSelectedItem()+""),Valid.SetTgl(TglTempo.getSelectedItem()+""),""+sbttl,""+ttldisk,""+ttl,
-                    ""+ppn,""+meterai,""+(ttl+ppn+meterai),"Belum Dibayar"
+                    ""+ppn,""+meterai,""+(ttl+ppn+meterai+biayaLainSmc),"Belum Dibayar"
                 })==true){
+                    if(biayaLainSmc>0){
+                        if(Sequel.menyimpantfSmc("ipsrspemesanan_biaya_lain_smc","",NoFaktur.getText(),Biaya_Lain_Penerimaan_NonMedis,""+biayaLainSmc)==false){
+                            sukses=false;
+                        }
+                    }
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
                         if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
@@ -754,7 +792,15 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
                             sukses=false;
                         }
                     }
-                    if(Sequel.insertTampJurnal(Kontra_Penerimaan_NonMedis, "HUTANG BARANG NON MEDIS", 0, (ttl + ppn + meterai))==false){
+                    if(biayaLainSmc>0){
+                        if(Sequel.insertTampJurnal(Biaya_Lain_Penerimaan_NonMedis, "BIAYA LAIN PENERIMAAN BARANG NON MEDIS", biayaLainSmc, 0)==false){
+                            sukses=false;
+                        }
+                    }
+//                    if(Sequel.insertTampJurnal(Kontra_Penerimaan_NonMedis, "HUTANG BARANG NON MEDIS", 0, (ttl + ppn + meterai))==false){
+//                        sukses=false;
+//                    }
+                    if(Sequel.insertTampJurnal(Kontra_Penerimaan_NonMedis, "HUTANG BARANG NON MEDIS", 0, (ttl + ppn + meterai + biayaLainSmc))==false){
                         sukses=false;
                     }
                     if(sukses==true){
@@ -779,6 +825,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
                         tbDokter.setValueAt(0,i,9);
                     }
                     Meterai.setText("0");
+                    BiayaLainSmc.setText("0");
                     getData();
                 } else {
                     JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -1011,6 +1058,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
             }
         } catch (Exception e) {
         }
+        tampilAkunSmc();
         if(tampikan==true){
             try {
                 if(Valid.daysOld("./cache/penerimaanipsrs.iyem")<8){
@@ -1099,6 +1147,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampilAkun();
+        tampilAkunSmc();
         runBackground(() ->LoadData());
     }//GEN-LAST:event_BtnAllActionPerformed
 
@@ -1109,6 +1158,12 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
             Valid.pindah(evt, BtnCari, TCari);
         }
     }//GEN-LAST:event_BtnAllKeyPressed
+
+    private void BiayaLainSmcKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BiayaLainSmcKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            getData();
+        }
+    }//GEN-LAST:event_BiayaLainSmcKeyPressed
 
     /**
     * @param args the command line arguments
@@ -1127,6 +1182,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.TextBox BiayaLainSmc;
     private widget.Button BtnAll;
     private widget.Button BtnCari;
     private widget.Button BtnCari1;
@@ -1139,6 +1195,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
     private widget.Label LSubtotal;
     private widget.Label LTagiha;
     private widget.Label LTotal2;
+    private widget.Label LabelBiayaLainSmc;
     private widget.TextBox Meterai;
     private widget.TextBox NoFaktur;
     private widget.TextBox NoOrder;
@@ -1340,6 +1397,10 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
         if(!Meterai.getText().equals("")){
             meterai=Double.parseDouble(Meterai.getText());
         }
+        biayaLainSmc=0;
+        if(!BiayaLainSmc.getText().equals("")){
+            biayaLainSmc=Double.parseDouble(BiayaLainSmc.getText());
+        }
 
         jml=tbDokter.getRowCount();
         for(i=0;i<jml;i++){
@@ -1364,7 +1425,8 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
         if(!tppn.getText().equals("")){
             ppn=Math.round((Double.parseDouble(tppn.getText())/100) *(ttl));
             LPpn.setText(Valid.SetAngka(ppn));
-            LTagiha.setText(Valid.SetAngka(ttl+ppn+meterai));
+//            LTagiha.setText(Valid.SetAngka(ttl+ppn+meterai));
+            LTagiha.setText(Valid.SetAngka(ttl+ppn+meterai+biayaLainSmc));
         }
     }
 
@@ -1373,6 +1435,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
         TCari.requestFocus();
         tppn.setText("11");
         Meterai.setText("0");
+        BiayaLainSmc.setText("0");
         if(akses.getjml2()>=1){
             kdptg.setEditable(false);
             btnPetugas.setEnabled(false);
@@ -1481,6 +1544,15 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
             if (myObj != null) try { myObj.close(); } catch (Exception e) {}
             response = null;
             root = null;
+        }
+    }
+
+    private void tampilAkunSmc() {
+        Biaya_Lain_Penerimaan_NonMedis=Sequel.cariIsiSmc("select set_akun_smc.biaya_lain_penerimaan_non_medis from set_akun_smc");
+        BiayaLainSmc.setEnabled(!Biaya_Lain_Penerimaan_NonMedis.equals(""));
+        if(Biaya_Lain_Penerimaan_NonMedis.equals("")){
+            BiayaLainSmc.setText("0");
+            getData();
         }
     }
 

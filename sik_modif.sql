@@ -515,6 +515,16 @@ ALTER TABLE `ipsrsopname` MODIFY COLUMN IF EXISTS `selisih` double NOT NULL AFTE
 
 ALTER TABLE `ipsrsopname` MODIFY COLUMN IF EXISTS `lebih` double NOT NULL AFTER `nomihilang`;
 
+CREATE TABLE IF NOT EXISTS `ipsrspemesanan_biaya_lain_smc`  (
+  `no_faktur` varchar(20) NOT NULL,
+  `kd_rek` varchar(15) NOT NULL,
+  `biaya_lain` double NOT NULL,
+  PRIMARY KEY (`no_faktur`) USING BTREE,
+  INDEX `ipsrspemesanan_biaya_lain_smc_ibfk_2`(`kd_rek`) USING BTREE,
+  CONSTRAINT `ipsrspemesanan_biaya_lain_smc_ibfk_1` FOREIGN KEY (`no_faktur`) REFERENCES `ipsrspemesanan` (`no_faktur`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `ipsrspemesanan_biaya_lain_smc_ibfk_2` FOREIGN KEY (`kd_rek`) REFERENCES `rekening` (`kd_rek`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `alamat` varchar(100) NULL DEFAULT NULL AFTER `nama_suplier`;
 
 ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `kota` varchar(50) NULL DEFAULT NULL AFTER `alamat`;
@@ -1912,6 +1922,12 @@ CREATE TABLE IF NOT EXISTS `set_akses_edit_sementara`  (
 ALTER TABLE `set_akun2` MODIFY COLUMN IF EXISTS `Piutang_Jasa_Perusahaan` varchar(15) NULL DEFAULT NULL AFTER `Kontra_Hibah_Dapur`;
 
 ALTER TABLE `set_akun2` MODIFY COLUMN IF EXISTS `Pendapatan_Piutang_Jasa_Perusahaan` varchar(15) NULL DEFAULT NULL AFTER `Piutang_Jasa_Perusahaan`;
+
+CREATE TABLE IF NOT EXISTS `set_akun_smc`  (
+  `biaya_lain_penerimaan_non_medis` varchar(15) NULL DEFAULT NULL,
+  INDEX `set_akun_smc_ibfk_1`(`biaya_lain_penerimaan_non_medis`) USING BTREE,
+  CONSTRAINT `set_akun_smc_ibfk_1` FOREIGN KEY (`biaya_lain_penerimaan_non_medis`) REFERENCES `rekening` (`kd_rek`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `set_aturan_password_smc`  (
   `panjang_minimal` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
