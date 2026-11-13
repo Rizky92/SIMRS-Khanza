@@ -466,6 +466,7 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
     */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         if(aktifkanbatch.equals("yes")){
             index=0;
             jml=tbDokter.getRowCount();
@@ -583,6 +584,7 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         runBackground(() ->tampil());
         isTotal();
     }//GEN-LAST:event_BtnCari1ActionPerformed
@@ -596,6 +598,7 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         for(i=0;i<tbDokter.getRowCount();i++){
             tbDokter.setValueAt("",i,0);
             tbDokter.setValueAt("0",i,4);
@@ -644,6 +647,7 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
     }//GEN-LAST:event_kddariKeyPressed
 
     private void btnDariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDariActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         DlgCariBangsal bangsal=new DlgCariBangsal(null,false);
         bangsal.addWindowListener(new WindowListener() {
             @Override
@@ -728,6 +732,7 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterKeyPressed
 
     private void ppStokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppStokActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         for(i=0;i<tbDokter.getRowCount();i++){
             try {
                 stok_asal=0;

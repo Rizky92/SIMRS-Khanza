@@ -970,6 +970,9 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
+        if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
         if(TNoRW.getText().trim().equals("")){
             Valid.textKosong(TNoRW,"No Rawat");
         }else if(NoSEP.getText().trim().equals("")){
@@ -1521,6 +1524,8 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_CariDataObatActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         if(TabRawat.getSelectedIndex()==0){
             if(tbObat.getSelectedRow()!=-1){
                 int reply = JOptionPane.showConfirmDialog(rootPane,"Yakin mau dihapus obat "+tbObat.getValueAt(tbObat.getSelectedRow(),2)+"...?","Konfirmasi",JOptionPane.YES_NO_OPTION);

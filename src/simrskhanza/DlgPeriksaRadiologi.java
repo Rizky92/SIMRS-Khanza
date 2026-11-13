@@ -1056,6 +1056,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNotaActionPerformed
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
@@ -1089,6 +1090,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariPeriksaKeyPressed
 
     private void btnCariPeriksaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariPeriksaActionPerformed
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
         runBackground(() -> tampil());
     }//GEN-LAST:event_btnCariPeriksaActionPerformed
 
@@ -1101,6 +1103,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCariPeriksaKeyPressed
 
     private void BtnAllPeriksaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllPeriksaActionPerformed
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
         TCariPeriksa.setText("");
         runBackground(() -> tampil());
     }//GEN-LAST:event_BtnAllPeriksaActionPerformed
@@ -1168,6 +1171,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariBhpKeyPressed
 
     private void btnCariBhpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariBhpActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         runBackground(() -> tampil2());
     }//GEN-LAST:event_btnCariBhpActionPerformed
 
@@ -1180,6 +1184,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCariBhpKeyPressed
 
     private void BtnAllBhpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllBhpActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         TCariBhp.setText("");
         runBackground(() -> tampil2());
     }//GEN-LAST:event_BtnAllBhpActionPerformed
@@ -1262,6 +1267,8 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
         if(TNoRw.getText().equals("")||TNoRM.getText().equals("")||TPasien.getText().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
         }else if(KdPtg.getText().equals("")||NmPtg.getText().equals("")){
@@ -1325,6 +1332,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_KodePerujukKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
         if(ceksukses){
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;

@@ -472,6 +472,7 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         if(ceksukses){
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
@@ -601,6 +602,7 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailPiutangActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
      if(tabMode.getRowCount()==0){
         JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
         TCari.requestFocus();
@@ -621,6 +623,7 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
     }//GEN-LAST:event_MnDetailPiutangActionPerformed
 
     private void BtnBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBayarActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
@@ -779,6 +782,7 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
     }//GEN-LAST:event_BtnAll1ActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         total=0;
         for(i=0;i<tbBangsal.getRowCount();i++){
@@ -796,6 +800,7 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         total=0;
         for(i=0;i<tbBangsal.getRowCount();i++){

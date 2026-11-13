@@ -449,6 +449,7 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
     */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         if(NoKeluar.getText().trim().equals("")){
             Valid.textKosong(NoKeluar,"No.Faktur");
         }else if(Keterangan.getText().trim().equals("")){
@@ -470,8 +471,8 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
                 if(Sequel.menyimpantf2("ipsrspengeluaran","?,?,?,?","No.Keluar",4,new String[]{NoKeluar.getText(),Valid.SetTgl(TglKeluar.getSelectedItem()+""),kdptg.getText(),Keterangan.getText()})==true){
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
-                         if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
-                             validasiStok(tbDokter.getValueAt(i, 1).toString(), tbDokter.getValueAt(i, 2).toString(), Valid.SetAngka(tbDokter.getValueAt(i, 0).toString()));
+                        if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
+                            validasiStok(tbDokter.getValueAt(i, 1).toString(), tbDokter.getValueAt(i, 2).toString(), Valid.SetAngka(tbDokter.getValueAt(i, 0).toString()));
                             if(Sequel.menyimpantf2("ipsrsdetailpengeluaran","?,?,?,?,?,?","Transaksi Pengeluaran",6,new String[]{
                                 NoKeluar.getText(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,3).toString(),
                                 tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,5).toString(),tbDokter.getValueAt(i,6).toString()
@@ -484,7 +485,7 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
                             }else{
                                 sukses=false;
                             }
-                         }
+                        }
                     }
                 }else{
                     sukses=false;
@@ -550,6 +551,7 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         runBackground(() ->tampil());
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
@@ -562,6 +564,7 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         for(i=0;i<tbDokter.getRowCount();i++){
             tbDokter.setValueAt("",i,0);
             tbDokter.setValueAt("0",i,6);

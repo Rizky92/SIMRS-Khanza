@@ -2544,6 +2544,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_TNoRwKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         isRawat();
         tampilbilling();
     }//GEN-LAST:event_BtnCariActionPerformed
@@ -2737,6 +2738,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariTindakanKeyPressed
 
     private void BtnCariTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariTindakanActionPerformed
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         TabRawatMouseClicked(null);
     }//GEN-LAST:event_BtnCariTindakanActionPerformed
 
@@ -2745,6 +2747,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariTindakanKeyPressed
 
     private void BtnAllTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllTindakanActionPerformed
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         TCariTindakan.setText("");
         TabRawatMouseClicked(null);
     }//GEN-LAST:event_BtnAllTindakanActionPerformed
@@ -2794,6 +2797,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         if(statushapus==false){
             JOptionPane.showMessageDialog(null,"Maaf, silahkan lanjutkan proses simpan terlebih dahulu ...!!!");
         }else{
@@ -2853,6 +2857,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariBayarKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         if(statushapus==true){
             JOptionPane.showMessageDialog(null,"Maaf, silahkan lanjutkan proses hapus terlebih dahulu ...!!!");
         }else{
@@ -2888,6 +2893,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNotaActionPerformed
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         if(TNoRw.getText().trim().equals("")||TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
         }else if(tabModeBilling.getRowCount()==0){

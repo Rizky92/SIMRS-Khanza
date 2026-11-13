@@ -1073,6 +1073,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
     }//GEN-LAST:event_btnProgramPRBKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         if(NoRawat.getText().trim().equals("")){
             Valid.textKosong(NoRawat,"Pasien");
         }else if(NoKartu.getText().trim().equals("")){
@@ -1182,6 +1183,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         if(NoRawat.getText().trim().equals("")){
             Valid.textKosong(NoRawat,"Pasien");
         }else if(NoKartu.getText().trim().equals("")){
@@ -1301,6 +1303,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
     }//GEN-LAST:event_ObatPRBKeyPressed
 
     private void BtnCari2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari2ActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         runBackground(() ->tampilObat());
     }//GEN-LAST:event_BtnCari2ActionPerformed
 
@@ -1327,6 +1330,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void MnSuratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSuratActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         if(tbProgramPRB.getSelectedRow()!= -1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Map<String, Object> param = new HashMap<>();

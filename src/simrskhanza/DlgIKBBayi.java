@@ -3095,6 +3095,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
     }//GEN-LAST:event_ppGrafikproseslahirwnActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbAPGAR.isEditing()) tbAPGAR.getCellEditor().stopCellEditing();
         if(NoRm.getText().trim().equals("")){
             Valid.textKosong(NoRm,"No.Rekam Medis");
         }else if(NmBayi.getText().trim().equals("")){
@@ -3644,6 +3645,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
     }//GEN-LAST:event_CaraLahirKeyPressed
 
     private void BtnSimpan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpan1ActionPerformed
+        if (tbAPGAR.isEditing()) tbAPGAR.getCellEditor().stopCellEditing();
         if(NoRm.getText().trim().equals("")){
             Valid.textKosong(NoRm,"No.Rekam Medis");
         }else if(NmBayi.getText().trim().equals("")){

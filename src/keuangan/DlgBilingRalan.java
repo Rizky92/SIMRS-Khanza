@@ -2234,6 +2234,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_TNoRwKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         if(akses.getbilling_ralan()==true){
             try {
                 pscekbilling=koneksi.prepareStatement(sqlpscekbilling);
@@ -2306,6 +2308,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_TtlSemuaKeyPressed
 
     private void BtnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNotaActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         if(TNoRw.getText().trim().equals("")||TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
         }else if(tabModeRwJlDr.getRowCount()==0){
@@ -2787,6 +2791,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_DTPTglKeyPressed
 
     private void MnHapusTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHapusTagihanActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         try {
             i=0;
             pscekbilling=koneksi.prepareStatement(sqlpscekbilling);
@@ -3010,6 +3016,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCloseIn1KeyPressed
 
     private void BtnSimpan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpan1ActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         if(TNoRw.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"No.Rawat");
         }if(kddokter.getText().trim().equals("")||TDokter.getText().trim().equals("")){
@@ -3096,6 +3104,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCloseInKeyPressed
 
     private void BtnSimpan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpan2ActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         if(TNoRw.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"No.Rawat");
         }else{
@@ -3111,6 +3121,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpan2KeyPressed
 
     private void BtnBatal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatal1ActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         if(TNoRw.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"No.Rawat");
         }else{
@@ -3148,6 +3160,9 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void BtnSimpan3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpan3ActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
+        if (tbTambahan.isEditing()) tbTambahan.getCellEditor().stopCellEditing();
         if(norawat.getText().trim().equals("")||(tbTambahan.getRowCount()<=0)){
             Valid.textKosong(norawat,"Data");
         }else{
@@ -3164,6 +3179,9 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpan3ActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
+        if (tbTambahan.isEditing()) tbTambahan.getCellEditor().stopCellEditing();
         Sequel.queryu("delete from tambahan_biaya where no_rawat='"+norawat.getText()+
                 "' and nama_biaya='"+tbTambahan.getValueAt(tbTambahan.getSelectedRow(),0).toString() +"'");
         tabModeTambahan.removeRow(tbTambahan.getSelectedRow());
@@ -3180,6 +3198,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCloseIn4ActionPerformed
 
     private void BtnSimpan4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpan4ActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         if(TNoRw.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"No.Rawat");
         }if(kdpoli.getText().trim().equals("")||nmpoli.getText().trim().equals("")){
@@ -3243,6 +3263,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPoliActionPerformed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         isRawat();
     }//GEN-LAST:event_BtnCariActionPerformed
 
@@ -3263,6 +3285,9 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahPotonganActionPerformed
 
     private void BtnSimpanPotonganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanPotonganActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
+        if (tbPotongan.isEditing()) tbPotongan.getCellEditor().stopCellEditing();
         if(norawatpotongan.getText().trim().equals("")||(tbPotongan.getRowCount()<=0)){
             Valid.textKosong(norawat,"Data");
         }else{
@@ -3278,6 +3303,9 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanPotonganActionPerformed
 
     private void BtnHapusPotonganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusPotonganActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
+        if (tbPotongan.isEditing()) tbPotongan.getCellEditor().stopCellEditing();
         Sequel.queryu("delete from pengurangan_biaya where no_rawat='"+norawatpotongan.getText()+"' and nama_pengurangan='"+tbPotongan.getValueAt(tbPotongan.getSelectedRow(),0).toString() +"'");
         tabModePotongan.removeRow(tbPotongan.getSelectedRow());
         isRawat();
@@ -3321,6 +3349,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPeriksaLabActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         double sekarang = tagihanppn;
         isRawatSmc();
         try {
@@ -3387,26 +3417,38 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void chkPotonganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPotonganActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         isRawat();
     }//GEN-LAST:event_chkPotonganActionPerformed
 
     private void chkLaboratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkLaboratActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         isRawat();
     }//GEN-LAST:event_chkLaboratActionPerformed
 
     private void chkTarifDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTarifDokterActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         isRawat();
     }//GEN-LAST:event_chkTarifDokterActionPerformed
 
     private void chkTarifPrmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTarifPrmActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         isRawat();
     }//GEN-LAST:event_chkTarifPrmActionPerformed
 
     private void chkTambahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTambahanActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         isRawat();
     }//GEN-LAST:event_chkTambahanActionPerformed
 
     private void chkObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkObatActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         isRawat();
     }//GEN-LAST:event_chkObatActionPerformed
 
@@ -3466,6 +3508,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCariPeriksaLabActionPerformed
 
     private void chkRadiologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkRadiologiActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         isRawat();
     }//GEN-LAST:event_chkRadiologiActionPerformed
 
@@ -3502,10 +3546,14 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCariRadiologiActionPerformed
 
     private void chkAdministrasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAdministrasiActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         isRawat();
     }//GEN-LAST:event_chkAdministrasiActionPerformed
 
     private void chkSarprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSarprasActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         isRawat();
     }//GEN-LAST:event_chkSarprasActionPerformed
 
@@ -3583,6 +3631,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_kdpenjabKeyPressed
 
     private void BtnSimpan5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpan5ActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         if(kdpenjab.getText().trim().equals("")||nmpenjab.getText().trim().equals("")){
             Valid.textKosong(kdpenjab,"Jenis Bayar");
         }else{
@@ -3642,6 +3692,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariBayarActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         if(status.equals("belum")){
             tampilAkunBayar2();
         }else if(status.equals("sudah")){
@@ -3662,6 +3714,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_TCari1KeyPressed
 
     private void btnCariPiutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariPiutangActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         if(status.equals("belum")){
             tampilAkunPiutang2();
         }else if(status.equals("sudah")){
@@ -3685,6 +3739,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void ppBersihkan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkan1ActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
         Valid.tabelKosong(tabModeAkunPiutang);
         if(status.equals("belum")){
             tampilAkunPiutang2();
@@ -3856,6 +3911,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCariPeriksaLabPAActionPerformed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         if(status.equals("belum")){
             TCari.setText("");
             tampilAkunBayar();
@@ -3880,6 +3937,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnAll1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAll1ActionPerformed
+        if (tbAkunPiutang.isEditing()) tbAkunPiutang.getCellEditor().stopCellEditing();
+        if (tbBilling.isEditing()) tbBilling.getCellEditor().stopCellEditing();
         if(status.equals("belum")){
             TCari1.setText("");
             tampilAkunPiutang();

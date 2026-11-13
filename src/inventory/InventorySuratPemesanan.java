@@ -764,6 +764,7 @@ public class InventorySuratPemesanan extends javax.swing.JDialog {
     */
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         for(i=0;i<tbDokter.getRowCount();i++){
             tbDokter.setValueAt("",i,0);
             tbDokter.setValueAt(0,i,6);
@@ -944,6 +945,7 @@ public class InventorySuratPemesanan extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         runBackground(() ->tampil2());
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
@@ -1162,6 +1164,7 @@ public class InventorySuratPemesanan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         if(NoPemesanan.getText().trim().equals("")){
             Valid.textKosong(NoPemesanan,"No.Pemesanan");
         }else if(nmsup.getText().trim().equals("")){
@@ -1259,6 +1262,7 @@ public class InventorySuratPemesanan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnPrint5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint5ActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         if(NoPemesanan.getText().trim().equals("")){
             Valid.textKosong(NoPemesanan,"No.Pemesanan");
         }else if(nmsup.getText().trim().equals("")){
@@ -1334,6 +1338,7 @@ public class InventorySuratPemesanan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppStok1ActionPerformed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         TCari.setText("");
         runBackground(() ->LoadData());
     }//GEN-LAST:event_BtnAllActionPerformed

@@ -341,6 +341,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbJadwal.isEditing()) tbJadwal.getCellEditor().stopCellEditing();
 
         for(i=0;i<tabMode.getRowCount();i++){
             Sequel.menyimpan2("jadwal_pegawai","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", 34,
@@ -397,6 +398,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        if (tbJadwal.isEditing()) tbJadwal.getCellEditor().stopCellEditing();
         if(tabMode.getRowCount()!=0){
             if(tbJadwal.getSelectedRow()!= -1){
                 Sequel.queryu2("delete from jadwal_pegawai where id=? and tahun=? and bulan=?",3,new String[]{
@@ -427,6 +429,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (tbJadwal.isEditing()) tbJadwal.getCellEditor().stopCellEditing();
         if(ceksukses){
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;

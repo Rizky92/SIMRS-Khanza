@@ -695,6 +695,7 @@ public class IPSRSReturBeli extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         runBackground(() ->tampil());
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
@@ -719,6 +720,7 @@ public class IPSRSReturBeli extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         if(NoRetur.getText().trim().equals("")){
             Valid.textKosong(NoRetur,"No.Retur");
         }else if(nmsup.getText().trim().equals("")){

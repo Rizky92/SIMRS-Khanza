@@ -602,6 +602,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariPeriksaKeyPressed
 
     private void btnCariPeriksaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariPeriksaActionPerformed
+        if (tbPengujian.isEditing()) tbPengujian.getCellEditor().stopCellEditing();
         if(KodeSampel.getText().trim().equals("")||NamaSampel.getText().trim().equals("")){
             Valid.textKosong(TCariPeriksa,"Kode Sampel");
         }else{
@@ -622,6 +623,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCariPeriksaKeyPressed
 
     private void BtnAllPeriksaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllPeriksaActionPerformed
+        if (tbPengujian.isEditing()) tbPengujian.getCellEditor().stopCellEditing();
         if(KodeSampel.getText().trim().equals("")||NamaSampel.getText().trim().equals("")){
             Valid.textKosong(TCariPeriksa,"Kode Sampel");
         }else{
@@ -647,6 +649,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbPengujian.isEditing()) tbPengujian.getCellEditor().stopCellEditing();
         jml=0;
         for(i=0;i<tbPengujian.getRowCount();i++){
             if(tbPengujian.getValueAt(i,0).toString().equals("true")){

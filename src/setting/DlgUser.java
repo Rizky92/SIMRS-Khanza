@@ -4270,6 +4270,7 @@ public class DlgUser extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
+        if (tbUser.isEditing()) tbUser.getCellEditor().stopCellEditing();
         if(TKd.getText().trim().equals("")||TNmUser.getText().trim().equals("")){
             Valid.textKosong(TKd,"User");
         }else if(TPass.getText().trim().equals("")){
@@ -5614,6 +5615,7 @@ public class DlgUser extends javax.swing.JDialog {
     }//GEN-LAST:event_TNmUserKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (tbUser.isEditing()) tbUser.getCellEditor().stopCellEditing();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");

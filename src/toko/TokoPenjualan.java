@@ -803,6 +803,7 @@ public class TokoPenjualan extends javax.swing.JDialog {
     */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         if(NoNota.getText().trim().equals("")){
             Valid.textKosong(NoNota,"No.Nota");
         }else if(nmmem.getText().trim().equals("")||kdmem.getText().trim().equals("")){
@@ -904,6 +905,7 @@ public class TokoPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNotaActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         if(NoNota.getText().trim().equals("")){
             Valid.textKosong(NoNota,"No.Nota");
         }else if(nmmem.getText().trim().equals("")||kdmem.getText().trim().equals("")){
@@ -961,6 +963,7 @@ public class TokoPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
     runBackground(() ->tampil());
     }//GEN-LAST:event_BtnCari1ActionPerformed
 

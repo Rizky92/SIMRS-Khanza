@@ -506,6 +506,9 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
+        if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"pasien");
         }else if(KdDokter.getText().trim().equals("")||NmDokter.getText().trim().equals("")){
@@ -650,6 +653,8 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         if(TabRawat.getSelectedIndex()==0){
             if(tbObat.getSelectedRow()!=-1){
                 int reply = JOptionPane.showConfirmDialog(rootPane,"Yakin mau dihapus obat "+tbObat.getValueAt(tbObat.getSelectedRow(),2)+"...?","Konfirmasi",JOptionPane.YES_NO_OPTION);

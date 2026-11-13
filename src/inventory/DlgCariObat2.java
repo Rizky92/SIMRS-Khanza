@@ -905,6 +905,9 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
+        if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
         if (!load) {
             buatcacheberiobat();
         }
@@ -943,6 +946,9 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
+        if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
         TCari.setText("");
         buatcacheberiobat();
         BtnCariActionPerformed(evt);
@@ -1087,6 +1093,9 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
+        if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
         if(VALIDASIULANGBERIOBAT.equals("yes")){
             lanjut = true;
             for(i=0;i<tbObat.getRowCount();i++){
@@ -1576,6 +1585,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     }//GEN-LAST:event_kelasKeyPressed
 
     private void ppStokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppStokActionPerformed
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         if(kdgudang.getText().equals("")){
             Valid.textKosong(TCari,"Lokasi");
         }else{
@@ -1895,6 +1906,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambah1ActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
         if(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),1).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),4).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),5).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),6).equals("")){
             tabModeObatRacikan.removeRow(tbObatRacikan.getSelectedRow());
         }else{

@@ -228,6 +228,7 @@ public class DlgJumlahPorsiDiet extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (tbJadwal.isEditing()) tbJadwal.getCellEditor().stopCellEditing();
         if(ceksukses){
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;

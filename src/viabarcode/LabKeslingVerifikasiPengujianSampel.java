@@ -576,6 +576,7 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbVerifikasi.isEditing()) tbVerifikasi.getCellEditor().stopCellEditing();
         if(KdPetugas.getText().equals("")||NmPetugas.getText().equals("")){
             Valid.textKosong(BtnPetugas,"Penanggung Jawab Verifikasi");
         }else if(KodePelanggan.getText().equals("")||NamaPelanggan.getText().equals("")){
@@ -689,6 +690,7 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
     }//GEN-LAST:event_BtnPetugasActionPerformed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (tbVerifikasi.isEditing()) tbVerifikasi.getCellEditor().stopCellEditing();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(KdPetugas.getText().equals("")||NmPetugas.getText().equals("")){
             Valid.textKosong(BtnPetugas,"Penanggung Jawab Verifikasi");

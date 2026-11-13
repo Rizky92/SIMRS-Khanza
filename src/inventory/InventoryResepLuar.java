@@ -725,6 +725,9 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        if (tbDetailResepObatRacikan.isEditing()) tbDetailResepObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObatResepRacikan.isEditing()) tbObatResepRacikan.getCellEditor().stopCellEditing();
+        if (tbResep.isEditing()) tbResep.getCellEditor().stopCellEditing();
         if(TabRawat.getSelectedIndex()==0){
             runBackground(() ->tampilobat());
         }else if(TabRawat.getSelectedIndex()==1){
@@ -759,6 +762,9 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        if (tbDetailResepObatRacikan.isEditing()) tbDetailResepObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObatResepRacikan.isEditing()) tbObatResepRacikan.getCellEditor().stopCellEditing();
+        if (tbResep.isEditing()) tbResep.getCellEditor().stopCellEditing();
         TCari.setText("");
         BtnCariActionPerformed(evt);
     }//GEN-LAST:event_BtnAllActionPerformed
@@ -841,6 +847,9 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDetailResepObatRacikan.isEditing()) tbDetailResepObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObatResepRacikan.isEditing()) tbObatResepRacikan.getCellEditor().stopCellEditing();
+        if (tbResep.isEditing()) tbResep.getCellEditor().stopCellEditing();
         jmlobat=0;
         for(i=0;i<tbResep.getRowCount();i++){
             if(Valid.SetAngka(tbResep.getValueAt(i,0).toString())>0){
@@ -1077,6 +1086,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatResepRacikanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        if (tbObatResepRacikan.isEditing()) tbObatResepRacikan.getCellEditor().stopCellEditing();
         if(tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),1).equals("")&&tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),4).equals("")&&tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),5).equals("")&&tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),6).equals("")){
             tabModeResepRacikan.removeRow(tbObatResepRacikan.getSelectedRow());
         }else{

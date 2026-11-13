@@ -2776,6 +2776,7 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
     }//GEN-LAST:event_TNoRwKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbAPGAR.isEditing()) tbAPGAR.getCellEditor().stopCellEditing();
         if(TNoRM.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Nama Pasien");
         }else if(NmDokter.getText().trim().equals("")){
@@ -2848,6 +2849,7 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
+        if (tbAPGAR.isEditing()) tbAPGAR.getCellEditor().stopCellEditing();
         if(TNoRM.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Nama Pasien");
         }else if(NmDokter.getText().trim().equals("")){

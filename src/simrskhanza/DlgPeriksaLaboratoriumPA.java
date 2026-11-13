@@ -797,6 +797,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
         jml=0;
         for(i=0;i<tbPemeriksaan.getRowCount();i++){
             if(!tbPemeriksaan.getValueAt(i,2).toString().equals("")){
@@ -852,6 +853,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
         if(ceksukses){
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;

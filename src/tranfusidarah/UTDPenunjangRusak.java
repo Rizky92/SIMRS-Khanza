@@ -631,6 +631,7 @@ public class UTDPenunjangRusak extends javax.swing.JDialog {
     */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         if(NmPetugas.getText().trim().equals("")||KdPetugas.getText().trim().equals("")){
             Valid.textKosong(KdPetugas,"Stok Asal");
         }else if(Keterangan.getText().trim().equals("")){
@@ -686,6 +687,7 @@ public class UTDPenunjangRusak extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         runBackground(() ->tampil());
         isTotal();
     }//GEN-LAST:event_BtnCari1ActionPerformed
@@ -699,6 +701,7 @@ public class UTDPenunjangRusak extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
             for(i=0;i<tbDokter.getRowCount();i++){
                 tbDokter.setValueAt("",i,0);
                 tbDokter.setValueAt("0",i,4);

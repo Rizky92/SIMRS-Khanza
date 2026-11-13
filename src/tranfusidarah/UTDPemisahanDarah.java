@@ -1280,10 +1280,12 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariMedisKeyPressed
 
     private void BtnCari2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari2ActionPerformed
+        if (tbMedis.isEditing()) tbMedis.getCellEditor().stopCellEditing();
         runBackground(() ->tampilMedis());
     }//GEN-LAST:event_BtnCari2ActionPerformed
 
     private void BtnAll1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAll1ActionPerformed
+        if (tbMedis.isEditing()) tbMedis.getCellEditor().stopCellEditing();
         TCariMedis.setText("");
         runBackground(() ->tampilMedis());
     }//GEN-LAST:event_BtnAll1ActionPerformed
@@ -1323,10 +1325,12 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariNonMedisKeyPressed
 
     private void BtnCari3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari3ActionPerformed
+        if (tbNonMedis.isEditing()) tbNonMedis.getCellEditor().stopCellEditing();
         runBackground(() ->tampilNonMedis());
     }//GEN-LAST:event_BtnCari3ActionPerformed
 
     private void BtnAll2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAll2ActionPerformed
+        if (tbNonMedis.isEditing()) tbNonMedis.getCellEditor().stopCellEditing();
         TCariNonMedis.setText("");
         runBackground(() ->tampilNonMedis());
     }//GEN-LAST:event_BtnAll2ActionPerformed
@@ -1469,6 +1473,8 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbMedis.isEditing()) tbMedis.getCellEditor().stopCellEditing();
+        if (tbNonMedis.isEditing()) tbNonMedis.getCellEditor().stopCellEditing();
         jml=0;
         for(i=0;i<tbKomponen.getRowCount();i++){
             if(tbKomponen.getValueAt(i,0).toString().equals("true")){

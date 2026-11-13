@@ -601,6 +601,7 @@ public class InventoryHibahObatBHP extends javax.swing.JDialog {
     */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         jml=tbDokter.getRowCount();
         index=0;
         for(i=0;i<jml;i++){
@@ -752,6 +753,7 @@ public class InventoryHibahObatBHP extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         runBackground(() ->tampil());
     }//GEN-LAST:event_BtnCari1ActionPerformed
 

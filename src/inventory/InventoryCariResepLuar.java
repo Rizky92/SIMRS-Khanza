@@ -748,6 +748,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
     }//GEN-LAST:event_NoResepUbah3KeyPressed
 
     private void BtnSimpanInput3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanInput3ActionPerformed
+        if (tbTambahan.isEditing()) tbTambahan.getCellEditor().stopCellEditing();
         if(NoResepUbah3.getText().trim().equals("")||(tbTambahan.getRowCount()<=0)){
             Valid.textKosong(NoResepUbah3,"Data");
         }else{
@@ -854,6 +855,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
     }//GEN-LAST:event_NoResepUbah4KeyPressed
 
     private void BtnSimpanInput4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanInput4ActionPerformed
+        if (tbTambahan1.isEditing()) tbTambahan1.getCellEditor().stopCellEditing();
        if(NoResepUbah4.getText().trim().equals("")||(tbTambahan1.getRowCount()<=0)){
             Valid.textKosong(NoResepUbah4,"Data");
         }else{

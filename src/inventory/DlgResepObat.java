@@ -1633,6 +1633,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_NoResepUbahKeyPressed
 
     private void BtnSimpan3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpan3ActionPerformed
+        if (tbTambahan.isEditing()) tbTambahan.getCellEditor().stopCellEditing();
         if(NoResepUbah.getText().trim().equals("")||(tbTambahan.getRowCount()<=0)){
             Valid.textKosong(NoResepUbah,"Data");
         }else{
@@ -1768,6 +1769,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_NoResepUbah1KeyPressed
 
     private void BtnSimpan4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpan4ActionPerformed
+        if (tbTambahan1.isEditing()) tbTambahan1.getCellEditor().stopCellEditing();
         if(NoResepUbah1.getText().trim().equals("")||(tbTambahan1.getRowCount()<=0)){
             Valid.textKosong(NoResepUbah1,"Data");
         }else{

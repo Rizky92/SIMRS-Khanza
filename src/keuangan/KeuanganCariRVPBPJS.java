@@ -510,6 +510,7 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         if(ceksukses){
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
@@ -665,6 +666,7 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
     }//GEN-LAST:event_Tgl1KeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis..!!!!");
         }else if(tabMode.getRowCount()!=0){

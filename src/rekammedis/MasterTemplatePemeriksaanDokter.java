@@ -2040,6 +2040,10 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObatNonRacikan.isEditing()) tbObatNonRacikan.getCellEditor().stopCellEditing();
+        if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
+        if (tbProsedur.isEditing()) tbProsedur.getCellEditor().stopCellEditing();
         if(Kd.getText().trim().equals("")){
             Valid.textKosong(Kd,"No.Template");
         }else if(KdDokter.getText().trim().equals("")||NmDokter.getText().trim().equals("")){
@@ -2095,6 +2099,10 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObatNonRacikan.isEditing()) tbObatNonRacikan.getCellEditor().stopCellEditing();
+        if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
+        if (tbProsedur.isEditing()) tbProsedur.getCellEditor().stopCellEditing();
         if(Kd.getText().trim().equals("")){
             Valid.textKosong(Kd,"No.Template");
         }else if(KdDokter.getText().trim().equals("")||NmDokter.getText().trim().equals("")){
@@ -2329,6 +2337,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_ProsedurKeyPressed
 
     private void BtnCariProsedurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariProsedurActionPerformed
+        if (tbProsedur.isEditing()) tbProsedur.getCellEditor().stopCellEditing();
         tampilprosedure();
     }//GEN-LAST:event_BtnCariProsedurActionPerformed
 
@@ -2417,6 +2426,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariDetailMBActionPerformed
 
     private void BtnCariObatNonRacikanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariObatNonRacikanActionPerformed
+        if (tbObatNonRacikan.isEditing()) tbObatNonRacikan.getCellEditor().stopCellEditing();
         tampilObatNonRacikan2();
     }//GEN-LAST:event_BtnCariObatNonRacikanActionPerformed
 
@@ -2441,6 +2451,8 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_CariObatRacikanKeyPressed
 
     private void BtnCariObatRacikanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariObatRacikanActionPerformed
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
         if(tbObatRacikan.getRowCount()!=0){
             if(tbObatRacikan.getSelectedRow()!= -1){
                 if(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString().equals("")||
@@ -2482,6 +2494,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllPenyakitActionPerformed
 
     private void BtnAllProsedurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllProsedurActionPerformed
+        if (tbProsedur.isEditing()) tbProsedur.getCellEditor().stopCellEditing();
         Prosedur.setText("");
         tampilprosedure();
     }//GEN-LAST:event_BtnAllProsedurActionPerformed
@@ -2521,12 +2534,15 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllDetailMBActionPerformed
 
     private void BtnAllObatNonRacikanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllObatNonRacikanActionPerformed
+        if (tbObatNonRacikan.isEditing()) tbObatNonRacikan.getCellEditor().stopCellEditing();
         CariObatNonRacikan.setText("");
         tampilObatNonRacikan();
         tampilObatNonRacikan2();
     }//GEN-LAST:event_BtnAllObatNonRacikanActionPerformed
 
     private void BtnAllObatRacikanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllObatRacikanActionPerformed
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
         CariObatRacikan.setText("");
         tampilObatNonRacikan();
         BtnCariObatRacikanActionPerformed(null);
@@ -2568,6 +2584,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambah1ActionPerformed
 
     private void BtnHapus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapus1ActionPerformed
+        if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
         if(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),1).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),4).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),5).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),6).equals("")){
             tabModeObatRacikan.removeRow(tbObatRacikan.getSelectedRow());
         }else{

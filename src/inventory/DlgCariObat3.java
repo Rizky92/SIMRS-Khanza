@@ -441,6 +441,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         if(TNoRw.getText().trim().equals("")){
             Valid.textKosong(Jeniskelas,"Data");
         }else if(kdgudang.getText().equals("")){
@@ -645,6 +646,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(TNoRw.getText().equals("")){
             Valid.textKosong(TNoRw,"Pasien");

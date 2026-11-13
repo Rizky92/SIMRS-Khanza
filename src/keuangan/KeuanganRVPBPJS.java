@@ -777,6 +777,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         if(ceksukses){
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
@@ -882,6 +883,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         TCari.setText("");
         chkRalan.setSelected(true);
         chkRanap.setSelected(true);
@@ -908,6 +910,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         tampil();
     }//GEN-LAST:event_BtnCariActionPerformed
 
@@ -916,6 +919,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailPiutangActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
      if(tabMode.getRowCount()==0){
         JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
         TCari.requestFocus();
@@ -951,6 +955,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
     }//GEN-LAST:event_MnDetailPiutangActionPerformed
 
     private void BtnBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBayarActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis..!!!!");
         }else if(total<=0){
@@ -2347,6 +2352,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         for(i=0;i<tbBangsal.getRowCount();i++){
             tbBangsal.setValueAt(false,i,0);
@@ -2357,6 +2363,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         for(i=0;i<tbBangsal.getRowCount();i++){
             if (Valid.SetAngka(tbBangsal.getValueAt(i, 9).toString()) > 0) {
@@ -2369,6 +2376,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
     private void ppUmbalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUmbalActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         jfc.setAcceptAllFileFilterUsed(false);
         jfc.addChoosableFileFilter(excelFilter);
         if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -2924,6 +2932,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAll1ActionPerformed
 
     private void ppUmbalMonitoringKlaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUmbalMonitoringKlaimActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         if (tabMode.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Tidak ada data yang bisa dilakukan pencarian!");
         } else {

@@ -571,6 +571,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        if (tbUser.isEditing()) tbUser.getCellEditor().stopCellEditing();
         runBackground(() ->tampil(TKd.getText()));
     }//GEN-LAST:event_BtnCariActionPerformed
 
@@ -583,6 +584,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        if (tbUser.isEditing()) tbUser.getCellEditor().stopCellEditing();
         TCari.setText("");
         runBackground(() ->tampil(TKd.getText()));
     }//GEN-LAST:event_BtnAllActionPerformed
@@ -596,6 +598,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbUser.isEditing()) tbUser.getCellEditor().stopCellEditing();
         if(TKd.getText().trim().equals("")||TNmUser.getText().trim().equals("")){
             Valid.textKosong(TNmUser,"User");
         }else if(TPass.getText().trim().equals("")){

@@ -1131,6 +1131,8 @@ public class UTDPenyerahanDarah extends javax.swing.JDialog {
     */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbMedis.isEditing()) tbMedis.getCellEditor().stopCellEditing();
+        if (tbNonMedis.isEditing()) tbNonMedis.getCellEditor().stopCellEditing();
         if(nopenyerahan.getText().trim().equals("")){
             Valid.textKosong(nopenyerahan,"No.Penyerahan");
         }else if(keterangan.getText().trim().equals("")){
@@ -1575,6 +1577,7 @@ public class UTDPenyerahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariMedisKeyPressed
 
     private void BtnCari2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari2ActionPerformed
+        if (tbMedis.isEditing()) tbMedis.getCellEditor().stopCellEditing();
         runBackground(() ->tampilMedis());
     }//GEN-LAST:event_BtnCari2ActionPerformed
 
@@ -1583,6 +1586,7 @@ public class UTDPenyerahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCari2KeyPressed
 
     private void BtnAll1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAll1ActionPerformed
+        if (tbMedis.isEditing()) tbMedis.getCellEditor().stopCellEditing();
         TCariMedis.setText("");
         runBackground(() ->tampilMedis());
     }//GEN-LAST:event_BtnAll1ActionPerformed
@@ -1626,6 +1630,7 @@ public class UTDPenyerahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariNonMedisKeyPressed
 
     private void BtnCari3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari3ActionPerformed
+        if (tbNonMedis.isEditing()) tbNonMedis.getCellEditor().stopCellEditing();
         runBackground(() ->tampilNonMedis());
     }//GEN-LAST:event_BtnCari3ActionPerformed
 
@@ -1634,6 +1639,7 @@ public class UTDPenyerahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCari3KeyPressed
 
     private void BtnAll2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAll2ActionPerformed
+        if (tbNonMedis.isEditing()) tbNonMedis.getCellEditor().stopCellEditing();
         TCariNonMedis.setText("");
         runBackground(() ->tampilNonMedis());
     }//GEN-LAST:event_BtnAll2ActionPerformed

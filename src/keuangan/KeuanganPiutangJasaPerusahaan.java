@@ -848,6 +848,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         runBackground(() ->tampil2());
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
@@ -1007,6 +1008,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         if(NoPiutang.getText().trim().equals("")){
             Valid.textKosong(NoPiutang,"No.Piutang");
         }else if(NmPerusahaan.getText().trim().equals("")){
@@ -1108,6 +1110,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         if(ceksukses){
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
@@ -1213,6 +1216,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         TCari.setText("");
         tampil();
         runBackground(() ->tampil2());

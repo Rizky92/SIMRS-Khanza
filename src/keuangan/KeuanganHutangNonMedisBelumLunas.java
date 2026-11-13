@@ -889,6 +889,7 @@ public final class KeuanganHutangNonMedisBelumLunas extends javax.swing.JDialog 
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         if(ceksukses){
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
@@ -1159,6 +1160,7 @@ public final class KeuanganHutangNonMedisBelumLunas extends javax.swing.JDialog 
     }//GEN-LAST:event_BtnSeek2KeyPressed
 
     private void BtnBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBayarActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(NoBukti.getText().trim().equals("")){
             Valid.textKosong(NoBukti,"No.Bukti");
@@ -1389,6 +1391,7 @@ public final class KeuanganHutangNonMedisBelumLunas extends javax.swing.JDialog 
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void ppSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSemuaActionPerformed
+        if (javax.swing.SwingUtilities.isEventDispatchThread() && tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         for(row=0;row<tbBangsal.getRowCount();row++){
             tbBangsal.setValueAt(true,row,0);
             if(tbBangsal.getValueAt(row,10).toString().equals("0")){
@@ -1428,6 +1431,7 @@ public final class KeuanganHutangNonMedisBelumLunas extends javax.swing.JDialog 
     }//GEN-LAST:event_tbBangsalPropertyChange
 
     private void ChkAccorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkAccorActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         if(tbBangsal.getSelectedRow()!= -1){
             isPhoto();
             panggilPhoto();
@@ -1456,6 +1460,7 @@ public final class KeuanganHutangNonMedisBelumLunas extends javax.swing.JDialog 
     }//GEN-LAST:event_BtnKeluarMandiriActionPerformed
 
     private void BtnSimpanMandiriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanMandiriActionPerformed
+        if (tbBangsal.isEditing()) tbBangsal.getCellEditor().stopCellEditing();
         if(NoRekening.getText().trim().equals("")){
             Valid.textKosong(NoRekening,"No.Rekening Tujuan");
         }else if(RekeningAtasNama.getText().trim().equals("")){

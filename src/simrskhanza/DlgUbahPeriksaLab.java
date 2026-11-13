@@ -610,6 +610,8 @@ public final class DlgUbahPeriksaLab extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
+        if (tbTarif.isEditing()) tbTarif.getCellEditor().stopCellEditing();
         jml=0;
         for(i=0;i<tbTarif.getRowCount();i++){
             if(tbTarif.getValueAt(i,0).toString().equals("true")){
@@ -1106,6 +1108,7 @@ public final class DlgUbahPeriksaLab extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        if (tbTarif.isEditing()) tbTarif.getCellEditor().stopCellEditing();
        runBackground(() ->tampiltarif());
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
@@ -1174,6 +1177,8 @@ public final class DlgUbahPeriksaLab extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari2ActionPerformed
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
+        if (tbTarif.isEditing()) tbTarif.getCellEditor().stopCellEditing();
         runBackground(() ->tampil());
     }//GEN-LAST:event_BtnCari2ActionPerformed
 

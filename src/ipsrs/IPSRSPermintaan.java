@@ -459,6 +459,7 @@ public class IPSRSPermintaan extends javax.swing.JDialog {
     */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         jml=0;
         for(i=0;i<tbDokter.getRowCount();i++){
             if(!tbDokter.getValueAt(i,0).toString().equals("")){
@@ -552,6 +553,7 @@ public class IPSRSPermintaan extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         runBackground(() ->tampil2());
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
@@ -708,6 +710,7 @@ public class IPSRSPermintaan extends javax.swing.JDialog {
     }//GEN-LAST:event_TanggalItemStateChanged
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         TCari.setText("");
         runBackground(() ->LoadData());
     }//GEN-LAST:event_BtnAllActionPerformed

@@ -525,6 +525,7 @@ public class DlgMutasiBarang extends javax.swing.JDialog {
     */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         jml=tbDokter.getRowCount();
         index=0;
         for(i=0;i<jml;i++){
@@ -644,6 +645,7 @@ public class DlgMutasiBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         runBackground(() ->tampil2());
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
@@ -677,6 +679,7 @@ public class DlgMutasiBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_kddariKeyPressed
 
     private void btnDariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDariActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         if(index>0){
             JOptionPane.showMessageDialog(null,"Maaf, silahkan bersihkan jumlah jika ingin mengganti lokasi depo...!!!");
             tbDokter.requestFocus();
@@ -719,6 +722,7 @@ public class DlgMutasiBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_btnDariActionPerformed
 
     private void btnKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         if(index>0){
             JOptionPane.showMessageDialog(null,"Maaf, silahkan bersihkan jumlah jika ingin mengganti lokasi depo...!!!");
             tbDokter.requestFocus();
@@ -835,6 +839,7 @@ public class DlgMutasiBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterKeyPressed
 
     private void ppStokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppStokActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         for(i=0;i<tbDokter.getRowCount();i++){
             try {
                 stok_asal=0;
@@ -1053,6 +1058,7 @@ public class DlgMutasiBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterKeyReleased
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        if (tbDokter.isEditing()) tbDokter.getCellEditor().stopCellEditing();
         TCari.setText("");
         runBackground(() ->loadTabel());
     }//GEN-LAST:event_BtnAllActionPerformed

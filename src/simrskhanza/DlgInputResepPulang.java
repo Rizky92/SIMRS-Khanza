@@ -416,6 +416,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        if (tbKamar.isEditing()) tbKamar.getCellEditor().stopCellEditing();
         runBackground(() -> tampil());
     }//GEN-LAST:event_BtnCariActionPerformed
 
@@ -428,6 +429,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        if (tbKamar.isEditing()) tbKamar.getCellEditor().stopCellEditing();
         TCari.setText("");
         runBackground(() -> tampil());
     }//GEN-LAST:event_BtnAllActionPerformed
@@ -445,6 +447,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbKamar.isEditing()) tbKamar.getCellEditor().stopCellEditing();
     if(aktifkanbatch.equals("yes")){
         index=0;
         jml=tbKamar.getRowCount();
@@ -700,6 +703,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_kdgudangKeyPressed
 
     private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGudangActionPerformed
+        if (tbKamar.isEditing()) tbKamar.getCellEditor().stopCellEditing();
         if (lokasidepo == null || !lokasidepo.isDisplayable()) {
             lokasidepo=new DlgCariBangsal(null,false);
             lokasidepo.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

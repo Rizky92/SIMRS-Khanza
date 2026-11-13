@@ -1231,6 +1231,9 @@ public class DlgPenjualan extends javax.swing.JDialog {
     */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
         row=0;
         if(aktifkanbatch.equals("yes")){
             jml=tbObat.getRowCount();
@@ -1510,6 +1513,9 @@ public class DlgPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNotaActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(NoNota.getText().trim().equals("")){
             Valid.textKosong(NoNota,"No.Nota");
@@ -1591,6 +1597,9 @@ public class DlgPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
         if(TabRawat.getSelectedIndex()==0){
             runBackground(() ->tampil());
         }else if(TabRawat.getSelectedIndex()==1){
@@ -1794,6 +1803,7 @@ public class DlgPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_kdgudangKeyPressed
 
     private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGudangActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         akses.setform("DlgPenjualan");
         DlgCariBangsal bangsal=new DlgCariBangsal(null,false);
         bangsal.addWindowListener(new WindowListener() {
@@ -1983,6 +1993,8 @@ public class DlgPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void ppStokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppStokActionPerformed
+        if (tbDetailObatRacikan.isEditing()) tbDetailObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         if(TabRawat.getSelectedIndex()==0){
             for(i=0;i<tbObat.getRowCount();i++){
                 try {
@@ -2120,6 +2132,7 @@ public class DlgPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambah2ActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
         if(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),1).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),2).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),3).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),4).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),5).equals("")&&tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),6).equals("")){
             tabModeObatRacikan.removeRow(tbObatRacikan.getSelectedRow());
         }else{

@@ -689,6 +689,7 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbAkunBayar.isEditing()) tbAkunBayar.getCellEditor().stopCellEditing();
         if(DibayarOleh.getText().equals("")){
             Valid.textKosong(DibayarOleh,"Pihak Pelanggan Yang Membayar");
         }else if(KodePelanggan.getText().equals("")||NamaPelanggan.getText().equals("")){
@@ -727,6 +728,7 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNotaActionPerformed
+        if (tbAkunBayar.isEditing()) tbAkunBayar.getCellEditor().stopCellEditing();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(DibayarOleh.getText().equals("")){
             Valid.textKosong(DibayarOleh,"Pihak Pelanggan Yang Membayar");
@@ -914,6 +916,7 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariBayarActionPerformed
+        if (tbAkunBayar.isEditing()) tbAkunBayar.getCellEditor().stopCellEditing();
         tampilAkunBayar2();
         isKembali();
     }//GEN-LAST:event_BtnCariBayarActionPerformed
@@ -923,6 +926,7 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
     }//GEN-LAST:event_BtnCariBayarKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        if (tbAkunBayar.isEditing()) tbAkunBayar.getCellEditor().stopCellEditing();
         tampilAkunBayar();
         isKembali();
     }//GEN-LAST:event_BtnAllActionPerformed

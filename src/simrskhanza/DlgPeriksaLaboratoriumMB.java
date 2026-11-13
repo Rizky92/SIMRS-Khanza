@@ -813,6 +813,7 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
         jml=0;
         for(i=0;i<tbPemeriksaan.getRowCount();i++){
             if(!tbPemeriksaan.getValueAt(i,2).toString().equals("")){
@@ -874,6 +875,7 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
         if(ceksukses){
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
@@ -1044,6 +1046,7 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkJlnActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
         try{
             for(i=0;i<tbPemeriksaan.getRowCount();i++){
                 if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
@@ -1166,6 +1169,7 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNotaActionPerformed
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
@@ -1243,6 +1247,7 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCari2KeyPressed
 
     private void BtnCari2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari2ActionPerformed
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
         runBackground(() ->tampil());
     }//GEN-LAST:event_BtnCari2ActionPerformed
 

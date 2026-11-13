@@ -621,6 +621,7 @@ public final class DlgCariObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbKamar.isEditing()) tbKamar.getCellEditor().stopCellEditing();
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
         }else if(bangsal.equals("")){

@@ -588,6 +588,7 @@ public class PanelDiagnosa extends widget.panelisi {
     }//GEN-LAST:event_btnTambahProsedurActionPerformed
 
     private void BtnCariProsedurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariProsedurActionPerformed
+        if (tbProsedur.isEditing()) tbProsedur.getCellEditor().stopCellEditing();
         runBackground(() ->tampilprosedure());
     }//GEN-LAST:event_BtnCariProsedurActionPerformed
 

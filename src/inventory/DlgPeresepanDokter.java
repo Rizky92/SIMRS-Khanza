@@ -980,6 +980,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        if (tbDetailResepObatRacikan.isEditing()) tbDetailResepObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObatResepRacikan.isEditing()) tbObatResepRacikan.getCellEditor().stopCellEditing();
+        if (tbResep.isEditing()) tbResep.getCellEditor().stopCellEditing();
         if (!load) {
             buatcacheresep();
         }
@@ -1018,6 +1021,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        if (tbDetailResepObatRacikan.isEditing()) tbDetailResepObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObatResepRacikan.isEditing()) tbObatResepRacikan.getCellEditor().stopCellEditing();
+        if (tbResep.isEditing()) tbResep.getCellEditor().stopCellEditing();
         TCari.setText("");
         buatcacheresep();
         BtnCariActionPerformed(evt);
@@ -1120,6 +1126,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbDetailResepObatRacikan.isEditing()) tbDetailResepObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObatResepRacikan.isEditing()) tbObatResepRacikan.getCellEditor().stopCellEditing();
+        if (tbResep.isEditing()) tbResep.getCellEditor().stopCellEditing();
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"pasien");
         }else if(KdDokter.getText().trim().equals("")||NmDokter.getText().trim().equals("")){
@@ -1337,6 +1346,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeek5KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
+        if (tbDetailResepObatRacikan.isEditing()) tbDetailResepObatRacikan.getCellEditor().stopCellEditing();
+        if (tbResep.isEditing()) tbResep.getCellEditor().stopCellEditing();
     if(TabRawat.getSelectedIndex()==0){
         for(i=0;i<tbResep.getRowCount();i++){
             tbResep.setValueAt(false,i,0);
@@ -1576,6 +1587,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatResepRacikanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        if (tbDetailResepObatRacikan.isEditing()) tbDetailResepObatRacikan.getCellEditor().stopCellEditing();
+        if (tbObatResepRacikan.isEditing()) tbObatResepRacikan.getCellEditor().stopCellEditing();
         if (tbObatResepRacikan.getSelectedRow() != -1) {
             if (JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menghapus resep racikan ini?", "Hapus Racikan", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 for (int i = tbDetailResepObatRacikan.getRowCount() - 1; i >= 0; i--) {

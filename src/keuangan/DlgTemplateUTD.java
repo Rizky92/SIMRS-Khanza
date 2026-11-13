@@ -239,6 +239,7 @@ public final class DlgTemplateUTD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbKamar.isEditing()) tbKamar.getCellEditor().stopCellEditing();
     if(KdPeriksa.getText().equals("")||NmPeriksa.getText().equals("")){
         Valid.textKosong(KdPeriksa,"Pemeriksaan");
     }else{
@@ -270,6 +271,7 @@ public final class DlgTemplateUTD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        if (tbKamar.isEditing()) tbKamar.getCellEditor().stopCellEditing();
    try{
        Sequel.meghapus("template_utd","id_template",tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString());
        tabMode.removeRow(tbKamar.getSelectedRow());

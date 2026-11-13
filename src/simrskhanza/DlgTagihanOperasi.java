@@ -1969,6 +1969,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         runBackground(() ->tampil2());
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
@@ -1981,6 +1982,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         TCari.setText("");
         runBackground(() ->tampil2());
     }//GEN-LAST:event_BtnAllActionPerformed
@@ -2051,6 +2053,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariPaketKeyPressed
 
     private void BtnCari2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari2ActionPerformed
+        if (tbtindakan.isEditing()) tbtindakan.getCellEditor().stopCellEditing();
         runBackground(() ->tampil());
     }//GEN-LAST:event_BtnCari2ActionPerformed
 
@@ -2059,6 +2062,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCari2KeyPressed
 
     private void BtnAll1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAll1ActionPerformed
+        if (tbtindakan.isEditing()) tbtindakan.getCellEditor().stopCellEditing();
         TCariPaket.setText("");
         runBackground(() ->tampil());
     }//GEN-LAST:event_BtnAll1ActionPerformed
@@ -2804,6 +2808,8 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbtindakan.isEditing()) tbtindakan.getCellEditor().stopCellEditing();
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         if(kdoperator2.getText().trim().equals("")||nmoperator2.getText().trim().equals("")){
             kdoperator2.setText("-");
             nmoperator2.setText("-");

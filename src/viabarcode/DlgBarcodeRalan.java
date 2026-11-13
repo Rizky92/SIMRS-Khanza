@@ -528,6 +528,7 @@ public final class DlgBarcodeRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_NoRawatKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         if(aktifkanbatch.equals("yes")){
             index=0;
             jml=tbObat.getRowCount();
@@ -815,6 +816,7 @@ public final class DlgBarcodeRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariObatKeyPressed
 
     private void BtnAllBhpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllBhpActionPerformed
+        if (tbObat.isEditing()) tbObat.getCellEditor().stopCellEditing();
         TCariObat.setText("");
         runBackground(() ->tampilobat());
     }//GEN-LAST:event_BtnAllBhpActionPerformed

@@ -401,6 +401,7 @@ public final class DlgUbahNilaiLab extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
         if (ceksukses) {
             JOptionPane.showMessageDialog(null, "Proses masih loading! Silahkan tunggu hingga proses loading selesai..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return;
@@ -526,6 +527,7 @@ public final class DlgUbahNilaiLab extends javax.swing.JDialog {
     }//GEN-LAST:event_WindowExpandIsiHasilComponentShown
 
     private void BtnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRefreshActionPerformed
+        if (tbPemeriksaan.isEditing()) tbPemeriksaan.getCellEditor().stopCellEditing();
         Valid.tabelKosong(tabMode);
         runBackground(() -> {
             tampilSmc();
