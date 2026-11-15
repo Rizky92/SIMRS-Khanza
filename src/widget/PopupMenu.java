@@ -1,31 +1,6 @@
 package widget;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsDevice;
-import java.awt.Insets;
-import java.awt.RenderingHints;
-import java.awt.Window;
-import java.awt.event.ContainerAdapter;
-import java.awt.event.ContainerEvent;
-import java.awt.event.HierarchyEvent;
-import java.awt.event.HierarchyListener;
-import java.awt.geom.RoundRectangle2D;
-import java.awt.image.BufferedImage;
-import javax.swing.JComponent;
-import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.JSeparator;
-import javax.swing.JWindow;
-import javax.swing.SwingUtilities;
-import javax.swing.border.AbstractBorder;
-import javax.swing.plaf.SeparatorUI;
-import javax.swing.plaf.basic.BasicPopupMenuUI;
 
 public class PopupMenu extends JPopupMenu {
     /*

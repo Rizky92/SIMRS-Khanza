@@ -21,11 +21,8 @@
                                     $totalHutang   = 0;
                                     $dataPieHutang = [];
                                     $queryHutang = bukaquery(
-                                        "select inventaris_pemesanan.kode_suplier,inventaris_suplier.nama_suplier, ".
-                                        "(inventaris_pemesanan.tagihan-(select ifnull(sum(besar_bayar),0) from bayar_pemesanan_inventaris where bayar_pemesanan_inventaris.no_faktur=inventaris_pemesanan.no_faktur)) as sisahutang ".
-                                        "from inventaris_pemesanan inner join inventaris_suplier on inventaris_pemesanan.kode_suplier=inventaris_suplier.kode_suplier ".
-                                        "where (inventaris_pemesanan.status='Belum Dibayar' or inventaris_pemesanan.status='Belum Lunas') ".
-                                        "group by inventaris_pemesanan.kode_suplier order by inventaris_pemesanan.kode_suplier asc"
+                                        "select inventaris_pemesanan.kode_suplier,inventaris_suplier.nama_suplier,sum(inventaris_pemesanan.tagihan-(SELECT ifnull(SUM(bayar_pemesanan_inventaris.besar_bayar),0) FROM bayar_pemesanan_inventaris where bayar_pemesanan_inventaris.no_faktur=inventaris_pemesanan.no_faktur)) as sisahutang ".
+                                        "from inventaris_pemesanan inner join inventaris_suplier on inventaris_pemesanan.kode_suplier=inventaris_suplier.kode_suplier where inventaris_pemesanan.status in ('Belum Dibayar','Belum Lunas') group by inventaris_pemesanan.kode_suplier order by inventaris_pemesanan.kode_suplier asc"
                                     );
                                     while($rshutang = mysqli_fetch_array($queryHutang)) {
                                         $totalHutang += $rshutang["sisahutang"];

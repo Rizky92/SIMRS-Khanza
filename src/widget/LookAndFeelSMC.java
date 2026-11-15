@@ -56,7 +56,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.JTable;
 import javax.swing.JWindow;
 import javax.swing.ListCellRenderer;
 import javax.swing.LookAndFeel;

@@ -9,7 +9,6 @@ import java.awt.Cursor;
 import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
-import javax.swing.plaf.basic.BasicCheckBoxUI;
 
 public class CekBox extends JCheckBox {
     /*

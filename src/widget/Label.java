@@ -1,7 +1,5 @@
 package widget;
 
-import java.awt.Color;
-
 /**
  *
  * @author usu

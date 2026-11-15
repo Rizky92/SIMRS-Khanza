@@ -21,8 +21,8 @@
                                     $totalHutang   = 0;
                                     $dataPieHutang = [];
                                     $queryHutang = bukaquery(
-                                        "select pemesanan.kode_suplier,datasuplier.nama_suplier,(pemesanan.tagihan-(select ifnull(sum(besar_bayar),0) from bayar_pemesanan where bayar_pemesanan.no_faktur=pemesanan.no_faktur)) as sisahutang from pemesanan ".
-                                        "inner join datasuplier on pemesanan.kode_suplier=datasuplier.kode_suplier where (pemesanan.status='Belum Dibayar' or pemesanan.status='Belum Lunas') group by pemesanan.kode_suplier order by pemesanan.kode_suplier asc"
+                                        "select pemesanan.kode_suplier,datasuplier.nama_suplier,sum(pemesanan.tagihan-ifnull((select sum(bayar_pemesanan.besar_bayar) from bayar_pemesanan where bayar_pemesanan.no_faktur=pemesanan.no_faktur),0)) as sisahutang ".
+                                        "from pemesanan inner join datasuplier on pemesanan.kode_suplier=datasuplier.kode_suplier where pemesanan.status in ('Belum Dibayar','Belum Lunas') group by pemesanan.kode_suplier order by pemesanan.kode_suplier asc"
                                     );
                                     while($rshutang = mysqli_fetch_array($queryHutang)) {
                                         $totalHutang += $rshutang["sisahutang"];
