@@ -112,6 +112,7 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
             Utang_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling,Beban_Jasa_Analis_Pelayanan_Lab_Kesling,Utang_Jasa_Analis_Pelayanan_Lab_Kesling,
             Beban_KSO_Pelayanan_Lab_Kesling,Utang_KSO_Pelayanan_Lab_Kesling,Beban_Jasa_Menejemen_Pelayanan_Lab_Kesling,
             Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling;
+    private String biayaLainPenerimaanNonMedisSmc="";
     private String copyakun="";
     private DlgRekeningTahun rekening=new DlgRekeningTahun(null,false);
 
@@ -837,6 +838,7 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
             Utang_KSO_Pelayanan_Lab_Kesling=tbPengaturan.getValueAt(218,1).toString();
             Beban_Jasa_Menejemen_Pelayanan_Lab_Kesling=tbPengaturan.getValueAt(219,1).toString();
             Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling=tbPengaturan.getValueAt(220,1).toString();
+            biayaLainPenerimaanNonMedisSmc=tbPengaturan.getValueAt(221,1).toString();
 
             if(Pengadaan_Obat.equals("")||Pemesanan_Obat.equals("")||Kontra_Pemesanan_Obat.equals("")||Bayar_Pemesanan_Obat.equals("")||Penjualan_Obat.equals("")||
                     Piutang_Obat.equals("")||Kontra_Piutang_Obat.equals("")||Retur_Ke_Suplayer.equals("")||Kontra_Retur_Ke_Suplayer.equals("")||
@@ -968,6 +970,8 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
                     Utang_Jasa_Analis_Pelayanan_Lab_Kesling,Beban_KSO_Pelayanan_Lab_Kesling,Utang_KSO_Pelayanan_Lab_Kesling,
                     Beban_Jasa_Menejemen_Pelayanan_Lab_Kesling,Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling
                 });
+                Sequel.menghapusSmc("set_akun_smc");
+                Sequel.menyimpanSmc("set_akun_smc","biaya_lain_penerimaan_non_medis",biayaLainPenerimaanNonMedisSmc.equals("")?null:biayaLainPenerimaanNonMedisSmc);
                 JOptionPane.showMessageDialog(null,"Proses selesai...!!!!");
                 runBackground(() ->tampil());
             }
@@ -1764,6 +1768,8 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
                     ps.close();
                 }
             }
+
+            biayaLainPenerimaanNonMedisSmc=Sequel.cariIsiSmc("select set_akun_smc.biaya_lain_penerimaan_non_medis from set_akun_smc");
 
             tabMode.addRow(new Object[]{" [Debet] Akun Suspen Piutang Tindakan Rawat Jalan",Suspen_Piutang_Tindakan_Ralan,
                 Sequel.cariIsi("select rekening.nm_rek from rekening where rekening.kd_rek=?",Suspen_Piutang_Tindakan_Ralan),
@@ -2869,6 +2875,11 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
                 Sequel.cariIsi("select rekening.nm_rek from rekening where rekening.kd_rek=?",Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling),
                 Sequel.cariIsi("select rekening.tipe from rekening where rekening.kd_rek=?",Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling),
                 Sequel.cariIsi("select rekening.balance from rekening where rekening.kd_rek=?",Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling)
+            });
+            tabMode.addRow(new Object[]{" [Debet] Akun Biaya Lain (Ongkos Kirim, dll.) pada menu Penerimaan Barang Non Medis, kosongkan bila tidak digunakan",biayaLainPenerimaanNonMedisSmc,
+                Sequel.cariIsi("select rekening.nm_rek from rekening where rekening.kd_rek=?",biayaLainPenerimaanNonMedisSmc),
+                Sequel.cariIsi("select rekening.tipe from rekening where rekening.kd_rek=?",biayaLainPenerimaanNonMedisSmc),
+                Sequel.cariIsi("select rekening.balance from rekening where rekening.kd_rek=?",biayaLainPenerimaanNonMedisSmc)
             });
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);

@@ -901,6 +901,21 @@ public class IPSRSCariPemesanan extends javax.swing.JDialog {
                         sukses=false;
                     }
                 }
+                try (PreparedStatement psbiayalain=koneksi.prepareStatement(
+                    "select ipsrspemesanan_biaya_lain_smc.kd_rek,ipsrspemesanan_biaya_lain_smc.biaya_lain from ipsrspemesanan_biaya_lain_smc where ipsrspemesanan_biaya_lain_smc.no_faktur=?"
+                )) {
+                    psbiayalain.setString(1,rs.getString("no_faktur"));
+                    try (ResultSet rsbiayalain=psbiayalain.executeQuery()) {
+                        if(rsbiayalain.next()){
+                            if(Sequel.insertTampJurnal(rsbiayalain.getString("kd_rek"), "BIAYA LAIN PENERIMAAN BARANG NON MEDIS", 0, rsbiayalain.getDouble("biaya_lain"))==false){
+                                sukses=false;
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    sukses=false;
+                    System.out.println("Notif Biaya Lain : "+e);
+                }
                 if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Penerimaan_NonMedis from set_akun"), "HUTANG BARANG NON MEDIS", rs.getDouble("tagihan"), 0)==false){
                     sukses=false;
                 }
@@ -1367,6 +1382,9 @@ public class IPSRSCariPemesanan extends javax.swing.JDialog {
                     tabMode.addRow(new Object[]{rs.getString("no_order"),"Tgl.Faktur",": "+rs.getString("tgl_faktur"),"","","","Total",":",Valid.SetAngka(rs.getDouble("total2"))});
                     tabMode.addRow(new Object[]{"","Tgl.Datang",": "+rs.getString("tgl_pesan"),"","","","Meterai",":",Valid.SetAngka(rs.getDouble("meterai"))});
                     tabMode.addRow(new Object[]{"","Jth.Tempo",": "+rs.getString("tgl_tempo"),"","","","PPN",":",Valid.SetAngka(rs.getDouble("ppn"))});
+                    if(Sequel.cariExistsSmc("select * from ipsrspemesanan_biaya_lain_smc where ipsrspemesanan_biaya_lain_smc.no_faktur=?",rs.getString("no_faktur"))){
+                        tabMode.addRow(new Object[]{"","","","","","","Biaya Lain",":",Valid.SetAngka(Sequel.cariDoubleSmc("select ipsrspemesanan_biaya_lain_smc.biaya_lain from ipsrspemesanan_biaya_lain_smc where ipsrspemesanan_biaya_lain_smc.no_faktur=?",rs.getString("no_faktur")))});
+                    }
                     tabMode.addRow(new Object[]{"","Status Bayar",": "+rs.getString("status"),"","","","Tagihan",":",Valid.SetAngka(rs.getDouble("tagihan"))});
                     tagihan=tagihan+rs.getDouble("tagihan");
                 }
