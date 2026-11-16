@@ -77,9 +77,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import smc.ui.swing.JasperViewerSMC;
-/*
-import uz.ncipro.calendar.JDateTimePicker;
-*/
 import widget.Button;
 import widget.ComboBox;
 import widget.DateTimePickerSMC;
@@ -159,10 +156,6 @@ public final class validasi {
 
     public void autonomor1Smc(JTextComponent component, String prefix, String table, String kolom, int panjang, String pad, Tanggal tanggal) {
         autonomorSmc(component, prefix, "", table, kolom, panjang, pad, validasi.this.getTglSmc(tanggal));
-    }
-
-    public void autonomorSmc(JTextComponent component, String prefix, String table, String kolom, int panjang, String pad) {
-        component.setText(sek.autonomorSmc(prefix, table, kolom, panjang, pad));
     }
 
     public void renomorSmc(JTextComponent component, int panjang, String pad) {
