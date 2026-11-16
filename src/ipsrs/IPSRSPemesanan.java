@@ -800,6 +800,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
                 }
 
                 if(sukses==true){
+                    Sequel.mengupdatetfSmc("surat_pemesanan_non_medis", "status = 'Sudah Datang'", "no_pemesanan = ?", NoOrder.getText());
                     Sequel.Commit();
                 }else{
                     Sequel.RollBack();
