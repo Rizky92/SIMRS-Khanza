@@ -1413,103 +1413,6 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
         LTagiha.setText(Valid.SetAngka(ttl + ppn + meterai));
     }
 
-    private void hitungBarisSmc(int baris, int kolom) {
-        if (menghitungSmc || ((0 != kolom) && (5 != kolom) && (7 != kolom) && (8 != kolom))) {
-            return;
-        }
-        menghitungSmc = true;
-        try {
-            if (!jumlahValidSmc(tabMode.getValueAt(baris, 0))) {
-                tabMode.setValueAt("", baris, 0);
-            }
-            if (null == tabMode.getValueAt(baris, 5)) {
-                tabMode.setValueAt(0d, baris, 5);
-            }
-            double jumlahBeli = angkaSmc(tabMode.getValueAt(baris, 0)), subtotalBeli = 0, persenDiskon = angkaSmc(tabMode.getValueAt(baris, 7)), nominalDiskon = 0;
-            if (jumlahBeli > 0) {
-                subtotalBeli = jumlahBeli * angkaSmc(tabMode.getValueAt(baris, 5));
-            }
-            if (subtotalBeli > 0) {
-                if (8 == kolom) {
-                    nominalDiskon = angkaSmc(tabMode.getValueAt(baris, 8));
-                    persenDiskon = nominalDiskon * 100 / subtotalBeli;
-                } else {
-                    nominalDiskon = Math.round(subtotalBeli * persenDiskon / 100);
-                }
-            }
-            tabMode.setValueAt(subtotalBeli, baris, 6);
-            tabMode.setValueAt(persenDiskon, baris, 7);
-            tabMode.setValueAt(nominalDiskon, baris, 8);
-            tabMode.setValueAt(subtotalBeli - nominalDiskon, baris, 9);
-        } finally {
-            menghitungSmc = false;
-        }
-        jadwalkanTotalSmc();
-    }
-
-    private void kosongkanSelSmc(KeyEvent evt) {
-        int baris = tbDokter.getSelectedRow(), kolom = tbDokter.getSelectedColumn();
-        if (tbDokter.isEditing() || (-1 == baris) || (-1 == kolom)) {
-            return;
-        }
-        if (0 == kolom) {
-            tbDokter.setValueAt("", baris, kolom);
-        } else if ((5 == kolom) || (7 == kolom) || (8 == kolom)) {
-            tbDokter.setValueAt(0d, baris, kolom);
-        }
-        evt.consume();
-    }
-
-    private boolean jumlahValidSmc(Object nilai) {
-        if (null == nilai) {
-            return false;
-        }
-        String teks = nilai.toString().trim();
-        if (teks.isEmpty()) {
-            return true;
-        }
-        try {
-            Double.parseDouble(teks);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    private void jadwalkanTotalSmc() {
-        if (!totalTertundaSmc) {
-            totalTertundaSmc = true;
-            SwingUtilities.invokeLater(() -> {
-                totalTertundaSmc = false;
-                hitungTotalSmc();
-            });
-        }
-    }
-
-    private double persenPPNSmc() {
-        return angkaSmc(tppn.getText().replace(',', '.'));
-    }
-
-    private void hitungTotalSmc() {
-        menghitungSmc = true;
-        try {
-            getData();
-        } finally {
-            menghitungSmc = false;
-        }
-    }
-
-    private double angkaSmc(Object nilai) {
-        if (nilai instanceof Number) {
-            return ((Number) nilai).doubleValue();
-        }
-        try {
-            return Double.parseDouble(nilai.toString().trim());
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
     public void isCek(){
         autoNomor();
         TCari.requestFocus();
@@ -1627,6 +1530,122 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
             if (myObj != null) try { myObj.close(); } catch (Exception e) {}
             response = null;
             root = null;
+        }
+    }
+
+    private void hitungBarisSmc(int baris, int kolom) {
+        if (menghitungSmc || ((0 != kolom) && (5 != kolom) && (7 != kolom) && (8 != kolom))) {
+            return;
+        }
+
+        menghitungSmc = true;
+
+        try {
+            if (!jumlahValidSmc(tabMode.getValueAt(baris, 0))) {
+                tabMode.setValueAt("", baris, 0);
+            }
+
+            if (null == tabMode.getValueAt(baris, 5)) {
+                tabMode.setValueAt(0d, baris, 5);
+            }
+
+            double jumlahBeli = angkaSmc(tabMode.getValueAt(baris, 0)),
+                subtotalBeli = 0,
+                persenDiskon = angkaSmc(tabMode.getValueAt(baris, 7)),
+                nominalDiskon = 0;
+
+            if (jumlahBeli > 0) {
+                subtotalBeli = jumlahBeli * angkaSmc(tabMode.getValueAt(baris, 5));
+            }
+
+            if (subtotalBeli > 0) {
+                if (8 == kolom) {
+                    nominalDiskon = angkaSmc(tabMode.getValueAt(baris, 8));
+                    persenDiskon = nominalDiskon * 100 / subtotalBeli;
+                } else {
+                    nominalDiskon = Math.round(subtotalBeli * persenDiskon / 100);
+                }
+            }
+
+            tabMode.setValueAt(subtotalBeli, baris, 6);
+            tabMode.setValueAt(persenDiskon, baris, 7);
+            tabMode.setValueAt(nominalDiskon, baris, 8);
+            tabMode.setValueAt(subtotalBeli - nominalDiskon, baris, 9);
+        } finally {
+            menghitungSmc = false;
+        }
+
+        jadwalkanTotalSmc();
+    }
+
+    private void kosongkanSelSmc(KeyEvent evt) {
+        int baris = tbDokter.getSelectedRow(), kolom = tbDokter.getSelectedColumn();
+        if (tbDokter.isEditing() || (-1 == baris) || (-1 == kolom)) {
+            return;
+        }
+
+        if (0 == kolom) {
+            tbDokter.setValueAt("", baris, kolom);
+        } else if ((5 == kolom) || (7 == kolom) || (8 == kolom)) {
+            tbDokter.setValueAt(0d, baris, kolom);
+        }
+
+        evt.consume();
+    }
+
+    private boolean jumlahValidSmc(Object nilai) {
+        if (null == nilai) {
+            return false;
+        }
+
+        String teks = nilai.toString().trim();
+
+        if (teks.isEmpty()) {
+            return true;
+        }
+
+        try {
+            Double.parseDouble(teks);
+
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private void jadwalkanTotalSmc() {
+        if (!totalTertundaSmc) {
+            totalTertundaSmc = true;
+            SwingUtilities.invokeLater(() -> {
+                totalTertundaSmc = false;
+                hitungTotalSmc();
+            });
+        }
+    }
+
+    private double persenPPNSmc() {
+        return angkaSmc(tppn.getText().replace(',', '.'));
+    }
+
+    private void hitungTotalSmc() {
+        menghitungSmc = true;
+
+        try {
+            getData();
+        } finally {
+            menghitungSmc = false;
+        }
+    }
+
+    private double angkaSmc(Object nilai) {
+        if (nilai instanceof Number) {
+            return ((Number) nilai).doubleValue();
+        }
+
+        try {
+            return Double.parseDouble(nilai.toString().trim());
+        } catch (Exception e) {
+            return 0;
         }
     }
 
