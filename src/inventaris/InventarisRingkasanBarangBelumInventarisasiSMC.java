@@ -12,6 +12,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,8 +49,8 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
 
         tabMode = new DefaultTableModel(null, new Object[] {
             "Kode Barang", "Nama Barang", "Produsen", "Merk", "Tahun Produksi",
-            "Kategori", "Jenis", "No. Faktur", "Tgl. Pemesanan", "Supplier",
-            "Harga", "Jumlah", "Subtotal", "Belum Diaset"
+            "Kategori", "Jenis", "Penerimaan", "No. Faktur", "Tgl. Terima", "Supplier/Pemberi",
+            "Harga", "Jumlah", "Subtotal", "Harga Aset", "Belum Diaset"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -57,7 +59,7 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
 
             @Override
             public Class getColumnClass(int columnIndex) {
-                if (columnIndex == 10 || columnIndex == 11 || columnIndex == 12 || columnIndex == 13) {
+                if (columnIndex >= 11) {
                     return Double.class;
                 }
 
@@ -87,19 +89,23 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
             } else if (i == 6) {
                 column.setPreferredWidth(90);
             } else if (i == 7) {
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(75);
             } else if (i == 8) {
-                column.setPreferredWidth(90);
+                column.setPreferredWidth(100);
             } else if (i == 9) {
-                column.setPreferredWidth(150);
-            } else if (i == 10) {
                 column.setPreferredWidth(70);
+            } else if (i == 10) {
+                column.setPreferredWidth(150);
             } else if (i == 11) {
+                column.setPreferredWidth(90);
+            } else if (i == 12) {
                 column.setPreferredWidth(40);
             } else if (i == 13) {
-                column.setPreferredWidth(80);
-            } else if (i == 13) {
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(90);
+            } else if (i == 14) {
+                column.setPreferredWidth(90);
+            } else if (i == 15) {
+                column.setPreferredWidth(75);
             }
         }
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
@@ -118,13 +124,13 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppDetailFaktur = new javax.swing.JMenuItem();
-        ppJadikanAset = new javax.swing.JMenuItem();
+        jPopupMenu1 = new widget.PopupMenu();
+        ppDetailFaktur = new widget.MenuItem();
+        ppJadikanAset = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
         tbDokter = new widget.Table();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new widget.PanelBiasa();
         panelisi1 = new widget.panelisi();
         label10 = new widget.Label();
         TCari = new widget.TextBox();
@@ -154,6 +160,8 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
         btnSuplier = new widget.Button();
         label12 = new widget.Label();
         TglBeli2 = new widget.Tanggal();
+        label13 = new widget.Label();
+        CmbPenerimaan = new widget.ComboBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -228,6 +236,7 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
 
         internalFrame1.add(scrollPane1, java.awt.BorderLayout.CENTER);
 
+        jPanel1.setBorder(null);
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(816, 100));
@@ -394,7 +403,7 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
         panelisi3.add(NoFaktur);
         NoFaktur.setBounds(84, 10, 219, 23);
 
-        label11.setText("Tgl.Datang :");
+        label11.setText("Tgl.Terima :");
         label11.setName("label11"); // NOI18N
         label11.setPreferredSize(new java.awt.Dimension(70, 23));
         panelisi3.add(label11);
@@ -447,6 +456,17 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
         TglBeli2.setName("TglBeli2"); // NOI18N
         panelisi3.add(TglBeli2);
         TglBeli2.setBounds(208, 40, 95, 23);
+
+        label13.setText("Penerimaan :");
+        label13.setName("label13"); // NOI18N
+        panelisi3.add(label13);
+        label13.setBounds(305, 40, 80, 23);
+
+        CmbPenerimaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Pemesanan", "Pembelian", "Hibah" }));
+        CmbPenerimaan.setLightWeightPopupEnabled(false);
+        CmbPenerimaan.setName("CmbPenerimaan"); // NOI18N
+        panelisi3.add(CmbPenerimaan);
+        CmbPenerimaan.setBounds(389, 40, 110, 23);
 
         internalFrame1.add(panelisi3, java.awt.BorderLayout.PAGE_START);
 
@@ -559,37 +579,40 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
         nmjenis.setText("");
         kdsup.setText("");
         nmsup.setText("");
+        CmbPenerimaan.setSelectedIndex(0);
         tampilSmc();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (ceksukses) {
+            JOptionPane.showMessageDialog(null, "Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        BtnCariActionPerformed(evt);
         if (tabMode.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        } else if (tabMode.getRowCount() != 0) {
-            Sequel.queryu("delete from temporary where temp37='" + akses.getalamatip() + "'");
-            int row = tabMode.getRowCount();
-            int i = 0;
-            for (; i < row; i++) {
-                Sequel.menyimpan("temporary", "'" + i + "','" +
-                    tabMode.getValueAt(i, 0).toString() + "','" +
-                    tabMode.getValueAt(i, 1).toString() + "','" +
-                    tabMode.getValueAt(i, 2).toString() + "','" +
-                    tabMode.getValueAt(i, 3).toString() + "','" +
-                    tabMode.getValueAt(i, 4).toString() + "','" +
-                    tabMode.getValueAt(i, 5).toString() + "','" +
-                    tabMode.getValueAt(i, 6).toString() + "','" +
-                    tabMode.getValueAt(i, 7).toString() + "','" +
-                    tabMode.getValueAt(i, 8).toString() + "','','','','','','','','','','','','','','','','','','','','','','','','','','','','" + akses.getalamatip() + "'", "Transaksi Penerimaan");
+        } else {
+            Sequel.deleteTemporary();
+            double unitbelum = 0, nilaibelum = 0;
+            for (int i = 0; i < tbDokter.getRowCount(); i++) {
+                double sisa = (double) tbDokter.getValueAt(i, 15);
+                if (sisa > 0) {
+                    unitbelum += sisa;
+                    nilaibelum += sisa * (double) tbDokter.getValueAt(i, 14);
+                }
+                Sequel.temporary(
+                    String.valueOf(i + 1), tbDokter.getValueAt(i, 7).toString(), tbDokter.getValueAt(i, 8).toString(), Valid.SetTgl3(tbDokter.getValueAt(i, 9).toString()),
+                    tbDokter.getValueAt(i, 10).toString(), tbDokter.getValueAt(i, 0).toString(), tbDokter.getValueAt(i, 1).toString(), tbDokter.getValueAt(i, 3).toString(),
+                    tbDokter.getValueAt(i, 6).toString(), Valid.SetAngka((double) tbDokter.getValueAt(i, 12)), Valid.SetAngka((double) tbDokter.getValueAt(i, 14)), Valid.SetAngka(sisa)
+                );
             }
-            i++;
-            Sequel.menyimpan("temporary", "'0','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','" + akses.getalamatip() + "'", "Transaksi Penerimaan");
-            i++;
-            Sequel.menyimpan("temporary", "'0','Jml.Total :','','','','','','','','" + LTotal.getText() + "','','','','','','','','','','','','','','','','','','','','','','','','','','','','" + akses.getalamatip() + "'", "Transaksi Penerimaan");
 
             Map<String, Object> param = new HashMap<>();
+            param.put("periode", "Tanggal Terima " + TglBeli1.getSelectedItem() + " s.d. " + TglBeli2.getSelectedItem() + (CmbPenerimaan.getSelectedIndex() > 0 ? ", Penerimaan " + CmbPenerimaan.getSelectedItem() : ""));
+            param.put("jumlahdata", String.valueOf(tbDokter.getRowCount()));
+            param.put("jumlahunit", Valid.SetAngka(unitbelum));
+            param.put("nilaibelum", Valid.SetAngka(nilaibelum));
             param.put("namars", akses.getnamars());
             param.put("alamatrs", akses.getalamatrs());
             param.put("kotars", akses.getkabupatenrs());
@@ -597,7 +620,7 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
             param.put("kontakrs", akses.getkontakrs());
             param.put("emailrs", akses.getemailrs());
             param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPemesananAset.jasper", "report", "::[ Transaksi Penerimaan Barang Aset/Inventaris ]::", "select * from temporary where temporary.temp37='" + akses.getalamatip() + "' order by temporary.no", param);
+            Valid.reportTempSmc("rptRingkasanBarangBelumInventarisasiSMC.jasper", "report", "::[ Ringkasan Barang Belum Inventarisasi ]::", param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -631,17 +654,81 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
     }//GEN-LAST:event_formWindowOpened
 
     private void ppJadikanAsetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppJadikanAsetActionPerformed
-        // spawn ke InventarisKoleksi
-        // di menu terkait, apabila barang lebih dari 1 maka akan refresh untuk mengulang inputan
-        // dan hitung barang yang sudah diberikan no. aset
-        // apabila sudah lebih dari 1, maka keluar dari menu dan menu ini refresh.
-        // apabila jumlah barang diasetkan belum sesuai dengan barang diterimakan,
-        // maka ada warning untuk mengakhiri proses aset.
-        // ketika kembali ke menu setelah refresh hitung ulang barang yang belum dilakukan inventaris
+        if (tbDokter.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Silahkan pilih barang terlebih dahulu..!!");
+            return;
+        }
+
+        int row = tbDokter.getSelectedRow();
+        String kodebarang = tbDokter.getValueAt(row, 0).toString();
+        String penerimaan = tbDokter.getValueAt(row, 7).toString();
+        String nofaktur = tbDokter.getValueAt(row, 8).toString();
+        if ((double) tbDokter.getValueAt(row, 15) <= 0) {
+            JOptionPane.showMessageDialog(null, "Seluruh barang " + tbDokter.getValueAt(row, 1) + " dari faktur " + nofaktur + " sudah diinventarisasi..!!");
+            return;
+        }
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        InventarisKoleksi koleksi = new InventarisKoleksi(null, false);
+        koleksi.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                tampilSmc();
+            }
+        });
+        koleksi.isCek();
+        koleksi.setPenerimaanSmc(
+            "Hibah".equals(penerimaan) ? "Hibah" : "Beli", nofaktur, kodebarang, tbDokter.getValueAt(row, 9).toString(),
+            BigDecimal.valueOf((double) tbDokter.getValueAt(row, 14)).setScale(2, RoundingMode.HALF_UP).stripTrailingZeros().toPlainString(),
+            (int) Math.round((double) tbDokter.getValueAt(row, 12))
+        );
+        koleksi.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        koleksi.setLocationRelativeTo(internalFrame1);
+        koleksi.setAlwaysOnTop(false);
+        koleksi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_ppJadikanAsetActionPerformed
 
     private void ppDetailFakturActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDetailFakturActionPerformed
-        // TODO add your handling code here:
+        if (tbDokter.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Silahkan pilih barang terlebih dahulu..!!");
+            return;
+        }
+
+        String penerimaan = tbDokter.getValueAt(tbDokter.getSelectedRow(), 7).toString();
+        String nofaktur = tbDokter.getValueAt(tbDokter.getSelectedRow(), 8).toString();
+        String tanggal = tbDokter.getValueAt(tbDokter.getSelectedRow(), 9).toString();
+        if (!aksesDetailPenerimaan(penerimaan)) {
+            JOptionPane.showMessageDialog(null, "Maaf, anda tidak memiliki akses untuk melihat data " + penerimaan.toLowerCase() + " aset..!!");
+            return;
+        }
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        javax.swing.JDialog dialog;
+        if ("Pembelian".equals(penerimaan)) {
+            InventarisCariPembelian pembelian = new InventarisCariPembelian(null, false);
+            pembelian.emptTeks();
+            pembelian.isCek();
+            pembelian.setNoFakturSmc(nofaktur, tanggal);
+            dialog = pembelian;
+        } else if ("Hibah".equals(penerimaan)) {
+            InventarisCariHibah hibah = new InventarisCariHibah(null, false);
+            hibah.emptTeks();
+            hibah.isCek();
+            hibah.setNoFakturSmc(nofaktur, tanggal);
+            dialog = hibah;
+        } else {
+            InventarisCariPemesanan pemesanan = new InventarisCariPemesanan(null, false);
+            pemesanan.emptTeks();
+            pemesanan.isCek();
+            pemesanan.setNoFakturSmc(nofaktur, tanggal);
+            dialog = pemesanan;
+        }
+        dialog.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        dialog.setLocationRelativeTo(internalFrame1);
+        dialog.setAlwaysOnTop(false);
+        dialog.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_ppDetailFakturActionPerformed
 
     private void tbDokterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMousePressed
@@ -673,6 +760,7 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
     private widget.Button BtnCari;
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
+    private widget.ComboBox CmbPenerimaan;
     private widget.Label LTotal;
     private widget.TextBox NoFaktur;
     private widget.TextBox TCari;
@@ -682,14 +770,15 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
     private widget.Button btnSatuan;
     private widget.Button btnSuplier;
     private widget.InternalFrame internalFrame1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.PanelBiasa jPanel1;
+    private widget.PopupMenu jPopupMenu1;
     private widget.TextBox kdbar;
     private widget.TextBox kdjenis;
     private widget.TextBox kdsup;
     private widget.Label label10;
     private widget.Label label11;
     private widget.Label label12;
+    private widget.Label label13;
     private widget.Label label15;
     private widget.Label label16;
     private widget.Label label17;
@@ -701,8 +790,8 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
-    private javax.swing.JMenuItem ppDetailFaktur;
-    private javax.swing.JMenuItem ppJadikanAset;
+    private widget.MenuItem ppDetailFaktur;
+    private widget.MenuItem ppJadikanAset;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables
@@ -716,6 +805,7 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
             new SwingWorker<Void, Object[]>() {
                 final String tglawal = Valid.getTglSmc(TglBeli1);
                 final String tglakhir = Valid.getTglSmc(TglBeli2);
+                final String penerimaan = CmbPenerimaan.getSelectedIndex() > 0 ? CmbPenerimaan.getSelectedItem().toString() : "";
                 final String nofaktur = NoFaktur.getText().trim();
                 final String kodesuplier = kdsup.getText().trim();
                 final String idjenis = kdjenis.getText().trim();
@@ -725,22 +815,34 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
                 @Override
                 protected Void doInBackground() throws Exception {
                     try (PreparedStatement ps = koneksi.prepareStatement(
-                        "with ba as (select i.kode_barang, i.no_faktur, count(*) as jumlah from inventaris i where i.no_faktur is not null group by i.kode_barang, i.no_faktur) " +
-                        "select idp.kode_barang, b.nama_barang, bp.nama_produsen, bm.nama_merk, b.thn_produksi, bk.nama_kategori, bj.nama_jenis, ip.no_faktur, ip.tgl_pesan, " +
-                        "ps.nama_suplier, idp.harga, idp.jumlah, idp.subtotal, (idp.jumlah - ifnull(ba.jumlah, 0)) as sisa_gudang from inventaris_pemesanan ip " +
-                        "inner join inventaris_detail_pesan idp on ip.no_faktur = idp.no_faktur inner join inventaris_barang b on idp.kode_barang = b.kode_barang " +
-                        "inner join inventaris_produsen bp on b.kode_produsen = bp.kode_produsen inner join inventaris_merk bm on b.id_merk = bm.id_merk " +
-                        "inner join inventaris_kategori bk on b.id_kategori = bk.id_kategori inner join inventaris_jenis bj on b.id_jenis = bj.id_jenis " +
-                        "inner join inventaris_suplier ps on ip.kode_suplier = ps.kode_suplier left join ba on ip.no_faktur = ba.no_faktur and " +
-                        "idp.kode_barang = ba.kode_barang where ip.tgl_pesan between ? and ? " + (nofaktur.isBlank() ? "" : "and ip.no_faktur like ? ") +
-                        (kodesuplier.isBlank() ? "" : "and ip.kode_suplier = ? ") + (idjenis.isBlank() ? "" : "and b.id_jenis = ? ") + (kodebrng.isBlank() ? "" :
-                        "and idp.kode_barang = ? ") + (cari.isBlank() ? "" : "and (idp.kode_barang like ? or b.nama_barang like ? or bp.nama_produsen like ? or " +
-                        "bm.nama_merk like ? or b.thn_produksi like ? or bk.nama_kategori like ? or bj.nama_jenis like ? or ip.no_faktur like ? or ip.kode_suplier " +
-                        "like ? or ps.nama_suplier like ?) ") + "order by ip.tgl_pesan desc, ip.no_faktur, b.nama_barang"
+                        "with ba as (select i.no_faktur, i.kode_barang, i.asal_barang, count(*) as jumlah from inventaris i where i.no_faktur is not null group by i.no_faktur, " +
+                        "i.kode_barang, i.asal_barang), pn as (select 'Pemesanan' as penerimaan, 'Beli' as asal_barang, p.no_faktur, p.tgl_pesan as tanggal, p.kode_suplier as " +
+                        "kode_asal, s.nama_suplier as nama_asal, d.kode_barang, d.harga, d.jumlah, d.subtotal, round(d.total / d.jumlah * (1 + if(p.total2 > 0, p.ppn / " +
+                        "p.total2, 0)), 2) as harga_aset from inventaris_pemesanan p inner join inventaris_detail_pesan d on p.no_faktur = d.no_faktur inner join " +
+                        "inventaris_suplier s on p.kode_suplier = s.kode_suplier where d.jumlah > 0 union all select 'Pembelian', 'Beli', p.no_faktur, p.tgl_beli, " +
+                        "p.kode_suplier, s.nama_suplier, d.kode_barang, d.harga, d.jumlah, d.subtotal, round(d.total / d.jumlah * (1 + if(p.total > 0, p.ppn / p.total, 0)), " +
+                        "2) from inventaris_pembelian p inner join inventaris_detail_beli d on p.no_faktur = d.no_faktur inner join inventaris_suplier s on p.kode_suplier = " +
+                        "s.kode_suplier where d.jumlah > 0 union all select 'Hibah', 'Hibah', h.no_hibah, h.tgl_hibah, h.kode_pemberi, ifnull(ph.nama_pemberi, ''), " +
+                        "d.kode_barang, ifnull(d.h_hibah, 0), d.jumlah, ifnull(d.subtotalhibah, 0), ifnull(d.h_hibah, 0) from inventaris_hibah h inner join " +
+                        "inventaris_detail_hibah d on h.no_hibah = d.no_hibah left join pemberihibah ph on h.kode_pemberi = ph.kode_pemberi where d.jumlah > 0) " +
+                        "select pn.penerimaan, pn.no_faktur, pn.tanggal, pn.nama_asal, pn.kode_barang, b.nama_barang, bp.nama_produsen, bm.nama_merk, b.thn_produksi, " +
+                        "bk.nama_kategori, bj.nama_jenis, pn.harga, pn.jumlah, pn.subtotal, pn.harga_aset, (pn.jumlah - ifnull(ba.jumlah, 0)) as sisa from pn inner join " +
+                        "inventaris_barang b on pn.kode_barang = b.kode_barang inner join inventaris_produsen bp on b.kode_produsen = bp.kode_produsen inner join " +
+                        "inventaris_merk bm on b.id_merk = bm.id_merk inner join inventaris_kategori bk on b.id_kategori = bk.id_kategori inner join inventaris_jenis bj on " +
+                        "b.id_jenis = bj.id_jenis left join ba on pn.no_faktur = ba.no_faktur and pn.kode_barang = ba.kode_barang and pn.asal_barang = ba.asal_barang " +
+                        "where pn.tanggal between ? and ? " + (penerimaan.isBlank() ? "" : "and pn.penerimaan = ? ") + (nofaktur.isBlank() ? "" : "and pn.no_faktur like ? ") +
+                        (kodesuplier.isBlank() ? "" : "and pn.penerimaan <> 'Hibah' and pn.kode_asal = ? ") + (idjenis.isBlank() ? "" : "and b.id_jenis = ? ") +
+                        (kodebrng.isBlank() ? "" : "and pn.kode_barang = ? ") + (cari.isBlank() ? "" : "and (pn.kode_barang like ? or b.nama_barang like ? or " +
+                        "bp.nama_produsen like ? or bm.nama_merk like ? or b.thn_produksi like ? or bk.nama_kategori like ? or bj.nama_jenis like ? or pn.no_faktur like ? " +
+                        "or pn.kode_asal like ? or pn.nama_asal like ? or pn.penerimaan like ?) ") + "order by pn.tanggal desc, pn.no_faktur, b.nama_barang"
                     )) {
                         int p = 0;
                         ps.setString(++p, tglawal);
                         ps.setString(++p, tglakhir);
+
+                        if (!penerimaan.isBlank()) {
+                            ps.setString(++p, penerimaan);
+                        }
 
                         if (!nofaktur.isBlank()) {
                             ps.setString(++p, "%" + nofaktur + "%");
@@ -759,24 +861,17 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
                         }
 
                         if (!cari.isBlank()) {
-                            ps.setString(++p, "%" + cari + "%");
-                            ps.setString(++p, "%" + cari + "%");
-                            ps.setString(++p, "%" + cari + "%");
-                            ps.setString(++p, "%" + cari + "%");
-                            ps.setString(++p, "%" + cari + "%");
-                            ps.setString(++p, "%" + cari + "%");
-                            ps.setString(++p, "%" + cari + "%");
-                            ps.setString(++p, "%" + cari + "%");
-                            ps.setString(++p, "%" + cari + "%");
-                            ps.setString(++p, "%" + cari + "%");
+                            for (int i = 0; i < 11; i++) {
+                                ps.setString(++p, "%" + cari + "%");
+                            }
                         }
 
                         try (ResultSet rs = ps.executeQuery()) {
                             while (rs.next()) {
                                 publish(new Object[] {
                                     rs.getString("kode_barang"), rs.getString("nama_barang"), rs.getString("nama_produsen"), rs.getString("nama_merk"), rs.getString("thn_produksi"),
-                                    rs.getString("nama_kategori"), rs.getString("nama_jenis"), rs.getString("no_faktur"), rs.getString("tgl_pesan"), rs.getString("nama_suplier"),
-                                    rs.getDouble("harga"), rs.getDouble("jumlah"), rs.getDouble("subtotal"), rs.getDouble("sisa_gudang")
+                                    rs.getString("nama_kategori"), rs.getString("nama_jenis"), rs.getString("penerimaan"), rs.getString("no_faktur"), rs.getString("tanggal"),
+                                    rs.getString("nama_asal"), rs.getDouble("harga"), rs.getDouble("jumlah"), rs.getDouble("subtotal"), rs.getDouble("harga_aset"), rs.getDouble("sisa")
                                 });
                             }
                         }
@@ -805,13 +900,35 @@ public class InventarisRingkasanBarangBelumInventarisasiSMC extends javax.swing.
         }
     }
 
+    private boolean aksesDetailPenerimaan(String penerimaan) {
+        switch (penerimaan) {
+            case "Pembelian":
+                return akses.getpengadaan_aset_inventaris();
+            case "Hibah":
+                return akses.gethibah_aset_inventaris();
+            default:
+                return akses.getpenerimaan_aset_inventaris();
+        }
+    }
+
     public void emptTeks() {
         kdbar.setText("");
         nmbar.setText("");
         kdbar.requestFocus();
     }
 
-    public void isCek() {
+    public void setPenerimaan(String penerimaan, String nofaktur, String tanggal) {
+        CmbPenerimaan.setSelectedItem(penerimaan);
+        NoFaktur.setText(nofaktur);
+        if (tanggal != null && !tanggal.isBlank()) {
+            Valid.setTglSmc(TglBeli1, tanggal);
+            Valid.setTglSmc(TglBeli2, tanggal);
+        }
+    }
 
+    public void isCek() {
+        BtnPrint.setEnabled(akses.getringkasan_barang_belum_inventaris_smc());
+        ppJadikanAset.setEnabled(akses.getinventaris_inventaris());
+        ppDetailFaktur.setEnabled(akses.getpenerimaan_aset_inventaris() || akses.getpengadaan_aset_inventaris() || akses.gethibah_aset_inventaris());
     }
 }

@@ -1721,4 +1721,13 @@ public class InventarisSuratPemesananSMC extends javax.swing.JDialog {
     public void panggilgetData() {
         getData();
     }
+
+    public static void perbaruiStatus(String nopemesanan) {
+        new sekuel().executeRawSmc(
+            "update surat_pemesanan_inventaris_smc s set s.status = case when not exists (select 1 from inventaris_pemesanan p where p.no_order = s.no_pemesanan) " +
+            "then 'Proses Pesan' when exists (select 1 from detail_surat_pemesanan_inventaris_smc d where d.no_pemesanan = s.no_pemesanan and d.jumlah > (select " +
+            "ifnull(sum(dp.jumlah), 0) from inventaris_detail_pesan dp inner join inventaris_pemesanan p on dp.no_faktur = p.no_faktur where p.no_order = " +
+            "d.no_pemesanan and dp.kode_barang = d.kode_barang)) then 'Datang Sebagian' else 'Sudah Datang' end where s.no_pemesanan = ?", nopemesanan
+        );
+    }
 }

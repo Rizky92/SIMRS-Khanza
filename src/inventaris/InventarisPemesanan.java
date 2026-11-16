@@ -772,7 +772,7 @@ public class InventarisPemesanan extends javax.swing.JDialog {
                             }
                         }
                     }
-                    Sequel.mengupdatetfSmc("surat_pemesanan_inventaris_smc", "status = 'Sudah Datang'", "no_pemesanan = ?", NoOrder.getText());
+                    InventarisSuratPemesananSMC.perbaruiStatus(NoOrder.getText());
                 }else{
                     sukses=false;
                 }
@@ -1596,22 +1596,29 @@ public class InventarisPemesanan extends javax.swing.JDialog {
                 @Override
                 protected Void doInBackground() throws Exception {
                     try (PreparedStatement ps = koneksi.prepareStatement(
-                        "select d.kode_barang, b.nama_barang, p.nama_produsen, m.nama_merk, k.nama_kategori, j.nama_jenis, d.jumlah, d.h_pesan, d.subtotal, d.dis, " +
-                        "d.besardis, d.total from detail_surat_pemesanan_inventaris_smc d inner join inventaris_barang b on d.kode_barang = b.kode_barang inner join " +
-                        "inventaris_produsen p on b.kode_produsen = p.kode_produsen inner join inventaris_merk m on b.id_merk = m.id_merk inner join " +
-                        "inventaris_kategori k on b.id_kategori = k.id_kategori inner join inventaris_jenis j on b.id_jenis = j.id_jenis where " +
-                        "d.no_pemesanan = ? order by d.kode_barang"
+                        "select d.kode_barang, b.nama_barang, p.nama_produsen, m.nama_merk, k.nama_kategori, j.nama_jenis, d.jumlah, d.h_pesan, d.dis, d.besardis, " +
+                        "d.jumlah - ifnull((select sum(dp.jumlah) from inventaris_detail_pesan dp inner join inventaris_pemesanan ip on dp.no_faktur = ip.no_faktur " +
+                        "where ip.no_order = d.no_pemesanan and dp.kode_barang = d.kode_barang), 0) as sisa from detail_surat_pemesanan_inventaris_smc d inner join " +
+                        "inventaris_barang b on d.kode_barang = b.kode_barang inner join inventaris_produsen p on b.kode_produsen = p.kode_produsen inner join " +
+                        "inventaris_merk m on b.id_merk = m.id_merk inner join inventaris_kategori k on b.id_kategori = k.id_kategori inner join inventaris_jenis j " +
+                        "on b.id_jenis = j.id_jenis where d.no_pemesanan = ? order by d.kode_barang"
                     )) {
                         ps.setString(1, nopemesanan);
                         try (ResultSet rs = ps.executeQuery()) {
                             while (rs.next()) {
-                                ttl1 += rs.getDouble("subtotal");
-                                potongan += rs.getDouble("besardis");
-                                ttl2 += rs.getDouble("total");
+                                double sisa = rs.getDouble("sisa");
+                                if (sisa <= 0) {
+                                    continue;
+                                }
+                                double subtotal = sisa * rs.getDouble("h_pesan");
+                                double besardis = rs.getDouble("jumlah") > 0 ? Math.round(rs.getDouble("besardis") * sisa / rs.getDouble("jumlah")) : 0;
+                                ttl1 += subtotal;
+                                potongan += besardis;
+                                ttl2 += subtotal - besardis;
                                 publish(new Object[] {
-                                    rs.getString("jumlah"), rs.getString("kode_barang"), rs.getString("nama_barang"), rs.getString("nama_produsen"),
+                                    rs.getString("sisa"), rs.getString("kode_barang"), rs.getString("nama_barang"), rs.getString("nama_produsen"),
                                     rs.getString("nama_merk"), rs.getString("nama_kategori"), rs.getString("nama_jenis"), rs.getDouble("h_pesan"),
-                                    rs.getDouble("subtotal"), rs.getDouble("dis"), rs.getDouble("besardis"), rs.getDouble("total")
+                                    subtotal, rs.getDouble("dis"), besardis, subtotal - besardis
                                 });
                             }
                             ppn = (Valid.SetAngka(tppn.getText()) / 100) * ttl2;

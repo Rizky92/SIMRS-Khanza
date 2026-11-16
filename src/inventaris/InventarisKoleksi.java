@@ -40,6 +40,7 @@ import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -159,6 +160,8 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
     }
     private double nilai_inven=0;
     private int pilihan=0;
+    private String asalPenerimaanSmc = "", noFakturPenerimaanSmc = "", kodeBarangPenerimaanSmc = "", tglPenerimaanSmc = "", hargaPenerimaanSmc = "";
+    private int jumlahPenerimaanSmc = 0;
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -905,12 +908,21 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
             Valid.textKosong(id_ruang,"Ruangan");
         }else {
                 //menyimpan-------------------------------------------------
+                /*
                 Sequel.menyimpan("inventaris","'"+no_inventaris.getText()+"','"+kode_barang.getText()+"','"+asal_barang.getSelectedItem()+"','"+Valid.SetTgl(tgl_pengadaan.getSelectedItem()+"")+
                         "','"+harga.getText()+"','"+status_barang.getSelectedItem()+"','"+id_ruang.getText()+"','"+no_rak.getSelectedItem()+"','"+no_box.getSelectedItem()+"'","No.Inventaris");
+                */
+                if (!simpanSmc()) {
+                    return;
+                }
                 //----------------------------------------------------------
                 no_inventaris.requestFocus();
             runBackground(() ->tampil());
             emptTeks();
+            if (!noFakturPenerimaanSmc.isBlank() && sisaPenerimaanSmc() <= 0) {
+                JOptionPane.showMessageDialog(null, "Seluruh barang " + nama_barang.getText() + " dari faktur " + noFakturPenerimaanSmc + " sudah diinventarisasi..!!");
+                dispose();
+            }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -1589,6 +1601,8 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         //Valid.autoNomer(" jns_perawatan ","JP",6,TKd);
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_inventaris,5),signed)),0) from inventaris  ","I",9,no_inventaris);
         no_inventaris.requestFocus();
+        noFaktur.setText("");
+        isiPenerimaanSmc();
     }
 
     private void getData() {
@@ -1608,6 +1622,8 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
                 nm_ruang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString());
                 no_rak.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString());
                 no_box.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),15).toString());
+                noFaktur.setText(Sequel.cariIsiSmc("select inventaris.no_faktur from inventaris where inventaris.no_inventaris = ?", tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 0).toString()));
+                kunciAsalPenerimaanSmc(!noFakturPenerimaanSmc.isBlank() || !noFaktur.getText().isBlank());
           }
     }
 
@@ -1776,7 +1792,97 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        if (!konfirmasiTutupPenerimaanSmc()) {
+            return;
+        }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    public void setPenerimaanSmc(String asalbarang, String nofaktur, String kodebarang, String tglDatang, String hargaSatuan, int jumlahDiterima) {
+        asalPenerimaanSmc = asalbarang;
+        noFakturPenerimaanSmc = nofaktur;
+        kodeBarangPenerimaanSmc = kodebarang;
+        tglPenerimaanSmc = tglDatang;
+        hargaPenerimaanSmc = hargaSatuan;
+        jumlahPenerimaanSmc = jumlahDiterima;
+        ChkInput.setSelected(true);
+        isForm();
+        emptTeks();
+    }
+
+    private void isiPenerimaanSmc() {
+        kunciAsalPenerimaanSmc(false);
+        if (noFakturPenerimaanSmc.isBlank()) {
+            return;
+        }
+        noFaktur.setText(noFakturPenerimaanSmc);
+        kode_barang.setText(kodeBarangPenerimaanSmc);
+        isBarang();
+        asal_barang.setSelectedItem(asalPenerimaanSmc);
+        Valid.setTglSmc(tgl_pengadaan, tglPenerimaanSmc);
+        harga.setText(hargaPenerimaanSmc);
+        kunciAsalPenerimaanSmc(true);
+        if (internalFrame1.getBorder() instanceof TitledBorder) {
+            ((TitledBorder) internalFrame1.getBorder()).setTitle("::[ Data Aset Inventaris, Penerimaan " + noFakturPenerimaanSmc + " : " + sisaPenerimaanSmc() + " dari " + jumlahPenerimaanSmc + " Unit Belum Diinventarisasi ]::");
+            internalFrame1.repaint();
+        }
+    }
+
+    private void kunciAsalPenerimaanSmc(boolean kunci) {
+        kode_barang.setEditable(!kunci);
+        btnBarang.setEnabled(!kunci);
+        asal_barang.setEnabled(!kunci);
+    }
+
+    private int sisaPenerimaanSmc() {
+        return jumlahPenerimaanSmc - Sequel.cariIntegerSmc(
+            "select count(*) from inventaris where inventaris.no_faktur = ? and inventaris.kode_barang = ? and inventaris.asal_barang = ?",
+            noFakturPenerimaanSmc, kodeBarangPenerimaanSmc, asalPenerimaanSmc
+        );
+    }
+
+    private boolean simpanSmc() {
+        if (noFakturPenerimaanSmc.isBlank()) {
+            if (Sequel.menyimpantfSmc("inventaris", "no_inventaris, kode_barang, asal_barang, tgl_pengadaan, harga, status_barang, id_ruang, no_rak, no_box",
+                no_inventaris.getText(), kode_barang.getText(), asal_barang.getSelectedItem().toString(), Valid.getTglSmc(tgl_pengadaan), harga.getText(),
+                status_barang.getSelectedItem().toString(), id_ruang.getText(), no_rak.getSelectedItem().toString(), no_box.getSelectedItem().toString()
+            )) {
+                return true;
+            }
+            JOptionPane.showMessageDialog(null, "Gagal menyimpan data, kemungkinan No.Inventaris sudah ada..!!");
+            return false;
+        }
+
+        if (!kodeBarangPenerimaanSmc.equals(kode_barang.getText())) {
+            JOptionPane.showMessageDialog(null, "Barang tidak sesuai dengan barang pada faktur " + noFakturPenerimaanSmc + "..!!");
+            emptTeks();
+            return false;
+        }
+
+        if (sisaPenerimaanSmc() <= 0) {
+            JOptionPane.showMessageDialog(null, "Seluruh barang dari faktur " + noFakturPenerimaanSmc + " sudah diinventarisasi..!!");
+            return false;
+        }
+
+        if (Sequel.menyimpantfSmc("inventaris", "no_inventaris, kode_barang, asal_barang, tgl_pengadaan, harga, status_barang, id_ruang, no_rak, no_box, no_faktur",
+            no_inventaris.getText(), kodeBarangPenerimaanSmc, asalPenerimaanSmc, Valid.getTglSmc(tgl_pengadaan), harga.getText(),
+            status_barang.getSelectedItem().toString(), id_ruang.getText(), no_rak.getSelectedItem().toString(), no_box.getSelectedItem().toString(), noFakturPenerimaanSmc
+        )) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(null, "Gagal menyimpan data, kemungkinan No.Inventaris sudah ada..!!");
+        return false;
+    }
+
+    private boolean konfirmasiTutupPenerimaanSmc() {
+        if (noFakturPenerimaanSmc.isBlank()) {
+            return true;
+        }
+        int sisa = sisaPenerimaanSmc();
+        if (sisa <= 0) {
+            return true;
+        }
+        return JOptionPane.showConfirmDialog(rootPane, "Masih ada " + sisa + " unit " + nama_barang.getText() + " dari faktur " + noFakturPenerimaanSmc + " yang belum diinventarisasi.\nAkhiri proses inventarisasi?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 }

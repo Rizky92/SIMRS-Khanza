@@ -143,6 +143,7 @@ public class InventarisCariPemesanan extends javax.swing.JDialog {
         jPopupMenu1 = new widget.PopupMenu();
         ppHapus = new widget.MenuItem();
         ppBayar = new widget.MenuItem();
+        ppRingkasanBelumInventarisasiSmc = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
         tbDokter = new widget.Table();
@@ -222,6 +223,22 @@ public class InventarisCariPemesanan extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(ppBayar);
+
+        ppRingkasanBelumInventarisasiSmc.setBackground(new java.awt.Color(255, 255, 254));
+        ppRingkasanBelumInventarisasiSmc.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppRingkasanBelumInventarisasiSmc.setForeground(new java.awt.Color(50, 50, 50));
+        ppRingkasanBelumInventarisasiSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppRingkasanBelumInventarisasiSmc.setText("Ringkasan Barang Belum Inventarisasi");
+        ppRingkasanBelumInventarisasiSmc.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppRingkasanBelumInventarisasiSmc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppRingkasanBelumInventarisasiSmc.setName("ppRingkasanBelumInventarisasiSmc"); // NOI18N
+        ppRingkasanBelumInventarisasiSmc.setPreferredSize(new java.awt.Dimension(250, 25));
+        ppRingkasanBelumInventarisasiSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppRingkasanBelumInventarisasiSmcActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(ppRingkasanBelumInventarisasiSmc);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -976,6 +993,11 @@ public class InventarisCariPemesanan extends javax.swing.JDialog {
                     pscaripesan.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                     rs=pscaripesan.executeQuery();
                     if(rs.next()){
+                        if (Sequel.cariExistsSmc("select * from inventaris where inventaris.no_faktur = ? and inventaris.asal_barang = 'Beli'", rs.getString("no_faktur"))) {
+                            JOptionPane.showMessageDialog(null, "Barang dari faktur " + rs.getString("no_faktur") + " sudah diinventarisasi, hapus data inventarisnya terlebih dahulu..!!");
+                            return;
+                        }
+                        String noOrderSmc = Sequel.cariIsiSmc("select inventaris_pemesanan.no_order from inventaris_pemesanan where inventaris_pemesanan.no_faktur = ?", rs.getString("no_faktur"));
                         Sequel.AutoComitFalse();
                         sukses=true;
 
@@ -1000,6 +1022,7 @@ public class InventarisCariPemesanan extends javax.swing.JDialog {
                             sukses=Sequel.queryu2tf("delete from inventaris_pemesanan where no_faktur=?",1,new String[]{rs.getString("no_faktur")});
                         }
                         if(sukses==true){
+                            InventarisSuratPemesananSMC.perbaruiStatus(noOrderSmc);
                             Sequel.Commit();
                             runBackground(() ->tampil());
                         }else{
@@ -1109,6 +1132,32 @@ public class InventarisCariPemesanan extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbDokterMouseClicked
 
+    private void ppRingkasanBelumInventarisasiSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRingkasanBelumInventarisasiSmcActionPerformed
+        String nofaktur = "";
+        for (int row = tbDokter.getSelectedRow(); row >= 0; row--) {
+            String kolomFaktur = tbDokter.getValueAt(row, 0).toString().trim();
+            if (!kolomFaktur.isBlank() && tbDokter.getValueAt(row, 8).toString().isBlank()) {
+                nofaktur = kolomFaktur;
+                break;
+            }
+        }
+
+        if (nofaktur.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Silahkan pilih data penerimaan terlebih dahulu..!!");
+            return;
+        }
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        InventarisRingkasanBarangBelumInventarisasiSMC ringkasan = new InventarisRingkasanBarangBelumInventarisasiSMC(null, false);
+        ringkasan.setPenerimaan("Pemesanan", nofaktur, Sequel.cariIsiSmc("select inventaris_pemesanan.tgl_pesan from inventaris_pemesanan where inventaris_pemesanan.no_faktur = ?", nofaktur));
+        ringkasan.isCek();
+        ringkasan.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        ringkasan.setLocationRelativeTo(internalFrame1);
+        ringkasan.setAlwaysOnTop(false);
+        ringkasan.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_ppRingkasanBelumInventarisasiSmcActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1172,6 +1221,7 @@ public class InventarisCariPemesanan extends javax.swing.JDialog {
     private widget.panelisi panelisi4;
     private widget.MenuItem ppBayar;
     private widget.MenuItem ppHapus;
+    private widget.MenuItem ppRingkasanBelumInventarisasiSmc;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables
@@ -1296,6 +1346,15 @@ public class InventarisCariPemesanan extends javax.swing.JDialog {
             ppHapus.setEnabled(false);
         }
         ppBayar.setEnabled(akses.getbayar_pemesanan_iventaris());
+        ppRingkasanBelumInventarisasiSmc.setEnabled(akses.getringkasan_barang_belum_inventaris_smc());
+    }
+
+    public void setNoFakturSmc(String nofaktur, String tglDatang) {
+        NoFaktur.setText(nofaktur);
+        if (tglDatang != null && !tglDatang.isBlank()) {
+            Valid.setTglSmc(TglBeli1, tglDatang);
+            Valid.setTglSmc(TglBeli2, tglDatang);
+        }
     }
 
     private void isPhoto(){

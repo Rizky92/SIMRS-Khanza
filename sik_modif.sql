@@ -503,6 +503,8 @@ ALTER TABLE `industrifarmasi` MODIFY COLUMN IF EXISTS `kota` varchar(30) NULL DE
 
 ALTER TABLE `inventaris` ADD COLUMN IF NOT EXISTS `no_faktur` varchar(20) NULL DEFAULT NULL AFTER `no_box`;
 
+ALTER TABLE `inventaris` ADD INDEX IF NOT EXISTS `no_faktur`(`no_faktur`, `kode_barang`) USING BTREE;
+
 ALTER TABLE `ipsrsdetailpengeluaran` ADD PRIMARY KEY IF NOT EXISTS (`no_keluar`, `kode_brng`) USING BTREE;
 
 ALTER TABLE `ipsrsdetailpengeluaran` DROP FOREIGN KEY IF EXISTS `ipsrsdetailpengeluaran_ibfk_4`;
@@ -2119,7 +2121,7 @@ CREATE TABLE IF NOT EXISTS `surat_pemesanan_inventaris_smc` (
   `ppn` double NULL DEFAULT NULL,
   `meterai` double NULL DEFAULT NULL,
   `tagihan` double NULL DEFAULT NULL,
-  `status` enum('Proses Pesan','Sudah Datang') NULL DEFAULT NULL,
+  `status` enum('Proses Pesan','Sudah Datang','Datang Sebagian') NULL DEFAULT NULL,
   PRIMARY KEY (`no_pemesanan`) USING BTREE,
   INDEX `kode_suplier`(`kode_suplier`) USING BTREE,
   INDEX `nip`(`nip`) USING BTREE,

@@ -940,8 +940,8 @@ public class InventarisCariSuratPemesananSMC extends javax.swing.JDialog {
         if (tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString().trim().equals("")) {
             Valid.textKosong(TCari, "No.Pemesanan");
         } else {
-            if (Sequel.cariExistsSmc("select * from surat_pemesanan_inventaris_smc where no_pemesanan = ? and status = 'Sudah Datang'", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString())) {
-                JOptionPane.showMessageDialog(null, "Barang sudah datang..!!");
+            if (Sequel.cariExistsSmc("select * from surat_pemesanan_inventaris_smc where no_pemesanan = ? and status in ('Sudah Datang', 'Datang Sebagian')", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString())) {
+                JOptionPane.showMessageDialog(null, "Barang sudah datang, seluruhnya atau sebagian..!!");
             } else {
                 Sequel.menghapusSmc("surat_pemesanan_inventaris_smc", "no_pemesanan = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
                 tampil();
