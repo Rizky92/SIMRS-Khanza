@@ -227,6 +227,8 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         no_rak = new widget.ComboBox();
         label21 = new widget.Label();
         label22 = new widget.Label();
+        label11 = new widget.Label();
+        noFaktur = new widget.TextBox();
         ChkInput = new widget.CekBox();
         PanelAccor = new widget.PanelBiasa();
         ChkAccor = new widget.CekBox();
@@ -557,7 +559,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
             }
         });
         FormInput.add(no_inventaris);
-        no_inventaris.setBounds(68, 10, 140, 23);
+        no_inventaris.setBounds(68, 10, 121, 23);
 
         nm_merk.setEditable(false);
         nm_merk.setName("nm_merk"); // NOI18N
@@ -567,7 +569,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         label8.setText("Tgl.Pengadaan :");
         label8.setName("label8"); // NOI18N
         FormInput.add(label8);
-        label8.setBounds(337, 10, 100, 23);
+        label8.setBounds(392, 10, 90, 23);
 
         label9.setText("Merk :");
         label9.setName("label9"); // NOI18N
@@ -594,7 +596,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         nama_barang.setName("nama_barang"); // NOI18N
         nama_barang.setPreferredSize(new java.awt.Dimension(207, 23));
         FormInput.add(nama_barang);
-        nama_barang.setBounds(190, 40, 510, 23);
+        nama_barang.setBounds(192, 40, 508, 23);
 
         btnBarang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnBarang.setMnemonic('1');
@@ -607,9 +609,9 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
             }
         });
         FormInput.add(btnBarang);
-        btnBarang.setBounds(703, 40, 25, 23);
+        btnBarang.setBounds(703, 40, 28, 23);
 
-        tgl_pengadaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2022" }));
+        tgl_pengadaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-06-2026" }));
         tgl_pengadaan.setDisplayFormat("dd-MM-yyyy");
         tgl_pengadaan.setName("tgl_pengadaan"); // NOI18N
         tgl_pengadaan.setOpaque(false);
@@ -619,12 +621,12 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
             }
         });
         FormInput.add(tgl_pengadaan);
-        tgl_pengadaan.setBounds(440, 10, 100, 23);
+        tgl_pengadaan.setBounds(485, 10, 90, 23);
 
         jLabel18.setText("Status :");
         jLabel18.setName("jLabel18"); // NOI18N
         FormInput.add(jLabel18);
-        jLabel18.setBounds(540, 10, 60, 23);
+        jLabel18.setBounds(578, 10, 60, 23);
 
         status_barang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ada", "Rusak", "Hilang", "Perbaikan", "Dipinjam", "-" }));
         status_barang.setLightWeightPopupEnabled(false);
@@ -635,7 +637,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
             }
         });
         FormInput.add(status_barang);
-        status_barang.setBounds(603, 10, 125, 23);
+        status_barang.setBounds(641, 10, 90, 23);
 
         label12.setText("Kategori :");
         label12.setName("label12"); // NOI18N
@@ -773,7 +775,17 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         label22.setBounds(152, 55, 46, 23);
 
         FormInput.add(jPanel1);
-        jPanel1.setBounds(420, 65, 310, 90);
+        jPanel1.setBounds(420, 65, 311, 90);
+
+        label11.setText("No. Faktur :");
+        label11.setName("label11"); // NOI18N
+        FormInput.add(label11);
+        label11.setBounds(192, 10, 63, 23);
+
+        noFaktur.setEditable(false);
+        noFaktur.setName("noFaktur"); // NOI18N
+        FormInput.add(noFaktur);
+        noFaktur.setBounds(258, 10, 131, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -1463,6 +1475,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private widget.TextBox kode_barang;
     private widget.Label label1;
+    private widget.Label label11;
     private widget.Label label12;
     private widget.Label label13;
     private widget.Label label14;
@@ -1481,6 +1494,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
     private widget.TextBox nm_produsen;
     private widget.TextBox nm_ruang;
     private widget.TextBox nm_ruangcari;
+    private widget.TextBox noFaktur;
     private widget.ComboBox no_box;
     private widget.TextBox no_inventaris;
     private widget.ComboBox no_rak;
