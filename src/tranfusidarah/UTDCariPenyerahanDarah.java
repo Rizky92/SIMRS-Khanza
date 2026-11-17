@@ -907,112 +907,112 @@ public class UTDCariPenyerahanDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_ppCetakNotaActionPerformed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-    if(tabMode.getRowCount()==0){
-        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-        TCari.requestFocus();
-    }else if(tbDokter.getSelectedRow()<= -1){
-        JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus..!!");
-    }else{
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
-            Valid.textKosong(TCari,"No.Penyerahan");
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TCari.requestFocus();
+        }else if(tbDokter.getSelectedRow()<= -1){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus..!!");
         }else{
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().equals("")){
-                int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, Yakin mau dihapus..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
-                if (reply == JOptionPane.YES_OPTION) {
-                    Sequel.AutoComitFalse();
-                    sukses=true;
-                    try {
-                        psdarah=koneksi.prepareStatement(
-                            "select no_kantong from utd_penyerahan_darah_detail where no_penyerahan=? ");
+            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+                Valid.textKosong(TCari,"No.Penyerahan");
+            }else{
+                if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().equals("")){
+                    int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, Yakin mau dihapus..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                    if (reply == JOptionPane.YES_OPTION) {
+                        Sequel.AutoComitFalse();
+                        sukses=true;
                         try {
-                            psdarah.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                            rs2=psdarah.executeQuery();
-                            while(rs2.next()){
-                                Sequel.mengedit("utd_stok_darah","no_kantong=?","status='Ada'",1,new String[]{rs2.getString(1)});
-                            }
-                        } catch (Exception e) {
-                            sukses=false;
-                            System.out.println("Notifikasi Darah : "+e);
-                        }finally{
-                            if(rs2!=null){
-                                rs2.close();
-                            }
-                            if(psdarah!=null){
-                                psdarah.close();
-                            }
-                        }
-                        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString().equals("Sudah Dibayar")){
-                            pscekmedis=koneksi.prepareStatement(sqlpscekmedis);
+                            psdarah=koneksi.prepareStatement(
+                                "select no_kantong from utd_penyerahan_darah_detail where no_penyerahan=? ");
                             try {
-                                pscekmedis.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                                rs=pscekmedis.executeQuery();
-                                while(rs.next()){
-                                    Sequel.menyimpan("utd_stok_medis","'"+rs.getString("kode_brng")+"','"+rs.getString("jml")+"','"+rs.getDouble("harga")+"'",
-                                        "stok=stok+"+rs.getString("jml")+"","kode_brng='"+rs.getString("kode_brng")+"'");
-                                }
-                            } catch (Exception e) {
-                                sukses=false;
-                                System.out.println("Notifikasi : "+e);
-                            } finally{
-                                if(rs!=null){
-                                    rs.close();
-                                }
-                                if(pscekmedis!=null){
-                                    pscekmedis.close();
-                                }
-                            }
-                            psceknonmedis=koneksi.prepareStatement(sqlpsceknonmedis);
-                            try {
-                                psceknonmedis.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                                rs2=psceknonmedis.executeQuery();
+                                psdarah.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                                rs2=psdarah.executeQuery();
                                 while(rs2.next()){
-                                    Sequel.menyimpan("utd_stok_penunjang","'"+rs2.getString("kode_brng")+"','"+rs2.getString("jml")+"','"+rs2.getDouble("harga")+"'",
-                                        "stok=stok+"+rs2.getString("jml")+"","kode_brng='"+rs2.getString("kode_brng")+"'");
+                                    Sequel.mengedit("utd_stok_darah","no_kantong=?","status='Ada'",1,new String[]{rs2.getString(1)});
                                 }
                             } catch (Exception e) {
                                 sukses=false;
-                                System.out.println("Notifikasi : "+e);
-                            } finally{
+                                System.out.println("Notifikasi Darah : "+e);
+                            }finally{
                                 if(rs2!=null){
                                     rs2.close();
                                 }
-                                if(psceknonmedis!=null){
-                                    psceknonmedis.close();
+                                if(psdarah!=null){
+                                    psdarah.close();
                                 }
                             }
+                            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString().equals("Sudah Dibayar")){
+                                pscekmedis=koneksi.prepareStatement(sqlpscekmedis);
+                                try {
+                                    pscekmedis.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                                    rs=pscekmedis.executeQuery();
+                                    while(rs.next()){
+                                        Sequel.menyimpan("utd_stok_medis","'"+rs.getString("kode_brng")+"','"+rs.getString("jml")+"','"+rs.getDouble("harga")+"'",
+                                            "stok=stok+"+rs.getString("jml")+"","kode_brng='"+rs.getString("kode_brng")+"'");
+                                    }
+                                } catch (Exception e) {
+                                    sukses=false;
+                                    System.out.println("Notifikasi : "+e);
+                                } finally{
+                                    if(rs!=null){
+                                        rs.close();
+                                    }
+                                    if(pscekmedis!=null){
+                                        pscekmedis.close();
+                                    }
+                                }
+                                psceknonmedis=koneksi.prepareStatement(sqlpsceknonmedis);
+                                try {
+                                    psceknonmedis.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                                    rs2=psceknonmedis.executeQuery();
+                                    while(rs2.next()){
+                                        Sequel.menyimpan("utd_stok_penunjang","'"+rs2.getString("kode_brng")+"','"+rs2.getString("jml")+"','"+rs2.getDouble("harga")+"'",
+                                            "stok=stok+"+rs2.getString("jml")+"","kode_brng='"+rs2.getString("kode_brng")+"'");
+                                    }
+                                } catch (Exception e) {
+                                    sukses=false;
+                                    System.out.println("Notifikasi : "+e);
+                                } finally{
+                                    if(rs2!=null){
+                                        rs2.close();
+                                    }
+                                    if(psceknonmedis!=null){
+                                        psceknonmedis.close();
+                                    }
+                                }
 
-                            if(sukses==true){
-                                subtotalpendapatan=Sequel.cariIsiAngka("select sum(total) from utd_penyerahan_darah_detail where no_penyerahan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                                Sequel.deleteTampJurnal();
-                                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Penyerahan_Darah from set_akun"), "PENJUALAN DARAH UTD", subtotalpendapatan, 0)==false){
-                                    sukses=false;
-                                }
-                                if(Sequel.insertTampJurnal(Sequel.cariIsi("select kd_rek from utd_penyerahan_darah where no_penyerahan = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()), "CARA BAYAR", 0,subtotalpendapatan)==false){
-                                    sukses=false;
-                                }
                                 if(sukses==true){
-                                    sukses=jur.simpanJurnal(nopenyerahan.getText(),"U","PEMBATALAN PENJUALAN DARAH DI UTD"+", OLEH "+akses.getkode());
+                                    subtotalpendapatan=Sequel.cariIsiAngka("select sum(total) from utd_penyerahan_darah_detail where no_penyerahan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                                    Sequel.deleteTampJurnal();
+                                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Penyerahan_Darah from set_akun"), "PENJUALAN DARAH UTD", subtotalpendapatan, 0)==false){
+                                        sukses=false;
+                                    }
+                                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select kd_rek from utd_penyerahan_darah where no_penyerahan = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()), "CARA BAYAR", 0,subtotalpendapatan)==false){
+                                        sukses=false;
+                                    }
+                                    if(sukses==true){
+                                        sukses=jur.simpanJurnal(nopenyerahan.getText(),"U","PEMBATALAN PENJUALAN DARAH DI UTD"+", OLEH "+akses.getkode());
+                                    }
                                 }
                             }
+                        } catch (Exception e) {
+                            System.out.println("Notifikasi Hapus Penyerahan : "+e);
                         }
-                    } catch (Exception e) {
-                        System.out.println("Notifikasi Hapus Penyerahan : "+e);
-                    }
-                    if(sukses==true){
-                        Sequel.meghapus("utd_penyerahan_darah","no_penyerahan",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                        Sequel.queryu("delete from tagihan_sadewa where no_nota='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim()+"'");
-                        Sequel.Commit();
-                        runBackground(() ->tampil());
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                        Sequel.RollBack();
-                    }
+                        if(sukses==true){
+                            Sequel.meghapus("utd_penyerahan_darah","no_penyerahan",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                            Sequel.queryu("delete from tagihan_sadewa where no_nota='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim()+"'");
+                            Sequel.Commit();
+                            runBackground(() ->tampil());
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                            Sequel.RollBack();
+                        }
 
-                    Sequel.AutoComitTrue();
+                        Sequel.AutoComitTrue();
+                    }
                 }
             }
         }
-    }
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

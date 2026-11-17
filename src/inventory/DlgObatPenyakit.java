@@ -903,11 +903,11 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_kdobatKeyPressed
 
     private void KtgCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KtgCariKeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_UP){
-       btnKategoriCariActionPerformed(null);
-   }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-       runBackground(() ->tampil());
-   }
+        if(evt.getKeyCode()==KeyEvent.VK_UP){
+            btnKategoriCariActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            runBackground(() ->tampil());
+        }
     }//GEN-LAST:event_KtgCariKeyPressed
 
     private void btnKategoriCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKategoriCariActionPerformed
@@ -953,15 +953,15 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKategoriCariActionPerformed
 
     private void btnKategoriCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnKategoriCariKeyPressed
-   Valid.pindah(evt,btnPenyakitCari,TCari);
+        Valid.pindah(evt,btnPenyakitCari,TCari);
     }//GEN-LAST:event_btnKategoriCariKeyPressed
 
     private void PenyakitCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PenyakitCariKeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_UP){
-       btnPenyakitCariActionPerformed(null);
-   }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-       runBackground(() ->tampil());
-   }
+        if(evt.getKeyCode()==KeyEvent.VK_UP){
+            btnPenyakitCariActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            runBackground(() ->tampil());
+        }
     }//GEN-LAST:event_PenyakitCariKeyPressed
 
     private void btnPenyakitCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPenyakitCariActionPerformed
@@ -996,7 +996,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPenyakitCariActionPerformed
 
     private void btnPenyakitCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPenyakitCariKeyPressed
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnPenyakitCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

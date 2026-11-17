@@ -644,37 +644,37 @@ public class DlgUserSmc extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeek1KeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-    if (tabMode.getRowCount() == 0) {
-        JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-        TKd.requestFocus();
-    } else if (tabMode.getRowCount() != 0) {
-        Map<String, Object> param = new HashMap<>();
-        param.put("namars", akses.getnamars());
-        param.put("alamatrs", akses.getalamatrs());
-        param.put("kotars", akses.getkabupatenrs());
-        param.put("propinsirs", akses.getpropinsirs());
-        param.put("kontakrs", akses.getkontakrs());
-        param.put("emailrs", akses.getemailrs());
-        Sequel.deleteTemporary();
-        for (int i = 0; i < tabMode.getRowCount(); i++) {
-            Sequel.temporary(String.valueOf(i),
-                tabMode.getValueAt(i, 0).toString(),
-                tabMode.getValueAt(i, 1).toString(),
-                tabMode.getValueAt(i, 3).toString()
-            );
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+            TKd.requestFocus();
+        } else if (tabMode.getRowCount() != 0) {
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars", akses.getnamars());
+            param.put("alamatrs", akses.getalamatrs());
+            param.put("kotars", akses.getkabupatenrs());
+            param.put("propinsirs", akses.getpropinsirs());
+            param.put("kontakrs", akses.getkontakrs());
+            param.put("emailrs", akses.getemailrs());
+            Sequel.deleteTemporary();
+            for (int i = 0; i < tabMode.getRowCount(); i++) {
+                Sequel.temporary(String.valueOf(i),
+                    tabMode.getValueAt(i, 0).toString(),
+                    tabMode.getValueAt(i, 1).toString(),
+                    tabMode.getValueAt(i, 3).toString()
+                );
+            }
+            Valid.MyReportqry("rptUser.jasper", "report", "::[ Data User ]::", "select * from temporary where temporary.temp37='" + akses.getalamatip() + "' order by temporary.no", param);
         }
-        Valid.MyReportqry("rptUser.jasper", "report", "::[ Data User ]::", "select * from temporary where temporary.temp37='" + akses.getalamatip() + "' order by temporary.no", param);
-    }
-    this.setCursor(Cursor.getDefaultCursor());
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-    if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-        BtnPrintActionPerformed(null);
-    } else {
-        Valid.pindah(evt, BtnHapus, BtnKeluar);
-    }
+        if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
+            BtnPrintActionPerformed(null);
+        } else {
+            Valid.pindah(evt, BtnHapus, BtnKeluar);
+        }
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

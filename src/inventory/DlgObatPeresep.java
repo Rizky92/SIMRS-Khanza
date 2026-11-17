@@ -533,7 +533,7 @@ public class DlgObatPeresep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnDokterActionPerformed
 
     private void BtnDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDokterKeyPressed
-   //Valid.pindah(evt,DTPCari2,TCari);
+        //Valid.pindah(evt,DTPCari2,TCari);
     }//GEN-LAST:event_BtnDokterKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed

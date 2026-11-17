@@ -770,7 +770,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPerusahaanActionPerformed
 
     private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
-    if (petugas == null || !petugas.isDisplayable()) {
+        if (petugas == null || !petugas.isDisplayable()) {
             petugas=new DlgCariPetugas(null,false);
             petugas.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             petugas.addWindowListener(new WindowAdapter() {
@@ -920,18 +920,18 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
         if(tbDokter.getRowCount()!=0){
             try {
-                   if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==3)||(tbDokter.getSelectedColumn()==6)){
-                        getData();
-                   }else if(tbDokter.getSelectedColumn()==5){
-                       try {
-                           tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString())*
-                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())/100)),tbDokter.getSelectedRow(),6);
-                       } catch (Exception e) {
-                           tbDokter.setValueAt(0,tbDokter.getSelectedRow(),6);
-                       }
+                if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==3)||(tbDokter.getSelectedColumn()==6)){
+                    getData();
+                }else if(tbDokter.getSelectedColumn()==5){
+                    try {
+                        tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString())*
+                            (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())/100)),tbDokter.getSelectedRow(),6);
+                    } catch (Exception e) {
+                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),6);
+                    }
 
-                       getData();
-                   }
+                    getData();
+                }
             } catch (java.lang.NullPointerException e) {
             }
         }

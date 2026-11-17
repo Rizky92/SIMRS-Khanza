@@ -359,15 +359,15 @@ public class DlgKIPPasienRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-    if(nmpenyakit.getText().trim().equals("")){
-        JOptionPane.showMessageDialog(null,"Silahkan masukkan penyakit yang mau dicari terlebih dahulu..!!!");
-    }else{
-        if(TabRawat.getSelectedIndex()==0){
-            runBackground(() ->prosesCari());
-        }else if(TabRawat.getSelectedIndex()==1){
-            runBackground(() ->prosesCari2());
+        if(nmpenyakit.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Silahkan masukkan penyakit yang mau dicari terlebih dahulu..!!!");
+        }else{
+            if(TabRawat.getSelectedIndex()==0){
+                runBackground(() ->prosesCari());
+            }else if(TabRawat.getSelectedIndex()==1){
+                runBackground(() ->prosesCari2());
+            }
         }
-    }
     }//GEN-LAST:event_btnCariActionPerformed
 
     private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed

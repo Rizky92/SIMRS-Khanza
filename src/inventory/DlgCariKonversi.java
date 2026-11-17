@@ -192,19 +192,19 @@ public final class DlgCariKonversi extends javax.swing.JDialog {
     }//GEN-LAST:event_kdsat2ItemStateChanged
 
     private void BtnKeluar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar1ActionPerformed
-   dispose();
+        dispose();
     }//GEN-LAST:event_BtnKeluar1ActionPerformed
 
     private void BtnKeluar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluar1KeyPressed
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_BtnKeluar1KeyPressed
 
     private void n1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n1ActionPerformed
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_n1ActionPerformed
 
     private void kdsat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kdsat1ActionPerformed
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_kdsat1ActionPerformed
 
     /**

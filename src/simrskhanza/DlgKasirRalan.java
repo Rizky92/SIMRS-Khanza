@@ -126,6 +126,7 @@ import rekammedis.RMDataSkriningGiziKehamilan;
 import rekammedis.RMDataSkriningGiziLanjut;
 import rekammedis.RMDeteksiDiniCorona;
 import rekammedis.RMEdukasiPasienKeluargaRawatJalan;
+import rekammedis.RMFotoPasienSMC;
 import rekammedis.RMHasilEndoskopiFaringLaring;
 import rekammedis.RMHasilEndoskopiHidung;
 import rekammedis.RMHasilEndoskopiTelinga;
@@ -323,6 +324,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         initKasirRalan();
+        initFotoPasienSmc();
 
         this.setLocation(8,1);
         setSize(885,674);
@@ -16990,6 +16992,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     private widget.Menu MnHasilUSG,MnHasilEndoskopi,MnRMSkrining,MnEdukasi,MnRehabMedik,MnRMSkriningRisikoKanker,MnRMSkriningKesehatanGigiMulut,MnSuratPersetujuan,MnSkriningInstrumen,MnSkriningParu,MnCatatanObservasi;
 
     private widget.MenuItem MnPengkajianInvasifNonBedahSMC;
+    private widget.MenuItem ppFotoPasienSMC, ppFotoPasien1SMC;
     /*
     private void tampilkasir() {
         if(ceksukses==false){
@@ -19928,5 +19931,67 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
+    }
+
+    private void initFotoPasienSmc() {
+        ppFotoPasienSMC = new widget.MenuItem();
+        ppFotoPasienSMC.setBackground(new java.awt.Color(255, 255, 254));
+        ppFotoPasienSMC.setFont(new java.awt.Font("Tahoma", 0, 11));
+        ppFotoPasienSMC.setForeground(new java.awt.Color(50, 50, 50));
+        ppFotoPasienSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        ppFotoPasienSMC.setText("Foto Pasien");
+        ppFotoPasienSMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppFotoPasienSMC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppFotoPasienSMC.setName("ppFotoPasienSMC");
+        ppFotoPasienSMC.setPreferredSize(new java.awt.Dimension(200, 26));
+        ppFotoPasienSMC.addActionListener(this::ppFotoPasienSMCActionPerformed);
+        MenuInputData.add(ppFotoPasienSMC, MenuInputData.getPopupMenu().getComponentIndex(ppBerkasDigital) + 1);
+
+        ppFotoPasien1SMC = new widget.MenuItem();
+        ppFotoPasien1SMC.setBackground(new java.awt.Color(255, 255, 254));
+        ppFotoPasien1SMC.setFont(new java.awt.Font("Tahoma", 0, 11));
+        ppFotoPasien1SMC.setForeground(new java.awt.Color(50, 50, 50));
+        ppFotoPasien1SMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        ppFotoPasien1SMC.setText("Foto Pasien");
+        ppFotoPasien1SMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppFotoPasien1SMC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppFotoPasien1SMC.setName("ppFotoPasien1SMC");
+        ppFotoPasien1SMC.setPreferredSize(new java.awt.Dimension(200, 26));
+        ppFotoPasien1SMC.addActionListener(this::ppFotoPasien1SMCActionPerformed);
+        MenuInputData1.add(ppFotoPasien1SMC, MenuInputData1.getPopupMenu().getComponentIndex(ppBerkasDigital1) + 1);
+    }
+
+    private void ppFotoPasienSMCActionPerformed(java.awt.event.ActionEvent evt) {
+        if (tabModekasir.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        } else if (TNoRw.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        } else {
+            tampilFotoPasienSmc(TNoRw.getText());
+        }
+    }
+
+    private void ppFotoPasien1SMCActionPerformed(java.awt.event.ActionEvent evt) {
+        if (tabModekasir2.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        } else if (tbKasirRalan2.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan2.requestFocus();
+        } else {
+            tampilFotoPasienSmc(tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(), 10).toString());
+        }
+    }
+
+    private void tampilFotoPasienSmc(String norawat) {
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMFotoPasienSMC form = new RMFotoPasienSMC(null, true);
+        form.setNoRawat(norawat);
+        form.setSize(560, 560);
+        form.setLocationRelativeTo(internalFrame1);
+        this.setCursor(Cursor.getDefaultCursor());
+        form.setVisible(true);
     }
 }

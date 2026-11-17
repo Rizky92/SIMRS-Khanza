@@ -925,15 +925,15 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void nopermintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nopermintaanKeyPressed
-    Valid.pindah(evt,TCari, tgl_permintaan);
+        Valid.pindah(evt,TCari, tgl_permintaan);
     }//GEN-LAST:event_nopermintaanKeyPressed
 
     private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tgl_permintaanKeyPressed
-    Valid.pindah(evt,nopermintaan,no_inventaris);
+        Valid.pindah(evt,nopermintaan,no_inventaris);
     }//GEN-LAST:event_tgl_permintaanKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

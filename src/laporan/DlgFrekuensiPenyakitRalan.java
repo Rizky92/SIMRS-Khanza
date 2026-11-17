@@ -1057,7 +1057,7 @@ public class DlgFrekuensiPenyakitRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppGrafikTerbanyakPieActionPerformed
 
     private void ppGrafikTerkecilBatangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikTerkecilBatangActionPerformed
-    if((tbDokter.getRowCount()>9)&&(Integer.parseInt(tbDokter.getValueAt(0,7).toString())<=Integer.parseInt(tbDokter.getValueAt(1,7).toString()))
+        if((tbDokter.getRowCount()>9)&&(Integer.parseInt(tbDokter.getValueAt(0,7).toString())<=Integer.parseInt(tbDokter.getValueAt(1,7).toString()))
                 && (Integer.parseInt(tbDokter.getValueAt(1,7).toString())<=Integer.parseInt(tbDokter.getValueAt(2,7).toString()))
                 && (Integer.parseInt(tbDokter.getValueAt(2,7).toString())<=Integer.parseInt(tbDokter.getValueAt(3,7).toString()))
                 && (Integer.parseInt(tbDokter.getValueAt(3,7).toString())<=Integer.parseInt(tbDokter.getValueAt(4,7).toString()))
@@ -1262,7 +1262,7 @@ public class DlgFrekuensiPenyakitRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppGrafikTerkecilBatangActionPerformed
 
     private void ppGrafikTerkecilPieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikTerkecilPieActionPerformed
-   if((tbDokter.getRowCount()>9)&&(Integer.parseInt(tbDokter.getValueAt(0,7).toString())<=Integer.parseInt(tbDokter.getValueAt(1,7).toString()))
+        if((tbDokter.getRowCount()>9)&&(Integer.parseInt(tbDokter.getValueAt(0,7).toString())<=Integer.parseInt(tbDokter.getValueAt(1,7).toString()))
                 && (Integer.parseInt(tbDokter.getValueAt(1,7).toString())<=Integer.parseInt(tbDokter.getValueAt(2,7).toString()))
                 && (Integer.parseInt(tbDokter.getValueAt(2,7).toString())<=Integer.parseInt(tbDokter.getValueAt(3,7).toString()))
                 && (Integer.parseInt(tbDokter.getValueAt(3,7).toString())<=Integer.parseInt(tbDokter.getValueAt(4,7).toString()))

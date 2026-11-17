@@ -535,7 +535,7 @@ public final class DlgCariPengambilanUTD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCetakActionPerformed
 
     private void BtnCetakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCetakKeyPressed
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_BtnCetakKeyPressed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated

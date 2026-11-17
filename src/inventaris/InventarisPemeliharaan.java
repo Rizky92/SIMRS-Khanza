@@ -878,15 +878,15 @@ public final class InventarisPemeliharaan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void NoInventarisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoInventarisKeyPressed
-    Valid.pindah(evt,TCari, Tanggal);
+        Valid.pindah(evt,TCari, Tanggal);
     }//GEN-LAST:event_NoInventarisKeyPressed
 
     private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
-    Valid.pindah(evt,NoInventaris,KodeBarang);
+        Valid.pindah(evt,NoInventaris,KodeBarang);
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

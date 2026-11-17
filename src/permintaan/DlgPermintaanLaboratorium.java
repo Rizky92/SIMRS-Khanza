@@ -1509,22 +1509,22 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
     }//GEN-LAST:event_PemeriksaanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-   try{
-       for(i=0;i<tbDetailPK.getRowCount();i++){
-          if(tbDetailPK.getValueAt(i,0).toString().equals("true")){
-              tabMode.removeRow(i);
-          }
-       }
-   }catch(Exception ex){
-   }
-   try{
-       for(i=0;i<tbDetailMB.getRowCount();i++){
-          if(tbDetailMB.getValueAt(i,0).toString().equals("true")){
-              tabModeDetailMB.removeRow(i);
-          }
-       }
-   }catch(Exception ex){
-   }
+        try{
+            for(i=0;i<tbDetailPK.getRowCount();i++){
+                if(tbDetailPK.getValueAt(i,0).toString().equals("true")){
+                    tabMode.removeRow(i);
+                }
+            }
+        }catch(Exception ex){
+        }
+        try{
+            for(i=0;i<tbDetailMB.getRowCount();i++){
+                if(tbDetailMB.getValueAt(i,0).toString().equals("true")){
+                    tabModeDetailMB.removeRow(i);
+                }
+            }
+        }catch(Exception ex){
+        }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
