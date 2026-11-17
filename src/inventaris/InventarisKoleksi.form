@@ -165,7 +165,6 @@
           <SubComponents>
             <Component class="widget.Table" name="tbJnsPerawatan">
               <Properties>
-                <Property name="autoCreateRowSorter" type="boolean" value="false"/>
                 <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                 <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="Popup"/>
@@ -625,7 +624,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="04-03-2026"/>
+                        <StringItem index="0" value="17-11-2026"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -781,11 +780,13 @@
                 <Component class="widget.ComboBox" name="asal_barang">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
+                      <StringArray count="6">
                         <StringItem index="0" value="Beli"/>
                         <StringItem index="1" value="Bantuan"/>
                         <StringItem index="2" value="Hibah"/>
                         <StringItem index="3" value="-"/>
+                        <StringItem index="4" value="Pemesanan"/>
+                        <StringItem index="5" value="Pembelian"/>
                       </StringArray>
                     </Property>
                     <Property name="lightWeightPopupEnabled" type="boolean" value="false"/>
