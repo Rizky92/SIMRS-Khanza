@@ -769,7 +769,7 @@ public final class KeuanganPemberiHutangLain extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarKeyPressed
 
     private void NmPemberiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmPemberiKeyPressed
-   Valid.pindah(evt,KdPemberi,AlamatPemberiHutang);
+        Valid.pindah(evt,KdPemberi,AlamatPemberiHutang);
     }//GEN-LAST:event_NmPemberiKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

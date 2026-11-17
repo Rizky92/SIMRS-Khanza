@@ -1109,8 +1109,73 @@ public class SuratKontrol extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void BtnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDokterActionPerformed
-    if(JADWALDOKTERDIREGISTRASI.equals("aktif")){
-        if(akses.getkode().equals("Admin Utama")){
+        if(JADWALDOKTERDIREGISTRASI.equals("aktif")){
+            if(akses.getkode().equals("Admin Utama")){
+                DlgCariDokter dokter=new DlgCariDokter(null,false);
+                dokter.addWindowListener(new WindowListener() {
+                    @Override
+                    public void windowOpened(WindowEvent e) {;}
+                    @Override
+                    public void windowClosing(WindowEvent e) {}
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        if(dokter.getTable().getSelectedRow()!= -1){
+                            KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
+                            NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            isNomer();
+                        }
+                    }
+                    @Override
+                    public void windowIconified(WindowEvent e) {}
+                    @Override
+                    public void windowDeiconified(WindowEvent e) {}
+                    @Override
+                    public void windowActivated(WindowEvent e) {}
+                    @Override
+                    public void windowDeactivated(WindowEvent e) {}
+                });
+                dokter.isCek();
+                dokter.TCari.requestFocus();
+                dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                dokter.setLocationRelativeTo(internalFrame1);
+                dokter.setVisible(true);
+            }else{
+                DlgCariDokter2 dokter2=new DlgCariDokter2(null,false);
+                dokter2.addWindowListener(new WindowListener() {
+                    @Override
+                    public void windowOpened(WindowEvent e) {;}
+                    @Override
+                    public void windowClosing(WindowEvent e) {}
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        if(dokter2.getTable().getSelectedRow()!= -1){
+                            KdDokter.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),0).toString());
+                            NmDokter.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),1).toString());
+                            if(JADWALDOKTERDIREGISTRASI.equals("aktif")){
+                                kuota=Integer.parseInt(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),13).toString());
+                            }
+                            isNomer();
+                        }
+                    }
+                    @Override
+                    public void windowIconified(WindowEvent e) {}
+                    @Override
+                    public void windowDeiconified(WindowEvent e) {}
+                    @Override
+                    public void windowActivated(WindowEvent e) {}
+                    @Override
+                    public void windowDeactivated(WindowEvent e) {}
+                });
+                dokter2.setPoli(NmPoli.getText());
+                dokter2.isCek();
+                dokter2.SetHari(TanggalPeriksa.getDate());
+                dokter2.tampil3();
+                dokter2.TCari.requestFocus();
+                dokter2.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                dokter2.setLocationRelativeTo(internalFrame1);
+                dokter2.setVisible(true);
+            }
+        }else{
             DlgCariDokter dokter=new DlgCariDokter(null,false);
             dokter.addWindowListener(new WindowListener() {
                 @Override
@@ -1139,84 +1204,19 @@ public class SuratKontrol extends javax.swing.JDialog {
             dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             dokter.setLocationRelativeTo(internalFrame1);
             dokter.setVisible(true);
-        }else{
-            DlgCariDokter2 dokter2=new DlgCariDokter2(null,false);
-            dokter2.addWindowListener(new WindowListener() {
-                @Override
-                public void windowOpened(WindowEvent e) {;}
-                @Override
-                public void windowClosing(WindowEvent e) {}
-                @Override
-                public void windowClosed(WindowEvent e) {
-                    if(dokter2.getTable().getSelectedRow()!= -1){
-                        KdDokter.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),0).toString());
-                        NmDokter.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),1).toString());
-                        if(JADWALDOKTERDIREGISTRASI.equals("aktif")){
-                            kuota=Integer.parseInt(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),13).toString());
-                        }
-                        isNomer();
-                    }
-                }
-                @Override
-                public void windowIconified(WindowEvent e) {}
-                @Override
-                public void windowDeiconified(WindowEvent e) {}
-                @Override
-                public void windowActivated(WindowEvent e) {}
-                @Override
-                public void windowDeactivated(WindowEvent e) {}
-            });
-            dokter2.setPoli(NmPoli.getText());
-            dokter2.isCek();
-            dokter2.SetHari(TanggalPeriksa.getDate());
-            dokter2.tampil3();
-            dokter2.TCari.requestFocus();
-            dokter2.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-            dokter2.setLocationRelativeTo(internalFrame1);
-            dokter2.setVisible(true);
         }
-    }else{
-        DlgCariDokter dokter=new DlgCariDokter(null,false);
-        dokter.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {;}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){
-                    KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                    NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                    isNomer();
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-        dokter.isCek();
-        dokter.TCari.requestFocus();
-        dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        dokter.setLocationRelativeTo(internalFrame1);
-        dokter.setVisible(true);
-    }
     }//GEN-LAST:event_BtnDokterActionPerformed
 
     private void BtnDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDokterKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-        BtnDokterActionPerformed(null);
-    }else{
-        Valid.pindah(evt,Rtl2,BtnPoli);
-    }
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnDokterActionPerformed(null);
+        }else{
+            Valid.pindah(evt,Rtl2,BtnPoli);
+        }
     }//GEN-LAST:event_BtnDokterKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void DTPCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPCari1KeyPressed

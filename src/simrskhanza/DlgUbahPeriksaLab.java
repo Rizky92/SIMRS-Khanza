@@ -1098,11 +1098,11 @@ public final class DlgUbahPeriksaLab extends javax.swing.JDialog {
     }//GEN-LAST:event_PemeriksaanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-   try{
-       tabMode.removeRow(tbPemeriksaan.getSelectedRow());
-   }catch(Exception ex){
-       JOptionPane.showMessageDialog(null,"Pilih dulu data yang mau dihapus..!!");
-   }
+        try{
+            tabMode.removeRow(tbPemeriksaan.getSelectedRow());
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Pilih dulu data yang mau dihapus..!!");
+        }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
