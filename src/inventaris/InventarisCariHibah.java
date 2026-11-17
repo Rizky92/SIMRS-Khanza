@@ -9,6 +9,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
@@ -100,6 +101,7 @@ public class InventarisCariHibah extends javax.swing.JDialog {
 
         jPopupMenu1 = new widget.PopupMenu();
         ppHapus = new widget.MenuItem();
+        ppRingkasanBelumInventarisasiSmc = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
         tbDokter = new widget.Table();
@@ -155,6 +157,22 @@ public class InventarisCariHibah extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(ppHapus);
+
+        ppRingkasanBelumInventarisasiSmc.setBackground(new java.awt.Color(255, 255, 254));
+        ppRingkasanBelumInventarisasiSmc.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppRingkasanBelumInventarisasiSmc.setForeground(new java.awt.Color(50, 50, 50));
+        ppRingkasanBelumInventarisasiSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppRingkasanBelumInventarisasiSmc.setText("Ringkasan Barang Belum Inventarisasi");
+        ppRingkasanBelumInventarisasiSmc.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppRingkasanBelumInventarisasiSmc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppRingkasanBelumInventarisasiSmc.setName("ppRingkasanBelumInventarisasiSmc"); // NOI18N
+        ppRingkasanBelumInventarisasiSmc.setPreferredSize(new java.awt.Dimension(250, 25));
+        ppRingkasanBelumInventarisasiSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppRingkasanBelumInventarisasiSmcActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(ppRingkasanBelumInventarisasiSmc);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -769,6 +787,10 @@ public class InventarisCariHibah extends javax.swing.JDialog {
                         pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
                         rs=pscaribeli.executeQuery();
                         if(rs.next()){
+                            if (Sequel.cariExistsSmc("select * from inventaris where inventaris.no_faktur = ? and inventaris.asal_barang = 'Hibah'", rs.getString("no_hibah"))) {
+                                JOptionPane.showMessageDialog(null, "Barang dari hibah " + rs.getString("no_hibah") + " sudah diinventarisasi, hapus data inventarisnya terlebih dahulu..!!");
+                                return;
+                            }
                             Sequel.AutoComitFalse();
                             sukses=true;
 
@@ -882,6 +904,32 @@ public class InventarisCariHibah extends javax.swing.JDialog {
         jenis.setVisible(true);
     }//GEN-LAST:event_btnJenisActionPerformed
 
+    private void ppRingkasanBelumInventarisasiSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRingkasanBelumInventarisasiSmcActionPerformed
+        String tanggal = "", nofaktur = "";
+        for (int row = tbDokter.getSelectedRow(); row >= 0; row--) {
+            if (!tbDokter.getValueAt(row, 0).toString().isBlank()) {
+                tanggal = tbDokter.getValueAt(row, 0).toString();
+                nofaktur = tbDokter.getValueAt(row, 1).toString();
+                break;
+            }
+        }
+
+        if (nofaktur.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Silahkan pilih data hibah terlebih dahulu..!!");
+            return;
+        }
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        InventarisRingkasanBarangBelumInventarisasiSMC ringkasan = new InventarisRingkasanBarangBelumInventarisasiSMC(null, false);
+        ringkasan.setPenerimaan("Hibah", nofaktur, tanggal);
+        ringkasan.isCek();
+        ringkasan.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        ringkasan.setLocationRelativeTo(internalFrame1);
+        ringkasan.setAlwaysOnTop(false);
+        ringkasan.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_ppRingkasanBelumInventarisasiSmcActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -936,6 +984,7 @@ public class InventarisCariHibah extends javax.swing.JDialog {
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
     private widget.MenuItem ppHapus;
+    private widget.MenuItem ppRingkasanBelumInventarisasiSmc;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables
@@ -1053,6 +1102,22 @@ public class InventarisCariHibah extends javax.swing.JDialog {
         }else{
             ppHapus.setEnabled(false);
         }
+        ppRingkasanBelumInventarisasiSmc.setEnabled(akses.getringkasan_barang_belum_inventaris_smc());
+    }
+
+    public void setNoFakturSmc(String nofaktur, String tanggal) {
+        NoFaktur.setText(nofaktur);
+        if (tanggal != null && !tanggal.isBlank()) {
+            Valid.setTglSmc(TglBeli1, tanggal);
+            Valid.setTglSmc(TglBeli2, tanggal);
+        }
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                removeWindowListener(this);
+                runBackground(() -> tampil());
+            }
+        });
     }
 
     private void runBackground(Runnable task) {

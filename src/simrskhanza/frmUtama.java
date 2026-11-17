@@ -380,8 +380,8 @@ import informasi.InformasiTarifRalan;
 import informasi.InformasiTarifRanap;
 import informasi.InformasiTelusurKunjunganPasien;
 import inventaris.InventarisAsalHibah;
-import inventaris.InventarisBarang;
 import inventaris.InventarisBarangCSSD;
+import inventaris.InventarisBarang;
 import inventaris.InventarisHibah;
 import inventaris.InventarisJenis;
 import inventaris.InventarisKategori;
@@ -394,10 +394,12 @@ import inventaris.InventarisPemesanan;
 import inventaris.InventarisPerbaikan;
 import inventaris.InventarisPermintaanPerbaikan;
 import inventaris.InventarisProdusen;
+import inventaris.InventarisRingkasanBarangBelumInventarisasiSMC;
 import inventaris.InventarisRuang;
 import inventaris.InventarisSirkulasi;
 import inventaris.InventarisSirkulasiCSSD;
 import inventaris.InventarisSuplier;
+import inventaris.InventarisSuratPemesananSMC;
 import inventaris.KeslingLimbahB3Medis;
 import inventaris.KeslingLimbahB3MedisCair;
 import inventaris.KeslingLimbahDomestik;
@@ -50646,7 +50648,7 @@ public class frmUtama extends javax.swing.JFrame {
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaimSmc, btnUserSmc, btnSetAksesEditSementaraSmc, btnBPJSAntreanPerKodebookingMobileJKNSmc, btnSetTampilJenisObatResepSmc, btnSetPintuPoliSmc,
                              btnBPJSDaftarPelayananObat2ApotekSmc, btnBPJSKirimObatApotekSmc, btnBPJSKirimEditObatApotekSmc, btnBPJSRiwayatPelayananResepApotekSmc, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc,
                              btnPengkajianInvasifNonBedahSmc, btnPengajuanIzinAdminSmc, btnJadwalDinasSmc, btnJadwalDinasPegawaiSmc, btnRekapKehadiranSmc, btnIPSRSStokAkhirPerTanggalSmc, btnTemplatePaketMCUSmc,
-                             btnSetAturanPasswordSMC, btnTemplateUmumSmc;
+                             btnSetAturanPasswordSMC, btnTemplateUmumSmc, btnSuratPemesananInventarisSmc, btnRingkasanBarangBelumInventarisasiSmc;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaimSmc = new widget.ButtonBig();
@@ -50798,6 +50800,22 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetAturanPasswordSMC.setName("btnSetAturanPasswordSMC");
         btnSetAturanPasswordSMC.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetAturanPasswordSMC.addActionListener(this::btnSetAturanPasswordSMCActionPerformed);
+
+        btnSuratPemesananInventarisSmc = new widget.ButtonBig();
+        btnSuratPemesananInventarisSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Select-Language_49621.png")));
+        btnSuratPemesananInventarisSmc.setText("Surat Pemesanan Barang Aset");
+        btnSuratPemesananInventarisSmc.setIconTextGap(0);
+        btnSuratPemesananInventarisSmc.setName("btnSuratPemesananInventarisSmc");
+        btnSuratPemesananInventarisSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSuratPemesananInventarisSmc.addActionListener(this::btnSuratPemesananInventarisSmcActionPerformed);
+
+        btnRingkasanBarangBelumInventarisasiSmc = new widget.ButtonBig();
+        btnRingkasanBarangBelumInventarisasiSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_homework_18312586.png")));
+        btnRingkasanBarangBelumInventarisasiSmc.setText("Ringkasan Barang Belum Inventarisasi");
+        btnRingkasanBarangBelumInventarisasiSmc.setIconTextGap(0);
+        btnRingkasanBarangBelumInventarisasiSmc.setName("btnRingkasanBarangBelumInventarisasiSmc");
+        btnRingkasanBarangBelumInventarisasiSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnRingkasanBarangBelumInventarisasiSmc.addActionListener(this::btnRingkasanBarangBelumInventarisasiSmcActionPerformed);
     }
 
     private void cekPeringatanPasswordSmc() {
@@ -50825,7 +50843,17 @@ public class frmUtama extends javax.swing.JFrame {
     }
 
     private void isComboSmc() {
-        if (cmbMenu.getSelectedIndex() == 0) {
+        if (cmbMenu.getSelectedIndex() == 6) {
+            if (akses.getsurat_pemesanan_inventaris_smc()) {
+                Panelmenu.add(btnSuratPemesananInventarisSmc);
+                jmlmenu++;
+            }
+
+            if (akses.getringkasan_barang_belum_inventaris_smc()) {
+                Panelmenu.add(btnRingkasanBarangBelumInventarisasiSmc);
+                jmlmenu++;
+            }
+        } else if (cmbMenu.getSelectedIndex() == 0) {
             if (akses.getset_pintu_poli()) {
                 Panelmenu.add(btnSetPintuPoliSmc);
                 jmlmenu++;
@@ -50994,6 +51022,16 @@ public class frmUtama extends javax.swing.JFrame {
             jmlmenu++;
         }
 
+        if (akses.getsurat_pemesanan_inventaris_smc()) {
+            Panelmenu.add(btnSuratPemesananInventarisSmc);
+            jmlmenu++;
+        }
+
+        if (akses.getringkasan_barang_belum_inventaris_smc()) {
+            Panelmenu.add(btnRingkasanBarangBelumInventarisasiSmc);
+            jmlmenu++;
+        }
+
         if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
             Panelmenu.add(btnPengkajianInvasifNonBedahSmc);
             jmlmenu++;
@@ -51123,6 +51161,20 @@ public class frmUtama extends javax.swing.JFrame {
         if (akses.getbpjs_riwayat_surat_smc()) {
             if (btnBPJSRiwayatSuratKontrolSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getsurat_pemesanan_inventaris_smc()) {
+            if (btnSuratPemesananInventarisSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnSuratPemesananInventarisSmc);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getringkasan_barang_belum_inventaris_smc()) {
+            if (btnRingkasanBarangBelumInventarisasiSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnRingkasanBarangBelumInventarisasiSmc);
                 jmlmenu++;
             }
         }
@@ -51449,6 +51501,30 @@ public class frmUtama extends javax.swing.JFrame {
         form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnSuratPemesananInventarisSmcActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        InventarisSuratPemesananSMC aplikasi = new InventarisSuratPemesananSMC(this, false);
+        aplikasi.isCek();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnRingkasanBarangBelumInventarisasiSmcActionPerformed(ActionEvent e) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        InventarisRingkasanBarangBelumInventarisasiSMC aplikasi = new InventarisRingkasanBarangBelumInventarisasiSMC(this, false);
+        aplikasi.isCek();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
