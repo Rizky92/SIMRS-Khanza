@@ -274,7 +274,7 @@ public final class akses {
             satu_sehat_mapping_kptl_tarif_kamar=false,checklist_kriteria_keluar_isolasi=false,satu_sehat_tanda_tangan_elektronik=false,satu_sehat_kirim_composition=false,
             ringkasan_hutang_vendor_inventaris=false,ringkasan_beban_hutang_lain=false,set_resep_per_cara_bayar=false,skrining_tolac=false,admisi_skoring_tolac=false,
             monitoring_tolac=false,hasil_persalinan_tolac=false,laporan_reaksi_transfusi=false,penilaian_grace_scor=false,penilaian_bishop_scor=false,profil_ringkas_rawat_jalan=false,
-            hasil_usg_testis=false,hasil_usg_kepala=false,hasil_usg_mammae=false,hasil_spirometri=false,surat_pernyataan_bersedia_dirujuk=false;
+            hasil_usg_testis=false,hasil_usg_kepala=false,hasil_usg_mammae=false,hasil_spirometri=false,surat_pernyataan_bersedia_dirujuk=false,surat_kesediaan_menunggu_igd=false;
 
     private static boolean edit_hapus_spo_medis = false,
         edit_hapus_spo_nonmedis = false,
@@ -1593,6 +1593,7 @@ public final class akses {
                         akses.hasil_usg_mammae=akses.getBoolean(rs2, "hasil_usg_mammae");
                         akses.hasil_spirometri=akses.getBoolean(rs2, "hasil_spirometri");
                         akses.surat_pernyataan_bersedia_dirujuk=akses.getBoolean(rs2, "surat_pernyataan_bersedia_dirujuk");
+                        akses.surat_kesediaan_menunggu_igd=akses.getBoolean(rs2, "surat_kesediaan_menunggu_igd");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2892,6 +2893,7 @@ public final class akses {
         akses.hasil_usg_mammae=isadmin;
         akses.hasil_spirometri=isadmin;
         akses.surat_pernyataan_bersedia_dirujuk=isadmin;
+        akses.surat_kesediaan_menunggu_igd=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -4194,6 +4196,7 @@ public final class akses {
     public static boolean gethasil_usg_mammae(){return akses.hasil_usg_mammae;}
     public static boolean gethasil_spirometri(){return akses.hasil_spirometri;}
     public static boolean getsurat_pernyataan_bersedia_dirujuk(){return akses.surat_pernyataan_bersedia_dirujuk;}
+    public static boolean getsurat_kesediaan_menunggu_igd(){return akses.surat_kesediaan_menunggu_igd;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {
         akses.edit = false;

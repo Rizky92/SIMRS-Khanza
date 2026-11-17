@@ -1194,6 +1194,7 @@ import surat.SuratButaWarna;
 import surat.SuratCutiHamil;
 import surat.SuratIndeks;
 import surat.SuratKeluar;
+import surat.SuratKesediaanMenungguIGD;
 import surat.SuratKeteranganBebasTBC;
 import surat.SuratKeteranganBerobat;
 import surat.SuratKeteranganCovid;
@@ -23784,6 +23785,19 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
+    private void btnSuratPernyataanBersediaMenungguDiIGDActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SuratKesediaanMenungguIGD aplikasi=new SuratKesediaanMenungguIGD(this,false);
+        aplikasi.isCek();
+        aplikasi.emptTeks();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -24510,7 +24524,7 @@ public class frmUtama extends javax.swing.JFrame {
             btnMapingTarifTindakanRanapKPTLSatuSehat,btnMapingTarifTindakanRadiologiKPTLSatuSehat,btnMapingTarifTindakanLabKPTLSatuSehat,btnMapingTarifTindakanOperasiKPTLSatuSehat,btnMapingTarifKamarKPTLSatuSehat,
             btnChecklistKriteriaKeluarIsolasi,btnBridgingTTESatuSehat,btnBridgingCompositionRMESatuSehat,btnRingkasanHutangVendorAsetInventaris,btnRingkasanBebanHutangLain,btnSetResepPerCaraBayar,
             btnSkriningTOLAC,btnAdmisiSkoringTOLAC,btnMonitoringTOLAC,btnHasilPersalinanTOLAC,btnLaporanReaksiTranfusi,btnPenilaianGRACEScore,btnPenilaianBISHOPScore,btnProfilRingkasRawatJalan,
-            btnHasilUSGTestis,btnHasilUSGKepala,btnHasilUSGMammae,btnHasilPemeriksaanSpirometri,btnSuratPernyataanBersediaDirujuk;
+            btnHasilUSGTestis,btnHasilUSGKepala,btnHasilUSGMammae,btnHasilPemeriksaanSpirometri,btnSuratPernyataanBersediaDirujuk,btnSuratPernyataanBersediaMenungguDiIGD;
 
     public void isWall(){
         try{
@@ -30307,6 +30321,11 @@ public class frmUtama extends javax.swing.JFrame {
 
             if(akses.getsurat_pernyataan_bersedia_dirujuk()==true){
                 Panelmenu.add(btnSuratPernyataanBersediaDirujuk);
+                jmlmenu++;
+            }
+
+            if(akses.getsurat_kesediaan_menunggu_igd()==true){
+                Panelmenu.add(btnSuratPernyataanBersediaMenungguDiIGD);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==16){
@@ -36416,6 +36435,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if(akses.getsurat_pernyataan_bersedia_dirujuk()==true){
             Panelmenu.add(btnSuratPernyataanBersediaDirujuk);
+            jmlmenu++;
+        }
+
+        if(akses.getsurat_kesediaan_menunggu_igd()==true){
+            Panelmenu.add(btnSuratPernyataanBersediaMenungguDiIGD);
             jmlmenu++;
         }
 
@@ -44783,6 +44807,13 @@ public class frmUtama extends javax.swing.JFrame {
             }
         }
 
+        if(akses.getsurat_kesediaan_menunggu_igd()==true){
+            if(btnSuratPernyataanBersediaMenungguDiIGD.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSuratPernyataanBersediaMenungguDiIGD);
+                jmlmenu++;
+            }
+        }
+
         if(akses.getruang_perpustakaan()==true){
             if(btnRuangPerpustakaan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnRuangPerpustakaan);
@@ -50877,6 +50908,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratPernyataanBersediaDirujuk.setName("btnSuratPernyataanBersediaDirujuk");
         btnSuratPernyataanBersediaDirujuk.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratPernyataanBersediaDirujuk.addActionListener(this::btnSuratPernyataanBersediaDirujukActionPerformed);
+
+        btnSuratPernyataanBersediaMenungguDiIGD = new widget.ButtonBig();
+        btnSuratPernyataanBersediaMenungguDiIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/flashcard_5386247.png")));
+        btnSuratPernyataanBersediaMenungguDiIGD.setText("Surat Bersedia Menunggu Di IGD/UGD");
+        btnSuratPernyataanBersediaMenungguDiIGD.setIconTextGap(0);
+        btnSuratPernyataanBersediaMenungguDiIGD.setName("btnSuratPernyataanBersediaMenungguDiIGD");
+        btnSuratPernyataanBersediaMenungguDiIGD.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSuratPernyataanBersediaMenungguDiIGD.addActionListener(this::btnSuratPernyataanBersediaMenungguDiIGDActionPerformed);
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaimSmc, btnUserSmc, btnSetAksesEditSementaraSmc, btnBPJSAntreanPerKodebookingMobileJKNSmc, btnSetTampilJenisObatResepSmc, btnSetPintuPoliSmc,
