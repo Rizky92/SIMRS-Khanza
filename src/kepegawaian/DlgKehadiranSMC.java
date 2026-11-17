@@ -1,5 +1,9 @@
 package kepegawaian;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -14,9 +18,14 @@ import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,11 +49,13 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -71,6 +82,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final JFileChooser chooser = new JFileChooser();
+    private final ObjectMapper mapper = new ObjectMapper();
     private final List<Pegawai> listImport = new ArrayList<>();
     private final Set<LocalDate> hariLibur = new HashSet<>();
     private final Set<Integer> kolomMinggu = new HashSet<>();
@@ -88,8 +100,10 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private static final String TANDA_PERLU_KOREKSI = " /PK";
     private static final String TANDA_ABSEN = " /A";
     private static final String KETERANGAN_TANPA_MASUK = "tanpa scan masuk";
+    private static final String KETERANGAN_BEBAS_SCANLOG = "bebas scanlog";
     private static final String MODE_MASUK = "Scan Masuk";
     private static final String MODE_PULANG = "Scan Pulang";
+    private static final String MODE_TAMBAHAN = "Tambahan";
     private static final String TABLE_JADWAL_DINAS = "jadwal_pegawai_smc";
     private static final String TABLE_JADWAL_TAMBAHAN = "jadwal_tambahan_smc";
     private static final String JENIS_JADWAL = "Jadwal Tambahan";
@@ -103,6 +117,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private static final DateTimeFormatter FORMAT_JAM = DateTimeFormatter.ofPattern("HH:mm");
     private static final DateTimeFormatter FORMAT_KOLOM = DateTimeFormatter.ofPattern("dd/MM");
     private static final DateTimeFormatter FORMAT_SQL = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final DateTimeFormatter FORMAT_WAKTU_DRAFT = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
     private static final DateTimeFormatter FORMAT_JAM_SCANLOG = DateTimeFormatter.ofPattern("H:mm[:ss]");
     private static final DateTimeFormatter[] FORMAT_TANGGAL_SCANLOG = {
         DateTimeFormatter.ofPattern("d/M/yyyy"),
@@ -119,6 +134,8 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private LocalDate periodeAkhir;
     private LocalDate importAwal;
     private LocalDate imporAkhir;
+    private String importDepartemen = "";
+    private String importStatusKerja = "";
     private LocalDate tanggalDetail;
     private Pegawai pegawaiDetail;
 
@@ -209,6 +226,11 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
             }
         }
         tbScanLog.setDefaultRenderer(Object.class, new WarnaTable());
+        tbScanLog.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                ikutiScanTerpilih();
+            }
+        });
 
         TCari.setDocument(new batasInput((int) 100).getKata(TCari));
         Valid.LoadTahun(ThnCari);
@@ -222,6 +244,13 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PopupScanLog = new widget.PopupMenu();
+        ppPindahHariSebelumnya = new widget.MenuItem();
+        ppPindahHariBerikutnya = new widget.MenuItem();
+        PopupRekapFinger = new widget.PopupMenu();
+        ppKoreksiScan = new widget.MenuItem();
+        ppPengajuanCuti = new widget.MenuItem();
+        ppPengajuanIzin = new widget.MenuItem();
         WindowImportScanlogFingerspot = new javax.swing.JDialog();
         internalFrame2 = new widget.InternalFrame();
         panelatas1 = new widget.PanelBiasa();
@@ -246,6 +275,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         label18 = new widget.Label();
         KdShiftDetail = new widget.TextBox();
         NmShiftDetail = new widget.TextBox();
+        JamShiftDetail = new widget.TextBox();
         BtnShiftDetail = new widget.Button();
         label19 = new widget.Label();
         LStatusDetail = new widget.Label();
@@ -259,11 +289,18 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         cmbJamPulang = new widget.ComboBox();
         cmbMenitPulang = new widget.ComboBox();
         CekPulangDetail = new widget.CekBox();
+        label22 = new widget.Label();
+        TglScanDetail = new widget.Tanggal();
+        cmbJamScan = new widget.ComboBox();
+        cmbMenitScan = new widget.ComboBox();
+        cmbModeScan = new widget.ComboBox();
+        BtnTambahScan = new widget.Button();
         Scroll2 = new widget.ScrollPane();
         tbScanLog = new widget.Table();
         panelbawah2 = new widget.panelisi();
         BtnTerapkan = new widget.Button();
         BtnHapusShift = new widget.Button();
+        BtnHapusScan = new widget.Button();
         BtnKeluarDetail = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         TabKehadiran = new widget.TabPane();
@@ -291,6 +328,65 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         BtnPrint = new widget.Button();
         BtnAll = new widget.Button();
         BtnKeluar = new widget.Button();
+
+        PopupScanLog.setName("PopupScanLog"); // NOI18N
+
+        ppPindahHariSebelumnya.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppPindahHariSebelumnya.setText("Pindah ke Shift Hari Sebelumnya");
+        ppPindahHariSebelumnya.setName("ppPindahHariSebelumnya"); // NOI18N
+        ppPindahHariSebelumnya.setPreferredSize(new java.awt.Dimension(230, 26));
+        ppPindahHariSebelumnya.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPindahHariSebelumnyaActionPerformed(evt);
+            }
+        });
+        PopupScanLog.add(ppPindahHariSebelumnya);
+
+        ppPindahHariBerikutnya.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppPindahHariBerikutnya.setText("Pindah ke Shift Hari Berikutnya");
+        ppPindahHariBerikutnya.setName("ppPindahHariBerikutnya"); // NOI18N
+        ppPindahHariBerikutnya.setPreferredSize(new java.awt.Dimension(230, 26));
+        ppPindahHariBerikutnya.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPindahHariBerikutnyaActionPerformed(evt);
+            }
+        });
+        PopupScanLog.add(ppPindahHariBerikutnya);
+
+        PopupRekapFinger.setName("PopupRekapFinger"); // NOI18N
+
+        ppKoreksiScan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppKoreksiScan.setText("Koreksi Scan");
+        ppKoreksiScan.setName("ppKoreksiScan"); // NOI18N
+        ppKoreksiScan.setPreferredSize(new java.awt.Dimension(200, 26));
+        ppKoreksiScan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppKoreksiScanActionPerformed(evt);
+            }
+        });
+        PopupRekapFinger.add(ppKoreksiScan);
+
+        ppPengajuanCuti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppPengajuanCuti.setText("Pengajuan Cuti");
+        ppPengajuanCuti.setName("ppPengajuanCuti"); // NOI18N
+        ppPengajuanCuti.setPreferredSize(new java.awt.Dimension(200, 26));
+        ppPengajuanCuti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPengajuanCutiActionPerformed(evt);
+            }
+        });
+        PopupRekapFinger.add(ppPengajuanCuti);
+
+        ppPengajuanIzin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppPengajuanIzin.setText("Pengajuan Izin");
+        ppPengajuanIzin.setName("ppPengajuanIzin"); // NOI18N
+        ppPengajuanIzin.setPreferredSize(new java.awt.Dimension(200, 26));
+        ppPengajuanIzin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPengajuanIzinActionPerformed(evt);
+            }
+        });
+        PopupRekapFinger.add(ppPengajuanIzin);
 
         WindowImportScanlogFingerspot.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
         WindowImportScanlogFingerspot.setName("WindowImportScanlogFingerspot"); // NOI18N
@@ -335,11 +431,17 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
         Scroll1.setName("Scroll1"); // NOI18N
 
-        tbRekapFinger.setToolTipText("<html>\nKlik 2x/tekan spasi pada kolom tanggal untuk melihat detail scanlog<br />\nIsi kolom tanggal: [kode shift] scan masuk - scan pulang, \"--:--\" apabila tidak ada<br /><br />\nKeterangan warna kolom<br />\n- Merah: Tanpa keterangan atau pengajuan izin/cuti/sakit tidak disetujui<br />\n- Biru: Izin<br />\n- Kuning: Cuti/sakit<br />\n- Hitam: Izin normatif<br />\n- Cyan: Tidak ada jadwal dinas<br />\n- Merah muda: Hari minggu/libur<br />\n- Oranye: Scan tidak lengkap/perlu dikoreksi<br />\n</html>"); // NOI18N
+        tbRekapFinger.setToolTipText("<html>\nKlik 2x/tekan spasi pada kolom tanggal untuk melihat detail scanlog<br />\nKlik kanan pada kolom tanggal untuk koreksi scan, pengajuan cuti, atau pengajuan izin<br />\nIsi kolom tanggal: [kode shift] scan masuk - scan pulang, \"--:--\" apabila tidak ada<br /><br />\nKeterangan warna kolom<br />\n- Merah: Tanpa keterangan atau pengajuan izin/cuti/sakit tidak disetujui<br />\n- Biru: Izin<br />\n- Kuning: Cuti/sakit<br />\n- Hitam: Izin normatif<br />\n- Cyan: Tidak ada jadwal dinas<br />\n- Merah muda: Hari minggu/libur<br />\n- Oranye: Scan tidak lengkap/perlu dikoreksi<br />\n</html>"); // NOI18N
         tbRekapFinger.setName("tbRekapFinger"); // NOI18N
         tbRekapFinger.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbRekapFingerMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbRekapFingerMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbRekapFingerMouseReleased(evt);
             }
         });
         tbRekapFinger.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -419,7 +521,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         internalFrame3.setLayout(new java.awt.BorderLayout());
 
         panelatas2.setName("panelatas2"); // NOI18N
-        panelatas2.setPreferredSize(new java.awt.Dimension(44, 133));
+        panelatas2.setPreferredSize(new java.awt.Dimension(44, 193));
         panelatas2.setLayout(null);
 
         label17.setText("Pegawai :");
@@ -461,9 +563,16 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
         NmShiftDetail.setEditable(false);
         NmShiftDetail.setName("NmShiftDetail"); // NOI18N
-        NmShiftDetail.setPreferredSize(new java.awt.Dimension(166, 23));
+        NmShiftDetail.setPreferredSize(new java.awt.Dimension(303, 23));
         panelatas2.add(NmShiftDetail);
-        NmShiftDetail.setBounds(131, 40, 166, 23);
+        NmShiftDetail.setBounds(131, 40, 303, 23);
+
+        JamShiftDetail.setEditable(false);
+        JamShiftDetail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        JamShiftDetail.setName("JamShiftDetail"); // NOI18N
+        JamShiftDetail.setPreferredSize(new java.awt.Dimension(80, 23));
+        panelatas2.add(JamShiftDetail);
+        JamShiftDetail.setBounds(437, 40, 80, 23);
 
         BtnShiftDetail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnShiftDetail.setMnemonic('1');
@@ -475,20 +584,22 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
             }
         });
         panelatas2.add(BtnShiftDetail);
-        BtnShiftDetail.setBounds(300, 40, 28, 23);
+        BtnShiftDetail.setBounds(520, 40, 28, 23);
 
         label19.setText("Status :");
         label19.setName("label19"); // NOI18N
         label19.setPreferredSize(new java.awt.Dimension(50, 23));
         panelatas2.add(label19);
-        label19.setBounds(331, 40, 50, 23);
+        label19.setBounds(0, 160, 75, 23);
 
+        LStatusDetail.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 0, 0, 0));
         LStatusDetail.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         LStatusDetail.setText("-");
+        LStatusDetail.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         LStatusDetail.setName("LStatusDetail"); // NOI18N
-        LStatusDetail.setPreferredSize(new java.awt.Dimension(164, 23));
+        LStatusDetail.setPreferredSize(new java.awt.Dimension(164, 53));
         panelatas2.add(LStatusDetail);
-        LStatusDetail.setBounds(384, 40, 164, 23);
+        LStatusDetail.setBounds(78, 160, 409, 23);
 
         label20.setText("Jam Datang :");
         label20.setName("label20"); // NOI18N
@@ -497,7 +608,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         label20.setBounds(0, 70, 75, 23);
 
         TglDatangDetail.setForeground(new java.awt.Color(50, 70, 50));
-        TglDatangDetail.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-11-2026" }));
+        TglDatangDetail.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-11-2026" }));
         TglDatangDetail.setDisplayFormat("dd-MM-yyyy");
         TglDatangDetail.setName("TglDatangDetail"); // NOI18N
         TglDatangDetail.setOpaque(false);
@@ -537,7 +648,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         label21.setBounds(0, 100, 75, 23);
 
         TglPulangDetail.setForeground(new java.awt.Color(50, 70, 50));
-        TglPulangDetail.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-11-2026" }));
+        TglPulangDetail.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-11-2026" }));
         TglPulangDetail.setDisplayFormat("dd-MM-yyyy");
         TglPulangDetail.setName("TglPulangDetail"); // NOI18N
         TglPulangDetail.setOpaque(false);
@@ -570,11 +681,60 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         panelatas2.add(CekPulangDetail);
         CekPulangDetail.setBounds(289, 100, 80, 23);
 
+        label22.setText("Tambah Scan :");
+        label22.setName("label22"); // NOI18N
+        label22.setPreferredSize(new java.awt.Dimension(75, 23));
+        panelatas2.add(label22);
+        label22.setBounds(0, 130, 75, 23);
+
+        TglScanDetail.setForeground(new java.awt.Color(50, 70, 50));
+        TglScanDetail.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-11-2026" }));
+        TglScanDetail.setDisplayFormat("dd-MM-yyyy");
+        TglScanDetail.setName("TglScanDetail"); // NOI18N
+        TglScanDetail.setOpaque(false);
+        panelatas2.add(TglScanDetail);
+        TglScanDetail.setBounds(78, 130, 90, 23);
+
+        cmbJamScan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        cmbJamScan.setToolTipText("Jam scan");
+        cmbJamScan.setName("cmbJamScan"); // NOI18N
+        cmbJamScan.setPreferredSize(new java.awt.Dimension(56, 23));
+        panelatas2.add(cmbJamScan);
+        cmbJamScan.setBounds(171, 130, 56, 23);
+
+        cmbMenitScan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        cmbMenitScan.setToolTipText("Menit scan");
+        cmbMenitScan.setName("cmbMenitScan"); // NOI18N
+        cmbMenitScan.setPreferredSize(new java.awt.Dimension(56, 23));
+        panelatas2.add(cmbMenitScan);
+        cmbMenitScan.setBounds(230, 130, 56, 23);
+
+        cmbModeScan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Scan Masuk", "Scan Pulang" }));
+        cmbModeScan.setToolTipText("Mode scan");
+        cmbModeScan.setName("cmbModeScan"); // NOI18N
+        cmbModeScan.setPreferredSize(new java.awt.Dimension(95, 23));
+        panelatas2.add(cmbModeScan);
+        cmbModeScan.setBounds(289, 130, 95, 23);
+
+        BtnTambahScan.setMnemonic('T');
+        BtnTambahScan.setText("Tambah");
+        BtnTambahScan.setToolTipText("Alt+T, tambahkan scan yang tidak tercatat mesin");
+        BtnTambahScan.setName("BtnTambahScan"); // NOI18N
+        BtnTambahScan.setPreferredSize(new java.awt.Dimension(100, 23));
+        BtnTambahScan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTambahScanActionPerformed(evt);
+            }
+        });
+        panelatas2.add(BtnTambahScan);
+        BtnTambahScan.setBounds(387, 130, 100, 23);
+
         internalFrame3.add(panelatas2, java.awt.BorderLayout.PAGE_START);
 
         Scroll2.setName("Scroll2"); // NOI18N
 
-        tbScanLog.setToolTipText("Ubah kolom mode untuk mengoreksi scan masuk/pulang"); // NOI18N
+        tbScanLog.setToolTipText("Ubah kolom mode untuk mengoreksi scan masuk/pulang, klik kanan untuk memindahkan scan ke shift hari sebelumnya/berikutnya"); // NOI18N
+        tbScanLog.setComponentPopupMenu(PopupScanLog);
         tbScanLog.setName("tbScanLog"); // NOI18N
         Scroll2.setViewportView(tbScanLog);
 
@@ -609,6 +769,19 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
             }
         });
         panelbawah2.add(BtnHapusShift);
+
+        BtnHapusScan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        BtnHapusScan.setMnemonic('N');
+        BtnHapusScan.setText("Hapus Scan");
+        BtnHapusScan.setToolTipText("Alt+N, hapus scan yang dipilih, scan mesin diabaikan sampai scanlog diimpor ulang");
+        BtnHapusScan.setName("BtnHapusScan"); // NOI18N
+        BtnHapusScan.setPreferredSize(new java.awt.Dimension(115, 30));
+        BtnHapusScan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnHapusScanActionPerformed(evt);
+            }
+        });
+        panelbawah2.add(BtnHapusScan);
 
         BtnKeluarDetail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluarDetail.setMnemonic('K');
@@ -1025,14 +1198,36 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BlnCariItemStateChanged
 
     private void BtnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnImportActionPerformed
+        JsonNode draft = listImport.isEmpty() ? bacaDraft() : null;
+        if (!listImport.isEmpty() || null != draft) {
+            String ringkasan = listImport.isEmpty()
+                ? draft.path("berkas").asText() + "\nPeriode " + LocalDate.parse(draft.path("awal").asText()).format(FORMAT_TANGGAL) + " s.d. " + LocalDate.parse(draft.path("akhir").asText()).format(FORMAT_TANGGAL) +
+                    ", terakhir diubah " + LocalDateTime.parse(draft.path("diubah").asText()).format(FORMAT_WAKTU_DRAFT)
+                : LBerkas.getText() + "\nPeriode " + importAwal.format(FORMAT_TANGGAL) + " s.d. " + imporAkhir.format(FORMAT_TANGGAL);
+
+            int pilihan = JOptionPane.showOptionDialog(this,
+                "Masih ada draft impor scanlog yang belum disimpan:\n" + ringkasan + "\n\nLanjutkan draft tersebut, atau impor berkas scanlog baru?\nImpor baru akan menggantikan draft beserta seluruh koreksinya.",
+                "Draft Impor Scanlog", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Lanjutkan Draft", "Impor Scanlog"}, "Lanjutkan Draft");
+
+            if (0 == pilihan) {
+                if (!listImport.isEmpty() || lanjutkanDraft(draft)) {
+                    tampilWindowImport();
+                }
+
+                return;
+            }
+
+            if (1 != pilihan) {
+                return;
+            }
+        }
+
         List<File> berkas = pilihScanlog(this);
-        if (berkas.isEmpty() ? listImport.isEmpty() : !importScanlog(berkas)) {
+        if (berkas.isEmpty() || !importScanlog(berkas)) {
             return;
         }
 
-        WindowImportScanlogFingerspot.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-        WindowImportScanlogFingerspot.setLocationRelativeTo(internalFrame1);
-        WindowImportScanlogFingerspot.setVisible(true);
+        tampilWindowImport();
     }//GEN-LAST:event_BtnImportActionPerformed
 
     private void BtnImportKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnImportKeyPressed
@@ -1055,6 +1250,8 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(WindowImportScanlogFingerspot, "Belum ada scanlog yang diimpor...!!!!");
             return;
         }
+
+        segarkanMappingShift();
 
         boolean sukses = true;
         Map<ImportShift, Pegawai> simpan = new LinkedHashMap<>();
@@ -1150,7 +1347,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
                     sukses = Sequel.menyimpantfSmc("rekap_presensi", "id, shift, jam_datang, jam_pulang, status, keterlambatan, durasi, keterangan, photo",
                         data.getValue().id, shift.shift, shift.getJamDatang().format(FORMAT_SQL), null == shift.getPulang() ? null : shift.getPulang().format(FORMAT_SQL), statusShift(shift),
                         keterlambatanShift(shift), tidakLengkap(shift) ? null : formatDurasi(Duration.between(shift.getDatang(), shift.getPulang()).getSeconds()),
-                        "Impor scanlog fingerspot" + (shift.dikoreksi() ? ", dikoreksi" : "") + (null == shift.getDatang() ? ", " + KETERANGAN_TANPA_MASUK : ""), "");
+                        "Impor scanlog fingerspot" + (data.getValue().bebasScanlog ? ", " + KETERANGAN_BEBAS_SCANLOG : "") + (shift.dikoreksi() ? ", dikoreksi" : "") + (null == shift.getDatang() ? ", " + KETERANGAN_TANPA_MASUK : ""), "");
                 }
 
                 if (sukses) {
@@ -1176,6 +1373,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
         JOptionPane.showMessageDialog(WindowImportScanlogFingerspot, simpan.size() + " presensi" + (koreksiJadwal.isEmpty() ? "" : " dan " + koreksiJadwal.size() + " koreksi jadwal") + " berhasil disimpan...!!!!");
 
+        hapusDraft();
         prepareImport();
         WindowImportScanlogFingerspot.dispose();
         tampil();
@@ -1198,32 +1396,17 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_tbRekapFingerKeyPressed
 
     private void BtnTerapkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTerapkanActionPerformed
-        ImportShift shift = pegawaiDetail.jadwalPada(tanggalDetail, detailTable());
-        if (null == shift) {
-            return;
-        }
-
-        LocalDateTime datang = !CekDatangDetail.isSelected() ? null : waktuDetail(TglDatangDetail, cmbJamDatang, cmbMenitDatang);
-        LocalDateTime pulang = !CekPulangDetail.isSelected() ? null : waktuDetail(TglPulangDetail, cmbJamPulang, cmbMenitPulang);
-
-        shift.datangManual = null;
-        shift.pulangManual = null;
-
-        attachScan(pegawaiDetail);
-        shift.datangManual = null == datang || datang.equals(shift.datang) ? null : datang;
-        shift.pulangManual = null == pulang || pulang.equals(shift.pulang) ? null : pulang;
-
-        attachScan(pegawaiDetail);
-
-        refreshDetail();
+        terapkanKoreksi();
     }//GEN-LAST:event_BtnTerapkanActionPerformed
 
     private void CekDatangDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CekDatangDetailActionPerformed
         aktifkanWaktuDetail();
+        terapkanKoreksi();
     }//GEN-LAST:event_CekDatangDetailActionPerformed
 
     private void CekPulangDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CekPulangDetailActionPerformed
         aktifkanWaktuDetail();
+        terapkanKoreksi();
     }//GEN-LAST:event_CekPulangDetailActionPerformed
 
     private void BtnKeluarDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarDetailActionPerformed
@@ -1263,29 +1446,19 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
         int terpilih = jammasuk.getTable().getSelectedRow();
         if (-1 != terpilih) {
-            try (PreparedStatement ps = koneksi.prepareStatement(
-                "select jam_masuk_smc.kode_shift, jam_masuk_smc.nama_shift, jam_masuk_smc.jam_masuk, jam_masuk_smc.jam_pulang, set_kode_shift_smc.shift from jam_masuk_smc " +
-                "left join set_kode_shift_smc on set_kode_shift_smc.kode_shift = jam_masuk_smc.kode_shift where jam_masuk_smc.kode_shift = ?"
-            )) {
-                ps.setString(1, jammasuk.getTable().getValueAt(terpilih, 1).toString());
+            MasterShift pilihan = cariMasterShift(jammasuk.getTable().getValueAt(terpilih, 1).toString());
 
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        MasterShift pilihan = new MasterShift(rs.getString("kode_shift"), rs.getString("nama_shift"), rs.getString("shift"), rs.getTime("jam_masuk").toLocalTime(), rs.getTime("jam_pulang").toLocalTime());
+            if (null != pilihan) {
+                ImportShift shift = pegawaiDetail.jadwalPada(tanggalDetail, detailTable());
 
-                        ImportShift shift = pegawaiDetail.jadwalPada(tanggalDetail, detailTable());
-
-                        if (null == shift) {
-                            pegawaiDetail.tambahJadwal(tanggalDetail, detailTable(), pilihan);
-                        } else {
-                            shift.pakai(pilihan);
-                        }
-
-                        perbaruiJadwalDetail();
-                    }
+                if (null == shift) {
+                    pegawaiDetail.tambahJadwal(tanggalDetail, detailTable(), pilihan);
+                } else {
+                    shift.pakai(pilihan);
                 }
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
+
+                segarkanMappingShift();
+                perbaruiJadwalDetail();
             }
         }
     }//GEN-LAST:event_BtnShiftDetailActionPerformed
@@ -1296,6 +1469,42 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
             tampil();
         }
     }//GEN-LAST:event_TabKehadiranStateChanged
+
+    private void BtnHapusScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusScanActionPerformed
+        hapusScan();
+    }//GEN-LAST:event_BtnHapusScanActionPerformed
+
+    private void BtnTambahScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahScanActionPerformed
+        tambahScan();
+    }//GEN-LAST:event_BtnTambahScanActionPerformed
+
+    private void ppKoreksiScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppKoreksiScanActionPerformed
+        tampilDetail();
+    }//GEN-LAST:event_ppKoreksiScanActionPerformed
+
+    private void ppPengajuanCutiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPengajuanCutiActionPerformed
+        bukaPengajuan(true);
+    }//GEN-LAST:event_ppPengajuanCutiActionPerformed
+
+    private void ppPengajuanIzinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPengajuanIzinActionPerformed
+        bukaPengajuan(false);
+    }//GEN-LAST:event_ppPengajuanIzinActionPerformed
+
+    private void tbRekapFingerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRekapFingerMousePressed
+        tampilPopupRekap(evt);
+    }//GEN-LAST:event_tbRekapFingerMousePressed
+
+    private void tbRekapFingerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRekapFingerMouseReleased
+        tampilPopupRekap(evt);
+    }//GEN-LAST:event_tbRekapFingerMouseReleased
+
+    private void ppPindahHariBerikutnyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPindahHariBerikutnyaActionPerformed
+        pindahScan(false);
+    }//GEN-LAST:event_ppPindahHariBerikutnyaActionPerformed
+
+    private void ppPindahHariSebelumnyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPindahHariSebelumnyaActionPerformed
+        pindahScan(true);
+    }//GEN-LAST:event_ppPindahHariSebelumnyaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1317,6 +1526,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private widget.ComboBox BlnCari;
     private widget.Button BtnAll;
     private widget.Button BtnCari;
+    private widget.Button BtnHapusScan;
     private widget.Button BtnHapusShift;
     private widget.Button BtnImporScanlog;
     private widget.Button BtnImport;
@@ -1326,10 +1536,12 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private widget.Button BtnPrint;
     private widget.Button BtnShiftDetail;
     private widget.Button BtnSimpanImpor;
+    private widget.Button BtnTambahScan;
     private widget.Button BtnTerapkan;
     private widget.CekBox CekDatangDetail;
     private widget.CekBox CekPulangDetail;
     private smc.ui.swing.ComboBoxSMC Departemen;
+    private widget.TextBox JamShiftDetail;
     private widget.ComboBox JenisDetail;
     private widget.TextBox KdShiftDetail;
     private widget.Label LBerkas;
@@ -1340,6 +1552,8 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private widget.Label LPeriodeImpor;
     private widget.Label LStatusDetail;
     private widget.TextBox NmShiftDetail;
+    private widget.PopupMenu PopupRekapFinger;
+    private widget.PopupMenu PopupScanLog;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll1;
     private widget.ScrollPane Scroll2;
@@ -1349,13 +1563,17 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private widget.TabPane TabKehadiran;
     private widget.Tanggal TglDatangDetail;
     private widget.Tanggal TglPulangDetail;
+    private widget.Tanggal TglScanDetail;
     private widget.ComboBox ThnCari;
     private javax.swing.JDialog WindowDetailLogPresensi;
     private javax.swing.JDialog WindowImportScanlogFingerspot;
     private widget.ComboBox cmbJamDatang;
     private widget.ComboBox cmbJamPulang;
+    private widget.ComboBox cmbJamScan;
     private widget.ComboBox cmbMenitDatang;
     private widget.ComboBox cmbMenitPulang;
+    private widget.ComboBox cmbMenitScan;
+    private widget.ComboBox cmbModeScan;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
     private widget.InternalFrame internalFrame3;
@@ -1373,12 +1591,18 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private widget.Label label19;
     private widget.Label label20;
     private widget.Label label21;
+    private widget.Label label22;
     private widget.panelisi panelGlass5;
     private widget.panelisi panelGlass7;
     private widget.PanelBiasa panelatas1;
     private widget.PanelBiasa panelatas2;
     private widget.panelisi panelbawah1;
     private widget.panelisi panelbawah2;
+    private widget.MenuItem ppKoreksiScan;
+    private widget.MenuItem ppPengajuanCuti;
+    private widget.MenuItem ppPengajuanIzin;
+    private widget.MenuItem ppPindahHariBerikutnya;
+    private widget.MenuItem ppPindahHariSebelumnya;
     private widget.Table tbKehadiran;
     private widget.Table tbLogPresensi;
     private widget.Table tbRekapFinger;
@@ -1812,9 +2036,104 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         return JFileChooser.APPROVE_OPTION == chooser.showOpenDialog(parent) ? List.of(chooser.getSelectedFiles()) : List.of();
     }
 
+    private void tampilPopupRekap(MouseEvent evt) {
+        if (!evt.isPopupTrigger()) {
+            return;
+        }
+
+        int baris = tbRekapFinger.rowAtPoint(evt.getPoint()), kolom = tbRekapFinger.columnAtPoint(evt.getPoint());
+        if (0 > baris || baris >= listImport.size() || KOLOM_TANGGAL_AWAL > kolom) {
+            return;
+        }
+
+        tbRekapFinger.changeSelection(baris, kolom, false, false);
+        ppPengajuanCuti.setEnabled(akses.getpengajuan_cuti());
+        ppPengajuanIzin.setEnabled(akses.getpengajuan_izin_smc());
+        PopupRekapFinger.show(tbRekapFinger, evt.getX(), evt.getY());
+    }
+
+    private void bukaPengajuan(boolean cuti) {
+        int baris = tbRekapFinger.getSelectedRow(), kolom = tbRekapFinger.getSelectedColumn();
+        if (0 > baris || baris >= listImport.size() || KOLOM_TANGGAL_AWAL > kolom) {
+            return;
+        }
+
+        Pegawai pegawai = listImport.get(baris);
+        Date tanggal = Date.from(importAwal.plusDays(kolom - KOLOM_TANGGAL_AWAL).atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        JDialog form;
+        if (cuti) {
+            PengajuanCutiAdmin pengajuan = new PengajuanCutiAdmin(null, true);
+            pengajuan.isCek();
+            pengajuan.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowOpened(WindowEvent e) {
+                    pengajuan.setPegawaiSmc(pegawai.nik, tanggal);
+                }
+            });
+            form = pengajuan;
+        } else {
+            PengajuanIzinAdminSMC pengajuan = new PengajuanIzinAdminSMC(null, true);
+            pengajuan.isCek();
+            pengajuan.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowOpened(WindowEvent e) {
+                    pengajuan.setPegawai(pegawai.nik, tanggal);
+                }
+            });
+            form = pengajuan;
+        }
+
+        form.setSize(WindowImportScanlogFingerspot.getWidth() - 20, WindowImportScanlogFingerspot.getHeight() - 20);
+        form.setLocationRelativeTo(WindowImportScanlogFingerspot);
+        form.setVisible(true);
+
+        muatUlangKeterangan();
+    }
+
+    private void muatUlangKeterangan() {
+        Map<String, Pegawai> pegawaiPerID = new HashMap<>();
+        for (Pegawai pegawai : listImport) {
+            pegawai.keterangan.clear();
+            pegawaiPerID.put(pegawai.id, pegawai);
+        }
+
+        try {
+            loadKeterangan(pegawaiPerID);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+
+        for (Pegawai pegawai : listImport) {
+            if (pegawai.bebasScanlog) {
+                attachScan(pegawai);
+            }
+
+            updateRow(pegawai);
+        }
+
+        tbRekapFinger.repaint();
+    }
+
+    private void tampilWindowImport() {
+        WindowImportScanlogFingerspot.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        WindowImportScanlogFingerspot.setLocationRelativeTo(internalFrame1);
+        WindowImportScanlogFingerspot.setVisible(true);
+    }
+
+    private String filterDepartemen() {
+        return null == Departemen.getSelectedKey() || "semua".equals(Departemen.getSelectedKey()) ? "" : Departemen.getSelectedKey().toString();
+    }
+
+    private String filterStatusKerja() {
+        return null == StatusKerja.getSelectedKey() || "semua".equals(StatusKerja.getSelectedKey()) ? "" : StatusKerja.getSelectedKey().toString();
+    }
+
     private boolean importScanlog(List<File> berkas) {
         Component parent = WindowImportScanlogFingerspot.isVisible() ? WindowImportScanlogFingerspot : this;
         parent.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        final String departemen = filterDepartemen(), statuskerja = filterStatusKerja();
 
         Map<String, Pegawai> pegawaiPerPin = new HashMap<>();
         Set<String> pinTerdaftar = new HashSet<>();
@@ -1828,7 +2147,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         String berkasDibaca = berkas.get(0).getName();
 
         try {
-            Map<String, Pegawai> pegawaiPerID = loadPegawai(pegawaiPerPin, pinTerdaftar);
+            Map<String, Pegawai> pegawaiPerID = loadPegawai(departemen, statuskerja, pegawaiPerPin, pinTerdaftar);
 
             for (File file : berkas) {
                 berkasDibaca = file.getName();
@@ -1873,7 +2192,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
                         }
 
                         Pegawai pegawai = pegawaiPerPin.get(pin);
-                        if (null == pegawai || !scanUnik.add(pin + "|" + waktu + "|" + mode.toUpperCase())) {
+                        if (null == pegawai || pegawai.bebasScanlog || !scanUnik.add(pin + "|" + waktu + "|" + mode.toUpperCase())) {
                             continue;
                         }
 
@@ -1901,29 +2220,8 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
             importAwal = tanggalScan.get(0);
             imporAkhir = tanggalScan.get(tanggalScan.size() - 1);
 
-            loadJadwal(importAwal.minusDays(1), imporAkhir, id -> pegawaiPerID.containsKey(id) ? pegawaiPerID.get(id).jadwal : null);
-            loadKeterangan(pegawaiPerID);
-
-            toleransi = Sequel.cariIntegerSmc("select set_keterlambatan.toleransi from set_keterlambatan");
-            terlambat1 = Sequel.cariIntegerSmc("select set_keterlambatan.terlambat1 from set_keterlambatan");
-            terlambat2 = Sequel.cariIntegerSmc("select set_keterlambatan.terlambat2 from set_keterlambatan");
-
-            prepareImport();
-
-            for (Pegawai pegawai : pegawaiPerID.values()) {
-                pegawai.scan.sort(Comparator.comparing(scan -> scan.waktu));
-                pegawai.jadwal.sort(Comparator.comparing(shift -> shift.jadwalMasuk));
-
-                attachScan(pegawai);
-
-                boolean adaJadwal = pegawai.jadwal.stream().anyMatch(shift -> !shift.tanggal.isBefore(importAwal));
-
-                if (adaJadwal || !pegawai.scan.isEmpty()) {
-                    listImport.add(pegawai);
-                }
-            }
-
-            listImport.sort(Comparator.comparing(pegawai -> pegawai.nik));
+            muatJadwalImport(pegawaiPerID);
+            pasangImport(pegawaiPerID);
         } catch (Exception e) {
             System.out.println("Notif : " + e);
 
@@ -1939,13 +2237,12 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
             return false;
         }
 
-        String namaBerkas = berkas.stream().map(File::getName).collect(Collectors.joining(", "));
+        importDepartemen = departemen;
+        importStatusKerja = statuskerja;
 
-        LBerkas.setText(namaBerkas);
-        LBerkas.setToolTipText(namaBerkas);
-        LPeriodeImpor.setText(importAwal.format(FORMAT_TANGGAL) + " s.d. " + imporAkhir.format(FORMAT_TANGGAL));
-
+        tampilLabelImport(berkas.stream().map(File::getName).collect(Collectors.joining(", ")));
         tampilHasilImport();
+        simpanDraft();
 
         parent.setCursor(Cursor.getDefaultCursor());
 
@@ -1956,15 +2253,265 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         return true;
     }
 
-    private Map<String, Pegawai> loadPegawai(Map<String, Pegawai> pegawaiPerPin, Set<String> pinTerdaftar) throws Exception {
-        final String departemen = null == Departemen.getSelectedKey() || "semua".equals(Departemen.getSelectedKey()) ? "" : Departemen.getSelectedKey().toString();
-        final String statuskerja = null == StatusKerja.getSelectedKey() || "semua".equals(StatusKerja.getSelectedKey()) ? "" : StatusKerja.getSelectedKey().toString();
+    private void tampilLabelImport(String namaBerkas) {
+        LBerkas.setText(namaBerkas);
+        LBerkas.setToolTipText(namaBerkas);
+        LPeriodeImpor.setText(importAwal.format(FORMAT_TANGGAL) + " s.d. " + imporAkhir.format(FORMAT_TANGGAL));
+    }
 
+    private void muatJadwalImport(Map<String, Pegawai> pegawaiPerID) throws Exception {
+        loadJadwal(importAwal.minusDays(1), imporAkhir, id -> pegawaiPerID.containsKey(id) ? pegawaiPerID.get(id).jadwal : null);
+        loadKeterangan(pegawaiPerID);
+
+        toleransi = Sequel.cariIntegerSmc("select set_keterlambatan.toleransi from set_keterlambatan");
+        terlambat1 = Sequel.cariIntegerSmc("select set_keterlambatan.terlambat1 from set_keterlambatan");
+        terlambat2 = Sequel.cariIntegerSmc("select set_keterlambatan.terlambat2 from set_keterlambatan");
+
+        prepareImport();
+    }
+
+    private void pasangImport(Map<String, Pegawai> pegawaiPerID) {
+        for (Pegawai pegawai : pegawaiPerID.values()) {
+            pegawai.scan.sort(Comparator.comparing(scan -> scan.waktu));
+            pegawai.jadwal.sort(Comparator.comparing(shift -> shift.jadwalMasuk));
+
+            attachScan(pegawai);
+
+            boolean adaJadwal = pegawai.jadwal.stream().anyMatch(shift -> !shift.tanggal.isBefore(importAwal));
+
+            if (adaJadwal || !pegawai.scan.isEmpty()) {
+                listImport.add(pegawai);
+            }
+        }
+
+        listImport.sort(Comparator.comparing(pegawai -> pegawai.nik));
+    }
+
+    private File berkasDraft() {
+        return new File("./cache/draftimporscanlogsmc-" + String.valueOf(akses.getkode()).replaceAll("[^A-Za-z0-9_-]", "_") + ".iyem");
+    }
+
+    private JsonNode bacaDraft() {
+        File berkas = berkasDraft();
+        if (!berkas.isFile()) {
+            return null;
+        }
+
+        try {
+            JsonNode draft = mapper.readTree(berkas);
+            LocalDate.parse(draft.path("awal").asText());
+            LocalDate.parse(draft.path("akhir").asText());
+            LocalDateTime.parse(draft.path("diubah").asText());
+
+            return draft;
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+
+            return null;
+        }
+    }
+
+    private void hapusDraft() {
+        try {
+            Files.deleteIfExists(berkasDraft().toPath());
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+
+    private void simpanDraft() {
+        if (null == importAwal || listImport.isEmpty()) {
+            return;
+        }
+
+        ObjectNode draft = mapper.createObjectNode();
+        draft.put("versi", 1);
+        draft.put("diubah", LocalDateTime.now().toString());
+        draft.put("berkas", LBerkas.getText());
+        draft.put("awal", importAwal.toString());
+        draft.put("akhir", imporAkhir.toString());
+        draft.put("departemen", importDepartemen);
+        draft.put("statusKerja", importStatusKerja);
+
+        ArrayNode daftarPegawai = draft.putArray("pegawai");
+        for (Pegawai pegawai : listImport) {
+            ObjectNode item = daftarPegawai.addObject();
+            item.put("id", pegawai.id);
+
+            ArrayNode daftarScan = item.putArray("scan");
+            for (ScanFinger scan : pegawai.scan) {
+                daftarScan.addObject()
+                    .put("waktu", scan.waktu.toString())
+                    .put("masukMesin", scan.masukMesin)
+                    .put("masuk", scan.masuk)
+                    .put("tambahan", scan.tambahan);
+            }
+
+            ArrayNode daftarKoreksi = item.putArray("koreksi");
+            for (ImportShift shift : pegawai.jadwal) {
+                if (!shift.kodeShift.equals(shift.kodeAsal) || null != shift.datangManual || null != shift.pulangManual) {
+                    tambahKoreksiDraft(daftarKoreksi, shift, shift.kodeShift);
+                }
+            }
+
+            for (ImportShift shift : pegawai.jadwalDihapus) {
+                tambahKoreksiDraft(daftarKoreksi, shift, null);
+            }
+        }
+
+        try {
+            File berkas = berkasDraft();
+            File sementara = new File(berkas.getPath() + ".tmp");
+            berkas.getAbsoluteFile().getParentFile().mkdirs();
+            mapper.writeValue(sementara, draft);
+            Files.move(sementara.toPath(), berkas.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+
+    private void tambahKoreksiDraft(ArrayNode daftarKoreksi, ImportShift shift, String kodeShift) {
+        daftarKoreksi.addObject()
+            .put("tanggal", shift.tanggal.toString())
+            .put("table", shift.table)
+            .put("kodeAsal", shift.kodeAsal)
+            .put("kodeShift", kodeShift)
+            .put("datang", null == kodeShift || null == shift.datangManual ? null : shift.datangManual.toString())
+            .put("pulang", null == kodeShift || null == shift.pulangManual ? null : shift.pulangManual.toString());
+    }
+
+    private static String teksDraft(JsonNode node, String kolom) {
+        return node.path(kolom).isTextual() ? node.path(kolom).asText() : null;
+    }
+
+    private boolean lanjutkanDraft(JsonNode draft) {
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        List<String> tidakDiterapkan = new ArrayList<>();
+        int pegawaiTidakDitemukan = 0;
+        String departemen = draft.path("departemen").asText(), statuskerja = draft.path("statusKerja").asText();
+
+        try {
+            Map<String, Pegawai> pegawaiPerID = loadPegawai(departemen, statuskerja, new HashMap<>(), new HashSet<>());
+
+            importAwal = LocalDate.parse(draft.path("awal").asText());
+            imporAkhir = LocalDate.parse(draft.path("akhir").asText());
+
+            for (JsonNode item : draft.path("pegawai")) {
+                Pegawai pegawai = pegawaiPerID.get(item.path("id").asText());
+                if (null == pegawai) {
+                    pegawaiTidakDitemukan++;
+
+                    continue;
+                }
+
+                if (!pegawai.bebasScanlog) {
+                    for (JsonNode scan : item.path("scan")) {
+                        ScanFinger scanFinger = new ScanFinger(LocalDateTime.parse(scan.path("waktu").asText()), scan.path("masukMesin").asBoolean(), scan.path("tambahan").asBoolean());
+                        scanFinger.masuk = scan.path("masuk").asBoolean();
+                        pegawai.scan.add(scanFinger);
+                    }
+                }
+            }
+
+            muatJadwalImport(pegawaiPerID);
+
+            for (JsonNode item : draft.path("pegawai")) {
+                Pegawai pegawai = pegawaiPerID.get(item.path("id").asText());
+                if (null != pegawai) {
+                    for (JsonNode koreksi : item.path("koreksi")) {
+                        terapkanKoreksiDraft(pegawai, koreksi, tidakDiterapkan);
+                    }
+                }
+            }
+
+            pasangImport(pegawaiPerID);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+
+            importAwal = null;
+            imporAkhir = null;
+
+            prepareImport();
+
+            setCursor(Cursor.getDefaultCursor());
+
+            JOptionPane.showMessageDialog(this, "Gagal melanjutkan draft impor scanlog, silahkan impor ulang berkas scanlog..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+
+            return false;
+        }
+
+        importDepartemen = departemen;
+        importStatusKerja = statuskerja;
+
+        tampilLabelImport(draft.path("berkas").asText());
+        tampilHasilImport();
+        simpanDraft();
+
+        setCursor(Cursor.getDefaultCursor());
+
+        if (0 < pegawaiTidakDitemukan || !tidakDiterapkan.isEmpty()) {
+            StringBuilder pesan = new StringBuilder("Draft dilanjutkan dengan jadwal dan izin/cuti terbaru, tetapi:");
+            if (0 < pegawaiTidakDitemukan) {
+                pesan.append("\n- ").append(pegawaiTidakDitemukan).append(" pegawai sudah tidak terdaftar, scan-nya tidak dimuat");
+            }
+
+            tidakDiterapkan.stream().limit(20).forEach(item -> pesan.append("\n- ").append(item));
+            if (20 < tidakDiterapkan.size()) {
+                pesan.append("\n- dan ").append(tidakDiterapkan.size() - 20).append(" koreksi lainnya");
+            }
+
+            JOptionPane.showMessageDialog(this, pesan.toString(), "Draft Impor Scanlog", JOptionPane.WARNING_MESSAGE);
+        }
+
+        return true;
+    }
+
+    private void terapkanKoreksiDraft(Pegawai pegawai, JsonNode koreksi, List<String> tidakDiterapkan) {
+        LocalDate tanggal = LocalDate.parse(koreksi.path("tanggal").asText());
+        String table = koreksi.path("table").asText(), kodeAsal = teksDraft(koreksi, "kodeAsal"), kodeShift = teksDraft(koreksi, "kodeShift");
+        String keterangan = pegawai.nik + " " + pegawai.nama + ", " + tanggal.format(FORMAT_TANGGAL) + (TABLE_JADWAL_TAMBAHAN.equals(table) ? " (jadwal tambahan)" : "");
+
+        ImportShift shift = pegawai.jadwalPada(tanggal, table);
+        if (!Objects.equals(kodeAsal, null == shift ? null : shift.kodeAsal)) {
+            tidakDiterapkan.add(keterangan + ": jadwal sudah diubah di luar impor, koreksi hari itu tidak diterapkan");
+
+            return;
+        }
+
+        if (!Objects.equals(kodeAsal, kodeShift)) {
+            if (null == kodeShift) {
+                pegawai.hapusJadwal(shift);
+
+                return;
+            }
+
+            MasterShift master = cariMasterShift(kodeShift);
+            if (null == master) {
+                tidakDiterapkan.add(keterangan + ": shift " + kodeShift + " sudah tidak ada, koreksi hari itu tidak diterapkan");
+
+                return;
+            }
+
+            if (null == shift) {
+                pegawai.tambahJadwal(tanggal, table, master);
+                shift = pegawai.jadwalPada(tanggal, table);
+            } else {
+                shift.pakai(master);
+            }
+        }
+
+        String datang = teksDraft(koreksi, "datang"), pulang = teksDraft(koreksi, "pulang");
+        shift.datangManual = null == datang ? null : LocalDateTime.parse(datang);
+        shift.pulangManual = null == pulang ? null : LocalDateTime.parse(pulang);
+    }
+
+    private Map<String, Pegawai> loadPegawai(String departemen, String statuskerja, Map<String, Pegawai> pegawaiPerPin, Set<String> pinTerdaftar) throws Exception {
         Map<String, Pegawai> pegawaiPerId = new LinkedHashMap<>();
 
         try (PreparedStatement ps = koneksi.prepareStatement(
-            "select mapping_pin_pegawai_smc.pin, pegawai.id, pegawai.nik, pegawai.nama, departemen.nama as departemen, pegawai.departemen as dep_id, pegawai.stts_kerja, pegawai.stts_aktif " +
-            "from mapping_pin_pegawai_smc inner join pegawai on pegawai.id = mapping_pin_pegawai_smc.id inner join departemen on departemen.dep_id = pegawai.departemen"
+            "select mapping_pin_pegawai_smc.pin, pegawai.id, pegawai.nik, pegawai.nama, departemen.nama as departemen, pegawai.departemen as dep_id, pegawai.stts_kerja, pegawai.stts_aktif, stts_kerja.bebas_scanlog " +
+            "from mapping_pin_pegawai_smc inner join pegawai on pegawai.id = mapping_pin_pegawai_smc.id inner join departemen on departemen.dep_id = pegawai.departemen left join stts_kerja on stts_kerja.stts = pegawai.stts_kerja"
         )) {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -1976,11 +2523,31 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
                     Pegawai pegawai = pegawaiPerId.get(rs.getString("id"));
                     if (null == pegawai) {
-                        pegawai = new Pegawai(rs.getString("id"), rs.getString("nik"), rs.getString("nama"), rs.getString("departemen"));
+                        pegawai = new Pegawai(rs.getString("id"), rs.getString("nik"), rs.getString("nama"), rs.getString("departemen"), "Ya".equals(rs.getString("bebas_scanlog")));
                         pegawaiPerId.put(pegawai.id, pegawai);
                     }
 
                     pegawaiPerPin.put(rs.getString("pin"), pegawai);
+                }
+            }
+        }
+
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select pegawai.id, pegawai.nik, pegawai.nama, departemen.nama as departemen from pegawai inner join departemen on departemen.dep_id = pegawai.departemen " +
+            "inner join stts_kerja on stts_kerja.stts = pegawai.stts_kerja where stts_kerja.bebas_scanlog = 'Ya' and pegawai.stts_aktif != 'KELUAR' " +
+            (departemen.isBlank() ? "" : "and pegawai.departemen = ? ") + (statuskerja.isBlank() ? "" : "and pegawai.stts_kerja = ? ")
+        )) {
+            int i = 1;
+            if (!departemen.isBlank()) {
+                ps.setString(i++, departemen);
+            }
+            if (!statuskerja.isBlank()) {
+                ps.setString(i++, statuskerja);
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    pegawaiPerId.putIfAbsent(rs.getString("id"), new Pegawai(rs.getString("id"), rs.getString("nik"), rs.getString("nama"), rs.getString("departemen"), true));
                 }
             }
         }
@@ -2014,8 +2581,44 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         }
     }
 
-    private MasterShift cariMasterShift(String kode) {
+    private void segarkanMappingShift() {
+        Map<String, String> mapping = new HashMap<>();
 
+        try (PreparedStatement ps = koneksi.prepareStatement("select set_kode_shift_smc.kode_shift, set_kode_shift_smc.shift from set_kode_shift_smc")) {
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    mapping.put(rs.getString("kode_shift"), rs.getString("shift"));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+
+            return;
+        }
+
+        for (Pegawai pegawai : listImport) {
+            pegawai.jadwal.forEach(shift -> shift.shift = mapping.get(shift.kodeShift));
+            pegawai.jadwalDihapus.forEach(shift -> shift.shift = mapping.get(shift.kodeShift));
+        }
+
+        tbRekapFinger.repaint();
+    }
+
+    private MasterShift cariMasterShift(String kode) {
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select jam_masuk_smc.kode_shift, jam_masuk_smc.nama_shift, jam_masuk_smc.jam_masuk, jam_masuk_smc.jam_pulang, set_kode_shift_smc.shift from jam_masuk_smc " +
+            "left join set_kode_shift_smc on set_kode_shift_smc.kode_shift = jam_masuk_smc.kode_shift where jam_masuk_smc.kode_shift = ?"
+        )) {
+            ps.setString(1, kode);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new MasterShift(rs.getString("kode_shift"), rs.getString("nama_shift"), rs.getString("shift"), rs.getTime("jam_masuk").toLocalTime(), rs.getTime("jam_pulang").toLocalTime());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
 
         return null;
     }
@@ -2083,11 +2686,36 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     }
 
     private void attachScan(Pegawai pegawai) {
-        pegawai.scan.forEach(scan -> scan.dipakai = "");
-        for (int i = 0; i < pegawai.jadwal.size(); i++) {
-            ImportShift shift = pegawai.jadwal.get(i);
+        pegawai.scan.forEach(scan -> {
+            scan.dipakai = "";
+            scan.shift = null;
+        });
+
+        for (ImportShift shift : pegawai.jadwal) {
             shift.datang = null;
             shift.pulang = null;
+            shift.scanDatang = null;
+            shift.scanPulang = null;
+        }
+
+        if (pegawai.bebasScanlog) {
+            for (ImportShift shift : pegawai.jadwal) {
+                if (!shift.tanggal.isBefore(importAwal) && !pegawai.keterangan.containsKey(shift.tanggal)) {
+                    shift.datang = shift.jadwalMasuk;
+                    shift.pulang = shift.jadwalPulang;
+                }
+            }
+
+            return;
+        }
+
+        for (ImportShift shift : pegawai.jadwal) {
+            klaimScanKoreksi(pegawai, shift, shift.datangManual, true);
+            klaimScanKoreksi(pegawai, shift, shift.pulangManual, false);
+        }
+
+        for (int i = 0; i < pegawai.jadwal.size(); i++) {
+            ImportShift shift = pegawai.jadwal.get(i);
 
             if (null == shift.datangManual && !shift.tanggal.isBefore(importAwal)) {
                 LocalDateTime dari = shift.windowSebelumMasuk();
@@ -2097,8 +2725,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
                 ScanFinger scan = cariScan(pegawai, true, dari, shift.jadwalPulang, false);
                 if (null != scan) {
-                    scan.dipakai = "Datang " + namaShiftScan(shift);
-                    shift.datang = scan.waktu;
+                    pakaiScan(scan, shift, true);
                 }
             }
         }
@@ -2126,8 +2753,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
             ScanFinger scan = cariScan(pegawai, false, dasar.plusSeconds(1), batas, true);
             if (null != scan) {
-                scan.dipakai = "Pulang " + namaShiftScan(shift);
-                shift.pulang = scan.waktu;
+                pakaiScan(scan, shift, false);
             }
         }
     }
@@ -2143,8 +2769,36 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
                 .orElse(null);
 
             if (null != jadwalTerdekat && null == jadwalTerdekat.getDatang()) {
-                scan.dipakai = "Datang " + namaShiftScan(jadwalTerdekat);
-                jadwalTerdekat.datang = scan.waktu;
+                pakaiScan(scan, jadwalTerdekat, true);
+            }
+        }
+    }
+
+    private void pakaiScan(ScanFinger scan, ImportShift shift, boolean datang) {
+        scan.dipakai = (datang ? "Datang " : "Pulang ") + namaShiftScan(shift);
+        scan.shift = shift;
+
+        if (datang) {
+            shift.datang = scan.waktu;
+            shift.scanDatang = scan;
+        } else {
+            shift.pulang = scan.waktu;
+            shift.scanPulang = scan;
+        }
+    }
+
+    private void klaimScanKoreksi(Pegawai pegawai, ImportShift shift, LocalDateTime koreksi, boolean datang) {
+        if (null == koreksi) {
+            return;
+        }
+
+        LocalDateTime menit = koreksi.truncatedTo(ChronoUnit.MINUTES);
+        for (ScanFinger scan : pegawai.scan) {
+            if (scan.dipakai.isEmpty() && scan.waktu.truncatedTo(ChronoUnit.MINUTES).equals(menit)) {
+                scan.dipakai = (datang ? "Datang " : "Pulang ") + namaShiftScan(shift) + " (koreksi)";
+                scan.shift = shift;
+
+                return;
             }
         }
     }
@@ -2330,6 +2984,8 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
             return;
         }
 
+        segarkanMappingShift();
+
         pegawaiDetail = listImport.get(baris);
         tanggalDetail = importAwal.plusDays(kolom - KOLOM_TANGGAL_AWAL);
         LPegawaiDetail.setText(pegawaiDetail.nik + " - " + pegawaiDetail.nama + ", " + tanggalDetail.format(FORMAT_TANGGAL));
@@ -2338,10 +2994,15 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         JenisDetail.setSelectedIndex(null == pegawaiDetail.jadwalPada(tanggalDetail, TABLE_JADWAL_DINAS) && null != pegawaiDetail.jadwalPada(tanggalDetail, TABLE_JADWAL_TAMBAHAN) ? 1 : 0);
         isLoading = false;
 
+        setWaktuDetail(TglScanDetail, cmbJamScan, cmbMenitScan, tanggalDetail.atStartOfDay());
+        cmbJamScan.setSelectedIndex(-1);
+        cmbMenitScan.setSelectedIndex(-1);
+        cmbModeScan.setSelectedIndex(-1);
+
         tampilScanDetail();
         tampilShiftDetail();
 
-        WindowDetailLogPresensi.setSize(570, 450);
+        WindowDetailLogPresensi.setSize(570, 480);
         WindowDetailLogPresensi.setLocationRelativeTo(WindowImportScanlogFingerspot);
         WindowDetailLogPresensi.setVisible(true);
     }
@@ -2358,8 +3019,9 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
         scanDetail.clear();
 
+        List<ImportShift> jadwal = pegawaiDetail.jadwalPada(tanggalDetail);
         for (ScanFinger scan : pegawaiDetail.scan) {
-            if (!scan.waktu.isBefore(dari) && scan.waktu.isBefore(sampai)) {
+            if (null == scan.shift ? !scan.waktu.isBefore(dari) && scan.waktu.isBefore(sampai) : jadwal.contains(scan.shift)) {
                 scanDetail.add(scan);
             }
         }
@@ -2371,7 +3033,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
             tabModeScan.addRow(new Object[] {
                 scan.waktu.format(FORMAT_TANGGAL),
                 scan.waktu.format(FORMAT_JAM),
-                scan.masukMesin ? MODE_MASUK : MODE_PULANG,
+                scan.tambahan ? MODE_TAMBAHAN : scan.masukMesin ? MODE_MASUK : MODE_PULANG,
                 scan.masuk ? MODE_MASUK : MODE_PULANG,
                 scan.dipakai
             });
@@ -2395,11 +3057,129 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
     private void perbaruiJadwalDetail() {
         pegawaiDetail.jadwal.sort(Comparator.comparing(item -> item.jadwalMasuk));
+        muatUlangDetail();
+    }
+
+    private void muatUlangDetail() {
         attachScan(pegawaiDetail);
 
         tampilScanDetail();
         tampilShiftDetail();
         updateRow(pegawaiDetail);
+        simpanDraft();
+    }
+
+    private void pindahScan(boolean sebelumnya) {
+        if (null != tbScanLog.getCellEditor()) {
+            tbScanLog.getCellEditor().stopCellEditing();
+        }
+
+        int baris = tbScanLog.getSelectedRow();
+        if (0 > baris) {
+            JOptionPane.showMessageDialog(WindowDetailLogPresensi, "Silahkan pilih scan yang akan dipindah..!!");
+
+            return;
+        }
+
+        ScanFinger scan = scanDetail.get(tbScanLog.convertRowIndexToModel(baris));
+        LocalDate tanggalTujuan = scan.waktu.toLocalDate().plusDays(sebelumnya ? -1 : 1);
+        Comparator<ImportShift> urutan = Comparator.comparing(shift -> shift.jadwalMasuk);
+        ImportShift tujuan = pegawaiDetail.jadwalPada(tanggalTujuan).stream()
+            .filter(shift -> !shift.tanggal.isBefore(importAwal))
+            .max(sebelumnya ? urutan : urutan.reversed())
+            .orElse(null);
+
+        if (null == tujuan) {
+            JOptionPane.showMessageDialog(WindowDetailLogPresensi, "Tidak ada jadwal pada " + tanggalTujuan.format(FORMAT_TANGGAL) + " dalam periode impor..!!");
+
+            return;
+        }
+
+        String waktuScan = scan.waktu.format(FORMAT_TANGGAL) + " " + scan.waktu.format(FORMAT_JAM),
+            namaTujuan = "shift " + namaShiftScan(tujuan) + " (" + rentangJam(tujuan.jadwalMasuk, tujuan.jadwalPulang) + ")",
+            modeTujuan = sebelumnya ? MODE_PULANG : MODE_MASUK;
+
+        if (sebelumnya == scan.masuk && JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(WindowDetailLogPresensi,
+            "Scan " + waktuScan + " tercatat sebagai " + (scan.masuk ? MODE_MASUK : MODE_PULANG) + ", sedangkan scan yang dipindah ke " + namaTujuan + "\nhanya dapat menjadi " + modeTujuan +
+            ".\n\nUbah menjadi " + modeTujuan + " dan pindahkan?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE)) {
+            return;
+        }
+
+        LocalDateTime lama = sebelumnya ? tujuan.getPulang() : tujuan.getDatang();
+        if (null != lama && !lama.equals(scan.waktu) && JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(WindowDetailLogPresensi,
+            "Jam " + (sebelumnya ? "pulang" : "datang") + " " + namaTujuan + " sudah terisi " + lama.format(FORMAT_TANGGAL) + " " + lama.format(FORMAT_JAM) + ".\nGanti dengan scan " + waktuScan + "?",
+            "Konfirmasi", JOptionPane.YES_NO_OPTION)) {
+            return;
+        }
+
+        LocalDateTime menit = scan.waktu.truncatedTo(ChronoUnit.MINUTES);
+        for (ImportShift shift : pegawaiDetail.jadwal) {
+            if (null != shift.datangManual && shift.datangManual.truncatedTo(ChronoUnit.MINUTES).equals(menit)) {
+                shift.datangManual = null;
+            }
+
+            if (null != shift.pulangManual && shift.pulangManual.truncatedTo(ChronoUnit.MINUTES).equals(menit)) {
+                shift.pulangManual = null;
+            }
+        }
+
+        scan.masuk = !sebelumnya;
+        if (sebelumnya) {
+            tujuan.pulangManual = scan.waktu;
+        } else {
+            tujuan.datangManual = scan.waktu;
+        }
+
+        muatUlangDetail();
+    }
+
+    private void tambahScan() {
+        if (0 > cmbJamScan.getSelectedIndex() || 0 > cmbMenitScan.getSelectedIndex() || 0 > cmbModeScan.getSelectedIndex()) {
+            JOptionPane.showMessageDialog(WindowDetailLogPresensi, "Silahkan pilih jam, menit, dan mode scan terlebih dahulu..!!");
+
+            return;
+        }
+
+        LocalDateTime waktu = waktuDetail(TglScanDetail, cmbJamScan, cmbMenitScan);
+        boolean masuk = MODE_MASUK.equals(cmbModeScan.getSelectedItem());
+
+        if (pegawaiDetail.scan.stream().anyMatch(scan -> masuk == scan.masuk && scan.waktu.truncatedTo(ChronoUnit.MINUTES).equals(waktu))) {
+            JOptionPane.showMessageDialog(WindowDetailLogPresensi, "Scan dengan jam dan mode tersebut sudah ada..!!");
+
+            return;
+        }
+
+        pegawaiDetail.scan.add(new ScanFinger(waktu, masuk, true));
+        pegawaiDetail.scan.sort(Comparator.comparing(scan -> scan.waktu));
+
+        cmbJamScan.setSelectedIndex(-1);
+        cmbMenitScan.setSelectedIndex(-1);
+        cmbModeScan.setSelectedIndex(-1);
+
+        muatUlangDetail();
+    }
+
+    private void hapusScan() {
+        if (null != tbScanLog.getCellEditor()) {
+            tbScanLog.getCellEditor().stopCellEditing();
+        }
+
+        int baris = tbScanLog.getSelectedRow();
+        if (0 > baris) {
+            JOptionPane.showMessageDialog(WindowDetailLogPresensi, "Silahkan pilih scan yang akan dihapus..!!");
+
+            return;
+        }
+
+        ScanFinger scan = scanDetail.get(tbScanLog.convertRowIndexToModel(baris));
+        if (!scan.tambahan && JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(WindowDetailLogPresensi,
+            "Scan mesin " + scan.waktu.format(FORMAT_TANGGAL) + " " + scan.waktu.format(FORMAT_JAM) + " akan diabaikan sampai scanlog diimpor ulang.\nLanjutkan?",
+            "Konfirmasi", JOptionPane.YES_NO_OPTION)) {
+            return;
+        }
+
+        pegawaiDetail.scan.remove(scan);
+        muatUlangDetail();
     }
 
     private void tampilShiftDetail() {
@@ -2407,19 +3187,24 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         boolean ada = null != shift;
 
         KdShiftDetail.setText(ada ? shift.kodeShift : "");
-        NmShiftDetail.setText(ada ? shift.namaShift + " (" + shift.jadwalMasuk.format(FORMAT_JAM) + " - " + shift.jadwalPulang.format(FORMAT_JAM) + ")" : "Tidak ada jadwal");
+        NmShiftDetail.setText(ada ? shift.namaShift : "Tidak ada jadwal");
+        JamShiftDetail.setText(ada ? rentangJam(shift.jadwalMasuk, shift.jadwalPulang) : "");
         BtnShiftDetail.setEnabled(akses.getjadwal_pegawai_smc());
         BtnHapusShift.setEnabled(ada && akses.getjadwal_pegawai_smc());
         CekDatangDetail.setEnabled(ada);
         CekPulangDetail.setEnabled(ada);
         BtnTerapkan.setEnabled(ada);
+        ppPindahHariSebelumnya.setEnabled(!pegawaiDetail.bebasScanlog);
+        ppPindahHariBerikutnya.setEnabled(!pegawaiDetail.bebasScanlog);
+        BtnTambahScan.setEnabled(!pegawaiDetail.bebasScanlog);
+        BtnHapusScan.setEnabled(!pegawaiDetail.bebasScanlog);
         if (!ada) {
             CekDatangDetail.setSelected(false);
             CekPulangDetail.setSelected(false);
             setWaktuDetail(TglDatangDetail, cmbJamDatang, cmbMenitDatang, tanggalDetail.atStartOfDay());
             setWaktuDetail(TglPulangDetail, cmbJamPulang, cmbMenitPulang, tanggalDetail.atStartOfDay());
             aktifkanWaktuDetail();
-            LStatusDetail.setText("-");
+            setStatusDetail("-");
 
             return;
         }
@@ -2432,7 +3217,12 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
         aktifkanWaktuDetail();
         String masalah = masalahShift(shift);
-        LStatusDetail.setText(shift.kosong() ? "Tidak hadir" : !masalah.isEmpty() ? masalah : statusShift(shift) + (shift.dikoreksi() ? " (dikoreksi)" : ""));
+        setStatusDetail(shift.kosong() ? "Tidak hadir" : !masalah.isEmpty() ? masalah : statusShift(shift) + (shift.dikoreksi() ? " (dikoreksi)" : ""));
+    }
+
+    private void setStatusDetail(String status) {
+        LStatusDetail.setText("<html>" + status.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;") + "</html>");
+        LStatusDetail.setToolTipText(status);
     }
 
     private void setWaktuDetail(widget.Tanggal tanggal, widget.ComboBox jam, widget.ComboBox menit, LocalDateTime waktu) {
@@ -2463,6 +3253,54 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         scanDetail.get(baris).masuk = MODE_MASUK.equals(tabModeScan.getValueAt(baris, KOLOM_MODE));
         attachScan(pegawaiDetail);
         refreshDetail();
+        ikutiScanTerpilih();
+    }
+
+    private void terapkanKoreksi() {
+        ImportShift shift = pegawaiDetail.jadwalPada(tanggalDetail, detailTable());
+        if (null == shift) {
+            return;
+        }
+
+        LocalDateTime datang = !CekDatangDetail.isSelected() ? null : waktuScanKoreksi(waktuDetail(TglDatangDetail, cmbJamDatang, cmbMenitDatang));
+        LocalDateTime pulang = !CekPulangDetail.isSelected() ? null : waktuScanKoreksi(waktuDetail(TglPulangDetail, cmbJamPulang, cmbMenitPulang));
+
+        shift.datangManual = null;
+        shift.pulangManual = null;
+
+        attachScan(pegawaiDetail);
+        shift.datangManual = null == datang || datang.equals(shift.datang) ? null : datang;
+        shift.pulangManual = null == pulang || pulang.equals(shift.pulang) ? null : pulang;
+
+        attachScan(pegawaiDetail);
+
+        refreshDetail();
+    }
+
+    private LocalDateTime waktuScanKoreksi(LocalDateTime waktu) {
+        return pegawaiDetail.scan.stream()
+            .map(scan -> scan.waktu)
+            .filter(item -> item.truncatedTo(ChronoUnit.MINUTES).equals(waktu))
+            .findFirst()
+            .orElse(waktu);
+    }
+
+    private void ikutiScanTerpilih() {
+        int baris = tbScanLog.getSelectedRow();
+        if (isLoading || 0 > baris || null == pegawaiDetail || null == pegawaiDetail.jadwalPada(tanggalDetail, detailTable())) {
+            return;
+        }
+
+        ScanFinger scan = scanDetail.get(tbScanLog.convertRowIndexToModel(baris));
+        if (scan.masuk) {
+            setWaktuDetail(TglDatangDetail, cmbJamDatang, cmbMenitDatang, scan.waktu);
+        } else {
+            setWaktuDetail(TglPulangDetail, cmbJamPulang, cmbMenitPulang, scan.waktu);
+        }
+
+        if (scan.masuk ? CekDatangDetail.isSelected() : CekPulangDetail.isSelected()) {
+            terapkanKoreksi();
+        }
     }
 
     private void refreshDetail() {
@@ -2474,6 +3312,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
         tampilShiftDetail();
         updateRow(pegawaiDetail);
+        simpanDraft();
     }
 
     private boolean simpanJadwalLegacy(String id, ImportShift shift, String shiftLegacy) {
@@ -2671,14 +3510,20 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
     private static final class ScanFinger {
         private final LocalDateTime waktu;
-        private final boolean masukMesin;
+        private final boolean masukMesin, tambahan;
         private boolean masuk;
         private String dipakai = "";
+        private ImportShift shift;
 
         private ScanFinger(LocalDateTime waktu, boolean masuk) {
+            this(waktu, masuk, false);
+        }
+
+        private ScanFinger(LocalDateTime waktu, boolean masuk, boolean tambahan) {
             this.waktu = waktu;
             this.masukMesin = masuk;
             this.masuk = masuk;
+            this.tambahan = tambahan;
         }
     }
 
@@ -2701,6 +3546,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         private String kodeShift, namaShift, shift;
         private LocalDateTime jadwalMasuk, jadwalPulang;
         private LocalDateTime datang, pulang, datangManual, pulangManual;
+        private ScanFinger scanDatang, scanPulang;
 
         private ImportShift(LocalDate tanggal, String table, String kodeAsal, MasterShift master) {
             this.tanggal = tanggal;
@@ -2738,7 +3584,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         }
 
         private boolean dikoreksi() {
-            return null != datangManual || null != pulangManual;
+            return null != datangManual || null != pulangManual || (null != scanDatang && scanDatang.tambahan) || (null != scanPulang && scanPulang.tambahan);
         }
 
         private LocalDateTime windowSebelumMasuk() {
@@ -2760,12 +3606,14 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         private final List<ImportShift> jadwal = new ArrayList<>();
         private final List<ImportShift> jadwalDihapus = new ArrayList<>();
         private final Map<LocalDate, String> keterangan = new HashMap<>();
+        private final boolean bebasScanlog;
 
-        private Pegawai(String id, String nik, String nama, String departemen) {
+        private Pegawai(String id, String nik, String nama, String departemen, boolean bebasScanlog) {
             this.id = id;
             this.nik = nik;
             this.nama = nama;
             this.departemen = departemen;
+            this.bebasScanlog = bebasScanlog;
         }
 
         private List<ImportShift> jadwalPada(LocalDate tanggal) {
