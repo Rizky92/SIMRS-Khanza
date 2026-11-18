@@ -1272,6 +1272,27 @@ public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getpengajuan_izin_smc());
     }
 
+    public void setPegawai(String nik, Date tanggal) {
+        try (PreparedStatement ps = koneksi.prepareStatement("select pegawai.nama, pegawai.bidang, pegawai.departemen from pegawai where pegawai.nik = ?")) {
+            ps.setString(1, nik);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    KdPetugas.setText(nik);
+                    NmPetugas.setText(rs.getString("nama"));
+                    Bidang.setText(rs.getString("bidang"));
+                    Departemen.setText(rs.getString("departemen"));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+
+        TglIzin.setDate(tanggal);
+        ChkInput.setSelected(true);
+        isForm();
+        hitungSisaIzin();
+    }
+
     private void autoNomor() {
         Valid.autonomor1Smc(NoPengajuan, "PI", "pengajuan_izin_smc", "no_pengajuan", 3, "0", Tanggal);
     }
