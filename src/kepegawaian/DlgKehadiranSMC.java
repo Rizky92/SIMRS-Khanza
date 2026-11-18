@@ -1345,21 +1345,24 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
         long jumlahTidakLengkap = simpan.keySet().stream().filter(this::tidakLengkap).count();
         widget.CekBox gantiPresensi = new widget.CekBox();
-        gantiPresensi.setText("Ganti presensi yang sudah tersimpan");
+        gantiPresensi.setText("Update kehadiran yang sudah tersimpan");
 
         if (0 < jumlahTidakLengkap || !sudahTersimpan.isEmpty()) {
             List<Object> pesan = new ArrayList<>();
 
             if (0 < jumlahTidakLengkap) {
-                pesan.add("Masih ada kehadiran dengan scan tidak lengkap.");
+                pesan.add("Masih ada kehadiran dengan scan tidak lengkap,");
             }
 
             if (!sudahTersimpan.isEmpty()) {
-                pesan.add(sudahTersimpan.size() + " presensi sudah tersimpan sebelumnya pada jam shift yang sama, presensi tersebut tidak disimpan kecuali dicentang.");
-                pesan.add(gantiPresensi);
+                pesan.add("dan terdapat kehadiran yang sudah tersimpan sebelumnya pada tanggal shift yang sama,");
             }
 
-            pesan.add("Tetap simpan?");
+            pesan.add("\ntetap lanjut?");
+
+            if (!sudahTersimpan.isEmpty()) {
+                pesan.add(gantiPresensi);
+            }
 
             if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(WindowImportScanlogFingerspot, pesan.toArray(), "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE)) {
                 return;
@@ -1438,12 +1441,11 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         }
 
         if (!sukses) {
-            JOptionPane.showMessageDialog(WindowImportScanlogFingerspot, (gagalSimpan.isEmpty() ? "Terjadi kesalahan pada saat menyimpan hasil impor scanlog" : "Gagal menyimpan " + gagalSimpan) + ".\nSeluruh perubahan dibatalkan, tidak ada data yang tersimpan..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(WindowImportScanlogFingerspot, (gagalSimpan.isEmpty() ? "Terjadi kesalahan pada saat menyimpan hasil import scanlog" : "Gagal menyimpan " + gagalSimpan) + "..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        JOptionPane.showMessageDialog(WindowImportScanlogFingerspot, simpan.size() + " presensi" + (koreksiJadwal.isEmpty() ? "" : " dan " + koreksiJadwal.size() + " koreksi jadwal") + " berhasil disimpan..!!" +
-            (0 == jumlahDilewati ? "" : "\n" + jumlahDilewati + " presensi tidak disimpan karena sudah tersimpan sebelumnya."));
+        JOptionPane.showMessageDialog(WindowImportScanlogFingerspot, "Kehadiran berhasil disimpan..!!" + (0 == jumlahDilewati ? "" : "\n" + jumlahDilewati + " presensi tidak disimpan karena sudah tersimpan sebelumnya."));
 
         hapusDraft();
         prepareImport();
