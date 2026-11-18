@@ -161,6 +161,7 @@ import rekammedis.RMPenilaianAwalMedisRalanBedah;
 import rekammedis.RMPenilaianAwalMedisRalanBedahMulut;
 import rekammedis.RMPenilaianAwalMedisRalanDewasa;
 import rekammedis.RMPenilaianAwalMedisRalanGeriatri;
+import rekammedis.RMPenilaianAwalMedisRalanGigi;
 import rekammedis.RMPenilaianAwalMedisRalanJantung;
 import rekammedis.RMPenilaianAwalMedisRalanKandungan;
 import rekammedis.RMPenilaianAwalMedisRalanKulitDanKelamin;
@@ -10912,6 +10913,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         }
     }
 
+    private void BtnAwalMedisGigiActionPerformed(java.awt.event.ActionEvent evt) {
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMPenilaianAwalMedisRalanGigi form=new RMPenilaianAwalMedisRalanGigi(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -11283,7 +11301,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                           BtnHasilPemeriksaanTreadmill,BtnHasilPemeriksaanECHOPediatrik,BtnSkriningCURB65,BtnSkriningGiziKehamilan,BtnResepIterasiBPJS,BtnPermintaanKonsultasiPerawat,BtnCatatanObservasiRuangOperasi,
                           BtnHasilPemeriksaanUSGAbdomen,BtnIntervensiNyeriFarmakologi,BtnIntervensiNyeriNonFarmakologi,BtnChecklistKriteriaMasukIsolasi,BtnSkriningTOLAC,BtnAdmisiSkoringTOLAC,BtnMonitoringTolac,
                           BtnHasilPersalinanTOLAC,BtnLaporanReaksiTranfusi,BtnPenilaianGRACEScore,BtnPenilaianBISHOPScore,BtnProfilRawatJalan,BtnHasilPemeriksaanUSGTestis,BtnHasilPemeriksaanUSGKepala,BtnHasilPemeriksaanUSGMammae,
-                          BtnHasilPemeriksaanSpirometri;
+                          BtnHasilPemeriksaanSpirometri,BtnAwalMedisGigi;
     private widget.PopupMenu PopupSOAP,PopupPemeriksaan;
     private widget.MenuItem MnSOAPDokter,MnSOAPPetugas,MnCopySOAP,MnPasteSOAP;
 
@@ -11767,6 +11785,10 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         }
         BtnAwalMedisUrologi.setVisible(akses.getpenilaian_awal_medis_ralan_urologi());
         if(akses.getpenilaian_awal_medis_ralan_urologi()==true){
+            tinggi=tinggi+24;
+        }
+        BtnAwalMedisGigi.setVisible(akses.getpenilaian_awal_medis_gigi_mulut());
+        if(akses.getpenilaian_awal_medis_gigi_mulut()==true){
             tinggi=tinggi+24;
         }
         BtnPenilaianPsikolog.setVisible(akses.getpenilaian_psikologi());
@@ -14459,6 +14481,19 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisUrologi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisUrologi.addActionListener(this::BtnAwalMedisUrologiActionPerformed);
 
+        BtnAwalMedisGigi = new widget.Button();
+        BtnAwalMedisGigi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnAwalMedisGigi.setText("Awal Medis Gigi");
+        BtnAwalMedisGigi.setFocusPainted(false);
+        BtnAwalMedisGigi.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnAwalMedisGigi.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnAwalMedisGigi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnAwalMedisGigi.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnAwalMedisGigi.setName("BtnAwalMedisGigi");
+        BtnAwalMedisGigi.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnAwalMedisGigi.setRoundRect(false);
+        BtnAwalMedisGigi.addActionListener(this::BtnAwalMedisGigiActionPerformed);
+
         BtnLaporanTindakan = new widget.Button();
         BtnLaporanTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
         BtnLaporanTindakan.setText("Laporan Tindakan");
@@ -14849,6 +14884,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         FormMenu.add(BtnAwalMedisParu);
         FormMenu.add(BtnAwalMedisJantung);
         FormMenu.add(BtnAwalMedisUrologi);
+        FormMenu.add(BtnAwalMedisGigi);
         FormMenu.add(BtnAwalMedisRehabMedik);
         FormMenu.add(BtnAwalMedisHemodialisa);
         FormMenu.add(BtnRujukKeluar);
