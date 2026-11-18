@@ -3229,6 +3229,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             chkReaksiTranfusi.setSelected(true);
             chkPenilaianGRACEScore.setSelected(true);
             chkPenilaianBishop.setSelected(true);
+            chkAsuhanTindakanNonBedahSMC.setSelected(true);
         }else{
             chkTriase.setSelected(false);
             chkAsuhanKeperawatanRalan.setSelected(false);
@@ -3442,6 +3443,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             chkReaksiTranfusi.setSelected(false);
             chkPenilaianGRACEScore.setSelected(false);
             chkPenilaianBishop.setSelected(false);
+            chkAsuhanTindakanNonBedahSMC.setSelected(false);
         }
     }//GEN-LAST:event_chkSemuaItemStateChanged
 
@@ -17527,8 +17529,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                         do{
                             htmlContent.append(
                                  "<tr>").append(
-                                    "<td valign='top' align='center' rowspan='3'>").append(w).append("</td>").append(
-                                    "<td valign='top' rowspan='3'>").append(rs2.getString("tgl_perawatan")).append(" ").append(rs2.getString("jam_rawat")).append("</td>").append(
+                                    "<td valign='top' align='center'>").append(w).append("</td>").append(
+                                    "<td valign='top'>").append(rs2.getString("tgl_perawatan")).append(" ").append(rs2.getString("jam_rawat")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("tangan_kiri")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("tangan_kanan")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("badan")).append("</td>").append(
@@ -17538,7 +17540,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                     "<td valign='top' align='center'>").append(rs2.getString("iritasi")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("sirkulasi")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("kondisi_keterangan")).append("</td>").append(
-                                    "<td valign='top' rowspan='3'>").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
+                                    "<td valign='top'>").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
                                  "</tr>"
                             );
                             w++;
