@@ -828,6 +828,8 @@ ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tat_kerja` date NOT NULL 
 
 ALTER TABLE `pengajuan_cuti` MODIFY COLUMN IF EXISTS `urgensi` enum('Tahunan','Besar','Sakit','Bersalin','Alasan Penting','Keterangan Lainnya','Lainnya','Panjang (10 Tahun)') NOT NULL AFTER `nik`;
 
+ALTER TABLE `pengajuan_cuti` MODIFY COLUMN IF EXISTS `kepentingan` varchar(150) NOT NULL DEFAULT '' AFTER `jumlah`;
+
 CREATE TABLE IF NOT EXISTS `pengajuan_izin_smc`  (
   `no_pengajuan` varchar(17) NOT NULL,
   `tanggal` date NOT NULL,
