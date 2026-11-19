@@ -24,7 +24,6 @@ import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
-import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPegawai;
@@ -68,9 +67,8 @@ public class KeuanganJasaTindakan extends javax.swing.JDialog {
                 ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                 ".isi4 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"
         );
-        Document doc = kit.createDefaultDocument();
-        LoadHTML.setDocument(doc);
-        LoadHTML2.setDocument(doc);
+        LoadHTML.setDocument(kit.createDefaultDocument());
+        LoadHTML2.setDocument(kit.createDefaultDocument());
     }
 
 

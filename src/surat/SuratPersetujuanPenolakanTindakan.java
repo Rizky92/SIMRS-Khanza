@@ -25,20 +25,20 @@ import java.sql.ResultSet;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
+import javax.swing.WindowConstants;
 
 
 /**
@@ -236,9 +236,8 @@ public final class SuratPersetujuanPenolakanTindakan extends javax.swing.JDialog
                 ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
                 ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
         );
-        Document doc = kit.createDefaultDocument();
-        LoadHTML2.setDocument(doc);
-        LoadHTML3.setDocument(doc);
+        LoadHTML2.setDocument(kit.createDefaultDocument());
+        LoadHTML3.setDocument(kit.createDefaultDocument());
     }
 
 
@@ -2439,19 +2438,33 @@ public final class SuratPersetujuanPenolakanTindakan extends javax.swing.JDialog
 
     private void runBackground(Runnable task) {
         if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
         ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+    
+    @Override
+    public void dispose() {
+    executor.shutdownNow();
+        super.dispose();
     }
 }

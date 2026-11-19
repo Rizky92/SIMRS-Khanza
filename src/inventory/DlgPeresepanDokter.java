@@ -55,7 +55,6 @@ import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -68,6 +67,16 @@ import widget.Button;
  * @author dosen
  */
 public final class DlgPeresepanDokter extends javax.swing.JDialog {
+    private javax.swing.Timer timerJam;
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
+    }
+
     private final DefaultTableModel tabModeResep,tabModeDetailResepRacikan,tabModeResepRacikan;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -2320,7 +2329,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             }
         };
 
-        new Timer(250, taskPerformer).start();
+        timerJam = new javax.swing.Timer(250, taskPerformer);
+        timerJam.start();
     }
 
     private void tampildetailracikanresep() {
@@ -4503,6 +4513,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        if (timerJam != null) {
+            timerJam.stop();
+        }
         executor.shutdownNow();
         super.dispose();
     }

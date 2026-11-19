@@ -2306,7 +2306,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                                     "\"jam\":\""+JamDicari.getText()+"\"" +
                                 "}";
                     post.setEntity(new StringEntity(json));
-                    try (CloseableHttpResponse response = httpClient.execute(post)) {
+                    try (httpClient; CloseableHttpResponse response = httpClient.execute(post)) {
                         json=EntityUtils.toString(response.getEntity());
                         root = mapper.readTree(json);
                         JOptionPane.showMessageDialog(null,root.path("metadata").path("message").asText());

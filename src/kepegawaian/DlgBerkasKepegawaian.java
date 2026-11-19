@@ -46,7 +46,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.HyperlinkEvent;
-import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
@@ -104,12 +103,11 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                 ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                 ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
         );
-        Document doc = kit.createDefaultDocument();
-        LoadHTML1.setDocument(doc);
-        LoadHTML2.setDocument(doc);
-        LoadHTML3.setDocument(doc);
-        LoadHTML4.setDocument(doc);
-        LoadHTML5.setDocument(doc);
+        LoadHTML1.setDocument(kit.createDefaultDocument());
+        LoadHTML2.setDocument(kit.createDefaultDocument());
+        LoadHTML3.setDocument(kit.createDefaultDocument());
+        LoadHTML4.setDocument(kit.createDefaultDocument());
+        LoadHTML5.setDocument(kit.createDefaultDocument());
 
         LoadHTML1.setEditable(false);
         LoadHTML2.setEditable(false);
@@ -185,6 +183,9 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
         Platform.runLater(new Runnable() {
 
             public void run() {
+                if (engine != null) {
+                    return;
+                }
                 WebView view = new WebView();
 
                 engine = view.getEngine();
@@ -1610,6 +1611,20 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            Platform.runLater(() -> {
+                try {
+                    WebEngine eng = engine;
+                    engine = null;
+                    if (eng != null) {
+                        eng.load(null);
+                    }
+                    jfxPanel.setScene(null);
+                } catch (Exception ignore) {
+                }
+            });
+        } catch (Exception ignore) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

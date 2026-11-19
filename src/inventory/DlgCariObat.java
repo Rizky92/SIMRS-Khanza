@@ -57,7 +57,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -79,6 +78,16 @@ import widget.TanggalCellEditorSMC;
  * @author dosen
  */
 public final class DlgCariObat extends javax.swing.JDialog {
+    private javax.swing.Timer timerJam;
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
+    }
+
     private final DefaultTableModel tabModeobat,tabModeObatRacikan,tabModeDetailObatRacikan;
     private final String templateValidasiWA = "Kepada %s\nPasien %s %s %s (%s)" +
                                               "\n*RESEP OBAT SAAT INI DALAM PROSES PENGERJAAN %s* di Instalasi Farmasi Rawat Jalan. " +
@@ -3693,7 +3702,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
             }
         };
         // Timer
-        new Timer(500, taskPerformer).start();
+        timerJam = new javax.swing.Timer(500, taskPerformer);
+        timerJam.start();
     }
 
     public void setDokter(String kodedokter,String namadokter){
@@ -4398,6 +4408,9 @@ public final class DlgCariObat extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        if (timerJam != null) {
+            timerJam.stop();
+        }
         executor.shutdownNow();
         super.dispose();
     }

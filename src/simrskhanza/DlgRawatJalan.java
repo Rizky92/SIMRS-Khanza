@@ -252,6 +252,16 @@ import surat.SuratKontrol;
  * @author dosen
  */
 public final class DlgRawatJalan extends javax.swing.JDialog {
+    private javax.swing.Timer timerJam;
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
+    }
+
     private final DefaultTableModel tabModeDr,tabModePr,tabModeDrPr,
             tabModePemeriksaan,tabModeObstetri,tabModeGinekologi,
             TabModeTindakan,TabModeTindakan2,TabModeTindakan3,TabModeCatatan;
@@ -10828,7 +10838,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         }
     }
 
-    private void BtnProfilRawatJalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMonitoringReaksiTranfusiActionPerformed
+    private void BtnProfilRawatJalanActionPerformed(java.awt.event.ActionEvent evt) {                                                            
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -12707,7 +12717,8 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         };
         // Timer
-        new Timer(1000, taskPerformer).start();
+        timerJam = new javax.swing.Timer(1000, taskPerformer);
+        timerJam.start();
     }
 
     public void setNoRm(String norwt,Date tgl1,Date tgl2,String kodedokter, String namadokter) {
@@ -15278,6 +15289,12 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        if (panelDiagnosa1 != null) {
+            panelDiagnosa1.tutup();
+        }
+        if (timerJam != null) {
+            timerJam.stop();
+        }
         executor.shutdownNow();
         super.dispose();
     }

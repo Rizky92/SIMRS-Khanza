@@ -53,7 +53,6 @@ import javax.net.ssl.X509TrustManager;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -79,6 +78,16 @@ import rekammedis.RMRiwayatPerawatan;
  * @author perpustakaan
  */
 public final class PCareDataPendaftaran extends javax.swing.JDialog {
+    private javax.swing.Timer timerJam;
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
+    }
+
     private DefaultTableModel tabMode,tabMode2,tabMode3;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -9539,7 +9548,8 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
             }
         };
         // Timer
-        new Timer(1000, taskPerformer).start();
+        timerJam = new javax.swing.Timer(1000, taskPerformer);
+        timerJam.start();
     }
 
     private void insertPCare(){
@@ -9870,6 +9880,9 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        if (timerJam != null) {
+            timerJam.stop();
+        }
         executor.shutdownNow();
         super.dispose();
     }

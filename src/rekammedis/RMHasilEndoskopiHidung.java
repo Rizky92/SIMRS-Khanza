@@ -44,7 +44,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
@@ -208,9 +207,8 @@ public final class RMHasilEndoskopiHidung extends javax.swing.JDialog {
                 ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
                 ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
         );
-        Document doc = kit.createDefaultDocument();
-        LoadHTML.setDocument(doc);
-        LoadHTML2.setDocument(doc);
+        LoadHTML.setDocument(kit.createDefaultDocument());
+        LoadHTML2.setDocument(kit.createDefaultDocument());
 
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
@@ -1640,7 +1638,7 @@ public final class RMHasilEndoskopiHidung extends javax.swing.JDialog {
                                     "\"norawat\":\""+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"\"" +
                                 "}";
                     post.setEntity(new StringEntity(json));
-                    try (CloseableHttpResponse response = httpClient.execute(post)) {
+                    try (httpClient; CloseableHttpResponse response = httpClient.execute(post)) {
                         json=EntityUtils.toString(response.getEntity());
                         root = mapper.readTree(json);
                         JOptionPane.showMessageDialog(null,root.path("metadata").path("message").asText());

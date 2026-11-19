@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -63,6 +64,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
     private StringBuilder htmlContent;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
@@ -2163,19 +2165,33 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
 
     private void runBackground(Runnable task) {
         if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
         ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
 
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

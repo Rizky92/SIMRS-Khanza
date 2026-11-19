@@ -44,7 +44,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import org.apache.commons.lang3.StringUtils;
@@ -54,6 +53,24 @@ import org.apache.commons.lang3.StringUtils;
  * @author dosen
  */
 public final class DlgUbahNilaiLab extends javax.swing.JDialog {
+    private javax.swing.Timer timerJam;
+
+    @Override
+    public void dispose() {
+        if (timerJam != null) {
+            timerJam.stop();
+        }
+        executor.shutdownNow();
+        super.dispose();
+    }
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
+    }
+
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -659,7 +676,8 @@ public final class DlgUbahNilaiLab extends javax.swing.JDialog {
             }
         };
         // Timer
-        new Timer(1000, taskPerformer).start();
+        timerJam = new javax.swing.Timer(1000, taskPerformer);
+        timerJam.start();
     }
 
     private void tampilSmc() {
@@ -787,11 +805,5 @@ public final class DlgUbahNilaiLab extends javax.swing.JDialog {
         } catch (RejectedExecutionException ex) {
             ceksukses = false;
         }
-    }
-
-    @Override
-    public void dispose() {
-        executor.shutdownNow();
-        super.dispose();
     }
 }

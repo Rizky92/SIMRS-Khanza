@@ -38,7 +38,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -49,6 +48,16 @@ import simrskhanza.DlgCariPerusahaan;
 import simrskhanza.DlgCariPoli;
 
 public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
+    private javax.swing.Timer timerJam;
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
+    }
+
     private final DefaultTableModel tabMode;
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
@@ -1279,7 +1288,8 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
             }
         };
         // Timer
-        new Timer(1000, taskPerformer).start();
+        timerJam = new javax.swing.Timer(1000, taskPerformer);
+        timerJam.start();
     }
 
     private void isNumber(){
@@ -1366,6 +1376,9 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        if (timerJam != null) {
+            timerJam.stop();
+        }
         executor.shutdownNow();
         super.dispose();
     }

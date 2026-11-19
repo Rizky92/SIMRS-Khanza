@@ -35,12 +35,10 @@ import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPegawai;
@@ -51,6 +49,16 @@ import kepegawaian.DlgCariPegawai;
  * @author perpustakaan
  */
 public final class RMPelaksanaanInformasiEdukasi extends javax.swing.JDialog {
+    private javax.swing.Timer timerJam;
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
+    }
+
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -152,9 +160,8 @@ public final class RMPelaksanaanInformasiEdukasi extends javax.swing.JDialog {
                 ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
                 ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
         );
-        Document doc = kit.createDefaultDocument();
-        LoadHTML.setDocument(doc);
-        LoadHTML2.setDocument(doc);
+        LoadHTML.setDocument(kit.createDefaultDocument());
+        LoadHTML2.setDocument(kit.createDefaultDocument());
 
         ChkInput.setSelected(false);
         isForm();
@@ -1709,7 +1716,8 @@ public final class RMPelaksanaanInformasiEdukasi extends javax.swing.JDialog {
             }
         };
         // Timer
-        new Timer(1000, taskPerformer).start();
+        timerJam = new javax.swing.Timer(1000, taskPerformer);
+        timerJam.start();
     }
 
     private void ganti() {
@@ -1842,6 +1850,9 @@ public final class RMPelaksanaanInformasiEdukasi extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        if (timerJam != null) {
+            timerJam.stop();
+        }
         executor.shutdownNow();
         super.dispose();
     }

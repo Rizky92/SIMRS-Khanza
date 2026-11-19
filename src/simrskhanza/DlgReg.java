@@ -84,7 +84,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
-import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -319,6 +318,23 @@ import surat.SuratTidakHamil;
  * @author dosen
  */
 public final class DlgReg extends javax.swing.JDialog {
+    private javax.swing.Timer timerJam;
+
+    @Override
+    public void dispose() {
+        if (timerJam != null) {
+            timerJam.stop();
+        }
+        super.dispose();
+    }
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
+    }
+
     private final DefaultTableModel tabMode,tabMode2;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -17290,7 +17306,7 @@ public final class DlgReg extends javax.swing.JDialog {
         }
     }
 
-    private void MnPenilaianAwalMedisRalanGigiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianAwalMedisRalanActionPerformed
+    private void MnPenilaianAwalMedisRalanGigiActionPerformed(java.awt.event.ActionEvent evt) {                                                          
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -18094,7 +18110,8 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         };
         // Timer
-        new Timer(1000, taskPerformer).start();
+        timerJam = new javax.swing.Timer(1000, taskPerformer);
+        timerJam.start();
     }
 
     private void isPas(){

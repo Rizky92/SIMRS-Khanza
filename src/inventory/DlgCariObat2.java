@@ -48,10 +48,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -70,6 +70,16 @@ import widget.TanggalCellEditorSMC;
  * @author dosen
  */
 public final class DlgCariObat2 extends javax.swing.JDialog {
+    private javax.swing.Timer timerJam;
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
+    }
+
     private final DefaultTableModel tabMode,tabModeObatRacikan,tabModeDetailObatRacikan;;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -2801,7 +2811,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             }
         };
         // Timer
-        new Timer(500, taskPerformer).start();
+        timerJam = new javax.swing.Timer(500, taskPerformer);
+        timerJam.start();
     }
 
     private void getDatadetailobatracikan() {
@@ -4199,28 +4210,6 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         }
     }
 
-    private void runBackground(Runnable task) {
-        if (ceksukses) return;
-        if (executor.isShutdown() || executor.isTerminated()) return;
-        if (!isDisplayable()) return;
-
-        ceksukses = true;
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
-    }
-
     private void cekPengaturanResepRanap() {
         boolean oldValue = ChkNoResep.isSelected();
         if (new File("./cache/pengaturanresep.iyem").isFile()) {
@@ -4557,5 +4546,39 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 break;
         }
         this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
+        ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+
+    @Override
+    public void dispose() {
+        if (timerJam != null) {
+            timerJam.stop();
+        }
+        super.dispose();
     }
 }

@@ -47,7 +47,6 @@ import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -62,6 +61,16 @@ import simrskhanza.DlgCariPasien;
  * @author perpustakaan
  */
 public class DlgPemberianObat extends javax.swing.JDialog {
+    private javax.swing.Timer timerJam;
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
+    }
+
     private final DefaultTableModel tabModePO;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -158,7 +167,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         jam();
 
         try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            try (FileInputStream fisx = new FileInputStream("setting/database.xml")) { prop.loadFromXML(fisx); }
             aktifkanparsial=prop.getProperty("AKTIFKANBILLINGPARSIAL");
             aktifkanbatch = prop.getProperty("AKTIFKANBATCHOBAT");
         } catch (Exception ex) {
@@ -1678,7 +1687,8 @@ public class DlgPemberianObat extends javax.swing.JDialog {
             }
         };
         // Timer
-        new Timer(1000, taskPerformer).start();
+        timerJam = new javax.swing.Timer(1000, taskPerformer);
+        timerJam.start();
     }
 
     public void setDokter(String kodedokter,String namadokter){
@@ -1923,6 +1933,9 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        if (timerJam != null) {
+            timerJam.stop();
+        }
         executor.shutdownNow();
         super.dispose();
     }
