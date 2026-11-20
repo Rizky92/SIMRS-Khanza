@@ -47,12 +47,14 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.text.DefaultCaret;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import org.apache.commons.httpclient.HttpClient;
@@ -265,6 +267,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             }
         });
 
+        aturCaretHTMLSmc();
         ChkAccor.setSelected(false);
         isMenu();
     }
@@ -4374,7 +4377,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             NoRawat.requestFocus();
         } else {
             esign = false;
-            tampilPerawatan();
+            String htmlRiwayatPerawatan = ambilHTMLRiwayatPerawatanSmc();
             File g = new File("file.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;border: white;}");
@@ -4386,7 +4389,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             }
             PdfWriter pdf = new PdfWriter("./berkaspdf/" + tglExport + "/" + noSEP + "_" + urut + "_Riwayat.pdf");
             HtmlConverter.convertToPdf(
-                LoadHTMLRiwayatPerawatan.getText().replaceAll("<head>", "<head><link href=\"file.css\" rel=\"stylesheet\" type=\"text/css\" />").
+                htmlRiwayatPerawatan.replaceAll("<head>", "<head><link href=\"file.css\" rel=\"stylesheet\" type=\"text/css\" />").
                     replaceAll("<body>",
                         "<body>"
                         + "<table width='100%' align='center' border='0' class='tbl_form' cellspacing='0' cellpadding='0'>"
@@ -40175,6 +40178,22 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                 }
             });
         }
+    }
+
+    private void aturCaretHTMLSmc() {
+        for (JEditorPane pane : new JEditorPane[]{LoadHTMLRiwayatPerawatan, LoadHTMLSOAPI, LoadHTMLTindakanLab, LoadHTMLTindakanRadiologi, LoadHTMLBerkasDigital, LoadHTMLPembelian, LoadHTMLPiutang, LoadHTMLRetensi, LoadHTMLWearable}) {
+            if (pane.getCaret() instanceof DefaultCaret) {
+                ((DefaultCaret) pane.getCaret()).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
+            }
+        }
+    }
+
+    private String ambilHTMLRiwayatPerawatanSmc() throws Exception {
+        tampilPerawatan();
+        if (!SwingUtilities.isEventDispatchThread()) {
+            SwingUtilities.invokeAndWait(() -> {});
+        }
+        return LoadHTMLRiwayatPerawatan.getText();
     }
 
     private void runBackground(Runnable task) {
