@@ -173,7 +173,7 @@ public class frmUtama extends javax.swing.JFrame {
                     try (PreparedStatement ps = koneksi.prepareStatement(
                         "select b.*, r.no_rkm_medis, px.nm_pasien, p.nm_poli, d.nm_dokter, from_unixtime(b.estimasidilayani / 1000) as dt_ed " +
                         "from referensi_mobilejkn_bpjs b join reg_periksa r on b.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis " +
-                        "join poliklinik p on r.kd_poli = p.kd_poli join dokter d on r.kd_dokter = d.kd_dokter where b.status = 'Belum' and " +
+                        "join poliklinik p on r.kd_poli = p.kd_poli join dokter d on r.kd_dokter = d.kd_dokter where b.status in ('Belum', 'Checkin') and " +
                         "b.statuskirim = 'Belum' and b.tanggalperiksa between ? and date_add(?, interval 30 day) order by b.tanggalperiksa"
                     )) {
                         ps.setString(1, tgl.format(Tanggal1.getDate()));
