@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import java.awt.Cursor;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -22,6 +21,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.stream.StreamSupport;
+import widget.LoadingOverlaySMC;
 
 public class DlgRegistrasiMandiri extends widget.Dialog {
 
@@ -340,52 +340,52 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
         } else if (Sequel.cariExistsSmc("select * from reg_periksa join kamar_inap on reg_periksa.no_rawat = kamar_inap.no_rawat where kamar_inap.stts_pulang = '-' and reg_periksa.no_rkm_medis = ?", noRM.getText())) {
             Valid.popupInfoDialog("Maaf, pasien sedang dalam masa perawatan di rawat inap..!!");
         } else {
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            int next = 0, retries = 5;
-            boolean sukses = false;
+            LoadingOverlaySMC.run(this, "Memproses pendaftaran...", () -> {
+                int next = 0, retries = 5;
+                boolean sukses = false;
 
-            String waktu = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
+                String waktu = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
 
-            do {
-                autonomor();
-                System.out.print("Mencoba mendaftarkan pasien dengan no. rawat [" + noRawat + "] : ");
-                biayaReg = statusPoli.equals("Lama") ? poliBiayaLama : poliBiaya;
+                do {
+                    autonomor();
+                    System.out.print("Mencoba mendaftarkan pasien dengan no. rawat [" + noRawat + "] : ");
+                    biayaReg = statusPoli.equals("Lama") ? poliBiayaLama : poliBiaya;
 
-                sukses = Sequel.menyimpantfSmc("reg_periksa", null, noReg, noRawat,
-                    waktu.substring(0, 10), waktu.substring(11), kdDokter, noRM.getText(),
-                    kdPoli, namaPJ, alamatPJ, hubunganPJ, biayaReg, "Belum", statusDaftar,
-                    "Ralan", "A09", umurDaftar, statusUmur, "Belum Bayar", statusPoli
-                );
+                    sukses = Sequel.menyimpantfSmc("reg_periksa", null, noReg, noRawat,
+                        waktu.substring(0, 10), waktu.substring(11), kdDokter, noRM.getText(),
+                        kdPoli, namaPJ, alamatPJ, hubunganPJ, biayaReg, "Belum", statusDaftar,
+                        "Ralan", "A09", umurDaftar, statusUmur, "Belum Bayar", statusPoli
+                    );
 
-                if (!sukses) {
-                    System.out.println("Gagal!");
+                    if (!sukses) {
+                        System.out.println("Gagal!");
+                    }
+                } while (next++ < retries && !sukses);
+
+                if (sukses) {
+                    System.out.println("Berhasil!");
+                    Sequel.mengupdateSmc("pasien", "umur = ?", "no_rkm_medis = ?", umurPasien, noRM.getText());
+
+                    Map<String, Object> param = new HashMap<>();
+                    param.put("namars", instansiNama);
+                    param.put("alamatrs", instansiAlamat);
+                    param.put("kotars", instansiKota);
+                    param.put("kontakrs", instansiKontak);
+                    param.put("norawat", noRawat);
+                    Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, printerBarcode, printJumlahBarcode);
+                    Valid.popupInfoDialog("Berhasil!");
+                } else {
+                    Valid.popupInfoDialog("Pendaftaran gagal..!!\nSilahkan coba kembali.");
                 }
-            } while (next++ < retries && !sukses);
-
-            if (sukses) {
-                System.out.println("Berhasil!");
-                Sequel.mengupdateSmc("pasien", "umur = ?", "no_rkm_medis = ?", umurPasien, noRM.getText());
-
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars", instansiNama);
-                param.put("alamatrs", instansiAlamat);
-                param.put("kotars", instansiKota);
-                param.put("kontakrs", instansiKontak);
-                param.put("norawat", noRawat);
-                Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, printerBarcode, printJumlahBarcode);
-                Valid.popupInfoDialog("Berhasil!");
-            } else {
-                Valid.popupInfoDialog("Pendaftaran gagal..!!\nSilahkan coba kembali.");
-            }
-            this.setCursor(Cursor.getDefaultCursor());
-            btnKeluarActionPerformed(null);
+                btnKeluarActionPerformed(null);
+            });
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void buttonCariDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCariDokterActionPerformed
         dokter.setSize(getContentPane().getSize());
         dokter.setLocationRelativeTo(getContentPane());
-        dokter.tampil(hari, kdPoli);
+        LoadingOverlaySMC.run(this, "Memuat jadwal dokter...", () -> dokter.tampil(hari, kdPoli));
         dokter.setVisible(true);
     }//GEN-LAST:event_buttonCariDokterActionPerformed
 

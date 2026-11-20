@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileReader;
@@ -20,6 +19,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
 import javax.swing.border.TitledBorder;
+import widget.LoadingOverlaySMC;
 
 public class DlgCekDataPasien extends widget.Dialog {
     public static final int REGIST_MANDIRI = 1;
@@ -299,31 +299,33 @@ public class DlgCekDataPasien extends widget.Dialog {
     }
 
     private void cek() {
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if (NoRMPasien.getText().isBlank()) {
             Valid.popupPeringatanDialog("Isian masih kosong..!!", 3);
-        } else {
-            String noRM = Sequel.cariIsiSmc("select pasien.no_rkm_medis from pasien where (pasien.no_rkm_medis = ? or trim(pasien.no_ktp) = ?)", NoRMPasien.getText().trim(), NoRMPasien.getText().trim());
-            if (noRM.isBlank()) {
-                Valid.popupGagalDialog("Data pasien tidak ditemukan..!!", 5);
-            } else {
-                switch (flag) {
-                    case CEKIN_BOOKING:
-                        this.cekBooking(noRM);
-                        break;
-                    case REGIST_MANDIRI:
-                        mandiri.setSize(this.getSize());
-                        mandiri.setLocationRelativeTo(this);
-                        mandiri.setPasien(noRM);
-                        mandiri.setVisible(true);
-                        this.flag = -1;
-                        this.dispose();
-                        break;
-                }
-            }
+        } else if (LoadingOverlaySMC.call(this, flag == CEKIN_BOOKING ? "Memproses check in..." : "Mencari data pasien...", this::cariPasienSmc)) {
+            mandiri.setVisible(true);
+            this.flag = -1;
+            this.dispose();
         }
         formWindowActivated(null);
-        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private boolean cariPasienSmc() {
+        String noRM = Sequel.cariIsiSmc("select pasien.no_rkm_medis from pasien where (pasien.no_rkm_medis = ? or trim(pasien.no_ktp) = ?)", NoRMPasien.getText().trim(), NoRMPasien.getText().trim());
+        if (noRM.isBlank()) {
+            Valid.popupGagalDialog("Data pasien tidak ditemukan..!!", 5);
+        } else {
+            switch (flag) {
+                case CEKIN_BOOKING:
+                    this.cekBooking(noRM);
+                    break;
+                case REGIST_MANDIRI:
+                    mandiri.setSize(this.getSize());
+                    mandiri.setLocationRelativeTo(this);
+                    mandiri.setPasien(noRM);
+                    return true;
+            }
+        }
+        return false;
     }
 
     private void cekBooking(String noRM) {

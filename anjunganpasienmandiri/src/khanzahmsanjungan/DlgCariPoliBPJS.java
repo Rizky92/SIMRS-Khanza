@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.table.DefaultTableModel;
+import widget.LoadingOverlaySMC;
 
 public final class DlgCariPoliBPJS extends widget.Dialog {
     private final DefaultTableModel tabMode;
@@ -103,40 +104,42 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        loadPengaturanAPM();
-        aturKolomSmc();
-        Valid.tabelKosongSmc(tabMode);
-        if (batasRegistrasiSatuJam) {
-            try (PreparedStatement ps = koneksi.prepareStatement(
-                "select jadwal.kd_poli, concat(left(jadwal.jam_mulai, 5), '-', left(jadwal.jam_selesai, 5)) as jampraktek, " +
-                "maping_poli_bpjs.kd_poli_bpjs, maping_poli_bpjs.nm_poli_bpjs from jadwal join maping_poli_bpjs on " +
-                "jadwal.kd_poli = maping_poli_bpjs.kd_poli_rs where jadwal.hari_kerja = ? " + (kodeDokter.isBlank() ? ""
-                : "and jadwal.kd_dokter = ? ") + "order by jadwal.jam_mulai"
-            )) {
-                int p = 0;
-                ps.setString(++p, hari);
-                if (!kodeDokter.isBlank()) {
-                    ps.setString(++p, kodeDokter);
-                }
-                try (ResultSet rs = ps.executeQuery()) {
-                    while (rs.next()) {
-                        tabMode.addRow(new Object[] {
-                            rs.getString("kd_poli_bpjs"), rs.getString("nm_poli_bpjs"), rs.getString("kd_poli"), rs.getString("jampraktek")
-                        });
+        LoadingOverlaySMC.run(this, "Memuat jadwal poliklinik...", () -> {
+            loadPengaturanAPM();
+            aturKolomSmc();
+            Valid.tabelKosongSmc(tabMode);
+            if (batasRegistrasiSatuJam) {
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select jadwal.kd_poli, concat(left(jadwal.jam_mulai, 5), '-', left(jadwal.jam_selesai, 5)) as jampraktek, " +
+                    "maping_poli_bpjs.kd_poli_bpjs, maping_poli_bpjs.nm_poli_bpjs from jadwal join maping_poli_bpjs on " +
+                    "jadwal.kd_poli = maping_poli_bpjs.kd_poli_rs where jadwal.hari_kerja = ? " + (kodeDokter.isBlank() ? ""
+                    : "and jadwal.kd_dokter = ? ") + "order by jadwal.jam_mulai"
+                )) {
+                    int p = 0;
+                    ps.setString(++p, hari);
+                    if (!kodeDokter.isBlank()) {
+                        ps.setString(++p, kodeDokter);
                     }
+                    try (ResultSet rs = ps.executeQuery()) {
+                        while (rs.next()) {
+                            tabMode.addRow(new Object[] {
+                                rs.getString("kd_poli_bpjs"), rs.getString("nm_poli_bpjs"), rs.getString("kd_poli"), rs.getString("jampraktek")
+                            });
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
                 }
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-            }
-        } else {
-            try (ResultSet rs = koneksi.createStatement().executeQuery("select * from maping_poli_bpjs")) {
-                while (rs.next()) {
-                    tabMode.addRow(new String[] {rs.getString("kd_poli_bpjs"), rs.getString("nm_poli_bpjs"), rs.getString("kd_poli_rs"), ""});
+            } else {
+                try (ResultSet rs = koneksi.createStatement().executeQuery("select * from maping_poli_bpjs")) {
+                    while (rs.next()) {
+                        tabMode.addRow(new String[] {rs.getString("kd_poli_bpjs"), rs.getString("nm_poli_bpjs"), rs.getString("kd_poli_rs"), ""});
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
                 }
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
             }
-        }
+        });
     }//GEN-LAST:event_formWindowActivated
 
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed

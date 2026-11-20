@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.StringJoiner;
 import javax.swing.table.DefaultTableModel;
+import widget.LoadingOverlaySMC;
 
 public final class DlgCariPoli extends widget.Dialog {
     private final DefaultTableModel tabMode;
@@ -110,34 +111,36 @@ public final class DlgCariPoli extends widget.Dialog {
     }//GEN-LAST:event_tbPoliMouseReleased
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        Valid.tabelKosongSmc(tabMode);
-        StringJoiner sj = new StringJoiner(", ");
-        if (!kodePoliEksekutif.isEmpty()) {
-            kodePoliEksekutif.iterator().forEachRemaining(s -> sj.add("?"));
-        }
-        try (PreparedStatement ps = koneksi.prepareStatement(
-            "select p.kd_poli, p.nm_poli, p.registrasi, p.registrasilama from poliklinik as p where p.status = '1' " +
-            (kodePoliEksekutif.isEmpty() ? "" : "and p.kd_poli in (" + sj.toString() + ") ") +
-            "and exists(select * from jadwal as j where j.kd_poli = p.kd_poli and j.hari_kerja = ?) order by p.nm_poli"
-        )) {
-            int p = 0;
+        LoadingOverlaySMC.run(this, "Memuat jadwal poliklinik...", () -> {
+            Valid.tabelKosongSmc(tabMode);
+            StringJoiner sj = new StringJoiner(", ");
             if (!kodePoliEksekutif.isEmpty()) {
-                for (String s : kodePoliEksekutif) {
-                    ps.setString(++p, s);
-                }
+                kodePoliEksekutif.iterator().forEachRemaining(s -> sj.add("?"));
             }
-            ps.setString(++p, hari);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    tabMode.addRow(new Object[] {
-                        rs.getString("kd_poli"), rs.getString("nm_poli"),
-                        rs.getDouble("registrasi"), rs.getDouble("registrasilama")
-                    });
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select p.kd_poli, p.nm_poli, p.registrasi, p.registrasilama from poliklinik as p where p.status = '1' " +
+                (kodePoliEksekutif.isEmpty() ? "" : "and p.kd_poli in (" + sj.toString() + ") ") +
+                "and exists(select * from jadwal as j where j.kd_poli = p.kd_poli and j.hari_kerja = ?) order by p.nm_poli"
+            )) {
+                int p = 0;
+                if (!kodePoliEksekutif.isEmpty()) {
+                    for (String s : kodePoliEksekutif) {
+                        ps.setString(++p, s);
+                    }
                 }
+                ps.setString(++p, hari);
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        tabMode.addRow(new Object[] {
+                            rs.getString("kd_poli"), rs.getString("nm_poli"),
+                            rs.getDouble("registrasi"), rs.getDouble("registrasilama")
+                        });
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
+        });
     }//GEN-LAST:event_formWindowActivated
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
