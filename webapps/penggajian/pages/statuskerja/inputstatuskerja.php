@@ -103,9 +103,10 @@
             $izin          = '';
             $hakizin       = '';
             $max_menit     = '';
+            $bebas_scanlog = 'Tidak';
 
             if ($action === 'UBAH') {
-                $_sql          = sprintf("select stts_kerja.stts, stts_kerja.ktg, stts_kerja.indek, stts_kerja.hakcuti, stts_kerja.cuti_besar, stts_kerja.hakcuti_besar, stts_kerja.izin, stts_kerja.hakizin, stts_kerja.max_menit from stts_kerja where stts_kerja.stts = '%s'", $stts);
+                $_sql          = sprintf("select stts_kerja.stts, stts_kerja.ktg, stts_kerja.indek, stts_kerja.hakcuti, stts_kerja.cuti_besar, stts_kerja.hakcuti_besar, stts_kerja.izin, stts_kerja.hakizin, stts_kerja.max_menit, stts_kerja.bebas_scanlog from stts_kerja where stts_kerja.stts = '%s'", $stts);
                 $hasil         = bukaquery($_sql);
                 $baris         = mysqli_fetch_row($hasil);
                 $stts          = $baris[0];
@@ -117,6 +118,7 @@
                 $izin          = $baris[6];
                 $hakizin       = $baris[7];
                 $max_menit     = $baris[8];
+                $bebas_scanlog = $baris[9];
             }
             ?>
             <input type="hidden" name="stts" value="<?= $stts ?>">
@@ -206,6 +208,16 @@
                         <span id="MsgIsi8" style="color:#CC0000; font-size:10px;"></span>
                     </td>
                 </tr>
+                <tr class="head">
+                    <td width="31%">Bebas Scanlog</td>
+                    <td width="">:</td>
+                    <td width="67%">
+                        <select name="bebas_scanlog" class="text3" style="width: 95%">
+                            <option value="Tidak" <?= $bebas_scanlog === 'Tidak' ? 'selected' : '' ?>>Tidak, presensi mengikuti scanlog</option>
+                            <option value="Ya" <?= $bebas_scanlog === 'Ya' ? 'selected' : '' ?>>Ya, presensi mengikuti jadwal</option>
+                        </select>
+                    </td>
+                </tr>
             </table>
 
             <div>
@@ -228,11 +240,12 @@
                 $izin          = validTeks(trim($_POST['izin']));
                 $hakizin       = validTeks(trim($_POST['hakizin']));
                 $max_menit     = validTeks(trim($_POST['max_menit']));
-                if ($stts !== '' && $ktg !== '' && $indek !== '' && $hakcuti !== '' && $cuti_besar !== '' && $hakcuti_besar !== '' && $izin !== '' && $hakizin !== '' && $max_menit !== '') {
+                $bebas_scanlog = validTeks(trim($_POST['bebas_scanlog']));
+                if ($stts !== '' && $ktg !== '' && $indek !== '' && $hakcuti !== '' && $cuti_besar !== '' && $hakcuti_besar !== '' && $izin !== '' && $hakizin !== '' && $max_menit !== '' && $bebas_scanlog !== '') {
                     switch ($action) {
                         case 'TAMBAH':
                             try {
-                                bukaquery2(sprintf("insert into stts_kerja values ('%s', '%s', %s, %s, '%s', %s, '%s', %s, %s)", $stts, $ktg, $indek, $hakcuti, $cuti_besar, $hakcuti_besar, $izin, $hakizin, $max_menit));
+                                bukaquery2(sprintf("insert into stts_kerja (stts, ktg, indek, hakcuti, cuti_besar, hakcuti_besar, izin, hakizin, max_menit, bebas_scanlog) values ('%s', '%s', %s, %s, '%s', %s, '%s', %s, %s, '%s')", $stts, $ktg, $indek, $hakcuti, $cuti_besar, $hakcuti_besar, $izin, $hakizin, $max_menit, $bebas_scanlog));
                                 echo <<<'HTML'
                                     <meta http-equiv="refresh" content="1;URL=?act=InputSttskerja&action=TAMBAH">
                                     HTML;
@@ -250,8 +263,8 @@
                             break;
                         case 'UBAH':
                             try {
-                                bukaquery2(sprintf("update stts_kerja set ktg = '%s', indek = %s, hakcuti = %s, cuti_besar = '%s', hakcuti_besar = %s, izin = '%s', hakizin = %s, max_menit = %s where stts = '%s'",
-                                    $ktg, $indek, $hakcuti, $cuti_besar, $hakcuti_besar, $izin, $hakizin, $max_menit, $stts
+                                bukaquery2(sprintf("update stts_kerja set ktg = '%s', indek = %s, hakcuti = %s, cuti_besar = '%s', hakcuti_besar = %s, izin = '%s', hakizin = %s, max_menit = %s, bebas_scanlog = '%s' where stts = '%s'",
+                                    $ktg, $indek, $hakcuti, $cuti_besar, $hakcuti_besar, $izin, $hakizin, $max_menit, $bebas_scanlog, $stts
                                 ));
                                 echo <<<'HTML'
                                     <meta http-equiv="refresh" content="1;URL=?act=ListSttskerja&action=UBAH">

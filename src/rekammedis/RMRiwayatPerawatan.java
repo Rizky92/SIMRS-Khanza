@@ -38,6 +38,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.JEditorPane;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import static javafx.concurrent.Worker.State.FAILED;
@@ -51,6 +52,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.text.DefaultCaret;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import netscape.javascript.JSObject;
@@ -276,19 +278,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                 }
             }
         });
-        LoadHTMLProfilRingkasRalan.setDocument(kit.createDefaultDocument());
-        LoadHTMLProfilRingkasRalan.setEditable(false);
-        LoadHTMLProfilRingkasRalan.addHyperlinkListener(e -> {
-            if (HyperlinkEvent.EventType.ACTIVATED.equals(e.getEventType())) {
-                Desktop desktop = Desktop.getDesktop();
-                try {
-                   desktop.browse(e.getURL().toURI());
-                } catch (Exception ex) {
-                  ex.printStackTrace();
-                }
-            }
-        });
 
+        aturCaretHTMLSmc();
         ChkAccor.setSelected(false);
         isMenu();
     }
@@ -3319,6 +3310,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             chkReaksiTranfusi.setSelected(true);
             chkPenilaianGRACEScore.setSelected(true);
             chkPenilaianBishop.setSelected(true);
+            chkAsuhanTindakanNonBedahSMC.setSelected(true);
             chkHasilPemeriksaanUSGTestis.setSelected(true);
             chkHasilPemeriksaanUSGKepala.setSelected(true);
             chkHasilPemeriksaanUSGMammae.setSelected(true);
@@ -3537,6 +3529,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             chkReaksiTranfusi.setSelected(false);
             chkPenilaianGRACEScore.setSelected(false);
             chkPenilaianBishop.setSelected(false);
+            chkAsuhanTindakanNonBedahSMC.setSelected(false);
             chkHasilPemeriksaanUSGTestis.setSelected(false);
             chkHasilPemeriksaanUSGKepala.setSelected(false);
             chkHasilPemeriksaanUSGMammae.setSelected(false);
@@ -4482,7 +4475,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             NoRawat.requestFocus();
         } else {
             esign = false;
-            tampilPerawatan();
+            String htmlRiwayatPerawatan = ambilHTMLRiwayatPerawatanSmc();
             File g = new File("file.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;border: white;}");
@@ -4494,7 +4487,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             }
             PdfWriter pdf = new PdfWriter("./berkaspdf/" + tglExport + "/" + noSEP + "_" + urut + "_Riwayat.pdf");
             HtmlConverter.convertToPdf(
-                LoadHTMLRiwayatPerawatan.getText().replaceAll("<head>", "<head><link href=\"file.css\" rel=\"stylesheet\" type=\"text/css\" />").
+                htmlRiwayatPerawatan.replaceAll("<head>", "<head><link href=\"file.css\" rel=\"stylesheet\" type=\"text/css\" />").
                     replaceAll("<body>",
                         "<body>"
                         + "<table width='100%' align='center' border='0' class='tbl_form' cellspacing='0' cellpadding='0'>"
@@ -8345,7 +8338,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
 
                 }
 
-                LoadHTMLTindakanLab.setText(
+                isiHtml(LoadHTMLTindakanLab,
                     "<html>"
                     + "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
                     + htmlContent.toString()
@@ -8709,7 +8702,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     );
                 }
 
-                LoadHTMLTindakanLab.setText(
+                isiHtml(LoadHTMLTindakanRadiologi,
                     "<html>"
                     + "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
                     + htmlContent.toString()
@@ -8822,7 +8815,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                 }
             }
 
-            LoadHTMLBerkasDigital.setText(
+            isiHtml(LoadHTMLBerkasDigital,
                 "<html>"
                 + "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
                 + htmlContent.toString()
@@ -17766,8 +17759,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                         do{
                             htmlContent.append(
                                  "<tr>").append(
-                                    "<td valign='top' align='center' rowspan='3'>").append(w).append("</td>").append(
-                                    "<td valign='top' rowspan='3'>").append(rs2.getString("tgl_perawatan")).append(" ").append(rs2.getString("jam_rawat")).append("</td>").append(
+                                    "<td valign='top' align='center'>").append(w).append("</td>").append(
+                                    "<td valign='top'>").append(rs2.getString("tgl_perawatan")).append(" ").append(rs2.getString("jam_rawat")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("tangan_kiri")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("tangan_kanan")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("badan")).append("</td>").append(
@@ -17777,7 +17770,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                     "<td valign='top' align='center'>").append(rs2.getString("iritasi")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("sirkulasi")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("kondisi_keterangan")).append("</td>").append(
-                                    "<td valign='top' rowspan='3'>").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
+                                    "<td valign='top'>").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
                                  "</tr>"
                             );
                             w++;
@@ -41462,6 +41455,22 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                 }
             });
         }
+    }
+
+    private void aturCaretHTMLSmc() {
+        for (JEditorPane pane : new JEditorPane[]{LoadHTMLRiwayatPerawatan, LoadHTMLSOAPI, LoadHTMLTindakanLab, LoadHTMLTindakanRadiologi, LoadHTMLBerkasDigital, LoadHTMLPembelian, LoadHTMLPiutang, LoadHTMLRetensi, LoadHTMLWearable}) {
+            if (pane.getCaret() instanceof DefaultCaret) {
+                ((DefaultCaret) pane.getCaret()).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
+            }
+        }
+    }
+
+    private String ambilHTMLRiwayatPerawatanSmc() throws Exception {
+        tampilPerawatan();
+        if (!SwingUtilities.isEventDispatchThread()) {
+            SwingUtilities.invokeAndWait(() -> {});
+        }
+        return LoadHTMLRiwayatPerawatan.getText();
     }
 
     private void runBackground(Runnable task) {

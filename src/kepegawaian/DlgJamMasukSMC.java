@@ -557,15 +557,40 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             return;
         }
 
+        String error = null;
         String kode = TKode.getText().trim().toUpperCase();
-        if (Sequel.menyimpantfSmc("jam_masuk_smc", "", kode, TNama.getText().trim(), Valid.getJamSmc(cmbJam1, cmbMnt1, cmbDtk1), Valid.getJamSmc(cmbJam2, cmbMnt2, cmbDtk2))) {
-            simpanMappingShift(kode);
-            tabMode.addRow(new Object[] {
-                false, kode, TNama.getText().trim(), Valid.getJamSmc(cmbJam1, cmbMnt1, cmbDtk1),
-                Valid.getJamSmc(cmbJam2, cmbMnt2, cmbDtk2), cmbShift.getSelectedItem().toString()
-            });
-            emptTeks();
+        try {
+            Sequel.AutoComitFalse();
+            if (!Sequel.menyimpantfSmc("jam_masuk_smc", "", kode, TNama.getText().trim(), Valid.getJamSmc(cmbJam1, cmbMnt1, cmbDtk1), Valid.getJamSmc(cmbJam2, cmbMnt2, cmbDtk2))) {
+                error = "Gagal menyimpan data, kemungkinan kode shift sudah dipakai...!!!";
+            } else if (!simpanMappingShift(kode)) {
+                error = "Gagal menyimpan mapping shift presensi, data tidak disimpan...!!!";
+            }
+
+            if (null == error) {
+                Sequel.Commit();
+            } else {
+                Sequel.RollBack();
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            Sequel.RollBack();
+            error = "Terjadi kesalahan pada saat menyimpan data, data tidak disimpan...!!!";
+        } finally {
+            Sequel.AutoComitTrue();
         }
+
+        if (null != error) {
+            JOptionPane.showMessageDialog(null, error, "Peringatan", JOptionPane.WARNING_MESSAGE);
+
+            return;
+        }
+
+        tabMode.addRow(new Object[] {
+            false, kode, TNama.getText().trim(), Valid.getJamSmc(cmbJam1, cmbMnt1, cmbDtk1), Valid.getJamSmc(cmbJam2, cmbMnt2, cmbDtk2), ""
+        });
+        perbaruiMappingTabel(kode);
+        emptTeks();
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -625,31 +650,42 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
         }
 
         String error = null;
+        String kode = TKode.getText().trim().toUpperCase();
         try {
             Sequel.AutoComitFalse();
-            String kode = TKode.getText().trim().toUpperCase();
-            if (Sequel.mengupdatetfSmc("jam_masuk_smc", "kode_shift = ?, nama_shift = ?, jam_masuk = ?, jam_pulang = ?", "kode_shift = ?", kode, TNama.getText().trim(),
+            if (!Sequel.mengupdatetfSmc("jam_masuk_smc", "kode_shift = ?, nama_shift = ?, jam_masuk = ?, jam_pulang = ?", "kode_shift = ?", kode, TNama.getText().trim(),
                 Valid.getJamSmc(cmbJam1, cmbMnt1, cmbDtk1), Valid.getJamSmc(cmbJam2, cmbMnt2, cmbDtk2), tbJadwal.getValueAt(tbJadwal.getSelectedRow(), 1).toString()
             )) {
-                if (simpanMappingShift(kode)) {
-                    tabMode.setValueAt(kode, tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 1);
-                    tabMode.setValueAt(TNama.getText().trim(), tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 2);
-                    tabMode.setValueAt(Valid.getJamSmc(cmbJam1, cmbMnt1, cmbDtk1), tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 3);
-                    tabMode.setValueAt(Valid.getJamSmc(cmbJam2, cmbMnt2, cmbDtk2), tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 4);
-                    tabMode.setValueAt(cmbShift.getSelectedItem().toString(), tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 5);
-                    emptTeks();
-                }
-            } else {
                 error = "Gagal mengganti data, kemungkinan kode shift sudah dipakai...!!!";
+            } else if (!simpanMappingShift(kode)) {
+                error = "Gagal menyimpan mapping shift presensi, perubahan dibatalkan...!!!";
+            }
+
+            if (null == error) {
+                Sequel.Commit();
+            } else {
+                Sequel.RollBack();
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
+            Sequel.RollBack();
+            error = "Terjadi kesalahan pada saat mengganti data, perubahan dibatalkan...!!!";
         } finally {
             Sequel.AutoComitTrue();
-            if (null != error) {
-                JOptionPane.showMessageDialog(null, error, "Peringatan", JOptionPane.WARNING_MESSAGE);
-            }
         }
+
+        if (null != error) {
+            JOptionPane.showMessageDialog(null, error, "Peringatan", JOptionPane.WARNING_MESSAGE);
+
+            return;
+        }
+
+        tabMode.setValueAt(kode, tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 1);
+        tabMode.setValueAt(TNama.getText().trim(), tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 2);
+        tabMode.setValueAt(Valid.getJamSmc(cmbJam1, cmbMnt1, cmbDtk1), tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 3);
+        tabMode.setValueAt(Valid.getJamSmc(cmbJam2, cmbMnt2, cmbDtk2), tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 4);
+        perbaruiMappingTabel(kode);
+        emptTeks();
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
@@ -1052,11 +1088,25 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
     private boolean simpanMappingShift(String kode) {
         String shift = cmbShift.getSelectedItem().toString();
         if (TANPA_SHIFT.equals(shift)) {
-            return Sequel.menghapustfSmc("set_kode_shift_smc", "kode_shift = ?", kode);
+            Sequel.menghapusSmc("set_kode_shift_smc", "kode_shift = ?", kode);
+
+            return true;
         }
 
-        return Sequel.menghapustfSmc("set_kode_shift_smc", "shift = ? and kode_shift != ?", shift, kode) &&
-            Sequel.executeRawSmc("insert into set_kode_shift_smc (shift, kode_shift) values (?, ?) on duplicate key update shift = values(shift)", shift, kode);
+        Sequel.menghapusSmc("set_kode_shift_smc", "shift = ? and kode_shift != ?", shift, kode);
+
+        return Sequel.executeRawSmc("insert into set_kode_shift_smc (shift, kode_shift) values (?, ?) on duplicate key update shift = values(shift)", shift, kode);
+    }
+
+    private void perbaruiMappingTabel(String kode) {
+        String shift = TANPA_SHIFT.equals(cmbShift.getSelectedItem().toString()) ? "" : cmbShift.getSelectedItem().toString();
+        for (int i = 0; i < tabMode.getRowCount(); i++) {
+            if (kode.equals(tabMode.getValueAt(i, 1))) {
+                tabMode.setValueAt(shift, i, 5);
+            } else if (!shift.isEmpty() && shift.equals(tabMode.getValueAt(i, 5))) {
+                tabMode.setValueAt("", i, 5);
+            }
+        }
     }
 
     private Set<String> getKodeShift() {

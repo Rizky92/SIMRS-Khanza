@@ -6,6 +6,8 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -661,52 +663,56 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                            json = "{" +
-                                        "\"resourceType\": \"ClinicalImpression\"," +
-                                        "\"status\": \"completed\"," +
-                                        "\"description\" : \""+tbObat.getValueAt(i,10).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ") +"\"," +
-                                        "\"subject\" : {"+
-                                           "\"reference\" : \"Patient/"+idpasien+"\","+
-                                           "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\""+
-                                        "},"+
-                                        "\"encounter\" : { " +
-                                          "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\","+
-                                          "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
-                                        "},"+
-                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
-                                        "\"date\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
-                                        "\"assessor\" : {"+
-                                          "\"reference\" : \"Practitioner/"+iddokter+"\""+
-                                        "},"+
-                                        "\"summary\" : \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\","+
-                                        "\"finding\": [" +
-                                            "{" +
-                                                "\"itemCodeableConcept\": {"+
-                                                    "\"coding\": ["+
-                                                        "{"+
-                                                            "\"system\": \"http://hl7.org/fhir/sid/icd-10\","+
-                                                            "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\","+
-                                                            "\"display\": \""+tbObat.getValueAt(i,17).toString()+"\""+
-                                                        "}"+
-                                                    "]"+
-                                                "},"+
-                                                "\"itemReference\": {"+
-                                                    "\"reference\": \"Condition/"+tbObat.getValueAt(i,18).toString()+"\""+
-                                                "}"+
-                                            "}"+
-                                        "],"+
-                                        "\"prognosisCodeableConcept\": ["+
-                                            "{"+
-                                                "\"coding\": ["+
-                                                    "{"+
-                                                        "\"system\": \"http://terminology.kemkes.go.id/CodeSystem/clinical-term\","+
-                                                        "\"code\": \"PR000001\","+
-                                                        "\"display\": \"Prognosis\""+
-                                                    "}"+
-                                                "]"+
-                                            "}"+
-                                        "]"+
-                                   "}";
+                            ObjectNode payload = mapper.createObjectNode();
+                            payload.put("resourceType", "ClinicalImpression");
+                            payload.put("status", "completed");
+                            payload.put("description", tbObat.getValueAt(i, 10).toString()
+                                    .replaceAll("(\r\n|\r|\n|\n\r)", "<br>")
+                                    .replaceAll("\t", " "));
+
+                            ObjectNode subject = payload.putObject("subject");
+                            subject.put("reference", "Patient/" + idpasien);
+                            subject.put("display", tbObat.getValueAt(i, 4).toString());
+
+                            ObjectNode encounter = payload.putObject("encounter");
+                            encounter.put("reference", "Encounter/" + tbObat.getValueAt(i, 9).toString());
+                            encounter.put("display",
+                                    "Kunjungan " + tbObat.getValueAt(i, 4).toString()
+                                    + " pada tanggal " + tbObat.getValueAt(i, 1).toString()
+                                    + " dengan nomor kunjungan " + tbObat.getValueAt(i, 2).toString());
+
+                            String waktu = tbObat.getValueAt(i, 14).toString() + "T" + tbObat.getValueAt(i, 15).toString() + "+07:00";
+                            payload.put("effectiveDateTime", waktu);
+                            payload.put("date", waktu);
+
+                            ObjectNode assessor = payload.putObject("assessor");
+                            assessor.put("reference", "Practitioner/" + iddokter);
+
+                            payload.put("summary", tbObat.getValueAt(i, 11).toString()
+                                    .replaceAll("(\r\n|\r|\n|\n\r)", "<br>")
+                                    .replaceAll("\t", " "));
+
+                            ArrayNode finding = payload.putArray("finding");
+                            ObjectNode temuan = finding.addObject();
+                            ObjectNode itemCodeableConcept = temuan.putObject("itemCodeableConcept");
+                            ArrayNode coding = itemCodeableConcept.putArray("coding");
+                            ObjectNode kode = coding.addObject();
+                            kode.put("system", "http://hl7.org/fhir/sid/icd-10");
+                            kode.put("code", tbObat.getValueAt(i, 16).toString());
+                            kode.put("display", tbObat.getValueAt(i, 17).toString());
+
+                            ObjectNode itemReference = temuan.putObject("itemReference");
+                            itemReference.put("reference", "Condition/" + tbObat.getValueAt(i, 18).toString());
+
+                            ArrayNode prognosis = payload.putArray("prognosisCodeableConcept");
+                            ObjectNode prognosisItem = prognosis.addObject();
+                            ArrayNode prognosisCoding = prognosisItem.putArray("coding");
+                            ObjectNode prognosisCode = prognosisCoding.addObject();
+                            prognosisCode.put("system", "http://terminology.kemkes.go.id/CodeSystem/clinical-term");
+                            prognosisCode.put("code", "PR000001");
+                            prognosisCode.put("display", "Prognosis");
+
+                            json = mapper.writeValueAsString(payload);
                             System.out.println("URL : "+link+"/ClinicalImpression");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
@@ -771,53 +777,57 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                            json = "{" +
-                                        "\"resourceType\": \"ClinicalImpression\"," +
-                                        "\"id\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
-                                        "\"status\": \"completed\"," +
-                                        "\"description\" : \""+tbObat.getValueAt(i,10).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"," +
-                                        "\"subject\" : {"+
-                                           "\"reference\" : \"Patient/"+idpasien+"\","+
-                                           "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\""+
-                                        "},"+
-                                        "\"encounter\" : { " +
-                                          "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\","+
-                                          "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
-                                        "},"+
-                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
-                                        "\"date\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
-                                        "\"assessor\" : {"+
-                                          "\"reference\" : \"Practitioner/"+iddokter+"\""+
-                                        "},"+
-                                        "\"summary\" : \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\","+
-                                        "\"finding\": [" +
-                                            "{" +
-                                                "\"itemCodeableConcept\": {"+
-                                                    "\"coding\": ["+
-                                                        "{"+
-                                                            "\"system\": \"http://hl7.org/fhir/sid/icd-10\","+
-                                                            "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\","+
-                                                            "\"display\": \""+tbObat.getValueAt(i,17).toString()+"\""+
-                                                        "}"+
-                                                    "]"+
-                                                "},"+
-                                                "\"itemReference\": {"+
-                                                    "\"reference\": \"Condition/"+tbObat.getValueAt(i,18).toString()+"\""+
-                                                "}"+
-                                            "}"+
-                                        "],"+
-                                        "\"prognosisCodeableConcept\": ["+
-                                            "{"+
-                                                "\"coding\": ["+
-                                                    "{"+
-                                                        "\"system\": \"http://terminology.kemkes.go.id/CodeSystem/clinical-term\","+
-                                                        "\"code\": \"PR000001\","+
-                                                        "\"display\": \"Prognosis\""+
-                                                    "}"+
-                                                "]"+
-                                            "}"+
-                                        "]"+
-                                   "}";
+                            ObjectNode payload = mapper.createObjectNode();
+                            payload.put("resourceType", "ClinicalImpression");
+                            payload.put("id", tbObat.getValueAt(i, 19).toString());
+                            payload.put("status", "completed");
+                            payload.put("description", tbObat.getValueAt(i, 10).toString()
+                                    .replaceAll("(\r\n|\r|\n|\n\r)", "<br>")
+                                    .replaceAll("\t", " "));
+
+                            ObjectNode subject = payload.putObject("subject");
+                            subject.put("reference", "Patient/" + idpasien);
+                            subject.put("display", tbObat.getValueAt(i, 4).toString());
+
+                            ObjectNode encounter = payload.putObject("encounter");
+                            encounter.put("reference", "Encounter/" + tbObat.getValueAt(i, 9).toString());
+                            encounter.put("display",
+                                    "Kunjungan " + tbObat.getValueAt(i, 4).toString()
+                                    + " pada tanggal " + tbObat.getValueAt(i, 1).toString()
+                                    + " dengan nomor kunjungan " + tbObat.getValueAt(i, 2).toString());
+
+                            String waktu = tbObat.getValueAt(i, 14).toString() + "T" + tbObat.getValueAt(i, 15).toString() + "+07:00";
+                            payload.put("effectiveDateTime", waktu);
+                            payload.put("date", waktu);
+
+                            ObjectNode assessor = payload.putObject("assessor");
+                            assessor.put("reference", "Practitioner/" + iddokter);
+
+                            payload.put("summary", tbObat.getValueAt(i, 11).toString()
+                                    .replaceAll("(\r\n|\r|\n|\n\r)", "<br>")
+                                    .replaceAll("\t", " "));
+
+                            ArrayNode finding = payload.putArray("finding");
+                            ObjectNode temuan = finding.addObject();
+                            ObjectNode itemCodeableConcept = temuan.putObject("itemCodeableConcept");
+                            ArrayNode coding = itemCodeableConcept.putArray("coding");
+                            ObjectNode kode = coding.addObject();
+                            kode.put("system", "http://hl7.org/fhir/sid/icd-10");
+                            kode.put("code", tbObat.getValueAt(i, 16).toString());
+                            kode.put("display", tbObat.getValueAt(i, 17).toString());
+
+                            ObjectNode itemReference = temuan.putObject("itemReference");
+                            itemReference.put("reference", "Condition/" + tbObat.getValueAt(i, 18).toString());
+
+                            ArrayNode prognosis = payload.putArray("prognosisCodeableConcept");
+                            ObjectNode prognosisItem = prognosis.addObject();
+                            ArrayNode prognosisCoding = prognosisItem.putArray("coding");
+                            ObjectNode prognosisCode = prognosisCoding.addObject();
+                            prognosisCode.put("system", "http://terminology.kemkes.go.id/CodeSystem/clinical-term");
+                            prognosisCode.put("code", "PR000001");
+                            prognosisCode.put("display", "Prognosis");
+
+                            json = mapper.writeValueAsString(payload);
                             System.out.println("URL : "+link+"/ClinicalImpression/"+tbObat.getValueAt(i,19).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
