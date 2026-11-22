@@ -138,6 +138,7 @@ import rekammedis.RMHasilPemeriksaanUSGUrologi;
 import rekammedis.RMHasilPersalinanTOLAC;
 import rekammedis.RMHasilTindakanESWL;
 import rekammedis.RMKonselingFarmasi;
+import rekammedis.RMLaporanMESO;
 import rekammedis.RMLaporanTindakan;
 import rekammedis.RMMonitoringAldrettePascaAnestesi;
 import rekammedis.RMMonitoringBromagePascaAnestesi;
@@ -9305,6 +9306,23 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }
     }
 
+    private void BtnLaporanMESOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRekonsiliasiObatActionPerformed
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMLaporanMESO form=new RMLaporanMESO(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -9639,7 +9657,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                           BtnPelaksanaanInformasiEdukasi,BtnCatatanObservasiHemodialisa,BtnCatatanCairanHemodialisa,BtnCatatanPengkajianPaskaOperasi,BtnCatatanObservasiBayi,BtnChecklistKesiapanAnestesi,BtnHasilPemeriksaanSlitLamp,BtnHasilPemeriksaanOCT,
                           BtnChecklistKriteriaMasukNICU,BtnChecklistKriteriaKeluarNICU,BtnAwalMedisPsikiatri,BtnChecklistKriteriaMasukPICU,BtnChecklistKriteriaKeluarPICU,BtnHasilPemeriksaanTreadmill,BtnHasilPemeriksaanECHOPediatrik,BtnAwalMedisJantung,
                           BtnSkriningGiziKehamilan,BtnPermintaanKonsultasiPerawat,BtnCatatanObservasiRuangOperasi,BtnHasilPemeriksaanUSGAbdomen,BtnIntervensiNyeriFarmakologi,BtnIntervensiNyeriNonFarmakologi,BtnChecklistKriteriaMasukIsolasi,BtnChecklistKriteriaKeluarIsolasi,
-                          BtnAdmisiSkoringTOLAC,BtnMonitoringTolac,BtnHasilPersalinanTOLAC,BtnLaporanReaksiTranfusi,BtnPenilaianBISHOPScore,BtnHasilPemeriksaanUSGTestis,BtnHasilPemeriksaanUSGKepala,BtnHasilPemeriksaanUSGMammae,BtnHasilPemeriksaanSpirometri;
+                          BtnAdmisiSkoringTOLAC,BtnMonitoringTolac,BtnHasilPersalinanTOLAC,BtnLaporanReaksiTranfusi,BtnPenilaianBISHOPScore,BtnHasilPemeriksaanUSGTestis,BtnHasilPemeriksaanUSGKepala,BtnHasilPemeriksaanUSGMammae,BtnHasilPemeriksaanSpirometri,BtnLaporanMESO;
     private widget.PopupMenu PopupSOAP,PopupPemeriksaan;
     private widget.MenuItem MnCopySOAP,MnPasteSOAP;
 
@@ -10488,6 +10506,10 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         if(akses.gethasil_spirometri()==true){
             tinggi=tinggi+24;
         }
+        BtnLaporanMESO.setVisible(akses.getlaporan_meso());
+        if(akses.getlaporan_meso()==true){
+            tinggi=tinggi+24;
+        }
         BtnHasilPemeriksaanEKG.setVisible(akses.gethasil_pemeriksaan_ekg());
         if(akses.gethasil_pemeriksaan_ekg()==true){
             tinggi=tinggi+24;
@@ -11136,6 +11158,19 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnHasilPemeriksaanSpirometri.setPreferredSize(new java.awt.Dimension(190, 23));
         BtnHasilPemeriksaanSpirometri.setRoundRect(false);
         BtnHasilPemeriksaanSpirometri.addActionListener(this::BtnHasilPemeriksaanSpirometriActionPerformed);
+
+        BtnLaporanMESO = new widget.Button();
+        BtnLaporanMESO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnLaporanMESO.setText("Laporan MESO");
+        BtnLaporanMESO.setFocusPainted(false);
+        BtnLaporanMESO.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnLaporanMESO.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnLaporanMESO.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnLaporanMESO.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnLaporanMESO.setName("BtnLaporanMESO");
+        BtnLaporanMESO.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnLaporanMESO.setRoundRect(false);
+        BtnLaporanMESO.addActionListener(this::BtnLaporanMESOActionPerformed);
 
         BtnHasilPemeriksaanEKG = new widget.Button();
         BtnHasilPemeriksaanEKG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
@@ -11957,6 +11992,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         FormMenu.add(BtnKonselingFarmasi);
         FormMenu.add(BtnInformasiObat);
         FormMenu.add(BtnRekonsiliasiObat);
+        FormMenu.add(BtnLaporanMESO);
         FormMenu.add(BtnTransferAntarRuang);
         FormMenu.add(BtnPelaksanaanInformasiEdukasi);
         FormMenu.add(BtnPengkajianRestrain);
