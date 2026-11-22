@@ -581,7 +581,6 @@ public class DlgRunTeks extends javax.swing.JDialog {
         TTeks.requestFocus();
     }
 
-
     private String gambar(String id) {
         return folder + File.separator + id.trim() + ".jpg";
     }

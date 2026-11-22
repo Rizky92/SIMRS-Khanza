@@ -100,7 +100,6 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
         }
         tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable());
 
-
         Kode.setDocument(new batasInput((byte)5).getKata(Kode));
         Nama.setDocument(new batasInput((int)100).getKata(Nama));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
@@ -108,8 +107,6 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
         isForm();
 
     }
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.

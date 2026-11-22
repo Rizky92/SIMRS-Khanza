@@ -305,7 +305,6 @@ The plugin allso adds the following methods to the plot object:
             }
         });
 
-
         plot.hooks.drawOverlay.push(function (plot, ctx) {
             // draw selection
             if (selection.show && selectionIsSane()) {

@@ -514,7 +514,6 @@ public final class DlgBarcodeRalan extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
 
     }//GEN-LAST:event_formWindowClosed
@@ -1230,7 +1229,6 @@ public final class DlgBarcodeRalan extends javax.swing.JDialog {
             bangsal=lokasidepoutama.getDepoDefault();
         }
     }
-
 
     public void tampilobat() {
         z=0;

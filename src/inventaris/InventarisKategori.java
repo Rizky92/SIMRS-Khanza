@@ -53,7 +53,6 @@ public class InventarisKategori extends javax.swing.JDialog {
 
         this.setLocation(10,10);
 
-
         Object[] row={"ID Kategori","Nama Kategori"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

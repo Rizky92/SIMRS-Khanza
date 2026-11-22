@@ -895,7 +895,6 @@ public class PCarePesertaKegiatanKelompok extends javax.swing.JDialog {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-
     public void isCek(){
         BtnHapus.setEnabled(akses.getpcare_peserta_kegiatan_kelompok());
         BtnPrint.setEnabled(akses.getpcare_peserta_kegiatan_kelompok());

@@ -125,7 +125,6 @@
                             $jmlmsk=isset($baris2[0])?$baris2[0]:0;
                         }
 
-
                                     $_sql3    = "SELECT sum(jml)
                                     from jgmlm  where id='$baris[0]'
                                     and tgl like '%".$tahun."-".$bulan."%' group by id";
@@ -154,7 +153,6 @@
                                     $hasil6   = bukaquery($_sql6);
                                     $baris6   = mysqli_fetch_row($hasil6);
                                     $ttlc     = (isset($baris6[0])?$baris6[0]:0)+getOne("select sum(jumlah) from pengajuan_cuti where tanggal_awal like '%".$tahun."-".$bulan."%' and status='Disetujui' and nik='".$baris["nik"]."'");
-
 
                                     $_sql7    = "SELECT sum(jml)
                                     from ketidakhadiran  where id='$baris[0]'
@@ -357,7 +355,6 @@
                                     $baris8   = mysqli_fetch_row($hasil8);
                                     $ttltmb   = isset($baris8[0])?$baris8[0]:0;
 
-
                                     $ttln=getOne("select count(rekap_presensi.id) from rekap_presensi where rekap_presensi.id='$baris[0]' and rekap_presensi.jam_datang like '%$tahun-$bulan%'")+$ttltmb;
                                     $tmbh=$ttltmb;
 
@@ -453,7 +450,6 @@
 
                                     $_sql22  ="SELECT ($ttln/sum(n))*100 from indekref where kdindex='".$baris["indexins"]."'";
 
-
                                     $hasil22 =bukaquery($_sql22);
                                     $baris22 = mysqli_fetch_array($hasil22);
                         $indexjaga=round((isset($baris22[0])?$baris22[0]:0),2);
@@ -530,7 +526,6 @@
                                                 (isset($baris31[0])?$baris31[0]:0);
                                         $ttljasalain=$ttljasalain+$jl;
 
-
                                 echo "<tr class='isi'>
                                          <td>".$baris["nik"]."&nbsp;</td>
                                          <td>".$baris["nama"]."&nbsp;</td>
@@ -582,7 +577,6 @@
                                                             set_insentif.tahun='$tahun' and set_insentif.bulan='$bulanindex' and
                                                             indextotal.kdindex=indexins.dep_id and
                                                             indextotal.kdindex='".$baris["indexins"]."'";
-
 
                                                     $hasil23=bukaquery($_sql23);
                                                     $baris23 = mysqli_fetch_array($hasil23);

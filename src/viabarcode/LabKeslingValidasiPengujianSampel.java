@@ -51,16 +51,7 @@ import keuangan.Jurnal;
  * @author dosen
  */
 public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -980,7 +971,6 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
     private widget.Table tbValidasi;
     // End of variables declaration//GEN-END:variables
 
-
     private void tampil() {
         try {
             Valid.tabelKosong(tabMode);
@@ -1153,5 +1143,13 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

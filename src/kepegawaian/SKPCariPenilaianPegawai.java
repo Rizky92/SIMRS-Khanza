@@ -996,7 +996,6 @@ public class SKPCariPenilaianPegawai extends javax.swing.JDialog {
         }
     }
 
-
     public void isCek(){
         TCari.requestFocus();
     }

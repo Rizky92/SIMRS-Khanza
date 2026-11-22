@@ -53,7 +53,6 @@ public class K3RSDampakCidera extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         Object[] row={"Kode","Dampak Cidera"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

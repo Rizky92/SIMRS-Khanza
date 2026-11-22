@@ -88,7 +88,6 @@ public class DlgRHPengeluaranIPSRS extends javax.swing.JDialog {
         kdbarang.setDocument(new batasInput((byte)8).getKata(kdbarang));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING Do NOT modify this code. The content of this method is

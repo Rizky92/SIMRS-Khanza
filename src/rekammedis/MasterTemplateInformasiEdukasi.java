@@ -53,7 +53,6 @@ public class MasterTemplateInformasiEdukasi extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         Object[] row={"Kode","Template Informasi & Edukasi","Lama Edukasi","Metode"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

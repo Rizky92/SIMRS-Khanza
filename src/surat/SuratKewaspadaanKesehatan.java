@@ -37,7 +37,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-
 /**
  *
  * @author salimmulyana
@@ -104,10 +103,6 @@ public final class SuratKewaspadaanKesehatan extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
     }
-
-
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -786,7 +781,6 @@ public final class SuratKewaspadaanKesehatan extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-
     private void TNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRMKeyPressed
 
     }//GEN-LAST:event_TNoRMKeyPressed
@@ -1000,7 +994,6 @@ public final class SuratKewaspadaanKesehatan extends javax.swing.JDialog {
                 "SKK"+TanggalPeriksa.getSelectedItem().toString().substring(6,10)+TanggalPeriksa.getSelectedItem().toString().substring(3,5)+TanggalPeriksa.getSelectedItem().toString().substring(0,2),3,NoSurat);
         NoSurat.requestFocus();
     }
-
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){

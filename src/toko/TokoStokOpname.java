@@ -112,7 +112,6 @@ public final class TokoStokOpname extends javax.swing.JDialog {
     private DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");
     double total=0,totalreal=0;
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -860,7 +859,6 @@ public final class TokoStokOpname extends javax.swing.JDialog {
     public JButton getButton(){
         return BtnKeluar;
     }
-
 
     public void isCek(){
         BtnHapus.setEnabled(akses.getstok_opname_toko());

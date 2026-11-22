@@ -23,7 +23,6 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
-
 /**
  *
  * @author khanzasoft
@@ -1437,14 +1436,11 @@ public class frmUtama extends javax.swing.JFrame {
                 }
             }
 
-
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }
-
-
 
     public void isPasien(){
         Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",TPasien,KdRw.getText());

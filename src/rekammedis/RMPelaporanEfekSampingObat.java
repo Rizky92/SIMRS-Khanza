@@ -34,8 +34,6 @@ import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPegawai;
 import simrskhanza.DlgCariBangsal;
 
-
-
 /**
  *
  * @author rsad pelamonia
@@ -538,7 +536,6 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

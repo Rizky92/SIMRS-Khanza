@@ -56,7 +56,6 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-
     /** Creates new form DlgPemberianInfus
      * @param parent
      * @param modal */
@@ -1879,7 +1878,6 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
     public void tampil2() {
         runBackground(() ->tampil());
     }
-
 
     public void emptTeks() {
         UraianKonsultasi.setText("");

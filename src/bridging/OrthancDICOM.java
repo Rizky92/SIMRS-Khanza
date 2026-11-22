@@ -11,7 +11,6 @@
 
 package bridging;
 
-
 import fungsi.batasInput;
 import fungsi.validasi;
 import java.awt.BorderLayout;
@@ -109,13 +108,11 @@ public class OrthancDICOM extends javax.swing.JDialog {
                     });
                 });
 
-
                 engine.setOnStatusChanged((final WebEvent<String> event) -> {
                     SwingUtilities.invokeLater(() -> {
                         lblStatus.setText(event.getData());
                     });
                 });
-
 
                 engine.getLoadWorker().workDoneProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, final Number newValue) -> {
                     SwingUtilities.invokeLater(() -> {
@@ -204,7 +201,6 @@ public class OrthancDICOM extends javax.swing.JDialog {
             }
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

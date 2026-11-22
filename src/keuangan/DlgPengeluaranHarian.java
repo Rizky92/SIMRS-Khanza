@@ -48,7 +48,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author perpustakaan
@@ -1600,7 +1599,6 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
             Valid.SetTgl(Tanggal,tbResep.getValueAt(tbResep.getSelectedRow(),1).toString());
         }
     }
-
 
     private void isForm(){
         if(ChkInput.isSelected()==true){

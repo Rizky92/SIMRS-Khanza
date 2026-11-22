@@ -65,7 +65,6 @@ public final class sekuel {
         super();
     }
 
-
     public void menyimpan(String table,String value,String sama){
         try {
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
@@ -575,7 +574,6 @@ public final class sekuel {
         }
     }
 
-
     public void meghapus(String table,String field,String nilai_field) {
         try {
             ps=connect.prepareStatement("delete from "+table+" where "+field+"=?");
@@ -921,7 +919,6 @@ public final class sekuel {
         }
     }
 
-
     public void queryu2(String qry){
         try {
             ps=connect.prepareStatement(qry);
@@ -1243,7 +1240,6 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
-
 
     public void cariIsi(String sql,JLabel txt){
         try {

@@ -816,7 +816,6 @@ public class DapurCariPembelian extends javax.swing.JDialog {
                                 }
                             }
 
-
                             Sequel.deleteTampJurnal();
                             if(Sequel.insertTampJurnal(akunpengadaan, "PEMBELIAN", 0, rs.getDouble("total"))==false){
                                 sukses=false;

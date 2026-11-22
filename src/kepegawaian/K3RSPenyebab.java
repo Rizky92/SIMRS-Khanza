@@ -53,7 +53,6 @@ public class K3RSPenyebab extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         Object[] row={"Kode","Penyebab Kecelakaan"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

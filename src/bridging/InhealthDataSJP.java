@@ -51,7 +51,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
-
 /**
  *
  * @author perpustakaan
@@ -200,7 +199,6 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
         btnKamar.setVisible(false);
         LabelJenpel.setVisible(false);
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -2019,7 +2017,6 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
         JenisPelayananItemStateChanged(null);
         isRawat();
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getinhealth_sjp());

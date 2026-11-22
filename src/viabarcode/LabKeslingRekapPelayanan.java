@@ -1310,7 +1310,6 @@ public class LabKeslingRekapPelayanan extends javax.swing.JDialog {
         }
     }
 
-
     public void isCek(){
         TCari.requestFocus();
         BtnPrint.setEnabled(akses.getrekap_pelayanan_lab_kesehatan_lingkungan());

@@ -363,7 +363,6 @@
                                     $baris8   = mysqli_fetch_row($hasil8);
                                     $ttltmb   = isset($baris8[0])?$baris8[0]:0;
 
-
                                     $ttln=getOne("select count(rekap_presensi.id) from rekap_presensi where rekap_presensi.id='$baris[0]' and rekap_presensi.jam_datang like '%$tahun-$bulan%'")+$ttltmb;
                                     $tmbh=$ttltmb;
 
@@ -458,7 +457,6 @@
 
                                     $_sql22  ="SELECT ($ttln/sum(indekref.n))*100 from indekref where indekref.kdindex='".$baris["indexins"]."'";
 
-
                                     $hasil22 =bukaquery($_sql22);
                                     $baris22 = mysqli_fetch_array($hasil22);
                         $indexjaga=round((isset($baris22[0])?$baris22[0]:0),2);
@@ -533,7 +531,6 @@
                         (isset($baris29[0])?$baris29[0]:0)+
                         (isset($baris31[0])?$baris31[0]:0);
                                     $ttljasalain=$ttljasalain+$jl;
-
 
                                 echo "<tr class='isi' valign='top' >
                                          <td>".$baris["nik"]."&nbsp;</td>
@@ -626,7 +623,6 @@
                                                         $tnjtnj=$tnjtnj+$nilaitunjangan;
                                                         echo "<tr class='isi3'><td width='150px'>$baris16[0]</td><td>: ".formatDuit($nilaitunjangan)."</td></tr>";
                                                     }
-
 
                                                     $_sql50="select master_tunjangan_bulanan.nama,
                                                      master_tunjangan_bulanan.tnj

@@ -53,16 +53,7 @@ import keuangan.Jurnal;
  * @author dosen
  */
 public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabMode,tabMode2;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -83,7 +74,6 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
     private boolean sukses=false, VALIDASIULANGHASILPERMINTAANLABPA = koneksiDB.VALIDASIULANGHASILPERMINTAAN("labpa");
     private double ttljmdokter=0,ttljmpetugas=0,ttlkso=0,ttlpendapatan=0,ttlbhp=0,ttljasasarana=0,ttljmperujuk=0,ttlmenejemen=0;
     private String norawatibu="";
-
 
     /** Creates new form DlgPerawatan
      * @param parent
@@ -2125,5 +2115,13 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

@@ -38,7 +38,6 @@ import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
 import simrskhanza.DlgCariBangsal;
 
-
 public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
@@ -1274,7 +1273,6 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         }
 }//GEN-LAST:event_BtnAllKeyPressed
 
-
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
@@ -1779,7 +1777,6 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         autonomor();
     }
 
-
     private void getData() {
          if(tbObat.getSelectedRow()!= -1){
             NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -1861,7 +1858,6 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
             ChkInput.setVisible(true);
         }
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsurat_pengajuan_cuti_pasien());

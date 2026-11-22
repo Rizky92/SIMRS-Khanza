@@ -57,7 +57,6 @@ public class SuratKontrol extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-
     /** Creates new form DlgPemberianInfus
      * @param parent
      * @param modal */
@@ -123,7 +122,6 @@ public class SuratKontrol extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-
 
         TNoRM.setDocument(new batasInput((byte)15).getKata(TNoRM));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
@@ -1828,7 +1826,6 @@ public class SuratKontrol extends javax.swing.JDialog {
         }
         LCount.setText("" + tabMode.getRowCount());
     }
-
 
     public void emptTeks() {
         KdDokter.setText("");

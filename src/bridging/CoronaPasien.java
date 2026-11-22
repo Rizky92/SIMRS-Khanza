@@ -63,7 +63,6 @@ public class CoronaPasien extends javax.swing.JDialog {
     private JsonNode root;
     private JsonNode response;
 
-
     /** Creates new form DlgPemberianInfus
      * @param parent
      * @param modal */

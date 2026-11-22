@@ -57,7 +57,6 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
                   instrumen, dokter_anak, perawaat_resusitas, dokter_anestesi, asisten_anestesi,asisten_anestesi2, bidan,bidan2,bidan3,
                   perawat_luar, sewa_ok, alat,akomodasi,bagian_rs,omloop,omloop2,omloop3,omloop4,omloop5,sarpras,ttltindakan,jmlobat,hargasatuan,ttlobat;
 
-
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal*/
@@ -3978,8 +3977,6 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         }
     }
 
-
-
     private void getData(){
        int row=tbObat.getSelectedRow();
         if(row!= -1){
@@ -4073,8 +4070,6 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         }
     }
 
-
-
     public void isCek(){
        // Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(nota_jual,6),signed)),0) from penjualan ","PJ",6,NoNota);
         TCari.requestFocus();
@@ -4138,7 +4133,6 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         kdoperator1.setText(KodeOperator);
         nmoperator1.setText(NamaOperator);
     }
-
 
     private void isForm(){
         if(ChkInput.isSelected()==true){

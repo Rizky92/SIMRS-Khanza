@@ -1214,7 +1214,6 @@ public class DlgSirkulasiBarang6 extends javax.swing.JDialog {
                                     }
                                 }
 
-
                                 harga=Sequel.cariIsiAngka("select data_batch."+hppfarmasi+" from data_batch where data_batch.kode_brng='"+rs.getString("kode_brng")+"' and data_batch.no_batch='"+rs2.getString("no_batch")+"' and data_batch.no_faktur='"+rs2.getString("no_faktur")+"' ");
                                 if(harga<=0){
                                     harga=rs.getDouble("harga");
@@ -1698,7 +1697,6 @@ public class DlgSirkulasiBarang6 extends javax.swing.JDialog {
                                         totalstokakhir=0;
                                     }
                                 }
-
 
                                 if((jumlahbeli>0)||(jumlahpesan>0)||(jumlahjual>0)||(jumlahpasin>0)||(jumlahpiutang>0)||(jumlahhibah>0)||(jumlahmutasimasuk>0)||(jumlahmutasikeluar>0)||
                                     (jumlahutd>0)||(jumlahkeluar>0)||(jumlahretbeli>0)||(jumlahretjual>0)||(jumlahretpiut>0)||(stokawal>0)||(stokakhir>0)||(jumlahrespulang>0)){

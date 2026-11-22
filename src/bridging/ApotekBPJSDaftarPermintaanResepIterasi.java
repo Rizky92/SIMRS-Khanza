@@ -159,8 +159,6 @@ public final class ApotekBPJSDaftarPermintaanResepIterasi extends javax.swing.JD
         LoadHTMLPhoto.setDocument(kit.createDefaultDocument());
     }
 
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

@@ -17,7 +17,6 @@
               <div align="center"><input name=BtnCari type=submit class="button" value="Cari"/></div>
             <br/>
 
-
     <div style="width: 100%; height: 350px; overflow: auto; ">
 
     <?php
@@ -73,7 +72,6 @@
                 temporary_presensi.status like '%".$keyword."%' or
                 temporary_presensi.keterlambatan like '%".$keyword."%'
                 order by $urut ";
-
 
         $hasil=bukaquery($_sql);
         $jumlah=mysqli_num_rows($hasil);

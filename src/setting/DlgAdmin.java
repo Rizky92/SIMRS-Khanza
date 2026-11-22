@@ -10,7 +10,6 @@
   dak pernah rela karya kami dibajak tanpa ijin.
  */
 
-
 package setting;
 
 import fungsi.WarnaTable;

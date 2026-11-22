@@ -11,7 +11,6 @@ function title(){
         echo "$judul";
 }
 
-
 function cekSessiKunjung() {
         if (isset($_SESSION['ses_kunjung']))
                 return true;
@@ -58,7 +57,6 @@ function isGuest() {
         if (cekSessiKunjung()|| cekSessiAdmin()) return false;
         else return true;
 }
-
 
 function samping()
 {
@@ -129,7 +127,6 @@ function tampilMenu() {
         echo "</ul>";
 }
 
-
 function ListArtikel()
 {
         $x= bukaquery("SELECT * FROM artikel where page='artikel' ORDER BY id DESC LIMIT 4");
@@ -166,7 +163,6 @@ function kategori() {
                </p>";
 }
 
-
 function formProtek() {
         if (!cekUser()) {
                 $form = array ('HomeAdmin','InputDataAdmin','InputPasien','ListPasien','ListPjawab','InputPjawab',
@@ -180,7 +176,6 @@ function formProtek() {
                                 }
                         }
                 }
-
 
 }
 
@@ -212,13 +207,10 @@ function actionPages() {
                 case 'ListFragmen'              : include_once('pages/fragmen/listfragmen.php'); break;
                 case 'DetailFragmen'            : include_once('pages/fragmen/detailfragmen.php'); break;
 
-
                 default			          : include_once('pages/home.php');
 
         }
 }
-
-
 
 function menuLogin(){
 

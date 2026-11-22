@@ -2052,7 +2052,6 @@ public class SatuSehatBridgingTTE extends JDialog {
         }
     }
 
-
     /**
      * Proses sinyal webhook yang masuk (tabel satu_sehat_task_webhook diisi penerima PHP).
      *

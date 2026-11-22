@@ -1295,7 +1295,6 @@ import ziscsr.ZISPenghasilanPenerimaDankes;
 import ziscsr.ZISTernakPenerimaDankes;
 import ziscsr.ZISUkuranRumahPenerimaDankes;
 
-
 /**
  *
  * @author perpustakaan
@@ -1387,7 +1386,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         return myInstance;
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -20619,7 +20617,6 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-
     private void btnPenilaianAwalMedisHemodialisaActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
@@ -31005,7 +31002,6 @@ public class frmUtama extends javax.swing.JFrame {
            jmlmenu++;
         }
 
-
         if(akses.getbarcoderalan()==true){
             Panelmenu.add(btnBarcodeRalan);
             jmlmenu++;
@@ -33396,7 +33392,6 @@ public class frmUtama extends javax.swing.JFrame {
             Panelmenu.add(btnLabaRugi);
             jmlmenu++;
         }
-
 
         if(akses.getbpjs_cek_kartu()==true){
             Panelmenu.add(btnCekBPJSKartu);
@@ -37184,7 +37179,6 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
         }
-
 
         if(akses.getbarcoderalan()==true){
             if(btnBarcodeRalan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
@@ -46557,7 +46551,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenerimaanBarangToko.setName("btnPenerimaanBarangToko");
         btnPenerimaanBarangToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenerimaanBarangToko.addActionListener(this::btnPenerimaanBarangTokoActionPerformed);
-
 
         btnPengadaanBarangToko = new widget.ButtonBig();
         btnPengadaanBarangToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Notebook_3387299.png")));

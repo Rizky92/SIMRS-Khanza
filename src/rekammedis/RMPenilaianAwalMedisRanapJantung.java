@@ -35,7 +35,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
 
-
 /**
  *
  * @author perpustakaan
@@ -191,7 +190,6 @@ public final class RMPenilaianAwalMedisRanapJantung extends javax.swing.JDialog 
         Edukasi.setDocument(new batasInput((int)500).getKata(Edukasi));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
 
-
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -216,7 +214,6 @@ public final class RMPenilaianAwalMedisRanapJantung extends javax.swing.JDialog 
             TANGGALMUNDUR="yes";
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

@@ -126,7 +126,6 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-
     /** Creates new form DlgKamar
      * @param parent
      * @param modal */
@@ -475,8 +474,6 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
             LabelJabatanTNI.setVisible(false);
         }
     }
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.

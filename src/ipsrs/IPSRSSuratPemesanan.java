@@ -1,7 +1,5 @@
 package ipsrs;
 
-
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable2;
@@ -1260,7 +1258,6 @@ public class IPSRSSuratPemesanan extends javax.swing.JDialog {
                                 Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pemesanan");
                 }
             }
-
 
             Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());

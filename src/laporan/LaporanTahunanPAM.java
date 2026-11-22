@@ -36,7 +36,6 @@ public class LaporanTahunanPAM extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -1364,6 +1363,5 @@ public class LaporanTahunanPAM extends javax.swing.JDialog {
     public void isCek(){
         BtnPrint.setEnabled(akses.getlaporan_tahunan_penolakan_anjuran_medis());
     }
-
 
 }

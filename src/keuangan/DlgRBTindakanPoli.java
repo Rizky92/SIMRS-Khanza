@@ -178,7 +178,6 @@ public class DlgRBTindakanPoli extends javax.swing.JDialog {
         }
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING Do NOT modify this code. The content of this method is
@@ -785,7 +784,6 @@ public class DlgRBTindakanPoli extends javax.swing.JDialog {
                     if(rstambahan.next()){
                         tambahan=rstambahan.getDouble(1);
                     }
-
 
                     potongan=0;
                     pspotongan.setString(1,rsdokter.getString(1));

@@ -511,7 +511,6 @@
                                                             indextotal.kdindex=indexins.dep_id and
                                                             indextotal.kdindex='".$baris["indexins"]."'";
 
-
                                                     $hasil23=bukaquery($_sql23);
                                                     $baris23 = mysqli_fetch_array($hasil23);
                                                     $ttlinsentif=$baris23[0];

@@ -45,7 +45,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import rekammedis.RMRiwayatPerawatan;
 
-
 /**
  *
  * @author perpustakaan
@@ -687,7 +686,6 @@ public final class SisruteRujukanKeluar extends javax.swing.JDialog {
             System.out.println("E : "+e);
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

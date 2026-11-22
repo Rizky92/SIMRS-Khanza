@@ -105,7 +105,6 @@ public class DlgAkunBayarHutang extends javax.swing.JDialog {
         kdrek.setDocument(new batasInput((byte)15).getKata(kdrek));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -813,7 +812,6 @@ public class DlgAkunBayarHutang extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-
 
     public void emptTeks() {
        nmrek.setText("");

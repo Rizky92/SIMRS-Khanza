@@ -90,7 +90,6 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
      * @param modal */

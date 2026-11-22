@@ -50,7 +50,6 @@ public class KeuanganRekapJmDokter extends javax.swing.JDialog {
     private ResultSet rs,rsralandokter,rsralandokterdrpr,rsranapdokter,rsranapdokterdrpr,rsbiayaoperator1,rsbiayaoperator2,rsbiayaoperator3,rsbiayadokter_anak,
             rsbiayadokter_anestesi,rsperiksa_lab,rsdetaillab,rsperiksa_radiologi,rsbiaya_dokter_pjanak,rsbiaya_dokter_umum;
 
-
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */

@@ -113,7 +113,6 @@ public class DlgLabaRugi extends javax.swing.JDialog {
         Table3.setDefaultRenderer(Object.class, new WarnaTable());
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -574,7 +573,6 @@ public class DlgLabaRugi extends javax.swing.JDialog {
     private widget.ScrollPane scrollPane2;
     private widget.ScrollPane scrollPane3;
     // End of variables declaration//GEN-END:variables
-
 
     private void prosesCari(){
         String[] data = {"","",""};
@@ -2047,7 +2045,6 @@ public class DlgLabaRugi extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
     }
-
 
     public void isCek(){
         BtnPrint.setEnabled(akses.getkeuangan());

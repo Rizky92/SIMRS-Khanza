@@ -73,7 +73,6 @@ public final class TokoMember extends javax.swing.JDialog {
         };
         tbPetugas.setModel(tabMode);
 
-
         //tbPetugas.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPetugas.getBackground()));
         tbPetugas.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbPetugas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -111,7 +110,6 @@ public final class TokoMember extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -983,7 +981,6 @@ public final class TokoMember extends javax.swing.JDialog {
             Valid.SetTgl(TglLahir,tbPetugas.getValueAt(row,4).toString());
         }
     }
-
 
     public JTextField getTextField(){
         return NoMember;

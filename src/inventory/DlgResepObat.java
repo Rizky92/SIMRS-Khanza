@@ -52,7 +52,6 @@ import kepegawaian.DlgCariDokter;
 import smc.kirimwa.DlgKirimWA;
 import widget.TanggalCellEditorSMC;
 
-
 /**
  *
  * @author perpustakaan
@@ -2175,11 +2174,10 @@ public final class DlgResepObat extends javax.swing.JDialog {
             }else{
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 InventoryTelaahResep aplikasi=new InventoryTelaahResep(null,false);
-                aplikasi.emptTeks();
                 aplikasi.isCek();
-                aplikasi.setNoRm(NoResep.getText(),TNoRw.getText(),DTPCari2.getDate());
                 aplikasi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 aplikasi.setLocationRelativeTo(internalFrame1);
+                aplikasi.setNoRm(NoResep.getText(),TNoRw.getText(),DTPCari2.getDate());
                 aplikasi.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
             }

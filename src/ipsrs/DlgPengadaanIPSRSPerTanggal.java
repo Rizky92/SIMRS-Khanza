@@ -75,10 +75,8 @@ public class DlgPengadaanIPSRSPerTanggal extends javax.swing.JDialog {
         tbJadwal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         Valid.LoadTahun(ThnCari);
 
-
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -641,7 +639,6 @@ public class DlgPengadaanIPSRSPerTanggal extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
         this.setCursor(Cursor.getDefaultCursor());
     }
-
 
     String konversi(int year, int month, int day){
         dateString = String.format("%d-%d-%d", year, month, day);

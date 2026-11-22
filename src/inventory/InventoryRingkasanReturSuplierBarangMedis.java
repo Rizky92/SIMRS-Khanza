@@ -97,7 +97,6 @@ public class InventoryRingkasanReturSuplierBarangMedis extends javax.swing.JDial
         Kdptg.setDocument(new batasInput((byte)25).getKata(Kdptg));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -677,7 +676,6 @@ public class InventoryRingkasanReturSuplierBarangMedis extends javax.swing.JDial
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));

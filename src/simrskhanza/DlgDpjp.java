@@ -156,7 +156,6 @@ public class DlgDpjp extends javax.swing.JDialog {
 
     //private DlgCariObatDokter dlgobtpny=new DlgCariObatDokter(null,false);
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -875,7 +874,6 @@ public class DlgDpjp extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
 
-
         }
     }//GEN-LAST:event_tbPasienMouseClicked
 
@@ -1121,7 +1119,6 @@ public class DlgDpjp extends javax.swing.JDialog {
     private void isPsien() {
         Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",TPasien,TNoRM.getText());
     }
-
 
     private void getData() {
         if(tbPasien.getSelectedRow()!= -1){

@@ -1432,7 +1432,6 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
         }
     }
 
-
     public void emptTeks() {
         KdDiet.setText("");
         NmDiet.setText("");

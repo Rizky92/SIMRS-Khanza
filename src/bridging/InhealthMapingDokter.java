@@ -50,7 +50,6 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
      * @param modal */
@@ -674,7 +673,6 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
             KdDokterInhealth.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
         }
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getinhealth_mapping_dokter());

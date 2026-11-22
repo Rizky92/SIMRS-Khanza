@@ -2,7 +2,6 @@
  * Kontribusi RSUD Prembun
  */
 
-
 package rekammedis;
 
 import fungsi.WarnaTable;
@@ -44,22 +43,12 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author perpustakaan
  */
 public final class RMPenilaianLanjutanSkriningFungsional extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -184,7 +173,6 @@ public final class RMPenilaianLanjutanSkriningFungsional extends javax.swing.JDi
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1805,7 +1793,6 @@ public final class RMPenilaianLanjutanSkriningFungsional extends javax.swing.JDi
         SkalaResiko1.requestFocus();
     }
 
-
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
             TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -2088,5 +2075,13 @@ public final class RMPenilaianLanjutanSkriningFungsional extends javax.swing.JDi
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

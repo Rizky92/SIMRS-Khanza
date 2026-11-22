@@ -104,7 +104,6 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
         }
         tbKamIn.setDefaultRenderer(Object.class, new WarnaTable());
 
-
         TNoA.setDocument(new batasInput((byte)10).getFilter(TNoA));
         KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
         TNoI.setDocument(new batasInput((byte)20).getKata(TNoI));
@@ -114,8 +113,6 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
         WindowInput.setSize(735,245);
         WindowInput.setLocationRelativeTo(null);
     }
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1598,7 +1595,6 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
             TOut.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),12).toString());
         }
     }
-
 
     public void isCek(){
         if(akses.getjml2()>=1){

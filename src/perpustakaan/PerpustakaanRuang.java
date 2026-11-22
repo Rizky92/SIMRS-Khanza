@@ -53,7 +53,6 @@ public class PerpustakaanRuang extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         Object[] row={"Kode Ruang","Nama Ruang"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

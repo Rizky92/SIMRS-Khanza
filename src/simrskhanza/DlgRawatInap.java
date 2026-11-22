@@ -33,6 +33,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
@@ -53,7 +54,6 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -196,22 +196,15 @@ import rekammedis.RMSkriningNutrisiLansia;
 import rekammedis.RMTimeOutSebelumInsisi;
 import rekammedis.RMTransferPasienAntarRuang;
 import surat.SuratKontrol;
+import javax.swing.Timer;
+import javax.swing.WindowConstants;
 
 /**
  *
  * @author perpustakaan
  */
 public final class DlgRawatInap extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabModeDr,tabModePr,tabModeDrPr,
             tabModePemeriksaan,tabModeObstetri,tabModeGinekologi;
     private sekuel Sequel=new sekuel();
@@ -226,6 +219,11 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     private boolean sukses=false;
     private double ttljmdokter=0,ttljmperawat=0,ttlkso=0,ttlpendapatan=0,ttljasasarana=0,ttlbhp=0,ttlmenejemen=0;
     private String kode_poli="",kamar="",jenisbayar="",TANGGALMUNDUR="yes";
+    private RMRiwayatPerawatan riwayat;
+    private DlgPeresepanDokter resepobat;
+    private DlgPermintaanLaboratorium permintaanlab;
+    private DlgPermintaanRadiologi permintaanradiologi;
+    private RMDataResumePasienRanap resume;
     private widget.TextBox TanggalRegistrasi;
     /** Creates new form DlgRawatInap
      * @param parent
@@ -775,9 +773,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             TANGGALMUNDUR="yes";
         }
     }
-
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -6663,18 +6658,35 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                 JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi ..!!");
             }else{
-                DlgPeresepanDokter resep=new DlgPeresepanDokter(null,false);
-                resep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-                resep.setLocationRelativeTo(internalFrame1);
-                resep.setNoRm(TNoRw.getText(),DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),
-                        cmbDtk.getSelectedItem().toString(),KdDok.getText(),TDokter.getText(),"ranap",
+                if (resepobat == null || !resepobat.isDisplayable()) {
+                    resepobat=new DlgPeresepanDokter(null,false);
+                    resepobat.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    resepobat.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                            resepobat=null;
+                        }
+                    });
+
+                    resepobat.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                    resepobat.setLocationRelativeTo(internalFrame1);
+                }
+                if (resepobat == null) return;
+                if (!resepobat.isVisible()) {
+                    resepobat.setNoRm(TNoRw.getText(),DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),cmbDtk.getSelectedItem().toString(),KdDok.getText(),TDokter.getText(),"ranap",
                         Sequel.cariIsiSmc("select kamar.kd_bangsal from kamar join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal where concat(kamar.kd_kamar, ' ', bangsal.nm_bangsal) = ?", kamar));
-                resep.isCek();
-                resep.tampilobat();
-                resep.setVisible(true);
+                    resepobat.isCek();
+                    resepobat.tampilobat();
+                }
+
+                if (resepobat.isVisible()) {
+                    resepobat.toFront();
+                    return;
+                }
+                resepobat.setVisible(true);
             }
         }
-    }//GEN-LAST:event_BtnResepObatActionPerformed
+    }
 
     private void BtnCopyResepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCopyResepActionPerformed
         if(TNoRw.getText().trim().equals("")){
@@ -6686,7 +6698,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             daftar.isCek();
             daftar.setRM(TNoRw.getText(),TNoRM.getText(),KdDok.getText(),jenisbayar,"ranap",Sequel.cariIsiSmc("select kamar.kd_bangsal from kamar join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal where concat(kamar.kd_kamar, ' ', bangsal.nm_bangsal) = ?", kamar));
             daftar.tampil2();
-            daftar.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            daftar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);;
             daftar.setLocationRelativeTo(internalFrame1);
             daftar.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -6704,7 +6716,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 if(Sequel.cariInteger("select count(stok_obat_pasien.no_rawat) from stok_obat_pasien where stok_obat_pasien.no_rawat=? ",TNoRw.getText())>0){
                     DlgCariObat3 dlgobt=new DlgCariObat3(null,false);
                     dlgobt.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText(),DTPTgl.getDate());
-                    dlgobt.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+                    dlgobt.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);;
                     dlgobt.setLocationRelativeTo(internalFrame1);
                     dlgobt.setVisible(true);
                 }else{
@@ -6712,7 +6724,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     dlgobt.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText(),DTPTgl.getDate());
                     dlgobt.isCek();
                     dlgobt.tampil();
-                    dlgobt.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+                    dlgobt.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);;
                     dlgobt.setLocationRelativeTo(internalFrame1);
                     dlgobt.setVisible(true);
                 }
@@ -6727,7 +6739,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             DlgPemberianObat dlgrwinap=new DlgPemberianObat(null,false);
-            dlgrwinap.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            dlgrwinap.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);;
             dlgrwinap.setLocationRelativeTo(internalFrame1);
             dlgrwinap.isCek();
             dlgrwinap.setNoRm2(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate(),"ranap");
@@ -6755,7 +6767,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 System.out.println("Notifikasi : "+ex);
             }
 
-            berkas.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            berkas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);;
             berkas.setLocationRelativeTo(internalFrame1);
             berkas.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -6768,13 +6780,31 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            DlgPermintaanLaboratorium dlgro=new DlgPermintaanLaboratorium(null,false);
-            dlgro.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-            dlgro.setLocationRelativeTo(internalFrame1);
-            dlgro.emptTeks();
-            dlgro.isCek();
-            dlgro.setNoRm(TNoRw.getText(),"Ranap");
-            dlgro.setVisible(true);
+            if (permintaanlab == null || !permintaanlab.isDisplayable()) {
+                permintaanlab=new DlgPermintaanLaboratorium(null,false);
+                permintaanlab.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                permintaanlab.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        permintaanlab=null;
+                    }
+                });
+
+                permintaanlab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                permintaanlab.setLocationRelativeTo(internalFrame1);
+            }
+            if (permintaanlab == null) return;
+            if (!permintaanlab.isVisible()) {
+                permintaanlab.emptTeks();
+                permintaanlab.isCek();
+                permintaanlab.setNoRm(TNoRw.getText(),"Ranap");
+            }
+
+            if (permintaanlab.isVisible()) {
+                permintaanlab.toFront();
+                return;
+            }
+            permintaanlab.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPermintaanLabActionPerformed
@@ -6785,13 +6815,31 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            DlgPermintaanRadiologi dlgro=new DlgPermintaanRadiologi(null,false);
-            dlgro.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-            dlgro.setLocationRelativeTo(internalFrame1);
-            dlgro.emptTeks();
-            dlgro.isCek();
-            dlgro.setNoRm(TNoRw.getText(),"Ranap");
-            dlgro.setVisible(true);
+            if (permintaanradiologi == null || !permintaanradiologi.isDisplayable()) {
+                permintaanradiologi=new DlgPermintaanRadiologi(null,false);
+                permintaanradiologi.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                permintaanradiologi.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        permintaanradiologi=null;
+                    }
+                });
+
+                permintaanradiologi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                permintaanradiologi.setLocationRelativeTo(internalFrame1);
+            }
+            if (permintaanradiologi == null) return;
+            if (!permintaanradiologi.isVisible()) {
+                permintaanradiologi.emptTeks();
+                permintaanradiologi.isCek();
+                permintaanradiologi.setNoRm(TNoRw.getText(),"Ranap");
+            }
+
+            if (permintaanradiologi.isVisible()) {
+                permintaanradiologi.toFront();
+                return;
+            }
+            permintaanradiologi.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPermintaanRadActionPerformed
@@ -6803,7 +6851,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }else{
             SuratKontrol form=new SuratKontrol(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);;
             form.setLocationRelativeTo(internalFrame1);
             form.emptTeks();
             kode_poli=Sequel.cariIsi("select reg_periksa.kd_poli from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText());
@@ -6822,7 +6870,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }else{
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 DlgRujuk dlgrjk=new DlgRujuk(null,false);
-                dlgrjk.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+                dlgrjk.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);;
                 dlgrjk.setLocationRelativeTo(internalFrame1);
                 dlgrjk.emptTeks();
                 dlgrjk.isCek();
@@ -6854,7 +6902,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             DlgDiagnosaPenyakit resep=new DlgDiagnosaPenyakit(null,false);
-            resep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            resep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);;
             resep.setLocationRelativeTo(internalFrame1);
             resep.isCek();
             resep.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate(),"Ranap");
@@ -6868,11 +6916,29 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMRiwayatPerawatan resume=new RMRiwayatPerawatan(null,true);
-            resume.setNoRm(TNoRw.getText(), TNoRM.getText(),TPasien.getText());
-            resume.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-            resume.setLocationRelativeTo(internalFrame1);
-            resume.setVisible(true);
+            if (riwayat == null || !riwayat.isDisplayable()) {
+                riwayat=new RMRiwayatPerawatan(null,false);
+                riwayat.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                riwayat.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        riwayat=null;
+                    }
+                });
+
+                riwayat.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                riwayat.setLocationRelativeTo(internalFrame1);
+            }
+            if (riwayat == null) return;
+            if (!riwayat.isVisible()) {
+                riwayat.setNoRm(TNoRw.getText(), TNoRM.getText(),TPasien.getText());
+            }
+
+            if (riwayat.isVisible()) {
+                riwayat.toFront();
+                return;
+            }
+            riwayat.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnRiwayatActionPerformed
@@ -6891,11 +6957,29 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataResumePasienRanap resume=new RMDataResumePasienRanap(null,false);
-            resume.isCek();
-            resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-            resume.setLocationRelativeTo(internalFrame1);
-            resume.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            if (resume == null || !resume.isDisplayable()) {
+                resume=new RMDataResumePasienRanap(null,false);
+                resume.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                resume.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        resume=null;
+                    }
+                });
+
+                resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                resume.setLocationRelativeTo(internalFrame1);
+            }
+            if (resume == null) return;
+            if (!resume.isVisible()) {
+                resume.isCek();
+                resume.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            }
+
+            if (resume.isVisible()) {
+                resume.toFront();
+                return;
+            }
             resume.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -6944,7 +7028,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi ..!!");
             }else{
                 DlgPermintaanStokPasien resep=new DlgPermintaanStokPasien(null,false);
-                resep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+                resep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 resep.setLocationRelativeTo(internalFrame1);
                 resep.setNoRm(TNoRw.getText(),DTPTgl.getDate());
                 resep.isCek();
@@ -7104,7 +7188,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi ..!!");
             }else{
                 DlgPermintaanResepPulang resep=new DlgPermintaanResepPulang(null,false);
-                resep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+                resep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);;
                 resep.setLocationRelativeTo(internalFrame1);
                 resep.setVisible(true);
                 resep.setNoRm(TNoRw.getText(),DTPTgl.getDate());
@@ -12891,5 +12975,13 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

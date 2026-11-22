@@ -63,7 +63,6 @@
         this.hovered = false;
         this.padding = 0;
 
-
         this.init();
     }
     function marqueeObj(newElement){
@@ -179,19 +178,14 @@
 
             var totalDistance =  containerWidth - endPoint;
 
-
-
-
             for (var i = 0; i < spawnAmount; i++) {
 
             	var newElement = false;
 
                 if(config.hover == true){
 
-
                   newElement = $('<div class="marquee-' + (i+1) + '">' + marqueeContent + '</div>')
                   .mouseenter(function() {
-
 
                     if ((plugin.documentHasFocus == true) && (plugin.marqueeHovered == false)){
                       plugin.marqueeHovered = true;
@@ -201,12 +195,10 @@
                         plugin.marqueeSpawned[key].hovered = true;
                       }
 
-
                     }
 
                   })
                   .mouseleave(function() {
-
 
                       if ((plugin.documentHasFocus == true) && (plugin.marqueeHovered == true)){
 

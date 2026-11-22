@@ -14,7 +14,6 @@
         $norawat  = $data['no_rawat'];
     }
 
-
     $no_rkm_medis = "";
     $nm_pasien    = "";
     $jk           = "";

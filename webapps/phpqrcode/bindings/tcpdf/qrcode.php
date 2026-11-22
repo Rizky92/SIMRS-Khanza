@@ -640,10 +640,8 @@ if (!class_exists('QRcode', false)) {
 			array(0x1689, 0x13be, 0x1ce7, 0x19d0, 0x0762, 0x0255, 0x0d0c, 0x083b)  //
 		);
 
-
 		// -------------------------------------------------
 		// -------------------------------------------------
-
 
 		/**
 		 * This is the class constructor.
@@ -2805,7 +2803,6 @@ if (!class_exists('QRcode', false)) {
 			}
 			$rs['iprim'] = (int)($iprim / $prim);
 			$rs['genpoly'][0] = 1;
-
 
 			for ($i = 0,$root=$fcr*$prim; $i < $nroots; $i++, $root += $prim) {
 				$rs['genpoly'][$i+1] = 1;

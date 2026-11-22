@@ -106,8 +106,6 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
         Sequel.cariIsiAngka("select modal_awal from set_modal_payment",ModalAwal);
     }
 
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

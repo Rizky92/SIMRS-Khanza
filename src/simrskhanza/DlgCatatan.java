@@ -41,7 +41,6 @@ public class DlgCatatan extends javax.swing.JDialog {
 
     //private DlgCariObatPenyakit dlgobtpny=new DlgCariObatPenyakit(null,false);
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -294,7 +293,6 @@ public class DlgCatatan extends javax.swing.JDialog {
     private widget.panelisi panelGlass8;
     // End of variables declaration//GEN-END:variables
 
-
     private void isPsien() {
         Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",TPasien,TNoRM.getText());
     }
@@ -304,7 +302,6 @@ public class DlgCatatan extends javax.swing.JDialog {
         isPsien();
         Sequel.cariIsi("select catatan_pasien.catatan from catatan_pasien where catatan_pasien.no_rkm_medis=?",TCatatan,TNoRM.getText());
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(true);

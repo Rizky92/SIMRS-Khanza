@@ -1122,7 +1122,6 @@ public class DlgSirkulasiBarang2 extends javax.swing.JDialog {
                         }
                     }
 
-
                     //piutang
                     ps2=koneksi.prepareStatement("select sum(detailpiutang.jumlah) "+
                         " from piutang inner join detailpiutang "+
@@ -1641,7 +1640,6 @@ public class DlgSirkulasiBarang2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-
 
                     //returjual
                     ps2=koneksi.prepareStatement("select sum(detreturjual.jml_retur) "+

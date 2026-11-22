@@ -178,7 +178,6 @@ public class DlgRBTindakanDokter extends javax.swing.JDialog {
         }
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING Do NOT modify this code. The content of this method is
@@ -835,7 +834,6 @@ public class DlgRBTindakanDokter extends javax.swing.JDialog {
            ttltambahan=0;
            ttlradiologi=0;
 
-
                psdokter.setString(1,"%"+kddokter.getText()+"%");
                psdokter.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                psdokter.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -1079,7 +1077,6 @@ public class DlgRBTindakanDokter extends javax.swing.JDialog {
            ttlregistrasi=0;
            ttlradiologi=0;
            ttltambahan=0;
-
 
                psdokter.setString(1,"%"+kddokter.getText()+"%");
                psdokter.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));

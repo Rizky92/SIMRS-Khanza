@@ -222,7 +222,6 @@ public class UTDPenyerahanDarah extends javax.swing.JDialog {
         }
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -2096,7 +2095,6 @@ public class UTDPenyerahanDarah extends javax.swing.JDialog {
             isKembali();
         }
     }
-
 
     private void isKembali(){
         if(!Bayar.getText().trim().equals("")) {

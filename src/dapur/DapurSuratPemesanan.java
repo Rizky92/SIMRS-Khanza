@@ -1220,7 +1220,6 @@ public class DapurSuratPemesanan extends javax.swing.JDialog {
                 }
             }
 
-
             Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());

@@ -41,7 +41,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author perpustakaan
@@ -539,7 +538,6 @@ public final class RMPenilaianAwalKeperawatanBayiAnak extends javax.swing.JDialo
         ChkAccor.setSelected(false);
         isMenu();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -5359,7 +5357,6 @@ public final class RMPenilaianAwalKeperawatanBayiAnak extends javax.swing.JDialo
         DTPCari2.setDate(tgl2);
         isRawat();
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_awal_keperawatan_anak());

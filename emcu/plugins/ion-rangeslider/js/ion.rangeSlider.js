@@ -112,8 +112,6 @@
         };
     }
 
-
-
     // =================================================================================================================
     // Template
 
@@ -139,8 +137,6 @@
 
     var disable_html =
         '<span class="irs-disable-mask"></span>';
-
-
 
     // =================================================================================================================
     // Core
@@ -256,8 +252,6 @@
             p_single_left: 0
         };
 
-
-
         /**
          * get and validate config
          */
@@ -325,8 +319,6 @@
             onUpdate: null
         };
 
-
-
         // config from data-attributes extends js config
         config_from_data = {
             type: $inp.data("type"),
@@ -389,8 +381,6 @@
             }
         }
 
-
-
         // input value extends default config
         if (val) {
             val = val.split(config_from_data.input_values_separator || options.input_values_separator || ";");
@@ -411,22 +401,15 @@
             }
         }
 
-
-
         // js config extends default config
         $.extend(config, options);
-
 
         // data config extends config
         $.extend(config, config_from_data);
         this.options = config;
 
-
-
         // validate config, to be sure that all data types are correct
         this.validate();
-
-
 
         // default result object, returned to callbacks
         this.result = {
@@ -444,8 +427,6 @@
             to_percent: 0,
             to_value: null
         };
-
-
 
         this.init();
     };
@@ -923,8 +904,6 @@
             }
         },
 
-
-
         // =============================================================================================================
         // Calculations
 
@@ -1120,7 +1099,6 @@
             this.calcLabels();
         },
 
-
         /**
          * calculates pointer X in percent
          */
@@ -1240,8 +1218,6 @@
 
             }
         },
-
-
 
         // =============================================================================================================
         // Drawings
@@ -1567,8 +1543,6 @@
             }
         },
 
-
-
         // =============================================================================================================
         // Callbacks
 
@@ -1592,8 +1566,6 @@
                 this.options.onUpdate(this.result);
             }
         },
-
-
 
         // =============================================================================================================
         // Service methods
@@ -1651,7 +1623,6 @@
             if (percent === 100) {
                 return this.options.max;
             }
-
 
             if (min_decimals) {
                 min_length = min_decimals.length;
@@ -1873,7 +1844,6 @@
                 o.grid_num = o.max;
                 o.grid_snap = true;
 
-
                 for (i = 0; i < vl; i++) {
                     value = +v[i];
 
@@ -2033,7 +2003,6 @@
             this.updateTo();
         },
 
-
         // =============================================================================================================
         // Grid
 
@@ -2057,8 +2026,6 @@
 
                 result,
                 html = '';
-
-
 
             this.calcGridMargin();
 
@@ -2121,8 +2088,6 @@
                 html += '<span class="irs-grid-text js-grid-text-' + i + '" style="left: ' + big_w + '%">' + result + '</span>';
             }
             this.coords.big_num = Math.ceil(big_num + 1);
-
-
 
             this.$cache.cont.addClass("irs-with-grid");
             this.$cache.grid.html(html);
@@ -2223,8 +2188,6 @@
             this.$cache.grid[0].style.left = this.coords.grid_gap + "%";
         },
 
-
-
         // =============================================================================================================
         // Public methods
 
@@ -2278,8 +2241,6 @@
             }
         });
     };
-
-
 
     // =================================================================================================================
     // http://paulirish.com/2011/requestanimationframe-for-smart-animating/

@@ -109,7 +109,6 @@ public final class InhealthCekEligibilitas extends javax.swing.JDialog {
     private long p2;
     private boolean empt=false;
 
-
     /** Creates new form DlgKamar
      * @param parent
      * @param modal */
@@ -329,8 +328,6 @@ public final class InhealthCekEligibilitas extends javax.swing.JDialog {
             LabelJabatanTNI.setVisible(false);
         }
     }
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -4788,8 +4785,6 @@ public final class InhealthCekEligibilitas extends javax.swing.JDialog {
         }
     }
 
-
-
     private void isForm(){
         if(ChkCari.isSelected()==true){
             panelCari.setVisible(true);
@@ -5228,7 +5223,6 @@ public final class InhealthCekEligibilitas extends javax.swing.JDialog {
         }else if(R6.isSelected()==true){
             klg="ANAK";
         }
-
 
         Sequel.queryu4("insert ignore into kelurahan values(?,?)",2,new String[]{"0",Kelurahan.getText()});
         Sequel.queryu4("insert ignore into kecamatan values(?,?)",2,new String[]{"0",Kecamatan.getText()});

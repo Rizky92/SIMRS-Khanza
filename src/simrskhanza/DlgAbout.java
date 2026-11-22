@@ -20,7 +20,6 @@ import java.util.Properties;
  */
 public class DlgAbout extends javax.swing.JDialog {
 
-
     public DlgAbout(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

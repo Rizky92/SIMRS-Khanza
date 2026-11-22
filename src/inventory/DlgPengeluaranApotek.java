@@ -137,7 +137,6 @@ public class DlgPengeluaranApotek extends javax.swing.JDialog {
         }
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -1282,7 +1281,6 @@ public class DlgPengeluaranApotek extends javax.swing.JDialog {
         LTotal.setText(Valid.SetAngka(ttl));
     }
 
-
     public void isCek(){
         TCari.requestFocus();
         autoNomor();
@@ -1311,7 +1309,6 @@ public class DlgPengeluaranApotek extends javax.swing.JDialog {
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(pengeluaran_obat_bhp.no_keluar,3),signed)),0) from pengeluaran_obat_bhp where pengeluaran_obat_bhp.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' ",
                 "SKM"+Tgl.getSelectedItem().toString().substring(6,10)+Tgl.getSelectedItem().toString().substring(3,5)+Tgl.getSelectedItem().toString().substring(0,2),3,NoKeluar);
    }
-
 
    private void tampil(String nopermintaan) {
         Valid.tabelKosong(tabMode);

@@ -85,7 +85,6 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -244,7 +243,6 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -426,7 +424,6 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-
 
             ps2=koneksi.prepareStatement(
                 "select count(penyakit.kd_penyakit) as jumlah from kategori_penyakit inner join penyakit on penyakit.kd_ktg=kategori_penyakit.kd_ktg  "+

@@ -50,7 +50,6 @@ import javax.swing.table.TableColumn;
 import restore.DlgRestoreDokter;
 import simrskhanza.DlgCariSpesialis;
 
-
 /**
  *
  * @author dosen
@@ -143,7 +142,6 @@ public class DlgDokter extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1691,7 +1689,6 @@ public class DlgDokter extends javax.swing.JDialog {
             ((Painter) PhotoTTD).setImage(Sequel.cariBlobSmc("select dokter_ttdbasah.gambar_ttd from dokter_ttdbasah where dokter_ttdbasah.kd_dokter = ?", TKd.getText()));
         }
     }
-
 
     public JTextField getTextField(){
         return TKd;

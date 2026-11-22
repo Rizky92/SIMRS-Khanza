@@ -200,7 +200,6 @@
 		    $baris22 = mysqli_fetch_array($hasil22);
 		    $indexjaga=round($baris22[0],2);
 
-
 		    $ttlindex=$barisindex[2]+$indexjaga;
                     if ($action!="CARI") {
                         bukainput("insert into indextotal  values('$barisindex[0]','$ttlindex')");
@@ -341,7 +340,6 @@
                             $jmlmsk=isset($baris2[0])?$baris2[0]:0;
                         }
 
-
                             $_sql3    = "SELECT sum(jml)
                             from jgmlm  where id='$baris[0]'
                             and tgl like '%".$tahun."-".$bulan."%' group by id";
@@ -479,7 +477,6 @@
                                 $ttllemburhr=$ttllemburhr+$lemburhr;
 
                             $_sql22  ="SELECT ($ttln/sum(n))*100 from indekref where kdindex='".$baris["indexins"]."'";
-
 
 			    $hasil22 =bukaquery($_sql22);
 			    $baris22 = mysqli_fetch_array($hasil22);
@@ -710,7 +707,6 @@
                                                     set_insentif.tahun='$tahun' and set_insentif.bulan='$bulanindex' and
                                                     indextotal.kdindex=indexins.dep_id and
                                                     indextotal.kdindex='".$baris["indexins"]."'";
-
 
                                             $hasil23=bukaquery($_sql23);
                                             $baris23 = mysqli_fetch_array($hasil23);

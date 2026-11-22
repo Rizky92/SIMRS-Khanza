@@ -49,7 +49,6 @@ public class DlgRBJmDokter extends javax.swing.JDialog {
     private ResultSet rs,rsralandokter,rsralandokterdrpr,rsranapdokter,rsranapdokterdrpr,rsbiayaoperator1,rsbiayaoperator2,rsbiayaoperator3,rsbiayadokter_anak,
             rsbiayadokter_anestesi,rsperiksa_lab,rsdetaillab,rsperiksa_radiologi,rsbiaya_dokter_pjanak,rsbiaya_dokter_umum;
 
-
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -1220,7 +1219,6 @@ public class DlgRBJmDokter extends javax.swing.JDialog {
                              }
                          }
 
-
                          psdetaillab2=koneksi.prepareStatement(
                              "select sum(detail_periksa_lab.bagian_perujuk) as total, "+
                             "count(detail_periksa_lab.id_template)as jml,"+
@@ -1887,7 +1885,6 @@ public class DlgRBJmDokter extends javax.swing.JDialog {
                              }
                          }
 
-
                          psdetaillab2=koneksi.prepareStatement(
                              "select sum(detail_periksa_lab.bagian_perujuk) as total, "+
                             "count(detail_periksa_lab.id_template)as jml,"+
@@ -2535,7 +2532,6 @@ public class DlgRBJmDokter extends javax.swing.JDialog {
                                  psperiksa_lab2.close();
                              }
                          }
-
 
                          psdetaillab2=koneksi.prepareStatement(
                              "select sum(detail_periksa_lab.bagian_perujuk) as total, "+
@@ -3185,7 +3181,6 @@ public class DlgRBJmDokter extends javax.swing.JDialog {
                              }
                          }
 
-
                          psdetaillab2=koneksi.prepareStatement(
                              "select sum(detail_periksa_lab.bagian_perujuk) as total, "+
                             "count(detail_periksa_lab.id_template)as jml,"+
@@ -3833,7 +3828,6 @@ public class DlgRBJmDokter extends javax.swing.JDialog {
                                  psperiksa_lab2.close();
                              }
                          }
-
 
                          psdetaillab2=koneksi.prepareStatement(
                              "select sum(detail_periksa_lab.bagian_perujuk) as total, "+

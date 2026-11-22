@@ -102,8 +102,6 @@ public final class AplicareCekReferensiKamar extends javax.swing.JDialog {
         }
     }
 
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

@@ -2,7 +2,6 @@
  * By Mas Elkhanza
  */
 
-
 package rekammedis;
 
 import fungsi.WarnaTable;
@@ -38,7 +37,6 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPegawai;
-
 
 /**
  *
@@ -238,7 +236,6 @@ public final class RMPenilaianFisioterapi extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

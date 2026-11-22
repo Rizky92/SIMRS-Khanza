@@ -1,6 +1,5 @@
 package inventory;
 
-
 import fungsi.WarnaTable2;
 import fungsi.akses;
 import fungsi.batasInput;

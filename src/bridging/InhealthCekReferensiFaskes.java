@@ -84,8 +84,6 @@ public final class InhealthCekReferensiFaskes extends javax.swing.JDialog {
         diagnosa.setDocument(new batasInput((byte)100).getKata(diagnosa));
     }
 
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

@@ -101,7 +101,6 @@ public final class DlgLhtBRIVA extends javax.swing.JDialog {
         DlgSinkron.setSize(330,115);
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

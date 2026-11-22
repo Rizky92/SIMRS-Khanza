@@ -2,7 +2,6 @@
  * By Mas Elkhanza
  */
 
-
 package rekammedis;
 
 import fungsi.WarnaTable;
@@ -39,7 +38,6 @@ import javax.swing.table.TableColumn;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
-
 
 /**
  *
@@ -165,7 +163,6 @@ public final class RMLayananKedokteranFisikRehabilitasi extends javax.swing.JDia
             TANGGALMUNDUR="yes";
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

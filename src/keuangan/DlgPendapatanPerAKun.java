@@ -82,8 +82,6 @@ public final class DlgPendapatanPerAKun extends javax.swing.JDialog {
         LoadHTML2.setDocument(doc);
     }
 
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

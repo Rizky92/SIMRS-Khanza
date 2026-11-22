@@ -43,7 +43,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author perpustakaan
@@ -219,7 +218,6 @@ public final class RMDataAsuhanGizi extends javax.swing.JDialog {
             TANGGALMUNDUR="yes";
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

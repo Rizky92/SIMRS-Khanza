@@ -33,20 +33,12 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-
-
 /*
  * Version: 1.1.4
  * Build: 2010100721
  */
 
-
-
 //---- qrconst.php -----------------------------
-
-
-
-
 
 /*
  * PHP QR Code encoder
@@ -101,12 +93,7 @@
 		}
 	}
 
-
-
 //---- merged_config.php -----------------------------
-
-
-
 
 /*
  * PHP QR Code encoder
@@ -124,13 +111,7 @@
 
     define('QR_PNG_MAXIMUM_SIZE',  1024);                                                       // maximum allowed png image width (in pixels), tune to make sure GD and PHP can handle such big images
 
-
-
-
 //---- qrtools.php -----------------------------
-
-
-
 
 /*
  * PHP QR Code encoder
@@ -303,13 +284,7 @@
 
     QRtools::markTime('start');
 
-
-
-
 //---- qrspec.php -----------------------------
-
-
-
 
 /*
  * PHP QR Code encoder
@@ -581,7 +556,6 @@
             array(30, 56), array(34, 60), array(30, 58), array(34, 62), array(30, 54), //31-35
             array(24, 50), array(28, 54), array(32, 58), array(26, 54), array(30, 58), //35-40
         );
-
 
         /** --------------------------------------------------------------------
          * Put an alignment marker.
@@ -903,12 +877,7 @@
 
     }
 
-
-
 //---- qrimage.php -----------------------------
-
-
-
 
 /*
  * PHP QR Code encoder
@@ -1005,12 +974,7 @@
         }
     }
 
-
-
 //---- qrinput.php -----------------------------
-
-
-
 
 /*
  * PHP QR Code encoder
@@ -1526,7 +1490,6 @@
             return false;
         }
 
-
         //----------------------------------------------------------------------
         public function estimateBitStreamSize($version)
         {
@@ -1738,15 +1701,7 @@
         }
     }
 
-
-
-
-
-
 //---- qrbitstream.php -----------------------------
-
-
-
 
 /*
  * PHP QR Code encoder
@@ -1928,13 +1883,7 @@
 
     }
 
-
-
-
 //---- qrsplit.php -----------------------------
-
-
-
 
 /*
  * PHP QR Code encoder
@@ -2247,12 +2196,7 @@
         }
     }
 
-
-
 //---- qrrscode.php -----------------------------
-
-
-
 
 /*
  * PHP QR Code encoder
@@ -2464,12 +2408,7 @@
         }
     }
 
-
-
 //---- qrmask.php -----------------------------
-
-
-
 
 /*
  * PHP QR Code encoder
@@ -2752,7 +2691,6 @@
             return $demerit;
         }
 
-
         //----------------------------------------------------------------------
         public function mask($width, $frame, $level)
         {
@@ -2799,13 +2737,7 @@
         //----------------------------------------------------------------------
     }
 
-
-
-
 //---- qrencode.php -----------------------------
-
-
-
 
 /*
  * PHP QR Code encoder
@@ -2897,7 +2829,6 @@
             $dl = QRspec::rsDataCodes1($spec);
             $el = QRspec::rsEccCodes1($spec);
             $rs = QRrs::init_rs(8, 0x11d, 0, 1, $el, 255 - $dl - $el);
-
 
             $blockNo = 0;
             $dataPos = 0;
@@ -3014,7 +2945,6 @@
 
             $frame = $filler->frame;
             unset($filler);
-
 
             // masking
             $maskObj = new QRmask();

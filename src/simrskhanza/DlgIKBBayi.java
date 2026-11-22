@@ -2700,7 +2700,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         Valid.pindah(evt,Proses,G);
     }//GEN-LAST:event_AnakkeKeyPressed
 
-
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         if(ceksukses){
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
@@ -4716,7 +4715,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         TabRawat.setSelectedIndex(0);
     }
 
-
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
             NoRm.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
@@ -4779,7 +4777,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
             Sequel.cariIsi("select pasien_bayi.penolong from pasien_bayi where pasien_bayi.no_rkm_medis=?",KdPenolong,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
         }
     }
-
 
     public JTextField getTextField(){
         return NoRm;

@@ -2,7 +2,6 @@
  * Kontribusi RSUD Prembun
  */
 
-
 package rekammedis;
 
 import fungsi.WarnaTable;
@@ -39,7 +38,6 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
-
 
 /**
  *
@@ -228,7 +226,6 @@ public final class RMPenilaianAwalMedisRalanBedahMulut extends javax.swing.JDial
 
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
 
-
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -253,7 +250,6 @@ public final class RMPenilaianAwalMedisRalanBedahMulut extends javax.swing.JDial
             TANGGALMUNDUR="yes";
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

@@ -100,7 +100,6 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         kdjenis.setDocument(new batasInput((int)10).getKata(kdjenis));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

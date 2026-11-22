@@ -146,8 +146,6 @@ public final class InhealthTindakanLaborat extends javax.swing.JDialog {
             public void keyReleased(KeyEvent e) {}
         });
 
-
-
     }
 
     /** This method is called from within the constructor to
@@ -755,7 +753,6 @@ public final class InhealthTindakanLaborat extends javax.swing.JDialog {
            KdTindakanInhealth.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
         }
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getinhealth_mapping_tindakan_laborat());

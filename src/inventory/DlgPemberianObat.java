@@ -61,16 +61,7 @@ import simrskhanza.DlgCariPasien;
  * @author perpustakaan
  */
 public class DlgPemberianObat extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabModePO;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -177,7 +168,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     }
 
     //private DlgCariObatPenyakit dlgobtpny=new DlgCariObatPenyakit(null,false);
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1633,8 +1623,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 
     }
 
-
-
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
             private int nilai_jam;
@@ -1938,5 +1926,13 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

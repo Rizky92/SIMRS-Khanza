@@ -79,8 +79,6 @@ public final class CoronaReferensiJK extends javax.swing.JDialog {
         }
     }
 
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -230,7 +228,6 @@ public final class CoronaReferensiJK extends javax.swing.JDialog {
             }
         }
     }
-
 
     public JTable getTable(){
         return tbKamar;

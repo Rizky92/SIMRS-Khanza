@@ -99,7 +99,6 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
         KdPeriksa.setDocument(new batasInput((byte)100).getKata(KdPeriksa));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -223,7 +222,6 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();

@@ -92,7 +92,6 @@ public final class DlgCariICD9 extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -240,7 +239,6 @@ public final class DlgCariICD9 extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
         if(tabMode.getRowCount()!=0){

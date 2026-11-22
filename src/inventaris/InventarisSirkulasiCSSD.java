@@ -130,7 +130,6 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
         NoInventaris.setDocument(new batasInput((byte)30).getKata(NoInventaris));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
 
-
         WindowInput.setSize(735,245);
         WindowInput.setLocationRelativeTo(null);
 
@@ -972,7 +971,6 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
 
-
         }
     }//GEN-LAST:event_tbKamInMouseClicked
 
@@ -1365,7 +1363,6 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
             TOut.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString());
         }
     }
-
 
     public void isCek(){
         if(akses.getjml2()>=1){

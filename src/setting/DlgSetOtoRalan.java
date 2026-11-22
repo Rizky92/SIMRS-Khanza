@@ -148,7 +148,6 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         }
         Table3.setDefaultRenderer(Object.class, new WarnaTable());
 
-
         kdtindakan.setDocument(new batasInput((byte)15).getKata(kdtindakan));
         kddokter.setDocument(new batasInput((byte)20).getKata(kddokter));
         kdpj.setDocument(new batasInput((byte)3).getKata(kdpj));
@@ -1661,7 +1660,6 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
     // End of variables declaration//GEN-END:variables
-
 
     private void tampil() {
         Valid.tabelKosong(tabMode);

@@ -103,7 +103,6 @@ public final class PCareCekKartu extends javax.swing.JDialog {
     private JsonNode nameNode;
     private JsonNode response;
 
-
     /** Creates new form DlgKamar
      * @param parent
      * @param modal */
@@ -423,8 +422,6 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             LabelJabatanTNI.setVisible(false);
         }
     }
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.

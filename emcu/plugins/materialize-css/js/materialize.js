@@ -274,7 +274,6 @@ m.isFunction(t)&&t(null,!0)}),f.queue(a,m.isString(v)?v:"",[])),"stop"===y?(i(a)
   }
 })(window);
 
-
 // Unique ID
 Materialize.guid = (function() {
   function s4() {
@@ -318,7 +317,6 @@ if ($) {
 
     options = $.extend(defaults, options);
 
-
     return this.each(function() {
 
       var $this = $(this);
@@ -330,7 +328,6 @@ if ($) {
       // Turn off any existing event handlers
        $this.off('click.collapse', '> li > .collapsible-header');
        $panel_headers.off('click.collapse');
-
 
        /****************
        Helper Functions
@@ -404,8 +401,6 @@ if ($) {
       }
 
       /*****  End Helper Functions  *****/
-
-
 
       // Add click handler to only direct collapsible header children
       $this.on('click.collapse', '> li > .collapsible-header', function(e) {
@@ -568,7 +563,6 @@ if ($) {
           }
         }
 
-
         if (offsetLeft + activates.innerWidth() > $(window).width()) {
           // Dropdown goes past screen on right, force right alignment
           currAlignment = 'right';
@@ -609,7 +603,6 @@ if ($) {
           top: origin.position().top + verticalOffset + scrollYOffset,
           left: leftPosition + scrollXOffset
         });
-
 
         // Show dropdown
         activates.stop(true, true).css('opacity', 0)
@@ -702,7 +695,6 @@ if ($) {
         placeDropdown(eventType);
       });
       origin.on('close', hideDropdown);
-
 
     });
   }; // End dropdown plugin
@@ -813,7 +805,6 @@ if ($) {
         });
       }
 
-
     }
   });
 
@@ -840,7 +831,6 @@ if ($) {
       $(document).off('keyup.leanModal' + overlayID);
 
       $overlay.velocity( { opacity: 0}, {duration: options.out_duration, queue: false, ease: "easeOutQuart"});
-
 
       // Define Bottom Sheet animation
       if ($modal.hasClass('bottom-sheet')) {
@@ -927,14 +917,12 @@ if ($) {
       var ancestor;
       origin.wrap(placeholder);
 
-
       origin.on('click', function(){
         var placeholder = origin.parent('.material-placeholder');
         var windowWidth = window.innerWidth;
         var windowHeight = window.innerHeight;
         var originalWidth = origin.width();
         var originalHeight = origin.height();
-
 
         // If already modal, return to original
         if (doneAnimating === false) {
@@ -945,7 +933,6 @@ if ($) {
           returnToOriginal();
           return false;
         }
-
 
         // Set states
         doneAnimating = false;
@@ -1069,7 +1056,6 @@ if ($) {
 
     }); // End origin on click
 
-
       // Return on scroll
       $(window).scroll(function() {
         if (overlayActive) {
@@ -1087,7 +1073,6 @@ if ($) {
         }
       });
 
-
       // This function returns the modaled image to the original spot
       function returnToOriginal() {
 
@@ -1102,7 +1087,6 @@ if ($) {
           origin.velocity("stop", true);
           $('#materialbox-overlay').velocity("stop", true);
           $('.materialbox-caption').velocity("stop", true);
-
 
           $('#materialbox-overlay').velocity({opacity: 0}, {
             duration: outDuration, // Delay prevents animation overlapping
@@ -1295,7 +1279,6 @@ $(document).ready(function(){
       $links.not($active).each(function () {
         $(this.hash).hide();
       });
-
 
       // Bind the click event handler
       $this.on('click', 'a', function(e) {
@@ -1822,7 +1805,6 @@ $(document).ready(function(){
         }
     };
 
-
     /**
      * Disable mousedown event for 500ms during and after touch
      */
@@ -1853,7 +1835,6 @@ $(document).ready(function(){
             TouchHandler.allowEvent(e);
         }
     };
-
 
     /**
      * Delegated click handler for .waves-effect element.
@@ -1978,7 +1959,6 @@ $(document).ready(function(){
     var timeLeft = displayLength;
     var counterInterval = setInterval (function(){
 
-
       if (newToast.parentNode === null)
         window.clearInterval(counterInterval);
 
@@ -2003,8 +1983,6 @@ $(document).ready(function(){
         window.clearInterval(counterInterval);
       }
     }, 20);
-
-
 
     function createToast(html) {
 
@@ -2206,8 +2184,6 @@ $(document).ready(function(){
           }
         }
 
-
-
         // Touch Event
         var panning = false;
         var menuOut = false;
@@ -2273,7 +2249,6 @@ $(document).ready(function(){
 
               menu_id.css('transform', 'translateX(' + rightPos + 'px)');
             }
-
 
             // Percentage overlay
             var overlayPerc;
@@ -2411,7 +2386,6 @@ $(document).ready(function(){
           });
       });
 
-
     },
     show : function() {
       this.trigger('click');
@@ -2420,7 +2394,6 @@ $(document).ready(function(){
       $('#sidenav-overlay').trigger('click');
     }
   };
-
 
     $.fn.sideNav = function(methodOrOptions) {
       if ( methods[methodOrOptions] ) {
@@ -2490,7 +2463,6 @@ $(document).ready(function(){
 
 		return hits;
 	}
-
 
 	/**
 	 * Called when the user scrolls the window
@@ -2643,7 +2615,6 @@ $(document).ready(function(){
 		// perform a scan once, after current execution context, and after dom is ready
 		setTimeout(readyScroll, 0);
 
-
 		selector.on('scrollSpy:enter', function() {
 			visible = $.grep(visible, function(value) {
 	      return value.height() != 0;
@@ -2663,7 +2634,6 @@ $(document).ready(function(){
 			else {
 				visible.push($(this));
 			}
-
 
 			$('a[href="#' + visible[0].attr('id') + '"]').addClass('active');
 		});
@@ -2853,7 +2823,6 @@ $(document).ready(function(){
       hiddenDiv.text($textarea.val() + '\n');
       var content = hiddenDiv.html().replace(/\n/g, '<br>');
       hiddenDiv.html(content);
-
 
       // When textarea is hidden, width goes crazy.
       // Approximate with half of window size
@@ -3454,7 +3423,6 @@ $(document).ready(function(){
                               } });
             captionTransition($caption, options.transition);
 
-
             // Update indicators
             if (options.indicators) {
               $indicators.eq($active_index).removeClass('active');
@@ -3463,7 +3431,6 @@ $(document).ready(function(){
             $slides.eq(index).velocity({opacity: 1}, {duration: options.transition, queue: false, easing: 'easeOutQuad'});
             $slides.eq(index).find('.caption').velocity({opacity: 1, translateX: 0, translateY: 0}, {duration: options.transition, delay: options.transition, queue: false, easing: 'easeOutQuad'});
             $slides.eq(index).addClass('active');
-
 
             // Update indicators
             if (options.indicators) {
@@ -3484,7 +3451,6 @@ $(document).ready(function(){
           }
           $slider.height(options.height);
         }
-
 
         // Set initial positions of captions
         $slides.find('.caption').each(function () {
@@ -3560,7 +3526,6 @@ $(document).ready(function(){
           }, options.transition + options.interval
         );
 
-
         // HammerJS, Swipe navigation
 
         // Touch Event
@@ -3611,7 +3576,6 @@ $(document).ready(function(){
               next_slide.velocity({ opacity: 1
                   }, {duration: 300, queue: false, easing: 'easeOutQuad'});
             }
-
 
           }
 
@@ -3689,8 +3653,6 @@ $(document).ready(function(){
 
       });
 
-
-
     },
     pause : function() {
       $(this).trigger('sliderPause');
@@ -3705,7 +3667,6 @@ $(document).ready(function(){
       $(this).trigger('sliderPrev');
     }
   };
-
 
     $.fn.slider = function(methodOrOptions) {
       if ( methods[methodOrOptions] ) {
@@ -4031,7 +3992,6 @@ $(document).ready(function(){
 
     options = $.extend(defaults, options);
 
-
     $index = 0;
     return this.each(function() {
       var $uniqueId = Materialize.guid(),
@@ -4117,7 +4077,6 @@ $(document).ready(function(){
     }
   });
 
-
   var openFABMenu = function (btn) {
     $this = btn;
     if ($this.hasClass('active') === false) {
@@ -4167,7 +4126,6 @@ $(document).ready(function(){
       { duration: 80 }
     );
   };
-
 
 }( jQuery ));
 ;(function ($) {
@@ -4232,7 +4190,6 @@ $(document).ready(function(){
     });
   };
 
-
   $(document).ready(function() {
     // Hardcoded .staggered-list scrollFire
     // var staggeredListOptions = [];
@@ -4252,7 +4209,6 @@ $(document).ready(function(){
     // Touch Event
     var swipeLeft = false;
     var swipeRight = false;
-
 
     // Dismissible Collections
     $('.dismissable').each(function() {
@@ -4313,7 +4269,6 @@ $(document).ready(function(){
       });
 
     });
-
 
     // time = 0
     // // Vertical Staggered list
@@ -4413,7 +4368,6 @@ var $window = $( window )
 var $document = $( document )
 var $html = $( document.documentElement )
 
-
 /**
  * The picker constructor that creates a blank picker.
  */
@@ -4422,34 +4376,27 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
     // If there’s no element, return the picker constructor.
     if ( !ELEMENT ) return PickerConstructor
 
-
     var
         IS_DEFAULT_THEME = false,
-
 
         // The state of the picker.
         STATE = {
             id: ELEMENT.id || 'P' + Math.abs( ~~(Math.random() * new Date()) )
         },
 
-
         // Merge the defaults and options passed.
         SETTINGS = COMPONENT ? $.extend( true, {}, COMPONENT.defaults, OPTIONS ) : OPTIONS || {},
-
 
         // Merge the default classes with the settings classes.
         CLASSES = $.extend( {}, PickerConstructor.klasses(), SETTINGS.klass ),
 
-
         // The element node wrapper into a jQuery object.
         $ELEMENT = $( ELEMENT ),
-
 
         // Pseudo picker constructor.
         PickerInstance = function() {
             return this.start()
         },
-
 
         // The picker prototype.
         P = PickerInstance.prototype = {
@@ -4457,7 +4404,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
             constructor: PickerInstance,
 
             $node: $ELEMENT,
-
 
             /**
              * Initialize everything
@@ -4467,13 +4413,11 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 // If it’s already started, do nothing.
                 if ( STATE && STATE.start ) return P
 
-
                 // Update the picker states.
                 STATE.methods = {}
                 STATE.start = true
                 STATE.open = false
                 STATE.type = ELEMENT.type
-
 
                 // Confirm focus state, convert into text input to remove UA stylings,
                 // and set as readonly to prevent keyboard popup.
@@ -4484,30 +4428,24 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                     ELEMENT.type = 'text'
                 }
 
-
                 // Create a new picker component with the settings.
                 P.component = new COMPONENT(P, SETTINGS)
-
 
                 // Create the picker root with a holder and then prepare it.
                 P.$root = $( PickerConstructor._.node('div', createWrappedComponent(), CLASSES.picker, 'id="' + ELEMENT.id + '_root" tabindex="0"') )
                 prepareElementRoot()
-
 
                 // If there’s a format for the hidden input element, create the element.
                 if ( SETTINGS.formatSubmit ) {
                     prepareElementHidden()
                 }
 
-
                 // Prepare the input element.
                 prepareElement()
-
 
                 // Insert the root as specified in the settings.
                 if ( SETTINGS.container ) $( SETTINGS.container ).append( P.$root )
                 else $ELEMENT.after( P.$root )
-
 
                 // Bind the default component and settings events.
                 P.on({
@@ -4526,21 +4464,17 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                     set: SETTINGS.onSet
                 })
 
-
                 // Once we’re all set, check the theme in use.
                 IS_DEFAULT_THEME = isUsingDefaultTheme( P.$root.children()[ 0 ] )
-
 
                 // If the element has autofocus, open the picker.
                 if ( ELEMENT.autofocus ) {
                     P.open()
                 }
 
-
                 // Trigger queued the “start” and “render” events.
                 return P.trigger( 'start' ).trigger( 'render' )
             }, //start
-
 
             /**
              * Render a new picker
@@ -4554,7 +4488,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 // Trigger the queued “render” events.
                 return P.trigger( 'render' )
             }, //render
-
 
             /**
              * Destroy everything
@@ -4595,7 +4528,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
 
                 return P
             }, //stop
-
 
             /**
              * Open up the picker
@@ -4668,12 +4600,10 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                             // Grab the target.
                             target = event.target
 
-
                         // On escape, close the picker and give focus.
                         if ( keycode == 27 ) {
                             P.close( true )
                         }
-
 
                         // Check if there is a key movement or “enter” keypress on the element.
                         else if ( target == P.$root[0] && ( keycodeToMove || keycode == 13 ) ) {
@@ -4692,7 +4622,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                             }
                         }
 
-
                         // If the target is within the root and “enter” is pressed,
                         // prevent the default action and trigger a click on the target instead.
                         else if ( $.contains( P.$root[0], target ) && keycode == 13 ) {
@@ -4705,7 +4634,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 // Trigger the queued “open” events.
                 return P.trigger( 'open' )
             }, //open
-
 
             /**
              * Close the picker
@@ -4758,14 +4686,12 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 return P.trigger( 'close' )
             }, //close
 
-
             /**
              * Clear the values
              */
             clear: function( options ) {
                 return P.set( 'clear', null, options )
             }, //clear
-
 
             /**
              * Set something
@@ -4814,7 +4740,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 return options.muted ? P : P.trigger( 'set', thingObject )
             }, //set
 
-
             /**
              * Get something
              */
@@ -4856,8 +4781,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 }
             }, //get
 
-
-
             /**
              * Bind events on the things.
              */
@@ -4896,8 +4819,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 return P
             }, //on
 
-
-
             /**
              * Unbind events on the things.
              */
@@ -4912,7 +4833,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 }
                 return P
             },
-
 
             /**
              * Fire off method events.
@@ -4931,7 +4851,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 return P
             } //trigger
         } //PickerInstance.prototype
-
 
     /**
      * Wrap the picker holder components together.
@@ -4970,8 +4889,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
         ) //endreturn
     } //createWrappedComponent
 
-
-
     /**
      * Prepare the input element with all bindings.
      */
@@ -4994,7 +4911,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 ELEMENT.value
             )
 
-
         // Only bind keydown events if the element isn’t editable.
         if ( !SETTINGS.editable ) {
 
@@ -5010,7 +4926,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 on( 'keydown.' + STATE.id, handleKeydownEvent )
         }
 
-
         // Update the aria attributes.
         aria(ELEMENT, {
             haspopup: true,
@@ -5019,7 +4934,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
             owns: ELEMENT.id + '_root'
         })
     }
-
 
     /**
      * Prepare the root picker element with all bindings.
@@ -5121,7 +5035,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
         aria( P.$root[0], 'hidden', true )
     }
 
-
      /**
       * Prepare the hidden input element along with all bindings.
       */
@@ -5166,12 +5079,10 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                     ''
             })
 
-
         // Insert the hidden input as specified in the settings.
         if ( SETTINGS.container ) $( SETTINGS.container ).append( P._hidden )
         else $ELEMENT.after( P._hidden )
     }
-
 
     // For iOS8.
     function handleKeydownEvent( event ) {
@@ -5201,7 +5112,6 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
         }
     }
 
-
     // Separated for IE
     function handleFocusToOpenEvent( event ) {
 
@@ -5217,12 +5127,9 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
         P.open()
     }
 
-
     // Return a new picker instance.
     return new PickerInstance()
 } //PickerConstructor
-
-
 
 /**
  * The default classes and prefix to use for the HTML classes.
@@ -5248,8 +5155,6 @@ PickerConstructor.klasses = function( prefix ) {
     }
 } //PickerConstructor.klasses
 
-
-
 /**
  * Check if the default theme is being used.
  */
@@ -5270,8 +5175,6 @@ function isUsingDefaultTheme( element ) {
 
     return theme == 'fixed'
 }
-
-
 
 /**
  * Get the width of the browser’s scrollbar.
@@ -5305,8 +5208,6 @@ function getScrollbarWidth() {
     return widthWithoutScroll - widthWithScroll
 }
 
-
-
 /**
  * PickerConstructor helper methods.
  */
@@ -5336,7 +5237,6 @@ PickerConstructor._ = {
             // The counter starts from the `min`
             counter = PickerConstructor._.trigger( groupObject.min, groupObject )
 
-
         // Loop from the `min` to `max`, incrementing by `i`
         for ( ; counter <= PickerConstructor._.trigger( groupObject.max, groupObject, [ counter ] ); counter += groupObject.i ) {
 
@@ -5355,7 +5255,6 @@ PickerConstructor._ = {
         // Return the list of nodes
         return nodesList
     }, //group
-
 
     /**
      * Create a dom node string
@@ -5378,14 +5277,12 @@ PickerConstructor._ = {
         return '<' + wrapper + klass + attribute + '>' + item + '</' + wrapper + '>'
     }, //node
 
-
     /**
      * Lead numbers below 10 with a zero.
      */
     lead: function( number ) {
         return ( number < 10 ? '0': '' ) + number
     },
-
 
     /**
      * Trigger a function otherwise return the value.
@@ -5394,14 +5291,12 @@ PickerConstructor._ = {
         return typeof callback == 'function' ? callback.apply( scope, args || [] ) : callback
     },
 
-
     /**
      * If the second character is a digit, length is 2 otherwise 1.
      */
     digits: function( string ) {
         return ( /\d/ ).test( string[ 1 ] ) ? 2 : 1
     },
-
 
     /**
      * Tell if something is a date object.
@@ -5410,7 +5305,6 @@ PickerConstructor._ = {
         return {}.toString.call( value ).indexOf( 'Date' ) > -1 && this.isInteger( value.getDate() )
     },
 
-
     /**
      * Tell if something is an integer.
      */
@@ -5418,14 +5312,11 @@ PickerConstructor._ = {
         return {}.toString.call( value ).indexOf( 'Number' ) > -1 && value % 1 === 0
     },
 
-
     /**
      * Create ARIA attribute strings.
      */
     ariaAttr: ariaAttr
 } //PickerConstructor._
-
-
 
 /**
  * Extend the picker with a component and defaults.
@@ -5463,8 +5354,6 @@ PickerConstructor.extend = function( name, Component ) {
     $.fn[ name ].defaults = Component.defaults
 } //PickerConstructor.extend
 
-
-
 function aria(element, attribute, value) {
     if ( $.isPlainObject(attribute) ) {
         for ( var key in attribute ) {
@@ -5501,14 +5390,10 @@ function getActiveElement() {
     } catch ( err ) { }
 }
 
-
-
 // Expose the picker constructor.
 return PickerConstructor
 
-
 }));
-
 
 ;/*!
  * Date picker for pickadate.js v3.5.0
@@ -5530,15 +5415,12 @@ return PickerConstructor
 
 }(function( Picker, $ ) {
 
-
 /**
  * Globals and constants
  */
 var DAYS_IN_WEEK = 7,
     WEEKS_IN_CALENDAR = 6,
     _ = Picker._
-
-
 
 /**
  * The date picker constructor
@@ -5604,7 +5486,6 @@ function DatePicker( picker, settings ) {
             set( 'highlight', calendar.item.now )
     }
 
-
     // The keycode to movement mapping.
     calendar.key = {
         40: 7, // Down
@@ -5622,7 +5503,6 @@ function DatePicker( picker, settings ) {
             this.render()
         }
     }
-
 
     // Bind some picker events.
     picker.
@@ -5654,7 +5534,6 @@ function DatePicker( picker, settings ) {
         }, 1 )
 
 } //DatePicker
-
 
 /**
  * Set a datepicker item object.
@@ -5699,14 +5578,12 @@ DatePicker.prototype.set = function( type, value, options ) {
     return calendar
 } //DatePicker.prototype.set
 
-
 /**
  * Get a datepicker item object.
  */
 DatePicker.prototype.get = function( type ) {
     return this.item[ type ]
 } //DatePicker.prototype.get
-
 
 /**
  * Create a picker date object.
@@ -5718,7 +5595,6 @@ DatePicker.prototype.create = function( type, value, options ) {
 
     // If there’s no value, use the type as the value.
     value = value === undefined ? type : value
-
 
     // If it’s infinity, update the value.
     if ( value == -Infinity || value == Infinity ) {
@@ -5758,7 +5634,6 @@ DatePicker.prototype.create = function( type, value, options ) {
     }
 } //DatePicker.prototype.create
 
-
 /**
  * Create a range limit object using an array, date object,
  * literal “true”, or integer relative to another time.
@@ -5795,7 +5670,6 @@ DatePicker.prototype.createRange = function( from, to ) {
     }
 } //DatePicker.prototype.createRange
 
-
 /**
  * Check if a date unit falls within a date range object.
  */
@@ -5803,7 +5677,6 @@ DatePicker.prototype.withinRange = function( range, dateUnit ) {
     range = this.createRange(range.from, range.to)
     return dateUnit.pick >= range.from.pick && dateUnit.pick <= range.to.pick
 }
-
 
 /**
  * Check if two date range objects overlap.
@@ -5820,7 +5693,6 @@ DatePicker.prototype.overlapRanges = function( one, two ) {
         calendar.withinRange( two, one.from ) || calendar.withinRange( two, one.to )
 }
 
-
 /**
  * Get the date today.
  */
@@ -5831,7 +5703,6 @@ DatePicker.prototype.now = function( type, value, options ) {
     }
     return this.normalize( value, options )
 }
-
 
 /**
  * Navigate to next/prev month.
@@ -5846,7 +5717,6 @@ DatePicker.prototype.navigate = function( type, value, options ) {
         isTargetObject = $.isPlainObject( value ),
         viewsetObject = this.item.view/*,
         safety = 100*/
-
 
     if ( isTargetArray || isTargetObject ) {
 
@@ -5889,7 +5759,6 @@ DatePicker.prototype.navigate = function( type, value, options ) {
     return value
 } //DatePicker.prototype.navigate
 
-
 /**
  * Normalize a date by setting the hours to midnight.
  */
@@ -5897,7 +5766,6 @@ DatePicker.prototype.normalize = function( value/*, options*/ ) {
     value.setHours( 0, 0, 0, 0 )
     return value
 }
-
 
 /**
  * Measure the range of dates.
@@ -5924,14 +5792,12 @@ DatePicker.prototype.measure = function( type, value/*, options*/ ) {
     return value
 } ///DatePicker.prototype.measure
 
-
 /**
  * Create a viewset object based on navigation.
  */
 DatePicker.prototype.viewset = function( type, dateObject/*, options*/ ) {
     return this.create([ dateObject.year, dateObject.month, 1 ])
 }
-
 
 /**
  * Validate a date as enabled and shift if needed.
@@ -5975,8 +5841,6 @@ DatePicker.prototype.validate = function( type, dateObject, options ) {
 
         safety = 100*/
 
-
-
     // Cases to validate for:
     // [1] Not inverted and date disabled.
     // [2] Inverted and some dates enabled.
@@ -5993,13 +5857,11 @@ DatePicker.prototype.validate = function( type, dateObject, options ) {
         /* 3 */ ( !isFlippedBase && (dateObject.pick <= minLimitObject.pick || dateObject.pick >= maxLimitObject.pick) )
     ) {
 
-
         // When inverted, flip the direction if there aren’t any enabled weekdays
         // and there are no enabled dates in the direction of the interval.
         if ( isFlippedBase && !hasEnabledWeekdays && ( ( !hasEnabledAfterTarget && interval > 0 ) || ( !hasEnabledBeforeTarget && interval < 0 ) ) ) {
             interval *= -1
         }
-
 
         // Keep looping until we reach an enabled date.
         while ( /*safety &&*/ calendar.disabled( dateObject ) ) {
@@ -6009,13 +5871,11 @@ DatePicker.prototype.validate = function( type, dateObject, options ) {
                 throw 'Fell into an infinite loop while validating ' + dateObject.obj + '.'
             }*/
 
-
             // If we’ve looped into the next/prev month with a large interval, return to the original date and flatten the interval.
             if ( Math.abs( interval ) > 1 && ( dateObject.month < originalDateObject.month || dateObject.month > originalDateObject.month ) ) {
                 dateObject = originalDateObject
                 interval = interval > 0 ? 1 : -1
             }
-
 
             // If we’ve reached the min/max limit, reverse the direction, flatten the interval and set it to the limit.
             if ( dateObject.pick <= minLimitObject.pick ) {
@@ -6037,12 +5897,10 @@ DatePicker.prototype.validate = function( type, dateObject, options ) {
                 ])
             }
 
-
             // If we’ve reached both limits, just break out of the loop.
             if ( reachedMin && reachedMax ) {
                 break
             }
-
 
             // Finally, create the shifted date using the interval and keep looping.
             dateObject = calendar.create([ dateObject.year, dateObject.month, dateObject.date + interval ])
@@ -6050,11 +5908,9 @@ DatePicker.prototype.validate = function( type, dateObject, options ) {
 
     } //endif
 
-
     // Return the date object settled on.
     return dateObject
 } //DatePicker.prototype.validate
-
 
 /**
  * Check if a date is disabled.
@@ -6096,7 +5952,6 @@ DatePicker.prototype.disabled = function( dateToVerify ) {
         dateToVerify.pick > calendar.item.max.pick
 
 } //DatePicker.prototype.disabled
-
 
 /**
  * Parse a string into a usable type.
@@ -6145,7 +6000,6 @@ DatePicker.prototype.parse = function( type, value, options ) {
         parsingObject.dd || parsingObject.d
     ]
 } //DatePicker.prototype.parse
-
 
 /**
  * Various formats to display the object in.
@@ -6252,9 +6106,6 @@ DatePicker.prototype.formats = (function() {
     }
 })() //DatePicker.prototype.formats
 
-
-
-
 /**
  * Check if two date units are the exact.
  */
@@ -6286,7 +6137,6 @@ DatePicker.prototype.isDateExact = function( one, two ) {
     return false
 }
 
-
 /**
  * Check if two date units overlap.
  */
@@ -6313,7 +6163,6 @@ DatePicker.prototype.isDateOverlap = function( one, two ) {
     return false
 }
 
-
 /**
  * Flip the “enabled” state.
  */
@@ -6322,7 +6171,6 @@ DatePicker.prototype.flipEnable = function(val) {
     itemObject.enable = val || (itemObject.enable == -1 ? 1 : -1)
 }
 
-
 /**
  * Mark a collection of dates as “disabled”.
  */
@@ -6330,7 +6178,6 @@ DatePicker.prototype.deactivate = function( type, datesToDisable ) {
 
     var calendar = this,
         disabledItems = calendar.item.disable.slice(0)
-
 
     // If we’re flipping, that’s all we need to do.
     if ( datesToDisable == 'flip' ) {
@@ -6380,7 +6227,6 @@ DatePicker.prototype.deactivate = function( type, datesToDisable ) {
     // Return the updated collection.
     return disabledItems
 } //DatePicker.prototype.deactivate
-
 
 /**
  * Mark a collection of dates as “enabled”.
@@ -6473,7 +6319,6 @@ DatePicker.prototype.activate = function( type, datesToEnable ) {
     return disabledItems.filter(function( val ) { return val != null })
 } //DatePicker.prototype.activate
 
-
 /**
  * Create a string for the nodes in the picker.
  */
@@ -6490,7 +6335,6 @@ DatePicker.prototype.nodes = function( isOpen ) {
         disabledCollection = calendarItem.disable,
         minLimitObject = calendarItem.min,
         maxLimitObject = calendarItem.max,
-
 
         // Create the calendar table head using a copy of weekday labels collection.
         // * We do a copy so we don't mutate the original array.
@@ -6526,7 +6370,6 @@ DatePicker.prototype.nodes = function( isOpen ) {
         // Materialize modified
         })( ( settings.showWeekdaysFull ? settings.weekdaysFull : settings.weekdaysLetter ).slice( 0 ), settings.weekdaysFull.slice( 0 ) ), //tableHead
 
-
         // Create the nav for next/prev month.
         createMonthNav = function( next ) {
 
@@ -6549,7 +6392,6 @@ DatePicker.prototype.nodes = function( isOpen ) {
                 'title="' + (next ? settings.labelMonthNext : settings.labelMonthPrev ) + '"'
             ) //endreturn
         }, //createMonthNav
-
 
         // Create the month label.
         //Materialize modified
@@ -6607,7 +6449,6 @@ DatePicker.prototype.nodes = function( isOpen ) {
             // If there's a need for a month selector
             return _.node( 'div', monthsCollection[ viewsetObject.month ], settings.klass.month )
         }, //createMonthLabel
-
 
         // Create the year label.
         // Materialize modified
@@ -6680,7 +6521,6 @@ DatePicker.prototype.nodes = function( isOpen ) {
             return _.node( 'div', focusedYear, settings.klass.year )
         } //createYearLabel
 
-
         // Materialize modified
         createDayLabel = function() {
                 if (selectedObject != null)
@@ -6697,7 +6537,6 @@ DatePicker.prototype.nodes = function( isOpen ) {
             var weekday = settings.weekdaysFull[ display_day ]
             return weekday
         }
-
 
     // Create and return the entire calendar.
 return _.node(
@@ -6845,9 +6684,6 @@ return _.node(
     ) //endreturn
 } //DatePicker.prototype.nodes
 
-
-
-
 /**
  * The date picker defaults.
  */
@@ -6887,7 +6723,6 @@ DatePicker.defaults = (function( prefix ) {
 
             header: prefix + 'header',
 
-
             // Materialize Added klasses
             date_display: prefix + 'date-display',
             day_display: prefix + 'day-display',
@@ -6895,8 +6730,6 @@ DatePicker.defaults = (function( prefix ) {
             year_display: prefix + 'year-display',
             calendar_container: prefix + 'calendar-container',
             // end
-
-
 
             navPrev: prefix + 'nav--prev',
             navNext: prefix + 'nav--next',
@@ -6927,18 +6760,12 @@ DatePicker.defaults = (function( prefix ) {
     }
 })( Picker.klasses().picker + '__' )
 
-
-
-
-
 /**
  * Extend the picker to add the date picker.
  */
 Picker.extend( 'pickadate', DatePicker )
 
-
 }));
-
 
 ;(function ($) {
 
@@ -7035,7 +6862,6 @@ Picker.extend( 'pickadate', DatePicker )
             xform, frame, timestamp, ticker, dragged, vertical_dragged;
         var $indicators = $('<ul class="indicators"></ul>');
 
-
         // Initialize
         var view = $(this);
         var showIndicators = view.attr('data-indicators') || options.indicators;
@@ -7046,7 +6872,6 @@ Picker.extend( 'pickadate', DatePicker )
           $(this).trigger('carouselNext', [0.000001]);
           return true;
         }
-
 
         // Options
         if (options.full_width) {
@@ -7066,7 +6891,6 @@ Picker.extend( 'pickadate', DatePicker )
             view.find('.carousel-fixed-item').addClass('with-indicators');
           }
         }
-
 
         view.addClass('initialized');
         pressed = false;
@@ -7098,7 +6922,6 @@ Picker.extend( 'pickadate', DatePicker )
           view.append($indicators);
         }
         count = images.length;
-
 
         function setupEvents() {
           if (typeof window.ontouchstart !== 'undefined') {
@@ -7198,7 +7021,6 @@ Picker.extend( 'pickadate', DatePicker )
               el.style.opacity = tweenedOpacity;
               el.style.display = 'block';
             }
-
 
             // left side
             if (options.full_width) {
@@ -7400,8 +7222,6 @@ Picker.extend( 'pickadate', DatePicker )
           return true;
         });
 
-
-
         window.onresize = scroll;
 
         setupEvents();
@@ -7440,8 +7260,6 @@ Picker.extend( 'pickadate', DatePicker )
 
       });
 
-
-
     },
     next : function(n) {
       $(this).trigger('carouselNext', [n]);
@@ -7453,7 +7271,6 @@ Picker.extend( 'pickadate', DatePicker )
       $(this).trigger('carouselSet', [n]);
     }
   };
-
 
     $.fn.carousel = function(methodOrOptions) {
       if ( methods[methodOrOptions] ) {

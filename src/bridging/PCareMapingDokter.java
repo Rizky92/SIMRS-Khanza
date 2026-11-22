@@ -56,7 +56,6 @@ public final class PCareMapingDokter extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
      * @param modal */
@@ -827,7 +826,6 @@ public final class PCareMapingDokter extends javax.swing.JDialog {
             NmPoliPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
         }
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpcare_mapping_dokter());

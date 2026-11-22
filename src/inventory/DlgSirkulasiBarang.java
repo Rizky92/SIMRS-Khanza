@@ -1403,7 +1403,6 @@ public class DlgSirkulasiBarang extends javax.swing.JDialog {
                         ttltotalhibah=ttltotalhibah+totalhibah;
                     }
 
-
                 }
                 tabMode.addRow(new Object[]{"","","","","","","","","","","","","","","","","",""});
                 tabMode.addRow(new Object[]{
@@ -1474,7 +1473,6 @@ public class DlgSirkulasiBarang extends javax.swing.JDialog {
                     totalretbeli=0;jumlahretbeli=0;totalretjual=0;jumlahretjual=0;totalretpiut=0;jumlahretpiut=0;
                     jumlahpasin=0;stok=0;aset=0;totalrespulang=0;
                     jumlahutd=0;jumlahkeluar=0;totalkeluar=0;totalutd=0;
-
 
                     ps2=koneksi.prepareStatement(qrystok);
                     try {

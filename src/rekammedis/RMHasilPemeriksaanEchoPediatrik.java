@@ -49,7 +49,6 @@ import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.apache.hc.core5.http.io.entity.StringEntity;
 
-
 /**
  *
  * @author perpustakaan
@@ -249,7 +248,6 @@ public final class RMHasilPemeriksaanEchoPediatrik extends javax.swing.JDialog {
             TANGGALMUNDUR="yes";
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

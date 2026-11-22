@@ -94,7 +94,6 @@ public class UTDStokDarah extends javax.swing.JDialog {
         KodeKomponen.setDocument(new batasInput((byte)5).getKata(KodeKomponen));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
 
-
         ChkInput.setSelected(false);
         panelCari.setVisible(false);
         posisi();

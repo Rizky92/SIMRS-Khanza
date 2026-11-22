@@ -49,7 +49,6 @@ public class DlgParkirBarcode extends javax.swing.JDialog {
 
         this.setLocation(10,10);
 
-
         Object[] row={"Kode Barcode","Nomer Kartu"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

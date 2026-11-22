@@ -1,7 +1,5 @@
 package ipsrs;
 
-
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable2;
@@ -1017,7 +1015,6 @@ public class IPSRSHibah extends javax.swing.JDialog {
         }
         LTotal.setText(Valid.SetAngka(sbttl));
     }
-
 
     public void isCek(){
         autoNomor();

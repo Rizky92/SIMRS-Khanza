@@ -109,7 +109,6 @@ public final class DlgCekEntryRalan extends javax.swing.JDialog {
         }
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
 
-
     }
 
     /** This method is called from within the constructor to

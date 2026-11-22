@@ -127,7 +127,6 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         }
         Table3.setDefaultRenderer(Object.class, new WarnaTable());
 
-
         javax.swing.Timer timer = new javax.swing.Timer(100, this);
         timer.start();
     }
@@ -140,7 +139,6 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     private validasi Valid=new validasi();
     private int pilihan=0;
     private DlgCariPoli poli=new DlgCariPoli(null,false);
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1307,8 +1305,6 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             panggil(Integer.parseInt(labelantri3.getText()));
         }
     }//GEN-LAST:event_BtnBatal6ActionPerformed
-
-
 
     /**
     * @param args the command line arguments

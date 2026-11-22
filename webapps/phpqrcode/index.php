@@ -36,7 +36,6 @@
     if (!file_exists($PNG_TEMP_DIR))
         mkdir($PNG_TEMP_DIR);
 
-
     $filename = $PNG_TEMP_DIR.'test.png';
 
     //processing form input
@@ -48,7 +47,6 @@
     $matrixPointSize = 4;
     if (isset($_REQUEST['size']))
         $matrixPointSize = min(max((int)$_REQUEST['size'], 1), 10);
-
 
     if (isset($_REQUEST['data'])) {
 

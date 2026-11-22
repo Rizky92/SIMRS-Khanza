@@ -47,7 +47,6 @@ public class LaporanBulananIRJ extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -1215,8 +1214,6 @@ public class LaporanBulananIRJ extends javax.swing.JDialog {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-
-
     public void isCek(){
         BtnPrint.setEnabled(akses.getlaporan_tahunan_irj());
     }
@@ -1527,7 +1524,6 @@ public class LaporanBulananIRJ extends javax.swing.JDialog {
                             "</td>"+
                         "</tr>"
                     );
-
 
                     i++;
                 }
@@ -1976,7 +1972,6 @@ public class LaporanBulananIRJ extends javax.swing.JDialog {
                             "</td>"+
                         "</tr>"
                     );
-
 
                     i++;
                 }

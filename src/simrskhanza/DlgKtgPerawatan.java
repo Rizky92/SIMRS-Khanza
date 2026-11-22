@@ -55,7 +55,6 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
 
         this.setLocation(10,10);
 
-
         Object[] row={"P","Kode Kategori","Nama Kategori"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){

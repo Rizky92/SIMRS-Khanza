@@ -5228,7 +5228,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             total=ttl;
         }
 
-
         tagihanppn=besarppn+total;
         TagihanPPn.setText(Valid.SetAngka3(tagihanppn));
 

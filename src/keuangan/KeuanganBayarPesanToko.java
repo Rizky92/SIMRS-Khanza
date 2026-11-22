@@ -176,7 +176,6 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
         });
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -1720,7 +1719,6 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
     public void tampil2() {
         runBackground(() ->tampil());
     }
-
 
     public void emptTeks() {
         Kd2.setText("");

@@ -42,7 +42,6 @@ import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
 import simrskhanza.DlgCariCaraBayar;
 
-
 /**
  *
  * @author perpustakaan
@@ -432,7 +431,6 @@ public final class RMMCU extends javax.swing.JDialog {
             TANGGALMUNDUR="yes";
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

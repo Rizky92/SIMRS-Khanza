@@ -44,16 +44,7 @@ import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
 
 public class DlgPermintaanResepPulang extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -155,7 +146,6 @@ public class DlgPermintaanResepPulang extends javax.swing.JDialog {
             hppfarmasi="dasar";
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -658,7 +648,6 @@ public class DlgPermintaanResepPulang extends javax.swing.JDialog {
                             Sequel.meghapus("detail_permintaan_resep_pulang","no_permintaan",NoResep.getText());
                             simpandata();
                         }
-
 
                         if(sukses==true){
                             Sequel.Commit();
@@ -1321,7 +1310,6 @@ public class DlgPermintaanResepPulang extends javax.swing.JDialog {
         }
     }
 
-
     public void emptTeksobat() {
         if(ChkRM.isSelected()==true){
             Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_resep_pulang.no_permintaan,4),signed)),0) from permintaan_resep_pulang where permintaan_resep_pulang.tgl_permintaan='"+Valid.SetTgl(DTPBeri.getSelectedItem()+"")+"' ",
@@ -1759,5 +1747,13 @@ public class DlgPermintaanResepPulang extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

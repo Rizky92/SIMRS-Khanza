@@ -109,7 +109,6 @@ public final class PerpustakaanKoleksi extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TCari.requestFocus();
 
-
         ChkInput.setSelected(false);
         isForm();
         Valid.LoadTahun(ThnTerbit);

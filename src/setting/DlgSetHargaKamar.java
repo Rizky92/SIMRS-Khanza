@@ -60,7 +60,6 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
 
         this.setLocation(10,10);
 
-
         Object[] row={"No.Bed/Kamar","Kode Bangsal","Nama Bangsal/Kamar","Kode Bayar","Cara Bayar","Tarif Kamar"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

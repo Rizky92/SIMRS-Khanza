@@ -42,7 +42,7 @@ import kepegawaian.DlgCariPetugas;
  * @author dosen
  */
 public final class RMRekonsiliasiObat extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
+    private Timer timerJam;
 
     @Override
     public void dispose() {
@@ -51,14 +51,6 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         }
         super.dispose();
     }
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -67,7 +59,6 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private int i,reply;
-
 
     /** Creates new form DlgPerawatan
      * @param parent
@@ -1140,5 +1131,13 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         PerubahanAturanPakai.setText("");
         TindakLanjut.setSelectedIndex(0);
         NamaObat.requestFocus();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

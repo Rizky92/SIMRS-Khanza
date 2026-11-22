@@ -56,7 +56,6 @@
               <div align="center"><input name=BtnCari type=submit class="button" value="Cari"/></div>
             <br/>
 
-
     <div style="width: 100%; height: 350px; overflow: auto; ">
 
     <?php
@@ -119,7 +118,6 @@
                         $say and rekap_presensi.jam_datang like '%".$keyword."%' or
                         $say and rekap_presensi.status like '%".$keyword."%' or
                         $say and rekap_presensi.keterlambatan like '%".$keyword."%' order by $urut,rekap_presensi.jam_datang   ";
-
 
         $hasil=bukaquery($_sql);
         $jumlah=mysqli_num_rows($hasil);

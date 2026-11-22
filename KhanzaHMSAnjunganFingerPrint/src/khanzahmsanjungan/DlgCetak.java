@@ -429,7 +429,6 @@ public class DlgCetak extends javax.swing.JDialog {
     private component.Panel jPanel4;
     // End of variables declaration//GEN-END:variables
 
-
     public void setPasien(String norawat,String Poli,String Antrian,String Nama, String NoRM,
             String Dokter,String Bayar, String Penjab){
         LblNoRw.setText(norawat);

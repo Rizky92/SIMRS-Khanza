@@ -85,8 +85,6 @@ public final class DlgRl32 extends javax.swing.JDialog {
 
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
 
-
-
         try {
             ps=koneksi.prepareStatement(
                     "select poliklinik.kd_poli,poliklinik.nm_poli from poliklinik " +

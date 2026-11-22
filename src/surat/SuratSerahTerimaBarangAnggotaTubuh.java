@@ -39,7 +39,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author windiartohugroho
@@ -163,10 +162,6 @@ public final class SuratSerahTerimaBarangAnggotaTubuh extends javax.swing.JDialo
         LoadHTML.setDocument(kit.createDefaultDocument());
 
     }
-
-
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1121,7 +1116,6 @@ public final class SuratSerahTerimaBarangAnggotaTubuh extends javax.swing.JDialo
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
@@ -1517,7 +1511,6 @@ public final class SuratSerahTerimaBarangAnggotaTubuh extends javax.swing.JDialo
         NamaPJ.requestFocus();
     }
 
-
     private void getData() {
          if(tbObat.getSelectedRow()!= -1){
             NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -1596,7 +1589,6 @@ public final class SuratSerahTerimaBarangAnggotaTubuh extends javax.swing.JDialo
             ChkInput.setVisible(true);
         }
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getserah_terima_anggota_tubuh_barang());

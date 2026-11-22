@@ -26,7 +26,6 @@
                 $jumlahlibur=mysqli_num_rows($hasillibur);
 ?>
 
-
 <div id="post">
     <div class="entry">
 	<br/>
@@ -166,7 +165,6 @@
     </div>
 
     </form>
-
 
        <?php
             if(mysqli_num_rows($hasil)!=0) {

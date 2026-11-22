@@ -41,7 +41,6 @@ public class ApiKemenkesSirs {
 	return Key;
     }
 
-
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = SSLContext.getInstance("SSL");
         javax.net.ssl.TrustManager[] trustManagers= {

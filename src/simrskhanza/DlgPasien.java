@@ -68,7 +68,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import rekammedis.RMRiwayatPerawatan;
 
-
 /**
  *
  * @author igos
@@ -595,7 +594,6 @@ public class DlgPasien extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -3826,7 +3824,6 @@ public class DlgPasien extends javax.swing.JDialog {
                     kdprop=Sequel.CariKodePropinsi(Propinsi.getText());
                 }
             }
-
 
             if(Sequel.menyimpantf2("pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rekam Medis Pasien",36,new String[]{
                     TNo.getText(),TNm.getText(),TKtp.getText(),CmbJk.getSelectedItem().toString().substring(0,1),TTmp.getText(),

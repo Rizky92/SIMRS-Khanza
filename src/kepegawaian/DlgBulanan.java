@@ -114,9 +114,6 @@ public final class DlgBulanan extends javax.swing.JDialog {
         loadTahun();
     }
 
-
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

@@ -592,5 +592,4 @@
 		window.pjax = pjax_obj;
 	}
 
-
 }).call({});

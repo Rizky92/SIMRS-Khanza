@@ -56,7 +56,6 @@ public class DlgJabatanPolri extends javax.swing.JDialog {
 
         this.setLocation(10,10);
 
-
         tabMode=new DefaultTableModel(null,new Object[]{"ID","Jabatan POLRI"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };

@@ -35,7 +35,6 @@
                                 toko_detail_jual.nota_jual='$nonota'";
                 $hasil    = bukaquery($_sql);
 
-
                 $setting=  mysqli_fetch_array(bukaquery("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting"));
                 echo "<table width='".getOne("select notatoko from set_nota")."'  border='0' align='left' cellpadding='0' cellspacing='0' class='tbl_form'>
                        <tr class='isi14'>

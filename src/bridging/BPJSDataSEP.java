@@ -71,7 +71,6 @@ import org.springframework.web.client.RestTemplate;
 import rekammedis.RMRiwayatPerawatan;
 import simrskhanza.DlgKamarInap;
 
-
 /**
  *
  * @author perpustakaan
@@ -421,7 +420,6 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -6908,7 +6906,6 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             }
         }
     }
-
 
     private void insertSEP(){
         try {

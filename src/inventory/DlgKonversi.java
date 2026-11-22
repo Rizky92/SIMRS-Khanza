@@ -93,7 +93,6 @@ public final class DlgKonversi extends javax.swing.JDialog {
         Valid.loadCombo(kdsat2,"kode_sat","kodesatuan");
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

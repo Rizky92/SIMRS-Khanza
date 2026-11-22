@@ -43,7 +43,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author perpustakaan
@@ -1012,7 +1011,6 @@ public final class KeslingLimbahB3MedisCair extends javax.swing.JDialog {
         Keterangan.setText("");
         NoDokumen.requestFocus();
     }
-
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){

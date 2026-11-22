@@ -43,8 +43,6 @@ public class SirsApi {
 	return Key;
     }
 
-
-
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = SSLContext.getInstance("SSL");
         javax.net.ssl.TrustManager[] trustManagers= {

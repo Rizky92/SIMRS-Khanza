@@ -123,7 +123,6 @@ public final class KeuanganPiutangJasaPerusahaanBelumLunas extends javax.swing.J
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

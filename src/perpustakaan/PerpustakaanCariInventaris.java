@@ -104,11 +104,9 @@ public final class PerpustakaanCariInventaris extends javax.swing.JDialog {
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TCari.requestFocus();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

@@ -67,7 +67,6 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(885,674);
 
-
         LoadHTML.setEditable(true);
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditorKit(kit);

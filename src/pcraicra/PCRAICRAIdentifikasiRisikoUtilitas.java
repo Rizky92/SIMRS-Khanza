@@ -55,7 +55,6 @@ public final class PCRAICRAIdentifikasiRisikoUtilitas extends javax.swing.JDialo
         initComponents();
         this.setLocation(10,10);
 
-
         Object[] row={"Kode","Risiko Infeksi"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

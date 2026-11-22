@@ -106,13 +106,11 @@ public final class SuratMasuk extends javax.swing.JDialog {
                     });
                 });
 
-
                 engine.setOnStatusChanged((final WebEvent<String> event) -> {
                     SwingUtilities.invokeLater(() -> {
                         lblStatus.setText(event.getData());
                     });
                 });
-
 
                 engine.getLoadWorker().workDoneProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, final Number newValue) -> {
                     SwingUtilities.invokeLater(() -> {
@@ -133,7 +131,6 @@ public final class SuratMasuk extends javax.swing.JDialog {
                         });
                     }
                 });
-
 
                 engine.locationProperty().addListener((ObservableValue<? extends String> ov, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
@@ -165,7 +162,6 @@ public final class SuratMasuk extends javax.swing.JDialog {
             }
         });
     }
-
 
     public void loadURL(String url) {
         try {
@@ -209,13 +205,11 @@ public final class SuratMasuk extends javax.swing.JDialog {
                     });
                 });
 
-
                 engine.setOnStatusChanged((final WebEvent<String> event) -> {
                     SwingUtilities.invokeLater(() -> {
                         lblStatus.setText(event.getData());
                     });
                 });
-
 
                 engine.getLoadWorker().workDoneProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, final Number newValue) -> {
                     SwingUtilities.invokeLater(() -> {
@@ -236,7 +230,6 @@ public final class SuratMasuk extends javax.swing.JDialog {
                         });
                     }
                 });
-
 
                 engine.locationProperty().addListener((ObservableValue<? extends String> ov, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {

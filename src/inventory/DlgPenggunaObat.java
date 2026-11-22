@@ -88,7 +88,6 @@ public class DlgPenggunaObat extends javax.swing.JDialog {
         isForm();
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING Do NOT modify this code. The content of this method is
@@ -1069,7 +1068,6 @@ public class DlgPenggunaObat extends javax.swing.JDialog {
         }
 
     }
-
 
     public void isCek(){
         //BtnPrint.setEnabled(var.getobat_per_kamar());

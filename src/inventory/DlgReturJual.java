@@ -108,7 +108,6 @@ public class DlgReturJual extends javax.swing.JDialog {
         }
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
-
         NoRetur.setDocument(new batasInput((byte)14).getKata(NoRetur));
         kdmem.setDocument(new batasInput((byte)15).getKata(kdmem));
         NoNota.setDocument(new batasInput((byte)20).getKata(NoNota));
@@ -1368,7 +1367,6 @@ public class DlgReturJual extends javax.swing.JDialog {
             isHitung();
         }
     }
-
 
     private void isHitung(){
         if((!Jmlretur.getText().equals(""))&&(!Hargaretur.getText().equals(""))){

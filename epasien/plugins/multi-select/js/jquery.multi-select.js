@@ -13,7 +13,6 @@
 
   "use strict";
 
-
  /* MULTISELECT CLASS DEFINITION
   * ====================== */
 

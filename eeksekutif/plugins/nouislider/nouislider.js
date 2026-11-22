@@ -22,7 +22,6 @@
 
 	'use strict';
 
-
 	// Removes duplicates from an array.
 	function unique(array) {
 		return array.filter(function(a){
@@ -144,7 +143,6 @@
 		};
 	}
 
-
 // Value calculation
 
 	// Determine the size of a sub-range in relation to a full range.
@@ -168,7 +166,6 @@
 	function isPercentage ( range, value ) {
 		return ((value * ( range[1] - range[0] )) / 100) + range[0];
 	}
-
 
 // Range conversion
 
@@ -251,7 +248,6 @@
 		);
 	}
 
-
 // Entry parsing
 
 	function handleEntryPoint ( index, value, that ) {
@@ -314,7 +310,6 @@
 			that.xPct[i+1] );
 	}
 
-
 // Interface
 
 	// The interface to Spectrum handles all direction-based
@@ -345,7 +340,6 @@
 		} else {
 			ordered.sort(function(a, b) { return a[0] - b[0]; });
 		}
-
 
 		// Convert all entries to subranges.
 		for ( index = 0; index < ordered.length; index++ ) {
@@ -796,7 +790,6 @@
 		return parsed;
 	}
 
-
 function closure ( target, options, originalOptions ){
 	var
 		actions = getActions( ),
@@ -809,7 +802,6 @@ function closure ( target, options, originalOptions ){
 		scope_Values = [],
 		scope_Events = {},
 		scope_Self;
-
 
 	// Delimit proposed values for handle positions.
 	function getPositions ( a, b, delimit ) {
@@ -954,7 +946,6 @@ function closure ( target, options, originalOptions ){
 		return div;
 	}
 
-
 	function addTooltip ( handle, index ) {
 
 		if ( !options.tooltips[index] ) {
@@ -987,7 +978,6 @@ function closure ( target, options, originalOptions ){
 			}
 		});
 	}
-
 
 	function getGroup ( mode, values, stepped ) {
 
@@ -1236,7 +1226,6 @@ function closure ( target, options, originalOptions ){
 		));
 	}
 
-
 	// Shorthand for base dimensions.
 	function baseSize ( ) {
 		var rect = scope_Base.getBoundingClientRect(), alt = 'offset' + ['Width', 'Height'][options.ort];
@@ -1299,7 +1288,6 @@ function closure ( target, options, originalOptions ){
 
 		return values;
 	}
-
 
 	// Handler for attaching events trough a proxy.
 	function attach ( events, element, callback, data ) {
@@ -1617,7 +1605,6 @@ function closure ( target, options, originalOptions ){
 		}
 	}
 
-
 	// Test suggested values and apply margin, step.
 	function setHandle ( handle, to, noLimitOption ) {
 
@@ -1890,7 +1877,6 @@ function closure ( target, options, originalOptions ){
 		valueSet(optionsToUpdate.start || v, fireSetEvent);
 	}
 
-
 	// Throw an error if the slider was already initialized.
 	if ( scope_Target.noUiSlider ) {
 		throw new Error('Slider was already initialized.');
@@ -1931,7 +1917,6 @@ function closure ( target, options, originalOptions ){
 	return scope_Self;
 
 }
-
 
 	// Run the standard initializer
 	function initialize ( target, originalOptions ) {

@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 
-
 package surat;
 
 import fungsi.WarnaTable;
@@ -40,7 +39,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
-
 
 /**
  *
@@ -179,10 +177,6 @@ public final class SuratPersetujuanPenundaanPelayanan extends javax.swing.JDialo
         LoadHTML2.setDocument(kit.createDefaultDocument());
 
     }
-
-
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1236,7 +1230,6 @@ public final class SuratPersetujuanPenundaanPelayanan extends javax.swing.JDialo
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
@@ -1708,7 +1701,6 @@ public final class SuratPersetujuanPenundaanPelayanan extends javax.swing.JDialo
         BtnDokter.requestFocus();
     }
 
-
     private void getData() {
          if(tbObat.getSelectedRow()!= -1){
             NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -1792,7 +1784,6 @@ public final class SuratPersetujuanPenundaanPelayanan extends javax.swing.JDialo
             ChkInput.setVisible(true);
         }
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpersetujuan_penundaan_pelayanan());

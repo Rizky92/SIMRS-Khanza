@@ -1,6 +1,5 @@
 package inventory;
 
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable2;
@@ -1616,7 +1615,6 @@ public class DlgMutasiBarang extends javax.swing.JDialog {
                             }
                         }
                     }
-
 
                     tbDokter.setValueAt(stok_asal,i,6);
                     tbDokter.setValueAt(stok_tujuan,i,7);

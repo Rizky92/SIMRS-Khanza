@@ -529,7 +529,6 @@
         return this;
     }
 
-
     function stringSet (units, value) {
         if (typeof units === 'object') {
             units = normalizeObjectUnits(units);
@@ -667,7 +666,6 @@
     // any word (or two) characters or numbers including two/three word month in arabic.
     // includes scottish gaelic two word and hyphenated months
     var matchWord = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i;
-
 
     var regexes = {};
 
@@ -1529,7 +1527,6 @@
         }
     }
 
-
     function computeWeekdaysParse () {
         function cmpLenRev(a, b) {
             return b.length - a.length;
@@ -1689,7 +1686,6 @@
             return isLower ? 'am' : 'AM';
         }
     }
-
 
     // MOMENTS
 
@@ -2236,7 +2232,6 @@
         configFromArray(config);
         checkOverflow(config);
     }
-
 
     function meridiemFixWrap (locale, hour, meridiem) {
         var isPm;
@@ -3262,7 +3257,6 @@
     addUnitPriority('weekYear', 1);
     addUnitPriority('isoWeekYear', 1);
 
-
     // PARSING
 
     addRegexToken('G',      matchSigned);
@@ -3484,7 +3478,6 @@
     addFormatToken(0, ['SSSSSSSSS', 9], 0, function () {
         return this.millisecond() * 1000000;
     });
-
 
     // ALIASES
 
@@ -4072,7 +4065,6 @@
         years  = absFloor(months / 12);
         months %= 12;
 
-
         // inspired by https://github.com/dordille/moment-isoduration/blob/master/moment.isoduration.js
         var Y = years;
         var M = months;
@@ -4154,7 +4146,6 @@
     });
 
     // Side effect imports
-
 
     utils_hooks__hooks.version = '2.14.1';
 

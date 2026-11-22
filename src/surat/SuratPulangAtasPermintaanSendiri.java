@@ -42,7 +42,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author windiartohugroho
@@ -160,10 +159,6 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         LoadHTML2.setDocument(kit.createDefaultDocument());
         LoadHTML3.setDocument(kit.createDefaultDocument());
     }
-
-
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1139,7 +1134,6 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
@@ -1539,7 +1533,6 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
                 "APS"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,NoSurat);
     }
 
-
     private void getData() {
          if(tbObat.getSelectedRow()!= -1){
             NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -1615,7 +1608,6 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
             ChkInput.setVisible(true);
         }
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsurat_pulang_atas_permintaan_sendiri());

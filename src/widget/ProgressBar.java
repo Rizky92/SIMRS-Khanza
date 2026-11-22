@@ -120,7 +120,6 @@ public class ProgressBar extends JProgressBar {
             g2.fill(s);
         }
 
-
         paint = new GradientPaint(0, 0, light, 0, getHeight() * 3 / 4, dark);
         g2.setPaint(paint);
         g2.fillRect(3, 3, getWidth(), getHeight() * 3 / 4);

@@ -49,16 +49,7 @@ import widget.Button;
  * @author dosen
  */
 public final class InventoryResepLuar extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabModeResep,tabModeDetailResepRacikan,tabModeResepRacikan;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -245,7 +236,6 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         jam();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -719,7 +709,6 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1653,7 +1642,6 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
         }
     }
 
-
     private void simpandata() {
         try {
             for(i=0;i<tbResep.getRowCount();i++){
@@ -1733,5 +1721,13 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

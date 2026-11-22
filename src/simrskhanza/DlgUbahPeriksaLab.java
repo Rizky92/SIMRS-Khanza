@@ -60,7 +60,6 @@ public final class DlgUbahPeriksaLab extends javax.swing.JDialog {
     private double ttljmdokter=0,ttljmpetugas=0,ttlkso=0,ttlpendapatan=0,ttlbhp=0,ttljasasarana=0,ttljmperujuk=0,ttlmenejemen=0;
     private String status="";
 
-
     /** Creates new form DlgPerawatan
      * @param parent
      * @param modal */
@@ -1532,12 +1531,10 @@ public final class DlgUbahPeriksaLab extends javax.swing.JDialog {
         Pemeriksaan.requestFocus();
     }
 
-
     private void isPsien(){
         Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",TPasien,TNoRM.getText());
         Sequel.cariIsi("select pasien.jk from pasien where pasien.no_rkm_medis=? ",Jk,TNoRM.getText());
     }
-
 
     public void setNoRm(String norwt,String tanggal,String jam) {
         try {

@@ -220,7 +220,6 @@
                 }
             }
 
-
             canvasHeight--;
 
             if (options.get('normalRangeMin') !== undefined && !options.get('drawNormalOnTop')) {
@@ -347,4 +346,3 @@
             target.render();
         }
     });
-

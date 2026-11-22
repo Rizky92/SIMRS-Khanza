@@ -578,8 +578,6 @@ public final class DlgPengeluaranPengeluaran extends javax.swing.JDialog {
         tbPengembalianDeposit.setDefaultRenderer(Object.class, new WarnaTable());
     }
 
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

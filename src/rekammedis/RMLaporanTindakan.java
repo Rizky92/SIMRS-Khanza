@@ -2,7 +2,6 @@
  * By Mas Elkhanza
  */
 
-
 package rekammedis;
 
 import fungsi.WarnaTable;
@@ -41,7 +40,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
-
 
 /**
  *
@@ -156,7 +154,6 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
 
         setWaktuSekarangSmc();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

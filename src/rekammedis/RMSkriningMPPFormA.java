@@ -2,7 +2,6 @@
  * Kontribusi dari Haris Rochmatullah, RS Bhayangkara Nganjuk
  */
 
-
 package rekammedis;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -45,7 +44,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
-
 
 /**
  *
@@ -221,11 +219,9 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
 
-
         ChkAccor.setSelected(false);
         isMenu();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -2157,7 +2153,6 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
         DTPCari2.setDate(tgl2);
         isRawat();
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getmpp_skrining());

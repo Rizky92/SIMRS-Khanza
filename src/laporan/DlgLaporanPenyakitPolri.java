@@ -39,7 +39,6 @@ public class DlgLaporanPenyakitPolri extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);

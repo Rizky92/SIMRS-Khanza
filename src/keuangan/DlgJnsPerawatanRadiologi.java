@@ -124,7 +124,6 @@ public final class DlgJnsPerawatanRadiologi extends javax.swing.JDialog {
         isForm();
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

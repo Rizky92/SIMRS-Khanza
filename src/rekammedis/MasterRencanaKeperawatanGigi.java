@@ -56,7 +56,6 @@ public class MasterRencanaKeperawatanGigi extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         Object[] row={"Kode Masalah","Masalah Keperawatan","Kode","Rencana Keperawatan"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

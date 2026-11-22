@@ -74,8 +74,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import simrskhanza.DlgCariPasien;
 
-
-
 /**
  *
  * @author windiarto

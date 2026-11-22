@@ -33,7 +33,6 @@ import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author perpustakaan
@@ -604,7 +603,6 @@ public final class RMPenilaianAwalKeperawatanKebidananRanap extends javax.swing.
             TANGGALMUNDUR="yes";
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -6900,7 +6898,6 @@ public final class RMPenilaianAwalKeperawatanKebidananRanap extends javax.swing.
         isRawat();
         runBackground(() ->tampilPersalinan());
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_awal_keperawatan_ranapkebidanan());

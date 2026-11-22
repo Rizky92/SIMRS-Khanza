@@ -112,7 +112,6 @@
                         @$bariscek       = mysqli_fetch_array($hasilcek);
                         @$idcek          = $bariscek["id"];
 
-
                         if(empty($idcek)){
                             if(empty($img)){
                                 echo "<font size='9'>Pilih shift dulu !!!!!!!</font>";

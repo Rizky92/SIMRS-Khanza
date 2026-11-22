@@ -457,7 +457,6 @@
 
                                     $_sql22  ="SELECT ($ttln/sum(n))*100 from indekref where kdindex='".$baris["indexins"]."'";
 
-
                                     $hasil22 =bukaquery($_sql22);
                                     $baris22 = mysqli_fetch_array($hasil22);
                         $indexjaga=round((isset($baris22[0])?$baris22[0]:0),2);
@@ -532,7 +531,6 @@
                                                 (isset($baris29[0])?$baris29[0]:0)+
                                                 (isset($baris31[0])?$baris31[0]:0);
                                         $ttljasalain=$ttljasalain+$jl;
-
 
                                 echo "<tr class='isi' valign='top'>
                                          <td>".$baris["nik"]."</td>

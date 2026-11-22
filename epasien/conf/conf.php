@@ -269,7 +269,6 @@
         }
     }
 
-
     function tutupkoneksi(){
        global  $konektor;
        mysqli_close($konektor);
@@ -422,13 +421,11 @@
         echo"<html><head><title></title><meta http-equiv='refresh' content='0;URL=$url'></head><body></body></html>";
     }
 
-
     function JurusKibasNaga(){
         $id	= $_SERVER['REMOTE_ADDR'];
         $sql      = bukaquery("DELETE FROM tmp WHERE ID='$id'");
         return $sql;
     }
-
 
     function konversiTgl($tanggal){
         list($thn,$bln,$tgl)    = explode('-',$tanggal);
@@ -545,7 +542,6 @@
         }
     }
 
-
     function loadTgl2(){
         for($tgl=1; $tgl<=31; $tgl++){
             $tgl_leng=strlen($tgl);
@@ -605,7 +601,6 @@
             echo "<option value=$i>$i</option>";
         }
     }
-
 
     function loadThnnow(){
         $thnini=date('Y');

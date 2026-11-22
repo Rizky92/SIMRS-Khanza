@@ -55,16 +55,7 @@ import kepegawaian.DlgCariPetugas;
  * @author dosen
  */
 public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -1496,7 +1487,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
     private widget.Table tbPermintaan;
     // End of variables declaration//GEN-END:variables
 
-
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try {
@@ -1810,5 +1800,13 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

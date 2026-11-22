@@ -107,7 +107,6 @@ public class DlgReturBeli extends javax.swing.JDialog {
         }
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
-
         NoRetur.setDocument(new batasInput((byte)20).getKata(NoRetur));
         NoFaktur.setDocument(new batasInput((byte)20).getKata(NoFaktur));
         Kdptg.setDocument(new batasInput((byte)25).getKata(Kdptg));
@@ -1438,7 +1437,6 @@ public class DlgReturBeli extends javax.swing.JDialog {
             Nmptg.setText(Sequel.CariPetugas(Kdptg.getText()));
         }
     }
-
 
     private void cariBarang(){
         try {

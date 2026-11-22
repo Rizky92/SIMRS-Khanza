@@ -45,7 +45,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		return module.exports;
 /******/ 	}
 
-
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
 
@@ -5113,7 +5112,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return ret;
 	    };
 
-
 	    /*\
 	     * Set.isPointInside
 	     [ method ]
@@ -5479,7 +5477,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return R;
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
 
 /***/ },
 /* 2 */
@@ -5856,7 +5853,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    (typeof module != "undefined" && module.exports) ? (module.exports = eve) : ( true ? (!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function() { return eve; }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))) : (glob.eve = eve));
 	})(this);
-
 
 /***/ },
 /* 3 */
@@ -7281,7 +7277,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
-
 /***/ },
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
@@ -7437,7 +7432,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            newpath = pathTypes[o.type] && (params.x != a.x || params.y != a.y || params.width != a.width || params.height != a.height || params.cx != a.cx || params.cy != a.cy || params.rx != a.rx || params.ry != a.ry || params.r != a.r),
 	            isOval = ovalTypes[o.type] && (a.cx != params.cx || a.cy != params.cy || a.r != params.r || a.rx != params.rx || a.ry != params.ry),
 	            res = o;
-
 
 	        for (var par in params) if (params[has](par)) {
 	            a[par] = params[par];
@@ -8285,7 +8279,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        })(method);
 	    }
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
 
 /***/ }
 /******/ ])

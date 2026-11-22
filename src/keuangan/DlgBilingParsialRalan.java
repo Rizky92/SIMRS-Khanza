@@ -37,7 +37,6 @@ import javax.swing.text.DocumentFilter;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author khanzamedia
@@ -4500,7 +4499,6 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                 noorder=null;
                 noorder=new String[jml];
 
-
                 index=0;
                 for(i=0;i<tbRadiologi.getRowCount();i++){
                     if(tbRadiologi.getValueAt(i,0).toString().equals("true")){
@@ -4816,7 +4814,6 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                 jam=new String[jml];
                 noorder=null;
                 noorder=new String[jml];
-
 
                 index=0;
                 for(i=0;i<tbLaborat.getRowCount();i++){
@@ -5738,7 +5735,6 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
         }
     }
 
-
     private void isHitung() {
         ttl=0;
         y=0;
@@ -6145,7 +6141,6 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                         }
                     }
                 }
-
 
                 if(sukses==true){
                     if((ttlRalan_Dokter+ttlRalan_Dokter_Param+ttlRalan_Paramedis-Suspen_Tindakan_Ralan)>0){

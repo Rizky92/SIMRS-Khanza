@@ -229,7 +229,6 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         }
     }
 
-
     /** This method is called from within the constructor to
      * initialize the
      * WARNING: Do NOT modify this code. The content of this method is
@@ -2205,7 +2204,6 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         }
         LCount1.setText(Valid.SetAngka(bayar));
     }
-
 
     private void autoNomor() {
         Valid.autonomorSmc(NoTagihan, "JMD", "", "bayar_jm_dokter", "no_bayar", 3, "0", Tanggal);

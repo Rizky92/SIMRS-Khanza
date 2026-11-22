@@ -2669,7 +2669,6 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
 
                                     }
 
-
                                 }
                             } catch (Exception e) {
                                 System.out.println("Notif pasien ranap : "+e);
@@ -2830,7 +2829,6 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
                                 }
                             }
                         }
-
 
                    }
                    i++;
@@ -4831,7 +4829,6 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
                                             }
 
                                         }
-
 
                                     }
                                 } catch (Exception e) {
@@ -7090,7 +7087,6 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
 
                                         }
 
-
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif pasien ranap : "+e);
@@ -9219,7 +9215,6 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
 
                                         }
 
-
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif pasien ranap : "+e);
@@ -11347,7 +11342,6 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
                                             }
 
                                         }
-
 
                                     }
                                 } catch (Exception e) {

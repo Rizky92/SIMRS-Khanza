@@ -2,7 +2,6 @@
  * Kontribusi Agus Budiyono Puskesmas Kerjo
  */
 
-
 package rekammedis;
 
 import fungsi.WarnaTable;
@@ -43,22 +42,12 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author perpustakaan
  */
 public final class RMSkriningAdiksiNikotin extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -181,7 +170,6 @@ public final class RMSkriningAdiksiNikotin extends javax.swing.JDialog {
 
         jam();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1935,7 +1923,6 @@ public final class RMSkriningAdiksiNikotin extends javax.swing.JDialog {
         }
     }
 
-
     private void simpan() {
         if(Sequel.menyimpantf("skrining_adiksi_nikotin","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",18,new String[]{
             TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),RokokDihisab.getSelectedItem().toString(),NilaiRokokDihisab.getText(),
@@ -1986,5 +1973,13 @@ public final class RMSkriningAdiksiNikotin extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

@@ -79,8 +79,6 @@ public final class YaskiReferensiPropinsi extends javax.swing.JDialog {
         Propinsi.setDocument(new batasInput((byte)100).getKata(Propinsi));
     }
 
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

@@ -11,16 +11,12 @@ package khanzahmsserviceaplicare;
  */
 public class KhanzaHMSServiceAplicare {
 
-
     /**
      * @param args the command line arguments
      */
 
-
     public static void main(String[] args) {
         new frmUtama().setVisible(true);
     }
-
-
 
 }

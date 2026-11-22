@@ -463,7 +463,6 @@ print isset($header)?$header:NULL;*/
 
                             $_sql22  ="SELECT ($ttln/sum(n))*100 from indekref where kdindex='".$baris["indexins"]."'";
 
-
 			    $hasil22 =bukaquery($_sql22);
 			    $baris22 = mysqli_fetch_array($hasil22);
                 $indexjaga=round((isset($baris22[0])?$baris22[0]:0),2);

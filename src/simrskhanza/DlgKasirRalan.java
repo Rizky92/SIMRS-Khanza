@@ -309,6 +309,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     private DlgRawatJalan formrawatjalan;
     private DlgPeresepanDokter resepobat;
     private DlgCariPerawatanRalan dlgrwjl;
+    private RMRiwayatPerawatan riwayat;
+    private DlgKamarInap kamarinap;
     private String aktifkanparsial="no",caripenjab="",filter="no",namadokter="",namapoli="",order="reg_periksa.no_rawat desc",
             tampildiagnosa="",finger="",norawatdipilih="",normdipilih="",variabel="",terbitsep="";
     private DlgBilingRalan billing;
@@ -8236,15 +8238,33 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi..!!");
                     }else{
                         akses.setstatus(true);
-                        DlgKamarInap kamarinap=new DlgKamarInap(null,false);
-                        kamarinap.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                        kamarinap.setLocationRelativeTo(internalFrame1);
-                        kamarinap.emptTeks();
-                        if(akses.getbilling_ralan()==true){
-                            otomatisRalan();
+                        if (kamarinap == null || !kamarinap.isDisplayable()) {
+                            kamarinap=new DlgKamarInap(null,false);
+                            kamarinap.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                            kamarinap.addWindowListener(new WindowAdapter() {
+                                @Override
+                                public void windowClosed(WindowEvent e) {
+                                    kamarinap=null;
+                                }
+                            });
+
+                            kamarinap.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                            kamarinap.setLocationRelativeTo(internalFrame1);
                         }
-                        kamarinap.isCek();
-                        kamarinap.setNoRm(TNoRw.getText(),TNoRMCari.getText(),TPasienCari.getText());
+                        if (kamarinap == null) return;
+                        if (!kamarinap.isVisible()) {
+                            kamarinap.emptTeks();
+                            if(akses.getbilling_ralan()==true){
+                                otomatisRalan();
+                            }
+                            kamarinap.isCek();
+                            kamarinap.setNoRm(TNoRw.getText(),TNoRMCari.getText(),TPasienCari.getText());
+                        }
+
+                        if (kamarinap.isVisible()) {
+                            kamarinap.toFront();
+                            return;
+                        }
                         kamarinap.setVisible(true);
                     }
                 }
@@ -9096,11 +9116,29 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             tbKasirRalan.requestFocus();
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMRiwayatPerawatan resume=new RMRiwayatPerawatan(null,true);
-            resume.setNoRm(TNoRMCari.getText(),TPasienCari.getText());
-            resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-            resume.setLocationRelativeTo(internalFrame1);
-            resume.setVisible(true);
+            if (riwayat == null || !riwayat.isDisplayable()) {
+                riwayat=new RMRiwayatPerawatan(null,false);
+                riwayat.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                riwayat.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        riwayat=null;
+                    }
+                });
+
+                riwayat.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                riwayat.setLocationRelativeTo(internalFrame1);
+            }
+            if (riwayat == null) return;
+            if (!riwayat.isVisible()) {
+                riwayat.setNoRm(TNoRMCari.getText(),TPasienCari.getText());
+            }
+
+            if (riwayat.isVisible()) {
+                riwayat.toFront();
+                return;
+            }
+            riwayat.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_ppRiwayatBtnPrintActionPerformed
@@ -9560,12 +9598,30 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi..!!");
                     }else{
                         akses.setstatus(true);
-                        DlgKamarInap kamarinap=new DlgKamarInap(null,false);
-                        kamarinap.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                        kamarinap.setLocationRelativeTo(internalFrame1);
-                        kamarinap.emptTeks();
-                        kamarinap.isCek();
-                        kamarinap.setNoRm(tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),10).toString(),tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),2).toString(),tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),3).toString());
+                        if (kamarinap == null || !kamarinap.isDisplayable()) {
+                            kamarinap=new DlgKamarInap(null,false);
+                            kamarinap.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                            kamarinap.addWindowListener(new WindowAdapter() {
+                                @Override
+                                public void windowClosed(WindowEvent e) {
+                                    kamarinap=null;
+                                }
+                            });
+
+                            kamarinap.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                            kamarinap.setLocationRelativeTo(internalFrame1);
+                        }
+                        if (kamarinap == null) return;
+                        if (!kamarinap.isVisible()) {
+                            kamarinap.emptTeks();
+                            kamarinap.isCek();
+                            kamarinap.setNoRm(tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),10).toString(),tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),2).toString(),tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),3).toString());
+                        }
+
+                        if (kamarinap.isVisible()) {
+                            kamarinap.toFront();
+                            return;
+                        }
                         kamarinap.setVisible(true);
                     }
                 }
@@ -20020,7 +20076,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             }.execute();
         }
     }
-
 
     private void MnPengkajianInvasifNonBedahSMCActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabModekasir.getRowCount()==0){

@@ -76,10 +76,8 @@ public class DapurStokKeluarBarangPerTanggal extends javax.swing.JDialog {
         tbJadwal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         Valid.LoadTahun(ThnCari);
 
-
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

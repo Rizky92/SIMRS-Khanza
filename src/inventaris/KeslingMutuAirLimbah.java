@@ -43,7 +43,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author perpustakaan
@@ -1085,7 +1084,6 @@ public final class KeslingMutuAirLimbah extends javax.swing.JDialog {
         Salt.setText("0");
         Meteran.requestFocus();
     }
-
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){

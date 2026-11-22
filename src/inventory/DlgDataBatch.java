@@ -58,7 +58,6 @@ public class DlgDataBatch extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         tabMode = new DefaultTableModel(null,new Object[]{
             "P", "Kode Barang", "Nama Barang", "No.Batch", "No.Faktur", "Tgl.Datang","Kadaluwarsa",
             "Hrg.Dasar(Rp)","Hrg.Beli(Rp)", "Ralan(Rp)", "Ranap K1(Rp)", "Ranap K2(Rp)", "Ranap K3(Rp)",
@@ -143,7 +142,6 @@ public class DlgDataBatch extends javax.swing.JDialog {
             }
         }
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
-
 
         Kd.setDocument(new batasInput((byte) 15).getKata(Kd));
         Nm.setDocument(new batasInput((byte) 80).getKata(Nm));

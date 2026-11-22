@@ -5,7 +5,6 @@
 
 package fungsi;
 
-
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -348,7 +347,6 @@ public final class validasi {
         String[] subRptDir = fullPath.split(reportName);
         String reportDir = subRptDir[0];
 
-
         try {
             try (Statement stm = connect.createStatement()) {
                 Map<String, Object> parameters = new HashMap<>();
@@ -408,7 +406,6 @@ public final class validasi {
         // Ambil Direktori tempat file RptMaster.jasper berada
         String[] subRptDir = fullPath.split(reportName);
         String reportDir = subRptDir[0];
-
 
         try {
             try (Statement stm = connect.createStatement()) {
@@ -470,7 +467,6 @@ public final class validasi {
         String[] subRptDir = fullPath.split(reportName);
         String reportDir = subRptDir[0];
 
-
         try {
             try {
                 String namafile="./"+reportDirName+"/"+reportName;
@@ -525,7 +521,6 @@ public final class validasi {
         String[] subRptDir = fullPath.split(reportName);
         String reportDir = subRptDir[0];
 
-
         try {
             try {
                 String namafile="./"+reportDirName+"/"+reportName;
@@ -567,7 +562,6 @@ public final class validasi {
            System.out.println("Error : "+ex);
         }
     }
-
 
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JTextField kanan){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -814,7 +808,6 @@ public final class validasi {
         teks.requestFocus();
     }
 
-
     public void tabelKosong(DefaultTableModel tabMode) {
         j=tabMode.getRowCount();
         for(i=0;i<j;i++){
@@ -848,6 +841,5 @@ public final class validasi {
             }
             return x;
     }
-
 
 }

@@ -53,7 +53,6 @@ public class PerpustakaanDenda extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         tabMode=new DefaultTableModel(null,new Object[]{"Kode Denda","Nama Denda","Besarnya Denda(%)"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };

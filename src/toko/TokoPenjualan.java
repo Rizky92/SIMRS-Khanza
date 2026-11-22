@@ -58,7 +58,6 @@ public class TokoPenjualan extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -127,7 +126,6 @@ public class TokoPenjualan extends javax.swing.JDialog {
         warna.kolom=0;
         tbObat.setDefaultRenderer(Object.class,warna);
 
-
         NoNota.setDocument(new batasInput((byte)15).getKata(NoNota));
         kdmem.setDocument(new batasInput((byte)10).getKata(kdmem));
         catatan.setDocument(new batasInput((byte)40).getKata(catatan));
@@ -161,7 +159,6 @@ public class TokoPenjualan extends javax.swing.JDialog {
             hpptoko="dasar";
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1406,8 +1403,6 @@ public class TokoPenjualan extends javax.swing.JDialog {
         }
     }
 
-
-
     private void getData(){
         row=tbObat.getSelectedRow();
         if(row!= -1){
@@ -1485,7 +1480,6 @@ public class TokoPenjualan extends javax.swing.JDialog {
         LTotal.setText(Valid.SetAngka(ttl));
         isKembali();
     }
-
 
     private void isKembali(){
         if(!Bayar.getText().trim().equals("")) {

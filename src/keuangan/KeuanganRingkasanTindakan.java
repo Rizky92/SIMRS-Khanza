@@ -558,7 +558,6 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
         Valid.SetTgl2(Tgl2,format.format(new Date())+" 23:59:59");
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -4284,7 +4283,6 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
     }
-
 
     private void tampil8(){
         Valid.tabelKosong(tabModeRadiologi);

@@ -61,7 +61,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-
 /**
  *
  * @author perpustakaan
@@ -92,7 +91,6 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
         initComponents();
         this.setLocation(8,1);
         setSize(628,674);
-
 
         Object[] row={
             "No.SEP","No.Rawat","No.RM","Nama Pasien","Tgl.Rujukan",
@@ -160,7 +158,6 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
             user=akses.getkode();
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

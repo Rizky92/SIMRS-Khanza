@@ -90,7 +90,6 @@
             $el = QRspec::rsEccCodes1($spec);
             $rs = QRrs::init_rs(8, 0x11d, 0, 1, $el, 255 - $dl - $el);
 
-
             $blockNo = 0;
             $dataPos = 0;
             $eccPos = 0;
@@ -206,7 +205,6 @@
 
             $frame = $filler->frame;
             unset($filler);
-
 
             // masking
             $maskObj = new QRmask();

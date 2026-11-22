@@ -56,26 +56,13 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
-
 /**
  *
  * @author perpustakaan
  */
 public final class DlgDataInsidenKeselamatan extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-    private javax.swing.Timer timerJam2;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-        if (timerJam2 != null && !timerJam2.isRunning()) {
-            timerJam2.start();
-        }
-    }
-
+    private Timer timerJam;
+    private Timer timerJam2;
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -94,7 +81,6 @@ public final class DlgDataInsidenKeselamatan extends javax.swing.JDialog {
         initComponents();
         this.setLocation(8,1);
         setSize(628,674);
-
 
         Object[] row={
             "No.Rawat","No.R.M.","Nama Pasien","Umur","Tgl.Kejadian","Jam Kejadian",
@@ -177,7 +163,6 @@ public final class DlgDataInsidenKeselamatan extends javax.swing.JDialog {
         jam();
         jam2();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -2050,5 +2035,16 @@ public final class DlgDataInsidenKeselamatan extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
+        if (timerJam2 != null && !timerJam2.isRunning()) {
+            timerJam2.start();
+        }
     }
 }

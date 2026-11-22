@@ -42,7 +42,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author perpustakaan
@@ -64,7 +63,6 @@ public final class UTDCekalDarah extends javax.swing.JDialog {
         initComponents();
         this.setLocation(8,1);
         setSize(628,674);
-
 
         Object[] row={"Nomor","No.ID","Nama Pendonor","No.Telp","Tanggal","Dinas","NIP","Petugas Cekal","Keterangan"};
         tabMode=new DefaultTableModel(null,row){

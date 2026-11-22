@@ -24,7 +24,6 @@ function drawDocSparklines() {
     $('#compositebar').sparkline([4, 1, 5, 7, 9, 9, 8, 7, 6, 6, 4, 7, 8, 4, 3, 2, 2, 5, 6, 7],
         { composite: true, fillColor: false, lineColor: 'red' });
 
-
     // Line charts taking their values from the tag
     $('.sparkline-1').sparkline();
 

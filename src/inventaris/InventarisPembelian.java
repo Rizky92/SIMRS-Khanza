@@ -1,7 +1,5 @@
 package inventaris;
 
-
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable2;
@@ -1284,7 +1282,6 @@ public class InventarisPembelian extends javax.swing.JDialog {
         }
 
     }
-
 
     public void isCek(){
         autoNomor();

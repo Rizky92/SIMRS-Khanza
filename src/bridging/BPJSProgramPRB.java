@@ -60,7 +60,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-
 /**
  *
  * @author perpustakaan
@@ -1101,7 +1100,6 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
                     obat="[]";
                 }
 
-
                 headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
                 headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
@@ -1210,7 +1208,6 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
                     }else{
                         obat="[]";
                     }
-
 
                     headers = new HttpHeaders();
                     headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -1657,7 +1654,6 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
         isForm();
         runBackground(() ->tampil());
     }
-
 
     private void isForm(){
         if(ChkInput.isSelected()==true){

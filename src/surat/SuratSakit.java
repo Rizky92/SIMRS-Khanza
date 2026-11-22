@@ -39,7 +39,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
 
-
 /**
  *
  * @author salimmulyana
@@ -107,10 +106,6 @@ public final class SuratSakit extends javax.swing.JDialog {
         MnCetakSuratSakit4.setEnabled(false);
         MnCetakSuratSakit5.setEnabled(false);
     }
-
-
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -891,7 +886,6 @@ public final class SuratSakit extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-
     private void TanggalAkhirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalAkhirKeyPressed
         Valid.pindah(evt,TanggalAwal,LamaSakit);
     }//GEN-LAST:event_TanggalAkhirKeyPressed
@@ -1311,7 +1305,6 @@ public final class SuratSakit extends javax.swing.JDialog {
         Valid.autonomorSmc(NoSurat, "SKS", "", "suratsakit", "no_surat", 3, "0", TanggalAwal);
         NoSurat.requestFocus();
     }
-
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){

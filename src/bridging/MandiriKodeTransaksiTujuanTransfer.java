@@ -56,7 +56,6 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
      * @param modal */

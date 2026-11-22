@@ -57,7 +57,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-
 /**
  *
  * @author perpustakaan
@@ -188,7 +187,6 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
         NoPeserta.setDocument(new batasInput((byte)17).getKata(NoPeserta));
         NoRujukan.setDocument(new batasInput((int)200).getKata(NoRujukan));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-
 
         ChkInput.setSelected(false);
         isForm();
@@ -1184,7 +1182,6 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
         runBackground(() ->tampil());
     }
 
-
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
@@ -1347,7 +1344,6 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
             return "DELETE";
         }
     }
-
 
     @Test
     public void bodyWithDeleteRequest() throws Exception {

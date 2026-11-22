@@ -1087,7 +1087,6 @@ public class IPSRSCariPembelian extends javax.swing.JDialog {
                     ps.setString(i,"%"+TCari.getText()+"%");
                 }
 
-
                 rs=ps.executeQuery();
                 tagihan=0;
                 while(rs.next()){

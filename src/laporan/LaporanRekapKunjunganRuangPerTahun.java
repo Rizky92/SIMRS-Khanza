@@ -526,5 +526,4 @@ public final class LaporanRekapKunjunganRuangPerTahun extends javax.swing.JDialo
         super.dispose();
     }
 
-
 }

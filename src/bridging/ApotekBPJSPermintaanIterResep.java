@@ -43,7 +43,7 @@ import kepegawaian.DlgCariDokter;
  * @author dosen
  */
 public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
+    private Timer timerJam;
 
     @Override
     public void dispose() {
@@ -52,14 +52,6 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
         }
         super.dispose();
     }
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
     private final DefaultTableModel tabModeobat,tabModeObatRacikan,tabModeDetailObatRacikan;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -208,7 +200,6 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
 
         jam();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -515,7 +506,6 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
@@ -1007,5 +997,13 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
         // Timer
         timerJam = new javax.swing.Timer(1000, taskPerformer);
         timerJam.start();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

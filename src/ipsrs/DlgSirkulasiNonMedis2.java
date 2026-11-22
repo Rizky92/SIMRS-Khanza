@@ -816,8 +816,6 @@ public class DlgSirkulasiNonMedis2 extends javax.swing.JDialog {
 
     }
 
-
-
     public void isCek(){
          BtnPrint.setEnabled(akses.getsirkulasi_non_medis2());
     }

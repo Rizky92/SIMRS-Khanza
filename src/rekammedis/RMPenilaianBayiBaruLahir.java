@@ -2,7 +2,6 @@
  * Kontribusi dari windiarto
  */
 
-
 package rekammedis;
 
 import fungsi.WarnaTable;
@@ -43,7 +42,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
 import simrskhanza.DlgCariPasien;
-
 
 /**
  *
@@ -490,7 +488,6 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
             TANGGALMUNDUR="yes";
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

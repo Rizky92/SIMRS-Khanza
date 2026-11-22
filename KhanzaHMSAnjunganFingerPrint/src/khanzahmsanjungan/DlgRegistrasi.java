@@ -866,7 +866,6 @@ public class DlgRegistrasi extends javax.swing.JDialog {
     private component.Panel jPanel4;
     // End of variables declaration//GEN-END:variables
 
-
     public void setPasien(String norm,String kodepoli,String kddokter){
         LblNoRm.setText(norm);
         try {

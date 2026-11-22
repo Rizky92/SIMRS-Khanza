@@ -14,7 +14,6 @@ import java.awt.geom.GeneralPath;
 import java.awt.image.BufferedImage;
 import javax.swing.JDesktopPane;
 
-
 /**
  *
  * @author dosen

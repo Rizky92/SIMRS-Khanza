@@ -35,7 +35,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
 
-
 /**
  *
  * @author perpustakaan
@@ -240,7 +239,6 @@ public final class RMPenilaianAwalMedisRalanKandungan extends javax.swing.JDialo
             TANGGALMUNDUR="yes";
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

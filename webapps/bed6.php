@@ -30,7 +30,6 @@
     <link rel="stylesheet" href="assets/marquee.css" />
     <link rel="stylesheet" href="assets/example.css" />
 
-
 </head>
 <body>
 
@@ -185,11 +184,6 @@
       </div>
     </footer>
 
-
-
-
-
-
 <script type="text/javascript" src="conf/validator.js"></script>
 <meta http-equiv="refresh" content="32"/>
 <script src="Scripts/AC_RunActiveContent.js" type="text/javascript"></script>
@@ -199,7 +193,6 @@
 <!-- Bootstrap core JavaScript -->
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/vendor/jquery/jquery.min.js"></script>
-
 
  </body>
 

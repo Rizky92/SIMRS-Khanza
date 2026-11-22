@@ -59,7 +59,6 @@ public class DlgCashflow extends javax.swing.JDialog {
         }
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
-
     }
     private DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");
     private double kasawal=0,penerimaan=0,pengeluaran=0,debkred=0;

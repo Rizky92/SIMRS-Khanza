@@ -181,7 +181,6 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         Diskon.setDocument(new batasInput((int) 5).getOnlyAngka(Diskon));
     }
 
-
      double sisapiutang=0;
 
     /** This method is called from within the constructor to

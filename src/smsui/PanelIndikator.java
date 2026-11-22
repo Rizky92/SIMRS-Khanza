@@ -129,7 +129,6 @@ public class PanelIndikator extends javax.swing.JPanel {
         add(jPanel1, java.awt.BorderLayout.NORTH);
     }// </editor-fold>//GEN-END:initComponents
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel baterai;
     private javax.swing.JLabel imsi;

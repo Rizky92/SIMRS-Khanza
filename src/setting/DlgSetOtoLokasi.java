@@ -133,7 +133,6 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
         KodeBangsalRanap.setDocument(new batasInput((byte)5).getKata(KodeBangsalRanap));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

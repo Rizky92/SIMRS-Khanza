@@ -55,7 +55,6 @@ public final class PCRAICRAJenisAktivitasProyek extends javax.swing.JDialog {
         initComponents();
         this.setLocation(10,10);
 
-
         Object[] row={"Kode Aktivitas","Nama Jenis Aktivitas"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

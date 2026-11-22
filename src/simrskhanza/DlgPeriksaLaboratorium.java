@@ -72,16 +72,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author dosen
  */
 public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabMode,tabMode2;
     private sekuel Sequel=new sekuel();
     private Connection koneksisysmex;
@@ -3491,7 +3482,6 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
                         .findFirst()
                         .orElse("");
 
-
                     if (idtemplate.isEmpty()) continue;
 
                     boolean isFinal = "Final".equalsIgnoreCase(result.path("ResultStatus").asText(""));
@@ -3562,5 +3552,13 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

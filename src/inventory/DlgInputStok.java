@@ -162,7 +162,6 @@ public class DlgInputStok extends javax.swing.JDialog {
 
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -2342,7 +2341,6 @@ public class DlgInputStok extends javax.swing.JDialog {
                 tbDokter.setValueAt(0,i,9);
                 tbDokter.setValueAt(0,i,10);
             }
-
 
             ttl=0;
             ttl2=0;

@@ -110,7 +110,6 @@ public class DlgAkunPenagihanPiutang extends javax.swing.JDialog {
         isForm();
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -919,7 +918,6 @@ public class DlgAkunPenagihanPiutang extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-
 
     public void emptTeks() {
        nmrek.setText("");

@@ -2,7 +2,6 @@
  * Kontribusi dari Abdul Wahid, RSUD Cipayung Jakarta Timur
  */
 
-
 package pcraicra;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -43,7 +42,6 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPegawai;
-
 
 /**
  *
@@ -431,7 +429,6 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -2352,7 +2349,6 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-
 
     }//GEN-LAST:event_BtnHapusActionPerformed
 

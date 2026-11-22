@@ -63,7 +63,7 @@ import simrskhanza.DlgInputResepPulang;
 import smc.kirimwa.DlgKirimWA;
 
 public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
+    private Timer timerJam;
 
     @Override
     public void dispose() {
@@ -72,14 +72,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         }
         super.dispose();
     }
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
     private final DefaultTableModel tabMode,tabMode2,tabMode3,tabMode4,tabMode5,tabMode6,tabMode7,tabMode8;
     private final DlgKirimWA kirimWA = new DlgKirimWA(null, false);
     private sekuel Sequel=new sekuel();
@@ -8768,6 +8760,14 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                     ceksukses = false;
                 }
             }.execute();
+        }
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
         }
     }
 }

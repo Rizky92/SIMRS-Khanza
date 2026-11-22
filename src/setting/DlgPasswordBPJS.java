@@ -58,7 +58,6 @@ public class DlgPasswordBPJS extends javax.swing.JDialog {
 
         this.setLocation(10,10);
 
-
         Object[] row={"Kode Bayar","Cara Bayar","User","Pasword"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

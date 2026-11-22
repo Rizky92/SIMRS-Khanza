@@ -122,7 +122,6 @@ public final class DlgPenyakit extends javax.swing.JDialog {
         }
         tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable());
 
-
         TKd.setDocument(new batasInput((byte)15).getKata(TKd));
         TNm.setDocument(new batasInput((int)100).getKata(TNm));
         TCiri.setDocument(new batasInput((int)1500).getKata(TCiri));
@@ -131,8 +130,6 @@ public final class DlgPenyakit extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
     }
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.

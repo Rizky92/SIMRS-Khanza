@@ -1,6 +1,5 @@
 package inventory;
 
-
 import fungsi.WarnaTable2;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -773,7 +772,6 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
                     }
                 }
 
-
                 stok_tujuan=0;
                 psstok2=koneksi.prepareStatement("select ifnull(stok,'0') from utd_stok_medis where kode_brng=?");
                 try {
@@ -1019,7 +1017,6 @@ public class DlgPengambilanUTD extends javax.swing.JDialog {
                                 }
                             }
                         }
-
 
                         stok_tujuan=0;
                         psstok2=koneksi.prepareStatement("select ifnull(stok,'0') from utd_stok_medis where kode_brng=?");

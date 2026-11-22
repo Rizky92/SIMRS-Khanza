@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 // Known Issues:
 //
 // * Patterns only support repeat.
@@ -389,7 +388,6 @@ if (!document.createElement('canvas').getContext) {
     whitesmoke: '#F5F5F5',
     yellowgreen: '#9ACD32'
   };
-
 
   function getRgbHslContent(styleString) {
     var start = styleString.indexOf('(', 3);
@@ -939,7 +937,6 @@ if (!document.createElement('canvas').getContext) {
                          mr(p.xEnd), ',', mr(p.yEnd));
             break;
         }
-
 
         // TODO: Following is broken for curves due to
         //       move to proper paths.

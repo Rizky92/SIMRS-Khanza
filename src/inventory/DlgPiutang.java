@@ -2058,7 +2058,6 @@ public class DlgPiutang extends javax.swing.JDialog {
         }
     }
 
-
     private void cariBatch() {
         try {
             if((!NoBatch.getText().equals(""))&&NoFaktur.getText().equals("")){

@@ -96,7 +96,6 @@ public class DlgJamMasuk extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -776,7 +775,6 @@ public class DlgJamMasuk extends javax.swing.JDialog {
         int b=tabMode.getRowCount();
         LCount.setText(""+b);
     }
-
 
     public void emptTeks() {
         cmbJam1.setSelectedItem("00");

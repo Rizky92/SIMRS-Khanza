@@ -710,7 +710,6 @@ Licensed under the MIT license.
         draw();
         bindEvents();
 
-
         function executeHooks(hook, args) {
             args = [plot].concat(args);
             for (var i = 0; i < hook.length; ++i)
@@ -2119,7 +2118,6 @@ Licensed under the MIT license.
                 ctx.stroke();
             }
 
-
             // draw border
             if (bw) {
                 // If either borderWidth or borderColor is an object, then draw the border
@@ -2818,7 +2816,6 @@ Licensed under the MIT license.
                 }
             }
         }
-
 
         // interactive features
 

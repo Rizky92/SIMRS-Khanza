@@ -527,7 +527,6 @@
 
                                     $ttljasalain=$ttljasalain+$jl;
 
-
                                 echo "<tr class='isi'>
                                          <td>".$baris["nik"]."&nbsp;</td>
                                          <td>".$baris["nama"]."&nbsp;</td>

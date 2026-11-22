@@ -1550,7 +1550,6 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
         }
     }
 
-
     public void isCek(){
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);

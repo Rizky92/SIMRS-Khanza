@@ -37,7 +37,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-
 /**
  *
  * @author salimmulyana
@@ -114,10 +113,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
     }
-
-
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -940,7 +935,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
@@ -1229,7 +1223,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         NoSurat.requestFocus();
     }
 
-
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
             NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -1279,7 +1272,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
             ChkInput.setVisible(true);
         }
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsurat_keterangan_sehat());

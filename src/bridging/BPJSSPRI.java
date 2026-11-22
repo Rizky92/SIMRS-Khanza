@@ -129,7 +129,6 @@ public class BPJSSPRI extends javax.swing.JDialog {
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
 
-
         NoRawat.setDocument(new batasInput((byte)15).getKata(NoRawat));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         Diagnosa.setDocument(new batasInput((byte)50).getKata(Diagnosa));
@@ -1549,7 +1548,6 @@ public class BPJSSPRI extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-
     public void emptTeks() {
         NoRawat.setText("");
         NoKartu.setText("");
@@ -1568,7 +1566,6 @@ public class BPJSSPRI extends javax.swing.JDialog {
         NmPoli.setText("");
         Diagnosa.requestFocus();
     }
-
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){

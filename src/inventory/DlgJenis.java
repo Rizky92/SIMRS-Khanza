@@ -108,7 +108,6 @@ public final class DlgJenis extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

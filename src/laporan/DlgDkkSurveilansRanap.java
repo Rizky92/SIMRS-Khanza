@@ -66,7 +66,6 @@ public final class DlgDkkSurveilansRanap extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(885,674);
 
-
         tabMode=new DefaultTableModel(null,new String[]{
             "No.","Kode ICD 10","Jenis Penyakit","0-7 Hr","8-28 Hr","< 1","1-4","5-9","10-14","15-19",
             "20-44","45-54","55-59","60-69","70+","Laki","Perp","Jumlah","Ttl.Kunjungan","Meninggal"}){

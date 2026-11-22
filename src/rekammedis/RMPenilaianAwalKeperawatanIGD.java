@@ -2,7 +2,6 @@
  * Kontribusi dari Abdul Wahid, RSUD Cipayung Jakarta Timur
  */
 
-
 package rekammedis;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -43,7 +42,6 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
-
 
 /**
  *
@@ -446,7 +444,6 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
         ChkAccor.setSelected(false);
         isMenu();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -4322,7 +4319,6 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
         DTPCari2.setDate(tgl2);
         isRawat();
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_awal_keperawatan_igd());

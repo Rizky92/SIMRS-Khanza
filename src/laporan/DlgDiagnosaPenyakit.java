@@ -118,7 +118,6 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
 
     //private DlgCariObatPenyakit dlgobtpny=new DlgCariObatPenyakit(null,false);
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -637,8 +636,6 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
     private widget.panelisi panelGlass9;
     // End of variables declaration//GEN-END:variables
 
-
-
     private void isRawat() {
          Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",TNoRM,TNoRw.getText());
     }
@@ -646,8 +643,6 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
     private void isPsien() {
         Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",TPasien,TNoRM.getText());
     }
-
-
 
     public void setNoRm(String norwt, Date tgl1, Date tgl2,String status) {
         TNoRw.setText(norwt);
@@ -659,8 +654,6 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
         DTPCari2.setDate(tgl2);
         panelDiagnosa1.setRM(TNoRw.getText(),TNoRM.getText(),Valid.SetTgl(DTPCari1.getSelectedItem()+""),Valid.SetTgl(DTPCari2.getSelectedItem()+""),Status.getSelectedItem().toString(),TCari.getText().trim());
     }
-
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getdiagnosa_pasien());

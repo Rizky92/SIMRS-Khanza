@@ -55,7 +55,6 @@ public final class MandiriBankTujuanTransfer extends javax.swing.JDialog {
         initComponents();
         this.setLocation(10,10);
 
-
         Object[] row={"Kode Bank","Nama Bank"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

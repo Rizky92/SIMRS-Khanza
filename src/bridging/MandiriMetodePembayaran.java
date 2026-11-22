@@ -55,7 +55,6 @@ public final class MandiriMetodePembayaran extends javax.swing.JDialog {
         initComponents();
         this.setLocation(10,10);
 
-
         tabMode=new DefaultTableModel(null,new Object[]{
             "Kode","Metode Pembayaran","Biaya Transaksi"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

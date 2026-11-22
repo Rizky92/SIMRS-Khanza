@@ -12,7 +12,6 @@
 
 package keuangan;
 
-
 import bridging.ApiBRI;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -600,8 +599,6 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         }
         jam2();
     }
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -2407,7 +2404,6 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                         pscekbilling.close();
                     }
                 }
-
 
                 if(i<=0){
                     int jawab=JOptionPane.showConfirmDialog(null, "Data pembayaran belum tersimpan, apa anda mau menyimpannya...????","Konfirmasi",JOptionPane.YES_NO_OPTION);
@@ -5886,7 +5882,6 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         }
     }
 
-
     public void isCek(){
         TCari.setText("");
         TCari1.setText("");
@@ -6163,7 +6158,6 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                             }
                         }
 
-
                         if(chkRanap.isSelected()==true){
                             if(rsranapdrpr.next()||rsranapdokter.next()||rsranapperawat.next()){
                                 tabModeRwJlDr.addRow(new Object[]{true,x+". "+rskategori.getString(2),":","",null,null,null,null,"Ranap Dokter"});
@@ -6408,7 +6402,6 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                     psperiksalab.close();
                 }
             }
-
 
             subttl=0;
             psperiksarad=koneksi.prepareStatement(

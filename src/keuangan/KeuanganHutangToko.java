@@ -142,7 +142,6 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
         Keterangan.setDocument(new batasInput((byte)100).getKata(Keterangan));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

@@ -3141,7 +3141,6 @@ public class DlgFrekuensiPenyakitRanap extends javax.swing.JDialog {
                        }
                    }
 
-
                    a=0;
                    ps3=koneksi.prepareStatement("select diagnosa_pasien.no_rawat from penyakit inner join diagnosa_pasien inner join reg_periksa inner join pasien_mati "+
                         "inner join pasien inner join kamar_inap inner join kamar inner join bangsal inner join dokter inner join penjab inner join kabupaten "+

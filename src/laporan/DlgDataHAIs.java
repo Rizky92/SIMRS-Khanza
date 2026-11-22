@@ -40,7 +40,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-
 /**
  *
  * @author perpustakaan
@@ -150,7 +149,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1376,8 +1374,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         Antibiotik.setText("");
         Tanggal.setDate(new Date());
     }
-
-
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){

@@ -11,7 +11,6 @@ let plugins = [
 let externals = [];
 let filename = "raphael";
 
-
 if(args.indexOf('--no-deps') !== -1){
 	console.log('Building version without deps');
 	externals.push("eve");

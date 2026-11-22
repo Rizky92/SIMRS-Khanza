@@ -1253,8 +1253,6 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
        }
     }
 
-
-
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);

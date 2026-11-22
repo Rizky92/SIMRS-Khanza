@@ -460,7 +460,6 @@ print isset($header)?$header:NULL;*/
 
                             $_sql22  ="SELECT ($ttln/sum(n))*100 from indekref where kdindex='".$baris["indexins"]."'";
 
-
 			    $hasil22 =bukaquery($_sql22);
 			    $baris22 = mysqli_fetch_array($hasil22);
                 $indexjaga=round((isset($baris22[0])?$baris22[0]:0),2);
@@ -528,7 +527,6 @@ print isset($header)?$header:NULL;*/
                                 and indextotal.kdindex='".$baris["indexins"]."'";
 			    $hasil31=bukaquery($_sql31);
 			    $baris31 = mysqli_fetch_array($hasil31);
-
 
 			    $jl   = (isset($baris26[0])?$baris26[0]:0)+
                                         (isset($baris27[0])?$baris27[0]:0)+
@@ -616,7 +614,6 @@ print isset($header)?$header:NULL;*/
                                             }
                                          $ttltnjtnj=$ttltnjtnj+$tnjtnj+$tnjtnjbln+$ttlkasift;
                                          $ttljmlgaji=$ttljmlgaji+$gapok+$tnjjbtn+$tnjtnj+$tnjtnjbln+$ttlkasift+$tmbhjgmlm+$tmbahanjg+$tnjhadir;
-
 
 					   $_sql23="SELECT ($ttlindex/sum(indextotal.ttl))*((indexins.persen/100)*total_insentif)
                                                     from indextotal,indexins,set_insentif where
@@ -826,8 +823,6 @@ print isset($header)?$header:NULL;*/
 					 <td width='3px'>&nbsp;</td>
 					 <td width='140px'>&nbsp;</td>
 				      </TR>-->
-
-
 
                                       <TR class='isi6'>
                                          <TD width='130px' colspan='3'><center><font face='Arial' size='1' color='999999'>Rawat Jalan</font></center>";

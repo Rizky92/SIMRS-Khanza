@@ -513,7 +513,6 @@
             return false;
         }
 
-
         //----------------------------------------------------------------------
         public function estimateBitStreamSize($version)
         {

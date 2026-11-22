@@ -14,7 +14,6 @@ package grafikanalisa;
  * and open the template in the editor.
  */
 
-
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
@@ -38,7 +37,6 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
-
 
 /**
  *
@@ -101,7 +99,6 @@ public class grafikperiksaralanibubulan extends JDialog {
             }
              return result;
          }
-
 
          private static JFreeChart createChart(String symbol) {
 

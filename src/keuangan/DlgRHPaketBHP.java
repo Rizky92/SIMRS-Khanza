@@ -79,7 +79,6 @@ public class DlgRHPaketBHP extends javax.swing.JDialog {
         kdbayar.setDocument(new batasInput((byte)20).getKata(kdbayar));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -666,7 +665,6 @@ public class DlgRHPaketBHP extends javax.swing.JDialog {
                             rsrawatjalanpr=psrawatjalanpr.executeQuery();
                             rsrawatjalanpr.last();
 
-
                             if((rsrawatjalandr.getRow()>0)||(rsrawatjalandrpr.getRow()>0)||(rsrawatjalanpr.getRow()>0)){
                                 z++;
                                 tabMode.addRow(new Object[]{"","",z+". Rawat Jalan ","","",""});
@@ -763,7 +761,6 @@ public class DlgRHPaketBHP extends javax.swing.JDialog {
                             psrawatinappr.setString(3,rs.getString("kd_pj"));
                             rsrawatinappr=psrawatinappr.executeQuery();
                             rsrawatinappr.last();
-
 
                             if((rsrawatinapdr.getRow()>0)||(rsrawatinapdrpr.getRow()>0)||(rsrawatinappr.getRow()>0)){
                                 z++;
@@ -887,7 +884,6 @@ public class DlgRHPaketBHP extends javax.swing.JDialog {
                             " on periksa_radiologi.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                             " and periksa_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw "+
                             " where periksa_radiologi.tgl_periksa between ? and ? and reg_periksa.kd_pj=? order by periksa_radiologi.tgl_periksa,periksa_radiologi.jam,jns_perawatan_radiologi.nm_perawatan  ");
-
 
                        try {
                             psperiksa_radiologi.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));

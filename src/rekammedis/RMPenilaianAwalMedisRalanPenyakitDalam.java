@@ -2,7 +2,6 @@
  * Kontribusi dari tim IT RSUD Prembun
  */
 
-
 package rekammedis;
 
 import fungsi.WarnaTable;
@@ -39,7 +38,6 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
-
 
 /**
  *
@@ -210,7 +208,6 @@ public final class RMPenilaianAwalMedisRalanPenyakitDalam extends javax.swing.JD
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

@@ -56,7 +56,6 @@ public final class PCareMapingObat extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
      * @param modal */
@@ -840,7 +839,6 @@ public final class PCareMapingObat extends javax.swing.JDialog {
     public JTable getTable(){
         return tbJnsPerawatan;
     }
-
 
     private void runBackground(Runnable task) {
         if (ceksukses) return;

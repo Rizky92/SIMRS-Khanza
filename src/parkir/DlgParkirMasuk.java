@@ -1019,7 +1019,6 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
                                     rs.getString(17)});
                 }
 
-
             }
             //rs.close();*/
         }catch(Exception e){
@@ -1038,11 +1037,6 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
             NomorKendaraan.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
         }
     }
-
-
-
-
-
 
     public void isCek(){
         if(akses.getjml2()>=1){

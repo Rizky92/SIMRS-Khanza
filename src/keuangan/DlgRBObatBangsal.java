@@ -76,7 +76,6 @@ public class DlgRBObatBangsal extends javax.swing.JDialog {
         kdbangsal.setDocument(new batasInput((byte)5).getKata(kdbangsal));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING Do NOT modify this code. The content of this method is
@@ -612,7 +611,6 @@ public class DlgRBObatBangsal extends javax.swing.JDialog {
         }
 
     }
-
 
     public void isCek(){
         //BtnPrint.setEnabled(var.getobat_per_kamar());

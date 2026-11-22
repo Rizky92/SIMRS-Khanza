@@ -390,8 +390,6 @@ public class DlgAntrian extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnBatal2ActionPerformed
 
-
-
     /**
     * @param args the command line arguments
     */

@@ -134,7 +134,6 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-
         TKd.setDocument(new batasInput((byte)15).getKata(TKd));
         TNm.setDocument(new batasInput((byte)80).getKata(TNm));
         TOperator1.setDocument(new batasInput((byte)13).getOnlyAngka(TOperator1));
@@ -2178,7 +2177,6 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             nmpnj.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),33).toString());
         }
     }
-
 
     private void isjml(){
 

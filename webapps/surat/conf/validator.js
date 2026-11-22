@@ -726,10 +726,6 @@ function validasiPengguna()
          }
 }
 
-
-
-
-
 /* Perbaikan <select> pada WebView JavaFX di macOS: klik mouse pada popup bawaan tidak memilih item. Dropdown diganti dengan daftar HTML. */
 (function () {
     var ua = navigator.userAgent;

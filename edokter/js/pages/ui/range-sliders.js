@@ -38,7 +38,6 @@ $(function () {
         step: 250
     });
 
-
     $("#range_06").ionRangeSlider({
         type: "double",
         grid: true,
@@ -56,7 +55,6 @@ $(function () {
         to: 5,
         values: [0, 10, 100, 1000, 10000, 100000, 1000000]
     });
-
 
     $("#range_08").ionRangeSlider({
         grid: true,

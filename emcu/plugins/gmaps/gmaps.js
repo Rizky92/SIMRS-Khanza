@@ -10,7 +10,6 @@
     root.GMaps = factory();
   }
 
-
 }(this, function() {
 
 /*!

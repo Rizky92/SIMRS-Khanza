@@ -20,7 +20,6 @@ function cekSessiAdmin() {
     }
 }
 
-
 function cekUser() {
     if (isset($_SESSION['ses_admin_fotokelahiranbayismc'])) {
         return true;

@@ -29,7 +29,6 @@
         }
      }
 
-
     function formProtek() {
         $aksi=isset($_GET['act'])?$_GET['act']:NULL;
         if (!cekSessiAdmin()) {

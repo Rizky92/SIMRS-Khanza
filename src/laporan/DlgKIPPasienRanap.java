@@ -47,7 +47,6 @@ public class DlgKIPPasienRanap extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -982,8 +981,6 @@ public class DlgKIPPasienRanap extends javax.swing.JDialog {
             System.out.println("Notif 5 : "+e);
         }
     }
-
-
 
     public void isCek(){
         BtnPrint.setEnabled(akses.getkip_pasien_ranap());

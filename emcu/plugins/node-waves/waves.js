@@ -36,7 +36,6 @@
     var toString         = Object.prototype.toString;
     var isTouchAvailable = 'ontouchstart' in window;
 
-
     // Find exact position of element
     function isWindow(obj) {
         return obj !== null && obj === obj.window;
@@ -308,7 +307,6 @@
         }, delay);
     }
 
-
     /**
      * Disable mousedown event for 500ms during and after touch
      */
@@ -348,7 +346,6 @@
             }
         }
     };
-
 
     /**
      * Delegated click handler for .waves-effect element.
@@ -468,7 +465,6 @@
         body.addEventListener('mousedown', showEffect, false);
     };
 
-
     /**
      * Attach Waves to dynamically loaded inputs, or add .waves-effect and other
      * waves classes to a set of elements. Set drag to true if the ripple mouseover
@@ -502,7 +498,6 @@
         }
     };
 
-
     /**
      * Cause a ripple to appear in an element via code.
      */
@@ -513,7 +508,6 @@
         options          = options || {};
         options.wait     = options.wait || 0;
         options.position = options.position || null; // default = centre of element
-
 
         if (elementsLen) {
             var element, pos, off, centre = {}, i = 0;

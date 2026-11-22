@@ -2362,7 +2362,6 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-
     public void emptTeks() {
         NoRawat.setText("");
         NoSEP.setText("");
@@ -2418,7 +2417,6 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         Hamil.setSelectedIndex(0);
         TanggalSurat.requestFocus();
     }
-
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){

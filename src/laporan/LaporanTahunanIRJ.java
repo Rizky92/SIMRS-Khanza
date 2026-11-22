@@ -37,7 +37,6 @@ public class LaporanTahunanIRJ extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -1012,8 +1011,6 @@ public class LaporanTahunanIRJ extends javax.swing.JDialog {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-
-
     public void isCek(){
         BtnPrint.setEnabled(akses.getlaporan_tahunan_irj());
     }
@@ -1491,7 +1488,6 @@ public class LaporanTahunanIRJ extends javax.swing.JDialog {
                     nov=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where DATE_FORMAT(tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-11' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and pasien.jk='P'");
                     des=0;
                     des=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where DATE_FORMAT(tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-12' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and pasien.jk='P'");
-
 
                     ttljanbaru=ttljanbaru+jan;
                     ttlfebbaru=ttlfebbaru+feb;

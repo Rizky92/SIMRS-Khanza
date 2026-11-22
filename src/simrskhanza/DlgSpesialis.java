@@ -57,7 +57,6 @@ public class DlgSpesialis extends javax.swing.JDialog {
 
         this.setLocation(10,10);
 
-
         Object[] row={"Kode Spesialis",
                       "Nama Spesialis"};
         tabMode=new DefaultTableModel(null,row){

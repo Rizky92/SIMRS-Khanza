@@ -1,7 +1,5 @@
 package toko;
 
-
-
 import fungsi.WarnaTable2;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -1187,7 +1185,6 @@ public class TokoSuratPemesanan extends javax.swing.JDialog {
                                 Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Pemesanan");
                 }
             }
-
 
             Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());

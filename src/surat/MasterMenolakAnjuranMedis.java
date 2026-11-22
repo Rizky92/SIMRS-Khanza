@@ -53,7 +53,6 @@ public class MasterMenolakAnjuranMedis extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         Object[] row={"Kode","Penolakan Anjuran"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

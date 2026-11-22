@@ -117,9 +117,6 @@ public final class DlgKehadiran extends javax.swing.JDialog {
         StatusKerja.setSelectedItem("Semua");
     }
 
-
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -652,7 +649,6 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                         }
                     }
 
-
                     ps2=koneksi.prepareStatement(
                         "select count(rekap_presensi.id) from rekap_presensi where rekap_presensi.id=? and rekap_presensi.status like '%Tepat Waktu%' "+
                         "and rekap_presensi.jam_datang like ?");
@@ -674,7 +670,6 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-
 
                     ps2=koneksi.prepareStatement(
                         "select count(rekap_presensi.id) from rekap_presensi where rekap_presensi.id=? and rekap_presensi.status like '%Terlambat Toleransi%' "+

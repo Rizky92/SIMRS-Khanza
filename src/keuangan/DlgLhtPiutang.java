@@ -120,7 +120,6 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
         MnDetailCicilan.setEnabled(akses.getbayar_piutang());
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -874,7 +873,6 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
         TCari.setText(norm);
         Tgl1.setDate(tgl);
     }
-
 
     public void isCek(){
         TCari.requestFocus();

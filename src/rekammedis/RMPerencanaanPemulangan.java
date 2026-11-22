@@ -2,7 +2,6 @@
  * by MAs ElKhanza
  */
 
-
 package rekammedis;
 
 import fungsi.WarnaTable;
@@ -39,7 +38,6 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
-
 
 /**
  *
@@ -210,7 +208,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML2.setDocument(doc);
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

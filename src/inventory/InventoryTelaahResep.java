@@ -47,7 +47,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author perpustakaan
@@ -200,7 +199,6 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1785,14 +1783,17 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
 
     private void isForm(){
         if(ChkInput.isSelected()==true){
-            ChkInput.setVisible(false);
-            if(this.getHeight()>600){
+            if(this.getHeight()>526){
+                ChkInput.setVisible(false);
                 PanelInput.setPreferredSize(new Dimension(WIDTH,354));
+                FormInput.setVisible(true);
+                ChkInput.setVisible(true);
             }else{
-                PanelInput.setPreferredSize(new Dimension(WIDTH,this.getHeight()-230));
+                ChkInput.setVisible(false);
+                PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-230));
+                FormInput.setVisible(true);
+                ChkInput.setVisible(true);
             }
-            FormInput.setVisible(true);
-            ChkInput.setVisible(true);
         }else if(ChkInput.isSelected()==false){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));

@@ -37,22 +37,12 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-
 /**
  *
  * @author perpustakaan
  */
 public final class DlgAuditBundleVAP extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -65,7 +55,6 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
     private double posisi_kepala=0,pengkajian_setiap_hari=0,hand_hygiene=0,oral_hygiene=0,suction_manajemen_sekresi=0,profilaksis_peptic_ulcer=0,dvt_profiklasisi=0,penggunaan_apd_sesuai=0,pembagi=0,
                    naposisi_kepala=0,napengkajian_setiap_hari=0,nahand_hygiene=0,naoral_hygiene=0,nasuction_manajemen_sekresi=0,naprofilaksis_peptic_ulcer=0,nadvt_profiklasisi=0,napenggunaan_apd_sesuai=0,
                    ttlposisi_kepala=0,ttlpengkajian_setiap_hari=0,ttlhand_hygiene=0,ttloral_hygiene=0,ttlsuction_manajemen_sekresi=0,ttlprofilaksis_peptic_ulcer=0,ttldvt_profiklasisi=0,ttlpenggunaan_apd_sesuai=0,ttlpenilaian=0;
-
 
     /** Creates new form DlgRujuk
      * @param parent
@@ -126,7 +115,6 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
         isForm();
         jam();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1411,5 +1399,13 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

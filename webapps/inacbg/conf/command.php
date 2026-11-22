@@ -18,7 +18,6 @@
         }
     }
 
-
     function cekUser() {
         if (isset($_SESSION['ses_admin_casemix'])) {
             return true;
@@ -33,8 +32,6 @@
         }
     }
 
-
-
     function isGuest() {
         if (cekSessiAdmin()) {
             return false;
@@ -42,7 +39,6 @@
             return true;
         }
     }
-
 
     function formProtek() {
             $aksi=isset($_GET['act'])?$_GET['act']:NULL;

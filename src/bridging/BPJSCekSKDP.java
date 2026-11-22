@@ -123,7 +123,6 @@ public final class BPJSCekSKDP extends javax.swing.JDialog {
     private Date parsedDate;
     private boolean statusantrean=true;
 
-
     /** Creates new form DlgKamar
      * @param parent
      * @param modal */
@@ -379,8 +378,6 @@ public final class BPJSCekSKDP extends javax.swing.JDialog {
             LabelJabatanTNI.setVisible(false);
         }
     }
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.

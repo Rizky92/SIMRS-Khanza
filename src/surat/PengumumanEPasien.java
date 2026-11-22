@@ -42,7 +42,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPegawai;
 
-
 /**
  *
  * @author perpustakaan
@@ -893,7 +892,6 @@ public final class PengumumanEPasien extends javax.swing.JDialog {
         Pengumuman.setText("");
         Pengumuman.requestFocus();
     }
-
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){

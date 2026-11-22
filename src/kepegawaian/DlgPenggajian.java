@@ -169,10 +169,9 @@ public class DlgPenggajian extends javax.swing.JDialog {
 
     private void loadURL(String url) {
         Platform.runLater(() -> {
-            try {
-                engine.load(url);
-            }catch (Exception exception) {
-                engine.load(url);
+            final WebEngine eng = engine;
+            if (eng != null) {
+                eng.load(url);
             }
         });
     }
@@ -196,7 +195,6 @@ public class DlgPenggajian extends javax.swing.JDialog {
             }
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

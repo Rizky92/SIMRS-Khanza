@@ -54,7 +54,6 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         Object[] row={"Kesimpulan/Diagnosa","Anjuran"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

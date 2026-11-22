@@ -65,7 +65,6 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
 
         this.setLocation(10,10);
 
-
         tabMode=new DefaultTableModel(null,new Object[]{
                 "No.Inventaris","Kode Barang","Nama Barang","Ruang","Kategori"
             }){

@@ -49,7 +49,6 @@ public class DlgParkirJenis extends javax.swing.JDialog {
 
         this.setLocation(10,10);
 
-
         Object[] row={"ID Jenis","Jenis Parkir","Biaya Parkir","Sistem"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

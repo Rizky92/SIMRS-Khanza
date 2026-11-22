@@ -641,7 +641,6 @@ public final class DlgBarcode extends javax.swing.JDialog {
                 }
             }
 
-
         }
     }//GEN-LAST:event_tbBangsalKeyPressed
 

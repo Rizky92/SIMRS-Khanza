@@ -1341,7 +1341,6 @@ public class DlgReturPiutang extends javax.swing.JDialog {
         }
     }
 
-
     private void isHitung(){
         if((!Jmlretur.getText().equals(""))&&(!Hargaretur.getText().equals(""))){
             Subtotal.setText(Double.toString(Double.parseDouble(Jmlretur.getText())*Double.parseDouble(Hargaretur.getText())));

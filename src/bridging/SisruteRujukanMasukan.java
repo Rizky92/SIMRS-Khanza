@@ -50,7 +50,7 @@ import simrskhanza.DlgReg;
  * @author perpustakaan
  */
 public final class SisruteRujukanMasukan extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
+    private Timer timerJam;
 
     @Override
     public void dispose() {
@@ -59,14 +59,6 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
         }
         super.dispose();
     }
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -1109,7 +1101,6 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
         }
     }
 
-
     private void jam(){
         ActionListener taskPerformer = (ActionEvent e) -> {
             if(aktif==true){
@@ -1196,6 +1187,14 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
             SttsPasien=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),33).toString();
             SttsRegistrasi=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),34).toString();
             NoRmRS=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),35).toString();
+        }
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
         }
     }
 }

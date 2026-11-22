@@ -126,7 +126,6 @@ public final class BPJSCekNIK2 extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-
     /** Creates new form DlgKamar
      * @param parent
      * @param modal */
@@ -157,7 +156,6 @@ public final class BPJSCekNIK2 extends javax.swing.JDialog {
         }
 
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-
 
         pasien.addWindowListener(new WindowListener() {
             @Override
@@ -476,8 +474,6 @@ public final class BPJSCekNIK2 extends javax.swing.JDialog {
             LabelJabatanTNI.setVisible(false);
         }
     }
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.

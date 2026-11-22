@@ -108,8 +108,6 @@ public final class SisruteCekReferensiKriteriaLayanan extends javax.swing.JDialo
         }
     }
 
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -318,7 +316,6 @@ public final class SisruteCekReferensiKriteriaLayanan extends javax.swing.JDialo
             }
         }
     }
-
 
     public JTable getTable(){
         return tbKamar;

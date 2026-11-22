@@ -51,7 +51,6 @@ public class RMDeteksiDiniCorona extends javax.swing.JDialog {
     private volatile boolean ceksukses = false;
     private String finger="";
 
-
     /** Creates new form DlgPemberianInfus
      * @param parent
      * @param modal */

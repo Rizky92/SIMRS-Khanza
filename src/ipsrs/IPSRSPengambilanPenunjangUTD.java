@@ -1,6 +1,5 @@
 package ipsrs;
 
-
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;

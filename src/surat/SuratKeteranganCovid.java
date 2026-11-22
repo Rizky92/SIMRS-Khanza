@@ -42,7 +42,6 @@ import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author salimmulyana
@@ -121,10 +120,6 @@ public final class SuratKeteranganCovid extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
     }
-
-
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -937,7 +932,6 @@ public final class SuratKeteranganCovid extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-
     private void TanggalAkhirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalAkhirKeyPressed
         Valid.pindah(evt,TanggalAwal,BtnDokter);
     }//GEN-LAST:event_TanggalAkhirKeyPressed
@@ -1264,7 +1258,6 @@ public final class SuratKeteranganCovid extends javax.swing.JDialog {
                 "SKRT"+TanggalAwal.getSelectedItem().toString().substring(6,10)+TanggalAwal.getSelectedItem().toString().substring(3,5)+TanggalAwal.getSelectedItem().toString().substring(0,2),3,NoSurat);
         NoSurat.requestFocus();
     }
-
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){

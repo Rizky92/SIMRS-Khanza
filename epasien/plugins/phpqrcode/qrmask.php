@@ -280,7 +280,6 @@
             return $demerit;
         }
 
-
         //----------------------------------------------------------------------
         public function mask($width, $frame, $level)
         {

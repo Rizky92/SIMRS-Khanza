@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 
-
 package surat;
 
 import fungsi.WarnaTable;
@@ -96,10 +95,6 @@ public final class SuratKeteranganBerobat extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
     }
-
-
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -784,7 +779,6 @@ public final class SuratKeteranganBerobat extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-
     private void TNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRMKeyPressed
 
     }//GEN-LAST:event_TNoRMKeyPressed
@@ -1009,7 +1003,6 @@ public final class SuratKeteranganBerobat extends javax.swing.JDialog {
         NoSurat.requestFocus();
     }
 
-
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
             NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -1090,7 +1083,6 @@ public final class SuratKeteranganBerobat extends javax.swing.JDialog {
             ChkInput.setVisible(true);
         }
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsurat_keterangan_berobat());

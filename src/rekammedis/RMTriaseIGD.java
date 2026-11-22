@@ -48,7 +48,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPegawai;
 
-
 /**
  *
  * @author perpustakaan
@@ -396,7 +395,6 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
         ChkAccor.setSelected(false);
         isMenu();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

@@ -200,7 +200,6 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
         }
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -434,7 +433,6 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
        dispose();
@@ -840,7 +838,6 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 
-
     private void tampil() {
         try {
             Valid.tabelKosong(tabMode);
@@ -981,7 +978,6 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
                         }
                     }
 
-
                     retur=0;
                     psretur=koneksi.prepareStatement(
                             "select sum(returpasien.jml) as jml from returpasien where returpasien.no_rawat=? and "+
@@ -1005,7 +1001,6 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
                             psretur.close();
                         }
                     }
-
 
                     returshs=(rstampilbarang.getDouble("jumlah")-keluar);
                     if(returshs<0){
@@ -1077,8 +1072,6 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
 
         BtnGudang.setEnabled(akses.getakses_depo_obat());
     }
-
-
 
     private void getData(){
         int row=tbObat.getSelectedRow();

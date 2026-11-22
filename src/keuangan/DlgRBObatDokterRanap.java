@@ -96,7 +96,6 @@ public class DlgRBObatDokterRanap extends javax.swing.JDialog {
         kddokter.setDocument(new batasInput((byte)8).getKata(kddokter));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING Do NOT modify this code. The content of this method is

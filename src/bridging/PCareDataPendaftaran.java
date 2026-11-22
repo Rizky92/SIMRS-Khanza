@@ -72,22 +72,12 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import rekammedis.RMRiwayatPerawatan;
 
-
 /**
  *
  * @author perpustakaan
  */
 public final class PCareDataPendaftaran extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private DefaultTableModel tabMode,tabMode2,tabMode3;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -452,7 +442,6 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
 
         jam();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -9885,5 +9874,13 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

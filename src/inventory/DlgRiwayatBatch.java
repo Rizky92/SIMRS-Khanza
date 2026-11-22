@@ -29,14 +29,12 @@ public class DlgRiwayatBatch extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public DlgRiwayatBatch(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
 
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
@@ -56,7 +54,6 @@ public class DlgRiwayatBatch extends javax.swing.JDialog {
 
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

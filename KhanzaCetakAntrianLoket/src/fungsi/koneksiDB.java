@@ -79,7 +79,6 @@ public class koneksiDB {
         }
     }
 
-
     public static boolean GUNAKANANTREANHURUF() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);

@@ -105,7 +105,6 @@ public final class DlgICD9 extends javax.swing.JDialog {
         }
         tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable());
 
-
         Kode.setDocument(new batasInput((byte)10).getKata(Kode));
         Pendek.setDocument(new batasInput((int)100).getKata(Pendek));
         Panjang.setDocument(new batasInput((int)1500).getKata(Panjang));
@@ -113,8 +112,6 @@ public final class DlgICD9 extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
     }
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.

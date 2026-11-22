@@ -48,16 +48,7 @@ import simrskhanza.DlgCariPerusahaan;
 import simrskhanza.DlgCariPoli;
 
 public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabMode;
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
@@ -1230,7 +1221,6 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
         }
     }
 
-
     public void isCek(){
         TCari.requestFocus();
         BtnSimpan.setEnabled(akses.getbooking_mcu_perusahaan());
@@ -1381,5 +1371,13 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

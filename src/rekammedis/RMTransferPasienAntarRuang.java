@@ -2,7 +2,6 @@
  * Kontribusi dari M. Syukur RS. Jiwa Prov Sultra
  */
 
-
 package rekammedis;
 
 import fungsi.WarnaTable;
@@ -36,7 +35,6 @@ import javax.swing.table.TableColumn;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
-
 
 /**
  *
@@ -205,7 +203,6 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         ChkAccor.setSelected(false);
         isPhoto();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

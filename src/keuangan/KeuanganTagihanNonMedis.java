@@ -54,7 +54,6 @@ public final class KeuanganTagihanNonMedis extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-
     /** Creates new form DlgLhtBiaya
      * @param parent
      * @param modal */
@@ -144,7 +143,6 @@ public final class KeuanganTagihanNonMedis extends javax.swing.JDialog {
         LoadHTML.setDocument(doc);
 
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

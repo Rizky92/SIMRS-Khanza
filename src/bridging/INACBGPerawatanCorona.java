@@ -36,7 +36,6 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
     private ResultSet rs;
     private int i=0;
 
-
     /** Creates new form DlgPemberianInfus
      * @param parent
      * @param modal */

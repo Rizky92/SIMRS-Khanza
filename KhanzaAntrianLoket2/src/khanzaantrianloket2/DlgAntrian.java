@@ -68,8 +68,6 @@ public class DlgAntrian extends javax.swing.JDialog{
     }
     int i;
 
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -413,8 +411,6 @@ public class DlgAntrian extends javax.swing.JDialog{
         }
     }//GEN-LAST:event_BtnBatal3ActionPerformed
 
-
-
     /**
     * @param args the command line arguments
     */
@@ -452,7 +448,6 @@ public class DlgAntrian extends javax.swing.JDialog{
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi5;
     // End of variables declaration//GEN-END:variables
-
 
     private void panggil(int antrian){
         if (antrian < 12){
@@ -601,6 +596,5 @@ public class DlgAntrian extends javax.swing.JDialog{
         // Timer
         new Timer(1000, taskPerformer).start();
     }
-
 
 }

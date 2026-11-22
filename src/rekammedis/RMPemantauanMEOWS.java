@@ -2,7 +2,6 @@
  * By Windiarto
  */
 
-
 package rekammedis;
 import fungsi.WarnaTableMEOWS;
 import fungsi.akses;
@@ -43,22 +42,12 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author perpustakaan
  */
 public final class RMPemantauanMEOWS extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -196,7 +185,6 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             TANGGALMUNDUR="yes";
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -2241,7 +2229,6 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
         timerJam.start();
     }
 
-
     private void ganti() {
         isCombo1();
         isCombo2();
@@ -2383,5 +2370,13 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

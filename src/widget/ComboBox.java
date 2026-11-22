@@ -134,7 +134,6 @@ public final class ComboBox extends JComboBox {
         }
     }
 
-
     private static class ModernComboUI extends BasicComboBoxUI {
 
         private static final String NEXT = "khanzaPilihBerikut";

@@ -2,7 +2,6 @@
  * By Mas Khanza
  */
 
-
 package surat;
 
 import fungsi.WarnaTable;
@@ -40,7 +39,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
-
 
 /**
  *
@@ -154,7 +152,6 @@ public final class SuratPenolakanResusitasi extends javax.swing.JDialog {
         LoadHTML2.setDocument(kit.createDefaultDocument());
         LoadHTML3.setDocument(kit.createDefaultDocument());
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

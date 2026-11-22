@@ -47,16 +47,7 @@ import rekammedis.RMRiwayatPerawatan;
  * @author dosen
  */
 public class DlgPermintaanPelayananInformasiObat extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -71,7 +62,6 @@ public class DlgPermintaanPelayananInformasiObat extends javax.swing.JDialog {
     private StringBuilder htmlContent;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-
 
     /** Creates new form DlgPemberianInfus
      * @param parent
@@ -2029,7 +2019,6 @@ public class DlgPermintaanPelayananInformasiObat extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-
     public void emptTeks() {
         NoRw.setText("");
         NoRM.setText("");
@@ -2215,5 +2204,13 @@ public class DlgPermintaanPelayananInformasiObat extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

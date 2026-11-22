@@ -38,7 +38,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPegawai;
 
-
 /**
  *
  * @author perpustakaan
@@ -160,7 +159,6 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
             }
         });
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1520,7 +1518,6 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
         autoNomor();
         NamaBarang.requestFocus();
     }
-
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){

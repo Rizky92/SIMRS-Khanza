@@ -263,7 +263,7 @@ import surat.SuratTidakHamil;
  * @author dosen
  */
 public final class DlgIGD extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
+    private Timer timerJam;
 
     @Override
     public void dispose() {
@@ -272,14 +272,6 @@ public final class DlgIGD extends javax.swing.JDialog {
         }
         super.dispose();
     }
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -293,6 +285,8 @@ public final class DlgIGD extends javax.swing.JDialog {
     private DlgKelurahan kel;
     private DlgCariDokter dokter;
     private DlgRawatJalan dlgrwjl;
+    private RMRiwayatPerawatan riwayat;
+    private DlgKamarInap kamarinap;
     private ResultSet rs;
     private boolean ceksukses=false;
     private int i=0,jmlparsial=0;
@@ -6439,13 +6433,31 @@ public final class DlgIGD extends javax.swing.JDialog {
                     }else{
                         akses.setstatus(true);
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                        DlgKamarInap dlgki=new DlgKamarInap(null,false);
-                        dlgki.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-                        dlgki.setLocationRelativeTo(internalFrame1);
-                        dlgki.emptTeks();
-                        dlgki.isCek();
-                        dlgki.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText());
-                        dlgki.setVisible(true);
+                        if (kamarinap == null || !kamarinap.isDisplayable()) {
+                            kamarinap=new DlgKamarInap(null,false);
+                            kamarinap.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                            kamarinap.addWindowListener(new WindowAdapter() {
+                                @Override
+                                public void windowClosed(WindowEvent e) {
+                                    kamarinap=null;
+                                }
+                            });
+
+                            kamarinap.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                            kamarinap.setLocationRelativeTo(internalFrame1);
+                        }
+                        if (kamarinap == null) return;
+                        if (!kamarinap.isVisible()) {
+                            kamarinap.emptTeks();
+                            kamarinap.isCek();
+                            kamarinap.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText());
+                        }
+
+                        if (kamarinap.isVisible()) {
+                            kamarinap.toFront();
+                            return;
+                        }
+                        kamarinap.setVisible(true);
                         this.setCursor(Cursor.getDefaultCursor());
                     }
                 }
@@ -7813,11 +7825,29 @@ public final class DlgIGD extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMRiwayatPerawatan resume=new RMRiwayatPerawatan(null,true);
-            resume.setNoRm(TNoRM.getText(),TPasien.getText());
-            resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-            resume.setLocationRelativeTo(internalFrame1);
-            resume.setVisible(true);
+            if (riwayat == null || !riwayat.isDisplayable()) {
+                riwayat=new RMRiwayatPerawatan(null,false);
+                riwayat.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                riwayat.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        riwayat=null;
+                    }
+                });
+
+                riwayat.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                riwayat.setLocationRelativeTo(internalFrame1);
+            }
+            if (riwayat == null) return;
+            if (!riwayat.isVisible()) {
+                riwayat.setNoRm(TNoRM.getText(),TPasien.getText());
+            }
+
+            if (riwayat.isVisible()) {
+                riwayat.toFront();
+                return;
+            }
+            riwayat.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_ppRiwayatBtnPrintActionPerformed
@@ -13352,7 +13382,6 @@ public final class DlgIGD extends javax.swing.JDialog {
         }
     }
 
-
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
             private int nilai_jam;
@@ -13545,7 +13574,6 @@ public final class DlgIGD extends javax.swing.JDialog {
             System.out.println(ex);
         }
     }
-
 
     public JTextField getTextField(){
         return TNoRw;
@@ -15389,6 +15417,14 @@ public final class DlgIGD extends javax.swing.JDialog {
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
                 this.setCursor(Cursor.getDefaultCursor());
             }
+        }
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
         }
     }
 }

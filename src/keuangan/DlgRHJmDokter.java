@@ -96,7 +96,6 @@ public class DlgRHJmDokter extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
 
-
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -110,7 +109,6 @@ public class DlgRHJmDokter extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1512,7 +1510,6 @@ public class DlgRHJmDokter extends javax.swing.JDialog {
                          }
                     }
 
-
                     if(chkRadiologi.isSelected()==true){
                         //periksa radiologi
                          psperiksa_radiologi=koneksi.prepareStatement("select periksa_radiologi.tarif_tindakan_dokter,pasien.nm_pasien,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,"+
@@ -2253,7 +2250,6 @@ public class DlgRHJmDokter extends javax.swing.JDialog {
                          }
                     }
 
-
                     if(chkRadiologi.isSelected()==true){
                         //periksa radiologi
                          psperiksa_radiologi=koneksi.prepareStatement("select periksa_radiologi.tarif_tindakan_dokter,pasien.nm_pasien,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,"+
@@ -2984,7 +2980,6 @@ public class DlgRHJmDokter extends javax.swing.JDialog {
                              }
                          }
                     }
-
 
                     if(chkRadiologi.isSelected()==true){
                         //periksa radiologi
@@ -3743,7 +3738,6 @@ public class DlgRHJmDokter extends javax.swing.JDialog {
                          }
                     }
 
-
                     if(chkRadiologi.isSelected()==true){
                         //periksa radiologi
                          psperiksa_radiologi=koneksi.prepareStatement("select periksa_radiologi.tarif_tindakan_dokter,pasien.nm_pasien,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,"+
@@ -4458,7 +4452,6 @@ public class DlgRHJmDokter extends javax.swing.JDialog {
                              }
                          }
                     }
-
 
                     if(chkRadiologi.isSelected()==true){
                         //periksa radiologi
@@ -5217,7 +5210,6 @@ public class DlgRHJmDokter extends javax.swing.JDialog {
                          }
                     }
 
-
                     if(chkRadiologi.isSelected()==true){
                         //periksa radiologi
                          psperiksa_radiologi=koneksi.prepareStatement("select periksa_radiologi.tarif_tindakan_dokter,pasien.nm_pasien,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,"+
@@ -5917,7 +5909,6 @@ public class DlgRHJmDokter extends javax.swing.JDialog {
                              }
                          }
                     }
-
 
                     if(chkRadiologi.isSelected()==true){
                         //periksa radiologi
@@ -6659,7 +6650,6 @@ public class DlgRHJmDokter extends javax.swing.JDialog {
                          }
                     }
 
-
                     if(chkRadiologi.isSelected()==true){
                         //periksa radiologi
                          psperiksa_radiologi=koneksi.prepareStatement("select periksa_radiologi.tarif_tindakan_dokter,pasien.nm_pasien,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,"+
@@ -7357,7 +7347,6 @@ public class DlgRHJmDokter extends javax.swing.JDialog {
                              }
                          }
                     }
-
 
                     if(chkRadiologi.isSelected()==true){
                         //periksa radiologi
@@ -8098,7 +8087,6 @@ public class DlgRHJmDokter extends javax.swing.JDialog {
                              }
                          }
                     }
-
 
                     if(chkRadiologi.isSelected()==true){
                         //periksa radiologi

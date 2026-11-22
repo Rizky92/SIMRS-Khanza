@@ -125,7 +125,6 @@
                     $jmlmsk=isset($baris2[0])?$baris2[0]:0;
                 }
 
-
                             $_sql3    = "SELECT sum(jml)
                             from jgmlm  where id='$id'
                             and tgl like '%".$tahun."-".$bulan."%' group by id";
@@ -452,7 +451,6 @@
 
                             $_sql22  ="SELECT ($ttln/sum(n))*100 from indekref where kdindex='".$baris["indexins"]."'";
 
-
 			    $hasil22 =bukaquery($_sql22);
 			    $baris22 = mysqli_fetch_array($hasil22);
                 $indexjaga=round((isset($baris22[0])?$baris22[0]:0),2);
@@ -521,7 +519,6 @@
                                 and indextotal.kdindex='".$baris["indexins"]."'";
 			    $hasil31=bukaquery($_sql31);
 			    $baris31 = mysqli_fetch_array($hasil31);
-
 
 			    $jl   = (isset($baris26[0])?$baris26[0]:0)+
                                         (isset($baris27[0])?$baris27[0]:0)+
@@ -606,7 +603,6 @@
                                                     indextotal.kdindex=indexins.dep_id and
                                                     indextotal.kdindex='".$baris["indexins"]."'";
 
-
                                             $hasil23=bukaquery($_sql23);
                                             $baris23 = mysqli_fetch_array($hasil23);
                                             $ttlinsentif=$baris23[0];
@@ -644,7 +640,6 @@
                                          <TD width='130px'>".$barisjs[0]."</TD><td width='3px'>:</td><td width='140px'>".formatDuit($barisjs[1])."</td>
 				      </TR>";
 				}
-
 
                                 echo "
 				      <TR class='isi6'>

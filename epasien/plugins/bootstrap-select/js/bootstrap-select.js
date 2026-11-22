@@ -234,7 +234,6 @@
     return text;
   }
 
-
   function htmlEscape(html) {
     var escapeMap = {
       '&': '&amp;',
@@ -1730,6 +1729,5 @@
     })
   });
 })(jQuery);
-
 
 }));

@@ -15,7 +15,6 @@
 var factory = function( $, DataTable ) {
 "use strict";
 
-
 /* Set the defaults for DataTables initialisation */
 $.extend( true, DataTable.defaults, {
 	dom:
@@ -25,14 +24,12 @@ $.extend( true, DataTable.defaults, {
 	renderer: 'bootstrap'
 } );
 
-
 /* Default class modification */
 $.extend( DataTable.ext.classes, {
 	sWrapper:      "dataTables_wrapper form-inline dt-bootstrap",
 	sFilterInput:  "form-control input-sm",
 	sLengthSelect: "form-control input-sm"
 } );
-
 
 /* Bootstrap paging button renderer */
 DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, buttons, page, pages ) {
@@ -147,7 +144,6 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 	}
 };
 
-
 /*
  * TableTools Bootstrap compatibility
  * Required TableTools 2.1+
@@ -187,7 +183,6 @@ if ( DataTable.TableTools ) {
 
 }; // /factory
 
-
 // Define as an AMD module if possible
 if ( typeof define === 'function' && define.amd ) {
 	define( ['jquery', 'datatables'], factory );
@@ -200,6 +195,5 @@ else if ( jQuery ) {
 	// Otherwise simply initialise as normal, stopping multiple evaluation
 	factory( jQuery, jQuery.fn.dataTable );
 }
-
 
 })(window, document);

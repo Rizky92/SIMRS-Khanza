@@ -782,7 +782,6 @@
         return $sql;
     }
 
-
     function konversiTgl($tanggal){
         list($thn,$bln,$tgl)=explode('-',$tanggal);
         $tmp = $tgl."-".$bln."-".$thn;
@@ -882,7 +881,6 @@
         }
     }
 
-
     function loadTgl2(){
         //echo "<option>-&nbsp</option>";
         for($tgl=1; $tgl<=31; $tgl++){
@@ -944,7 +942,6 @@
             echo "<option value=$i>$i</option>";
         }
     }
-
 
     function loadThnnow(){
         $thnini=date('Y');

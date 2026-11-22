@@ -113,7 +113,6 @@ public final class InventarisBarang extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TCari.requestFocus();
 
-
         ChkInput.setSelected(false);
         isForm();
         Valid.LoadTahun(thn_produksi);
@@ -1323,8 +1322,6 @@ public final class InventarisBarang extends javax.swing.JDialog {
             }
         }
     }
-
-
 
     public JTable getTable(){
         return tbJnsPerawatan;

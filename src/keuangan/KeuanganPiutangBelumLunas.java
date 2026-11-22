@@ -145,7 +145,6 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
         NilaiKapitasiPaket.setDocument(new batasInput((byte)20).getKata(NilaiKapitasiPaket));
     }
 
-
      double sisapiutang=0,cicilan=0;
 
     /** This method is called from within the constructor to

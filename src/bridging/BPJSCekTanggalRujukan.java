@@ -45,16 +45,7 @@ import org.springframework.http.MediaType;
  * @author perpustakaan
  */
 public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabMode,tabMode2;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -958,7 +949,6 @@ public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
                     nilai_menit = now.getMinutes();
                     nilai_detik = now.getSeconds();
 
-
                     // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
                     if (nilai_jam <= 9) {
                         // Tambahkan "0" didepannya
@@ -1024,5 +1014,13 @@ public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

@@ -209,7 +209,6 @@
                 $baris22 = mysqli_fetch_array($hasil22);
                 $indexjaga=round($baris22[0],2);
 
-
                 $ttlindex=$barisindex[2]+$indexjaga;
                 if ($action!="CARI") {
                     bukainput("insert into indextotal  values('$barisindex[0]','$ttlindex')");

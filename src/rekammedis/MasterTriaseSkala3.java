@@ -56,7 +56,6 @@ public class MasterTriaseSkala3 extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         Object[] row={"Kode Pemeriksaan","Pemeriksaan","Kode","Pengkajian"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

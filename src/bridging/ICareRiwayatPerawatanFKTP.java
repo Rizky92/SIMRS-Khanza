@@ -86,7 +86,6 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(628,674);
 
-
         NoKartu.setDocument(new batasInput((int)100).getKata(NoKartu));
         KdDPJPLayanan.setDocument(new batasInput((int)100).getKata(KdDPJPLayanan));
 
@@ -110,8 +109,6 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
 
         internalFrame1.add(PanelContent);
     }
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -399,10 +396,11 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
                 }
                 WebView view = new WebView();
 
-                engine = view.getEngine();
-                engine.setJavaScriptEnabled(true);
+                final WebEngine we = view.getEngine();
+                engine = we;
+                we.setJavaScriptEnabled(true);
 
-                engine.setCreatePopupHandler(new Callback<PopupFeatures, WebEngine>() {
+                we.setCreatePopupHandler(new Callback<PopupFeatures, WebEngine>() {
                     @Override
                     public WebEngine call(PopupFeatures p) {
                         Stage stage = new Stage(StageStyle.TRANSPARENT);
@@ -410,53 +408,50 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
                     }
                 });
 
-                engine.titleProperty().addListener((ObservableValue<? extends String> observable, String oldValue, final String newValue) -> {
+                we.titleProperty().addListener((ObservableValue<? extends String> observable, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         ICareRiwayatPerawatanFKTP.this.setTitle(newValue);
                     });
                 });
 
-
-                engine.setOnStatusChanged((final WebEvent<String> event) -> {
+                we.setOnStatusChanged((final WebEvent<String> event) -> {
                     SwingUtilities.invokeLater(() -> {
                         lblStatus.setText(event.getData());
                     });
                 });
 
-
-                engine.getLoadWorker().workDoneProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, final Number newValue) -> {
+                we.getLoadWorker().workDoneProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, final Number newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         progressBar.setValue(newValue.intValue());
                     });
                 });
 
-                engine.getLoadWorker().exceptionProperty().addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
-                    if (engine.getLoadWorker().getState() == FAILED) {
+                we.getLoadWorker().exceptionProperty().addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
+                    if (we.getLoadWorker().getState() == FAILED) {
                         SwingUtilities.invokeLater(() -> {
                             JOptionPane.showMessageDialog(
                                     PanelContent,
                                     (value != null) ?
-                                            engine.getLocation() + "\n" + value.getMessage() :
-                                            engine.getLocation() + "\nUnexpected Catatan.",
+                                            we.getLocation() + "\n" + value.getMessage() :
+                                            we.getLocation() + "\nUnexpected Catatan.",
                                     "Loading Catatan...",
                                     JOptionPane.ERROR_MESSAGE);
                         });
                     }
                 });
 
-
-                engine.locationProperty().addListener((ObservableValue<? extends String> ov, String oldValue, final String newValue) -> {
+                we.locationProperty().addListener((ObservableValue<? extends String> ov, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         txtURL.setText(newValue);
                     });
                 });
 
-                engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+                we.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
                     @Override
                     public void changed(ObservableValue ov, Worker.State oldState, Worker.State newState) {
                         if (newState == Worker.State.SUCCEEDED) {
                             try {
-                                System.out.println("URL : "+engine.getLocation());
+                                System.out.println("URL : "+we.getLocation());
                             } catch (Exception ex) {
                                 System.out.println("Notifikasi : "+ex);
                             }
@@ -476,10 +471,9 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
         }
 
         Platform.runLater(() -> {
-            try {
-                engine.load(url);
-            }catch (Exception exception) {
-                engine.load(url);
+            final WebEngine eng = engine;
+            if (eng != null) {
+                eng.load(url);
             }
         });
     }

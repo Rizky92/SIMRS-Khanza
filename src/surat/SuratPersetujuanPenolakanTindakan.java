@@ -2,7 +2,6 @@
  * By Mas Khanza
  */
 
-
 package surat;
 
 import fungsi.WarnaTable;
@@ -39,7 +38,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.WindowConstants;
-
 
 /**
  *
@@ -239,7 +237,6 @@ public final class SuratPersetujuanPenolakanTindakan extends javax.swing.JDialog
         LoadHTML2.setDocument(kit.createDefaultDocument());
         LoadHTML3.setDocument(kit.createDefaultDocument());
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -2461,7 +2458,7 @@ public final class SuratPersetujuanPenolakanTindakan extends javax.swing.JDialog
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
     executor.shutdownNow();

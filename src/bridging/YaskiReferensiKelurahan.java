@@ -84,8 +84,6 @@ public final class YaskiReferensiKelurahan extends javax.swing.JDialog {
         Kabupaten.setDocument(new batasInput((byte)100).getKata(Kabupaten));
     }
 
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

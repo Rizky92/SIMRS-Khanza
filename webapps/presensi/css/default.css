@@ -236,7 +236,6 @@ h1 {
 /* end news border corners*/
 .y { padding:10px 15px}
 
-
 input.teks_input{
     height:18px;
     background-color:#fff;
@@ -288,7 +287,6 @@ padding:4px 5px 0 0;
 color: #333333;
 }
 
-
 /*--------------*/
 
 .head td{
@@ -330,8 +328,6 @@ color: #333333;
 	padding: 4px 2px 4px 10px;
 	background: #eee6e6 ;
 }
-
-
 
 .isi td{
 	border-right: 1px solid #C1DAD7;
@@ -428,7 +424,6 @@ color: #333333;
 	font-style: italic;
 }
 
-
 .head9 td{
 	font: 12px  "Arial", Arial, Helvetica, sans-serif;
         font-style: italic;
@@ -478,7 +473,6 @@ color: #333333;
 	font: 12px  "Comic Sans Ms", Arial, Helvetica, sans-serif;
         height:100%
 }
-
 
 .isi12 td{
 

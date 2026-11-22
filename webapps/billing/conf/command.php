@@ -7,7 +7,6 @@
 		echo "$judul";
  	}
 
-
  	function cekSessiKunjung() {
 		if (session_is_registered('ses_kunjung'))
 			return true;
@@ -55,7 +54,6 @@
 		else return true;
 	}
 
-
 	function samping()
 	{
 
@@ -72,7 +70,6 @@
                                   </p>
                                ";
                 elseif (cekSessiKelas()):
-
 
                             echo"
                                         <li class=\"even\"><a href='index.php?act=ListKepribadian'>Kepribadian</a></li>
@@ -129,7 +126,6 @@
 		echo "</ul>";
 	}
 
-
 	function ListArtikel()
 	{
 		$x= bukaquery("SELECT * FROM artikel where page='artikel' ORDER BY id DESC LIMIT 4");
@@ -167,7 +163,6 @@
                        </p>";
 	}
 
-
 	function formProtek() {
 		if (!cekUser()) {
 			$form = array ('HomeAdmin','ListBilling','ListBillingBayi','ListBillingIbu','ListPasien',
@@ -180,7 +175,6 @@
 					}
 				}
 			}
-
 
 	}
 
@@ -207,8 +201,6 @@
 
 		}
 	}
-
-
 
  function menuLogin(){
 

@@ -46,7 +46,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 
-
 /**
  *
  * @author perpustakaan
@@ -214,7 +213,6 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

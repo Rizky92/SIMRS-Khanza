@@ -37,7 +37,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-
 /**
  *
  * @author salimmulyana
@@ -104,10 +103,6 @@ public final class SuratTidakHamil extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
     }
-
-
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -757,7 +752,6 @@ public final class SuratTidakHamil extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-
     private void TNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRMKeyPressed
 
     }//GEN-LAST:event_TNoRMKeyPressed
@@ -959,7 +953,6 @@ public final class SuratTidakHamil extends javax.swing.JDialog {
         NoSurat.requestFocus();
     }
 
-
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
             NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -1004,7 +997,6 @@ public final class SuratTidakHamil extends javax.swing.JDialog {
             ChkInput.setVisible(true);
         }
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsurat_hamil());

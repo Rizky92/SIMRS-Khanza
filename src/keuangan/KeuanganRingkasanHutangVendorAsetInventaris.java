@@ -86,7 +86,6 @@ public final class KeuanganRingkasanHutangVendorAsetInventaris extends javax.swi
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -347,7 +346,6 @@ public final class KeuanganRingkasanHutangVendorAsetInventaris extends javax.swi
             Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Hutang");
             i++;
             Sequel.menyimpan("temporary","'"+i+"','TOTAL HUTANG :','','"+LCount.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Hutang");
-
 
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());

@@ -67,7 +67,6 @@ public class DlgVakum extends javax.swing.JDialog {
              }
         };
 
-
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
 
         tbAdmin.setModel(tabMode);

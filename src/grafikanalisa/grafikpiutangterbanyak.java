@@ -14,7 +14,6 @@ package grafikanalisa;
  * and open the template in the editor.
  */
 
-
 import fungsi.koneksiDB;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -37,7 +36,6 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
-
 
 /**
  *

@@ -64,7 +64,6 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
     private final boolean BOOKINGLANGSUNGREGISTRASI = koneksiDB.BOOKINGLANGSUNGREGISTRASI(),
                           JADWALDOKTERDIREGISTRASI = koneksiDB.JADWALDOKTERDIREGISTRASI().equals("aktif");
 
-
     /** Creates new form DlgPemberianInfus
      * @param parent
      * @param modal */
@@ -1772,7 +1771,6 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-
 
     public void emptTeks() {
         TNoRM.setText("");

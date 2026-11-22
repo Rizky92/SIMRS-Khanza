@@ -42,7 +42,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPegawai;
 
-
 /**
  *
  * @author perpustakaan
@@ -110,7 +109,6 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

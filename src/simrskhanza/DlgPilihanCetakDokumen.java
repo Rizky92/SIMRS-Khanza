@@ -150,7 +150,6 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -1495,8 +1494,6 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
             }
         }
 
-
-
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     /**
@@ -1690,7 +1687,6 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
         }
 
     }
-
 
     public void setNoRm(String NoRawat,String NoRm,String NoSEP,String NoReg,String NamaPoli,
         String NamaBayar,String NamaDokter,String NamaPasien,String AlamatPasien,

@@ -62,7 +62,6 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(885,674);
 
-
         tabModeOperasi=new DefaultTableModel(null,new Object[]{
             "No.","No.Rawat","No.R.M.","Nama Pasien","Tanggal","Jam","Cara Bayar","Ruangan",
             "Operator 1","JM Operator 1","Operator 2","JM Operator 2",
@@ -411,7 +410,6 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
 
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

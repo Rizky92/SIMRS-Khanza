@@ -606,7 +606,6 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
     private widget.Table tbObatPenyakit;
     // End of variables declaration//GEN-END:variables
 
-
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{

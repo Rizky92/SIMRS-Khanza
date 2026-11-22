@@ -43,7 +43,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPegawai;
 
-
 /**
  *
  * @author perpustakaan
@@ -1378,7 +1377,6 @@ public final class KeuanganPengajuanBiaya extends javax.swing.JDialog {
         autoNomor();
         Urgensi.requestFocus();
     }
-
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){

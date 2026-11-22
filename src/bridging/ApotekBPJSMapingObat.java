@@ -56,7 +56,6 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
     private DlgBarang barang;
     private ApotekBPJSCekReferensiDPHO barangbpjs;
 
-
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
      * @param modal */

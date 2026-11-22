@@ -39,7 +39,6 @@ public class GrafikRegistrasiPerDokter extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
     }
 
     /** This method is called from within the constructor to

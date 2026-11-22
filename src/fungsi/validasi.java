@@ -5,7 +5,6 @@
 
 package fungsi;
 
-
 import java.awt.Desktop;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Dimension;
@@ -1633,7 +1632,6 @@ public final class validasi {
             System.out.println(e);
         }
     }
-
 
     public void MyReport(String reportName,Map parameters,String title){
         try {

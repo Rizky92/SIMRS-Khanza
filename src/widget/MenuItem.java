@@ -122,7 +122,6 @@ public class MenuItem extends JMenuItem {
         return d;
     }
 
-
     static class ModernMenuItemUI extends BasicMenuItemUI {
         @Override
         protected void installDefaults() {

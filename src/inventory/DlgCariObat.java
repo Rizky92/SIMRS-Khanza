@@ -78,16 +78,7 @@ import widget.TanggalCellEditorSMC;
  * @author dosen
  */
 public final class DlgCariObat extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabModeobat,tabModeObatRacikan,tabModeDetailObatRacikan;
     private final String templateValidasiWA = "Kepada %s\nPasien %s %s %s (%s)" +
                                               "\n*RESEP OBAT SAAT INI DALAM PROSES PENGERJAAN %s* di Instalasi Farmasi Rawat Jalan. " +
@@ -466,7 +457,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
             FormInput.setPreferredSize(new Dimension(100, 103));
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1079,7 +1069,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -3571,7 +3560,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 }
             }
 
-
             tbObat.setValueAt(stokbarang,data,10);
 
             y=0;
@@ -4243,7 +4231,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
                     }
                 }
 
-
                 try {
                     stokbarang=0;
                     if(aktifkanbatch.equals("yes")){
@@ -4378,41 +4365,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
             }
         }
-    }
-
-    private void runBackground(Runnable task) {
-        if (ceksukses) return;
-        if (executor.isShutdown() || executor.isTerminated()) return;
-        if (!isDisplayable()) return;
-
-        ceksukses = true;
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-        try {
-            executor.submit(() -> {
-                try {
-                    task.run();
-                } finally {
-                    ceksukses = false;
-                    SwingUtilities.invokeLater(() -> {
-                        if (isDisplayable()) {
-                            setCursor(Cursor.getDefaultCursor());
-                        }
-                    });
-                }
-            });
-        } catch (RejectedExecutionException ex) {
-            ceksukses = false;
-        }
-    }
-
-    @Override
-    public void dispose() {
-        if (timerJam != null) {
-            timerJam.stop();
-        }
-        executor.shutdownNow();
-        super.dispose();
     }
 
     private void cekObatKronis(int posisi, String kodeObat, String namaObat) {
@@ -4847,5 +4799,48 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 break;
         }
         this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
+        ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+
+    @Override
+    public void dispose() {
+        if (timerJam != null) {
+            timerJam.stop();
+        }
+        executor.shutdownNow();
+        super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

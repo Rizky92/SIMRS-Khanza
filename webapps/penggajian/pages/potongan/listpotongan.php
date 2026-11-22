@@ -62,7 +62,6 @@
                     }
                 }
 
-
                 $keyword   = trim(isset($_POST['keyword']))?trim($_POST['keyword']):NULL;
                 $keyword   = validTeks($keyword);
 

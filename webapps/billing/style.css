@@ -76,7 +76,6 @@ img.aligncenter {
 
 /* Header */
 
-
 #header {
 	width: 100%;
 	height: 130px;
@@ -102,7 +101,6 @@ img.aligncenter {
 	font-size:11px;
         font-family: "serif", Times, serif;
 }
-
 
 /* Logo */
 
@@ -303,7 +301,6 @@ img.aligncenter {
 	padding: 10px 0px 0px 0px;
 }
 
-
 #post b {
 	color: #9f9f98;
 	font-weight:bold;
@@ -345,7 +342,6 @@ img.aligncenter {
         font-family: "Tahoma",Arial,Verdana, serif;
         font-size: 12px;
 }
-
 
 .links {
 	display: block;
@@ -445,7 +441,6 @@ img.aligncenter {
 	text-decoration: none;
 	font-size:12px;
 }
-
 
 /* Calendar */
 
@@ -551,7 +546,6 @@ background:url(images/checked.png) no-repeat left #7bbcc7; color:#FFFFFF;backgro
         border-bottom:1px #FFFFFF solid;
         color:#504b4b;
 }
-
 
 /*--------------*/
 
@@ -677,7 +671,6 @@ background:url(images/checked.png) no-repeat left #7bbcc7; color:#FFFFFF;backgro
 	font-style: italic;
 }
 
-
 .head9 td{
 	font: 12px  "Arial", Arial, Helvetica, sans-serif;
         font-style: italic;
@@ -727,7 +720,6 @@ background:url(images/checked.png) no-repeat left #7bbcc7; color:#FFFFFF;backgro
 	font: 12px  "Tahoma", Arial, Helvetica, sans-serif;
         height:100%
 }
-
 
 .isi12 td{
 
@@ -825,7 +817,6 @@ background:url(images/checked.png) no-repeat left #7bbcc7; color:#FFFFFF;backgro
 	color: #BF3600;
         list-style: none;
 }
-
 
 /*---------------contact_form------------------*/
 .contact_form{

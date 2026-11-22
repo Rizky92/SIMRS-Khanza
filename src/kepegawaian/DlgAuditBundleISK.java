@@ -33,22 +33,12 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-
 /**
  *
  * @author perpustakaan
  */
 public final class DlgAuditBundleISK extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -61,7 +51,6 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
     private double pemasangan_sesuai_indikasi=0,hand_hygiene=0,menggunakan_apd_yang_tepat=0,pemasangan_menggunakan_alat_steril=0,segera_dilepas_setelah_tidak_diperlukan=0,pengisian_balon_sesuai_petunjuk=0,fiksasi_kateter_dengan_plester=0,urinebag_menggantung_tidak_menyentuh_lantai=0,pembagi=0,
                    napemasangan_sesuai_indikasi=0,nahand_hygiene=0,namenggunakan_apd_yang_tepat=0,napemasangan_menggunakan_alat_steril=0,nasegera_dilepas_setelah_tidak_diperlukan=0,napengisian_balon_sesuai_petunjuk=0,nafiksasi_kateter_dengan_plester=0,naurinebag_menggantung_tidak_menyentuh_lantai=0,
                    ttlpemasangan_sesuai_indikasi=0,ttlhand_hygiene=0,ttlmenggunakan_apd_yang_tepat=0,ttlpemasangan_menggunakan_alat_steril=0,ttlsegera_dilepas_setelah_tidak_diperlukan=0,ttlpengisian_balon_sesuai_petunjuk=0,ttlfiksasi_kateter_dengan_plester=0,ttlurinebag_menggantung_tidak_menyentuh_lantai=0,ttlpenilaian=0;
-
 
     /** Creates new form DlgRujuk
      * @param parent
@@ -123,7 +112,6 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
 
         jam();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1397,5 +1385,13 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

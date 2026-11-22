@@ -1,7 +1,5 @@
 package inventaris;
 
-
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable2;
@@ -1003,7 +1001,6 @@ public class InventarisHibah extends javax.swing.JDialog {
         }
         LTotal.setText(Valid.SetAngka(sbttl));
     }
-
 
     public void isCek(){
         autoNomor();

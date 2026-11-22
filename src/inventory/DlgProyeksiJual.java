@@ -97,7 +97,6 @@ public class DlgProyeksiJual extends javax.swing.JDialog {
     }
     private double total=0;
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -889,7 +888,6 @@ public class DlgProyeksiJual extends javax.swing.JDialog {
                         "penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and penjualan.jns_jual like '%"+Jenisjual.getSelectedItem().toString().replaceAll("Semua","")+"%' and concat(penjualan.kd_bangsal,bangsal.nm_bangsal) like '%"+kdasal.getText()+nmasal.getText()+"%' and concat(databarang.kdjns,jenis.nama) like '%"+kdjenis.getText()+nmjns.getText()+"%' and concat(databarang.kode_kategori,kategori_barang.nama) like '%"+kdkategori.getText()+nmkategori.getText()+"%' and concat(databarang.kode_golongan,golongan_barang.nama) like '%"+kdgolongan.getText()+nmgolongan.getText()+"%' and kodesatuan.satuan like '%"+TCari.getText().trim()+"%' "+
                         " order by penjualan.tgl_jual,penjualan.nota_jual");
             }
-
 
             try {
                 rs=ps.executeQuery();

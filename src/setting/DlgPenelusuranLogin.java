@@ -599,7 +599,6 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
         LCount.setText(""+tabMode2.getRowCount());
     }
 
-
     public void isCek(){
         BtnHapus.setEnabled(akses.gettracer_login());
     }

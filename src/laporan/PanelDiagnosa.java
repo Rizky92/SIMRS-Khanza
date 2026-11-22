@@ -763,7 +763,6 @@ public class PanelDiagnosa extends widget.panelisi {
         }
     }//GEN-LAST:event_tbProsedurPropertyChange
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnCariPenyakit;
     private widget.Button BtnCariProsedur;

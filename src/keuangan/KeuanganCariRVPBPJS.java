@@ -182,7 +182,6 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -1963,7 +1962,6 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-
 
             LCount.setText(Valid.SetAngka(sisapiutang));
             LCount2.setText(Valid.SetAngka(total));

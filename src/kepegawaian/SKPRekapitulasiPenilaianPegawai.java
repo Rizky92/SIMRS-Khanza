@@ -1153,8 +1153,6 @@ public class SKPRekapitulasiPenilaianPegawai extends javax.swing.JDialog {
         }*/
     }
 
-
-
     public void isCek(){
         autoNomor();
         TCari.requestFocus();

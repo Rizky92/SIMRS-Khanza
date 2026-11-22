@@ -59,7 +59,6 @@
              $next = "yes";
           }
 
-
           if (  $prev == "yes"  )  {
              $prev_page  = ( ($block - 1) * $page_per_block );
              $prev_block = $block - 1;
@@ -90,7 +89,6 @@
              $startblock++;
           }
 
-
           if (  $next == "yes" )  {
              $next_page = ($block * $page_per_block) + 1;
              $next_block= $block + 1;
@@ -108,10 +106,6 @@
           }
        }
     }
-
-
-
-
 
     /*------------------------------------------------------------------------------------------*/
     /*

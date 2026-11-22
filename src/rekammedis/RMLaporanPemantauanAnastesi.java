@@ -33,7 +33,6 @@ import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author perpustakaan
@@ -597,7 +596,6 @@ public final class RMLaporanPemantauanAnastesi extends javax.swing.JDialog {
         ChkAccor.setSelected(false);
         isMenu();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -6880,7 +6878,6 @@ public final class RMLaporanPemantauanAnastesi extends javax.swing.JDialog {
         isRawat();
         runBackground(() ->tampilPersalinan());
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_awal_keperawatan_ranapkebidanan());

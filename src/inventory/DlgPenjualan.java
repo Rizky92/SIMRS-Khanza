@@ -67,7 +67,6 @@ public class DlgPenjualan extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -303,7 +302,6 @@ public class DlgPenjualan extends javax.swing.JDialog {
             DEPOAKTIFOBAT = "";
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

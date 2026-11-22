@@ -37,22 +37,12 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-
 /**
  *
  * @author perpustakaan
  */
 public final class DlgAuditBundlePLABSI extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -65,7 +55,6 @@ public final class DlgAuditBundlePLABSI extends javax.swing.JDialog {
     private double sebelum_melakukan_hand_hygiene=0,menggunakan_apd_lengkap=0,lokasi_pemasangan_sesuai=0,alat_yang_digunakan_steril=0,pembersihan_kulit=0,setelah_melakukan_hand_hygiene=0,perawatan_dressing_infus=0,spoit_yang_digunakan_disposible=0,memberi_tanggal_dan_jam_pemasangan_infus=0,set_infus_setiap_72jam=0,pembagi=0,
                    nasebelum_melakukan_hand_hygiene=0,namenggunakan_apd_lengkap=0,nalokasi_pemasangan_sesuai=0,naalat_yang_digunakan_steril=0,napembersihan_kulit=0,nasetelah_melakukan_hand_hygiene=0,naperawatan_dressing_infus=0,naspoit_yang_digunakan_disposible=0,namemberi_tanggal_dan_jam_pemasangan_infus=0,naset_infus_setiap_72jam=0,
                    ttlsebelum_melakukan_hand_hygiene=0,ttlmenggunakan_apd_lengkap=0,ttllokasi_pemasangan_sesuai=0,ttlalat_yang_digunakan_steril=0,ttlpembersihan_kulit=0,ttlsetelah_melakukan_hand_hygiene=0,ttlperawatan_dressing_infus=0,ttlspoit_yang_digunakan_disposible=0,ttlmemberi_tanggal_dan_jam_pemasangan_infus=0,ttlset_infus_setiap_72jam=0,ttlpenilaian=0;
-
 
     /** Creates new form DlgRujuk
      * @param parent
@@ -130,7 +119,6 @@ public final class DlgAuditBundlePLABSI extends javax.swing.JDialog {
         isForm();
         jam();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1491,5 +1479,13 @@ public final class DlgAuditBundlePLABSI extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

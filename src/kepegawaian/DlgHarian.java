@@ -112,9 +112,6 @@ public final class DlgHarian extends javax.swing.JDialog {
         Departemen.setSelectedItem("Semua");
     }
 
-
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -1326,7 +1323,6 @@ public final class DlgHarian extends javax.swing.JDialog {
         Detik2.setSelectedItem("00");
         catatan.setText("");
     }
-
 
     private void getData() {
         int row=tbBangsal.getSelectedRow();

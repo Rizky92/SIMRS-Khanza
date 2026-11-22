@@ -73,7 +73,6 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     private volatile boolean ceksukses = false;
     private String status="",bangsal="",lokasistok="",kamar="",diagnosa="",order="",kelas="",penjab="",norawatibu="",posisi="",DEPOAKTIFOBAT="",norm="";
 
-
     /** Creates new form DlgPemberianInfus
      * @param parent
      * @param modal */
@@ -140,7 +139,6 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
@@ -2377,7 +2375,6 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-
 
     public void emptTeks() {
         KdDokter.setText("");

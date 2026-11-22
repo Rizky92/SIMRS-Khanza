@@ -110,7 +110,6 @@ public class MenuBar extends JMenuBar {
         }
     }
 
-
     @Override
     protected void paintComponent(Graphics g) {
         if (!isOpaque()) {

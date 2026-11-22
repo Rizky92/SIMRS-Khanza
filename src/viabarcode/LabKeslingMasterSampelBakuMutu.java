@@ -57,7 +57,6 @@ public class LabKeslingMasterSampelBakuMutu extends javax.swing.JDialog {
 
         this.setLocation(10,10);
 
-
         tabMode=new DefaultTableModel(null,new Object[]{"Kode Sampel","Nama Sampel","Baku Mutu"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };

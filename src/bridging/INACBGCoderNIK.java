@@ -61,7 +61,6 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
 
         this.setLocation(10,10);
 
-
         Object[] row={"NIP","Petugas","Coder NIK"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

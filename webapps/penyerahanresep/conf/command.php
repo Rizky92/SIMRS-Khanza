@@ -15,7 +15,6 @@
         }
     }
 
-
     function cekUser() {
         if (isset($_SESSION['ses_admin_penyerahanresep'])) {
             return true;

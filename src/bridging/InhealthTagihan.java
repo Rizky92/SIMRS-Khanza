@@ -36,7 +36,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-
 /**
  *
  * @author perpustakaan
@@ -60,7 +59,6 @@ public final class InhealthTagihan extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocation(8,1);
-
 
         tabMode=new DefaultTableModel(null,new Object[]{
                 "No.SJP","No.Rawat","Tanggal SJP","Tanggal Rujukan","No.Rujukan",
@@ -228,7 +226,6 @@ public final class InhealthTagihan extends javax.swing.JDialog {
         ChkAccor.setSelected(false);
         isMenu();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -893,7 +890,6 @@ public final class InhealthTagihan extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-
 
     public void isCek(){
         BtnPrint.setEnabled(akses.getinhealth_kirim_tagihan());

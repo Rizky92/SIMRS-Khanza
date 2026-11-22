@@ -14,7 +14,6 @@ http://www.tooplate.com/view/2098-health
     overflow-x: hidden;
   }
 
-
   /*---------------------------------------
      TYPOGRAPHY
   -----------------------------------------*/
@@ -66,7 +65,6 @@ http://www.tooplate.com/view/2098-health
     font-weight: normal;
     line-height: 24px;
   }
-
 
   /*---------------------------------------
      GENERAL
@@ -185,7 +183,6 @@ http://www.tooplate.com/view/2098-health
     margin-right: 10px;
   }
 
-
   #about, #team, #news,
   #news-detail {
     position: relative;
@@ -202,7 +199,6 @@ http://www.tooplate.com/view/2098-health
     margin: 0;
     padding: 0;
   }
-
 
   /*---------------------------------------
        PRE LOADER
@@ -252,8 +248,6 @@ http://www.tooplate.com/view/2098-health
     to {transform: rotate(360deg);}
   }
 
-
-
   /*---------------------------------------
       MENU
   -----------------------------------------*/
@@ -298,8 +292,6 @@ http://www.tooplate.com/view/2098-health
     color: #a5c422;
     margin-right: 5px;
   }
-
-
 
   /*---------------------------------------
       MENU
@@ -382,8 +374,6 @@ http://www.tooplate.com/view/2098-health
     background-color: transparent;
   }
 
-
-
   /*---------------------------------------
       HOME
   -----------------------------------------*/
@@ -463,7 +453,6 @@ http://www.tooplate.com/view/2098-health
     background-image: url(../images/slider3.jpg);
   }
 
-
   /*---------------------------------------
       ABOUT
   -----------------------------------------*/
@@ -495,8 +484,6 @@ http://www.tooplate.com/view/2098-health
     color: #858585;
     margin: 0;
   }
-
-
 
   /*---------------------------------------
       TEAM MEMBERS
@@ -563,8 +550,6 @@ http://www.tooplate.com/view/2098-health
     top: -22em;
   }
 
-
-
   /*---------------------------------------
      SERVICE
   -----------------------------------------*/
@@ -596,7 +581,6 @@ http://www.tooplate.com/view/2098-health
     line-height: 120px;
     border-radius: 100%;
   }
-
 
   /*---------------------------------------
       NEWS
@@ -745,8 +729,6 @@ http://www.tooplate.com/view/2098-health
     background: #4267b2;
   }
 
-
-
   /*---------------------------------------
       APPOINTMENT
   -----------------------------------------*/
@@ -787,7 +769,6 @@ http://www.tooplate.com/view/2098-health
     background: #393939;
     color: #ffffff;
   }
-
 
   /*---------------------------------------
      FOOTER
@@ -907,7 +888,6 @@ http://www.tooplate.com/view/2098-health
     transform: translateY(-5px);
   }
 
-
   /*---------------------------------------
      SOCIAL ICON
   -----------------------------------------*/
@@ -940,7 +920,6 @@ http://www.tooplate.com/view/2098-health
     background: #4267b2;
     color: #ffffff;
   }
-
 
   /*---------------------------------------
      RESPONSIVE STYLES

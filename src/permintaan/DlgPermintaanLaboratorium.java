@@ -49,16 +49,7 @@ import kepegawaian.DlgCariDokter;
  * @author dosen
  */
 public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
-    private javax.swing.Timer timerJam;
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        if (timerJam != null && !timerJam.isRunning()) {
-            timerJam.start();
-        }
-    }
-
+    private Timer timerJam;
     private final DefaultTableModel tabMode,tabMode2,tabMode3,tabModeMB,tabModeDetailMB;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -74,7 +65,6 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
     private boolean sukses=true;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-
 
     /** Creates new form DlgPerawatan
      * @param parent
@@ -3030,5 +3020,13 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         }
         executor.shutdownNow();
         super.dispose();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (timerJam != null && !timerJam.isRunning()) {
+            timerJam.start();
+        }
     }
 }

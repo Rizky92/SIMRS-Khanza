@@ -40,7 +40,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-
 /**
  *
  * @author perpustakaan
@@ -107,7 +106,6 @@ public final class DlgDataKlasifikasiPasienRanap extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1011,8 +1009,6 @@ public final class DlgDataKlasifikasiPasienRanap extends javax.swing.JDialog {
         Total.setSelectedIndex(0);
         Minimal.requestFocus();
     }
-
-
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){

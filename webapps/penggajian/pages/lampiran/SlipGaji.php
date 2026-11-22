@@ -456,7 +456,6 @@
 
                             $_sql22  ="SELECT ($ttln/sum(n))*100 from indekref where kdindex='".$baris["indexins"]."'";
 
-
 			    $hasil22 =bukaquery($_sql22);
 			    $baris22 = mysqli_fetch_array($hasil22);
                 $indexjaga=round((isset($baris22[0])?$baris22[0]:0),2);
@@ -664,7 +663,6 @@
 					 </TR>";
                                     }
 
-
                                     echo"
 					 <TR class='isi6'>
                                             <TD width='130px'>&nbsp;&nbsp;&nbsp;<i>Jumlah Lembur Diterima</i></TD>
@@ -721,7 +719,6 @@
                                          <TD width='130px'>".$barisjs[0]."</TD><td width='3px'>:</td><td width='140px'>".formatDuit($barisjs[1])."</td>
 				      </TR>";
 				}
-
 
                                  if(isset($baris27[0])!=0){
                                      echo"

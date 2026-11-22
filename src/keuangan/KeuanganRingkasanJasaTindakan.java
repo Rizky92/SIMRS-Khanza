@@ -70,7 +70,6 @@ public class KeuanganRingkasanJasaTindakan extends javax.swing.JDialog {
         LoadHTML2.setDocument(kit.createDefaultDocument());
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -814,7 +813,6 @@ public class KeuanganRingkasanJasaTindakan extends javax.swing.JDialog {
     private widget.ScrollPane scrollPane2;
     private widget.ScrollPane scrollPane3;
     // End of variables declaration//GEN-END:variables
-
 
     private void isForm(){
         if(ChkInput.isSelected()==true){

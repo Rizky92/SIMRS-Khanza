@@ -40,7 +40,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPegawai;
 
-
 /**
  *
  * @author windiartohugroho
@@ -159,10 +158,6 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
         LoadHTML2.setEditorKit(kit);
         LoadHTML2.setDocument(kit.createDefaultDocument());
     }
-
-
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1135,7 +1130,6 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
@@ -1568,7 +1562,6 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
         AlasanPenolakan.requestFocus();
     }
 
-
     private void getData() {
          if(tbObat.getSelectedRow()!= -1){
             NoPernyataan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -1646,7 +1639,6 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
             ChkInput.setVisible(true);
         }
     }
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenolakan_anjuran_medis());

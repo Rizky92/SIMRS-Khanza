@@ -20,7 +20,6 @@ public class koneksiDB {
     private static final Properties prop = new Properties();
     private static final MysqlDataSource dataSource = new MysqlDataSource();
 
-
     public static Connection condb() {
         try {
             if (connection == null || connection.isClosed()) {

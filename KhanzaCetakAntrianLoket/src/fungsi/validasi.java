@@ -5,7 +5,6 @@
 
 package fungsi;
 
-
 import java.awt.Desktop;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Dimension;
@@ -911,7 +910,6 @@ public final class validasi {
         }
     }
 
-
     public void MyReport(String reportName,Map parameters,String title){
         try {
                 JasperViewer jasperViewer =new JasperViewer(JasperFillManager.fillReport("./report/"+reportName,parameters,connect), false);
@@ -923,7 +921,6 @@ public final class validasi {
            System.out.println("Notifikasi : "+ex);
         }
     }
-
 
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JTextField kanan){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){

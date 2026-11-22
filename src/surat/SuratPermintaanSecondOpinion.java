@@ -2,7 +2,6 @@
  * By Mas Khanza
  */
 
-
 package surat;
 
 import fungsi.WarnaTable;
@@ -41,7 +40,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
-
 
 /**
  *
@@ -159,7 +157,6 @@ public final class SuratPermintaanSecondOpinion extends javax.swing.JDialog {
         LoadHTML2.setDocument(doc2);
         LoadHTML3.setDocument(doc3);
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

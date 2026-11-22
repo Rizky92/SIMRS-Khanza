@@ -19,7 +19,6 @@
         }
     }
 
-
     function cekUser() {
         if (isset($_SESSION['ses_admin_perlindungankekerasan'])) {
             return true;

@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 
-
 package rekammedis;
 
 import fungsi.WarnaTable;
@@ -41,7 +40,6 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
-
 
 /**
  *
@@ -163,7 +161,6 @@ public final class RMPenilaianBishop extends javax.swing.JDialog {
             TANGGALMUNDUR="yes";
         }
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

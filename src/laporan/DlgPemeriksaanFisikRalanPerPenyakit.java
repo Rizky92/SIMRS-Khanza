@@ -39,7 +39,6 @@ public class DlgPemeriksaanFisikRalanPerPenyakit extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -53,7 +52,6 @@ public class DlgPemeriksaanFisikRalanPerPenyakit extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

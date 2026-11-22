@@ -36,7 +36,6 @@ import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
  *
  * @author perpustakaan
@@ -652,7 +651,6 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
         ChkAccor.setSelected(false);
         isMenu();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -8185,7 +8183,6 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
         isRawat();
     }
 
-
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_awal_keperawatan_ranap());
         BtnHapus.setEnabled(akses.getpenilaian_awal_keperawatan_ranap());
@@ -8290,8 +8287,6 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
             }
         }
     }
-
-
 
     private void hapus() {
         if(Sequel.queryu2tf("delete from penilaian_awal_keperawatan_ranap where no_rawat=?",1,new String[]{
