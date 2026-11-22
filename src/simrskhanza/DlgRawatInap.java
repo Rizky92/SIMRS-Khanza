@@ -54,6 +54,8 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -196,8 +198,6 @@ import rekammedis.RMSkriningNutrisiLansia;
 import rekammedis.RMTimeOutSebelumInsisi;
 import rekammedis.RMTransferPasienAntarRuang;
 import surat.SuratKontrol;
-import javax.swing.Timer;
-import javax.swing.WindowConstants;
 
 /**
  *
@@ -6686,7 +6686,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 resepobat.setVisible(true);
             }
         }
-    }
+    }//GEN-LAST:event_BtnResepObatActionPerformed
 
     private void BtnCopyResepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCopyResepActionPerformed
         if(TNoRw.getText().trim().equals("")){

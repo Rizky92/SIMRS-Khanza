@@ -53,15 +53,16 @@ import javafx.util.Callback;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
+import rekammedis.RMRiwayatPerawatan;
 import simrskhanza.DlgCariBangsal;
 import simrskhanza.DlgCariPoli;
 import simrskhanza.DlgPeriksaLaboratorium;
-import javax.swing.WindowConstants;
-import rekammedis.RMRiwayatPerawatan;
 
 public class DlgCariPermintaanLab extends javax.swing.JDialog {
     private Timer timerJam;
