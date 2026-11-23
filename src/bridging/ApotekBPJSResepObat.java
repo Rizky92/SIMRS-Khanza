@@ -421,7 +421,7 @@ public final class ApotekBPJSResepObat extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbKamar.getSelectedRow()!= -1){
-            reply = JOptionPane.showConfirmDialog(rootPane, "Eeiiiiiits, udah yakin data No.SEP Apotek : "+tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString()+",\nNo.SEP Asal : "+tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString()+",No.Resep : "+tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString()+" mau dihapus?\nData hanya dihapus di sisi BPJS, data yang disimpan lokal tidak ikut terhapus..!!\nGunakan fitur ini untuk perbaikan data Apotek Online BPJS..!!!", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+            reply = JOptionPane.showConfirmDialog(rootPane, "Eeiiiiiits, udah yakin data No.SEP Apotek : "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString()+",\nNo.SEP Asal : "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString()+",No.Resep : "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2).toString()+" mau dihapus?\nData hanya dihapus di sisi BPJS, data yang disimpan lokal tidak ikut terhapus..!!\nGunakan fitur ini untuk perbaikan data Apotek Online BPJS..!!!", "Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
                 try {
                     bodyWithDeleteRequest();
@@ -764,7 +764,7 @@ public final class ApotekBPJSResepObat extends javax.swing.JDialog {
             headers.add("x-signature", api.getHmac(utc));
             headers.add("user_key", koneksiDB.USERKEYAPIAPOTEKBPJS());
             URL = link+"/hapusresep";
-            requestJson ="{\"nosjp\":\""+tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString()+"\",\"refasalsjp\":\""+tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString()+"\",\"noresep\":\""+tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString()+"\"}";
+            requestJson ="{\"nosjp\":\""+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString()+"\",\"refasalsjp\":\""+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString()+"\",\"noresep\":\""+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2).toString()+"\"}";
             System.out.println(URL);
             System.out.println("JSON Dikirim : "+requestJson);
             requestEntity = new HttpEntity(requestJson,headers);
@@ -773,7 +773,7 @@ public final class ApotekBPJSResepObat extends javax.swing.JDialog {
             System.out.println("code : "+nameNode.path("code").asText());
             System.out.println("message : "+nameNode.path("message").asText());
             if(nameNode.path("code").asText().equals("200")){
-                tabMode.removeRow(tbKamar.getSelectedRow());
+                tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
             }else{
                 JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
             }

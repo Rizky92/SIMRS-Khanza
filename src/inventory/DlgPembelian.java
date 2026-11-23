@@ -264,6 +264,7 @@ public class DlgPembelian extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -727,7 +728,7 @@ public class DlgPembelian extends javax.swing.JDialog {
             row=0;
             jml=tbDokter.getRowCount();
             for(i=0;i<jml;i++){
-                if((Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0)&&tbDokter.getValueAt(i,13).toString().trim().equals("")){
+                if((Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0)&&tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),13).toString().trim().equals("")){
                     row++;
                 }
             }
@@ -786,29 +787,29 @@ public class DlgPembelian extends javax.swing.JDialog {
                         for(i=0;i<jml;i++){
                             setKonversi(i);
                             try {
-                                if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
+                                if(Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0){
                                     if(Sequel.menyimpantf2("detailbeli","?,?,?,?,?,?,?,?,?,?,?,?","Transaksi Pembelian",12,new String[]{
                                            NoFaktur.getText(),
-                                           tbDokter.getValueAt(i,2).toString(),
-                                           tbDokter.getValueAt(i,1).toString(),
-                                           tbDokter.getValueAt(i,0).toString(),
-                                           tbDokter.getValueAt(i,7).toString(),
-                                           tbDokter.getValueAt(i,8).toString(),
-                                           tbDokter.getValueAt(i,9).toString(),
-                                           tbDokter.getValueAt(i,10).toString(),
-                                           tbDokter.getValueAt(i,11).toString(),
-                                           tbDokter.getValueAt(i,13).toString(),
-                                           tbDokter.getValueAt(i,12).toString(),
-                                           Valid.SetTgl(tbDokter.getValueAt(i,6).toString()+"")
+                                           tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString(),
+                                           tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString(),
+                                           tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString(),
+                                           tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),7).toString(),
+                                           tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString(),
+                                           tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),9).toString(),
+                                           tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),10).toString(),
+                                           tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),11).toString(),
+                                           tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),13).toString(),
+                                           tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),12).toString(),
+                                           Valid.SetTgl(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString()+"")
                                     })==true){
                                         if(aktifkanbatch.equals("yes")){
-                                            Trackobat.catatRiwayat(tbDokter.getValueAt(i,2).toString(),Valid.SetAngka(tbDokter.getValueAt(i,12).toString()),0,"Pengadaan",akses.getkode(),kdgudang.getText(),"Simpan",tbDokter.getValueAt(i,13).toString(),NoFaktur.getText(),NoFaktur.getText()+" "+nmsup.getText());
-                                            Sequel.menyimpan("gudangbarang","'"+tbDokter.getValueAt(i,2).toString()+"','"+kdgudang.getText()+"','"+tbDokter.getValueAt(i,12).toString()+"','"+tbDokter.getValueAt(i,13).toString()+"','"+NoFaktur.getText()+"'",
-                                                       "stok=stok+'"+tbDokter.getValueAt(i,12).toString()+"'","kode_brng='"+tbDokter.getValueAt(i,2).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='"+tbDokter.getValueAt(i,13).toString()+"' and no_faktur='"+NoFaktur.getText()+"'");
+                                            Trackobat.catatRiwayat(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString(),Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),12).toString()),0,"Pengadaan",akses.getkode(),kdgudang.getText(),"Simpan",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),13).toString(),NoFaktur.getText(),NoFaktur.getText()+" "+nmsup.getText());
+                                            Sequel.menyimpan("gudangbarang","'"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString()+"','"+kdgudang.getText()+"','"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),12).toString()+"','"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),13).toString()+"','"+NoFaktur.getText()+"'",
+                                                       "stok=stok+'"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),12).toString()+"'","kode_brng='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),13).toString()+"' and no_faktur='"+NoFaktur.getText()+"'");
                                         }else{
-                                            Trackobat.catatRiwayat(tbDokter.getValueAt(i,2).toString(),Valid.SetAngka(tbDokter.getValueAt(i,12).toString()),0,"Pengadaan",akses.getkode(),kdgudang.getText(),"Simpan","","",NoFaktur.getText()+" "+nmsup.getText());
-                                            Sequel.menyimpan("gudangbarang","'"+tbDokter.getValueAt(i,2).toString()+"','"+kdgudang.getText()+"','"+tbDokter.getValueAt(i,12).toString()+"','',''",
-                                                       "stok=stok+'"+tbDokter.getValueAt(i,12).toString()+"'","kode_brng='"+tbDokter.getValueAt(i,2).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='' and no_faktur=''");
+                                            Trackobat.catatRiwayat(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString(),Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),12).toString()),0,"Pengadaan",akses.getkode(),kdgudang.getText(),"Simpan","","",NoFaktur.getText()+" "+nmsup.getText());
+                                            Sequel.menyimpan("gudangbarang","'"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString()+"','"+kdgudang.getText()+"','"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),12).toString()+"','',''",
+                                                       "stok=stok+'"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),12).toString()+"'","kode_brng='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='' and no_faktur=''");
                                         }
 
                                         simpanbatch();
@@ -853,25 +854,25 @@ public class DlgPembelian extends javax.swing.JDialog {
                         jml=tbDokter.getRowCount();
                         if(aktifkanbatch.equals("yes")){
                             for(i=0;i<jml;i++){
-                                tbDokter.setValueAt("",i,0);
-                                tbDokter.setValueAt(true,i,5);
-                                tbDokter.setValueAt(0,i,8);
-                                tbDokter.setValueAt(0,i,9);
-                                tbDokter.setValueAt(0,i,10);
-                                tbDokter.setValueAt(0,i,11);
-                                tbDokter.setValueAt(0,i,12);
-                                tbDokter.setValueAt("",i,13);
+                                tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),0);
+                                tabMode.setValueAt(true,tbDokter.convertRowIndexToModel(i),5);
+                                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),8);
+                                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),9);
+                                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),10);
+                                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),11);
+                                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),12);
+                                tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),13);
                             }
                         }else{
                             for(i=0;i<jml;i++){
-                                tbDokter.setValueAt("",i,0);
-                                tbDokter.setValueAt(false,i,5);
-                                tbDokter.setValueAt(0,i,8);
-                                tbDokter.setValueAt(0,i,9);
-                                tbDokter.setValueAt(0,i,10);
-                                tbDokter.setValueAt(0,i,11);
-                                tbDokter.setValueAt(0,i,12);
-                                tbDokter.setValueAt("",i,13);
+                                tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),0);
+                                tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(i),5);
+                                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),8);
+                                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),9);
+                                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),10);
+                                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),11);
+                                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),12);
+                                tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),13);
                             }
                         }
                         ppn=0;
@@ -932,13 +933,13 @@ public class DlgPembelian extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            tbDokter.setValueAt("",i,0);
-            tbDokter.setValueAt(0,i,8);
-            tbDokter.setValueAt(0,i,9);
-            tbDokter.setValueAt(0,i,10);
-            tbDokter.setValueAt(0,i,11);
-            tbDokter.setValueAt(0,i,12);
-            tbDokter.setValueAt("",i,13);
+            tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),0);
+            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),8);
+            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),9);
+            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),10);
+            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),11);
+            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),12);
+            tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),13);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -1180,10 +1181,10 @@ public class DlgPembelian extends javax.swing.JDialog {
                 }else if(tbDokter.getSelectedColumn()==9){
                     setKonversi(tbDokter.getSelectedRow());
                     try {
-                        tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())*
-                            (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
+                        tabMode.setValueAt(Math.round(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8).toString())*
+                            (Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9).toString())/100)),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10);
                     } catch (Exception e) {
-                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),10);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10);
                     }
                     getData();
                 }
@@ -1211,10 +1212,10 @@ public class DlgPembelian extends javax.swing.JDialog {
                         }else if(tbDokter.getSelectedColumn()==8){
                             setKonversi(tbDokter.getSelectedRow());
                             try {
-                                tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())*
-                                        (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
+                                tabMode.setValueAt(Math.round(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8).toString())*
+                                        (Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9).toString())/100)),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10);
                             } catch (Exception e) {
-                                tbDokter.setValueAt(0,tbDokter.getSelectedRow(),10);
+                                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10);
                             }
                             getData();
                         }else if((tbDokter.getSelectedColumn()==10)||(tbDokter.getSelectedColumn()==11)||(tbDokter.getSelectedColumn()==13)){
@@ -1223,10 +1224,10 @@ public class DlgPembelian extends javax.swing.JDialog {
                         }else if(tbDokter.getSelectedColumn()==9){
                             setKonversi(tbDokter.getSelectedRow());
                             try {
-                                tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())*
-                                        (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
+                                tabMode.setValueAt(Math.round(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8).toString())*
+                                        (Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9).toString())/100)),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10);
                             } catch (Exception e) {
-                                tbDokter.setValueAt(0,tbDokter.getSelectedRow(),10);
+                                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10);
                             }
                             getData();
                         }
@@ -1236,13 +1237,13 @@ public class DlgPembelian extends javax.swing.JDialog {
                 case KeyEvent.VK_DELETE:
                     try {
                         if(tbDokter.getSelectedColumn()==0){
-                            tbDokter.setValueAt(null, tbDokter.getSelectedRow(),0);
+                            tabMode.setValueAt(null, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0);
                         }else if(tbDokter.getSelectedColumn()==7){
-                            tbDokter.setValueAt("", tbDokter.getSelectedRow(),7);
+                            tabMode.setValueAt("", tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7);
                         }else if(tbDokter.getSelectedColumn()==9){
-                            tbDokter.setValueAt("", tbDokter.getSelectedRow(),9);
+                            tabMode.setValueAt("", tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9);
                         }else if(tbDokter.getSelectedColumn()==10){
-                            tbDokter.setValueAt("", tbDokter.getSelectedRow(),10);
+                            tabMode.setValueAt("", tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10);
                         }
                     } catch (Exception e) {
                     }
@@ -1250,20 +1251,20 @@ public class DlgPembelian extends javax.swing.JDialog {
                 case KeyEvent.VK_BACK_SPACE:
                     try {
                         if(tbDokter.getSelectedColumn()==0){
-                            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().equals("0")||tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().equals("0.0")||tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().equals("0,0")){
-                                tbDokter.setValueAt("", tbDokter.getSelectedRow(),0);
+                            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().equals("0")||tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().equals("0.0")||tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().equals("0,0")){
+                                tabMode.setValueAt("", tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0);
                             }
                         }else if(tbDokter.getSelectedColumn()==7){
-                            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString().equals("0")||tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString().equals("0.0")||tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString().equals("0,0")){
-                                tbDokter.setValueAt("", tbDokter.getSelectedRow(),7);
+                            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7).toString().equals("0")||tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7).toString().equals("0.0")||tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7).toString().equals("0,0")){
+                                tabMode.setValueAt("", tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7);
                             }
                         }else if(tbDokter.getSelectedColumn()==9){
-                            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString().equals("0")||tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString().equals("0.0")||tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString().equals("0,0")){
-                                tbDokter.setValueAt("", tbDokter.getSelectedRow(),9);
+                            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9).toString().equals("0")||tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9).toString().equals("0.0")||tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9).toString().equals("0,0")){
+                                tabMode.setValueAt("", tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9);
                             }
                         }else if(tbDokter.getSelectedColumn()==10){
-                            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString().equals("0")||tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString().equals("0.0")||tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString().equals("0,0")){
-                                tbDokter.setValueAt("", tbDokter.getSelectedRow(),10);
+                            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10).toString().equals("0")||tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10).toString().equals("0.0")||tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10).toString().equals("0,0")){
+                                tabMode.setValueAt("", tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10);
                             }
                         }
                     } catch (Exception e) {
@@ -1277,10 +1278,10 @@ public class DlgPembelian extends javax.swing.JDialog {
                     if(tbDokter.getSelectedColumn()==9){
                         setKonversi(tbDokter.getSelectedRow());
                         try {
-                            tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())*
-                                    (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
+                            tabMode.setValueAt(Math.round(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8).toString())*
+                                    (Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9).toString())/100)),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10);
                         } catch (Exception e) {
-                            tbDokter.setValueAt(0,tbDokter.getSelectedRow(),10);
+                            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10);
                         }
                         getData();
                     }else if((tbDokter.getSelectedColumn()==1)||(tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==10)){
@@ -1295,7 +1296,7 @@ public class DlgPembelian extends javax.swing.JDialog {
                     if(tbDokter.getSelectedColumn()==1){
                         y=0;
                         try {
-                            y=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                            y=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         } catch (Exception e) {
                             y=0;
                         }
@@ -1309,19 +1310,19 @@ public class DlgPembelian extends javax.swing.JDialog {
                                 @Override
                                 public void windowClosed(WindowEvent e) {
                                     if(datakonversi.getTable().getSelectedRow()!= -1){
-                                        tbDokter.setValueAt(datakonversi.getTable().getValueAt(datakonversi.getTable().getSelectedRow(),1).toString(),tbDokter.getSelectedRow(),1);
+                                        tabMode.setValueAt(datakonversi.getTable().getValueAt(datakonversi.getTable().getSelectedRow(),1).toString(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1);
                                         try{
-                                            tbDokter.setValueAt(Double.parseDouble(datakonversi.getTable().getValueAt(datakonversi.getTable().getSelectedRow(),3).toString()),tbDokter.getSelectedRow(),25);
+                                            tabMode.setValueAt(Double.parseDouble(datakonversi.getTable().getValueAt(datakonversi.getTable().getSelectedRow(),3).toString()),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),25);
                                         }catch(Exception er){
                                             JOptionPane.showMessageDialog(null,"Gagal mengambil nilai konversi, nilai barang satuan kecil dianggap bernilai 1..!!");
-                                            tbDokter.setValueAt(1,tbDokter.getSelectedRow(),25);
+                                            tabMode.setValueAt(1,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),25);
                                         }
 
                                         try{
-                                            tbDokter.setValueAt(Double.parseDouble(datakonversi.getTable().getValueAt(datakonversi.getTable().getSelectedRow(),0).toString()),tbDokter.getSelectedRow(),26);
+                                            tabMode.setValueAt(Double.parseDouble(datakonversi.getTable().getValueAt(datakonversi.getTable().getSelectedRow(),0).toString()),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),26);
                                         }catch(Exception er){
                                             JOptionPane.showMessageDialog(null,"Gagal mengambil nilai konversi, nilai barang satuan besar dianggap bernilai 1..!!");
-                                            tbDokter.setValueAt(1,tbDokter.getSelectedRow(),26);
+                                            tabMode.setValueAt(1,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),26);
                                         }
                                     }
                                     tbDokter.requestFocus();
@@ -1348,7 +1349,7 @@ public class DlgPembelian extends javax.swing.JDialog {
                                 @Override
                                 public void keyReleased(KeyEvent e) {}
                             });
-                            datakonversi.setSatuanKecil(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
+                            datakonversi.setSatuanKecil(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
                             datakonversi.isCek();
                             datakonversi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight());
                             datakonversi.setLocationRelativeTo(internalFrame1);
@@ -1514,7 +1515,7 @@ public class DlgPembelian extends javax.swing.JDialog {
             jml=0;
             for(i=0;i<row;i++){
                 try {
-                    if(Double.parseDouble(tbDokter.getValueAt(i,0).toString())>0){
+                    if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0){
                         jml++;
                     }
                 } catch (Exception e) {
@@ -1554,41 +1555,42 @@ public class DlgPembelian extends javax.swing.JDialog {
             index=0;
             for(i=0;i<row;i++){
                 try {
-                    if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
-                        jumlah[index]=Double.parseDouble(tbDokter.getValueAt(i,0).toString());
-                        satuanbeli[index]=tbDokter.getValueAt(i,1).toString();
-                        kodebarang[index]=tbDokter.getValueAt(i,2).toString();
-                        namabarang[index]=tbDokter.getValueAt(i,3).toString();
-                        satuan[index]=tbDokter.getValueAt(i,4).toString();
-                        ganti[index]=Boolean.parseBoolean(tbDokter.getValueAt(i,5).toString());
-                        kadaluwarsa[index]=tbDokter.getValueAt(i,6).toString();
-                        harga[index]=Double.parseDouble(tbDokter.getValueAt(i,7).toString());
-                        subtotal[index]=Double.parseDouble(tbDokter.getValueAt(i,8).toString());
-                        diskon[index]=Double.parseDouble(tbDokter.getValueAt(i,9).toString());
-                        besardiskon[index]=Double.parseDouble(tbDokter.getValueAt(i,10).toString());
-                        jmltotal[index]=Double.parseDouble(tbDokter.getValueAt(i,11).toString());
-                        jmlstok[index]=Double.parseDouble(tbDokter.getValueAt(i,12).toString());
-                        nobatch[index]=tbDokter.getValueAt(i,13).toString();
-                        ralan[index]=Double.parseDouble(tbDokter.getValueAt(i,14).toString());
-                        kelas1[index]=Double.parseDouble(tbDokter.getValueAt(i,15).toString());
-                        kelas2[index]=Double.parseDouble(tbDokter.getValueAt(i,16).toString());
-                        kelas3[index]=Double.parseDouble(tbDokter.getValueAt(i,17).toString());
-                        utama[index]=Double.parseDouble(tbDokter.getValueAt(i,18).toString());
-                        vip[index]=Double.parseDouble(tbDokter.getValueAt(i,19).toString());
-                        vvip[index]=Double.parseDouble(tbDokter.getValueAt(i,20).toString());
-                        beliluar[index]=Double.parseDouble(tbDokter.getValueAt(i,21).toString());
-                        jualbebas[index]=Double.parseDouble(tbDokter.getValueAt(i,22).toString());
-                        karyawan[index]=Double.parseDouble(tbDokter.getValueAt(i,23).toString());
-                        hpp[index]=Double.parseDouble(tbDokter.getValueAt(i,24).toString());
-                        isi[index]=Double.parseDouble(tbDokter.getValueAt(i,25).toString());
-                        jmlbesar[index]=Double.parseDouble(tbDokter.getValueAt(i,26).toString());
-                        dasar[index]=Double.parseDouble(tbDokter.getValueAt(i,27).toString());
+                    if(Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0){
+                        jumlah[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString());
+                        satuanbeli[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString();
+                        kodebarang[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString();
+                        namabarang[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString();
+                        satuan[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString();
+                        ganti[index]=Boolean.parseBoolean(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString());
+                        kadaluwarsa[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString();
+                        harga[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),7).toString());
+                        subtotal[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString());
+                        diskon[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),9).toString());
+                        besardiskon[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),10).toString());
+                        jmltotal[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),11).toString());
+                        jmlstok[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),12).toString());
+                        nobatch[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),13).toString();
+                        ralan[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),14).toString());
+                        kelas1[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),15).toString());
+                        kelas2[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),16).toString());
+                        kelas3[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString());
+                        utama[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),18).toString());
+                        vip[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),19).toString());
+                        vvip[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),20).toString());
+                        beliluar[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),21).toString());
+                        jualbebas[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),22).toString());
+                        karyawan[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),23).toString());
+                        hpp[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),24).toString());
+                        isi[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),25).toString());
+                        jmlbesar[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),26).toString());
+                        dasar[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),27).toString());
                         index++;
                     }
                 } catch (Exception e) {
                     System.out.println("e "+e);
                 }
             }
+            tbDokter.suspendSorting();
             Valid.tabelKosong(tabMode);
             for(i=0;i<jml;i++){
                 tabMode.addRow(new Object[]{
@@ -1669,29 +1671,30 @@ public class DlgPembelian extends javax.swing.JDialog {
             response = null;
             root = null;
         }
+        tbDokter.resumeSorting();
     }
 
     private void getData(){
         row=tbDokter.getSelectedRow();
         if(row!= -1){
-            if(!tbDokter.getValueAt(row,0).toString().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString().equals("")){
                 try {
-                    if(Double.parseDouble(tbDokter.getValueAt(row,0).toString())>0){
-                        tbDokter.setValueAt(Double.parseDouble(tbDokter.getValueAt(row,0).toString())*Double.parseDouble(tbDokter.getValueAt(row,7).toString()), row,8);
-                        tbDokter.setValueAt(Double.parseDouble(tbDokter.getValueAt(row,8).toString())-Double.parseDouble(tbDokter.getValueAt(row,10).toString()), row,11);
+                    if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString())>0){
+                        tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString())*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),7).toString()), tbDokter.convertRowIndexToModel(row),8);
+                        tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),8).toString())-Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),10).toString()), tbDokter.convertRowIndexToModel(row),11);
                     }
                 } catch (Exception e) {
-                    tbDokter.setValueAt("", row,0);
-                    tbDokter.setValueAt(0, row,8);
-                    tbDokter.setValueAt(0, row,9);
-                    tbDokter.setValueAt(0, row,10);
-                    tbDokter.setValueAt(0, row,11);
+                    tabMode.setValueAt("", tbDokter.convertRowIndexToModel(row),0);
+                    tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(row),8);
+                    tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(row),9);
+                    tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(row),10);
+                    tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(row),11);
                 }
             }else{
-                tbDokter.setValueAt(0, row,8);
-                tbDokter.setValueAt(0, row,9);
-                tbDokter.setValueAt(0, row,10);
-                tbDokter.setValueAt(0, row,11);
+                tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(row),8);
+                tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(row),9);
+                tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(row),10);
+                tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(row),11);
             }
 
         }
@@ -1702,17 +1705,17 @@ public class DlgPembelian extends javax.swing.JDialog {
         jml=tbDokter.getRowCount();
         for(i=0;i<jml;i++){
             try {
-                w=Double.parseDouble(tbDokter.getValueAt(i,8).toString());
+                w=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString());
             } catch (Exception e) {
-                tbDokter.setValueAt(0,tbDokter.getSelectedRow(),8);
+                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8);
                 w=0;
             }
             sbttl=sbttl+w;
 
             try {
-                y=Double.parseDouble(tbDokter.getValueAt(i,10).toString());
+                y=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),10).toString());
             } catch (Exception e) {
-                tbDokter.setValueAt(0,tbDokter.getSelectedRow(),10);
+                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10);
                 y=0;
             }
             ttldisk=ttldisk+y;
@@ -1750,26 +1753,26 @@ public class DlgPembelian extends javax.swing.JDialog {
     }
 
     private void simpanbatch(){
-        if((!tbDokter.getValueAt(i,13).toString().equals(""))&&(!tbDokter.getValueAt(i,14).toString().equals(""))&&
-            (!tbDokter.getValueAt(i,15).toString().equals(""))&&(!tbDokter.getValueAt(i,16).toString().equals(""))&&
-            (!tbDokter.getValueAt(i,17).toString().equals(""))&&(!tbDokter.getValueAt(i,18).toString().equals(""))&&
-            (!tbDokter.getValueAt(i,19).toString().equals(""))&&(!tbDokter.getValueAt(i,20).toString().equals(""))&&
-            (!tbDokter.getValueAt(i,21).toString().equals(""))&&(!tbDokter.getValueAt(i,22).toString().equals(""))&&
-            (!tbDokter.getValueAt(i,23).toString().equals(""))&&(!tbDokter.getValueAt(i,24).toString().equals(""))&&
-            (!tbDokter.getValueAt(i,27).toString().equals(""))){
+        if((!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),13).toString().equals(""))&&(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),14).toString().equals(""))&&
+            (!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),15).toString().equals(""))&&(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),16).toString().equals(""))&&
+            (!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString().equals(""))&&(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),18).toString().equals(""))&&
+            (!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),19).toString().equals(""))&&(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),20).toString().equals(""))&&
+            (!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),21).toString().equals(""))&&(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),22).toString().equals(""))&&
+            (!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),23).toString().equals(""))&&(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),24).toString().equals(""))&&
+            (!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),27).toString().equals(""))){
             Sequel.menyimpan2("data_batch","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Batch",20,new String[]{
-                tbDokter.getValueAt(i,13).toString(),tbDokter.getValueAt(i,2).toString(),Valid.SetTgl(TglBeli.getSelectedItem()+""),Valid.SetTgl(tbDokter.getValueAt(i,6).toString()),"Pengadaan",NoFaktur.getText(),
-                tbDokter.getValueAt(i,27).toString(),tbDokter.getValueAt(i,24).toString(),tbDokter.getValueAt(i,14).toString(),tbDokter.getValueAt(i,15).toString(),tbDokter.getValueAt(i,16).toString(),tbDokter.getValueAt(i,17).toString(),
-                tbDokter.getValueAt(i,18).toString(),tbDokter.getValueAt(i,19).toString(),tbDokter.getValueAt(i,20).toString(),tbDokter.getValueAt(i,21).toString(),tbDokter.getValueAt(i,22).toString(),tbDokter.getValueAt(i,23).toString(),
-                tbDokter.getValueAt(i,12).toString(),tbDokter.getValueAt(i,12).toString()
+                tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),13).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString(),Valid.SetTgl(TglBeli.getSelectedItem()+""),Valid.SetTgl(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString()),"Pengadaan",NoFaktur.getText(),
+                tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),27).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),24).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),14).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),15).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),16).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString(),
+                tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),18).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),19).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),20).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),21).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),22).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),23).toString(),
+                tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),12).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),12).toString()
             });
         }
         if(akses.getobat()==true){
-            if(tbDokter.getValueAt(i,5).toString().equals("true")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString().equals("true")){
                 Sequel.mengedit("databarang","kode_brng=?","expire=?,h_beli=?,ralan=?,kelas1=?,kelas2=?,kelas3=?,utama=?,vip=?,vvip=?,beliluar=?,jualbebas=?,karyawan=?,dasar=?",14,new String[]{
-                    Valid.SetTgl(tbDokter.getValueAt(i,6).toString()),tbDokter.getValueAt(i,24).toString(),tbDokter.getValueAt(i,14).toString(),tbDokter.getValueAt(i,15).toString(),tbDokter.getValueAt(i,16).toString(),tbDokter.getValueAt(i,17).toString(),
-                    tbDokter.getValueAt(i,18).toString(),tbDokter.getValueAt(i,19).toString(),tbDokter.getValueAt(i,20).toString(),tbDokter.getValueAt(i,21).toString(),tbDokter.getValueAt(i,22).toString(),tbDokter.getValueAt(i,23).toString(),
-                    tbDokter.getValueAt(i,27).toString(),tbDokter.getValueAt(i,2).toString()
+                    Valid.SetTgl(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString()),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),24).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),14).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),15).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),16).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString(),
+                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),18).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),19).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),20).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),21).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),22).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),23).toString(),
+                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),27).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString()
                 });
             }
         }
@@ -1778,30 +1781,30 @@ public class DlgPembelian extends javax.swing.JDialog {
     private void setKonversi(int baris){
         try {
             if(hargadasar.equals("Harga Beli")){
-                if(Valid.SetAngka(tbDokter.getValueAt(baris,0).toString())>0){
-                    if(tbDokter.getValueAt(baris,5).toString().equals("true")){
+                if(Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString())>0){
+                    if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),5).toString().equals("true")){
                         switch (pengaturanharga) {
                             case "Per Jenis":
                                 try{
                                     rs=koneksi.prepareStatement("select * from setpenjualan where setpenjualan.kdjns='"+
                                             Sequel.cariIsi("select databarang.kdjns from databarang where databarang.kode_brng='"+
-                                                    tbDokter.getValueAt(baris,2).toString()+
+                                                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),2).toString()+
                                                     "'")+"'").executeQuery();
                                     if(rs.next()){
-                                        if(tbDokter.getValueAt(baris,1).toString().equals(tbDokter.getValueAt(baris,4).toString())){
+                                        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),1).toString().equals(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),4).toString())){
                                             try {
-                                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString());
+                                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString());
                                             } catch (Exception e) {
                                                 jmlkonversi=0;
                                             }
-                                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                                             hargappn=0;
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,7).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tbDokter.getValueAt(baris,7).toString()));
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),7).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),7).toString()));
                                                 }else{
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,7).toString());
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),7).toString());
                                                 }
                                             } catch (Exception e) {
                                                 hargappn=0;
@@ -1809,38 +1812,38 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                                 }else{
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                                 }
                                             } catch (Exception e) {
                                                 hargadiskon=0;
                                             }
-                                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
-                                            tbDokter.setValueAt(Math.round(hargappn),baris,24);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("ralan")/100)),100),baris,14);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas1")/100)),100),baris,15);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas2")/100)),100),baris,16);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas3")/100)),100),baris,17);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("utama")/100)),100),baris,18);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vip")/100)),100),baris,19);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vvip")/100)),100),baris,20);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("beliluar")/100)),100),baris,21);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("jualbebas")/100)),100),baris,22);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("karyawan")/100)),100),baris,23);
+                                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
+                                            tabMode.setValueAt(Math.round(hargappn),tbDokter.convertRowIndexToModel(baris),24);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("ralan")/100)),100),tbDokter.convertRowIndexToModel(baris),14);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas1")/100)),100),tbDokter.convertRowIndexToModel(baris),15);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas2")/100)),100),tbDokter.convertRowIndexToModel(baris),16);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas3")/100)),100),tbDokter.convertRowIndexToModel(baris),17);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("utama")/100)),100),tbDokter.convertRowIndexToModel(baris),18);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vip")/100)),100),tbDokter.convertRowIndexToModel(baris),19);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vvip")/100)),100),tbDokter.convertRowIndexToModel(baris),20);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("beliluar")/100)),100),tbDokter.convertRowIndexToModel(baris),21);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("jualbebas")/100)),100),tbDokter.convertRowIndexToModel(baris),22);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("karyawan")/100)),100),tbDokter.convertRowIndexToModel(baris),23);
                                         }else{
                                             try {
-                                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString())*(Double.parseDouble(tbDokter.getValueAt(baris,25).toString())/Double.parseDouble(tbDokter.getValueAt(baris,26).toString()));
+                                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString())*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),25).toString())/Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),26).toString()));
                                             } catch (Exception e) {
                                                 jmlkonversi=0;
                                             }
-                                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                                             hargappn=0;
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,8).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tbDokter.getValueAt(baris,8).toString()));
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),8).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),8).toString()));
                                                 }else{
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,8).toString());
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),8).toString());
                                                 }
                                             } catch (Exception e) {
                                                 hargappn=0;
@@ -1848,29 +1851,29 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                                 }else{
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                                 }
                                             } catch (Exception e) {
                                                 hargadiskon=0;
                                             }
-                                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
+                                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
                                             hargakonversi=hargappn/jmlkonversi;
-                                            tbDokter.setValueAt(Math.round(hargakonversi),baris,24);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("ralan")/100)),100),baris,14);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas1")/100)),100),baris,15);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas2")/100)),100),baris,16);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas3")/100)),100),baris,17);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("utama")/100)),100),baris,18);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vip")/100)),100),baris,19);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vvip")/100)),100),baris,20);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("beliluar")/100)),100),baris,21);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("jualbebas")/100)),100),baris,22);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("karyawan")/100)),100),baris,23);
+                                            tabMode.setValueAt(Math.round(hargakonversi),tbDokter.convertRowIndexToModel(baris),24);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("ralan")/100)),100),tbDokter.convertRowIndexToModel(baris),14);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas1")/100)),100),tbDokter.convertRowIndexToModel(baris),15);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas2")/100)),100),tbDokter.convertRowIndexToModel(baris),16);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas3")/100)),100),tbDokter.convertRowIndexToModel(baris),17);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("utama")/100)),100),tbDokter.convertRowIndexToModel(baris),18);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vip")/100)),100),tbDokter.convertRowIndexToModel(baris),19);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vvip")/100)),100),tbDokter.convertRowIndexToModel(baris),20);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("beliluar")/100)),100),tbDokter.convertRowIndexToModel(baris),21);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("jualbebas")/100)),100),tbDokter.convertRowIndexToModel(baris),22);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("karyawan")/100)),100),tbDokter.convertRowIndexToModel(baris),23);
                                         }
                                     }else{
-                                        tbDokter.setValueAt(false,baris,5);
+                                        tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(baris),5);
                                         JOptionPane.showMessageDialog(null,"Pengaturan untuk jenis obat/alkes/bhp ini tidak ditemukan..!!");
                                         TCari.requestFocus();
                                     }
@@ -1885,20 +1888,20 @@ public class DlgPembelian extends javax.swing.JDialog {
                                 try{
                                     rs=koneksi.prepareStatement("select * from setpenjualanumum").executeQuery();
                                     if(rs.next()){
-                                        if(tbDokter.getValueAt(baris,1).toString().equals(tbDokter.getValueAt(baris,4).toString())){
+                                        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),1).toString().equals(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),4).toString())){
                                             try {
-                                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString());
+                                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString());
                                             } catch (Exception e) {
                                                 jmlkonversi=0;
                                             }
-                                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                                             hargappn=0;
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,7).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tbDokter.getValueAt(baris,7).toString()));
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),7).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),7).toString()));
                                                 }else{
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,7).toString());
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),7).toString());
                                                 }
                                             } catch (Exception e) {
                                                 hargappn=0;
@@ -1906,38 +1909,38 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                                 }else{
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                                 }
                                             } catch (Exception e) {
                                                 hargadiskon=0;
                                             }
-                                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
-                                            tbDokter.setValueAt(Math.round(hargappn),baris,24);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("ralan")/100)),100),baris,14);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas1")/100)),100),baris,15);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas2")/100)),100),baris,16);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas3")/100)),100),baris,17);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("utama")/100)),100),baris,18);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vip")/100)),100),baris,19);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vvip")/100)),100),baris,20);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("beliluar")/100)),100),baris,21);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("jualbebas")/100)),100),baris,22);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("karyawan")/100)),100),baris,23);
+                                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
+                                            tabMode.setValueAt(Math.round(hargappn),tbDokter.convertRowIndexToModel(baris),24);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("ralan")/100)),100),tbDokter.convertRowIndexToModel(baris),14);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas1")/100)),100),tbDokter.convertRowIndexToModel(baris),15);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas2")/100)),100),tbDokter.convertRowIndexToModel(baris),16);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas3")/100)),100),tbDokter.convertRowIndexToModel(baris),17);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("utama")/100)),100),tbDokter.convertRowIndexToModel(baris),18);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vip")/100)),100),tbDokter.convertRowIndexToModel(baris),19);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vvip")/100)),100),tbDokter.convertRowIndexToModel(baris),20);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("beliluar")/100)),100),tbDokter.convertRowIndexToModel(baris),21);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("jualbebas")/100)),100),tbDokter.convertRowIndexToModel(baris),22);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("karyawan")/100)),100),tbDokter.convertRowIndexToModel(baris),23);
                                         }else{
                                             try {
-                                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString())*(Double.parseDouble(tbDokter.getValueAt(baris,25).toString())/Double.parseDouble(tbDokter.getValueAt(baris,26).toString()));
+                                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString())*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),25).toString())/Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),26).toString()));
                                             } catch (Exception e) {
                                                 jmlkonversi=0;
                                             }
-                                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                                             hargappn=0;
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,8).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tbDokter.getValueAt(baris,8).toString()));
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),8).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),8).toString()));
                                                 }else{
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,8).toString());
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),8).toString());
                                                 }
                                             } catch (Exception e) {
                                                 hargappn=0;
@@ -1945,29 +1948,29 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                                 }else{
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                                 }
                                             } catch (Exception e) {
                                                 hargadiskon=0;
                                             }
-                                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
+                                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
                                             hargakonversi=hargappn/jmlkonversi;
-                                            tbDokter.setValueAt(Math.round(hargakonversi),baris,24);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("ralan")/100)),100),baris,14);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas1")/100)),100),baris,15);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas2")/100)),100),baris,16);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas3")/100)),100),baris,17);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("utama")/100)),100),baris,18);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vip")/100)),100),baris,19);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vvip")/100)),100),baris,20);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("beliluar")/100)),100),baris,21);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("jualbebas")/100)),100),baris,22);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("karyawan")/100)),100),baris,23);
+                                            tabMode.setValueAt(Math.round(hargakonversi),tbDokter.convertRowIndexToModel(baris),24);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("ralan")/100)),100),tbDokter.convertRowIndexToModel(baris),14);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas1")/100)),100),tbDokter.convertRowIndexToModel(baris),15);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas2")/100)),100),tbDokter.convertRowIndexToModel(baris),16);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas3")/100)),100),tbDokter.convertRowIndexToModel(baris),17);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("utama")/100)),100),tbDokter.convertRowIndexToModel(baris),18);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vip")/100)),100),tbDokter.convertRowIndexToModel(baris),19);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vvip")/100)),100),tbDokter.convertRowIndexToModel(baris),20);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("beliluar")/100)),100),tbDokter.convertRowIndexToModel(baris),21);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("jualbebas")/100)),100),tbDokter.convertRowIndexToModel(baris),22);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("karyawan")/100)),100),tbDokter.convertRowIndexToModel(baris),23);
                                         }
                                     }else{
-                                        tbDokter.setValueAt(false,baris,5);
+                                        tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(baris),5);
                                         JOptionPane.showMessageDialog(null,"Pengaturan harga umum masih kosong..!!");
                                         TCari.requestFocus();
                                     }
@@ -1980,22 +1983,22 @@ public class DlgPembelian extends javax.swing.JDialog {
                                 }   break;
                             case "Per Barang":
                                 try{
-                                    rs=koneksi.prepareStatement("select * from setpenjualanperbarang where setpenjualanperbarang.kode_brng='"+tbDokter.getValueAt(baris,2).toString()+"'").executeQuery();
+                                    rs=koneksi.prepareStatement("select * from setpenjualanperbarang where setpenjualanperbarang.kode_brng='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),2).toString()+"'").executeQuery();
                                     if(rs.next()){
-                                        if(tbDokter.getValueAt(baris,1).toString().equals(tbDokter.getValueAt(baris,4).toString())){
+                                        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),1).toString().equals(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),4).toString())){
                                             try {
-                                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString());
+                                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString());
                                             } catch (Exception e) {
                                                 jmlkonversi=0;
                                             }
-                                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                                             hargappn=0;
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,7).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tbDokter.getValueAt(baris,7).toString()));
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),7).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),7).toString()));
                                                 }else{
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,7).toString());
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),7).toString());
                                                 }
                                             } catch (Exception e) {
                                                 hargappn=0;
@@ -2003,38 +2006,38 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                                 }else{
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                                 }
                                             } catch (Exception e) {
                                                 hargadiskon=0;
                                             }
-                                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
-                                            tbDokter.setValueAt(Math.round(hargappn),baris,24);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("ralan")/100)),100),baris,14);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas1")/100)),100),baris,15);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas2")/100)),100),baris,16);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas3")/100)),100),baris,17);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("utama")/100)),100),baris,18);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vip")/100)),100),baris,19);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vvip")/100)),100),baris,20);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("beliluar")/100)),100),baris,21);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("jualbebas")/100)),100),baris,22);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("karyawan")/100)),100),baris,23);
+                                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
+                                            tabMode.setValueAt(Math.round(hargappn),tbDokter.convertRowIndexToModel(baris),24);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("ralan")/100)),100),tbDokter.convertRowIndexToModel(baris),14);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas1")/100)),100),tbDokter.convertRowIndexToModel(baris),15);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas2")/100)),100),tbDokter.convertRowIndexToModel(baris),16);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas3")/100)),100),tbDokter.convertRowIndexToModel(baris),17);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("utama")/100)),100),tbDokter.convertRowIndexToModel(baris),18);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vip")/100)),100),tbDokter.convertRowIndexToModel(baris),19);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vvip")/100)),100),tbDokter.convertRowIndexToModel(baris),20);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("beliluar")/100)),100),tbDokter.convertRowIndexToModel(baris),21);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("jualbebas")/100)),100),tbDokter.convertRowIndexToModel(baris),22);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("karyawan")/100)),100),tbDokter.convertRowIndexToModel(baris),23);
                                         }else{
                                             try {
-                                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString())*(Double.parseDouble(tbDokter.getValueAt(baris,25).toString())/Double.parseDouble(tbDokter.getValueAt(baris,26).toString()));
+                                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString())*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),25).toString())/Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),26).toString()));
                                             } catch (Exception e) {
                                                 jmlkonversi=0;
                                             }
-                                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                                             hargappn=0;
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,8).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tbDokter.getValueAt(baris,8).toString()));
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),8).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),8).toString()));
                                                 }else{
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,8).toString());
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),8).toString());
                                                 }
                                             } catch (Exception e) {
                                                 hargappn=0;
@@ -2042,29 +2045,29 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                                 }else{
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                                 }
                                             } catch (Exception e) {
                                                 hargadiskon=0;
                                             }
-                                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
+                                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
                                             hargakonversi=hargappn/jmlkonversi;
-                                            tbDokter.setValueAt(Math.round(hargakonversi),baris,24);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("ralan")/100)),100),baris,14);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas1")/100)),100),baris,15);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas2")/100)),100),baris,16);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas3")/100)),100),baris,17);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("utama")/100)),100),baris,18);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vip")/100)),100),baris,19);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vvip")/100)),100),baris,20);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("beliluar")/100)),100),baris,21);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("jualbebas")/100)),100),baris,22);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("karyawan")/100)),100),baris,23);
+                                            tabMode.setValueAt(Math.round(hargakonversi),tbDokter.convertRowIndexToModel(baris),24);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("ralan")/100)),100),tbDokter.convertRowIndexToModel(baris),14);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas1")/100)),100),tbDokter.convertRowIndexToModel(baris),15);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas2")/100)),100),tbDokter.convertRowIndexToModel(baris),16);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas3")/100)),100),tbDokter.convertRowIndexToModel(baris),17);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("utama")/100)),100),tbDokter.convertRowIndexToModel(baris),18);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vip")/100)),100),tbDokter.convertRowIndexToModel(baris),19);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vvip")/100)),100),tbDokter.convertRowIndexToModel(baris),20);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("beliluar")/100)),100),tbDokter.convertRowIndexToModel(baris),21);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("jualbebas")/100)),100),tbDokter.convertRowIndexToModel(baris),22);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("karyawan")/100)),100),tbDokter.convertRowIndexToModel(baris),23);
                                         }
                                     }else{
-                                        tbDokter.setValueAt(false,baris,5);
+                                        tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(baris),5);
                                         JOptionPane.showMessageDialog(null,"Pengaturan untuk obat/alkes/bhp ini tidak ditemukan..!!");
                                         TCari.requestFocus();
                                     }
@@ -2076,25 +2079,25 @@ public class DlgPembelian extends javax.swing.JDialog {
                                     }
                                 }   break;
                             default:
-                                tbDokter.setValueAt(false,baris,5);
+                                tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(baris),5);
                                 JOptionPane.showMessageDialog(null,"Pengaturan untuk obat/alkes/bhp belum disetting..!!");
                                 break;
                         }
                     }else{
-                        if(tbDokter.getValueAt(baris,1).toString().equals(tbDokter.getValueAt(baris,4).toString())){
+                        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),1).toString().equals(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),4).toString())){
                             try {
-                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString());
+                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString());
                             } catch (Exception e) {
                                 jmlkonversi=0;
                             }
-                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                             hargappn=0;
 
                             try {
                                 if(pakaippn.equals("Yes")){
-                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,7).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tbDokter.getValueAt(baris,7).toString()));
+                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),7).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),7).toString()));
                                 }else{
-                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,7).toString());
+                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),7).toString());
                                 }
                             } catch (Exception e) {
                                 hargappn=0;
@@ -2102,38 +2105,38 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                             try {
                                 if(pakaippn.equals("Yes")){
-                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                 }else{
-                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                 }
                             } catch (Exception e) {
                                 hargadiskon=0;
                             }
-                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
-                            tbDokter.setValueAt(Math.round(hargappn),baris,24);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,14);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,15);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,16);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,17);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,18);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,19);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,20);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,21);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,22);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,23);
+                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
+                            tabMode.setValueAt(Math.round(hargappn),tbDokter.convertRowIndexToModel(baris),24);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),14);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),15);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),16);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),17);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),18);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),19);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),20);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),21);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),22);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),23);
                         }else{
                             try {
-                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString())*(Double.parseDouble(tbDokter.getValueAt(baris,25).toString())/Double.parseDouble(tbDokter.getValueAt(baris,26).toString()));
+                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString())*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),25).toString())/Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),26).toString()));
                             } catch (Exception e) {
                                 jmlkonversi=0;
                             }
-                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                             hargappn=0;
                             try {
                                 if(pakaippn.equals("Yes")){
-                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,8).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tbDokter.getValueAt(baris,8).toString()));
+                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),8).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),8).toString()));
                                 }else{
-                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,8).toString());
+                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),8).toString());
                                 }
                             } catch (Exception e) {
                                 hargappn=0;
@@ -2141,54 +2144,54 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                             try {
                                 if(pakaippn.equals("Yes")){
-                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                 }else{
-                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                 }
                             } catch (Exception e) {
                                 hargadiskon=0;
                             }
-                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
+                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
                             hargakonversi=hargappn/jmlkonversi;
-                            tbDokter.setValueAt(Math.round(hargakonversi),baris,24);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,14);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,15);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,16);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,17);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,18);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,19);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,20);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,21);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,22);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,23);
+                            tabMode.setValueAt(Math.round(hargakonversi),tbDokter.convertRowIndexToModel(baris),24);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),14);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),15);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),16);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),17);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),18);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),19);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),20);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),21);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),22);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),23);
                         }
                     }
                 }
             }else if(hargadasar.equals("Harga Diskon")){
-                if(Valid.SetAngka(tbDokter.getValueAt(baris,0).toString())>0){
-                    if(tbDokter.getValueAt(baris,5).toString().equals("true")){
+                if(Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString())>0){
+                    if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),5).toString().equals("true")){
                         switch (pengaturanharga) {
                             case "Per Jenis":
                                 try{
                                     rs=koneksi.prepareStatement("select * from setpenjualan where setpenjualan.kdjns='"+
                                             Sequel.cariIsi("select databarang.kdjns from databarang where databarang.kode_brng='"+
-                                                    tbDokter.getValueAt(baris,2).toString()+
+                                                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),2).toString()+
                                                     "'")+"'").executeQuery();
                                     if(rs.next()){
-                                        if(tbDokter.getValueAt(baris,1).toString().equals(tbDokter.getValueAt(baris,4).toString())){
+                                        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),1).toString().equals(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),4).toString())){
                                             try {
-                                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString());
+                                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString());
                                             } catch (Exception e) {
                                                 jmlkonversi=0;
                                             }
-                                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                                             hargappn=0;
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargappn=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                                    hargappn=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                                 }else{
-                                                    hargappn=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                                    hargappn=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                                 }
                                             } catch (Exception e) {
                                                 hargappn=0;
@@ -2196,38 +2199,38 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                                 }else{
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                                 }
                                             } catch (Exception e) {
                                                 hargadiskon=0;
                                             }
-                                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
-                                            tbDokter.setValueAt(Math.round(hargappn),baris,24);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("ralan")/100)),100),baris,14);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas1")/100)),100),baris,15);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas2")/100)),100),baris,16);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas3")/100)),100),baris,17);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("utama")/100)),100),baris,18);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vip")/100)),100),baris,19);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vvip")/100)),100),baris,20);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("beliluar")/100)),100),baris,21);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("jualbebas")/100)),100),baris,22);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("karyawan")/100)),100),baris,23);
+                                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
+                                            tabMode.setValueAt(Math.round(hargappn),tbDokter.convertRowIndexToModel(baris),24);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("ralan")/100)),100),tbDokter.convertRowIndexToModel(baris),14);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas1")/100)),100),tbDokter.convertRowIndexToModel(baris),15);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas2")/100)),100),tbDokter.convertRowIndexToModel(baris),16);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas3")/100)),100),tbDokter.convertRowIndexToModel(baris),17);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("utama")/100)),100),tbDokter.convertRowIndexToModel(baris),18);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vip")/100)),100),tbDokter.convertRowIndexToModel(baris),19);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vvip")/100)),100),tbDokter.convertRowIndexToModel(baris),20);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("beliluar")/100)),100),tbDokter.convertRowIndexToModel(baris),21);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("jualbebas")/100)),100),tbDokter.convertRowIndexToModel(baris),22);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("karyawan")/100)),100),tbDokter.convertRowIndexToModel(baris),23);
                                         }else{
                                             try {
-                                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString())*(Double.parseDouble(tbDokter.getValueAt(baris,25).toString())/Double.parseDouble(tbDokter.getValueAt(baris,26).toString()));
+                                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString())*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),25).toString())/Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),26).toString()));
                                             } catch (Exception e) {
                                                 jmlkonversi=0;
                                             }
-                                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                                             hargappn=0;
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,11).toString())+(Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString()));
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())+(Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString()));
                                                 }else{
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,11).toString());
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString());
                                                 }
                                             } catch (Exception e) {
                                                 hargappn=0;
@@ -2235,29 +2238,29 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                                 }else{
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                                 }
                                             } catch (Exception e) {
                                                 hargadiskon=0;
                                             }
-                                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
+                                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
                                             hargakonversi=hargappn/jmlkonversi;
-                                            tbDokter.setValueAt(Math.round(hargakonversi),baris,24);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("ralan")/100)),100),baris,14);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas1")/100)),100),baris,15);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas2")/100)),100),baris,16);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas3")/100)),100),baris,17);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("utama")/100)),100),baris,18);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vip")/100)),100),baris,19);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vvip")/100)),100),baris,20);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("beliluar")/100)),100),baris,21);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("jualbebas")/100)),100),baris,22);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("karyawan")/100)),100),baris,23);
+                                            tabMode.setValueAt(Math.round(hargakonversi),tbDokter.convertRowIndexToModel(baris),24);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("ralan")/100)),100),tbDokter.convertRowIndexToModel(baris),14);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas1")/100)),100),tbDokter.convertRowIndexToModel(baris),15);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas2")/100)),100),tbDokter.convertRowIndexToModel(baris),16);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas3")/100)),100),tbDokter.convertRowIndexToModel(baris),17);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("utama")/100)),100),tbDokter.convertRowIndexToModel(baris),18);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vip")/100)),100),tbDokter.convertRowIndexToModel(baris),19);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vvip")/100)),100),tbDokter.convertRowIndexToModel(baris),20);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("beliluar")/100)),100),tbDokter.convertRowIndexToModel(baris),21);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("jualbebas")/100)),100),tbDokter.convertRowIndexToModel(baris),22);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("karyawan")/100)),100),tbDokter.convertRowIndexToModel(baris),23);
                                         }
                                     }else{
-                                        tbDokter.setValueAt(false,baris,5);
+                                        tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(baris),5);
                                         JOptionPane.showMessageDialog(null,"Pengaturan untuk jenis obat/alkes/bhp ini tidak ditemukan..!!");
                                         TCari.requestFocus();
                                     }
@@ -2272,20 +2275,20 @@ public class DlgPembelian extends javax.swing.JDialog {
                                 try{
                                     rs=koneksi.prepareStatement("select * from setpenjualanumum").executeQuery();
                                     if(rs.next()){
-                                        if(tbDokter.getValueAt(baris,1).toString().equals(tbDokter.getValueAt(baris,4).toString())){
+                                        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),1).toString().equals(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),4).toString())){
                                             try {
-                                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString());
+                                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString());
                                             } catch (Exception e) {
                                                 jmlkonversi=0;
                                             }
-                                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                                             hargappn=0;
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargappn=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                                    hargappn=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                                 }else{
-                                                    hargappn=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                                    hargappn=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                                 }
                                             } catch (Exception e) {
                                                 hargappn=0;
@@ -2293,38 +2296,38 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                                 }else{
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                                 }
                                             } catch (Exception e) {
                                                 hargadiskon=0;
                                             }
-                                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
-                                            tbDokter.setValueAt(Math.round(hargappn),baris,24);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("ralan")/100)),100),baris,14);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas1")/100)),100),baris,15);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas2")/100)),100),baris,16);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas3")/100)),100),baris,17);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("utama")/100)),100),baris,18);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vip")/100)),100),baris,19);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vvip")/100)),100),baris,20);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("beliluar")/100)),100),baris,21);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("jualbebas")/100)),100),baris,22);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("karyawan")/100)),100),baris,23);
+                                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
+                                            tabMode.setValueAt(Math.round(hargappn),tbDokter.convertRowIndexToModel(baris),24);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("ralan")/100)),100),tbDokter.convertRowIndexToModel(baris),14);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas1")/100)),100),tbDokter.convertRowIndexToModel(baris),15);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas2")/100)),100),tbDokter.convertRowIndexToModel(baris),16);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas3")/100)),100),tbDokter.convertRowIndexToModel(baris),17);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("utama")/100)),100),tbDokter.convertRowIndexToModel(baris),18);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vip")/100)),100),tbDokter.convertRowIndexToModel(baris),19);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vvip")/100)),100),tbDokter.convertRowIndexToModel(baris),20);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("beliluar")/100)),100),tbDokter.convertRowIndexToModel(baris),21);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("jualbebas")/100)),100),tbDokter.convertRowIndexToModel(baris),22);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("karyawan")/100)),100),tbDokter.convertRowIndexToModel(baris),23);
                                         }else{
                                             try {
-                                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString())*(Double.parseDouble(tbDokter.getValueAt(baris,25).toString())/Double.parseDouble(tbDokter.getValueAt(baris,26).toString()));
+                                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString())*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),25).toString())/Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),26).toString()));
                                             } catch (Exception e) {
                                                 jmlkonversi=0;
                                             }
-                                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                                             hargappn=0;
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,11).toString())+(Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString()));
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())+(Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString()));
                                                 }else{
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,11).toString());
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString());
                                                 }
                                             } catch (Exception e) {
                                                 hargappn=0;
@@ -2332,29 +2335,29 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                                 }else{
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                                 }
                                             } catch (Exception e) {
                                                 hargadiskon=0;
                                             }
-                                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
+                                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
                                             hargakonversi=hargappn/jmlkonversi;
-                                            tbDokter.setValueAt(Math.round(hargakonversi),baris,24);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("ralan")/100)),100),baris,14);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas1")/100)),100),baris,15);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas2")/100)),100),baris,16);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas3")/100)),100),baris,17);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("utama")/100)),100),baris,18);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vip")/100)),100),baris,19);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vvip")/100)),100),baris,20);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("beliluar")/100)),100),baris,21);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("jualbebas")/100)),100),baris,22);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("karyawan")/100)),100),baris,23);
+                                            tabMode.setValueAt(Math.round(hargakonversi),tbDokter.convertRowIndexToModel(baris),24);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("ralan")/100)),100),tbDokter.convertRowIndexToModel(baris),14);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas1")/100)),100),tbDokter.convertRowIndexToModel(baris),15);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas2")/100)),100),tbDokter.convertRowIndexToModel(baris),16);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas3")/100)),100),tbDokter.convertRowIndexToModel(baris),17);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("utama")/100)),100),tbDokter.convertRowIndexToModel(baris),18);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vip")/100)),100),tbDokter.convertRowIndexToModel(baris),19);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vvip")/100)),100),tbDokter.convertRowIndexToModel(baris),20);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("beliluar")/100)),100),tbDokter.convertRowIndexToModel(baris),21);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("jualbebas")/100)),100),tbDokter.convertRowIndexToModel(baris),22);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("karyawan")/100)),100),tbDokter.convertRowIndexToModel(baris),23);
                                         }
                                     }else{
-                                        tbDokter.setValueAt(false,baris,5);
+                                        tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(baris),5);
                                         JOptionPane.showMessageDialog(null,"Pengaturan harga umum masih kosong..!!");
                                         TCari.requestFocus();
                                     }
@@ -2367,22 +2370,22 @@ public class DlgPembelian extends javax.swing.JDialog {
                                 }   break;
                             case "Per Barang":
                                 try{
-                                    rs=koneksi.prepareStatement("select * from setpenjualanperbarang where setpenjualanperbarang.kode_brng='"+tbDokter.getValueAt(baris,2).toString()+"'").executeQuery();
+                                    rs=koneksi.prepareStatement("select * from setpenjualanperbarang where setpenjualanperbarang.kode_brng='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),2).toString()+"'").executeQuery();
                                     if(rs.next()){
-                                        if(tbDokter.getValueAt(baris,1).toString().equals(tbDokter.getValueAt(baris,4).toString())){
+                                        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),1).toString().equals(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),4).toString())){
                                             try {
-                                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString());
+                                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString());
                                             } catch (Exception e) {
                                                 jmlkonversi=0;
                                             }
-                                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                                             hargappn=0;
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargappn=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                                    hargappn=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                                 }else{
-                                                    hargappn=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                                    hargappn=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                                 }
                                             } catch (Exception e) {
                                                 hargappn=0;
@@ -2390,38 +2393,38 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                                 }else{
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                                 }
                                             } catch (Exception e) {
                                                 hargadiskon=0;
                                             }
-                                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
-                                            tbDokter.setValueAt(Math.round(hargappn),baris,24);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("ralan")/100)),100),baris,14);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas1")/100)),100),baris,15);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas2")/100)),100),baris,16);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas3")/100)),100),baris,17);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("utama")/100)),100),baris,18);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vip")/100)),100),baris,19);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vvip")/100)),100),baris,20);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("beliluar")/100)),100),baris,21);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("jualbebas")/100)),100),baris,22);
-                                            tbDokter.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("karyawan")/100)),100),baris,23);
+                                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
+                                            tabMode.setValueAt(Math.round(hargappn),tbDokter.convertRowIndexToModel(baris),24);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("ralan")/100)),100),tbDokter.convertRowIndexToModel(baris),14);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas1")/100)),100),tbDokter.convertRowIndexToModel(baris),15);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas2")/100)),100),tbDokter.convertRowIndexToModel(baris),16);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("kelas3")/100)),100),tbDokter.convertRowIndexToModel(baris),17);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("utama")/100)),100),tbDokter.convertRowIndexToModel(baris),18);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vip")/100)),100),tbDokter.convertRowIndexToModel(baris),19);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("vvip")/100)),100),tbDokter.convertRowIndexToModel(baris),20);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("beliluar")/100)),100),tbDokter.convertRowIndexToModel(baris),21);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("jualbebas")/100)),100),tbDokter.convertRowIndexToModel(baris),22);
+                                            tabMode.setValueAt(Valid.roundUp(hargappn+(hargappn*(rs.getDouble("karyawan")/100)),100),tbDokter.convertRowIndexToModel(baris),23);
                                         }else{
                                             try {
-                                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString())*(Double.parseDouble(tbDokter.getValueAt(baris,25).toString())/Double.parseDouble(tbDokter.getValueAt(baris,26).toString()));
+                                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString())*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),25).toString())/Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),26).toString()));
                                             } catch (Exception e) {
                                                 jmlkonversi=0;
                                             }
-                                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                                             hargappn=0;
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,11).toString())+(Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString()));
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())+(Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString()));
                                                 }else{
-                                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,11).toString());
+                                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString());
                                                 }
                                             } catch (Exception e) {
                                                 hargappn=0;
@@ -2429,29 +2432,29 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                                             try {
                                                 if(pakaippn.equals("Yes")){
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                                 }else{
-                                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                                 }
                                             } catch (Exception e) {
                                                 hargadiskon=0;
                                             }
-                                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
+                                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
                                             hargakonversi=hargappn/jmlkonversi;
-                                            tbDokter.setValueAt(Math.round(hargakonversi),baris,24);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("ralan")/100)),100),baris,14);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas1")/100)),100),baris,15);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas2")/100)),100),baris,16);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas3")/100)),100),baris,17);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("utama")/100)),100),baris,18);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vip")/100)),100),baris,19);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vvip")/100)),100),baris,20);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("beliluar")/100)),100),baris,21);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("jualbebas")/100)),100),baris,22);
-                                            tbDokter.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("karyawan")/100)),100),baris,23);
+                                            tabMode.setValueAt(Math.round(hargakonversi),tbDokter.convertRowIndexToModel(baris),24);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("ralan")/100)),100),tbDokter.convertRowIndexToModel(baris),14);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas1")/100)),100),tbDokter.convertRowIndexToModel(baris),15);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas2")/100)),100),tbDokter.convertRowIndexToModel(baris),16);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("kelas3")/100)),100),tbDokter.convertRowIndexToModel(baris),17);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("utama")/100)),100),tbDokter.convertRowIndexToModel(baris),18);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vip")/100)),100),tbDokter.convertRowIndexToModel(baris),19);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("vvip")/100)),100),tbDokter.convertRowIndexToModel(baris),20);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("beliluar")/100)),100),tbDokter.convertRowIndexToModel(baris),21);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("jualbebas")/100)),100),tbDokter.convertRowIndexToModel(baris),22);
+                                            tabMode.setValueAt(Valid.roundUp(hargakonversi+(hargakonversi*(rs.getDouble("karyawan")/100)),100),tbDokter.convertRowIndexToModel(baris),23);
                                         }
                                     }else{
-                                        tbDokter.setValueAt(false,baris,5);
+                                        tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(baris),5);
                                         JOptionPane.showMessageDialog(null,"Pengaturan untuk obat/alkes/bhp ini tidak ditemukan..!!");
                                         TCari.requestFocus();
                                     }
@@ -2463,25 +2466,25 @@ public class DlgPembelian extends javax.swing.JDialog {
                                     }
                                 }   break;
                             default:
-                                tbDokter.setValueAt(false,baris,5);
+                                tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(baris),5);
                                 JOptionPane.showMessageDialog(null,"Pengaturan untuk obat/alkes/bhp belum disetting..!!");
                                 break;
                         }
                     }else{
-                        if(tbDokter.getValueAt(baris,1).toString().equals(tbDokter.getValueAt(baris,4).toString())){
+                        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),1).toString().equals(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),4).toString())){
                             try {
-                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString());
+                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString());
                             } catch (Exception e) {
                                 jmlkonversi=0;
                             }
-                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                             hargappn=0;
 
                             try {
                                 if(pakaippn.equals("Yes")){
-                                    hargappn=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                    hargappn=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                 }else{
-                                    hargappn=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                    hargappn=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                 }
                             } catch (Exception e) {
                                 hargappn=0;
@@ -2489,38 +2492,38 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                             try {
                                 if(pakaippn.equals("Yes")){
-                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                 }else{
-                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                 }
                             } catch (Exception e) {
                                 hargadiskon=0;
                             }
-                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
-                            tbDokter.setValueAt(Math.round(hargappn),baris,24);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,14);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,15);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,16);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,17);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,18);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,19);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,20);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,21);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,22);
-                            tbDokter.setValueAt(Valid.roundUp(hargappn,100),baris,23);
+                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
+                            tabMode.setValueAt(Math.round(hargappn),tbDokter.convertRowIndexToModel(baris),24);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),14);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),15);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),16);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),17);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),18);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),19);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),20);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),21);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),22);
+                            tabMode.setValueAt(Valid.roundUp(hargappn,100),tbDokter.convertRowIndexToModel(baris),23);
                         }else{
                             try {
-                                jmlkonversi=Double.parseDouble(tbDokter.getValueAt(baris,0).toString())*(Double.parseDouble(tbDokter.getValueAt(baris,25).toString())/Double.parseDouble(tbDokter.getValueAt(baris,26).toString()));
+                                jmlkonversi=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),0).toString())*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),25).toString())/Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),26).toString()));
                             } catch (Exception e) {
                                 jmlkonversi=0;
                             }
-                            tbDokter.setValueAt(jmlkonversi,baris,12);
+                            tabMode.setValueAt(jmlkonversi,tbDokter.convertRowIndexToModel(baris),12);
                             hargappn=0;
                             try {
                                 if(pakaippn.equals("Yes")){
-                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,11).toString())+(Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString()));
+                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())+(Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString()));
                                 }else{
-                                    hargappn=Double.parseDouble(tbDokter.getValueAt(baris,11).toString());
+                                    hargappn=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString());
                                 }
                             } catch (Exception e) {
                                 hargappn=0;
@@ -2528,32 +2531,32 @@ public class DlgPembelian extends javax.swing.JDialog {
 
                             try {
                                 if(pakaippn.equals("Yes")){
-                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi));
+                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi)+((Double.parseDouble(tppn.getText())/100)*(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi));
                                 }else{
-                                    hargadiskon=(Double.parseDouble(tbDokter.getValueAt(baris,11).toString())/jmlkonversi);
+                                    hargadiskon=(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(baris),11).toString())/jmlkonversi);
                                 }
                             } catch (Exception e) {
                                 hargadiskon=0;
                             }
-                            tbDokter.setValueAt(Math.round(hargadiskon),baris,27);
+                            tabMode.setValueAt(Math.round(hargadiskon),tbDokter.convertRowIndexToModel(baris),27);
                             hargakonversi=hargappn/jmlkonversi;
-                            tbDokter.setValueAt(Math.round(hargakonversi),baris,24);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,14);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,15);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,16);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,17);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,18);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,19);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,20);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,21);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,22);
-                            tbDokter.setValueAt(Valid.roundUp(hargakonversi,100),baris,23);
+                            tabMode.setValueAt(Math.round(hargakonversi),tbDokter.convertRowIndexToModel(baris),24);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),14);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),15);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),16);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),17);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),18);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),19);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),20);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),21);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),22);
+                            tabMode.setValueAt(Valid.roundUp(hargakonversi,100),tbDokter.convertRowIndexToModel(baris),23);
                         }
                     }
                 }
             }
         } catch (Exception e) {
-            tbDokter.setValueAt("",baris,0);
+            tabMode.setValueAt("",tbDokter.convertRowIndexToModel(baris),0);
         }
     }
 

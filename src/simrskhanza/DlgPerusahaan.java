@@ -554,7 +554,7 @@ public class DlgPerusahaan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -569,9 +569,9 @@ public class DlgPerusahaan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Pilih dulu data yang akan Anda hapus dengan menklik data pada tabel...!!!");
             tbDokter.requestFocus();
         }else{
-            if (Sequel.menghapustfSmc("perusahaan_pasien", "kode_perusahaan = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString())) {
-                tabMode.removeRow(tbDokter.getSelectedRow());
-                LCount.setText(String.valueOf(tabMode.getRowCount()));
+            if (Sequel.menghapustfSmc("perusahaan_pasien", "kode_perusahaan = ?", tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 0).toString())) {
+                tabMode.removeRow(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()));
+                LCount.setText(String.valueOf(tbDokter.getRowCount()));
                 emptTeks();
             }
         }
@@ -597,21 +597,21 @@ public class DlgPerusahaan extends javax.swing.JDialog {
         }else{
             if (Sequel.mengupdatetfSmc("perusahaan_pasien", "kode_perusahaan = ?, nama_perusahaan = ?, alamat = ?, kota = ?, no_telp = ?, no_npwp = ?, email = ?", "kode_perusahaan = ?",
                 Kd.getText(), Nm.getText(), Alamat.getText(), Kota.getText(), Telp.getText(), NPWP.getText(), Email.getText(),
-                tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString()
+                tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 0).toString()
             )) {
                 if (!Password.getText().isBlank()) {
                     Sequel.mengupdateSmc("password_perusahaan_pasien", "password = aes_encrypt(?, 'windi')", "kode_perusahaan = ?", Password.getText(), Kd.getText());
                 } else {
                     Sequel.menghapusSmc("password_perusahaan_pasien", "kode_perusahaan = ?", Kd.getText());
                 }
-                tbDokter.setValueAt(Kd.getText(), tbDokter.getSelectedRow(), 0);
-                tbDokter.setValueAt(Nm.getText(), tbDokter.getSelectedRow(), 1);
-                tbDokter.setValueAt(Alamat.getText(), tbDokter.getSelectedRow(), 2);
-                tbDokter.setValueAt(Kota.getText(), tbDokter.getSelectedRow(), 3);
-                tbDokter.setValueAt(Telp.getText(), tbDokter.getSelectedRow(), 4);
-                tbDokter.setValueAt(Email.getText(), tbDokter.getSelectedRow(), 5);
-                tbDokter.setValueAt(NPWP.getText(), tbDokter.getSelectedRow(), 6);
-                tbDokter.setValueAt(Password.getText(), tbDokter.getSelectedRow(), 7);
+                tabMode.setValueAt(Kd.getText(), tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 0);
+                tabMode.setValueAt(Nm.getText(), tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 1);
+                tabMode.setValueAt(Alamat.getText(), tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 2);
+                tabMode.setValueAt(Kota.getText(), tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 3);
+                tabMode.setValueAt(Telp.getText(), tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 4);
+                tabMode.setValueAt(Email.getText(), tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 5);
+                tabMode.setValueAt(NPWP.getText(), tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 6);
+                tabMode.setValueAt(Password.getText(), tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 7);
             }
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -731,7 +731,7 @@ public class DlgPerusahaan extends javax.swing.JDialog {
                 tabMode.addRow(new Object[] {
                     Kd.getText(), Nm.getText(), Alamat.getText(), Kota.getText(), Telp.getText(), Email.getText(), NPWP.getText(), Password.getText()
                 });
-                LCount.setText(String.valueOf(tabMode.getRowCount()));
+                LCount.setText(String.valueOf(tbDokter.getRowCount()));
                 emptTeks();
             }
         }
@@ -807,7 +807,7 @@ public class DlgPerusahaan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPilihAsuransiActionPerformed
 
     private void tbDokterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMousePressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -902,7 +902,7 @@ public class DlgPerusahaan extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        LCount.setText(String.valueOf(tabMode.getRowCount()));
+        LCount.setText(String.valueOf(tbDokter.getRowCount()));
     }
 
     public void emptTeks() {
@@ -920,14 +920,14 @@ public class DlgPerusahaan extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            Kd.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 0).toString());
-            Nm.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 1).toString());
-            Alamat.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 2).toString());
-            Kota.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 3).toString());
-            Telp.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 4).toString());
-            Email.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 5).toString());
-            NPWP.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 6).toString());
-            Password.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 7).toString());
+            Kd.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 0).toString());
+            Nm.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 1).toString());
+            Alamat.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 2).toString());
+            Kota.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 3).toString());
+            Telp.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 4).toString());
+            Email.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 5).toString());
+            NPWP.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 6).toString());
+            Password.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 7).toString());
         }
     }
 

@@ -828,10 +828,10 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try{
                 if(tbObat.getSelectedRow()!= -1){
-                    if(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString().equals("")){
+                    if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString().equals("")){
                         JOptionPane.showMessageDialog(null,"Display snomed masih kosong, silakan mapping terlebih dahulu...!!");
                     }else{
                         DTPTanggal.setDate(new Date());
@@ -840,57 +840,57 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                             iyembuilder.append("{").
                                             append("\"resource\": {").
                                                 append("\"resourceType\": \"Patient\",").
-                                                append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString())).append("\",").
+                                                append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2).toString())).append("\",").
                                                 append("\"identifier\": [").
                                                     append("{").
                                                         append("\"use\": \"usual\",").
                                                         append("\"type\": {\"coding\": [{\"system\": \"http://hl7.org/fhir/v2/0203\", \"code\": \"MR\"}]},").
-                                                        append("\"value\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString()).append("\",").
+                                                        append("\"value\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2).toString()).append("\",").
                                                         append("\"assigner\": {\"display\": \"").append(akses.getnamars()).append("\"}").
                                                     append("},").
                                                     append("{").
                                                         append("\"use\": \"official\",").
                                                         append("\"type\": {\"coding\": [{\"system\": \"http://hl7.org/fhir/v2/0203\", \"code\": \"MB\"}]},").
-                                                        append("\"value\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString()).append("\",").
+                                                        append("\"value\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6).toString()).append("\",").
                                                         append("\"assigner\": {\"display\": \"BPJS KESEHATAN\"}").
                                                     append("},").
                                                     append("{").
                                                         append("\"use\": \"official\",").
                                                         append("\"type\": {\"coding\": [{\"system\": \"http://hl7.org/fhir/v2/0203\", \"code\": \"NNIDN\"}]},").
-                                                        append("\"value\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString()).append("\",").
+                                                        append("\"value\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 5).toString()).append("\",").
                                                         append("\"assigner\": {\"display\": \"KEMENDAGRI\"}").
                                                     append("}").
                                                 append("],").
                                                 append("\"active\": true,").
-                                                append("\"name\": [{\"use\": \"official\", \"text\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 3).toString()).append("\"}],").
+                                                append("\"name\": [{\"use\": \"official\", \"text\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 3).toString()).append("\"}],").
                                                 append("\"maritalStatus\": {").
                                                     append("\"coding\": [{").
                                                         append("\"system\": \"http://terminology.hl7.org/CodeSystem/v3-MaritalStatus\",").
-                                                        append("\"code\": \"").append((tbObat.getValueAt(tbObat.getSelectedRow(),22).toString().equals("MENIKAH")?"M":(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString().equals("BELUM MENIKAH")?"S":"U"))).append("\"").
+                                                        append("\"code\": \"").append((tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22).toString().equals("MENIKAH")?"M":(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22).toString().equals("BELUM MENIKAH")?"S":"U"))).append("\"").
                                                     append("}]").
                                                 append("},").
                                                 append("\"telecom\": [").
                                                     append("{").
                                                         append("\"system\": \"phone\",").
-                                                        append("\"value\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()).append("\",").
+                                                        append("\"value\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9).toString()).append("\",").
                                                         append("\"use\": \"mobile\"").
                                                     append("}").
                                                 append("],").
-                                                append("\"gender\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().replaceAll("L","male").replaceAll("P","female")).append("\",").
-                                                append("\"birthDate\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString()).append("\",").
+                                                append("\"gender\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString().replaceAll("L","male").replaceAll("P","female")).append("\",").
+                                                append("\"birthDate\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 7).toString()).append("\",").
                                                 append("\"deceasedBoolean\":false,").
                                                 append("\"address\": [{").
-                                                    append("\"line\": [\"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 4).toString()).append("\"],").
-                                                    append("\"city\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 23).toString()).append("\",").
-                                                    append("\"district\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 25).toString()).append("\",").
+                                                    append("\"line\": [\"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 4).toString()).append("\"],").
+                                                    append("\"city\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 23).toString()).append("\",").
+                                                    append("\"district\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 25).toString()).append("\",").
                                                     append("\"state\": \"").append(akses.getpropinsirs()).append("\",").
-                                                    append("\"postalCode\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 24).toString()).append("\",").
-                                                    append("\"text\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 4).toString()).append("\",").
+                                                    append("\"postalCode\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 24).toString()).append("\",").
+                                                    append("\"text\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 4).toString()).append("\",").
                                                     append("\"use\": \"home\",").
                                                     append("\"type\": \"both\"").
                                                 append("}],").
                                                 append("\"managingOrganization\": {").
-                                                    append("\"reference\": \"Organization/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(akses.getkodeppkbpjs() + akses.getnamars())).append("\",").
+                                                    append("\"reference\": \"Organization/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(akses.getkodeppkbpjs() + akses.getnamars())).append("\",").
                                                     append("\"display\": \"").append(akses.getnamars()).append("\"").
                                                 append("}").
                                             append("}").
@@ -901,7 +901,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                             iyembuilder.append("{").
                                             append("\"resource\": {").
                                                 append("\"resourceType\": \"Organization\",").
-                                                append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString().substring(0,1)).append("-").append(jadikanUUID(akses.getkodeppkbpjs()+akses.getnamars())).append("\",").
+                                                append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString().substring(0,1)).append("-").append(jadikanUUID(akses.getkodeppkbpjs()+akses.getnamars())).append("\",").
                                                 append("\"identifier\": [").
                                                     append("{").
                                                         append("\"use\": \"official\",").
@@ -924,9 +924,9 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                     append("],").
                                                     append("\"text\": \"").append(akses.getnamars()).append("\"").
                                                 append("}],").
-                                                append("\"name\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString()).append("\",").
+                                                append("\"name\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString()).append("\",").
                                                 append("\"alias\": [").
-                                                    append("\"").append(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString()).append("\"").
+                                                    append("\"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString()).append("\"").
                                                 append("],").
                                                 append("\"telecom\": [{").
                                                         append("\"system\": \"phone\",").
@@ -973,13 +973,13 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                 "WHERE reg_periksa.no_rawat=?"
                             );
                             try {
-                                ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
+                                ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
                                 rs=ps.executeQuery();
                                 if(rs.next()){
                                     iyembuilder.append("{").
                                                     append("\"resource\": {").
                                                         append("\"resourceType\": \"Practitioner\",").
-                                                        append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString().substring(0,1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString())).append("\",").
+                                                        append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString().substring(0,1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString())).append("\",").
                                                         append("\"identifier\": [").
                                                             append("{").
                                                                 append("\"use\": \"official\",").
@@ -1002,7 +1002,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                         append("],").
                                                         append("\"name\": [{").
                                                             append("\"use\": \"official\",").
-                                                            append("\"text\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString()).append("\"").
+                                                            append("\"text\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString()).append("\"").
                                                         append("}],").
                                                         append("\"telecom\": [").
                                                             append("{").
@@ -1057,30 +1057,30 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                         }
 
                         if(chkEncounter.isSelected()==true){
-                            String norujukaninternal=Sequel.cariIsi("SELECT bridging_sep_internal.no_rujukan FROM bridging_sep_internal WHERE bridging_sep_internal.no_rawat = ? LIMIT 1",tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString());
+                            String norujukaninternal=Sequel.cariIsi("SELECT bridging_sep_internal.no_rujukan FROM bridging_sep_internal WHERE bridging_sep_internal.no_rawat = ? LIMIT 1",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString());
                             iyembuilder.append("{").
                                             append("\"resource\": {").
                                                 append("\"resourceType\": \"Encounter\",").
-                                                append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\",").
+                                                append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\",").
                                                 append("\"identifier\": [{").
                                                     append("\"system\": \"http://api.bpjs-kesehatan.go.id:8080/Vclaim-rest/SEP/\",").
-                                                    append("\"value\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()).append("\"").
+                                                    append("\"value\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString()).append("\"").
                                                 append("}],").
                                                 append("\"subject\": {").
-                                                    append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString())).append("\",").
-                                                    append("\"display\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 3).toString()).append("\",").
-                                                    append("\"noSep\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()).append("\"").
+                                                    append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2).toString())).append("\",").
+                                                    append("\"display\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 3).toString()).append("\",").
+                                                    append("\"noSep\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString()).append("\"").
                                                 append("},").
                                                 append("\"class\": {").
                                                     append("\"system\": \"http://terminology.hl7.org/CodeSystem/v3-ActCode\",").
-                                                    append("\"code\": \"").append((tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().equals("2. Ralan") ? "AMB" : "IMP")).append("\",").
-                                                    append("\"display\": \"").append((tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().equals("2. Ralan") ? "ambulatory" : "inpatient encounter")).append("\"").
+                                                    append("\"code\": \"").append((tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().equals("2. Ralan") ? "AMB" : "IMP")).append("\",").
+                                                    append("\"display\": \"").append((tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().equals("2. Ralan") ? "ambulatory" : "inpatient encounter")).append("\"").
                                                 append("},").
                                                 append("\"incomingReferral\": [{").
                                                     append("\"identifier\": [").
                                                         append("{").
                                                             append("\"system\": \"http://sys-ids.kemkes.go.id/no-rujukan-bpjs\",").
-                                                            append("\"value\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 18).toString().equals("")? "Tidak Ada Nomor Rujukan" : tbObat.getValueAt(tbObat.getSelectedRow(), 18).toString()).append("\"").
+                                                            append("\"value\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 18).toString().equals("")? "Tidak Ada Nomor Rujukan" : tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 18).toString()).append("\"").
                                                         append("},").
                                                         append("{").
                                                             append("\"system\": \"http://sys-ids.kemkes.go.id/no-rujukan-internal\",").
@@ -1090,15 +1090,15 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                 append("}],").
                                                 append("\"reason\": [{").
                                                     append("\"coding\": [{").
-                                                        append("\"code\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString()).append("\",").
-                                                        append("\"display\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString()).append("\",").
+                                                        append("\"code\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20).toString()).append("\",").
+                                                        append("\"display\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString()).append("\",").
                                                         append("\"system\": \"http://snomed.info/sct\"").
                                                     append("}],").
-                                                    append("\"text\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString()).append("\"").
+                                                    append("\"text\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString()).append("\"").
                                                 append("}],").
                                                 append("\"diagnosis\": [{").
                                                     append("\"condition\": {").
-                                                        append("\"reference\": \"Condition/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString()+Sequel.cariIsi("SELECT diagnosa_pasien.kd_penyakit FROM diagnosa_pasien WHERE diagnosa_pasien.no_rawat = ? order by diagnosa_pasien.prioritas limit 1",tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString()))).append("\",").
+                                                        append("\"reference\": \"Condition/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString()+Sequel.cariIsi("SELECT diagnosa_pasien.kd_penyakit FROM diagnosa_pasien WHERE diagnosa_pasien.no_rawat = ? order by diagnosa_pasien.prioritas limit 1",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString()))).append("\",").
                                                         append("\"role\": {").
                                                             append("\"coding\": [{").
                                                                 append("\"system\": \"http://terminology.hl7.org/CodeSystem/diagnosis-role\",").
@@ -1119,12 +1119,12 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                     append("}]").
                                                 append("},").
                                                 append("\"period\": {").
-                                                    append("\"start\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 10).toString()).append("\",").
-                                                    append("\"end\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 17).toString()).append("\"").
+                                                    append("\"start\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 10).toString()).append("\",").
+                                                    append("\"end\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 17).toString()).append("\"").
                                                 append("},").
                                                 append("\"status\": \"finished\",").
                                                 append("\"text\": {").
-                                                    append("\"div\": \"Admitted to ").append(tbObat.getValueAt(tbObat.getSelectedRow(), 16).toString()).append(" ").append(akses.getnamars()).append(" between ").append(tbObat.getValueAt(tbObat.getSelectedRow(), 10).toString()).append(" and ").append(tbObat.getValueAt(tbObat.getSelectedRow(), 17).toString()).append("\",").
+                                                    append("\"div\": \"Admitted to ").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 16).toString()).append(" ").append(akses.getnamars()).append(" between ").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 10).toString()).append(" and ").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 17).toString()).append("\",").
                                                     append("\"status\": \"generated\"").
                                                 append("}").
                                             append("}").
@@ -1138,13 +1138,13 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                 "ORDER BY diagnosa_pasien.prioritas"
                             );
                             try {
-                                ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
+                                ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
                                 rs=ps.executeQuery();
                                 while(rs.next()){
                                     iyembuilder.append("{").
                                                     append("\"resource\": {").
                                                         append("\"resourceType\": \"Condition\",").
-                                                        append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString()+rs.getString("kd_penyakit"))).append("\",").
+                                                        append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString()+rs.getString("kd_penyakit"))).append("\",").
                                                         append("\"clinicalStatus\": \"active\",").
                                                         append("\"verificationStatus\": \"confirmed\",").
                                                         append("\"category\": [{").
@@ -1163,9 +1163,9 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                             append("\"text\": \"").append(rs.getString("nm_penyakit")).append("\"").
                                                         append("},").
                                                         append("\"subject\": {").
-                                                            append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString())).append("\"").
+                                                            append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2).toString())).append("\"").
                                                         append("},").
-                                                        append("\"onsetDateTime\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 10).toString()).append("\"").
+                                                        append("\"onsetDateTime\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 10).toString()).append("\"").
                                                     append("}").
                                                 append("},");
                                 }
@@ -1183,7 +1183,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
 
                         String jalannyapenyakit="";
                         if (chkComposition.isSelected() == true) {
-                            if(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString().equals("1. Ranap")){
+                            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString().equals("1. Ranap")){
                                 ps=koneksi.prepareStatement(
                                     "SELECT resume_pasien_ranap.diagnosa_awal,resume_pasien_ranap.alasan,resume_pasien_ranap.keluhan_utama,resume_pasien_ranap.pemeriksaan_fisik,"+
                                     "resume_pasien_ranap.jalannya_penyakit,resume_pasien_ranap.pemeriksaan_penunjang,resume_pasien_ranap.hasil_laborat,resume_pasien_ranap.tindakan_dan_operasi,"+
@@ -1193,13 +1193,13 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                     "FROM resume_pasien_ranap inner join reg_periksa on resume_pasien_ranap.no_rawat=reg_periksa.no_rawat where resume_pasien_ranap.no_rawat=?"
                                 );
                                 try {
-                                    ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
+                                    ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
                                     rs=ps.executeQuery();
                                     if(rs.next()){
                                         iyembuilder.append("{").
                                                         append("\"resource\": {").
                                                             append("\"resourceType\": \"Composition\",").
-                                                            append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()+tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString())).append("\",").
+                                                            append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString()+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString())).append("\",").
                                                             append("\"status\": \"final\",").
                                                             append("\"type\": {").
                                                                 append("\"coding\": [{").
@@ -1209,16 +1209,16 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                 append("\"text\": \"Discharge Summary\"").
                                                             append("},").
                                                             append("\"subject\": {").
-                                                                append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString())).append("\",").
-                                                                append("\"display\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 3).toString()).append("\"").
+                                                                append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2).toString())).append("\",").
+                                                                append("\"display\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 3).toString()).append("\"").
                                                             append("},").
                                                             append("\"encounter\": {").
-                                                                append("\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"").
+                                                                append("\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"").
                                                             append("},").
                                                             append("\"date\": \"").append(rs.getString("tgl_registrasi")).append(" ").append(rs.getString("jam_reg")).append("\",").
                                                             append("\"author\": [{").
-                                                                append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString().substring(0,1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString())).append("\",").
-                                                                append("\"display\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString()).append("\"").
+                                                                append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString().substring(0,1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString())).append("\",").
+                                                                append("\"display\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString()).append("\"").
                                                             append("}],").
                                                             append("\"title\": \"Discharge Summary\",").
                                                             append("\"confidentiality\": \"N\",").
@@ -1231,7 +1231,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                         append("\"display\": \"Reason for visit Narrative\"").
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("alasan")).append("\"},").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"1\": {").
                                                                     append("\"title\": \"Admission diagnosis\",").
@@ -1241,7 +1241,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                         append("\"display\": \"Admission diagnosis Narrative\"").
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("diagnosa_awal")).append("\"},").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"2\": {").
                                                                     append("\"title\": \"Chief complaint\",").
@@ -1251,7 +1251,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                         append("\"display\": \"Chief complaint Narrative\"").
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("keluhan_utama").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append("\"},").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"3\": {").
                                                                     append("\"title\": \"Physical findings\",").
@@ -1261,7 +1261,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                         append("\"display\": \"Physical findings\"").
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("pemeriksaan_fisik").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append("\"},").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"4\": {").
                                                                     append("\"title\": \"Clinical course\",").
@@ -1271,7 +1271,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                         append("\"display\": \"Hospital course in medical records narrative\"").
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("jalannya_penyakit").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append("\"},").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"5\": {").
                                                                     append("\"title\": \"Relevant diagnostic tests\",").
@@ -1281,7 +1281,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                         append("\"display\": \"Relevant diagnostic tests/lab data\"").
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append("Radiologi: ").append(rs.getString("pemeriksaan_penunjang").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append(". Lab: ").append(rs.getString("hasil_laborat").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append(". Pending : ").append(rs.getString("lab_belum").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append("\"},").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"6\": {").
                                                                     append("\"title\": \"History of procedures\",").
@@ -1291,7 +1291,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                         append("\"display\": \"History of Procedures\"").
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("tindakan_dan_operasi").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append("\"},").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"7\": {").
                                                                     append("\"title\": \"History of medication use\",").
@@ -1301,7 +1301,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                         append("\"display\": \"History of medication use\"").
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("obat_di_rs").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append("\"},").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"8\": {").
                                                                     append("\"title\": \"Medications on Discharge\",").
@@ -1312,7 +1312,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("obat_pulang").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append("\"},").
                                                                     append("\"mode\": \"working\",").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"9\": {").
                                                                     append("\"title\": \"Known allergies\",").
@@ -1322,7 +1322,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                         append("\"display\": \"Allergies and adverse reactions\"").
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("alergi")).append("\"},").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"10\": {").
                                                                     append("\"title\": \"Diet\",").
@@ -1333,7 +1333,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("diet").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append("\"},").
                                                                     append("\"mode\": \"working\",").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"11\": {").
                                                                     append("\"title\": \"Educations & Instructions\",").
@@ -1344,7 +1344,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("edukasi").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append("\"},").
                                                                     append("\"mode\": \"working\",").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"12\": {").
                                                                     append("\"title\": \"Discharge condition\",").
@@ -1355,7 +1355,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("keadaan")+" - "+rs.getString("ket_keadaan")).append("\"},").
                                                                     append("\"mode\": \"working\",").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"13\": {").
                                                                     append("\"title\": \"Plan of care\",").
@@ -1366,7 +1366,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append("Cara Keluar : ").append(rs.getString("cara_keluar")).append(" - ").append(rs.getString("ket_keluar")).append(". Dilanjutkan : ").append(rs.getString("dilanjutkan")).append(" - ").append(rs.getString("ket_dilanjutkan")).append(". Kontrol : ").append(rs.getString("kontrol")).append("\"},").
                                                                     append("\"mode\": \"working\",").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("}").
                                                             append("}").
                                                         append("}").
@@ -1390,13 +1390,13 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                     "inner join reg_periksa on resume_pasien.no_rawat=reg_periksa.no_rawat where resume_pasien.no_rawat=?"
                                 );
                                 try {
-                                    ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
+                                    ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
                                     rs=ps.executeQuery();
                                     if(rs.next()){
                                         iyembuilder.append("{").
                                                         append("\"resource\": {").
                                                             append("\"resourceType\": \"Composition\",").
-                                                            append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()+tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString())).append("\",").
+                                                            append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString()+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString())).append("\",").
                                                             append("\"status\": \"final\",").
                                                             append("\"type\": {").
                                                                 append("\"coding\": [{").
@@ -1406,16 +1406,16 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                 append("\"text\": \"Discharge Summary\"").
                                                             append("},").
                                                             append("\"subject\": {").
-                                                                append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString())).append("\",").
-                                                                append("\"display\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 3).toString()).append("\"").
+                                                                append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2).toString())).append("\",").
+                                                                append("\"display\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 3).toString()).append("\"").
                                                             append("},").
                                                             append("\"encounter\": {").
-                                                                append("\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"").
+                                                                append("\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"").
                                                             append("},").
                                                             append("\"date\": \"").append(rs.getString("tgl_registrasi")).append(" ").append(rs.getString("jam_reg")).append("\",").
                                                             append("\"author\": [{").
-                                                                append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString().substring(0,1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString())).append("\",").
-                                                                append("\"display\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString()).append("\"").
+                                                                append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString().substring(0,1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString())).append("\",").
+                                                                append("\"display\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString()).append("\"").
                                                             append("}],").
                                                             append("\"title\": \"Discharge Summary\",").
                                                             append("\"confidentiality\": \"N\",").
@@ -1428,7 +1428,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                         append("\"display\": \"Chief complaint Narrative\"").
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("keluhan_utama").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append("\"},").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"1\": {").
                                                                     append("\"title\": \"Clinical course\",").
@@ -1438,7 +1438,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                         append("\"display\": \"Hospital course in medical records narrative\"").
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("jalannya_penyakit").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append("\"},").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"2\": {").
                                                                     append("\"title\": \"Relevant diagnostic tests\",").
@@ -1448,7 +1448,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                         append("\"display\": \"Relevant diagnostic tests/lab data\"").
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append("Radiologi : ").append(rs.getString("pemeriksaan_penunjang").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append(". Lab : ").append(rs.getString("hasil_laborat").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append("\"},").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"3\": {").
                                                                     append("\"title\": \"Discharge counseling note\",").
@@ -1459,7 +1459,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("obat_pulang").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")).append("\"},").
                                                                     append("\"mode\": \"working\",").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("},").
                                                                 append("\"4\": {").
                                                                     append("\"title\": \"Discharge condition\",").
@@ -1470,7 +1470,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                     append("}]},").
                                                                     append("\"text\": {\"status\": \"additional\",\"div\":\"").append(rs.getString("kondisi_pulang")).append("\"},").
                                                                     append("\"mode\": \"working\",").
-                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\"}]").
+                                                                    append("\"entry\": [{\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\"}]").
                                                                 append("}").
                                                             append("}").
                                                         append("}").
@@ -1498,7 +1498,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                 "WHERE prosedur_pasien.no_rawat = ? ORDER BY prosedur_pasien.prioritas"
                             );
                             try {
-                                ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
+                                ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
                                 rs=ps.executeQuery();
                                 if(rs.next()){
                                     iyembuilder.append("{").
@@ -1506,7 +1506,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                     do{
                                         iyembuilder.append("{").
                                                         append("\"resourceType\": \"Procedure\",").
-                                                        append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString()+rs.getString("kode"))).append("\",").
+                                                        append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString()+rs.getString("kode"))).append("\",").
                                                         append("\"text\": {").
                                                             append("\"status\": \"generated\",").
                                                             append("\"div\": \"Generated Narrative with Details\"").
@@ -1522,16 +1522,16 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                             append("]").
                                                         append("},").
                                                         append("\"subject\": {").
-                                                            append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString())).append("\",").
-                                                            append("\"display\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 3).toString()).append("\"").
+                                                            append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2).toString())).append("\",").
+                                                            append("\"display\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 3).toString()).append("\"").
                                                         append("},").
                                                         append("\"context\": {").
-                                                            append("\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())).append("\",").
-                                                            append("\"display\": \"Admitted to ").append(tbObat.getValueAt(tbObat.getSelectedRow(), 16).toString()).append(" ").append(akses.getnamars()).append(" between ").append(tbObat.getValueAt(tbObat.getSelectedRow(), 10).toString()).append(" and ").append(tbObat.getValueAt(tbObat.getSelectedRow(), 17).toString()).append("\"").
+                                                            append("\"reference\": \"Encounter/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())).append("\",").
+                                                            append("\"display\": \"Admitted to ").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 16).toString()).append(" ").append(akses.getnamars()).append(" between ").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 10).toString()).append(" and ").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 17).toString()).append("\"").
                                                         append("},").
                                                         append("\"performedPeriod\": {").
-                                                            append("\"start\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 10).toString()).append("\",").
-                                                            append("\"end\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 17).toString()).append("\"").
+                                                            append("\"start\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 10).toString()).append("\",").
+                                                            append("\"end\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 17).toString()).append("\"").
                                                         append("},").
                                                         append("\"performer\": [{").
                                                             append("\"role\": {").
@@ -1544,8 +1544,8 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                 append("]").
                                                             append("},").
                                                             append("\"actor\": {").
-                                                                append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString().substring(0,1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString())).append("\",").
-                                                                append("\"display\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString()).append("\"").
+                                                                append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString().substring(0,1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString())).append("\",").
+                                                                append("\"display\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString()).append("\"").
                                                             append("}").
                                                         append("}],").
                                                         append("\"reasonCode\": [").
@@ -1585,22 +1585,22 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                 "WHERE detail_pemberian_obat.no_rawat = ? AND (jenis.nama like '%alkes%' or jenis.nama like '%alat kesehatan%')"
                             );
                             try {
-                                ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
+                                ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
                                 rs=ps.executeQuery();
                                 while(rs.next()){
                                     iyembuilder.append("{").
                                                     append("\"resource\": {").
                                                         append("\"resourceType\": \"Device\",").
-                                                        append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kode_brng")+rs.getString("no_batch"))).append("\",").
+                                                        append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kode_brng")+rs.getString("no_batch"))).append("\",").
                                                         append("\"text\": {").
                                                             append("\"status\": \"generated\",").
-                                                            append("\"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">id: ").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kode_brng")+rs.getString("no_batch"))).
+                                                            append("\"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">id: ").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kode_brng")+rs.getString("no_batch"))).
                                                             append("<br/>identifier: ").append(rs.getString("kode_brng")).
                                                             append("<br/>type: ").append(rs.getString("nama_brng")).append(" (Details : {http://acme.com/devices code = ").append(rs.getString("kode_brng")).append(", given as ").append(rs.getString("nama_brng")).append("})").
                                                             append("<br/>lotNumber: ").append(rs.getString("no_batch")).
                                                             append("<br/>manufacturer: ").append(rs.getString("nama_industri")).
                                                             append("<br/>model: ").
-                                                            append("<br/>patient: Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString())).
+                                                            append("<br/>patient: Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2).toString())).
                                                             append("<br/>contact: ").append(rs.getString("no_telp")).
                                                             append("</div>\"").
                                                         append("},").
@@ -1623,7 +1623,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                         append("\"expirationDate\": \"").append(rs.getString("tgl_kadaluarsa")).append("\",").
                                                         append("\"model\": \"\",").
                                                         append("\"patient\": {").
-                                                            append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString())).append("\"").
+                                                            append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2).toString())).append("\"").
                                                         append("},").
                                                         append("\"contact\": [{").
                                                             append("\"system\": \"phone\",").
@@ -1659,7 +1659,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                 "where resep_obat.no_rawat=?"
                             );
                             try {
-                                ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
+                                ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
                                 rs=ps.executeQuery();
                                 while(rs.next()){
                                     arrSplit = rs.getString("aturan_pakai").toLowerCase().split("x");
@@ -1688,11 +1688,11 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                         append("},").
                                                         append("\"identifier\": {").
                                                             append("\"system\": \"id_resep_pulang\",").
-                                                            append("\"value\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("no_resep")+rs.getString("kode_brng"))).append("\"").
+                                                            append("\"value\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("no_resep")+rs.getString("kode_brng"))).append("\"").
                                                         append("},").
                                                         append("\"subject\": {").
-                                                            append("\"display\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 3).toString()).append("\",").
-                                                            append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString())).append("\"").
+                                                            append("\"display\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 3).toString()).append("\",").
+                                                            append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2).toString())).append("\"").
                                                         append("},").
                                                         append("\"intent\": \"final\",").
                                                         append("\"medicationCodeableConcept\": {").
@@ -1729,19 +1729,19 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                         append("}],").
                                                         append("\"reasonCode\": [{").
                                                             append("\"coding\": [{").
-                                                                append("\"code\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString()).append("\",").
-                                                                append("\"display\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString()).append("\",").
+                                                                append("\"code\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20).toString()).append("\",").
+                                                                append("\"display\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString()).append("\",").
                                                                 append("\"system\": \"http://snomed.info/sct\"").
                                                             append("}],").
-                                                            append("\"text\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString()).append("\"").
+                                                            append("\"text\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString()).append("\"").
                                                         append("}],").
                                                         append("\"requester\": {").
                                                             append("\"agent\": {").
-                                                                append("\"display\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 14).toString()).append("\",").
-                                                                append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString().substring(0,1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString())).append("\"").
+                                                                append("\"display\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 14).toString()).append("\",").
+                                                                append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString().substring(0,1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString())).append("\"").
                                                             append("},").
                                                             append("\"onBehalfOf\": {").
-                                                                append("\"reference\": \"Organization/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString().substring(0,1)).append("-").append(jadikanUUID(akses.getkodeppkbpjs()+akses.getnamars())).append("\"").
+                                                                append("\"reference\": \"Organization/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString().substring(0,1)).append("-").append(jadikanUUID(akses.getkodeppkbpjs()+akses.getnamars())).append("\"").
                                                             append("}").
                                                         append("},").
                                                         append("\"meta\": {").
@@ -1790,17 +1790,17 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                 "where reg_periksa.no_rawat=?"
                             );
                             try {
-                                ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
+                                ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
                                 rs=ps.executeQuery();
                                 while(rs.next()){
                                     iyembuilder.append("{").
                                                     append("\"resource\": {").
                                                         append("\"resourceType\": \"DiagnosticReport\",").
-                                                        append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("noorder")+rs.getString("kd_jenis_prw"))).append("\",").
+                                                        append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("noorder")+rs.getString("kd_jenis_prw"))).append("\",").
                                                         append("\"subject\": {").
-                                                            append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString())).append("\",").
-                                                            append("\"display\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 3).toString()).append("\",").
-                                                            append("\"noSep\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()).append("\"").
+                                                            append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2).toString())).append("\",").
+                                                            append("\"display\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 3).toString()).append("\",").
+                                                            append("\"noSep\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString()).append("\"").
                                                         append("},").
                                                         append("\"category\": {").
                                                             append("\"coding\": {").
@@ -1811,7 +1811,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                         append("},").
                                                         append("\"status\": \"final\",").
                                                         append("\"performer\": [{").
-                                                            append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kd_dokter"))).append("\",").
+                                                            append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kd_dokter"))).append("\",").
                                                             append("\"display\": \"").append(rs.getString("nama").replace("\"", "'")).append("\"").
                                                         append("}],").
                                                         append("\"result\": [{").
@@ -1833,7 +1833,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                 append("\"text\": \"").append(rs.getString("nm_perawatan").replace("\"", "'")).append("\"").
                                                             append("},").
                                                             append("\"performer\": {").
-                                                                append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kd_dokter"))).append("\",").
+                                                                append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kd_dokter"))).append("\",").
                                                                 append("\"display\": \"").append(rs.getString("nama").replace("\"", "'")).append("\"").
                                                             append("},").
                                                             append("\"image\": [{").
@@ -1890,17 +1890,17 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                 "where reg_periksa.no_rawat=?"
                             );
                             try {
-                                ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
+                                ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
                                 rs=ps.executeQuery();
                                 while(rs.next()){
                                     iyembuilder.append("{").
                                                     append("\"resource\": {").
                                                         append("\"resourceType\": \"DiagnosticReport\",").
-                                                        append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("noorder")+rs.getString("id_template"))).append("\",").
+                                                        append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("noorder")+rs.getString("id_template"))).append("\",").
                                                         append("\"subject\": {").
-                                                            append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString())).append("\",").
-                                                            append("\"display\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 3).toString()).append("\",").
-                                                            append("\"noSep\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()).append("\"").
+                                                            append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2).toString())).append("\",").
+                                                            append("\"display\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 3).toString()).append("\",").
+                                                            append("\"noSep\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString()).append("\"").
                                                         append("},").
                                                         append("\"category\": {").
                                                             append("\"coding\": {").
@@ -1911,7 +1911,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                         append("},").
                                                         append("\"status\": \"final\",").
                                                         append("\"performer\": [{").
-                                                            append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kd_dokter"))).append("\",").
+                                                            append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kd_dokter"))).append("\",").
                                                             append("\"display\": \"").append(rs.getString("nama").replace("\"", "'")).append("\"").
                                                         append("}],").
                                                         append("\"result\": [{").
@@ -1933,7 +1933,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                 append("\"text\": \"").append(rs.getString("Pemeriksaan").replace("\"", "'")).append("\"").
                                                             append("},").
                                                             append("\"performer\": {").
-                                                                append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kd_dokter"))).append("\",").
+                                                                append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kd_dokter"))).append("\",").
                                                                 append("\"display\": \"").append(rs.getString("nama").replace("\"", "'")).append("\"").
                                                             append("},").
                                                             append("\"image\": [{").
@@ -1990,17 +1990,17 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                 "where reg_periksa.no_rawat=?"
                             );
                             try {
-                                ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
+                                ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
                                 rs=ps.executeQuery();
                                 while(rs.next()){
                                     iyembuilder.append("{").
                                                     append("\"resource\": {").
                                                         append("\"resourceType\": \"DiagnosticReport\",").
-                                                        append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("noorder")+rs.getString("id_template")+"mb")).append("\",").
+                                                        append("\"id\": \"").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("noorder")+rs.getString("id_template")+"mb")).append("\",").
                                                         append("\"subject\": {").
-                                                            append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString())).append("\",").
-                                                            append("\"display\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 3).toString()).append("\",").
-                                                            append("\"noSep\": \"").append(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()).append("\"").
+                                                            append("\"reference\": \"Patient/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2).toString())).append("\",").
+                                                            append("\"display\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 3).toString()).append("\",").
+                                                            append("\"noSep\": \"").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString()).append("\"").
                                                         append("},").
                                                         append("\"category\": {").
                                                             append("\"coding\": {").
@@ -2011,7 +2011,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                         append("},").
                                                         append("\"status\": \"final\",").
                                                         append("\"performer\": [{").
-                                                            append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kd_dokter"))).append("\",").
+                                                            append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kd_dokter"))).append("\",").
                                                             append("\"display\": \"").append(rs.getString("nama").replace("\"", "'")).append("\"").
                                                         append("}],").
                                                         append("\"result\": [{").
@@ -2033,7 +2033,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                                                                 append("\"text\": \"").append(rs.getString("Pemeriksaan").replace("\"", "'")).append("\"").
                                                             append("},").
                                                             append("\"performer\": {").
-                                                                append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kd_dokter"))).append("\",").
+                                                                append("\"reference\": \"Practitioner/").append(akses.getkodeppkbpjs()).append("-").append(akses.getkodeppkkemenkes()).append("-").append(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString().substring(0, 1)).append("-").append(jadikanUUID(rs.getString("kd_dokter"))).append("\",").
                                                                 append("\"display\": \"").append(rs.getString("nama").replace("\"", "'")).append("\"").
                                                             append("},").
                                                             append("\"image\": [{").
@@ -2066,13 +2066,13 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
 
                         String stringJSON = "{" +
                                                 "\"resourceType\": \"Bundle\"," +
-                                                "\"id\": \""+akses.getkodeppkbpjs()+"-"+akses.getkodeppkkemenkes()+"-"+tbObat.getValueAt(tbObat.getSelectedRow(),1).toString().substring(0,1)+"-"+jadikanUUID(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString())+"\"," +
+                                                "\"id\": \""+akses.getkodeppkbpjs()+"-"+akses.getkodeppkkemenkes()+"-"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString().substring(0,1)+"-"+jadikanUUID(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString())+"\"," +
                                                 "\"meta\": {" +
                                                     "\"lastUpdated\": \""+Valid.SetTgl(DTPTanggal.getSelectedItem()+"")+"T"+DTPTanggal.getSelectedItem().toString().substring(11,19)+".000+07:00\"" +
                                                 "}," +
                                                 "\"identifier\": {" +
                                                     "\"system\": \"sep\"," +
-                                                    "\"value\": \""+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"\"" +
+                                                    "\"value\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"\"" +
                                                 "}," +
                                                 "\"type\": \"document\"," +
                                                 "\"entry\": [" +
@@ -2105,7 +2105,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void BtnRiwayatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRiwayatActionPerformed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if(tbObat.getSelectedRow()!= -1){
                 if (resume == null || !resume.isDisplayable()) {
                     resume=new RMRiwayatPerawatan(null,false);
@@ -2121,8 +2121,8 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                 }
                 if (resume == null) return;
                 if (!resume.isVisible()) {
-                    resume.setNoRawat(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-                    resume.setNoRm(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
+                    resume.setNoRawat(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+                    resume.setNoRm(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
                 }
                 if (resume.isVisible()) {
                     resume.toFront();
@@ -2191,10 +2191,10 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                     headers.add("user_key",koneksiDB.USERKEYAPISMARTCLAIM());
                     requestJson ="{" +
                                     "\"request\": {" +
-                                        "\"noSep\": \""+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"\"," +
-                                        "\"jnsPelayanan\": \""+tbObat.getValueAt(tbObat.getSelectedRow(),11).toString().substring(0,1)+"\"," +
-                                        "\"bulan\": \""+tbObat.getValueAt(tbObat.getSelectedRow(),10).toString().substring(5,7).replaceAll("0","")+"\"," +
-                                        "\"tahun\": \""+tbObat.getValueAt(tbObat.getSelectedRow(),10).toString().substring(0,4)+"\"," +
+                                        "\"noSep\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"\"," +
+                                        "\"jnsPelayanan\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString().substring(0,1)+"\"," +
+                                        "\"bulan\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString().substring(5,7).replaceAll("0","")+"\"," +
+                                        "\"tahun\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString().substring(0,4)+"\"," +
                                         "\"dataMR\": \""+api.encryptSmartClaimData(JSONFHIR.getText(),akses.getkodeppkbpjs())+"\"" +
                                     "}" +
                                 "}";
@@ -2207,9 +2207,9 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
                     System.out.println("message : "+nameNode.path("message").asText());
                     if(nameNode.path("code").asText().equals("200")){
                         if(Sequel.menyimpantf("bridging_smart_klaim_bpjs","?,?","No.SEP",2,new String[]{
-                                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),Valid.SetTgl(DTPTanggal.getSelectedItem()+"")
+                                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString(),Valid.SetTgl(DTPTanggal.getSelectedItem()+"")
                             })==true){
-                            tbObat.setValueAt(Valid.SetTgl(DTPTanggal.getSelectedItem()+""),tbObat.getSelectedRow(),12);
+                            tabMode.setValueAt(Valid.SetTgl(DTPTanggal.getSelectedItem()+""),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12);
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
@@ -2356,7 +2356,7 @@ public final class SmartKlaimBPJSKirimFHIR extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void isCek(){

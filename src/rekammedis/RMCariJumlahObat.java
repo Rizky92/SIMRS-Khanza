@@ -171,7 +171,7 @@ public final class RMCariJumlahObat extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKamar.setAutoCreateRowSorter(false);
+        tbKamar.setAutoCreateRowSorter(true);
         tbKamar.setComponentPopupMenu(jPopupMenu1);
         tbKamar.setName("tbKamar"); // NOI18N
         tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -309,7 +309,7 @@ public final class RMCariJumlahObat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getClickCount()==2){
                 dispose();
             }
@@ -317,7 +317,7 @@ public final class RMCariJumlahObat extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 dispose();
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
@@ -363,13 +363,13 @@ public final class RMCariJumlahObat extends javax.swing.JDialog {
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
         for(z=0;z<tbKamar.getRowCount();z++){
-            tbKamar.setValueAt(true,z,0);
+            tabMode.setValueAt(true,tbKamar.convertRowIndexToModel(z),0);
         }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(z=0;z<tbKamar.getRowCount();z++){
-            tbKamar.setValueAt(false,z,0);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(z),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -407,6 +407,7 @@ public final class RMCariJumlahObat extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -437,7 +438,8 @@ public final class RMCariJumlahObat extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {

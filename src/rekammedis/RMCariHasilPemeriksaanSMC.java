@@ -261,7 +261,7 @@ public final class RMCariHasilPemeriksaanSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getClickCount()==2){
                 dispose();
             }
@@ -269,7 +269,7 @@ public final class RMCariHasilPemeriksaanSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -342,6 +342,7 @@ public final class RMCariHasilPemeriksaanSMC extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         String cari = TCari.getText().trim().toLowerCase();
         for (String[] pemeriksaan : PEMERIKSAAN) {
@@ -350,7 +351,8 @@ public final class RMCariHasilPemeriksaanSMC extends javax.swing.JDialog {
             }
             muat(pemeriksaan, cari);
         }
-        LCount.setText("" + tabMode.getRowCount());
+        LCount.setText("" + tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     private boolean diminta(String nama) {

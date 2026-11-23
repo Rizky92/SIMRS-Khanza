@@ -1038,8 +1038,8 @@ public final class RMHemodialisa extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else{
-                if(KdDokter.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString())){
-                    if(Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),Sequel.ambiltanggalsekarang())==true){
+                if(KdDokter.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20).toString())){
+                    if(Sequel.cekTanggal48jam(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString(),Sequel.ambiltanggalsekarang())==true){
                         hapus();
                     }
                 }else{
@@ -1102,8 +1102,8 @@ public final class RMHemodialisa extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(KdDokter.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString())){
-                        if(Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),Sequel.ambiltanggalsekarang())==true){
+                    if(KdDokter.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20).toString())){
+                        if(Sequel.cekTanggal48jam(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString(),Sequel.ambiltanggalsekarang())==true){
                             if(TanggalRegistrasi.getText().equals("")){
                                 TanggalRegistrasi.setText(Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
                             }
@@ -1271,7 +1271,7 @@ public final class RMHemodialisa extends javax.swing.JDialog {
     }//GEN-LAST:event_TNoRMKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1280,7 +1280,7 @@ public final class RMHemodialisa extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1642,7 +1642,7 @@ public final class RMHemodialisa extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        int b=tabMode.getRowCount();
+        int b=tbObat.getRowCount();
         LCount.setText(""+b);
     }
 
@@ -1669,31 +1669,31 @@ public final class RMHemodialisa extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            Umur.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            JK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            Jam.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(11,13));
-            Menit.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(14,15));
-            Detik.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(17,19));
-            TLama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            TAkses.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            TDialist.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            TTransfusi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            TPenarikan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            TQB.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            TQD.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            TUreum.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            THb.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            THbsag.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            TCreatinin.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            THIV.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            THCV.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            TLain.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
-            kdDiagnosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
-            NmDiagnosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            Umur.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            JK.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            Jam.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString().substring(11,13));
+            Menit.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString().substring(14,15));
+            Detik.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString().substring(17,19));
+            TLama.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            TAkses.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            TDialist.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            TTransfusi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            TPenarikan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            TQB.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            TQD.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            TUreum.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            THb.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            THbsag.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+            TCreatinin.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
+            THIV.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17).toString());
+            THCV.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18).toString());
+            TLain.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19).toString());
+            kdDiagnosa.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22).toString());
+            NmDiagnosa.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23).toString());
         }
     }
 
@@ -1838,7 +1838,7 @@ public final class RMHemodialisa extends javax.swing.JDialog {
                 TLama.getText(),TAkses.getText(),TDialist.getText(),TTransfusi.getText(),TPenarikan.getText(),TQB.getText(),TQD.getText(),TUreum.getText(),THb.getText(),THbsag.getText(),TCreatinin.getText(),THIV.getText(),
                 THCV.getText(),TLain.getText(),KdDokter.getText(),NmDokter.getText(),kdDiagnosa.getText(),NmDiagnosa.getText()
             });
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
         }
     }
@@ -1848,42 +1848,42 @@ public final class RMHemodialisa extends javax.swing.JDialog {
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),KdDokter.getText(),TLama.getText(),TAkses.getText(),
                 TDialist.getText(),TTransfusi.getText(),TPenarikan.getText(),TQB.getText(),TQD.getText(),TUreum.getText(),THb.getText(),
                 THbsag.getText(),TCreatinin.getText(),THIV.getText(),THCV.getText(),TLain.getText(),kdDiagnosa.getText(),
-                tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             })==true){
-            tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
-            tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),1);
-            tbObat.setValueAt(TPasien.getText(),tbObat.getSelectedRow(),2);
-            tbObat.setValueAt(Umur.getText(),tbObat.getSelectedRow(),3);
-            tbObat.setValueAt(JK.getText(),tbObat.getSelectedRow(),4);
-            tbObat.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),tbObat.getSelectedRow(),5);
-            tbObat.setValueAt(TLama.getText(),tbObat.getSelectedRow(),6);
-            tbObat.setValueAt(TAkses.getText(),tbObat.getSelectedRow(),7);
-            tbObat.setValueAt(TDialist.getText(),tbObat.getSelectedRow(),8);
-            tbObat.setValueAt(TTransfusi.getText(),tbObat.getSelectedRow(),9);
-            tbObat.setValueAt(TPenarikan.getText(),tbObat.getSelectedRow(),10);
-            tbObat.setValueAt(TQB.getText(),tbObat.getSelectedRow(),11);
-            tbObat.setValueAt(TQD.getText(),tbObat.getSelectedRow(),12);
-            tbObat.setValueAt(TUreum.getText(),tbObat.getSelectedRow(),13);
-            tbObat.setValueAt(THb.getText(),tbObat.getSelectedRow(),14);
-            tbObat.setValueAt(THbsag.getText(),tbObat.getSelectedRow(),15);
-            tbObat.setValueAt(TCreatinin.getText(),tbObat.getSelectedRow(),16);
-            tbObat.setValueAt(THIV.getText(),tbObat.getSelectedRow(),17);
-            tbObat.setValueAt(THCV.getText(),tbObat.getSelectedRow(),18);
-            tbObat.setValueAt(TLain.getText(),tbObat.getSelectedRow(),19);
-            tbObat.setValueAt(KdDokter.getText(),tbObat.getSelectedRow(),20);
-            tbObat.setValueAt(NmDokter.getText(),tbObat.getSelectedRow(),21);
-            tbObat.setValueAt(kdDiagnosa.getText(),tbObat.getSelectedRow(),22);
-            tbObat.setValueAt(NmDiagnosa.getText(),tbObat.getSelectedRow(),23);
+            tabMode.setValueAt(TNoRw.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0);
+            tabMode.setValueAt(TNoRM.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1);
+            tabMode.setValueAt(TPasien.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2);
+            tabMode.setValueAt(Umur.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3);
+            tabMode.setValueAt(JK.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4);
+            tabMode.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5);
+            tabMode.setValueAt(TLama.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6);
+            tabMode.setValueAt(TAkses.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7);
+            tabMode.setValueAt(TDialist.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8);
+            tabMode.setValueAt(TTransfusi.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9);
+            tabMode.setValueAt(TPenarikan.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10);
+            tabMode.setValueAt(TQB.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11);
+            tabMode.setValueAt(TQD.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12);
+            tabMode.setValueAt(TUreum.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13);
+            tabMode.setValueAt(THb.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14);
+            tabMode.setValueAt(THbsag.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15);
+            tabMode.setValueAt(TCreatinin.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16);
+            tabMode.setValueAt(THIV.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17);
+            tabMode.setValueAt(THCV.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18);
+            tabMode.setValueAt(TLain.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19);
+            tabMode.setValueAt(KdDokter.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20);
+            tabMode.setValueAt(NmDokter.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21);
+            tabMode.setValueAt(kdDiagnosa.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22);
+            tabMode.setValueAt(NmDiagnosa.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23);
             emptTeks();
         }
     }
 
     private void hapus() {
         if(Sequel.queryu2tf("delete from hemodialisa where tanggal=? and no_rawat=?",2,new String[]{
-            tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
         })==true){
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");

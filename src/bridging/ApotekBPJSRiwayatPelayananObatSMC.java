@@ -452,6 +452,7 @@ public final class ApotekBPJSRiwayatPelayananObatSMC extends javax.swing.JDialog
                 ceksukses = true;
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 tbKamar.clearSelection();
+                tbKamar.suspendSorting();
                 Valid.tabelKosongSmc(tabMode);
                 final String tglawal = Valid.getTglSmc(TanggalAwal);
                 final String tglakhir = Valid.getTglSmc(TanggalAkhir);
@@ -522,9 +523,10 @@ public final class ApotekBPJSRiwayatPelayananObatSMC extends javax.swing.JDialog
                             }
                         }
                         tabMode.fireTableDataChanged();
-                        LCount.setText(tabMode.getRowCount() + "");
+                        LCount.setText(tbKamar.getRowCount() + "");
                         ApotekBPJSRiwayatPelayananObatSMC.this.setCursor(Cursor.getDefaultCursor());
                         ceksukses = false;
+                        tbKamar.resumeSorting();
                     }
                 }.execute();
             }

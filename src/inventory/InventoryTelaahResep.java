@@ -1114,7 +1114,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else{
-                if(Nip.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),33).toString())){
+                if(Nip.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),33).toString())){
                     hapus();
                 }else{
                     JOptionPane.showMessageDialog(null,"Hanya bisa dihapus oleh petugas yang bersangkutan..!!");
@@ -1144,7 +1144,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(Nip.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),33).toString())){
+                    if(Nip.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),33).toString())){
                         ganti();
                     }else{
                         JOptionPane.showMessageDialog(null,"Hanya bisa diganti oleh petugas yang bersangkutan..!!");
@@ -1324,7 +1324,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1333,7 +1333,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1695,7 +1695,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -1725,34 +1725,34 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoResep.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            ResepTepatIdentifikasiPasien.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            KetResepTepatIdetifikasiPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            ResepTepatObat.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            KetResepTepatObat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            ResepTepatDosis.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            KetResepTepatDosis.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            ResepTepatCaraPemberian.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            KetResepTepatCaraPemberian.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
-            ResepTepatWaktuPemberian.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
-            KetResepTepatWaktuPemberian.setText(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
-            ResepTidakDuplikasiObat.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
-            KetResepTidakDuplikasiObat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
-            ResepInteraksiObat.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
-            KetResepInteraksiObat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
-            ResepKontraIndikasiObat.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
-            KetResepKontraIndikasiObat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
-            ObatTepatPasien.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
-            ObatTepatObat.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
-            ObatTepatDosis.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
-            ObatTepatCaraPemberian.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString());
-            ObatTepatWaktuPemberian.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),32).toString());
-            Nip.setText(tbObat.getValueAt(tbObat.getSelectedRow(),33).toString());
-            NamaPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),34).toString());
+            NoResep.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            TglLahir.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            ResepTepatIdentifikasiPasien.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            KetResepTepatIdetifikasiPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            ResepTepatObat.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            KetResepTepatObat.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+            ResepTepatDosis.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
+            KetResepTepatDosis.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17).toString());
+            ResepTepatCaraPemberian.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18).toString());
+            KetResepTepatCaraPemberian.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19).toString());
+            ResepTepatWaktuPemberian.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20).toString());
+            KetResepTepatWaktuPemberian.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString());
+            ResepTidakDuplikasiObat.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22).toString());
+            KetResepTidakDuplikasiObat.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23).toString());
+            ResepInteraksiObat.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),24).toString());
+            KetResepInteraksiObat.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),25).toString());
+            ResepKontraIndikasiObat.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),26).toString());
+            KetResepKontraIndikasiObat.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),27).toString());
+            ObatTepatPasien.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),28).toString());
+            ObatTepatObat.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),29).toString());
+            ObatTepatDosis.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),30).toString());
+            ObatTepatCaraPemberian.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),31).toString());
+            ObatTepatWaktuPemberian.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),32).toString());
+            Nip.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),33).toString());
+            NamaPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),34).toString());
         }
     }
     private void isRawat() {
@@ -1818,7 +1818,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
 
     private void hapus() {
         if(Sequel.queryu2tf("delete from telaah_farmasi where no_resep=?",1,new String[]{
-            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
         })==true){
             runBackground(() ->tampil());
         }else{
@@ -1838,7 +1838,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                 KetResepTidakDuplikasiObat.getText(),ResepInteraksiObat.getSelectedItem().toString(),KetResepInteraksiObat.getText(),
                 ResepKontraIndikasiObat.getSelectedItem().toString(),KetResepKontraIndikasiObat.getText(),ObatTepatPasien.getSelectedItem().toString(),
                 ObatTepatObat.getSelectedItem().toString(),ObatTepatDosis.getSelectedItem().toString(),ObatTepatCaraPemberian.getSelectedItem().toString(),
-                ObatTepatWaktuPemberian.getSelectedItem().toString(),Nip.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                ObatTepatWaktuPemberian.getSelectedItem().toString(),Nip.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             })==true){
                runBackground(() ->tampil());
                emptTeks();

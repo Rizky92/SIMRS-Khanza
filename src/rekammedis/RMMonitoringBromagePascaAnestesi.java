@@ -873,8 +873,8 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else{
-                if(KdPetugas.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString())){
-                    if(Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),Sequel.ambiltanggalsekarang())==true){
+                if(KdPetugas.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString())){
+                    if(Sequel.cekTanggal48jam(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString(),Sequel.ambiltanggalsekarang())==true){
                         hapus();
                     }
                 }else{
@@ -910,8 +910,8 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(KdPetugas.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString())){
-                        if(Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),Sequel.ambiltanggalsekarang())==true){
+                    if(KdPetugas.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString())){
+                        if(Sequel.cekTanggal48jam(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString(),Sequel.ambiltanggalsekarang())==true){
                             if(TanggalRegistrasi.getText().equals("")){
                                 TanggalRegistrasi.setText(Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
                             }
@@ -1079,10 +1079,10 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),10).toString():finger)+"\n"+Tanggal.getSelectedItem());
-            finger2=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),12).toString():finger2)+"\n"+Tanggal.getSelectedItem());
+            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString()+"\nID "+(finger.equals("")?tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString():finger)+"\n"+Tanggal.getSelectedItem());
+            finger2=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString()+"\nID "+(finger.equals("")?tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString():finger2)+"\n"+Tanggal.getSelectedItem());
             try {
                 param.put("gambar",getClass().getResource("/picture/bromage_score.png").openStream());
             } catch (Exception e) {
@@ -1094,7 +1094,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
                     "from skor_bromage_pasca_anestesi inner join reg_periksa on skor_bromage_pasca_anestesi.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join dokter on skor_bromage_pasca_anestesi.kd_dokter=dokter.kd_dokter "+
-                    "inner join petugas on skor_bromage_pasca_anestesi.nip=petugas.nip where reg_periksa.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
+                    "inner join petugas on skor_bromage_pasca_anestesi.nip=petugas.nip where reg_periksa.no_rawat='"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"'",param);
         }
     }//GEN-LAST:event_MnMonitoringBromageScoreActionPerformed
 
@@ -1124,7 +1124,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
     }//GEN-LAST:event_InstruksiKeyPressed
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1135,7 +1135,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
     }//GEN-LAST:event_tbObatKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1164,7 +1164,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
                 "from skor_bromage_pasca_anestesi inner join reg_periksa on skor_bromage_pasca_anestesi.no_rawat=reg_periksa.no_rawat "+
                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "inner join dokter on skor_bromage_pasca_anestesi.kd_dokter=dokter.kd_dokter "+
-                "inner join petugas on skor_bromage_pasca_anestesi.nip=petugas.nip where reg_periksa.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
+                "inner join petugas on skor_bromage_pasca_anestesi.nip=petugas.nip where reg_periksa.no_rawat='"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"'",param);
         }
     }//GEN-LAST:event_MnMonitoringBromageScore2ActionPerformed
 
@@ -1445,7 +1445,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -1460,21 +1460,21 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            JK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            SkalaKriteria.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            NilaiKriteria.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            Keluar.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            Instruksi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            KdDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            NmDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            Jam.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(6,7));
-            Menit.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(8,10));
-            Detik.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(11,13));
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            TglLahir.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            JK.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            SkalaKriteria.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            NilaiKriteria.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            Keluar.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            Instruksi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            KdDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            NmDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            Jam.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString().substring(6,7));
+            Menit.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString().substring(8,10));
+            Detik.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString().substring(11,13));
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
         }
     }
 
@@ -1626,33 +1626,33 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
                 "keluar=?,instruksi=?,kd_dokter=?,nip=?",10,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
                 SkalaKriteria.getSelectedItem().toString(),NilaiKriteria.getText(),Keluar.getText(),Instruksi.getText(),KdDokter.getText(),KdPetugas.getText(),
-                tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             })==true){
-            tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
-            tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),1);
-            tbObat.setValueAt(TPasien.getText(),tbObat.getSelectedRow(),2);
-            tbObat.setValueAt(TglLahir.getText(),tbObat.getSelectedRow(),3);
-            tbObat.setValueAt(JK.getText(),tbObat.getSelectedRow(),4);
-            tbObat.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),tbObat.getSelectedRow(),5);
-            tbObat.setValueAt(SkalaKriteria.getSelectedItem().toString(),tbObat.getSelectedRow(),6);
-            tbObat.setValueAt(NilaiKriteria.getText(),tbObat.getSelectedRow(),7);
-            tbObat.setValueAt(Keluar.getText(),tbObat.getSelectedRow(),8);
-            tbObat.setValueAt(Instruksi.getText(),tbObat.getSelectedRow(),9);
-            tbObat.setValueAt(KdDokter.getText(),tbObat.getSelectedRow(),10);
-            tbObat.setValueAt(NmDokter.getText(),tbObat.getSelectedRow(),11);
-            tbObat.setValueAt(KdPetugas.getText(),tbObat.getSelectedRow(),12);
-            tbObat.setValueAt(NmPetugas.getText(),tbObat.getSelectedRow(),13);
+            tabMode.setValueAt(TNoRw.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0);
+            tabMode.setValueAt(TNoRM.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1);
+            tabMode.setValueAt(TPasien.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2);
+            tabMode.setValueAt(TglLahir.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3);
+            tabMode.setValueAt(JK.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4);
+            tabMode.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5);
+            tabMode.setValueAt(SkalaKriteria.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6);
+            tabMode.setValueAt(NilaiKriteria.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7);
+            tabMode.setValueAt(Keluar.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8);
+            tabMode.setValueAt(Instruksi.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9);
+            tabMode.setValueAt(KdDokter.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10);
+            tabMode.setValueAt(NmDokter.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11);
+            tabMode.setValueAt(KdPetugas.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12);
+            tabMode.setValueAt(NmPetugas.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13);
             emptTeks();
         }
     }
 
     private void hapus() {
         if(Sequel.queryu2tf("delete from skor_bromage_pasca_anestesi where tanggal=? and no_rawat=?",2,new String[]{
-            tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
         })==true){
-            tabMode.removeRow(tbObat.getSelectedRow());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
             emptTeks();
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbObat.getRowCount());
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
@@ -1680,7 +1680,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
                 SkalaKriteria.getSelectedItem().toString(),NilaiKriteria.getText(),Keluar.getText(),Instruksi.getText(),KdDokter.getText(),NmDokter.getText(),KdPetugas.getText(),NmPetugas.getText()
             });
             emptTeks();
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbObat.getRowCount());
         }
     }
 

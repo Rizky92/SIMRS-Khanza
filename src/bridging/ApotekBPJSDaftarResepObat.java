@@ -634,20 +634,20 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                             append("</tr>");
                                 for (int i = 0; i < tabMode.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,12).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,13).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,13).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -696,20 +696,20 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                             append("</tr>");
                                 for (int i = 0; i < tabMode.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,12).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbResep.getValueAt(i,13).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabMode.getValueAt(i,13).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -744,7 +744,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                     "\"No.SEP Asal\";\"No.SEP Apotek\";\"Tanggal SEP\";\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"No.Kartu\";\"Jenis\";\"ID User SEP\";\"No.Resep\";\"Tgl.Resep\";\"Tgl.Pelayanan\";\"Iterasi\";\"PPK Rujukan\"\n"
                                 );
                                 for (int i = 0; i < tabMode.getRowCount(); i++) {
-                                    htmlContent.append("\"").append(tbResep.getValueAt(i,0).toString()).append("\";\"").append(tbResep.getValueAt(i,1).toString()).append("\";\"").append(tbResep.getValueAt(i,2).toString()).append("\";\"").append(tbResep.getValueAt(i,3).toString()).append("\";\"").append(tbResep.getValueAt(i,4).toString()).append("\";\"").append(tbResep.getValueAt(i,5).toString()).append("\";\"").append(tbResep.getValueAt(i,6).toString()).append("\";\"").append(tbResep.getValueAt(i,7).toString()).append("\";\"").append(tbResep.getValueAt(i,8).toString()).append("\";\"").append(tbResep.getValueAt(i,9).toString()).append("\";\"").append(tbResep.getValueAt(i,10).toString()).append("\";\"").append(tbResep.getValueAt(i,11).toString()).append("\";\"").append(tbResep.getValueAt(i,12).toString()).append("\";\"").append(tbResep.getValueAt(i,13).toString()).append("\"\n");
+                                    htmlContent.append("\"").append(tabMode.getValueAt(i,0).toString()).append("\";\"").append(tabMode.getValueAt(i,1).toString()).append("\";\"").append(tabMode.getValueAt(i,2).toString()).append("\";\"").append(tabMode.getValueAt(i,3).toString()).append("\";\"").append(tabMode.getValueAt(i,4).toString()).append("\";\"").append(tabMode.getValueAt(i,5).toString()).append("\";\"").append(tabMode.getValueAt(i,6).toString()).append("\";\"").append(tabMode.getValueAt(i,7).toString()).append("\";\"").append(tabMode.getValueAt(i,8).toString()).append("\";\"").append(tabMode.getValueAt(i,9).toString()).append("\";\"").append(tabMode.getValueAt(i,10).toString()).append("\";\"").append(tabMode.getValueAt(i,11).toString()).append("\";\"").append(tabMode.getValueAt(i,12).toString()).append("\";\"").append(tabMode.getValueAt(i,13).toString()).append("\"\n");
                                 }
                                 f = new File("DataResepApolBPJS.csv");
                                 bw = new BufferedWriter(new FileWriter(f));
@@ -817,28 +817,28 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                             append("</tr>");
                                 for (int i = 0; i < tabModeRekap.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,12).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,13).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,14).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,15).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,16).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,17).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,18).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,19).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,20).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,21).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,13).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,14).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,15).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,16).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,17).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,18).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,19).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,20).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,21).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -895,28 +895,28 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                             append("</tr>");
                                 for (int i = 0; i < tabModeRekap.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,12).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,13).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,14).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,15).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,16).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,17).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,18).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,19).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,20).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapResep.getValueAt(i,21).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,13).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,14).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,15).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,16).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,17).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,18).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,19).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,20).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekap.getValueAt(i,21).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -951,7 +951,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                                     "\"No.SEP Asal\";\"No.SEP Apotek\";\"Tanggal SEP\";\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"No.Kartu\";\"Jenis\";\"ID User SEP\";\"No.Resep\";\"Tgl.Resep\";\"Tgl.Pelayanan\";\"Iterasi\";\"PPK Rujukan\";\"No.Racik\";\"Kode Obat\";\"Nama Obat\";\"Signa 1\";\"Signa 2\";\"Jml.Obat\";\"Permintaan\";\"Jml.Harian\"\n"
                                 );
                                 for (int i = 0; i < tabModeRekap.getRowCount(); i++) {
-                                    htmlContent.append("\"").append(tbRekapResep.getValueAt(i,0).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,1).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,2).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,3).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,4).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,5).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,6).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,7).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,8).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,9).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,10).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,11).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,12).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,13).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,14).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,15).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,16).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,17).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,18).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,19).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,20).toString()).append("\";\"").append(tbRekapResep.getValueAt(i,21).toString()).append("\"\n");
+                                    htmlContent.append("\"").append(tabModeRekap.getValueAt(i,0).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,1).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,2).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,3).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,4).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,5).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,6).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,7).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,8).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,9).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,10).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,11).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,12).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,13).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,14).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,15).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,16).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,17).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,18).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,19).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,20).toString()).append("\";\"").append(tabModeRekap.getValueAt(i,21).toString()).append("\"\n");
                                 }
                                 f = new File("DataRekapResepApolBPJS.csv");
                                 bw = new BufferedWriter(new FileWriter(f));
@@ -999,13 +999,13 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
         if(TabData.getSelectedIndex()==0){
             if(tbResep.getSelectedRow()!= -1){
                 if(ChkAccor.isSelected()==true){
-                    reply = JOptionPane.showConfirmDialog(rootPane, "Eeiiiiiits, udah yakin data No.SEP Apotek : "+tbResep.getValueAt(tbResep.getSelectedRow(),1).toString()+",\nNo.SEP Asal : "+tbResep.getValueAt(tbResep.getSelectedRow(),0).toString()+", No.Resep : "+tbResep.getValueAt(tbResep.getSelectedRow(),9).toString()+"\nmau dihapus beserta seluruh obatnya...?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+                    reply = JOptionPane.showConfirmDialog(rootPane, "Eeiiiiiits, udah yakin data No.SEP Apotek : "+tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString()+",\nNo.SEP Asal : "+tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),0).toString()+", No.Resep : "+tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),9).toString()+"\nmau dihapus beserta seluruh obatnya...?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
                     if (reply == JOptionPane.YES_OPTION) {
                         sukses=true;
                         for(i=0;i<tbDetailResep.getRowCount();i++){
                             try {
                                 HapusDetailResep(
-                                    tbResep.getValueAt(tbResep.getSelectedRow(),1).toString(),tbResep.getValueAt(tbResep.getSelectedRow(),9).toString().substring(tbResep.getValueAt(tbResep.getSelectedRow(),9).toString().length()-5),tbDetailResep.getValueAt(i,1).toString(),tbDetailResep.getValueAt(i,0).toString(),i
+                                    tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString(),tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),9).toString().substring(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),9).toString().length()-5),tabModeDetail.getValueAt(tbDetailResep.convertRowIndexToModel(i),1).toString(),tabModeDetail.getValueAt(tbDetailResep.convertRowIndexToModel(i),0).toString(),i
                                 );
                             }catch (Exception ex) {
                                 System.out.println("Notifikasi Bridging : "+ex);
@@ -1014,7 +1014,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
 
                         if(sukses==true){
                             try {
-                                nopiutang=tbResep.getValueAt(tbResep.getSelectedRow(),1).toString();
+                                nopiutang=tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString();
                                 HapusResep();
                             }catch (Exception ex) {
                                 System.out.println("Notifikasi Bridging : "+ex);
@@ -1170,8 +1170,8 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                         "where bridging_resep_apotek_bpjs_racikan.no_sep_apotek=? and bridging_resep_apotek_bpjs_racikan.no_resep=?"
                     );
                     try {
-                        ps.setString(1,tbResep.getValueAt(tbResep.getSelectedRow(),1).toString());
-                        ps.setString(2,tbResep.getValueAt(tbResep.getSelectedRow(),9).toString());
+                        ps.setString(1,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString());
+                        ps.setString(2,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),9).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModeDetail.addRow(new Object[]{
@@ -1200,8 +1200,8 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                         "where bridging_resep_apotek_bpjs_nonracikan.no_sep_apotek=? and bridging_resep_apotek_bpjs_nonracikan.no_resep=?"
                     );
                     try {
-                        ps.setString(1,tbResep.getValueAt(tbResep.getSelectedRow(),1).toString());
-                        ps.setString(2,tbResep.getValueAt(tbResep.getSelectedRow(),9).toString());
+                        ps.setString(1,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString());
+                        ps.setString(2,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),9).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModeDetail.addRow(new Object[]{
@@ -1334,7 +1334,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbResep.getRowCount());
     }
 
     private void tampil2() {
@@ -1437,7 +1437,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeRekap.getRowCount());
+        LCount.setText(""+tbRekapResep.getRowCount());
     }
 
     public JTable getTable(){
@@ -1556,7 +1556,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
             headers.add("x-signature", api.getHmac(utc));
             headers.add("user_key", koneksiDB.USERKEYAPIAPOTEKBPJS());
             URL = link+"/hapusresep";
-            requestJson ="{\"nosjp\":\""+tbResep.getValueAt(tbResep.getSelectedRow(),1).toString()+"\",\"refasalsjp\":\""+tbResep.getValueAt(tbResep.getSelectedRow(),0).toString()+"\",\"noresep\":\""+tbResep.getValueAt(tbResep.getSelectedRow(),9).toString().substring(tbResep.getValueAt(tbResep.getSelectedRow(),9).toString().length()-5)+"\"}";
+            requestJson ="{\"nosjp\":\""+tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString()+"\",\"refasalsjp\":\""+tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),0).toString()+"\",\"noresep\":\""+tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),9).toString().substring(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),9).toString().length()-5)+"\"}";
             System.out.println(URL);
             System.out.println("JSON Dikirim : "+requestJson);
             requestEntity = new HttpEntity(requestJson,headers);
@@ -1568,12 +1568,12 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                 sukses=false;
                 JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
             }else{
-                if(!tbResep.getValueAt(tbResep.getSelectedRow(),12).toString().equals("0. Tanpa Iterasi")){
+                if(!tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),12).toString().equals("0. Tanpa Iterasi")){
                     ps=koneksi.prepareStatement(
                         "select permintaan_resep_iterasi_bpjs.no_resep from permintaan_resep_iterasi_bpjs where permintaan_resep_iterasi_bpjs.no_resep_awal=?"
                     );
                     try {
-                        ps.setString(1,tbResep.getValueAt(tbResep.getSelectedRow(),9).toString());
+                        ps.setString(1,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),9).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             Sequel.meghapus("resep_obat","no_resep",rs.getString("no_resep"));
@@ -1589,9 +1589,9 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                         }
                     }
                 }
-                Sequel.meghapus("bridging_resep_apotek_bpjs","no_sep_apotek",tbResep.getValueAt(tbResep.getSelectedRow(),1).toString());
+                Sequel.meghapus("bridging_resep_apotek_bpjs","no_sep_apotek",tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString());
                 Valid.tabelKosong(tabModeDetail);
-                tabMode.removeRow(tbResep.getSelectedRow());
+                tabMode.removeRow(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()));
             }
         } catch (Exception e) {
             sukses=false;

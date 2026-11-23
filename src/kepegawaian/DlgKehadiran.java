@@ -409,23 +409,23 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                        for(int r=0;r<tbBangsal.getRowCount();r++){
+                        for(int r=0;r<tabMode.getRowCount();r++){
                                 Sequel.menyimpan("temporary","'"+r+"','"+
-                                                tbBangsal.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
-                                                tbBangsal.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
-                                                tbBangsal.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                                                tbBangsal.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
-                                                tbBangsal.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
-                                                tbBangsal.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
-                                                tbBangsal.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
-                                                tbBangsal.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
-                                                tbBangsal.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
-                                                tbBangsal.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
-                                                tbBangsal.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
-                                                tbBangsal.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
-                                                tbBangsal.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
-                                                tbBangsal.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
-                                                tbBangsal.getValueAt(r,14).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                                tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
+                                                tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,14).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
@@ -811,7 +811,7 @@ public final class DlgKehadiran extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbBangsal.getRowCount());
     }
 
     private  void loadTahun(){

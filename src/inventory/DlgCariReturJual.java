@@ -191,6 +191,7 @@ public class DlgCariReturJual extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbRetur.setSortable(false);
         tbRetur.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -795,13 +796,13 @@ public class DlgCariReturJual extends javax.swing.JDialog {
     }//GEN-LAST:event_TglRetur2KeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-        if(tbRetur.getValueAt(tbRetur.getSelectedRow(),0).toString().trim().equals("")){
+        if(tabMode.getValueAt(tbRetur.convertRowIndexToModel(tbRetur.getSelectedRow()),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"No.Faktur");
         }else{
             try {
                 ps=koneksi.prepareStatement("select no_retur_jual, kd_bangsal from returjual where no_retur_jual=?");
                 try {
-                    ps.setString(1,tbRetur.getValueAt(tbRetur.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbRetur.convertRowIndexToModel(tbRetur.getSelectedRow()),0).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         Sequel.AutoComitFalse();
@@ -854,7 +855,7 @@ public class DlgCariReturJual extends javax.swing.JDialog {
                         }
 
                         if(sukses==true){
-                            Sequel.queryu("delete from returjual where no_retur_jual='"+tbRetur.getValueAt(tbRetur.getSelectedRow(),0).toString()+"'");
+                            Sequel.queryu("delete from returjual where no_retur_jual='"+tabMode.getValueAt(tbRetur.convertRowIndexToModel(tbRetur.getSelectedRow()),0).toString()+"'");
                             Sequel.Commit();
                         }else{
                             sukses=false;

@@ -173,6 +173,7 @@ public class DapurCariHibah extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -738,13 +739,13 @@ public class DapurCariHibah extends javax.swing.JDialog {
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
         if(tbDokter.getSelectedRow()>-1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Faktur");
             }else{
             try {
                 pscaribeli=koneksi.prepareStatement("select no_hibah,totalhibah,tgl_hibah from dapur_hibah where no_hibah=?");
                 try {
-                    pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+                    pscaribeli.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
                     rs=pscaribeli.executeQuery();
                     if(rs.next()){
                         Sequel.AutoComitFalse();

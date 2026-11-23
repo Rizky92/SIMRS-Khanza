@@ -514,9 +514,9 @@ public final class PengumumanEPasien extends javax.swing.JDialog {
                     KdPetugas.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),Pengumuman.getText()
                 })==true){
                     tabMode.addRow(new Object[]{
-                        (tabMode.getRowCount()+1)+"",KdPetugas.getText(),NmPetugas.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),Pengumuman.getText()
+                        (tbObat.getRowCount()+1)+"",KdPetugas.getText(),NmPetugas.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),Pengumuman.getText()
                     });
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText(""+tbObat.getRowCount());
                     emptTeks();
             }
         }
@@ -545,9 +545,9 @@ public final class PengumumanEPasien extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()> -1){
             if(Sequel.queryu2tf("delete from pengumuman_epasien where nik=? and tanggal=?",2,new String[]{
-                    tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString()
                 })==true){
-                tabMode.removeRow(tbObat.getSelectedRow());
+                tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
                 emptTeks();
             }
         }
@@ -570,12 +570,12 @@ public final class PengumumanEPasien extends javax.swing.JDialog {
             if(tbObat.getSelectedRow()> -1){
                 if(Sequel.mengedittf("pengumuman_epasien","nik=? and tanggal=?","nik=?,tanggal=?,pengumuman=?",5,new String[]{
                         KdPetugas.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),
-                        Pengumuman.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()
+                        Pengumuman.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString()
                     })==true){
-                        tbObat.setValueAt(KdPetugas.getText(),tbObat.getSelectedRow(),1);
-                        tbObat.setValueAt(NmPetugas.getText(),tbObat.getSelectedRow(),2);
-                        tbObat.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),tbObat.getSelectedRow(),3);
-                        tbObat.setValueAt(Pengumuman.getText(),tbObat.getSelectedRow(),3);
+                        tabMode.setValueAt(KdPetugas.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1);
+                        tabMode.setValueAt(NmPetugas.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2);
+                        tabMode.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3);
+                        tabMode.setValueAt(Pengumuman.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3);
                         emptTeks();
                 }
             }
@@ -704,7 +704,7 @@ public final class PengumumanEPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -760,7 +760,7 @@ public final class PengumumanEPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void tbObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -850,6 +850,7 @@ public final class PengumumanEPasien extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -885,7 +886,8 @@ public final class PengumumanEPasien extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
+        tbObat.resumeSorting();
     }
 
     public void emptTeks() {
@@ -897,10 +899,10 @@ public final class PengumumanEPasien extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            Valid.SetTgl2(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Pengumuman.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
+            KdPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            NmPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            Valid.SetTgl2(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            Pengumuman.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
         }
     }
 

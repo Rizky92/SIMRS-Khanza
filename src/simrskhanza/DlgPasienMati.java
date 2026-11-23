@@ -927,7 +927,7 @@ public class DlgPasienMati extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbMatiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMatiMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbMati.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1044,7 +1044,7 @@ public class DlgPasienMati extends javax.swing.JDialog {
     }//GEN-LAST:event_TKtgKeyPressed
 
     private void tbMatiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbMatiKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbMati.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1191,6 +1191,7 @@ public class DlgPasienMati extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbMati.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select pasien_mati.tanggal,pasien_mati.jam,pasien_mati.no_rkm_medis,pasien.nm_pasien, "+
@@ -1234,8 +1235,9 @@ public class DlgPasienMati extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        int b=tabMode.getRowCount();
+        int b=tbMati.getRowCount();
         LCount.setText(""+b);
+        tbMati.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1255,20 +1257,20 @@ public class DlgPasienMati extends javax.swing.JDialog {
 
     private void getData() {
         if(tbMati.getSelectedRow()!= -1){
-            cmbJam.setSelectedItem(tbMati.getValueAt(tbMati.getSelectedRow(),1).toString().substring(0,2));
-            cmbMnt.setSelectedItem(tbMati.getValueAt(tbMati.getSelectedRow(),1).toString().substring(3,5));
-            cmbDtk.setSelectedItem(tbMati.getValueAt(tbMati.getSelectedRow(),1).toString().substring(6,8));
-            TNoRM.setText(tbMati.getValueAt(tbMati.getSelectedRow(),2).toString());
-            TPasien.setText(tbMati.getValueAt(tbMati.getSelectedRow(),3).toString());
-            TKtg.setText(tbMati.getValueAt(tbMati.getSelectedRow(),10).toString());
-            Valid.SetTgl(DTPTgl,tbMati.getValueAt(tbMati.getSelectedRow(),0).toString());
-            tmptmeninggal.setSelectedItem(tbMati.getValueAt(tbMati.getSelectedRow(),11).toString());
-            icd1.setText(tbMati.getValueAt(tbMati.getSelectedRow(),12).toString());
-            icd2.setText(tbMati.getValueAt(tbMati.getSelectedRow(),13).toString());
-            icd3.setText(tbMati.getValueAt(tbMati.getSelectedRow(),14).toString());
-            icd4.setText(tbMati.getValueAt(tbMati.getSelectedRow(),15).toString());
-            KdDokter.setText(tbMati.getValueAt(tbMati.getSelectedRow(),16).toString());
-            NmDokter.setText(tbMati.getValueAt(tbMati.getSelectedRow(),17).toString());
+            cmbJam.setSelectedItem(tabMode.getValueAt(tbMati.convertRowIndexToModel(tbMati.getSelectedRow()),1).toString().substring(0,2));
+            cmbMnt.setSelectedItem(tabMode.getValueAt(tbMati.convertRowIndexToModel(tbMati.getSelectedRow()),1).toString().substring(3,5));
+            cmbDtk.setSelectedItem(tabMode.getValueAt(tbMati.convertRowIndexToModel(tbMati.getSelectedRow()),1).toString().substring(6,8));
+            TNoRM.setText(tabMode.getValueAt(tbMati.convertRowIndexToModel(tbMati.getSelectedRow()),2).toString());
+            TPasien.setText(tabMode.getValueAt(tbMati.convertRowIndexToModel(tbMati.getSelectedRow()),3).toString());
+            TKtg.setText(tabMode.getValueAt(tbMati.convertRowIndexToModel(tbMati.getSelectedRow()),10).toString());
+            Valid.SetTgl(DTPTgl,tabMode.getValueAt(tbMati.convertRowIndexToModel(tbMati.getSelectedRow()),0).toString());
+            tmptmeninggal.setSelectedItem(tabMode.getValueAt(tbMati.convertRowIndexToModel(tbMati.getSelectedRow()),11).toString());
+            icd1.setText(tabMode.getValueAt(tbMati.convertRowIndexToModel(tbMati.getSelectedRow()),12).toString());
+            icd2.setText(tabMode.getValueAt(tbMati.convertRowIndexToModel(tbMati.getSelectedRow()),13).toString());
+            icd3.setText(tabMode.getValueAt(tbMati.convertRowIndexToModel(tbMati.getSelectedRow()),14).toString());
+            icd4.setText(tabMode.getValueAt(tbMati.convertRowIndexToModel(tbMati.getSelectedRow()),15).toString());
+            KdDokter.setText(tabMode.getValueAt(tbMati.convertRowIndexToModel(tbMati.getSelectedRow()),16).toString());
+            NmDokter.setText(tabMode.getValueAt(tbMati.convertRowIndexToModel(tbMati.getSelectedRow()),17).toString());
         }
     }
 

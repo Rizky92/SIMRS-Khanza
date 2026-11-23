@@ -201,6 +201,7 @@ public final class InventarisPerbaikan extends javax.swing.JDialog {
         Scroll.setOpaque(true);
 
         tbJnsPerawatan.setAutoCreateRowSorter(false);
+        tbJnsPerawatan.setSortable(false);
         tbJnsPerawatan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbJnsPerawatan.setName("tbJnsPerawatan"); // NOI18N
         tbJnsPerawatan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -754,7 +755,7 @@ public final class InventarisPerbaikan extends javax.swing.JDialog {
                 if(Sequel.mengedittf("perbaikan_inventaris","no_permintaan=?","no_permintaan=?,tanggal=?,uraian_kegiatan=?,nip=?,pelaksana=?,biaya=?,keterangan=?,status=?",9,new String[]{
                         NoPermintaan.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),UraianKegiatan.getText(),NIP.getText(),
                         Pelaksana.getSelectedItem().toString(),Biaya.getText(),Keterangan.getText(),Status.getSelectedItem().toString(),
-                        tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                        tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString()
                     })==true){
                         if(Status.getSelectedItem().toString().equals("Bisa Diperbaiki")){
                             Sequel.mengedit("inventaris","no_inventaris='"+NoInventaris.getText()+"'","status_barang='Ada'");
@@ -900,7 +901,7 @@ public final class InventarisPerbaikan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -909,7 +910,7 @@ public final class InventarisPerbaikan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -999,7 +1000,7 @@ public final class InventarisPerbaikan extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRuang1ActionPerformed
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1245,7 +1246,7 @@ public final class InventarisPerbaikan extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(tabMode.getRowCount()+"");
+            LCount.setText(tbJnsPerawatan.getRowCount()+"");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
@@ -1268,17 +1269,17 @@ public final class InventarisPerbaikan extends javax.swing.JDialog {
 
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
-             NoPermintaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-             NoInventaris.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-             NamaBarang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()+" "+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-             NIP.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
-             NamaPetugas.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
-             UraianKegiatan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
-             Pelaksana.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString());
-             Biaya.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString());
-             Keterangan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString());
-             Status.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),12).toString());
-             Valid.SetTgl2(Tanggal,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString());
+             NoPermintaan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+             NoInventaris.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+             NamaBarang.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString()+" "+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+             NIP.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5).toString());
+             NamaPetugas.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),6).toString());
+             UraianKegiatan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7).toString());
+             Pelaksana.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),9).toString());
+             Biaya.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),10).toString());
+             Keterangan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),11).toString());
+             Status.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),12).toString());
+             Valid.SetTgl2(Tanggal,tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),8).toString());
         }
     }
 

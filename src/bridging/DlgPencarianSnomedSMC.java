@@ -72,7 +72,7 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
         tbKamar.setModel(tabMode);
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbKamar.getColumnCount(); i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(70);
@@ -94,7 +94,7 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
         tbKamar1.setModel(tabModeDetail);
         tbKamar1.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < tabModeDetail.getColumnCount(); i++) {
+        for (int i = 0; i < tbKamar1.getColumnCount(); i++) {
             TableColumn column = tbKamar1.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(250);
@@ -432,13 +432,13 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void ppCariTurunanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCariTurunanActionPerformed
-        TParameter.setText("ecl/<<" + tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString() + " |" + tbKamar.getValueAt(tbKamar.getSelectedRow(), 2).toString() + "|");
+        TParameter.setText("ecl/<<" + tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString() + " |" + tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 2).toString() + "|");
         TCari.setText("");
         tampilSmc();
     }//GEN-LAST:event_ppCariTurunanActionPerformed
 
     private void ppCariMemberRefsetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCariMemberRefsetActionPerformed
-        TParameter.setText("refset/" + tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString());
+        TParameter.setText("refset/" + tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString());
         TCari.setText("");
         tampilSmc();
     }//GEN-LAST:event_ppCariMemberRefsetActionPerformed
@@ -468,7 +468,7 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluar1ActionPerformed
 
     private void BtnLihatTurunanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLihatTurunanActionPerformed
-        TParameter.setText("ecl/<!" + tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString() + " |" + tbKamar.getValueAt(tbKamar.getSelectedRow(), 2).toString() + "|");
+        TParameter.setText("ecl/<!" + tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString() + " |" + tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 2).toString() + "|");
         TCari.setText("");
         tampilSmc();
         Valid.tabelKosong(tabModeDetail);
@@ -531,11 +531,12 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
             fetchNext = filter.equals(lastFilter) && parameter.equals(lastParameter);
 
             if (!fetchNext) {
+                tbKamar.suspendSorting();
                 Valid.tabelKosongSmc(tabMode);
                 LCount.setText("0 / 0");
             }
 
-            final int offset = tabMode.getRowCount();
+            final int offset = tbKamar.getRowCount();
 
             new SwingWorker<Void, Object[]>() {
                 private int totalRecords = 0;
@@ -588,9 +589,10 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + " / " + totalRecords);
+                    LCount.setText(tbKamar.getRowCount() + " / " + totalRecords);
                     DlgPencarianSnomedSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbKamar.resumeSorting();
                 }
             }.execute();
         }
@@ -601,7 +603,7 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
             ceksukses = true;
             WindowDetailKode.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-            final String code = tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString();
+            final String code = tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString();
 
             new SwingWorker<Void, Object[]>() {
                 private final ObjectMapper mapper = new ObjectMapper();

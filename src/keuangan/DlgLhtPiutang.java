@@ -218,6 +218,7 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setSortable(false);
         tbBangsal.setComponentPopupMenu(jPopupMenu1);
         tbBangsal.setName("tbBangsal"); // NOI18N
         tbBangsal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -523,19 +524,19 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(tbBangsal.getSelectedRow()!= -1){
                 if(evt.getClickCount()==2){
                     int kolom=tbBangsal.getSelectedColumn();
                     if(kolom==1){
                         if(akses.getbayar_piutang()==true){
-                            if(!tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().equals("TOTAL")){
+                            if(!tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString().equals("TOTAL")){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                 DlgBayarPiutang bayarpiutang=new DlgBayarPiutang(null,false);
                                 bayarpiutang.emptTeks();
-                                String norm=Sequel.cariIsi("select piutang_pasien.no_rkm_medis from piutang_pasien where piutang_pasien.no_rawat='"+tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString() +"'");
+                                String norm=Sequel.cariIsi("select piutang_pasien.no_rkm_medis from piutang_pasien where piutang_pasien.no_rawat='"+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString() +"'");
                                 String nama=Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+norm+"'");
-                                bayarpiutang.setData(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString(),norm,nama);
+                                bayarpiutang.setData(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString(),norm,nama);
                                 bayarpiutang.tampil2();
                                 bayarpiutang.setSize(this.getWidth()-20,this.getHeight()-20);
                                 bayarpiutang.setLocationRelativeTo(this);
@@ -552,19 +553,19 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(tbBangsal.getSelectedRow()!= -1){
                 if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                     int kolom=tbBangsal.getSelectedColumn();
                     if(kolom==1){
                         if(akses.getbayar_piutang()==true){
-                            if(!tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().equals("TOTAL")){
+                            if(!tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString().equals("TOTAL")){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                 DlgBayarPiutang bayarpiutang=new DlgBayarPiutang(null,false);
                                 bayarpiutang.emptTeks();
-                                String norm=Sequel.cariIsi("select piutang_pasien.no_rkm_medis from piutang_pasien where piutang_pasien.no_rawat='"+tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString()+"'");
+                                String norm=Sequel.cariIsi("select piutang_pasien.no_rkm_medis from piutang_pasien where piutang_pasien.no_rawat='"+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString()+"'");
                                 String nama=Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+norm+"'");
-                                bayarpiutang.setData(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString(),norm,nama);
+                                bayarpiutang.setData(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString(),norm,nama);
                                 bayarpiutang.tampil2();
                                 bayarpiutang.setSize(this.getWidth()-20,this.getHeight()-20);
                                 bayarpiutang.setLocationRelativeTo(this);
@@ -603,17 +604,17 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailPiutangActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
             if(tbBangsal.getSelectedRow()!= -1){
-                if(!tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().equals("TOTAL")){
+                if(!tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString().equals("TOTAL")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    status=Sequel.cariIsi("select reg_periksa.status_lanjut from reg_periksa where reg_periksa.no_rawat=?",tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
+                    status=Sequel.cariIsi("select reg_periksa.status_lanjut from reg_periksa where reg_periksa.no_rawat=?",tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
                     if(status.equals("Ralan")){
                         DlgBilingRalan billing=new DlgBilingRalan(null,false);
-                        billing.TNoRw.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
+                        billing.TNoRw.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
                         billing.isCek();
                         billing.isRawat();
                         if(Sequel.cariInteger("select count(piutang_pasien.no_rawat) from piutang_pasien where piutang_pasien.no_rawat=?",billing.TNoRw.getText())>0){
@@ -624,7 +625,7 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
                         billing.setVisible(true);
                     }else if(status.equals("Ranap")){
                         DlgBilingRanap billing=new DlgBilingRanap(null,false);
-                        billing.TNoRw.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
+                        billing.TNoRw.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
                         billing.isCek();
                         billing.isRawat();
                         billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -640,18 +641,18 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_MnDetailPiutangActionPerformed
 
     private void MnDetailCicilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailCicilanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
             if(tbBangsal.getSelectedRow()!= -1){
-                if(!tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().equals("TOTAL")){
+                if(!tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString().equals("TOTAL")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     DlgBayarPiutang bayarpiutang=new DlgBayarPiutang(null,true);
                     bayarpiutang.emptTeks();
-                    String norm=Sequel.cariIsi("select piutang_pasien.no_rkm_medis from piutang_pasien where piutang_pasien.no_rawat='"+tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString()+"'");
+                    String norm=Sequel.cariIsi("select piutang_pasien.no_rkm_medis from piutang_pasien where piutang_pasien.no_rawat='"+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString()+"'");
                     String nama=Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+norm+"'");
-                    bayarpiutang.setData(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString(),norm,nama);
+                    bayarpiutang.setData(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString(),norm,nama);
                     bayarpiutang.tampil2();
                     bayarpiutang.isCek();
                     bayarpiutang.setSize(this.getWidth()-20,this.getHeight()-20);
@@ -854,8 +855,8 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
                 }
             }
 
-            LCount2.setText(""+tabMode.getRowCount());
-            if(tabMode.getRowCount()>0){
+            LCount2.setText(""+tbBangsal.getRowCount());
+            if(tbBangsal.getRowCount()>0){
                 tabMode.addRow(new Object[]{
                     "TOTAL",":","","",totalpiutang,totaluangmuka,totalcicilan,totaldiskon,totaltidakterbayar,sisapiutang,"",""
                 });

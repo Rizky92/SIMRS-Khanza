@@ -2333,10 +2333,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbSuhu,i);
-                    if(tbSuhu.getValueAt(i,0).toString().equals("true")&&(!tbSuhu.getValueAt(i,5).toString().equals(""))&&(!tbSuhu.getValueAt(i,12).toString().equals(""))&&tbSuhu.getValueAt(i,15).toString().equals("")){
+                    if(tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),12).toString().equals(""))&&tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),15).toString().equals("")){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbSuhu.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbSuhu.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -2381,13 +2381,13 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbSuhu.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Suhu Badan di "+tbSuhu.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbSuhu.getValueAt(i,4).toString()+" Pada Tanggal "+tbSuhu.getValueAt(i,13).toString()+" Jam "+tbSuhu.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Suhu Badan di "+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbSuhu.getValueAt(i,13).toString()+"T"+tbSuhu.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbSuhu.getValueAt(i,13).toString()+"T"+tbSuhu.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),13).toString()+"T"+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),13).toString()+"T"+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbSuhu.getValueAt(i,10).toString().replaceAll(",",".").replaceAll("-", "0")+"," +
+                                                "\"value\": "+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),10).toString().replaceAll(",",".").replaceAll("-", "0")+"," +
                                                 "\"unit\": \"degree Celsius\"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"Cel\"" +
@@ -2402,7 +2402,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 response = root.path("id");
                                 if(!response.asText().equals("")){
                                     if(Sequel.menyimpantf2("satu_sehat_observationttvsuhu","?,?,?,?,?","Observation Suhu",5,new String[]{
-                                        tbSuhu.getValueAt(i,2).toString(),tbSuhu.getValueAt(i,13).toString(),tbSuhu.getValueAt(i,14).toString(),tbSuhu.getValueAt(i,7).toString(),response.asText()
+                                        tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),2).toString(),tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),13).toString(),tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),14).toString(),tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),7).toString(),response.asText()
                                     })==true){
                                         pengirim.setValueAt(tbSuhu,response.asText(),i,15);
                                         pengirim.setValueAt(tbSuhu,false,i,0);
@@ -2425,10 +2425,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbRespirasi,i);
-                    if(tbRespirasi.getValueAt(i,0).toString().equals("true")&&(!tbRespirasi.getValueAt(i,5).toString().equals(""))&&(!tbRespirasi.getValueAt(i,12).toString().equals(""))&&tbRespirasi.getValueAt(i,15).toString().equals("")){
+                    if(tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),12).toString().equals(""))&&tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),15).toString().equals("")){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbRespirasi.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbRespirasi.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -2473,13 +2473,13 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbRespirasi.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Respirasi di "+tbRespirasi.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbRespirasi.getValueAt(i,4).toString()+" Pada Tanggal "+tbRespirasi.getValueAt(i,13).toString()+" Jam "+tbRespirasi.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Respirasi di "+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbRespirasi.getValueAt(i,13).toString()+"T"+tbRespirasi.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbRespirasi.getValueAt(i,13).toString()+"T"+tbRespirasi.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),13).toString()+"T"+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),13).toString()+"T"+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbRespirasi.getValueAt(i,10).toString().replaceAll(",",".")+"," +
+                                                "\"value\": "+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),10).toString().replaceAll(",",".")+"," +
                                                 "\"unit\": \"breaths/minute\"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"/min\"" +
@@ -2494,7 +2494,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 response = root.path("id");
                                 if(!response.asText().equals("")){
                                     if(Sequel.menyimpantf2("satu_sehat_observationttvrespirasi","?,?,?,?,?","Observation Respirasi",5,new String[]{
-                                        tbRespirasi.getValueAt(i,2).toString(),tbRespirasi.getValueAt(i,13).toString(),tbRespirasi.getValueAt(i,14).toString(),tbRespirasi.getValueAt(i,7).toString(),response.asText()
+                                        tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),2).toString(),tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),13).toString(),tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),14).toString(),tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),7).toString(),response.asText()
                                     })==true){
                                         pengirim.setValueAt(tbRespirasi,response.asText(),i,15);
                                         pengirim.setValueAt(tbRespirasi,false,i,0);
@@ -2517,10 +2517,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbNadi,i);
-                    if(tbNadi.getValueAt(i,0).toString().equals("true")&&(!tbNadi.getValueAt(i,5).toString().equals(""))&&(!tbNadi.getValueAt(i,12).toString().equals(""))&&tbNadi.getValueAt(i,15).toString().equals("")){
+                    if(tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),12).toString().equals(""))&&tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),15).toString().equals("")){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbNadi.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbNadi.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -2565,13 +2565,13 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbNadi.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Nadi di "+tbNadi.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbNadi.getValueAt(i,4).toString()+" Pada Tanggal "+tbNadi.getValueAt(i,13).toString()+" Jam "+tbNadi.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Nadi di "+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbNadi.getValueAt(i,13).toString()+"T"+tbNadi.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbNadi.getValueAt(i,13).toString()+"T"+tbNadi.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),13).toString()+"T"+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),13).toString()+"T"+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbNadi.getValueAt(i,10).toString().replaceAll(",",".")+"," +
+                                                "\"value\": "+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),10).toString().replaceAll(",",".")+"," +
                                                 "\"unit\": \"breaths/minute\"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"/min\"" +
@@ -2586,7 +2586,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 response = root.path("id");
                                 if(!response.asText().equals("")){
                                     if(Sequel.menyimpantf2("satu_sehat_observationttvnadi","?,?,?,?,?","Observation Nadi",5,new String[]{
-                                        tbNadi.getValueAt(i,2).toString(),tbNadi.getValueAt(i,13).toString(),tbNadi.getValueAt(i,14).toString(),tbNadi.getValueAt(i,7).toString(),response.asText()
+                                        tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),2).toString(),tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),13).toString(),tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),14).toString(),tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),7).toString(),response.asText()
                                     })==true){
                                         pengirim.setValueAt(tbNadi,response.asText(),i,15);
                                         pengirim.setValueAt(tbNadi,false,i,0);
@@ -2609,10 +2609,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbSpO2,i);
-                    if(tbSpO2.getValueAt(i,0).toString().equals("true")&&(!tbSpO2.getValueAt(i,5).toString().equals(""))&&(!tbSpO2.getValueAt(i,12).toString().equals(""))&&tbSpO2.getValueAt(i,15).toString().equals("")){
+                    if(tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),12).toString().equals(""))&&tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),15).toString().equals("")){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbSpO2.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbSpO2.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -2657,13 +2657,13 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbSpO2.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik SpO2  di "+tbSpO2.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien"+tbSpO2.getValueAt(i,4).toString()+" Pada Tanggal "+tbSpO2.getValueAt(i,13).toString()+" Jam "+tbSpO2.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik SpO2  di "+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien"+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbSpO2.getValueAt(i,13).toString()+"T"+tbSpO2.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbSpO2.getValueAt(i,13).toString()+"T"+tbSpO2.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),13).toString()+"T"+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),13).toString()+"T"+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbSpO2.getValueAt(i,10).toString().replaceAll(",",".")+"," +
+                                                "\"value\": "+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),10).toString().replaceAll(",",".")+"," +
                                                 "\"unit\": \"percent saturation\"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"%\"" +
@@ -2678,7 +2678,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 response = root.path("id");
                                 if(!response.asText().equals("")){
                                     if(Sequel.menyimpantf2("satu_sehat_observationttvspo2","?,?,?,?,?","Observation SpO2",5,new String[]{
-                                        tbSpO2.getValueAt(i,2).toString(),tbSpO2.getValueAt(i,13).toString(),tbSpO2.getValueAt(i,14).toString(),tbSpO2.getValueAt(i,7).toString(),response.asText()
+                                        tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),2).toString(),tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),13).toString(),tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),14).toString(),tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),7).toString(),response.asText()
                                     })==true){
                                         pengirim.setValueAt(tbSpO2,response.asText(),i,15);
                                         pengirim.setValueAt(tbSpO2,false,i,0);
@@ -2701,10 +2701,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbGCS,i);
-                    if(tbGCS.getValueAt(i,0).toString().equals("true")&&(!tbGCS.getValueAt(i,5).toString().equals(""))&&(!tbGCS.getValueAt(i,12).toString().equals(""))&&tbGCS.getValueAt(i,15).toString().equals("")){
+                    if(tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),12).toString().equals(""))&&tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),15).toString().equals("")){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbGCS.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbGCS.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -2749,13 +2749,13 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbGCS.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik GCS di "+tbGCS.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbGCS.getValueAt(i,4).toString()+" Pada Tanggal "+tbGCS.getValueAt(i,13).toString()+" Jam "+tbGCS.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik GCS di "+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbGCS.getValueAt(i,13).toString()+"T"+tbGCS.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbGCS.getValueAt(i,13).toString()+"T"+tbGCS.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),13).toString()+"T"+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),13).toString()+"T"+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbGCS.getValueAt(i,10).toString().replaceAll(",",".")+"," +
+                                                "\"value\": "+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),10).toString().replaceAll(",",".")+"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"{score}\"" +
                                             "}" +
@@ -2769,7 +2769,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 response = root.path("id");
                                 if(!response.asText().equals("")){
                                     if(Sequel.menyimpantf("satu_sehat_observationttvgcs","?,?,?,?,?","Observation GCS",5,new String[]{
-                                        tbGCS.getValueAt(i,2).toString(),tbGCS.getValueAt(i,13).toString(),tbGCS.getValueAt(i,14).toString(),tbGCS.getValueAt(i,7).toString(),response.asText()
+                                        tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),2).toString(),tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),13).toString(),tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),14).toString(),tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),7).toString(),response.asText()
                                     })==true){
                                         pengirim.setValueAt(tbGCS,response.asText(),i,15);
                                         pengirim.setValueAt(tbGCS,false,i,0);
@@ -2792,10 +2792,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbKesadaran,i);
-                    if(tbKesadaran.getValueAt(i,0).toString().equals("true")&&(!tbKesadaran.getValueAt(i,5).toString().equals(""))&&(!tbKesadaran.getValueAt(i,12).toString().equals(""))&&tbKesadaran.getValueAt(i,15).toString().equals("")){
+                    if(tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),12).toString().equals(""))&&tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),15).toString().equals("")){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbKesadaran.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbKesadaran.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -2840,13 +2840,13 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbKesadaran.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Kesadaran di "+tbKesadaran.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbKesadaran.getValueAt(i,4).toString()+" Pada Tanggal "+tbKesadaran.getValueAt(i,13).toString()+" Jam "+tbKesadaran.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Kesadaran di "+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbKesadaran.getValueAt(i,13).toString()+"T"+tbKesadaran.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbKesadaran.getValueAt(i,13).toString()+"T"+tbKesadaran.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),13).toString()+"T"+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),13).toString()+"T"+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueCodeableConcept\": {" +
-                                                "\"text\": \""+tbKesadaran.getValueAt(i,10).toString().replaceAll("Compos Mentis","Alert").replaceAll("Somnolence","Voice").replaceAll("Sopor","Pain").replaceAll("Coma","Unresponsive")+"\"" +
+                                                "\"text\": \""+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),10).toString().replaceAll("Compos Mentis","Alert").replaceAll("Somnolence","Voice").replaceAll("Sopor","Pain").replaceAll("Coma","Unresponsive")+"\"" +
                                             "}" +
                                        "}";
                                 System.out.println("URL : "+link+"/Observation");
@@ -2858,7 +2858,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 response = root.path("id");
                                 if(!response.asText().equals("")){
                                     if(Sequel.menyimpantf2("satu_sehat_observationttvkesadaran","?,?,?,?,?","Observation Kesadaran",5,new String[]{
-                                        tbKesadaran.getValueAt(i,2).toString(),tbKesadaran.getValueAt(i,13).toString(),tbKesadaran.getValueAt(i,14).toString(),tbKesadaran.getValueAt(i,7).toString(),response.asText()
+                                        tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),2).toString(),tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),13).toString(),tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),14).toString(),tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),7).toString(),response.asText()
                                     })==true){
                                         pengirim.setValueAt(tbKesadaran,response.asText(),i,15);
                                         pengirim.setValueAt(tbKesadaran,false,i,0);
@@ -2881,10 +2881,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbTensi,i);
-                    if(tbTensi.getValueAt(i,0).toString().equals("true")&&(!tbTensi.getValueAt(i,5).toString().equals(""))&&(!tbTensi.getValueAt(i,12).toString().equals(""))&&tbTensi.getValueAt(i,15).toString().equals("")){
+                    if(tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),12).toString().equals(""))&&tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),15).toString().equals("")){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbTensi.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbTensi.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -2893,7 +2893,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
                                 continue;
                             }
-                            arrSplit = tbTensi.getValueAt(i,10).toString().split("/");
+                            arrSplit = tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),10).toString().split("/");
                             sistole="0";
                             try {
                                 if(!arrSplit[0].equals("")){
@@ -2947,11 +2947,11 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbTensi.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Tensi di "+tbTensi.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbTensi.getValueAt(i,4).toString()+" Pada Tanggal "+tbTensi.getValueAt(i,13).toString()+" Jam "+tbTensi.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Tensi di "+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbTensi.getValueAt(i,13).toString()+"T"+tbTensi.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbTensi.getValueAt(i,13).toString()+"T"+tbTensi.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),13).toString()+"T"+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),13).toString()+"T"+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"component\" : ["+
                                                 "{" +
                                                     "\"code\" : {" +
@@ -2998,7 +2998,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 response = root.path("id");
                                 if(!response.asText().equals("")){
                                     if(Sequel.menyimpantf2("satu_sehat_observationttvtensi","?,?,?,?,?","Observation Tensi",5,new String[]{
-                                        tbTensi.getValueAt(i,2).toString(),tbTensi.getValueAt(i,13).toString(),tbTensi.getValueAt(i,14).toString(),tbTensi.getValueAt(i,7).toString(),response.asText()
+                                        tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),2).toString(),tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),13).toString(),tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),14).toString(),tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),7).toString(),response.asText()
                                     })==true){
                                         pengirim.setValueAt(tbTensi,response.asText(),i,15);
                                         pengirim.setValueAt(tbTensi,false,i,0);
@@ -3019,10 +3019,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbTB,i);
-                    if(tbTB.getValueAt(i,0).toString().equals("true")&&(!tbTB.getValueAt(i,5).toString().equals(""))&&(!tbTB.getValueAt(i,12).toString().equals(""))&&tbTB.getValueAt(i,15).toString().equals("")){
+                    if(tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),12).toString().equals(""))&&tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),15).toString().equals("")){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbTB.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbTB.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -3067,13 +3067,13 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbTB.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Tinggi Badan di "+tbTB.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbTB.getValueAt(i,4).toString()+" Pada Tanggal "+tbTB.getValueAt(i,13).toString()+" Jam "+tbTB.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Tinggi Badan di "+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbTB.getValueAt(i,13).toString()+"T"+tbTB.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbTB.getValueAt(i,13).toString()+"T"+tbTB.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),13).toString()+"T"+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),13).toString()+"T"+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbTB.getValueAt(i,10).toString().replaceAll(",",".")+"," +
+                                                "\"value\": "+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),10).toString().replaceAll(",",".")+"," +
                                                 "\"unit\": \"centimeter\"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"cm\"" +
@@ -3088,7 +3088,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 response = root.path("id");
                                 if(!response.asText().equals("")){
                                     if(Sequel.menyimpantf2("satu_sehat_observationttvtb","?,?,?,?,?","Observation TB",5,new String[]{
-                                        tbTB.getValueAt(i,2).toString(),tbTB.getValueAt(i,13).toString(),tbTB.getValueAt(i,14).toString(),tbTB.getValueAt(i,7).toString(),response.asText()
+                                        tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),2).toString(),tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),13).toString(),tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),14).toString(),tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),7).toString(),response.asText()
                                     })==true){
                                         pengirim.setValueAt(tbTB,response.asText(),i,15);
                                         pengirim.setValueAt(tbTB,false,i,0);
@@ -3109,10 +3109,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbBB,i);
-                    if(tbBB.getValueAt(i,0).toString().equals("true")&&(!tbBB.getValueAt(i,5).toString().equals(""))&&(!tbBB.getValueAt(i,12).toString().equals(""))&&tbBB.getValueAt(i,15).toString().equals("")){
+                    if(tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),12).toString().equals(""))&&tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),15).toString().equals("")){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbBB.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbBB.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -3157,13 +3157,13 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbBB.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Berat Badan di "+tbBB.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbBB.getValueAt(i,4).toString()+" Pada Tanggal "+tbBB.getValueAt(i,13).toString()+" Jam "+tbBB.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Berat Badan di "+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbBB.getValueAt(i,13).toString()+"T"+tbBB.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbBB.getValueAt(i,13).toString()+"T"+tbBB.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),13).toString()+"T"+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),13).toString()+"T"+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbBB.getValueAt(i,10).toString().replaceAll(",",".")+"," +
+                                                "\"value\": "+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),10).toString().replaceAll(",",".")+"," +
                                                 "\"unit\": \"kilogram\"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"kg\"" +
@@ -3178,7 +3178,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 response = root.path("id");
                                 if(!response.asText().equals("")){
                                     if(Sequel.menyimpantf2("satu_sehat_observationttvbb","?,?,?,?,?","Observation BB",5,new String[]{
-                                        tbBB.getValueAt(i,2).toString(),tbBB.getValueAt(i,13).toString(),tbBB.getValueAt(i,14).toString(),tbBB.getValueAt(i,7).toString(),response.asText()
+                                        tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),2).toString(),tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),13).toString(),tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),14).toString(),tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),7).toString(),response.asText()
                                     })==true){
                                         pengirim.setValueAt(tbBB,response.asText(),i,15);
                                         pengirim.setValueAt(tbBB,false,i,0);
@@ -3201,10 +3201,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbLP,i);
-                    if(tbLP.getValueAt(i,0).toString().equals("true")&&(!tbLP.getValueAt(i,5).toString().equals(""))&&(!tbLP.getValueAt(i,12).toString().equals(""))&&tbLP.getValueAt(i,15).toString().equals("")){
+                    if(tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),12).toString().equals(""))&&tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),15).toString().equals("")){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbLP.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbLP.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -3249,13 +3249,13 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbLP.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Lingkar Perut di "+tbLP.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbLP.getValueAt(i,4).toString()+" Pada Tanggal "+tbLP.getValueAt(i,13).toString()+" Jam "+tbLP.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Lingkar Perut di "+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbLP.getValueAt(i,13).toString()+"T"+tbLP.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbLP.getValueAt(i,13).toString()+"T"+tbLP.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),13).toString()+"T"+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),13).toString()+"T"+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbLP.getValueAt(i,10).toString().replaceAll(",",".")+"," +
+                                                "\"value\": "+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),10).toString().replaceAll(",",".")+"," +
                                                 "\"unit\": \"centimeter\"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"cm\"" +
@@ -3270,7 +3270,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 response = root.path("id");
                                 if(!response.asText().equals("")){
                                     if(Sequel.menyimpantf2("satu_sehat_observationttvlp","?,?,?,?,?","Observation LP",5,new String[]{
-                                        tbLP.getValueAt(i,2).toString(),tbLP.getValueAt(i,13).toString(),tbLP.getValueAt(i,14).toString(),tbLP.getValueAt(i,7).toString(),response.asText()
+                                        tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),2).toString(),tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),13).toString(),tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),14).toString(),tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),7).toString(),response.asText()
                                     })==true){
                                         pengirim.setValueAt(tbLP,response.asText(),i,15);
                                         pengirim.setValueAt(tbLP,false,i,0);
@@ -3294,43 +3294,43 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         switch (TabRawat.getSelectedIndex()) {
             case 0:
                 for(i=0;i<tbSuhu.getRowCount();i++){
-                    tbSuhu.setValueAt(true,i,0);
+                    tabModeSuhu.setValueAt(true,tbSuhu.convertRowIndexToModel(i),0);
                 }   break;
             case 1:
                 for(i=0;i<tbRespirasi.getRowCount();i++){
-                    tbRespirasi.setValueAt(true,i,0);
+                    tabModeRespirasi.setValueAt(true,tbRespirasi.convertRowIndexToModel(i),0);
                 }   break;
             case 2:
                 for(i=0;i<tbNadi.getRowCount();i++){
-                    tbNadi.setValueAt(true,i,0);
+                    tabModeNadi.setValueAt(true,tbNadi.convertRowIndexToModel(i),0);
                 }   break;
             case 3:
                 for(i=0;i<tbSpO2.getRowCount();i++){
-                    tbSpO2.setValueAt(true,i,0);
+                    tabModeSpO2.setValueAt(true,tbSpO2.convertRowIndexToModel(i),0);
                 }   break;
             case 4:
                 for(i=0;i<tbGCS.getRowCount();i++){
-                    tbGCS.setValueAt(true,i,0);
+                    tabModeGCS.setValueAt(true,tbGCS.convertRowIndexToModel(i),0);
                 }   break;
             case 5:
                 for(i=0;i<tbKesadaran.getRowCount();i++){
-                    tbKesadaran.setValueAt(true,i,0);
+                    tabModeKesadaran.setValueAt(true,tbKesadaran.convertRowIndexToModel(i),0);
                 }   break;
             case 6:
                 for(i=0;i<tbTensi.getRowCount();i++){
-                    tbTensi.setValueAt(true,i,0);
+                    tabModeTensi.setValueAt(true,tbTensi.convertRowIndexToModel(i),0);
                 }   break;
             case 7:
                 for(i=0;i<tbTB.getRowCount();i++){
-                    tbTB.setValueAt(true,i,0);
+                    tabModeTB.setValueAt(true,tbTB.convertRowIndexToModel(i),0);
                 }   break;
             case 8:
                 for(i=0;i<tbBB.getRowCount();i++){
-                    tbBB.setValueAt(true,i,0);
+                    tabModeBB.setValueAt(true,tbBB.convertRowIndexToModel(i),0);
                 }   break;
             case 9:
                 for(i=0;i<tbLP.getRowCount();i++){
-                    tbLP.setValueAt(true,i,0);
+                    tabModeLP.setValueAt(true,tbLP.convertRowIndexToModel(i),0);
                 }   break;
             default:
                 break;
@@ -3341,43 +3341,43 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         switch (TabRawat.getSelectedIndex()) {
             case 0:
                 for(i=0;i<tbSuhu.getRowCount();i++){
-                    tbSuhu.setValueAt(false,i,0);
+                    tabModeSuhu.setValueAt(false,tbSuhu.convertRowIndexToModel(i),0);
                 }   break;
             case 1:
                 for(i=0;i<tbRespirasi.getRowCount();i++){
-                    tbRespirasi.setValueAt(false,i,0);
+                    tabModeRespirasi.setValueAt(false,tbRespirasi.convertRowIndexToModel(i),0);
                 }   break;
             case 2:
                 for(i=0;i<tbNadi.getRowCount();i++){
-                    tbNadi.setValueAt(false,i,0);
+                    tabModeNadi.setValueAt(false,tbNadi.convertRowIndexToModel(i),0);
                 }   break;
             case 3:
                 for(i=0;i<tbSpO2.getRowCount();i++){
-                    tbSpO2.setValueAt(false,i,0);
+                    tabModeSpO2.setValueAt(false,tbSpO2.convertRowIndexToModel(i),0);
                 }   break;
             case 4:
                 for(i=0;i<tbGCS.getRowCount();i++){
-                    tbGCS.setValueAt(false,i,0);
+                    tabModeGCS.setValueAt(false,tbGCS.convertRowIndexToModel(i),0);
                 }   break;
             case 5:
                 for(i=0;i<tbKesadaran.getRowCount();i++){
-                    tbKesadaran.setValueAt(false,i,0);
+                    tabModeKesadaran.setValueAt(false,tbKesadaran.convertRowIndexToModel(i),0);
                 }   break;
             case 6:
                 for(i=0;i<tbTensi.getRowCount();i++){
-                    tbTensi.setValueAt(false,i,0);
+                    tabModeTensi.setValueAt(false,tbTensi.convertRowIndexToModel(i),0);
                 }   break;
             case 7:
                 for(i=0;i<tbTB.getRowCount();i++){
-                    tbTB.setValueAt(false,i,0);
+                    tabModeTB.setValueAt(false,tbTB.convertRowIndexToModel(i),0);
                 }   break;
             case 8:
                 for(i=0;i<tbBB.getRowCount();i++){
-                    tbBB.setValueAt(false,i,0);
+                    tabModeBB.setValueAt(false,tbBB.convertRowIndexToModel(i),0);
                 }   break;
             case 9:
                 for(i=0;i<tbLP.getRowCount();i++){
-                    tbLP.setValueAt(false,i,0);
+                    tabModeLP.setValueAt(false,tbLP.convertRowIndexToModel(i),0);
                 }   break;
             default:
                 break;
@@ -3393,10 +3393,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbSuhu,i);
-                    if(tbSuhu.getValueAt(i,0).toString().equals("true")&&(!tbSuhu.getValueAt(i,5).toString().equals(""))&&(!tbSuhu.getValueAt(i,12).toString().equals(""))&&(!tbSuhu.getValueAt(i,15).toString().equals(""))){
+                    if(tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),12).toString().equals(""))&&(!tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),15).toString().equals(""))){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbSuhu.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbSuhu.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -3411,7 +3411,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                 json = "{" +
                                             "\"resourceType\": \"Observation\"," +
-                                            "\"id\": \""+tbSuhu.getValueAt(i,15).toString()+"\"," +
+                                            "\"id\": \""+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),15).toString()+"\"," +
                                             "\"status\": \"final\"," +
                                             "\"category\": [" +
                                                 "{" +
@@ -3442,22 +3442,22 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbSuhu.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Suhu Badan di "+tbSuhu.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbSuhu.getValueAt(i,4).toString()+" Pada Tanggal "+tbSuhu.getValueAt(i,13).toString()+" Jam "+tbSuhu.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Suhu Badan di "+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbSuhu.getValueAt(i,13).toString()+"T"+tbSuhu.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbSuhu.getValueAt(i,13).toString()+"T"+tbSuhu.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),13).toString()+"T"+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),13).toString()+"T"+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbSuhu.getValueAt(i,10).toString().replaceAll(",",".")+"," +
+                                                "\"value\": "+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),10).toString().replaceAll(",",".")+"," +
                                                 "\"unit\": \"degree Celsius\"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"Cel\"" +
                                             "}" +
                                        "}";
-                                System.out.println("URL : "+link+"/Observation/"+tbSuhu.getValueAt(i,15).toString());
+                                System.out.println("URL : "+link+"/Observation/"+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),15).toString());
                                 System.out.println("Request JSON : "+json);
                                 requestEntity = new HttpEntity(json,headers);
-                                json=api.kirimSmc(link+"/Observation/"+tbSuhu.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
+                                json=api.kirimSmc(link+"/Observation/"+tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i),15).toString(), HttpMethod.PUT, requestEntity);
                                 System.out.println("Result JSON : "+json);
                                 pengirim.setValueAt(tbSuhu,false,i,0);
                             } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -3477,10 +3477,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbRespirasi,i);
-                    if(tbRespirasi.getValueAt(i,0).toString().equals("true")&&(!tbRespirasi.getValueAt(i,5).toString().equals(""))&&(!tbRespirasi.getValueAt(i,12).toString().equals(""))&&(!tbRespirasi.getValueAt(i,15).toString().equals(""))){
+                    if(tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),12).toString().equals(""))&&(!tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),15).toString().equals(""))){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbRespirasi.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbRespirasi.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -3495,7 +3495,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                 json = "{" +
                                             "\"resourceType\": \"Observation\"," +
-                                            "\"id\": \""+tbRespirasi.getValueAt(i,15).toString()+"\"," +
+                                            "\"id\": \""+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),15).toString()+"\"," +
                                             "\"status\": \"final\"," +
                                             "\"category\": [" +
                                                 "{" +
@@ -3526,22 +3526,22 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbRespirasi.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Respirasi di "+tbRespirasi.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbRespirasi.getValueAt(i,4).toString()+" Pada Tanggal "+tbRespirasi.getValueAt(i,13).toString()+" Jam "+tbRespirasi.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Respirasi di "+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbRespirasi.getValueAt(i,13).toString()+"T"+tbRespirasi.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbRespirasi.getValueAt(i,13).toString()+"T"+tbRespirasi.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),13).toString()+"T"+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),13).toString()+"T"+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbRespirasi.getValueAt(i,10).toString().replaceAll(",",".")+"," +
+                                                "\"value\": "+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),10).toString().replaceAll(",",".")+"," +
                                                 "\"unit\": \"breaths/minute\"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"/min\"" +
                                             "}" +
                                        "}";
-                                System.out.println("URL : "+link+"/Observation/"+tbRespirasi.getValueAt(i,15).toString());
+                                System.out.println("URL : "+link+"/Observation/"+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),15).toString());
                                 System.out.println("Request JSON : "+json);
                                 requestEntity = new HttpEntity(json,headers);
-                                json=api.kirimSmc(link+"/Observation/"+tbRespirasi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
+                                json=api.kirimSmc(link+"/Observation/"+tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i),15).toString(), HttpMethod.PUT, requestEntity);
                                 System.out.println("Result JSON : "+json);
                                 pengirim.setValueAt(tbRespirasi,false,i,0);
                             } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -3561,10 +3561,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbNadi,i);
-                    if(tbNadi.getValueAt(i,0).toString().equals("true")&&(!tbNadi.getValueAt(i,5).toString().equals(""))&&(!tbNadi.getValueAt(i,12).toString().equals(""))&&(!tbNadi.getValueAt(i,15).toString().equals(""))){
+                    if(tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),12).toString().equals(""))&&(!tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),15).toString().equals(""))){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbNadi.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbNadi.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -3579,7 +3579,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                 json = "{" +
                                             "\"resourceType\": \"Observation\"," +
-                                            "\"id\": \""+tbNadi.getValueAt(i,15).toString()+"\"," +
+                                            "\"id\": \""+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),15).toString()+"\"," +
                                             "\"status\": \"final\"," +
                                             "\"category\": [" +
                                                 "{" +
@@ -3610,22 +3610,22 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbNadi.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Nadi di "+tbNadi.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbNadi.getValueAt(i,4).toString()+" Pada Tanggal "+tbNadi.getValueAt(i,13).toString()+" Jam "+tbNadi.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Nadi di "+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbNadi.getValueAt(i,13).toString()+"T"+tbNadi.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbNadi.getValueAt(i,13).toString()+"T"+tbNadi.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),13).toString()+"T"+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),13).toString()+"T"+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbNadi.getValueAt(i,10).toString().replaceAll(",",".")+"," +
+                                                "\"value\": "+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),10).toString().replaceAll(",",".")+"," +
                                                 "\"unit\": \"breaths/minute\"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"/min\"" +
                                             "}" +
                                        "}";
-                                System.out.println("URL : "+link+"/Observation/"+tbNadi.getValueAt(i,15).toString());
+                                System.out.println("URL : "+link+"/Observation/"+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),15).toString());
                                 System.out.println("Request JSON : "+json);
                                 requestEntity = new HttpEntity(json,headers);
-                                json=api.kirimSmc(link+"/Observation/"+tbNadi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
+                                json=api.kirimSmc(link+"/Observation/"+tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i),15).toString(), HttpMethod.PUT, requestEntity);
                                 System.out.println("Result JSON : "+json);
                                 pengirim.setValueAt(tbNadi,false,i,0);
                             } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -3645,10 +3645,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbSpO2,i);
-                    if(tbSpO2.getValueAt(i,0).toString().equals("true")&&(!tbSpO2.getValueAt(i,5).toString().equals(""))&&(!tbSpO2.getValueAt(i,12).toString().equals(""))&&(!tbSpO2.getValueAt(i,15).toString().equals(""))){
+                    if(tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),12).toString().equals(""))&&(!tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),15).toString().equals(""))){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbSpO2.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbSpO2.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -3663,7 +3663,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                 json = "{" +
                                             "\"resourceType\": \"Observation\"," +
-                                            "\"id\": \""+tbSpO2.getValueAt(i,15).toString()+"\"," +
+                                            "\"id\": \""+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),15).toString()+"\"," +
                                             "\"status\": \"final\"," +
                                             "\"category\": [" +
                                                 "{" +
@@ -3694,22 +3694,22 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbSpO2.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik SpO2 di "+tbSpO2.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbSpO2.getValueAt(i,4).toString()+" Pada Tanggal "+tbSpO2.getValueAt(i,13).toString()+" Jam "+tbSpO2.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik SpO2 di "+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbSpO2.getValueAt(i,13).toString()+"T"+tbSpO2.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbSpO2.getValueAt(i,13).toString()+"T"+tbSpO2.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),13).toString()+"T"+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),13).toString()+"T"+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbSpO2.getValueAt(i,10).toString().replaceAll(",",".")+"," +
+                                                "\"value\": "+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),10).toString().replaceAll(",",".")+"," +
                                                 "\"unit\": \"percent saturation\"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"%\"" +
                                             "}" +
                                        "}";
-                                System.out.println("URL : "+link+"/Observation/"+tbSpO2.getValueAt(i,15).toString());
+                                System.out.println("URL : "+link+"/Observation/"+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),15).toString());
                                 System.out.println("Request JSON : "+json);
                                 requestEntity = new HttpEntity(json,headers);
-                                json=api.kirimSmc(link+"/Observation/"+tbSpO2.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
+                                json=api.kirimSmc(link+"/Observation/"+tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i),15).toString(), HttpMethod.PUT, requestEntity);
                                 System.out.println("Result JSON : "+json);
                                 pengirim.setValueAt(tbSpO2,false,i,0);
                             } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -3729,10 +3729,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbGCS,i);
-                    if(tbGCS.getValueAt(i,0).toString().equals("true")&&(!tbGCS.getValueAt(i,5).toString().equals(""))&&(!tbGCS.getValueAt(i,12).toString().equals(""))&&(!tbGCS.getValueAt(i,15).toString().equals(""))){
+                    if(tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),12).toString().equals(""))&&(!tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),15).toString().equals(""))){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbGCS.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbGCS.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -3747,7 +3747,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                 json = "{" +
                                             "\"resourceType\": \"Observation\"," +
-                                            "\"id\": \""+tbGCS.getValueAt(i,15).toString()+"\"," +
+                                            "\"id\": \""+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),15).toString()+"\"," +
                                             "\"status\": \"final\"," +
                                             "\"category\": [" +
                                                 "{" +
@@ -3778,21 +3778,21 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbGCS.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik GCS di "+tbGCS.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbGCS.getValueAt(i,4).toString()+" Pada Tanggal "+tbGCS.getValueAt(i,13).toString()+" Jam "+tbGCS.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik GCS di "+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbGCS.getValueAt(i,13).toString()+"T"+tbGCS.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbGCS.getValueAt(i,13).toString()+"T"+tbGCS.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),13).toString()+"T"+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),13).toString()+"T"+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbGCS.getValueAt(i,10).toString().replaceAll(",",".")+"," +
+                                                "\"value\": "+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),10).toString().replaceAll(",",".")+"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"{score}\"" +
                                             "}" +
                                        "}";
-                                System.out.println("URL : "+link+"/Observation/"+tbGCS.getValueAt(i,15).toString());
+                                System.out.println("URL : "+link+"/Observation/"+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),15).toString());
                                 System.out.println("Request JSON : "+json);
                                 requestEntity = new HttpEntity(json,headers);
-                                json=api.kirimSmc(link+"/Observation/"+tbGCS.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
+                                json=api.kirimSmc(link+"/Observation/"+tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i),15).toString(), HttpMethod.PUT, requestEntity);
                                 System.out.println("Result JSON : "+json);
                                 pengirim.setValueAt(tbGCS,false,i,0);
                             } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -3812,10 +3812,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbKesadaran,i);
-                    if(tbKesadaran.getValueAt(i,0).toString().equals("true")&&(!tbKesadaran.getValueAt(i,5).toString().equals(""))&&(!tbKesadaran.getValueAt(i,12).toString().equals(""))&&(!tbKesadaran.getValueAt(i,15).toString().equals(""))){
+                    if(tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),12).toString().equals(""))&&(!tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),15).toString().equals(""))){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbKesadaran.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbKesadaran.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -3830,7 +3830,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                 json = "{" +
                                             "\"resourceType\": \"Observation\"," +
-                                            "\"id\": \""+tbKesadaran.getValueAt(i,15).toString()+"\"," +
+                                            "\"id\": \""+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),15).toString()+"\"," +
                                             "\"status\": \"final\"," +
                                             "\"category\": [" +
                                                 "{" +
@@ -3861,19 +3861,19 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbKesadaran.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Kesadaran di "+tbKesadaran.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbKesadaran.getValueAt(i,4).toString()+" Pada Tanggal "+tbKesadaran.getValueAt(i,13).toString()+" Jam "+tbKesadaran.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Kesadaran di "+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbKesadaran.getValueAt(i,13).toString()+"T"+tbKesadaran.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbKesadaran.getValueAt(i,13).toString()+"T"+tbKesadaran.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),13).toString()+"T"+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),13).toString()+"T"+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueCodeableConcept\": {" +
-                                                "\"text\": \""+tbKesadaran.getValueAt(i,10).toString().replaceAll("Compos Mentis","Alert").replaceAll("Somnolence","Voice").replaceAll("Sopor","Pain").replaceAll("Coma","Unresponsive")+"\"" +
+                                                "\"text\": \""+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),10).toString().replaceAll("Compos Mentis","Alert").replaceAll("Somnolence","Voice").replaceAll("Sopor","Pain").replaceAll("Coma","Unresponsive")+"\"" +
                                             "}" +
                                        "}";
-                                System.out.println("URL : "+link+"/Observation/"+tbKesadaran.getValueAt(i,15).toString());
+                                System.out.println("URL : "+link+"/Observation/"+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),15).toString());
                                 System.out.println("Request JSON : "+json);
                                 requestEntity = new HttpEntity(json,headers);
-                                json=api.kirimSmc(link+"/Observation/"+tbKesadaran.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
+                                json=api.kirimSmc(link+"/Observation/"+tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i),15).toString(), HttpMethod.PUT, requestEntity);
                                 System.out.println("Result JSON : "+json);
                                 pengirim.setValueAt(tbKesadaran,false,i,0);
                             } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -3893,10 +3893,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbTensi,i);
-                    if(tbTensi.getValueAt(i,0).toString().equals("true")&&(!tbTensi.getValueAt(i,5).toString().equals(""))&&(!tbTensi.getValueAt(i,12).toString().equals(""))&&(!tbTensi.getValueAt(i,15).toString().equals(""))){
+                    if(tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),12).toString().equals(""))&&(!tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),15).toString().equals(""))){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbTensi.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbTensi.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -3911,7 +3911,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                 json = "{" +
                                             "\"resourceType\": \"Observation\"," +
-                                            "\"id\": \""+tbTensi.getValueAt(i,15).toString()+"\"," +
+                                            "\"id\": \""+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),15).toString()+"\"," +
                                             "\"status\": \"final\"," +
                                             "\"category\": [" +
                                                 "{" +
@@ -3943,11 +3943,11 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbTensi.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Tensi di "+tbTensi.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbTensi.getValueAt(i,4).toString()+" Pada Tanggal "+tbTensi.getValueAt(i,13).toString()+" Jam "+tbTensi.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Tensi di "+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbTensi.getValueAt(i,13).toString()+"T"+tbTensi.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbTensi.getValueAt(i,13).toString()+"T"+tbTensi.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),13).toString()+"T"+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),13).toString()+"T"+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"component\" : ["+
                                                 "{" +
                                                     "\"code\" : {" +
@@ -3985,10 +3985,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}"+
                                             "]" +
                                        "}";
-                                System.out.println("URL : "+link+"/Observation/"+tbTensi.getValueAt(i,15).toString());
+                                System.out.println("URL : "+link+"/Observation/"+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),15).toString());
                                 System.out.println("Request JSON : "+json);
                                 requestEntity = new HttpEntity(json,headers);
-                                json=api.kirimSmc(link+"/Observation/"+tbTensi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
+                                json=api.kirimSmc(link+"/Observation/"+tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i),15).toString(), HttpMethod.PUT, requestEntity);
                                 System.out.println("Result JSON : "+json);
                                 pengirim.setValueAt(tbTensi,false,i,0);
                             } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -4008,10 +4008,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbTB,i);
-                    if(tbTB.getValueAt(i,0).toString().equals("true")&&(!tbTB.getValueAt(i,5).toString().equals(""))&&(!tbTB.getValueAt(i,12).toString().equals(""))&&(!tbTB.getValueAt(i,15).toString().equals(""))){
+                    if(tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),12).toString().equals(""))&&(!tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),15).toString().equals(""))){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbTB.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbTB.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -4026,7 +4026,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                 json = "{" +
                                             "\"resourceType\": \"Observation\"," +
-                                            "\"id\": \""+tbTB.getValueAt(i,15).toString()+"\"," +
+                                            "\"id\": \""+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),15).toString()+"\"," +
                                             "\"status\": \"final\"," +
                                             "\"category\": [" +
                                                 "{" +
@@ -4057,22 +4057,22 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbTB.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Tinggi Badan di "+tbTB.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbTB.getValueAt(i,4).toString()+" Pada Tanggal "+tbTB.getValueAt(i,13).toString()+" Jam "+tbTB.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Tinggi Badan di "+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbTB.getValueAt(i,13).toString()+"T"+tbTB.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbTB.getValueAt(i,13).toString()+"T"+tbTB.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),13).toString()+"T"+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),13).toString()+"T"+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbTB.getValueAt(i,10).toString().replaceAll(",",".")+"," +
+                                                "\"value\": "+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),10).toString().replaceAll(",",".")+"," +
                                                 "\"unit\": \"centimeter\"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"cm\"" +
                                             "}" +
                                        "}";
-                                System.out.println("URL : "+link+"/Observation/"+tbTB.getValueAt(i,15).toString());
+                                System.out.println("URL : "+link+"/Observation/"+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),15).toString());
                                 System.out.println("Request JSON : "+json);
                                 requestEntity = new HttpEntity(json,headers);
-                                json=api.kirimSmc(link+"/Observation/"+tbTB.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
+                                json=api.kirimSmc(link+"/Observation/"+tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i),15).toString(), HttpMethod.PUT, requestEntity);
                                 System.out.println("Result JSON : "+json);
                                 pengirim.setValueAt(tbTB,false,i,0);
                             } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -4092,10 +4092,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbBB,i);
-                    if(tbBB.getValueAt(i,0).toString().equals("true")&&(!tbBB.getValueAt(i,5).toString().equals(""))&&(!tbBB.getValueAt(i,12).toString().equals(""))&&(!tbBB.getValueAt(i,15).toString().equals(""))){
+                    if(tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),12).toString().equals(""))&&(!tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),15).toString().equals(""))){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbBB.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbBB.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -4110,7 +4110,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                 json = "{" +
                                             "\"resourceType\": \"Observation\"," +
-                                            "\"id\": \""+tbBB.getValueAt(i,15).toString()+"\"," +
+                                            "\"id\": \""+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),15).toString()+"\"," +
                                             "\"status\": \"final\"," +
                                             "\"category\": [" +
                                                 "{" +
@@ -4141,22 +4141,22 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbBB.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Berat Badan di "+tbBB.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbBB.getValueAt(i,4).toString()+" Pada Tanggal "+tbBB.getValueAt(i,13).toString()+" Jam "+tbBB.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Berat Badan di "+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbBB.getValueAt(i,13).toString()+"T"+tbBB.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbBB.getValueAt(i,13).toString()+"T"+tbBB.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),13).toString()+"T"+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),13).toString()+"T"+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbBB.getValueAt(i,10).toString().replaceAll(",",".")+"," +
+                                                "\"value\": "+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),10).toString().replaceAll(",",".")+"," +
                                                 "\"unit\": \"kilogram\"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"kg\"" +
                                             "}" +
                                        "}";
-                                System.out.println("URL : "+link+"/Observation/"+tbBB.getValueAt(i,15).toString());
+                                System.out.println("URL : "+link+"/Observation/"+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),15).toString());
                                 System.out.println("Request JSON : "+json);
                                 requestEntity = new HttpEntity(json,headers);
-                                json=api.kirimSmc(link+"/Observation/"+tbBB.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
+                                json=api.kirimSmc(link+"/Observation/"+tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i),15).toString(), HttpMethod.PUT, requestEntity);
                                 System.out.println("Result JSON : "+json);
                                 pengirim.setValueAt(tbBB,false,i,0);
                             } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -4176,10 +4176,10 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                         break;
                     }
                     pengirim.incrementIfSelected(tbLP,i);
-                    if(tbLP.getValueAt(i,0).toString().equals("true")&&(!tbLP.getValueAt(i,5).toString().equals(""))&&(!tbLP.getValueAt(i,12).toString().equals(""))&&(!tbLP.getValueAt(i,15).toString().equals(""))){
+                    if(tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),12).toString().equals(""))&&(!tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),15).toString().equals(""))){
                         try {
-                            iddokter=cekViaSatuSehat.tampilIDParktisi(tbLP.getValueAt(i,12).toString());
-                            idpasien=cekViaSatuSehat.tampilIDPasien(tbLP.getValueAt(i,5).toString());
+                            iddokter=cekViaSatuSehat.tampilIDParktisi(tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),12).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),5).toString());
                             if (iddokter.isBlank()) {
                                 System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                                 continue;
@@ -4194,7 +4194,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                 headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                 json = "{" +
                                             "\"resourceType\": \"Observation\"," +
-                                            "\"id\": \""+tbLP.getValueAt(i,15).toString()+"\"," +
+                                            "\"id\": \""+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),15).toString()+"\"," +
                                             "\"status\": \"final\"," +
                                             "\"category\": [" +
                                                 "{" +
@@ -4225,22 +4225,22 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                                 "}" +
                                             "]," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbLP.getValueAt(i,9).toString()+"\"," +
-                                                "\"display\": \"Pemeriksaan Fisik Lingkar Perut di "+tbLP.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbLP.getValueAt(i,4).toString()+" Pada Tanggal "+tbLP.getValueAt(i,13).toString()+" Jam "+tbLP.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                "\"display\": \"Pemeriksaan Fisik Lingkar Perut di "+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),4).toString()+" Pada Tanggal "+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),13).toString()+" Jam "+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),14).toString()+"\"" +
                                             "}," +
-                                            "\"effectiveDateTime\": \""+tbLP.getValueAt(i,13).toString()+"T"+tbLP.getValueAt(i,14).toString()+"+07:00\"," +
-                                            "\"issued\": \""+tbLP.getValueAt(i,13).toString()+"T"+tbLP.getValueAt(i,14).toString()+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),13).toString()+"T"+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
+                                            "\"issued\": \""+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),13).toString()+"T"+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),14).toString()+"+07:00\"," +
                                             "\"valueQuantity\": {" +
-                                                "\"value\": "+tbLP.getValueAt(i,10).toString().replaceAll(",",".")+"," +
+                                                "\"value\": "+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),10).toString().replaceAll(",",".")+"," +
                                                 "\"unit\": \"centimeter\"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
                                                 "\"code\": \"cm\"" +
                                             "}" +
                                        "}";
-                                System.out.println("URL : "+link+"/Observation/"+tbLP.getValueAt(i,15).toString());
+                                System.out.println("URL : "+link+"/Observation/"+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),15).toString());
                                 System.out.println("Request JSON : "+json);
                                 requestEntity = new HttpEntity(json,headers);
-                                json=api.kirimSmc(link+"/Observation/"+tbLP.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
+                                json=api.kirimSmc(link+"/Observation/"+tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i),15).toString(), HttpMethod.PUT, requestEntity);
                                 System.out.println("Result JSON : "+json);
                                 pengirim.setValueAt(tbLP,false,i,0);
                             } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -4337,63 +4337,63 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         switch (TabRawat.getSelectedIndex()) {
             case 0:
                 for(i=0;i<tbSuhu.getRowCount();i++){
-                    if (tbSuhu.getValueAt(i, 15).toString().isBlank()) {
-                        tbSuhu.setValueAt(true,i,0);
+                    if (tabModeSuhu.getValueAt(tbSuhu.convertRowIndexToModel(i), 15).toString().isBlank()) {
+                        tabModeSuhu.setValueAt(true,tbSuhu.convertRowIndexToModel(i),0);
                     }
                 }
                 break;
             case 1:
                 for(i=0;i<tbRespirasi.getRowCount();i++){
-                    if (tbRespirasi.getValueAt(i, 15).toString().isBlank()) {
-                        tbRespirasi.setValueAt(true,i,0);
+                    if (tabModeRespirasi.getValueAt(tbRespirasi.convertRowIndexToModel(i), 15).toString().isBlank()) {
+                        tabModeRespirasi.setValueAt(true,tbRespirasi.convertRowIndexToModel(i),0);
                     }
                 }   break;
             case 2:
                 for(i=0;i<tbNadi.getRowCount();i++){
-                    if (tbNadi.getValueAt(i, 15).toString().isBlank()) {
-                        tbNadi.setValueAt(true,i,0);
+                    if (tabModeNadi.getValueAt(tbNadi.convertRowIndexToModel(i), 15).toString().isBlank()) {
+                        tabModeNadi.setValueAt(true,tbNadi.convertRowIndexToModel(i),0);
                     }
                 }   break;
             case 3:
                 for(i=0;i<tbSpO2.getRowCount();i++){
-                    if (tbSpO2.getValueAt(i, 15).toString().isBlank()) {
-                        tbSpO2.setValueAt(true,i,0);
+                    if (tabModeSpO2.getValueAt(tbSpO2.convertRowIndexToModel(i), 15).toString().isBlank()) {
+                        tabModeSpO2.setValueAt(true,tbSpO2.convertRowIndexToModel(i),0);
                     }
                 }   break;
             case 4:
                 for(i=0;i<tbGCS.getRowCount();i++){
-                    if (tbGCS.getValueAt(i, 15).toString().isBlank()) {
-                        tbGCS.setValueAt(true,i,0);
+                    if (tabModeGCS.getValueAt(tbGCS.convertRowIndexToModel(i), 15).toString().isBlank()) {
+                        tabModeGCS.setValueAt(true,tbGCS.convertRowIndexToModel(i),0);
                     }
                 }   break;
             case 5:
                 for(i=0;i<tbKesadaran.getRowCount();i++){
-                    if (tbKesadaran.getValueAt(i, 15).toString().isBlank()) {
-                        tbKesadaran.setValueAt(true,i,0);
+                    if (tabModeKesadaran.getValueAt(tbKesadaran.convertRowIndexToModel(i), 15).toString().isBlank()) {
+                        tabModeKesadaran.setValueAt(true,tbKesadaran.convertRowIndexToModel(i),0);
                     }
                 }   break;
             case 6:
                 for(i=0;i<tbTensi.getRowCount();i++){
-                    if (tbTensi.getValueAt(i, 15).toString().isBlank()) {
-                        tbTensi.setValueAt(true,i,0);
+                    if (tabModeTensi.getValueAt(tbTensi.convertRowIndexToModel(i), 15).toString().isBlank()) {
+                        tabModeTensi.setValueAt(true,tbTensi.convertRowIndexToModel(i),0);
                     }
                 }   break;
             case 7:
                 for(i=0;i<tbTB.getRowCount();i++){
-                    if (tbTB.getValueAt(i, 15).toString().isBlank()) {
-                        tbTB.setValueAt(true,i,0);
+                    if (tabModeTB.getValueAt(tbTB.convertRowIndexToModel(i), 15).toString().isBlank()) {
+                        tabModeTB.setValueAt(true,tbTB.convertRowIndexToModel(i),0);
                     }
                 }   break;
             case 8:
                 for(i=0;i<tbBB.getRowCount();i++){
-                    if (tbBB.getValueAt(i, 15).toString().isBlank()) {
-                        tbBB.setValueAt(true,i,0);
+                    if (tabModeBB.getValueAt(tbBB.convertRowIndexToModel(i), 15).toString().isBlank()) {
+                        tabModeBB.setValueAt(true,tbBB.convertRowIndexToModel(i),0);
                     }
                 }   break;
             case 9:
                 for(i=0;i<tbLP.getRowCount();i++){
-                    if (tbLP.getValueAt(i, 15).toString().isBlank()) {
-                        tbLP.setValueAt(true,i,0);
+                    if (tabModeLP.getValueAt(tbLP.convertRowIndexToModel(i), 15).toString().isBlank()) {
+                        tabModeLP.setValueAt(true,tbLP.convertRowIndexToModel(i),0);
                     }
                 }   break;
             default:
@@ -4465,6 +4465,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampilsuhu() {
+        tbSuhu.suspendSorting();
         Valid.tabelKosong(tabModeSuhu);
         try{
             ps=koneksi.prepareStatement(
@@ -4557,10 +4558,12 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeSuhu.getRowCount());
+        LCount.setText(""+tbSuhu.getRowCount());
+        tbSuhu.resumeSorting();
     }
 
     private void tampilrespirasi() {
+        tbRespirasi.suspendSorting();
         Valid.tabelKosong(tabModeRespirasi);
         try{
             ps=koneksi.prepareStatement(
@@ -4653,10 +4656,12 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeRespirasi.getRowCount());
+        LCount.setText(""+tbRespirasi.getRowCount());
+        tbRespirasi.resumeSorting();
     }
 
     private void tampilnadi() {
+        tbNadi.suspendSorting();
         Valid.tabelKosong(tabModeNadi);
         try{
             ps=koneksi.prepareStatement(
@@ -4749,10 +4754,12 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeNadi.getRowCount());
+        LCount.setText(""+tbNadi.getRowCount());
+        tbNadi.resumeSorting();
     }
 
     private void tampilspo2() {
+        tbSpO2.suspendSorting();
         Valid.tabelKosong(tabModeSpO2);
         try{
             ps=koneksi.prepareStatement(
@@ -4845,10 +4852,12 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeSpO2.getRowCount());
+        LCount.setText(""+tbSpO2.getRowCount());
+        tbSpO2.resumeSorting();
     }
 
     private void tampilgcs() {
+        tbGCS.suspendSorting();
         Valid.tabelKosong(tabModeGCS);
         try{
             ps=koneksi.prepareStatement(
@@ -4941,10 +4950,12 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeGCS.getRowCount());
+        LCount.setText(""+tbGCS.getRowCount());
+        tbGCS.resumeSorting();
     }
 
     private void tampilkesadaran() {
+        tbKesadaran.suspendSorting();
         Valid.tabelKosong(tabModeKesadaran);
         try{
             ps=koneksi.prepareStatement(
@@ -5037,10 +5048,12 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeKesadaran.getRowCount());
+        LCount.setText(""+tbKesadaran.getRowCount());
+        tbKesadaran.resumeSorting();
     }
 
     private void tampiltensi() {
+        tbTensi.suspendSorting();
         Valid.tabelKosong(tabModeTensi);
         try{
             ps=koneksi.prepareStatement(
@@ -5133,10 +5146,12 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeTensi.getRowCount());
+        LCount.setText(""+tbTensi.getRowCount());
+        tbTensi.resumeSorting();
     }
 
     private void tampiltb() {
+        tbTB.suspendSorting();
         Valid.tabelKosong(tabModeTB);
         try{
             ps=koneksi.prepareStatement(
@@ -5229,10 +5244,12 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeTB.getRowCount());
+        LCount.setText(""+tbTB.getRowCount());
+        tbTB.resumeSorting();
     }
 
     private void tampilbb() {
+        tbBB.suspendSorting();
         Valid.tabelKosong(tabModeBB);
         try{
             ps=koneksi.prepareStatement(
@@ -5325,10 +5342,12 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeBB.getRowCount());
+        LCount.setText(""+tbBB.getRowCount());
+        tbBB.resumeSorting();
     }
 
     private void tampillp() {
+        tbLP.suspendSorting();
         Valid.tabelKosong(tabModeLP);
         try{
             ps=koneksi.prepareStatement(
@@ -5377,7 +5396,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeLP.getRowCount());
+        LCount.setText(""+tbLP.getRowCount());
+        tbLP.resumeSorting();
     }
 
     public void isCek(){

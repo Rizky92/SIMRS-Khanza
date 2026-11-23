@@ -1241,6 +1241,7 @@
               <SubComponents>
                 <Component class="widget.Table" name="tbAkunBayar">
                   <Properties>
+                    <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="0" rowCount="4"/>
                     </Property>
@@ -1542,6 +1543,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbTindakanDr">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="PopupTindakanDr"/>
                         </Property>
@@ -1581,6 +1583,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbTindakanDrBayar">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="PopupTindakanDrBayar"/>
                         </Property>
@@ -1718,6 +1721,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbTindakanPr">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="PopupTindakanPr"/>
                         </Property>
@@ -1761,6 +1765,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbTindakanPrBayar">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="PopupTindakanPrBayar"/>
                         </Property>
@@ -1948,6 +1953,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbTindakanDrPr">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="PopupTindakanDrPr"/>
                         </Property>
@@ -1987,6 +1993,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbTindakanDrPrBayar">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="PopupTindakanDrPrBayar"/>
                         </Property>
@@ -2050,6 +2057,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbRadiologi">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="PopupRadiologi"/>
                         </Property>
@@ -2089,6 +2097,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbRadiologiBayar">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="PopupRadiologiBayar"/>
                         </Property>
@@ -2344,6 +2353,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbLaborat">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                                   <ComponentRef name="PopupLaborat"/>
                                 </Property>
@@ -2380,6 +2390,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbDetailLaborat">
                               <Properties>
+                                <Property name="sortable" type="boolean" value="false"/>
                                 <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                                   <ComponentRef name="PopupDetailLaborat"/>
                                 </Property>
@@ -2473,6 +2484,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbLaboratBayar">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                                   <ComponentRef name="PopupLaboratBayar"/>
                                 </Property>
@@ -2512,6 +2524,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbDetailLaboratBayar">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                                   <ComponentRef name="PopupDetailLaboratBayar"/>
                                 </Property>
@@ -2585,6 +2598,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbObat">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="PopupObat"/>
                         </Property>
@@ -2624,6 +2638,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbObatBayar">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="PopupObatBayar"/>
                         </Property>
@@ -2737,6 +2752,9 @@
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
                 <Component class="widget.Table" name="tbBilling">
+                  <Properties>
+                    <Property name="sortable" type="boolean" value="false"/>
+                  </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbBillingMouseClicked"/>
                     <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tbBillingKeyPressed"/>

@@ -794,11 +794,11 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         if (tabPane1.getSelectedIndex() == 0) {
             if (tbRalan.getSelectedRow() != -1) {
                 if (Sequel.menghapustfSmc("set_filter_jenis_resep_obat_ralan", "kd_poli = ? and kd_pj = ? and kdjns = ?",
-                    tbRalan.getValueAt(tbRalan.getSelectedRow(), 0).toString(),
-                    tbRalan.getValueAt(tbRalan.getSelectedRow(), 2).toString(),
-                    tbRalan.getValueAt(tbRalan.getSelectedRow(), 4).toString())
+                    tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 0).toString(),
+                    tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 2).toString(),
+                    tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 4).toString())
                 ) {
-                    tabModeRalan.removeRow(tbRalan.getSelectedRow());
+                    tabModeRalan.removeRow(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()));
                     emptTeks();
                 }
             } else {
@@ -807,11 +807,11 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         } else if (tabPane1.getSelectedIndex() == 1) {
             if (tbRanap.getSelectedRow() != -1) {
                 if (Sequel.menghapustfSmc("set_filter_jenis_resep_obat_ranap", "kd_bangsal = ? and kd_pj = ? and kdjns = ?",
-                    tbRanap.getValueAt(tbRanap.getSelectedRow(), 0).toString(),
-                    tbRanap.getValueAt(tbRanap.getSelectedRow(), 2).toString(),
-                    tbRanap.getValueAt(tbRanap.getSelectedRow(), 4).toString())
+                    tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 0).toString(),
+                    tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 2).toString(),
+                    tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 4).toString())
                 ) {
-                    tabModeRanap.removeRow(tbRanap.getSelectedRow());
+                    tabModeRanap.removeRow(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()));
                     emptTeks();
                 }
             } else {
@@ -829,7 +829,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPilihCaraBayarRanapActionPerformed
 
     private void tbRanapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRanapMouseClicked
-        if (tabModeRanap.getRowCount() != 0) {
+        if (tbRanap.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {}
@@ -837,7 +837,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     }//GEN-LAST:event_tbRanapMouseClicked
 
     private void tbRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRalanMouseClicked
-        if (tabModeRalan.getRowCount() != 0) {
+        if (tbRalan.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {}
@@ -977,16 +977,16 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                     if (Sequel.mengupdatetfSmc("set_filter_jenis_resep_obat_ralan",
                         "kd_poli = ?, kd_pj = ?, kdjns = ?", "kd_poli = ? and kd_pj = ? and kdjns = ?",
                         kdpoli.getText(), kdpjRalan.getText(), kdjnsRalan.getText(),
-                        tbRalan.getValueAt(tbRalan.getSelectedRow(), 0).toString(),
-                        tbRalan.getValueAt(tbRalan.getSelectedRow(), 2).toString(),
-                        tbRalan.getValueAt(tbRalan.getSelectedRow(), 4).toString()
+                        tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 0).toString(),
+                        tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 2).toString(),
+                        tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 4).toString()
                     )) {
-                        tbRalan.setValueAt(kdpoli.getText(), tbRalan.getSelectedRow(), 0);
-                        tbRalan.setValueAt(nmpoli.getText(), tbRalan.getSelectedRow(), 1);
-                        tbRalan.setValueAt(kdpjRalan.getText(), tbRalan.getSelectedRow(), 2);
-                        tbRalan.setValueAt(pngjawabRalan.getText(), tbRalan.getSelectedRow(), 3);
-                        tbRalan.setValueAt(kdjnsRalan.getText(), tbRalan.getSelectedRow(), 4);
-                        tbRalan.setValueAt(nmjnsRalan.getText(), tbRalan.getSelectedRow(), 5);
+                        tabModeRalan.setValueAt(kdpoli.getText(), tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 0);
+                        tabModeRalan.setValueAt(nmpoli.getText(), tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 1);
+                        tabModeRalan.setValueAt(kdpjRalan.getText(), tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 2);
+                        tabModeRalan.setValueAt(pngjawabRalan.getText(), tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 3);
+                        tabModeRalan.setValueAt(kdjnsRalan.getText(), tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 4);
+                        tabModeRalan.setValueAt(nmjnsRalan.getText(), tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 5);
                         emptTeks();
                     } else {
                         JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengubah data..!!");
@@ -1007,16 +1007,16 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                     if (Sequel.mengupdatetfSmc("set_filter_jenis_resep_obat_ranap",
                         "kd_bangsal = ?, kd_pj = ?, kdjns = ?", "kd_bangsal = ? and kd_pj = ? and kdjns = ?",
                         kdbangsal.getText(), kdpjRanap.getText(), kdjnsRanap.getText(),
-                        tbRanap.getValueAt(tbRanap.getSelectedRow(), 0).toString(),
-                        tbRanap.getValueAt(tbRanap.getSelectedRow(), 2).toString(),
-                        tbRanap.getValueAt(tbRanap.getSelectedRow(), 4).toString()
+                        tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 0).toString(),
+                        tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 2).toString(),
+                        tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 4).toString()
                     )) {
-                        tbRanap.setValueAt(kdbangsal.getText(), tbRanap.getSelectedRow(), 0);
-                        tbRanap.setValueAt(nmbangsal.getText(), tbRanap.getSelectedRow(), 1);
-                        tbRanap.setValueAt(kdpjRanap.getText(), tbRanap.getSelectedRow(), 2);
-                        tbRanap.setValueAt(pngjawabRanap.getText(), tbRanap.getSelectedRow(), 3);
-                        tbRanap.setValueAt(kdjnsRanap.getText(), tbRanap.getSelectedRow(), 4);
-                        tbRanap.setValueAt(nmjnsRanap.getText(), tbRanap.getSelectedRow(), 5);
+                        tabModeRanap.setValueAt(kdbangsal.getText(), tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 0);
+                        tabModeRanap.setValueAt(nmbangsal.getText(), tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 1);
+                        tabModeRanap.setValueAt(kdpjRanap.getText(), tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 2);
+                        tabModeRanap.setValueAt(pngjawabRanap.getText(), tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 3);
+                        tabModeRanap.setValueAt(kdjnsRanap.getText(), tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 4);
+                        tabModeRanap.setValueAt(nmjnsRanap.getText(), tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 5);
                         emptTeks();
                     } else {
                         JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengubah data..!!");
@@ -1108,6 +1108,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbRalan.suspendSorting();
         Valid.tabelKosong(tabModeRalan);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select set_filter_jenis_resep_obat_ralan.kd_poli, poliklinik.nm_poli, set_filter_jenis_resep_obat_ralan.kd_pj, penjab.png_jawab, " +
@@ -1135,9 +1136,11 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+        tbRalan.resumeSorting();
     }
 
     private void tampil2() {
+        tbRanap.suspendSorting();
         Valid.tabelKosong(tabModeRanap);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select set_filter_jenis_resep_obat_ranap.kd_bangsal, bangsal.nm_bangsal, set_filter_jenis_resep_obat_ranap.kd_pj, penjab.png_jawab, " +
@@ -1165,6 +1168,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+        tbRanap.resumeSorting();
     }
 
     private void emptTeks() {
@@ -1189,21 +1193,21 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     private void getData() {
         if (tabPane1.getSelectedIndex() == 0) {
             if (tbRalan.getSelectedRow() != -1) {
-                kdpoli.setText(tbRalan.getValueAt(tbRalan.getSelectedRow(), 0).toString());
-                nmpoli.setText(tbRalan.getValueAt(tbRalan.getSelectedRow(), 1).toString());
-                kdpjRalan.setText(tbRalan.getValueAt(tbRalan.getSelectedRow(), 2).toString());
-                pngjawabRalan.setText(tbRalan.getValueAt(tbRalan.getSelectedRow(), 3).toString());
-                kdjnsRalan.setText(tbRalan.getValueAt(tbRalan.getSelectedRow(), 4).toString());
-                nmjnsRalan.setText(tbRalan.getValueAt(tbRalan.getSelectedRow(), 5).toString());
+                kdpoli.setText(tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 0).toString());
+                nmpoli.setText(tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 1).toString());
+                kdpjRalan.setText(tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 2).toString());
+                pngjawabRalan.setText(tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 3).toString());
+                kdjnsRalan.setText(tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 4).toString());
+                nmjnsRalan.setText(tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()), 5).toString());
             }
         } else if (tabPane1.getSelectedIndex() == 1) {
             if (tbRanap.getSelectedRow() != -1) {
-                kdbangsal.setText(tbRanap.getValueAt(tbRanap.getSelectedRow(), 0).toString());
-                nmbangsal.setText(tbRanap.getValueAt(tbRanap.getSelectedRow(), 1).toString());
-                kdpjRanap.setText(tbRanap.getValueAt(tbRanap.getSelectedRow(), 2).toString());
-                pngjawabRanap.setText(tbRanap.getValueAt(tbRanap.getSelectedRow(), 3).toString());
-                kdjnsRanap.setText(tbRanap.getValueAt(tbRanap.getSelectedRow(), 4).toString());
-                nmjnsRanap.setText(tbRanap.getValueAt(tbRanap.getSelectedRow(), 5).toString());
+                kdbangsal.setText(tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 0).toString());
+                nmbangsal.setText(tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 1).toString());
+                kdpjRanap.setText(tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 2).toString());
+                pngjawabRanap.setText(tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 3).toString());
+                kdjnsRanap.setText(tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 4).toString());
+                nmjnsRanap.setText(tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()), 5).toString());
             }
         }
     }

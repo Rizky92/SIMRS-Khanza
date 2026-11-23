@@ -186,6 +186,7 @@ public class IPSRSCariPembelian extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -689,13 +690,13 @@ public class IPSRSCariPembelian extends javax.swing.JDialog {
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
         if(tbDokter.getSelectedRow()>-1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Faktur");
             }else{
                 try {
                     pscaribeli=koneksi.prepareStatement("select ipsrspembelian.no_faktur,ipsrspembelian.tagihan,ipsrspembelian.tgl_beli,ipsrspembelian.kd_rek,ipsrspembelian.ppn,(ipsrspembelian.total+ipsrspembelian.meterai) as total from ipsrspembelian where ipsrspembelian.no_faktur=?");
                     try {
-                        pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+                        pscaribeli.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
                         rs=pscaribeli.executeQuery();
                         if(rs.next()){
                             Sequel.AutoComitFalse();
@@ -741,7 +742,7 @@ public class IPSRSCariPembelian extends javax.swing.JDialog {
                             }
 
                             if(sukses==true){
-                                sukses=Sequel.queryu2tf("delete from ipsrspembelian where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
+                                sukses=Sequel.queryu2tf("delete from ipsrspembelian where no_faktur=?",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()});
                             }
 
                             if(sukses==true){

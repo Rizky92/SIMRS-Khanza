@@ -562,6 +562,7 @@ public class TokoCariPiutang extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1001,20 +1002,20 @@ public class TokoCariPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void ppCetakNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCetakNotaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Valid.panggilUrl("billing/NotaToko4.php?nonota="+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim()+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
+            Valid.panggilUrl("billing/NotaToko4.php?nonota="+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim()+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_ppCetakNotaActionPerformed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1025,7 +1026,7 @@ public class TokoCariPiutang extends javax.swing.JDialog {
                 pscarijual=koneksi.prepareStatement(
                     "select nota_piutang,sisapiutang from tokopiutang where nota_piutang=?");
                 try {
-                    pscarijual.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+                    pscarijual.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
                     rs=pscarijual.executeQuery();
                     if(rs.next()){
                         Sequel.AutoComitFalse();
@@ -1136,7 +1137,7 @@ public class TokoCariPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_TabRawatMouseClicked
 
     private void MnDetailCicilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailCicilanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1145,9 +1146,9 @@ public class TokoCariPiutang extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             TokoBayarPiutang bayarpiutang=new TokoBayarPiutang(null,false);
             bayarpiutang.emptTeks();
-            String norm=Sequel.cariIsi("select no_member from tokopiutang where nota_piutang='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"'");
+            String norm=Sequel.cariIsi("select no_member from tokopiutang where nota_piutang='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()+"'");
             String nama=Sequel.cariIsi("select nama from tokomember where no_member='"+norm+"'");
-            bayarpiutang.setData(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),norm,nama);
+            bayarpiutang.setData(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString(),norm,nama);
             bayarpiutang.tampil();
             bayarpiutang.setSize(this.getWidth()-20,this.getHeight()-20);
             bayarpiutang.setLocationRelativeTo(this);

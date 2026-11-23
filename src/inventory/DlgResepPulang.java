@@ -536,7 +536,7 @@ public final class DlgResepPulang extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
              JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
              TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -551,19 +551,19 @@ public final class DlgResepPulang extends javax.swing.JDialog {
                     sukses=true;
                     i=tbResep.getSelectedRow();
                     if(Sequel.queryu2tf("delete from resep_pulang where no_rawat=? and kode_brng=? and no_batch=? and no_faktur=? and tanggal=? and jam=?",6,new String[]{
-                        tbResep.getValueAt(i,0).toString(),KdBarang.getText(),tbResep.getValueAt(i,9).toString(),tbResep.getValueAt(i,10).toString(),tbResep.getValueAt(i,1).toString(),tbResep.getValueAt(i,2).toString()
+                        tabMode.getValueAt(tbResep.convertRowIndexToModel(i),0).toString(),KdBarang.getText(),tabMode.getValueAt(tbResep.convertRowIndexToModel(i),9).toString(),tabMode.getValueAt(tbResep.convertRowIndexToModel(i),10).toString(),tabMode.getValueAt(tbResep.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbResep.convertRowIndexToModel(i),2).toString()
                     })==true){
                         if(aktifkanbatch.equals("yes")){
                             Sequel.mengedit3("data_batch","no_batch=? and kode_brng=? and no_faktur=?","sisa=sisa+?",4,new String[]{
-                                ""+tbResep.getValueAt(i,5).toString(),tabMode.getValueAt(i,9).toString(),KdBarang.getText(),tabMode.getValueAt(i,10).toString()
+                                ""+tabMode.getValueAt(tbResep.convertRowIndexToModel(i),5).toString(),tabMode.getValueAt(tbResep.convertRowIndexToModel(i),9).toString(),KdBarang.getText(),tabMode.getValueAt(tbResep.convertRowIndexToModel(i),10).toString()
                             });
-                            Trackobat.catatRiwayat(KdBarang.getText(),Valid.SetAngka(tbResep.getValueAt(i,5).toString()),0,"Resep Pulang",akses.getkode(),tbResep.getValueAt(i,11).toString(),"Hapus",tbResep.getValueAt(i,9).toString(),tbResep.getValueAt(i,10).toString(),TNoRw.getText()+" "+TPasien.getText());
-                            Sequel.menyimpan("gudangbarang","'"+KdBarang.getText()+"','"+tbResep.getValueAt(i,11).toString()+"','"+tbResep.getValueAt(i,5).toString()+"','"+tbResep.getValueAt(i,9).toString()+"','"+tbResep.getValueAt(i,10).toString()+"'",
-                                         "stok=stok+'"+tbResep.getValueAt(i,5).toString()+"'","kode_brng='"+KdBarang.getText()+"' and kd_bangsal='"+tbResep.getValueAt(i,11).toString()+"' and no_batch='"+tbResep.getValueAt(i,9).toString()+"' and no_faktur='"+tbResep.getValueAt(i,10).toString()+"'");
+                            Trackobat.catatRiwayat(KdBarang.getText(),Valid.SetAngka(tabMode.getValueAt(tbResep.convertRowIndexToModel(i),5).toString()),0,"Resep Pulang",akses.getkode(),tabMode.getValueAt(tbResep.convertRowIndexToModel(i),11).toString(),"Hapus",tabMode.getValueAt(tbResep.convertRowIndexToModel(i),9).toString(),tabMode.getValueAt(tbResep.convertRowIndexToModel(i),10).toString(),TNoRw.getText()+" "+TPasien.getText());
+                            Sequel.menyimpan("gudangbarang","'"+KdBarang.getText()+"','"+tabMode.getValueAt(tbResep.convertRowIndexToModel(i),11).toString()+"','"+tabMode.getValueAt(tbResep.convertRowIndexToModel(i),5).toString()+"','"+tabMode.getValueAt(tbResep.convertRowIndexToModel(i),9).toString()+"','"+tabMode.getValueAt(tbResep.convertRowIndexToModel(i),10).toString()+"'",
+                                         "stok=stok+'"+tabMode.getValueAt(tbResep.convertRowIndexToModel(i),5).toString()+"'","kode_brng='"+KdBarang.getText()+"' and kd_bangsal='"+tabMode.getValueAt(tbResep.convertRowIndexToModel(i),11).toString()+"' and no_batch='"+tabMode.getValueAt(tbResep.convertRowIndexToModel(i),9).toString()+"' and no_faktur='"+tabMode.getValueAt(tbResep.convertRowIndexToModel(i),10).toString()+"'");
                         }else{
-                            Trackobat.catatRiwayat(KdBarang.getText(),Valid.SetAngka(tbResep.getValueAt(i,5).toString()),0,"Resep Pulang",akses.getkode(),tbResep.getValueAt(i,11).toString(),"Hapus","","",TNoRw.getText()+" "+TPasien.getText());
-                            Sequel.menyimpan("gudangbarang","'"+KdBarang.getText()+"','"+tbResep.getValueAt(i,11).toString()+"','"+tbResep.getValueAt(i,5).toString()+"','',''",
-                                         "stok=stok+'"+tbResep.getValueAt(i,5).toString()+"'","kode_brng='"+KdBarang.getText()+"' and kd_bangsal='"+tbResep.getValueAt(i,11).toString()+"' and no_batch='' and no_faktur=''");
+                            Trackobat.catatRiwayat(KdBarang.getText(),Valid.SetAngka(tabMode.getValueAt(tbResep.convertRowIndexToModel(i),5).toString()),0,"Resep Pulang",akses.getkode(),tabMode.getValueAt(tbResep.convertRowIndexToModel(i),11).toString(),"Hapus","","",TNoRw.getText()+" "+TPasien.getText());
+                            Sequel.menyimpan("gudangbarang","'"+KdBarang.getText()+"','"+tabMode.getValueAt(tbResep.convertRowIndexToModel(i),11).toString()+"','"+tabMode.getValueAt(tbResep.convertRowIndexToModel(i),5).toString()+"','',''",
+                                         "stok=stok+'"+tabMode.getValueAt(tbResep.convertRowIndexToModel(i),5).toString()+"'","kode_brng='"+KdBarang.getText()+"' and kd_bangsal='"+tabMode.getValueAt(tbResep.convertRowIndexToModel(i),11).toString()+"' and no_batch='' and no_faktur=''");
                         }
                     }else{
                         sukses=false;
@@ -577,9 +577,9 @@ public final class DlgResepPulang extends javax.swing.JDialog {
                     }
                     Sequel.AutoComitTrue();
                     if(sukses==true){
-                        LCount1.setText(""+Valid.SetAngka(jumlahtotal-Double.parseDouble(tbResep.getValueAt(i,7).toString())));
-                        tabMode.removeRow(i);
-                        LCount.setText(""+tabMode.getRowCount());
+                        LCount1.setText(""+Valid.SetAngka(jumlahtotal-Double.parseDouble(tabMode.getValueAt(tbResep.convertRowIndexToModel(i),7).toString())));
+                        tabMode.removeRow(tbResep.convertRowIndexToModel(i));
+                        LCount.setText(""+tbResep.getRowCount());
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Silahkan pilih data untuk menghapus..!!");
@@ -712,7 +712,7 @@ public final class DlgResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbResepMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbResepMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbResep.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -721,7 +721,7 @@ public final class DlgResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbResepMouseClicked
 
     private void tbResepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbResepKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbResep.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -805,7 +805,7 @@ public final class DlgResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_TNoRwKeyPressed
 
     private void ppResepObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObatActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbResep.getSelectedRow()<= -1){
@@ -837,7 +837,7 @@ public final class DlgResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_ppResepObatActionPerformed
 
     private void ppResepObat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObat1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbResep.getSelectedRow()<= -1){
@@ -870,7 +870,7 @@ public final class DlgResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_ppResepObat1ActionPerformed
 
     private void ppResepObat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObat2ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbResep.getSelectedRow()<= -1){
@@ -1024,7 +1024,7 @@ public final class DlgResepPulang extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbResep.getRowCount());
             LCount1.setText(""+Valid.SetAngka(jumlahtotal));
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
@@ -1037,11 +1037,11 @@ public final class DlgResepPulang extends javax.swing.JDialog {
 
     private void getData() {
         if(tbResep.getSelectedRow()!= -1){
-            TNoRw.setText(tbResep.getValueAt(tbResep.getSelectedRow(),0).toString());
-            TPasien.setText(tbResep.getValueAt(tbResep.getSelectedRow(),3).toString());
-            Sequel.cariIsi("select databarang.kode_brng from databarang where concat(databarang.kode_brng,' ',databarang.nama_brng)=?",KdBarang,tbResep.getValueAt(tbResep.getSelectedRow(),4).toString());
-            Sequel.cariIsi("select databarang.nama_brng from databarang where concat(databarang.kode_brng,' ',databarang.nama_brng)=?",NmBarang,tbResep.getValueAt(tbResep.getSelectedRow(),4).toString());
-            Sequel.cariIsi("select databarang.kode_sat from databarang where concat(databarang.kode_brng,' ',databarang.nama_brng)=?",Satuan,tbResep.getValueAt(tbResep.getSelectedRow(),4).toString());
+            TNoRw.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),0).toString());
+            TPasien.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),3).toString());
+            Sequel.cariIsi("select databarang.kode_brng from databarang where concat(databarang.kode_brng,' ',databarang.nama_brng)=?",KdBarang,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),4).toString());
+            Sequel.cariIsi("select databarang.nama_brng from databarang where concat(databarang.kode_brng,' ',databarang.nama_brng)=?",NmBarang,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),4).toString());
+            Sequel.cariIsi("select databarang.kode_sat from databarang where concat(databarang.kode_brng,' ',databarang.nama_brng)=?",Satuan,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),4).toString());
          }
     }
 

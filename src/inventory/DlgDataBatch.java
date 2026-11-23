@@ -471,7 +471,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
-        tbDokter.setAutoCreateRowSorter(false);
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1054,7 +1054,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbDokter.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1063,7 +1063,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbDokter.getRowCount() != 0) {
             if (evt.getKeyCode() == KeyEvent.VK_SHIFT) {
                 TCari.setText("");
                 TCari.requestFocus();
@@ -1077,9 +1077,9 @@ public class DlgDataBatch extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for (i = 0; i < tbDokter.getRowCount(); i++) {
-            if (tbDokter.getValueAt(i, 0).toString().equals("true")) {
+            if (tabMode.getValueAt(tbDokter.convertRowIndexToModel(i), 0).toString().equals("true")) {
                 Sequel.queryu2("delete from data_batch where no_batch=? and kode_brng=?",2,new String[]{
-                    tbDokter.getValueAt(i, 3).toString(),tbDokter.getValueAt(i, 1).toString()
+                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(i), 3).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i), 1).toString()
                 });
             }
         }
@@ -1138,10 +1138,10 @@ public class DlgDataBatch extends javax.swing.JDialog {
                         NoBatch.getText(),Kd.getText(),Valid.SetTgl(TanggalDatang.getSelectedItem()+ ""),Valid.SetTgl(DTPExpired.getSelectedItem() + ""),
                         AsalBarang.getSelectedItem().toString(),NoFaktur.getText(),dasar.getText(),beli.getText(),ralan.getText(),kelas1.getText(),kelas2.getText(),
                         kelas3.getText(),utama.getText(),kelasvip.getText(),kelasvvip.getText(),beliluar.getText(),jualbebas.getText(),karyawan.getText(),
-                        JmlBeli.getText(),Sisa.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(), 3).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(),
-                        tbDokter.getValueAt(tbDokter.getSelectedRow(), 4).toString()
+                        JmlBeli.getText(),Sisa.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 3).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 1).toString(),
+                        tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 4).toString()
                     })==true){
-                        if (tabMode.getRowCount() != 0) {
+                        if (tbDokter.getRowCount() != 0) {
                             runBackground(() ->tampil());
                         }
                         emptTeks();
@@ -1561,7 +1561,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
     }//GEN-LAST:event_DTPExpiredKeyPressed
 
     private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyReleased
-        if (tabMode.getRowCount() != 0) {
+        if (tbDokter.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
@@ -1753,6 +1753,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbDokter.suspendSorting();
         Valid.tabelKosong(tabMode);
         try {
             if(TCari.getText().trim().equals("")){
@@ -1812,7 +1813,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
                         rs.getDouble("jumlahbeli"),rs.getDouble("sisa")
                     });
                 }
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbDokter.getRowCount());
             } catch (Exception e) {
                 System.out.println("Notifikasi : " + e);
             } finally{
@@ -1827,6 +1828,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
+        tbDokter.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1854,27 +1856,27 @@ public class DlgDataBatch extends javax.swing.JDialog {
     private void getData() {
         row = tbDokter.getSelectedRow();
         if (row != -1) {
-            Kd.setText(tbDokter.getValueAt(row, 1).toString());
-            Nm.setText(tbDokter.getValueAt(row, 2).toString());
-            NoBatch.setText(tbDokter.getValueAt(row, 3).toString());
-            NoFaktur.setText(tbDokter.getValueAt(row, 4).toString());
-            Valid.SetTgl(TanggalDatang, tbDokter.getValueAt(row,5).toString());
-            Valid.SetTgl(DTPExpired, tbDokter.getValueAt(row,6).toString());
-            dasar.setText(Double.toString(Double.parseDouble(tbDokter.getValueAt(row, 7).toString())));
-            beli.setText(Double.toString(Double.parseDouble(tbDokter.getValueAt(row, 8).toString())));
-            ralan.setText(Double.toString(Double.parseDouble(tbDokter.getValueAt(row, 9).toString())));
-            kelas1.setText(Double.toString(Double.parseDouble(tbDokter.getValueAt(row, 10).toString())));
-            kelas2.setText(Double.toString(Double.parseDouble(tbDokter.getValueAt(row, 11).toString())));
-            kelas3.setText(Double.toString(Double.parseDouble(tbDokter.getValueAt(row, 12).toString())));
-            utama.setText(Double.toString(Double.parseDouble(tbDokter.getValueAt(row, 13).toString())));
-            kelasvip.setText(Double.toString(Double.parseDouble(tbDokter.getValueAt(row, 14).toString())));
-            kelasvvip.setText(Double.toString(Double.parseDouble(tbDokter.getValueAt(row, 15).toString())));
-            beliluar.setText(Double.toString(Double.parseDouble(tbDokter.getValueAt(row, 16).toString())));
-            jualbebas.setText(Double.toString(Double.parseDouble(tbDokter.getValueAt(row, 17).toString())));
-            karyawan.setText(Double.toString(Double.parseDouble(tbDokter.getValueAt(row, 18).toString())));
-            AsalBarang.setSelectedItem(tbDokter.getValueAt(row,19).toString());
-            JmlBeli.setText(Double.toString(Double.parseDouble(tbDokter.getValueAt(row, 20).toString())));
-            Sisa.setText(Double.toString(Double.parseDouble(tbDokter.getValueAt(row, 21).toString())));
+            Kd.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 1).toString());
+            Nm.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 2).toString());
+            NoBatch.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 3).toString());
+            NoFaktur.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 4).toString());
+            Valid.SetTgl(TanggalDatang, tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),5).toString());
+            Valid.SetTgl(DTPExpired, tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),6).toString());
+            dasar.setText(Double.toString(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 7).toString())));
+            beli.setText(Double.toString(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 8).toString())));
+            ralan.setText(Double.toString(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 9).toString())));
+            kelas1.setText(Double.toString(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 10).toString())));
+            kelas2.setText(Double.toString(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 11).toString())));
+            kelas3.setText(Double.toString(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 12).toString())));
+            utama.setText(Double.toString(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 13).toString())));
+            kelasvip.setText(Double.toString(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 14).toString())));
+            kelasvvip.setText(Double.toString(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 15).toString())));
+            beliluar.setText(Double.toString(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 16).toString())));
+            jualbebas.setText(Double.toString(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 17).toString())));
+            karyawan.setText(Double.toString(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 18).toString())));
+            AsalBarang.setSelectedItem(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),19).toString());
+            JmlBeli.setText(Double.toString(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 20).toString())));
+            Sisa.setText(Double.toString(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 21).toString())));
         }
     }
 

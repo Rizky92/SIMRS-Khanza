@@ -1207,7 +1207,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                         param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,param11,param12,param13,param14,param15,param16,KdPetugas.getText(),NmPetugas.getText()
                     });
                     emptTeks();
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText(""+tbObat.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -1237,7 +1237,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else{
-                if(KdPetugas.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString())){
+                if(KdPetugas.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23).toString())){
                     hapus();
                 }else{
                     JOptionPane.showMessageDialog(null,"Hanya bisa dihapus oleh petugas yang bersangkutan..!!");
@@ -1267,7 +1267,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(KdPetugas.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString())){
+                    if(KdPetugas.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23).toString())){
                         ganti();
                     }else{
                         JOptionPane.showMessageDialog(null,"Hanya bisa diganti oleh petugas yang bersangkutan..!!");
@@ -1422,7 +1422,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1431,7 +1431,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1515,7 +1515,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                         "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "+
                         "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
                         "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
-                        "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where mpp_skrining.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
+                        "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where mpp_skrining.no_rawat='"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"'",param);
         }
     }//GEN-LAST:event_MnCetakLembarSkriningActionPerformed
 
@@ -1524,7 +1524,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     }//GEN-LAST:event_TglSkriningKeyPressed
 
     private void MnEvaluasiFormAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnEvaluasiFormAActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -1543,7 +1543,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     }//GEN-LAST:event_MnEvaluasiFormAActionPerformed
 
     private void MnEvaluasiFormBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnEvaluasiFormBActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -1805,7 +1805,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -1831,95 +1831,95 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            JK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString().replaceAll("L","Laki-laki").replaceAll("P","Perempuan"));
-            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            AlamatLengkap.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            Valid.SetTgl(TglSkrining,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString().equals("Ya")){
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            JK.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString().replaceAll("L","Laki-laki").replaceAll("P","Perempuan"));
+            TglLahir.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            AlamatLengkap.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            Valid.SetTgl(TglSkrining,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString().equals("Ya")){
                 Param1Ya.setSelected(true);
             }else{
                 Param1Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("Ya")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString().equals("Ya")){
                 Param2Ya.setSelected(true);
             }else{
                 Param2Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString().equals("Ya")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString().equals("Ya")){
                 Param3Ya.setSelected(true);
             }else{
                 Param3Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString().equals("Ya")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString().equals("Ya")){
                 Param4Ya.setSelected(true);
             }else{
                 Param4Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString().equals("Ya")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString().equals("Ya")){
                 Param5Ya.setSelected(true);
             }else{
                 Param5Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString().equals("Ya")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString().equals("Ya")){
                 Param6Ya.setSelected(true);
             }else{
                 Param6Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString().equals("Ya")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString().equals("Ya")){
                 Param7Ya.setSelected(true);
             }else{
                 Param7Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString().equals("Ya")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString().equals("Ya")){
                 Param8Ya.setSelected(true);
             }else{
                 Param8Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString().equals("Ya")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString().equals("Ya")){
                 Param9Ya.setSelected(true);
             }else{
                 Param9Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString().equals("Ya")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString().equals("Ya")){
                 Param10Ya.setSelected(true);
             }else{
                 Param10Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString().equals("Ya")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17).toString().equals("Ya")){
                 Param11Ya.setSelected(true);
             }else{
                 Param11Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString().equals("Ya")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18).toString().equals("Ya")){
                 Param12Ya.setSelected(true);
             }else{
                 Param12Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString().equals("Ya")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19).toString().equals("Ya")){
                 Param13Ya.setSelected(true);
             }else{
                 Param13Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString().equals("Ya")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20).toString().equals("Ya")){
                 Param14Ya.setSelected(true);
             }else{
                 Param14Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString().equals("Ya")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString().equals("Ya")){
                 Param15Ya.setSelected(true);
             }else{
                 Param15Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString().equals("Ya")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22).toString().equals("Ya")){
                 Param16Ya.setSelected(true);
             }else{
                 Param16Tidak.setSelected(true);
             }
-            KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
-            NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
+            KdPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23).toString());
+            NmPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),24).toString());
         }
     }
 
@@ -1999,11 +1999,11 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
 
     private void hapus() {
         if(Sequel.queryu2tf("delete from mpp_skrining where no_rawat=? and tanggal=?",2,new String[]{
-            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()
+            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString()
         })==true){
-            tabMode.removeRow(tbObat.getSelectedRow());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
             emptTeks();
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbObat.getRowCount());
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
@@ -2076,33 +2076,33 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
         }
         if(Sequel.mengedittf("mpp_skrining","no_rawat=? and tanggal=?","no_rawat=?,tanggal=?,param1=?,param2=?,param3=?,param4=?,param5=?,param6=?,param7=?,param8=?,param9=?,param10=?,param11=?,param12=?,param13=?,param14=?,param15=?,param16=?,nip=?",21,new String[]{
                 TNoRw.getText(),Valid.SetTgl(TglSkrining.getSelectedItem()+""), param1, param2, param3, param4, param5, param6, param7,param8, param9, param10, param11, param12, param13, param14, param15, param16,
-                KdPetugas.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()
+                KdPetugas.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString()
             })==true){
-                tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
-                tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),1);
-                tbObat.setValueAt(TPasien.getText(),tbObat.getSelectedRow(),2);
-                tbObat.setValueAt(JK.getText().substring(0,1),tbObat.getSelectedRow(),3);
-                tbObat.setValueAt(TglLahir.getText(),tbObat.getSelectedRow(),4);
-                tbObat.setValueAt(AlamatLengkap.getText(),tbObat.getSelectedRow(),5);
-                tbObat.setValueAt(Valid.SetTgl(TglSkrining.getSelectedItem()+""),tbObat.getSelectedRow(),6);
-                tbObat.setValueAt(param1,tbObat.getSelectedRow(),7);
-                tbObat.setValueAt(param2,tbObat.getSelectedRow(),8);
-                tbObat.setValueAt(param3,tbObat.getSelectedRow(),9);
-                tbObat.setValueAt(param4,tbObat.getSelectedRow(),10);
-                tbObat.setValueAt(param5,tbObat.getSelectedRow(),11);
-                tbObat.setValueAt(param6,tbObat.getSelectedRow(),12);
-                tbObat.setValueAt(param7,tbObat.getSelectedRow(),13);
-                tbObat.setValueAt(param8,tbObat.getSelectedRow(),14);
-                tbObat.setValueAt(param9,tbObat.getSelectedRow(),15);
-                tbObat.setValueAt(param10,tbObat.getSelectedRow(),16);
-                tbObat.setValueAt(param11,tbObat.getSelectedRow(),17);
-                tbObat.setValueAt(param12,tbObat.getSelectedRow(),18);
-                tbObat.setValueAt(param13,tbObat.getSelectedRow(),19);
-                tbObat.setValueAt(param14,tbObat.getSelectedRow(),20);
-                tbObat.setValueAt(param15,tbObat.getSelectedRow(),21);
-                tbObat.setValueAt(param16,tbObat.getSelectedRow(),22);
-                tbObat.setValueAt(KdPetugas.getText(),tbObat.getSelectedRow(),23);
-                tbObat.setValueAt(NmPetugas.getText(),tbObat.getSelectedRow(),24);
+                tabMode.setValueAt(TNoRw.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0);
+                tabMode.setValueAt(TNoRM.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1);
+                tabMode.setValueAt(TPasien.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2);
+                tabMode.setValueAt(JK.getText().substring(0,1),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3);
+                tabMode.setValueAt(TglLahir.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4);
+                tabMode.setValueAt(AlamatLengkap.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5);
+                tabMode.setValueAt(Valid.SetTgl(TglSkrining.getSelectedItem()+""),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6);
+                tabMode.setValueAt(param1,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7);
+                tabMode.setValueAt(param2,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8);
+                tabMode.setValueAt(param3,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9);
+                tabMode.setValueAt(param4,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10);
+                tabMode.setValueAt(param5,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11);
+                tabMode.setValueAt(param6,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12);
+                tabMode.setValueAt(param7,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13);
+                tabMode.setValueAt(param8,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14);
+                tabMode.setValueAt(param9,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15);
+                tabMode.setValueAt(param10,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16);
+                tabMode.setValueAt(param11,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17);
+                tabMode.setValueAt(param12,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18);
+                tabMode.setValueAt(param13,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19);
+                tabMode.setValueAt(param14,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20);
+                tabMode.setValueAt(param15,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21);
+                tabMode.setValueAt(param16,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22);
+                tabMode.setValueAt(KdPetugas.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23);
+                tabMode.setValueAt(NmPetugas.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),24);
                 emptTeks();
         }
     }

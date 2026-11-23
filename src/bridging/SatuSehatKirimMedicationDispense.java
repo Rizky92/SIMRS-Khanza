@@ -702,10 +702,10 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&tbObat.getValueAt(i,26).toString().equals("")){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString().equals(""))&&tabMode.getValueAt(tbObat.convertRowIndexToModel(i),26).toString().equals("")){
                     try {
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString());
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString());
                         if (iddokter.isBlank()) {
                             System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                             continue;
@@ -715,7 +715,7 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                             continue;
                         }
 
-                        arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
+                        arrSplit = tabMode.getValueAt(tbObat.convertRowIndexToModel(i),24).toString().toLowerCase().split("x");
                         signa1="1";
                         try {
                             if(!arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
@@ -744,12 +744,12 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                                             "{" +
                                                 "\"system\": \"http://sys-ids.kemkes.go.id/prescription/"+koneksiDB.IDSATUSEHAT()+"\"," +
                                                 "\"use\": \"official\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,25).toString()+"\"" +
+                                                "\"value\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),25).toString()+"\"" +
                                             "}," +
                                             "{" +
                                                 "\"system\": \"http://sys-ids.kemkes.go.id/prescription-item/"+koneksiDB.IDSATUSEHAT()+"\"," +
                                                 "\"use\": \"official\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
+                                                "\"value\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString()+"\"" +
                                             "}" +
                                         "]," +
                                         "\"status\": \"completed\"," +
@@ -757,50 +757,50 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                                             "\"coding\": [" +
                                                 "{" +
                                                     "\"system\": \"http://terminology.hl7.org/fhir/CodeSystem/medicationdispense-category\"," +
-                                                    "\"code\": \""+tbObat.getValueAt(i,30).toString().replaceAll("Ralan","outpatient").replaceAll("Ranap","inpatient")+"\"," +
-                                                    "\"display\": \""+tbObat.getValueAt(i,30).toString().replaceAll("Ralan","Outpatient").replaceAll("Ranap","Inpatient")+"\"" +
+                                                    "\"code\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),30).toString().replaceAll("Ralan","outpatient").replaceAll("Ranap","inpatient")+"\"," +
+                                                    "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),30).toString().replaceAll("Ralan","Outpatient").replaceAll("Ranap","Inpatient")+"\"" +
                                                 "}" +
                                             "]" +
                                         "}," +
                                         "\"medicationReference\": {" +
-                                            "\"reference\": \"Medication/"+tbObat.getValueAt(i,23).toString()+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,12).toString()+"\"" +
+                                            "\"reference\": \"Medication/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),23).toString()+"\"," +
+                                            "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),12).toString()+"\"" +
                                         "}," +
                                         "\"subject\": {" +
                                             "\"reference\": \"Patient/"+idpasien+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                            "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString()+"\"" +
                                         "}," +
                                         "\"context\": {" +
-                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString()+"\"" +
                                         "}," +
                                         "\"performer\": [" +
                                             "{" +
                                                 "\"actor\": {" +
                                                     "\"reference\": \"Practitioner/"+iddokter+"\"," +
-                                                    "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
+                                                    "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),6).toString()+"\"" +
                                                 "}" +
                                             "}" +
                                         "],"+
                                         "\"location\": {" +
-                                            "\"reference\": \"Location/"+tbObat.getValueAt(i,31).toString()+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,32).toString()+"\"" +
+                                            "\"reference\": \"Location/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),31).toString()+"\"," +
+                                            "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),32).toString()+"\"" +
                                         "},"+
                                         "\"authorizingPrescription\": [" +
                                             "{" +
-                                                "\"reference\": \"MedicationRequest/"+tbObat.getValueAt(i,33).toString()+"\"" +
+                                                "\"reference\": \"MedicationRequest/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),33).toString()+"\"" +
                                             "}" +
                                         "],"+
                                         "\"quantity\": {" +
-                                            "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
-                                            "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
-                                            "\"value\": "+tbObat.getValueAt(i,22).toString()+
+                                            "\"system\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),20).toString()+"\"," +
+                                            "\"code\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),19).toString()+"\"," +
+                                            "\"value\": "+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),22).toString()+
                                         "}," +
-                                        "\"whenPrepared\": \""+tbObat.getValueAt(i,21).toString().replaceAll(" ","T")+"Z\"," +
-                                        "\"whenHandedOver\": \""+tbObat.getValueAt(i,29).toString().replaceAll(" ","T")+"Z\","+
+                                        "\"whenPrepared\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),21).toString().replaceAll(" ","T")+"Z\"," +
+                                        "\"whenHandedOver\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),29).toString().replaceAll(" ","T")+"Z\","+
                                         "\"dosageInstruction\": [" +
                                             "{" +
                                                 "\"sequence\": 1," +
-                                                "\"text\": \""+tbObat.getValueAt(i,24).toString()+"\"," +
+                                                "\"text\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),24).toString()+"\"," +
                                                 "\"timing\": {" +
                                                     "\"repeat\": {" +
                                                         "\"frequency\": "+signa2+"," +
@@ -811,9 +811,9 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                                                 "\"route\": {" +
                                                     "\"coding\": [" +
                                                         "{" +
-                                                            "\"system\": \""+tbObat.getValueAt(i,17).toString()+"\"," +
-                                                            "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\"," +
-                                                            "\"display\": \""+tbObat.getValueAt(i,18).toString()+"\"" +
+                                                            "\"system\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),17).toString()+"\"," +
+                                                            "\"code\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),16).toString()+"\"," +
+                                                            "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),18).toString()+"\"" +
                                                         "}" +
                                                     "]" +
                                                 "}," +
@@ -821,9 +821,9 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                                                     "{" +
                                                         "\"doseQuantity\": {" +
                                                             "\"value\": "+signa1+"," +
-                                                            "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
-                                                            "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
-                                                            "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
+                                                            "\"unit\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),19).toString()+"\"," +
+                                                            "\"system\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),20).toString()+"\"," +
+                                                            "\"code\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),19).toString()+"\"" +
                                                         "}" +
                                                     "}" +
                                                 "]" +
@@ -839,8 +839,8 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.menyimpantf2("satu_sehat_medicationdispense","?,?,?,?,?,?,?","Obat/Alkes",7,new String[]{
-                                    tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,29).toString().substring(0,10),tbObat.getValueAt(i,29).toString().substring(11,19),
-                                    tbObat.getValueAt(i,11).toString(),tbObat.getValueAt(i,27).toString(),tbObat.getValueAt(i,28).toString(),response.asText()
+                                    tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),29).toString().substring(0,10),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),29).toString().substring(11,19),
+                                    tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),27).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),28).toString(),response.asText()
                                 })==true){
                                     pengirim.setValueAt(tbObat,response.asText(),i,26);
                                     pengirim.setValueAt(tbObat,false,i,0);
@@ -861,13 +861,13 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -879,10 +879,10 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&(!tbObat.getValueAt(i,26).toString().equals(""))){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),26).toString().equals(""))){
                     try {
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString());
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString());
                         if (iddokter.isBlank()) {
                             System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                             continue;
@@ -892,7 +892,7 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                             continue;
                         }
 
-                        arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
+                        arrSplit = tabMode.getValueAt(tbObat.convertRowIndexToModel(i),24).toString().toLowerCase().split("x");
                         signa1="1";
                         try {
                             if(!arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
@@ -916,17 +916,17 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"MedicationDispense\"," +
-                                        "\"id\": \""+tbObat.getValueAt(i,26).toString()+"\"," +
+                                        "\"id\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),26).toString()+"\"," +
                                         "\"identifier\": [" +
                                             "{" +
                                                 "\"system\": \"http://sys-ids.kemkes.go.id/medicationdispense/"+koneksiDB.IDSATUSEHAT()+"\"," +
                                                 "\"use\": \"official\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,25).toString()+"\"" +
+                                                "\"value\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),25).toString()+"\"" +
                                             "}," +
                                             "{" +
                                                 "\"system\": \"http://sys-ids.kemkes.go.id/medicationdispense-item/"+koneksiDB.IDSATUSEHAT()+"\"," +
                                                 "\"use\": \"official\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
+                                                "\"value\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString()+"\"" +
                                             "}" +
                                         "]," +
                                         "\"status\": \"completed\"," +
@@ -934,50 +934,50 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                                             "\"coding\": [" +
                                                 "{" +
                                                     "\"system\": \"http://terminology.hl7.org/fhir/CodeSystem/medicationdispense-category\"," +
-                                                    "\"code\": \""+tbObat.getValueAt(i,30).toString().replaceAll("Ralan","outpatient").replaceAll("Ranap","inpatient")+"\"," +
-                                                    "\"display\": \""+tbObat.getValueAt(i,30).toString().replaceAll("Ralan","Outpatient").replaceAll("Ranap","Inpatient")+"\"" +
+                                                    "\"code\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),30).toString().replaceAll("Ralan","outpatient").replaceAll("Ranap","inpatient")+"\"," +
+                                                    "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),30).toString().replaceAll("Ralan","Outpatient").replaceAll("Ranap","Inpatient")+"\"" +
                                                 "}" +
                                             "]" +
                                         "}," +
                                         "\"medicationReference\": {" +
-                                            "\"reference\": \"Medication/"+tbObat.getValueAt(i,23).toString()+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,12).toString()+"\"" +
+                                            "\"reference\": \"Medication/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),23).toString()+"\"," +
+                                            "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),12).toString()+"\"" +
                                         "}," +
                                         "\"subject\": {" +
                                             "\"reference\": \"Patient/"+idpasien+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                            "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString()+"\"" +
                                         "}," +
                                         "\"context\": {" +
-                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString()+"\"" +
                                         "}," +
                                         "\"performer\": [" +
                                             "{" +
                                                 "\"actor\": {" +
                                                     "\"reference\": \"Practitioner/"+iddokter+"\"," +
-                                                    "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
+                                                    "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),6).toString()+"\"" +
                                                 "}" +
                                             "}" +
                                         "],"+
                                         "\"location\": {" +
-                                            "\"reference\": \"Location/"+tbObat.getValueAt(i,31).toString()+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,32).toString()+"\"" +
+                                            "\"reference\": \"Location/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),31).toString()+"\"," +
+                                            "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),32).toString()+"\"" +
                                         "},"+
                                         "\"authorizingPrescription\": [" +
                                             "{" +
-                                                "\"reference\": \"MedicationRequest/"+tbObat.getValueAt(i,33).toString()+"\"" +
+                                                "\"reference\": \"MedicationRequest/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),33).toString()+"\"" +
                                             "}" +
                                         "],"+
                                         "\"quantity\": {" +
-                                            "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
-                                            "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
-                                            "\"value\": "+tbObat.getValueAt(i,22).toString()+"," +
+                                            "\"system\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),20).toString()+"\"," +
+                                            "\"code\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),19).toString()+"\"" +
+                                            "\"value\": "+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),22).toString()+"," +
                                         "}," +
-                                        "\"whenPrepared\": \""+tbObat.getValueAt(i,21).toString().replaceAll(" ","T")+"Z\"," +
-                                        "\"whenHandedOver\": \""+tbObat.getValueAt(i,29).toString().replaceAll(" ","T")+"Z\","+
+                                        "\"whenPrepared\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),21).toString().replaceAll(" ","T")+"Z\"," +
+                                        "\"whenHandedOver\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),29).toString().replaceAll(" ","T")+"Z\","+
                                         "\"dosageInstruction\": [" +
                                             "{" +
                                                 "\"sequence\": 1," +
-                                                "\"text\": \""+tbObat.getValueAt(i,24).toString()+"\"," +
+                                                "\"text\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),24).toString()+"\"," +
                                                 "\"timing\": {" +
                                                     "\"repeat\": {" +
                                                         "\"frequency\": "+signa2+"," +
@@ -988,9 +988,9 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                                                 "\"route\": {" +
                                                     "\"coding\": [" +
                                                         "{" +
-                                                            "\"system\": \""+tbObat.getValueAt(i,17).toString()+"\"," +
-                                                            "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\"," +
-                                                            "\"display\": \""+tbObat.getValueAt(i,18).toString()+"\"" +
+                                                            "\"system\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),17).toString()+"\"," +
+                                                            "\"code\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),16).toString()+"\"," +
+                                                            "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),18).toString()+"\"" +
                                                         "}" +
                                                     "]" +
                                                 "}," +
@@ -998,19 +998,19 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                                                     "{" +
                                                         "\"doseQuantity\": {" +
                                                             "\"value\": "+signa1+"," +
-                                                            "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
-                                                            "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
-                                                            "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
+                                                            "\"unit\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),19).toString()+"\"," +
+                                                            "\"system\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),20).toString()+"\"," +
+                                                            "\"code\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),19).toString()+"\"" +
                                                         "}" +
                                                     "}" +
                                                 "]" +
                                             "}" +
                                         "]" +
                                     "}";
-                            System.out.println("URL : "+link+"/MedicationDispense/"+tbObat.getValueAt(i,26).toString());
+                            System.out.println("URL : "+link+"/MedicationDispense/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),26).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.kirimSmc(link+"/MedicationDispense/"+tbObat.getValueAt(i,26).toString(), HttpMethod.PUT, requestEntity);
+                            json=api.kirimSmc(link+"/MedicationDispense/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),26).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             pengirim.setValueAt(tbObat,false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -1067,8 +1067,8 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
 
     private void ppPilihBelumDikirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihBelumDikirimActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            if (tbObat.getValueAt(i, 26).toString().isBlank()) {
-                tbObat.setValueAt(true,i,0);
+            if (tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 26).toString().isBlank()) {
+                tabMode.setValueAt(true,tbObat.convertRowIndexToModel(i),0);
             }
         }
     }//GEN-LAST:event_ppPilihBelumDikirimActionPerformed
@@ -1118,6 +1118,7 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -1250,7 +1251,8 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
+        tbObat.resumeSorting();
     }
 
     public void isCek(){

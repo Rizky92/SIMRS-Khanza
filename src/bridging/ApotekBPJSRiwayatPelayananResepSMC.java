@@ -392,6 +392,7 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
     // End of variables declaration//GEN-END:variables
 
     private void tampilSmc() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try {
             HttpHeaders headers = new HttpHeaders();
@@ -440,6 +441,7 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
                 JOptionPane.showMessageDialog(null, "Koneksi ke server BPJS terputus..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             }
         }
-        LCount.setText(tabMode.getRowCount() + "");
+        LCount.setText(tbKamar.getRowCount() + "");
+        tbKamar.resumeSorting();
     }
 }

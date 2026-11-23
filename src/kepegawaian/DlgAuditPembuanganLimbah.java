@@ -204,6 +204,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
         Scroll.setOpaque(true);
         Scroll.setPreferredSize(new java.awt.Dimension(452, 200));
 
+        tbObat.setSortable(false);
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setName("tbObat"); // NOI18N
         tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -735,7 +736,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()!= -1){
             if(Sequel.queryu2tf("delete from audit_pembuangan_limbah where id_ruang=? and tanggal=?",2,new String[]{
-                tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();
@@ -763,9 +764,9 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
                 Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),KdRuang.getText(),PemisahanLimbahOlehPenghasilLimbah.getSelectedItem().toString(),
                 LimbahInfeksiusDimasukkanKantongKuning.getSelectedItem().toString(),LimbahNoninfeksiusDimasukkanKantongHitam.getSelectedItem().toString(),LimbahTigaperempatDiikat.getSelectedItem().toString(),
                 LimbahSegeraDibawaKepembuanganSementara.getSelectedItem().toString(),KotakSampahDalamKondisiBersih.getSelectedItem().toString(),PembersihanTempatSampahDenganDesinfekten.getSelectedItem().toString(),
-                PembersihanPenampunganSementaraDenganDesinfekten.getSelectedItem().toString(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                PembersihanPenampunganSementaraDenganDesinfekten.getSelectedItem().toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             });
-            if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+            if(tbObat.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -906,7 +907,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -915,7 +916,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1296,18 +1297,18 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            if(!tbObat.getValueAt(tbObat.getSelectedRow(),0).toString().equals("")){
-                KdRuang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-                NmRuang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-                PemisahanLimbahOlehPenghasilLimbah.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-                LimbahInfeksiusDimasukkanKantongKuning.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-                LimbahNoninfeksiusDimasukkanKantongHitam.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-                LimbahTigaperempatDiikat.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-                LimbahSegeraDibawaKepembuanganSementara.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-                KotakSampahDalamKondisiBersih.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-                PembersihanTempatSampahDenganDesinfekten.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-                PembersihanPenampunganSementaraDenganDesinfekten.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-                Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            if(!tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString().equals("")){
+                KdRuang.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+                NmRuang.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+                PemisahanLimbahOlehPenghasilLimbah.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+                LimbahInfeksiusDimasukkanKantongKuning.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+                LimbahNoninfeksiusDimasukkanKantongHitam.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+                LimbahTigaperempatDiikat.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+                LimbahSegeraDibawaKepembuanganSementara.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+                KotakSampahDalamKondisiBersih.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+                PembersihanTempatSampahDenganDesinfekten.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+                PembersihanPenampunganSementaraDenganDesinfekten.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+                Valid.SetTgl(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
             }
         }
     }

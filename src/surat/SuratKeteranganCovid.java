@@ -805,7 +805,7 @@ public final class SuratKeteranganCovid extends javax.swing.JDialog {
             if(tbObat.getSelectedRow()!= -1){
                 if(Sequel.mengedittf("surat_keterangan_covid","no_surat=?","no_surat=?,no_rawat=?,kd_dokter=?,nip=?,igm=?,igg=?,sehat=?,tidaksehat=?,berlakumulai=?,berlakuselsai=?",11,new String[]{
                     NoSurat.getText(),TNoRw.getText(),KdDokter.getText(),KdPetugas.getText(),IgM.getSelectedItem().toString(),IgG.getSelectedItem().toString(),(Sehat.isSelected()?"V":"x"),
-                    (TidakSehat.isSelected()?"V":"x"),Valid.SetTgl(TanggalAwal.getSelectedItem()+""),Valid.SetTgl(TanggalAkhir.getSelectedItem()+""),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                    (TidakSehat.isSelected()?"V":"x"),Valid.SetTgl(TanggalAwal.getSelectedItem()+""),Valid.SetTgl(TanggalAkhir.getSelectedItem()+""),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
                 })==true){
                     runBackground(() ->tampil());
                     emptTeks();
@@ -947,7 +947,7 @@ public final class SuratKeteranganCovid extends javax.swing.JDialog {
     }//GEN-LAST:event_TNoRMKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -960,7 +960,7 @@ public final class SuratKeteranganCovid extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void tbObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1201,6 +1201,7 @@ public final class SuratKeteranganCovid extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -1248,7 +1249,8 @@ public final class SuratKeteranganCovid extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
+        tbObat.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1268,28 +1270,28 @@ public final class SuratKeteranganCovid extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            KdDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            NmDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            IgM.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            IgG.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString().equals("V")){
+            NoSurat.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            KdDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            NmDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            KdPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            NmPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            IgM.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            IgG.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString().equals("V")){
                 Sehat.setSelected(true);
             }else{
                 Sehat.setSelected(false);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString().equals("V")){
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString().equals("V")){
                 TidakSehat.setSelected(true);
             }else{
                 TidakSehat.setSelected(false);
             }
-            Valid.SetTgl(TanggalAwal,tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            Valid.SetTgl(TanggalAkhir,tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
+            Valid.SetTgl(TanggalAwal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            Valid.SetTgl(TanggalAkhir,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
         }
     }
 

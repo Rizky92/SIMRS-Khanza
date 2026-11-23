@@ -826,7 +826,7 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()> -1){
-            Sequel.meghapus("perawatan_corona","no_rawat",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            Sequel.meghapus("perawatan_corona","no_rawat",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
             tampil();
         }else{
             JOptionPane.showMessageDialog(null,"Maaf silahkan pilih data terlebih dahulu..!!");
@@ -931,7 +931,7 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -940,7 +940,7 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1000,7 +1000,7 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
                     PlastikErat.getSelectedItem().toString(),DesinfektanJenazah.getSelectedItem().toString(),MobilJenazah.getSelectedItem().toString(),
                     DesinFektanMobilJenazah.getSelectedItem().toString(),StatusCovid.getSelectedItem().toString(),NoJaminan.getText(),Episodes1.getText(),
                     Episodes2.getText(),Episodes3.getText(),Episodes4.getText(),Episodes5.getText(),Episodes6.getText(),Comorbid.getSelectedItem().toString(),
-                    tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
                 })==true){
                     tampil();
                     emptTeks();
@@ -1227,7 +1227,7 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -1255,25 +1255,25 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoRawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            NoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            NamaPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            PemulasaranJenazah.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            KantongJenazah.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            PetiJenazah.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            PlastikErat.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            DesinfektanJenazah.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            MobilJenazah.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            DesinFektanMobilJenazah.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            StatusCovid.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            NoJaminan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            Episodes1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            Episodes2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            Episodes3.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            Episodes4.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            Episodes5.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            Episodes6.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            Comorbid.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
+            NoRawat.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            NoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            NamaPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            PemulasaranJenazah.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            KantongJenazah.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            PetiJenazah.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            PlastikErat.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            DesinfektanJenazah.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            MobilJenazah.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            DesinFektanMobilJenazah.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            StatusCovid.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            NoJaminan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            Episodes1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            Episodes2.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            Episodes3.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+            Episodes4.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
+            Episodes5.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17).toString());
+            Episodes6.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18).toString());
+            Comorbid.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19).toString());
         }
     }
 

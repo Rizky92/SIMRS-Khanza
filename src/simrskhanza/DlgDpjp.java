@@ -225,7 +225,7 @@ public class DlgDpjp extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbPasien.setAutoCreateRowSorter(false);
+        tbPasien.setAutoCreateRowSorter(true);
         tbPasien.setName("tbPasien"); // NOI18N
         tbPasien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -525,6 +525,7 @@ public class DlgDpjp extends javax.swing.JDialog {
         Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll1.setName("Scroll1"); // NOI18N
 
+        tbDiagnosa.setAutoCreateRowSorter(true);
         tbDiagnosa.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbDiagnosa.setName("tbDiagnosa"); // NOI18N
         tbDiagnosa.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -640,7 +641,7 @@ public class DlgDpjp extends javax.swing.JDialog {
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         jml=0;
         for(i=0;i<tbDiagnosa.getRowCount();i++){
-            if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
+            if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),0).toString().equals("true")){
                 jml++;
             }
         }
@@ -650,18 +651,18 @@ public class DlgDpjp extends javax.swing.JDialog {
             Valid.textKosong(Dokter,"Data Dokter");
         }else{
             for(i=0;i<tbDiagnosa.getRowCount();i++){
-                if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
+                if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),0).toString().equals("true")){
                     if(Sequel.menyimpantf("dpjp_ranap","?,?","Dokter",2,new String[]{
-                            TNoRw.getText(),tbDiagnosa.getValueAt(i,1).toString()
+                            TNoRw.getText(),tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString()
                         })==true){
                         TabModePasien.addRow(new Object[]{
-                            false,Tanggal.getText(),TNoRw.getText(),TNoRM.getText(),TPasien.getText(),tbDiagnosa.getValueAt(i,1).toString(),tbDiagnosa.getValueAt(i,2).toString()
+                            false,Tanggal.getText(),TNoRw.getText(),TNoRM.getText(),TPasien.getText(),tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString(),tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),2).toString()
                         });
-                        tbDiagnosa.setValueAt(false,i,0);
+                        tabModeDiagnosa.setValueAt(false,tbDiagnosa.convertRowIndexToModel(i),0);
                     }
                 }
             }
-            LCount.setText(""+TabModePasien.getRowCount());
+            LCount.setText(""+tbPasien.getRowCount());
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -677,7 +678,7 @@ public class DlgDpjp extends javax.swing.JDialog {
         Dokter.setText("");
         TNoRw.requestFocus();
         for(i=0;i<tbDiagnosa.getRowCount();i++){
-            tbDiagnosa.setValueAt(false,i,0);
+            tabModeDiagnosa.setValueAt(false,tbDiagnosa.convertRowIndexToModel(i),0);
         }
         ChkInput.setSelected(true);
         isForm();
@@ -697,16 +698,16 @@ public class DlgDpjp extends javax.swing.JDialog {
              JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
         }else if(!(TPasien.getText().trim().equals(""))){
             for(i=0;i<tbPasien.getRowCount();i++){
-                if(tbPasien.getValueAt(i,0).toString().equals("true")){
+                if(TabModePasien.getValueAt(tbPasien.convertRowIndexToModel(i),0).toString().equals("true")){
                     if(Sequel.queryu2tf("delete from dpjp_ranap where no_rawat=? and kd_dokter=?",2,new String[]{
-                        tbPasien.getValueAt(i,2).toString(),tbPasien.getValueAt(i,5).toString()
+                        TabModePasien.getValueAt(tbPasien.convertRowIndexToModel(i),2).toString(),TabModePasien.getValueAt(tbPasien.convertRowIndexToModel(i),5).toString()
                     })==true){
-                        TabModePasien.removeRow(i);
+                        TabModePasien.removeRow(tbPasien.convertRowIndexToModel(i));
                         i--;
                     }
                 }
             }
-            LCount.setText(""+TabModePasien.getRowCount());
+            LCount.setText(""+tbPasien.getRowCount());
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -869,7 +870,7 @@ public class DlgDpjp extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeek4KeyPressed
 
     private void tbPasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPasienMouseClicked
-        if(TabModePasien.getRowCount()!=0){
+        if(tbPasien.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -880,7 +881,7 @@ public class DlgDpjp extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPasienMouseClicked
 
     private void tbPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPasienKeyPressed
-        if(TabModePasien.getRowCount()!=0){
+        if(tbPasien.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -936,7 +937,7 @@ public class DlgDpjp extends javax.swing.JDialog {
                     i=tbDiagnosa.getSelectedColumn();
                     if(i==1){
                         if(tbDiagnosa.getSelectedRow()>-1){
-                          tbDiagnosa.setValueAt(true,tbDiagnosa.getSelectedRow(),0);
+                          tabModeDiagnosa.setValueAt(true,tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),0);
                         }
                         Dokter.setText("");
                         Dokter.requestFocus();
@@ -1059,6 +1060,7 @@ public class DlgDpjp extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbPasien.suspendSorting();
         Valid.tabelKosong(TabModePasien);
         try{
             ps2=koneksi.prepareStatement("select reg_periksa.tgl_registrasi,dpjp_ranap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
@@ -1104,10 +1106,11 @@ public class DlgDpjp extends javax.swing.JDialog {
                     ps2.close();
                 }
             }
-            LCount.setText(""+TabModePasien.getRowCount());
+            LCount.setText(""+tbPasien.getRowCount());
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbPasien.resumeSorting();
     }
 
     public void tampil2() {
@@ -1125,10 +1128,10 @@ public class DlgDpjp extends javax.swing.JDialog {
 
     private void getData() {
         if(tbPasien.getSelectedRow()!= -1){
-            TNoRw.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),2).toString());
+            TNoRw.setText(TabModePasien.getValueAt(tbPasien.convertRowIndexToModel(tbPasien.getSelectedRow()),2).toString());
             isRawat();
             isPsien();
-            Tanggal.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),1).toString());
+            Tanggal.setText(TabModePasien.getValueAt(tbPasien.convertRowIndexToModel(tbPasien.getSelectedRow()),1).toString());
         }
     }
 
@@ -1170,7 +1173,7 @@ public class DlgDpjp extends javax.swing.JDialog {
         try{
             jml=0;
             for(i=0;i<tbDiagnosa.getRowCount();i++){
-                if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
+                if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -1184,14 +1187,15 @@ public class DlgDpjp extends javax.swing.JDialog {
 
             index=0;
             for(i=0;i<tbDiagnosa.getRowCount();i++){
-                if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
+                if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode[index]=tbDiagnosa.getValueAt(i,1).toString();
-                    nama[index]=tbDiagnosa.getValueAt(i,2).toString();
+                    kode[index]=tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString();
+                    nama[index]=tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),2).toString();
                     index++;
                 }
             }
 
+            tbDiagnosa.suspendSorting();
             Valid.tabelKosong(tabModeDiagnosa);
             for(i=0;i<jml;i++){
                 tabModeDiagnosa.addRow(new Object[] {pilih[i],kode[i],nama[i]});
@@ -1220,6 +1224,7 @@ public class DlgDpjp extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbDiagnosa.resumeSorting();
     }
 
     private void runBackground(Runnable task) {

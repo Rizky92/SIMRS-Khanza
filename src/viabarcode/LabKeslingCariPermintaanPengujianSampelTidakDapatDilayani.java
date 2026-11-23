@@ -713,13 +713,13 @@ public class LabKeslingCariPermintaanPengujianSampelTidakDapatDilayani extends j
                                         append("</tr>");
                             for (int i = 0; i < tabModeTidakDapatDilayani.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
-                                                append("<td valign='top'>").append(tbTidakDapatDilayani.getValueAt(i,0).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbTidakDapatDilayani.getValueAt(i,1).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbTidakDapatDilayani.getValueAt(i,2).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbTidakDapatDilayani.getValueAt(i,3).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbTidakDapatDilayani.getValueAt(i,4).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbTidakDapatDilayani.getValueAt(i,5).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbTidakDapatDilayani.getValueAt(i,6).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,0).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,1).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,2).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,3).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,4).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,5).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,6).toString()).append("</td>").
                                             append("</tr>");
                             }
                             LoadHTML.setText(
@@ -761,13 +761,13 @@ public class LabKeslingCariPermintaanPengujianSampelTidakDapatDilayani extends j
                                         append("</tr>");
                             for (int i = 0; i < tabModeTidakDapatDilayani.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
-                                                append("<td valign='top'>").append(tbTidakDapatDilayani.getValueAt(i,0).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbTidakDapatDilayani.getValueAt(i,1).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbTidakDapatDilayani.getValueAt(i,2).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbTidakDapatDilayani.getValueAt(i,3).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbTidakDapatDilayani.getValueAt(i,4).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbTidakDapatDilayani.getValueAt(i,5).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbTidakDapatDilayani.getValueAt(i,6).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,0).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,1).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,2).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,3).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,4).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,5).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,6).toString()).append("</td>").
                                             append("</tr>");
                             }
                             LoadHTML.setText(
@@ -802,7 +802,7 @@ public class LabKeslingCariPermintaanPengujianSampelTidakDapatDilayani extends j
                                 "\"Waktu Diterima\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Unsur Kaji Ulang/Abnornalitas Sampel/Keterangan Lainnya\"\n"
                             );
                             for (int i = 0; i < tabModeTidakDapatDilayani.getRowCount(); i++) {
-                                htmlContent.append("\"").append(tbTidakDapatDilayani.getValueAt(i,0).toString()).append("\";\"").append(tbTidakDapatDilayani.getValueAt(i,1).toString()).append("\";\"").append(tbTidakDapatDilayani.getValueAt(i,2).toString()).append("\";\"").append(tbTidakDapatDilayani.getValueAt(i,3).toString()).append("\";\"").append(tbTidakDapatDilayani.getValueAt(i,4).toString()).append("\";\"").append(tbTidakDapatDilayani.getValueAt(i,5).toString()).append("\";\"").append(tbTidakDapatDilayani.getValueAt(i,6).toString()).append("\"\n");
+                                htmlContent.append("\"").append(tabModeTidakDapatDilayani.getValueAt(i,0).toString()).append("\";\"").append(tabModeTidakDapatDilayani.getValueAt(i,1).toString()).append("\";\"").append(tabModeTidakDapatDilayani.getValueAt(i,2).toString()).append("\";\"").append(tabModeTidakDapatDilayani.getValueAt(i,3).toString()).append("\";\"").append(tabModeTidakDapatDilayani.getValueAt(i,4).toString()).append("\";\"").append(tabModeTidakDapatDilayani.getValueAt(i,5).toString()).append("\";\"").append(tabModeTidakDapatDilayani.getValueAt(i,6).toString()).append("\"\n");
                             }
                             f = new File("DataPermintaanPengujianSampelTidakDilayani.csv");
                             bw = new BufferedWriter(new FileWriter(f));
@@ -871,11 +871,11 @@ public class LabKeslingCariPermintaanPengujianSampelTidakDapatDilayani extends j
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbTidakDapatDilayani.getSelectedRow()!= -1){
-            if(Sequel.queryutf("delete from labkesling_permintaan_pengujian_sampel_tidak_dilayani where no_permintaan='"+tbTidakDapatDilayani.getValueAt(tbTidakDapatDilayani.getSelectedRow(),1).toString()+"'")==true){
-                Sequel.queryu("update labkesling_permintaan_pengujian_sampel set status='Permintaan Baru' where no_permintaan='"+tbTidakDapatDilayani.getValueAt(tbTidakDapatDilayani.getSelectedRow(),1).toString()+"'");
-                tabModeTidakDapatDilayani.removeRow(tbTidakDapatDilayani.getSelectedRow());
+            if(Sequel.queryutf("delete from labkesling_permintaan_pengujian_sampel_tidak_dilayani where no_permintaan='"+tabModeTidakDapatDilayani.getValueAt(tbTidakDapatDilayani.convertRowIndexToModel(tbTidakDapatDilayani.getSelectedRow()),1).toString()+"'")==true){
+                Sequel.queryu("update labkesling_permintaan_pengujian_sampel set status='Permintaan Baru' where no_permintaan='"+tabModeTidakDapatDilayani.getValueAt(tbTidakDapatDilayani.convertRowIndexToModel(tbTidakDapatDilayani.getSelectedRow()),1).toString()+"'");
+                tabModeTidakDapatDilayani.removeRow(tbTidakDapatDilayani.convertRowIndexToModel(tbTidakDapatDilayani.getSelectedRow()));
                 Valid.tabelKosong(tabModeDetailPermintaan);
-                LTotal.setText(tabModeTidakDapatDilayani.getRowCount()+"");
+                LTotal.setText(tbTidakDapatDilayani.getRowCount()+"");
             }
         }else{
             JOptionPane.showMessageDialog(null,"Silahkan pilih data tidak dapat dilayani...!!!");
@@ -907,8 +907,8 @@ public class LabKeslingCariPermintaanPengujianSampelTidakDapatDilayani extends j
                         "and labkesling_nilai_normal_baku_mutu.kode_sampel=? order by labkesling_detail_permintaan_pengujian_sampel.kode_parameter"
                     );
                     try {
-                        ps.setString(1,tbTidakDapatDilayani.getValueAt(tbTidakDapatDilayani.getSelectedRow(),1).toString());
-                        ps.setString(2,tbTidakDapatDilayani.getValueAt(tbTidakDapatDilayani.getSelectedRow(),4).toString());
+                        ps.setString(1,tabModeTidakDapatDilayani.getValueAt(tbTidakDapatDilayani.convertRowIndexToModel(tbTidakDapatDilayani.getSelectedRow()),1).toString());
+                        ps.setString(2,tabModeTidakDapatDilayani.getValueAt(tbTidakDapatDilayani.convertRowIndexToModel(tbTidakDapatDilayani.getSelectedRow()),4).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModeDetailPermintaan.addRow(new Object[]{
@@ -1059,7 +1059,7 @@ public class LabKeslingCariPermintaanPengujianSampelTidakDapatDilayani extends j
                         rs.getString("waktu_diterima"),rs.getString("no_permintaan"),rs.getString("kode_pelanggan"),rs.getString("nama_pelanggan"),rs.getString("kode_sampel"),rs.getString("nama_sampel"),rs.getString("keterangan")
                     });
                 }
-                LTotal.setText(tabModeTidakDapatDilayani.getRowCount()+"");
+                LTotal.setText(tbTidakDapatDilayani.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{

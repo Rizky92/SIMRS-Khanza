@@ -546,6 +546,7 @@ public class TokoCariPenjualan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -984,20 +985,20 @@ public class TokoCariPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void ppCetakNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCetakNotaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Valid.panggilUrl("billing/NotaToko2.php?nonota="+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim()+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
+            Valid.panggilUrl("billing/NotaToko2.php?nonota="+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim()+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_ppCetakNotaActionPerformed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1008,7 +1009,7 @@ public class TokoCariPenjualan extends javax.swing.JDialog {
                 pscarijual=koneksi.prepareStatement(
                     "select nota_jual,kd_rek,total from tokopenjualan where nota_jual=?");
                 try {
-                    pscarijual.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+                    pscarijual.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
                     rs=pscarijual.executeQuery();
                     if(rs.next()){
                         Sequel.AutoComitFalse();

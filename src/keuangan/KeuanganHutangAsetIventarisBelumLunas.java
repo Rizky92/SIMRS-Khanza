@@ -428,6 +428,7 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setAutoCreateRowSorter(true);
         tbBangsal.setToolTipText("Silahkan centang di depan untuk memilih data hutang yang mau dibayar");
         tbBangsal.setComponentPopupMenu(Popup);
         tbBangsal.setName("tbBangsal"); // NOI18N
@@ -994,20 +995,20 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(evt.getClickCount()==1){
                 if(tbBangsal.getSelectedColumn()==0){
-                    if(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),10).toString().equals("0")){
-                        tbBangsal.setValueAt(Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),11).toString()), tbBangsal.getSelectedRow(),10);
+                    if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),10).toString().equals("0")){
+                        tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),11).toString()), tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),10);
                     }
-                    if(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().equals("true")){
-                        tbBangsal.setValueAt(
-                            (Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),11).toString())-
-                            Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),10).toString()))
-                            ,tbBangsal.getSelectedRow(),9);
-                    }else if(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().equals("false")){
-                        tbBangsal.setValueAt(0,tbBangsal.getSelectedRow(),10);
-                        tbBangsal.setValueAt(Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),11).toString()),tbBangsal.getSelectedRow(),9);
+                    if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString().equals("true")){
+                        tabMode.setValueAt(
+                            (Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),11).toString())-
+                            Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),10).toString()))
+                            ,tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),9);
+                    }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString().equals("false")){
+                        tabMode.setValueAt(0,tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),10);
+                        tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),11).toString()),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),9);
                     }
                 }
                 panggilPhoto();
@@ -1016,19 +1017,19 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-                if(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().equals("true")){
-                    tbBangsal.setValueAt(
-                            (Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),11).toString())-
-                            Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),10).toString()))
-                            ,tbBangsal.getSelectedRow(),9);
-                }else if(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().equals("false")){
-                    tbBangsal.setValueAt(Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),11).toString()),tbBangsal.getSelectedRow(),9);
+                if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString().equals("true")){
+                    tabMode.setValueAt(
+                            (Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),11).toString())-
+                            Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),10).toString()))
+                            ,tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),9);
+                }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString().equals("false")){
+                    tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),11).toString()),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),9);
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
                 if(tbBangsal.getSelectedColumn()==10){
-                   tbBangsal.setValueAt(0, tbBangsal.getSelectedRow(),10);
+                   tabMode.setValueAt(0, tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),10);
                 }
             }
         }
@@ -1165,13 +1166,13 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
             Valid.textKosong(KdPetugas,"Petugas");
         }else if(AkunBayar.getSelectedItem().toString().trim().equals("")){
             Valid.textKosong(AkunBayar,"Akun Bayar");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda bayar...!!!!");
         }else if(Keterangan.getText().trim().equals("")){
             Valid.textKosong(Keterangan,"Keterangan");
         }else if(bayar==0){
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih tagihan yang mau dibayar...!!!!");
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbBangsal.getRowCount()!=0){
             koderekening="";
             try {
                 myObj = new FileReader("./cache/akunbayarhutang.iyem");
@@ -1228,28 +1229,28 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
                 }else{
                     Sequel.AutoComitFalse();
                     sukses=true;
-                    row=tabMode.getRowCount();
+                    row=tbBangsal.getRowCount();
                     for(int i=0;i<row;i++){
-                        if(tabMode.getValueAt(i,0).toString().equals("true")){
-                            if(Double.parseDouble(tbBangsal.getValueAt(i,10).toString())>0){
+                        if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                            if(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString())>0){
                                 if(Sequel.menyimpantf("bayar_pemesanan_inventaris","?,?,?,?,?,?,?","Data", 7,new String[]{
-                                    Valid.SetTgl(TglBayar.getSelectedItem()+""),tabMode.getValueAt(i,1).toString(),KdPetugas.getText(),
-                                    tabMode.getValueAt(i,10).toString(),Keterangan.getText(),AkunBayar.getSelectedItem().toString(),
+                                    Valid.SetTgl(TglBayar.getSelectedItem()+""),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),KdPetugas.getText(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString(),Keterangan.getText(),AkunBayar.getSelectedItem().toString(),
                                     NoBukti.getText()
                                 })==true){
-                                    if((Double.parseDouble(tabMode.getValueAt(i,9).toString())<=0)||(Double.parseDouble(tabMode.getValueAt(i,9).toString())<=-0)){
-                                        Sequel.mengedit("inventaris_pemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Sudah Dibayar'");
+                                    if((Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString())<=0)||(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString())<=-0)){
+                                        Sequel.mengedit("inventaris_pemesanan","no_faktur='"+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+"'","status='Sudah Dibayar'");
                                     }else{
-                                        Sequel.mengedit("inventaris_pemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
+                                        Sequel.mengedit("inventaris_pemesanan","no_faktur='"+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+"'","status='Belum Lunas'");
                                     }
                                     Sequel.deleteTampJurnal();
-                                    if(Sequel.insertTampJurnal(Kontra_Penerimaan_AsetInventaris, "HUTANG BARANG ASET/INVENTARIS", tabMode.getValueAt(i,10).toString(), "0")==false){
+                                    if(Sequel.insertTampJurnal(Kontra_Penerimaan_AsetInventaris, "HUTANG BARANG ASET/INVENTARIS", tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString(), "0")==false){
                                         sukses=false;
                                     }
-                                    if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", tabMode.getValueAt(i,10).toString())==false){
+                                    if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString())==false){
                                         sukses=false;
                                     }
-                                    if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG BARANG ASET/INVENTARIS NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
+                                    if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG BARANG ASET/INVENTARIS NO.FAKTUR "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+", OLEH "+akses.getkode())==false){
                                         sukses=false;
                                     }
                                 }else{
@@ -1258,7 +1259,7 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
                             }
                         }else{
                             if(!notagihan.equals("")){
-                                Sequel.mengedit("inventaris_pemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
+                                Sequel.mengedit("inventaris_pemesanan","no_faktur='"+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+"'","status='Belum Lunas'");
                             }
                         }
                     }
@@ -1278,8 +1279,8 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
                         bayar=0;
                         LCount1.setText("0");
                         for(i=0;i<tbBangsal.getRowCount();i++){
-                            if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                                tabMode.removeRow(i);
+                            if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                                tabMode.removeRow(tbBangsal.convertRowIndexToModel(i));
                                 i--;
                             }
                         }
@@ -1380,7 +1381,7 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(row=0;row<tbBangsal.getRowCount();row++){
-            tbBangsal.setValueAt(false,row,0);
+            tabMode.setValueAt(false,tbBangsal.convertRowIndexToModel(row),0);
         }
         bayar=0;
         LCount1.setText("0");
@@ -1388,18 +1389,18 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
 
     private void ppSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSemuaActionPerformed
         for(row=0;row<tbBangsal.getRowCount();row++){
-            tbBangsal.setValueAt(true,row,0);
-            if(tbBangsal.getValueAt(row,10).toString().equals("0")){
-                tbBangsal.setValueAt(Double.parseDouble(tbBangsal.getValueAt(row,11).toString()), row,10);
+            tabMode.setValueAt(true,tbBangsal.convertRowIndexToModel(row),0);
+            if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),10).toString().equals("0")){
+                tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),11).toString()), tbBangsal.convertRowIndexToModel(row),10);
             }
-            if(tbBangsal.getValueAt(row,0).toString().equals("true")){
-                tbBangsal.setValueAt(
-                    (Double.parseDouble(tbBangsal.getValueAt(row,11).toString())-
-                    Double.parseDouble(tbBangsal.getValueAt(row,10).toString()))
-                    ,row,9);
-            }else if(tbBangsal.getValueAt(row,0).toString().equals("false")){
-                tbBangsal.setValueAt(0,row,10);
-                tbBangsal.setValueAt(Double.parseDouble(tbBangsal.getValueAt(row,11).toString()),row,9);
+            if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),0).toString().equals("true")){
+                tabMode.setValueAt(
+                    (Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),11).toString())-
+                    Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),10).toString()))
+                    ,tbBangsal.convertRowIndexToModel(row),9);
+            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),0).toString().equals("false")){
+                tabMode.setValueAt(0,tbBangsal.convertRowIndexToModel(row),10);
+                tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),11).toString()),tbBangsal.convertRowIndexToModel(row),9);
             }
         }
         getData();
@@ -1408,17 +1409,17 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
     private void tbBangsalPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbBangsalPropertyChange
         if(this.isVisible()==true){
             if(tbBangsal.getSelectedRow()!= -1){
-                if(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),10).toString().equals("0")){
-                    tbBangsal.setValueAt(Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),11).toString()), tbBangsal.getSelectedRow(),10);
+                if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),10).toString().equals("0")){
+                    tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),11).toString()), tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),10);
                 }
-                if(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().equals("true")){
-                    tbBangsal.setValueAt(
-                        (Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),11).toString())-
-                        Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),10).toString()))
-                        ,tbBangsal.getSelectedRow(),9);
-                }else if(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().equals("false")){
-                    tbBangsal.setValueAt(0,tbBangsal.getSelectedRow(),10);
-                    tbBangsal.setValueAt(Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),11).toString()),tbBangsal.getSelectedRow(),9);
+                if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString().equals("true")){
+                    tabMode.setValueAt(
+                        (Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),11).toString())-
+                        Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),10).toString()))
+                        ,tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),9);
+                }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString().equals("false")){
+                    tabMode.setValueAt(0,tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),10);
+                    tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),11).toString()),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),9);
                 }
                 getData();
             }
@@ -1474,23 +1475,23 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
             try{
                 Sequel.AutoComitFalse();
                 sukses=true;
-                row=tabMode.getRowCount();
+                row=tbBangsal.getRowCount();
                 for(i=0;i<row;i++){
-                    if(tabMode.getValueAt(i,0).toString().equals("true")){
-                        if(Double.parseDouble(tbBangsal.getValueAt(i,10).toString())>0){
+                    if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                        if(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString())>0){
                             Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran,6),signed)),0) from pembayaran_pihak_ke3_bankmandiri where left(pembayaran_pihak_ke3_bankmandiri.tgl_pembayaran,10)='"+Valid.SetTgl(TglBayar.getSelectedItem()+"")+"' ",kodemcm+"14"+TglBayar.getSelectedItem().toString().replaceAll("-",""),6,NoBukti);
                             if(Sequel.menyimpantf("bayar_pemesanan_inventaris","?,?,?,?,?,?,?","Data", 7,new String[]{
-                                Valid.SetTgl(TglBayar.getSelectedItem()+""),tabMode.getValueAt(i,1).toString(),KdPetugas.getText(),
-                                tabMode.getValueAt(i,10).toString(),Keterangan.getText(),AkunBayar.getSelectedItem().toString(),
+                                Valid.SetTgl(TglBayar.getSelectedItem()+""),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),KdPetugas.getText(),
+                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString(),Keterangan.getText(),AkunBayar.getSelectedItem().toString(),
                                 NoBukti.getText()
                             })==true){
-                                if((Double.parseDouble(tabMode.getValueAt(i,9).toString())<=0)||(Double.parseDouble(tabMode.getValueAt(i,9).toString())<=-0)){
-                                    Sequel.mengedit("inventaris_pemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Sudah Dibayar'");
+                                if((Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString())<=0)||(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString())<=-0)){
+                                    Sequel.mengedit("inventaris_pemesanan","no_faktur='"+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+"'","status='Sudah Dibayar'");
                                 }else{
-                                    Sequel.mengedit("inventaris_pemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
+                                    Sequel.mengedit("inventaris_pemesanan","no_faktur='"+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+"'","status='Belum Lunas'");
                                 }
                                 if(Sequel.menyimpantf("pembayaran_pihak_ke3_bankmandiri","?,now(),?,?,?,?,?,?,?,?,?,?,?","No.Bukti", 12,new String[]{
-                                        NoBukti.getText(),norekening,NoRekening.getText(),RekeningAtasNama.getText(),KotaAtasNamaRekening.getText(),tabMode.getValueAt(i,10).toString(),tabMode.getValueAt(i,1).toString(),KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),"Bayar Pesan Aset/Inventaris","Baru"
+                                        NoBukti.getText(),norekening,NoRekening.getText(),RekeningAtasNama.getText(),KotaAtasNamaRekening.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),"Bayar Pesan Aset/Inventaris","Baru"
                                     })==false){
                                     sukses=false;
                                 }else{
@@ -1500,13 +1501,13 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
                                             sukses=false;
                                         }
                                     }
-                                    if(Sequel.insertTampJurnal(Kontra_Penerimaan_AsetInventaris, "HUTANG BARANG ASET/INVENTARIS", tabMode.getValueAt(i,10).toString(), "0")==false){
+                                    if(Sequel.insertTampJurnal(Kontra_Penerimaan_AsetInventaris, "HUTANG BARANG ASET/INVENTARIS", tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString(), "0")==false){
                                         sukses=false;
                                     }
-                                    if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, (Valid.SetAngka(BiayaTransaksi.getText()) + Valid.SetAngka(tabMode.getValueAt(i,10).toString())))==false){
+                                    if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, (Valid.SetAngka(BiayaTransaksi.getText()) + Valid.SetAngka(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString())))==false){
                                         sukses=false;
                                     }
-                                    if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG BARANG ASET/INVENTARIS NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
+                                    if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG BARANG ASET/INVENTARIS NO.FAKTUR "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+", OLEH "+akses.getkode())==false){
                                         sukses=false;
                                     }
                                 }
@@ -1516,7 +1517,7 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
                         }
                     }else{
                         if(!notagihan.equals("")){
-                            Sequel.mengedit("inventaris_pemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
+                            Sequel.mengedit("inventaris_pemesanan","no_faktur='"+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+"'","status='Belum Lunas'");
                         }
                     }
                 }
@@ -1530,8 +1531,8 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
                     bayar=0;
                     LCount1.setText("0");
                     for(i=0;i<tbBangsal.getRowCount();i++){
-                        if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                            tabMode.removeRow(i);
+                        if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                            tabMode.removeRow(tbBangsal.convertRowIndexToModel(i));
                             i--;
                         }
                     }
@@ -1709,6 +1710,7 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
     // End of variables declaration//GEN-END:variables
 
     private void tampil(){
+        tbBangsal.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             tanggaldatang="";
@@ -1768,14 +1770,15 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbBangsal.resumeSorting();
     }
 
     private void getData(){
         row=tbBangsal.getRowCount();
         bayar=0;
         for(i=0;i<row;i++){
-            if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                 bayar=bayar+Double.parseDouble(tbBangsal.getValueAt(i,11).toString());
+            if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                 bayar=bayar+Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),11).toString());
             }
         }
         LCount1.setText(Valid.SetAngka(bayar));
@@ -1800,7 +1803,7 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
             try {
                 ps=koneksi.prepareStatement("select photo from inventaris_bukti_pemesanan where no_faktur=?");
                 try {
-                    ps.setString(1,tbBangsal.getValueAt(tbBangsal.getSelectedRow(),1).toString());
+                    ps.setString(1,tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){
@@ -1903,6 +1906,7 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
 
     private void tampilTagihan(String notagihan){
         this.notagihan=notagihan;
+        tbBangsal.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -1948,6 +1952,7 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbBangsal.resumeSorting();
     }
 
     public void tampilTagihan2(String notagihan){

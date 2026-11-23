@@ -993,6 +993,7 @@ public final class BPJSCekRujukanKartuRS extends javax.swing.JDialog {
         Scroll.setOpaque(true);
 
         tbKamar.setAutoCreateRowSorter(false);
+        tbKamar.setSortable(false);
         tbKamar.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbKamar.setComponentPopupMenu(jPopupMenu1);
         tbKamar.setName("tbKamar"); // NOI18N
@@ -2926,7 +2927,7 @@ public final class BPJSCekRujukanKartuRS extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void ChkCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkCariActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             nosep="";
             ChkCari.setSelected(false);
             isForm();

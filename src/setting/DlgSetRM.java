@@ -1485,24 +1485,24 @@ public class DlgSetRM extends javax.swing.JDialog {
             case 0:
                 if(norm.getText().trim().equals("")){
                     Valid.textKosong(norm,"No.RM Terakhir");
-                }else if(tabMode.getRowCount()==0){
+                }else if(tbNoRM.getRowCount()==0){
                     Sequel.menyimpan("set_no_rkm_medis","'"+norm.getText()+"'","No.RM Terakhir");
                     runBackground(() ->tampilnorm());
                     emptTeks();
-                }else if(tabMode.getRowCount()>0){
+                }else if(tbNoRM.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     norm.requestFocus();
                 }   break;
             case 1:
-                if(tabMode2.getRowCount()==0){
+                if(tbNoUrut.getRowCount()==0){
                     Sequel.menyimpan("set_urut_no_rkm_medis","'"+cmburut.getSelectedItem()+"','"+cmbYesTahun.getSelectedItem()+"','"+cmbYesBulan.getSelectedItem()+"','"+cmbPosisi.getSelectedItem()+"'","Pengurutan");
                     runBackground(() ->tampilurut());
-                }else if(tabMode2.getRowCount()>0){
+                }else if(tbNoUrut.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     cmburut.requestFocus();
                 }   break;
             case 2:
-                if(tabMode3.getRowCount()==0){
+                if(tbAlamat.getRowCount()==0){
                     Sequel.menyimpan("set_alamat_pasien",
                             "'"+Kelurahan.getSelectedItem().toString().replaceAll("Yes","true").replaceAll("No","false")+"',"+
                             "'"+Kecamatan.getSelectedItem().toString().replaceAll("Yes","true").replaceAll("No","false")+"',"+
@@ -1510,7 +1510,7 @@ public class DlgSetRM extends javax.swing.JDialog {
                             "'"+Propinsi.getSelectedItem().toString().replaceAll("Yes","true").replaceAll("No","false")+"'","Pengaturan Alamat"
                     );
                     runBackground(() ->tampilalamat());
-                }else if(tabMode3.getRowCount()>0){
+                }else if(tbAlamat.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     cmburut.requestFocus();
                 }   break;
@@ -1553,7 +1553,7 @@ public class DlgSetRM extends javax.swing.JDialog {
                     Valid.textKosong(PanjangPropinsi,"Panjang Propinsi");
                 }else if(PanjangPropinsiPJ.getText().trim().equals("")){
                     Valid.textKosong(PanjangPropinsiPJ,"Panjang Propinsi P.J.");
-                }else if(tabMode4.getRowCount()==0){
+                }else if(tbKelengkapan.getRowCount()==0){
                     if(Sequel.menyimpantf("set_kelengkapan_data_pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Set Kelengkapan",38,new String[]{
                         YesNoKTP.getSelectedItem().toString(), PanjangKTP.getText(),YesNoTmpLahir.getSelectedItem().toString(),PanjangTmpLahir.getText(),
                         YesNoNamaIbu.getSelectedItem().toString(),PanjangNamaIbu.getText(),YesNoAlamat.getSelectedItem().toString(),PanjangAlamat.getText(),
@@ -1569,37 +1569,37 @@ public class DlgSetRM extends javax.swing.JDialog {
                         runBackground(() ->tampilkelengkapan());
                         emptTeks2();
                     }
-                }else if(tabMode4.getRowCount()>0){
+                }else if(tbKelengkapan.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     norm.requestFocus();
                 }   break;
             case 4:
-                if(tabMode5.getRowCount()==0){
+                if(tbValidasiRegistrasi.getRowCount()==0){
                     Sequel.menyimpan("set_validasi_registrasi",
                             "'"+ValidasiRegistrasi.getSelectedItem().toString()+"'","Pengaturan Validasi Registrasi"
                     );
                     runBackground(() ->tampilvalidasiregistrasi());
-                }else if(tabMode5.getRowCount()>0){
+                }else if(tbValidasiRegistrasi.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     ValidasiRegistrasi.requestFocus();
                 }   break;
             case 5:
-                if(tabMode6.getRowCount()==0){
+                if(tbValidasiCatatan.getRowCount()==0){
                     Sequel.menyimpan("set_validasi_catatan",
                             "'"+ValidasiCatatan.getSelectedItem().toString()+"'","Pengaturan Validasi Catatan"
                     );
                     runBackground(() ->tampilvalidasicatatan());
-                }else if(tabMode6.getRowCount()>0){
+                }else if(tbValidasiCatatan.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     ValidasiCatatan.requestFocus();
                 }   break;
             case 6:
-                if(tabMode7.getRowCount()==0){
+                if(tbTniPolri.getRowCount()==0){
                     Sequel.menyimpan("set_tni_polri",
                             "'"+TampilkanTNI.getSelectedItem().toString()+"'","Pengaturan Validasi Catatan"
                     );
                     runBackground(() ->tampiltni());
-                }else if(tabMode7.getRowCount()>0){
+                }else if(tbTniPolri.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     TampilkanTNI.requestFocus();
                 }   break;
@@ -1676,10 +1676,10 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbNoRM.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data No.RM Terakhir tidak boleh kosong ...!!!!");
             norm.requestFocus();
-        }else if(! (tabMode.getRowCount()==0)) {
+        }else if(! (tbNoRM.getRowCount()==0)) {
             dispose();
         }
     }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -1691,7 +1691,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbNoRMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNoRMMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbNoRM.getRowCount()!=0){
             try {
                 getDatanorm();
             } catch (java.lang.NullPointerException e) {
@@ -1700,7 +1700,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_tbNoRMMouseClicked
 
     private void tbNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbNoRMKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbNoRM.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDatanorm();
@@ -1760,7 +1760,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbYesTahunKeyPressed
 
     private void tbNoUrutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbNoUrutKeyPressed
-        if(tabMode2.getRowCount()!=0){
+        if(tbNoUrut.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataurut();
@@ -1771,7 +1771,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_tbNoUrutKeyPressed
 
     private void tbNoUrutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNoUrutMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbNoRM.getRowCount()!=0){
             try {
                 getDataurut();
             } catch (java.lang.NullPointerException e) {
@@ -1788,7 +1788,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbPosisiKeyPressed
 
     private void tbAlamatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAlamatMouseClicked
-        if(tabMode3.getRowCount()!=0){
+        if(tbAlamat.getRowCount()!=0){
             try {
                 getDataAlamat();
             } catch (java.lang.NullPointerException e) {
@@ -1797,7 +1797,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAlamatMouseClicked
 
     private void tbAlamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAlamatKeyPressed
-        if(tabMode3.getRowCount()!=0){
+        if(tbAlamat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataAlamat();
@@ -1820,7 +1820,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_KabupatenKeyPressed
 
     private void tbKelengkapanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKelengkapanMouseClicked
-        if(tabMode4.getRowCount()!=0){
+        if(tbKelengkapan.getRowCount()!=0){
             try {
                 getDataKelengkapan();
             } catch (java.lang.NullPointerException e) {
@@ -1829,7 +1829,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKelengkapanMouseClicked
 
     private void tbKelengkapanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKelengkapanKeyPressed
-        if(tabMode4.getRowCount()!=0){
+        if(tbKelengkapan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataKelengkapan();
@@ -1980,7 +1980,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_PanjangKabupatenPJKeyPressed
 
     private void tbValidasiRegistrasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbValidasiRegistrasiMouseClicked
-        if(tabMode5.getRowCount()!=0){
+        if(tbValidasiRegistrasi.getRowCount()!=0){
             try {
                 getDataValidasiRegistrasi();
             } catch (java.lang.NullPointerException e) {
@@ -1989,7 +1989,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_tbValidasiRegistrasiMouseClicked
 
     private void tbValidasiRegistrasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbValidasiRegistrasiKeyPressed
-        if(tabMode5.getRowCount()!=0){
+        if(tbValidasiRegistrasi.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataValidasiRegistrasi();
@@ -2004,7 +2004,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_ValidasiRegistrasiKeyPressed
 
     private void tbValidasiCatatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbValidasiCatatanMouseClicked
-        if(tabMode6.getRowCount()!=0){
+        if(tbValidasiCatatan.getRowCount()!=0){
             try {
                 getDataValidasiCatatan();
             } catch (java.lang.NullPointerException e) {
@@ -2013,7 +2013,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_tbValidasiCatatanMouseClicked
 
     private void tbValidasiCatatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbValidasiCatatanKeyPressed
-        if(tabMode6.getRowCount()!=0){
+        if(tbValidasiCatatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataValidasiCatatan();
@@ -2028,7 +2028,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_ValidasiCatatanKeyPressed
 
     private void tbTniPolriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTniPolriMouseClicked
-        if(tabMode7.getRowCount()!=0){
+        if(tbTniPolri.getRowCount()!=0){
             try {
                 getDataTampilkanTNI();
             } catch (java.lang.NullPointerException e) {
@@ -2037,7 +2037,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     }//GEN-LAST:event_tbTniPolriMouseClicked
 
     private void tbTniPolriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTniPolriKeyPressed
-        if(tabMode7.getRowCount()!=0){
+        if(tbTniPolri.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getDataTampilkanTNI();
@@ -2253,7 +2253,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     private void getDatanorm() {
         int row=tbNoRM.getSelectedRow();
         if(row!= -1){
-            norm.setText(tbNoRM.getValueAt(row,0).toString());
+            norm.setText(tabMode.getValueAt(tbNoRM.convertRowIndexToModel(row),0).toString());
         }
     }
 
@@ -2331,10 +2331,10 @@ public class DlgSetRM extends javax.swing.JDialog {
     private void getDataurut() {
         int row=tbNoUrut.getSelectedRow();
         if(row!= -1){
-            cmburut.setSelectedItem(tbNoUrut.getValueAt(row,0).toString());
-            cmbYesTahun.setSelectedItem(tbNoUrut.getValueAt(row,1).toString());
-            cmbYesBulan.setSelectedItem(tbNoUrut.getValueAt(row,2).toString());
-            cmbPosisi.setSelectedItem(tbNoUrut.getValueAt(row,3).toString());
+            cmburut.setSelectedItem(tabMode2.getValueAt(tbNoUrut.convertRowIndexToModel(row),0).toString());
+            cmbYesTahun.setSelectedItem(tabMode2.getValueAt(tbNoUrut.convertRowIndexToModel(row),1).toString());
+            cmbYesBulan.setSelectedItem(tabMode2.getValueAt(tbNoUrut.convertRowIndexToModel(row),2).toString());
+            cmbPosisi.setSelectedItem(tabMode2.getValueAt(tbNoUrut.convertRowIndexToModel(row),3).toString());
         }
     }
 
@@ -2384,10 +2384,10 @@ public class DlgSetRM extends javax.swing.JDialog {
     private void getDataAlamat() {
         int row=tbAlamat.getSelectedRow();
         if(row!= -1){
-            Kelurahan.setSelectedItem(tbAlamat.getValueAt(row,0).toString());
-            Kecamatan.setSelectedItem(tbAlamat.getValueAt(row,1).toString());
-            Kabupaten.setSelectedItem(tbAlamat.getValueAt(row,2).toString());
-            Propinsi.setSelectedItem(tbAlamat.getValueAt(row,3).toString());
+            Kelurahan.setSelectedItem(tabMode3.getValueAt(tbAlamat.convertRowIndexToModel(row),0).toString());
+            Kecamatan.setSelectedItem(tabMode3.getValueAt(tbAlamat.convertRowIndexToModel(row),1).toString());
+            Kabupaten.setSelectedItem(tabMode3.getValueAt(tbAlamat.convertRowIndexToModel(row),2).toString());
+            Propinsi.setSelectedItem(tabMode3.getValueAt(tbAlamat.convertRowIndexToModel(row),3).toString());
         }
     }
 
@@ -2455,44 +2455,44 @@ public class DlgSetRM extends javax.swing.JDialog {
     private void getDataKelengkapan() {
         int row=tbKelengkapan.getSelectedRow();
         if(row!= -1){
-            YesNoKTP.setSelectedItem(tbKelengkapan.getValueAt(0,1).toString());
-            PanjangKTP.setText(tbKelengkapan.getValueAt(1,1).toString());
-            YesNoTmpLahir.setSelectedItem(tbKelengkapan.getValueAt(2,1).toString());
-            PanjangTmpLahir.setText(tbKelengkapan.getValueAt(3,1).toString());
-            YesNoNamaIbu.setSelectedItem(tbKelengkapan.getValueAt(4,1).toString());
-            PanjangNamaIbu.setText(tbKelengkapan.getValueAt(5,1).toString());
-            YesNoAlamat.setSelectedItem(tbKelengkapan.getValueAt(6,1).toString());
-            PanjangAlamat.setText(tbKelengkapan.getValueAt(7,1).toString());
-            YesNoPekerjaan.setSelectedItem(tbKelengkapan.getValueAt(8,1).toString());
-            PanjangPekerjaan.setText(tbKelengkapan.getValueAt(9,1).toString());
-            YesNoTelp.setSelectedItem(tbKelengkapan.getValueAt(10,1).toString());
-            PanjangTelp.setText(tbKelengkapan.getValueAt(11,1).toString());
-            YesNoUmur.setSelectedItem(tbKelengkapan.getValueAt(12,1).toString());
-            PanjangUmur.setText(tbKelengkapan.getValueAt(13,1).toString());
-            YesNoNamaKeluarga.setSelectedItem(tbKelengkapan.getValueAt(14,1).toString());
-            PanjangNamaKeluarga.setText(tbKelengkapan.getValueAt(15,1).toString());
-            YesNoNoPeserta.setSelectedItem(tbKelengkapan.getValueAt(16,1).toString());
-            PanjangNoPeserta.setText(tbKelengkapan.getValueAt(17,1).toString());
-            YesNoKelurahan.setSelectedItem(tbKelengkapan.getValueAt(18,1).toString());
-            PanjangKelurahan.setText(tbKelengkapan.getValueAt(19,1).toString());
-            YesNoKecamatan.setSelectedItem(tbKelengkapan.getValueAt(20,1).toString());
-            PanjangKecamatan.setText(tbKelengkapan.getValueAt(21,1).toString());
-            YesNoKabupaten.setSelectedItem(tbKelengkapan.getValueAt(22,1).toString());
-            PanjangKabupaten.setText(tbKelengkapan.getValueAt(23,1).toString());
-            YesNoPekerjaanPJ.setSelectedItem(tbKelengkapan.getValueAt(24,1).toString());
-            PanjangPekerjaanPJ.setText(tbKelengkapan.getValueAt(25,1).toString());
-            YesNoAlamatPJ.setSelectedItem(tbKelengkapan.getValueAt(26,1).toString());
-            PanjangAlamatPJ.setText(tbKelengkapan.getValueAt(27,1).toString());
-            YesNoKelurahanPJ.setSelectedItem(tbKelengkapan.getValueAt(28,1).toString());
-            PanjangKelurahanPJ.setText(tbKelengkapan.getValueAt(29,1).toString());
-            YesNoKecamatanPJ.setSelectedItem(tbKelengkapan.getValueAt(30,1).toString());
-            PanjangKecamatanPJ.setText(tbKelengkapan.getValueAt(31,1).toString());
-            YesNoKabupatenPJ.setSelectedItem(tbKelengkapan.getValueAt(32,1).toString());
-            PanjangKabupatenPJ.setText(tbKelengkapan.getValueAt(33,1).toString());
-            YesNoPropinsi.setSelectedItem(tbKelengkapan.getValueAt(34,1).toString());
-            PanjangPropinsi.setText(tbKelengkapan.getValueAt(35,1).toString());
-            YesNoPropinsiPJ.setSelectedItem(tbKelengkapan.getValueAt(36,1).toString());
-            PanjangPropinsiPJ.setText(tbKelengkapan.getValueAt(37,1).toString());
+            YesNoKTP.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(0),1).toString());
+            PanjangKTP.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(1),1).toString());
+            YesNoTmpLahir.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(2),1).toString());
+            PanjangTmpLahir.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(3),1).toString());
+            YesNoNamaIbu.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(4),1).toString());
+            PanjangNamaIbu.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(5),1).toString());
+            YesNoAlamat.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(6),1).toString());
+            PanjangAlamat.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(7),1).toString());
+            YesNoPekerjaan.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(8),1).toString());
+            PanjangPekerjaan.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(9),1).toString());
+            YesNoTelp.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(10),1).toString());
+            PanjangTelp.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(11),1).toString());
+            YesNoUmur.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(12),1).toString());
+            PanjangUmur.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(13),1).toString());
+            YesNoNamaKeluarga.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(14),1).toString());
+            PanjangNamaKeluarga.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(15),1).toString());
+            YesNoNoPeserta.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(16),1).toString());
+            PanjangNoPeserta.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(17),1).toString());
+            YesNoKelurahan.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(18),1).toString());
+            PanjangKelurahan.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(19),1).toString());
+            YesNoKecamatan.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(20),1).toString());
+            PanjangKecamatan.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(21),1).toString());
+            YesNoKabupaten.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(22),1).toString());
+            PanjangKabupaten.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(23),1).toString());
+            YesNoPekerjaanPJ.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(24),1).toString());
+            PanjangPekerjaanPJ.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(25),1).toString());
+            YesNoAlamatPJ.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(26),1).toString());
+            PanjangAlamatPJ.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(27),1).toString());
+            YesNoKelurahanPJ.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(28),1).toString());
+            PanjangKelurahanPJ.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(29),1).toString());
+            YesNoKecamatanPJ.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(30),1).toString());
+            PanjangKecamatanPJ.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(31),1).toString());
+            YesNoKabupatenPJ.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(32),1).toString());
+            PanjangKabupatenPJ.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(33),1).toString());
+            YesNoPropinsi.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(34),1).toString());
+            PanjangPropinsi.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(35),1).toString());
+            YesNoPropinsiPJ.setSelectedItem(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(36),1).toString());
+            PanjangPropinsiPJ.setText(tabMode4.getValueAt(tbKelengkapan.convertRowIndexToModel(37),1).toString());
         }
     }
 
@@ -2523,7 +2523,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     private void getDataValidasiRegistrasi() {
         int row=tbValidasiRegistrasi.getSelectedRow();
         if(row!= -1){
-            ValidasiRegistrasi.setSelectedItem(tbValidasiRegistrasi.getValueAt(row,0).toString());
+            ValidasiRegistrasi.setSelectedItem(tabMode5.getValueAt(tbValidasiRegistrasi.convertRowIndexToModel(row),0).toString());
         }
     }
 
@@ -2554,7 +2554,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     private void getDataValidasiCatatan() {
         int row=tbValidasiCatatan.getSelectedRow();
         if(row!= -1){
-            ValidasiCatatan.setSelectedItem(tbValidasiCatatan.getValueAt(row,0).toString());
+            ValidasiCatatan.setSelectedItem(tabMode6.getValueAt(tbValidasiCatatan.convertRowIndexToModel(row),0).toString());
         }
     }
 
@@ -2585,7 +2585,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     private void getDataTampilkanTNI() {
         int row=tbTniPolri.getSelectedRow();
         if(row!= -1){
-            TampilkanTNI.setSelectedItem(tbTniPolri.getValueAt(row,0).toString());
+            TampilkanTNI.setSelectedItem(tabMode7.getValueAt(tbTniPolri.convertRowIndexToModel(row),0).toString());
         }
     }
 

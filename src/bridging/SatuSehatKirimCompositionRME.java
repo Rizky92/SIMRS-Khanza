@@ -968,6 +968,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
         ScrollIGDPrimer.setName("ScrollIGDPrimer"); // NOI18N
         ScrollIGDPrimer.setOpaque(true);
 
+        tbIGDPrimer.setAutoCreateRowSorter(true);
         tbIGDPrimer.setComponentPopupMenu(jPopupMenu1);
         tbIGDPrimer.setName("tbIGDPrimer"); // NOI18N
         tbIGDPrimer.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1030,6 +1031,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
         ScrollIGDSekunder.setName("ScrollIGDSekunder"); // NOI18N
         ScrollIGDSekunder.setOpaque(true);
 
+        tbIGDSekunder.setAutoCreateRowSorter(true);
         tbIGDSekunder.setComponentPopupMenu(jPopupMenu1);
         tbIGDSekunder.setName("tbIGDSekunder"); // NOI18N
         tbIGDSekunder.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1056,6 +1058,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
         ScrollAwalKeperawatanIGD.setName("ScrollAwalKeperawatanIGD"); // NOI18N
         ScrollAwalKeperawatanIGD.setOpaque(true);
 
+        tbAwalKeperawatanIGD.setAutoCreateRowSorter(true);
         tbAwalKeperawatanIGD.setComponentPopupMenu(jPopupMenu1);
         tbAwalKeperawatanIGD.setName("tbAwalKeperawatanIGD"); // NOI18N
         tbAwalKeperawatanIGD.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1235,21 +1238,21 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                     for (i = 0; i < tabModeIGDPrimer.getRowCount(); i++) {
                         htmlContent.append(
                             "<tr class='isi'>"+
-                                "<td valign='top'>"+tbIGDPrimer.getValueAt(i,1).toString()+"</td>"+
-                                "<td valign='top'>"+tbIGDPrimer.getValueAt(i,2).toString()+"</td>"+
-                                "<td valign='top'>"+tbIGDPrimer.getValueAt(i,3).toString()+"</td>"+
-                                "<td valign='top'>"+tbIGDPrimer.getValueAt(i,4).toString()+"</td>"+
-                                "<td valign='top'>"+tbIGDPrimer.getValueAt(i,5).toString()+"</td>"+
-                                "<td valign='top'>"+tbIGDPrimer.getValueAt(i,6).toString()+"</td>"+
-                                "<td valign='top'>"+tbIGDPrimer.getValueAt(i,7).toString()+"</td>"+
-                                "<td valign='top'>"+tbIGDPrimer.getValueAt(i,8).toString()+"</td>"+
-                                "<td valign='top'>"+tbIGDPrimer.getValueAt(i,9).toString()+"</td>"+
-                                "<td valign='top'>"+tbIGDPrimer.getValueAt(i,10).toString()+"</td>"+
-                                "<td valign='top'>"+tbIGDPrimer.getValueAt(i,11).toString()+"</td>"+
-                                "<td valign='top'>"+tbIGDPrimer.getValueAt(i,12).toString()+"</td>"+
-                                "<td valign='top'>"+tbIGDPrimer.getValueAt(i,13).toString()+"</td>"+
-                                "<td valign='top'>"+tbIGDPrimer.getValueAt(i,14).toString()+"</td>"+
-                                "<td valign='top'>"+tbIGDPrimer.getValueAt(i,15).toString()+"</td>"+
+                                "<td valign='top'>"+tabModeIGDPrimer.getValueAt(i,1).toString()+"</td>"+
+                                "<td valign='top'>"+tabModeIGDPrimer.getValueAt(i,2).toString()+"</td>"+
+                                "<td valign='top'>"+tabModeIGDPrimer.getValueAt(i,3).toString()+"</td>"+
+                                "<td valign='top'>"+tabModeIGDPrimer.getValueAt(i,4).toString()+"</td>"+
+                                "<td valign='top'>"+tabModeIGDPrimer.getValueAt(i,5).toString()+"</td>"+
+                                "<td valign='top'>"+tabModeIGDPrimer.getValueAt(i,6).toString()+"</td>"+
+                                "<td valign='top'>"+tabModeIGDPrimer.getValueAt(i,7).toString()+"</td>"+
+                                "<td valign='top'>"+tabModeIGDPrimer.getValueAt(i,8).toString()+"</td>"+
+                                "<td valign='top'>"+tabModeIGDPrimer.getValueAt(i,9).toString()+"</td>"+
+                                "<td valign='top'>"+tabModeIGDPrimer.getValueAt(i,10).toString()+"</td>"+
+                                "<td valign='top'>"+tabModeIGDPrimer.getValueAt(i,11).toString()+"</td>"+
+                                "<td valign='top'>"+tabModeIGDPrimer.getValueAt(i,12).toString()+"</td>"+
+                                "<td valign='top'>"+tabModeIGDPrimer.getValueAt(i,13).toString()+"</td>"+
+                                "<td valign='top'>"+tabModeIGDPrimer.getValueAt(i,14).toString()+"</td>"+
+                                "<td valign='top'>"+tabModeIGDPrimer.getValueAt(i,15).toString()+"</td>"+
                             "</tr>");
                     }
                     LoadHTML.setText(
@@ -1343,11 +1346,11 @@ KirimTriaseIGDSekunder();
         switch (TabRawat.getSelectedIndex()) {
             case 0:
                 for(i=0;i<tbIGDPrimer.getRowCount();i++){
-                    tbIGDPrimer.setValueAt(true,i,0);
+                    tabModeIGDPrimer.setValueAt(true,tbIGDPrimer.convertRowIndexToModel(i),0);
                 }   break;
             case 1:
                 for(i=0;i<tbIGDSekunder.getRowCount();i++){
-                    tbIGDSekunder.setValueAt(true,i,0);
+                    tabModeIGDSekunder.setValueAt(true,tbIGDSekunder.convertRowIndexToModel(i),0);
                 }   break;
             case 2:
                 for(i=0;i<tbNadi.getRowCount();i++){
@@ -1362,11 +1365,11 @@ KirimTriaseIGDSekunder();
         switch (TabRawat.getSelectedIndex()) {
             case 0:
                 for(i=0;i<tbIGDPrimer.getRowCount();i++){
-                    tbIGDPrimer.setValueAt(false,i,0);
+                    tabModeIGDPrimer.setValueAt(false,tbIGDPrimer.convertRowIndexToModel(i),0);
                 }   break;
             case 1:
                 for(i=0;i<tbIGDSekunder.getRowCount();i++){
-                    tbIGDSekunder.setValueAt(false,i,0);
+                    tabModeIGDSekunder.setValueAt(false,tbIGDSekunder.convertRowIndexToModel(i),0);
                 }   break;
             case 2:
                 for(i=0;i<tbNadi.getRowCount();i++){
@@ -1454,7 +1457,7 @@ KirimTriaseIGDSekunder();
     }//GEN-LAST:event_tbIGDPrimerMouseClicked
 
     private void tbIGDPrimerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbIGDPrimerKeyReleased
-        if(tabModeIGDPrimer.getRowCount()!=0){
+        if(tbIGDPrimer.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 if(tbIGDPrimer.getSelectedRow()!= -1){
                     getDataIGDPrimer();
@@ -1482,7 +1485,7 @@ KirimTriaseIGDSekunder();
     }//GEN-LAST:event_tbIGDSekunderMouseClicked
 
     private void tbIGDSekunderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbIGDSekunderKeyPressed
-        if(tabModeIGDSekunder.getRowCount()!=0){
+        if(tbIGDSekunder.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 if(tbIGDSekunder.getSelectedRow()!= -1){
                     getDataIGDSekunder();
@@ -1512,7 +1515,7 @@ KirimTriaseIGDSekunder();
     }//GEN-LAST:event_ChkAccorAwalKeperawatanIGDActionPerformed
 
     private void tbAwalKeperawatanIGDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAwalKeperawatanIGDKeyPressed
-        if(tabModeAwalKeperawatanIGD.getRowCount()!=0){
+        if(tbAwalKeperawatanIGD.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 if(tbAwalKeperawatanIGD.getSelectedRow()!= -1){
                     getDataIGDSekunder();
@@ -1610,6 +1613,7 @@ KirimTriaseIGDSekunder();
     // End of variables declaration//GEN-END:variables
 
     private void tampilIGDPrimer() {
+        tbIGDPrimer.suspendSorting();
         Valid.tabelKosong(tabModeIGDPrimer);
         try{
             ps=koneksi.prepareStatement(
@@ -1657,10 +1661,12 @@ KirimTriaseIGDSekunder();
         }catch(Exception e){
             System.out.println("Notifikasi IGD Primer : "+e);
         }
-        LCount.setText(""+tabModeIGDPrimer.getRowCount());
+        LCount.setText(""+tbIGDPrimer.getRowCount());
+        tbIGDPrimer.resumeSorting();
     }
 
     private void tampilIGDSekunder() {
+        tbIGDSekunder.suspendSorting();
         Valid.tabelKosong(tabModeIGDSekunder);
         try{
             ps=koneksi.prepareStatement(
@@ -1708,10 +1714,12 @@ KirimTriaseIGDSekunder();
         }catch(Exception e){
             System.out.println("Notifikasi IGD Sekunder : "+e);
         }
-        LCount.setText(""+tabModeIGDSekunder.getRowCount());
+        LCount.setText(""+tbIGDSekunder.getRowCount());
+        tbIGDSekunder.resumeSorting();
     }
 
     private void tampilAwalKeperawatanIGD() {
+        tbAwalKeperawatanIGD.suspendSorting();
         Valid.tabelKosong(tabModeAwalKeperawatanIGD);
         try{
             ps=koneksi.prepareStatement(
@@ -1782,7 +1790,8 @@ KirimTriaseIGDSekunder();
         }catch(Exception e){
             System.out.println("Notifikasi Awal Keperawatan IGD : "+e);
         }
-        LCount.setText(""+tabModeAwalKeperawatanIGD.getRowCount());
+        LCount.setText(""+tbAwalKeperawatanIGD.getRowCount());
+        tbAwalKeperawatanIGD.resumeSorting();
     }
 
     public void isCek(){
@@ -1844,7 +1853,7 @@ KirimTriaseIGDSekunder();
                 "where data_triase_igddetail_skala1.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan order by master_triase_pemeriksaan.kode_pemeriksaan"
             );
             try {
-                ps.setString(1,tbIGDPrimer.getValueAt(tbIGDPrimer.getSelectedRow(),1).toString());
+                ps.setString(1,tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(tbIGDPrimer.getSelectedRow()),1).toString());
                 rs=ps.executeQuery();
                 if(rs.next()){
                     htmlContent.append("<tr class='isi'>").
@@ -1864,7 +1873,7 @@ KirimTriaseIGDSekunder();
                         );
                         try {
                             ps2.setString(1,rs.getString("kode_pemeriksaan"));
-                            ps2.setString(2,tbIGDPrimer.getValueAt(tbIGDPrimer.getSelectedRow(),1).toString());
+                            ps2.setString(2,tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(tbIGDPrimer.getSelectedRow()),1).toString());
                             rs2=ps2.executeQuery();
                             while(rs2.next()){
                                 htmlContent.append("<tr class='isi'>").
@@ -1907,7 +1916,7 @@ KirimTriaseIGDSekunder();
                     "where data_triase_igddetail_skala2.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan order by master_triase_pemeriksaan.kode_pemeriksaan"
                 );
                 try {
-                    ps.setString(1,tbIGDPrimer.getValueAt(tbIGDPrimer.getSelectedRow(),1).toString());
+                    ps.setString(1,tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(tbIGDPrimer.getSelectedRow()),1).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         htmlContent.append("<tr class='isi'>").
@@ -1927,7 +1936,7 @@ KirimTriaseIGDSekunder();
                             );
                             try {
                                 ps2.setString(1,rs.getString("kode_pemeriksaan"));
-                                ps2.setString(2,tbIGDPrimer.getValueAt(tbIGDPrimer.getSelectedRow(),1).toString());
+                                ps2.setString(2,tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(tbIGDPrimer.getSelectedRow()),1).toString());
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
                                     htmlContent.append("<tr class='isi'>").
@@ -1984,7 +1993,7 @@ KirimTriaseIGDSekunder();
                 "where data_triase_igddetail_skala3.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan order by master_triase_pemeriksaan.kode_pemeriksaan"
             );
             try {
-                ps.setString(1,tbIGDSekunder.getValueAt(tbIGDSekunder.getSelectedRow(),1).toString());
+                ps.setString(1,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(tbIGDSekunder.getSelectedRow()),1).toString());
                 rs=ps.executeQuery();
                 if(rs.next()){
                     htmlContent.append("<tr class='isi'>").
@@ -2004,7 +2013,7 @@ KirimTriaseIGDSekunder();
                         );
                         try {
                             ps2.setString(1,rs.getString("kode_pemeriksaan"));
-                            ps2.setString(2,tbIGDSekunder.getValueAt(tbIGDSekunder.getSelectedRow(),1).toString());
+                            ps2.setString(2,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(tbIGDSekunder.getSelectedRow()),1).toString());
                             rs2=ps2.executeQuery();
                             while(rs2.next()){
                                 htmlContent.append("<tr class='isi'>").
@@ -2047,7 +2056,7 @@ KirimTriaseIGDSekunder();
                     "where data_triase_igddetail_skala4.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan order by master_triase_pemeriksaan.kode_pemeriksaan"
                 );
                 try {
-                    ps.setString(1,tbIGDSekunder.getValueAt(tbIGDSekunder.getSelectedRow(),1).toString());
+                    ps.setString(1,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(tbIGDSekunder.getSelectedRow()),1).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         htmlContent.append("<tr class='isi'>").
@@ -2067,7 +2076,7 @@ KirimTriaseIGDSekunder();
                             );
                             try {
                                 ps2.setString(1,rs.getString("kode_pemeriksaan"));
-                                ps2.setString(2,tbIGDSekunder.getValueAt(tbIGDSekunder.getSelectedRow(),1).toString());
+                                ps2.setString(2,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(tbIGDSekunder.getSelectedRow()),1).toString());
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
                                     htmlContent.append("<tr class='isi'>").
@@ -2110,7 +2119,7 @@ KirimTriaseIGDSekunder();
                     "where data_triase_igddetail_skala5.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan order by master_triase_pemeriksaan.kode_pemeriksaan"
                 );
                 try {
-                    ps.setString(1,tbIGDSekunder.getValueAt(tbIGDSekunder.getSelectedRow(),1).toString());
+                    ps.setString(1,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(tbIGDSekunder.getSelectedRow()),1).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         htmlContent.append("<tr class='isi'>").
@@ -2130,7 +2139,7 @@ KirimTriaseIGDSekunder();
                             );
                             try {
                                 ps2.setString(1,rs.getString("kode_pemeriksaan"));
-                                ps2.setString(2,tbIGDSekunder.getValueAt(tbIGDSekunder.getSelectedRow(),1).toString());
+                                ps2.setString(2,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(tbIGDSekunder.getSelectedRow()),1).toString());
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
                                     htmlContent.append("<tr class='isi'>").
@@ -2185,7 +2194,7 @@ KirimTriaseIGDSekunder();
                 "where penilaian_awal_keperawatan_igd_masalah.no_rawat=? order by penilaian_awal_keperawatan_igd_masalah.kode_masalah"
             );
             try {
-                ps.setString(1,tbAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.getSelectedRow(),1).toString());
+                ps.setString(1,tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(tbAwalKeperawatanIGD.getSelectedRow()),1).toString());
                 rs=ps.executeQuery();
                 if(rs.next()){
                     htmlContent.append("<tr class='isi'>").
@@ -2205,7 +2214,7 @@ KirimTriaseIGDSekunder();
                         );
                         try {
                             ps2.setString(1,rs.getString("kode_masalah"));
-                            ps2.setString(2,tbAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.getSelectedRow(),1).toString());
+                            ps2.setString(2,tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(tbAwalKeperawatanIGD.getSelectedRow()),1).toString());
                             rs2=ps2.executeQuery();
                             while(rs2.next()){
                                 htmlContent.append("<tr class='isi'>").
@@ -2252,12 +2261,12 @@ KirimTriaseIGDSekunder();
 
     private void KirimTriaseIGDPrimer() {
         for(i=0;i<tbIGDPrimer.getRowCount();i++){
-            if(tbIGDPrimer.getValueAt(i,0).toString().equals("true")&&(!tbIGDPrimer.getValueAt(i,4).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,7).toString().equals(""))){
+            if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),4).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),7).toString().equals(""))){
                 try {
-                    iddokter = cekViaSatuSehat.tampilIDParktisi(tbIGDPrimer.getValueAt(i,7).toString());
-                    idpasien = cekViaSatuSehat.tampilIDPasien(tbIGDPrimer.getValueAt(i,4).toString());
+                    iddokter = cekViaSatuSehat.tampilIDParktisi(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),7).toString());
+                    idpasien = cekViaSatuSehat.tampilIDPasien(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),4).toString());
                     //Cara Masuk
-                    if(tbIGDPrimer.getValueAt(i,10).toString().equals("")){
+                    if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),10).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2295,11 +2304,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDPrimer.getValueAt(i,9).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),9).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -2310,9 +2319,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_cara_masuk=?",2,new String[]{
-                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDPrimer.setValueAt(response.asText(), i,10);
+                                    tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),10);
                                 }
                             }
                         }catch(Exception e){
@@ -2321,7 +2330,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Transportasi
-                    if(tbIGDPrimer.getValueAt(i,12).toString().equals("")){
+                    if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),12).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2359,11 +2368,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDPrimer.getValueAt(i,11).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),11).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -2374,9 +2383,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_alat_transportasi=?",2,new String[]{
-                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDPrimer.setValueAt(response.asText(), i,12);
+                                    tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),12);
                                 }
                             }
                         }catch(Exception e){
@@ -2385,7 +2394,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Alasan Kedatangan
-                    if(tbIGDPrimer.getValueAt(i,15).toString().equals("")){
+                    if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),15).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2423,11 +2432,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDPrimer.getValueAt(i,13).toString()+(tbIGDPrimer.getValueAt(i,14).toString().equals("")?"":", Keterangan : "+tbIGDPrimer.getValueAt(i,14).toString())+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),13).toString()+(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),14).toString().equals("")?"":", Keterangan : "+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),14).toString())+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -2438,9 +2447,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_alasan_kedatangan=?",2,new String[]{
-                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDPrimer.setValueAt(response.asText(), i,15);
+                                    tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),15);
                                 }
                             }
                         }catch(Exception e){
@@ -2449,7 +2458,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Macam Kasus
-                    if(tbIGDPrimer.getValueAt(i,17).toString().equals("")){
+                    if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),17).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2487,11 +2496,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDPrimer.getValueAt(i,16).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),16).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -2502,9 +2511,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_macam_kasus=?",2,new String[]{
-                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDPrimer.setValueAt(response.asText(), i,17);
+                                    tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),17);
                                 }
                             }
                         }catch(Exception e){
@@ -2513,8 +2522,8 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Tekanan Darah
-                    if(tbIGDPrimer.getValueAt(i,19).toString().equals("")){
-                        arrSplit = tbIGDPrimer.getValueAt(i,18).toString().split("/");
+                    if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),19).toString().equals("")){
+                        arrSplit = tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),18).toString().split("/");
                         sistole="0";
                         try {
                             if(!arrSplit[0].equals("")){
@@ -2568,10 +2577,10 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"component\" : ["+
                                             "{" +
                                                 "\"code\" : {" +
@@ -2618,9 +2627,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_tekanan_darah=?",2,new String[]{
-                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDPrimer.setValueAt(response.asText(), i,19);
+                                    tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),19);
                                 }
                             }
                         }catch(Exception e){
@@ -2629,7 +2638,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Nadi
-                    if(tbIGDPrimer.getValueAt(i,21).toString().equals("")){
+                    if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),21).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2667,12 +2676,12 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDPrimer.getValueAt(i, 20).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 20).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"/min\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"/min\""+
@@ -2687,9 +2696,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_nadi=?",2,new String[]{
-                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDPrimer.setValueAt(response.asText(), i,21);
+                                    tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),21);
                                 }
                             }
                         }catch(Exception e){
@@ -2698,7 +2707,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Respirasi
-                    if(tbIGDPrimer.getValueAt(i,23).toString().equals("")){
+                    if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),23).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2736,12 +2745,12 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDPrimer.getValueAt(i, 22).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 22).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"/min\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"/min\""+
@@ -2756,9 +2765,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_pernapasan=?",2,new String[]{
-                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDPrimer.setValueAt(response.asText(), i,23);
+                                    tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),23);
                                 }
                             }
                         }catch(Exception e){
@@ -2767,7 +2776,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Suhu Tubuh
-                    if(tbIGDPrimer.getValueAt(i,25).toString().equals("")){
+                    if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),25).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2805,12 +2814,12 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDPrimer.getValueAt(i, 24).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 24).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"degree Celsius\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"Cel\""+
@@ -2825,9 +2834,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_suhu=?",2,new String[]{
-                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDPrimer.setValueAt(response.asText(), i,25);
+                                    tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),25);
                                 }
                             }
                         }catch(Exception e){
@@ -2836,7 +2845,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Saturasi Oksigen
-                    if(tbIGDPrimer.getValueAt(i,27).toString().equals("")){
+                    if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),27).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2874,12 +2883,12 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDPrimer.getValueAt(i, 26).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 26).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"%\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"%\""+
@@ -2894,9 +2903,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_saturasi_o2=?",2,new String[]{
-                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDPrimer.setValueAt(response.asText(), i,27);
+                                    tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),27);
                                 }
                             }
                         }catch(Exception e){
@@ -2905,7 +2914,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Nyeri
-                    if(tbIGDPrimer.getValueAt(i,29).toString().equals("")){
+                    if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),29).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2943,11 +2952,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueInteger\": " + tbIGDPrimer.getValueAt(i, 28).toString().replaceAll("[^0-9]", "") +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueInteger\": " + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 28).toString().replaceAll("[^0-9]", "") +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -2958,9 +2967,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_nyeri=?",2,new String[]{
-                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDPrimer.setValueAt(response.asText(), i,29);
+                                    tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),29);
                                 }
                             }
                         }catch(Exception e){
@@ -2969,7 +2978,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Keluhan Utama
-                    if(tbIGDPrimer.getValueAt(i,31).toString().equals("")){
+                    if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),31).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3007,11 +3016,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \"" + tbIGDPrimer.getValueAt(i,30).toString().replace("\"", "'").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ") + "\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \"" + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),30).toString().replace("\"", "'").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ") + "\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -3022,9 +3031,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igdprimer","no_rawat=?","id_observation_keluhan_utama=?",2,new String[]{
-                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDPrimer.setValueAt(response.asText(), i,31);
+                                    tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),31);
                                 }
                             }
                         }catch(Exception e){
@@ -3033,7 +3042,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Kebutuhan Khusus
-                    if((!tbIGDPrimer.getValueAt(i, 32).toString().equals("-"))&&tbIGDPrimer.getValueAt(i,33).toString().equals("")){
+                    if((!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 32).toString().equals("-"))&&tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),33).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3071,11 +3080,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \"" + tbIGDPrimer.getValueAt(i, 32).toString() + "\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \"" + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 32).toString() + "\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -3086,9 +3095,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igdprimer","no_rawat=?","id_observation_kebutuhan_khusus=?",2,new String[]{
-                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDPrimer.setValueAt(response.asText(), i,33);
+                                    tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),33);
                                 }
                             }
                         }catch(Exception e){
@@ -3097,7 +3106,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Catatan
-                    if((!tbIGDPrimer.getValueAt(i, 34).toString().equals("")) && tbIGDPrimer.getValueAt(i, 35).toString().equals("")){
+                    if((!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 34).toString().equals("")) && tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 35).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3135,11 +3144,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \"" +tbIGDPrimer.getValueAt(i, 34).toString().replace("\"", "'")+ "\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \"" +tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 34).toString().replace("\"", "'")+ "\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -3150,9 +3159,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igdprimer","no_rawat=?","id_observation_catatan=?",2,new String[]{
-                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDPrimer.setValueAt(response.asText(), i,35);
+                                    tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),35);
                                 }
                             }
                         }catch(Exception e){
@@ -3161,7 +3170,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Keputusan
-                    if(tbIGDPrimer.getValueAt(i, 37).toString().equals("")){
+                    if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 37).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3171,7 +3180,7 @@ KirimTriaseIGDSekunder();
                                         "\"status\": \"active\"," +
                                         "\"intent\": \"plan\"," +
                                         "\"title\": \"Rencana Penempatan Pasien IGD\"," +
-                                        "\"description\": \"Zona Merah " + tbIGDPrimer.getValueAt(i, 36).toString()+"\"," +
+                                        "\"description\": \"Zona Merah " + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 36).toString()+"\"," +
                                         "\"category\": ["+
                                             "{"+
                                                 "\"coding\": ["+
@@ -3187,13 +3196,13 @@ KirimTriaseIGDSekunder();
                                             "\"reference\": \"Patient/" + idpasien + "\""+
                                         "}," +
                                         "\"encounter\": {"+
-                                            "\"reference\": \"Encounter/" + tbIGDPrimer.getValueAt(i, 5).toString() + "\""+
+                                            "\"reference\": \"Encounter/" + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 5).toString() + "\""+
                                         "}," +
                                         "\"author\": {"+
                                             "\"reference\": \"Practitioner/" + iddokter + "\""+
                                         "}," +
                                         "\"period\": {"+
-                                            "\"start\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\""+
+                                            "\"start\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\""+
                                         "}" +
                                    "}";
                             System.out.println("URL : "+link+"/CarePlan");
@@ -3205,9 +3214,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igdprimer","no_rawat=?","id_careplan_keputusan=?",2,new String[]{
-                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDPrimer.setValueAt(response.asText(), i,37);
+                                    tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),37);
                                 }
                             }
                         }catch(Exception e){
@@ -3225,10 +3234,10 @@ KirimTriaseIGDSekunder();
                         "where data_triase_igddetail_skala1.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan"
                     );
                     try {
-                        ps.setString(1,tbIGDPrimer.getValueAt(i,1).toString());
+                        ps.setString(1,tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
-                            if(tbIGDPrimer.getValueAt(i, 38).toString().equals("")){
+                            if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 38).toString().equals("")){
                                 try{
                                     headers = new HttpHeaders();
                                     headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3266,10 +3275,10 @@ KirimTriaseIGDSekunder();
                                                     "}" +
                                                 "]," +
                                                 "\"encounter\": {" +
-                                                    "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                                    "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                                 "}," +
-                                                "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                 "\"valueCodeableConcept\": {" +
                                                     "\"coding\": [" +
                                                         "{" +
@@ -3290,9 +3299,9 @@ KirimTriaseIGDSekunder();
                                     response = root.path("id");
                                     if(!response.asText().equals("")){
                                         if(Sequel.mengedittf("data_triase_igdprimer","no_rawat=?","id_observation_skala=?",2,new String[]{
-                                                response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                                response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                             })==true){
-                                            tbIGDPrimer.setValueAt(response.asText(), i,38);
+                                            tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),38);
                                         }
                                     }
                                 }catch(Exception e){
@@ -3309,7 +3318,7 @@ KirimTriaseIGDSekunder();
                                 );
                                 try {
                                     ps2.setString(1,rs.getString("kode_pemeriksaan"));
-                                    ps2.setString(2,tbIGDPrimer.getValueAt(i,1).toString());
+                                    ps2.setString(2,tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString());
                                     rs2=ps2.executeQuery();
                                     while(rs2.next()){
                                         if(rs2.getString("id_observation_skala1").equals("")){
@@ -3350,10 +3359,10 @@ KirimTriaseIGDSekunder();
                                                                 "}"+
                                                             "]," +
                                                             "\"encounter\": {"+
-                                                                "\"reference\": \"Encounter/" + tbIGDPrimer.getValueAt(i, 5).toString() + "\""+
+                                                                "\"reference\": \"Encounter/" + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 5).toString() + "\""+
                                                             "}," +
-                                                            "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                            "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                            "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                            "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                             "\"valueString\": \"" + rs2.getString("pengkajian_skala1").replace("\"", "'") + "\"" +
                                                        "}";
                                                 System.out.println("URL : "+link+"/Observation");
@@ -3365,7 +3374,7 @@ KirimTriaseIGDSekunder();
                                                 response = root.path("id");
                                                 if(!response.asText().equals("")){
                                                     Sequel.mengedit("data_triase_igddetail_skala1","no_rawat=? AND kode_skala1=?","id_observation_skala1=?",3,new String[]{
-                                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString(),rs2.getString("kode_skala1")
+                                                        response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString(),rs2.getString("kode_skala1")
                                                     });
                                                     iyembuilder.append("{\"reference\": \"Observation/").append(response.asText()).append("\"},");
                                                 }
@@ -3410,10 +3419,10 @@ KirimTriaseIGDSekunder();
                             "where data_triase_igddetail_skala2.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan"
                         );
                         try {
-                            ps.setString(1,tbIGDPrimer.getValueAt(i,1).toString());
+                            ps.setString(1,tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString());
                             rs=ps.executeQuery();
                             if(rs.next()){
-                                if(tbIGDPrimer.getValueAt(i, 38).toString().equals("")){
+                                if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 38).toString().equals("")){
                                     try{
                                         headers = new HttpHeaders();
                                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3451,10 +3460,10 @@ KirimTriaseIGDSekunder();
                                                         "}" +
                                                     "]," +
                                                     "\"encounter\": {" +
-                                                        "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                                        "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                                     "}," +
-                                                    "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                    "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                    "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                    "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                     "\"valueCodeableConcept\": {" +
                                                         "\"coding\": [" +
                                                             "{" +
@@ -3475,9 +3484,9 @@ KirimTriaseIGDSekunder();
                                         response = root.path("id");
                                         if(!response.asText().equals("")){
                                             if(Sequel.mengedittf("data_triase_igdprimer","no_rawat=?","id_observation_skala=?",3,new String[]{
-                                                    response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                                    response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                                 })==true){
-                                                tbIGDPrimer.setValueAt(response.asText(), i,38);
+                                                tabModeIGDPrimer.setValueAt(response.asText(), tbIGDPrimer.convertRowIndexToModel(i),38);
                                             }
                                         }
                                     }catch(Exception e){
@@ -3494,7 +3503,7 @@ KirimTriaseIGDSekunder();
                                     );
                                     try {
                                         ps2.setString(1,rs.getString("kode_pemeriksaan"));
-                                        ps2.setString(2,tbIGDPrimer.getValueAt(i,1).toString());
+                                        ps2.setString(2,tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString());
                                         rs2=ps2.executeQuery();
                                         while(rs2.next()){
                                             if(rs2.getString("id_observation_skala2").equals("")){
@@ -3535,10 +3544,10 @@ KirimTriaseIGDSekunder();
                                                                     "}"+
                                                                 "]," +
                                                                 "\"encounter\": {"+
-                                                                    "\"reference\": \"Encounter/" + tbIGDPrimer.getValueAt(i, 5).toString() + "\""+
+                                                                    "\"reference\": \"Encounter/" + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 5).toString() + "\""+
                                                                 "}," +
-                                                                "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                                "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                                "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                                "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                                 "\"valueString\": \"" + rs2.getString("pengkajian_skala2").replace("\"", "'") + "\"" +
                                                            "}";
                                                     System.out.println("URL : "+link+"/Observation");
@@ -3550,7 +3559,7 @@ KirimTriaseIGDSekunder();
                                                     response = root.path("id");
                                                     if(!response.asText().equals("")){
                                                         Sequel.mengedit("data_triase_igddetail_skala2","no_rawat=? AND kode_skala2=?","id_observation_skala2=?",2,new String[]{
-                                                            response.asText(),tbIGDPrimer.getValueAt(i,1).toString(),rs2.getString("kode_skala2")
+                                                            response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString(),rs2.getString("kode_skala2")
                                                         });
                                                         iyembuilder.append("{\"reference\": \"Observation/").append(response.asText()).append("\"},");
                                                     }
@@ -3588,10 +3597,10 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Composition IGD
-                    if((!tbIGDPrimer.getValueAt(i,10).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,12).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,15).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,17).toString().equals(""))&&
-                            (!tbIGDPrimer.getValueAt(i,19).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,21).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,23).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,25).toString().equals(""))&&
-                            (!tbIGDPrimer.getValueAt(i,27).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,29).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,31).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,33).toString().equals(""))&&
-                            (!tbIGDPrimer.getValueAt(i,35).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,37).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,38).toString().equals(""))&&tbIGDPrimer.getValueAt(i,39).toString().equals("")){
+                    if((!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),10).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),12).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),15).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),17).toString().equals(""))&&
+                            (!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),19).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),21).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),23).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),25).toString().equals(""))&&
+                            (!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),27).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),29).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),31).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),33).toString().equals(""))&&
+                            (!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),35).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),37).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),38).toString().equals(""))&&tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),39).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3612,14 +3621,14 @@ KirimTriaseIGDSekunder();
                                             "\"reference\": \"Patient/"+idpasien+"\"" +
                                         "}," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
                                         "\"author\": [" +
                                             "{" +
                                                 "\"reference\": \"Practitioner/"+iddokter+"\"" +
                                             "}" +
                                         "]," +
-                                        "\"date\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"date\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"title\": \"Data Triase IGD\"," +
                                         "\"section\": [" +
                                             "{" +
@@ -3634,10 +3643,10 @@ KirimTriaseIGDSekunder();
                                                     "]" +
                                                 "}," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,10).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,12).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,15).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,17).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),10).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),12).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),15).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),17).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
@@ -3652,7 +3661,7 @@ KirimTriaseIGDSekunder();
                                                     "]" +
                                                 "}," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,31).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),31).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
@@ -3667,17 +3676,17 @@ KirimTriaseIGDSekunder();
                                                     "]" +
                                                 "}," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,19).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,21).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,23).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,25).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,27).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),19).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),21).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),23).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),25).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),27).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
                                                 "\"title\": \"Kebutuhan Khusus\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,33).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),33).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
@@ -3693,21 +3702,21 @@ KirimTriaseIGDSekunder();
                                                 "}," +
                                                 "\"entry\": [" +
                                                     iyembuilder.toString()+
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,29).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,38).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),29).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),38).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
                                                 "\"title\": \"Catatan\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,35).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),35).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
                                                 "\"title\": \"Plan/Keputusan\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"CarePlan/"+tbIGDPrimer.getValueAt(i,37).toString()+"\"}," +
-                                                    "{\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"}" +
+                                                    "{\"reference\": \"CarePlan/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),37).toString()+"\"}," +
+                                                    "{\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"}" +
                                                 "]" +
                                             "}" +
                                         "]" +
@@ -3721,10 +3730,10 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("ata_triase_igd","no_rawat=?","id_composition=?",2,new String[]{
-                                    response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                    response.asText(),tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString()
                                 })==true){
-                                    tbIGDPrimer.setValueAt(response.asText(),i,39);
-                                    tbIGDPrimer.setValueAt(false,i,0);
+                                    tabModeIGDPrimer.setValueAt(response.asText(),tbIGDPrimer.convertRowIndexToModel(i),39);
+                                    tabModeIGDPrimer.setValueAt(false,tbIGDPrimer.convertRowIndexToModel(i),0);
                                 }
                             }
                         }catch(Exception e){
@@ -3741,12 +3750,12 @@ KirimTriaseIGDSekunder();
 
     private void KirimTriaseIGDSekunder() {
         for(i=0;i<tbIGDSekunder.getRowCount();i++){
-            if(tbIGDSekunder.getValueAt(i,0).toString().equals("true")&&(!tbIGDSekunder.getValueAt(i,4).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,7).toString().equals(""))){
+            if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),4).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),7).toString().equals(""))){
                 try {
-                    iddokter = cekViaSatuSehat.tampilIDParktisi(tbIGDSekunder.getValueAt(i,7).toString());
-                    idpasien = cekViaSatuSehat.tampilIDPasien(tbIGDSekunder.getValueAt(i,4).toString());
+                    iddokter = cekViaSatuSehat.tampilIDParktisi(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),7).toString());
+                    idpasien = cekViaSatuSehat.tampilIDPasien(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),4).toString());
                     //Cara Masuk
-                    if(tbIGDSekunder.getValueAt(i,10).toString().equals("")){
+                    if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),10).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3784,11 +3793,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDSekunder.getValueAt(i,9).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),9).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -3799,9 +3808,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_cara_masuk=?",2,new String[]{
-                                        response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDSekunder.setValueAt(response.asText(), i,10);
+                                    tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),10);
                                 }
                             }
                         }catch(Exception e){
@@ -3810,7 +3819,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Transportasi
-                    if(tbIGDSekunder.getValueAt(i,12).toString().equals("")){
+                    if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),12).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3848,11 +3857,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDSekunder.getValueAt(i,11).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),11).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -3863,9 +3872,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_alat_transportasi=?",2,new String[]{
-                                        response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDSekunder.setValueAt(response.asText(), i,12);
+                                    tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),12);
                                 }
                             }
                         }catch(Exception e){
@@ -3874,7 +3883,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Alasan Kedatangan
-                    if(tbIGDSekunder.getValueAt(i,15).toString().equals("")){
+                    if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),15).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3912,11 +3921,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDSekunder.getValueAt(i,13).toString()+(tbIGDSekunder.getValueAt(i,14).toString().equals("")?"":", Keterangan : "+tbIGDSekunder.getValueAt(i,14).toString())+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),13).toString()+(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),14).toString().equals("")?"":", Keterangan : "+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),14).toString())+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -3927,9 +3936,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_alasan_kedatangan=?",2,new String[]{
-                                        response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDSekunder.setValueAt(response.asText(), i,15);
+                                    tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),15);
                                 }
                             }
                         }catch(Exception e){
@@ -3938,7 +3947,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Macam Kasus
-                    if(tbIGDSekunder.getValueAt(i,17).toString().equals("")){
+                    if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),17).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3976,11 +3985,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDSekunder.getValueAt(i,16).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),16).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -3991,9 +4000,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_macam_kasus=?",2,new String[]{
-                                        response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDSekunder.setValueAt(response.asText(), i,17);
+                                    tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),17);
                                 }
                             }
                         }catch(Exception e){
@@ -4002,8 +4011,8 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Tekanan Darah
-                    if(tbIGDSekunder.getValueAt(i,19).toString().equals("")){
-                        arrSplit = tbIGDSekunder.getValueAt(i,18).toString().split("/");
+                    if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),19).toString().equals("")){
+                        arrSplit = tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),18).toString().split("/");
                         sistole="0";
                         try {
                             if(!arrSplit[0].equals("")){
@@ -4057,10 +4066,10 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"component\" : ["+
                                             "{" +
                                                 "\"code\" : {" +
@@ -4107,9 +4116,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_tekanan_darah=?",2,new String[]{
-                                        response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDSekunder.setValueAt(response.asText(), i,19);
+                                    tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),19);
                                 }
                             }
                         }catch(Exception e){
@@ -4118,7 +4127,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Nadi
-                    if(tbIGDSekunder.getValueAt(i,21).toString().equals("")){
+                    if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),21).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -4156,12 +4165,12 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDSekunder.getValueAt(i, 20).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 20).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"/min\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"/min\""+
@@ -4176,9 +4185,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_nadi=?",2,new String[]{
-                                        response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDSekunder.setValueAt(response.asText(), i,21);
+                                    tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),21);
                                 }
                             }
                         }catch(Exception e){
@@ -4187,7 +4196,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Respirasi
-                    if(tbIGDSekunder.getValueAt(i,23).toString().equals("")){
+                    if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),23).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -4225,12 +4234,12 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDSekunder.getValueAt(i, 22).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 22).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"/min\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"/min\""+
@@ -4245,9 +4254,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_pernapasan=?",2,new String[]{
-                                        response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDSekunder.setValueAt(response.asText(), i,23);
+                                    tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),23);
                                 }
                             }
                         }catch(Exception e){
@@ -4256,7 +4265,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Suhu Tubuh
-                    if(tbIGDSekunder.getValueAt(i,25).toString().equals("")){
+                    if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),25).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -4294,12 +4303,12 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDSekunder.getValueAt(i, 24).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 24).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"degree Celsius\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"Cel\""+
@@ -4314,9 +4323,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_suhu=?",2,new String[]{
-                                        response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDSekunder.setValueAt(response.asText(), i,25);
+                                    tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),25);
                                 }
                             }
                         }catch(Exception e){
@@ -4325,7 +4334,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Saturasi Oksigen
-                    if(tbIGDSekunder.getValueAt(i,27).toString().equals("")){
+                    if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),27).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -4363,12 +4372,12 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDSekunder.getValueAt(i, 26).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 26).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"%\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"%\""+
@@ -4383,9 +4392,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_saturasi_o2=?",2,new String[]{
-                                        response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDSekunder.setValueAt(response.asText(), i,27);
+                                    tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),27);
                                 }
                             }
                         }catch(Exception e){
@@ -4394,7 +4403,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Nyeri
-                    if(tbIGDSekunder.getValueAt(i,29).toString().equals("")){
+                    if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),29).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -4432,11 +4441,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueInteger\": " + tbIGDSekunder.getValueAt(i, 28).toString().replaceAll("[^0-9]", "") +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueInteger\": " + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 28).toString().replaceAll("[^0-9]", "") +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -4447,9 +4456,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_nyeri=?",2,new String[]{
-                                        response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDSekunder.setValueAt(response.asText(), i,29);
+                                    tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),29);
                                 }
                             }
                         }catch(Exception e){
@@ -4458,7 +4467,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Anamnesa Singkat
-                    if(tbIGDSekunder.getValueAt(i,31).toString().equals("")){
+                    if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),31).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -4466,7 +4475,7 @@ KirimTriaseIGDSekunder();
                             json = "{" +
                                         "\"resourceType\": \"ClinicalImpression\"," +
                                         "\"status\": \"completed\","+
-                                        "\"description\" : \""+tbIGDSekunder.getValueAt(i,30).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ") +"\"," +
+                                        "\"description\" : \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),30).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ") +"\"," +
                                         "\"subject\": {" +
                                             "\"reference\": \"Patient/"+idpasien+"\"" +
                                         "}," +
@@ -4474,10 +4483,10 @@ KirimTriaseIGDSekunder();
                                             "\"reference\": \"Practitioner/"+iddokter+"\"" +
                                         "}," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"date\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"date\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"prognosisCodeableConcept\": ["+
                                             "{"+
                                                 "\"coding\": ["+
@@ -4499,9 +4508,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igdsekunder","no_rawat=?","id_clinicalimpression_anamnesa=?",2,new String[]{
-                                        response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDSekunder.setValueAt(response.asText(), i,31);
+                                    tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),31);
                                 }
                             }
                         }catch(Exception e){
@@ -4510,7 +4519,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Catatan
-                    if((!tbIGDSekunder.getValueAt(i, 32).toString().equals("")) && tbIGDSekunder.getValueAt(i, 33).toString().equals("")){
+                    if((!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 32).toString().equals("")) && tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 33).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -4548,11 +4557,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \"" +tbIGDSekunder.getValueAt(i, 32).toString().replace("\"", "'")+ "\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \"" +tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 32).toString().replace("\"", "'")+ "\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -4563,9 +4572,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igdsekunder","no_rawat=?","id_observation_catatan=?",2,new String[]{
-                                        response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDSekunder.setValueAt(response.asText(), i,33);
+                                    tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),33);
                                 }
                             }
                         }catch(Exception e){
@@ -4574,7 +4583,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Keputusan
-                    if(tbIGDSekunder.getValueAt(i, 35).toString().equals("")){
+                    if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 35).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -4584,7 +4593,7 @@ KirimTriaseIGDSekunder();
                                         "\"status\": \"active\"," +
                                         "\"intent\": \"plan\"," +
                                         "\"title\": \"Rencana Penempatan Pasien IGD\"," +
-                                        "\"description\": \"" + tbIGDSekunder.getValueAt(i, 34).toString()+"\"," +
+                                        "\"description\": \"" + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 34).toString()+"\"," +
                                         "\"category\": ["+
                                             "{"+
                                                 "\"coding\": ["+
@@ -4600,13 +4609,13 @@ KirimTriaseIGDSekunder();
                                             "\"reference\": \"Patient/" + idpasien + "\""+
                                         "}," +
                                         "\"encounter\": {"+
-                                            "\"reference\": \"Encounter/" + tbIGDSekunder.getValueAt(i, 5).toString() + "\""+
+                                            "\"reference\": \"Encounter/" + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 5).toString() + "\""+
                                         "}," +
                                         "\"author\": {"+
                                             "\"reference\": \"Practitioner/" + iddokter + "\""+
                                         "}," +
                                         "\"period\": {"+
-                                            "\"start\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\""+
+                                            "\"start\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\""+
                                         "}" +
                                    "}";
                             System.out.println("URL : "+link+"/CarePlan");
@@ -4618,9 +4627,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igdsekunder","no_rawat=?","id_careplan_keputusan=?",2,new String[]{
-                                        response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                        response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbIGDSekunder.setValueAt(response.asText(), i,35);
+                                    tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),35);
                                 }
                             }
                         }catch(Exception e){
@@ -4638,10 +4647,10 @@ KirimTriaseIGDSekunder();
                         "where data_triase_igddetail_skala3.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan"
                     );
                     try {
-                        ps.setString(1,tbIGDSekunder.getValueAt(i,1).toString());
+                        ps.setString(1,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
-                            if(tbIGDSekunder.getValueAt(i, 36).toString().equals("")){
+                            if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 36).toString().equals("")){
                                 try{
                                     headers = new HttpHeaders();
                                     headers.setContentType(MediaType.APPLICATION_JSON);
@@ -4679,10 +4688,10 @@ KirimTriaseIGDSekunder();
                                                     "}" +
                                                 "]," +
                                                 "\"encounter\": {" +
-                                                    "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                                    "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                                 "}," +
-                                                "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                 "\"valueCodeableConcept\": {" +
                                                     "\"coding\": [" +
                                                         "{" +
@@ -4703,9 +4712,9 @@ KirimTriaseIGDSekunder();
                                     response = root.path("id");
                                     if(!response.asText().equals("")){
                                         if(Sequel.mengedittf("data_triase_igdsekunder","no_rawat=?","id_observation_skala=?",2,new String[]{
-                                                response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                                response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                             })==true){
-                                            tbIGDSekunder.setValueAt(response.asText(), i,36);
+                                            tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),36);
                                         }
                                     }
                                 }catch(Exception e){
@@ -4722,7 +4731,7 @@ KirimTriaseIGDSekunder();
                                 );
                                 try {
                                     ps2.setString(1,rs.getString("kode_pemeriksaan"));
-                                    ps2.setString(2,tbIGDSekunder.getValueAt(i,1).toString());
+                                    ps2.setString(2,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString());
                                     rs2=ps2.executeQuery();
                                     while(rs2.next()){
                                         if(rs2.getString("id_observation_skala3").equals("")){
@@ -4763,10 +4772,10 @@ KirimTriaseIGDSekunder();
                                                                 "}"+
                                                             "]," +
                                                             "\"encounter\": {"+
-                                                                "\"reference\": \"Encounter/" + tbIGDSekunder.getValueAt(i, 5).toString() + "\""+
+                                                                "\"reference\": \"Encounter/" + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 5).toString() + "\""+
                                                             "}," +
-                                                            "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                            "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                            "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                            "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                             "\"valueString\": \"" + rs2.getString("pengkajian_skala3").replace("\"", "'") + "\"" +
                                                        "}";
                                                 System.out.println("URL : "+link+"/Observation");
@@ -4778,7 +4787,7 @@ KirimTriaseIGDSekunder();
                                                 response = root.path("id");
                                                 if(!response.asText().equals("")){
                                                     Sequel.mengedit("data_triase_igddetail_skala3","no_rawat=? AND kode_skala3=?","id_observation_skala3=?",3,new String[]{
-                                                        response.asText(),tbIGDSekunder.getValueAt(i,1).toString(),rs2.getString("kode_skala3")
+                                                        response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString(),rs2.getString("kode_skala3")
                                                     });
                                                     iyembuilder.append("{\"reference\": \"Observation/").append(response.asText()).append("\"},");
                                                 }
@@ -4823,10 +4832,10 @@ KirimTriaseIGDSekunder();
                             "where data_triase_igddetail_skala4.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan"
                         );
                         try {
-                            ps.setString(1,tbIGDSekunder.getValueAt(i,1).toString());
+                            ps.setString(1,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString());
                             rs=ps.executeQuery();
                             if(rs.next()){
-                                if(tbIGDSekunder.getValueAt(i, 36).toString().equals("")){
+                                if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 36).toString().equals("")){
                                     try{
                                         headers = new HttpHeaders();
                                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -4864,10 +4873,10 @@ KirimTriaseIGDSekunder();
                                                         "}" +
                                                     "]," +
                                                     "\"encounter\": {" +
-                                                        "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                                        "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                                     "}," +
-                                                    "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                    "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                    "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                    "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                     "\"valueCodeableConcept\": {" +
                                                         "\"coding\": [" +
                                                             "{" +
@@ -4888,9 +4897,9 @@ KirimTriaseIGDSekunder();
                                         response = root.path("id");
                                         if(!response.asText().equals("")){
                                             if(Sequel.mengedittf("data_triase_igdsekunder","no_rawat=?","id_observation_skala=?",3,new String[]{
-                                                    response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                                    response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                                 })==true){
-                                                tbIGDSekunder.setValueAt(response.asText(), i,36);
+                                                tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),36);
                                             }
                                         }
                                     }catch(Exception e){
@@ -4907,7 +4916,7 @@ KirimTriaseIGDSekunder();
                                     );
                                     try {
                                         ps2.setString(1,rs.getString("kode_pemeriksaan"));
-                                        ps2.setString(2,tbIGDSekunder.getValueAt(i,1).toString());
+                                        ps2.setString(2,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString());
                                         rs2=ps2.executeQuery();
                                         while(rs2.next()){
                                             if(rs2.getString("id_observation_skala4").equals("")){
@@ -4948,10 +4957,10 @@ KirimTriaseIGDSekunder();
                                                                     "}"+
                                                                 "]," +
                                                                 "\"encounter\": {"+
-                                                                    "\"reference\": \"Encounter/" + tbIGDSekunder.getValueAt(i, 5).toString() + "\""+
+                                                                    "\"reference\": \"Encounter/" + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 5).toString() + "\""+
                                                                 "}," +
-                                                                "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                                "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                                "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                                "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                                 "\"valueString\": \"" + rs2.getString("pengkajian_skala4").replace("\"", "'") + "\"" +
                                                            "}";
                                                     System.out.println("URL : "+link+"/Observation");
@@ -4963,7 +4972,7 @@ KirimTriaseIGDSekunder();
                                                     response = root.path("id");
                                                     if(!response.asText().equals("")){
                                                         Sequel.mengedit("data_triase_igddetail_skala4","no_rawat=? AND kode_skala4=?","id_observation_skala4=?",2,new String[]{
-                                                            response.asText(),tbIGDSekunder.getValueAt(i,1).toString(),rs2.getString("kode_skala4")
+                                                            response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString(),rs2.getString("kode_skala4")
                                                         });
                                                         iyembuilder.append("{\"reference\": \"Observation/").append(response.asText()).append("\"},");
                                                     }
@@ -5009,10 +5018,10 @@ KirimTriaseIGDSekunder();
                             "where data_triase_igddetail_skala5.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan"
                         );
                         try {
-                            ps.setString(1,tbIGDSekunder.getValueAt(i,1).toString());
+                            ps.setString(1,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString());
                             rs=ps.executeQuery();
                             if(rs.next()){
-                                if(tbIGDSekunder.getValueAt(i, 36).toString().equals("")){
+                                if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 36).toString().equals("")){
                                     try{
                                         headers = new HttpHeaders();
                                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -5050,10 +5059,10 @@ KirimTriaseIGDSekunder();
                                                         "}" +
                                                     "]," +
                                                     "\"encounter\": {" +
-                                                        "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                                        "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                                     "}," +
-                                                    "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                    "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                    "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                    "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                     "\"valueCodeableConcept\": {" +
                                                         "\"coding\": [" +
                                                             "{" +
@@ -5074,9 +5083,9 @@ KirimTriaseIGDSekunder();
                                         response = root.path("id");
                                         if(!response.asText().equals("")){
                                             if(Sequel.mengedittf("data_triase_igdsekunder","no_rawat=?","id_observation_skala=?",3,new String[]{
-                                                    response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                                    response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                                 })==true){
-                                                tbIGDSekunder.setValueAt(response.asText(), i,36);
+                                                tabModeIGDSekunder.setValueAt(response.asText(), tbIGDSekunder.convertRowIndexToModel(i),36);
                                             }
                                         }
                                     }catch(Exception e){
@@ -5093,7 +5102,7 @@ KirimTriaseIGDSekunder();
                                     );
                                     try {
                                         ps2.setString(1,rs.getString("kode_pemeriksaan"));
-                                        ps2.setString(2,tbIGDSekunder.getValueAt(i,1).toString());
+                                        ps2.setString(2,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString());
                                         rs2=ps2.executeQuery();
                                         while(rs2.next()){
                                             if(rs2.getString("id_observation_skala5").equals("")){
@@ -5134,10 +5143,10 @@ KirimTriaseIGDSekunder();
                                                                     "}"+
                                                                 "]," +
                                                                 "\"encounter\": {"+
-                                                                    "\"reference\": \"Encounter/" + tbIGDSekunder.getValueAt(i, 5).toString() + "\""+
+                                                                    "\"reference\": \"Encounter/" + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 5).toString() + "\""+
                                                                 "}," +
-                                                                "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                                "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                                "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                                "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                                 "\"valueString\": \"" + rs2.getString("pengkajian_skala5").replace("\"", "'") + "\"" +
                                                            "}";
                                                     System.out.println("URL : "+link+"/Observation");
@@ -5149,7 +5158,7 @@ KirimTriaseIGDSekunder();
                                                     response = root.path("id");
                                                     if(!response.asText().equals("")){
                                                         Sequel.mengedit("data_triase_igddetail_skala5","no_rawat=? AND kode_skala5=?","id_observation_skala5=?",2,new String[]{
-                                                            response.asText(),tbIGDSekunder.getValueAt(i,1).toString(),rs2.getString("kode_skala5")
+                                                            response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString(),rs2.getString("kode_skala5")
                                                         });
                                                         iyembuilder.append("{\"reference\": \"Observation/").append(response.asText()).append("\"},");
                                                     }
@@ -5187,10 +5196,10 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Composition IGD Sekunder
-                    if((!tbIGDSekunder.getValueAt(i,10).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,12).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,15).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,17).toString().equals(""))&&
-                            (!tbIGDSekunder.getValueAt(i,19).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,21).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,23).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,25).toString().equals(""))&&
-                            (!tbIGDSekunder.getValueAt(i,27).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,29).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,31).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,33).toString().equals(""))&&
-                            (!tbIGDSekunder.getValueAt(i,35).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,36).toString().equals(""))&&tbIGDSekunder.getValueAt(i,37).toString().equals("")){
+                    if((!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),10).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),12).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),15).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),17).toString().equals(""))&&
+                            (!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),19).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),21).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),23).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),25).toString().equals(""))&&
+                            (!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),27).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),29).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),31).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),33).toString().equals(""))&&
+                            (!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),35).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),36).toString().equals(""))&&tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),37).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -5211,14 +5220,14 @@ KirimTriaseIGDSekunder();
                                             "\"reference\": \"Patient/"+idpasien+"\"" +
                                         "}," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
                                         "\"author\": [" +
                                             "{" +
                                                 "\"reference\": \"Practitioner/"+iddokter+"\"" +
                                             "}" +
                                         "]," +
-                                        "\"date\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"date\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"title\": \"Data Triase IGD Sekunder\"," +
                                         "\"section\": [" +
                                             "{" +
@@ -5233,16 +5242,16 @@ KirimTriaseIGDSekunder();
                                                     "]" +
                                                 "}," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,10).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,12).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,15).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,17).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),10).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),12).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),15).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),17).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
                                                 "\"title\": \"Anamnesa\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"ClinicalImpression/"+tbIGDSekunder.getValueAt(i,31).toString()+"\"}" +
+                                                    "{\"reference\": \"ClinicalImpression/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),31).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
@@ -5257,11 +5266,11 @@ KirimTriaseIGDSekunder();
                                                     "]" +
                                                 "}," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,19).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,21).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,23).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,25).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,27).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),19).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),21).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),23).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),25).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),27).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
@@ -5277,21 +5286,21 @@ KirimTriaseIGDSekunder();
                                                 "}," +
                                                 "\"entry\": [" +
                                                     iyembuilder.toString()+
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,29).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,36).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),29).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),36).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
                                                 "\"title\": \"Catatan\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,33).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),33).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
                                                 "\"title\": \"Plan/Keputusan\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"CarePlan/"+tbIGDSekunder.getValueAt(i,35).toString()+"\"}," +
-                                                    "{\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"}" +
+                                                    "{\"reference\": \"CarePlan/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),35).toString()+"\"}," +
+                                                    "{\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"}" +
                                                 "]" +
                                             "}" +
                                         "]" +
@@ -5305,10 +5314,10 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_composition=?",2,new String[]{
-                                    response.asText(),tbIGDSekunder.getValueAt(i,1).toString()
+                                    response.asText(),tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString()
                                 })==true){
-                                    tbIGDSekunder.setValueAt(response.asText(),i,37);
-                                    tbIGDSekunder.setValueAt(false,i,0);
+                                    tabModeIGDSekunder.setValueAt(response.asText(),tbIGDSekunder.convertRowIndexToModel(i),37);
+                                    tabModeIGDSekunder.setValueAt(false,tbIGDSekunder.convertRowIndexToModel(i),0);
                                 }
                             }
                         }catch(Exception e){
@@ -5325,15 +5334,15 @@ KirimTriaseIGDSekunder();
 
     private void KirimAwalKeperawatanIGD() {
         for(i=0;i<tbAwalKeperawatanIGD.getRowCount();i++){
-            if(tbAwalKeperawatanIGD.getValueAt(i,0).toString().equals("true")&&(!tbAwalKeperawatanIGD.getValueAt(i,4).toString().equals(""))&&(!tbAwalKeperawatanIGD.getValueAt(i,7).toString().equals(""))){
+            if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),4).toString().equals(""))&&(!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),7).toString().equals(""))){
                 try {
-                    iddokter = cekViaSatuSehat.tampilIDParktisi(tbAwalKeperawatanIGD.getValueAt(i,7).toString());
-                    idpasien = cekViaSatuSehat.tampilIDPasien(tbAwalKeperawatanIGD.getValueAt(i,4).toString());
+                    iddokter = cekViaSatuSehat.tampilIDParktisi(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),7).toString());
+                    idpasien = cekViaSatuSehat.tampilIDPasien(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),4).toString());
                     StringBuilder masalahbuilder = new StringBuilder();
                     StringBuilder rencanabuilder = new StringBuilder();
 
                     //Informasi
-                    if(tbAwalKeperawatanIGD.getValueAt(i,10).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),10).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -5371,11 +5380,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \"Informasi didapat dari : "+tbAwalKeperawatanIGD.getValueAt(i,9).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \"Informasi didapat dari : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),9).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -5386,9 +5395,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_informasi=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,10);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),10);
                                 }
                             }
                         }catch(Exception e){
@@ -5397,7 +5406,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Riwayat Penyakit Sekarang
-                    if(tbAwalKeperawatanIGD.getValueAt(i,12).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),12).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -5435,11 +5444,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,11).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),11).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -5450,9 +5459,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_keluhan_utama=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,12);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),12);
                                 }
                             }
                         }catch(Exception e){
@@ -5461,7 +5470,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Riwayat Penyakit Dahulu
-                    if(tbAwalKeperawatanIGD.getValueAt(i,14).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),14).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -5499,11 +5508,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,13).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),13).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -5514,9 +5523,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_rpd=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,14);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),14);
                                 }
                             }
                         }catch(Exception e){
@@ -5525,7 +5534,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Riwayat Penggunaan Obat
-                    if(tbAwalKeperawatanIGD.getValueAt(i,16).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),16).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -5563,11 +5572,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,15).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),15).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -5578,9 +5587,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_rpo=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,16);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),16);
                                 }
                             }
                         }catch(Exception e){
@@ -5589,7 +5598,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Status Hamil
-                    if((!tbAwalKeperawatanIGD.getValueAt(i,17).toString().equals("-"))&&tbAwalKeperawatanIGD.getValueAt(i,18).toString().equals("")){
+                    if((!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),17).toString().equals("-"))&&tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),18).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -5627,11 +5636,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,17).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),17).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -5642,9 +5651,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_status_kehamilan=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,18);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),18);
                                 }
                             }
                         }catch(Exception e){
@@ -5653,7 +5662,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Gravida
-                    if(tbAwalKeperawatanIGD.getValueAt(i,20).toString().equals("")&&(!tbAwalKeperawatanIGD.getValueAt(i,19).toString().equals(""))){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),20).toString().equals("")&&(!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),19).toString().equals(""))){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -5691,11 +5700,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,19).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),19).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -5706,9 +5715,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_gravida=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,20);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),20);
                                 }
                             }
                         }catch(Exception e){
@@ -5717,7 +5726,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Para
-                    if(tbAwalKeperawatanIGD.getValueAt(i,22).toString().equals("")&&(!tbAwalKeperawatanIGD.getValueAt(i,21).toString().equals(""))){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),22).toString().equals("")&&(!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),21).toString().equals(""))){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -5755,11 +5764,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,21).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),21).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -5770,9 +5779,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_para=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,22);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),22);
                                 }
                             }
                         }catch(Exception e){
@@ -5781,7 +5790,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Abortus
-                    if(tbAwalKeperawatanIGD.getValueAt(i,24).toString().equals("")&&(!tbAwalKeperawatanIGD.getValueAt(i,23).toString().equals(""))){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),24).toString().equals("")&&(!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),23).toString().equals(""))){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -5819,11 +5828,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,23).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),23).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -5834,9 +5843,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_abortus=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,24);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),24);
                                 }
                             }
                         }catch(Exception e){
@@ -5845,7 +5854,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //HPHT
-                    if(tbAwalKeperawatanIGD.getValueAt(i,26).toString().equals("")&&tbAwalKeperawatanIGD.getValueAt(i,17).toString().equals("Hamil")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),26).toString().equals("")&&tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),17).toString().equals("Hamil")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -5883,11 +5892,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,25).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),25).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -5898,9 +5907,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_hpht=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,26);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),26);
                                 }
                             }
                         }catch(Exception e){
@@ -5909,7 +5918,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Tekanan Intrakranial
-                    if(tbAwalKeperawatanIGD.getValueAt(i,28).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),28).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -5947,11 +5956,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,27).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),27).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -5962,9 +5971,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_tekanan=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,28);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),28);
                                 }
                             }
                         }catch(Exception e){
@@ -5973,7 +5982,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Pupil
-                    if(tbAwalKeperawatanIGD.getValueAt(i,30).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),30).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6011,11 +6020,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,29).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),29).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6026,9 +6035,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_pupil=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,30);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),30);
                                 }
                             }
                         }catch(Exception e){
@@ -6037,7 +6046,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Neurosensorik/Muskuloskeletal
-                    if(tbAwalKeperawatanIGD.getValueAt(i,32).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),32).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6075,11 +6084,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,31).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),31).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6090,9 +6099,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_neurosensorik=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,32);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),32);
                                 }
                             }
                         }catch(Exception e){
@@ -6101,7 +6110,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Integumen
-                    if(tbAwalKeperawatanIGD.getValueAt(i,34).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),34).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6139,11 +6148,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,33).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),33).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6154,9 +6163,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_integumen=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,34);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),34);
                                 }
                             }
                         }catch(Exception e){
@@ -6165,7 +6174,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Turgor Kulit
-                    if(tbAwalKeperawatanIGD.getValueAt(i,36).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),36).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6203,11 +6212,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,35).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),35).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6218,9 +6227,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_turgor=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,36);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),36);
                                 }
                             }
                         }catch(Exception e){
@@ -6229,7 +6238,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Edema
-                    if(tbAwalKeperawatanIGD.getValueAt(i,38).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),38).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6267,11 +6276,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,37).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),37).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6282,9 +6291,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_edema=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,38);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),38);
                                 }
                             }
                         }catch(Exception e){
@@ -6293,7 +6302,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Mukosa Mulut
-                    if(tbAwalKeperawatanIGD.getValueAt(i,40).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),40).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6331,11 +6340,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,39).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),39).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6346,9 +6355,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_mukosa=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,40);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),40);
                                 }
                             }
                         }catch(Exception e){
@@ -6357,7 +6366,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Perdarahan
-                    if(tbAwalKeperawatanIGD.getValueAt(i,44).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),44).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6395,11 +6404,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,41).toString()+(tbAwalKeperawatanIGD.getValueAt(i,41).toString().equals("Ada")?", Jumlah : "+tbAwalKeperawatanIGD.getValueAt(i,42).toString()+", Warna : "+tbAwalKeperawatanIGD.getValueAt(i,43).toString():"")+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),41).toString()+(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),41).toString().equals("Ada")?", Jumlah : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),42).toString()+", Warna : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),43).toString():"")+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6410,9 +6419,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_perdarahan=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,44);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),44);
                                 }
                             }
                         }catch(Exception e){
@@ -6421,7 +6430,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Intoksikasi
-                    if(tbAwalKeperawatanIGD.getValueAt(i,46).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),46).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6459,11 +6468,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,45).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),45).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6474,9 +6483,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_intoksikasi=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,46);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),46);
                                 }
                             }
                         }catch(Exception e){
@@ -6485,7 +6494,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Eliminasi
-                    if(tbAwalKeperawatanIGD.getValueAt(i,55).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),55).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6523,11 +6532,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \"BAB : -Frekuensi : "+tbAwalKeperawatanIGD.getValueAt(i,47).toString()+" x / "+tbAwalKeperawatanIGD.getValueAt(i,48).toString()+" -Konsistensi : "+tbAwalKeperawatanIGD.getValueAt(i,49).toString()+" -Warna : "+tbAwalKeperawatanIGD.getValueAt(i,50).toString()+"; BAK : -Frekuensi : "+tbAwalKeperawatanIGD.getValueAt(i,51).toString()+" x / "+tbAwalKeperawatanIGD.getValueAt(i,52).toString()+" -Warna : "+tbAwalKeperawatanIGD.getValueAt(i,53).toString()+" -Lain-lain : "+tbAwalKeperawatanIGD.getValueAt(i,54).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \"BAB : -Frekuensi : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),47).toString()+" x / "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),48).toString()+" -Konsistensi : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),49).toString()+" -Warna : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),50).toString()+"; BAK : -Frekuensi : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),51).toString()+" x / "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),52).toString()+" -Warna : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),53).toString()+" -Lain-lain : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),54).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6538,9 +6547,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_eliminasi=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,55);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),55);
                                 }
                             }
                         }catch(Exception e){
@@ -6549,7 +6558,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Kondisi Psikologis
-                    if(tbAwalKeperawatanIGD.getValueAt(i,57).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),57).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6587,11 +6596,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,56).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),56).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6602,9 +6611,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_psikologis=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,57);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),57);
                                 }
                             }
                         }catch(Exception e){
@@ -6613,7 +6622,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Gangguan Jiwa Di Masa Lalu
-                    if(tbAwalKeperawatanIGD.getValueAt(i,59).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),59).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6651,11 +6660,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,58).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),58).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6666,9 +6675,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_jiwa=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,59);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),59);
                                 }
                             }
                         }catch(Exception e){
@@ -6677,7 +6686,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Perilaku
-                    if(tbAwalKeperawatanIGD.getValueAt(i,63).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),63).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6715,11 +6724,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,60).toString()+", Dilaporkan Ke : "+tbAwalKeperawatanIGD.getValueAt(i,61).toString()+", Sebutkan : "+tbAwalKeperawatanIGD.getValueAt(i,62).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),60).toString()+", Dilaporkan Ke : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),61).toString()+", Sebutkan : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),62).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6730,9 +6739,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_perilaku=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,63);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),63);
                                 }
                             }
                         }catch(Exception e){
@@ -6741,7 +6750,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Hubungan Keluarga
-                    if(tbAwalKeperawatanIGD.getValueAt(i,65).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),65).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6779,11 +6788,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,64).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),64).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6794,9 +6803,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_hubungan=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,65);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),65);
                                 }
                             }
                         }catch(Exception e){
@@ -6805,7 +6814,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Tinggal Dengan
-                    if(tbAwalKeperawatanIGD.getValueAt(i,68).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),68).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6843,11 +6852,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,66).toString()+(tbAwalKeperawatanIGD.getValueAt(i,67).toString().equals("")?"":", "+tbAwalKeperawatanIGD.getValueAt(i,67).toString())+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),66).toString()+(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),67).toString().equals("")?"":", "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),67).toString())+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6858,9 +6867,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_tinggal_dengan=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,68);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),68);
                                 }
                             }
                         }catch(Exception e){
@@ -6869,7 +6878,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Budaya
-                    if(tbAwalKeperawatanIGD.getValueAt(i,71).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),71).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6907,11 +6916,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,69).toString()+(tbAwalKeperawatanIGD.getValueAt(i,70).toString().equals("")?"":", "+tbAwalKeperawatanIGD.getValueAt(i,70).toString())+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),69).toString()+(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),70).toString().equals("")?"":", "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),70).toString())+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6922,9 +6931,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_budaya=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,71);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),71);
                                 }
                             }
                         }catch(Exception e){
@@ -6933,7 +6942,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Pendidikan PJ
-                    if(tbAwalKeperawatanIGD.getValueAt(i,74).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),74).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -6971,11 +6980,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,72).toString()+(tbAwalKeperawatanIGD.getValueAt(i,73).toString().equals("")?"":", "+tbAwalKeperawatanIGD.getValueAt(i,73).toString())+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),72).toString()+(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),73).toString().equals("")?"":", "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),73).toString())+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -6986,9 +6995,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_pendidikan_pj=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,74);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),74);
                                 }
                             }
                         }catch(Exception e){
@@ -6997,7 +7006,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Edukasi
-                    if(tbAwalKeperawatanIGD.getValueAt(i,77).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),77).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -7035,11 +7044,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,75).toString()+(tbAwalKeperawatanIGD.getValueAt(i,76).toString().equals("")?"":", "+tbAwalKeperawatanIGD.getValueAt(i,76).toString())+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),75).toString()+(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),76).toString().equals("")?"":", "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),76).toString())+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -7050,9 +7059,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_edukasi=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,77);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),77);
                                 }
                             }
                         }catch(Exception e){
@@ -7061,7 +7070,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Kemampuan Aktifitas
-                    if(tbAwalKeperawatanIGD.getValueAt(i,79).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),79).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -7099,11 +7108,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,78).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),78).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -7114,9 +7123,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_kemampuan=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,79);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),79);
                                 }
                             }
                         }catch(Exception e){
@@ -7125,7 +7134,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Aktifitas
-                    if(tbAwalKeperawatanIGD.getValueAt(i,81).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),81).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -7163,11 +7172,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,80).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),80).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -7178,9 +7187,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_aktifitas=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,81);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),81);
                                 }
                             }
                         }catch(Exception e){
@@ -7189,7 +7198,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Alat Bantu
-                    if(tbAwalKeperawatanIGD.getValueAt(i,84).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),84).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -7227,11 +7236,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbAwalKeperawatanIGD.getValueAt(i,82).toString()+(tbAwalKeperawatanIGD.getValueAt(i,83).toString().equals("")?"":", "+tbAwalKeperawatanIGD.getValueAt(i,83).toString())+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),82).toString()+(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),83).toString().equals("")?"":", "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),83).toString())+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -7242,9 +7251,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_alat_bantu=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,84);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),84);
                                 }
                             }
                         }catch(Exception e){
@@ -7253,7 +7262,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Pengkajian Nyeri
-                    if(tbAwalKeperawatanIGD.getValueAt(i,98).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),98).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -7291,11 +7300,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+"Tingkat Nyeri : "+tbAwalKeperawatanIGD.getValueAt(i,85).toString()+", Provokes : "+tbAwalKeperawatanIGD.getValueAt(i,86).toString()+(tbAwalKeperawatanIGD.getValueAt(i,87).toString().equals("")?"":" "+tbAwalKeperawatanIGD.getValueAt(i,87).toString())+", Kualitas : "+tbAwalKeperawatanIGD.getValueAt(i,88).toString()+(tbAwalKeperawatanIGD.getValueAt(i,89).toString().equals("")?"":" "+tbAwalKeperawatanIGD.getValueAt(i,89).toString())+", Lokasi : "+tbAwalKeperawatanIGD.getValueAt(i,90).toString()+", Menyebar : "+tbAwalKeperawatanIGD.getValueAt(i,91).toString()+", Skala Nyeri : "+tbAwalKeperawatanIGD.getValueAt(i,92).toString()+", Durasi : "+tbAwalKeperawatanIGD.getValueAt(i,93).toString()+", Nyeri Hilang : "+tbAwalKeperawatanIGD.getValueAt(i,94).toString()+(tbAwalKeperawatanIGD.getValueAt(i,95).toString().equals("")?"":" "+tbAwalKeperawatanIGD.getValueAt(i,95).toString())+", Lapor Ke Dokter : "+tbAwalKeperawatanIGD.getValueAt(i,96).toString()+", Jam Lapor : "+tbAwalKeperawatanIGD.getValueAt(i,97).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+"Tingkat Nyeri : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),85).toString()+", Provokes : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),86).toString()+(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),87).toString().equals("")?"":" "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),87).toString())+", Kualitas : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),88).toString()+(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),89).toString().equals("")?"":" "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),89).toString())+", Lokasi : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),90).toString()+", Menyebar : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),91).toString()+", Skala Nyeri : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),92).toString()+", Durasi : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),93).toString()+", Nyeri Hilang : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),94).toString()+(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),95).toString().equals("")?"":" "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),95).toString())+", Lapor Ke Dokter : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),96).toString()+", Jam Lapor : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),97).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -7306,9 +7315,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_nyeri=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,98);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),98);
                                 }
                             }
                         }catch(Exception e){
@@ -7317,7 +7326,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Pengkajian Resiko Jatuh
-                    if(tbAwalKeperawatanIGD.getValueAt(i,105).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),105).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -7355,11 +7364,11 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+"Tidak seimbang/sempoyongan/limbung : "+tbAwalKeperawatanIGD.getValueAt(i,99).toString()+", Jalan dengan menggunakan alat bantu (kruk, tripot, kursi roda, orang lain) : "+tbAwalKeperawatanIGD.getValueAt(i,100).toString()+", Menopang saat akan duduk, tampak memegang pinggiran kursi atau meja/benda lain sebagai penopang : "+tbAwalKeperawatanIGD.getValueAt(i,101).toString()+", Hasil : "+tbAwalKeperawatanIGD.getValueAt(i,102).toString()+", Dilaporkan ke dokter? : "+tbAwalKeperawatanIGD.getValueAt(i,103).toString()+", Jam Lapor : "+tbAwalKeperawatanIGD.getValueAt(i,104).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+"Tidak seimbang/sempoyongan/limbung : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),99).toString()+", Jalan dengan menggunakan alat bantu (kruk, tripot, kursi roda, orang lain) : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),100).toString()+", Menopang saat akan duduk, tampak memegang pinggiran kursi atau meja/benda lain sebagai penopang : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),101).toString()+", Hasil : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),102).toString()+", Dilaporkan ke dokter? : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),103).toString()+", Jam Lapor : "+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),104).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -7370,9 +7379,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_observation_resiko_jatuh=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,105);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),105);
                                 }
                             }
                         }catch(Exception e){
@@ -7381,7 +7390,7 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Rencana Keperawatan Lainnya
-                    if(tbAwalKeperawatanIGD.getValueAt(i,107).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,106).toString().equals("")){
+                    if(tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),107).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),106).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -7391,7 +7400,7 @@ KirimTriaseIGDSekunder();
                                         "\"status\": \"active\"," +
                                         "\"intent\": \"plan\"," +
                                         "\"title\": \"Rencana Keperawatan Lainnya\"," +
-                                        "\"description\": \""+tbAwalKeperawatanIGD.getValueAt(i,106).toString()+"\"," +
+                                        "\"description\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),106).toString()+"\"," +
                                         "\"subject\": {"+
                                             "\"reference\": \"Patient/" + idpasien + "\""+
                                         "}," +
@@ -7407,13 +7416,13 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {"+
-                                            "\"reference\": \"Encounter/" + tbAwalKeperawatanIGD.getValueAt(i,5).toString() + "\""+
+                                            "\"reference\": \"Encounter/" + tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString() + "\""+
                                         "}," +
                                         "\"author\": {"+
                                             "\"reference\": \"Practitioner/" + iddokter + "\""+
                                         "}," +
                                         "\"period\": {"+
-                                            "\"start\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\""+
+                                            "\"start\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\""+
                                         "}" +
                                    "}";
                             System.out.println("URL : "+link+"/CarePlan");
@@ -7425,9 +7434,9 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_careplan_rencana=?",2,new String[]{
-                                        response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                        response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                     })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(), i,107);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(), tbAwalKeperawatanIGD.convertRowIndexToModel(i),107);
                                 }
                             }
                         }catch(Exception e){
@@ -7441,7 +7450,7 @@ KirimTriaseIGDSekunder();
                         "where penilaian_awal_keperawatan_igd_masalah.no_rawat=? order by penilaian_awal_keperawatan_igd_masalah.kode_masalah"
                     );
                     try {
-                        ps.setString(1,tbAwalKeperawatanIGD.getValueAt(i,1).toString());
+                        ps.setString(1,tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             if(rs.getString("id_condition_masalah").equals("")){
@@ -7478,9 +7487,9 @@ KirimTriaseIGDSekunder();
                                                     "\"reference\": \"Patient/"+idpasien+"\"" +
                                                 "}," +
                                                 "\"encounter\": {" +
-                                                    "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                                    "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                                 "}," +
-                                                "\"recordedDate\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                "\"recordedDate\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                 "\"recorder\": {" +
                                                     "\"reference\": \"Practitioner/"+iddokter+"\"" +
                                                 "}" +
@@ -7494,7 +7503,7 @@ KirimTriaseIGDSekunder();
                                     response = root.path("id");
                                     if(!response.asText().equals("")){
                                         Sequel.mengedit("penilaian_awal_keperawatan_igd_masalah","no_rawat=? AND kode_masalah=?","id_condition_masalah=?",3,new String[]{
-                                            response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString(),rs.getString("kode_masalah")
+                                            response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString(),rs.getString("kode_masalah")
                                         });
                                         masalahbuilder.append("{\"reference\": \"Condition/").append(response.asText()).append("\"},");
                                     }
@@ -7513,7 +7522,7 @@ KirimTriaseIGDSekunder();
                             );
                             try {
                                 ps2.setString(1,rs.getString("kode_masalah"));
-                                ps2.setString(2,tbAwalKeperawatanIGD.getValueAt(i,1).toString());
+                                ps2.setString(2,tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString());
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
                                     if(rs2.getString("id_careplan_rencana").equals("")){
@@ -7542,13 +7551,13 @@ KirimTriaseIGDSekunder();
                                                             "}" +
                                                         "]," +
                                                         "\"encounter\": {"+
-                                                            "\"reference\": \"Encounter/" + tbAwalKeperawatanIGD.getValueAt(i,5).toString() + "\""+
+                                                            "\"reference\": \"Encounter/" + tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString() + "\""+
                                                         "}," +
                                                         "\"author\": {"+
                                                             "\"reference\": \"Practitioner/" + iddokter + "\""+
                                                         "}," +
                                                         "\"period\": {"+
-                                                            "\"start\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\""+
+                                                            "\"start\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\""+
                                                         "}" +
                                                    "}";
                                             System.out.println("URL : "+link+"/CarePlan");
@@ -7560,7 +7569,7 @@ KirimTriaseIGDSekunder();
                                             response = root.path("id");
                                             if(!response.asText().equals("")){
                                                 Sequel.mengedit("penilaian_awal_keperawatan_ralan_rencana_igd","no_rawat=? AND kode_rencana=?","id_careplan_rencana=?",3,new String[]{
-                                                    response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString(),rs2.getString("kode_rencana")
+                                                    response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString(),rs2.getString("kode_rencana")
                                                 });
                                                 rencanabuilder.append("{\"reference\": \"CarePlan/").append(response.asText()).append("\"},");
                                             }
@@ -7594,31 +7603,31 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Composition Awal Keperawatan IGD
-                    if(!tbAwalKeperawatanIGD.getValueAt(i,10).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,12).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,14).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,16).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,28).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,30).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,32).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,34).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,36).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,38).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,40).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,44).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,46).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,55).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,57).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,59).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,63).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,65).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,68).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,71).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,74).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,77).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,79).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,81).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,84).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,98).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,105).toString().equals("")&&tbAwalKeperawatanIGD.getValueAt(i,108).toString().equals("")){
+                    if(!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),10).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),12).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),14).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),16).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),28).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),30).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),32).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),34).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),36).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),38).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),40).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),44).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),46).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),55).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),57).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),59).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),63).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),65).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),68).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),71).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),74).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),77).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),79).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),81).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),84).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),98).toString().equals("")&&!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),105).toString().equals("")&&tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),108).toString().equals("")){
                         try{
                             StringBuilder iyembuilder = new StringBuilder();
-                            if(!tbAwalKeperawatanIGD.getValueAt(i,18).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,18).toString()+"\"},");
+                            if(!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),18).toString().equals("")){
+                                iyembuilder.append("{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),18).toString()+"\"},");
                             }
-                            if(!tbAwalKeperawatanIGD.getValueAt(i,20).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,20).toString()+"\"},");
+                            if(!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),20).toString().equals("")){
+                                iyembuilder.append("{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),20).toString()+"\"},");
                             }
-                            if(!tbAwalKeperawatanIGD.getValueAt(i,22).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,22).toString()+"\"},");
+                            if(!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),22).toString().equals("")){
+                                iyembuilder.append("{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),22).toString()+"\"},");
                             }
-                            if(!tbAwalKeperawatanIGD.getValueAt(i,24).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,24).toString()+"\"},");
+                            if(!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),24).toString().equals("")){
+                                iyembuilder.append("{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),24).toString()+"\"},");
                             }
-                            if(!tbAwalKeperawatanIGD.getValueAt(i,26).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,26).toString()+"\"},");
+                            if(!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),26).toString().equals("")){
+                                iyembuilder.append("{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),26).toString()+"\"},");
                             }
                             if(iyembuilder.length()>0){
                                 iyembuilder.setLength(iyembuilder.length()-1);
                                 iyembuilder.insert(0,"{\"title\": \"Status Kehamilan & Riwayat Obstetri\",\"entry\": [").append("]},");
                             }
                             StringBuilder iyembuilder2 = new StringBuilder();
-                            if(!tbAwalKeperawatanIGD.getValueAt(i,107).toString().equals("")){
-                                rencanabuilder.append("{\"reference\": \"CarePlan/"+tbAwalKeperawatanIGD.getValueAt(i,107).toString()+"\"},");
+                            if(!tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),107).toString().equals("")){
+                                rencanabuilder.append("{\"reference\": \"CarePlan/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),107).toString()+"\"},");
                             }
                             if(rencanabuilder.length()>0){
                                 rencanabuilder.setLength(rencanabuilder.length()-1);
@@ -7671,72 +7680,72 @@ KirimTriaseIGDSekunder();
                                             "\"reference\": \"Patient/"+idpasien+"\"" +
                                         "}," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbAwalKeperawatanIGD.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
                                         "\"author\": [" +
                                             "{" +
                                                 "\"reference\": \"Practitioner/"+iddokter+"\"" +
                                             "}" +
                                         "]," +
-                                        "\"date\": \""+tbAwalKeperawatanIGD.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"date\": \""+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"title\": \"Penilaian Awal Keperawatan IGD\"," +
                                         "\"section\": [" +
                                             "{" +
                                                 "\"title\": \"Anamnesa & Riwayat\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,10).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,12).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,14).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,16).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),10).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),12).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),14).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),16).toString()+"\"}" +
                                                 "]" +
                                             "}"+ "," +
                                             iyembuilder.toString()+
                                             "{" +
                                                 "\"title\": \"Pemeriksaan Fisik & Eliminasi\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,28).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,30).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,32).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,34).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,36).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,38).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,40).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,44).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,46).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,55).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),28).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),30).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),32).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),34).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),36).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),38).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),40).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),44).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),46).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),55).toString()+"\"}" +
                                                 "]" +
                                             "}"+ "," +
                                             "{" +
                                                 "\"title\": \"Psikososial\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,57).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,59).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,63).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,65).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,68).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,71).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,74).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,77).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),57).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),59).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),63).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),65).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),68).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),71).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),74).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),77).toString()+"\"}" +
                                                 "]" +
                                             "}"+ "," +
                                             "{" +
                                                 "\"title\": \"Status Fungsional\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,79).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,81).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,84).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),79).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),81).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),84).toString()+"\"}" +
                                                 "]" +
                                             "}"+ "," +
                                             "{" +
                                                 "\"title\": \"Pengkajian Nyeri\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,98).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),98).toString()+"\"}" +
                                                 "]" +
                                             "}"+ "," +
                                             "{" +
                                                 "\"title\": \"Risiko Jatuh\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,105).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),105).toString()+"\"}" +
                                                 "]" +
                                             "}"+
                                             (iyembuilder3.length()>0?","+iyembuilder3.toString():"")+
@@ -7752,10 +7761,10 @@ KirimTriaseIGDSekunder();
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.mengedittf("penilaian_awal_keperawatan_igd","no_rawat=?","id_composition=?",2,new String[]{
-                                    response.asText(),tbAwalKeperawatanIGD.getValueAt(i,1).toString()
+                                    response.asText(),tabModeAwalKeperawatanIGD.getValueAt(tbAwalKeperawatanIGD.convertRowIndexToModel(i),1).toString()
                                 })==true){
-                                    tbAwalKeperawatanIGD.setValueAt(response.asText(),i,108);
-                                    tbAwalKeperawatanIGD.setValueAt(false,i,0);
+                                    tabModeAwalKeperawatanIGD.setValueAt(response.asText(),tbAwalKeperawatanIGD.convertRowIndexToModel(i),108);
+                                    tabModeAwalKeperawatanIGD.setValueAt(false,tbAwalKeperawatanIGD.convertRowIndexToModel(i),0);
                                 }
                             }
                             iyembuilder=null;
@@ -7776,19 +7785,19 @@ KirimTriaseIGDSekunder();
 
     private void UpdateTriaseIGDPrimer() {
         for(i=0;i<tbIGDPrimer.getRowCount();i++){
-            if(tbIGDPrimer.getValueAt(i,0).toString().equals("true")&&(!tbIGDPrimer.getValueAt(i,4).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,7).toString().equals(""))){
+            if(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),4).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),7).toString().equals(""))){
                 try {
-                    iddokter = cekViaSatuSehat.tampilIDParktisi(tbIGDPrimer.getValueAt(i,7).toString());
-                    idpasien = cekViaSatuSehat.tampilIDPasien(tbIGDPrimer.getValueAt(i,4).toString());
+                    iddokter = cekViaSatuSehat.tampilIDParktisi(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),7).toString());
+                    idpasien = cekViaSatuSehat.tampilIDPasien(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),4).toString());
                     //Cara Masuk
-                    if(!tbIGDPrimer.getValueAt(i,10).toString().equals("")){
+                    if(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),10).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDPrimer.getValueAt(i,10).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),10).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -7820,16 +7829,16 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDPrimer.getValueAt(i,9).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),9).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDPrimer.getValueAt(i,10).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),10).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Cara Masuk IGD : "+e);
@@ -7837,14 +7846,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Transportasi
-                    if(!tbIGDPrimer.getValueAt(i,12).toString().equals("")){
+                    if(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),12).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDPrimer.getValueAt(i,12).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),12).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -7876,16 +7885,16 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDPrimer.getValueAt(i,11).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),11).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDPrimer.getValueAt(i,12).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),12).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Alat Transportasi : "+e);
@@ -7893,14 +7902,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Alasan Kedatangan
-                    if(!tbIGDPrimer.getValueAt(i,15).toString().equals("")){
+                    if(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),15).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDPrimer.getValueAt(i,15).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),15).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -7932,16 +7941,16 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDPrimer.getValueAt(i,13).toString()+(tbIGDPrimer.getValueAt(i,14).toString().equals("")?"":", Keterangan : "+tbIGDPrimer.getValueAt(i,14).toString())+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),13).toString()+(tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),14).toString().equals("")?"":", Keterangan : "+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),14).toString())+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDPrimer.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Alasan Kedatangan : "+e);
@@ -7949,14 +7958,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Macam Kasus
-                    if(!tbIGDPrimer.getValueAt(i,17).toString().equals("")){
+                    if(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),17).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDPrimer.getValueAt(i,17).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),17).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -7988,16 +7997,16 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDPrimer.getValueAt(i,16).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),16).toString()+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDPrimer.getValueAt(i,17).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),17).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Macam Kasus : "+e);
@@ -8005,8 +8014,8 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Tekanan Darah
-                    if(!tbIGDPrimer.getValueAt(i,19).toString().equals("")){
-                        arrSplit = tbIGDPrimer.getValueAt(i,18).toString().split("/");
+                    if(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),19).toString().equals("")){
+                        arrSplit = tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),18).toString().split("/");
                         sistole="0";
                         try {
                             if(!arrSplit[0].equals("")){
@@ -8029,7 +8038,7 @@ KirimTriaseIGDSekunder();
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDPrimer.getValueAt(i,19).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),19).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -8061,10 +8070,10 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"component\" : ["+
                                             "{" +
                                                 "\"code\" : {" +
@@ -8105,7 +8114,7 @@ KirimTriaseIGDSekunder();
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDPrimer.getValueAt(i,19).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),19).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Tekanan Darah : "+e);
@@ -8113,14 +8122,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Nadi
-                    if(!tbIGDPrimer.getValueAt(i,21).toString().equals("")){
+                    if(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),21).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDPrimer.getValueAt(i,21).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),21).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -8152,12 +8161,12 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDPrimer.getValueAt(i, 20).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 20).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"/min\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"/min\""+
@@ -8166,7 +8175,7 @@ KirimTriaseIGDSekunder();
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDPrimer.getValueAt(i,21).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),21).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Nadi : "+e);
@@ -8174,14 +8183,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Respirasi
-                    if(!tbIGDPrimer.getValueAt(i,23).toString().equals("")){
+                    if(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),23).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDPrimer.getValueAt(i,23).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),23).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -8213,12 +8222,12 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDPrimer.getValueAt(i, 22).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 22).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"/min\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"/min\""+
@@ -8227,7 +8236,7 @@ KirimTriaseIGDSekunder();
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDPrimer.getValueAt(i,23).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),23).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Respirasi : "+e);
@@ -8235,14 +8244,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Suhu Tubuh
-                    if(!tbIGDPrimer.getValueAt(i,25).toString().equals("")){
+                    if(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),25).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDPrimer.getValueAt(i,25).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),25).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -8274,12 +8283,12 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDPrimer.getValueAt(i, 24).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 24).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"degree Celsius\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"Cel\""+
@@ -8288,7 +8297,7 @@ KirimTriaseIGDSekunder();
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDPrimer.getValueAt(i,25).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),25).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Suhu Tubuh : "+e);
@@ -8296,14 +8305,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Saturasi Oksigen
-                    if(!tbIGDPrimer.getValueAt(i,27).toString().equals("")){
+                    if(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),27).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDPrimer.getValueAt(i,27).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),27).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -8335,12 +8344,12 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDPrimer.getValueAt(i, 26).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 26).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"%\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"%\""+
@@ -8349,7 +8358,7 @@ KirimTriaseIGDSekunder();
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDPrimer.getValueAt(i,27).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),27).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Saturasi O²(%) : "+e);
@@ -8357,14 +8366,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Nyeri
-                    if(!tbIGDPrimer.getValueAt(i,29).toString().equals("")){
+                    if(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),29).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDPrimer.getValueAt(i,29).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),29).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -8396,16 +8405,16 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueInteger\": " + tbIGDPrimer.getValueAt(i, 28).toString().replaceAll("[^0-9]", "") +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueInteger\": " + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 28).toString().replaceAll("[^0-9]", "") +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDPrimer.getValueAt(i,29).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),29).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Nyeri : "+e);
@@ -8413,14 +8422,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Keluhan Utama
-                    if(!tbIGDPrimer.getValueAt(i,31).toString().equals("")){
+                    if(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),31).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDPrimer.getValueAt(i,31).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),31).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -8452,16 +8461,16 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \"" + tbIGDPrimer.getValueAt(i,30).toString().replace("\"", "'").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ") + "\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \"" + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),30).toString().replace("\"", "'").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ") + "\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDPrimer.getValueAt(i,31).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),31).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Keluhan Utama : "+e);
@@ -8469,14 +8478,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Kebutuhan Khusus
-                    if((!tbIGDPrimer.getValueAt(i, 32).toString().equals("-"))&&(!tbIGDPrimer.getValueAt(i,33).toString().equals(""))){
+                    if((!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 32).toString().equals("-"))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),33).toString().equals(""))){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDPrimer.getValueAt(i,33).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),33).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -8508,16 +8517,16 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \"" + tbIGDPrimer.getValueAt(i, 32).toString() + "\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \"" + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 32).toString() + "\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDPrimer.getValueAt(i,33).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),33).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Kebutuhan Khusus : "+e);
@@ -8525,14 +8534,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Catatan
-                    if((!tbIGDPrimer.getValueAt(i, 34).toString().equals("")) && (!tbIGDPrimer.getValueAt(i, 35).toString().equals(""))){
+                    if((!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 34).toString().equals("")) && (!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 35).toString().equals(""))){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDPrimer.getValueAt(i,35).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),35).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -8564,16 +8573,16 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \"" +tbIGDPrimer.getValueAt(i, 34).toString().replace("\"", "'")+ "\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \"" +tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 34).toString().replace("\"", "'")+ "\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDPrimer.getValueAt(i,35).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),35).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Catatan : "+e);
@@ -8581,18 +8590,18 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Keputusan
-                    if(!tbIGDPrimer.getValueAt(i, 37).toString().equals("")){
+                    if(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 37).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"CarePlan\"," +
-                                        "\"id\": \""+tbIGDPrimer.getValueAt(i,37).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),37).toString()+"\"," +
                                         "\"status\": \"active\"," +
                                         "\"intent\": \"plan\"," +
                                         "\"title\": \"Rencana Penempatan Pasien IGD\"," +
-                                        "\"description\": \"Zona Merah " + tbIGDPrimer.getValueAt(i, 36).toString()+"\"," +
+                                        "\"description\": \"Zona Merah " + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 36).toString()+"\"," +
                                         "\"category\": ["+
                                             "{"+
                                                 "\"coding\": ["+
@@ -8608,19 +8617,19 @@ KirimTriaseIGDSekunder();
                                             "\"reference\": \"Patient/" + idpasien + "\""+
                                         "}," +
                                         "\"encounter\": {"+
-                                            "\"reference\": \"Encounter/" + tbIGDPrimer.getValueAt(i, 5).toString() + "\""+
+                                            "\"reference\": \"Encounter/" + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 5).toString() + "\""+
                                         "}," +
                                         "\"author\": {"+
                                             "\"reference\": \"Practitioner/" + iddokter + "\""+
                                         "}," +
                                         "\"period\": {"+
-                                            "\"start\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\""+
+                                            "\"start\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\""+
                                         "}" +
                                    "}";
                             System.out.println("URL : "+link+"/CarePlan");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/CarePlan/"+tbIGDPrimer.getValueAt(i,37).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/CarePlan/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),37).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Keputusan : "+e);
@@ -8637,17 +8646,17 @@ KirimTriaseIGDSekunder();
                         "where data_triase_igddetail_skala1.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan"
                     );
                     try {
-                        ps.setString(1,tbIGDPrimer.getValueAt(i,1).toString());
+                        ps.setString(1,tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
-                            if(!tbIGDPrimer.getValueAt(i, 38).toString().equals("")){
+                            if(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 38).toString().equals("")){
                                 try{
                                     headers = new HttpHeaders();
                                     headers.setContentType(MediaType.APPLICATION_JSON);
                                     headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                     json = "{" +
                                                 "\"resourceType\": \"Observation\"," +
-                                                "\"id\": \""+tbIGDPrimer.getValueAt(i,38).toString()+"\"," +
+                                                "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),38).toString()+"\"," +
                                                 "\"status\": \"final\"," +
                                                 "\"category\": [" +
                                                     "{" +
@@ -8679,10 +8688,10 @@ KirimTriaseIGDSekunder();
                                                     "}" +
                                                 "]," +
                                                 "\"encounter\": {" +
-                                                    "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                                    "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                                 "}," +
-                                                "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                 "\"valueCodeableConcept\": {" +
                                                     "\"coding\": [" +
                                                         "{" +
@@ -8697,7 +8706,7 @@ KirimTriaseIGDSekunder();
                                     System.out.println("URL : "+link+"/Observation");
                                     System.out.println("Request JSON : "+json);
                                     requestEntity = new HttpEntity(json,headers);
-                                    json=api.getRest().exchange(link+"/Observation/"+tbIGDPrimer.getValueAt(i,38).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                                    json=api.getRest().exchange(link+"/Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),38).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                                     System.out.println("Result JSON : "+json);
                                 }catch(Exception e){
                                     System.out.println("Notifikasi Triase Skala 1 : "+e);
@@ -8713,7 +8722,7 @@ KirimTriaseIGDSekunder();
                                 );
                                 try {
                                     ps2.setString(1,rs.getString("kode_pemeriksaan"));
-                                    ps2.setString(2,tbIGDPrimer.getValueAt(i,1).toString());
+                                    ps2.setString(2,tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString());
                                     rs2=ps2.executeQuery();
                                     while(rs2.next()){
                                         if(!rs2.getString("id_observation_skala1").equals("")){
@@ -8755,10 +8764,10 @@ KirimTriaseIGDSekunder();
                                                                 "}"+
                                                             "]," +
                                                             "\"encounter\": {"+
-                                                                "\"reference\": \"Encounter/" + tbIGDPrimer.getValueAt(i, 5).toString() + "\""+
+                                                                "\"reference\": \"Encounter/" + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 5).toString() + "\""+
                                                             "}," +
-                                                            "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                            "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                            "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                            "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                             "\"valueString\": \"" + rs2.getString("pengkajian_skala1").replace("\"", "'") + "\"" +
                                                        "}";
                                                 System.out.println("URL : "+link+"/Observation");
@@ -8810,17 +8819,17 @@ KirimTriaseIGDSekunder();
                             "where data_triase_igddetail_skala2.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan"
                         );
                         try {
-                            ps.setString(1,tbIGDPrimer.getValueAt(i,1).toString());
+                            ps.setString(1,tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString());
                             rs=ps.executeQuery();
                             if(rs.next()){
-                                if(!tbIGDPrimer.getValueAt(i, 38).toString().equals("")){
+                                if(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 38).toString().equals("")){
                                     try{
                                         headers = new HttpHeaders();
                                         headers.setContentType(MediaType.APPLICATION_JSON);
                                         headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                         json = "{" +
                                                     "\"resourceType\": \"Observation\"," +
-                                                    "\"id\": \""+tbIGDPrimer.getValueAt(i,38).toString()+"\"," +
+                                                    "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),38).toString()+"\"," +
                                                     "\"status\": \"final\"," +
                                                     "\"category\": [" +
                                                         "{" +
@@ -8852,10 +8861,10 @@ KirimTriaseIGDSekunder();
                                                         "}" +
                                                     "]," +
                                                     "\"encounter\": {" +
-                                                        "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                                        "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                                     "}," +
-                                                    "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                    "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                    "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                    "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                     "\"valueCodeableConcept\": {" +
                                                         "\"coding\": [" +
                                                             "{" +
@@ -8870,7 +8879,7 @@ KirimTriaseIGDSekunder();
                                         System.out.println("URL : "+link+"/Observation");
                                         System.out.println("Request JSON : "+json);
                                         requestEntity = new HttpEntity(json,headers);
-                                        json=api.getRest().exchange(link+"/Observation/"+tbIGDPrimer.getValueAt(i,38).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                                        json=api.getRest().exchange(link+"/Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),38).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                                         System.out.println("Result JSON : "+json);
                                     }catch(Exception e){
                                         System.out.println("Notifikasi Triase Skala 2 : "+e);
@@ -8886,7 +8895,7 @@ KirimTriaseIGDSekunder();
                                     );
                                     try {
                                         ps2.setString(1,rs.getString("kode_pemeriksaan"));
-                                        ps2.setString(2,tbIGDPrimer.getValueAt(i,1).toString());
+                                        ps2.setString(2,tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),1).toString());
                                         rs2=ps2.executeQuery();
                                         while(rs2.next()){
                                             if(!rs2.getString("id_observation_skala2").equals("")){
@@ -8928,10 +8937,10 @@ KirimTriaseIGDSekunder();
                                                                     "}"+
                                                                 "]," +
                                                                 "\"encounter\": {"+
-                                                                    "\"reference\": \"Encounter/" + tbIGDPrimer.getValueAt(i, 5).toString() + "\""+
+                                                                    "\"reference\": \"Encounter/" + tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i), 5).toString() + "\""+
                                                                 "}," +
-                                                                "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                                "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                                "\"effectiveDateTime\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                                "\"issued\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                                 "\"valueString\": \"" + rs2.getString("pengkajian_skala2").replace("\"", "'") + "\"" +
                                                            "}";
                                                     System.out.println("URL : "+link+"/Observation");
@@ -8976,17 +8985,17 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Composition IGD
-                    if((!tbIGDPrimer.getValueAt(i,10).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,12).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,15).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,17).toString().equals(""))&&
-                            (!tbIGDPrimer.getValueAt(i,19).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,21).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,23).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,25).toString().equals(""))&&
-                            (!tbIGDPrimer.getValueAt(i,27).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,29).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,31).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,33).toString().equals(""))&&
-                            (!tbIGDPrimer.getValueAt(i,35).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,37).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,38).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,39).toString().equals(""))){
+                    if((!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),10).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),12).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),15).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),17).toString().equals(""))&&
+                            (!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),19).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),21).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),23).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),25).toString().equals(""))&&
+                            (!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),27).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),29).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),31).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),33).toString().equals(""))&&
+                            (!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),35).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),37).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),38).toString().equals(""))&&(!tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),39).toString().equals(""))){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Composition\"," +
-                                        "\"id\": \""+tbIGDPrimer.getValueAt(i,39).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),39).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"type\": {" +
                                             "\"coding\": [" +
@@ -9001,14 +9010,14 @@ KirimTriaseIGDSekunder();
                                             "\"reference\": \"Patient/"+idpasien+"\"" +
                                         "}," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
                                         "\"author\": [" +
                                             "{" +
                                                 "\"reference\": \"Practitioner/"+iddokter+"\"" +
                                             "}" +
                                         "]," +
-                                        "\"date\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"date\": \""+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"title\": \"Data Triase IGD\"," +
                                         "\"section\": [" +
                                             "{" +
@@ -9023,10 +9032,10 @@ KirimTriaseIGDSekunder();
                                                     "]" +
                                                 "}," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,10).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,12).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,15).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,17).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),10).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),12).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),15).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),17).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
@@ -9041,7 +9050,7 @@ KirimTriaseIGDSekunder();
                                                     "]" +
                                                 "}," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,31).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),31).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
@@ -9056,17 +9065,17 @@ KirimTriaseIGDSekunder();
                                                     "]" +
                                                 "}," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,19).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,21).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,23).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,25).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,27).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),19).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),21).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),23).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),25).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),27).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
                                                 "\"title\": \"Kebutuhan Khusus\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,33).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),33).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
@@ -9082,21 +9091,21 @@ KirimTriaseIGDSekunder();
                                                 "}," +
                                                 "\"entry\": [" +
                                                     iyembuilder.toString()+
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,29).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,38).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),29).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),38).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
                                                 "\"title\": \"Catatan\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,35).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),35).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
                                                 "\"title\": \"Plan/Keputusan\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"CarePlan/"+tbIGDPrimer.getValueAt(i,37).toString()+"\"}," +
-                                                    "{\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"}" +
+                                                    "{\"reference\": \"CarePlan/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),37).toString()+"\"}," +
+                                                    "{\"reference\": \"Encounter/"+tabModeIGDPrimer.getValueAt(tbIGDPrimer.convertRowIndexToModel(i),5).toString()+"\"}" +
                                                 "]" +
                                             "}" +
                                         "]" +
@@ -9106,7 +9115,7 @@ KirimTriaseIGDSekunder();
                             requestEntity = new HttpEntity(json,headers);
                             json=api.getRest().exchange(link+"/Composition",HttpMethod.PUT,requestEntity,String.class).getBody();
                             System.out.println("Result JSON : "+json);
-                            tbIGDPrimer.setValueAt(false,i,0);
+                            tabModeIGDPrimer.setValueAt(false,tbIGDPrimer.convertRowIndexToModel(i),0);
                         }catch(Exception e){
                             System.out.println("Notifikasi Composition Triase IGD : "+e);
                         }
@@ -9121,19 +9130,19 @@ KirimTriaseIGDSekunder();
 
     private void UpdateTriaseIGDSekunder() {
         for(i=0;i<tbIGDSekunder.getRowCount();i++){
-            if(tbIGDSekunder.getValueAt(i,0).toString().equals("true")&&(!tbIGDSekunder.getValueAt(i,4).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,7).toString().equals(""))){
+            if(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),4).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),7).toString().equals(""))){
                 try {
-                    iddokter = cekViaSatuSehat.tampilIDParktisi(tbIGDSekunder.getValueAt(i,7).toString());
-                    idpasien = cekViaSatuSehat.tampilIDPasien(tbIGDSekunder.getValueAt(i,4).toString());
+                    iddokter = cekViaSatuSehat.tampilIDParktisi(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),7).toString());
+                    idpasien = cekViaSatuSehat.tampilIDPasien(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),4).toString());
                     //Cara Masuk
-                    if(!tbIGDSekunder.getValueAt(i,10).toString().equals("")){
+                    if(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),10).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDSekunder.getValueAt(i,10).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),10).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -9165,16 +9174,16 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDSekunder.getValueAt(i,9).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),9).toString()+"\"" +
                                    "}";
-                            System.out.println("URL : "+link+"/Observation/"+tbIGDSekunder.getValueAt(i,10).toString());
+                            System.out.println("URL : "+link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),10).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDSekunder.getValueAt(i,10).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),10).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Cara Masuk IGD : "+e);
@@ -9182,14 +9191,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Transportasi
-                    if(!tbIGDSekunder.getValueAt(i,12).toString().equals("")){
+                    if(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),12).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDSekunder.getValueAt(i,12).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),12).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -9221,16 +9230,16 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDSekunder.getValueAt(i,11).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),11).toString()+"\"" +
                                    "}";
-                            System.out.println("URL : "+link+"/Observation/"+tbIGDSekunder.getValueAt(i,12).toString());
+                            System.out.println("URL : "+link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),12).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDSekunder.getValueAt(i,12).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),12).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Alat Transportasi : "+e);
@@ -9238,14 +9247,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Alasan Kedatangan
-                    if(!tbIGDSekunder.getValueAt(i,15).toString().equals("")){
+                    if(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),15).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDSekunder.getValueAt(i,15).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),15).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -9277,16 +9286,16 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDSekunder.getValueAt(i,13).toString()+(tbIGDSekunder.getValueAt(i,14).toString().equals("")?"":", Keterangan : "+tbIGDSekunder.getValueAt(i,14).toString())+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),13).toString()+(tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),14).toString().equals("")?"":", Keterangan : "+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),14).toString())+"\"" +
                                    "}";
-                            System.out.println("URL : "+link+"/Observation/"+tbIGDSekunder.getValueAt(i,15).toString());
+                            System.out.println("URL : "+link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),15).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDSekunder.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Alasan Kedatangan : "+e);
@@ -9294,14 +9303,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Macam Kasus
-                    if(!tbIGDSekunder.getValueAt(i,17).toString().equals("")){
+                    if(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),17).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDSekunder.getValueAt(i,17).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),17).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -9333,16 +9342,16 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbIGDSekunder.getValueAt(i,16).toString()+"\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),16).toString()+"\"" +
                                    "}";
-                            System.out.println("URL : "+link+"/Observation/"+tbIGDSekunder.getValueAt(i,17).toString());
+                            System.out.println("URL : "+link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),17).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDSekunder.getValueAt(i,17).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),17).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Macam Kasus : "+e);
@@ -9350,8 +9359,8 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Tekanan Darah
-                    if(!tbIGDSekunder.getValueAt(i,19).toString().equals("")){
-                        arrSplit = tbIGDSekunder.getValueAt(i,18).toString().split("/");
+                    if(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),19).toString().equals("")){
+                        arrSplit = tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),18).toString().split("/");
                         sistole="0";
                         try {
                             if(!arrSplit[0].equals("")){
@@ -9374,7 +9383,7 @@ KirimTriaseIGDSekunder();
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDSekunder.getValueAt(i,19).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),19).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -9406,10 +9415,10 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"component\" : ["+
                                             "{" +
                                                 "\"code\" : {" +
@@ -9447,10 +9456,10 @@ KirimTriaseIGDSekunder();
                                             "}"+
                                         "]" +
                                    "}";
-                            System.out.println("URL : "+link+"/Observation/"+tbIGDSekunder.getValueAt(i,19).toString());
+                            System.out.println("URL : "+link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),19).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDSekunder.getValueAt(i,19).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),19).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Tekanan Darah : "+e);
@@ -9458,14 +9467,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Nadi
-                    if(!tbIGDSekunder.getValueAt(i,21).toString().equals("")){
+                    if(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),21).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDSekunder.getValueAt(i,21).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),21).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -9497,21 +9506,21 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDSekunder.getValueAt(i, 20).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 20).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"/min\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"/min\""+
                                         "}" +
                                    "}";
-                            System.out.println("URL : "+link+"/Observation/"+tbIGDSekunder.getValueAt(i,21).toString());
+                            System.out.println("URL : "+link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),21).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDSekunder.getValueAt(i,21).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),21).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Nadi : "+e);
@@ -9519,14 +9528,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Respirasi
-                    if(!tbIGDSekunder.getValueAt(i,23).toString().equals("")){
+                    if(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),23).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDSekunder.getValueAt(i,23).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),23).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -9558,21 +9567,21 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDSekunder.getValueAt(i, 22).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 22).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"/min\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"/min\""+
                                         "}" +
                                    "}";
-                            System.out.println("URL : "+link+"/Observation/"+tbIGDSekunder.getValueAt(i,23).toString());
+                            System.out.println("URL : "+link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),23).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDSekunder.getValueAt(i,23).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),23).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Respirasi : "+e);
@@ -9580,14 +9589,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Suhu Tubuh
-                    if(!tbIGDSekunder.getValueAt(i,25).toString().equals("")){
+                    if(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),25).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDSekunder.getValueAt(i,25).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),25).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -9619,21 +9628,21 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDSekunder.getValueAt(i, 24).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 24).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"degree Celsius\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"Cel\""+
                                         "}" +
                                    "}";
-                            System.out.println("URL : "+link+"/Observation/"+tbIGDSekunder.getValueAt(i,25).toString());
+                            System.out.println("URL : "+link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),25).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDSekunder.getValueAt(i,25).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),25).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Suhu Tubuh : "+e);
@@ -9641,14 +9650,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Saturasi Oksigen
-                    if(!tbIGDSekunder.getValueAt(i,27).toString().equals("")){
+                    if(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),27).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDSekunder.getValueAt(i,27).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),27).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -9680,21 +9689,21 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                                            "\"value\": " + tbIGDSekunder.getValueAt(i, 26).toString().replaceAll(",", ".") + ","+
+                                            "\"value\": " + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 26).toString().replaceAll(",", ".") + ","+
                                             "\"unit\": \"%\","+
                                             "\"system\": \"http://unitsofmeasure.org\","+
                                             "\"code\": \"%\""+
                                         "}" +
                                    "}";
-                            System.out.println("URL : "+link+"/Observation/"+tbIGDSekunder.getValueAt(i,27).toString());
+                            System.out.println("URL : "+link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),27).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDSekunder.getValueAt(i,27).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),27).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Saturasi O²(%) : "+e);
@@ -9702,14 +9711,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Nyeri
-                    if(!tbIGDSekunder.getValueAt(i,29).toString().equals("")){
+                    if(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),29).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDSekunder.getValueAt(i,29).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),29).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -9741,16 +9750,16 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueInteger\": " + tbIGDSekunder.getValueAt(i, 28).toString().replaceAll("[^0-9]", "") +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueInteger\": " + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 28).toString().replaceAll("[^0-9]", "") +
                                    "}";
-                            System.out.println("URL : "+link+"/Observation/"+tbIGDSekunder.getValueAt(i,29).toString());
+                            System.out.println("URL : "+link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),29).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDSekunder.getValueAt(i,29).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),29).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Nyeri : "+e);
@@ -9758,16 +9767,16 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Anamnesa Singkat
-                    if(!tbIGDSekunder.getValueAt(i,31).toString().equals("")){
+                    if(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),31).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"ClinicalImpression\"," +
-                                        "\"id\": \""+tbIGDSekunder.getValueAt(i,31).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),31).toString()+"\"," +
                                         "\"status\": \"completed\","+
-                                        "\"description\" : \""+tbIGDSekunder.getValueAt(i,30).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ") +"\"," +
+                                        "\"description\" : \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),30).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ") +"\"," +
                                         "\"subject\": {" +
                                             "\"reference\": \"Patient/"+idpasien+"\"" +
                                         "}," +
@@ -9775,10 +9784,10 @@ KirimTriaseIGDSekunder();
                                             "\"reference\": \"Practitioner/"+iddokter+"\"" +
                                         "}," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"date\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"date\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"prognosisCodeableConcept\": ["+
                                             "{"+
                                                 "\"coding\": ["+
@@ -9791,10 +9800,10 @@ KirimTriaseIGDSekunder();
                                             "}"+
                                         "]"+
                                    "}";
-                            System.out.println("URL : "+link+"/ClinicalImpression/"+tbIGDSekunder.getValueAt(i,31).toString());
+                            System.out.println("URL : "+link+"/ClinicalImpression/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),31).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/ClinicalImpression/"+tbIGDSekunder.getValueAt(i,31).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/ClinicalImpression/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),31).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Anamnesa Singkat : "+e);
@@ -9802,14 +9811,14 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Catatan
-                    if((!tbIGDSekunder.getValueAt(i, 32).toString().equals("")) && (!tbIGDSekunder.getValueAt(i, 33).toString().equals(""))){
+                    if((!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 32).toString().equals("")) && (!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 33).toString().equals(""))){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbIGDSekunder.getValueAt(i,33).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),33).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"category\": [" +
                                             "{" +
@@ -9841,16 +9850,16 @@ KirimTriaseIGDSekunder();
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                        "\"valueString\": \"" +tbIGDSekunder.getValueAt(i, 32).toString().replace("\"", "'")+ "\"" +
+                                        "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \"" +tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 32).toString().replace("\"", "'")+ "\"" +
                                    "}";
-                            System.out.println("URL : "+link+"/Observation/"+tbIGDSekunder.getValueAt(i,33).toString());
+                            System.out.println("URL : "+link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),33).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbIGDSekunder.getValueAt(i,33).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),33).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Catatan : "+e);
@@ -9858,18 +9867,18 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Keputusan
-                    if(!tbIGDSekunder.getValueAt(i, 35).toString().equals("")){
+                    if(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 35).toString().equals("")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"CarePlan\"," +
-                                        "\"id\": \""+tbIGDSekunder.getValueAt(i,35).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),35).toString()+"\"," +
                                         "\"status\": \"active\"," +
                                         "\"intent\": \"plan\"," +
                                         "\"title\": \"Rencana Penempatan Pasien IGD\"," +
-                                        "\"description\": \"" + tbIGDSekunder.getValueAt(i, 34).toString()+"\"," +
+                                        "\"description\": \"" + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 34).toString()+"\"," +
                                         "\"category\": ["+
                                             "{"+
                                                 "\"coding\": ["+
@@ -9885,19 +9894,19 @@ KirimTriaseIGDSekunder();
                                             "\"reference\": \"Patient/" + idpasien + "\""+
                                         "}," +
                                         "\"encounter\": {"+
-                                            "\"reference\": \"Encounter/" + tbIGDSekunder.getValueAt(i, 5).toString() + "\""+
+                                            "\"reference\": \"Encounter/" + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 5).toString() + "\""+
                                         "}," +
                                         "\"author\": {"+
                                             "\"reference\": \"Practitioner/" + iddokter + "\""+
                                         "}," +
                                         "\"period\": {"+
-                                            "\"start\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\""+
+                                            "\"start\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\""+
                                         "}" +
                                    "}";
-                            System.out.println("URL : "+link+"/CarePlan/"+tbIGDSekunder.getValueAt(i,35).toString());
+                            System.out.println("URL : "+link+"/CarePlan/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),35).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/CarePlan/"+tbIGDSekunder.getValueAt(i,35).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/CarePlan/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),35).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                         }catch(Exception e){
                             System.out.println("Notifikasi Keputusan : "+e);
@@ -9914,17 +9923,17 @@ KirimTriaseIGDSekunder();
                         "where data_triase_igddetail_skala3.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan"
                     );
                     try {
-                        ps.setString(1,tbIGDSekunder.getValueAt(i,1).toString());
+                        ps.setString(1,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
-                            if(!tbIGDSekunder.getValueAt(i, 36).toString().equals("")){
+                            if(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 36).toString().equals("")){
                                 try{
                                     headers = new HttpHeaders();
                                     headers.setContentType(MediaType.APPLICATION_JSON);
                                     headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                     json = "{" +
                                                 "\"resourceType\": \"Observation\"," +
-                                                "\"id\": \""+tbIGDSekunder.getValueAt(i,36).toString()+"\"," +
+                                                "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),36).toString()+"\"," +
                                                 "\"status\": \"final\"," +
                                                 "\"category\": [" +
                                                     "{" +
@@ -9956,10 +9965,10 @@ KirimTriaseIGDSekunder();
                                                     "}" +
                                                 "]," +
                                                 "\"encounter\": {" +
-                                                    "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                                    "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                                 "}," +
-                                                "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                 "\"valueCodeableConcept\": {" +
                                                     "\"coding\": [" +
                                                         "{" +
@@ -9971,10 +9980,10 @@ KirimTriaseIGDSekunder();
                                                     "\"text\": \"3. Urgent\"" +
                                                 "}" +
                                            "}";
-                                    System.out.println("URL : "+link+"/Observation/"+tbIGDSekunder.getValueAt(i,36).toString());
+                                    System.out.println("URL : "+link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),36).toString());
                                     System.out.println("Request JSON : "+json);
                                     requestEntity = new HttpEntity(json,headers);
-                                    json=api.getRest().exchange(link+"/Observation/"+tbIGDSekunder.getValueAt(i,36).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                                    json=api.getRest().exchange(link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),36).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                                     System.out.println("Result JSON : "+json);
                                 }catch(Exception e){
                                     System.out.println("Notifikasi Triase Skala 3 : "+e);
@@ -9990,7 +9999,7 @@ KirimTriaseIGDSekunder();
                                 );
                                 try {
                                     ps2.setString(1,rs.getString("kode_pemeriksaan"));
-                                    ps2.setString(2,tbIGDSekunder.getValueAt(i,1).toString());
+                                    ps2.setString(2,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString());
                                     rs2=ps2.executeQuery();
                                     while(rs2.next()){
                                         if(!rs2.getString("id_observation_skala3").equals("")){
@@ -10032,10 +10041,10 @@ KirimTriaseIGDSekunder();
                                                                 "}"+
                                                             "]," +
                                                             "\"encounter\": {"+
-                                                                "\"reference\": \"Encounter/" + tbIGDSekunder.getValueAt(i, 5).toString() + "\""+
+                                                                "\"reference\": \"Encounter/" + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 5).toString() + "\""+
                                                             "}," +
-                                                            "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                            "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                            "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                            "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                             "\"valueString\": \"" + rs2.getString("pengkajian_skala3").replace("\"", "'") + "\"" +
                                                        "}";
                                                 System.out.println("URL : "+link+"/Observation/"+rs2.getString("id_observation_skala3"));
@@ -10087,17 +10096,17 @@ KirimTriaseIGDSekunder();
                             "where data_triase_igddetail_skala4.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan"
                         );
                         try {
-                            ps.setString(1,tbIGDSekunder.getValueAt(i,1).toString());
+                            ps.setString(1,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString());
                             rs=ps.executeQuery();
                             if(rs.next()){
-                                if(!tbIGDSekunder.getValueAt(i, 36).toString().equals("")){
+                                if(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 36).toString().equals("")){
                                     try{
                                         headers = new HttpHeaders();
                                         headers.setContentType(MediaType.APPLICATION_JSON);
                                         headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                         json = "{" +
                                                     "\"resourceType\": \"Observation\"," +
-                                                    "\"id\": \""+tbIGDSekunder.getValueAt(i,36).toString()+"\"," +
+                                                    "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),36).toString()+"\"," +
                                                     "\"status\": \"final\"," +
                                                     "\"category\": [" +
                                                         "{" +
@@ -10129,10 +10138,10 @@ KirimTriaseIGDSekunder();
                                                         "}" +
                                                     "]," +
                                                     "\"encounter\": {" +
-                                                        "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                                        "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                                     "}," +
-                                                    "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                    "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                    "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                    "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                     "\"valueCodeableConcept\": {" +
                                                         "\"coding\": [" +
                                                             "{" +
@@ -10144,10 +10153,10 @@ KirimTriaseIGDSekunder();
                                                         "\"text\": \"4. Less Urgent\"" +
                                                     "}" +
                                                "}";
-                                        System.out.println("URL : "+link+"/Observation/"+tbIGDSekunder.getValueAt(i,36).toString());
+                                        System.out.println("URL : "+link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),36).toString());
                                         System.out.println("Request JSON : "+json);
                                         requestEntity = new HttpEntity(json,headers);
-                                        json=api.getRest().exchange(link+"/Observation/"+tbIGDSekunder.getValueAt(i,36).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                                        json=api.getRest().exchange(link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),36).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                                         System.out.println("Result JSON : "+json);
                                     }catch(Exception e){
                                         System.out.println("Notifikasi Triase Skala 4 : "+e);
@@ -10163,7 +10172,7 @@ KirimTriaseIGDSekunder();
                                     );
                                     try {
                                         ps2.setString(1,rs.getString("kode_pemeriksaan"));
-                                        ps2.setString(2,tbIGDSekunder.getValueAt(i,1).toString());
+                                        ps2.setString(2,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString());
                                         rs2=ps2.executeQuery();
                                         while(rs2.next()){
                                             if(!rs2.getString("id_observation_skala4").equals("")){
@@ -10205,10 +10214,10 @@ KirimTriaseIGDSekunder();
                                                                     "}"+
                                                                 "]," +
                                                                 "\"encounter\": {"+
-                                                                    "\"reference\": \"Encounter/" + tbIGDSekunder.getValueAt(i, 5).toString() + "\""+
+                                                                    "\"reference\": \"Encounter/" + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 5).toString() + "\""+
                                                                 "}," +
-                                                                "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                                "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                                "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                                "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                                 "\"valueString\": \"" + rs2.getString("pengkajian_skala4").replace("\"", "'") + "\"" +
                                                            "}";
                                                     System.out.println("URL : "+link+"/Observation/"+rs2.getString("id_observation_skala4"));
@@ -10261,17 +10270,17 @@ KirimTriaseIGDSekunder();
                             "where data_triase_igddetail_skala5.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan"
                         );
                         try {
-                            ps.setString(1,tbIGDSekunder.getValueAt(i,1).toString());
+                            ps.setString(1,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString());
                             rs=ps.executeQuery();
                             if(rs.next()){
-                                if(!tbIGDSekunder.getValueAt(i, 36).toString().equals("")){
+                                if(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 36).toString().equals("")){
                                     try{
                                         headers = new HttpHeaders();
                                         headers.setContentType(MediaType.APPLICATION_JSON);
                                         headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                         json = "{" +
                                                     "\"resourceType\": \"Observation\"," +
-                                                    "\"id\": \""+tbIGDSekunder.getValueAt(i,36).toString()+"\"," +
+                                                    "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),36).toString()+"\"," +
                                                     "\"status\": \"final\"," +
                                                     "\"category\": [" +
                                                         "{" +
@@ -10303,10 +10312,10 @@ KirimTriaseIGDSekunder();
                                                         "}" +
                                                     "]," +
                                                     "\"encounter\": {" +
-                                                        "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                                        "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                                     "}," +
-                                                    "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                    "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                    "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                    "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                     "\"valueCodeableConcept\": {" +
                                                         "\"coding\": [" +
                                                             "{" +
@@ -10318,10 +10327,10 @@ KirimTriaseIGDSekunder();
                                                         "\"text\": \"5. Non Urgent\"" +
                                                     "}" +
                                                "}";
-                                        System.out.println("URL : "+link+"/Observation/"+tbIGDSekunder.getValueAt(i,36).toString());
+                                        System.out.println("URL : "+link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),36).toString());
                                         System.out.println("Request JSON : "+json);
                                         requestEntity = new HttpEntity(json,headers);
-                                        json=api.getRest().exchange(link+"/Observation/"+tbIGDSekunder.getValueAt(i,36).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                                        json=api.getRest().exchange(link+"/Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),36).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                                         System.out.println("Result JSON : "+json);
                                     }catch(Exception e){
                                         System.out.println("Notifikasi Triase Skala 5 : "+e);
@@ -10337,7 +10346,7 @@ KirimTriaseIGDSekunder();
                                     );
                                     try {
                                         ps2.setString(1,rs.getString("kode_pemeriksaan"));
-                                        ps2.setString(2,tbIGDSekunder.getValueAt(i,1).toString());
+                                        ps2.setString(2,tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),1).toString());
                                         rs2=ps2.executeQuery();
                                         while(rs2.next()){
                                             if(!rs2.getString("id_observation_skala5").equals("")){
@@ -10379,10 +10388,10 @@ KirimTriaseIGDSekunder();
                                                                     "}"+
                                                                 "]," +
                                                                 "\"encounter\": {"+
-                                                                    "\"reference\": \"Encounter/" + tbIGDSekunder.getValueAt(i, 5).toString() + "\""+
+                                                                    "\"reference\": \"Encounter/" + tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i), 5).toString() + "\""+
                                                                 "}," +
-                                                                "\"effectiveDateTime\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                                                "\"issued\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                                "\"effectiveDateTime\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
+                                                                "\"issued\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                                                 "\"valueString\": \"" + rs2.getString("pengkajian_skala5").replace("\"", "'") + "\"" +
                                                            "}";
                                                     System.out.println("URL : "+link+"/Observation/"+rs2.getString("id_observation_skala5"));
@@ -10427,17 +10436,17 @@ KirimTriaseIGDSekunder();
                     }
 
                     //Composition IGD Sekunder
-                    if((!tbIGDSekunder.getValueAt(i,10).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,12).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,15).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,17).toString().equals(""))&&
-                            (!tbIGDSekunder.getValueAt(i,19).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,21).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,23).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,25).toString().equals(""))&&
-                            (!tbIGDSekunder.getValueAt(i,27).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,29).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,31).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,33).toString().equals(""))&&
-                            (!tbIGDSekunder.getValueAt(i,35).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,36).toString().equals(""))&&(!tbIGDSekunder.getValueAt(i,37).toString().equals(""))){
+                    if((!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),10).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),12).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),15).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),17).toString().equals(""))&&
+                            (!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),19).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),21).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),23).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),25).toString().equals(""))&&
+                            (!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),27).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),29).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),31).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),33).toString().equals(""))&&
+                            (!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),35).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),36).toString().equals(""))&&(!tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),37).toString().equals(""))){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Composition\"," +
-                                        "\"id\": \""+tbIGDSekunder.getValueAt(i,37).toString()+"\"," +
+                                        "\"id\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),37).toString()+"\"," +
                                         "\"status\": \"final\"," +
                                         "\"type\": {" +
                                             "\"coding\": [" +
@@ -10452,14 +10461,14 @@ KirimTriaseIGDSekunder();
                                             "\"reference\": \"Patient/"+idpasien+"\"" +
                                         "}," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"" +
                                         "}," +
                                         "\"author\": [" +
                                             "{" +
                                                 "\"reference\": \"Practitioner/"+iddokter+"\"" +
                                             "}" +
                                         "]," +
-                                        "\"date\": \""+tbIGDSekunder.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"date\": \""+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"title\": \"Data Triase IGD Sekunder\"," +
                                         "\"section\": [" +
                                             "{" +
@@ -10474,16 +10483,16 @@ KirimTriaseIGDSekunder();
                                                     "]" +
                                                 "}," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,10).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,12).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,15).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,17).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),10).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),12).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),15).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),17).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
                                                 "\"title\": \"Anamnesa\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"ClinicalImpression/"+tbIGDSekunder.getValueAt(i,31).toString()+"\"}" +
+                                                    "{\"reference\": \"ClinicalImpression/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),31).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
@@ -10498,11 +10507,11 @@ KirimTriaseIGDSekunder();
                                                     "]" +
                                                 "}," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,19).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,21).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,23).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,25).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,27).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),19).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),21).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),23).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),25).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),27).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
@@ -10518,31 +10527,31 @@ KirimTriaseIGDSekunder();
                                                 "}," +
                                                 "\"entry\": [" +
                                                     iyembuilder.toString()+
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,29).toString()+"\"}," +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,36).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),29).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),36).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
                                                 "\"title\": \"Catatan\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"Observation/"+tbIGDSekunder.getValueAt(i,33).toString()+"\"}" +
+                                                    "{\"reference\": \"Observation/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),33).toString()+"\"}" +
                                                 "]" +
                                             "}," +
                                             "{" +
                                                 "\"title\": \"Plan/Keputusan\"," +
                                                 "\"entry\": [" +
-                                                    "{\"reference\": \"CarePlan/"+tbIGDSekunder.getValueAt(i,35).toString()+"\"}," +
-                                                    "{\"reference\": \"Encounter/"+tbIGDSekunder.getValueAt(i,5).toString()+"\"}" +
+                                                    "{\"reference\": \"CarePlan/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),35).toString()+"\"}," +
+                                                    "{\"reference\": \"Encounter/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),5).toString()+"\"}" +
                                                 "]" +
                                             "}" +
                                         "]" +
                                     "}";
-                            System.out.println("URL : "+link+"/Composition/"+tbIGDSekunder.getValueAt(i,37).toString());
+                            System.out.println("URL : "+link+"/Composition/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),37).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Composition/"+tbIGDSekunder.getValueAt(i,37).toString(),HttpMethod.PUT,requestEntity,String.class).getBody();
+                            json=api.getRest().exchange(link+"/Composition/"+tabModeIGDSekunder.getValueAt(tbIGDSekunder.convertRowIndexToModel(i),37).toString(),HttpMethod.PUT,requestEntity,String.class).getBody();
                             System.out.println("Result JSON : "+json);
-                            tbIGDSekunder.setValueAt(false,i,0);
+                            tabModeIGDSekunder.setValueAt(false,tbIGDSekunder.convertRowIndexToModel(i),0);
                         }catch(Exception e){
                             System.out.println("Notifikasi Composition Triase IGD Sekunder : "+e);
                         }

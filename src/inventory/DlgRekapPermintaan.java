@@ -148,6 +148,7 @@ public class DlgRekapPermintaan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -549,17 +550,17 @@ public class DlgRekapPermintaan extends javax.swing.JDialog {
             form.tampilkan=false;
             form.isCek();
             Valid.tabelKosong(form.tabMode());
-            for(i=0;i<tbDokter.getRowCount();i++){
-                if(tbDokter.getValueAt(i,0).toString().equals("true")){
-                    harga=Sequel.cariIsiAngka("select databarang.h_beli from databarang where databarang.kode_brng=?",tbDokter.getValueAt(i,1).toString());
-                    jml=Double.parseDouble(tbDokter.getValueAt(i,5).toString());
+            for(i=0;i<tabMode.getRowCount();i++){
+                if(tabMode.getValueAt(i,0).toString().equals("true")){
+                    harga=Sequel.cariIsiAngka("select databarang.h_beli from databarang where databarang.kode_brng=?",tabMode.getValueAt(i,1).toString());
+                    jml=Double.parseDouble(tabMode.getValueAt(i,5).toString());
                     form.tabMode().addRow(new Object[]{
-                        jml,tbDokter.getValueAt(i,6).toString(),
-                        tbDokter.getValueAt(i,1).toString(),
-                        tbDokter.getValueAt(i,2).toString(),
-                        tbDokter.getValueAt(i,6).toString(),
+                        jml,tabMode.getValueAt(i,6).toString(),
+                        tabMode.getValueAt(i,1).toString(),
+                        tabMode.getValueAt(i,2).toString(),
+                        tabMode.getValueAt(i,6).toString(),
                         harga,(jml*harga),0,0,(jml*harga),jml,
-                        Double.parseDouble(tbDokter.getValueAt(i,7).toString()),1
+                        Double.parseDouble(tabMode.getValueAt(i,7).toString()),1
                     });
                 }
             }
@@ -645,7 +646,7 @@ public class DlgRekapPermintaan extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             z=0;
             for(i=0;i<tbDokter.getRowCount();i++){
-                if(!tbDokter.getValueAt(i,0).toString().equals("")){
+                if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("")){
                     z++;
                 }
             }
@@ -667,18 +668,19 @@ public class DlgRekapPermintaan extends javax.swing.JDialog {
 
             z=0;
             for(i=0;i<tbDokter.getRowCount();i++){
-                if(tbDokter.getValueAt(i,0).toString().equals("true")){
-                    pilihan[z]=Boolean.parseBoolean(tbDokter.getValueAt(i,0).toString());
-                    kodebarang[z]=tbDokter.getValueAt(i,1).toString();
-                    namabarang[z]=tbDokter.getValueAt(i,2).toString();
-                    satuan[z]=tbDokter.getValueAt(i,3).toString();
-                    jenis[z]=tbDokter.getValueAt(i,4).toString();
-                    jumlah[z]=tbDokter.getValueAt(i,5).toString();
-                    kodesat[z]=tbDokter.getValueAt(i,6).toString();
+                if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("true")){
+                    pilihan[z]=Boolean.parseBoolean(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString());
+                    kodebarang[z]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString();
+                    namabarang[z]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString();
+                    satuan[z]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString();
+                    jenis[z]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString();
+                    jumlah[z]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString();
+                    kodesat[z]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString();
                     z++;
                 }
             }
 
+            tbDokter.suspendSorting();
             Valid.tabelKosong(tabMode);
             for(i=0;i<z;i++){
                 tabMode.addRow(new Object[] {
@@ -734,6 +736,7 @@ public class DlgRekapPermintaan extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println(e);
         }
+        tbDokter.resumeSorting();
     }
 
     private void runBackground(Runnable task) {

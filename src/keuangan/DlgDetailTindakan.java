@@ -1767,6 +1767,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         Scroll4.setName("Scroll4"); // NOI18N
         Scroll4.setOpaque(true);
 
+        tbRanapDokter.setSortable(false);
         tbRanapDokter.setName("tbRanapDokter"); // NOI18N
         Scroll4.setViewportView(tbRanapDokter);
 
@@ -2791,6 +2792,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmPoliRalanDokter.setText("");
                 KdCaraBayarRalanDokter.setText("");
                 NmCaraBayarRalanDokter.setText("");
+                tbRalanDokter.suspendSorting();
                 Valid.tabelKosong(tabModeRalanDokter);
                 break;
             case 1:
@@ -2800,6 +2802,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmPoliRalanParamedis.setText("");
                 KdCaraBayarRalanParamedis.setText("");
                 NmCaraBayarRalanParamedis.setText("");
+                tbRalanParamedis.suspendSorting();
                 Valid.tabelKosong(tabModeRalanParamedis);
                 break;
             case 2:
@@ -2811,6 +2814,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmPoliRalanDokterParamedis.setText("");
                 KdCaraBayarRalanDokterParamedis.setText("");
                 NmCaraBayarRalanDokterParamedis.setText("");
+                tbRalanDokterParamedis.suspendSorting();
                 Valid.tabelKosong(tabModeRalanDokterParamedis);
                 break;
             case 3:
@@ -2820,6 +2824,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmAsistenOperasi.setText("");
                 KdCaraBayarOperasi.setText("");
                 NmCaraBayarOperasi.setText("");
+                tbOperasi.suspendSorting();
                 Valid.tabelKosong(tabModeOperasi);
                 break;
             case 4:
@@ -2827,6 +2832,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmDokterRanapDokter.setText("");
                 KdCaraBayarRanapDokter.setText("");
                 NmCaraBayarRanapDokter.setText("");
+                tbRanapDokter.suspendSorting();
                 Valid.tabelKosong(tabModeRanapDokter);
                 break;
             case 5:
@@ -2834,6 +2840,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmPetugasRanapParamedis.setText("");
                 KdCaraBayarRanapParamedis.setText("");
                 NmCaraBayarRanapParamedis.setText("");
+                tbRanapParamedis.suspendSorting();
                 Valid.tabelKosong(tabModeRanapParamedis);
                 break;
             case 6:
@@ -2843,6 +2850,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmDokterRanapDokterParamedis.setText("");
                 KdCaraBayarRanapDokterParamedis.setText("");
                 NmCaraBayarRanapDokterParamedis.setText("");
+                tbRanapDokterParamedis.suspendSorting();
                 Valid.tabelKosong(tabModeRanapDokterParamedis);
                 break;
            case 7:
@@ -2852,6 +2860,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmDokterPerujukRad.setText("");
                 KdCaraBayarRad.setText("");
                 NmCaraBayarRad.setText("");
+                tbRadiologi.suspendSorting();
                 Valid.tabelKosong(tabModeRadiologi);
                 break;
             case 8:
@@ -2861,6 +2870,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmDokterPerujukLab.setText("");
                 KdCaraBayarLab.setText("");
                 NmCaraBayarLab.setText("");
+                tbLaborat.suspendSorting();
                 Valid.tabelKosong(tabModeLaborat);
                 break;
             case 9:
@@ -2870,12 +2880,23 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmDokterPerujukDetailLab.setText("");
                 KdCaraBayarDetailLab.setText("");
                 NmCaraBayarDetailLab.setText("");
+                tbDetailLaborat.suspendSorting();
                 Valid.tabelKosong(tabModeDetailLaborat);
                 break;
             default:
                 break;
         }
         BtnCariActionPerformed(null);
+        tbRalanDokter.resumeSorting();
+        tbRalanParamedis.resumeSorting();
+        tbRalanDokterParamedis.resumeSorting();
+        tbRanapDokter.resumeSorting();
+        tbRanapParamedis.resumeSorting();
+        tbRanapDokterParamedis.resumeSorting();
+        tbRadiologi.resumeSorting();
+        tbLaborat.resumeSorting();
+        tbDetailLaborat.resumeSorting();
+        tbOperasi.resumeSorting();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -3560,6 +3581,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbRalanDokter.suspendSorting();
             Valid.tabelKosongSmc(tabModeRalanDokter);
             new SwingWorker<Void, Object[]>() {
                 private final String tgl1 = Valid.getTglSmc(Tgl1);
@@ -3643,6 +3665,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                     tabModeRalanDokter.fireTableDataChanged();
                     DlgDetailTindakan.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbRalanDokter.resumeSorting();
                 }
             }.execute();
         }
@@ -3652,6 +3675,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbRalanParamedis.suspendSorting();
             Valid.tabelKosongSmc(tabModeRalanParamedis);
             new SwingWorker<Void, Object[]>() {
                 private final String tgl1 = Valid.getTglSmc(Tgl1);
@@ -3734,6 +3758,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                     tabModeRalanParamedis.fireTableDataChanged();
                     DlgDetailTindakan.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbRalanParamedis.resumeSorting();
                 }
             }.execute();
         }
@@ -3743,6 +3768,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbRalanDokterParamedis.suspendSorting();
             Valid.tabelKosongSmc(tabModeRalanDokterParamedis);
             new SwingWorker<Void, Object[]>() {
                 private final String tgl1 = Valid.getTglSmc(Tgl1);
@@ -3833,6 +3859,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                     tabModeRalanDokterParamedis.fireTableDataChanged();
                     DlgDetailTindakan.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbRalanDokterParamedis.resumeSorting();
                 }
             }.execute();
         }
@@ -3842,6 +3869,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbOperasi.suspendSorting();
             Valid.tabelKosongSmc(tabModeOperasi);
             new SwingWorker<Void, Object[]>() {
                 private final String tgl1 = Valid.getTglSmc(Tgl1);
@@ -3999,6 +4027,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                     tabModeOperasi.fireTableDataChanged();
                     DlgDetailTindakan.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbOperasi.resumeSorting();
                 }
             }.execute();
         }
@@ -4008,6 +4037,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbRanapDokter.suspendSorting();
             Valid.tabelKosongSmc(tabModeRanapDokter);
             new SwingWorker<Void, Object[]>() {
                 private final String tgl1 = Valid.getTglSmc(Tgl1);
@@ -4086,6 +4116,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                     tabModeRanapDokter.fireTableDataChanged();
                     DlgDetailTindakan.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbRanapDokter.resumeSorting();
                 }
             }.execute();
 
@@ -4096,6 +4127,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbRanapParamedis.suspendSorting();
             Valid.tabelKosongSmc(tabModeRanapParamedis);
             new SwingWorker<Void, Object[]>() {
                 private final String tgl1 = Valid.getTglSmc(Tgl1);
@@ -4173,6 +4205,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                     tabModeRanapParamedis.fireTableDataChanged();
                     DlgDetailTindakan.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbRanapParamedis.resumeSorting();
                 }
             }.execute();
         }
@@ -4182,6 +4215,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbRanapDokterParamedis.suspendSorting();
             Valid.tabelKosongSmc(tabModeRanapDokterParamedis);
             new SwingWorker<Void, Object[]>() {
                 private final String tgl1 = Valid.getTglSmc(Tgl1);
@@ -4268,6 +4302,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                     tabModeRanapDokterParamedis.fireTableDataChanged();
                     DlgDetailTindakan.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbRanapDokterParamedis.resumeSorting();
                 }
             }.execute();
         }
@@ -4277,6 +4312,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbRadiologi.suspendSorting();
             Valid.tabelKosongSmc(tabModeRadiologi);
             new SwingWorker<Void, Object[]>() {
                 private final String tgl1 = Valid.getTglSmc(Tgl1);
@@ -4374,6 +4410,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                     tabModeRadiologi.fireTableDataChanged();
                     DlgDetailTindakan.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbRadiologi.resumeSorting();
                 }
 
             }.execute();
@@ -4384,6 +4421,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbLaborat.suspendSorting();
             Valid.tabelKosongSmc(tabModeLaborat);
             new SwingWorker<Void, Object[]>() {
                 private final String tgl1 = Valid.getTglSmc(Tgl1);
@@ -4480,6 +4518,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                     tabModeLaborat.fireTableDataChanged();
                     DlgDetailTindakan.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbLaborat.resumeSorting();
                 }
             }.execute();
         }
@@ -4489,6 +4528,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbDetailLaborat.suspendSorting();
             Valid.tabelKosongSmc(tabModeDetailLaborat);
             new SwingWorker<Void, Object[]>() {
                 private final String tgl1 = Valid.getTglSmc(Tgl1);
@@ -4587,6 +4627,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                     tabModeDetailLaborat.fireTableDataChanged();
                     DlgDetailTindakan.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbDetailLaborat.resumeSorting();
                 }
             }.execute();
         }
@@ -4733,10 +4774,10 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
     }
 
     private void CetakRalanDokter() {
-        if(tabModeRalanDokter.getRowCount()==0){
+        if(tbRalanDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeRalanDokter.getRowCount()!=0){
+        }else if(tbRalanDokter.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -4783,10 +4824,10 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
     }
 
     private void CetakRalanParamedis() {
-        if(tabModeRalanParamedis.getRowCount()==0){
+        if(tbRalanParamedis.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeRalanParamedis.getRowCount()!=0){
+        }else if(tbRalanParamedis.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -4833,10 +4874,10 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
     }
 
     private void CetakRalanDokterParamedis() {
-        if(tabModeRalanDokterParamedis.getRowCount()==0){
+        if(tbRalanDokterParamedis.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeRalanDokterParamedis.getRowCount()!=0){
+        }else if(tbRalanDokterParamedis.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -4883,10 +4924,10 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
     }
 
     private void CetakOperasi() {
-        if(tabModeOperasi.getRowCount()==0){
+        if(tbOperasi.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeOperasi.getRowCount()!=0){
+        }else if(tbOperasi.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -4933,10 +4974,10 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
     }
 
     private void CetakRanapDokter() {
-        if(tabModeRanapDokter.getRowCount()==0){
+        if(tbRanapDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeRanapDokter.getRowCount()!=0){
+        }else if(tbRanapDokter.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -4983,10 +5024,10 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
     }
 
     private void CetakRanapParamedis() {
-        if(tabModeRanapParamedis.getRowCount()==0){
+        if(tbRanapParamedis.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeRanapParamedis.getRowCount()!=0){
+        }else if(tbRanapParamedis.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -5033,10 +5074,10 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
     }
 
     private void CetakRanapDokterParamedis() {
-        if(tabModeRanapDokterParamedis.getRowCount()==0){
+        if(tbRanapDokterParamedis.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeRanapDokterParamedis.getRowCount()!=0){
+        }else if(tbRanapDokterParamedis.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -5083,10 +5124,10 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
     }
 
     private void CetakRadiologi() {
-        if(tabModeRadiologi.getRowCount()==0){
+        if(tbRadiologi.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeRadiologi.getRowCount()!=0){
+        }else if(tbRadiologi.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -5133,10 +5174,10 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
     }
 
     private void CetakLab() {
-        if(tabModeLaborat.getRowCount()==0){
+        if(tbLaborat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeLaborat.getRowCount()!=0){
+        }else if(tbLaborat.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -5183,10 +5224,10 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
     }
 
     private void CetakDetailLab() {
-        if(tabModeDetailLaborat.getRowCount()==0){
+        if(tbDetailLaborat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModeDetailLaborat.getRowCount()!=0){
+        }else if(tbDetailLaborat.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {

@@ -761,6 +761,7 @@ public class DlgCariJurnal extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbDokter.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             new SwingWorker<Void, Object[]>() {
                 private final String tgl1 = Valid.getTglSmc(TglJurnal1);
@@ -859,6 +860,7 @@ public class DlgCariJurnal extends javax.swing.JDialog {
                     kredit.setText(Valid.SetAngka(ttlkredit));
                     DlgCariJurnal.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbDokter.resumeSorting();
                 }
             }.execute();
         }
@@ -867,6 +869,7 @@ public class DlgCariJurnal extends javax.swing.JDialog {
     private void tampil() {
         if(ceksukses==false){
             ceksukses=true;
+            tbDokter.suspendSorting();
             Valid.tabelKosong(tabMode);
             new SwingWorker<Void, Object[]>() {
                 @Override
@@ -944,6 +947,7 @@ public class DlgCariJurnal extends javax.swing.JDialog {
                     debet.setText(Valid.SetAngka(ttldebet));
                     kredit.setText(Valid.SetAngka(ttlkredit));
                     ceksukses = false;
+                    tbDokter.resumeSorting();
                 }
             }.execute();
         }

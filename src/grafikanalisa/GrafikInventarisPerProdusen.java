@@ -223,6 +223,7 @@ public class GrafikInventarisPerProdusen extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbInventaris.setSortable(false);
         tbInventaris.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbInventaris.setName("tbInventaris"); // NOI18N
         Scroll.setViewportView(tbInventaris);
@@ -484,11 +485,11 @@ public class GrafikInventarisPerProdusen extends javax.swing.JDialog {
                     totalaset=totalaset+rs.getDouble("harga");
                     tabMode.addRow(new Object[]{rs.getString(3)+" ("+rs.getString(1)+")",rs.getString(2),"",rs.getDouble(4),""});
                 }
-                if(tabMode.getRowCount()>0){
+                if(tbInventaris.getRowCount()>0){
                     tabMode.addRow(new Object[]{"Jumlah : ",total,"100 %",totalaset,"100 %"});
                     for(i=0;i<tbInventaris.getRowCount();i++){
-                        tbInventaris.setValueAt(Math.round((Double.parseDouble(tbInventaris.getValueAt(i,1).toString())/total)*100)+" %",i,2);
-                        tbInventaris.setValueAt(Math.round((Double.parseDouble(tbInventaris.getValueAt(i,3).toString())/totalaset)*100)+" %",i,4);
+                        tabMode.setValueAt(Math.round((Double.parseDouble(tabMode.getValueAt(tbInventaris.convertRowIndexToModel(i),1).toString())/total)*100)+" %",tbInventaris.convertRowIndexToModel(i),2);
+                        tabMode.setValueAt(Math.round((Double.parseDouble(tabMode.getValueAt(tbInventaris.convertRowIndexToModel(i),3).toString())/totalaset)*100)+" %",tbInventaris.convertRowIndexToModel(i),4);
                     }
                 }
             } catch (Exception e) {

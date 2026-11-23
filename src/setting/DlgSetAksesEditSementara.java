@@ -520,8 +520,8 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Silahkan pilih data yang mau dihapus terlebih dahulu...!!!");
             return;
         }
-        if (Sequel.menghapustfSmc("set_akses_edit_sementara", "id_user = ?", tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
-            tabMode.removeRow(tbUser.getSelectedRow());
+        if (Sequel.menghapustfSmc("set_akses_edit_sementara", "id_user = ?", tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 0).toString())) {
+            tabMode.removeRow(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()));
             emptTeks();
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
@@ -539,9 +539,9 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         } else {
             if (Sequel.mengupdatetfSmc("set_akses_edit_sementara", "tgl_selesai = ?", "id_user = ?",
                 Valid.getTglJamSmc(DTPTgl1, CmbJam1, CmbMenit1, CmbDetik1),
-                tabMode.getValueAt(tbUser.getSelectedRow(), 0).toString()
+                tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 0).toString()
             )) {
-                tabMode.setValueAt(Valid.getTglJamSmc(DTPTgl1, CmbJam1, CmbMenit1, CmbDetik1), tbUser.getSelectedRow(), 3);
+                tabMode.setValueAt(Valid.getTglJamSmc(DTPTgl1, CmbJam1, CmbMenit1, CmbDetik1), tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 3);
                 emptTeks();
             }
         }
@@ -638,7 +638,7 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
                     tabMode.addRow(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)});
                 }
             }
-            LCount.setText(String.valueOf(tabMode.getRowCount()));
+            LCount.setText(String.valueOf(tbUser.getRowCount()));
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
@@ -659,13 +659,13 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
     private void getData() {
         try {
             if (tbUser.getSelectedRow() != -1) {
-                TUser.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString());
-                TNmUser.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 1).toString());
-                jabatan = tbUser.getValueAt(tbUser.getSelectedRow(), 2).toString();
-                DTPTgl1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString()));
-                CmbJam1.setSelectedItem(tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString().substring(11, 13));
-                CmbMenit1.setSelectedItem(tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString().substring(14, 16));
-                CmbDetik1.setSelectedItem(tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString().substring(17, 19));
+                TUser.setText(tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 0).toString());
+                TNmUser.setText(tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 1).toString());
+                jabatan = tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 2).toString();
+                DTPTgl1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 3).toString()));
+                CmbJam1.setSelectedItem(tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 3).toString().substring(11, 13));
+                CmbMenit1.setSelectedItem(tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 3).toString().substring(14, 16));
+                CmbDetik1.setSelectedItem(tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 3).toString().substring(17, 19));
             }
         } catch (Exception e) {
 

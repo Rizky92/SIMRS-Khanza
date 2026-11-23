@@ -398,7 +398,7 @@ public final class PerpustakaanCariInventaris extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(tabMode.getRowCount()+"");
+            LCount.setText(tbJnsPerawatan.getRowCount()+"");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }

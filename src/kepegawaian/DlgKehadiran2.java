@@ -127,6 +127,7 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbJadwal.setAutoCreateRowSorter(true);
         tbJadwal.setName("tbJadwal"); // NOI18N
         Scroll.setViewportView(tbJadwal);
 
@@ -1252,7 +1253,7 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJadwal.getRowCount());
     }
 
     String konversi(int year, int month, int day){

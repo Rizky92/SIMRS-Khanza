@@ -140,7 +140,7 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKamar.setAutoCreateRowSorter(false);
+        tbKamar.setAutoCreateRowSorter(true);
         tbKamar.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbKamar.setName("tbKamar"); // NOI18N
         tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -293,7 +293,7 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getClickCount()==2){
                 dispose();
             }
@@ -301,7 +301,7 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-       if(tabMode.getRowCount()!=0){
+       if(tbKamar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 dispose();
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
@@ -394,6 +394,7 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try {
             File file = new File("./cache/masteranjuranmcu.iyem");
@@ -414,13 +415,15 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
                 fw.write(mapper.writeValueAsString(root));
                 fw.flush();
             }
-            LCount.setText(String.valueOf(tabMode.getRowCount()));
+            LCount.setText(String.valueOf(tbKamar.getRowCount()));
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+        tbKamar.resumeSorting();
     }
 
     private void tampil2() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try (FileReader fr = new FileReader("./cache/masteranjuranmcu.iyem")) {
             JsonNode response = mapper.readTree(fr).path("masteranjuranmcu");
@@ -446,7 +449,8 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        LCount.setText(String.valueOf(tabMode.getRowCount()));
+        LCount.setText(String.valueOf(tbKamar.getRowCount()));
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {

@@ -236,7 +236,7 @@ public final class DlgJenis extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKamar.setAutoCreateRowSorter(false);
+        tbKamar.setAutoCreateRowSorter(true);
         tbKamar.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbKamar.setComponentPopupMenu(Popup);
         tbKamar.setName("tbKamar"); // NOI18N
@@ -542,8 +542,8 @@ public final class DlgJenis extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbKamar.getRowCount();i++){
-            if(tbKamar.getValueAt(i,0).toString().equals("true")){
-                Sequel.meghapus("jenis","kdjns",tbKamar.getValueAt(i,1).toString());
+            if(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.meghapus("jenis","kdjns",tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString());
             }
         }
         BtnCariActionPerformed(evt);
@@ -567,9 +567,9 @@ public final class DlgJenis extends javax.swing.JDialog {
             Valid.textKosong(Keterangan,"Keterangan");
         }else{
             Valid.editTable(tabMode,"jenis","kdjns","?","nama=?,keterangan=?,kdjns=?",4,new String[]{
-                Nm.getText(),Keterangan.getText(),Kd.getText(),tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString()
+                Nm.getText(),Keterangan.getText(),Kd.getText(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString()
             });
-            if(tabMode.getRowCount()!=0){BtnCariActionPerformed(evt);}
+            if(tbKamar.getRowCount()!=0){BtnCariActionPerformed(evt);}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -691,7 +691,7 @@ public final class DlgJenis extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -700,7 +700,7 @@ public final class DlgJenis extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -739,7 +739,7 @@ public final class DlgJenis extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbKamarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -799,6 +799,7 @@ public final class DlgJenis extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select kdjns, nama, keterangan from jenis where  kdjns like ? or nama like ? or keterangan like ? order by nama ");
@@ -825,7 +826,8 @@ public final class DlgJenis extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {
@@ -839,9 +841,9 @@ public final class DlgJenis extends javax.swing.JDialog {
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            Kd.setText(tbKamar.getValueAt(row,1).toString());
-            Nm.setText(tbKamar.getValueAt(row,2).toString());
-            Keterangan.setText(tbKamar.getValueAt(row,3).toString());
+            Kd.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
+            Nm.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),2).toString());
+            Keterangan.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),3).toString());
         }
     }
 

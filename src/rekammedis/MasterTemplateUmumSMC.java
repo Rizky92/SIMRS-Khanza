@@ -63,7 +63,7 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
         tbTemplate.setModel(tabMode);
         tbTemplate.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbTemplate.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbTemplate.getColumnCount(); i++) {
             TableColumn column = tbTemplate.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(130);
@@ -491,7 +491,7 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
                     kdDokter.getText().trim(), getNamaDokter(), isiTemplate.getText(), getKodeMenu(), getKodeField()
                 });
                 emptTeks();
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbTemplate.getRowCount());
             } else {
                 JOptionPane.showMessageDialog(null, "Gagal menyimpan template, kemungkinan nomor template sudah digunakan..!!");
             }
@@ -522,12 +522,12 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
         if (tbTemplate.getSelectedRow() >= 0) {
             if (JOptionPane.showConfirmDialog(null, "Eeiiiiiits, udah bener mau dihapus..??", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if (Sequel.menghapustfSmc("template_umum_smc", "no_template = ? and menu = ? and field = ?",
-                    tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 2).toString(), tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 7).toString(),
-                    tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 8).toString()
+                    tabMode.getValueAt(tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow()), 2).toString(), tabMode.getValueAt(tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow()), 7).toString(),
+                    tabMode.getValueAt(tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow()), 8).toString()
                 )) {
                     tabMode.removeRow(tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow()));
                     emptTeks();
-                    LCount.setText("" + tabMode.getRowCount());
+                    LCount.setText("" + tbTemplate.getRowCount());
                 }
             }
         } else {
@@ -547,20 +547,20 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
         if (tbTemplate.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Silahkan pilih template yang mau diganti..!!");
         } else if (isInputValid()) {
-            int row = tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow());
+            int row = tbTemplate.getSelectedRow();
             if (Sequel.mengupdatetfSmc("template_umum_smc", "no_template = ?, menu = ?, field = ?, kd_dokter = ?, nama_template = ?, isi_template = ?", "no_template = ? and menu = ? and field = ?",
                 noTemplate.getText(), getKodeMenu(), getKodeField(), getKodeDokter(), namaTemplate.getText(), isiTemplate.getText(),
-                tabMode.getValueAt(row, 2).toString(), tabMode.getValueAt(row, 7).toString(), tabMode.getValueAt(row, 8).toString()
+                tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 2).toString(), tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 7).toString(), tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 8).toString()
             )) {
-                tabMode.setValueAt(menu.getSelectedItem().toString(), row, 0);
-                tabMode.setValueAt(field.getSelectedItem().toString(), row, 1);
-                tabMode.setValueAt(noTemplate.getText(), row, 2);
-                tabMode.setValueAt(namaTemplate.getText(), row, 3);
-                tabMode.setValueAt(kdDokter.getText().trim(), row, 4);
-                tabMode.setValueAt(getNamaDokter(), row, 5);
-                tabMode.setValueAt(isiTemplate.getText(), row, 6);
-                tabMode.setValueAt(getKodeMenu(), row, 7);
-                tabMode.setValueAt(getKodeField(), row, 8);
+                tabMode.setValueAt(menu.getSelectedItem().toString(), tbTemplate.convertRowIndexToModel(row), 0);
+                tabMode.setValueAt(field.getSelectedItem().toString(), tbTemplate.convertRowIndexToModel(row), 1);
+                tabMode.setValueAt(noTemplate.getText(), tbTemplate.convertRowIndexToModel(row), 2);
+                tabMode.setValueAt(namaTemplate.getText(), tbTemplate.convertRowIndexToModel(row), 3);
+                tabMode.setValueAt(kdDokter.getText().trim(), tbTemplate.convertRowIndexToModel(row), 4);
+                tabMode.setValueAt(getNamaDokter(), tbTemplate.convertRowIndexToModel(row), 5);
+                tabMode.setValueAt(isiTemplate.getText(), tbTemplate.convertRowIndexToModel(row), 6);
+                tabMode.setValueAt(getKodeMenu(), tbTemplate.convertRowIndexToModel(row), 7);
+                tabMode.setValueAt(getKodeField(), tbTemplate.convertRowIndexToModel(row), 8);
                 emptTeks();
             } else {
                 JOptionPane.showMessageDialog(null, "Gagal mengganti template, kemungkinan nomor template sudah digunakan..!!");
@@ -626,7 +626,7 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbTemplateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTemplateMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbTemplate.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -635,7 +635,7 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_tbTemplateMouseClicked
 
     private void tbTemplateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTemplateKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbTemplate.getRowCount() != 0) {
             if (evt.getKeyCode() == KeyEvent.VK_SHIFT) {
                 TCari.setText("");
                 TCari.requestFocus();
@@ -644,7 +644,7 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_tbTemplateKeyPressed
 
     private void tbTemplateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTemplateKeyReleased
-        if (tabMode.getRowCount() != 0) {
+        if (tbTemplate.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
@@ -821,6 +821,7 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             LCount.setText("0");
+            tbTemplate.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
 
             new SwingWorker<Void, Object[]>() {
@@ -889,9 +890,10 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbTemplate.getRowCount() + "");
                     MasterTemplateUmumSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbTemplate.resumeSorting();
                 }
             }.execute();
         }
@@ -977,16 +979,16 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
 
     private void getData() {
         if (tbTemplate.getSelectedRow() != -1) {
-            int row = tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow());
+            int row = tbTemplate.getSelectedRow();
             memuat = true;
-            menu.setSelectedKey(tabMode.getValueAt(row, 7).toString());
-            field.setSelectedKey(tabMode.getValueAt(row, 8).toString());
+            menu.setSelectedKey(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 7).toString());
+            field.setSelectedKey(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 8).toString());
             memuat = false;
-            noTemplate.setText(tabMode.getValueAt(row, 2).toString());
-            namaTemplate.setText(tabMode.getValueAt(row, 3).toString());
-            kdDokter.setText(tabMode.getValueAt(row, 4).toString());
-            nmDokter.setText(tabMode.getValueAt(row, 5).toString());
-            isiTemplate.setText(tabMode.getValueAt(row, 6).toString());
+            noTemplate.setText(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 2).toString());
+            namaTemplate.setText(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 3).toString());
+            kdDokter.setText(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 4).toString());
+            nmDokter.setText(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 5).toString());
+            isiTemplate.setText(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 6).toString());
         }
     }
 

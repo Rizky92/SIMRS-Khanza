@@ -339,10 +339,10 @@ public class DlgJabatanPolri extends javax.swing.JDialog {
             Valid.textKosong(Nama,"Jabatan POLRI");
         }else{
             if(tbkecamatan.getSelectedRow()!= -1){
-                if(Sequel.meghapustf("jabatan_polri","id",tbkecamatan.getValueAt(tbkecamatan.getSelectedRow(),0).toString())==true){
-                    tabMode.removeRow(tbkecamatan.getSelectedRow());
+                if(Sequel.meghapustf("jabatan_polri","id",tabMode.getValueAt(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()),0).toString())==true){
+                    tabMode.removeRow(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()));
                     emptTeks();
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText(""+tbkecamatan.getRowCount());
                 }
             }
         }
@@ -404,7 +404,7 @@ public class DlgJabatanPolri extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbkecamatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbkecamatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbkecamatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -416,7 +416,7 @@ public class DlgJabatanPolri extends javax.swing.JDialog {
     }//GEN-LAST:event_tbkecamatanMouseClicked
 
     private void tbkecamatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbkecamatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbkecamatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -518,7 +518,7 @@ public class DlgJabatanPolri extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbkecamatan.getRowCount());
     }
 
     public void emptTeks() {
@@ -529,7 +529,7 @@ public class DlgJabatanPolri extends javax.swing.JDialog {
 
     private void getData() {
         if(tbkecamatan.getSelectedRow()!= -1){
-            Nama.setText(tbkecamatan.getValueAt(tbkecamatan.getSelectedRow(),1).toString());
+            Nama.setText(tabMode.getValueAt(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()),1).toString());
         }
     }
 

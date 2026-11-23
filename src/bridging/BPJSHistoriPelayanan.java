@@ -422,7 +422,7 @@ public final class BPJSHistoriPelayanan extends javax.swing.JDialog {
                             form4.isCek();
                             form4.setSize(internalFrame1.getWidth()-20, internalFrame1.getHeight()-20);
                             form4.setLocationRelativeTo(internalFrame1);
-                            form4.SetRujukan(tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString());
+                            form4.SetRujukan(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),7).toString());
                             form4.setVisible(true);
                             this.setCursor(Cursor.getDefaultCursor());
                         }else{
@@ -436,7 +436,7 @@ public final class BPJSHistoriPelayanan extends javax.swing.JDialog {
                             form5.isCek();
                             form5.setSize(internalFrame1.getWidth()-20, internalFrame1.getHeight()-20);
                             form5.setLocationRelativeTo(internalFrame1);
-                            form5.SetRujukan(tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString());
+                            form5.SetRujukan(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),7).toString());
                             form5.setVisible(true);
                             this.setCursor(Cursor.getDefaultCursor());
                         }else{

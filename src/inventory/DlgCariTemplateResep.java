@@ -210,6 +210,7 @@ public class DlgCariTemplateResep extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbPemisahan.setSortable(false);
         tbPemisahan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -254,7 +255,7 @@ public class DlgCariTemplateResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbPemisahanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemisahanMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbPemisahan.getRowCount() != 0) {
             if (evt.getClickCount() == 2) {
                 dispose();
             }
@@ -262,7 +263,7 @@ public class DlgCariTemplateResep extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemisahanMouseClicked
 
     private void tbPemisahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemisahanKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbPemisahan.getRowCount() != 0) {
             if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
                 dispose();
             }
@@ -316,15 +317,15 @@ public class DlgCariTemplateResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else if(tbPemisahan.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data pada baris yang ada nama template resep..!!");
         }else{
-            if(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString().equals("")){
+            if(tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),0).toString().equals("")){
                 JOptionPane.showMessageDialog(rootPane,"Maaf, Silahkan pilih data pada baris yang ada nama template resep..!!");
             }else {
-                query.mengupdateSmc("resep_obat", "nama_template = null", "nama_template = ?", tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString());
+                query.mengupdateSmc("resep_obat", "nama_template = null", "nama_template = ?", tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),0).toString());
                 tampil();
             }
         }

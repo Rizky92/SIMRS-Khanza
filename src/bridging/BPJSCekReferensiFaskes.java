@@ -142,6 +142,7 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
         Scroll.setOpaque(true);
 
         tbKamar.setAutoCreateRowSorter(false);
+        tbKamar.setSortable(false);
         tbKamar.setName("tbKamar"); // NOI18N
         Scroll.setViewportView(tbKamar);
 

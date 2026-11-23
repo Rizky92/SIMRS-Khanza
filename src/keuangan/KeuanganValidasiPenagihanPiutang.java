@@ -606,7 +606,7 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             KeuanganPiutangBelumLunas form=new KeuanganPiutangBelumLunas(null,false);
             form.isCek();
-            form.tampiltagihanSmc(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().trim());
+            form.tampiltagihanSmc(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString().trim());
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
@@ -633,7 +633,7 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
         if(tbBangsal.getSelectedRow()!= -1){
             panggilPhoto();
-            LCount1.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),6).toString());
+            LCount1.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),6).toString());
         }
     }//GEN-LAST:event_tbBangsalMouseClicked
 
@@ -783,7 +783,7 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
             try {
                 ps=koneksi.prepareStatement("select bukti_penagihan_piutang.photo from bukti_penagihan_piutang where bukti_penagihan_piutang.no_tagihan=?");
                 try {
-                    ps.setString(1,tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){

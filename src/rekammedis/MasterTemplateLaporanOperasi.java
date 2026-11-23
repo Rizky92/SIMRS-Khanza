@@ -528,7 +528,7 @@ public class MasterTemplateLaporanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -540,7 +540,7 @@ public class MasterTemplateLaporanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -563,8 +563,8 @@ public class MasterTemplateLaporanOperasi extends javax.swing.JDialog {
         }else{
             if(Valid.hapusTabletf(tabMode,Kd,"template_laporan_operasi","no_template")==true){
                 if(tbDokter.getSelectedRow()!= -1){
-                    tabMode.removeRow(tbDokter.getSelectedRow());
-                    LCount.setText(""+tabMode.getRowCount());
+                    tabMode.removeRow(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()));
+                    LCount.setText(""+tbDokter.getRowCount());
                     emptTeks();
                 }
             }
@@ -594,15 +594,15 @@ public class MasterTemplateLaporanOperasi extends javax.swing.JDialog {
             Valid.textKosong(Template,"Template Laporan Operasi");
         }else{
             if(Valid.editTabletf(tabMode,"template_laporan_operasi","no_template","?","no_template=?,nama_operasi=?,diagnosa_preop=?,diagnosa_postop=?,jaringan_dieksisi=?,permintaan_pa=?,laporan_operasi=?",8,new String[]{
-                Kd.getText(),NamaOperasi.getText(),DiagnosisPreOp.getText(),DiagnosisPostOp.getText(),JaringanDieksisi.getText(),DikirimPA.getSelectedItem().toString(),Template.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
+                Kd.getText(),NamaOperasi.getText(),DiagnosisPreOp.getText(),DiagnosisPostOp.getText(),JaringanDieksisi.getText(),DikirimPA.getSelectedItem().toString(),Template.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()
             })==true){
-                tbDokter.setValueAt(Kd.getText(),tbDokter.getSelectedRow(),0);
-                tbDokter.setValueAt(NamaOperasi.getText(),tbDokter.getSelectedRow(),1);
-                tbDokter.setValueAt(DiagnosisPreOp.getText(),tbDokter.getSelectedRow(),2);
-                tbDokter.setValueAt(DiagnosisPostOp.getText(),tbDokter.getSelectedRow(),3);
-                tbDokter.setValueAt(JaringanDieksisi.getText(),tbDokter.getSelectedRow(),4);
-                tbDokter.setValueAt(DikirimPA.getSelectedItem().toString(),tbDokter.getSelectedRow(),5);
-                tbDokter.setValueAt(Template.getText(),tbDokter.getSelectedRow(),6);
+                tabMode.setValueAt(Kd.getText(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0);
+                tabMode.setValueAt(NamaOperasi.getText(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1);
+                tabMode.setValueAt(DiagnosisPreOp.getText(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2);
+                tabMode.setValueAt(DiagnosisPostOp.getText(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3);
+                tabMode.setValueAt(JaringanDieksisi.getText(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4);
+                tabMode.setValueAt(DikirimPA.getSelectedItem().toString(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),5);
+                tabMode.setValueAt(Template.getText(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6);
                 emptTeks();
                 TabRawat.setSelectedIndex(1);
             }
@@ -839,7 +839,7 @@ public class MasterTemplateLaporanOperasi extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }
 
     public void emptTeks() {
@@ -857,13 +857,13 @@ public class MasterTemplateLaporanOperasi extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            Kd.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            NamaOperasi.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),1).toString());
-            DiagnosisPreOp.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),2).toString());
-            DiagnosisPostOp.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString());
-            JaringanDieksisi.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),4).toString());
-            DikirimPA.setSelectedItem(tabMode.getValueAt(tbDokter.getSelectedRow(),5).toString());
-            Template.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),6).toString());
+            Kd.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+            NamaOperasi.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
+            DiagnosisPreOp.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString());
+            DiagnosisPostOp.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString());
+            JaringanDieksisi.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
+            DikirimPA.setSelectedItem(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),5).toString());
+            Template.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6).toString());
         }
     }
 

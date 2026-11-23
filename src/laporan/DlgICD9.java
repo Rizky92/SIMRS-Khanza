@@ -176,7 +176,7 @@ public final class DlgICD9 extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbPenyakit.setAutoCreateRowSorter(false);
+        tbPenyakit.setAutoCreateRowSorter(true);
         tbPenyakit.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPenyakit.setName("tbPenyakit"); // NOI18N
         tbPenyakit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -569,8 +569,8 @@ public final class DlgICD9 extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(z=0;z<tbPenyakit.getRowCount();z++){
-            if(tbPenyakit.getValueAt(z,0).toString().equals("true")){
-                Sequel.meghapus("icd9","kode",tbPenyakit.getValueAt(z,1).toString());
+            if(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(z),0).toString().equals("true")){
+                Sequel.meghapus("icd9","kode",tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(z),1).toString());
             }
         }
         runBackground(() ->tampil());
@@ -595,9 +595,9 @@ public final class DlgICD9 extends javax.swing.JDialog {
         }else{
             if(Valid.editTabletf(tabMode,"icd9","kode","?","deskripsi_panjang=?,deskripsi_pendek=?,kode=?,validcode=?,accpdx=?,im=?",7,new String[]{
                 Panjang.getText(),Pendek.getText(),Kode.getText(),cmbValidCode.getSelectedItem().toString(),cmbACCPDX.getSelectedItem().toString(),
-                cmbIM.getSelectedItem().toString(),tbPenyakit.getValueAt(tbPenyakit.getSelectedRow(),1).toString()
+                cmbIM.getSelectedItem().toString(),tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(tbPenyakit.getSelectedRow()),1).toString()
             })==true){
-                if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+                if(tbPenyakit.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
             }
         }
@@ -719,7 +719,7 @@ public final class DlgICD9 extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbPenyakitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPenyakitMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPenyakit.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -728,7 +728,7 @@ public final class DlgICD9 extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPenyakitMouseClicked
 
     private void tbPenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPenyakitKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbPenyakit.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -736,7 +736,7 @@ public final class DlgICD9 extends javax.swing.JDialog {
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_A){
                 for(z=0;z<tbPenyakit.getRowCount();z++){
-                    tbPenyakit.setValueAt(true,z,0);
+                    tabMode.setValueAt(true,tbPenyakit.convertRowIndexToModel(z),0);
                 }
             }
 
@@ -838,6 +838,7 @@ public final class DlgICD9 extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbPenyakit.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -867,7 +868,8 @@ public final class DlgICD9 extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPenyakit.getRowCount());
+        tbPenyakit.resumeSorting();
     }
 
     public void emptTeks() {
@@ -880,12 +882,12 @@ public final class DlgICD9 extends javax.swing.JDialog {
     private void getData() {
         int row=tbPenyakit.getSelectedRow();
         if(row!= -1){
-            Kode.setText(tbPenyakit.getValueAt(row,1).toString());
-            Pendek.setText(tbPenyakit.getValueAt(row,3).toString());
-            Panjang.setText(tbPenyakit.getValueAt(row,2).toString());
-            cmbValidCode.setSelectedItem(tbPenyakit.getValueAt(row,4).toString());
-            cmbACCPDX.setSelectedItem(tbPenyakit.getValueAt(row,5).toString());
-            cmbIM.setSelectedItem(tbPenyakit.getValueAt(row,6).toString());
+            Kode.setText(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),1).toString());
+            Pendek.setText(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),3).toString());
+            Panjang.setText(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),2).toString());
+            cmbValidCode.setSelectedItem(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),4).toString());
+            cmbACCPDX.setSelectedItem(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),5).toString());
+            cmbIM.setSelectedItem(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),6).toString());
         }
     }
 

@@ -390,6 +390,7 @@ public class DapurInputStok extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -624,7 +625,7 @@ public class DapurInputStok extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -633,16 +634,16 @@ public class DapurInputStok extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_DELETE){
                 try {
                     if(tbDokter.getSelectedColumn()==0){
-                        tbDokter.setValueAt("",tbDokter.getSelectedRow(),0);
-                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),6);
-                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
-                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),8);
-                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),9);
-                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),10);
+                        tabMode.setValueAt("",tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10);
                     }
                 } catch (Exception e) {
                 }
@@ -696,17 +697,17 @@ public class DapurInputStok extends javax.swing.JDialog {
                 Sequel.AutoComitFalse();
                 sukses=true;
                 for(i=0;i<tbDokter.getRowCount();i++){
-                    if(!tbDokter.getValueAt(i,0).toString().equals("")){
+                    if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("")){
                         try {
-                            if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>=0){
-                                if (Sequel.menyimpantfSmc("dapuropname", "", tbDokter.getValueAt(i, 1).toString(), Valid.setAngkaSmc((Number) tbDokter.getValueAt(i, 5), 5), Valid.getTglSmc(Tgl),
-                                    Valid.setAngkaSmc((Number) tbDokter.getValueAt(i, 6), 5), tbDokter.getValueAt(i, 0).toString().trim(), Valid.setAngkaSmc((Number) tbDokter.getValueAt(i, 7), 5),
-                                    Valid.setAngkaSmc((Number) tbDokter.getValueAt(i, 8), 5), Valid.setAngkaSmc((Number) tbDokter.getValueAt(i, 9), 5), Valid.setAngkaSmc((Number) tbDokter.getValueAt(i, 10), 5),
+                            if(Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>=0){
+                                if (Sequel.menyimpantfSmc("dapuropname", "", tabMode.getValueAt(tbDokter.convertRowIndexToModel(i), 1).toString(), Valid.setAngkaSmc((Number) tabMode.getValueAt(tbDokter.convertRowIndexToModel(i), 5), 5), Valid.getTglSmc(Tgl),
+                                    Valid.setAngkaSmc((Number) tabMode.getValueAt(tbDokter.convertRowIndexToModel(i), 6), 5), tabMode.getValueAt(tbDokter.convertRowIndexToModel(i), 0).toString().trim(), Valid.setAngkaSmc((Number) tabMode.getValueAt(tbDokter.convertRowIndexToModel(i), 7), 5),
+                                    Valid.setAngkaSmc((Number) tabMode.getValueAt(tbDokter.convertRowIndexToModel(i), 8), 5), Valid.setAngkaSmc((Number) tabMode.getValueAt(tbDokter.convertRowIndexToModel(i), 9), 5), Valid.setAngkaSmc((Number) tabMode.getValueAt(tbDokter.convertRowIndexToModel(i), 10), 5),
                                     catatan.getText()
                                 )) {
-                                    Trackbarang.catatRiwayat(tbDokter.getValueAt(i,1).toString(),Valid.SetAngka(tbDokter.getValueAt(i,0).toString()),0,"Opname",akses.getkode(),"Simpan");
+                                    Trackbarang.catatRiwayat(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString(),Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString()),0,"Opname",akses.getkode(),"Simpan");
                                     Sequel.mengedit3("dapurbarang","kode_brng=?","stok=?",2,new String[]{
-                                        tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,1).toString()
+                                        tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString()
                                     });
                                 }else{
                                     sukses=false;
@@ -743,7 +744,7 @@ public class DapurInputStok extends javax.swing.JDialog {
 
                 if(sukses==true){
                     for(index=0;index<tbDokter.getRowCount();index++){
-                        tbDokter.setValueAt("",index,0);
+                        tabMode.setValueAt("",tbDokter.convertRowIndexToModel(index),0);
                     }
                     runBackground(() ->tampil());
                 }
@@ -802,17 +803,17 @@ public class DapurInputStok extends javax.swing.JDialog {
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         int row2=tbDokter.getRowCount();
         for(int r=0;r<row2;r++){
-            tbDokter.setValueAt("",r,0);
-            tbDokter.setValueAt(0,r,6);
-            tbDokter.setValueAt(0,r,7);
-            tbDokter.setValueAt(0,r,8);
-            tbDokter.setValueAt(0,r,9);
-            tbDokter.setValueAt(0,r,10);
+            tabMode.setValueAt("",tbDokter.convertRowIndexToModel(r),0);
+            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(r),6);
+            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(r),7);
+            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(r),8);
+            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(r),9);
+            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(r),10);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)||(evt.getKeyCode()==KeyEvent.VK_RIGHT)){
                 try {
                     getData();
@@ -840,6 +841,7 @@ public class DapurInputStok extends javax.swing.JDialog {
 
     private void ppBelumOpnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBelumOpnameActionPerformed
         try{
+            tbDokter.suspendSorting();
             Valid.tabelKosong(tabMode);
             pstampil=koneksi.prepareStatement(
                 "select dapurbarang.kode_brng, dapurbarang.nama_brng,dapurbarang.jenis, dapurbarang.kode_sat,dapurbarang.harga,dapurbarang.stok from dapurbarang "+
@@ -875,10 +877,12 @@ public class DapurInputStok extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbDokter.resumeSorting();
     }//GEN-LAST:event_ppBelumOpnameActionPerformed
 
     private void ppSudahOpnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSudahOpnameActionPerformed
         try{
+            tbDokter.suspendSorting();
             Valid.tabelKosong(tabMode);
             pstampil=koneksi.prepareStatement(
                 "select dapurbarang.kode_brng, dapurbarang.nama_brng,dapurbarang.jenis, dapurbarang.kode_sat,dapurbarang.harga,dapurbarang.stok from dapurbarang "+
@@ -914,6 +918,7 @@ public class DapurInputStok extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbDokter.resumeSorting();
     }//GEN-LAST:event_ppSudahOpnameActionPerformed
 
     private void MnKodeBarangDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKodeBarangDescActionPerformed
@@ -1111,7 +1116,7 @@ public class DapurInputStok extends javax.swing.JDialog {
         try{
             jml=0;
             for(i=0;i<tbDokter.getRowCount();i++){
-                if(!tbDokter.getValueAt(i,0).toString().equals("")){
+                if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("")){
                     jml++;
                 }
             }
@@ -1129,22 +1134,23 @@ public class DapurInputStok extends javax.swing.JDialog {
 
             index=0;
             for(i=0;i<tbDokter.getRowCount();i++){
-                if(!tbDokter.getValueAt(i,0).toString().equals("")){
-                    real[index]=tbDokter.getValueAt(i,0).toString();
-                    kodebarang[index]=tbDokter.getValueAt(i,1).toString();
-                    namabarang[index]=tbDokter.getValueAt(i,2).toString();
-                    kategori[index]=tbDokter.getValueAt(i,3).toString();
-                    satuan[index]=tbDokter.getValueAt(i,4).toString();
-                    hargabeli[index]=Double.parseDouble(tbDokter.getValueAt(i,5).toString());
-                    stok[index]=Double.parseDouble(tbDokter.getValueAt(i,6).toString());
-                    selisih[index]=Double.parseDouble(tbDokter.getValueAt(i,7).toString());
-                    nomihilang[index]=Double.parseDouble(tbDokter.getValueAt(i,8).toString());
-                    lebih[index]=Double.parseDouble(tbDokter.getValueAt(i,9).toString());
-                    nomilebih[index]=Double.parseDouble(tbDokter.getValueAt(i,10).toString());
+                if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("")){
+                    real[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString();
+                    kodebarang[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString();
+                    namabarang[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString();
+                    kategori[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString();
+                    satuan[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString();
+                    hargabeli[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString());
+                    stok[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString());
+                    selisih[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),7).toString());
+                    nomihilang[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString());
+                    lebih[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),9).toString());
+                    nomilebih[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),10).toString());
                     index++;
                 }
             }
 
+            tbDokter.suspendSorting();
             Valid.tabelKosong(tabMode);
             for(i=0;i<jml;i++){
                 tabMode.addRow(new Object[]{
@@ -1190,49 +1196,50 @@ public class DapurInputStok extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
+        tbDokter.resumeSorting();
     }
 
     private void getData(){
         i=tbDokter.getSelectedRow();
         if(i!= -1){
             if((tbDokter.getSelectedColumn()==1)||(tbDokter.getSelectedColumn()==0)){
-                if(!tbDokter.getValueAt(i,0).toString().equals("")){
+                if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("")){
                     try {
-                        if(Double.parseDouble(tabMode.getValueAt(i,0).toString())>=0){
+                        if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>=0){
                             try {
-                                kurang=Double.parseDouble(tbDokter.getValueAt(i,6).toString())-Double.parseDouble(tbDokter.getValueAt(i,0).toString());
+                                kurang=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString())-Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString());
                             } catch (Exception e) {
                                 kurang=0;
                             }
 
                             if(kurang>0){
-                                tbDokter.setValueAt(kurang,i,7);
-                                tbDokter.setValueAt(0,i,9);
+                                tabMode.setValueAt(kurang,tbDokter.convertRowIndexToModel(i),7);
+                                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),9);
                             }else{
-                                tbDokter.setValueAt(0,i,7);
-                                tbDokter.setValueAt((kurang*-1),i,9);
+                                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),7);
+                                tabMode.setValueAt((kurang*-1),tbDokter.convertRowIndexToModel(i),9);
                             }
 
                             if(kurang>0){
-                                 tbDokter.setValueAt(kurang*Double.parseDouble(tbDokter.getValueAt(i,5).toString()),i,8);
-                                 tbDokter.setValueAt(0,i,10);
+                                 tabMode.setValueAt(kurang*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString()),tbDokter.convertRowIndexToModel(i),8);
+                                 tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),10);
                             }else{
-                                 tbDokter.setValueAt(0,i,8);
-                                 tbDokter.setValueAt(-1*kurang*Double.parseDouble(tbDokter.getValueAt(i,5).toString()),i,10);
+                                 tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),8);
+                                 tabMode.setValueAt(-1*kurang*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString()),tbDokter.convertRowIndexToModel(i),10);
                             }
                         }
                     } catch (Exception e) {
-                        tbDokter.setValueAt("",i,0);
-                        tbDokter.setValueAt(0,i,7);
-                        tbDokter.setValueAt(0,i,8);
-                        tbDokter.setValueAt(0,i,9);
-                        tbDokter.setValueAt(0,i,10);
+                        tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),0);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),7);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),8);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),9);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),10);
                     }
                 }else{
-                    tbDokter.setValueAt(0,i,7);
-                    tbDokter.setValueAt(0,i,8);
-                    tbDokter.setValueAt(0,i,9);
-                    tbDokter.setValueAt(0,i,10);
+                    tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),7);
+                    tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),8);
+                    tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),9);
+                    tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),10);
                 }
             }
 
@@ -1240,7 +1247,7 @@ public class DapurInputStok extends javax.swing.JDialog {
             for(i=0;i<tbDokter.getRowCount();i++){
                 y=0;
                 try {
-                    y=Double.parseDouble(tbDokter.getValueAt(i,8).toString());
+                    y=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString());
                 } catch (Exception e) {
                     y=0;
                 }
@@ -1251,7 +1258,7 @@ public class DapurInputStok extends javax.swing.JDialog {
             for(i=0;i<tbDokter.getRowCount();i++){
                 y=0;
                 try {
-                    y=Double.parseDouble(tbDokter.getValueAt(i,10).toString());
+                    y=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),10).toString());
                 } catch (Exception e) {
                     y=0;
                 }

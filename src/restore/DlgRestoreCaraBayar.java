@@ -134,7 +134,7 @@ public final class DlgRestoreCaraBayar extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKamar.setAutoCreateRowSorter(false);
+        tbKamar.setAutoCreateRowSorter(true);
         tbKamar.setName("tbKamar"); // NOI18N
         Scroll.setViewportView(tbKamar);
 
@@ -267,8 +267,8 @@ public final class DlgRestoreCaraBayar extends javax.swing.JDialog {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         for(i=0;i<tbKamar.getRowCount();i++){
-            if(tbKamar.getValueAt(i,0).toString().equals("true")){
-                Sequel.mengedit("penjab","kd_pj='"+tbKamar.getValueAt(i,1).toString()+"'","status='1'");
+            if(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.mengedit("penjab","kd_pj='"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString()+"'","status='1'");
             }
         }
         BtnCariActionPerformed(evt);
@@ -284,8 +284,8 @@ public final class DlgRestoreCaraBayar extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbKamar.getRowCount();i++){
-            if(tbKamar.getValueAt(i,0).toString().equals("true")){
-                Sequel.meghapus("penjab","kd_pj",tbKamar.getValueAt(i,1).toString());
+            if(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.meghapus("penjab","kd_pj",tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString());
             }
         }
         BtnCariActionPerformed(evt);
@@ -404,6 +404,7 @@ public final class DlgRestoreCaraBayar extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -429,7 +430,8 @@ public final class DlgRestoreCaraBayar extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     private void runBackground(Runnable task) {

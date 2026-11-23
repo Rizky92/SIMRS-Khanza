@@ -593,19 +593,19 @@ public class PCareDataPemberianTindakan extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(TabRawat.getSelectedIndex()==0){
             if(tbDokter.getSelectedRow()!= -1){
-                if(Sequel.cariRegistrasi(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString())>0){
+                if(Sequel.cariRegistrasi(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString())>0){
                     JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                     TCari.requestFocus();
                 }else{
                     Sequel.AutoComitFalse();
                     sukses=true;
-                    ttljasasarana=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString());
-                    ttlbhp=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString());
-                    ttljmdokter=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),11).toString());
-                    ttljmperawat=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),12).toString());
-                    ttlkso=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),13).toString());
-                    ttlmenejemen=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),14).toString());
-                    ttlpendapatan=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),15).toString());
+                    ttljasasarana=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9).toString());
+                    ttlbhp=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10).toString());
+                    ttljmdokter=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),11).toString());
+                    ttljmperawat=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),12).toString());
+                    ttlkso=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),13).toString());
+                    ttlmenejemen=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),14).toString());
+                    ttlpendapatan=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),15).toString());
 
                     Sequel.deleteTampJurnal();
                     if(ttlpendapatan>0){
@@ -665,33 +665,33 @@ public class PCareDataPemberianTindakan extends javax.swing.JDialog {
                         }
                     }
                     if(sukses==true){
-                        sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN TINDAKAN RAWAT INAP PASIEN, OLEH "+akses.getkode());
+                        sukses=jur.simpanJurnal(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString(),"U","PEMBATALAN PEMBERIAN TINDAKAN RAWAT INAP PASIEN, OLEH "+akses.getkode());
                     }
 
                     if(sukses==true){
                         Sequel.queryu2("delete from pcare_tindakan_ralan_diberikan where "+
-                            "no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+"' "+
-                            "and kd_jenis_prw='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()+"' "+
-                            "and tgl_perawatan='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"' "+
-                            "and jam='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"'");
+                            "no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7).toString()+"' "+
+                            "and tgl_perawatan='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()+"' "+
+                            "and jam='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()+"'");
                         Sequel.queryu2("delete from rawat_jl_dr where "+
-                            "no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+"' "+
-                            "and kd_jenis_prw='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()+"' "+
-                            "and tgl_perawatan='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"' "+
-                            "and jam_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"'");
+                            "no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7).toString()+"' "+
+                            "and tgl_perawatan='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()+"' "+
+                            "and jam_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()+"'");
                         Sequel.queryu2("delete from rawat_jl_pr where "+
-                            "no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+"' "+
-                            "and kd_jenis_prw='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()+"' "+
-                            "and tgl_perawatan='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"' "+
-                            "and jam_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"'");
+                            "no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7).toString()+"' "+
+                            "and tgl_perawatan='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()+"' "+
+                            "and jam_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()+"'");
                         Sequel.queryu2("delete from rawat_jl_drpr where "+
-                            "no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+"' "+
-                            "and kd_jenis_prw='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()+"' "+
-                            "and tgl_perawatan='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"' "+
-                            "and jam_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"'");
+                            "no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7).toString()+"' "+
+                            "and tgl_perawatan='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()+"' "+
+                            "and jam_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()+"'");
 
                         try {
-                            URL = link+"/tindakan/"+tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString()+"/kunjungan/"+tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString();
+                            URL = link+"/tindakan/"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6).toString()+"/kunjungan/"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString();
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
@@ -746,19 +746,19 @@ public class PCareDataPemberianTindakan extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==1){
             if(tbDokter2.getSelectedRow()!= -1){
-                if(Sequel.cariRegistrasi(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString())>0){
+                if(Sequel.cariRegistrasi(tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),3).toString())>0){
                     JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                     TCari.requestFocus();
                 }else{
                     Sequel.AutoComitFalse();
                     sukses=true;
-                    ttljasasarana=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),9).toString());
-                    ttlbhp=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),10).toString());
-                    ttljmdokter=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),11).toString());
-                    ttljmperawat=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),12).toString());
-                    ttlkso=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),13).toString());
-                    ttlmenejemen=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),14).toString());
-                    ttlpendapatan=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),15).toString());
+                    ttljasasarana=Double.parseDouble(tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),9).toString());
+                    ttlbhp=Double.parseDouble(tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),10).toString());
+                    ttljmdokter=Double.parseDouble(tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),11).toString());
+                    ttljmperawat=Double.parseDouble(tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),12).toString());
+                    ttlkso=Double.parseDouble(tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),13).toString());
+                    ttlmenejemen=Double.parseDouble(tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),14).toString());
+                    ttlpendapatan=Double.parseDouble(tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),15).toString());
 
                     Sequel.deleteTampJurnal();
                     if(ttlpendapatan>0){
@@ -818,32 +818,32 @@ public class PCareDataPemberianTindakan extends javax.swing.JDialog {
                         }
                     }
                     if(sukses==true){
-                        sukses=jur.simpanJurnal(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN TINDAKAN RAWAT INAP PASIEN, OLEH "+akses.getkode());
+                        sukses=jur.simpanJurnal(tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),3).toString(),"U","PEMBATALAN PEMBERIAN TINDAKAN RAWAT INAP PASIEN, OLEH "+akses.getkode());
                     }
 
                     if(sukses==true){
                         Sequel.queryu2("delete from pcare_tindakan_ranap_diberikan where "+
-                            "no_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString()+"' "+
-                            "and kd_jenis_prw='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),7).toString()+"' "+
-                            "and tgl_perawatan='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),0).toString()+"' "+
-                            "and jam='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),1).toString()+"'");
+                            "no_rawat='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),7).toString()+"' "+
+                            "and tgl_perawatan='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),0).toString()+"' "+
+                            "and jam='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),1).toString()+"'");
                         Sequel.queryu2("delete from rawat_inap_dr where "+
-                            "no_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString()+"' "+
-                            "and kd_jenis_prw='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),7).toString()+"' "+
-                            "and tgl_perawatan='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),0).toString()+"' "+
-                            "and jam_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),1).toString()+"'");
+                            "no_rawat='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),7).toString()+"' "+
+                            "and tgl_perawatan='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),0).toString()+"' "+
+                            "and jam_rawat='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),1).toString()+"'");
                         Sequel.queryu2("delete from rawat_inap_pr where "+
-                            "no_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString()+"' "+
-                            "and kd_jenis_prw='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),7).toString()+"' "+
-                            "and tgl_perawatan='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),0).toString()+"' "+
-                            "and jam_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),1).toString()+"'");
+                            "no_rawat='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),7).toString()+"' "+
+                            "and tgl_perawatan='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),0).toString()+"' "+
+                            "and jam_rawat='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),1).toString()+"'");
                         Sequel.queryu2("delete from rawat_inap_drpr where "+
-                            "no_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString()+"' "+
-                            "and kd_jenis_prw='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),7).toString()+"' "+
-                            "and tgl_perawatan='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),0).toString()+"' "+
-                            "and jam_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),1).toString()+"'");
+                            "no_rawat='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),7).toString()+"' "+
+                            "and tgl_perawatan='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),0).toString()+"' "+
+                            "and jam_rawat='"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),1).toString()+"'");
                         try {
-                            URL = link+"/tindakan/"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),6).toString()+"/kunjungan/"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),2).toString();
+                            URL = link+"/tindakan/"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),6).toString()+"/kunjungan/"+tabMode2.getValueAt(tbDokter2.convertRowIndexToModel(tbDokter2.getSelectedRow()),2).toString();
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
@@ -1062,7 +1062,7 @@ public class PCareDataPemberianTindakan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }
 
     private void tampil2() {
@@ -1124,7 +1124,7 @@ public class PCareDataPemberianTindakan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode2.getRowCount());
+        LCount.setText(""+tbDokter2.getRowCount());
     }
 
     public void isCek(){

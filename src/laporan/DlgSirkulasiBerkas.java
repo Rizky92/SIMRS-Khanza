@@ -757,7 +757,7 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Pilih dulu data peminjaman_berkas yang akan dikembalikan dengan menklik data pada tabel...!!!");
             tbKamIn.requestFocus();
         }else if(! TOut.getText().equals("")){
-            JOptionPane.showMessageDialog(null,"Maaf, Berkas sudah dikembalikan pada tanggal "+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),4).toString()+"...!!!");
+            JOptionPane.showMessageDialog(null,"Maaf, Berkas sudah dikembalikan pada tanggal "+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),4).toString()+"...!!!");
             tbKamIn.requestFocus();
         }else {
             NoRm.setEditable(false);
@@ -787,8 +787,8 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Data berkas dengan No.R.M. "+NoRm.getText()+" belum kembali. Data belum bisa anda hapus...!!!!");
         }else{
             Sequel.queryu2("delete from peminjaman_berkas where nip=? and peminjam=? and no_rkm_medis=? and tgl_pinjam=? and id_ruang=?",5,new String[]{
-                tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString(),
-                tbKamIn.getValueAt(tbKamIn.getSelectedRow(),3).toString(),TIn.getText(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString()
+                tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString(),
+                tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),3).toString(),TIn.getText(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),1).toString()
             });
             runBackground(() ->tampil());
             emptTeks();
@@ -821,10 +821,10 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbKamIn.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tbKamIn.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -979,8 +979,8 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
                 //mengedit-------------------------------------------------
                 Sequel.mengedit("peminjaman_berkas","nip=? and peminjam=? and no_rkm_medis=? and tgl_pinjam=? and id_ruang=?","tgl_kembali=?,nip=?,status_pinjam=?",8,new String[]{
                     Valid.SetTgl(Tanggal.getSelectedItem()+""),KdPetugas.getText(),"Sudah Kembali",
-                    tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString(),
-                    tbKamIn.getValueAt(tbKamIn.getSelectedRow(),3).toString(),TIn.getText(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString()
+                    tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString(),
+                    tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),3).toString(),TIn.getText(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),1).toString()
                 });
                 emptTeks();
                 WindowInput.dispose();
@@ -1537,15 +1537,15 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
     private void getData() {
         if(tbKamIn.getSelectedRow()!= -1){
             try {
-                TOut.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString());
+                TOut.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),6).toString());
             } catch (Exception e) {
                 TOut.setText("");
             }
-            KdRuang.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString());
-            NmRuang.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),2).toString());
-            NoRm.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),3).toString());
-            peminjam.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
-            TIn.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString());
+            KdRuang.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),1).toString());
+            NmRuang.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),2).toString());
+            NoRm.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),3).toString());
+            peminjam.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString());
+            TIn.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),5).toString());
             isPasien();
         }
     }

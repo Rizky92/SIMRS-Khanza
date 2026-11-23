@@ -213,6 +213,7 @@ public class TokoCariPengajuanBarang extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -763,10 +764,10 @@ public class TokoCariPengajuanBarang extends javax.swing.JDialog {
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(Sequel.cariInteger("select count(no_pengajuan) from toko_pengajuan_barang where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim())==0){
+            if(Sequel.cariInteger("select count(no_pengajuan) from toko_pengajuan_barang where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim())==0){
                     Valid.textKosong(TCari,"pilihan data");
             }else{
-                Sequel.queryu("delete from toko_pengajuan_barang where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+                Sequel.queryu("delete from toko_pengajuan_barang where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
                 runBackground(() ->tampil());
             }
         }
@@ -840,10 +841,10 @@ public class TokoCariPengajuanBarang extends javax.swing.JDialog {
 
     private void ppProsesPengajuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppProsesPengajuanActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(Sequel.cariInteger("select count(no_pengajuan) from toko_pengajuan_barang where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim())==0){
+            if(Sequel.cariInteger("select count(no_pengajuan) from toko_pengajuan_barang where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim())==0){
                 Valid.textKosong(TCari,"pilihan data");
             }else{
-                Sequel.queryu("update toko_pengajuan_barang set status='Proses Pengajuan' where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+                Sequel.queryu("update toko_pengajuan_barang set status='Proses Pengajuan' where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
                 runBackground(() ->tampil());
             }
         }
@@ -851,18 +852,18 @@ public class TokoCariPengajuanBarang extends javax.swing.JDialog {
 
     private void ppDisetujuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDisetujuiActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(Sequel.cariInteger("select count(no_pengajuan) from toko_pengajuan_barang where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim())==0){
+            if(Sequel.cariInteger("select count(no_pengajuan) from toko_pengajuan_barang where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim())==0){
                 Valid.textKosong(TCari,"pilihan data");
             }else{
-                if(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString().equals("Disetujui")){
+                if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString().equals("Disetujui")){
                     JOptionPane.showMessageDialog(null,"Data pengajuan sudah tervalidasi..!!");
                 }else{
-                    Sequel.queryu("update toko_pengajuan_barang set status='Disetujui' where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+                    Sequel.queryu("update toko_pengajuan_barang set status='Disetujui' where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     TokoSuratPemesanan aplikasi=new TokoSuratPemesanan(null,false);
                     aplikasi.tampilkan=false;
                     aplikasi.isCek();
-                    aplikasi.panggilgetData(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+                    aplikasi.panggilgetData(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
                     aplikasi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     aplikasi.setLocationRelativeTo(internalFrame1);
                     aplikasi.setVisible(true);
@@ -875,10 +876,10 @@ public class TokoCariPengajuanBarang extends javax.swing.JDialog {
 
     private void ppDitolakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDitolakActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(Sequel.cariInteger("select count(no_pengajuan) from toko_pengajuan_barang where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim())==0){
+            if(Sequel.cariInteger("select count(no_pengajuan) from toko_pengajuan_barang where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim())==0){
                 Valid.textKosong(TCari,"pilihan data");
             }else{
-                Sequel.queryu("update toko_pengajuan_barang set status='Ditolak' where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+                Sequel.queryu("update toko_pengajuan_barang set status='Ditolak' where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
                 runBackground(() ->tampil());
             }
         }

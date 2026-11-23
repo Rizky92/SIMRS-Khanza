@@ -344,7 +344,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(TabRawat.getSelectedIndex()==0){
-            if(tabMode.getRowCount()==0){
+            if(tbObat.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 tbObat.requestFocus();
             }else{
@@ -357,7 +357,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
                 }
             }
         }else if(TabRawat.getSelectedIndex()==1){
-            if(tabMode2.getRowCount()==0){
+            if(tbObat1.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 tbObat1.requestFocus();
             }else{
@@ -551,7 +551,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     private void tampil2() {
@@ -596,7 +596,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode2.getRowCount());
+        LCount.setText(""+tbObat1.getRowCount());
     }
 
 

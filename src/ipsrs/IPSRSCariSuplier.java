@@ -398,7 +398,7 @@ public class IPSRSCariSuplier extends javax.swing.JDialog {
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }
 
     private void tampil2() {
@@ -436,7 +436,7 @@ public class IPSRSCariSuplier extends javax.swing.JDialog {
             response = null;
             root = null;
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }
 
     public void emptTeks() {

@@ -507,7 +507,7 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     Kd.getText(),Nm.getText(),NmAkun.getText(),NmKontraAKun.getText()
                 });
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbKamar.getRowCount());
                 emptTeks();
             }
         }
@@ -533,8 +533,8 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,Kd,"kategori_pengeluaran_harian ","kode_kategori")==true){
-            tabMode.removeRow(tbKamar.getSelectedRow());
-            LCount.setText("" + tabMode.getRowCount());
+            tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
+            LCount.setText("" + tbKamar.getRowCount());
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -558,12 +558,12 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
         }else{
             if(tbKamar.getSelectedRow()>-1){
                 if(Sequel.mengedittf("kategori_pengeluaran_harian","kode_kategori=?","kode_kategori=?,nama_kategori=?,kd_rek=?,kd_rek2=?",5,new String[]{
-                    Kd.getText(),Nm.getText(),KdAkun.getText(),KdKontraAkun.getText(),tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString()
+                    Kd.getText(),Nm.getText(),KdAkun.getText(),KdKontraAkun.getText(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString()
                 })==true){
-                    tbKamar.setValueAt(Kd.getText(),tbKamar.getSelectedRow(),0);
-                    tbKamar.setValueAt(Nm.getText(),tbKamar.getSelectedRow(),1);
-                    tbKamar.setValueAt(NmAkun.getText(),tbKamar.getSelectedRow(),2);
-                    tbKamar.setValueAt(NmKontraAKun.getText(),tbKamar.getSelectedRow(),3);
+                    tabMode.setValueAt(Kd.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0);
+                    tabMode.setValueAt(Nm.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1);
+                    tabMode.setValueAt(NmAkun.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2);
+                    tabMode.setValueAt(NmKontraAKun.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3);
                     emptTeks();
                 }
             }
@@ -691,7 +691,7 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -700,7 +700,7 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -967,7 +967,7 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     public void emptTeks() {
@@ -984,12 +984,12 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            Kd.setText(tbKamar.getValueAt(row,0).toString());
-            Nm.setText(tbKamar.getValueAt(row,1).toString());
-            NmAkun.setText(tbKamar.getValueAt(row,2).toString());
-            NmKontraAKun.setText(tbKamar.getValueAt(row,3).toString());
-            Sequel.cariIsi("select kategori_pengeluaran_harian.kd_rek from kategori_pengeluaran_harian where kategori_pengeluaran_harian.kode_kategori=?",KdAkun,tbKamar.getValueAt(row,0).toString());
-            Sequel.cariIsi("select kategori_pengeluaran_harian.kd_rek2 from kategori_pengeluaran_harian where kategori_pengeluaran_harian.kode_kategori=?",KdKontraAkun,tbKamar.getValueAt(row,0).toString());
+            Kd.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
+            Nm.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
+            NmAkun.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),2).toString());
+            NmKontraAKun.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),3).toString());
+            Sequel.cariIsi("select kategori_pengeluaran_harian.kd_rek from kategori_pengeluaran_harian where kategori_pengeluaran_harian.kode_kategori=?",KdAkun,tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
+            Sequel.cariIsi("select kategori_pengeluaran_harian.kd_rek2 from kategori_pengeluaran_harian where kategori_pengeluaran_harian.kode_kategori=?",KdKontraAkun,tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
         }
     }
 

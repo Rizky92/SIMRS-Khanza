@@ -520,7 +520,7 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
         }else{
             if(tbJnsPerawatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("maping_poliklinik_pcare","kd_poli_rs=?","kd_poli_rs=?,kd_poli_pcare=?,nm_poli_pcare=?",4,new String[]{
-                        kdpoli.getText(),KdPoliPCare.getText(),NmPoliPCare.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                        kdpoli.getText(),KdPoliPCare.getText(),NmPoliPCare.getText(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString()
                     })==true){
                     emptTeks();
                     runBackground(() ->tampil());
@@ -643,7 +643,7 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -652,7 +652,7 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -808,7 +808,7 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {
@@ -821,10 +821,10 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
 
     private void getData() {
        if(tbJnsPerawatan.getSelectedRow()!= -1){
-           kdpoli.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-           TPoli.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-           KdPoliPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-           NmPoliPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
+           kdpoli.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+           TPoli.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+           KdPoliPCare.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+           NmPoliPCare.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
         }
     }
 

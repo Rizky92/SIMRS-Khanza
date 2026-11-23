@@ -706,7 +706,7 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnLayaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLayaniActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else{
             if(tbObat.getSelectedRow()!= -1){
@@ -718,10 +718,10 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
                     form.setLocationRelativeTo(internalFrame1);
                     form.setVisible(true);
                     form.emptTeks();
-                    form.setNoRm(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),new Date());
-                    form.Diagnosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-                    form.NoPermintaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-                    form.PermintaanTerapi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
+                    form.setNoRm(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),new Date());
+                    form.Diagnosa.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+                    form.NoPermintaan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+                    form.PermintaanTerapi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
                     form.addWindowListener(new WindowListener() {
                         @Override
                         public void windowOpened(WindowEvent e) {}
@@ -730,8 +730,8 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
                         @Override
                         public void windowClosed(WindowEvent e) {
                             if(form.status==true){
-                                tabMode.removeRow(tbObat.getSelectedRow());
-                                LCount.setText(""+tabMode.getRowCount());
+                                tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+                                LCount.setText(""+tbObat.getRowCount());
                             }
                         }
                         @Override
@@ -758,14 +758,14 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnLayaniKeyPressed
 
     private void BtnSelesaiProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSelesaiProgramActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else{
             if(tbObat.getSelectedRow()!= -1){
-                if(Sequel.mengedittf("layanan_kedokteran_fisik_rehabilitasi","no_rawat=?","status_program='Sudah Selesai'",1,new String[]{tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()})==true){
+                if(Sequel.mengedittf("layanan_kedokteran_fisik_rehabilitasi","no_rawat=?","status_program='Sudah Selesai'",1,new String[]{tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()})==true){
                     if(R3.isSelected()==false){
-                        tabMode.removeRow(tbObat.getSelectedRow());
-                        LCount.setText(""+tabMode.getRowCount());
+                        tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+                        LCount.setText(""+tbObat.getRowCount());
                     }
                     JOptionPane.showMessageDialog(null,"Rangkaian Layanan Program KFR Sudah Terselesaikan...!!!!");
                 }
@@ -780,11 +780,11 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSelesaiProgramKeyPressed
 
     private void BtnPerpanjangProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerpanjangProgramActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else{
             if(tbObat.getSelectedRow()!= -1){
-                if(Sequel.mengedittf("layanan_kedokteran_fisik_rehabilitasi","no_rawat=?","status_program='Belum Selesai'",1,new String[]{tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()})==true){
+                if(Sequel.mengedittf("layanan_kedokteran_fisik_rehabilitasi","no_rawat=?","status_program='Belum Selesai'",1,new String[]{tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()})==true){
                     JOptionPane.showMessageDialog(null,"Rangkaian Layanan Program KFR Berhasil Diperpanjang...!!!!");
                 }
             }else{
@@ -844,13 +844,13 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
 
         }
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
 
             }
@@ -905,8 +905,8 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()));
+            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString()+"\nID "+(finger.equals("")?tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString():finger)+"\n"+Valid.SetTgl3(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString()));
             Valid.MyReportqry("rptCetakLayananKedokteranFisikRehabilitasi.jasper","report","::[ Lembar Formulir Layanan Rawat Jalan Kedokteran Fisik & Rehabilitasi ]::",
                         "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,layanan_kedokteran_fisik_rehabilitasi.tanggal,"+
                         "layanan_kedokteran_fisik_rehabilitasi.kd_dokter,dokter.nm_dokter,layanan_kedokteran_fisik_rehabilitasi.pendamping,layanan_kedokteran_fisik_rehabilitasi.keterangan_pendamping,"+
@@ -917,12 +917,12 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
                         "inner join kecamatan on kecamatan.kd_kec=pasien.kd_kec inner join kabupaten on kabupaten.kd_kab=pasien.kd_kab inner join propinsi on propinsi.kd_prop=pasien.kd_prop "+
                         "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join layanan_kedokteran_fisik_rehabilitasi on reg_periksa.no_rawat=layanan_kedokteran_fisik_rehabilitasi.no_rawat "+
                         "inner join dokter on layanan_kedokteran_fisik_rehabilitasi.kd_dokter=dokter.kd_dokter inner join bukti_layanan_kedokteran_fisik_rehabilitasi on layanan_kedokteran_fisik_rehabilitasi.no_rawat=bukti_layanan_kedokteran_fisik_rehabilitasi.no_rawat "+
-                        "where layanan_kedokteran_fisik_rehabilitasi.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
+                        "where layanan_kedokteran_fisik_rehabilitasi.no_rawat='"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"'",param);
         }
     }//GEN-LAST:event_BtnDetailPermintaanActionPerformed
 
     private void BtnRiwayatProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRiwayatProgramActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else{
             if(tbObat.getSelectedRow()!= -1){
@@ -933,12 +933,12 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
                 form.setLocationRelativeTo(internalFrame1);
                 form.setVisible(true);
                 form.emptTeks();
-                form.Diagnosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-                form.NoPermintaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-                form.PermintaanTerapi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-                form.DTPCari1.setDate(Valid.SetTgl2(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()));
-                form.TCari.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-                form.setNoRm(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),new Date());
+                form.Diagnosa.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+                form.NoPermintaan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+                form.PermintaanTerapi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+                form.DTPCari1.setDate(Valid.SetTgl2(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString()));
+                form.TCari.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+                form.setNoRm(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),new Date());
                 this.setCursor(Cursor.getDefaultCursor());
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data...!!!!");
@@ -947,7 +947,7 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnRiwayatProgramActionPerformed
 
     private void BtnRiwayatPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRiwayatPasienActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbObat.getSelectedRow()== -1){
@@ -956,7 +956,7 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMRiwayatPerawatan resume=new RMRiwayatPerawatan(null,true);
-            resume.setNoRm(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
+            resume.setNoRm(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
             resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             resume.setLocationRelativeTo(internalFrame1);
             resume.setVisible(true);
@@ -965,7 +965,7 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnRiwayatPasienActionPerformed
 
     private void BtnSOAPTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSOAPTindakanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else{
             if(tbObat.getSelectedRow()!= -1){
@@ -973,10 +973,10 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
                 DlgRawatJalan dlgrwjl=new DlgRawatJalan(null,false);
                 dlgrwjl.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 dlgrwjl.setLocationRelativeTo(internalFrame1);
-                dlgrwjl.SetPj(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-                dlgrwjl.SetPoli(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
+                dlgrwjl.SetPj(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+                dlgrwjl.SetPoli(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
                 dlgrwjl.emptTeks();
-                dlgrwjl.setNoRm(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),DTPCari1.getDate(),DTPCari2.getDate());
+                dlgrwjl.setNoRm(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),DTPCari1.getDate(),DTPCari2.getDate());
                 dlgrwjl.isCek();
                 dlgrwjl.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
@@ -991,10 +991,10 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnCetak.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbObat.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1034,7 +1034,7 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCetakKeyPressed
 
     private void BtnAwalFisioTerapiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAwalFisioTerapiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else{
             if(tbObat.getSelectedRow()!= -1){
@@ -1045,7 +1045,7 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
                 form.setLocationRelativeTo(internalFrame1);
                 form.setVisible(true);
                 form.emptTeks();
-                form.setNoRm(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),Valid.SetTgl2(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()));
+                form.setNoRm(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),Valid.SetTgl2(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString()));
                 this.setCursor(Cursor.getDefaultCursor());
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data...!!!!");
@@ -1262,7 +1262,7 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void isCek(){

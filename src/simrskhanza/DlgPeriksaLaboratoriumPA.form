@@ -899,6 +899,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbTarif">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="name" type="java.lang.String" value="tbTarif" noResource="true"/>
                       </Properties>
                       <Events>
@@ -1076,6 +1077,7 @@
           <SubComponents>
             <Component class="widget.Table" name="tbPemeriksaan">
               <Properties>
+                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                 <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="Popup"/>
                 </Property>

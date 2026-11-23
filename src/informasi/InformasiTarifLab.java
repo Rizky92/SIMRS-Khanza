@@ -107,6 +107,7 @@ public final class InformasiTarifLab extends javax.swing.JDialog {
         Scroll.setOpaque(true);
 
         tbJnsPerawatan.setAutoCreateRowSorter(false);
+        tbJnsPerawatan.setSortable(false);
         tbJnsPerawatan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbJnsPerawatan.setName("tbJnsPerawatan"); // NOI18N
         Scroll.setViewportView(tbJnsPerawatan);
@@ -349,7 +350,7 @@ public final class InformasiTarifLab extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     private void runBackground(Runnable task) {

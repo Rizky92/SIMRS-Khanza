@@ -263,7 +263,7 @@ public final class DlgSidikJari extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbBangsal.getSelectedRow()>-1){
-            Sequel.meghapus("sidikjari","id",tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
+            Sequel.meghapus("sidikjari","id",tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
             runBackground(() ->tampil());
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
@@ -475,7 +475,7 @@ public final class DlgSidikJari extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbBangsal.getRowCount());
     }
 
     public void isCek(){

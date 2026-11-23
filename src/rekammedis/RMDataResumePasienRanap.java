@@ -1898,7 +1898,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                         tglJam,ObatPulang.getText(),KdPj.getText(),CaraBayar.getText()
                     });
                     emptTeks();
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText(""+tbObat.getRowCount());
                     JOptionPane.showMessageDialog(null, "Resume medis pasien berhasil disimpan!");
             }
         }
@@ -1929,7 +1929,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else{
-                if(KdDokter.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString())){
+                if(KdDokter.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString())){
                     hapus();
                 }else{
                     JOptionPane.showMessageDialog(null,"Hanya bisa dihapus oleh dokter yang bersangkutan..!!");
@@ -1965,7 +1965,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(KdDokter.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString())){
+                    if(KdDokter.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString())){
                         ganti();
                     }else{
                         JOptionPane.showMessageDialog(null,"Hanya bisa diganti oleh dokter yang bersangkutan..!!");
@@ -2111,7 +2111,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_TNoRMKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -2120,7 +2120,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -2270,14 +2270,14 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            param.put("norawat",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),3).toString():finger)+"\n"+Valid.SetTgl3(Keluar.getText()));
+            param.put("norawat",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString()+"\nID "+(finger.equals("")?tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString():finger)+"\n"+Valid.SetTgl3(Keluar.getText()));
             try {
                 ps=koneksi.prepareStatement("select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? and dpjp_ranap.kd_dokter<>?");
                 try {
-                    ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-                    ps.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
+                    ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+                    ps.setString(2,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
                     rs=ps.executeQuery();
                     i=2;
                     while(rs.next()){
@@ -2459,20 +2459,20 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
 
     private void ppBerkasDigitalBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBerkasDigitalBtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else{
             if(tbObat.getSelectedRow()>-1){
-                if(!tbObat.getValueAt(tbObat.getSelectedRow(),0).toString().equals("")){
+                if(!tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString().equals("")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     DlgBerkasRawat berkas=new DlgBerkasRawat(null,true);
                     berkas.setJudul("::[ Berkas Digital Perawatan ]::","berkasrawat/pages");
                     try {
                         if(akses.gethapus_berkas_digital_perawatan()==true){
-                            berkas.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+"berkasrawat/login2.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&no_rawat="+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+                            berkas.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+"berkasrawat/login2.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&no_rawat="+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
                         }else{
-                            berkas.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+"berkasrawat/login2nonhapus.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&no_rawat="+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+                            berkas.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+"berkasrawat/login2nonhapus.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&no_rawat="+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
                         }
                     } catch (Exception ex) {
                         System.out.println("Notifikasi : "+ex);
@@ -2797,13 +2797,13 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            param.put("norawat",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            param.put("norawat",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
             param.put("finger","#1A");
             try {
                 ps=koneksi.prepareStatement("select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? and dpjp_ranap.kd_dokter<>?");
                 try {
-                    ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-                    ps.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
+                    ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+                    ps.setString(2,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
                     rs=ps.executeQuery();
                     i=2;
                     while(rs.next()){
@@ -2938,13 +2938,13 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                param.put("norawat",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+                param.put("norawat",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
                 param.put("finger","#");
                 try {
                     ps=koneksi.prepareStatement("select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? and dpjp_ranap.kd_dokter<>?");
                     try {
-                        ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-                        ps.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
+                        ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+                        ps.setString(2,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
                         rs=ps.executeQuery();
                         i=2;
                         while(rs.next()){
@@ -3345,7 +3345,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -3392,58 +3392,58 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            KodeDokterPengirim.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            NamaDokterPengirim.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            KdRuang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            NmRuang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            Masuk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            JamMasuk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            Keluar.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            JamKeluar.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            DiagnosaAwal.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            Alasan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            KeluhanUtama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            PemeriksaanFisik.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            JalannyaPenyakit.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            PemeriksaanRad.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            HasilLaborat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
-            TindakanSelamaDiRS.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
-            ObatSelamaDiRS.setText(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
-            DiagnosaUtama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
-            KodeDiagnosaUtama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
-            DiagnosaSekunder1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
-            KodeDiagnosaSekunder1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
-            DiagnosaSekunder2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
-            KodeDiagnosaSekunder2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
-            DiagnosaSekunder3.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
-            KodeDiagnosaSekunder3.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
-            DiagnosaSekunder4.setText(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
-            KodeDiagnosaSekunder4.setText(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString());
-            ProsedurUtama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),32).toString());
-            KodeProsedurUtama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),33).toString());
-            ProsedurSekunder1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),34).toString());
-            KodeProsedurSekunder1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),35).toString());
-            ProsedurSekunder2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),36).toString());
-            KodeProsedurSekunder2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),37).toString());
-            ProsedurSekunder3.setText(tbObat.getValueAt(tbObat.getSelectedRow(),38).toString());
-            KodeProsedurSekunder3.setText(tbObat.getValueAt(tbObat.getSelectedRow(),39).toString());
-            Alergi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),40).toString());
-            Diet.setText(tbObat.getValueAt(tbObat.getSelectedRow(),41).toString());
-            LabBelum.setText(tbObat.getValueAt(tbObat.getSelectedRow(),42).toString());
-            Edukasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),43).toString());
-            Keadaan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),44).toString());
-            KetKeadaanPulang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),45).toString());
-            CaraKeluar.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),46).toString());
-            KetKeluar.setText(tbObat.getValueAt(tbObat.getSelectedRow(),47).toString());
-            DIlanjutkan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),48).toString());
-            KetDilanjutkan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),49).toString());
-            ObatPulang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),51).toString());
-            KdPj.setText(tbObat.getValueAt(tbObat.getSelectedRow(),52).toString());
-            CaraBayar.setText(tbObat.getValueAt(tbObat.getSelectedRow(),53).toString());
-            Valid.SetTgl2(Kontrol,tbObat.getValueAt(tbObat.getSelectedRow(),50).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            KodeDokterPengirim.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            NamaDokterPengirim.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            KdRuang.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            NmRuang.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            Masuk.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            JamMasuk.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            Keluar.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            JamKeluar.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            DiagnosaAwal.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            Alasan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            KeluhanUtama.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+            PemeriksaanFisik.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
+            JalannyaPenyakit.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17).toString());
+            PemeriksaanRad.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18).toString());
+            HasilLaborat.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19).toString());
+            TindakanSelamaDiRS.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20).toString());
+            ObatSelamaDiRS.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString());
+            DiagnosaUtama.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22).toString());
+            KodeDiagnosaUtama.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23).toString());
+            DiagnosaSekunder1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),24).toString());
+            KodeDiagnosaSekunder1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),25).toString());
+            DiagnosaSekunder2.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),26).toString());
+            KodeDiagnosaSekunder2.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),27).toString());
+            DiagnosaSekunder3.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),28).toString());
+            KodeDiagnosaSekunder3.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),29).toString());
+            DiagnosaSekunder4.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),30).toString());
+            KodeDiagnosaSekunder4.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),31).toString());
+            ProsedurUtama.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),32).toString());
+            KodeProsedurUtama.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),33).toString());
+            ProsedurSekunder1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),34).toString());
+            KodeProsedurSekunder1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),35).toString());
+            ProsedurSekunder2.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),36).toString());
+            KodeProsedurSekunder2.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),37).toString());
+            ProsedurSekunder3.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),38).toString());
+            KodeProsedurSekunder3.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),39).toString());
+            Alergi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),40).toString());
+            Diet.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),41).toString());
+            LabBelum.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),42).toString());
+            Edukasi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),43).toString());
+            Keadaan.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),44).toString());
+            KetKeadaanPulang.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),45).toString());
+            CaraKeluar.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),46).toString());
+            KetKeluar.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),47).toString());
+            DIlanjutkan.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),48).toString());
+            KetDilanjutkan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),49).toString());
+            ObatPulang.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),51).toString());
+            KdPj.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),52).toString());
+            CaraBayar.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),53).toString());
+            Valid.SetTgl2(Kontrol,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),50).toString());
         }
     }
 
@@ -3655,62 +3655,62 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                 KodeProsedurSekunder3.getText(),Alergi.getText(),Diet.getText(),LabBelum.getText(),Edukasi.getText(),CaraKeluar.getSelectedItem().toString(),KetKeluar.getText(),
                 Keadaan.getSelectedItem().toString(),KetKeadaanPulang.getText(),DIlanjutkan.getSelectedItem().toString(),KetDilanjutkan.getText(),
                 tglJam,ObatPulang.getText(),
-                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
                 })==true){
-                   tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
-                   tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),1);
-                   tbObat.setValueAt(TPasien.getText(),tbObat.getSelectedRow(),2);
-                   tbObat.setValueAt(KdDokter.getText(),tbObat.getSelectedRow(),3);
-                   tbObat.setValueAt(NmDokter.getText(),tbObat.getSelectedRow(),4);
-                   tbObat.setValueAt(KodeDokterPengirim.getText(),tbObat.getSelectedRow(),5);
-                   tbObat.setValueAt(NamaDokterPengirim.getText(),tbObat.getSelectedRow(),6);
-                   tbObat.setValueAt(KdRuang.getText(),tbObat.getSelectedRow(),7);
-                   tbObat.setValueAt(NmRuang.getText(),tbObat.getSelectedRow(),8);
-                   tbObat.setValueAt(Masuk.getText(),tbObat.getSelectedRow(),9);
-                   tbObat.setValueAt(JamMasuk.getText(),tbObat.getSelectedRow(),10);
-                   tbObat.setValueAt(Keluar.getText(),tbObat.getSelectedRow(),11);
-                   tbObat.setValueAt(JamKeluar.getText(),tbObat.getSelectedRow(),12);
-                   tbObat.setValueAt(DiagnosaAwal.getText(),tbObat.getSelectedRow(),13);
-                   tbObat.setValueAt(Alasan.getText(),tbObat.getSelectedRow(),14);
-                   tbObat.setValueAt(KeluhanUtama.getText(),tbObat.getSelectedRow(),15);
-                   tbObat.setValueAt(PemeriksaanFisik.getText(),tbObat.getSelectedRow(),16);
-                   tbObat.setValueAt(JalannyaPenyakit.getText(),tbObat.getSelectedRow(),17);
-                   tbObat.setValueAt(PemeriksaanRad.getText(),tbObat.getSelectedRow(),18);
-                   tbObat.setValueAt(HasilLaborat.getText(),tbObat.getSelectedRow(),19);
-                   tbObat.setValueAt(TindakanSelamaDiRS.getText(),tbObat.getSelectedRow(),20);
-                   tbObat.setValueAt(ObatSelamaDiRS.getText(),tbObat.getSelectedRow(),21);
-                   tbObat.setValueAt(DiagnosaUtama.getText(),tbObat.getSelectedRow(),22);
-                   tbObat.setValueAt(KodeDiagnosaUtama.getText(),tbObat.getSelectedRow(),23);
-                   tbObat.setValueAt(DiagnosaSekunder1.getText(),tbObat.getSelectedRow(),24);
-                   tbObat.setValueAt(KodeDiagnosaSekunder1.getText(),tbObat.getSelectedRow(),25);
-                   tbObat.setValueAt(DiagnosaSekunder2.getText(),tbObat.getSelectedRow(),26);
-                   tbObat.setValueAt(KodeDiagnosaSekunder2.getText(),tbObat.getSelectedRow(),27);
-                   tbObat.setValueAt(DiagnosaSekunder3.getText(),tbObat.getSelectedRow(),28);
-                   tbObat.setValueAt(KodeDiagnosaSekunder3.getText(),tbObat.getSelectedRow(),29);
-                   tbObat.setValueAt(DiagnosaSekunder4.getText(),tbObat.getSelectedRow(),30);
-                   tbObat.setValueAt(KodeDiagnosaSekunder4.getText(),tbObat.getSelectedRow(),31);
-                   tbObat.setValueAt(ProsedurUtama.getText(),tbObat.getSelectedRow(),32);
-                   tbObat.setValueAt(KodeProsedurUtama.getText(),tbObat.getSelectedRow(),33);
-                   tbObat.setValueAt(ProsedurSekunder1.getText(),tbObat.getSelectedRow(),34);
-                   tbObat.setValueAt(KodeProsedurSekunder1.getText(),tbObat.getSelectedRow(),35);
-                   tbObat.setValueAt(ProsedurSekunder2.getText(),tbObat.getSelectedRow(),36);
-                   tbObat.setValueAt(KodeProsedurSekunder2.getText(),tbObat.getSelectedRow(),37);
-                   tbObat.setValueAt(ProsedurSekunder3.getText(),tbObat.getSelectedRow(),38);
-                   tbObat.setValueAt(KodeProsedurSekunder3.getText(),tbObat.getSelectedRow(),39);
-                   tbObat.setValueAt(Alergi.getText(),tbObat.getSelectedRow(),40);
-                   tbObat.setValueAt(Diet.getText(),tbObat.getSelectedRow(),41);
-                   tbObat.setValueAt(LabBelum.getText(),tbObat.getSelectedRow(),42);
-                   tbObat.setValueAt(Edukasi.getText(),tbObat.getSelectedRow(),43);
-                   tbObat.setValueAt(Keadaan.getSelectedItem().toString(),tbObat.getSelectedRow(),44);
-                   tbObat.setValueAt(KetKeadaanPulang.getText(),tbObat.getSelectedRow(),45);
-                   tbObat.setValueAt(CaraKeluar.getSelectedItem().toString(),tbObat.getSelectedRow(),46);
-                   tbObat.setValueAt(KetKeluar.getText(),tbObat.getSelectedRow(),47);
-                   tbObat.setValueAt(DIlanjutkan.getSelectedItem().toString(),tbObat.getSelectedRow(),48);
-                   tbObat.setValueAt(KetDilanjutkan.getText(),tbObat.getSelectedRow(),49);
-                   tbObat.setValueAt(tglJam,tbObat.getSelectedRow(),50);
-                   tbObat.setValueAt(ObatPulang.getText(),tbObat.getSelectedRow(),51);
-                   tbObat.setValueAt(KdPj.getText(),tbObat.getSelectedRow(),52);
-                   tbObat.setValueAt(CaraBayar.getText(),tbObat.getSelectedRow(),53);
+                   tabMode.setValueAt(TNoRw.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0);
+                   tabMode.setValueAt(TNoRM.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1);
+                   tabMode.setValueAt(TPasien.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2);
+                   tabMode.setValueAt(KdDokter.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3);
+                   tabMode.setValueAt(NmDokter.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4);
+                   tabMode.setValueAt(KodeDokterPengirim.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5);
+                   tabMode.setValueAt(NamaDokterPengirim.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6);
+                   tabMode.setValueAt(KdRuang.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7);
+                   tabMode.setValueAt(NmRuang.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8);
+                   tabMode.setValueAt(Masuk.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9);
+                   tabMode.setValueAt(JamMasuk.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10);
+                   tabMode.setValueAt(Keluar.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11);
+                   tabMode.setValueAt(JamKeluar.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12);
+                   tabMode.setValueAt(DiagnosaAwal.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13);
+                   tabMode.setValueAt(Alasan.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14);
+                   tabMode.setValueAt(KeluhanUtama.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15);
+                   tabMode.setValueAt(PemeriksaanFisik.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16);
+                   tabMode.setValueAt(JalannyaPenyakit.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17);
+                   tabMode.setValueAt(PemeriksaanRad.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18);
+                   tabMode.setValueAt(HasilLaborat.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19);
+                   tabMode.setValueAt(TindakanSelamaDiRS.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20);
+                   tabMode.setValueAt(ObatSelamaDiRS.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21);
+                   tabMode.setValueAt(DiagnosaUtama.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22);
+                   tabMode.setValueAt(KodeDiagnosaUtama.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23);
+                   tabMode.setValueAt(DiagnosaSekunder1.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),24);
+                   tabMode.setValueAt(KodeDiagnosaSekunder1.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),25);
+                   tabMode.setValueAt(DiagnosaSekunder2.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),26);
+                   tabMode.setValueAt(KodeDiagnosaSekunder2.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),27);
+                   tabMode.setValueAt(DiagnosaSekunder3.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),28);
+                   tabMode.setValueAt(KodeDiagnosaSekunder3.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),29);
+                   tabMode.setValueAt(DiagnosaSekunder4.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),30);
+                   tabMode.setValueAt(KodeDiagnosaSekunder4.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),31);
+                   tabMode.setValueAt(ProsedurUtama.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),32);
+                   tabMode.setValueAt(KodeProsedurUtama.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),33);
+                   tabMode.setValueAt(ProsedurSekunder1.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),34);
+                   tabMode.setValueAt(KodeProsedurSekunder1.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),35);
+                   tabMode.setValueAt(ProsedurSekunder2.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),36);
+                   tabMode.setValueAt(KodeProsedurSekunder2.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),37);
+                   tabMode.setValueAt(ProsedurSekunder3.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),38);
+                   tabMode.setValueAt(KodeProsedurSekunder3.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),39);
+                   tabMode.setValueAt(Alergi.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),40);
+                   tabMode.setValueAt(Diet.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),41);
+                   tabMode.setValueAt(LabBelum.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),42);
+                   tabMode.setValueAt(Edukasi.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),43);
+                   tabMode.setValueAt(Keadaan.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),44);
+                   tabMode.setValueAt(KetKeadaanPulang.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),45);
+                   tabMode.setValueAt(CaraKeluar.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),46);
+                   tabMode.setValueAt(KetKeluar.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),47);
+                   tabMode.setValueAt(DIlanjutkan.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),48);
+                   tabMode.setValueAt(KetDilanjutkan.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),49);
+                   tabMode.setValueAt(tglJam,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),50);
+                   tabMode.setValueAt(ObatPulang.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),51);
+                   tabMode.setValueAt(KdPj.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),52);
+                   tabMode.setValueAt(CaraBayar.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),53);
                    emptTeks();
 
                    JOptionPane.showMessageDialog(null, "Resume medis pasien telah diganti!");
@@ -3725,10 +3725,10 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         }
 
         if(Sequel.queryu2tf("delete from resume_pasien_ranap where no_rawat=?",1,new String[]{
-            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
         })==true){
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");

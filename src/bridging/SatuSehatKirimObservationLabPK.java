@@ -646,10 +646,10 @@ public final class SatuSehatKirimObservationLabPK extends javax.swing.JDialog {
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,16).toString().equals(""))&&tbObat.getValueAt(i,18).toString().equals("")){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),16).toString().equals(""))&&tabMode.getValueAt(tbObat.convertRowIndexToModel(i),18).toString().equals("")){
                     try {
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
-                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,16).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString());
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),16).toString());
                         if (iddokter.isBlank()) {
                             System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                             continue;
@@ -669,7 +669,7 @@ public final class SatuSehatKirimObservationLabPK extends javax.swing.JDialog {
                             ArrayNode identifier = payload.putArray("identifier");
                             ObjectNode identitas = identifier.addObject();
                             identitas.put("system", "http://sys-ids.kemkes.go.id/observation/" + koneksiDB.IDSATUSEHAT());
-                            identitas.put("value", tbObat.getValueAt(i, 5).toString() + "." + tbObat.getValueAt(i, 12).toString());
+                            identitas.put("value", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 5).toString() + "." + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 12).toString());
 
                             payload.put("status", "final");
 
@@ -682,9 +682,9 @@ public final class SatuSehatKirimObservationLabPK extends javax.swing.JDialog {
 
                             ObjectNode kodePemeriksaan = payload.putObject("code");
                             ObjectNode kodeCoding = kodePemeriksaan.putArray("coding").addObject();
-                            kodeCoding.put("system", tbObat.getValueAt(i, 9).toString());
-                            kodeCoding.put("code", tbObat.getValueAt(i, 8).toString());
-                            kodeCoding.put("display", tbObat.getValueAt(i, 10).toString());
+                            kodeCoding.put("system", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 9).toString());
+                            kodeCoding.put("code", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 8).toString());
+                            kodeCoding.put("display", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 10).toString());
 
                             ObjectNode subject = payload.putObject("subject");
                             subject.put("reference", "Patient/" + idpasien);
@@ -694,21 +694,21 @@ public final class SatuSehatKirimObservationLabPK extends javax.swing.JDialog {
                             pelaksana.put("reference", "Practitioner/" + iddokter);
 
                             ObjectNode encounter = payload.putObject("encounter");
-                            encounter.put("reference", "Encounter/" + tbObat.getValueAt(i, 17).toString());
+                            encounter.put("reference", "Encounter/" + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 17).toString());
                             encounter.put("display",
-                                    "Hasil Pemeriksaan Lab " + tbObat.getValueAt(i, 7).toString()
-                                    + " No.Rawat " + tbObat.getValueAt(i, 1).toString()
-                                    + ", Atas Nama Pasien " + tbObat.getValueAt(i, 3).toString()
-                                    + ", No.RM " + tbObat.getValueAt(i, 2).toString()
-                                    + ", Pada Tanggal " + tbObat.getValueAt(i, 6).toString());
+                                    "Hasil Pemeriksaan Lab " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 7).toString()
+                                    + " No.Rawat " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 1).toString()
+                                    + ", Atas Nama Pasien " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 3).toString()
+                                    + ", No.RM " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 2).toString()
+                                    + ", Pada Tanggal " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 6).toString());
 
                             ObjectNode specimen = payload.putObject("specimen");
-                            specimen.put("reference", "Specimen/" + tbObat.getValueAt(i, 13).toString());
+                            specimen.put("reference", "Specimen/" + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 13).toString());
 
                             //"\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
-                            payload.put("effectiveDateTime", tbObat.getValueAt(i, 20).toString().replace(" ", "T") + "+07:00");
-                            payload.put("issued", tbObat.getValueAt(i, 6).toString().replaceAll(" ", "T") + "+07:00");
-                            payload.put("valueString", tbObat.getValueAt(i, 11).toString()
+                            payload.put("effectiveDateTime", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 20).toString().replace(" ", "T") + "+07:00");
+                            payload.put("issued", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 6).toString().replaceAll(" ", "T") + "+07:00");
+                            payload.put("valueString", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 11).toString()
                                     .replaceAll("(\r\n|\r|\n|\n\r)", "<br>")
                                     .replaceAll("\t", " "));
 
@@ -722,7 +722,7 @@ public final class SatuSehatKirimObservationLabPK extends javax.swing.JDialog {
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.menyimpantf2("satu_sehat_observation_lab","?,?,?,?","No.Order",4,new String[]{
-                                    tbObat.getValueAt(i,5).toString(),tbObat.getValueAt(i,19).toString(),tbObat.getValueAt(i,12).toString(),response.asText()
+                                    tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),19).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),12).toString(),response.asText()
                                 })==true){
                                     pengirim.setValueAt(tbObat,response.asText(),i,18);
                                     pengirim.setValueAt(tbObat,false,i,0);
@@ -743,13 +743,13 @@ public final class SatuSehatKirimObservationLabPK extends javax.swing.JDialog {
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -761,10 +761,10 @@ public final class SatuSehatKirimObservationLabPK extends javax.swing.JDialog {
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,16).toString().equals(""))&&(!tbObat.getValueAt(i,18).toString().equals(""))){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),16).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),18).toString().equals(""))){
                     try {
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
-                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,16).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString());
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),16).toString());
                         if (iddokter.isBlank()) {
                             System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                             continue;
@@ -780,12 +780,12 @@ public final class SatuSehatKirimObservationLabPK extends javax.swing.JDialog {
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             ObjectNode payload = mapper.createObjectNode();
                             payload.put("resourceType", "Observation");
-                            payload.put("id", tbObat.getValueAt(i, 18).toString());
+                            payload.put("id", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 18).toString());
 
                             ArrayNode identifier = payload.putArray("identifier");
                             ObjectNode identitas = identifier.addObject();
                             identitas.put("system", "http://sys-ids.kemkes.go.id/observation/" + koneksiDB.IDSATUSEHAT());
-                            identitas.put("value", tbObat.getValueAt(i, 5).toString() + "." + tbObat.getValueAt(i, 12).toString());
+                            identitas.put("value", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 5).toString() + "." + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 12).toString());
 
                             payload.put("status", "final");
 
@@ -798,9 +798,9 @@ public final class SatuSehatKirimObservationLabPK extends javax.swing.JDialog {
 
                             ObjectNode kodePemeriksaan = payload.putObject("code");
                             ObjectNode kodeCoding = kodePemeriksaan.putArray("coding").addObject();
-                            kodeCoding.put("system", tbObat.getValueAt(i, 9).toString());
-                            kodeCoding.put("code", tbObat.getValueAt(i, 8).toString());
-                            kodeCoding.put("display", tbObat.getValueAt(i, 10).toString());
+                            kodeCoding.put("system", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 9).toString());
+                            kodeCoding.put("code", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 8).toString());
+                            kodeCoding.put("display", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 10).toString());
 
                             ObjectNode subject = payload.putObject("subject");
                             subject.put("reference", "Patient/" + idpasien);
@@ -810,29 +810,29 @@ public final class SatuSehatKirimObservationLabPK extends javax.swing.JDialog {
                             pelaksana.put("reference", "Practitioner/" + iddokter);
 
                             ObjectNode encounter = payload.putObject("encounter");
-                            encounter.put("reference", "Encounter/" + tbObat.getValueAt(i, 17).toString());
+                            encounter.put("reference", "Encounter/" + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 17).toString());
                             encounter.put("display",
-                                    "Hasil Pemeriksaan Lab " + tbObat.getValueAt(i, 7).toString()
-                                    + " No.Rawat " + tbObat.getValueAt(i, 1).toString()
-                                    + ", Atas Nama Pasien " + tbObat.getValueAt(i, 3).toString()
-                                    + ", No.RM " + tbObat.getValueAt(i, 2).toString()
-                                    + ", Pada Tanggal " + tbObat.getValueAt(i, 6).toString());
+                                    "Hasil Pemeriksaan Lab " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 7).toString()
+                                    + " No.Rawat " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 1).toString()
+                                    + ", Atas Nama Pasien " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 3).toString()
+                                    + ", No.RM " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 2).toString()
+                                    + ", Pada Tanggal " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 6).toString());
 
                             ObjectNode specimen = payload.putObject("specimen");
-                            specimen.put("reference", "Specimen/" + tbObat.getValueAt(i, 13).toString());
+                            specimen.put("reference", "Specimen/" + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 13).toString());
 
                             //"\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
-                            payload.put("effectiveDateTime", tbObat.getValueAt(i, 20).toString().replace(" ", "T") + "+07:00");
-                            payload.put("issued", tbObat.getValueAt(i, 6).toString().replaceAll(" ", "T") + "+07:00");
-                            payload.put("valueString", tbObat.getValueAt(i, 11).toString()
+                            payload.put("effectiveDateTime", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 20).toString().replace(" ", "T") + "+07:00");
+                            payload.put("issued", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 6).toString().replaceAll(" ", "T") + "+07:00");
+                            payload.put("valueString", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 11).toString()
                                     .replaceAll("(\r\n|\r|\n|\n\r)", "<br>")
                                     .replaceAll("\t", " "));
 
                             json = mapper.writeValueAsString(payload);
-                            System.out.println("URL : "+link+"/Observation/"+tbObat.getValueAt(i,18).toString());
+                            System.out.println("URL : "+link+"/Observation/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),18).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.kirimSmc(link+"/Observation/"+tbObat.getValueAt(i,18).toString(), HttpMethod.PUT, requestEntity);
+                            json=api.kirimSmc(link+"/Observation/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),18).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             pengirim.setValueAt(tbObat,false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -889,8 +889,8 @@ public final class SatuSehatKirimObservationLabPK extends javax.swing.JDialog {
 
     private void ppPilihBelumDikirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihBelumDikirimActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            if (tbObat.getValueAt(i, 18).toString().isBlank()) {
-                tbObat.setValueAt(true,i,0);
+            if (tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 18).toString().isBlank()) {
+                tabMode.setValueAt(true,tbObat.convertRowIndexToModel(i),0);
             }
         }
     }//GEN-LAST:event_ppPilihBelumDikirimActionPerformed
@@ -939,6 +939,7 @@ public final class SatuSehatKirimObservationLabPK extends javax.swing.JDialog {
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -1063,7 +1064,8 @@ public final class SatuSehatKirimObservationLabPK extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
+        tbObat.resumeSorting();
     }
 
     public void isCek(){

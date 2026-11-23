@@ -465,7 +465,7 @@ public class DlgSetTarif extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbAdmin.getRowCount()==0){
             Sequel.menyimpan("set_tarif","?,?,?,?,?,?,?,?,?,?,?,?","Set Tarif",12,new String[]{
                 YesNo1.getSelectedItem().toString(),YesNo2.getSelectedItem().toString(),YesNo3.getSelectedItem().toString(),
                 YesNo4.getSelectedItem().toString(),YesNo5.getSelectedItem().toString(),YesNo6.getSelectedItem().toString(),
@@ -474,7 +474,7 @@ public class DlgSetTarif extends javax.swing.JDialog {
             });
             runBackground(() ->tampil());
             emptTeks();
-        }else if(tabMode.getRowCount()>0){
+        }else if(tbAdmin.getRowCount()>0){
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu record ...!!!!");
 
         }
@@ -533,10 +533,10 @@ public class DlgSetTarif extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbAdmin.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data Set Tarif tidak boleh kosong ...!!!!");
             YesNo1.requestFocus();
-        }else if(! (tabMode.getRowCount()==0)) {
+        }else if(! (tbAdmin.getRowCount()==0)) {
             dispose();
         }
     }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -548,7 +548,7 @@ public class DlgSetTarif extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -557,7 +557,7 @@ public class DlgSetTarif extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -705,18 +705,18 @@ public class DlgSetTarif extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            YesNo1.setSelectedItem(tbAdmin.getValueAt(row,0).toString());
-            YesNo2.setSelectedItem(tbAdmin.getValueAt(row,1).toString());
-            YesNo3.setSelectedItem(tbAdmin.getValueAt(row,2).toString());
-            YesNo4.setSelectedItem(tbAdmin.getValueAt(row,3).toString());
-            YesNo5.setSelectedItem(tbAdmin.getValueAt(row,4).toString());
-            YesNo6.setSelectedItem(tbAdmin.getValueAt(row,5).toString());
-            YesNo7.setSelectedItem(tbAdmin.getValueAt(row,6).toString());
-            YesNo8.setSelectedItem(tbAdmin.getValueAt(row,7).toString());
-            YesNo9.setSelectedItem(tbAdmin.getValueAt(row,8).toString());
-            YesNo10.setSelectedItem(tbAdmin.getValueAt(row,9).toString());
-            YesNo11.setSelectedItem(tbAdmin.getValueAt(row,10).toString());
-            YesNo12.setSelectedItem(tbAdmin.getValueAt(row,11).toString());
+            YesNo1.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),0).toString());
+            YesNo2.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),1).toString());
+            YesNo3.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),2).toString());
+            YesNo4.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),3).toString());
+            YesNo5.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),4).toString());
+            YesNo6.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),5).toString());
+            YesNo7.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),6).toString());
+            YesNo8.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),7).toString());
+            YesNo9.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),8).toString());
+            YesNo10.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),9).toString());
+            YesNo11.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),10).toString());
+            YesNo12.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),11).toString());
         }
     }
 

@@ -203,7 +203,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbObatPenyakit.setAutoCreateRowSorter(false);
+        tbObatPenyakit.setAutoCreateRowSorter(true);
         tbObatPenyakit.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObatPenyakit.setName("tbObatPenyakit"); // NOI18N
         tbObatPenyakit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -630,9 +630,9 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbObatPenyakit.getRowCount();i++){
-            if(tbObatPenyakit.getValueAt(i,0).toString().equals("true")){
+            if(tabMode.getValueAt(tbObatPenyakit.convertRowIndexToModel(i),0).toString().equals("true")){
                 Sequel.queryu2("delete from obat_penyakit where kd_penyakit=? and kode_brng=?",2,new String[]{
-                    tbObatPenyakit.getValueAt(i,1).toString(),tbObatPenyakit.getValueAt(i,7).toString()
+                    tabMode.getValueAt(tbObatPenyakit.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbObatPenyakit.convertRowIndexToModel(i),7).toString()
                 });
             }
         }
@@ -863,7 +863,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_btnobatKeyPressed
 
     private void tbObatPenyakitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatPenyakitMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObatPenyakit.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -872,7 +872,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatPenyakitMouseClicked
 
     private void tbObatPenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatPenyakitKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObatPenyakit.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1081,6 +1081,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
 
 
     private void tampil() {
+        tbObatPenyakit.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             sql=" nm_kategori like '%"+KtgCari.getText()+"%' "+
@@ -1126,7 +1127,8 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObatPenyakit.getRowCount());
+        tbObatPenyakit.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1142,11 +1144,11 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     private void getData() {
         int row=tbObatPenyakit.getSelectedRow();
         if(row!= -1){
-            kdpenyakit.setText(tbObatPenyakit.getValueAt(row,1).toString());
-            TPenyakit.setText(tbObatPenyakit.getValueAt(row,2).toString());
-            kdobat.setText(tbObatPenyakit.getValueAt(row,7).toString());
-            nmobat.setText(tbObatPenyakit.getValueAt(row,8).toString());
-            TRef.setText(tbObatPenyakit.getValueAt(row,11).toString());
+            kdpenyakit.setText(tabMode.getValueAt(tbObatPenyakit.convertRowIndexToModel(row),1).toString());
+            TPenyakit.setText(tabMode.getValueAt(tbObatPenyakit.convertRowIndexToModel(row),2).toString());
+            kdobat.setText(tabMode.getValueAt(tbObatPenyakit.convertRowIndexToModel(row),7).toString());
+            nmobat.setText(tabMode.getValueAt(tbObatPenyakit.convertRowIndexToModel(row),8).toString());
+            TRef.setText(tabMode.getValueAt(tbObatPenyakit.convertRowIndexToModel(row),11).toString());
         }
     }
 

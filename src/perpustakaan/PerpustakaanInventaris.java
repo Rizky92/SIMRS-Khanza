@@ -804,7 +804,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
                         "tgl_pengadaan=?,harga=?,status_buku=?,kd_ruang=?,no_rak=?,no_box=?",10,new String[]{
                         no_inventaris.getText(),kode_buku.getText(),asal_buku.getSelectedItem().toString(),Valid.SetTgl(tgl_pengadaan.getSelectedItem()+""),
                         harga.getText(),status_buku.getSelectedItem().toString(),kd_ruang.getText(),no_rak.getSelectedItem().toString(),no_box.getSelectedItem().toString(),
-                        tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                        tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString()
                     })==true){
                         runBackground(() ->tampil());
                         emptTeks();
@@ -967,7 +967,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -976,7 +976,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -1138,10 +1138,10 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
 
     private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBarcodeBtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbJnsPerawatan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbJnsPerawatan.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
@@ -1233,7 +1233,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRuang1ActionPerformed
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1439,7 +1439,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(tabMode.getRowCount()+" | "+Valid.SetAngka(nilai_inven));
+            LCount.setText(tbJnsPerawatan.getRowCount()+" | "+Valid.SetAngka(nilai_inven));
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
@@ -1469,21 +1469,21 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
 
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
-                no_inventaris.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-                kode_buku.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-                judul_buku.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-                nm_produsen.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-                nm_merk.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
-                nm_kategori.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
-                nm_jenis.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString());
-                asal_buku.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString());
-                Valid.SetTgl(tgl_pengadaan,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString());
-                harga.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString());
-                status_buku.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),12).toString());
-                Sequel.cariIsi("select perpustakaan_inventaris.kd_ruang from perpustakaan_inventaris where perpustakaan_inventaris.no_inventaris='"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()+"'",kd_ruang);
-                nm_ruang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString());
-                no_rak.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString());
-                no_box.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),15).toString());
+                no_inventaris.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+                kode_buku.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+                judul_buku.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+                nm_produsen.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+                nm_merk.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString());
+                nm_kategori.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7).toString());
+                nm_jenis.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),8).toString());
+                asal_buku.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),9).toString());
+                Valid.SetTgl(tgl_pengadaan,tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),10).toString());
+                harga.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),11).toString());
+                status_buku.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),12).toString());
+                Sequel.cariIsi("select perpustakaan_inventaris.kd_ruang from perpustakaan_inventaris where perpustakaan_inventaris.no_inventaris='"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString()+"'",kd_ruang);
+                nm_ruang.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),13).toString());
+                no_rak.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),14).toString());
+                no_box.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),15).toString());
           }
     }
 

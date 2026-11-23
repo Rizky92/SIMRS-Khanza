@@ -378,7 +378,7 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
             if(Sequel.menyimpantf("master_kesimpulan_anjuran_mcu","'"+Kesimpulan.getText()+"','"+Anjuran.getText()+"'","Kesimpulan & Anjuran")==true){
                 tabMode.addRow(new Object[]{Kesimpulan.getText(),Anjuran.getText()});
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbSpesialis.getRowCount());
             }
         } else {
             JOptionPane.showMessageDialog(null, "Maaf, data tidak boleh kosong..!!");
@@ -406,11 +406,11 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbSpesialis.getSelectedRow()!= -1){
             if(Sequel.queryu2tf("delete from master_kesimpulan_anjuran_mcu where kesimpulan=? and anjuran=?", 2,new String[]{
-                tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString()
+                tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString()
                 })==true){
-                tabMode.removeRow(tbSpesialis.getSelectedRow());
+                tabMode.removeRow(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()));
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbSpesialis.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
@@ -427,11 +427,11 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
         if(!Kesimpulan.getText().trim().equals("")||!Anjuran.getText().trim().equals("")){
             if(tbSpesialis.getSelectedRow()> -1){
                 if(Sequel.mengedittf("master_kesimpulan_anjuran_mcu","kesimpulan=? and anjuran=?","kesimpulan=?,anjuran=?",4,new String[]{
-                    Kesimpulan.getText(),Anjuran.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString(),
-                    tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString()
+                    Kesimpulan.getText(),Anjuran.getText(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString(),
+                    tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString()
                 })==true){
-                    tbSpesialis.setValueAt(Kesimpulan.getText(),tbSpesialis.getSelectedRow(),0);
-                    tbSpesialis.setValueAt(Anjuran.getText(),tbSpesialis.getSelectedRow(),1);
+                    tabMode.setValueAt(Kesimpulan.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0);
+                    tabMode.setValueAt(Anjuran.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1);
                     emptTeks();
                 }
             }
@@ -500,7 +500,7 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -509,7 +509,7 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisMouseClicked
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -549,7 +549,7 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbSpesialisKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -629,7 +629,7 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbSpesialis.getRowCount());
     }
 
     public void emptTeks() {
@@ -641,8 +641,8 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            Kesimpulan.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            Anjuran.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
+            Kesimpulan.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            Anjuran.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
         }
     }
 

@@ -207,6 +207,7 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -691,13 +692,13 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
 
     private void ppCetakNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCetakNotaActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")||tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals(">>")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")||tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals(">>")){
                 Valid.textKosong(TCari,"No.Piutang");
             }else {
                  try{
@@ -709,7 +710,7 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
                         "inner join perusahaan_pasien on piutang_jasa_perusahaan.kode_perusahaan=perusahaan_pasien.kode_perusahaan where piutang_jasa_perusahaan.no_piutang=?"
                     );
                     try {
-                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
                             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -722,7 +723,7 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
                                  "where detail_piutang_jasa_perusahaan.no_piutang=? order by detail_piutang_jasa_perusahaan.kode_kategori"
                             );
                             try{
-                                ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                                ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                                 rs2=ps2.executeQuery();
                                 i=0;
                                 while(rs2.next()){
@@ -751,7 +752,7 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
                             param.put("emailrs",akses.getemailrs());
                             param.put("keterangan",rs.getString("keterangan"));
                             param.put("perusahaan",rs.getString("nama_perusahaan"));
-                            param.put("notagihan",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                            param.put("notagihan",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                             param.put("jatuhtempo",Valid.SetTgl3(rs.getString("jatuh_tempo")));
                             param.put("tanggalpiutang",Valid.SetTgl3(rs.getString("tgl_piutang")));
                             param.put("petugas",rs.getString("nama"));
@@ -791,22 +792,22 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppCetakNotaActionPerformed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Piutang");
-            }else if(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString().trim().equals("Sudah Lunas")){
+            }else if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6).toString().trim().equals("Sudah Lunas")){
                 JOptionPane.showMessageDialog(null,"Maaf, Piutang sudah lunas dan tidak boleh dihapus..!!");
             }else{
                 int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau dihapus..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
                     Sequel.AutoComitFalse();
                     sukses=true;
-                    double nilaipiutang=Sequel.cariIsiAngka("select piutang_jasa_perusahaan.totalpiutang from piutang_jasa_perusahaan where piutang_jasa_perusahaan.no_piutang=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                    double nilaipiutang=Sequel.cariIsiAngka("select piutang_jasa_perusahaan.totalpiutang from piutang_jasa_perusahaan where piutang_jasa_perusahaan.no_piutang=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
 
                     if(nilaipiutang>0){
                         Sequel.deleteTampJurnal();
@@ -817,12 +818,12 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
                             sukses=false;
                         }
                         if(sukses==true){
-                            sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),"U","PEMBATALAN PIUTANG JASA PERUSAHAAN "+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+", OLEH "+akses.getkode());
+                            sukses=jur.simpanJurnal(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString(),"U","PEMBATALAN PIUTANG JASA PERUSAHAAN "+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString()+", OLEH "+akses.getkode());
                         }
                     }
 
                     if(sukses==true){
-                        sukses=Sequel.meghapustf("piutang_jasa_perusahaan","no_piutang",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        sukses=Sequel.meghapustf("piutang_jasa_perusahaan","no_piutang",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         Sequel.Commit();
                     }else{
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -838,23 +839,23 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void MnDetailCicilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailCicilanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Piutang");
-            }else if(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString().trim().equals("Sudah Lunas")){
+            }else if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6).toString().trim().equals("Sudah Lunas")){
                 JOptionPane.showMessageDialog(null,"Maaf, Piutang sudah lunas..!!");
             }else{
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 KeuanganBayarPiutangJasaPerusahaan bayarpiutang=new KeuanganBayarPiutangJasaPerusahaan(null,false);
                 bayarpiutang.emptTeks();
-                String kodeperusahaan=Sequel.cariIsi("select piutang_jasa_perusahaan.kode_perusahaan from piutang_jasa_perusahaan where piutang_jasa_perusahaan.no_piutang=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                String kodeperusahaan=Sequel.cariIsi("select piutang_jasa_perusahaan.kode_perusahaan from piutang_jasa_perusahaan where piutang_jasa_perusahaan.no_piutang=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                 String namaperusahaan=Sequel.cariIsi("select perusahaan_pasien.nama_perusahaan from perusahaan_pasien where perusahaan_pasien.kode_perusahaan=?",kodeperusahaan);
-                bayarpiutang.setData(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),kodeperusahaan,namaperusahaan);
+                bayarpiutang.setData(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString(),kodeperusahaan,namaperusahaan);
                 bayarpiutang.tampil2();
                 bayarpiutang.setSize(this.getWidth()-20,this.getHeight()-20);
                 bayarpiutang.setLocationRelativeTo(this);

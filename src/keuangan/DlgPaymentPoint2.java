@@ -155,6 +155,7 @@ public final class DlgPaymentPoint2 extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        Tabel.setSortable(false);
         Tabel.setName("Tabel"); // NOI18N
         Scroll.setViewportView(Tabel);
 

@@ -263,6 +263,7 @@ public class DlgCariPermintaan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -961,10 +962,10 @@ public class DlgCariPermintaan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"pilihan data");
         }else{
-            Sequel.queryu("delete from permintaan_medis where no_permintaan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+            Sequel.queryu("delete from permintaan_medis where no_permintaan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
             runBackground(() ->tampil());
         }
     }//GEN-LAST:event_ppHapusActionPerformed
@@ -1011,10 +1012,10 @@ public class DlgCariPermintaan extends javax.swing.JDialog {
     }//GEN-LAST:event_btnJenisActionPerformed
 
     private void ppDisetujuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDisetujuiActionPerformed
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"pilihan data");
         }else{
-            if(Sequel.cariIsi("select permintaan_medis.status from permintaan_medis where permintaan_medis.no_permintaan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim()).equals("Baru")){
+            if(Sequel.cariIsi("select permintaan_medis.status from permintaan_medis where permintaan_medis.no_permintaan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim()).equals("Baru")){
                 DlgMutasiBarang aplikasi=new DlgMutasiBarang(null,false);
                 aplikasi.addWindowListener(new WindowAdapter() {
                     @Override
@@ -1023,7 +1024,7 @@ public class DlgCariPermintaan extends javax.swing.JDialog {
                     }
                 });
                 aplikasi.isCek();
-                aplikasi.tampil2(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+                aplikasi.tampil2(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
                 aplikasi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 aplikasi.setLocationRelativeTo(internalFrame1);
                 aplikasi.setVisible(true);
@@ -1034,19 +1035,19 @@ public class DlgCariPermintaan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppDisetujuiActionPerformed
 
     private void ppTidakDisetujuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTidakDisetujuiActionPerformed
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"pilihan data");
         }else{
-            Sequel.queryu("update permintaan_medis set status='Tidak Disetujui' where no_permintaan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+            Sequel.queryu("update permintaan_medis set status='Tidak Disetujui' where no_permintaan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
             runBackground(() ->tampil());
         }
     }//GEN-LAST:event_ppTidakDisetujuiActionPerformed
 
     private void ppDisetujui1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDisetujui1ActionPerformed
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"pilihan data");
         }else{
-            if(Sequel.cariIsi("select permintaan_medis.status from permintaan_medis where permintaan_medis.no_permintaan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim()).equals("Baru")){
+            if(Sequel.cariIsi("select permintaan_medis.status from permintaan_medis where permintaan_medis.no_permintaan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim()).equals("Baru")){
                 DlgPengeluaranApotek aplikasi2=new DlgPengeluaranApotek(null,false);
                 aplikasi2.addWindowListener(new WindowAdapter() {
                     @Override
@@ -1056,7 +1057,7 @@ public class DlgCariPermintaan extends javax.swing.JDialog {
                 });
                 aplikasi2.tampilkanpermintaan=false;
                 aplikasi2.isCek();
-                aplikasi2.tampil2(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+                aplikasi2.tampil2(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
                 aplikasi2.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 aplikasi2.setLocationRelativeTo(internalFrame1);
                 aplikasi2.setVisible(true);

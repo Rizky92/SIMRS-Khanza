@@ -818,7 +818,7 @@ public class InformasiKamarInap extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamIn.getRowCount());
     }
 
     private void runBackground(Runnable task) {

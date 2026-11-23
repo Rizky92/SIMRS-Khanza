@@ -73,7 +73,7 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < tabMode.getRowCount(); i++) {
+        for (int i = 0; i < tbKamar.getRowCount(); i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(100);
@@ -440,7 +440,7 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
         } else {
             if (Sequel.menyimpantfSmc("pintu_smc", "", Kd.getText(), Nm.getText(), "1")) {
                 tabMode.addRow(new Object[] {Kd.getText(), Nm.getText()});
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbKamar.getRowCount());
                 emptTeks();
             }
         }
@@ -467,15 +467,15 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbKamar.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         } else if (tbKamar.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih dulu data yang mau dihapus..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
-            if (Sequel.mengupdatetfSmc("pintu_smc", "status = '0'", "kd_pintu = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString())) {
-                tabMode.removeRow(tbKamar.getSelectedRow());
+            if (Sequel.mengupdatetfSmc("pintu_smc", "status = '0'", "kd_pintu = ?", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString())) {
+                tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
                 emptTeks();
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbKamar.getRowCount());
             } else {
                 JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menonaktifkan pintu..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
             }
@@ -496,16 +496,16 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
         } else if (Nm.getText().isBlank()) {
             Valid.textKosong(Nm, "Nama Pintu");
         } else {
-            if (tabMode.getRowCount() == 0) {
+            if (tbKamar.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             } else if (tbKamar.getSelectedRow() < 0) {
                 JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih dulu data yang mau diubah..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             } else {
                 if (Sequel.mengupdatetfSmc("pintu_smc", "kd_pintu = ?, nm_pintu = ?", "kd_pintu = ?",
-                    Kd.getText(), Nm.getText(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString()
+                    Kd.getText(), Nm.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString()
                 )) {
-                    tbKamar.setValueAt(Kd.getText(), tbKamar.getSelectedRow(), 0);
-                    tbKamar.setValueAt(Nm.getText(), tbKamar.getSelectedRow(), 1);
+                    tabMode.setValueAt(Kd.getText(), tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0);
+                    tabMode.setValueAt(Nm.getText(), tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 1);
                     emptTeks();
                 } else {
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengupdate data pintu..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
@@ -630,7 +630,7 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbKamar.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -651,7 +651,7 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbKamarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyReleased
-        if (tabMode.getRowCount() != 0) {
+        if (tbKamar.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
@@ -714,6 +714,7 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select pintu_smc.kd_pintu, pintu_smc.nm_pintu from pintu_smc where pintu_smc.status = '1' " + (TCari.getText().isBlank() ? "" :
@@ -733,7 +734,8 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
 
-        LCount.setText("" + tabMode.getRowCount());
+        LCount.setText("" + tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {
@@ -746,9 +748,9 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
 
     private void getData() {
         if (tbKamar.getSelectedRow() != -1) {
-            Kd.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString());
-            Kd2.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString());
-            Nm.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString());
+            Kd.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString());
+            Kd2.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString());
+            Nm.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 1).toString());
         }
     }
 

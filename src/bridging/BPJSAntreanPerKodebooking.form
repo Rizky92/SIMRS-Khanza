@@ -68,6 +68,7 @@
           <SubComponents>
             <Component class="widget.Table" name="tbJnsPerawatan">
               <Properties>
+                <Property name="sortable" type="boolean" value="false"/>
                 <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                 <Property name="name" type="java.lang.String" value="tbJnsPerawatan" noResource="true"/>
               </Properties>

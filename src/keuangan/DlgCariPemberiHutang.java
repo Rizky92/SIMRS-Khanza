@@ -284,7 +284,7 @@ public final class DlgCariPemberiHutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getClickCount()==2){
                 dispose();
             }
@@ -309,7 +309,7 @@ public final class DlgCariPemberiHutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 dispose();
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
@@ -428,7 +428,7 @@ public final class DlgCariPemberiHutang extends javax.swing.JDialog {
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     public void emptTeks() {
@@ -466,7 +466,7 @@ public final class DlgCariPemberiHutang extends javax.swing.JDialog {
             response = null;
             root = null;
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     public void onCari(){

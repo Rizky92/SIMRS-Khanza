@@ -535,6 +535,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbIGDPrimer">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="jPopupMenu1"/>
                         </Property>
@@ -676,6 +677,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbIGDSekunder">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="jPopupMenu1"/>
                         </Property>
@@ -730,6 +732,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbAwalKeperawatanIGD">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="jPopupMenu1"/>
                         </Property>

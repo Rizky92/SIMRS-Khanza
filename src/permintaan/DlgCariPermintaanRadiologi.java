@@ -837,6 +837,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbRadiologiRalan.setSortable(false);
         tbRadiologiRalan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -976,6 +977,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         scrollPane3.setName("scrollPane3"); // NOI18N
         scrollPane3.setOpaque(true);
 
+        tbRadiologiRanap.setSortable(false);
         tbRadiologiRanap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1543,15 +1545,15 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
                 if(tbRadiologiRalan.getSelectedRow()!= -1){
-                    if(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString().trim().equals("")){
+                    if(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString().trim().equals("")){
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{
                         if(Sampel.equals("")||akses.getkode().equals("Admin Utama") || akses.gethapus_permintaan_radiologi_smc()){
-                            if(Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_radiologi where stts_bayar='Sudah' and noorder=?",tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString())>0){
+                            if(Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_radiologi where stts_bayar='Sudah' and noorder=?",tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString())>0){
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
                             }else if("".equals(Sampel)||"Admin Utama".equals(akses.getkode())||JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog(null,"Permintaan ini sudah dilakukan pengambilan sampel.\nYakin ingin menghapus permintaan ini..?","Peringatan",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE)){
-                                worklist.hapus(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString());
-                                Sequel.meghapus("permintaan_radiologi","noorder",tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString());
+                                worklist.hapus(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString());
+                                Sequel.meghapus("permintaan_radiologi","noorder",tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString());
                                 runBackground(() -> tampil());
                             }
                         }else{
@@ -1570,15 +1572,15 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
                 if(tbRadiologiRanap.getSelectedRow()!= -1){
-                    if(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString().trim().equals("")){
+                    if(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString().trim().equals("")){
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{
                         if(Sampel.equals("")||akses.getkode().equals("Admin Utama") || akses.gethapus_permintaan_radiologi_smc()){
-                            if(Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_radiologi where stts_bayar='Sudah' and noorder=?",tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString())>0){
+                            if(Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_radiologi where stts_bayar='Sudah' and noorder=?",tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString())>0){
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
                             }else if("".equals(Sampel)||"Admin Utama".equals(akses.getkode())||JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog(null,"Permintaan ini sudah dilakukan pengambilan sampel.\nYakin ingin menghapus permintaan ini..?","Peringatan",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE)){
-                                worklist.hapus(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString());
-                                Sequel.meghapus("permintaan_radiologi","noorder",tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString());
+                                worklist.hapus(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString());
+                                Sequel.meghapus("permintaan_radiologi","noorder",tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString());
                                 runBackground(() -> tampil3());
                             }
                         }else{
@@ -1606,7 +1608,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void tbRadiologiRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRadiologiRalanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbRadiologiRalan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1615,7 +1617,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbRadiologiRalanMouseClicked
 
     private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbRadiologiRalanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbRadiologiRalan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1628,11 +1630,11 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private void TabRawatJalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatJalanMouseClicked
         TeksKosong();
         if(TabRawatJalan.getSelectedIndex()==0){
-            if(tabMode.getRowCount()==0){
+            if(tbRadiologiRalan.getRowCount()==0){
                 runBackground(() -> tampil());
             }
         }else if(TabRawatJalan.getSelectedIndex()==1){
-            if(tabMode2.getRowCount()==0){
+            if(tbRadiologiRalan2.getRowCount()==0){
                 runBackground(() -> tampil2());
             }
         }
@@ -1650,7 +1652,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
                 if(tbRadiologiRalan.getSelectedRow()!= -1){
-                    if(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString().trim().equals("")){
+                    if(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString().trim().equals("")){
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{
                         if (VALIDASIULANGHASILPERMINTAANRAD) {
@@ -1661,8 +1663,8 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                                 dlgro.setLocationRelativeTo(internalFrame1);
                                 dlgro.emptTeks();
                                 dlgro.isCek();
-                                dlgro.setOrder(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString(),tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),1).toString(),"Ralan");
-                                dlgro.setDokterPerujuk(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),9).toString(),tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),10).toString());
+                                dlgro.setOrder(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString(),tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),1).toString(),"Ralan");
+                                dlgro.setDokterPerujuk(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),9).toString(),tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),10).toString());
                                 dlgro.setVisible(true);
                                 this.setCursor(Cursor.getDefaultCursor());
                             } else {
@@ -1675,8 +1677,8 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                             dlgro.setLocationRelativeTo(internalFrame1);
                             dlgro.emptTeks();
                             dlgro.isCek();
-                            dlgro.setOrder(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString(),tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),1).toString(),"Ralan");
-                            dlgro.setDokterPerujuk(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),9).toString(),tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),10).toString());
+                            dlgro.setOrder(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString(),tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),1).toString(),"Ralan");
+                            dlgro.setDokterPerujuk(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),9).toString(),tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),10).toString());
                             dlgro.setVisible(true);
                             this.setCursor(Cursor.getDefaultCursor());
                         }
@@ -1693,7 +1695,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
                 if(tbRadiologiRanap.getSelectedRow()!= -1){
-                    if(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString().trim().equals("")){
+                    if(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString().trim().equals("")){
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{
                         if (VALIDASIULANGHASILPERMINTAANRAD) {
@@ -1704,8 +1706,8 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                                 dlgro.setLocationRelativeTo(internalFrame1);
                                 dlgro.emptTeks();
                                 dlgro.isCek();
-                                dlgro.setOrder(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString(),tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),1).toString(),"Ranap");
-                                dlgro.setDokterPerujuk(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),9).toString(),tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),10).toString());
+                                dlgro.setOrder(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString(),tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),1).toString(),"Ranap");
+                                dlgro.setDokterPerujuk(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),9).toString(),tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),10).toString());
                                 dlgro.setVisible(true);
                                 this.setCursor(Cursor.getDefaultCursor());
                             } else {
@@ -1718,8 +1720,8 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                             dlgro.setLocationRelativeTo(internalFrame1);
                             dlgro.emptTeks();
                             dlgro.isCek();
-                            dlgro.setOrder(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString(),tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),1).toString(),"Ranap");
-                            dlgro.setDokterPerujuk(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),9).toString(),tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),10).toString());
+                            dlgro.setOrder(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString(),tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),1).toString(),"Ranap");
+                            dlgro.setDokterPerujuk(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),9).toString(),tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),10).toString());
                             dlgro.setVisible(true);
                             this.setCursor(Cursor.getDefaultCursor());
                         }
@@ -1744,7 +1746,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
                 if(tbRadiologiRalan.getSelectedRow()!= -1){
-                    if(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString().trim().equals("")){
+                    if(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString().trim().equals("")){
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{
                         TanggalPulang.setDate(new Date());
@@ -1765,7 +1767,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
                 if(tbRadiologiRanap.getSelectedRow()!= -1){
-                    if(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString().trim().equals("")){
+                    if(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString().trim().equals("")){
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{
                         TanggalPulang.setDate(new Date());
@@ -1797,17 +1799,17 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private void BtnSimpan4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpan4ActionPerformed
         if(TabPilihRawat.getSelectedIndex()==0){
             if(tbRadiologiRalan.getSelectedRow()!= -1){
-                if(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString().trim().equals("")){
+                if(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString().trim().equals("")){
                     Valid.textKosong(TanggalPulang,"No.Permintaan");
                 }else{
                     if(Sequel.mengedittf("permintaan_radiologi","noorder=?","tgl_sampel=?,jam_sampel=?",3,new String[]{
-                        Valid.SetTgl(TanggalPulang.getSelectedItem()+""),TanggalPulang.getSelectedItem().toString().substring(11,19),tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString()
+                        Valid.SetTgl(TanggalPulang.getSelectedItem()+""),TanggalPulang.getSelectedItem().toString().substring(11,19),tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString()
                     })==true){
                         Sequel.queryu("delete from antriradiologi");
                         Sequel.queryu("insert into antriradiologi values('1')");
-                        tbRadiologiRalan.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbRadiologiRalan.getSelectedRow(),5);
-                        tbRadiologiRalan.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbRadiologiRalan.getSelectedRow(),6);
-                        String noorderWorklist = tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString();
+                        tabMode.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),5);
+                        tabMode.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),6);
+                        String noorderWorklist = tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString();
                         WindowAmbilSampel.dispose();
                         kirimWorklistSmc(noorderWorklist);
                     }
@@ -1818,15 +1820,15 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
             }
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(tbRadiologiRanap.getSelectedRow()!= -1){
-                if(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString().trim().equals("")){
+                if(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString().trim().equals("")){
                     Valid.textKosong(TanggalPulang,"No.Permintaan");
                 }else{
                     if(Sequel.mengedittf("permintaan_radiologi","noorder=?","tgl_sampel=?,jam_sampel=?",3,new String[]{
-                        Valid.SetTgl(TanggalPulang.getSelectedItem()+""),TanggalPulang.getSelectedItem().toString().substring(11,19),tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString()
+                        Valid.SetTgl(TanggalPulang.getSelectedItem()+""),TanggalPulang.getSelectedItem().toString().substring(11,19),tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString()
                     })==true){
-                        tbRadiologiRanap.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbRadiologiRanap.getSelectedRow(),5);
-                        tbRadiologiRanap.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbRadiologiRanap.getSelectedRow(),6);
-                        String noorderWorklist = tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString();
+                        tabMode3.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),5);
+                        tabMode3.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),6);
+                        String noorderWorklist = tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString();
                         WindowAmbilSampel.dispose();
                         kirimWorklistSmc(noorderWorklist);
                     }
@@ -1971,21 +1973,21 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         TeksKosong();
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbRadiologiRalan.getRowCount()==0){
                     runBackground(() -> tampil());
                 }
             }else if(TabRawatJalan.getSelectedIndex()==1){
-                if(tabMode2.getRowCount()==0){
+                if(tbRadiologiRalan2.getRowCount()==0){
                     runBackground(() -> tampil2());
                 }
             }
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
-                if(tabMode3.getRowCount()==0){
+                if(tbRadiologiRanap.getRowCount()==0){
                     runBackground(() -> tampil3());
                 }
             }else if(TabRawatInap.getSelectedIndex()==1){
-                if(tabMode4.getRowCount()==0){
+                if(tbRadiologiRanap2.getRowCount()==0){
                     runBackground(() -> tampil4());
                 }
             }
@@ -1993,7 +1995,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_TabPilihRawatMouseClicked
 
     private void tbRadiologiRanapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRadiologiRanapMouseClicked
-        if(tabMode3.getRowCount()!=0){
+        if(tbRadiologiRanap.getRowCount()!=0){
             try {
                 getData2();
             } catch (java.lang.NullPointerException e) {
@@ -2002,7 +2004,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbRadiologiRanapMouseClicked
 
     private void tbRadiologiRanapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbRadiologiRanapKeyPressed
-        if(tabMode3.getRowCount()!=0){
+        if(tbRadiologiRanap.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData2();
@@ -2023,11 +2025,11 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private void TabRawatInapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatInapMouseClicked
         TeksKosong();
         if(TabRawatInap.getSelectedIndex()==0){
-            if(tabMode3.getRowCount()==0){
+            if(tbRadiologiRanap.getRowCount()==0){
                 runBackground(() -> tampil3());
             }
         }else if(TabRawatInap.getSelectedIndex()==1){
-            if(tabMode4.getRowCount()==0){
+            if(tbRadiologiRanap2.getRowCount()==0){
                 runBackground(() -> tampil4());
             }
         }
@@ -2203,12 +2205,12 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private void BtnBarcodePermintaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBarcodePermintaanActionPerformed
         if(TabPilihRawat.getSelectedIndex()==0){
             if(tbRadiologiRalan.getSelectedRow()!= -1){
-                if(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString().trim().equals("")){
+                if(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString().trim().equals("")){
                     Valid.textKosong(TCari,"No.Permintaan");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
-                    norm=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),1).toString());
+                    norm=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),1).toString());
                     param.put("nama",Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",norm));
                     param.put("alamat",Sequel.cariIsi("select date_format(tgl_lahir,'%d/%m/%Y') from pasien where no_rkm_medis=?",norm));
                     param.put("norm",norm);
@@ -2220,7 +2222,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("emailrs",akses.getemailrs());
                     Valid.MyReportqry("rptBarcodePermintaanRadiologi.jasper","report","::[ Barcode No.Permintaan Radiologi ]::",
-                            "select noorder from permintaan_radiologi where no_rawat='"+tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),1).toString()+"'",param);
+                            "select noorder from permintaan_radiologi where no_rawat='"+tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),1).toString()+"'",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }else{
@@ -2229,12 +2231,12 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
             }
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(tbRadiologiRanap.getSelectedRow()!= -1){
-                if(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString().trim().equals("")){
+                if(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString().trim().equals("")){
                     Valid.textKosong(TCari,"No.Permintaan");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
-                    norm=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),1).toString());
+                    norm=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),1).toString());
                     param.put("nama",Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",norm));
                     param.put("alamat",Sequel.cariIsi("select date_format(tgl_lahir,'%d/%m/%Y') from pasien where no_rkm_medis=?",norm));
                     param.put("norm",norm);
@@ -2246,7 +2248,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("emailrs",akses.getemailrs());
                     Valid.MyReportqry("rptBarcodePermintaanRadiologi.jasper","report","::[ Barcode No.Permintaan Radiologi ]::",
-                            "select noorder from permintaan_radiologi where no_rawat='"+tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),1).toString()+"'",param);
+                            "select noorder from permintaan_radiologi where no_rawat='"+tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),1).toString()+"'",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }else{
@@ -2259,12 +2261,12 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private void BtnBarcodePermintaan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBarcodePermintaan2ActionPerformed
         if(TabPilihRawat.getSelectedIndex()==0){
             if(tbRadiologiRalan.getSelectedRow()!= -1){
-                if(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString().trim().equals("")){
+                if(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString().trim().equals("")){
                     Valid.textKosong(TCari,"No.Permintaan");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
-                    norm=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),1).toString());
+                    norm=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),1).toString());
                     param.put("nama",Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",norm));
                     param.put("alamat",Sequel.cariIsi("select date_format(tgl_lahir,'%d/%m/%Y') from pasien where no_rkm_medis=?",norm));
                     param.put("norm",norm);
@@ -2276,7 +2278,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("emailrs",akses.getemailrs());
                     Valid.MyReportqry("rptBarcodePermintaanRadiologi2.jasper","report","::[ Barcode No.Permintaan Radiologi ]::",
-                            "select noorder from permintaan_radiologi where no_rawat='"+tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),1).toString()+"'",param);
+                            "select noorder from permintaan_radiologi where no_rawat='"+tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),1).toString()+"'",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }else{
@@ -2285,12 +2287,12 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
             }
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(tbRadiologiRanap.getSelectedRow()!= -1){
-                if(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString().trim().equals("")){
+                if(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString().trim().equals("")){
                     Valid.textKosong(TCari,"No.Permintaan");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
-                    norm=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),1).toString());
+                    norm=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),1).toString());
                     param.put("nama",Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",norm));
                     param.put("alamat",Sequel.cariIsi("select date_format(tgl_lahir,'%d/%m/%Y') from pasien where no_rkm_medis=?",norm));
                     param.put("norm",norm);
@@ -2302,7 +2304,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("emailrs",akses.getemailrs());
                     Valid.MyReportqry("rptBarcodePermintaanRadiologi2.jasper","report","::[ Barcode No.Permintaan Radiologi ]::",
-                            "select noorder from permintaan_radiologi where no_rawat='"+tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),1).toString()+"'",param);
+                            "select noorder from permintaan_radiologi where no_rawat='"+tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),1).toString()+"'",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }else{
@@ -2370,7 +2372,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
                 if(tbRadiologiRalan.getSelectedRow()!= -1){
-                    if(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString().trim().equals("")){
+                    if(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString().trim().equals("")){
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -2379,8 +2381,8 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                         dlgro.setLocationRelativeTo(internalFrame1);
                         dlgro.emptTeks();
                         dlgro.isCek();
-                        dlgro.setOrderFuji(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString(),tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),1).toString(),"Ralan");
-                        dlgro.setDokterPerujuk(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),9).toString(),tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),10).toString());
+                        dlgro.setOrderFuji(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString(),tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),1).toString(),"Ralan");
+                        dlgro.setDokterPerujuk(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),9).toString(),tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),10).toString());
                         dlgro.setVisible(true);
                         this.setCursor(Cursor.getDefaultCursor());
                     }
@@ -2396,7 +2398,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
                 if(tbRadiologiRanap.getSelectedRow()!= -1){
-                    if(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString().trim().equals("")){
+                    if(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString().trim().equals("")){
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -2405,8 +2407,8 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                         dlgro.setLocationRelativeTo(internalFrame1);
                         dlgro.emptTeks();
                         dlgro.isCek();
-                        dlgro.setOrderFuji(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString(),tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),1).toString(),"Ranap");
-                        dlgro.setDokterPerujuk(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),9).toString(),tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),10).toString());
+                        dlgro.setOrderFuji(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString(),tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),1).toString(),"Ranap");
+                        dlgro.setDokterPerujuk(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),9).toString(),tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),10).toString());
                         dlgro.setVisible(true);
                         this.setCursor(Cursor.getDefaultCursor());
                     }
@@ -2537,7 +2539,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
                 if(tbRadiologiRalan.getSelectedRow()!= -1){
-                    if(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString().trim().equals("")){
+                    if(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString().trim().equals("")){
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -2546,8 +2548,8 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                         dlgro.setLocationRelativeTo(internalFrame1);
                         dlgro.emptTeks();
                         dlgro.isCek();
-                        dlgro.setOrderFuji(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString(),tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),1).toString(),"Ralan");
-                        dlgro.setDokterPerujuk(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),9).toString(),tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),10).toString());
+                        dlgro.setOrderFuji(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString(),tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),1).toString(),"Ralan");
+                        dlgro.setDokterPerujuk(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),9).toString(),tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),10).toString());
                         dlgro.setVisible(true);
                         this.setCursor(Cursor.getDefaultCursor());
                     }
@@ -2563,7 +2565,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
                 if(tbRadiologiRanap.getSelectedRow()!= -1){
-                    if(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString().trim().equals("")){
+                    if(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString().trim().equals("")){
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -2572,8 +2574,8 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                         dlgro.setLocationRelativeTo(internalFrame1);
                         dlgro.emptTeks();
                         dlgro.isCek();
-                        dlgro.setOrderFuji(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString(),tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),1).toString(),"Ranap");
-                        dlgro.setDokterPerujuk(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),9).toString(),tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),10).toString());
+                        dlgro.setOrderFuji(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString(),tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),1).toString(),"Ranap");
+                        dlgro.setDokterPerujuk(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),9).toString(),tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),10).toString());
                         dlgro.setVisible(true);
                         this.setCursor(Cursor.getDefaultCursor());
                     }
@@ -2589,7 +2591,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         }if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
                 if(tbRadiologiRalan.getSelectedRow()!= -1){
-                    if(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString().trim().equals("")){
+                    if(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString().trim().equals("")){
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -2598,8 +2600,8 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                         dlgro.setLocationRelativeTo(internalFrame1);
                         dlgro.emptTeks();
                         dlgro.isCek();
-                        dlgro.setOrderFuji(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString(),tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),1).toString(),"Ralan");
-                        dlgro.setDokterPerujuk(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),9).toString(),tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),10).toString());
+                        dlgro.setOrderFuji(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString(),tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),1).toString(),"Ralan");
+                        dlgro.setDokterPerujuk(tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),9).toString(),tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),10).toString());
                         dlgro.setVisible(true);
                         this.setCursor(Cursor.getDefaultCursor());
                     }
@@ -2615,7 +2617,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
                 if(tbRadiologiRanap.getSelectedRow()!= -1){
-                    if(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString().trim().equals("")){
+                    if(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString().trim().equals("")){
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -2624,8 +2626,8 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                         dlgro.setLocationRelativeTo(internalFrame1);
                         dlgro.emptTeks();
                         dlgro.isCek();
-                        dlgro.setOrderFuji(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString(),tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),1).toString(),"Ranap");
-                        dlgro.setDokterPerujuk(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),9).toString(),tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),10).toString());
+                        dlgro.setOrderFuji(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString(),tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),1).toString(),"Ranap");
+                        dlgro.setDokterPerujuk(tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),9).toString(),tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),10).toString());
                         dlgro.setVisible(true);
                         this.setCursor(Cursor.getDefaultCursor());
                     }
@@ -2908,7 +2910,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode2.getRowCount());
+            LCount.setText(""+tbRadiologiRalan2.getRowCount());
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
@@ -2917,39 +2919,39 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
 
     private void getData() {
         if(tbRadiologiRalan.getSelectedRow()!= -1){
-            NoPermintaan=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString();
-            NoRawat=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),1).toString();
-            Pasien=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),2).toString();
-            Permintaan=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),3).toString();
-            JamPermintaan=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),4).toString();
-            Sampel=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),5).toString();
-            JamSampel=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),6).toString();
-            Hasil=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),7).toString();
-            JamHasil=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),8).toString();
-            KodeDokter=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),9).toString();
-            DokterPerujuk=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),10).toString();
-            Ruang=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),11).toString();
-            InformasiTambahan=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),12).toString();
-            Klinis=tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),13).toString();
+            NoPermintaan=tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),0).toString();
+            NoRawat=tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),1).toString();
+            Pasien=tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),2).toString();
+            Permintaan=tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),3).toString();
+            JamPermintaan=tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),4).toString();
+            Sampel=tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),5).toString();
+            JamSampel=tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),6).toString();
+            Hasil=tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),7).toString();
+            JamHasil=tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),8).toString();
+            KodeDokter=tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),9).toString();
+            DokterPerujuk=tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),10).toString();
+            Ruang=tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),11).toString();
+            InformasiTambahan=tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),12).toString();
+            Klinis=tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(tbRadiologiRalan.getSelectedRow()),13).toString();
         }
     }
 
     private void getData2() {
         if(tbRadiologiRanap.getSelectedRow()!= -1){
-            NoPermintaan=tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString();
-            NoRawat=tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),1).toString();
-            Pasien=tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),2).toString();
-            Permintaan=tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),3).toString();
-            JamPermintaan=tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),4).toString();
-            Sampel=tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),5).toString();
-            JamSampel=tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),6).toString();
-            Hasil=tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),7).toString();
-            JamHasil=tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),8).toString();
-            KodeDokter=tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),9).toString();
-            DokterPerujuk=tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),10).toString();
-            Ruang=tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),11).toString();
-            InformasiTambahan=tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),12).toString();
-            Klinis=tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),13).toString();
+            NoPermintaan=tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),0).toString();
+            NoRawat=tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),1).toString();
+            Pasien=tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),2).toString();
+            Permintaan=tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),3).toString();
+            JamPermintaan=tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),4).toString();
+            Sampel=tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),5).toString();
+            JamSampel=tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),6).toString();
+            Hasil=tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),7).toString();
+            JamHasil=tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),8).toString();
+            KodeDokter=tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),9).toString();
+            DokterPerujuk=tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),10).toString();
+            Ruang=tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),11).toString();
+            InformasiTambahan=tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),12).toString();
+            Klinis=tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(tbRadiologiRanap.getSelectedRow()),13).toString();
         }
     }
 
@@ -3216,7 +3218,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode4.getRowCount());
+            LCount.setText(""+tbRadiologiRanap2.getRowCount());
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
@@ -3245,7 +3247,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                     permintaanbaru=0;
                     if(formalarm.contains("ralan")){
                         for(i=0;i<tbRadiologiRalan.getRowCount();i++){
-                            if((!tbRadiologiRalan.getValueAt(i,0).toString().equals(""))&&tbRadiologiRalan.getValueAt(i,5).toString().equals("")){
+                            if((!tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(i),0).toString().equals(""))&&tabMode.getValueAt(tbRadiologiRalan.convertRowIndexToModel(i),5).toString().equals("")){
                                 permintaanbaru++;
                             }
                         }
@@ -3253,7 +3255,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
 
                     if(formalarm.contains("ranap")){
                         for(i=0;i<tbRadiologiRanap.getRowCount();i++){
-                            if((!tbRadiologiRanap.getValueAt(i,0).toString().equals(""))&&tbRadiologiRanap.getValueAt(i,5).toString().equals("")){
+                            if((!tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(i),0).toString().equals(""))&&tabMode3.getValueAt(tbRadiologiRanap.convertRowIndexToModel(i),5).toString().equals("")){
                                 permintaanbaru++;
                             }
                         }

@@ -144,7 +144,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKategori.setAutoCreateRowSorter(false);
+        tbKategori.setAutoCreateRowSorter(true);
         tbKategori.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbKategori.setName("tbKategori"); // NOI18N
         tbKategori.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -388,7 +388,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
                 TKd.getText(),TNm.getText()
             })==true){
                 tabMode.addRow(new Object[]{false,TKd.getText(),TNm.getText()});
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbKategori.getRowCount());
                 emptTeks();
             }
         }
@@ -414,14 +414,14 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbKategori.getRowCount();i++){
-            if(tbKategori.getValueAt(i,0).toString().equals("true")){
-                if(Sequel.meghapustf("kategori_perawatan","kd_kategori",tbKategori.getValueAt(i,1).toString())==true){
-                    tabMode.removeRow(i);
+            if(tabMode.getValueAt(tbKategori.convertRowIndexToModel(i),0).toString().equals("true")){
+                if(Sequel.meghapustf("kategori_perawatan","kd_kategori",tabMode.getValueAt(tbKategori.convertRowIndexToModel(i),1).toString())==true){
+                    tabMode.removeRow(tbKategori.convertRowIndexToModel(i));
                     i--;
                 }
             }
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKategori.getRowCount());
         emptTeks();
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -440,11 +440,11 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
             Valid.textKosong(TNm,"nama kategori");
         }else{
             if(Valid.editTabletf(tabMode,"kategori_perawatan","kd_kategori","?","kd_kategori=?,nm_kategori=?",3,new String[]{
-                TKd.getText(),TNm.getText(),tbKategori.getValueAt(tbKategori.getSelectedRow(),1).toString()
+                TKd.getText(),TNm.getText(),tabMode.getValueAt(tbKategori.convertRowIndexToModel(tbKategori.getSelectedRow()),1).toString()
             })==true){
                 if(tbKategori.getSelectedRow()!= -1){
-                    tbKategori.setValueAt(TKd.getText(),tbKategori.getSelectedRow(),1);
-                    tbKategori.setValueAt(TNm.getText(),tbKategori.getSelectedRow(),2);
+                    tabMode.setValueAt(TKd.getText(),tbKategori.convertRowIndexToModel(tbKategori.getSelectedRow()),1);
+                    tabMode.setValueAt(TNm.getText(),tbKategori.convertRowIndexToModel(tbKategori.getSelectedRow()),2);
                 }
                 emptTeks();
             }
@@ -511,7 +511,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKategoriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKategoriMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKategori.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -520,7 +520,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKategoriMouseClicked
 
     private void tbKategoriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKategoriKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKategori.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -601,6 +601,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil(){
+        tbKategori.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -626,13 +627,14 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKategori.getRowCount());
+        tbKategori.resumeSorting();
     }
 
     private void getData() {
         if(tbKategori.getSelectedRow()!= -1){
-            TKd.setText(tbKategori.getValueAt(tbKategori.getSelectedRow(),1).toString());
-            TNm.setText(tbKategori.getValueAt(tbKategori.getSelectedRow(),2).toString());
+            TKd.setText(tabMode.getValueAt(tbKategori.convertRowIndexToModel(tbKategori.getSelectedRow()),1).toString());
+            TNm.setText(tabMode.getValueAt(tbKategori.convertRowIndexToModel(tbKategori.getSelectedRow()),2).toString());
         }
     }
 

@@ -489,9 +489,9 @@ public class DlgParkirJenis extends javax.swing.JDialog {
             Valid.textKosong(TBiaya,"Biaya");
         }else{
             Sequel.mengedit("parkir_jenis","kd_parkir=?","kd_parkir=?,jns_parkir=?,biaya=?,jenis=?",5,new String[]{
-                TKd.getText(),TNm.getText(),TBiaya.getText(),Sistem.getSelectedItem().toString(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
+                TKd.getText(),TNm.getText(),TBiaya.getText(),Sistem.getSelectedItem().toString(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString()
             });
-            if(tabMode.getRowCount()!=0){tampil();}
+            if(tbSpesialis.getRowCount()!=0){tampil();}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -556,7 +556,7 @@ public class DlgParkirJenis extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -565,7 +565,7 @@ public class DlgParkirJenis extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisMouseClicked
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -653,7 +653,7 @@ public class DlgParkirJenis extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbSpesialis.getRowCount());
     }
 
     public void emptTeks() {
@@ -668,10 +668,10 @@ public class DlgParkirJenis extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            TKd.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            TNm.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
-            TBiaya.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString());
-            Sistem.setSelectedItem(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),3).toString());
+            TKd.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            TNm.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
+            TBiaya.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2).toString());
+            Sistem.setSelectedItem(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),3).toString());
         }
     }
 

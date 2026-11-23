@@ -153,6 +153,7 @@ public class DlgObatPerTanggal extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbJadwal.setAutoCreateRowSorter(true);
         tbJadwal.setComponentPopupMenu(jPopupMenu1);
         tbJadwal.setName("tbJadwal"); // NOI18N
         tbJadwal.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -962,7 +963,7 @@ public class DlgObatPerTanggal extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJadwal.getRowCount());
         this.setCursor(Cursor.getDefaultCursor());
     }
 
@@ -1126,7 +1127,7 @@ public class DlgObatPerTanggal extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJadwal.getRowCount());
         this.setCursor(Cursor.getDefaultCursor());
     }
 

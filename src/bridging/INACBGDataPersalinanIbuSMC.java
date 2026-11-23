@@ -59,7 +59,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         tbKelahiran.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKelahiran.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbKelahiran.getColumnCount(); i++) {
             TableColumn column = tbKelahiran.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(105);
@@ -620,14 +620,14 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbKelahiran.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis..!!");
         } else {
             if (tbKelahiran.getSelectedRow() < 0) {
                 JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data yang mau dihapus..!!");
             } else {
-                if (Sequel.menghapustfSmc("inacbg_data_klaim_persalinan_smc", "no_sep = ? and delivery_sequence = ?", noSEP.getText(), (String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 4))) {
-                    tabMode.removeRow(tbKelahiran.getSelectedRow());
+                if (Sequel.menghapustfSmc("inacbg_data_klaim_persalinan_smc", "no_sep = ? and delivery_sequence = ?", noSEP.getText(), (String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 4))) {
+                    tabMode.removeRow(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()));
                     emptTeks();
                 } else {
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus data kelahiran..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
@@ -637,7 +637,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbKelahiran.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis..!!");
         } else {
             if (tbKelahiran.getSelectedRow() < 0) {
@@ -650,22 +650,22 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
                     useManual.getSelectedItem().toString(), useForcep.getSelectedItem().toString(), useVacuum.getSelectedItem().toString(), spesimenDiambil.getSelectedItem().toString(),
                     lokasiSpesimen.getSelectedItem().toString(), (spesimenDiambil.getSelectedIndex() == 0 ? "0000-00-00" : Valid.getTglSmc(tglSampel)),
                     (spesimenDiambil.getSelectedIndex() == 0 ? "00:00:00" : Valid.getJamSmc(cmbJamSampel, cmbMenitSampel, cmbDetikSampel)),
-                    alasanSpesimenTakDiambil.getSelectedItem().toString(), noSEP.getText(), (String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 4)
+                    alasanSpesimenTakDiambil.getSelectedItem().toString(), noSEP.getText(), (String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 4)
                 )) {
-                    tbKelahiran.setValueAt(urutanLahir.getText(), tbKelahiran.getSelectedRow(), 4);
-                    tbKelahiran.setValueAt(caraLahir.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 5);
-                    tbKelahiran.setValueAt(Valid.getTglSmc(tglKelahiran), tbKelahiran.getSelectedRow(), 6);
-                    tbKelahiran.setValueAt(Valid.getJamSmc(cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran), tbKelahiran.getSelectedRow(), 7);
-                    tbKelahiran.setValueAt(letakJanin.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 8);
-                    tbKelahiran.setValueAt(useManual.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 9);
-                    tbKelahiran.setValueAt(useForcep.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 10);
-                    tbKelahiran.setValueAt(useVacuum.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 11);
-                    tbKelahiran.setValueAt(kondisiLahir.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 12);
-                    tbKelahiran.setValueAt(spesimenDiambil.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 13);
-                    tbKelahiran.setValueAt(lokasiSpesimen.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 14);
-                    tbKelahiran.setValueAt((spesimenDiambil.getSelectedIndex() == 0 ? "0000-00-00" : Valid.getTglSmc(tglSampel)), tbKelahiran.getSelectedRow(), 15);
-                    tbKelahiran.setValueAt((spesimenDiambil.getSelectedIndex() == 0 ? "00:00:00" : Valid.getJamSmc(cmbJamSampel, cmbMenitSampel, cmbDetikSampel)), tbKelahiran.getSelectedRow(), 16);
-                    tbKelahiran.setValueAt(alasanSpesimenTakDiambil.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 17);
+                    tabMode.setValueAt(urutanLahir.getText(), tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 4);
+                    tabMode.setValueAt(caraLahir.getSelectedItem().toString(), tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 5);
+                    tabMode.setValueAt(Valid.getTglSmc(tglKelahiran), tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 6);
+                    tabMode.setValueAt(Valid.getJamSmc(cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran), tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 7);
+                    tabMode.setValueAt(letakJanin.getSelectedItem().toString(), tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 8);
+                    tabMode.setValueAt(useManual.getSelectedItem().toString(), tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 9);
+                    tabMode.setValueAt(useForcep.getSelectedItem().toString(), tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 10);
+                    tabMode.setValueAt(useVacuum.getSelectedItem().toString(), tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 11);
+                    tabMode.setValueAt(kondisiLahir.getSelectedItem().toString(), tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 12);
+                    tabMode.setValueAt(spesimenDiambil.getSelectedItem().toString(), tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 13);
+                    tabMode.setValueAt(lokasiSpesimen.getSelectedItem().toString(), tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 14);
+                    tabMode.setValueAt((spesimenDiambil.getSelectedIndex() == 0 ? "0000-00-00" : Valid.getTglSmc(tglSampel)), tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 15);
+                    tabMode.setValueAt((spesimenDiambil.getSelectedIndex() == 0 ? "00:00:00" : Valid.getJamSmc(cmbJamSampel, cmbMenitSampel, cmbDetikSampel)), tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 16);
+                    tabMode.setValueAt(alasanSpesimenTakDiambil.getSelectedItem().toString(), tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 17);
                     emptTeks();
                 } else {
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengubah data kelahiran..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
@@ -716,7 +716,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbKelahiranMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKelahiranMouseReleased
-        if (tabMode.getRowCount() > 0) {
+        if (tbKelahiran.getRowCount() > 0) {
             try {
                 int row = tbKelahiran.rowAtPoint(evt.getPoint());
                 int col = tbKelahiran.columnAtPoint(evt.getPoint());
@@ -836,6 +836,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
     private void tampil() {
         if (!ceksukses) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbKelahiran.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             new SwingWorker<Void, Object[]>() {
                 private final String cari = TCari.getText().trim();
@@ -883,9 +884,10 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbKelahiran.getRowCount() + "");
                     INACBGDataPersalinanIbuSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbKelahiran.resumeSorting();
                 }
             }.execute();
         }
@@ -894,24 +896,24 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
     private void getData() {
         if (tbKelahiran.getSelectedRow() >= 0) {
             try {
-                noRawat.setText((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 0));
-                noSEP.setText((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 1));
-                noRM.setText((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 2));
-                namaPasien.setText((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 3));
-                urutanLahir.setText((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 4));
-                caraLahir.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 5));
-                Valid.setTglSmc(tglKelahiran, (String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 6));
-                Valid.setJamSmc(cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran, (String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 7));
-                letakJanin.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 8));
-                useManual.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 9));
-                useForcep.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 10));
-                useVacuum.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 11));
-                kondisiLahir.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 12));
-                spesimenDiambil.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 13));
-                lokasiSpesimen.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 14));
-                Valid.setTglSmc(tglSampel, (String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 15));
-                Valid.setJamSmc(cmbJamSampel, cmbMenitSampel, cmbDetikSampel, (String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 16));
-                alasanSpesimenTakDiambil.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 17));
+                noRawat.setText((String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 0));
+                noSEP.setText((String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 1));
+                noRM.setText((String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 2));
+                namaPasien.setText((String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 3));
+                urutanLahir.setText((String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 4));
+                caraLahir.setSelectedItem((String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 5));
+                Valid.setTglSmc(tglKelahiran, (String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 6));
+                Valid.setJamSmc(cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran, (String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 7));
+                letakJanin.setSelectedItem((String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 8));
+                useManual.setSelectedItem((String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 9));
+                useForcep.setSelectedItem((String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 10));
+                useVacuum.setSelectedItem((String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 11));
+                kondisiLahir.setSelectedItem((String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 12));
+                spesimenDiambil.setSelectedItem((String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 13));
+                lokasiSpesimen.setSelectedItem((String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 14));
+                Valid.setTglSmc(tglSampel, (String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 15));
+                Valid.setJamSmc(cmbJamSampel, cmbMenitSampel, cmbDetikSampel, (String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 16));
+                alasanSpesimenTakDiambil.setSelectedItem((String) tabMode.getValueAt(tbKelahiran.convertRowIndexToModel(tbKelahiran.getSelectedRow()), 17));
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }

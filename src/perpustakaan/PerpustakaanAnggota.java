@@ -781,7 +781,7 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
             if(tbJnsPerawatan.getSelectedRow()> -1){
                 if(Sequel.mengedittf("perpustakaan_anggota","no_anggota=?","no_anggota=?,nama_anggota=?,tmp_lahir=?,tgl_lahir=?,j_kel=?,alamat=?,no_telp=?,email=?,tgl_gabung=?,masa_berlaku=?,jenis_anggota=?,nomer_id=?",13,new String[]{
                         NoAnggota.getText(),NmAnggota.getText(),TmpLahir.getText(),Valid.SetTgl(TglLahir.getSelectedItem()+""),JK.getSelectedItem().toString().substring(0,1),Alamat.getText(),NoTelp.getText(),Email.getText(),
-                        Valid.SetTgl(Gabung.getSelectedItem()+""),Valid.SetTgl(Habis.getSelectedItem()+""),Jenis.getSelectedItem().toString(),NoID.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                        Valid.SetTgl(Gabung.getSelectedItem()+""),Valid.SetTgl(Habis.getSelectedItem()+""),Jenis.getSelectedItem().toString(),NoID.getText(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString()
                     })==true){
                         runBackground(() ->tampil());
                         emptTeks();
@@ -924,7 +924,7 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -933,7 +933,7 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -996,7 +996,7 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1036,10 +1036,10 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
 
     private void MnKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKartuActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbJnsPerawatan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbJnsPerawatan.getRowCount()!=0){
             if(tbJnsPerawatan.getSelectedRow()> -1){
                 Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
@@ -1180,7 +1180,7 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {
@@ -1197,18 +1197,18 @@ public final class PerpustakaanAnggota extends javax.swing.JDialog {
 
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
-            NoAnggota.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-            NmAnggota.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-            TmpLahir.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-            Valid.SetTgl(TglLahir,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-            JK.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString().replaceAll("P","Perempuan").replaceAll("L","Laki-Laki"));
-            Alamat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
-            NoTelp.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
-            Email.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
-            Valid.SetTgl(Gabung,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString());
-            Valid.SetTgl(Habis,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString());
-            Jenis.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString());
-            NoID.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString());
+            NoAnggota.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+            NmAnggota.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+            TmpLahir.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+            Valid.SetTgl(TglLahir,tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+            JK.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString().replaceAll("P","Perempuan").replaceAll("L","Laki-Laki"));
+            Alamat.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5).toString());
+            NoTelp.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),6).toString());
+            Email.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7).toString());
+            Valid.SetTgl(Gabung,tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),8).toString());
+            Valid.SetTgl(Habis,tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),9).toString());
+            Jenis.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),10).toString());
+            NoID.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),11).toString());
         }
     }
 

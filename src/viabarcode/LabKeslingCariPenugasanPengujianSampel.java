@@ -895,19 +895,19 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                             append("</tr>");
                                 for (int i = 0; i < tabModePenugasan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,12).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -955,19 +955,19 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                             append("</tr>");
                                 for (int i = 0; i < tabModePenugasan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPenugasan.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePenugasan.getValueAt(i,12).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -1002,7 +1002,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                     "\"Tgl.Penugasan\";\"No.Penugasan\";\"NIP PJ\";\"Nama PJ\";\"NIP Analis\";\"Nama Analis\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Hasil\";\"Catatan\"\n"
                                 );
                                 for (int i = 0; i < tabModePenugasan.getRowCount(); i++) {
-                                    htmlContent.append("\"").append(tbPenugasan.getValueAt(i,0).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,1).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,2).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,3).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,4).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,5).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,6).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,7).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,8).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,9).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,10).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,11).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,12).toString()).append("\"\n");
+                                    htmlContent.append("\"").append(tabModePenugasan.getValueAt(i,0).toString()).append("\";\"").append(tabModePenugasan.getValueAt(i,1).toString()).append("\";\"").append(tabModePenugasan.getValueAt(i,2).toString()).append("\";\"").append(tabModePenugasan.getValueAt(i,3).toString()).append("\";\"").append(tabModePenugasan.getValueAt(i,4).toString()).append("\";\"").append(tabModePenugasan.getValueAt(i,5).toString()).append("\";\"").append(tabModePenugasan.getValueAt(i,6).toString()).append("\";\"").append(tabModePenugasan.getValueAt(i,7).toString()).append("\";\"").append(tabModePenugasan.getValueAt(i,8).toString()).append("\";\"").append(tabModePenugasan.getValueAt(i,9).toString()).append("\";\"").append(tabModePenugasan.getValueAt(i,10).toString()).append("\";\"").append(tabModePenugasan.getValueAt(i,11).toString()).append("\";\"").append(tabModePenugasan.getValueAt(i,12).toString()).append("\"\n");
                                 }
                                 f = new File("DataPenugasanPengujianSampel.csv");
                                 bw = new BufferedWriter(new FileWriter(f));
@@ -1069,25 +1069,25 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                             append("</tr>");
                                 for (int i = 0; i < tabModeRekapPenugasan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,12).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,13).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,14).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,15).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,16).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,17).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,18).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,13).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,14).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,15).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,16).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,17).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,18).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -1141,25 +1141,25 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                             append("</tr>");
                                 for (int i = 0; i < tabModeRekapPenugasan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,12).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,13).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,14).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,15).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,16).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,17).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPenugasan.getValueAt(i,18).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,13).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,14).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,15).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,16).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,17).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPenugasan.getValueAt(i,18).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -1194,7 +1194,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                                     "\"Tgl.Penugasan\";\"No.Penugasan\";\"NIP PJ\";\"Nama PJ\";\"NIP Analis\";\"Nama Analis\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Hasil\";\"Catatan\";\"Kode Param\";\"Nama Parameter\";\"Metode Pengujian\";\"Satuan\";\"Kategori\";\"Nilai Normal\"\n"
                                 );
                                 for (int i = 0; i < tabModeRekapPenugasan.getRowCount(); i++) {
-                                    htmlContent.append("\"").append(tbRekapPenugasan.getValueAt(i,0).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,1).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,2).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,3).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,4).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,5).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,6).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,7).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,8).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,9).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,10).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,11).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,12).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,13).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,14).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,15).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,16).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,17).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,18).toString()).append("\"\n");
+                                    htmlContent.append("\"").append(tabModeRekapPenugasan.getValueAt(i,0).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,1).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,2).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,3).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,4).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,5).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,6).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,7).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,8).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,9).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,10).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,11).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,12).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,13).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,14).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,15).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,16).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,17).toString()).append("\";\"").append(tabModeRekapPenugasan.getValueAt(i,18).toString()).append("\"\n");
                                 }
                                 f = new File("DataRekapPenugasanPengujianSampel.csv");
                                 bw = new BufferedWriter(new FileWriter(f));
@@ -1274,7 +1274,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                         StringBuilder iyembuilder = new StringBuilder();
 
                         for(i=0;i<tbDetailPenugasan.getRowCount();i++){
-                            iyembuilder.append("{\"Kode\":\"").append(tbDetailPenugasan.getValueAt(i,0).toString()).append("\",\"NamaParameter\":\"").append(tbDetailPenugasan.getValueAt(i,1).toString()).append("\",\"MetodePengujian\":\"").append(tbDetailPenugasan.getValueAt(i,2).toString()).append("\",\"Satuan\":\"").append(tbDetailPenugasan.getValueAt(i,3).toString()).append("\",\"Kategori\":\"").append(tbDetailPenugasan.getValueAt(i,4).toString()).append("\",\"Normal\":\"").append(tbDetailPenugasan.getValueAt(i,5).toString()).append("\"},");
+                            iyembuilder.append("{\"Kode\":\"").append(tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),0).toString()).append("\",\"NamaParameter\":\"").append(tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),1).toString()).append("\",\"MetodePengujian\":\"").append(tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),2).toString()).append("\",\"Satuan\":\"").append(tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),3).toString()).append("\",\"Kategori\":\"").append(tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),4).toString()).append("\",\"Normal\":\"").append(tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),5).toString()).append("\"},");
                         }
 
                         if (iyembuilder.length() > 0) {
@@ -1299,7 +1299,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                         @Override
                         public void windowClosed(WindowEvent e) {
                             if(form.berhasil==true){
-                                tbPenugasan.setValueAt("Sudah Keluar Hasil",tbPenugasan.getSelectedRow(),11);
+                                tabModePenugasan.setValueAt("Sudah Keluar Hasil",tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),11);
                             }
                         }
                         @Override
@@ -1314,11 +1314,11 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                     form.isCek();
                     form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     form.setLocationRelativeTo(this);
-                    form.setData(tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),1).toString(),tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),6).toString(),tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),7).toString(),tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),8).toString(),tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),9).toString(),tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),10).toString(),tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),4).toString(),tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),5).toString());
+                    form.setData(tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),1).toString(),tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),6).toString(),tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),7).toString(),tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),8).toString(),tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),9).toString(),tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),10).toString(),tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),4).toString(),tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),5).toString());
                     form.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else{
-                    if(akses.getkode().equals(tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),4).toString())){
+                    if(akses.getkode().equals(tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),4).toString())){
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         try {
                             file=new File("./cache/hasilpengujiansampellabkesling.iyem");
@@ -1327,7 +1327,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                             StringBuilder iyembuilder = new StringBuilder();
 
                             for(i=0;i<tbDetailPenugasan.getRowCount();i++){
-                                iyembuilder.append("{\"Kode\":\"").append(tbDetailPenugasan.getValueAt(i,0).toString()).append("\",\"NamaParameter\":\"").append(tbDetailPenugasan.getValueAt(i,1).toString()).append("\",\"MetodePengujian\":\"").append(tbDetailPenugasan.getValueAt(i,2).toString()).append("\",\"Satuan\":\"").append(tbDetailPenugasan.getValueAt(i,3).toString()).append("\",\"Kategori\":\"").append(tbDetailPenugasan.getValueAt(i,4).toString()).append("\",\"Sampel\":\"").append(tbDetailPenugasan.getValueAt(i,5).toString()).append("\"},");
+                                iyembuilder.append("{\"Kode\":\"").append(tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),0).toString()).append("\",\"NamaParameter\":\"").append(tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),1).toString()).append("\",\"MetodePengujian\":\"").append(tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),2).toString()).append("\",\"Satuan\":\"").append(tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),3).toString()).append("\",\"Kategori\":\"").append(tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),4).toString()).append("\",\"Sampel\":\"").append(tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),5).toString()).append("\"},");
                             }
 
                             if (iyembuilder.length() > 0) {
@@ -1352,7 +1352,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                             @Override
                             public void windowClosed(WindowEvent e) {
                                 if(form.berhasil==true){
-                                    tbPenugasan.setValueAt("Sudah Keluar Hasil",tbPenugasan.getSelectedRow(),11);
+                                    tabModePenugasan.setValueAt("Sudah Keluar Hasil",tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),11);
                                 }
                             }
                             @Override
@@ -1367,7 +1367,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                         form.isCek();
                         form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         form.setLocationRelativeTo(this);
-                        form.setData(tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),1).toString(),tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),6).toString(),tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),7).toString(),tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),8).toString(),tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),9).toString(),tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),10).toString(),tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),4).toString(),tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),5).toString());
+                        form.setData(tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),1).toString(),tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),6).toString(),tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),7).toString(),tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),8).toString(),tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),9).toString(),tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),10).toString(),tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),4).toString(),tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),5).toString());
                         form.setVisible(true);
                         this.setCursor(Cursor.getDefaultCursor());
                     }else{
@@ -1407,8 +1407,8 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                         "and labkesling_nilai_normal_baku_mutu.kode_sampel=? order by labkesling_detail_penugasan_pengujian_sampel.kode_parameter"
                     );
                     try {
-                        ps.setString(1,tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),1).toString());
-                        ps.setString(2,tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),9).toString());
+                        ps.setString(1,tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),1).toString());
+                        ps.setString(2,tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),9).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModeDetailPenugasan.addRow(new Object[]{
@@ -1454,19 +1454,19 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                     Sequel.queryu("delete from temporary");
                     for(i=0;i<tbDetailPenugasan.getRowCount();i++){
                         Sequel.menyimpan("temporary","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                            "0",tbDetailPenugasan.getValueAt(i,0).toString(),tbDetailPenugasan.getValueAt(i,1).toString(),tbDetailPenugasan.getValueAt(i,2).toString(),tbDetailPenugasan.getValueAt(i,4).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+                            "0",tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),0).toString(),tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),1).toString(),tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),2).toString(),tabModeDetailPenugasan.getValueAt(tbDetailPenugasan.convertRowIndexToModel(i),4).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
                         });
                     }
                     //"Tgl.Penugasan"0,"No.Penugasan"1,"NIP PJ"2,"Nama PJ"3,"NIP Analis"4,"Nama Analis"5,"No.Permintaan"6,"No.Pelanggan"7,"Nama Pelanggan"8,"Kode Sampel"9,"Nama Sampel"10,"Status Hasil"11,"Catatan"12
                     Map<String, Object> param = new HashMap<>();
-                    param.put("pjlaborat",tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),3).toString());
-                    param.put("kodepjlaborat",tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),2).toString());
-                    param.put("analis",tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),5).toString()+" NIP : "+tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),4).toString());
-                    param.put("nopenugasan",tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),1).toString());
-                    param.put("nomorpermintaan",tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),6).toString());
-                    param.put("jenisampel",tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),9).toString());
-                    param.put("kodesampel",tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),10).toString());
-                    param.put("catatan",tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),12).toString());
+                    param.put("pjlaborat",tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),3).toString());
+                    param.put("kodepjlaborat",tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),2).toString());
+                    param.put("analis",tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),5).toString()+" NIP : "+tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),4).toString());
+                    param.put("nopenugasan",tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),1).toString());
+                    param.put("nomorpermintaan",tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),6).toString());
+                    param.put("jenisampel",tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),9).toString());
+                    param.put("kodesampel",tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),10).toString());
+                    param.put("catatan",tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),12).toString());
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
@@ -1474,8 +1474,8 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("emailrs",akses.getemailrs());
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),2).toString());
-                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),3).toString()+"\nID "+(finger.equals("")?tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),2).toString():finger)+"\n"+Valid.SetTgl3(tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),0).toString()));
+                    String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),2).toString());
+                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),3).toString()+"\nID "+(finger.equals("")?tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),2).toString():finger)+"\n"+Valid.SetTgl3(tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),0).toString()));
                     Valid.MyReport("rptPenugasanPengujianSampelLaboratKesling.jasper","report","::[ Penugasan Pengujian Sampel Laborat Kesehatan Lingkungan ]::",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else{
@@ -1490,13 +1490,13 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(TabData.getSelectedIndex()==0){
             if(tbPenugasan.getSelectedRow()!= -1){
-                if(tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),11).toString().equals("Belum Keluar Hasil")){
-                    if(Sequel.queryutf("delete from labkesling_penugasan_pengujian_sampel where no_penugasan='"+tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),1).toString()+"'")==true){
-                        if(Sequel.cariInteger("select count(labkesling_penugasan_pengujian_sampel.no_permintaan) from labkesling_penugasan_pengujian_sampel where labkesling_penugasan_pengujian_sampel.no_permintaan=?",tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),6).toString())==0){
-                            Sequel.queryu("update labkesling_permintaan_pengujian_sampel_dilayani set status='Belum Ada Penugasan' where no_permintaan='"+tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),6).toString()+"'");
+                if(tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),11).toString().equals("Belum Keluar Hasil")){
+                    if(Sequel.queryutf("delete from labkesling_penugasan_pengujian_sampel where no_penugasan='"+tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),1).toString()+"'")==true){
+                        if(Sequel.cariInteger("select count(labkesling_penugasan_pengujian_sampel.no_permintaan) from labkesling_penugasan_pengujian_sampel where labkesling_penugasan_pengujian_sampel.no_permintaan=?",tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),6).toString())==0){
+                            Sequel.queryu("update labkesling_permintaan_pengujian_sampel_dilayani set status='Belum Ada Penugasan' where no_permintaan='"+tabModePenugasan.getValueAt(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()),6).toString()+"'");
                         }
-                        tabModePenugasan.removeRow(tbPenugasan.getSelectedRow());
-                        LTotal.setText(tabModePenugasan.getRowCount()+"");
+                        tabModePenugasan.removeRow(tbPenugasan.convertRowIndexToModel(tbPenugasan.getSelectedRow()));
+                        LTotal.setText(tbPenugasan.getRowCount()+"");
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Sudah keluar hasil, tidak bisa dihapus...!");
@@ -1506,10 +1506,10 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
             }
         }else if(TabData.getSelectedIndex()==1){
             if(tbRekapPenugasan.getSelectedRow()!= -1){
-                if(tbRekapPenugasan.getValueAt(tbRekapPenugasan.getSelectedRow(),11).toString().equals("Belum Keluar Hasil")){
-                    if(Sequel.queryutf("delete from labkesling_detail_penugasan_pengujian_sampel where no_penugasan='"+tbRekapPenugasan.getValueAt(tbRekapPenugasan.getSelectedRow(),1).toString()+"' and kode_parameter='"+tbRekapPenugasan.getValueAt(tbRekapPenugasan.getSelectedRow(),13).toString()+"'")==true){
-                        tabModeRekapPenugasan.removeRow(tbRekapPenugasan.getSelectedRow());
-                        LTotal.setText(tabModeRekapPenugasan.getRowCount()+"");
+                if(tabModeRekapPenugasan.getValueAt(tbRekapPenugasan.convertRowIndexToModel(tbRekapPenugasan.getSelectedRow()),11).toString().equals("Belum Keluar Hasil")){
+                    if(Sequel.queryutf("delete from labkesling_detail_penugasan_pengujian_sampel where no_penugasan='"+tabModeRekapPenugasan.getValueAt(tbRekapPenugasan.convertRowIndexToModel(tbRekapPenugasan.getSelectedRow()),1).toString()+"' and kode_parameter='"+tabModeRekapPenugasan.getValueAt(tbRekapPenugasan.convertRowIndexToModel(tbRekapPenugasan.getSelectedRow()),13).toString()+"'")==true){
+                        tabModeRekapPenugasan.removeRow(tbRekapPenugasan.convertRowIndexToModel(tbRekapPenugasan.getSelectedRow()));
+                        LTotal.setText(tbRekapPenugasan.getRowCount()+"");
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Sudah keluar hasil, tidak bisa dihapus...!");
@@ -1660,7 +1660,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                         rs.getString("catatan")
                     });
                 }
-                LTotal.setText(tabModePenugasan.getRowCount()+"");
+                LTotal.setText(tbPenugasan.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{
@@ -1728,7 +1728,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
                         rs.getString("nilai_normal")
                     });
                 }
-                LTotal.setText(tabModeRekapPenugasan.getRowCount()+"");
+                LTotal.setText(tbRekapPenugasan.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{

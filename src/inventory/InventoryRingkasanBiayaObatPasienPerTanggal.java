@@ -498,6 +498,7 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
         scrollPane4.setOpaque(true);
 
         tbDokter.setAutoCreateRowSorter(false);
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},

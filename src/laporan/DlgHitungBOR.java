@@ -418,6 +418,7 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        Tabel1.setSortable(false);
         Tabel1.setComponentPopupMenu(jPopupMenu1);
         Tabel1.setName("Tabel1"); // NOI18N
         Scroll.setViewportView(Tabel1);
@@ -435,6 +436,7 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
+        Tabel2.setSortable(false);
         Tabel2.setComponentPopupMenu(jPopupMenu1);
         Tabel2.setName("Tabel2"); // NOI18N
         Tabel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -504,7 +506,7 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
                             param.put("tanggal",Tgl2.getDate());
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                             for(int r=0;r<tabMode.getRowCount();r++){
-                                if(!Tabel1.getValueAt(r,0).toString().contains(">>")){
+                                if(!tabMode.getValueAt(r,0).toString().contains(">>")){
                                     Sequel.menyimpan("temporary","'"+r+"','"+
                                                     tabMode.getValueAt(r,0).toString()+"','"+
                                                     tabMode.getValueAt(r,1).toString()+"','"+
@@ -551,7 +553,7 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
                             param.put("tanggal",Tgl2.getDate());
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                             for(int r=0;r<tabMode2.getRowCount();r++){
-                                if(!Tabel2.getValueAt(r,0).toString().contains(">>")){
+                                if(!tabMode2.getValueAt(r,0).toString().contains(">>")){
                                     Sequel.menyimpan("temporary","'"+r+"','"+
                                                     tabMode2.getValueAt(r,0).toString()+"','"+
                                                     tabMode2.getValueAt(r,1).toString()+"','"+

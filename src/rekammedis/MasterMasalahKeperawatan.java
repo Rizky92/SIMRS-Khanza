@@ -381,7 +381,7 @@ public class MasterMasalahKeperawatan extends javax.swing.JDialog {
             if(Sequel.menyimpantf("master_masalah_keperawatan","'"+TKd.getText()+"','"+TNm.getText()+"'","Kode")==true){
                 tabMode.addRow(new Object[]{TKd.getText(),TNm.getText()});
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbSpesialis.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -407,9 +407,9 @@ public class MasterMasalahKeperawatan extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,TKd,"master_masalah_keperawatan","kode_masalah")==true){
             if(tbSpesialis.getSelectedRow()!= -1){
-                tabMode.removeRow(tbSpesialis.getSelectedRow());
+                tabMode.removeRow(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()));
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbSpesialis.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
@@ -430,10 +430,10 @@ public class MasterMasalahKeperawatan extends javax.swing.JDialog {
         }else{
             if(tbSpesialis.getSelectedRow()> -1){
                 if(Sequel.mengedittf("master_masalah_keperawatan","kode_masalah=?","kode_masalah=?,nama_masalah=?",3,new String[]{
-                    TKd.getText(),TNm.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
+                    TKd.getText(),TNm.getText(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString()
                 })==true){
-                    tbSpesialis.setValueAt(TKd.getText(),tbSpesialis.getSelectedRow(),0);
-                    tbSpesialis.setValueAt(TNm.getText(),tbSpesialis.getSelectedRow(),1);
+                    tabMode.setValueAt(TKd.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0);
+                    tabMode.setValueAt(TNm.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1);
                     emptTeks();
                 }
             }
@@ -500,7 +500,7 @@ public class MasterMasalahKeperawatan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -509,7 +509,7 @@ public class MasterMasalahKeperawatan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisMouseClicked
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -549,7 +549,7 @@ public class MasterMasalahKeperawatan extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbSpesialisKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -624,7 +624,7 @@ public class MasterMasalahKeperawatan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbSpesialis.getRowCount());
     }
 
     private void emptTeks() {
@@ -638,8 +638,8 @@ public class MasterMasalahKeperawatan extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            TKd.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            TNm.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
+            TKd.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            TNm.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
         }
     }
 

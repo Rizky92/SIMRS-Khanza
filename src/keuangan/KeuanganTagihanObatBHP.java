@@ -263,6 +263,7 @@ public final class KeuanganTagihanObatBHP extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setAutoCreateRowSorter(true);
         tbBangsal.setToolTipText("Silahkan centang di depan untuk memilih data hutang yang mau dibayar");
         tbBangsal.setComponentPopupMenu(Popup);
         tbBangsal.setName("tbBangsal"); // NOI18N
@@ -710,9 +711,9 @@ public final class KeuanganTagihanObatBHP extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(kdsup.getText().trim().equals("")||nmsup.getText().trim().equals("")){
-                tbBangsal.setValueAt(false,tbBangsal.getSelectedRow(),0);
+                tabMode.setValueAt(false,tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0);
                 Valid.textKosong(BtnSuplier,"Suplier");
             }else{
                 if(tbBangsal.getSelectedRow()!= -1){
@@ -728,7 +729,7 @@ public final class KeuanganTagihanObatBHP extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(tbBangsal.getSelectedRow()!= -1){
                 if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                     getData();
@@ -850,7 +851,7 @@ public final class KeuanganTagihanObatBHP extends javax.swing.JDialog {
             Valid.textKosong(NoTagihan,"No.Tagihan");
         }else if(KdPetugas.getText().trim().equals("")||NmPetugas.getText().trim().equals("")){
             Valid.textKosong(KdPetugas,"Petugas");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda simpan...!!!!");
         }else if(Keterangan.getText().trim().equals("")){
             Valid.textKosong(Keterangan,"Keterangan");
@@ -867,13 +868,13 @@ public final class KeuanganTagihanObatBHP extends javax.swing.JDialog {
                 })==true){
                     row=tbBangsal.getRowCount();
                     for(i=0;i<row;i++){
-                        if(tabMode.getValueAt(i,0).toString().equals("true")){
+                        if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
                             if(Sequel.menyimpantf2("detail_titip_faktur","?,?","Detail Tagihan",2,new String[]{
-                                NoTagihan.getText(),tbBangsal.getValueAt(i,1).toString(),
+                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),
                             })==false){
                                 sukses=false;
                             }else{
-                                Sequel.mengedit("pemesanan","no_faktur=?","status='Titip Faktur'",1,new String[]{tbBangsal.getValueAt(i,1).toString()});
+                                Sequel.mengedit("pemesanan","no_faktur=?","status='Titip Faktur'",1,new String[]{tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()});
                             }
                         }
                     }
@@ -894,9 +895,9 @@ public final class KeuanganTagihanObatBHP extends javax.swing.JDialog {
                     autoNomor();
                     LCount1.setText("0");
                     for(i=0;i<tbBangsal.getRowCount();i++){
-                        if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                            sisahutang=sisahutang-Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
-                            tabMode.removeRow(i);
+                        if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                            sisahutang=sisahutang-Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString());
+                            tabMode.removeRow(tbBangsal.convertRowIndexToModel(i));
                             i--;
                         }
                     }
@@ -967,13 +968,13 @@ public final class KeuanganTagihanObatBHP extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(row=0;row<tbBangsal.getRowCount();row++){
-            tbBangsal.setValueAt(false,row,0);
+            tabMode.setValueAt(false,tbBangsal.convertRowIndexToModel(row),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void ppSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSemuaActionPerformed
         for(row=0;row<tbBangsal.getRowCount();row++){
-            tbBangsal.setValueAt(true,row,0);
+            tabMode.setValueAt(true,tbBangsal.convertRowIndexToModel(row),0);
         }
     }//GEN-LAST:event_ppSemuaActionPerformed
 
@@ -1094,6 +1095,7 @@ public final class KeuanganTagihanObatBHP extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil(){
+        tbBangsal.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             tanggaldatang="";
@@ -1152,14 +1154,15 @@ public final class KeuanganTagihanObatBHP extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbBangsal.resumeSorting();
     }
 
     private void getData(){
         row=tbBangsal.getRowCount();
         bayar=0;
         for(i=0;i<row;i++){
-            if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                 bayar=bayar+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
+            if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                 bayar=bayar+Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString());
             }
         }
         LCount1.setText(Valid.SetAngka(bayar));
@@ -1184,7 +1187,7 @@ public final class KeuanganTagihanObatBHP extends javax.swing.JDialog {
             try {
                 ps=koneksi.prepareStatement("select photo from bukti_pemesanan where no_faktur=?");
                 try {
-                    ps.setString(1,tbBangsal.getValueAt(tbBangsal.getSelectedRow(),1).toString());
+                    ps.setString(1,tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){

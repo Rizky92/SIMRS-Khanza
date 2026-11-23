@@ -889,6 +889,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbResep.setAutoCreateRowSorter(true);
         tbResep.setComponentPopupMenu(Popup);
         tbResep.setName("tbResep"); // NOI18N
         tbResep.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -920,6 +921,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         Scroll1.setOpaque(true);
         Scroll1.setPreferredSize(new java.awt.Dimension(454, 90));
 
+        tbObatResepRacikan.setAutoCreateRowSorter(true);
         tbObatResepRacikan.setName("tbObatResepRacikan"); // NOI18N
         tbObatResepRacikan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -940,7 +942,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
-        tbDetailResepObatRacikan.setAutoCreateRowSorter(false);
+        tbDetailResepObatRacikan.setAutoCreateRowSorter(true);
         tbDetailResepObatRacikan.setComponentPopupMenu(Popup);
         tbDetailResepObatRacikan.setName("tbDetailResepObatRacikan"); // NOI18N
         tbDetailResepObatRacikan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -989,13 +991,13 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         }else if(TabRawat.getSelectedIndex()==1){
             if(tbObatResepRacikan.getRowCount()!=0){
                 if(tbObatResepRacikan.getSelectedRow()!= -1){
-                    if(tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),0).toString().equals("")||
-                            tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),1).toString().equals("")||
-                            tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),2).toString().equals("")||
-                            tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),3).toString().equals("")||
-                            tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),4).toString().equals("")||
-                            tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),5).toString().equals("")||
-                            tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),6).toString().equals("")){
+                    if(tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()),0).toString().equals("")||
+                            tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()),1).toString().equals("")||
+                            tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()),2).toString().equals("")||
+                            tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()),3).toString().equals("")||
+                            tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()),4).toString().equals("")||
+                            tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()),5).toString().equals("")||
+                            tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()),6).toString().equals("")){
                         JOptionPane.showMessageDialog(null,"Silahkan lengkapi data racikan..!!");
                     }else{
                         runBackground(() -> tampildetailracikanresep());
@@ -1047,7 +1049,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                     i=tbResep.getSelectedColumn();
                     if((i==1)||(i==2)){
                         if(tbResep.getSelectedRow()!= -1){
-                            tbResep.setValueAt("",tbResep.getSelectedRow(),i);
+                            tabModeResep.setValueAt("",tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),i);
                         }
                     }
                 }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
@@ -1069,7 +1071,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                                 public void windowClosed(WindowEvent e) {
                                     if(aturanpakai.getTable().getSelectedRow()!= -1){
                                         cariAturanPakai = aturanpakai.dicari().trim();
-                                        tbResep.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbResep.getSelectedRow(),2);
+                                        tabModeResep.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),2);
                                         tbResep.requestFocus();
                                     }
                                     aturanpakai=null;
@@ -1310,11 +1312,13 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 if(sukses==true){
 
                     for(i=0;i<tbResep.getRowCount();i++){
-                        tbResep.setValueAt("",i,1);
-                        tbResep.setValueAt("",i,2);
+                        tabModeResep.setValueAt("",tbResep.convertRowIndexToModel(i),1);
+                        tabModeResep.setValueAt("",tbResep.convertRowIndexToModel(i),2);
                     }
 
+                    tbObatResepRacikan.suspendSorting();
                     Valid.tabelKosong(tabModeResepRacikan);
+                    tbDetailResepObatRacikan.suspendSorting();
                     Valid.tabelKosong(tabModeDetailResepRacikan);
                     dispose();
                 }else{
@@ -1323,6 +1327,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 ChkJln.setSelected(true);
             }
         }
+        tbObatResepRacikan.resumeSorting();
+        tbDetailResepObatRacikan.resumeSorting();
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSeek5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek5ActionPerformed
@@ -1339,16 +1345,16 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         if(TabRawat.getSelectedIndex()==0){
             for(i=0;i<tbResep.getRowCount();i++){
-                tbResep.setValueAt(false,i,0);
-                tbResep.setValueAt("",i,1);
-                tbResep.setValueAt("",i,2);
+                tabModeResep.setValueAt(false,tbResep.convertRowIndexToModel(i),0);
+                tabModeResep.setValueAt("",tbResep.convertRowIndexToModel(i),1);
+                tabModeResep.setValueAt("",tbResep.convertRowIndexToModel(i),2);
             }
         }else if(TabRawat.getSelectedIndex()==1){
             for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
-                tbDetailResepObatRacikan.setValueAt(1,i,9);
-                tbDetailResepObatRacikan.setValueAt(1,i,11);
-                tbDetailResepObatRacikan.setValueAt("",i,12);
-                tbDetailResepObatRacikan.setValueAt(0,i,13);
+                tabModeDetailResepRacikan.setValueAt(1,tbDetailResepObatRacikan.convertRowIndexToModel(i),9);
+                tabModeDetailResepRacikan.setValueAt(1,tbDetailResepObatRacikan.convertRowIndexToModel(i),11);
+                tabModeDetailResepRacikan.setValueAt("",tbDetailResepObatRacikan.convertRowIndexToModel(i),12);
+                tabModeDetailResepRacikan.setValueAt(0,tbDetailResepObatRacikan.convertRowIndexToModel(i),13);
             }
         }
         hitungResep();
@@ -1490,7 +1496,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                                 @Override
                                 public void windowClosed(WindowEvent e) {
                                     if(aturanpakai.getTable().getSelectedRow()!= -1){
-                                        tbObatResepRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObatResepRacikan.getSelectedRow(),5);
+                                        tabModeResepRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()),5);
                                         tbObatResepRacikan.requestFocus();
                                     }
                                     aturanpakai=null;
@@ -1507,7 +1513,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                         }
                         aturanpakai.setVisible(true);
                     }else if(i==3){
-                        if(tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),1).equals("")){
+                        if(tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()),1).equals("")){
                             JOptionPane.showMessageDialog(null,"Silahkan masukkan nama racikan..!!");
                             tbObatResepRacikan.requestFocus();
                         }else{
@@ -1521,8 +1527,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                                 @Override
                                 public void windowClosed(WindowEvent e) {
                                     if(metoderacik.getTable().getSelectedRow()!= -1){
-                                        tbObatResepRacikan.setValueAt(metoderacik.getTable().getValueAt(metoderacik.getTable().getSelectedRow(),1).toString(),tbObatResepRacikan.getSelectedRow(),2);
-                                        tbObatResepRacikan.setValueAt(metoderacik.getTable().getValueAt(metoderacik.getTable().getSelectedRow(),2).toString(),tbObatResepRacikan.getSelectedRow(),3);
+                                        tabModeResepRacikan.setValueAt(metoderacik.getTable().getValueAt(metoderacik.getTable().getSelectedRow(),1).toString(),tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()),2);
+                                        tabModeResepRacikan.setValueAt(metoderacik.getTable().getValueAt(metoderacik.getTable().getSelectedRow(),2).toString(),tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()),3);
                                         tbObatResepRacikan.requestFocus();
                                     }
                                 }
@@ -1579,17 +1585,17 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         if (tbObatResepRacikan.getSelectedRow() != -1) {
             if (JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menghapus resep racikan ini?", "Hapus Racikan", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 for (int i = tbDetailResepObatRacikan.getRowCount() - 1; i >= 0; i--) {
-                    if (tbDetailResepObatRacikan.getValueAt(i, 0).toString().equals(tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(), 0).toString())) {
-                        tabModeDetailResepRacikan.removeRow(i);
+                    if (tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i), 0).toString().equals(tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()), 0).toString())) {
+                        tabModeDetailResepRacikan.removeRow(tbDetailResepObatRacikan.convertRowIndexToModel(i));
                     }
                 }
-                tabModeResepRacikan.removeRow(tbObatResepRacikan.getSelectedRow());
+                tabModeResepRacikan.removeRow(tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()));
             }
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnTambah1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambah1ActionPerformed
-        i=tabModeResepRacikan.getRowCount()+1;
+        i=tbObatResepRacikan.getRowCount()+1;
         if(i==99){
             JOptionPane.showMessageDialog(null,"Maksimal 98 Racikan..!!");
         }else{
@@ -1605,22 +1611,22 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                     if((i==11)||(i==9)||(i==13)||(i==14)){
                         pesanaktif=true;
                         try {
-                            if(!tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),11).toString().equals(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),9).toString())){
-                                if(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),8).toString())==0){
+                            if(!tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),11).toString().equals(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),9).toString())){
+                                if(Valid.SetAngka(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),8).toString())==0){
                                     JOptionPane.showMessageDialog(null,"Kapasitas obat masih kosong..!!!");
                                 }else{
-                                    tbDetailResepObatRacikan.setValueAt(Valid.SetAngka8(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),8).toString())*
-                                        (Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),9).toString())/Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),11).toString())),1),
-                                            tbDetailResepObatRacikan.getSelectedRow(),12);
+                                    tabModeDetailResepRacikan.setValueAt(Valid.SetAngka8(Valid.SetAngka(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),8).toString())*
+                                        (Valid.SetAngka(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),9).toString())/Valid.SetAngka(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),11).toString())),1),
+                                            tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),12);
                                 }
                             }
                         } catch (Exception e) {
-                            tbDetailResepObatRacikan.setValueAt(0,tbDetailResepObatRacikan.getSelectedRow(),12);
+                            tabModeDetailResepRacikan.setValueAt(0,tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),12);
                         }
                         getCekStokRacikan();
                     }else if(i==12){
                         pesanaktif=true;
-                        if(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),12).toString().contains("%")){
+                        if(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),12).toString().contains("%")){
                             getDatadetailresepracikan2();
                         }else{
                             getDatadetailresepracikan();
@@ -1638,7 +1644,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         if(this.isVisible()==true){
             try {
                 if(tbDetailResepObatRacikan.getSelectedRow()!= -1){
-                    if(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),12).toString().contains("%")){
+                    if(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),12).toString().contains("%")){
                         getDatadetailresepracikan2();
                     }
                 }else{
@@ -2013,7 +2019,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             String[] no,kodebarang,namabarang,kodesatuan,kandungan,letakbarang,namajenis,aturan,industri,komposisi,namakategori;
             z=0;
             for(i=0;i<tbResep.getRowCount();i++){
-                if(!tbResep.getValueAt(i,1).toString().equals("")){
+                if(!tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),1).toString().equals("")){
                     z++;
                 }
             }
@@ -2033,46 +2039,47 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             stok=new double[z];
             z=0;
             for(i=0;i<tbResep.getRowCount();i++){
-                if(!tbResep.getValueAt(i,1).toString().equals("")){
-                    pilih[z]=Boolean.parseBoolean(tbResep.getValueAt(i,0).toString());
+                if(!tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),1).toString().equals("")){
+                    pilih[z]=Boolean.parseBoolean(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),0).toString());
                     try {
-                        jumlah[z]=Double.parseDouble(tbResep.getValueAt(i,1).toString());
+                        jumlah[z]=Double.parseDouble(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),1).toString());
                     } catch (Exception e) {
                         jumlah[z]=0;
                     }
-                    aturan[z]=tbResep.getValueAt(i,2).toString();
-                    kodebarang[z]=tbResep.getValueAt(i,3).toString();
-                    namabarang[z]=tbResep.getValueAt(i,4).toString();
-                    kodesatuan[z]=tbResep.getValueAt(i,5).toString();
+                    aturan[z]=tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),2).toString();
+                    kodebarang[z]=tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),3).toString();
+                    namabarang[z]=tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),4).toString();
+                    kodesatuan[z]=tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),5).toString();
                     try {
-                        letakbarang[z]=tbResep.getValueAt(i,6).toString();
+                        letakbarang[z]=tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),6).toString();
                     } catch (Exception e) {
                         letakbarang[z]="";
                     }
 
                     try {
-                        harga[z]=Double.parseDouble(tbResep.getValueAt(i,7).toString());
+                        harga[z]=Double.parseDouble(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),7).toString());
                     } catch (Exception e) {
                         harga[z]=0;
                     }
-                    namajenis[z]=tbResep.getValueAt(i,8).toString();
-                    industri[z]=tbResep.getValueAt(i,9).toString();
+                    namajenis[z]=tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),8).toString();
+                    industri[z]=tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),9).toString();
                     try {
-                        beli[z]=Double.parseDouble(tbResep.getValueAt(i,10).toString());
+                        beli[z]=Double.parseDouble(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),10).toString());
                     } catch (Exception e) {
                         beli[z]=0;
                     }
 
                     try {
-                        stok[z]=Double.parseDouble(tbResep.getValueAt(i,11).toString());
+                        stok[z]=Double.parseDouble(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),11).toString());
                     } catch (Exception e) {
                         stok[z]=0;
                     }
-                    namakategori[z]=tbResep.getValueAt(i,12).toString();
+                    namakategori[z]=tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),12).toString();
                     z++;
                 }
             }
 
+            tbResep.suspendSorting();
             Valid.tabelKosong(tabModeResep);
 
             for(i=0;i<z;i++){
@@ -2187,6 +2194,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             response = null;
             root = null;
         }
+        tbResep.resumeSorting();
     }
 
     public void emptTeksobat() {
@@ -2325,13 +2333,13 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
 
     private void tampildetailracikanresep() {
         try {
-            final String noRacikan = tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(), 0).toString();
+            final String noRacikan = tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()), 0).toString();
             boolean[] pilih;
             double[] jumlah,harga,beli,stok,kapasitas,p1,p2;
             String[] no,kodebarang,namabarang,kodesatuan,kandungan,letakbarang,namajenis,aturan,industri,komposisi,namakategori;
             z=0;
             for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
-                if(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(i,13).toString())>0){
+                if(Valid.SetAngka(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),13).toString())>0){
                     z++;
                 }
             }
@@ -2355,55 +2363,56 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             namakategori=new String[z];
             z=0;
             for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
-                if(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(i,13).toString())>0){
-                    no[z]=tbDetailResepObatRacikan.getValueAt(i,0).toString();
-                    kodebarang[z]=tbDetailResepObatRacikan.getValueAt(i,1).toString();
-                    namabarang[z]=tbDetailResepObatRacikan.getValueAt(i,2).toString();
-                    kodesatuan[z]=tbDetailResepObatRacikan.getValueAt(i,3).toString();
+                if(Valid.SetAngka(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),13).toString())>0){
+                    no[z]=tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),0).toString();
+                    kodebarang[z]=tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),1).toString();
+                    namabarang[z]=tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),2).toString();
+                    kodesatuan[z]=tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),3).toString();
                     try {
-                        harga[z]=Double.parseDouble(tbDetailResepObatRacikan.getValueAt(i,4).toString());
+                        harga[z]=Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),4).toString());
                     } catch (Exception e) {
                         harga[z]=0;
                     }
                     try {
-                        beli[z]=Double.parseDouble(tbDetailResepObatRacikan.getValueAt(i,5).toString());
+                        beli[z]=Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),5).toString());
                     } catch (Exception e) {
                         beli[z]=0;
                     }
-                    namajenis[z]=tbDetailResepObatRacikan.getValueAt(i,6).toString();
+                    namajenis[z]=tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),6).toString();
                     try {
-                        stok[z]=Double.parseDouble(tbDetailResepObatRacikan.getValueAt(i,7).toString());
+                        stok[z]=Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),7).toString());
                     } catch (Exception e) {
                         stok[z]=0;
                     }
                     try {
-                        kapasitas[z]=Double.parseDouble(tbDetailResepObatRacikan.getValueAt(i,8).toString());
+                        kapasitas[z]=Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),8).toString());
                     } catch (Exception e) {
                         kapasitas[z]=0;
                     }
                     try {
-                        p1[z]=Double.parseDouble(tbDetailResepObatRacikan.getValueAt(i,9).toString());
+                        p1[z]=Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),9).toString());
                     } catch (Exception e) {
                         p1[z]=0;
                     }
                     try {
-                        p2[z]=Double.parseDouble(tbDetailResepObatRacikan.getValueAt(i,11).toString());
+                        p2[z]=Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),11).toString());
                     } catch (Exception e) {
                         p2[z]=0;
                     }
-                    kandungan[z]=tbDetailResepObatRacikan.getValueAt(i,12).toString();
+                    kandungan[z]=tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),12).toString();
                     try {
-                        jumlah[z]=Double.parseDouble(tbDetailResepObatRacikan.getValueAt(i,13).toString());
+                        jumlah[z]=Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),13).toString());
                     } catch (Exception e) {
                         jumlah[z]=0;
                     }
-                    industri[z]=tbDetailResepObatRacikan.getValueAt(i,14).toString();
-                    komposisi[z]=tbDetailResepObatRacikan.getValueAt(i,15).toString();
-                    namakategori[z]=tbDetailResepObatRacikan.getValueAt(i,16).toString();
+                    industri[z]=tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),14).toString();
+                    komposisi[z]=tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),15).toString();
+                    namakategori[z]=tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),16).toString();
                     z++;
                 }
             }
 
+            tbDetailResepObatRacikan.suspendSorting();
             Valid.tabelKosong(tabModeDetailResepRacikan);
 
             for(i=0;i<z;i++){
@@ -2527,17 +2536,18 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             response = null;
             root = null;
         }
+        tbDetailResepObatRacikan.resumeSorting();
     }
 
     private void getDatadetailresepracikan() {
         if(tbDetailResepObatRacikan.getSelectedRow()!= -1){
             try {
-                tbDetailResepObatRacikan.setValueAt(Valid.SetAngka8((Double.parseDouble(tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),4).toString())
-                                *Double.parseDouble(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),12).toString()))
-                                /Double.parseDouble(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),8).toString()),1)
-                                ,tbDetailResepObatRacikan.getSelectedRow(),13);
+                tabModeDetailResepRacikan.setValueAt(Valid.SetAngka8((Double.parseDouble(tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(tbObatResepRacikan.getSelectedRow()),4).toString())
+                                *Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),12).toString()))
+                                /Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),8).toString()),1)
+                                ,tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),13);
             } catch (Exception e) {
-                tbDetailResepObatRacikan.setValueAt(0,tbDetailResepObatRacikan.getSelectedRow(),13);
+                tabModeDetailResepRacikan.setValueAt(0,tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),13);
             }
         }
     }
@@ -2546,21 +2556,21 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         if(tbDetailResepObatRacikan.getSelectedRow()!= -1){
             try {
                 r=tbDetailResepObatRacikan.getSelectedRow();
-                noracik=tbDetailResepObatRacikan.getValueAt(r,0).toString();
+                noracik=tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(r),0).toString();
                 jumlahracik=0;
-                persenracik=Double.parseDouble(tbDetailResepObatRacikan.getValueAt(r,12).toString().replaceAll("%",""));
-                kapasitasracik=Double.parseDouble(tbDetailResepObatRacikan.getValueAt(r,8).toString());
+                persenracik=Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(r),12).toString().replaceAll("%",""));
+                kapasitasracik=Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(r),8).toString());
                 for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
-                    if(noracik.equals(tbDetailResepObatRacikan.getValueAt(i,0).toString())){
-                        if(!tbDetailResepObatRacikan.getValueAt(i,12).toString().contains("%")){
-                            jumlahracik=jumlahracik+(Double.parseDouble(tbDetailResepObatRacikan.getValueAt(i,8).toString())*
-                                    Double.parseDouble(tbDetailResepObatRacikan.getValueAt(i,13).toString()));
+                    if(noracik.equals(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),0).toString())){
+                        if(!tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),12).toString().contains("%")){
+                            jumlahracik=jumlahracik+(Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),8).toString())*
+                                    Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),13).toString()));
                         }
                     }
                 }
-                tbDetailResepObatRacikan.setValueAt(Valid.SetAngka8((jumlahracik*(persenracik/100))/kapasitasracik,1),r,13);
+                tabModeDetailResepRacikan.setValueAt(Valid.SetAngka8((jumlahracik*(persenracik/100))/kapasitasracik,1),tbDetailResepObatRacikan.convertRowIndexToModel(r),13);
             } catch (Exception e) {
-                tbDetailResepObatRacikan.setValueAt(0,r,13);
+                tabModeDetailResepRacikan.setValueAt(0,tbDetailResepObatRacikan.convertRowIndexToModel(r),13);
             }
         }
     }
@@ -2602,8 +2612,11 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         }
 
         try {
+            tbResep.suspendSorting();
             Valid.tabelKosong(tabModeResep);
+            tbObatResepRacikan.suspendSorting();
             Valid.tabelKosong(tabModeResepRacikan);
+            tbDetailResepObatRacikan.suspendSorting();
             Valid.tabelKosong(tabModeDetailResepRacikan);
 
             if (kenaikan > 0) {
@@ -3075,6 +3088,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
+        tbResep.resumeSorting();
+        tbObatResepRacikan.resumeSorting();
+        tbDetailResepObatRacikan.resumeSorting();
     }
 
     private void tampilobat(String no_resep) {
@@ -3083,8 +3099,11 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         NoResep.setText(no_resep);
         ubah=true;
         try {
+            tbResep.suspendSorting();
             Valid.tabelKosong(tabModeResep);
+            tbObatResepRacikan.suspendSorting();
             Valid.tabelKosong(tabModeResepRacikan);
+            tbDetailResepObatRacikan.suspendSorting();
             Valid.tabelKosong(tabModeDetailResepRacikan);
             if(kenaikan>0){
                 if(aktifkanbatch.equals("yes")){
@@ -3893,6 +3912,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notifikasi Tampil Ubah : "+e);
         }
+        tbResep.resumeSorting();
+        tbObatResepRacikan.resumeSorting();
+        tbDetailResepObatRacikan.resumeSorting();
     }
 
     public void tampilobat3(String no_resep) {
@@ -3901,8 +3923,11 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
 
     private void tampilobat2(String no_resep) {
         try {
+            tbResep.suspendSorting();
             Valid.tabelKosong(tabModeResep);
+            tbObatResepRacikan.suspendSorting();
             Valid.tabelKosong(tabModeResepRacikan);
+            tbDetailResepObatRacikan.suspendSorting();
             Valid.tabelKosong(tabModeDetailResepRacikan);
             copy=true;
             if(kenaikan>0){
@@ -4249,6 +4274,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notifikasi Tampil Copy : "+e);
         }
+        tbResep.resumeSorting();
+        tbObatResepRacikan.resumeSorting();
+        tbDetailResepObatRacikan.resumeSorting();
     }
 
     public void tampilobat4(String no_resep) {
@@ -4258,25 +4286,25 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private void simpandata() {
         try {
             for(i=0;i<tbResep.getRowCount();i++){
-                if(Valid.SetAngka(tbResep.getValueAt(i,1).toString())>0){
-                    if(tbResep.getValueAt(i,0).toString().equals("true")){
+                if(Valid.SetAngka(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),1).toString())>0){
+                    if(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),0).toString().equals("true")){
                         pscarikapasitas= koneksi.prepareStatement("select IFNULL(databarang.kapasitas,1) from databarang where databarang.kode_brng=?");
                         try {
-                            pscarikapasitas.setString(1,tbResep.getValueAt(i,2).toString());
+                            pscarikapasitas.setString(1,tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),2).toString());
                             carikapasitas=pscarikapasitas.executeQuery();
                             if(carikapasitas.next()){
                                 if(Sequel.menyimpantf2("resep_dokter","?,?,?,?","data",4,new String[]{
-                                    NoResep.getText(),tbResep.getValueAt(i,3).toString(),
-                                    ""+(Double.parseDouble(tbResep.getValueAt(i,1).toString())/carikapasitas.getDouble(1)),
-                                    tbResep.getValueAt(i,2).toString()
+                                    NoResep.getText(),tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),3).toString(),
+                                    ""+(Double.parseDouble(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),1).toString())/carikapasitas.getDouble(1)),
+                                    tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),2).toString()
                                 })==false){
                                     sukses=false;
                                 }
                             }else{
                                 if(Sequel.menyimpantf2("resep_dokter","?,?,?,?","data",4,new String[]{
-                                    NoResep.getText(),tbResep.getValueAt(i,3).toString(),
-                                    ""+(Double.parseDouble(tbResep.getValueAt(i,1).toString())),
-                                    tbResep.getValueAt(i,2).toString()
+                                    NoResep.getText(),tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),3).toString(),
+                                    ""+(Double.parseDouble(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),1).toString())),
+                                    tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),2).toString()
                                 })==false){
                                     sukses=false;
                                 }
@@ -4293,9 +4321,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                         }
                     }else{
                         if(Sequel.menyimpantf2("resep_dokter","?,?,?,?","data",4,new String[]{
-                            NoResep.getText(),tbResep.getValueAt(i,3).toString(),
-                            ""+(Double.parseDouble(tbResep.getValueAt(i,1).toString())),
-                            tbResep.getValueAt(i,2).toString()
+                            NoResep.getText(),tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),3).toString(),
+                            ""+(Double.parseDouble(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),1).toString())),
+                            tabModeResep.getValueAt(tbResep.convertRowIndexToModel(i),2).toString()
                         })==false){
                             sukses=false;
                         }
@@ -4304,11 +4332,11 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             }
 
             for(i=0;i<tbObatResepRacikan.getRowCount();i++){
-                if(Valid.SetAngka(tbObatResepRacikan.getValueAt(i,4).toString())>0){
+                if(Valid.SetAngka(tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(i),4).toString())>0){
                     if(Sequel.menyimpantf2("resep_dokter_racikan","?,?,?,?,?,?,?","resep obat racikan",7,new String[]{
-                       NoResep.getText(),tbObatResepRacikan.getValueAt(i,0).toString(),tbObatResepRacikan.getValueAt(i,1).toString(),
-                       tbObatResepRacikan.getValueAt(i,2).toString(),tbObatResepRacikan.getValueAt(i,4).toString(),
-                       tbObatResepRacikan.getValueAt(i,5).toString(),tbObatResepRacikan.getValueAt(i,6).toString()
+                       NoResep.getText(),tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(i),0).toString(),tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(i),1).toString(),
+                       tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(i),2).toString(),tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(i),4).toString(),
+                       tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(i),5).toString(),tabModeResepRacikan.getValueAt(tbObatResepRacikan.convertRowIndexToModel(i),6).toString()
                     })==false){
                         sukses=false;
                     }
@@ -4316,11 +4344,11 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             }
 
             for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
-                if(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(i,13).toString())>0){
+                if(Valid.SetAngka(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),13).toString())>0){
                     if(Sequel.menyimpantf2("resep_dokter_racikan_detail","?,?,?,?,?,?,?","resep dokter racikan detail",7,new String[]{
-                        NoResep.getText(),tbDetailResepObatRacikan.getValueAt(i,0).toString(),tbDetailResepObatRacikan.getValueAt(i,1).toString(),
-                        tbDetailResepObatRacikan.getValueAt(i,9).toString(),tbDetailResepObatRacikan.getValueAt(i,11).toString(),
-                        tbDetailResepObatRacikan.getValueAt(i,12).toString(),tbDetailResepObatRacikan.getValueAt(i,13).toString()
+                        NoResep.getText(),tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),0).toString(),tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),1).toString(),
+                        tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),9).toString(),tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),11).toString(),
+                        tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),12).toString(),tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(i),13).toString()
                     })==false){
                         sukses=false;
                     }
@@ -4374,13 +4402,13 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private void hitungResep() {
         ttl=0;
         y=0;
-        row2=tabModeResep.getRowCount();
+        row2=tbResep.getRowCount();
         for(r=0;r<row2;r++){
             try {
-                if(Double.parseDouble(tabModeResep.getValueAt(r,1).toString())>0){
+                if(Double.parseDouble(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(r),1).toString())>0){
                     try {
-                        y=Math.round(Double.parseDouble(tabModeResep.getValueAt(r,1).toString())*
-                          Double.parseDouble(tabModeResep.getValueAt(r,7).toString()));
+                        y=Math.round(Double.parseDouble(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(r),1).toString())*
+                          Double.parseDouble(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(r),7).toString()));
                     } catch (Exception e) {
                         y=0;
                     }
@@ -4389,12 +4417,12 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             } catch (Exception e) {
             }
         }
-        row2=tabModeDetailResepRacikan.getRowCount();
+        row2=tbDetailResepObatRacikan.getRowCount();
         for(r=0;r<row2;r++){
-            if(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(r,13).toString())>0){
+            if(Valid.SetAngka(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(r),13).toString())>0){
                 try {
-                    y=Math.round(Double.parseDouble(tabModeDetailResepRacikan.getValueAt(r,13).toString())*
-                      Double.parseDouble(tabModeDetailResepRacikan.getValueAt(r,4).toString()));
+                    y=Math.round(Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(r),13).toString())*
+                      Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(r),4).toString()));
                 } catch (Exception e) {
                     y=0;
                 }
@@ -4431,14 +4459,14 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         if(tbResep.getSelectedRow()!= -1){
             if(STOKKOSONGRESEP.equals("no")){
                 try {
-                    if(Double.parseDouble(tbResep.getValueAt(tbResep.getSelectedRow(),1).toString())>0){
-                        if(Valid.SetAngka(tbResep.getValueAt(tbResep.getSelectedRow(),1).toString())>Valid.SetAngka(tbResep.getValueAt(tbResep.getSelectedRow(),11).toString())){
+                    if(Double.parseDouble(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString())>0){
+                        if(Valid.SetAngka(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString())>Valid.SetAngka(tabModeResep.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),11).toString())){
                             JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
-                            tbResep.setValueAt("",tbResep.getSelectedRow(),1);
+                            tabModeResep.setValueAt("",tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1);
                         }
                     }
                 } catch (Exception e) {
-                    tbResep.setValueAt("",tbResep.getSelectedRow(),1);
+                    tabModeResep.setValueAt("",tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1);
                 }
             }
         }
@@ -4448,14 +4476,14 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         if(tbDetailResepObatRacikan.getSelectedRow()!= -1){
             if(STOKKOSONGRESEP.equals("no")){
                 try {
-                    if(Double.parseDouble(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),13).toString())>0){
-                        if(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),13).toString())>Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),7).toString())){
+                    if(Double.parseDouble(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),13).toString())>0){
+                        if(Valid.SetAngka(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),13).toString())>Valid.SetAngka(tabModeDetailResepRacikan.getValueAt(tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),7).toString())){
                             JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
-                            tbDetailResepObatRacikan.setValueAt(0,tbDetailResepObatRacikan.getSelectedRow(),13);
+                            tabModeDetailResepRacikan.setValueAt(0,tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),13);
                         }
                     }
                 } catch (Exception e) {
-                    tbDetailResepObatRacikan.setValueAt(0,tbDetailResepObatRacikan.getSelectedRow(),13);
+                    tabModeDetailResepRacikan.setValueAt(0,tbDetailResepObatRacikan.convertRowIndexToModel(tbDetailResepObatRacikan.getSelectedRow()),13);
                 }
             }
         }

@@ -282,6 +282,7 @@ public class DlgLabaRugi extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        Table1.setSortable(false);
         Table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -309,6 +310,7 @@ public class DlgLabaRugi extends javax.swing.JDialog {
         scrollPane2.setName("scrollPane2"); // NOI18N
         scrollPane2.setOpaque(true);
 
+        Table2.setSortable(false);
         Table2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -336,6 +338,7 @@ public class DlgLabaRugi extends javax.swing.JDialog {
         scrollPane3.setName("scrollPane3"); // NOI18N
         scrollPane3.setOpaque(true);
 
+        Table3.setSortable(false);
         Table3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -496,7 +499,7 @@ public class DlgLabaRugi extends javax.swing.JDialog {
                     form.isCek();
                     form.setSize(lebar,tinggi);
                     form.setLocationRelativeTo(internalFrame1);
-                    form.setRiwayatTransaksi(Table1.getValueAt(Table1.getSelectedRow(),3).toString());
+                    form.setRiwayatTransaksi(tabMode.getValueAt(Table1.convertRowIndexToModel(Table1.getSelectedRow()),3).toString());
                     form.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else{
@@ -509,7 +512,7 @@ public class DlgLabaRugi extends javax.swing.JDialog {
                     form.isCek();
                     form.setSize(lebar,tinggi);
                     form.setLocationRelativeTo(internalFrame1);
-                    form.setRiwayatTransaksi(Table2.getValueAt(Table2.getSelectedRow(),3).toString());
+                    form.setRiwayatTransaksi(tabMode2.getValueAt(Table2.convertRowIndexToModel(Table2.getSelectedRow()),3).toString());
                     form.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else{
@@ -522,7 +525,7 @@ public class DlgLabaRugi extends javax.swing.JDialog {
                     form.isCek();
                     form.setSize(lebar,tinggi);
                     form.setLocationRelativeTo(internalFrame1);
-                    form.setRiwayatTransaksi(Table3.getValueAt(Table3.getSelectedRow(),3).toString());
+                    form.setRiwayatTransaksi(tabMode3.getValueAt(Table3.convertRowIndexToModel(Table3.getSelectedRow()),3).toString());
                     form.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else{

@@ -1818,7 +1818,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbJnsPerawatan.getSelectedRow() > -1){
-            Sequel.meghapus("k3rs_peristiwa","no_k3rs",tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+            Sequel.meghapus("k3rs_peristiwa","no_k3rs",tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
             emptTeks();
             runBackground(() ->tampil());
         }
@@ -1881,7 +1881,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                         KdLokasiKejadian.getText(),Kronologi.getText(),KdPenyebab.getText(),NIKKorban.getText(),Kategori.getSelectedItem().toString(),KdJenisCidera.getText(),KdJenisLuka.getText(),
                         KdBagianTubuh.getText(),LT.getText(),KondisiTidakAman.getText(),TindakanTidakAman.getText(),Pribadi.getText(),Pekerjaan.getText(),BarangBukti.getSelectedItem().toString(),
                         KdDampak.getText(),NIKPelapor.getText(),JenisTindakan.getSelectedItem().toString(),Rencana.getText(),Valid.SetTgl(Target.getSelectedItem()+""),Wewenang.getText(),NIKK3.getText(),
-                        Catatan.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                        Catatan.getText(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString()
                     })==true){
                         emptTeks();
                         TabRawat.setSelectedIndex(1);
@@ -2009,7 +2009,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 if(evt.getClickCount()==2){
                     getData();
@@ -2021,7 +2021,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 try {
                     getData();
@@ -3431,7 +3431,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {
@@ -3485,48 +3485,48 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
 
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
-            NoLaporan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-            Valid.SetTgl(TglInsiden,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-            JamInsiden.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString().substring(11,13));
-            MenitInsiden.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString().substring(14,16));
-            DetikInsiden.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString().substring(17,19));
-            KdJenisPekerjaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-            NmJenisPekerjaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-            Valid.SetTgl(TglPelaporan,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
-            JamPelaporan.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString().substring(11,13));
-            MenitPelaporan.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString().substring(14,16));
-            DetikPelaporan.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString().substring(17,19));
-            KdLokasiKejadian.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
-            NmLokasiKejadian.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
-            Kronologi.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
-            KdPenyebab.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString());
-            NmPenyebab.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString());
-            NIKKorban.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString());
-            NmKorban.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString());
-            Kategori.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),12).toString());
-            LT.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString());
-            KdJenisCidera.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString());
-            NmJenisCidera.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),15).toString());
-            KdJenisLuka.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),16).toString());
-            NmJenisLuka.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),17).toString());
-            KdBagianTubuh.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),18).toString());
-            NmBagianTubuh.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),19).toString());
-            KondisiTidakAman.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),20).toString());
-            TindakanTidakAman.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),21).toString());
-            Pribadi.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),22).toString());
-            Pekerjaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),23).toString());
-            KdDampak.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),24).toString());
-            NmDampak.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),25).toString());
-            NIKPelapor.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),26).toString());
-            NmPelapor.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),27).toString());
-            BarangBukti.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),28).toString());
-            JenisTindakan.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),29).toString());
-            Rencana.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),30).toString());
-            Valid.SetTgl(Target,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),31).toString());
-            Wewenang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),32).toString());
-            Catatan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),33).toString());
-            NIKK3.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),34).toString());
-            NmPetugasK3.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),35).toString());
+            NoLaporan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+            Valid.SetTgl(TglInsiden,tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+            JamInsiden.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString().substring(11,13));
+            MenitInsiden.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString().substring(14,16));
+            DetikInsiden.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString().substring(17,19));
+            KdJenisPekerjaan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+            NmJenisPekerjaan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+            Valid.SetTgl(TglPelaporan,tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString());
+            JamPelaporan.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString().substring(11,13));
+            MenitPelaporan.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString().substring(14,16));
+            DetikPelaporan.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString().substring(17,19));
+            KdLokasiKejadian.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5).toString());
+            NmLokasiKejadian.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),6).toString());
+            Kronologi.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7).toString());
+            KdPenyebab.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),8).toString());
+            NmPenyebab.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),9).toString());
+            NIKKorban.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),10).toString());
+            NmKorban.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),11).toString());
+            Kategori.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),12).toString());
+            LT.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),13).toString());
+            KdJenisCidera.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),14).toString());
+            NmJenisCidera.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),15).toString());
+            KdJenisLuka.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),16).toString());
+            NmJenisLuka.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),17).toString());
+            KdBagianTubuh.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),18).toString());
+            NmBagianTubuh.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),19).toString());
+            KondisiTidakAman.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),20).toString());
+            TindakanTidakAman.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),21).toString());
+            Pribadi.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),22).toString());
+            Pekerjaan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),23).toString());
+            KdDampak.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),24).toString());
+            NmDampak.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),25).toString());
+            NIKPelapor.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),26).toString());
+            NmPelapor.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),27).toString());
+            BarangBukti.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),28).toString());
+            JenisTindakan.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),29).toString());
+            Rencana.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),30).toString());
+            Valid.SetTgl(Target,tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),31).toString());
+            Wewenang.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),32).toString());
+            Catatan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),33).toString());
+            NIKK3.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),34).toString());
+            NmPetugasK3.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),35).toString());
             try {
                 ps=koneksi.prepareStatement(
                     "select jk,jbtn,departemen,bidang,tgl_lahir from pegawai where nik=?");

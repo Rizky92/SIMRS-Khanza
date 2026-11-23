@@ -414,7 +414,7 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbKamar.getSelectedRow()!= -1){
-            reply = JOptionPane.showConfirmDialog(rootPane, "Eeiiiiiits, udah yakin data No.SEP Apotek : "+tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString()+",\nNo.Resep : "+tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString()+",Kode Obat : "+tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString()+",\nTipe Obat : "+tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString()+" mau dihapus?\nData hanya dihapus di sisi BPJS, data yang disimpan lokal tidak ikut terhapus..!!\nGunakan fitur ini untuk perbaikan data Apotek Online BPJS..!!!", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+            reply = JOptionPane.showConfirmDialog(rootPane, "Eeiiiiiits, udah yakin data No.SEP Apotek : "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString()+",\nNo.Resep : "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2).toString()+",Kode Obat : "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),8).toString()+",\nTipe Obat : "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),10).toString()+" mau dihapus?\nData hanya dihapus di sisi BPJS, data yang disimpan lokal tidak ikut terhapus..!!\nGunakan fitur ini untuk perbaikan data Apotek Online BPJS..!!!", "Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
                 try {
                     bodyWithDeleteRequest();
@@ -582,7 +582,7 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
 	    headers.add("x-signature",api.getHmac(utc));
 	    headers.add("user_key",koneksiDB.USERKEYAPIAPOTEKBPJS());
             URL = link+"/pelayanan/obat/hapus";
-            requestJson ="{\"nosepapotek\":\""+tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString()+"\",\"noresep\":\""+tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString()+"\",\"kodeobat\":\""+tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString()+"\",\"tipeobat\":\""+tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString()+"\"}";
+            requestJson ="{\"nosepapotek\":\""+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString()+"\",\"noresep\":\""+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2).toString()+"\",\"kodeobat\":\""+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),8).toString()+"\",\"tipeobat\":\""+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),10).toString()+"\"}";
             System.out.println(URL);
             System.out.println("JSON Dikirim : "+requestJson);
             requestEntity = new HttpEntity(requestJson,headers);
@@ -591,7 +591,7 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
             System.out.println("code : "+nameNode.path("code").asText());
             System.out.println("message : "+nameNode.path("message").asText());
             if(nameNode.path("code").asText().equals("200")){
-                tabMode.removeRow(tbKamar.getSelectedRow());
+                tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
             }else{
                 JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
             }

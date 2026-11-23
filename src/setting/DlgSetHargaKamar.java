@@ -516,8 +516,8 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
             if(tbSpesialis.getSelectedRow()>-1){
                 Sequel.mengedit("set_harga_kamar","kd_kamar=? and kd_pj=?","kd_kamar=?,kd_pj=?,tarif=?",5,new String[]{
                     kdkamar.getText(),kdpj.getText(),Tarif.getText(),
-                    tabMode.getValueAt(tbSpesialis.getSelectedRow(),0).toString(),
-                    tabMode.getValueAt(tbSpesialis.getSelectedRow(),3).toString()
+                    tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString(),
+                    tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),3).toString()
                 });
                 runBackground(() ->tampil());
                 emptTeks();
@@ -583,7 +583,7 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -592,7 +592,7 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisMouseClicked
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -834,7 +834,7 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbSpesialis.getRowCount());
     }
 
     public void emptTeks() {
@@ -849,12 +849,12 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
     private void getData() {
         int row=tbSpesialis.getSelectedRow();
         if(row!= -1){
-            kdkamar.setText(tabMode.getValueAt(row,0).toString());
-            TKdBngsal.setText(tabMode.getValueAt(row,1).toString());
-            TBangsal.setText(tabMode.getValueAt(row,2).toString());
-            kdpj.setText(tabMode.getValueAt(row,3).toString());
-            nmpj.setText(tabMode.getValueAt(row,4).toString());
-            Tarif.setText(tabMode.getValueAt(row,5).toString());
+            kdkamar.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),0).toString());
+            TKdBngsal.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),1).toString());
+            TBangsal.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),2).toString());
+            kdpj.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),3).toString());
+            nmpj.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),4).toString());
+            Tarif.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),5).toString());
         }
     }
 

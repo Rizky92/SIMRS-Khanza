@@ -254,7 +254,7 @@ public final class DlgPoli extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKamar.setAutoCreateRowSorter(false);
+        tbKamar.setAutoCreateRowSorter(true);
         tbKamar.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbKamar.setComponentPopupMenu(Popup);
         tbKamar.setName("tbKamar"); // NOI18N
@@ -552,7 +552,7 @@ public final class DlgPoli extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     false,Kd.getText(),Nm.getText(),Double.parseDouble(By.getText()),Double.parseDouble(ByLm.getText())
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbKamar.getRowCount());
                 emptTeks();
             }
         }
@@ -578,14 +578,14 @@ public final class DlgPoli extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbKamar.getRowCount();i++){
-            if(tbKamar.getValueAt(i,0).toString().equals("true")){
-                Sequel.mengedit("poliklinik","kd_poli='"+tbKamar.getValueAt(i,1).toString()+"'","status='0'");
-                tabMode.removeRow(i);
+            if(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.mengedit("poliklinik","kd_poli='"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString()+"'","status='0'");
+                tabMode.removeRow(tbKamar.convertRowIndexToModel(i));
                 i--;
             }
         }
         emptTeks();
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -606,10 +606,10 @@ public final class DlgPoli extends javax.swing.JDialog {
         }else{
             if(tbKamar.getSelectedRow()!= -1){
                 if(Valid.editTabletf(tabMode,"poliklinik","kd_poli",Kd2,"registrasi='"+By.getText()+"',nm_poli='"+Nm.getText()+"',registrasilama='"+ByLm.getText()+"',kd_poli='"+Kd.getText()+"'")==true){
-                    tbKamar.setValueAt(Kd.getText(),tbKamar.getSelectedRow(),1);
-                    tbKamar.setValueAt(Nm.getText(),tbKamar.getSelectedRow(),2);
-                    tbKamar.setValueAt(Double.parseDouble(By.getText()),tbKamar.getSelectedRow(),3);
-                    tbKamar.setValueAt(Double.parseDouble(ByLm.getText()),tbKamar.getSelectedRow(),4);
+                    tabMode.setValueAt(Kd.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1);
+                    tabMode.setValueAt(Nm.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2);
+                    tabMode.setValueAt(Double.parseDouble(By.getText()),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3);
+                    tabMode.setValueAt(Double.parseDouble(ByLm.getText()),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),4);
                     emptTeks();
                 }
             }
@@ -730,7 +730,7 @@ public final class DlgPoli extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -789,7 +789,7 @@ public final class DlgPoli extends javax.swing.JDialog {
     }//GEN-LAST:event_ByLmKeyPressed
 
     private void tbKamarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -860,6 +860,7 @@ public final class DlgPoli extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil(String order) {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try {
             String sql="";
@@ -895,7 +896,8 @@ public final class DlgPoli extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
 
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {
@@ -910,11 +912,11 @@ public final class DlgPoli extends javax.swing.JDialog {
 
     private void getData() {
         if(tbKamar.getSelectedRow()!= -1){
-            Kd.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
-            Kd2.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
-            Nm.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString());
-            By.setText(Valid.SetAngka2(Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString())));
-            ByLm.setText(Valid.SetAngka2(Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString())));
+            Kd.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString());
+            Kd2.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString());
+            Nm.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2).toString());
+            By.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3).toString())));
+            ByLm.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),4).toString())));
         }
     }
 

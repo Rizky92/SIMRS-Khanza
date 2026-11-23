@@ -296,7 +296,7 @@ public final class DlgRl36 extends javax.swing.JDialog {
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                         for(int r=0;r<tabMode.getRowCount();r++){
-                            if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
+                            if(!tabMode.getValueAt(r,0).toString().contains(">>")){
                                 Sequel.menyimpan("temporary","'"+r+"','"+
                                                 tabMode.getValueAt(r,0).toString()+"','"+
                                                 tabMode.getValueAt(r,1).toString()+"','"+

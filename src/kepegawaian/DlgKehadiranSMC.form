@@ -1102,6 +1102,7 @@
               <SubComponents>
                 <Component class="widget.Table" name="tbScanLog">
                   <Properties>
+                    <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                     <Property name="toolTipText" type="java.lang.String" value="Ubah kolom mode untuk mengoreksi scan masuk/pulang, klik kanan untuk memindahkan scan ke shift hari sebelumnya/berikutnya" noResource="true"/>
                     <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                       <ComponentRef name="PopupScanLog"/>

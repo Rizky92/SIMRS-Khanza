@@ -532,7 +532,7 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
         }else{
             if(tbJnsPerawatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("inhealth_maping_poli","kd_poli_rs=?","kd_poli_rs=?,kd_poli_inhealth=?,nm_poli_inhealth=?",4,new String[]{
-                        kdpoli.getText(),KdPoliInhealth.getText(),NmPoliInhealth.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                        kdpoli.getText(),KdPoliInhealth.getText(),NmPoliInhealth.getText(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString()
                     })==true){
                     emptTeks();
                     runBackground(() ->tampil());
@@ -655,7 +655,7 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -711,7 +711,7 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -798,7 +798,7 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {
@@ -811,10 +811,10 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
 
     private void getData() {
        if(tbJnsPerawatan.getSelectedRow()!= -1){
-           kdpoli.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-           TPoli.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-           KdPoliInhealth.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-           NmPoliInhealth.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
+           kdpoli.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+           TPoli.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+           KdPoliInhealth.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+           NmPoliInhealth.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
         }
     }
 

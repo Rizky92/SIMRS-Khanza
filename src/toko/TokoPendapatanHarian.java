@@ -194,6 +194,7 @@ public final class TokoPendapatanHarian extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbPenjualan.setSortable(false);
         tbPenjualan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPenjualan.setName("tbPenjualan"); // NOI18N
         Scroll.setViewportView(tbPenjualan);
@@ -204,6 +205,7 @@ public final class TokoPendapatanHarian extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbPiutang.setSortable(false);
         tbPiutang.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPiutang.setName("tbPiutang"); // NOI18N
         Scroll2.setViewportView(tbPiutang);

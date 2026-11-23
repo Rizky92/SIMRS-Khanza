@@ -45,7 +45,7 @@ public class MasterCariTemplateUmumSMC extends javax.swing.JDialog {
         tbTemplate.setModel(tabMode);
         tbTemplate.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbTemplate.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbTemplate.getColumnCount(); i++) {
             TableColumn column = tbTemplate.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(40);
@@ -231,13 +231,13 @@ public class MasterCariTemplateUmumSMC extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbTemplateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTemplateMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbTemplate.getRowCount() != 0) {
             getData();
         }
     }//GEN-LAST:event_tbTemplateMouseClicked
 
     private void tbTemplateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTemplateKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbTemplate.getRowCount() != 0) {
             if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
                 getData();
                 if (melebihiBatas()) {
@@ -253,7 +253,7 @@ public class MasterCariTemplateUmumSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_tbTemplateKeyPressed
 
     private void tbTemplateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTemplateKeyReleased
-        if (tabMode.getRowCount() != 0) {
+        if (tbTemplate.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 getData();
             }
@@ -391,6 +391,7 @@ public class MasterCariTemplateUmumSMC extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             LCount.setText("0");
             Template.setText("");
+            tbTemplate.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim();
@@ -435,9 +436,10 @@ public class MasterCariTemplateUmumSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbTemplate.getRowCount() + "");
                     MasterCariTemplateUmumSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbTemplate.resumeSorting();
                 }
             }.execute();
         }
@@ -445,7 +447,7 @@ public class MasterCariTemplateUmumSMC extends javax.swing.JDialog {
 
     private void getData() {
         if (tbTemplate.getSelectedRow() != -1) {
-            Template.setText(tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 3).toString());
+            Template.setText(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow()), 3).toString());
             Template.setCaretPosition(0);
         }
     }

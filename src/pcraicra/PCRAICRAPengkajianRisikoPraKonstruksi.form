@@ -987,6 +987,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbKelompokRisikoArea">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="name" type="java.lang.String" value="tbKelompokRisikoArea" noResource="true"/>
                               </Properties>
                             </Component>
@@ -1160,6 +1161,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbIdentifikasiRisikoInfeksi">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="name" type="java.lang.String" value="tbIdentifikasiRisikoInfeksi" noResource="true"/>
                               </Properties>
                             </Component>
@@ -1295,6 +1297,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbIdentifikasiRisikoKebakaran">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="name" type="java.lang.String" value="tbIdentifikasiRisikoKebakaran" noResource="true"/>
                               </Properties>
                             </Component>
@@ -1430,6 +1433,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbIdentifikasiRisikoKeselamatan">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="name" type="java.lang.String" value="tbIdentifikasiRisikoKeselamatan" noResource="true"/>
                               </Properties>
                             </Component>
@@ -1565,6 +1569,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbIdentifikasiRisikoUtilitas">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="name" type="java.lang.String" value="tbIdentifikasiRisikoUtilitas" noResource="true"/>
                               </Properties>
                             </Component>
@@ -1852,6 +1857,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbTindakanPengendalian">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="name" type="java.lang.String" value="tbTindakanPengendalian" noResource="true"/>
                               </Properties>
                             </Component>
@@ -2163,6 +2169,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbPersyaratanDipenuhi">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="name" type="java.lang.String" value="tbPersyaratanDipenuhi" noResource="true"/>
                               </Properties>
                             </Component>

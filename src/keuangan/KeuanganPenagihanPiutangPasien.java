@@ -840,6 +840,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBelumLunas.setAutoCreateRowSorter(true);
         tbBelumLunas.setComponentPopupMenu(jPopupMenu1);
         tbBelumLunas.setName("tbBelumLunas"); // NOI18N
         tbBelumLunas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -860,6 +861,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
+        tbBelumDitagihkan.setAutoCreateRowSorter(true);
         tbBelumDitagihkan.setComponentPopupMenu(jPopupMenu1);
         tbBelumDitagihkan.setName("tbBelumDitagihkan"); // NOI18N
         tbBelumDitagihkan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -889,7 +891,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbBelumLunasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBelumLunasKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBelumLunas.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 getdata();
             }
@@ -899,17 +901,17 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
     private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailPiutangActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if (TabRawat.getSelectedIndex() == 0) {
-            if (tabMode.getRowCount() == 0) {
+            if (tbBelumLunas.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
                 TCari.requestFocus();
             } else {
                 if (tbBelumLunas.getSelectedRow() < 0) {
                     JOptionPane.showMessageDialog(null, "Silahkan pilih data terlebih dahulu...!!");
                 } else {
-                    status = Sequel.cariIsiSmc("select status_lanjut from reg_periksa where no_rawat = ?", tbBelumLunas.getValueAt(tbBelumLunas.getSelectedRow(), 1).toString());
+                    status = Sequel.cariIsiSmc("select status_lanjut from reg_periksa where no_rawat = ?", tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(tbBelumLunas.getSelectedRow()), 1).toString());
                     if (status.equals("Ralan")) {
                         DlgBilingRalan billing = new DlgBilingRalan(null, false);
-                        billing.TNoRw.setText(tbBelumLunas.getValueAt(tbBelumLunas.getSelectedRow(), 1).toString());
+                        billing.TNoRw.setText(tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(tbBelumLunas.getSelectedRow()), 1).toString());
                         billing.isCek();
                         billing.isRawat();
                         if (Sequel.cariIntegerSmc("select count(*) from piutang_pasien where no_rawat = ?", billing.TNoRw.getText()) > 0) {
@@ -920,7 +922,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
                         billing.setVisible(true);
                     } else if (status.equals("Ranap")) {
                         DlgBilingRanap billing = new DlgBilingRanap(null, false);
-                        billing.TNoRw.setText(tbBelumLunas.getValueAt(tbBelumLunas.getSelectedRow(), 1).toString());
+                        billing.TNoRw.setText(tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(tbBelumLunas.getSelectedRow()), 1).toString());
                         billing.isCek();
                         billing.isRawat();
                         billing.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
@@ -930,17 +932,17 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
                 }
             }
         } else if (TabRawat.getSelectedIndex() == 1) {
-            if (tabMode2.getRowCount() == 0) {
+            if (tbBelumDitagihkan.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
                 TCari.requestFocus();
             } else {
                 if (tbBelumDitagihkan.getSelectedRow() < 0) {
                     JOptionPane.showMessageDialog(null, "Silahkan pilih data terlebih dahulu...!!");
                 } else {
-                    status = Sequel.cariIsiSmc("select status_lanjut from reg_periksa where no_rawat = ?", tbBelumDitagihkan.getValueAt(tbBelumDitagihkan.getSelectedRow(), 1).toString());
+                    status = Sequel.cariIsiSmc("select status_lanjut from reg_periksa where no_rawat = ?", tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(tbBelumDitagihkan.getSelectedRow()), 1).toString());
                     if (status.equals("Ralan")) {
                         DlgBilingRalan billing = new DlgBilingRalan(null, false);
-                        billing.TNoRw.setText(tbBelumDitagihkan.getValueAt(tbBelumDitagihkan.getSelectedRow(), 1).toString());
+                        billing.TNoRw.setText(tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(tbBelumDitagihkan.getSelectedRow()), 1).toString());
                         billing.isCek();
                         billing.isRawat();
                         if (Sequel.cariIntegerSmc("select count(*) from piutang_pasien where no_rawat = ?", billing.TNoRw.getText()) > 0) {
@@ -951,7 +953,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
                         billing.setVisible(true);
                     } else if (status.equals("Ranap")) {
                         DlgBilingRanap billing = new DlgBilingRanap(null, false);
-                        billing.TNoRw.setText(tbBelumDitagihkan.getValueAt(tbBelumDitagihkan.getSelectedRow(), 1).toString());
+                        billing.TNoRw.setText(tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(tbBelumDitagihkan.getSelectedRow()), 1).toString());
                         billing.isCek();
                         billing.isRawat();
                         billing.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
@@ -1101,9 +1103,9 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
                         })==true){
                             jml=tbBelumLunas.getRowCount();
                             for(i=0;i<jml;i++){
-                                if(tbBelumLunas.getValueAt(i,0).toString().equals("true")){
+                                if(tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),0).toString().equals("true")){
                                     if(! Sequel.menyimpantfSmc("detail_penagihan_piutang", "no_tagihan, no_rawat, sisapiutang",
-                                        NoPenagihan.getText(), tbBelumLunas.getValueAt(i, 1).toString(), tbBelumLunas.getValueAt(i, 6).toString()
+                                        NoPenagihan.getText(), tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i), 1).toString(), tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i), 6).toString()
                                     )) {
                                         sukses = false;
                                     }
@@ -1147,9 +1149,9 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
                         })==true){
                             jml=tbBelumDitagihkan.getRowCount();
                             for(i=0;i<jml;i++){
-                                if(tbBelumDitagihkan.getValueAt(i,0).toString().equals("true")){
+                                if(tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),0).toString().equals("true")){
                                     if(! Sequel.menyimpantfSmc("detail_penagihan_piutang", "no_tagihan, no_rawat, sisapiutang",
-                                        NoPenagihan.getText(), tbBelumDitagihkan.getValueAt(i, 1).toString(), tbBelumDitagihkan.getValueAt(i, 6).toString()
+                                        NoPenagihan.getText(), tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i), 1).toString(), tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i), 6).toString()
                                     )) {
                                         sukses = false;
                                     }
@@ -1195,10 +1197,10 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
                         })==true){
                             jml=tbBelumLunas.getRowCount();
                             for(i=0;i<jml;i++){
-                                if(tbBelumLunas.getValueAt(i,0).toString().equals("true")){
+                                if(tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),0).toString().equals("true")){
                                     if(! Sequel.menyimpantfSmc("detail_penagihan_piutang", "no_tagihan, no_rawat, sisapiutang, diskon",
-                                        NoPenagihan.getText(), tbBelumLunas.getValueAt(i, 1).toString(), tbBelumLunas.getValueAt(i, 6).toString(),
-                                        new BigDecimal(Valid.SetAngka(tbBelumLunas.getValueAt(i, 6).toString()) * (Valid.SetAngka(Diskon.getText()) / 100))
+                                        NoPenagihan.getText(), tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i), 1).toString(), tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i), 6).toString(),
+                                        new BigDecimal(Valid.SetAngka(tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i), 6).toString()) * (Valid.SetAngka(Diskon.getText()) / 100))
                                             .setScale(0, RoundingMode.HALF_UP).toPlainString()
                                     )) {
                                         sukses = false;
@@ -1243,10 +1245,10 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
                         })==true){
                             jml=tbBelumDitagihkan.getRowCount();
                             for(i=0;i<jml;i++){
-                                if(tbBelumDitagihkan.getValueAt(i,0).toString().equals("true")){
+                                if(tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),0).toString().equals("true")){
                                     if(! Sequel.menyimpantfSmc("detail_penagihan_piutang", "no_tagihan, no_rawat, sisapiutang, diskon",
-                                        NoPenagihan.getText(), tbBelumDitagihkan.getValueAt(i, 1).toString(), tbBelumDitagihkan.getValueAt(i, 6).toString(),
-                                        new BigDecimal(Valid.SetAngka(tbBelumDitagihkan.getValueAt(i, 6).toString()) * (Valid.SetAngka(Diskon.getText()) / 100))
+                                        NoPenagihan.getText(), tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i), 1).toString(), tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i), 6).toString(),
+                                        new BigDecimal(Valid.SetAngka(tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i), 6).toString()) * (Valid.SetAngka(Diskon.getText()) / 100))
                                             .setScale(2, RoundingMode.HALF_UP).toPlainString()
                                     )) {
                                         sukses = false;
@@ -1488,7 +1490,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBelumDitagihkanMouseClicked
 
     private void tbBelumDitagihkanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBelumDitagihkanKeyPressed
-        if(tabMode2.getRowCount()!=0){
+        if(tbBelumDitagihkan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 getdata2();
             }
@@ -1496,7 +1498,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBelumDitagihkanKeyPressed
 
     private void tbBelumLunasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBelumLunasMouseReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbBelumLunas.getRowCount()!=0){
             if(tbBelumLunas.getSelectedColumn()==0){
                 getdata();
             }
@@ -1504,7 +1506,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBelumLunasMouseReleased
 
     private void tbBelumDitagihkanMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBelumDitagihkanMouseReleased
-        if(tabMode2.getRowCount()!=0){
+        if(tbBelumDitagihkan.getRowCount()!=0){
             if(tbBelumDitagihkan.getSelectedColumn()==0){
                 getdata2();
             }
@@ -1516,11 +1518,11 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
 
         if (kdpenjab.getText().isBlank() || nmpenjab.getText().isBlank()) {
             if (tbBelumLunas.getSelectedRow() != -1) {
-                tbBelumLunas.setValueAt(false, tbBelumLunas.getSelectedRow(), 0);
+                tabMode.setValueAt(false, tbBelumLunas.convertRowIndexToModel(tbBelumLunas.getSelectedRow()), 0);
             }
 
             if (tbBelumDitagihkan.getSelectedRow() != -1) {
-                tbBelumDitagihkan.setValueAt(false, tbBelumDitagihkan.getSelectedRow(), 0);
+                tabMode2.setValueAt(false, tbBelumDitagihkan.convertRowIndexToModel(tbBelumDitagihkan.getSelectedRow()), 0);
             }
 
             JOptionPane.showMessageDialog(null, "Silahkan pilih cara bayar/penjamin terlebih dahulu!");
@@ -1533,16 +1535,16 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         switch (TabRawat.getSelectedIndex()) {
             case 0:
                 for (i = 0; i < tbBelumLunas.getRowCount(); i++) {
-                    tbBelumLunas.setValueAt(true, i, 0);
-                    total += Double.parseDouble(tbBelumLunas.getValueAt(i, 6).toString());
+                    tabMode.setValueAt(true, tbBelumLunas.convertRowIndexToModel(i), 0);
+                    total += Double.parseDouble(tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i), 6).toString());
                     jml++;
                 }
             break;
 
             case 1:
                 for (i = 0; i < tbBelumDitagihkan.getRowCount(); i++) {
-                    tbBelumDitagihkan.setValueAt(true, i, 0);
-                    total += Double.parseDouble(tbBelumDitagihkan.getValueAt(i, 6).toString());
+                    tabMode2.setValueAt(true, tbBelumDitagihkan.convertRowIndexToModel(i), 0);
+                    total += Double.parseDouble(tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i), 6).toString());
                     jml++;
                 }
             break;
@@ -1560,11 +1562,11 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
 
         if (kdpenjab.getText().isBlank() || nmpenjab.getText().isBlank()) {
             if (tbBelumLunas.getSelectedRow() != -1) {
-                tbBelumLunas.setValueAt(false, tbBelumLunas.getSelectedRow(), 0);
+                tabMode.setValueAt(false, tbBelumLunas.convertRowIndexToModel(tbBelumLunas.getSelectedRow()), 0);
             }
 
             if (tbBelumDitagihkan.getSelectedRow() != -1) {
-                tbBelumDitagihkan.setValueAt(false, tbBelumDitagihkan.getSelectedRow(), 0);
+                tabMode2.setValueAt(false, tbBelumDitagihkan.convertRowIndexToModel(tbBelumDitagihkan.getSelectedRow()), 0);
             }
 
             JOptionPane.showMessageDialog(null, "Silahkan pilih cara bayar/penjamin terlebih dahulu!");
@@ -1575,13 +1577,13 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         switch (TabRawat.getSelectedIndex()) {
             case 0:
                 for (i = 0; i < tbBelumLunas.getRowCount(); i++) {
-                    tbBelumLunas.setValueAt(false, i, 0);
+                    tabMode.setValueAt(false, tbBelumLunas.convertRowIndexToModel(i), 0);
                 }
             break;
 
             case 1:
                 for (i = 0; i < tbBelumDitagihkan.getRowCount(); i++) {
-                    tbBelumDitagihkan.setValueAt(false, i, 0);
+                    tabMode2.setValueAt(false, tbBelumDitagihkan.convertRowIndexToModel(i), 0);
                 }
             break;
         }
@@ -1620,10 +1622,10 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
 
     private void DiskonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiskonKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (tabMode.getRowCount() > 0) {
+            if (tbBelumLunas.getRowCount() > 0) {
                 getdata();
             }
-            if (tabMode2.getRowCount() > 0) {
+            if (tbBelumDitagihkan.getRowCount() > 0) {
                 getdata2();
             }
         }
@@ -1718,7 +1720,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         try{
             jml=0;
             for(i=0;i<tbBelumLunas.getRowCount();i++){
-                if(tbBelumLunas.getValueAt(i,0).toString().equals("true")){
+                if(tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -1750,23 +1752,24 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
 
             index=0;
             for(i=0;i<tbBelumLunas.getRowCount();i++){
-                if(tbBelumLunas.getValueAt(i,0).toString().equals("true")){
+                if(tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    norawat[index]=tbBelumLunas.getValueAt(i,1).toString();
-                    tglpiutang[index]=tbBelumLunas.getValueAt(i,2).toString();
-                    norm[index]=tbBelumLunas.getValueAt(i,3).toString();
-                    pasien[index]=tbBelumLunas.getValueAt(i,4).toString();
-                    statusrawat[index]=tbBelumLunas.getValueAt(i,5).toString();
-                    piutang[index]=Double.parseDouble(tbBelumLunas.getValueAt(i,6).toString());
-                    carabayar[index]=tbBelumLunas.getValueAt(i,7).toString();
-                    nokartu[index]=tbBelumLunas.getValueAt(i,8).toString();
-                    asalperusahaan[index]=tbBelumLunas.getValueAt(i,9).toString();
-                    nip[index]=tbBelumLunas.getValueAt(i,10).toString();
-                    nonota[index]=tbBelumLunas.getValueAt(i,11).toString();
+                    norawat[index]=tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),1).toString();
+                    tglpiutang[index]=tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),2).toString();
+                    norm[index]=tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),3).toString();
+                    pasien[index]=tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),4).toString();
+                    statusrawat[index]=tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),5).toString();
+                    piutang[index]=Double.parseDouble(tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),6).toString());
+                    carabayar[index]=tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),7).toString();
+                    nokartu[index]=tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),8).toString();
+                    asalperusahaan[index]=tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),9).toString();
+                    nip[index]=tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),10).toString();
+                    nonota[index]=tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),11).toString();
                     index++;
                 }
             }
 
+            tbBelumLunas.suspendSorting();
             Valid.tabelKosong(tabMode);
 
             for(i=0;i<jml;i++){
@@ -1967,18 +1970,19 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
                 }
             }
 
-            LCountBelumDibayar1.setText(tabMode.getRowCount()+"");
+            LCountBelumDibayar1.setText(tbBelumLunas.getRowCount()+"");
             LCountBelumDibayar2.setText(Valid.SetAngka(sisapiutang));
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbBelumLunas.resumeSorting();
     }
 
     private void tampil2(){
         try{
             jml=0;
             for(i=0;i<tbBelumDitagihkan.getRowCount();i++){
-                if(tbBelumDitagihkan.getValueAt(i,0).toString().equals("true")){
+                if(tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -2010,23 +2014,24 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
 
             index=0;
             for(i=0;i<tbBelumDitagihkan.getRowCount();i++){
-                if(tbBelumDitagihkan.getValueAt(i,0).toString().equals("true")){
+                if(tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    norawat[index]=tbBelumDitagihkan.getValueAt(i,1).toString();
-                    tglpiutang[index]=tbBelumDitagihkan.getValueAt(i,2).toString();
-                    norm[index]=tbBelumDitagihkan.getValueAt(i,3).toString();
-                    pasien[index]=tbBelumDitagihkan.getValueAt(i,4).toString();
-                    statusrawat[index]=tbBelumDitagihkan.getValueAt(i,5).toString();
-                    piutang[index]=Double.parseDouble(tbBelumDitagihkan.getValueAt(i,6).toString());
-                    carabayar[index]=tbBelumDitagihkan.getValueAt(i,7).toString();
-                    nokartu[index]=tbBelumDitagihkan.getValueAt(i,8).toString();
-                    asalperusahaan[index]=tbBelumDitagihkan.getValueAt(i,9).toString();
-                    nip[index]=tbBelumDitagihkan.getValueAt(i,10).toString();
-                    nonota[index]=tbBelumDitagihkan.getValueAt(i,11).toString();
+                    norawat[index]=tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),1).toString();
+                    tglpiutang[index]=tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),2).toString();
+                    norm[index]=tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),3).toString();
+                    pasien[index]=tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),4).toString();
+                    statusrawat[index]=tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),5).toString();
+                    piutang[index]=Double.parseDouble(tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),6).toString());
+                    carabayar[index]=tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),7).toString();
+                    nokartu[index]=tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),8).toString();
+                    asalperusahaan[index]=tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),9).toString();
+                    nip[index]=tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),10).toString();
+                    nonota[index]=tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),11).toString();
                     index++;
                 }
             }
 
+            tbBelumDitagihkan.suspendSorting();
             Valid.tabelKosong(tabMode2);
 
             for(i=0;i<jml;i++){
@@ -2230,23 +2235,24 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
                 }
             }
 
-            LCountBelumDibayar1.setText(tabMode2.getRowCount()+"");
+            LCountBelumDibayar1.setText(tbBelumDitagihkan.getRowCount()+"");
             LCountBelumDibayar2.setText(Valid.SetAngka(sisapiutang));
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbBelumDitagihkan.resumeSorting();
     }
 
     private void getdata() {
         if(kdpenjab.getText().equals("")||nmpenjab.getText().equals("")){
-            tbBelumLunas.setValueAt(false,tbBelumLunas.getSelectedRow(),0);
+            tabMode.setValueAt(false,tbBelumLunas.convertRowIndexToModel(tbBelumLunas.getSelectedRow()),0);
             JOptionPane.showMessageDialog(null,"Silahkan pilih penjamin terlebih dahulu");
         }else{
             total=0;
             jml=0;
             for(i=0;i<tbBelumLunas.getRowCount();i++){
-                if(tbBelumLunas.getValueAt(i,0).toString().equals("true")){
-                     total=total+(Double.parseDouble(tbBelumLunas.getValueAt(i,6).toString()));
+                if(tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),0).toString().equals("true")){
+                     total=total+(Double.parseDouble(tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i),6).toString()));
                      jml++;
                 }
             }
@@ -2258,14 +2264,14 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
 
     private void getdata2() {
         if(kdpenjab.getText().equals("")||nmpenjab.getText().equals("")){
-            tbBelumDitagihkan.setValueAt(false,tbBelumDitagihkan.getSelectedRow(),0);
+            tabMode2.setValueAt(false,tbBelumDitagihkan.convertRowIndexToModel(tbBelumDitagihkan.getSelectedRow()),0);
             JOptionPane.showMessageDialog(null,"Silahkan pilih penjamin terlebih dahulu");
         }else{
             total=0;
             jml=0;
             for(i=0;i<tbBelumDitagihkan.getRowCount();i++){
-                if(tbBelumDitagihkan.getValueAt(i,0).toString().equals("true")){
-                     total=total+(Double.parseDouble(tbBelumDitagihkan.getValueAt(i,6).toString()));
+                if(tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),0).toString().equals("true")){
+                     total=total+(Double.parseDouble(tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i),6).toString()));
                      jml++;
                 }
             }
@@ -2296,7 +2302,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='" + akses.getalamatip() + "'");
             for (i = 0; i < tabMode.getRowCount(); i++) {
-                if (tbBelumLunas.getValueAt(i, 0).toString().equals("true")) {
+                if (tabMode.getValueAt(tbBelumLunas.convertRowIndexToModel(i), 0).toString().equals("true")) {
                     if (Sequel.menyimpantf2("temporary", "'" + i + "','" +
                         tabMode.getValueAt(i, 1).toString() + "','" +
                         tabMode.getValueAt(i, 2).toString() + "','" +
@@ -2362,7 +2368,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='" + akses.getalamatip() + "'");
             for (i = 0; i < tabMode2.getRowCount(); i++) {
-                if (tbBelumDitagihkan.getValueAt(i, 0).toString().equals("true")) {
+                if (tabMode2.getValueAt(tbBelumDitagihkan.convertRowIndexToModel(i), 0).toString().equals("true")) {
                     if (Sequel.menyimpantf2("temporary", "'" + i + "','" +
                         tabMode2.getValueAt(i, 1).toString() + "','" +
                         tabMode2.getValueAt(i, 2).toString() + "','" +

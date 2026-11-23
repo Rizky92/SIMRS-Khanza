@@ -152,6 +152,7 @@ public final class DlgLhtBankJateng extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setSortable(false);
         tbBangsal.setName("tbBangsal"); // NOI18N
         Scroll.setViewportView(tbBangsal);
 

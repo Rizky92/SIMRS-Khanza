@@ -259,7 +259,7 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbJnsPerawatan.setAutoCreateRowSorter(false);
+        tbJnsPerawatan.setAutoCreateRowSorter(true);
         tbJnsPerawatan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbJnsPerawatan.setComponentPopupMenu(Popup);
         tbJnsPerawatan.setName("tbJnsPerawatan"); // NOI18N
@@ -754,7 +754,7 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
                     Double.parseDouble(JMLaborat.getText()),Double.parseDouble(KSO.getText()),Double.parseDouble(Menejemen.getText()),Double.parseDouble(TotalBiaya.getText()),nmpnj.getText(),
                     Kelas.getSelectedItem().toString(),Kategori.getSelectedItem().toString()
                 });
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbJnsPerawatan.getRowCount());
                 emptTeks();
             }
         }
@@ -782,13 +782,13 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbJnsPerawatan.getRowCount();i++){
-            if(tbJnsPerawatan.getValueAt(i,0).toString().equals("true")){
-                Sequel.mengedit("jns_perawatan_lab","kd_jenis_prw='"+tbJnsPerawatan.getValueAt(i,1).toString()+"'","status='0'");
-                tabMode.removeRow(i);
+            if(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.mengedit("jns_perawatan_lab","kd_jenis_prw='"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),1).toString()+"'","status='0'");
+                tabMode.removeRow(tbJnsPerawatan.convertRowIndexToModel(i));
                 i--;
             }
         }
-        LCount.setText("" + tabMode.getRowCount());
+        LCount.setText("" + tbJnsPerawatan.getRowCount());
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -821,22 +821,22 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
         }else{
             if(Sequel.mengedittf("jns_perawatan_lab","kd_jenis_prw=?","kd_jenis_prw=?,nm_perawatan=?,bagian_rs=?,tarif_tindakan_petugas=?,total_byr=?,kd_pj=?,tarif_tindakan_dokter=?,tarif_perujuk=?,bhp=?,kso=?,menejemen=?,kelas=?,kategori=?",14,new String[]{
                 TKd.getText(),TNm.getText(),BagianRs.getText(),JMLaborat.getText(),TotalBiaya.getText(),kdpnj.getText(),JMDokter.getText(),JMPerujuk.getText(),Bhp.getText(),
-                KSO.getText(),Menejemen.getText(),Kelas.getSelectedItem().toString(),Kategori.getSelectedItem().toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString()
+                KSO.getText(),Menejemen.getText(),Kelas.getSelectedItem().toString(),Kategori.getSelectedItem().toString(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString()
             })==true){
-                tbJnsPerawatan.setValueAt(false,tbJnsPerawatan.getSelectedRow(),0);
-                tbJnsPerawatan.setValueAt(TKd.getText(),tbJnsPerawatan.getSelectedRow(),1);
-                tbJnsPerawatan.setValueAt(TNm.getText(),tbJnsPerawatan.getSelectedRow(),2);
-                tbJnsPerawatan.setValueAt(Double.parseDouble(BagianRs.getText()),tbJnsPerawatan.getSelectedRow(),3);
-                tbJnsPerawatan.setValueAt(Double.parseDouble(Bhp.getText()),tbJnsPerawatan.getSelectedRow(),4);
-                tbJnsPerawatan.setValueAt(Double.parseDouble(JMPerujuk.getText()),tbJnsPerawatan.getSelectedRow(),5);
-                tbJnsPerawatan.setValueAt(Double.parseDouble(JMDokter.getText()),tbJnsPerawatan.getSelectedRow(),6);
-                tbJnsPerawatan.setValueAt(Double.parseDouble(JMLaborat.getText()),tbJnsPerawatan.getSelectedRow(),7);
-                tbJnsPerawatan.setValueAt(Double.parseDouble(KSO.getText()),tbJnsPerawatan.getSelectedRow(),8);
-                tbJnsPerawatan.setValueAt(Double.parseDouble(Menejemen.getText()),tbJnsPerawatan.getSelectedRow(),9);
-                tbJnsPerawatan.setValueAt(Double.parseDouble(TotalBiaya.getText()),tbJnsPerawatan.getSelectedRow(),10);
-                tbJnsPerawatan.setValueAt(nmpnj.getText(),tbJnsPerawatan.getSelectedRow(),11);
-                tbJnsPerawatan.setValueAt(Kelas.getSelectedItem().toString(),tbJnsPerawatan.getSelectedRow(),12);
-                tbJnsPerawatan.setValueAt(Kategori.getSelectedItem().toString(),tbJnsPerawatan.getSelectedRow(),13);
+                tabMode.setValueAt(false,tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0);
+                tabMode.setValueAt(TKd.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1);
+                tabMode.setValueAt(TNm.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2);
+                tabMode.setValueAt(Double.parseDouble(BagianRs.getText()),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3);
+                tabMode.setValueAt(Double.parseDouble(Bhp.getText()),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4);
+                tabMode.setValueAt(Double.parseDouble(JMPerujuk.getText()),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5);
+                tabMode.setValueAt(Double.parseDouble(JMDokter.getText()),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),6);
+                tabMode.setValueAt(Double.parseDouble(JMLaborat.getText()),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7);
+                tabMode.setValueAt(Double.parseDouble(KSO.getText()),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),8);
+                tabMode.setValueAt(Double.parseDouble(Menejemen.getText()),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),9);
+                tabMode.setValueAt(Double.parseDouble(TotalBiaya.getText()),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),10);
+                tabMode.setValueAt(nmpnj.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),11);
+                tabMode.setValueAt(Kelas.getSelectedItem().toString(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),12);
+                tabMode.setValueAt(Kategori.getSelectedItem().toString(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),13);
                 emptTeks();
             }
         }
@@ -966,9 +966,9 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if (! kodeTindakanDicopy.isBlank()) {
-                if (kodeTindakanDicopy.equals(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 1).toString())) {
+                if (kodeTindakanDicopy.equals(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 1).toString())) {
                     kodeTindakanDicopy = "";
                     JOptionPane.showMessageDialog(rootPane, "Maaf, tarif yang dipilih tidak boleh sama...!!!");
                 } else {
@@ -978,7 +978,7 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
                         "select ? as kd_jenis_prw, Pemeriksaan, satuan, nilai_rujukan_ld, nilai_rujukan_la, nilai_rujukan_pd, nilai_rujukan_pa, " +
                         (akses.gettarif_lab() ? "bagian_rs, bhp, bagian_perujuk, bagian_dokter, bagian_laborat, kso, menejemen, biaya_item, " : "0, 0, 0, 0, 0, 0, 0, 0, ") + "urut " +
                         "from template_laboratorium where kd_jenis_prw = ?",
-                        tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 1).toString(),
+                        tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 1).toString(),
                         kodeTindakanDicopy
                     )) {
                         JOptionPane.showMessageDialog(null, "Copy Template lab berhasil...!!!");
@@ -998,10 +998,10 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_A){
                 for(i=0;i<tbJnsPerawatan.getRowCount();i++){
-                    tbJnsPerawatan.setValueAt(true,i,0);
+                    tabMode.setValueAt(true,tbJnsPerawatan.convertRowIndexToModel(i),0);
                 }
             }
         }
@@ -1069,10 +1069,10 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
         if(TNm.getText().trim().equals("")){
             Valid.textKosong(TNm,"Nama Pemeriksaan");
         }else{
-            if(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString().equals("PK")||tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString().equals("MB")){
+            if(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),13).toString().equals("PK")||tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),13).toString().equals("MB")){
                 DlgTemplateLaboratorium template=new DlgTemplateLaboratorium(null,false);
-                template.KdPeriksa.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-                template.NmPeriksa.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
+                template.KdPeriksa.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+                template.NmPeriksa.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
                 template.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 template.setLocationRelativeTo(internalFrame1);
                 template.tampil();
@@ -1183,7 +1183,7 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
     }//GEN-LAST:event_KelasKeyPressed
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1226,7 +1226,7 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
     private void ppCopyTemplateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCopyTemplateActionPerformed
         if (tbJnsPerawatan.getSelectedRow() != -1) {
             JOptionPane.showMessageDialog(rootPane, "Silahkan pilih pemeriksaan lab yang mau di paste...!!!");
-            kodeTindakanDicopy = tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 1).toString();
+            kodeTindakanDicopy = tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 1).toString();
         }
     }//GEN-LAST:event_ppCopyTemplateActionPerformed
 
@@ -1303,6 +1303,7 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbJnsPerawatan.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -1346,7 +1347,8 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
+        tbJnsPerawatan.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1372,20 +1374,20 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
 
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
-            TKd.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-            TNm.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-            BagianRs.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString())));
-            Bhp.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString())));
-            JMPerujuk.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString())));
-            JMDokter.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString())));
-            JMLaborat.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString())));
-            KSO.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString())));
-            Menejemen.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString())));
-            TotalBiaya.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString())));
-            Sequel.cariIsi("select jns_perawatan_lab.kd_pj from jns_perawatan_lab where jns_perawatan_lab.kd_jenis_prw=?", kdpnj,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-            nmpnj.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString());
-            Kelas.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),12).toString());
-            Kategori.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString());
+            TKd.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+            TNm.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+            BagianRs.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString())));
+            Bhp.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString())));
+            JMPerujuk.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5).toString())));
+            JMDokter.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),6).toString())));
+            JMLaborat.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7).toString())));
+            KSO.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),8).toString())));
+            Menejemen.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),9).toString())));
+            TotalBiaya.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),10).toString())));
+            Sequel.cariIsi("select jns_perawatan_lab.kd_pj from jns_perawatan_lab where jns_perawatan_lab.kd_jenis_prw=?", kdpnj,tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+            nmpnj.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),11).toString());
+            Kelas.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),12).toString());
+            Kategori.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),13).toString());
         }
     }
 

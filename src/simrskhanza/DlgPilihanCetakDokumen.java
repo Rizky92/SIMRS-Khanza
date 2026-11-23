@@ -107,7 +107,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbData.setAutoCreateRowSorter(false);
+        tbData.setAutoCreateRowSorter(true);
         tbData.setName("tbData"); // NOI18N
         Scroll.setViewportView(tbData);
 
@@ -156,9 +156,9 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        for(i=0;i<tbData.getRowCount();i++){
-            if(tbData.getValueAt(i,0).toString().equals("true")){
-                if(tbData.getValueAt(i,1).toString().equals("Kartu Pasien 1")){
+        for(i=0;i<TabMode.getRowCount();i++){
+            if(TabMode.getValueAt(i,0).toString().equals("true")){
+                if(TabMode.getValueAt(i,1).toString().equals("Kartu Pasien 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -169,7 +169,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("emailrs",akses.getemailrs());
                     Valid.MyReportqry("rptKartuBerobat5.jasper","report","::[ Kartu Periksa Pasien ]::","select * from pasien where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Kartu Pasien 2")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Kartu Pasien 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -185,7 +185,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "on pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Kartu Pasien 3")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Kartu Pasien 3")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -201,7 +201,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "on pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Kartu Pasien 4")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Kartu Pasien 4")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -217,7 +217,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "on pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Label Rekam Medis 1")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Label Rekam Medis 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -236,7 +236,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Label Rekam Medis 2")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Label Rekam Medis 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -255,7 +255,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Label Rekam Medis 3")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Label Rekam Medis 3")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -274,7 +274,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Label Rekam Medis 4")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Label Rekam Medis 4")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -293,7 +293,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Label Rekam Medis 5")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Label Rekam Medis 5")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -312,7 +312,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Label Rekam Medis 6")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Label Rekam Medis 6")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -331,7 +331,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Label Rekam Medis 7")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Label Rekam Medis 7")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -350,7 +350,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Identitas Pasien 1")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Identitas Pasien 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -369,7 +369,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Identitas Pasien 2")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Identitas Pasien 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -388,7 +388,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Kartu Indeks Pasien")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Kartu Indeks Pasien")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
@@ -404,7 +404,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "pasien.pnd, pasien.keluarga, pasien.namakeluarga from pasien inner join kelurahan inner join kecamatan inner join kabupaten "+
                            "on pasien.kd_kel=kelurahan.kd_kel and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Lembar Rawat Jalan Model 1")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Lembar Rawat Jalan Model 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -423,7 +423,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Lembar Rawat Jalan Model 2")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Lembar Rawat Jalan Model 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -442,7 +442,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Lembar Rawat Jalan Model 3")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Lembar Rawat Jalan Model 3")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -461,7 +461,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Formulir Pendaftaran Pasien")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Formulir Pendaftaran Pasien")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -480,7 +480,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Lembar Screening Awal Pasien Masuk Rawat Jalan")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Lembar Screening Awal Pasien Masuk Rawat Jalan")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -499,7 +499,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Formulir Penempelan Copy Resep")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Formulir Penempelan Copy Resep")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -518,7 +518,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Bukti Register 1")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Bukti Register 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -536,7 +536,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                            "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='"+NoRawat+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Bukti Register 2")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Bukti Register 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -554,7 +554,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                            "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='"+NoRawat+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Persetujuan Medis")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Persetujuan Medis")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -573,7 +573,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Surat Jaminan & Bukti Pelayanan Ralan")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Surat Jaminan & Bukti Pelayanan Ralan")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -592,7 +592,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli "+
                            "where reg_periksa.no_rawat='"+NoRawat+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Check List Kelengkapan Pendaftaran Kanan")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Check List Kelengkapan Pendaftaran Kanan")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("poli",NamaPoli);
@@ -610,7 +610,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     Valid.MyReportqry("rptCheckList.jasper","report","::[ Check List ]::",
                             "select current_date() as sekarang",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Check List Kelengkapan Pendaftaran Kiri")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Check List Kelengkapan Pendaftaran Kiri")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("poli",NamaPoli);
@@ -628,7 +628,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     Valid.MyReportqry("rptCheckList2.jasper","report","::[ Check List ]::",
                         "select current_date() as sekarang",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Check List Kelengkapan Pendaftaran Kanan+Tracker")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Check List Kelengkapan Pendaftaran Kanan+Tracker")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("poli",NamaPoli);
@@ -648,7 +648,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     Valid.MyReportqry("rptCheckList4.jasper","report","::[ Check List ]::",
                             "select current_date() as sekarang",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Check List Kelengkapan Pendaftaran Kiri+Tracker")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Check List Kelengkapan Pendaftaran Kiri+Tracker")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("poli",NamaPoli);
@@ -668,7 +668,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     Valid.MyReportqry("rptCheckList3.jasper","report","::[ Check List ]::",
                             "select current_date() as sekarang",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Lembar Periksa Pasien Kanan")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Lembar Periksa Pasien Kanan")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("poli",NamaPoli);
@@ -689,7 +689,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     Valid.MyReportqry("rptLembarPeriksa.jasper","report","::[ Lembar Periksa ]::",
                             "select date_format(current_date(),'%d/%m/%Y') as sekarang",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Lembar Periksa Pasien Kiri")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Lembar Periksa Pasien Kiri")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("poli",NamaPoli);
@@ -710,7 +710,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     Valid.MyReportqry("rptLembarPeriksa2.jasper","report","::[ Lembar Periksa ]::",
                             "select date_format(current_date(),'%d/%m/%Y') as sekarang",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Lembar Periksa Pasien Kanan 2")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Lembar Periksa Pasien Kanan 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("poli",NamaPoli);
@@ -732,7 +732,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     Valid.MyReportqry("rptLembarPeriksa3.jasper","report","::[ Lembar Periksa]::",
                             "select date_format(current_date(),'%d/%m/%Y') as sekarang",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Lembar Periksa Pasien Kiri 2")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Lembar Periksa Pasien Kiri 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("poli",NamaPoli);
@@ -754,7 +754,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     Valid.MyReportqry("rptLembarPeriksa4.jasper","report","::[ Lembar Periksa]::",
                             "select date_format(current_date(),'%d/%m/%Y') as sekarang",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Label Tracker 1")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Label Tracker 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -767,7 +767,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReport("rptLabelTracker.jasper",param,"::[ Label Tracker ]::");
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Label Tracker 2")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Label Tracker 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -780,7 +780,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReport("rptLabelTracker2.jasper",param,"::[ Label Tracker ]::");
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Label Tracker 3")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Label Tracker 3")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -798,7 +798,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                            "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='"+NoRawat+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Label Tracker 4")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Label Tracker 4")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -816,7 +816,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                            "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='"+NoRawat+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Barcode Perawatan")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Barcode Perawatan")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("nama",NamaPasien);
@@ -831,7 +831,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     Valid.MyReportqry("rptBarcodeRawat.jasper","report","::[ Barcode No.Rawat ]::",
                             "select reg_periksa.no_rawat from reg_periksa where no_rawat='"+NoRawat+"'",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Gelang Pasien Ralan 1")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Gelang Pasien Ralan 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -851,7 +851,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                         "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                         "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Gelang Pasien Ralan 2")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Gelang Pasien Ralan 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -871,7 +871,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                         "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                         "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Gelang Pasien Ralan 3")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Gelang Pasien Ralan 3")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -891,7 +891,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                         "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                         "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Gelang Pasien Ralan 4")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Gelang Pasien Ralan 4")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -911,7 +911,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                         "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                         "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Gelang Pasien Ralan 5")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Gelang Pasien Ralan 5")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -931,7 +931,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                         "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                         "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Gelang Pasien Ranap 1")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Gelang Pasien Ranap 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -952,7 +952,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Gelang Pasien Ranap 2")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Gelang Pasien Ranap 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -973,7 +973,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Lembar SEP Model 1")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Lembar SEP Model 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -1033,7 +1033,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     }
 
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Lembar SEP Model 2")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Lembar SEP Model 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -1093,7 +1093,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     }
 
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Lembar SEP Model 3")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Lembar SEP Model 3")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -1155,7 +1155,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     }
 
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Lembar SEP Model 4")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Lembar SEP Model 4")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -1218,7 +1218,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     }
 
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("Lembar SJP")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("Lembar SJP")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -1232,7 +1232,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                         Valid.MyReportqry("rptBridgingSJP2.jasper","report","::[ Cetak SEP ]::","select * from bridging_inhealth where no_sjp='"+NoSEP+"'",param);
                     }
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("PDF SEP Model 1")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("PDF SEP Model 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -1292,7 +1292,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     }
 
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("PDF SEP Model 2")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("PDF SEP Model 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -1352,7 +1352,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     }
 
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("PDF SEP Model 3")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("PDF SEP Model 3")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -1414,7 +1414,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     }
 
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("PDF SEP Model 4")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("PDF SEP Model 4")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -1477,7 +1477,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     }
 
                     this.setCursor(Cursor.getDefaultCursor());
-                }else if(tbData.getValueAt(i,1).toString().equals("PDF SJP")){
+                }else if(TabMode.getValueAt(i,1).toString().equals("PDF SJP")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -1526,6 +1526,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
 
     public void tampil() {
         try{
+            tbData.suspendSorting();
             Valid.tabelKosong(TabMode);
             TabMode.addRow(new Object[]{false,"Kartu Pasien 1"});//0,0
             TabMode.addRow(new Object[]{false,"Kartu Pasien 2"});//1,0
@@ -1583,10 +1584,12 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
 
+        tbData.resumeSorting();
     }
 
     public void tampil2() {
         try{
+            tbData.suspendSorting();
             Valid.tabelKosong(TabMode);
             TabMode.addRow(new Object[]{false,"Kartu Pasien 1"});//0,0
             TabMode.addRow(new Object[]{false,"Kartu Pasien 2"});//1,0
@@ -1634,10 +1637,12 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
 
+        tbData.resumeSorting();
     }
 
     public void tampil3() {
         try{
+            tbData.suspendSorting();
             Valid.tabelKosong(TabMode);
             TabMode.addRow(new Object[]{false,"Kartu Pasien 1"});//0,0
             TabMode.addRow(new Object[]{false,"Kartu Pasien 2"});//1,0
@@ -1689,6 +1694,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
 
+        tbData.resumeSorting();
     }
 
 

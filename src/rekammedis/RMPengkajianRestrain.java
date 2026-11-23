@@ -1191,8 +1191,8 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else{
-                if(KdPetugas.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString())){
-                    if(Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString(),Sequel.ambiltanggalsekarang())==true){
+                if(KdPetugas.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23).toString())){
+                    if(Sequel.cekTanggal48jam(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString(),Sequel.ambiltanggalsekarang())==true){
                         hapus();
                     }
                 }else{
@@ -1223,8 +1223,8 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(KdPetugas.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString())){
-                        if(Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString(),Sequel.ambiltanggalsekarang())==true){
+                    if(KdPetugas.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23).toString())){
+                        if(Sequel.cekTanggal48jam(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString(),Sequel.ambiltanggalsekarang())==true){
                             if(TanggalRegistrasi.getText().equals("")){
                                 TanggalRegistrasi.setText(Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
                             }
@@ -1345,7 +1345,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
 
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1363,7 +1363,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void tbObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1392,14 +1392,14 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkAccorActionPerformed
 
     private void btnAmbilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbilActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else{
             if(tbObat.getSelectedRow()>-1){
                 Sequel.queryu("delete from antripengkajianrestrain");
-                Sequel.queryu("insert into antripengkajianrestrain values('"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"')");
-                Sequel.queryu("delete from pengkajian_restrain_yang_menyetujui where no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'");
+                Sequel.queryu("insert into antripengkajianrestrain values('"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"')");
+                Sequel.queryu("delete from pengkajian_restrain_yang_menyetujui where no_rawat='"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"'");
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih No.Rawat terlebih dahulu..!!");
             }
@@ -1468,8 +1468,8 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                 param.put("emailrs",akses.getemailrs());
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("photo","http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/pengkajianrestrain/"+lokasifile);
-                finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
-                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),24).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),23).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString())+" "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString().substring(11,19));
+                finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23).toString());
+                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),24).toString()+"\nID "+(finger.equals("")?tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23).toString():finger)+"\n"+Valid.SetTgl3(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString())+" "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString().substring(11,19));
                 Valid.MyReportqry("rptFormulirPersetujuanRestrain.jasper","report","::[ Formulir Persetujuan Restrain ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,"+
                     "pengkajian_restrain.tanggal,pengkajian_restrain.gcs,pengkajian_restrain.refleka_cahaya_ka,pengkajian_restrain.refleka_cahaya_ki,"+
@@ -1478,7 +1478,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                     "pengkajian_restrain.restrain_non_farmakologi_keterangan,pengkajian_restrain.restrain_farmakologi,pengkajian_restrain.sudah_dijelaskan_keluarga,"+
                     "pengkajian_restrain.keluarga_yang_menyetujui,pengkajian_restrain.nip,petugas.nama from pengkajian_restrain inner join reg_periksa "+
                     "on pengkajian_restrain.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas "+
-                    "on pengkajian_restrain.nip=petugas.nip where pengkajian_restrain.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
+                    "on pengkajian_restrain.nip=petugas.nip where pengkajian_restrain.no_rawat='"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"'",param);
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data terlebih dahulu..!!!!");
@@ -1698,6 +1698,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             if(TCari.getText().trim().equals("")){
@@ -1761,7 +1762,8 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
+        tbObat.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1788,29 +1790,29 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
 
     private void getData() {
          if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            Umur.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            JK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            LahirPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            GCS.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            ReflekaCahayaKanan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            ReflekaCahayaKiri.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            UkuranPupilKanan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            UkuranPupilKiri.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            TD.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            Suhu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            RR.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            Nadi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            HasilObservasi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            PertimbanganKlinis.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            RestrainNonFarmakologi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            KeteranganNonRestrainFarmakologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
-            RestrainFarmakologi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
-            SudahDijelaskan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
-            Keluarga.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
-            Valid.SetTgl2(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            Umur.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            JK.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            LahirPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            GCS.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            ReflekaCahayaKanan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            ReflekaCahayaKiri.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            UkuranPupilKanan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            UkuranPupilKiri.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            TD.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            Suhu.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            RR.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            Nadi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+            HasilObservasi.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
+            PertimbanganKlinis.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17).toString());
+            RestrainNonFarmakologi.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18).toString());
+            KeteranganNonRestrainFarmakologi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19).toString());
+            RestrainFarmakologi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20).toString());
+            SudahDijelaskan.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString());
+            Keluarga.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22).toString());
+            Valid.SetTgl2(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
         }
     }
 
@@ -1910,42 +1912,42 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
             GCS.getText(),ReflekaCahayaKanan.getText(),ReflekaCahayaKiri.getText(),UkuranPupilKanan.getText(),UkuranPupilKiri.getText(),TD.getText(),
             Suhu.getText(),RR.getText(),Nadi.getText(),HasilObservasi.getSelectedItem().toString(),PertimbanganKlinis.getSelectedItem().toString(),
             RestrainNonFarmakologi.getSelectedItem().toString(),KeteranganNonRestrainFarmakologi.getText(),RestrainFarmakologi.getText(),
-            SudahDijelaskan.getSelectedItem().toString(),Keluarga.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+            SudahDijelaskan.getSelectedItem().toString(),Keluarga.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
         })==true){
-            tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
-            tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),1);
-            tbObat.setValueAt(TPasien.getText(),tbObat.getSelectedRow(),2);
-            tbObat.setValueAt(Umur.getText(),tbObat.getSelectedRow(),3);
-            tbObat.setValueAt(JK.getText(),tbObat.getSelectedRow(),4);
-            tbObat.setValueAt(LahirPasien.getText(),tbObat.getSelectedRow(),5);
-            tbObat.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),tbObat.getSelectedRow(),6);
-            tbObat.setValueAt(GCS.getText(),tbObat.getSelectedRow(),7);
-            tbObat.setValueAt(ReflekaCahayaKanan.getText(),tbObat.getSelectedRow(),8);
-            tbObat.setValueAt(ReflekaCahayaKiri.getText(),tbObat.getSelectedRow(),9);
-            tbObat.setValueAt(UkuranPupilKanan.getText(),tbObat.getSelectedRow(),10);
-            tbObat.setValueAt(UkuranPupilKiri.getText(),tbObat.getSelectedRow(),11);
-            tbObat.setValueAt(TD.getText(),tbObat.getSelectedRow(),12);
-            tbObat.setValueAt(Suhu.getText(),tbObat.getSelectedRow(),13);
-            tbObat.setValueAt(RR.getText(),tbObat.getSelectedRow(),14);
-            tbObat.setValueAt(Nadi.getText(),tbObat.getSelectedRow(),15);
-            tbObat.setValueAt(HasilObservasi.getSelectedItem().toString(),tbObat.getSelectedRow(),16);
-            tbObat.setValueAt(PertimbanganKlinis.getSelectedItem().toString(),tbObat.getSelectedRow(),17);
-            tbObat.setValueAt(RestrainNonFarmakologi.getSelectedItem().toString(),tbObat.getSelectedRow(),18);
-            tbObat.setValueAt(KeteranganNonRestrainFarmakologi.getText(),tbObat.getSelectedRow(),19);
-            tbObat.setValueAt(RestrainFarmakologi.getText(),tbObat.getSelectedRow(),20);
-            tbObat.setValueAt(SudahDijelaskan.getSelectedItem().toString(),tbObat.getSelectedRow(),21);
-            tbObat.setValueAt(Keluarga.getText(),tbObat.getSelectedRow(),22);
-            tbObat.setValueAt(KdPetugas.getText(),tbObat.getSelectedRow(),23);
-            tbObat.setValueAt(NmPetugas.getText(),tbObat.getSelectedRow(),24);
+            tabMode.setValueAt(TNoRw.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0);
+            tabMode.setValueAt(TNoRM.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1);
+            tabMode.setValueAt(TPasien.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2);
+            tabMode.setValueAt(Umur.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3);
+            tabMode.setValueAt(JK.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4);
+            tabMode.setValueAt(LahirPasien.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5);
+            tabMode.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6);
+            tabMode.setValueAt(GCS.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7);
+            tabMode.setValueAt(ReflekaCahayaKanan.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8);
+            tabMode.setValueAt(ReflekaCahayaKiri.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9);
+            tabMode.setValueAt(UkuranPupilKanan.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10);
+            tabMode.setValueAt(UkuranPupilKiri.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11);
+            tabMode.setValueAt(TD.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12);
+            tabMode.setValueAt(Suhu.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13);
+            tabMode.setValueAt(RR.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14);
+            tabMode.setValueAt(Nadi.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15);
+            tabMode.setValueAt(HasilObservasi.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16);
+            tabMode.setValueAt(PertimbanganKlinis.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17);
+            tabMode.setValueAt(RestrainNonFarmakologi.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18);
+            tabMode.setValueAt(KeteranganNonRestrainFarmakologi.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19);
+            tabMode.setValueAt(RestrainFarmakologi.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20);
+            tabMode.setValueAt(SudahDijelaskan.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21);
+            tabMode.setValueAt(Keluarga.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22);
+            tabMode.setValueAt(KdPetugas.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23);
+            tabMode.setValueAt(NmPetugas.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),24);
         }
     }
 
     private void hapus() {
         if(Sequel.queryu2tf("delete from pengkajian_restrain where no_rawat=?",1,new String[]{
-            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
         })==true){
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
@@ -1972,7 +1974,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
             try {
                 ps=koneksi.prepareStatement("select pengkajian_restrain_yang_menyetujui.photo from pengkajian_restrain_yang_menyetujui where pengkajian_restrain_yang_menyetujui.no_rawat=?");
                 try {
-                    ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){
@@ -2017,7 +2019,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
                 HasilObservasi.getSelectedItem().toString(),PertimbanganKlinis.getSelectedItem().toString(),RestrainNonFarmakologi.getSelectedItem().toString(),KeteranganNonRestrainFarmakologi.getText(),
                 RestrainFarmakologi.getText(),SudahDijelaskan.getSelectedItem().toString(),Keluarga.getText(),KdPetugas.getText(),NmPetugas.getText()
             });
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
         }
     }

@@ -285,6 +285,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbOperasi">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbOperasi" noResource="true"/>
                       </Properties>
                       <Events>
@@ -334,6 +335,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbOperasi1">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbOperasi1" noResource="true"/>
                       </Properties>
                       <Events>

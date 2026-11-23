@@ -655,7 +655,7 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
                     DoseUnit.getText()
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbJnsPerawatan.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -678,9 +678,9 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,KodeBarang,"satu_sehat_mapping_vaksin","kode_brng")==true){
-            tabMode.removeRow(tbJnsPerawatan.getSelectedRow());
+            tabMode.removeRow(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()));
             emptTeks();
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbJnsPerawatan.getRowCount());
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -719,18 +719,18 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
                         "route_code=?,route_system=?,route_display=?,dose_quantity_code=?,dose_quantity_system=?,dose_quantity_unit=?",11,new String[]{
                         KodeBarang.getText(),VaksinCode.getText(),VaksinSystem.getText(),VaksinDisplay.getText(),RouteCode.getText(),
                         RouteSystem.getText(),RouteDisplay.getText(),DoseCode.getText(),DoseSystem.getText(),DoseUnit.getText(),
-                        tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()
+                        tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString()
                     })==true){
-                    tabMode.setValueAt(KodeBarang.getText(),tbJnsPerawatan.getSelectedRow(),0);
-                    tabMode.setValueAt(VaksinCode.getText(),tbJnsPerawatan.getSelectedRow(),1);
-                    tabMode.setValueAt(VaksinSystem.getText(),tbJnsPerawatan.getSelectedRow(),2);
-                    tabMode.setValueAt(VaksinDisplay.getText(),tbJnsPerawatan.getSelectedRow(),3);
-                    tabMode.setValueAt(RouteCode.getText(),tbJnsPerawatan.getSelectedRow(),4);
-                    tabMode.setValueAt(RouteSystem.getText(),tbJnsPerawatan.getSelectedRow(),5);
-                    tabMode.setValueAt(RouteDisplay.getText(),tbJnsPerawatan.getSelectedRow(),6);
-                    tabMode.setValueAt(DoseCode.getText(),tbJnsPerawatan.getSelectedRow(),7);
-                    tabMode.setValueAt(DoseSystem.getText(),tbJnsPerawatan.getSelectedRow(),8);
-                    tabMode.setValueAt(DoseUnit.getText(),tbJnsPerawatan.getSelectedRow(),9);
+                    tabMode.setValueAt(KodeBarang.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0);
+                    tabMode.setValueAt(VaksinCode.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1);
+                    tabMode.setValueAt(VaksinSystem.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2);
+                    tabMode.setValueAt(VaksinDisplay.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3);
+                    tabMode.setValueAt(RouteCode.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4);
+                    tabMode.setValueAt(RouteSystem.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5);
+                    tabMode.setValueAt(RouteDisplay.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),6);
+                    tabMode.setValueAt(DoseCode.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7);
+                    tabMode.setValueAt(DoseSystem.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),8);
+                    tabMode.setValueAt(DoseUnit.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),9);
                     emptTeks();
                 }
             }
@@ -851,7 +851,7 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -860,7 +860,7 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1037,7 +1037,7 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {
@@ -1059,17 +1059,17 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
 
     private void getData() {
        if(tbJnsPerawatan.getSelectedRow()!= -1){
-           VaksinCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-           VaksinSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-           KodeBarang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-           NamaBarang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-           VaksinDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
-           RouteCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
-           RouteSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
-           RouteDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
-           DoseCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString());
-           DoseSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString());
-           DoseUnit.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString());
+           VaksinCode.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+           VaksinSystem.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+           KodeBarang.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+           NamaBarang.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+           VaksinDisplay.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString());
+           RouteCode.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5).toString());
+           RouteSystem.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),6).toString());
+           RouteDisplay.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7).toString());
+           DoseCode.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),8).toString());
+           DoseSystem.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),9).toString());
+           DoseUnit.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),10).toString());
         }
     }
 

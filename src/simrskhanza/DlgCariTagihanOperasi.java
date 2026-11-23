@@ -1523,6 +1523,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1938,7 +1939,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1949,7 +1950,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1959,8 +1960,8 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
 
     private void MnHapusTagihanOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHapusTagihanOperasiActionPerformed
         if(tbDokter.getSelectedRow()>-1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().equals("")){
-                if(Sequel.cariRegistrasi(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())>0){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().equals("")){
+                if(Sequel.cariRegistrasi(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString())>0){
                     JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                     TCari.requestFocus();
                 }else{
@@ -1969,13 +1970,13 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                         Sequel.AutoComitFalse();
                         sukses=true;
                         ttljmdokter=0;ttljmpetugas=0;ttlpendapatan=0;ttlbhp=0;status="";
-                        status=Sequel.cariIsi("select status from operasi where no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1) +"' and tgl_operasi='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0)+"'");
+                        status=Sequel.cariIsi("select status from operasi where no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1) +"' and tgl_operasi='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0)+"'");
                         ttljmdokter=Sequel.cariIsiAngka("select sum(biayaoperator1+biayaoperator2+biayaoperator3+biayadokter_anak+"+
-                                "biayadokter_anestesi+biaya_dokter_pjanak+biaya_dokter_umum) from operasi where no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1) +"' and tgl_operasi='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0)+"'");
+                                "biayadokter_anestesi+biaya_dokter_pjanak+biaya_dokter_umum) from operasi where no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1) +"' and tgl_operasi='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0)+"'");
                         ttljmpetugas=Sequel.cariIsiAngka("select sum(biayaasisten_operator1+biayaasisten_operator2+biayaasisten_operator3+"+
                                 "biayainstrumen+biayaperawaat_resusitas+biayaasisten_anestesi+biayaasisten_anestesi2+biayabidan+biayabidan2+"+
                                 "biayabidan3+biayaperawat_luar+biaya_omloop+biaya_omloop2+biaya_omloop3+biaya_omloop4+biaya_omloop5) "+
-                                "from operasi where no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1) +"' and tgl_operasi='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0)+"'");
+                                "from operasi where no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1) +"' and tgl_operasi='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0)+"'");
                         ttlpendapatan=Sequel.cariIsiAngka("select sum(operasi.biayaoperator1+operasi.biayaoperator2+"+
                                 "operasi.biayaoperator3+operasi.biayaasisten_operator1+operasi.biayaasisten_operator2+"+
                                 "operasi.biayaasisten_operator3+operasi.biayainstrumen+operasi.biayadokter_anak+"+
@@ -1984,12 +1985,12 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                                 "operasi.biayaperawat_luar+operasi.biayaalat+operasi.biayasewaok+operasi.akomodasi+"+
                                 "operasi.bagian_rs+operasi.biaya_omloop+operasi.biaya_omloop2+operasi.biaya_omloop3+"+
                                 "operasi.biaya_omloop4+operasi.biaya_omloop5+operasi.biayasarpras+operasi.biaya_dokter_pjanak+"+
-                                "operasi.biaya_dokter_umum) from operasi where no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1) +"' and tgl_operasi='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0)+"'");
-                        ttlbhp=Sequel.cariIsiAngka("select sum(jumlah*hargasatuan) from beri_obat_operasi where no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1) +"' and tanggal='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0)+"'");
+                                "operasi.biaya_dokter_umum) from operasi where no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1) +"' and tgl_operasi='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0)+"'");
+                        ttlbhp=Sequel.cariIsiAngka("select sum(jumlah*hargasatuan) from beri_obat_operasi where no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1) +"' and tanggal='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0)+"'");
 
                         ttlpendapatan=ttlpendapatan+ttlbhp;
-                        if(Sequel.queryutf("delete from operasi where no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1)+"' and tgl_operasi='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0) +"'")==true){
-                            if(Sequel.queryutf("delete from beri_obat_operasi where no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1) +"' and tanggal='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0)+"'")==false){
+                        if(Sequel.queryutf("delete from operasi where no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1)+"' and tgl_operasi='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0) +"'")==true){
+                            if(Sequel.queryutf("delete from beri_obat_operasi where no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1) +"' and tanggal='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0)+"'")==false){
                             ttlbhp=0;
                             sukses=false;
                             }
@@ -1998,7 +1999,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                         }
 
                         if(sukses==true){
-                            Sequel.queryu("delete from laporan_operasi where no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1)+"' and tanggal='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0) +"'");
+                            Sequel.queryu("delete from laporan_operasi where no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1)+"' and tanggal='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0) +"'");
                             if(status.equals("Ranap")){
                                 Sequel.deleteTampJurnal();
                                 if(ttlpendapatan>0){
@@ -2034,7 +2035,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                                     }
                                 }
                                 if(sukses==true){
-                                    sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN OPERASI RAWAT INAP PASIEN OLEH "+akses.getkode());
+                                    sukses=jur.simpanJurnal(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString(),"U","PEMBATALAN OPERASI RAWAT INAP PASIEN OLEH "+akses.getkode());
                                 }
                             }else if(status.equals("Ralan")){
                                 Sequel.deleteTampJurnal();
@@ -2071,7 +2072,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                                     }
                                 }
                                 if(sukses==true){
-                                    sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN OPERASI RAWAT JALAN PASIEN OLEH "+akses.getkode());
+                                    sukses=jur.simpanJurnal(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString(),"U","PEMBATALAN OPERASI RAWAT JALAN PASIEN OLEH "+akses.getkode());
                                 }
                             }
                         }
@@ -2094,8 +2095,8 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
 
     private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHapusObatOperasiActionPerformed
         if(tbDokter.getSelectedRow()>-1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().equals("")){
-                if(Sequel.cariRegistrasi(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString())>0){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().equals("")){
+                if(Sequel.cariRegistrasi(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString())>0){
                     JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                     TCari.requestFocus();
                 }else{
@@ -2104,10 +2105,10 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                         Sequel.AutoComitFalse();
                         sukses=true;
                         ttljmdokter=0;ttljmpetugas=0;ttlpendapatan=0;ttlbhp=0;
-                        status=Sequel.cariIsi("select status from operasi where no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1) +"' and tgl_operasi='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0)+"'");
-                        ttlbhp=Sequel.cariIsiAngka("select sum(jumlah*hargasatuan) from beri_obat_operasi where no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1) +"' and tanggal='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0)+"'");
+                        status=Sequel.cariIsi("select status from operasi where no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1) +"' and tgl_operasi='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0)+"'");
+                        ttlbhp=Sequel.cariIsiAngka("select sum(jumlah*hargasatuan) from beri_obat_operasi where no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1) +"' and tanggal='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0)+"'");
 
-                        if(Sequel.queryutf("delete from beri_obat_operasi where no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1) +"' and tanggal='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0)+"'")==true){
+                        if(Sequel.queryutf("delete from beri_obat_operasi where no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1) +"' and tanggal='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0)+"'")==true){
                             if(status.equals("Ranap")){
                                 if(ttlbhp>0){
                                     if(Sequel.insertOrUpdateTampJurnal(akuntindakanoperasi.getHPP_Obat_Operasi_Ranap(), "HPP Persediaan Operasi Rawat Inap", 0, ttlbhp)==false){
@@ -2123,7 +2124,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                                         sukses=false;
                                     }
                                     if(sukses==true){
-                                        sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN OBAT OPERASI RAWAT INAP OLEH "+akses.getkode());
+                                        sukses=jur.simpanJurnal(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString(),"U","PEMBATALAN OBAT OPERASI RAWAT INAP OLEH "+akses.getkode());
                                     }
                                 }
                             }else if(status.equals("Ralan")){
@@ -2141,7 +2142,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                                         sukses=false;
                                     }
                                     if(sukses==true){
-                                        sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN OBAT OPERASI RAWAT JALAN OLEH "+akses.getkode());
+                                        sukses=jur.simpanJurnal(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString(),"U","PEMBATALAN OBAT OPERASI RAWAT JALAN OLEH "+akses.getkode());
                                     }
                                 }
                             }
@@ -2274,8 +2275,8 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         }
         */
         if (tbDokter.getSelectedRow() > -1) {
-            if (!tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString().equals("")) {
-                if (Sequel.cariRegistrasi(tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString()) > 0) {
+            if (!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 1).toString().equals("")) {
+                if (Sequel.cariRegistrasi(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 1).toString()) > 0) {
                     JOptionPane.showMessageDialog(rootPane, "Data billing sudah terverifikasi, data tidak boleh diubah.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                     TCari.requestFocus();
                 } else {
@@ -2289,7 +2290,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                     ubah.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
                     ubah.setLocationRelativeTo(internalFrame1);
                     ubah.isCek();
-                    ubah.setDataOperasi(tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 2).toString(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
+                    ubah.setDataOperasi(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 1).toString(), tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 2).toString(), tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 0).toString());
                     ubah.setVisible(true);
                 }
             } else {
@@ -2463,7 +2464,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             Valid.textKosong(kdpjanak,"dr Pj Anak");
         }else if(kddrumum.getText().trim().equals("")||nmdrumum.getText().trim().equals("")){
             Valid.textKosong(kddrumum,"dr Umum");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else{
@@ -2477,8 +2478,8 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                      kdprwresust.getText(),kdanestesi.getText(),kdasistanestesi.getText(),kdasistanestesi2.getText(),
                      kdbidan.getText(),kdbidan2.getText(),kdbidan3.getText(),kdprwluar.getText(),kdonloop1.getText(),
                      kdonloop2.getText(),kdonloop3.getText(),kdonloop4.getText(),kdonloop5.getText(),kdpjanak.getText(),
-                     kddrumum.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),
-                     tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
+                     kddrumum.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString(),
+                     tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()
                 })==true){
                 runBackground(() -> tampil());
                 WindowGantiDokterParamedis.dispose();
@@ -3424,7 +3425,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
 
     private void MnLaporanOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanOperasiActionPerformed
         if(tbDokter.getSelectedRow()>-1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().equals("")){
                 Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
@@ -3433,17 +3434,17 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                param.put("norawat",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-                param.put("tanggaloperasi",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                kodeoperator=Sequel.cariIsi("select operasi.operator1 from operasi where operasi.no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"' and tgl_operasi='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"'");
+                param.put("norawat",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
+                param.put("tanggaloperasi",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+                kodeoperator=Sequel.cariIsi("select operasi.operator1 from operasi where operasi.no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()+"' and tgl_operasi='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()+"'");
                 finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kodeoperator);
-                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbDokter.getValueAt(tbDokter.getSelectedRow()+1,5).toString()+"\nID "+(finger.equals("")?kodeoperator:finger)+"\n"+Valid.SetTgl3(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()));
+                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()+1),5).toString()+"\nID "+(finger.equals("")?kodeoperator:finger)+"\n"+Valid.SetTgl3(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()));
                 finger="";
                 try {
                     try{
                         rs=koneksi.prepareStatement(
                                 "select paket_operasi.nm_perawatan from operasi inner join paket_operasi on paket_operasi.kode_paket=operasi.kode_paket where "+
-                                "operasi.no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"' and operasi.tgl_operasi='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"' ").executeQuery();
+                                "operasi.no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()+"' and operasi.tgl_operasi='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()+"' ").executeQuery();
                         while(rs.next()){
                             finger=rs.getString("nm_perawatan")+", "+finger;
                         }
@@ -3459,15 +3460,15 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                 }
                 finger=finger.substring(0,finger.length()-2);
                 param.put("tindakan",finger);
-                if(Sequel.cariIsi("select reg_periksa.status_lanjut from reg_periksa where reg_periksa.no_rawat=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()).equals("Ralan")){
+                if(Sequel.cariIsi("select reg_periksa.status_lanjut from reg_periksa where reg_periksa.no_rawat=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()).equals("Ralan")){
                     try {
                         try {
                             rs=koneksi.prepareStatement(
                                 "select pemeriksaan_ralan.no_rawat,pemeriksaan_ralan.tgl_perawatan,pemeriksaan_ralan.jam_rawat,pemeriksaan_ralan.suhu_tubuh,"+
                                 "pemeriksaan_ralan.tensi,pemeriksaan_ralan.nadi,pemeriksaan_ralan.respirasi,pemeriksaan_ralan.tinggi,pemeriksaan_ralan.berat,"+
                                 "pemeriksaan_ralan.gcs,pemeriksaan_ralan.keluhan,pemeriksaan_ralan.pemeriksaan,pemeriksaan_ralan.alergi,pemeriksaan_ralan.rtl,"+
-                                "pemeriksaan_ralan.penilaian from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"' "+
-                                "and concat(pemeriksaan_ralan.tgl_perawatan,' ',pemeriksaan_ralan.jam_rawat) <= '"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"' "+
+                                "pemeriksaan_ralan.penilaian from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()+"' "+
+                                "and concat(pemeriksaan_ralan.tgl_perawatan,' ',pemeriksaan_ralan.jam_rawat) <= '"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()+"' "+
                                 "order by pemeriksaan_ralan.tgl_perawatan desc,pemeriksaan_ralan.jam_rawat desc limit 1").executeQuery();
                             if(rs.next()){
                                 param.put("tgl_perawatan",rs.getDate("tgl_perawatan"));
@@ -3503,8 +3504,8 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                                 "select pemeriksaan_ranap.no_rawat,pemeriksaan_ranap.tgl_perawatan,pemeriksaan_ranap.jam_rawat,pemeriksaan_ranap.suhu_tubuh,"+
                                 "pemeriksaan_ranap.tensi,pemeriksaan_ranap.nadi,pemeriksaan_ranap.respirasi,pemeriksaan_ranap.tinggi,pemeriksaan_ranap.berat,"+
                                 "pemeriksaan_ranap.gcs,pemeriksaan_ranap.keluhan,pemeriksaan_ranap.pemeriksaan,pemeriksaan_ranap.alergi,pemeriksaan_ranap.rtl,"+
-                                "pemeriksaan_ranap.penilaian from pemeriksaan_ranap where pemeriksaan_ranap.no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"' "+
-                                "and concat(pemeriksaan_ranap.tgl_perawatan,' ',pemeriksaan_ranap.jam_rawat) <= '"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"' "+
+                                "pemeriksaan_ranap.penilaian from pemeriksaan_ranap where pemeriksaan_ranap.no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()+"' "+
+                                "and concat(pemeriksaan_ranap.tgl_perawatan,' ',pemeriksaan_ranap.jam_rawat) <= '"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()+"' "+
                                 "order by pemeriksaan_ranap.tgl_perawatan desc,pemeriksaan_ranap.jam_rawat desc limit 1").executeQuery();
                             if(rs.next()){
                                 param.put("tgl_perawatan",rs.getDate("tgl_perawatan"));
@@ -3543,12 +3544,12 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
 
     private void MnUbahLaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUbahLaporanActionPerformed
         if(tbDokter.getSelectedRow()>-1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().equals("")){
                 try {
                     rs2=koneksi.prepareStatement(
                         "select laporan_operasi.diagnosa_preop,laporan_operasi.diagnosa_postop,laporan_operasi.jaringan_dieksekusi,laporan_operasi.selesaioperasi,laporan_operasi.permintaan_pa,"+
-                        "laporan_operasi.laporan_operasi,laporan_operasi.nomor_implan, laporan_operasi.tanggal from laporan_operasi where laporan_operasi.no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1)+"' and "+
-                        "laporan_operasi.tanggal='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0)+"'").executeQuery();
+                        "laporan_operasi.laporan_operasi,laporan_operasi.nomor_implan, laporan_operasi.tanggal from laporan_operasi where laporan_operasi.no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1)+"' and "+
+                        "laporan_operasi.tanggal='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0)+"'").executeQuery();
                     if(rs2.next()){
                         PreOp.setText(rs2.getString("diagnosa_preop"));
                         PostOp.setText(rs2.getString("diagnosa_postop"));
@@ -3563,7 +3564,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                         rs2.close();
                     }
                     Kategori.setSelectedIndex(0);
-                    Kategori.setSelectedItem(Sequel.cariIsiSmc("select operasi.kategori from operasi where operasi.no_rawat = ? and operasi.tgl_operasi = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString()));
+                    Kategori.setSelectedItem(Sequel.cariIsiSmc("select operasi.kategori from operasi where operasi.no_rawat = ? and operasi.tgl_operasi = ?", tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 1).toString(), tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 0).toString()));
                 } catch (Exception e) {
                     System.out.println("Notif : "+e);
                 }
@@ -3596,8 +3597,8 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                 Kategori.requestFocus();
             } else {
                 boolean sukses = true;
-                String norawat = (String) tbDokter.getValueAt(tbDokter.getSelectedRow(), 1);
-                String tgl = (String) tbDokter.getValueAt(tbDokter.getSelectedRow(), 0);
+                String norawat = (String) tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 1);
+                String tgl = (String) tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 0);
 
                 if (null != norawat && !norawat.isBlank() && null != tgl && !tgl.isBlank()) {
                     Sequel.AutoComitFalse();
@@ -3628,7 +3629,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                 }
 
                 if (sukses) {
-                    tbDokter.setValueAt(Valid.getTglJamSmc(TglMulai, Jam3, Menit3, Detik3), tbDokter.getSelectedRow(), 0);
+                    tabMode.setValueAt(Valid.getTglJamSmc(TglMulai, Jam3, Menit3, Detik3), tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 0);
                     JOptionPane.showMessageDialog(null,"Proses update selesai...!!!!");
                 } else {
                     JOptionPane.showMessageDialog(null, "Gagal mengupdate laporan operasi..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
@@ -3689,20 +3690,20 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
 
     private void ppBerkasDigitalBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBerkasDigitalBtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else{
             if(tbDokter.getSelectedRow()>-1){
-                if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().equals("")){
+                if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().equals("")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     DlgBerkasRawat berkas=new DlgBerkasRawat(null,true);
                     berkas.setJudul("::[ Berkas Digital Perawatan ]::","berkasrawat/pages");
                     try {
                         if(akses.gethapus_berkas_digital_perawatan()==true){
-                            berkas.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+"berkasrawat/login2.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&no_rawat="+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+                            berkas.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+"berkasrawat/login2.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&no_rawat="+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
                         }else{
-                            berkas.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+"berkasrawat/login2nonhapus.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&no_rawat="+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+                            berkas.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+"berkasrawat/login2nonhapus.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&no_rawat="+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
                         }
                     } catch (Exception ex) {
                         System.out.println("Notifikasi : "+ex);
@@ -4144,7 +4145,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private void getData() {
         int row=tbDokter.getSelectedRow();
         if(row!= -1){
-            Kd2.setText(tabMode.getValueAt(row,0).toString());
+            Kd2.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString());
         }
     }
 

@@ -390,6 +390,7 @@ public final class DlgUbahNilaiLab extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbPemeriksaan.setAutoCreateRowSorter(true);
         tbPemeriksaan.setName("tbPemeriksaan"); // NOI18N
         Scroll.setViewportView(tbPemeriksaan);
 
@@ -410,8 +411,8 @@ public final class DlgUbahNilaiLab extends javax.swing.JDialog {
                 ChkJln.setSelected(false);
                 for(i=0;i<tbPemeriksaan.getRowCount();i++){
                     Sequel.mengedit("detail_periksa_lab","no_rawat=? and kd_jenis_prw=? and tgl_periksa=? and jam=? and id_template=?","nilai=?,nilai_rujukan=?,keterangan=?,tgl_periksa=?,jam=?",10,new String[]{
-                        tbPemeriksaan.getValueAt(i,1).toString(),tbPemeriksaan.getValueAt(i,3).toString(),tbPemeriksaan.getValueAt(i,4).toString(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
-                        CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),TNoRw.getText(),tbPemeriksaan.getValueAt(i,6).toString(),tanggal,jam,tbPemeriksaan.getValueAt(i,5).toString()
+                        tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),4).toString(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
+                        CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),TNoRw.getText(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),6).toString(),tanggal,jam,tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),5).toString()
                     });
                 }
 
@@ -442,8 +443,8 @@ public final class DlgUbahNilaiLab extends javax.swing.JDialog {
             ChkJln.setSelected(false);
             for(i=0;i<tbPemeriksaan.getRowCount();i++){
                 Sequel.mengedit("detail_periksa_lab","no_rawat=? and kd_jenis_prw=? and tgl_periksa=? and jam=? and id_template=?","nilai=?,nilai_rujukan=?,keterangan=?,tgl_periksa=?,jam=?",10,new String[]{
-                    tbPemeriksaan.getValueAt(i,1).toString(),tbPemeriksaan.getValueAt(i,3).toString(),tbPemeriksaan.getValueAt(i,4).toString(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
-                    CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),TNoRw.getText(),tbPemeriksaan.getValueAt(i,6).toString(),tanggal,jam,tbPemeriksaan.getValueAt(i,5).toString()
+                    tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),4).toString(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
+                    CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),TNoRw.getText(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),6).toString(),tanggal,jam,tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),5).toString()
                 });
             }
 
@@ -713,8 +714,8 @@ public final class DlgUbahNilaiLab extends javax.swing.JDialog {
                     belumFinal = false;
 
                     Map<String, Integer> map = new HashMap<>();
-                    for (int row = 0; row < tabMode.getRowCount(); row++) {
-                        map.put(tabMode.getValueAt(row, 5).toString(), row);
+                    for (int row = 0; row < tbPemeriksaan.getRowCount(); row++) {
+                        map.put(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(row), 5).toString(), row);
                     }
 
                     for (JsonNode result : sortedResults) {
@@ -745,9 +746,9 @@ public final class DlgUbahNilaiLab extends javax.swing.JDialog {
                         }
 
                         if (row != null) {
-                            tabMode.setValueAt(resultValue, row, 1);
-                            tabMode.setValueAt(nilaiRujukan, row, 3);
-                            tabMode.setValueAt(result.path("Flag").asText(""), row, 4);
+                            tabMode.setValueAt(resultValue, tbPemeriksaan.convertRowIndexToModel(row), 1);
+                            tabMode.setValueAt(nilaiRujukan, tbPemeriksaan.convertRowIndexToModel(row), 3);
+                            tabMode.setValueAt(result.path("Flag").asText(""), tbPemeriksaan.convertRowIndexToModel(row), 4);
                         }
                     }
 

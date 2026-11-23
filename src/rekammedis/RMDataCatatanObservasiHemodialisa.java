@@ -1005,8 +1005,8 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else{
-                if(KdPetugas.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString())){
-                    if(Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString(),Sequel.ambiltanggalsekarang())==true){
+                if(KdPetugas.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22).toString())){
+                    if(Sequel.cekTanggal48jam(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString(),Sequel.ambiltanggalsekarang())==true){
                         hapus();
                     }
                 }else{
@@ -1036,8 +1036,8 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(KdPetugas.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString())){
-                        if(Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString(),Sequel.ambiltanggalsekarang())==true){
+                    if(KdPetugas.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22).toString())){
+                        if(Sequel.cekTanggal48jam(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString(),Sequel.ambiltanggalsekarang())==true){
                             if(TanggalRegistrasi.getText().equals("")){
                                 TanggalRegistrasi.setText(Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
                             }
@@ -1165,7 +1165,7 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
     }//GEN-LAST:event_TNoRMKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1175,7 +1175,7 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1258,9 +1258,9 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
-            dpjp=Sequel.cariIsi("select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            dpjp=Sequel.cariIsi("select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
             if(dpjp.equals("")){
-                dpjp=Sequel.cariIsi("select dokter.nm_dokter from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter where reg_periksa.no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+                dpjp=Sequel.cariIsi("select dokter.nm_dokter from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter where reg_periksa.no_rawat=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
             }
             param.put("dpjp",dpjp);
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
@@ -1270,7 +1270,7 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
                     "catatan_observasi_hemodialisa.tekanan_arteri,catatan_observasi_hemodialisa.tekanan_vena,catatan_observasi_hemodialisa.tmp,catatan_observasi_hemodialisa.ufr,catatan_observasi_hemodialisa.tensi,"+
                     "catatan_observasi_hemodialisa.nadi,catatan_observasi_hemodialisa.suhu,catatan_observasi_hemodialisa.spo2,catatan_observasi_hemodialisa.tindakan,catatan_observasi_hemodialisa.ufg,"+
                     "catatan_observasi_hemodialisa.barcode_hf,catatan_observasi_hemodialisa.nip,petugas.nama from catatan_observasi_hemodialisa inner join reg_periksa on catatan_observasi_hemodialisa.no_rawat=reg_periksa.no_rawat "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on catatan_observasi_hemodialisa.nip=petugas.nip where reg_periksa.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"' "+
+                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on catatan_observasi_hemodialisa.nip=petugas.nip where reg_periksa.no_rawat='"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"' "+
                     "order by catatan_observasi_hemodialisa.tgl_perawatan,catatan_observasi_hemodialisa.jam_rawat",param);
         }
     }//GEN-LAST:event_MnCatatanObservasiHemodialisaActionPerformed
@@ -1491,7 +1491,7 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        LCount.setText(String.valueOf(tabMode.getRowCount()));
+        LCount.setText(String.valueOf(tbObat.getRowCount()));
     }
 
     public void emptTeks() {
@@ -1517,31 +1517,31 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 0));
-            TNoRM.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 1));
-            TPasien.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 2));
-            Umur.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 3));
-            JK.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 4));
-            TglLahir.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 5));
-            Valid.SetTgl(Tanggal, (String) tbObat.getValueAt(tbObat.getSelectedRow(), 6));
-            Jam.setSelectedItem(((String) tbObat.getValueAt(tbObat.getSelectedRow(), 6)).substring(11, 13));
-            Menit.setSelectedItem(((String) tbObat.getValueAt(tbObat.getSelectedRow(), 6)).substring(14, 16));
-            Detik.setSelectedItem(((String) tbObat.getValueAt(tbObat.getSelectedRow(), 6)).substring(17, 19));
-            QB.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 7));
-            QD.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 8));
-            Arteri.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 9));
-            Vena.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 10));
-            TMP.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 11));
-            UFR.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 12));
-            Tensi.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 13));
-            Nadi.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 14));
-            Suhu.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 15));
-            SpO2.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 16));
-            RR.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 17));
-            UFG.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 18));
-            UFV.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 19));
-            BarcodeHF.setText(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
-            Tindakan.setText((String) tbObat.getValueAt(tbObat.getSelectedRow(), 20));
+            TNoRw.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0));
+            TNoRM.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1));
+            TPasien.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2));
+            Umur.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 3));
+            JK.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 4));
+            TglLahir.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 5));
+            Valid.SetTgl(Tanggal, (String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6));
+            Jam.setSelectedItem(((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6)).substring(11, 13));
+            Menit.setSelectedItem(((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6)).substring(14, 16));
+            Detik.setSelectedItem(((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6)).substring(17, 19));
+            QB.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 7));
+            QD.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 8));
+            Arteri.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9));
+            Vena.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 10));
+            TMP.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11));
+            UFR.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 12));
+            Tensi.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 13));
+            Nadi.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 14));
+            Suhu.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 15));
+            SpO2.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 16));
+            RR.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 17));
+            UFG.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 18));
+            UFV.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 19));
+            BarcodeHF.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString());
+            Tindakan.setText((String) tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 20));
         }
     }
 
@@ -1652,46 +1652,46 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
             TNoRw.getText(), Valid.getTglSmc(Tanggal), Valid.getJamSmc(Jam, Menit, Detik), QB.getText(),
             QD.getText(), Arteri.getText(), Vena.getText(), TMP.getText(), UFR.getText(), Tensi.getText(),
             Nadi.getText(), Suhu.getText(), SpO2.getText(), Tindakan.getText(), UFG.getText(), RR.getText(),
-            UFV.getText(), BarcodeHF.getText(), KdPetugas.getText(), tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(),
-            tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString().substring(0, 10),
-            tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString().substring(11)
+            UFV.getText(), BarcodeHF.getText(), KdPetugas.getText(), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString(),
+            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6).toString().substring(0, 10),
+            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6).toString().substring(11)
         )) {
-            tbObat.setValueAt(TNoRw.getText(), tbObat.getSelectedRow(), 0);
-            tbObat.setValueAt(TNoRM.getText(), tbObat.getSelectedRow(), 1);
-            tbObat.setValueAt(TPasien.getText(), tbObat.getSelectedRow(), 2);
-            tbObat.setValueAt(Umur.getText(), tbObat.getSelectedRow(), 3);
-            tbObat.setValueAt(JK.getText(), tbObat.getSelectedRow(), 4);
-            tbObat.setValueAt(TglLahir.getText(), tbObat.getSelectedRow(), 5);
-            tbObat.setValueAt(Valid.getTglJamSmc(Tanggal, Jam, Menit, Detik), tbObat.getSelectedRow(), 6);
-            tbObat.setValueAt(QB.getText(), tbObat.getSelectedRow(), 7);
-            tbObat.setValueAt(QD.getText(), tbObat.getSelectedRow(), 8);
-            tbObat.setValueAt(Arteri.getText(), tbObat.getSelectedRow(), 9);
-            tbObat.setValueAt(Vena.getText(), tbObat.getSelectedRow(), 10);
-            tbObat.setValueAt(TMP.getText(), tbObat.getSelectedRow(), 11);
-            tbObat.setValueAt(UFR.getText(), tbObat.getSelectedRow(), 12);
-            tbObat.setValueAt(Tensi.getText(), tbObat.getSelectedRow(), 13);
-            tbObat.setValueAt(Nadi.getText(), tbObat.getSelectedRow(), 14);
-            tbObat.setValueAt(Suhu.getText(), tbObat.getSelectedRow(), 15);
-            tbObat.setValueAt(SpO2.getText(), tbObat.getSelectedRow(), 16);
-            tbObat.setValueAt(RR.getText(), tbObat.getSelectedRow(), 17);
-            tbObat.setValueAt(UFG.getText(), tbObat.getSelectedRow(), 18);
-            tbObat.setValueAt(UFV.getText(), tbObat.getSelectedRow(), 19);
-            tbObat.setValueAt(Tindakan.getText(), tbObat.getSelectedRow(), 20);
-            tbObat.setValueAt(BarcodeHF.getText(), tbObat.getSelectedRow(), 21);
-            tbObat.setValueAt(KdPetugas.getText(), tbObat.getSelectedRow(), 22);
-            tbObat.setValueAt(NmPetugas.getText(), tbObat.getSelectedRow(), 23);
+            tabMode.setValueAt(TNoRw.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0);
+            tabMode.setValueAt(TNoRM.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1);
+            tabMode.setValueAt(TPasien.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2);
+            tabMode.setValueAt(Umur.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 3);
+            tabMode.setValueAt(JK.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 4);
+            tabMode.setValueAt(TglLahir.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 5);
+            tabMode.setValueAt(Valid.getTglJamSmc(Tanggal, Jam, Menit, Detik), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6);
+            tabMode.setValueAt(QB.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 7);
+            tabMode.setValueAt(QD.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 8);
+            tabMode.setValueAt(Arteri.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9);
+            tabMode.setValueAt(Vena.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 10);
+            tabMode.setValueAt(TMP.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11);
+            tabMode.setValueAt(UFR.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 12);
+            tabMode.setValueAt(Tensi.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 13);
+            tabMode.setValueAt(Nadi.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 14);
+            tabMode.setValueAt(Suhu.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 15);
+            tabMode.setValueAt(SpO2.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 16);
+            tabMode.setValueAt(RR.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 17);
+            tabMode.setValueAt(UFG.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 18);
+            tabMode.setValueAt(UFV.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 19);
+            tabMode.setValueAt(Tindakan.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 20);
+            tabMode.setValueAt(BarcodeHF.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 21);
+            tabMode.setValueAt(KdPetugas.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 22);
+            tabMode.setValueAt(NmPetugas.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 23);
             emptTeks();
         }
     }
 
     private void hapus() {
         if (Sequel.menghapustfSmc("catatan_observasi_hemodialisa", "no_rawat = ? and tgl_perawatan = ? and jam_rawat = ?",
-            tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(),
-            tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString().substring(0, 10),
-            tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString().substring(11)
+            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString(),
+            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6).toString().substring(0, 10),
+            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6).toString().substring(11)
         )) {
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(String.valueOf(tabMode.getRowCount()));
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(String.valueOf(tbObat.getRowCount()));
             emptTeks();
         } else {
             JOptionPane.showMessageDialog(null, "Gagal menghapus..!!");
@@ -1711,7 +1711,7 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
                 TMP.getText(), UFR.getText(), Tensi.getText(), Nadi.getText(), Suhu.getText(), SpO2.getText(), RR.getText(),
                 UFG.getText(), UFV.getText(), Tindakan.getText(), BarcodeHF.getText(), KdPetugas.getText(), NmPetugas.getText()
             });
-            LCount.setText(String.valueOf(tabMode.getRowCount()));
+            LCount.setText(String.valueOf(tbObat.getRowCount()));
             emptTeks();
         }
     }

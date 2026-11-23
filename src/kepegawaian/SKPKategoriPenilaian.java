@@ -429,7 +429,7 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     Kode.getText(),Kategori.getText(),Sasaran.getSelectedItem().toString()
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbBangsal.getRowCount());
                 emptTeks();
             }
         }
@@ -456,9 +456,9 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,Kode,"skp_kategori_penilaian","kode_kategori")==true){
             if(tbBangsal.getSelectedRow()!= -1){
-                tabMode.removeRow(tbBangsal.getSelectedRow());
+                tabMode.removeRow(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()));
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbBangsal.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
@@ -479,11 +479,11 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
         }else{
             if(tbBangsal.getSelectedRow()>-1){
                 if(Sequel.mengedittf("skp_kategori_penilaian","kode_kategori=?","kode_kategori=?,nama_kategori=?,sasaran=?",4,new String[]{
-                    Kode.getText(),Kategori.getText(),Sasaran.getSelectedItem().toString().substring(0,1),tbBangsal.getValueAt(tbBangsal.getSelectedRow(), 0).toString()
+                    Kode.getText(),Kategori.getText(),Sasaran.getSelectedItem().toString().substring(0,1),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()), 0).toString()
                 })==true){
-                    tbBangsal.setValueAt(Kode.getText(),tbBangsal.getSelectedRow(),0);
-                    tbBangsal.setValueAt(Kategori.getText(),tbBangsal.getSelectedRow(),1);
-                    tbBangsal.setValueAt(Sasaran.getSelectedItem().toString(),tbBangsal.getSelectedRow(),2);
+                    tabMode.setValueAt(Kode.getText(),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0);
+                    tabMode.setValueAt(Kategori.getText(),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1);
+                    tabMode.setValueAt(Sasaran.getSelectedItem().toString(),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),2);
                     emptTeks();
                 }
             }
@@ -606,7 +606,7 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -616,7 +616,7 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -741,7 +741,7 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbBangsal.getRowCount());
     }
 
     public void emptTeks() {
@@ -754,9 +754,9 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
 
     private void getData() {
         if(tbBangsal.getSelectedRow()!= -1){
-            Kode.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
-            Kategori.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),1).toString());
-            Sasaran.setSelectedItem(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),2).toString());
+            Kode.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
+            Kategori.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1).toString());
+            Sasaran.setSelectedItem(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),2).toString());
         }
     }
 

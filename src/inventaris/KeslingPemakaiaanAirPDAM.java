@@ -175,6 +175,7 @@ public final class KeslingPemakaiaanAirPDAM extends javax.swing.JDialog {
         Scroll.setPreferredSize(new java.awt.Dimension(452, 200));
 
         tbObat.setAutoCreateRowSorter(false);
+        tbObat.setSortable(false);
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setName("tbObat"); // NOI18N
         tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -591,7 +592,7 @@ public final class KeslingPemakaiaanAirPDAM extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()> -1){
-            Sequel.meghapus("kesling_pemakaian_air_pdam","nip","tanggal",tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
+            Sequel.meghapus("kesling_pemakaian_air_pdam","nip","tanggal",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
             runBackground(() ->tampil());
             emptTeks();
         }
@@ -618,8 +619,8 @@ public final class KeslingPemakaiaanAirPDAM extends javax.swing.JDialog {
             if(tbObat.getSelectedRow()> -1){
                 if(Sequel.mengedittf("kesling_pemakaian_air_pdam","nip=? and tanggal=?","nip=?,tanggal=?,meteran=?,jumlahharian=?,keterangan=?",7,new String[]{
                         KdPetugas.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),
-                        Meteran.getText(),JmlHarian.getText(),Keterangan.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),
-                        tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()
+                        Meteran.getText(),JmlHarian.getText(),Keterangan.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),
+                        tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString()
                     })==true){
                         runBackground(() ->tampil());
                         emptTeks();
@@ -752,7 +753,7 @@ public final class KeslingPemakaiaanAirPDAM extends javax.swing.JDialog {
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -815,7 +816,7 @@ public final class KeslingPemakaiaanAirPDAM extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void tbObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -955,7 +956,7 @@ public final class KeslingPemakaiaanAirPDAM extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -969,12 +970,12 @@ public final class KeslingPemakaiaanAirPDAM extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            Valid.SetTgl2(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Meteran.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            JmlHarian.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
+            KdPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            NmPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            Valid.SetTgl2(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            Meteran.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            JmlHarian.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            Keterangan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
         }
     }
 

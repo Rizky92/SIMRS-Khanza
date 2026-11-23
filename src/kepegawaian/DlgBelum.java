@@ -398,7 +398,7 @@ public final class DlgBelum extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbBangsal.getRowCount());
     }
 
     private void runBackground(Runnable task) {

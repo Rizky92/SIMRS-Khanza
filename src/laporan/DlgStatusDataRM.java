@@ -215,6 +215,7 @@ public final class DlgStatusDataRM extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setSortable(false);
         tbBangsal.setComponentPopupMenu(jPopupMenu1);
         tbBangsal.setName("tbBangsal"); // NOI18N
         tbBangsal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -508,7 +509,7 @@ public final class DlgStatusDataRM extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -517,7 +518,7 @@ public final class DlgStatusDataRM extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -688,7 +689,7 @@ public final class DlgStatusDataRM extends javax.swing.JDialog {
             penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             penyakit.setLocationRelativeTo(internalFrame1);
             penyakit.isCek();
-            penyakit.setNoRm(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString(),Tgl1.getDate(),Tgl2.getDate(),tbBangsal.getValueAt(tbBangsal.getSelectedRow(),6).toString());
+            penyakit.setNoRm(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString(),Tgl1.getDate(),Tgl2.getDate(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),6).toString());
             penyakit.setVisible(true);
         }
     }//GEN-LAST:event_MnInputDiagnosaActionPerformed
@@ -852,7 +853,7 @@ public final class DlgStatusDataRM extends javax.swing.JDialog {
                         soapiralan,soapiranap,resumeralan,resumeranap,triaseigd,askepigd,icd10,icd9
                     });
                 }
-                if(tabMode.getRowCount()>0){
+                if(tbBangsal.getRowCount()>0){
                     tabMode.addRow(new Object[]{
                         "","","","","","Status Data Ada",":",adasoapiralan,adasoapiranap,adaresumeralan,adaresumeranap,adatriaseigd,adaaskepigd,adaicd10,adaicd9
                     });
@@ -879,7 +880,7 @@ public final class DlgStatusDataRM extends javax.swing.JDialog {
     private void getData() {
         int row=tbBangsal.getSelectedRow();
         if(row!= -1){
-            TKd.setText(tabMode.getValueAt(row,0).toString());
+            TKd.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),0).toString());
         }
     }
 

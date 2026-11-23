@@ -753,7 +753,7 @@ public class PCarePesertaKegiatanKelompok extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }
 
     private void tampil2() {
@@ -941,7 +941,7 @@ public class PCarePesertaKegiatanKelompok extends javax.swing.JDialog {
         restTemplate.setRequestFactory(factory);
 
         try {
-            URL = link+"/kelompok/peserta/"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"/"+tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString();
+            URL = link+"/kelompok/peserta/"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()+"/"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9).toString();
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
@@ -963,7 +963,7 @@ public class PCarePesertaKegiatanKelompok extends javax.swing.JDialog {
             System.out.println("message : "+nameNode.path("message").asText());
             if(nameNode.path("code").asText().equals("200")){
                 if(Sequel.queryu2tf("delete from pcare_peserta_kegiatan_kelompok where eduId=? and no_rkm_medis=?",2,new String[]{
-                    tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString()
+                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10).toString()
                 })==true){
                     runBackground(() ->tampil());
                 }

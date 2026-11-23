@@ -1178,6 +1178,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbMasalahKeperawatan">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="name" type="java.lang.String" value="tbMasalahKeperawatan" noResource="true"/>
                               </Properties>
                               <Events>
@@ -1250,6 +1251,7 @@
                                   <SubComponents>
                                     <Component class="widget.Table" name="tbRencanaKeperawatan">
                                       <Properties>
+                                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                         <Property name="name" type="java.lang.String" value="tbRencanaKeperawatan" noResource="true"/>
                                       </Properties>
                                     </Component>

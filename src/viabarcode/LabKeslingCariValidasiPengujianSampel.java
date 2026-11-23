@@ -911,19 +911,19 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                                             append("</tr>");
                                 for (int i = 0; i < tabModeValidasi.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,12).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -971,19 +971,19 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                                             append("</tr>");
                                 for (int i = 0; i < tabModeValidasi.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbValidasi.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeValidasi.getValueAt(i,12).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -1018,7 +1018,7 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                                     "\"Tgl.Validasi\";\"No.Validasi\";\"NIP PJ Validasi\";\"Nama PJ Validasi\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Bayar\";\"Catatan\";\"NIP PJ Verifikasi\";\"Nama PJ Verifikasi\"\n"
                                 );
                                 for (int i = 0; i < tabModeValidasi.getRowCount(); i++) {
-                                    htmlContent.append("\"").append(tbValidasi.getValueAt(i,0).toString()).append("\";\"").append(tbValidasi.getValueAt(i,1).toString()).append("\";\"").append(tbValidasi.getValueAt(i,2).toString()).append("\";\"").append(tbValidasi.getValueAt(i,3).toString()).append("\";\"").append(tbValidasi.getValueAt(i,4).toString()).append("\";\"").append(tbValidasi.getValueAt(i,5).toString()).append("\";\"").append(tbValidasi.getValueAt(i,6).toString()).append("\";\"").append(tbValidasi.getValueAt(i,7).toString()).append("\";\"").append(tbValidasi.getValueAt(i,8).toString()).append("\";\"").append(tbValidasi.getValueAt(i,9).toString()).append("\";\"").append(tbValidasi.getValueAt(i,10).toString()).append("\";\"").append(tbValidasi.getValueAt(i,11).toString()).append("\";\"").append(tbValidasi.getValueAt(i,12).toString()).append("\"\n");
+                                    htmlContent.append("\"").append(tabModeValidasi.getValueAt(i,0).toString()).append("\";\"").append(tabModeValidasi.getValueAt(i,1).toString()).append("\";\"").append(tabModeValidasi.getValueAt(i,2).toString()).append("\";\"").append(tabModeValidasi.getValueAt(i,3).toString()).append("\";\"").append(tabModeValidasi.getValueAt(i,4).toString()).append("\";\"").append(tabModeValidasi.getValueAt(i,5).toString()).append("\";\"").append(tabModeValidasi.getValueAt(i,6).toString()).append("\";\"").append(tabModeValidasi.getValueAt(i,7).toString()).append("\";\"").append(tabModeValidasi.getValueAt(i,8).toString()).append("\";\"").append(tabModeValidasi.getValueAt(i,9).toString()).append("\";\"").append(tabModeValidasi.getValueAt(i,10).toString()).append("\";\"").append(tabModeValidasi.getValueAt(i,11).toString()).append("\";\"").append(tabModeValidasi.getValueAt(i,12).toString()).append("\"\n");
                                 }
                                 f = new File("DataValidasiPengujianSampel.csv");
                                 bw = new BufferedWriter(new FileWriter(f));
@@ -1091,31 +1091,31 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                                             append("</tr>");
                                 for (int i = 0; i < tabModeRekapValidasi.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,12).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,13).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,14).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,15).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,16).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,17).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,18).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,19).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,20).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,21).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,22).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,23).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,24).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,13).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,14).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,15).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,16).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,17).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,18).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,19).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,20).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,21).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,22).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,23).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,24).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -1175,31 +1175,31 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                                             append("</tr>");
                                 for (int i = 0; i < tabModeRekapValidasi.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,12).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,13).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,14).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,15).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,16).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,17).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,18).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,19).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,20).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,21).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,22).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,23).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapValidasi.getValueAt(i,24).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,13).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,14).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,15).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,16).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,17).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,18).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,19).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,20).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,21).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,22).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,23).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapValidasi.getValueAt(i,24).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -1234,7 +1234,7 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                                     "\"Tgl.Validasi\";\"No.Validasi\";\"NIP PJ Validasi\";\"Nama PJ Validasi\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Bayar\";\"Catatan\";\"NIP PJ Verifikasi\";\"Nama PJ Verifikasi\";\"Kode\";\"Nama Parameter\";\"Satuan\";\"Hasil Pemeriksaan\";\"Keterangan\";\"Nilai Normal\";\"Metode Pengujian\";\"Kategori\";\"NIP Analis\";\"Nama Analis\";\"NIP PJ Pengujian\";\"Nama PJ Pengujian\"\n"
                                 );
                                 for (int i = 0; i < tabModeRekapValidasi.getRowCount(); i++) {
-                                    htmlContent.append("\"").append(tbRekapValidasi.getValueAt(i,0).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,1).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,2).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,3).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,4).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,5).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,6).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,7).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,8).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,9).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,10).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,11).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,12).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,13).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,14).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,15).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,16).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,17).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,18).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,19).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,20).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,21).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,22).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,23).toString()).append("\";\"").append(tbRekapValidasi.getValueAt(i,24).toString()).append("\"\n");
+                                    htmlContent.append("\"").append(tabModeRekapValidasi.getValueAt(i,0).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,1).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,2).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,3).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,4).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,5).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,6).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,7).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,8).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,9).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,10).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,11).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,12).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,13).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,14).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,15).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,16).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,17).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,18).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,19).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,20).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,21).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,22).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,23).toString()).append("\";\"").append(tabModeRekapValidasi.getValueAt(i,24).toString()).append("\"\n");
                                 }
                                 f = new File("DataRekapValidasiPengujianSampel.csv");
                                 bw = new BufferedWriter(new FileWriter(f));
@@ -1331,7 +1331,7 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                         "where labkesling_detail_validasi_pengujian_sampel.no_validasi=? order by labkesling_detail_validasi_pengujian_sampel.kode_parameter"
                     );
                     try {
-                        ps.setString(1,tbValidasi.getValueAt(tbValidasi.getSelectedRow(),1).toString());
+                        ps.setString(1,tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),1).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModeDetailValidasi.addRow(new Object[]{
@@ -1380,27 +1380,27 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                     Sequel.queryu("delete from temporary");
                     for(i=0;i<tbDetailValidasi.getRowCount();i++){
                         Sequel.menyimpan("temporary","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                            "0",tbDetailValidasi.getValueAt(i,1).toString(),tbDetailValidasi.getValueAt(i,2).toString(),tbDetailValidasi.getValueAt(i,3).toString(),tbDetailValidasi.getValueAt(i,5).toString(),tbDetailValidasi.getValueAt(i,6).toString(),tbDetailValidasi.getValueAt(i,7).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+                            "0",tabModeDetailValidasi.getValueAt(tbDetailValidasi.convertRowIndexToModel(i),1).toString(),tabModeDetailValidasi.getValueAt(tbDetailValidasi.convertRowIndexToModel(i),2).toString(),tabModeDetailValidasi.getValueAt(tbDetailValidasi.convertRowIndexToModel(i),3).toString(),tabModeDetailValidasi.getValueAt(tbDetailValidasi.convertRowIndexToModel(i),5).toString(),tabModeDetailValidasi.getValueAt(tbDetailValidasi.convertRowIndexToModel(i),6).toString(),tabModeDetailValidasi.getValueAt(tbDetailValidasi.convertRowIndexToModel(i),7).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
                         });
                     }
 
                     Map<String, Object> param = new HashMap<>();
-                    param.put("nomorpermintaan",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),4).toString());
-                    param.put("novalidasi",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),1).toString());
-                    param.put("namapelanggan",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),6).toString());
-                    param.put("alamatpelanggan",Sequel.cariIsi("select labkesling_pelanggan.alamat from labkesling_pelanggan where labkesling_pelanggan.kode_pelanggan=?",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),5).toString()));
-                    param.put("jenisampel",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),8).toString());
-                    param.put("bakumutu",Sequel.cariIsi("select labkesling_master_sampel.baku_mutu from labkesling_master_sampel where labkesling_master_sampel.kode_sampel=?",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),7).toString()));
-                    param.put("titiksampling",Sequel.cariIsi("select labkesling_permintaan_pengujian_sampel.lokasi_sampling from labkesling_permintaan_pengujian_sampel where labkesling_permintaan_pengujian_sampel.no_permintaan=?",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),4).toString()));
-                    param.put("disamplingoleh",Sequel.cariIsi("select labkesling_permintaan_pengujian_sampel.sampling_dilakukan_oleh from labkesling_permintaan_pengujian_sampel where labkesling_permintaan_pengujian_sampel.no_permintaan=?",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),4).toString()));
-                    param.put("waktusampling",Sequel.cariIsi("select date_format(labkesling_permintaan_pengujian_sampel.waktu_sampling,'%d/%m/%Y %H:%i:%s') from labkesling_permintaan_pengujian_sampel where labkesling_permintaan_pengujian_sampel.no_permintaan=?",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),4).toString()));
-                    param.put("waktuterimasampel",Sequel.cariIsi("select date_format(labkesling_permintaan_pengujian_sampel.waktu_diterima,'%d/%m/%Y %H:%i:%s') from labkesling_permintaan_pengujian_sampel where labkesling_permintaan_pengujian_sampel.no_permintaan=?",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),4).toString()));
-                    param.put("rentangwaktu",Sequel.cariIsi("select concat(date_format(labkesling_verifikasi_pengujian_sampel.mulai_pengujian,'%d/%m/%Y %H:%i:%s'),' s.d. ',date_format(labkesling_verifikasi_pengujian_sampel.selesai_pengujian,'%d/%m/%Y %H:%i:%s')) from labkesling_verifikasi_pengujian_sampel where labkesling_verifikasi_pengujian_sampel.no_permintaan=?",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),4).toString()));
-                    param.put("tanggalvalidasi",Valid.SetTgl5(tbValidasi.getValueAt(tbValidasi.getSelectedRow(),0).toString()));
-                    param.put("pjlaborat",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),3).toString());
-                    param.put("kodepjlaborat",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),2).toString());
-                    param.put("namapjpengujian",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),12).toString());
-                    param.put("kodepjpengujian",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),11).toString());
+                    param.put("nomorpermintaan",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),4).toString());
+                    param.put("novalidasi",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),1).toString());
+                    param.put("namapelanggan",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),6).toString());
+                    param.put("alamatpelanggan",Sequel.cariIsi("select labkesling_pelanggan.alamat from labkesling_pelanggan where labkesling_pelanggan.kode_pelanggan=?",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),5).toString()));
+                    param.put("jenisampel",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),8).toString());
+                    param.put("bakumutu",Sequel.cariIsi("select labkesling_master_sampel.baku_mutu from labkesling_master_sampel where labkesling_master_sampel.kode_sampel=?",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),7).toString()));
+                    param.put("titiksampling",Sequel.cariIsi("select labkesling_permintaan_pengujian_sampel.lokasi_sampling from labkesling_permintaan_pengujian_sampel where labkesling_permintaan_pengujian_sampel.no_permintaan=?",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),4).toString()));
+                    param.put("disamplingoleh",Sequel.cariIsi("select labkesling_permintaan_pengujian_sampel.sampling_dilakukan_oleh from labkesling_permintaan_pengujian_sampel where labkesling_permintaan_pengujian_sampel.no_permintaan=?",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),4).toString()));
+                    param.put("waktusampling",Sequel.cariIsi("select date_format(labkesling_permintaan_pengujian_sampel.waktu_sampling,'%d/%m/%Y %H:%i:%s') from labkesling_permintaan_pengujian_sampel where labkesling_permintaan_pengujian_sampel.no_permintaan=?",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),4).toString()));
+                    param.put("waktuterimasampel",Sequel.cariIsi("select date_format(labkesling_permintaan_pengujian_sampel.waktu_diterima,'%d/%m/%Y %H:%i:%s') from labkesling_permintaan_pengujian_sampel where labkesling_permintaan_pengujian_sampel.no_permintaan=?",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),4).toString()));
+                    param.put("rentangwaktu",Sequel.cariIsi("select concat(date_format(labkesling_verifikasi_pengujian_sampel.mulai_pengujian,'%d/%m/%Y %H:%i:%s'),' s.d. ',date_format(labkesling_verifikasi_pengujian_sampel.selesai_pengujian,'%d/%m/%Y %H:%i:%s')) from labkesling_verifikasi_pengujian_sampel where labkesling_verifikasi_pengujian_sampel.no_permintaan=?",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),4).toString()));
+                    param.put("tanggalvalidasi",Valid.SetTgl5(tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),0).toString()));
+                    param.put("pjlaborat",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),3).toString());
+                    param.put("kodepjlaborat",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),2).toString());
+                    param.put("namapjpengujian",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),12).toString());
+                    param.put("kodepjpengujian",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),11).toString());
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
@@ -1408,10 +1408,10 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("emailrs",akses.getemailrs());
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),2).toString());
-                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbValidasi.getValueAt(tbValidasi.getSelectedRow(),3).toString()+"\nID "+(finger.equals("")?tbValidasi.getValueAt(tbValidasi.getSelectedRow(),2).toString():finger)+"\n"+Valid.SetTgl5(tbValidasi.getValueAt(tbValidasi.getSelectedRow(),0).toString()));
-                    finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbValidasi.getValueAt(tbValidasi.getSelectedRow(),11).toString());
-                    param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbValidasi.getValueAt(tbValidasi.getSelectedRow(),12).toString()+"\nID "+(finger.equals("")?tbValidasi.getValueAt(tbValidasi.getSelectedRow(),11).toString():finger)+"\n"+Valid.SetTgl5(tbValidasi.getValueAt(tbValidasi.getSelectedRow(),0).toString()));
+                    String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),2).toString());
+                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),3).toString()+"\nID "+(finger.equals("")?tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),2).toString():finger)+"\n"+Valid.SetTgl5(tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),0).toString()));
+                    finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),11).toString());
+                    param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),12).toString()+"\nID "+(finger.equals("")?tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),11).toString():finger)+"\n"+Valid.SetTgl5(tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),0).toString()));
                     Valid.MyReport("rptValidasiPengujianSampelLaboratKesling.jasper","report","::[ Laporan Hasil Uji Laboratorium ]::",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else{
@@ -1428,7 +1428,7 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
             if(ChkAccor.isSelected()==false){
                 JOptionPane.showMessageDialog(null,"Silahkan tampilkan data detail validasi terlebih dahulu...!!!");
             }else{
-                if(tbValidasi.getValueAt(tbValidasi.getSelectedRow(),9).toString().equals("Belum Bayar")){
+                if(tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),9).toString().equals("Belum Bayar")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     try {
                         Sequel.AutoComitFalse();
@@ -1436,18 +1436,18 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
 
                         jasa_sarana=0;paket_bhp=0;jasa_pj_lab=0;jasa_pj_pengujian=0;jasa_verifikator=0;jasa_petugas=0;kso=0;jasa_menejemen=0;total=0;
                         for(i=0;i<tbDetailValidasi.getRowCount();i++){
-                            jasa_sarana=jasa_sarana+Double.parseDouble(tbDetailValidasi.getValueAt(i,12).toString());
-                            paket_bhp=paket_bhp+Double.parseDouble(tbDetailValidasi.getValueAt(i,13).toString());
-                            jasa_pj_lab=jasa_pj_lab+Double.parseDouble(tbDetailValidasi.getValueAt(i,14).toString());
-                            jasa_pj_pengujian=jasa_pj_pengujian+Double.parseDouble(tbDetailValidasi.getValueAt(i,15).toString());
-                            jasa_verifikator=jasa_verifikator+Double.parseDouble(tbDetailValidasi.getValueAt(i,16).toString());
-                            jasa_petugas=jasa_petugas+Double.parseDouble(tbDetailValidasi.getValueAt(i,17).toString());
-                            kso=kso+Double.parseDouble(tbDetailValidasi.getValueAt(i,18).toString());
-                            jasa_menejemen=jasa_menejemen+Double.parseDouble(tbDetailValidasi.getValueAt(i,19).toString());
-                            total=total+Double.parseDouble(tbDetailValidasi.getValueAt(i,20).toString());
+                            jasa_sarana=jasa_sarana+Double.parseDouble(tabModeDetailValidasi.getValueAt(tbDetailValidasi.convertRowIndexToModel(i),12).toString());
+                            paket_bhp=paket_bhp+Double.parseDouble(tabModeDetailValidasi.getValueAt(tbDetailValidasi.convertRowIndexToModel(i),13).toString());
+                            jasa_pj_lab=jasa_pj_lab+Double.parseDouble(tabModeDetailValidasi.getValueAt(tbDetailValidasi.convertRowIndexToModel(i),14).toString());
+                            jasa_pj_pengujian=jasa_pj_pengujian+Double.parseDouble(tabModeDetailValidasi.getValueAt(tbDetailValidasi.convertRowIndexToModel(i),15).toString());
+                            jasa_verifikator=jasa_verifikator+Double.parseDouble(tabModeDetailValidasi.getValueAt(tbDetailValidasi.convertRowIndexToModel(i),16).toString());
+                            jasa_petugas=jasa_petugas+Double.parseDouble(tabModeDetailValidasi.getValueAt(tbDetailValidasi.convertRowIndexToModel(i),17).toString());
+                            kso=kso+Double.parseDouble(tabModeDetailValidasi.getValueAt(tbDetailValidasi.convertRowIndexToModel(i),18).toString());
+                            jasa_menejemen=jasa_menejemen+Double.parseDouble(tabModeDetailValidasi.getValueAt(tbDetailValidasi.convertRowIndexToModel(i),19).toString());
+                            total=total+Double.parseDouble(tabModeDetailValidasi.getValueAt(tbDetailValidasi.convertRowIndexToModel(i),20).toString());
                         }
 
-                        if(Sequel.queryutf("delete from labkesling_validasi_pengujian_sampel where no_validasi='"+tbValidasi.getValueAt(tbValidasi.getSelectedRow(),1).toString()+"'")==true){
+                        if(Sequel.queryutf("delete from labkesling_validasi_pengujian_sampel where no_validasi='"+tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),1).toString()+"'")==true){
                             Sequel.deleteTampJurnal();
                             if(jasa_sarana>0){
                                 if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_sarana_Pelayanan_Lab_Kesling, "Utang Jasa Sarana Pelayanan Lab Kesling", jasa_sarana, 0);
@@ -1485,16 +1485,16 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                                 if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Pendapatan_Pelayanan_Lab_Kesling, "Pendapatan Pelayanan Lab Kesling", total, 0);
                                 if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Pelayanan_Lab_Kesling, "Suspen Piutang Pelayanan Lab Kesling", 0, total);
                             }
-                            if (berhasil) berhasil = jur.simpanJurnal(tbValidasi.getValueAt(tbValidasi.getSelectedRow(), 1).toString(), "U", "PEMBATALAN PELAYANAN LABORATORIUM KESEHATAN LINGKUNGAN " + NamaPelanggan.getText() + " DIPOSTING OLEH " + akses.getkode());
+                            if (berhasil) berhasil = jur.simpanJurnal(tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()), 1).toString(), "U", "PEMBATALAN PELAYANAN LABORATORIUM KESEHATAN LINGKUNGAN " + NamaPelanggan.getText() + " DIPOSTING OLEH " + akses.getkode());
                         }else{
                             berhasil=false;
                         }
 
                         if(berhasil==true){
-                            Sequel.queryu("update labkesling_verifikasi_pengujian_sampel set status='Belum Divalidasi' where no_permintaan='"+tbValidasi.getValueAt(tbValidasi.getSelectedRow(),4).toString()+"'");
+                            Sequel.queryu("update labkesling_verifikasi_pengujian_sampel set status='Belum Divalidasi' where no_permintaan='"+tabModeValidasi.getValueAt(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()),4).toString()+"'");
                             Sequel.Commit();
                             JOptionPane.showMessageDialog(null,"Proses hapus selesai...!");
-                            tabModeValidasi.removeRow(tbValidasi.getSelectedRow());
+                            tabModeValidasi.removeRow(tbValidasi.convertRowIndexToModel(tbValidasi.getSelectedRow()));
                             LTotal.setText(tbValidasi.getRowCount()+"");
                             Valid.tabelKosong(tabModeDetailValidasi);
                         }else{
@@ -1688,7 +1688,7 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                         rs.getString("kode_sampel"),rs.getString("nama_sampel"),rs.getString("status"),rs.getString("catatan"),rs.getString("nip_verifikator"),rs.getString("pjverifikasi")
                     });
                 }
-                LTotal.setText(tabModeValidasi.getRowCount()+"");
+                LTotal.setText(tbValidasi.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{
@@ -1759,7 +1759,7 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
                         rs.getString("nip_analis"),rs.getString("analis"),rs.getString("nip_pjpengujian"),rs.getString("pjpengujian")
                     });
                 }
-                LTotal.setText(tabModeRekapValidasi.getRowCount()+"");
+                LTotal.setText(tbRekapValidasi.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{

@@ -234,6 +234,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -664,7 +665,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbDokter.getSelectedRow()>-1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
               Valid.textKosong(BtnAll,"Nomor J.M.");
             }else{
                 try {
@@ -673,7 +674,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         "bayar_jm_dokter.labrawatjalan,bayar_jm_dokter.labrawatinap,bayar_jm_dokter.radrawatjalan,bayar_jm_dokter.radrawatinap,"+
                         "bayar_jm_dokter.operasiralan,bayar_jm_dokter.operasiranap from bayar_jm_dokter where bayar_jm_dokter.no_bayar=?");
                     try {
-                        ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
                             Sequel.AutoComitFalse();
@@ -703,8 +704,8 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                             if(sukses==true){
                                 totaltagihan=0;
                                 if(koderekening.equals(Host_to_Host_Bank_Mandiri)){
-                                    totaltagihan=Sequel.cariIsiAngka("select metode_pembayaran_bankmandiri.biaya_transaksi from metode_pembayaran_bankmandiri inner join pembayaran_pihak_ke3_bankmandiri on pembayaran_pihak_ke3_bankmandiri.kode_metode=metode_pembayaran_bankmandiri.kode_metode where pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                                    Sequel.meghapus("pembayaran_pihak_ke3_bankmandiri","nomor_pembayaran",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                                    totaltagihan=Sequel.cariIsiAngka("select metode_pembayaran_bankmandiri.biaya_transaksi from metode_pembayaran_bankmandiri inner join pembayaran_pihak_ke3_bankmandiri on pembayaran_pihak_ke3_bankmandiri.kode_metode=metode_pembayaran_bankmandiri.kode_metode where pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+                                    Sequel.meghapus("pembayaran_pihak_ke3_bankmandiri","nomor_pembayaran",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                                 }
                                 Sequel.deleteTampJurnal();
                                 if(rs.getDouble("rawatjalan")>0){
@@ -758,12 +759,12 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                                     }
                                 }
                                 if(sukses==true){
-                                    sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),"U","PEMBATALAN PEMBAYARAN JASA MEDIS DOKTER "+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+" "+tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString()+", OLEH "+akses.getkode());
+                                    sukses=jur.simpanJurnal(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString(),"U","PEMBATALAN PEMBAYARAN JASA MEDIS DOKTER "+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString()+" "+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString()+", OLEH "+akses.getkode());
                                 }
                             }
 
                             if(sukses==true){
-                                Sequel.queryu2("delete from bayar_jm_dokter where no_bayar=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
+                                Sequel.queryu2("delete from bayar_jm_dokter where no_bayar=?",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()});
                                 Sequel.Commit();
                             }else{
                                 sukses=false;
@@ -804,7 +805,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
 
     private void BtnGajiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGajiActionPerformed
         if(tbDokter.getSelectedRow()>-1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
               Valid.textKosong(BtnAll,"Nomor J.M.");
             }else{
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -820,7 +821,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         "inner join jns_perawatan on bayar_rawat_jl_dr.kd_jenis_prw=jns_perawatan.kd_jenis_prw "+
                         "where bayar_rawat_jl_dr.no_bayar=? order by bayar_rawat_jl_dr.tgl_perawatan,bayar_rawat_jl_dr.jam_rawat");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -854,7 +855,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         "inner join jns_perawatan on bayar_rawat_jl_drpr.kd_jenis_prw=jns_perawatan.kd_jenis_prw "+
                         "where bayar_rawat_jl_drpr.no_bayar=? order by bayar_rawat_jl_drpr.tgl_perawatan,bayar_rawat_jl_drpr.jam_rawat");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -888,7 +889,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         "inner join jns_perawatan_inap on bayar_rawat_inap_dr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw "+
                         "where bayar_rawat_inap_dr.no_bayar=? order by bayar_rawat_inap_dr.tgl_perawatan,bayar_rawat_inap_dr.jam_rawat");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -922,7 +923,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         "inner join jns_perawatan_inap on bayar_rawat_inap_drpr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw "+
                         "where bayar_rawat_inap_drpr.no_bayar=? order by bayar_rawat_inap_drpr.tgl_perawatan,bayar_rawat_inap_drpr.jam_rawat");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -956,7 +957,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         "inner join paket_operasi on bayar_operasi_operator1.kode_paket=paket_operasi.kode_paket "+
                         "where bayar_operasi_operator1.no_bayar=? order by bayar_operasi_operator1.tgl_operasi");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -990,7 +991,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         "inner join paket_operasi on bayar_operasi_operator2.kode_paket=paket_operasi.kode_paket "+
                         "where bayar_operasi_operator2.no_bayar=? order by bayar_operasi_operator2.tgl_operasi");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -1024,7 +1025,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         "inner join paket_operasi on bayar_operasi_operator3.kode_paket=paket_operasi.kode_paket "+
                         "where bayar_operasi_operator3.no_bayar=? order by bayar_operasi_operator3.tgl_operasi");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -1058,7 +1059,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         "inner join paket_operasi on bayar_operasi_dokter_anak.kode_paket=paket_operasi.kode_paket "+
                         "where bayar_operasi_dokter_anak.no_bayar=? order by bayar_operasi_dokter_anak.tgl_operasi");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -1092,7 +1093,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         "inner join paket_operasi on bayar_operasi_dokter_umum.kode_paket=paket_operasi.kode_paket "+
                         "where bayar_operasi_dokter_umum.no_bayar=? order by bayar_operasi_dokter_umum.tgl_operasi");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -1126,7 +1127,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         "inner join paket_operasi on bayar_operasi_dokter_pjanak.kode_paket=paket_operasi.kode_paket "+
                         "where bayar_operasi_dokter_pjanak.no_bayar=? order by bayar_operasi_dokter_pjanak.tgl_operasi");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -1160,7 +1161,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         "inner join paket_operasi on bayar_operasi_dokter_anestesi.kode_paket=paket_operasi.kode_paket "+
                         "where bayar_operasi_dokter_anestesi.no_bayar=? order by bayar_operasi_dokter_anestesi.tgl_operasi");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -1194,7 +1195,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         " inner join jns_perawatan_lab on bayar_periksa_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
                         "where bayar_periksa_lab.no_bayar=? order by bayar_periksa_lab.tgl_periksa,bayar_periksa_lab.jam");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -1229,7 +1230,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         " inner join template_laboratorium on bayar_detail_periksa_lab.id_template=template_laboratorium.id_template "+
                         "where bayar_detail_periksa_lab.no_bayar=? order by bayar_detail_periksa_lab.tgl_periksa,bayar_detail_periksa_lab.jam");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -1263,7 +1264,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         " inner join jns_perawatan_lab on bayar_periksa_lab_perujuk.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
                         "where bayar_periksa_lab_perujuk.no_bayar=? order by bayar_periksa_lab_perujuk.tgl_periksa,bayar_periksa_lab_perujuk.jam");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -1298,7 +1299,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         " inner join template_laboratorium on bayar_detail_periksa_lab_perujuk.id_template=template_laboratorium.id_template "+
                         "where bayar_detail_periksa_lab_perujuk.no_bayar=? order by bayar_detail_periksa_lab_perujuk.tgl_periksa,bayar_detail_periksa_lab_perujuk.jam");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -1332,7 +1333,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         " inner join jns_perawatan_radiologi on bayar_periksa_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw "+
                         "where bayar_periksa_radiologi.no_bayar=? order by bayar_periksa_radiologi.tgl_periksa,bayar_periksa_radiologi.jam");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -1366,7 +1367,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                         " inner join jns_perawatan_radiologi on bayar_periksa_radiologi_perujuk.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw "+
                         "where bayar_periksa_radiologi_perujuk.no_bayar=? order by bayar_periksa_radiologi_perujuk.tgl_periksa,bayar_periksa_radiologi_perujuk.jam");
                     try {
-                        ps2.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             Sequel.menyimpan("temporary","'"+i+"','"+
@@ -1391,7 +1392,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    Sequel.menyimpan("temporary","'"+i+"','>> Jumlah :','','','','','','"+tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString()+
+                    Sequel.menyimpan("temporary","'"+i+"','>> Jumlah :','','','','','','"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6).toString()+
                         "','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter"
                     );
 
@@ -1402,8 +1403,8 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("emailrs",akses.getemailrs());
-                    param.put("dokter",tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
-                    param.put("bulan",Valid.SetTgl3(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()).substring(3,10));
+                    param.put("dokter",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
+                    param.put("bulan",Valid.SetTgl3(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()).substring(3,10));
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptSlipBayarJMDokter.jasper","report","::[ Slip J.M. Dokter  ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                 } catch (Exception e) {

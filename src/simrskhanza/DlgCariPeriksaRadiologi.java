@@ -124,7 +124,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         tbListDicom.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbListDicom.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < tabModeDicom.getColumnCount(); i++) {
+        for (i = 0; i < tbListDicom.getColumnCount(); i++) {
             TableColumn column = tbListDicom.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(100);
@@ -555,6 +555,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1381,7 +1382,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1390,7 +1391,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             if(Kd2.getText().equals("")||Petugas.getText().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data terlebih dahulu...!!!!");
             }else{
-                if(Sequel.cariRegistrasi(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())>0){
+                if(Sequel.cariRegistrasi(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString())>0){
                     JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                     TCari.requestFocus();
                 }else{
@@ -1401,50 +1402,50 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                             sukses=true;
                             status="";
                             ttljmdokter=0;ttljmpetugas=0;ttlkso=0;ttlpendapatan=0;ttlbhp=0;ttljasasarana=0;ttljmperujuk=0;ttlmenejemen=0;
-                            ttljmdokter=Sequel.cariIsiAngka("select sum(periksa_radiologi.tarif_tindakan_dokter) from periksa_radiologi where periksa_radiologi.no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0) +
-                                    "' and tgl_periksa='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3) +
-                                    "' and jam='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),4) +"'");
-                            ttljmpetugas=Sequel.cariIsiAngka("select sum(periksa_radiologi.tarif_tindakan_petugas) from periksa_radiologi where periksa_radiologi.no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0) +
-                                    "' and tgl_periksa='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3) +
-                                    "' and jam='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),4) +"'");
-                            ttlkso=Sequel.cariIsiAngka("select sum(periksa_radiologi.kso) from periksa_radiologi where periksa_radiologi.no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0) +
-                                    "' and tgl_periksa='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3) +
-                                    "' and jam='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),4) +"'");
-                            ttlbhp=Sequel.cariIsiAngka("select sum(periksa_radiologi.bhp) from periksa_radiologi where periksa_radiologi.no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0) +
-                                    "' and tgl_periksa='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3) +
-                                    "' and jam='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),4) +"'");
-                            ttlpendapatan=Sequel.cariIsiAngka("select sum(periksa_radiologi.biaya) from periksa_radiologi where periksa_radiologi.no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0) +
-                                    "' and tgl_periksa='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3) +
-                                    "' and jam='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),4) +"'");
-                            ttljasasarana=Sequel.cariIsiAngka("select sum(periksa_radiologi.bagian_rs) from periksa_radiologi where periksa_radiologi.no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0) +
-                                    "' and tgl_periksa='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3) +
-                                    "' and jam='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),4) +"'");
-                            ttljmperujuk=Sequel.cariIsiAngka("select sum(periksa_radiologi.tarif_perujuk) from periksa_radiologi where periksa_radiologi.no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0) +
-                                    "' and tgl_periksa='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3) +
-                                    "' and jam='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),4) +"'");
-                            ttlmenejemen=Sequel.cariIsiAngka("select sum(periksa_radiologi.menejemen) from periksa_radiologi where periksa_radiologi.no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0) +
-                                    "' and tgl_periksa='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3) +
-                                    "' and jam='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),4) +"'");
+                            ttljmdokter=Sequel.cariIsiAngka("select sum(periksa_radiologi.tarif_tindakan_dokter) from periksa_radiologi where periksa_radiologi.no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0) +
+                                    "' and tgl_periksa='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3) +
+                                    "' and jam='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4) +"'");
+                            ttljmpetugas=Sequel.cariIsiAngka("select sum(periksa_radiologi.tarif_tindakan_petugas) from periksa_radiologi where periksa_radiologi.no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0) +
+                                    "' and tgl_periksa='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3) +
+                                    "' and jam='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4) +"'");
+                            ttlkso=Sequel.cariIsiAngka("select sum(periksa_radiologi.kso) from periksa_radiologi where periksa_radiologi.no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0) +
+                                    "' and tgl_periksa='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3) +
+                                    "' and jam='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4) +"'");
+                            ttlbhp=Sequel.cariIsiAngka("select sum(periksa_radiologi.bhp) from periksa_radiologi where periksa_radiologi.no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0) +
+                                    "' and tgl_periksa='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3) +
+                                    "' and jam='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4) +"'");
+                            ttlpendapatan=Sequel.cariIsiAngka("select sum(periksa_radiologi.biaya) from periksa_radiologi where periksa_radiologi.no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0) +
+                                    "' and tgl_periksa='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3) +
+                                    "' and jam='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4) +"'");
+                            ttljasasarana=Sequel.cariIsiAngka("select sum(periksa_radiologi.bagian_rs) from periksa_radiologi where periksa_radiologi.no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0) +
+                                    "' and tgl_periksa='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3) +
+                                    "' and jam='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4) +"'");
+                            ttljmperujuk=Sequel.cariIsiAngka("select sum(periksa_radiologi.tarif_perujuk) from periksa_radiologi where periksa_radiologi.no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0) +
+                                    "' and tgl_periksa='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3) +
+                                    "' and jam='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4) +"'");
+                            ttlmenejemen=Sequel.cariIsiAngka("select sum(periksa_radiologi.menejemen) from periksa_radiologi where periksa_radiologi.no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0) +
+                                    "' and tgl_periksa='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3) +
+                                    "' and jam='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4) +"'");
 
-                            status=Sequel.cariIsi("select periksa_radiologi.status from periksa_radiologi where periksa_radiologi.no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0) +
-                                        "' and tgl_periksa='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3) +
-                                        "' and jam='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),4) +"'");
+                            status=Sequel.cariIsi("select periksa_radiologi.status from periksa_radiologi where periksa_radiologi.no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0) +
+                                        "' and tgl_periksa='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3) +
+                                        "' and jam='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4) +"'");
 
                             if(Sequel.queryu2tf("delete from periksa_radiologi where periksa_radiologi.no_rawat=? and tgl_periksa=? and jam=?",3,new String[]{
-                                tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString()
+                                tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString()
                             })==true){
                                 Sequel.queryu2("delete from hasil_radiologi where no_rawat=? and tgl_periksa=? and jam=?",3,new String[]{
-                                    tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString()
+                                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString()
                                 });
                                 Sequel.queryu2("delete from gambar_radiologi where no_rawat=? and tgl_periksa=? and jam=?",3,new String[]{
-                                    tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString()
+                                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString()
                                 });
 
-                                ttlbhp=ttlbhp+Sequel.cariIsiAngka("select sum(beri_bhp_radiologi.total) from beri_bhp_radiologi where no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0) +
-                                        "' and tgl_periksa='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3) +
-                                        "' and jam='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),4) +"'");
+                                ttlbhp=ttlbhp+Sequel.cariIsiAngka("select sum(beri_bhp_radiologi.total) from beri_bhp_radiologi where no_rawat='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0) +
+                                        "' and tgl_periksa='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3) +
+                                        "' and jam='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4) +"'");
                                 if(Sequel.queryu2tf("delete from beri_bhp_radiologi where no_rawat=? and tgl_periksa=? and jam=?",3,new String[]{
-                                    tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString()
+                                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString()
                                 })==false){
                                     sukses=false;
                                 }
@@ -1520,7 +1521,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                                         }
                                     }
                                     if(sukses==true){
-                                        sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),"U","PEMBATALAN PEMERIKSAAN RADIOLOGI RAWAT INAP PASIEN "+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+" OLEH "+akses.getkode());
+                                        sukses=jur.simpanJurnal(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString(),"U","PEMBATALAN PEMERIKSAAN RADIOLOGI RAWAT INAP PASIEN "+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()+" OLEH "+akses.getkode());
                                     }
                                 }else if(status.equals("Ralan")){
                                     Sequel.deleteTampJurnal();
@@ -1589,7 +1590,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                                         }
                                     }
                                     if(sukses==true){
-                                        sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),"U","PEMBATALAN PEMERIKSAAN RADIOLOGI RAWAT JALAN PASIEN "+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+" OLEH "+akses.getkode());
+                                        sukses=jur.simpanJurnal(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString(),"U","PEMBATALAN PEMERIKSAAN RADIOLOGI RAWAT JALAN PASIEN "+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()+" OLEH "+akses.getkode());
                                     }
                                 }
                             }
@@ -1622,7 +1623,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1634,7 +1635,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
 
     private void MnCetakNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakNotaActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1650,9 +1651,9 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                         "on periksa_radiologi.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and periksa_radiologi.nip=petugas.nip and periksa_radiologi.kd_dokter=dokter.kd_dokter where "+
                         "periksa_radiologi.tgl_periksa=? and periksa_radiologi.jam=? and periksa_radiologi.no_rawat=? group by concat(periksa_radiologi.no_rawat,periksa_radiologi.tgl_periksa,periksa_radiologi.jam)");
                     try {
-                        ps4.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
-                        ps4.setString(2,tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
-                        ps4.setString(3,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        ps4.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString());
+                        ps4.setString(2,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
+                        ps4.setString(3,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs=ps4.executeQuery();
                         while(rs.next()){
                             Sequel.queryu("delete from temporary_radiologi");
@@ -1775,15 +1776,15 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                 param.put("jkel",Jk.getText());
                 param.put("umur",Umur.getText());
                 param.put("lahir",Sequel.cariIsi("select DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') from pasien where pasien.no_rkm_medis=? ",NoRM.getText()));
-                param.put("pengirim",tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString());
-                param.put("tanggal",Valid.SetTgl3(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()));
-                param.put("penjab",tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString());
-                param.put("petugas",tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString());
+                param.put("pengirim",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),5).toString());
+                param.put("tanggal",Valid.SetTgl3(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString()));
+                param.put("penjab",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6).toString());
+                param.put("petugas",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString());
                 param.put("alamat",Alamat.getText());
                 param.put("kamar",kamar);
                 param.put("namakamar",namakamar);
                 param.put("pemeriksaan",pemeriksaan);
-                param.put("jam",tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
+                param.put("jam",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
@@ -1793,9 +1794,9 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                 param.put("hasil",HasilPeriksa.getText());
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kdpenjab);
-                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?kdpenjab:finger)+"\n"+Valid.SetTgl3(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()));
+                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6).toString()+"\nID "+(finger.equals("")?kdpenjab:finger)+"\n"+Valid.SetTgl3(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString()));
                 finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kdpetugas);
-                param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString()+"\nID "+(finger.equals("")?kdpetugas:finger)+"\n"+Valid.SetTgl3(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()));
+                param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString()+"\nID "+(finger.equals("")?kdpetugas:finger)+"\n"+Valid.SetTgl3(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString()));
 
                 pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih hasil pemeriksaan..!","Hasil Pemeriksaan",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Model 1","Model 2", "Model 3","PDF Model 1","PDF Model 2","PDF Model 3"},"Model 1");
                 switch (pilihan) {
@@ -1833,7 +1834,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrint1KeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -1844,8 +1845,8 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             }else{
                 if (akses.getpermintaan_radiologi() && !Sequel.CariPetugas(akses.getkode()).isBlank() && !DiagnosisKlinis.getText().isBlank()) {
                     if (!Sequel.mengupdatetfSmc("permintaan_radiologi", "diagnosa_klinis = ?", "no_rawat = ? and tgl_hasil = ? and jam_hasil = ?",
-                        DiagnosisKlinis.getText().trim(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString(),
-                        tbDokter.getValueAt(tbDokter.getSelectedRow(), 3).toString(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 4).toString()
+                        DiagnosisKlinis.getText().trim(), tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 0).toString(),
+                        tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 3).toString(), tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 4).toString()
                     )) {
                         JOptionPane.showMessageDialog(null, "Tidak dapat mengubah diagnosa klinis,\nKemungkinan permintaan radiologi tidak ada..!!");
                     }
@@ -1889,10 +1890,10 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
 
     private void BtnSimpan4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpan4ActionPerformed
         if(tbDokter.getSelectedRow()>-1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().equals("")){
                 Sequel.queryu2("update periksa_radiologi set nip=?,dokter_perujuk=?,kd_dokter=? where no_rawat=? and tgl_periksa=? and jam=?",6,new String[]{
-                    KdPtgUbah.getText(),KodePerujuk.getText(),KodePj.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),
-                    tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString()
+                    KdPtgUbah.getText(),KodePerujuk.getText(),KodePj.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString(),
+                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString()
                 });
                 statushasil="";
                 runBackground(() -> tampil());
@@ -2018,7 +2019,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPetugas1ActionPerformed
 
     private void MnUbahDokterPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUbahDokterPetugasActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -2027,7 +2028,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             if(Kd2.getText().equals("")||Petugas.getText().equals("")){
                JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data terlebih dahulu...!!!!");
             }else{
-                if(Sequel.cariRegistrasi(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString())>0){
+                if(Sequel.cariRegistrasi(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString())>0){
                     JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh diubah.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                     TCari.requestFocus();
                 }else{
@@ -2039,7 +2040,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
 
     private void ppBerkasDigitalBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBerkasDigitalBtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -2052,9 +2053,9 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                 berkas.setJudul("::[ Berkas Digital Perawatan ]::","berkasrawat/pages");
                 try {
                     if(akses.gethapus_berkas_digital_perawatan()==true){
-                        berkas.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+"berkasrawat/login2.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&no_rawat="+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        berkas.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+"berkasrawat/login2.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&no_rawat="+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                     }else{
-                        berkas.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+"berkasrawat/login2nonhapus.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&no_rawat="+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        berkas.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+"berkasrawat/login2nonhapus.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&no_rawat="+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                     }
                 } catch (Exception ex) {
                     System.out.println("Notifikasi : "+ex);
@@ -2080,7 +2081,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
 
     private void btnAmbilPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbilPhotoActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -2135,17 +2136,17 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAmbilPhoto1ActionPerformed
 
     private void btnDicomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDicomActionPerformed
-        if(tabModeDicom.getRowCount()==0){
+        if(tbListDicom.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else {
             if(tbListDicom.getSelectedRow()!= -1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 OrthancDICOM orthan=new OrthancDICOM(null,false);
-                orthan.setJudul("::[ DICOM Orthanc Pasien "+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+", Series "+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString()+" ]::",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().replaceAll("/","")+"_"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().replaceAll(" ","_").replaceAll("/","").replaceAll(":","").replaceAll(",",""),tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString(),tbListDicom.getValueAt(tbListDicom.getSelectedRow(),1).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                orthan.setJudul("::[ DICOM Orthanc Pasien "+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()+", Series "+tabModeDicom.getValueAt(tbListDicom.convertRowIndexToModel(tbListDicom.getSelectedRow()),2).toString()+" ]::",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().replaceAll("/","")+"_"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().replaceAll(" ","_").replaceAll("/","").replaceAll(":","").replaceAll(",",""),tabModeDicom.getValueAt(tbListDicom.convertRowIndexToModel(tbListDicom.getSelectedRow()),2).toString(),tabModeDicom.getValueAt(tbListDicom.convertRowIndexToModel(tbListDicom.getSelectedRow()),1).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                 try {
-                    System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
-                    orthan.loadURL(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
+                    System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tabModeDicom.getValueAt(tbListDicom.convertRowIndexToModel(tbListDicom.getSelectedRow()),2).toString());
+                    orthan.loadURL(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tabModeDicom.getValueAt(tbListDicom.convertRowIndexToModel(tbListDicom.getSelectedRow()),2).toString());
                 } catch (Exception ex) {
                     System.out.println("Notifikasi : "+ex);
                 }
@@ -2164,7 +2165,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_TabDataMouseClicked
 
     private void tbListDicomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListDicomMouseClicked
-        if(tabModeDicom.getRowCount()!=0){
+        if(tbListDicom.getRowCount()!=0){
             if(evt.getClickCount()==2){
                 btnDicomActionPerformed(null);
             }
@@ -2172,7 +2173,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbListDicomMouseClicked
 
     private void tbListDicomKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbListDicomKeyPressed
-        if(tabModeDicom.getRowCount()!=0){
+        if(tbListDicom.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 btnDicomActionPerformed(null);
             }
@@ -2180,7 +2181,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbListDicomKeyPressed
 
     private void ppRiwayatBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRiwayatBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
@@ -2192,7 +2193,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 RMRiwayatPerawatan resume=new RMRiwayatPerawatan(null,true);
                 pilihan=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=?",Kd2.getText());
-                resume.setNoRm(pilihan,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().replaceAll(pilihan+" ",""));
+                resume.setNoRm(pilihan,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().replaceAll(pilihan+" ",""));
                 resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 resume.setLocationRelativeTo(internalFrame1);
                 resume.setVisible(true);
@@ -2244,7 +2245,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnDicomRouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDicomRouterActionPerformed
-        if(tabModeDicom.getRowCount()==0){
+        if(tbListDicom.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else {
@@ -2270,7 +2271,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                     }
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     ApiOrthanc orthanc=new ApiOrthanc();
-                    orthanc.kirimKeModalitySmc(tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString(), actualModalityName);
+                    orthanc.kirimKeModalitySmc(tabModeDicom.getValueAt(tbListDicom.convertRowIndexToModel(tbListDicom.getSelectedRow()),2).toString(), actualModalityName);
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }else{
@@ -2280,7 +2281,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_btnDicomRouterActionPerformed
 
     private void btnUploudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploudActionPerformed
-        if(tabModeDicom.getRowCount()==0){
+        if(tbListDicom.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else {
@@ -2288,7 +2289,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 Sequel.queryu2("delete from gambar_radiologi where no_rawat=? and tgl_periksa=? and jam=?",3,new String[]{NoRawatDicari.getText(),TglDicari.getText(),JamDicari.getText()});
                 ApiOrthanc orthanc=new ApiOrthanc();
-                orthanc.AmbilJpg2(tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
+                orthanc.AmbilJpg2(tabModeDicom.getValueAt(tbListDicom.convertRowIndexToModel(tbListDicom.getSelectedRow()),2).toString());
                 try {
                     CloseableHttpClient httpClient = HttpClients.createDefault();
                     HttpPost post = new HttpPost("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/pages/upload/service.php");
@@ -2296,11 +2297,11 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                     post.setHeader("Content-Type", "application/json");
                     post.addHeader("username", koneksiDB.USERHYBRIDWEB());
                     post.addHeader("password", koneksiDB.PASHYBRIDWEB());
-                    File f = new File("./gambarradiologi/"+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString()+".jpg");
+                    File f = new File("./gambarradiologi/"+tabModeDicom.getValueAt(tbListDicom.convertRowIndexToModel(tbListDicom.getSelectedRow()),2).toString()+".jpg");
                     byte[] fileContent = Files.readAllBytes(f.toPath());
                     String json="{" +
                                     "\"file\":\""+Base64.getEncoder().encodeToString(fileContent)+"\"," +
-                                    "\"namafile\":\""+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString()+".jpg\"," +
+                                    "\"namafile\":\""+tabModeDicom.getValueAt(tbListDicom.convertRowIndexToModel(tbListDicom.getSelectedRow()),2).toString()+".jpg\"," +
                                     "\"norawat\":\""+NoRawatDicari.getText()+"\"," +
                                     "\"tanggal\":\""+TglDicari.getText()+"\"," +
                                     "\"jam\":\""+JamDicari.getText()+"\"" +
@@ -2326,7 +2327,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_btnUploudActionPerformed
 
     private void tbDokterMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             int row = tbDokter.rowAtPoint(evt.getPoint());
             if(row >= 0){
                 tbDokter.setRowSelectionInterval(row, row);
@@ -2337,7 +2338,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                     tampilOrthanc();
                     DiagnosisKlinis.setEditable(Sequel.cariExistsSmc(
                         "select * from permintaan_radiologi where permintaan_radiologi.no_rawat = ? and permintaan_radiologi.tgl_hasil = ? and permintaan_radiologi.jam_hasil = ?",
-                        tbDokter.getValueAt(row, 0).toString(), tbDokter.getValueAt(row, 3).toString(), tbDokter.getValueAt(row, 4).toString()
+                        tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 0).toString(), tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 3).toString(), tabMode.getValueAt(tbDokter.convertRowIndexToModel(row), 4).toString()
                     ));
                 } catch (java.lang.NullPointerException e) {
                 }
@@ -2630,8 +2631,8 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     private void getData() {
         Kd2.setText("");
         if(tbDokter.getSelectedRow()!= -1){
-            Kd2.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            Petugas.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString());
+            Kd2.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+            Petugas.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6).toString());
         }
     }
 
@@ -2661,9 +2662,9 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                 "where periksa_radiologi.no_rawat=? "+
                 "and periksa_radiologi.tgl_periksa=? and periksa_radiologi.jam=?");
             try {
-                ps5.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                ps5.setString(2,tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
-                ps5.setString(3,tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
+                ps5.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+                ps5.setString(2,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString());
+                ps5.setString(3,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
                 rs5=ps5.executeQuery();
                 if(rs5.next()){
                     KodePerujuk.setText(rs5.getString("dokter_perujuk"));
@@ -2715,16 +2716,16 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         if(TabData.isVisible()==true){
             if(tbDokter.getSelectedRow()!= -1){
                 if((!Kd2.getText().equals(""))&&(!Petugas.getText().equals(""))){
-                     NoRawatDicari.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                     PasienDicari.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-                     TglDicari.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
-                     JamDicari.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
+                     NoRawatDicari.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+                     PasienDicari.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
+                     TglDicari.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString());
+                     JamDicari.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
                      try {
                         ps=koneksi.prepareStatement("select gambar_radiologi.lokasi_gambar from gambar_radiologi where gambar_radiologi.no_rawat=? and gambar_radiologi.tgl_periksa=? and gambar_radiologi.jam=? ");
                         try {
-                            ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                            ps.setString(2,tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
-                            ps.setString(3,tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
+                            ps.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+                            ps.setString(2,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString());
+                            ps.setString(3,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
                             rs=ps.executeQuery();
                             htmlContent = new StringBuilder();
                             while(rs.next()){
@@ -2750,9 +2751,9 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
 
                         ps5=koneksi.prepareStatement("select permintaan_radiologi.informasi_tambahan,permintaan_radiologi.diagnosa_klinis from permintaan_radiologi where permintaan_radiologi.no_rawat=? and permintaan_radiologi.tgl_hasil=? and permintaan_radiologi.jam_hasil=?");
                         try {
-                            ps5.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                            ps5.setString(2,tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
-                            ps5.setString(3,tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
+                            ps5.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+                            ps5.setString(2,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString());
+                            ps5.setString(3,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
                             rs5=ps5.executeQuery();
                             if(rs5.next()){
                                 InformasiTambahan.setText(rs5.getString("informasi_tambahan"));
@@ -2774,9 +2775,9 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
 
                         ps5=koneksi.prepareStatement("select hasil_radiologi.hasil from hasil_radiologi where hasil_radiologi.no_rawat=? and hasil_radiologi.tgl_periksa=? and hasil_radiologi.jam=?");
                         try {
-                            ps5.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                            ps5.setString(2,tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
-                            ps5.setString(3,tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
+                            ps5.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+                            ps5.setString(2,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString());
+                            ps5.setString(3,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
                             rs5=ps5.executeQuery();
                             if(rs5.next()){
                                 HasilPeriksa.setText(rs5.getString("hasil"));
@@ -2816,7 +2817,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                          try {
                              Valid.tabelKosong(tabModeDicom);
                              ApiOrthanc orthanc=new ApiOrthanc();
-                             root=orthanc.AmbilSeries(Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()),Valid.SetTgl(Tgl1.getSelectedItem()+"").replaceAll("-",""),Valid.SetTgl(Tgl2.getSelectedItem()+"").replaceAll("-",""));
+                             root=orthanc.AmbilSeries(Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()),Valid.SetTgl(Tgl1.getSelectedItem()+"").replaceAll("-",""),Valid.SetTgl(Tgl2.getSelectedItem()+"").replaceAll("-",""));
                              for(JsonNode list:root){
                                  for(JsonNode sublist:list.path("Series")){
                                       tabModeDicom.addRow(new Object[]{

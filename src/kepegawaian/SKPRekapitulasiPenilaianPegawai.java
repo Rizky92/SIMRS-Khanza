@@ -307,6 +307,7 @@ public class SKPRekapitulasiPenilaianPegawai extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -855,8 +856,8 @@ public class SKPRekapitulasiPenilaianPegawai extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            tbDokter.setValueAt(false,i,2);
-            tbDokter.setValueAt(false,i,3);
+            tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(i),2);
+            tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(i),3);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -943,17 +944,17 @@ public class SKPRekapitulasiPenilaianPegawai extends javax.swing.JDialog {
     }//GEN-LAST:event_btnDinilaiActionPerformed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 if(tbDokter.getSelectedRow()!= -1){
                     if(tbDokter.getSelectedColumn()==2){
-                        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString().equals("true")){
-                            tbDokter.setValueAt(false,tbDokter.getSelectedRow(),3);
+                        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString().equals("true")){
+                            tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3);
                         }
                     }
                     if(tbDokter.getSelectedColumn()==3){
-                        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString().equals("true")){
-                            tbDokter.setValueAt(false,tbDokter.getSelectedRow(),2);
+                        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString().equals("true")){
+                            tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2);
                         }
                     }
                 }

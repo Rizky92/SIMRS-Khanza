@@ -12,11 +12,15 @@ import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
+import javax.swing.event.RowSorterEvent;
 import javax.swing.plaf.UIResource;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
 import javax.swing.text.JTextComponent;
 
 public class TableSMC extends JTable {
@@ -26,6 +30,8 @@ public class TableSMC extends JTable {
     private Font boldFontBase;
     private Font boldFont;
     private boolean replaceOnType;
+    private boolean sortingBlocked;
+    private transient RowSorter<? extends TableModel> suspendedRowSorter;
 
     public TableSMC() {
         super();
@@ -103,6 +109,89 @@ public class TableSMC extends JTable {
             }
         }
         return editing;
+    }
+
+    /**
+     * Whether the rows can be given a sorter at all.
+     * A table whose rows are not one record each, such as a request followed by its detail rows or a list ending in a total, turns this off, because sorting would tear those rows apart.
+     *
+     * @return {@code false} when the table refuses every row sorter
+     */
+    public boolean isSortable() {
+        return !sortingBlocked;
+    }
+
+    /**
+     * @param sortable {@code false} to remove the row sorter and refuse any later one, including the one {@link #setAutoCreateRowSorter(boolean)} would create
+     * @see #isSortable()
+     */
+    public void setSortable(boolean sortable) {
+        boolean old = !sortingBlocked;
+        sortingBlocked = !sortable;
+        if (sortingBlocked) {
+            suspendedRowSorter = null;
+            super.setAutoCreateRowSorter(false);
+            super.setRowSorter(null);
+        }
+        firePropertyChange("sortable", old, sortable);
+    }
+
+    @Override
+    public void setAutoCreateRowSorter(boolean autoCreateRowSorter) {
+        super.setAutoCreateRowSorter(autoCreateRowSorter && !sortingBlocked);
+    }
+
+    @Override
+    public void setRowSorter(RowSorter<? extends TableModel> sorter) {
+        super.setRowSorter(sortingBlocked ? null : sorter);
+    }
+
+    /**
+     * Commits the cell being edited before the rows are sorted, so the typed value is stored on the row it was typed into instead of following the editor to whichever row takes its place.
+     * A value the editor rejects is discarded, because the sort keys have already changed when this is told.
+     */
+    @Override
+    public void sorterChanged(RowSorterEvent e) {
+        if (RowSorterEvent.Type.SORT_ORDER_CHANGED == e.getType() && isEditing() && !getCellEditor().stopCellEditing()) {
+            getCellEditor().cancelCellEditing();
+        }
+        super.sorterChanged(e);
+    }
+
+    /**
+     * Prepares the table for its rows to be reloaded: the selected rows are discarded and the row sorter is taken off.
+     * A selection kept across a reload can point past the new last row, or at another record once the rows are sorted, so it is always dropped, sorter or not.
+     * Without the sorter each added row is not sorted into place one at a time, and a clear that fires no event, such as {@code Valid.tabelKosongSmc}, cannot leave the sorter holding rows that are gone.
+     * Call {@link #resumeSorting()} once the rows are in. A second call before that only drops the selection again.
+     */
+    public void suspendSorting() {
+        discardSelection();
+        if (null == suspendedRowSorter && null != getRowSorter()) {
+            suspendedRowSorter = getRowSorter();
+            setRowSorter(null);
+        }
+    }
+
+    /**
+     * Gives back the row sorter taken by {@link #suspendSorting()}, with its sort keys, comparators and filter, and sorts the reloaded rows once.
+     * The sorter is dropped when the table got another model or sorter in the meantime.
+     */
+    public void resumeSorting() {
+        RowSorter<? extends TableModel> sorter = suspendedRowSorter;
+        suspendedRowSorter = null;
+        if (null != sorter && null == getRowSorter() && getModel() == sorter.getModel()) {
+            sorter.allRowsChanged();
+            setRowSorter(sorter);
+        }
+    }
+
+    private void discardSelection() {
+        ListSelectionModel rows = getSelectionModel();
+        rows.setValueIsAdjusting(true);
+        rows.clearSelection();
+        rows.setAnchorSelectionIndex(-1);
+        rows.setLeadSelectionIndex(-1);
+        rows.setValueIsAdjusting(false);
     }
 
     private Font boldFontSmc() {

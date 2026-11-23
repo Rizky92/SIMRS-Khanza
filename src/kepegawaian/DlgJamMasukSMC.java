@@ -89,7 +89,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
         tbJadwal.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbJadwal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbJadwal.getColumnCount(); i++) {
             TableColumn column = tbJadwal.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(20);
@@ -616,8 +616,8 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         int gagal = 0;
         for (int i = 0; i < tbJadwal.getRowCount(); i++) {
-            if (tbJadwal.getValueAt(i, 0).toString().equals("true")) {
-                if (!Sequel.menghapustfSmc("jam_masuk_smc", "kode_shift=?", tbJadwal.getValueAt(i, 1).toString())) {
+            if (tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i), 0).toString().equals("true")) {
+                if (!Sequel.menghapustfSmc("jam_masuk_smc", "kode_shift=?", tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i), 1).toString())) {
                     gagal++;
                 }
             }
@@ -654,7 +654,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
         try {
             Sequel.AutoComitFalse();
             if (!Sequel.mengupdatetfSmc("jam_masuk_smc", "kode_shift = ?, nama_shift = ?, jam_masuk = ?, jam_pulang = ?", "kode_shift = ?", kode, TNama.getText().trim(),
-                Valid.getJamSmc(cmbJam1, cmbMnt1, cmbDtk1), Valid.getJamSmc(cmbJam2, cmbMnt2, cmbDtk2), tbJadwal.getValueAt(tbJadwal.getSelectedRow(), 1).toString()
+                Valid.getJamSmc(cmbJam1, cmbMnt1, cmbDtk1), Valid.getJamSmc(cmbJam2, cmbMnt2, cmbDtk2), tabMode.getValueAt(tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 1).toString()
             )) {
                 error = "Gagal mengganti data, kemungkinan kode shift sudah dipakai...!!!";
             } else if (!simpanMappingShift(kode)) {
@@ -897,7 +897,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJadwalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJadwalMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbJadwal.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -906,7 +906,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJadwalMouseClicked
 
     private void tbJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJadwalKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbJadwal.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
@@ -1001,6 +1001,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbJadwal.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             LCount.setText("0");
             new SwingWorker<Void, Object[]>() {
@@ -1042,9 +1043,10 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbJadwal.getRowCount() + "");
                     DlgJamMasukSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbJadwal.resumeSorting();
                 }
             }.execute();
         }
@@ -1068,19 +1070,19 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
     private void getData() {
         int row = tbJadwal.getSelectedRow();
         if (row != -1) {
-            kodeLama = tbJadwal.getValueAt(row, 1).toString();
+            kodeLama = tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row), 1).toString();
             TKode.setText(kodeLama);
-            TNama.setText(tbJadwal.getValueAt(row, 2).toString());
-            cmbJam1.setSelectedItem(tbJadwal.getValueAt(row, 3).toString().substring(0, 2));
-            cmbMnt1.setSelectedItem(tbJadwal.getValueAt(row, 3).toString().substring(3, 5));
-            cmbDtk1.setSelectedItem(tbJadwal.getValueAt(row, 3).toString().substring(6, 8));
-            cmbJam2.setSelectedItem(tbJadwal.getValueAt(row, 4).toString().substring(0, 2));
-            cmbMnt2.setSelectedItem(tbJadwal.getValueAt(row, 4).toString().substring(3, 5));
-            cmbDtk2.setSelectedItem(tbJadwal.getValueAt(row, 4).toString().substring(6, 8));
-            if (tbJadwal.getValueAt(row, 5).toString().isEmpty()) {
+            TNama.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row), 2).toString());
+            cmbJam1.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row), 3).toString().substring(0, 2));
+            cmbMnt1.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row), 3).toString().substring(3, 5));
+            cmbDtk1.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row), 3).toString().substring(6, 8));
+            cmbJam2.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row), 4).toString().substring(0, 2));
+            cmbMnt2.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row), 4).toString().substring(3, 5));
+            cmbDtk2.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row), 4).toString().substring(6, 8));
+            if (tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row), 5).toString().isEmpty()) {
                 cmbShift.setSelectedItem(TANPA_SHIFT);
             } else {
-                cmbShift.setSelectedItem(tbJadwal.getValueAt(row, 5).toString());
+                cmbShift.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row), 5).toString());
             }
         }
     }

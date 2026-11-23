@@ -176,6 +176,7 @@ public class IPSRSCariReturBeli extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -723,13 +724,13 @@ public class IPSRSCariReturBeli extends javax.swing.JDialog {
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString().trim().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Faktur");
             }else{
               try {
                  pscaripesan=koneksi.prepareStatement("select no_retur_beli, total from ipsrsreturbeli where no_retur_beli=?");
                  try {
-                    pscaripesan.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                    pscaripesan.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                     rs=pscaripesan.executeQuery();
                     if(rs.next()){
                         Sequel.AutoComitFalse();
@@ -766,7 +767,7 @@ public class IPSRSCariReturBeli extends javax.swing.JDialog {
                     }
 
                         if(sukses==true){
-                            Sequel.queryu2("delete from ipsrsreturbeli where no_retur_beli=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
+                            Sequel.queryu2("delete from ipsrsreturbeli where no_retur_beli=?",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()});
                             Sequel.Commit();
                             runBackground(() ->tampil());
                         }else{

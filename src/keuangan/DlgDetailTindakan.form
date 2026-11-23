@@ -1436,6 +1436,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbRanapDokter">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbRanapDokter" noResource="true"/>
                       </Properties>
                     </Component>

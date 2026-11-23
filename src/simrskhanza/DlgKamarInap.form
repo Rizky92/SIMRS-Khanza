@@ -8583,6 +8583,7 @@
           <SubComponents>
             <Component class="widget.Table" name="tbKamIn">
               <Properties>
+                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                 <Property name="toolTipText" type="java.lang.String" value="Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan"/>
                 <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="jPopupMenu1"/>

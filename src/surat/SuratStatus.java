@@ -449,8 +449,8 @@ public final class SuratStatus extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbBangsal.getRowCount();i++){
-            if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                Sequel.meghapus("surat_status","kd",tbBangsal.getValueAt(i,1).toString());
+            if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.meghapus("surat_status","kd",tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString());
             }
         }
         runBackground(() ->tampil());
@@ -472,8 +472,8 @@ public final class SuratStatus extends javax.swing.JDialog {
             Valid.textKosong(TNm,"status");
         }else{
             if(tbBangsal.getSelectedRow()>-1){
-                Sequel.mengedit("surat_status","kd=?","status=?,kd=?",3,new String[]{TNm.getText(),TKd.getText(),tbBangsal.getValueAt(tbBangsal.getSelectedRow(), 1).toString()});
-                if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+                Sequel.mengedit("surat_status","kd=?","status=?,kd=?",3,new String[]{TNm.getText(),TKd.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()), 1).toString()});
+                if(tbBangsal.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
             }
         }
@@ -595,7 +595,7 @@ public final class SuratStatus extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -605,7 +605,7 @@ public final class SuratStatus extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -689,6 +689,7 @@ public final class SuratStatus extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbBangsal.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select * from surat_status where kd like ? "+
@@ -715,7 +716,8 @@ public final class SuratStatus extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbBangsal.getRowCount());
+        tbBangsal.resumeSorting();
     }
 
     public void emptTeks() {
@@ -728,8 +730,8 @@ public final class SuratStatus extends javax.swing.JDialog {
 
     private void getData() {
         if(tbBangsal.getSelectedRow()!= -1){
-            TKd.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),1).toString());
-            TNm.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),2).toString());
+            TKd.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1).toString());
+            TNm.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),2).toString());
         }
     }
 

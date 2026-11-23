@@ -338,10 +338,10 @@ public class DlgSuku extends javax.swing.JDialog {
         if(Nama.getText().trim().equals("")){
             Valid.textKosong(Nama,"Suku Bangsa");
         }else{
-            if(Sequel.meghapustf("suku_bangsa","id",tbkecamatan.getValueAt(tbkecamatan.getSelectedRow(),0).toString())==true){
+            if(Sequel.meghapustf("suku_bangsa","id",tabMode.getValueAt(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()),0).toString())==true){
                 if(tbkecamatan.getSelectedRow()!= -1){
-                    tabMode.removeRow(tbkecamatan.getSelectedRow());
-                    LCount.setText(""+tabMode.getRowCount());
+                    tabMode.removeRow(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()));
+                    LCount.setText(""+tbkecamatan.getRowCount());
                     emptTeks();
                 }
             }
@@ -405,7 +405,7 @@ public class DlgSuku extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbkecamatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbkecamatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbkecamatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -417,7 +417,7 @@ public class DlgSuku extends javax.swing.JDialog {
     }//GEN-LAST:event_tbkecamatanMouseClicked
 
     private void tbkecamatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbkecamatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbkecamatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -497,6 +497,7 @@ public class DlgSuku extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbkecamatan.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select * from suku_bangsa where nama_suku_bangsa like ? ");
@@ -519,7 +520,8 @@ public class DlgSuku extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbkecamatan.getRowCount());
+        tbkecamatan.resumeSorting();
     }
 
     public void emptTeks() {
@@ -530,7 +532,7 @@ public class DlgSuku extends javax.swing.JDialog {
 
     private void getData() {
         if(tbkecamatan.getSelectedRow()!= -1){
-            Nama.setText(tbkecamatan.getValueAt(tbkecamatan.getSelectedRow(),1).toString());
+            Nama.setText(tabMode.getValueAt(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()),1).toString());
         }
     }
 

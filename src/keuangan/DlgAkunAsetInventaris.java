@@ -153,6 +153,7 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbJadwal.setAutoCreateRowSorter(true);
         tbJadwal.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbJadwal.setName("tbJadwal"); // NOI18N
         tbJadwal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -427,7 +428,7 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                     false,kdjenis.getText(),nmjenis.getText(),kdrek.getText(),nmrek.getText()
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbJadwal.getRowCount());
                 emptTeks();
             }
         }
@@ -453,14 +454,14 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(int i=0;i<tbJadwal.getRowCount();i++){
-            if(tbJadwal.getValueAt(i,0).toString().equals("true")){
-                if(Sequel.meghapustf("akun_aset_inventaris","id_jenis",tbJadwal.getValueAt(i,1).toString())==true){
-                    tabMode.removeRow(i);
+            if(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),0).toString().equals("true")){
+                if(Sequel.meghapustf("akun_aset_inventaris","id_jenis",tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),1).toString())==true){
+                    tabMode.removeRow(tbJadwal.convertRowIndexToModel(i));
                     i--;
                 }
             }
         }
-        LCount.setText("" + tabMode.getRowCount());
+        LCount.setText("" + tbJadwal.getRowCount());
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -479,13 +480,13 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         }else{
             if(tbJadwal.getSelectedRow()>-1){
                 if(Sequel.mengedittf("akun_aset_inventaris","id_jenis=?","id_jenis=?,kd_rek=?",3,new String[]{
-                    kdjenis.getText(),kdrek.getText(),tbJadwal.getValueAt(tbJadwal.getSelectedRow(),1).toString()
+                    kdjenis.getText(),kdrek.getText(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),1).toString()
                 })==true){
-                    tbJadwal.setValueAt(false,tbJadwal.getSelectedRow(),0);
-                    tbJadwal.setValueAt(kdjenis.getText(),tbJadwal.getSelectedRow(),1);
-                    tbJadwal.setValueAt(nmjenis.getText(),tbJadwal.getSelectedRow(),2);
-                    tbJadwal.setValueAt(kdrek.getText(),tbJadwal.getSelectedRow(),3);
-                    tbJadwal.setValueAt(nmrek.getText(),tbJadwal.getSelectedRow(),4);
+                    tabMode.setValueAt(false,tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),0);
+                    tabMode.setValueAt(kdjenis.getText(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),1);
+                    tabMode.setValueAt(nmjenis.getText(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),2);
+                    tabMode.setValueAt(kdrek.getText(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),3);
+                    tabMode.setValueAt(nmrek.getText(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),4);
                     emptTeks();
                 }
             }else{
@@ -550,7 +551,7 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSemuaKeyPressed
 
     private void tbJadwalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJadwalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJadwal.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -559,7 +560,7 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJadwalMouseClicked
 
     private void tbJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJadwalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJadwal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -742,6 +743,7 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbJadwal.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -777,7 +779,8 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJadwal.getRowCount());
+        tbJadwal.resumeSorting();
     }
 
     public void emptTeks() {
@@ -791,10 +794,10 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
     private void getData() {
         int row=tbJadwal.getSelectedRow();
         if(row!= -1){
-            kdjenis.setText(tabMode.getValueAt(row,1).toString());
-            nmjenis.setText(tabMode.getValueAt(row,2).toString());
-            kdrek.setText(tabMode.getValueAt(row,3).toString());
-            nmrek.setText(tabMode.getValueAt(row,4).toString());
+            kdjenis.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),1).toString());
+            nmjenis.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),2).toString());
+            kdrek.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),3).toString());
+            nmrek.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),4).toString());
         }
     }
 

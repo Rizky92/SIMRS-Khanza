@@ -1102,16 +1102,16 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
         }
 
         if (akses.getadmin()) {
-            if (Sequel.menghapustfSmc("konsultasi_medik", "no_permintaan = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())) {
+            if (Sequel.menghapustfSmc("konsultasi_medik", "no_permintaan = ?", tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())) {
                 runBackground(() ->tampil());
                 emptTeks();
             } else {
                 JOptionPane.showMessageDialog(null, "Gagal menghapus..!!");
             }
         } else {
-            if (akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(), 10).toString())) {
-                if (tbObat.getValueAt(tbObat.getSelectedRow(), 18).toString().isBlank()) {
-                    if (Sequel.menghapustfSmc("konsultasi_medik", "no_permintaan = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())) {
+            if (akses.getkode().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 10).toString())) {
+                if (tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 18).toString().isBlank()) {
+                    if (Sequel.menghapustfSmc("konsultasi_medik", "no_permintaan = ?", tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())) {
                         tampil();
                         emptTeks();
                     } else {
@@ -1180,25 +1180,25 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
                 for (i = 0; i < tabMode.getRowCount(); i++) {
                     htmlContent.append(
                         "<tr class='isi'>"+
-                           "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,1).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,2).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,3).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,4).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,5).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,6).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,7).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,8).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,9).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,10).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,11).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,12).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,13).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,14).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,15).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,16).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
+                           "<td valign='top'>"+tabMode.getValueAt(i,0).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,1).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,2).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,3).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,4).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,5).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,6).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,7).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,8).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,9).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,10).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,11).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,12).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,13).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,14).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,15).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,16).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,17).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,18).toString()+"</td>"+
                         "</tr>");
                 }
                 LoadHTML.setText(
@@ -1294,7 +1294,7 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1303,7 +1303,7 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1337,10 +1337,10 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(!tbObat.getValueAt(tbObat.getSelectedRow(),18).toString().equals("")){
+                    if(!tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18).toString().equals("")){
                         JOptionPane.showMessageDialog(null,"Sudah ada jawaban dokter yang dikonsuli, data tidak bisa diubah ..!!");
                     }else{
-                        if(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString().equals(akses.getkode())){
+                        if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString().equals(akses.getkode())){
                             ganti();
                         }else{
                             JOptionPane.showMessageDialog(null,"Hanya bisa diganti oleh dokter yang bersangkutan..!!");
@@ -1374,7 +1374,7 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkAccorActionPerformed
 
     private void BtnJawabanDikonsuliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJawabanDikonsuliActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -1401,12 +1401,12 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnJawabanDikonsuliActionPerformed
 
     private void BtnDokumentasiKonsulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDokumentasiKonsulActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
             if(tbObat.getSelectedRow()!= -1){
-                if(!tbObat.getValueAt(tbObat.getSelectedRow(),18).toString().equals("")){
+                if(!tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18).toString().equals("")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -1415,10 +1415,10 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("emailrs",akses.getemailrs());
-                    finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),10).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString()));
-                    finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-                    param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),12).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString()));
+                    finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString()+"\nID "+(finger.equals("")?tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString():finger)+"\n"+Valid.SetTgl3(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString()));
+                    finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+                    param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString()+"\nID "+(finger.equals("")?tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString():finger)+"\n"+Valid.SetTgl3(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString()));
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptDokumentasiKonsultasiMedik.jasper","report","::[ Dokumentasi Konsultasi Medik ]::",
                         "select konsultasi_medik.no_permintaan,konsultasi_medik.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,reg_periksa.umurdaftar,"+
@@ -1443,7 +1443,7 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnDokumentasiKonsulActionPerformed
 
     private void BtnRiwayatPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRiwayatPasienActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -1873,7 +1873,7 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void tampil2() {
@@ -1899,21 +1899,21 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            NoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            NmPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Permintaan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            KdDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            NmDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            KdDokterDikonsuli.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            NmDokterDikonsuli.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            DiagnosaKerja.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            UraianKonsultasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            JawabanDiagnosaKerja.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            JawabanKonsultasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            Valid.SetTgl2(TanggalPermintaan,tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            Valid.SetTgl2(TanggalJawab,tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            NoPermintaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            NoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            NoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            NmPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            Permintaan.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            KdDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            NmDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            KdDokterDikonsuli.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            NmDokterDikonsuli.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            DiagnosaKerja.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            UraianKonsultasi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+            JawabanDiagnosaKerja.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17).toString());
+            JawabanKonsultasi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18).toString());
+            Valid.SetTgl2(TanggalPermintaan,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            Valid.SetTgl2(TanggalJawab,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
+            NoPermintaan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
         }
     }
 
@@ -1981,7 +1981,7 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
     private void ganti() {
         if(Sequel.mengedittf("konsultasi_medik","no_permintaan=?","no_permintaan=?,no_rawat=?,tanggal=?,jenis_permintaan=?,kd_dokter=?,kd_dokter_dikonsuli=?,diagnosa_kerja=?,uraian_konsultasi=?",9,new String[]{
                 NoPermintaan.getText(),NoRw.getText(),Valid.SetTgl(TanggalPermintaan.getSelectedItem()+"")+" "+TanggalPermintaan.getSelectedItem().toString().substring(11,19),
-                Permintaan.getSelectedItem().toString(),KdDokter.getText(),KdDokterDikonsuli.getText(),DiagnosaKerja.getText(),UraianKonsultasi.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                Permintaan.getSelectedItem().toString(),KdDokter.getText(),KdDokterDikonsuli.getText(),DiagnosaKerja.getText(),UraianKonsultasi.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
              })==true){
                 tampil();
                 emptTeks();

@@ -951,6 +951,7 @@
                                               <SubComponents>
                                                 <Component class="widget.Table" name="tbSkala1">
                                                   <Properties>
+                                                    <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                                       <Color blue="0" green="0" red="aa" type="rgb"/>
                                                     </Property>
@@ -986,6 +987,7 @@
                                               <SubComponents>
                                                 <Component class="widget.Table" name="tbSkala2">
                                                   <Properties>
+                                                    <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                                       <Color blue="0" green="0" red="ff" type="rgb"/>
                                                     </Property>
@@ -1770,6 +1772,7 @@
                                               <SubComponents>
                                                 <Component class="widget.Table" name="tbSkala3">
                                                   <Properties>
+                                                    <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                                       <Color blue="0" green="c8" red="c8" type="rgb"/>
                                                     </Property>
@@ -1805,6 +1808,7 @@
                                               <SubComponents>
                                                 <Component class="widget.Table" name="tbSkala4">
                                                   <Properties>
+                                                    <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                                       <Color blue="0" green="aa" red="0" type="rgb"/>
                                                     </Property>
@@ -1840,6 +1844,7 @@
                                               <SubComponents>
                                                 <Component class="widget.Table" name="tbSkala5">
                                                   <Properties>
+                                                    <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                                       <Color blue="96" green="96" red="96" type="rgb"/>
                                                     </Property>

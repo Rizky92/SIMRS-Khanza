@@ -139,7 +139,7 @@ public final class DlgRestoreTarifRadiologi extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbJnsPerawatan.setAutoCreateRowSorter(false);
+        tbJnsPerawatan.setAutoCreateRowSorter(true);
         tbJnsPerawatan.setName("tbJnsPerawatan"); // NOI18N
         Scroll.setViewportView(tbJnsPerawatan);
 
@@ -272,8 +272,8 @@ public final class DlgRestoreTarifRadiologi extends javax.swing.JDialog {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         for(i=0;i<tbJnsPerawatan.getRowCount();i++){
-            if(tbJnsPerawatan.getValueAt(i,0).toString().equals("true")){
-                Sequel.mengedit("jns_perawatan_radiologi","kd_jenis_prw='"+tbJnsPerawatan.getValueAt(i,1).toString()+"'","status='1'");
+            if(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.mengedit("jns_perawatan_radiologi","kd_jenis_prw='"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),1).toString()+"'","status='1'");
             }
         }
         BtnCariActionPerformed(evt);
@@ -289,8 +289,8 @@ public final class DlgRestoreTarifRadiologi extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbJnsPerawatan.getRowCount();i++){
-            if(tbJnsPerawatan.getValueAt(i,0).toString().equals("true")){
-                Sequel.meghapus("jns_perawatan_radiologi","kd_jenis_prw",tbJnsPerawatan.getValueAt(i,1).toString());
+            if(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.meghapus("jns_perawatan_radiologi","kd_jenis_prw",tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),1).toString());
             }
         }
         BtnCariActionPerformed(evt);
@@ -409,6 +409,7 @@ public final class DlgRestoreTarifRadiologi extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbJnsPerawatan.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -454,7 +455,8 @@ public final class DlgRestoreTarifRadiologi extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
+        tbJnsPerawatan.resumeSorting();
     }
 
     private void runBackground(Runnable task) {

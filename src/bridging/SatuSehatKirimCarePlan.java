@@ -275,6 +275,7 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbObat.setAutoCreateRowSorter(true);
         tbObat.setComponentPopupMenu(jPopupMenu1);
         tbObat.setName("tbObat"); // NOI18N
         Scroll.setViewportView(tbObat);
@@ -612,10 +613,10 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,6).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&tbObat.getValueAt(i,11).toString().equals("")){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),6).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString().equals(""))&&tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString().equals("")){
                     try {
-                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,9).toString());
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString());
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -629,7 +630,7 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                             ArrayNode identifierArray = root.putArray("identifier");
                             ObjectNode identifier = identifierArray.addObject();
                             identifier.put("system", "http://sys-ids.kemkes.go.id/careplan/" + koneksiDB.IDSATUSEHAT());
-                            identifier.put("value", tbObat.getValueAt(i, 2).toString());
+                            identifier.put("value", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 2).toString());
 
                             root.put("title", "Instruksi Medik dan Keperawatan Pasien");
                             root.put("status", "active");
@@ -640,7 +641,7 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                             ArrayNode codingArray = category.putArray("coding");
                             ObjectNode coding = codingArray.addObject();
 
-                            if (tbObat.getValueAt(i, 12).toString().equals("Ralan")) {
+                            if (tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 12).toString().equals("Ralan")) {
                                 coding.put("system", "http://snomed.info/sct");
                                 coding.put("code", "736271009");
                                 coding.put("display", "Outpatient care plan");
@@ -651,30 +652,30 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                             }
 
                             root.put("intent", "plan");
-                            root.put("description", tbObat.getValueAt(i, 7).toString()
+                            root.put("description", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 7).toString()
                                     .replaceAll("(\r\n|\r|\n|\n\r)", "<br>")
                                     .replaceAll("\t", " "));
 
                             // --- Subject ---
                             ObjectNode subject = root.putObject("subject");
                             subject.put("reference", "Patient/" + idpasien);
-                            subject.put("display", tbObat.getValueAt(i, 4).toString());
+                            subject.put("display", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 4).toString());
 
                             // --- Encounter ---
                             ObjectNode encounter = root.putObject("encounter");
-                            encounter.put("reference", "Encounter/" + tbObat.getValueAt(i, 6).toString());
+                            encounter.put("reference", "Encounter/" + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 6).toString());
                             encounter.put("display",
-                                    "Kunjungan " + tbObat.getValueAt(i, 4).toString()
-                                    + " pada tanggal " + tbObat.getValueAt(i, 1).toString()
-                                    + " dengan nomor kunjungan " + tbObat.getValueAt(i, 2).toString());
+                                    "Kunjungan " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 4).toString()
+                                    + " pada tanggal " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 1).toString()
+                                    + " dengan nomor kunjungan " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 2).toString());
 
                             // --- Created ---
-                            root.put("created", tbObat.getValueAt(i, 10).toString().replaceAll(" ", "T") + "+07:00");
+                            root.put("created", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 10).toString().replaceAll(" ", "T") + "+07:00");
 
                             // --- Author ---
                             ObjectNode author = root.putObject("author");
                             author.put("reference", "Practitioner/" + idpraktisi);
-                            author.put("display", tbObat.getValueAt(i, 8).toString());
+                            author.put("display", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 8).toString());
 
                             // --- Serialize ke string JSON valid ---
                             String json = mapper.writeValueAsString(root);
@@ -688,7 +689,7 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.menyimpantf2("satu_sehat_careplan","?,?,?,?,?","Rencana Perawatan",5,new String[]{
-                                    tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,10).toString().substring(0,10),tbObat.getValueAt(i,10).toString().substring(11,19),tbObat.getValueAt(i,12).toString(),response.asText()
+                                    tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString().substring(0,10),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString().substring(11,19),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),12).toString(),response.asText()
                                 })==true){
                                     pengirim.setValueAt(tbObat,response.asText(),i,11);
                                     pengirim.setValueAt(tbObat,false,i,0);
@@ -709,13 +710,13 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -727,10 +728,10 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,6).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&(!tbObat.getValueAt(i,11).toString().equals(""))){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),6).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString().equals(""))){
                     try {
-                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,9).toString());
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString());
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -740,12 +741,12 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                             ObjectNode root = mapper.createObjectNode();
 
                             root.put("resourceType", "CarePlan");
-                            root.put("id", tbObat.getValueAt(i, 11).toString());
+                            root.put("id", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 11).toString());
 
                             ArrayNode identifierArray = root.putArray("identifier");
                             ObjectNode identifier = identifierArray.addObject();
                             identifier.put("system", "http://sys-ids.kemkes.go.id/careplan/" + koneksiDB.IDSATUSEHAT());
-                            identifier.put("value", tbObat.getValueAt(i, 2).toString());
+                            identifier.put("value", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 2).toString());
 
                             root.put("title", "Instruksi Medik dan Keperawatan Pasien");
                             root.put("status", "active");
@@ -754,7 +755,7 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                             ObjectNode category = categoryArray.addObject();
                             ArrayNode codingArray = category.putArray("coding");
                             ObjectNode coding = codingArray.addObject();
-                            if (tbObat.getValueAt(i, 12).toString().equals("Ralan")) {
+                            if (tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 12).toString().equals("Ralan")) {
                                 coding.put("system", "http://snomed.info/sct");
                                 coding.put("code", "736271009");
                                 coding.put("display", "Outpatient care plan");
@@ -765,32 +766,32 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                             }
 
                             root.put("intent", "plan");
-                            root.put("description", tbObat.getValueAt(i, 7).toString()
+                            root.put("description", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 7).toString()
                                     .replaceAll("(\r\n|\r|\n|\n\r)", "<br>")
                                     .replaceAll("\t", " "));
 
                             ObjectNode subject = root.putObject("subject");
                             subject.put("reference", "Patient/" + idpasien);
-                            subject.put("display", tbObat.getValueAt(i, 4).toString());
+                            subject.put("display", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 4).toString());
 
                             ObjectNode encounter = root.putObject("encounter");
-                            encounter.put("reference", "Encounter/" + tbObat.getValueAt(i, 6).toString());
+                            encounter.put("reference", "Encounter/" + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 6).toString());
                             encounter.put("display",
-                                    "Kunjungan " + tbObat.getValueAt(i, 4).toString()
-                                    + " pada tanggal " + tbObat.getValueAt(i, 1).toString()
-                                    + " dengan nomor kunjungan " + tbObat.getValueAt(i, 2).toString());
+                                    "Kunjungan " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 4).toString()
+                                    + " pada tanggal " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 1).toString()
+                                    + " dengan nomor kunjungan " + tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 2).toString());
 
-                            root.put("created", tbObat.getValueAt(i, 10).toString().replaceAll(" ", "T") + "+07:00");
+                            root.put("created", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 10).toString().replaceAll(" ", "T") + "+07:00");
 
                             ObjectNode author = root.putObject("author");
                             author.put("reference", "Practitioner/" + idpraktisi);
-                            author.put("display", tbObat.getValueAt(i, 8).toString());
+                            author.put("display", tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 8).toString());
 
                             String json = mapper.writeValueAsString(root);
-                            System.out.println("URL : "+link+"/CarePlan/"+tbObat.getValueAt(i,11).toString());
+                            System.out.println("URL : "+link+"/CarePlan/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.kirimSmc(link+"/CarePlan/"+tbObat.getValueAt(i,11).toString(), HttpMethod.PUT, requestEntity);
+                            json=api.kirimSmc(link+"/CarePlan/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             pengirim.setValueAt(tbObat,false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -847,8 +848,8 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
 
     private void ppPilihBelumDikirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihBelumDikirimActionPerformed
         for (i = 0; i < tbObat.getRowCount(); i++) {
-            if (tbObat.getValueAt(i, 11).toString().isBlank()) {
-                tbObat.setValueAt(true, i, 0);
+            if (tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 11).toString().isBlank()) {
+                tabMode.setValueAt(true, tbObat.convertRowIndexToModel(i), 0);
             }
         }
     }//GEN-LAST:event_ppPilihBelumDikirimActionPerformed
@@ -898,6 +899,7 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -990,7 +992,8 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
+        tbObat.resumeSorting();
     }
 
     public void isCek(){

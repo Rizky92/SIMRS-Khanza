@@ -504,11 +504,11 @@ public final class KeuanganValidasiPersetujuanPengajuanBiaya extends javax.swing
             DlgPengeluaranHarian form=new DlgPengeluaranHarian(null,false);
             form.isCek();
             form.emptTeks();
-            form.setPengajuan(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString(),"Validasi pengajuan No."+tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString()+" tanggal "+tbBangsal.getValueAt(tbBangsal.getSelectedRow(),1).toString()+" oleh "+tbBangsal.getValueAt(tbBangsal.getSelectedRow(),3).toString()+" NIP "+tbBangsal.getValueAt(tbBangsal.getSelectedRow(),2).toString(),Valid.SetAngka2(Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),13).toString())));
+            form.setPengajuan(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString(),"Validasi pengajuan No."+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString()+" tanggal "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1).toString()+" oleh "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),3).toString()+" NIP "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),2).toString(),Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),13).toString())));
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
-            tabMode.removeRow(tbBangsal.getSelectedRow());
+            tabMode.removeRow(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()));
             this.setCursor(Cursor.getDefaultCursor());
         }else{
             JOptionPane.showMessageDialog(null,"Silahkan pilih No.Pengajuan yang diajukan..!!");
@@ -525,7 +525,7 @@ public final class KeuanganValidasiPersetujuanPengajuanBiaya extends javax.swing
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
         if(tbBangsal.getSelectedRow()!= -1){
-            LCount1.setText(Valid.SetAngka(Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),13).toString()))+"");
+            LCount1.setText(Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),13).toString()))+"");
         }
     }//GEN-LAST:event_tbBangsalMouseClicked
 
@@ -725,8 +725,8 @@ public final class KeuanganValidasiPersetujuanPengajuanBiaya extends javax.swing
 
     private void hitung(){
         belumdivalidasi=0;
-        for(i=0;i<tabMode.getRowCount();i++){
-            belumdivalidasi=belumdivalidasi+Valid.SetAngka(tbBangsal.getValueAt(i,13).toString());
+        for(i=0;i<tbBangsal.getRowCount();i++){
+            belumdivalidasi=belumdivalidasi+Valid.SetAngka(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),13).toString());
         }
         LCount.setText(""+Valid.SetAngka(belumdivalidasi));
     }

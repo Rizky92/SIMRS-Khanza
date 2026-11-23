@@ -540,7 +540,7 @@ public final class SatuSehatMapingTindakanRanapKPTL extends javax.swing.JDialog 
                     Code.getText(),TindakanSystem.getText(),KodeTindakan.getText(),NamaTindakan.getText(),Display.getText()
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbJnsPerawatan.getRowCount());
             }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -563,9 +563,9 @@ public final class SatuSehatMapingTindakanRanapKPTL extends javax.swing.JDialog 
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,KodeTindakan,"satu_sehat_mapping_tindakanranap_kptl","kd_jenis_prw")==true){
-            tabMode.removeRow(tbJnsPerawatan.getSelectedRow());
+            tabMode.removeRow(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()));
             emptTeks();
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbJnsPerawatan.getRowCount());
         }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -589,13 +589,13 @@ public final class SatuSehatMapingTindakanRanapKPTL extends javax.swing.JDialog 
         }else{
             if(tbJnsPerawatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("satu_sehat_mapping_tindakanranap_kptl","kd_jenis_prw=?","kd_jenis_prw=?,code=?,system=?,display=?",5,new String[]{
-                        KodeTindakan.getText(),Code.getText(),TindakanSystem.getText(),Display.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()
+                        KodeTindakan.getText(),Code.getText(),TindakanSystem.getText(),Display.getText(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString()
                     })==true){
-                    tabMode.setValueAt(Code.getText(),tbJnsPerawatan.getSelectedRow(),0);
-                    tabMode.setValueAt(TindakanSystem.getText(),tbJnsPerawatan.getSelectedRow(),1);
-                    tabMode.setValueAt(KodeTindakan.getText(),tbJnsPerawatan.getSelectedRow(),2);
-                    tabMode.setValueAt(NamaTindakan.getText(),tbJnsPerawatan.getSelectedRow(),3);
-                    tabMode.setValueAt(Display.getText(),tbJnsPerawatan.getSelectedRow(),4);
+                    tabMode.setValueAt(Code.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0);
+                    tabMode.setValueAt(TindakanSystem.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1);
+                    tabMode.setValueAt(KodeTindakan.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2);
+                    tabMode.setValueAt(NamaTindakan.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3);
+                    tabMode.setValueAt(Display.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4);
                     emptTeks();
                 }
             }
@@ -685,7 +685,7 @@ public final class SatuSehatMapingTindakanRanapKPTL extends javax.swing.JDialog 
 }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -694,7 +694,7 @@ public final class SatuSehatMapingTindakanRanapKPTL extends javax.swing.JDialog 
 }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -877,7 +877,7 @@ public final class SatuSehatMapingTindakanRanapKPTL extends javax.swing.JDialog 
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {
@@ -893,11 +893,11 @@ public final class SatuSehatMapingTindakanRanapKPTL extends javax.swing.JDialog 
 
     private void getData() {
        if(tbJnsPerawatan.getSelectedRow()!= -1){
-           Code.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-           TindakanSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-           KodeTindakan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-           NamaTindakan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-           Display.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
+           Code.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+           TindakanSystem.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+           KodeTindakan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+           NamaTindakan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+           Display.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString());
         }
     }
 

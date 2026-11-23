@@ -453,9 +453,9 @@ public class PerpustakaanDenda extends javax.swing.JDialog {
         }else{
             if(tbSpesialis.getSelectedRow()> -1){
                 Sequel.mengedit("perpustakaan_denda","kode_denda=?","kode_denda=?,jenis_denda=?,besar_denda=?",4,new String[]{
-                    KodeDenda.getText(),NmDenda.getText(),BesarDenda.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
+                    KodeDenda.getText(),NmDenda.getText(),BesarDenda.getText(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString()
                 });
-                if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+                if(tbSpesialis.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
             }
         }
@@ -521,7 +521,7 @@ public class PerpustakaanDenda extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -530,7 +530,7 @@ public class PerpustakaanDenda extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisMouseClicked
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -569,7 +569,7 @@ public class PerpustakaanDenda extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbSpesialisKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -653,7 +653,7 @@ public class PerpustakaanDenda extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbSpesialis.getRowCount());
     }
 
     public void emptTeks() {
@@ -668,9 +668,9 @@ public class PerpustakaanDenda extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            KodeDenda.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            NmDenda.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
-            BesarDenda.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString());
+            KodeDenda.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            NmDenda.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
+            BesarDenda.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2).toString());
         }
     }
 

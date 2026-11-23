@@ -451,7 +451,7 @@ public final class InformasiTarifRalan extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     private void tampil2() {
@@ -497,7 +497,7 @@ public final class InformasiTarifRalan extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode2.getRowCount());
+        LCount.setText(""+tbJnsPerawatan1.getRowCount());
     }
 
     private void tampil3() {
@@ -543,7 +543,7 @@ public final class InformasiTarifRalan extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode3.getRowCount());
+        LCount.setText(""+tbJnsPerawatan2.getRowCount());
     }
 
     private void runBackground(Runnable task) {

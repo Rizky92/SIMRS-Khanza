@@ -397,7 +397,7 @@ public final class DlgCariDataKonversi extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     public void emptTeks() {

@@ -176,6 +176,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbUser.setAutoCreateRowSorter(true);
         tbUser.setToolTipText("Untuk memegang hak akses agar tidak hilang karena pencarian data, silahkan klik di bagian P. \nUntuk memberikan hak akses klik pada akses. Gunakan klik kanan untuk menampilkan popup menu.");
         tbUser.setComponentPopupMenu(Popup);
         tbUser.setName("tbUser"); // NOI18N
@@ -380,13 +381,13 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
 
     private void ppClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppClearActionPerformed
         for (int i = 0; i < tbUser.getRowCount(); i++) {
-            tbUser.setValueAt(false, i, 0);
+            tabMode.setValueAt(false, tbUser.convertRowIndexToModel(i), 0);
         }
     }//GEN-LAST:event_ppClearActionPerformed
 
     private void ppSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSemuaActionPerformed
         for (int i = 0; i < tbUser.getRowCount(); i++) {
-            tbUser.setValueAt(true, i, 0);
+            tabMode.setValueAt(true, tbUser.convertRowIndexToModel(i), 0);
         }
     }//GEN-LAST:event_ppSemuaActionPerformed
 
@@ -1707,6 +1708,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
     }
 
     private void tampilSmc() {
+        tbUser.suspendSorting();
         Valid.tabelKosong(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement("select user.* from user where id_user = aes_encrypt(?, 'nur')")) {
             ps.setString(1, TNmUser.getText());
@@ -1731,6 +1733,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+        tbUser.resumeSorting();
     }
 
     private void simpanSmc() {

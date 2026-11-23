@@ -4476,6 +4476,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbPetugas.setAutoCreateRowSorter(true);
         tbPetugas.setToolTipText("Klik data di table, kemudian klik kanan untuk menampilkan menu yang dibutuhkan");
         tbPetugas.setComponentPopupMenu(jPopupMenu1);
         tbPetugas.setName("tbPetugas"); // NOI18N
@@ -5212,7 +5213,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                         KdDokter.getText(),TDokter.getText(),TNoRM.getText(),TPasien.getText(),JK.getText(),umur+" "+sttsumur,"IGD",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),Valid.SetAngka(biaya),
                         TStatus.getText(),nmpnj.getText(),"Belum",kdpnj.getText(),"Belum Bayar"
                     });
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText(""+tbPetugas.getRowCount());
                     emptTeks();
                     ceksukses=false;
                 }
@@ -5242,15 +5243,15 @@ public final class DlgIGD extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbPetugas.getRowCount();i++){
-            if(tbPetugas.getValueAt(i,0).toString().equals("true")){
-                if(Sequel.meghapustf("reg_periksa","no_rawat",tbPetugas.getValueAt(i,2).toString())==true){
-                    tabMode.removeRow(i);
+            if(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(i),0).toString().equals("true")){
+                if(Sequel.meghapustf("reg_periksa","no_rawat",tabMode.getValueAt(tbPetugas.convertRowIndexToModel(i),2).toString())==true){
+                    tabMode.removeRow(tbPetugas.convertRowIndexToModel(i));
                     i--;
                 }
             }
         }
 
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPetugas.getRowCount());
         emptTeks();
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -5383,7 +5384,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                             biaya=Sequel.cariIsiAngka("select poliklinik.registrasi from poliklinik where poliklinik.kd_poli='IGDK'");
                             break;
                 }
-                if(Sequel.cariRegistrasi(tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString()) > 0){
+                if(Sequel.cariRegistrasi(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()), 2).toString()) > 0){
                     JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh diubah.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                     TCari.requestFocus();
                 }else{
@@ -5392,26 +5393,26 @@ public final class DlgIGD extends javax.swing.JDialog {
                                 "p_jawab=?,almt_pj=?,biaya_reg=?,hubunganpj=?,stts_daftar=?,kd_pj=?,umurdaftar=?,sttsumur=? where no_rawat=?",16,new String[]{
                                 TNoRw.getText(),TNoReg.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                                 KdDokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),""+biaya,THbngn.getText(),
-                                TStatus.getText(),kdpnj.getText(),umur,sttsumur,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString()
+                                TStatus.getText(),kdpnj.getText(),umur,sttsumur,tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString()
                             })==true){
-                            tabMode.setValueAt(TNoReg.getText(),tbPetugas.getSelectedRow(),1);
-                            tabMode.setValueAt(TNoRw.getText(),tbPetugas.getSelectedRow(),2);
-                            tabMode.setValueAt(Valid.SetTgl(DTPReg.getSelectedItem()+""),tbPetugas.getSelectedRow(),3);
-                            tabMode.setValueAt(CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),tbPetugas.getSelectedRow(),4);
-                            tabMode.setValueAt(KdDokter.getText(),tbPetugas.getSelectedRow(),5);
-                            tabMode.setValueAt(TDokter.getText(),tbPetugas.getSelectedRow(),6);
-                            tabMode.setValueAt(TNoRM.getText(),tbPetugas.getSelectedRow(),7);
-                            tabMode.setValueAt(TPasien.getText(),tbPetugas.getSelectedRow(),8);
-                            tabMode.setValueAt(JK.getText(),tbPetugas.getSelectedRow(),9);
-                            tabMode.setValueAt(umur+" "+sttsumur,tbPetugas.getSelectedRow(),10);
-                            tabMode.setValueAt("IGD",tbPetugas.getSelectedRow(),11);
-                            tabMode.setValueAt(TPngJwb.getText(),tbPetugas.getSelectedRow(),12);
-                            tabMode.setValueAt(TAlmt.getText(),tbPetugas.getSelectedRow(),13);
-                            tabMode.setValueAt(THbngn.getText(),tbPetugas.getSelectedRow(),14);
-                            tabMode.setValueAt(Valid.SetAngka(biaya),tbPetugas.getSelectedRow(),15);
-                            tabMode.setValueAt(TStatus.getText(),tbPetugas.getSelectedRow(),16);
-                            tabMode.setValueAt(nmpnj.getText(),tbPetugas.getSelectedRow(),17);
-                            tabMode.setValueAt(kdpnj.getText(),tbPetugas.getSelectedRow(),19);
+                            tabMode.setValueAt(TNoReg.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),1);
+                            tabMode.setValueAt(TNoRw.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2);
+                            tabMode.setValueAt(Valid.SetTgl(DTPReg.getSelectedItem()+""),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),3);
+                            tabMode.setValueAt(CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),4);
+                            tabMode.setValueAt(KdDokter.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),5);
+                            tabMode.setValueAt(TDokter.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),6);
+                            tabMode.setValueAt(TNoRM.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),7);
+                            tabMode.setValueAt(TPasien.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),8);
+                            tabMode.setValueAt(JK.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),9);
+                            tabMode.setValueAt(umur+" "+sttsumur,tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),10);
+                            tabMode.setValueAt("IGD",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),11);
+                            tabMode.setValueAt(TPngJwb.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),12);
+                            tabMode.setValueAt(TAlmt.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),13);
+                            tabMode.setValueAt(THbngn.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),14);
+                            tabMode.setValueAt(Valid.SetAngka(biaya),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),15);
+                            tabMode.setValueAt(TStatus.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),16);
+                            tabMode.setValueAt(nmpnj.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),17);
+                            tabMode.setValueAt(kdpnj.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),19);
                             emptTeks();
                         }
                     }else{
@@ -5459,7 +5460,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         if (!tbPetugas.isRowSelected(r)) {
             tbPetugas.changeSelection(r, c, false, false);
         }
-        if(tabMode.getRowCount()!=0){
+        if(tbPetugas.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -5485,809 +5486,809 @@ public final class DlgIGD extends javax.swing.JDialog {
                         if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                             JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi..!!");
                         }else{
-                            if(normdipilih.equals(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),7).toString())){
+                            if(normdipilih.equals(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),7).toString())){
                                 Sequel.queryu2("update asuhan_gizi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update aturan_pakai set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_detail_periksa_lab set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_detail_periksa_lab_perujuk set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_operasi_dokter_anak set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_operasi_dokter_anestesi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_operasi_dokter_pjanak set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_operasi_dokter_umum set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_operasi_operator1 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_operasi_operator2 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_operasi_operator3 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_periksa_lab set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_periksa_lab_perujuk set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_periksa_radiologi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_periksa_radiologi_perujuk set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_rawat_inap_dr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_rawat_inap_drpr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_rawat_jl_dr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_rawat_jl_drpr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update beri_bhp_radiologi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update beri_obat_operasi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update berkas_digital_perawatan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update billing set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update booking_operasi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bridging_inhealth set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bridging_sep set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bridging_sep_internal set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bridging_surat_pri_bpjs set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update catatan_perawatan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_HAIs set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_klasifikasi_pasien_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_tb set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igd set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igddetail_skala1 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igddetail_skala2 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igddetail_skala3 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igddetail_skala4 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igddetail_skala5 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igdprimer set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igdsekunder set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update deposit set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_beri_diet set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_nota_inap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_nota_jalan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_obat_racikan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_pemberian_obat set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_penagihan_piutang set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_periksa_lab set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_periksa_labpa set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_periksa_labpa_gambar set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_piutang_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update deteksi_dini_corona set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update diagnosa_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update dpjp_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update gambar_radiologi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update hasil_radiologi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update hemodialisa set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update inacbg_klaim_baru2 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update inacbg_noklaim_corona set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update insiden_keselamatan_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update kamar_inap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update laporan_operasi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update monitoring_asuhan_gizi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update mutasi_berkas set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update nota_inap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update nota_jalan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update obat_racikan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update operasi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pcare_kunjungan_umum set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pcare_obat_diberikan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pcare_pendaftaran set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pcare_tindakan_ralan_diberikan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pcare_tindakan_ranap_diberikan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pemeriksaan_ginekologi_ralan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pemeriksaan_ginekologi_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pemeriksaan_obstetri_ralan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pemeriksaan_obstetri_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pemeriksaan_ralan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pemeriksaan_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pengembalian_deposit set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pengurangan_biaya set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_gigi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_gigi_masalah set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_igd set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_igd_masalah set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_kebidanan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_kebidanan_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_mata set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_mata_masalah set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_ralan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_ralan_bayi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_ralan_bayi_masalah set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_ralan_masalah set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_ralan_rencana set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_fisioterapi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_mcu set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_medis_igd set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_medis_ralan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_medis_ralan_anak set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_medis_ralan_kandungan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_medis_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_medis_ranap_kandungan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update perawatan_corona set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update periksa_lab set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update periksa_radiologi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update perkiraan_biaya_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_lab set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_labpa set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_obat set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_radiologi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_registrasi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_resep_pulang set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_stok_obat_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update piutang_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update prosedur_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update ranap_gabung set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update rawat_inap_dr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update rawat_inap_drpr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update rawat_inap_pr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update rawat_jl_dr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update rawat_jl_drpr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update rawat_jl_pr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update referensi_mobilejkn_bpjs_taskid set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update resep_luar set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update resep_obat set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update resep_pulang set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update resume_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update resume_pasien_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update returpasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 if(Sequel.queryu2tf("update rujuk set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 )==false){
                                     Sequel.meghapus("rujuk","no_rawat", norawatdipilih);
                                 }
                                 if(Sequel.queryu2tf("update rujuk_masuk set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 )==false){
                                     Sequel.meghapus("rujuk_masuk","no_rawat", norawatdipilih);
                                 }
                                 Sequel.queryu2("update rujukan_internal_poli set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update rvp_klaim_bpjs set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update saran_kesan_lab set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update sisrute_rujukan_keluar set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update skrining_gizi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update stok_obat_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_cuti_hamil set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_bebas_tato set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_bebas_tbc set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_hamil set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_buta_warna set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_keterangan_covid set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_keterangan_rawat_inap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_keterangan_sehat set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_kewaspadaan_kesehatan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_skbn set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update suratsakit set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update suratsakitpihak2 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update tagihan_obat_langsung set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update resep_luar set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_bebas_tbc set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_buta_warna set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_bebas_tato set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update tambahan_biaya set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update ubah_penjab set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update uji_fungsi_kfr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 if(Sequel.queryu2tf("delete from reg_periksa where no_rawat=?",1,new String[]{norawatdipilih})==true){
                                     for(i=0;i<tbPetugas.getRowCount();i++){
-                                        if(tbPetugas.getValueAt(i,2).toString().equals(norawatdipilih)){
-                                            tabMode.removeRow(i);
+                                        if(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(i),2).toString().equals(norawatdipilih)){
+                                            tabMode.removeRow(tbPetugas.convertRowIndexToModel(i));
                                         }
                                     }
                                     emptTeks();
-                                    LCount.setText(""+tabMode.getRowCount());
+                                    LCount.setText(""+tbPetugas.getRowCount());
                                 }
                             }else{
                                 JOptionPane.showMessageDialog(rootPane,"Tidak bisa digabung karena No.RM berbeda");
@@ -6325,7 +6326,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPetugasMousePressed
 
     private void tbPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPetugasKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbPetugas.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 i=tbPetugas.getSelectedColumn();
                 if(i==1){
@@ -6404,7 +6405,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnDokterActionPerformed
 
     private void MnKamarInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKamarInapActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -6412,7 +6413,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             tbPetugas.requestFocus();
         }else{
             if(tbPetugas.getSelectedRow()!= -1){
-                if(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),18).toString().equals("Batal")){
+                if(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18).toString().equals("Batal")){
                     JOptionPane.showMessageDialog(null,"Pasien berstatus batal periksa...!");
                 }else{
                     if(Sequel.cariRegistrasi(TNoRw.getText())>0){
@@ -6435,7 +6436,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnKamarInapActionPerformed
 
     private void MnRawatJalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRawatJalanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -6462,7 +6463,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                     if (dlgrwjl == null) return;
                     if (!dlgrwjl.isVisible()) {
                         dlgrwjl.SetPoli("IGDK");
-                        dlgrwjl.SetPj(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),19).toString());
+                        dlgrwjl.SetPj(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),19).toString());
                         dlgrwjl.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate());
                         dlgrwjl.isCek();
                     }
@@ -6479,7 +6480,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRawatJalanActionPerformed
 
     private void MnRujukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRujukActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -6499,7 +6500,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRujukActionPerformed
 
     private void MnPemberianObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemberianObatActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -6523,7 +6524,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPemberianObatActionPerformed
 
     private void MnBillingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnBillingActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -6653,7 +6654,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppGrafikPerTanggalActionPerformed
 
     private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeriksaLabActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -6677,7 +6678,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPeriksaLabActionPerformed
 
     private void MnCetakSuratSakitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratSakitActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -6976,7 +6977,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPenjabActionPerformed
 
     private void MnLaporanRekapKunjunganPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanRekapKunjunganPoliActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else{
@@ -6985,7 +6986,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLaporanRekapKunjunganPoliActionPerformed
 
     private void MnLaporanRekapKunjunganDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanRekapKunjunganDokterActionPerformed
-       if(tabMode.getRowCount()==0){
+       if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else{
@@ -6994,7 +6995,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLaporanRekapKunjunganDokterActionPerformed
 
     private void MnLaporanRekapJenisBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanRekapJenisBayarActionPerformed
-     if(tabMode.getRowCount()==0){
+     if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else{
@@ -7003,7 +7004,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLaporanRekapJenisBayarActionPerformed
 
     private void MnLaporanRekapRawatDaruratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanRekapRawatDaruratActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else{
@@ -7012,7 +7013,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLaporanRekapRawatDaruratActionPerformed
 
     private void MnLaporanRekapKunjunganBulananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanRekapKunjunganBulananActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else{
@@ -7021,7 +7022,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLaporanRekapKunjunganBulananActionPerformed
 
     private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanRekapKunjunganBulananPoliActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else{
@@ -7341,7 +7342,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeek5ActionPerformed
 
     private void MnOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnOperasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -7354,7 +7355,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnOperasiActionPerformed
 
     private void MnGelang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TCari.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -7378,7 +7379,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGelang1ActionPerformed
 
     private void MnGelang2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang2ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TCari.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -7613,7 +7614,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnHapusObatOperasiActionPerformed
 
     private void MnGelang3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang3ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TCari.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -7643,7 +7644,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGelang3ActionPerformed
 
     private void MnSEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSEPActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -7656,7 +7657,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             dlgki.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             dlgki.setLocationRelativeTo(internalFrame1);
             dlgki.isCek();
-            dlgki.setNoRm4(TNoRw.getText(), DTPReg.getDate(), "2. Ralan", "IGDK", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 5).toString());
+            dlgki.setNoRm4(TNoRw.getText(), DTPReg.getDate(), "2. Ralan", "IGDK", tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()), 5).toString());
             // dlgki.setNoRm(TNoRw.getText(),DTPReg.getDate(),"2. Ralan","IGDK","Unit IGD/UGD");
             dlgki.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -7689,7 +7690,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLembarCasemixActionPerformed
 
     private void ppCatatanPasienBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCatatanPasienBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -7786,7 +7787,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSPBKActionPerformed
 
     private void ppRiwayatBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRiwayatBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -7841,7 +7842,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnResepDOkterActionPerformed
 
     private void ppBerkasBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBerkasBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
@@ -7851,7 +7852,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Diterima',now(),now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRw.getText()+"'");
             Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Berkas Diterima'");
             if(tbPetugas.getSelectedRow()>-1){
-                tabMode.setValueAt("Berkas Diterima",tbPetugas.getSelectedRow(),18);
+                tabMode.setValueAt("Berkas Diterima",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
             }
         }
     }//GEN-LAST:event_ppBerkasBtnPrintActionPerformed
@@ -7865,7 +7866,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             }else {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Sudah'");
                 if(tbPetugas.getSelectedRow()>-1){
-                    tabMode.setValueAt("Sudah",tbPetugas.getSelectedRow(),18);
+                    tabMode.setValueAt("Sudah",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
                 }
             }
         }
@@ -7880,7 +7881,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             }else {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Belum'");
                 if(tbPetugas.getSelectedRow()>-1){
-                    tabMode.setValueAt("Belum",tbPetugas.getSelectedRow(),18);
+                    tabMode.setValueAt("Belum",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
                 }
             }
 
@@ -7899,7 +7900,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 }else{
                     Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Batal',biaya_reg='0'");
                     if(tbPetugas.getSelectedRow()>-1){
-                        tabMode.setValueAt("Batal",tbPetugas.getSelectedRow(),18);
+                        tabMode.setValueAt("Batal",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
                     }
                 }
             }
@@ -7916,7 +7917,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Dirujuk'");
                 MnRujukActionPerformed(evt);
                 if(tbPetugas.getSelectedRow()>-1){
-                    tabMode.setValueAt("Dirujuk",tbPetugas.getSelectedRow(),18);
+                    tabMode.setValueAt("Dirujuk",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
                 }
             }
         }
@@ -7932,7 +7933,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Dirawat'");
                 MnKamarInapActionPerformed(evt);
                 if(tbPetugas.getSelectedRow()>-1){
-                    tabMode.setValueAt("Dirawat",tbPetugas.getSelectedRow(),18);
+                    tabMode.setValueAt("Dirawat",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
                 }
             }
         }
@@ -7954,7 +7955,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 dlgPasienMati.isCek();
                 dlgPasienMati.setVisible(true);
                 if(tbPetugas.getSelectedRow()>-1){
-                    tabMode.setValueAt("Meninggal",tbPetugas.getSelectedRow(),18);
+                    tabMode.setValueAt("Meninggal",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
                 }
             }
 
@@ -8076,7 +8077,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnBarcode1ActionPerformed
 
     private void MnGelang4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang4ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TCari.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8106,7 +8107,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGelang4ActionPerformed
 
     private void MnGelang5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang5ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TCari.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8136,7 +8137,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGelang5ActionPerformed
 
     private void MnGelang6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelang6ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TCari.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8263,7 +8264,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSPBK1ActionPerformed
 
     private void MnLembarRalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLembarRalanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8303,7 +8304,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLembarRalanActionPerformed
 
     private void MnBarcodeRM9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnBarcodeRM9ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8332,7 +8333,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnBarcodeRM9ActionPerformed
 
     private void ppBerkasDigitalBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBerkasDigitalBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8360,7 +8361,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBerkasDigitalBtnPrintActionPerformed
 
     private void MnSJPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSJPActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8380,7 +8381,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSJPActionPerformed
 
     private void ppIKPBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppIKPBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8399,7 +8400,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppIKPBtnPrintActionPerformed
 
     private void MnPoliInternalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPoliInternalActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8417,7 +8418,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPoliInternalActionPerformed
 
     private void MnJadwalOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnJadwalOperasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -8435,7 +8436,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnJadwalOperasiActionPerformed
 
     private void SuratKontrolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuratKontrolActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -8454,7 +8455,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_SuratKontrolActionPerformed
 
     private void MnPermintaanLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPermintaanLabActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8478,7 +8479,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPermintaanLabActionPerformed
 
     private void MnPermintaanRadiologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPermintaanRadiologiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8510,7 +8511,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             }else {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Pulang Paksa'");
                 if(tbPetugas.getSelectedRow()>-1){
-                    tabMode.setValueAt("Pulang Paksa",tbPetugas.getSelectedRow(),18);
+                    tabMode.setValueAt("Pulang Paksa",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
                 }
             }
         }
@@ -8522,7 +8523,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         }else{
             Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"status_poli='Baru'");
             if(tbPetugas.getSelectedRow()>-1){
-                tabMode.setValueAt("Baru",tbPetugas.getSelectedRow(),16);
+                tabMode.setValueAt("Baru",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),16);
             }
         }
     }//GEN-LAST:event_MnStatusBaruActionPerformed
@@ -8533,13 +8534,13 @@ public final class DlgIGD extends javax.swing.JDialog {
         }else{
             Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"status_poli='Lama'");
             if(tbPetugas.getSelectedRow()>-1){
-                tabMode.setValueAt("Lama",tbPetugas.getSelectedRow(),18);
+                tabMode.setValueAt("Lama",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
             }
         }
     }//GEN-LAST:event_MnStatusLamaActionPerformed
 
     private void MnBillingParsialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnBillingParsialActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8590,7 +8591,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnBillingParsialActionPerformed
 
     private void tbPetugasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPetugasKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbPetugas.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -8625,7 +8626,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnBlangkoResepActionPerformed
 
     private void MnRujukSisruteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRujukSisruteActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8694,7 +8695,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSuratJaminanPelayananIGDActionPerformed
 
     private void MnLembarKeluarMasuk2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLembarKeluarMasuk2ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8726,7 +8727,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnLembarKeluarMasuk2ActionPerformed
 
     private void MnDataTriaseIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDataTriaseIGDActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8747,7 +8748,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnDataTriaseIGDActionPerformed
 
     private void ppResumeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResumeBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8768,7 +8769,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppResumeBtnPrintActionPerformed
 
     private void ppPerawatanCoronaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPerawatanCoronaBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8789,7 +8790,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppPerawatanCoronaBtnPrintActionPerformed
 
     private void ppPasienCoronaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPasienCoronaBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8808,7 +8809,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppPasienCoronaBtnPrintActionPerformed
 
     private void ppDeteksiDIniCoronaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDeteksiDIniCoronaBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8830,7 +8831,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppDeteksiDIniCoronaBtnPrintActionPerformed
 
     private void MnCetakSuratHamilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratHamilActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8850,7 +8851,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCetakSuratHamilActionPerformed
 
     private void MnCetakBebasNarkobaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakBebasNarkobaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8872,7 +8873,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCetakBebasNarkobaActionPerformed
 
     private void MnPCareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPCareActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8911,7 +8912,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnBarcode3ActionPerformed
 
     private void MnCetakSuratCovidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratCovidActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8933,7 +8934,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCetakSuratCovidActionPerformed
 
     private void MnHemodialisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHemodialisaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8974,7 +8975,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnTeridentifikasiTBActionPerformed
 
     private void MnCetakSuratCutiHamilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratCutiHamilActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -8996,7 +8997,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCetakSuratCutiHamilActionPerformed
 
     private void MnPeriksaLabPAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeriksaLabPAActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9018,7 +9019,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPeriksaLabPAActionPerformed
 
     private void MnPermintaanRanapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPermintaanRanapActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9041,7 +9042,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPermintaanRanapActionPerformed
 
     private void ppSuratKontrolBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSuratKontrolBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
@@ -9084,7 +9085,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSuratKontrolBtnPrintActionPerformed
 
     private void ppSuratPRIBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSuratPRIBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
@@ -9128,7 +9129,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSuratPRIBtnPrintActionPerformed
 
     private void MnCetakSuratSakitPihak2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratSakitPihak2ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
@@ -9151,7 +9152,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCetakSuratSakitPihak2ActionPerformed
 
     private void MnCetakSuratBebasTBCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratBebasTBCActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9173,7 +9174,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCetakSuratBebasTBCActionPerformed
 
     private void MnSuratButaWarnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSuratButaWarnaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9195,7 +9196,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSuratButaWarnaActionPerformed
 
     private void MnSuratBebasTatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSuratBebasTatoActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9215,7 +9216,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSuratBebasTatoActionPerformed
 
     private void MnSuratKewaspadaanKesehatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSuratKewaspadaanKesehatanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9235,7 +9236,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSuratKewaspadaanKesehatanActionPerformed
 
     private void MnPeniliaianAwalMedisIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeniliaianAwalMedisIGDActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9257,7 +9258,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPeniliaianAwalMedisIGDActionPerformed
 
     private void MnPenilaianFisioterapiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianFisioterapiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9279,7 +9280,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianFisioterapiActionPerformed
 
     private void ppProgramPRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppProgramPRBActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
@@ -9327,7 +9328,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppProgramPRBActionPerformed
 
     private void ppSuplesiJasaRaharjaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSuplesiJasaRaharjaBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
@@ -9370,7 +9371,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSuplesiJasaRaharjaBtnPrintActionPerformed
 
     private void ppDataIndukKecelakaanBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDataIndukKecelakaanBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
@@ -9413,7 +9414,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppDataIndukKecelakaanBtnPrintActionPerformed
 
     private void MnPenilaianAwalKeperawatanIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianAwalKeperawatanIGDActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9454,7 +9455,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCetakRegister2ActionPerformed
 
     private void MnCatatanObservasiIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanObservasiIGDActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9499,7 +9500,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCopyResepActionPerformed
 
     private void MnPenilaianPsikologActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPsikologActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9521,7 +9522,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianPsikologActionPerformed
 
     private void MnPersetujuanPenolakanTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPersetujuanPenolakanTindakanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9543,7 +9544,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPersetujuanPenolakanTindakanActionPerformed
 
     private void MnPemantauanPEWSAnakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemantauanPEWSAnakActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9565,7 +9566,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPemantauanPEWSAnakActionPerformed
 
     private void MnPeriksaLabMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeriksaLabMBActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9589,7 +9590,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPeriksaLabMBActionPerformed
 
     private void MnPenilaianPreOpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPreOpActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9611,7 +9612,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianPreOpActionPerformed
 
     private void MnPenilaianPreAnestesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPreAnestesiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9633,7 +9634,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianPreAnestesiActionPerformed
 
     private void MnPulangAtasPermintaanSendiriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPulangAtasPermintaanSendiriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9655,7 +9656,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPulangAtasPermintaanSendiriActionPerformed
 
     private void MnPenilaianRisikoJatuhDewasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianRisikoJatuhDewasaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9677,7 +9678,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianRisikoJatuhDewasaActionPerformed
 
     private void MnPenilaianRisikoJatuhAnakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianRisikoJatuhAnakActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9699,7 +9700,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianRisikoJatuhAnakActionPerformed
 
     private void MnPenilaianTambahanGeriatriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianTambahanGeriatriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9721,7 +9722,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianTambahanGeriatriActionPerformed
 
     private void ppSkriningNutrisiDewasaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSkriningNutrisiDewasaBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9743,7 +9744,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSkriningNutrisiDewasaBtnPrintActionPerformed
 
     private void ppSkriningNutrisiLansiaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSkriningNutrisiLansiaBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9765,7 +9766,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSkriningNutrisiLansiaBtnPrintActionPerformed
 
     private void ppSkriningNutrisiAnakBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSkriningNutrisiAnakBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9787,7 +9788,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSkriningNutrisiAnakBtnPrintActionPerformed
 
     private void ppSkriningGiziBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSkriningGiziBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9809,7 +9810,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSkriningGiziBtnPrintActionPerformed
 
     private void ppAsuhanGiziBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppAsuhanGiziBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9831,7 +9832,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppAsuhanGiziBtnPrintActionPerformed
 
     private void ppMonitoringAsuhanGiziBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppMonitoringAsuhanGiziBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9853,7 +9854,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppMonitoringAsuhanGiziBtnPrintActionPerformed
 
     private void MnPernyataanPasienUmumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPernyataanPasienUmumActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9875,7 +9876,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPernyataanPasienUmumActionPerformed
 
     private void MnKonselingFarmasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKonselingFarmasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9897,7 +9898,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnKonselingFarmasiActionPerformed
 
     private void MnPermintaanInformasiObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPermintaanInformasiObatActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9921,7 +9922,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPermintaanInformasiObatActionPerformed
 
     private void MnPersetujuanUmumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPersetujuanUmumActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9943,7 +9944,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPersetujuanUmumActionPerformed
 
     private void MnTransferAntarRuangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnTransferAntarRuangActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9965,7 +9966,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnTransferAntarRuangActionPerformed
 
     private void MnCatatanCekGDSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanCekGDSActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -9987,7 +9988,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCatatanCekGDSActionPerformed
 
     private void MnChecklistPreOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnChecklistPreOperasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10009,7 +10010,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnChecklistPreOperasiActionPerformed
 
     private void MnSignInSebelumAnestesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSignInSebelumAnestesiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10031,7 +10032,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSignInSebelumAnestesiActionPerformed
 
     private void MnTimeOutSebelumInsisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnTimeOutSebelumInsisiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10053,7 +10054,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnTimeOutSebelumInsisiActionPerformed
 
     private void MnSignOutSebelumMenutupLukaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSignOutSebelumMenutupLukaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10075,7 +10076,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSignOutSebelumMenutupLukaActionPerformed
 
     private void MnChecklistPostOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnChecklistPostOperasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10097,7 +10098,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnChecklistPostOperasiActionPerformed
 
     private void MnRekonsiliasiObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRekonsiliasiObatActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10119,7 +10120,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRekonsiliasiObatActionPerformed
 
     private void MnPenilaianPasienTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPasienTerminalActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10141,7 +10142,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianPasienTerminalActionPerformed
 
     private void MnPersetujuanRawatInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPersetujuanRawatInapActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10163,7 +10164,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPersetujuanRawatInapActionPerformed
 
     private void MnMonitoringReaksiTranfusiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnMonitoringReaksiTranfusiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10185,7 +10186,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnMonitoringReaksiTranfusiActionPerformed
 
     private void MnPenilaianKorbanKekerasanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianKorbanKekerasanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10207,7 +10208,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianKorbanKekerasanActionPerformed
 
     private void MnPenilaianRisikoJatuhLansiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianRisikoJatuhLansiaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10229,7 +10230,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianRisikoJatuhLansiaActionPerformed
 
     private void MnPenilaianPasienPenyakitMenularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPasienPenyakitMenularActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10251,7 +10252,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianPasienPenyakitMenularActionPerformed
 
     private void MnEdukasiPasienKeluargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnEdukasiPasienKeluargaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10273,7 +10274,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnEdukasiPasienKeluargaActionPerformed
 
     private void MnPemantauanPEWSDewasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemantauanPEWSDewasaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10295,7 +10296,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPemantauanPEWSDewasaActionPerformed
 
     private void MnPenilaianTambahanBunuhDiriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianTambahanBunuhDiriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10317,7 +10318,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianTambahanBunuhDiriActionPerformed
 
     private void MnPenilaianTambahanPerilakuKekerasanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianTambahanPerilakuKekerasanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10339,7 +10340,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianTambahanPerilakuKekerasanActionPerformed
 
     private void MnPenilaianTambahanMelarikanDiriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianTambahanMelarikanDiriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10361,7 +10362,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianTambahanMelarikanDiriActionPerformed
 
     private void MnPersetujuanPenundaanPelayananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPersetujuanPenundaanPelayananActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10383,7 +10384,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPersetujuanPenundaanPelayananActionPerformed
 
     private void MnPenilaianPasienKeracunanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPasienKeracunanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10405,7 +10406,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianPasienKeracunanActionPerformed
 
     private void MnPemantauanMEOWSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemantauanMEOWSActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10427,7 +10428,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPemantauanMEOWSActionPerformed
 
     private void ppCatatanADIMEGiziBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCatatanADIMEGiziBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10455,7 +10456,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnBelumTerbitSEPActionPerformed
 
     private void MnCheckListKriteriaMasukHCUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCheckListKriteriaMasukHCUActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10477,7 +10478,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCheckListKriteriaMasukHCUActionPerformed
 
     private void MnPenolakanAnjuranMedisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenolakanAnjuranMedisActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10499,7 +10500,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenolakanAnjuranMedisActionPerformed
 
     private void MnCheckListKriteriaMasukICUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCheckListKriteriaMasukICUActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10521,7 +10522,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCheckListKriteriaMasukICUActionPerformed
 
     private void MnPenilaianRisikoJatuhNeonatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianRisikoJatuhNeonatusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10543,7 +10544,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianRisikoJatuhNeonatusActionPerformed
 
     private void MnPenilaianRisikoJatuhGeriatriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianRisikoJatuhGeriatriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10565,7 +10566,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianRisikoJatuhGeriatriActionPerformed
 
     private void MnPemantauanEWSNeonatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemantauanEWSNeonatusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10587,7 +10588,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPemantauanEWSNeonatusActionPerformed
 
     private void MnRiwayatPerawatanICareNIKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRiwayatPerawatanICareNIKActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10613,7 +10614,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRiwayatPerawatanICareNIKActionPerformed
 
     private void MnRiwayatPerawatanICareNoKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRiwayatPerawatanICareNoKartuActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10639,7 +10640,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRiwayatPerawatanICareNoKartuActionPerformed
 
     private void MnGabungNoRawatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGabungNoRawatActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10650,13 +10651,13 @@ public final class DlgIGD extends javax.swing.JDialog {
                 if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                     int reply = JOptionPane.showConfirmDialog(rootPane,"Data billing sudah terverifikasi, apakah yakin mau digabung..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
                     if (reply == JOptionPane.YES_OPTION) {
-                        norawatdipilih=tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString();
-                        normdipilih=tbPetugas.getValueAt(tbPetugas.getSelectedRow(),7).toString();
+                        norawatdipilih=tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString();
+                        normdipilih=tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),7).toString();
                         JOptionPane.showMessageDialog(rootPane,"Silahkan pilih No.Rawat yang mau digabung...!");
                     }
                 }else{
-                    norawatdipilih=tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString();
-                    normdipilih=tbPetugas.getValueAt(tbPetugas.getSelectedRow(),7).toString();
+                    norawatdipilih=tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString();
+                    normdipilih=tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),7).toString();
                     JOptionPane.showMessageDialog(rootPane,"Silahkan pilih No.Rawat yang mau digabung...!");
                 }
             }
@@ -10664,7 +10665,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnGabungNoRawatActionPerformed
 
     private void MnRiwayatPerawatanICareNIK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRiwayatPerawatanICareNIK1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10690,7 +10691,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRiwayatPerawatanICareNIK1ActionPerformed
 
     private void MnRiwayatPerawatanICareNoKartu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRiwayatPerawatanICareNoKartu1ActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10716,7 +10717,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRiwayatPerawatanICareNoKartu1ActionPerformed
 
     private void MnPeniliaianAwalMedisHemodialisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeniliaianAwalMedisHemodialisaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10727,7 +10728,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 RMPenilaianAwalMedisHemodialisa form=new RMPenilaianAwalMedisHemodialisa(null,false);
                 form.isCek();
-                form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),tbPetugas.getValueAt(tbPetugas.getSelectedRow(),11).toString());
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),11).toString());
                 form.emptTeks();
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
@@ -10738,7 +10739,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPeniliaianAwalMedisHemodialisaActionPerformed
 
     private void MnPenilaianRisikoJatuhPsikiatriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianRisikoJatuhPsikiatriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10760,7 +10761,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianRisikoJatuhPsikiatriActionPerformed
 
     private void MnPenilaianLanjutanSkriningFungsionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianLanjutanSkriningFungsionalActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10782,7 +10783,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianLanjutanSkriningFungsionalActionPerformed
 
     private void MnPeniliaianAwalMedisIGDPsikiatriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeniliaianAwalMedisIGDPsikiatriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10804,7 +10805,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPeniliaianAwalMedisIGDPsikiatriActionPerformed
 
     private void MnPenilaianUlangNyeriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianUlangNyeriActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10827,7 +10828,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPenilaianUlangNyeriActionPerformed
 
     private void MnPengkajianRestrainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPengkajianRestrainActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10901,7 +10902,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCheckList9ActionPerformed
 
     private void MnCatatanKeperawatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanKeperawatanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10923,7 +10924,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCatatanKeperawatanActionPerformed
 
     private void MnCatatanPersalinanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanPersalinanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10945,7 +10946,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCatatanPersalinanActionPerformed
 
     private void MnSkorAldrettePascaAnestesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSkorAldrettePascaAnestesiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10967,7 +10968,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSkorAldrettePascaAnestesiActionPerformed
 
     private void MnSkorStewardPascaAnestesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSkorStewardPascaAnestesiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -10989,7 +10990,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSkorStewardPascaAnestesiActionPerformed
 
     private void MnSkorBromagePascaAnestesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSkorBromagePascaAnestesiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11011,7 +11012,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSkorBromagePascaAnestesiActionPerformed
 
     private void MnPenilaianPreInduksiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11033,7 +11034,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnHasilPemeriksaanEKGActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11060,7 +11061,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPenilaianPasienImunitasRendahActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11082,7 +11083,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanKeseimbanganCairanActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11105,7 +11106,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanObservasiCHBPActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11127,7 +11128,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanObservasiInduksiPersalinanActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11150,7 +11151,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnDataOperasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11161,7 +11162,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 DlgCariTagihanOperasi form=new DlgCariTagihanOperasi(null,false);
                 //form.emptTeks();
-                form.setPasien(TNoRw.getText(),Valid.SetTgl2(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),3).toString()));
+                form.setPasien(TNoRw.getText(),Valid.SetTgl2(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),3).toString()));
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
                 form.setVisible(true);
@@ -11171,7 +11172,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningMerokokUsiaSekolahRemajaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11193,7 +11194,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningKekerasanPadaWanitaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11215,7 +11216,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningObesitasActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11237,7 +11238,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningRisikoKankerPayudaraActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11259,7 +11260,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningRisikoKankerParuActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11281,7 +11282,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningKesehatanGigiMulutRemajaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11303,7 +11304,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningTBCActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11325,7 +11326,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanAnastesiSedasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11347,7 +11348,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningPUMAActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11369,7 +11370,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningAdiksiNikotinActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11391,7 +11392,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningThalassemiaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11413,7 +11414,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningInstrumenSDQActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11435,7 +11436,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningInstrumenSRQActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11457,7 +11458,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnChecklistPemberianFibrinolitikActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11479,7 +11480,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningKankerKolorektalActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11501,7 +11502,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPenilaianPsikologKlinisActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11523,7 +11524,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPenilaianDerajatDehidrasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11545,7 +11546,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnHasilPemeriksaanECHOActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11567,7 +11568,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPenilaianBayiBaruLahirActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11589,7 +11590,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningDiabetesMelitusActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11611,7 +11612,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnLaporanTindakanActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11633,7 +11634,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPelaksanaanInformasiEdukasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11656,7 +11657,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningAnemiaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11678,7 +11679,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningHipertensiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11700,7 +11701,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningKesehatanPenglihatanActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11722,7 +11723,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanObservasiHemodialisaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11744,7 +11745,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningKesehatanGigiMulutDewasaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11766,7 +11767,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningKesehatanGigiMulutBalitaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11788,7 +11789,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningRisikoKankerServiksActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11810,7 +11811,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanCairanHemodialisaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11833,7 +11834,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningKesehatanGigiMulutLansiaActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11855,7 +11856,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningIndraPendengaranActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11877,7 +11878,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanPengkajianPaskaOperasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11899,7 +11900,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningFrailtySyndromeActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11921,7 +11922,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanObservasiBayiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11944,7 +11945,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCheckListKesiapanAnestesiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11966,7 +11967,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnHasilPemeriksaanSlitLampActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -11988,7 +11989,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnHasilPemeriksaanOCTActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12010,7 +12011,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCetakSuratKeteranganLayakTerbangActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12030,7 +12031,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPersetujuanPemeriksaanHIVActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12053,7 +12054,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningInstrumenACRSActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12075,7 +12076,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPernyataanMemilihDPJPActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12095,7 +12096,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningInstrumenMentalEmosionalActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12117,7 +12118,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCheckListKriteriaMasukNICUActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12139,7 +12140,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCheckListKriteriaMasukPICUActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12161,7 +12162,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningInstrumenAMTActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12183,7 +12184,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningPneumoniaSeverityIndexActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12205,7 +12206,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnHasilPemeriksaanTreadmillActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12227,7 +12228,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnHasilPemeriksaanECHOPediatrikActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12249,7 +12250,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningInstrumenESATActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12271,7 +12272,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningCURB65ActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12293,7 +12294,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12316,7 +12317,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSerahTerimaBarangAnggotaTubuhActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12336,7 +12337,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPermintaanKonsultasiMedikActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12359,7 +12360,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPermintaanKonsultasiPerawatActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12382,7 +12383,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPersetujuanBimbinganRohaniActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12404,7 +12405,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPermintaanPerlindunganDariKekerasanActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12426,7 +12427,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSuratPermohonanPrivasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12448,7 +12449,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSuratPermintaanSecondOpinionActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12470,7 +12471,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCetakSuratKeteranganBerobatActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12490,7 +12491,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSuratPenolakanResusitasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12512,7 +12513,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCatatanObservasiRuangOperasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12534,7 +12535,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnIntervensiNyeriFarmakologiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12556,7 +12557,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnIntervensiNyeriNonFarmakologiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12578,7 +12579,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPengajuanCutiPerawatanPasienActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12600,7 +12601,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnCheckListKriteriaMasukIsolasiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12622,7 +12623,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnSkriningTOLACActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12644,7 +12645,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnAdmisiSkoringTOLACActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12666,7 +12667,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnMonitoringTOLACActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12688,7 +12689,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnHasilPersalinanTOLACActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12710,7 +12711,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnLaporanReaksiTranfusiActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12732,7 +12733,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPenilaianGRACEScoreActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -12754,7 +12755,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }
 
     private void MnPenilaianBISHOPScoreActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -13224,23 +13225,23 @@ public final class DlgIGD extends javax.swing.JDialog {
 
     private void getData() {
         if(tbPetugas.getSelectedRow()!= -1){
-            TNoReg.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),1).toString());
-            TNoRw.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
-            Kd2.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
-            Valid.SetTgl(DTPReg,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),3).toString());
-            CmbJam.setSelectedItem(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),4).toString().substring(0,2));
-            CmbMenit.setSelectedItem(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),4).toString().substring(3,5));
-            CmbDetik.setSelectedItem(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),4).toString().substring(6,8));
-            KdDokter.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),5).toString());
-            TDokter.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),6).toString());
-            TNoRM.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),7).toString());
+            TNoReg.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),1).toString());
+            TNoRw.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString());
+            Kd2.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString());
+            Valid.SetTgl(DTPReg,tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),3).toString());
+            CmbJam.setSelectedItem(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),4).toString().substring(0,2));
+            CmbMenit.setSelectedItem(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),4).toString().substring(3,5));
+            CmbDetik.setSelectedItem(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),4).toString().substring(6,8));
+            KdDokter.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),5).toString());
+            TDokter.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),6).toString());
+            TNoRM.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),7).toString());
             isCekPasien();
-            TPngJwb.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),12).toString());
-            TAlmt.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),13).toString());
-            THbngn.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),14).toString());
-            TStatus.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),16).toString());
-            nmpnj.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),17).toString());
-            kdpnj.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),19).toString());
+            TPngJwb.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),12).toString());
+            TAlmt.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),13).toString());
+            THbngn.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),14).toString());
+            TStatus.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),16).toString());
+            nmpnj.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),17).toString());
+            kdpnj.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),19).toString());
         }
     }
 
@@ -13811,7 +13812,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         if(tbPetugas.getSelectedRow()!= -1){
             jmlparsial=0;
             if(aktifkanparsial.equals("yes")){
-                jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",tbPetugas.getValueAt(tbPetugas.getSelectedRow(),19).toString());
+                jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),19).toString());
             }
             if(jmlparsial>0){
                 DlgBilingParsialRalan parsialralan=new DlgBilingParsialRalan(null,false);
@@ -13822,7 +13823,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 parsialralan.setNoRm(TNoRw.getText(),KdDokter.getText(),TDokter.getText(),"IGDK");
                 parsialralan.setVisible(true);
             }else{
-                JOptionPane.showMessageDialog(null,"Maaf, Cara bayar "+tbPetugas.getValueAt(tbPetugas.getSelectedRow(),17).toString()+" tidak diijinkan menggunakan Billing Parsial...!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Cara bayar "+tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),17).toString()+" tidak diijinkan menggunakan Billing Parsial...!!!");
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
@@ -15118,6 +15119,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     private void tampilSmc() {
         if(ceksukses==false){
             ceksukses=true;
+            tbPetugas.suspendSorting();
             Valid.tabelKosong(tabMode);
             final String cari = TCari.getText().trim(),
                 tglAwal = Valid.getTglSmc(DTPCari1),
@@ -15185,15 +15187,16 @@ public final class DlgIGD extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText("" + tabMode.getRowCount());
+                    LCount.setText("" + tbPetugas.getRowCount());
                     ceksukses = false;
+                    tbPetugas.resumeSorting();
                 }
             }.execute();
         }
     }
 
     private void MnPengkajianInvasifNonBedahSMCActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
+        if(tbPetugas.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
         }else if(TPasien.getText().trim().equals("")){

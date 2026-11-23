@@ -276,7 +276,7 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getClickCount()==2){
                 dispose();
             }
@@ -299,7 +299,7 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 dispose();
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
@@ -378,6 +378,7 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try {
             file=new File("./cache/sampelbakumutulabkesling.iyem");
@@ -416,7 +417,8 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
         } finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {
@@ -435,6 +437,7 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
         try {
             myObj = new FileReader("./cache/sampelbakumutulabkesling.iyem");
             root = mapper.readTree(myObj);
+            tbKamar.suspendSorting();
             Valid.tabelKosong(tabMode);
             response = root.path("sampelbakumutulabkesling");
             if(response.isArray()){
@@ -466,7 +469,8 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
             response = null;
             root = null;
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     private void runBackground(Runnable task) {

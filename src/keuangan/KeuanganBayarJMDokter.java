@@ -511,6 +511,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setAutoCreateRowSorter(true);
         tbBangsal.setToolTipText("Silahkan centang di depan untuk memilih data hutang yang mau dibayar");
         tbBangsal.setComponentPopupMenu(Popup);
         tbBangsal.setName("tbBangsal"); // NOI18N
@@ -1082,7 +1083,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
             Valid.textKosong(NoTagihan,"No.Bayar");
         }else if(KdDokter.getText().trim().equals("")||NmDokter.getText().trim().equals("")){
             Valid.textKosong(KdDokter,"Petugas");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbBangsal.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda simpan...!!!!");
         }else if(Keterangan.getText().trim().equals("")){
             Valid.textKosong(Keterangan,"Keterangan");
@@ -1114,6 +1115,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
                         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran,6),signed)),0) from pembayaran_pihak_ke3_bankmandiri where left(pembayaran_pihak_ke3_bankmandiri.tgl_pembayaran,10)='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",kodemcm+"14"+Tanggal.getSelectedItem().toString().substring(0,10).replaceAll("-",""),6,NoTagihan);
                         myObj = new FileReader("./cache/pegawai.iyem");
                         root = mapper.readTree(myObj);
+                        tbBangsal.suspendSorting();
                         Valid.tabelKosong(tabMode);
                         response = root.path("pegawai");
                         if(response.isArray()){
@@ -1140,218 +1142,218 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
                             })==true){
                                 row=tbBangsal.getRowCount();
                                 for(i=0;i<row;i++){
-                                    if(tabMode.getValueAt(i,0).toString().equals("true")){
-                                        if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Jalan Dr")){
+                                    if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                                        if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Rawat Jalan Dr")){
                                             if(Sequel.menyimpantf2("bayar_rawat_jl_dr","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Jalan DrPr")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Rawat Jalan DrPr")){
                                             if(Sequel.menyimpantf2("bayar_rawat_jl_drpr","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Inap Dr")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Rawat Inap Dr")){
                                             if(Sequel.menyimpantf2("bayar_rawat_inap_dr","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Inap DrPr")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Rawat Inap DrPr")){
                                             if(Sequel.menyimpantf2("bayar_rawat_inap_drpr","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan PJ")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ralan PJ")){
                                             if(Sequel.menyimpantf2("bayar_periksa_lab","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan PJ Detail")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ralan PJ Detail")){
                                             if(Sequel.menyimpantf2("bayar_detail_periksa_lab","?,?,?,?,?,?,?",7,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
-                                                tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),11).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan Perujuk")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ralan Perujuk")){
                                             if(Sequel.menyimpantf2("bayar_periksa_lab_perujuk","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan Perujuk Detail")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ralan Perujuk Detail")){
                                             if(Sequel.menyimpantf2("bayar_detail_periksa_lab_perujuk","?,?,?,?,?,?,?",7,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
-                                                tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),11).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap PJ")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ranap PJ")){
                                             if(Sequel.menyimpantf2("bayar_periksa_lab","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap PJ Detail")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ranap PJ Detail")){
                                             if(Sequel.menyimpantf2("bayar_detail_periksa_lab","?,?,?,?,?,?,?",7,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
-                                                tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),11).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap Perujuk")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ranap Perujuk")){
                                             if(Sequel.menyimpantf2("bayar_periksa_lab_perujuk","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap Perujuk Detail")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ranap Perujuk Detail")){
                                             if(Sequel.menyimpantf2("bayar_detail_periksa_lab_perujuk","?,?,?,?,?,?,?",7,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
-                                                tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),11).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ralan PJ")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Radiologi Ralan PJ")){
                                             if(Sequel.menyimpantf2("bayar_periksa_radiologi","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ralan Perujuk")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Radiologi Ralan Perujuk")){
                                             if(Sequel.menyimpantf2("bayar_periksa_radiologi_perujuk","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ranap PJ")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Radiologi Ranap PJ")){
                                             if(Sequel.menyimpantf2("bayar_periksa_radiologi","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ranap Perujuk")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Radiologi Ranap Perujuk")){
                                             if(Sequel.menyimpantf2("bayar_periksa_radiologi_perujuk","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan Op1")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ralan Op1")){
                                             if(Sequel.menyimpantf2("bayar_operasi_operator1","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan Op2")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ralan Op2")){
                                             if(Sequel.menyimpantf2("bayar_operasi_operator2","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan Op3")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ralan Op3")){
                                             if(Sequel.menyimpantf2("bayar_operasi_operator3","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr Anak")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ralan dr Anak")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_anak","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr Anastesi")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ralan dr Anastesi")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_anestesi","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr PJ Anak")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ralan dr PJ Anak")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_pjanak","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr Umum")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ralan dr Umum")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_umum","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap Op1")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ranap Op1")){
                                             if(Sequel.menyimpantf2("bayar_operasi_operator1","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap Op2")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ranap Op2")){
                                             if(Sequel.menyimpantf2("bayar_operasi_operator2","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap Op3")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ranap Op3")){
                                             if(Sequel.menyimpantf2("bayar_operasi_operator3","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr Anak")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ranap dr Anak")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_anak","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr Anastesi")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ranap dr Anastesi")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_anestesi","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr PJ Anak")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ranap dr PJ Anak")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_pjanak","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
-                                        }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr Umum")){
+                                        }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ranap dr Umum")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_umum","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                                tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                                NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
@@ -1416,8 +1418,8 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
                             if(sukses==true){
                                 autoNomor();
                                 for(i=0;i<tbBangsal.getRowCount();i++){
-                                    if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                                        tabMode.removeRow(i);
+                                    if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                                        tabMode.removeRow(tbBangsal.convertRowIndexToModel(i));
                                         i--;
                                     }
                                 }
@@ -1438,6 +1440,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
             }
         }
         this.setCursor(Cursor.getDefaultCursor());
+        tbBangsal.resumeSorting();
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -1458,14 +1461,14 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(row=0;row<tbBangsal.getRowCount();row++){
-            tbBangsal.setValueAt(false,row,0);
+            tabMode.setValueAt(false,tbBangsal.convertRowIndexToModel(row),0);
         }
         getData();
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void ppSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSemuaActionPerformed
         for(row=0;row<tbBangsal.getRowCount();row++){
-            tbBangsal.setValueAt(true,row,0);
+            tabMode.setValueAt(true,tbBangsal.convertRowIndexToModel(row),0);
         }
         getData();
     }//GEN-LAST:event_ppSemuaActionPerformed
@@ -1572,7 +1575,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_AkunBayarKeyPressed
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 getData();
             }
@@ -1580,7 +1583,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(tbBangsal.getSelectedColumn()==0){
                 getData();
             }
@@ -1700,218 +1703,218 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
                 })==true){
                     row=tbBangsal.getRowCount();
                     for(i=0;i<row;i++){
-                        if(tabMode.getValueAt(i,0).toString().equals("true")){
-                            if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Jalan Dr")){
+                        if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                            if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Rawat Jalan Dr")){
                                 if(Sequel.menyimpantf2("bayar_rawat_jl_dr","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Jalan DrPr")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Rawat Jalan DrPr")){
                                 if(Sequel.menyimpantf2("bayar_rawat_jl_drpr","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Inap Dr")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Rawat Inap Dr")){
                                 if(Sequel.menyimpantf2("bayar_rawat_inap_dr","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Inap DrPr")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Rawat Inap DrPr")){
                                 if(Sequel.menyimpantf2("bayar_rawat_inap_drpr","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan PJ")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ralan PJ")){
                                 if(Sequel.menyimpantf2("bayar_periksa_lab","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan PJ Detail")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ralan PJ Detail")){
                                 if(Sequel.menyimpantf2("bayar_detail_periksa_lab","?,?,?,?,?,?,?",7,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
-                                    tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),11).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan Perujuk")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ralan Perujuk")){
                                 if(Sequel.menyimpantf2("bayar_periksa_lab_perujuk","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan Perujuk Detail")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ralan Perujuk Detail")){
                                 if(Sequel.menyimpantf2("bayar_detail_periksa_lab_perujuk","?,?,?,?,?,?,?",7,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
-                                    tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),11).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap PJ")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ranap PJ")){
                                 if(Sequel.menyimpantf2("bayar_periksa_lab","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap PJ Detail")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ranap PJ Detail")){
                                 if(Sequel.menyimpantf2("bayar_detail_periksa_lab","?,?,?,?,?,?,?",7,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
-                                    tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),11).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap Perujuk")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ranap Perujuk")){
                                 if(Sequel.menyimpantf2("bayar_periksa_lab_perujuk","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap Perujuk Detail")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Laborat Ranap Perujuk Detail")){
                                 if(Sequel.menyimpantf2("bayar_detail_periksa_lab_perujuk","?,?,?,?,?,?,?",7,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
-                                    tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),11).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ralan PJ")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Radiologi Ralan PJ")){
                                 if(Sequel.menyimpantf2("bayar_periksa_radiologi","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ralan Perujuk")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Radiologi Ralan Perujuk")){
                                 if(Sequel.menyimpantf2("bayar_periksa_radiologi_perujuk","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ranap PJ")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Radiologi Ranap PJ")){
                                 if(Sequel.menyimpantf2("bayar_periksa_radiologi","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ranap Perujuk")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Radiologi Ranap Perujuk")){
                                 if(Sequel.menyimpantf2("bayar_periksa_radiologi_perujuk","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan Op1")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ralan Op1")){
                                 if(Sequel.menyimpantf2("bayar_operasi_operator1","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan Op2")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ralan Op2")){
                                 if(Sequel.menyimpantf2("bayar_operasi_operator2","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan Op3")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ralan Op3")){
                                 if(Sequel.menyimpantf2("bayar_operasi_operator3","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr Anak")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ralan dr Anak")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_anak","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr Anastesi")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ralan dr Anastesi")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_anestesi","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr PJ Anak")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ralan dr PJ Anak")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_pjanak","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr Umum")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ralan dr Umum")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_umum","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap Op1")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ranap Op1")){
                                 if(Sequel.menyimpantf2("bayar_operasi_operator1","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap Op2")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ranap Op2")){
                                 if(Sequel.menyimpantf2("bayar_operasi_operator2","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap Op3")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ranap Op3")){
                                 if(Sequel.menyimpantf2("bayar_operasi_operator3","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr Anak")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ranap dr Anak")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_anak","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr Anastesi")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ranap dr Anastesi")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_anestesi","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr PJ Anak")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ranap dr PJ Anak")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_pjanak","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
-                            }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr Umum")){
+                            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().equals("Operasi Ranap dr Umum")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_umum","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
-                                    tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
+                                    NoTagihan.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),7).toString(),
+                                    tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+" "+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString()
                                   })==false){
                                     sukses=false;
                                 }
@@ -1988,8 +1991,8 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
                 if(sukses==true){
                     autoNomor();
                     for(i=0;i<tbBangsal.getRowCount();i++){
-                        if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                            tabMode.removeRow(i);
+                        if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                            tabMode.removeRow(tbBangsal.convertRowIndexToModel(i));
                             i--;
                         }
                     }
@@ -2172,35 +2175,37 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         if(KdDokter.getText().trim().equals("")||NmDokter.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Silahkan pilih dokter yang mau dibayarkan jasa medisnya....!!!");
         }else{
+            tbBangsal.suspendSorting();
             Valid.tabelKosong(tabMode);
             prosesCariSmc();
         }
+        tbBangsal.resumeSorting();
     }
 
     private void getData(){
         row=tbBangsal.getRowCount();
         bayar=0;totalrawatjalan=0;totalrawatinap=0;totallabrawatjalan=0;totallabrawatinap=0;totalradrawatjalan=0;totalradrawatinap=0;totaloperasirawatjalan=0;totaloperasirawatinap=0;
         for(i=0;i<row;i++){
-            if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                if(tbBangsal.getValueAt(i,9).toString().contains("Rawat Jalan")){
-                    totalrawatjalan=totalrawatjalan+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
-                }else if(tbBangsal.getValueAt(i,9).toString().contains("Rawat Inap")){
-                    totalrawatinap=totalrawatinap+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
-                }else if(tbBangsal.getValueAt(i,9).toString().contains("Laborat Ralan")){
-                    totallabrawatjalan=totallabrawatjalan+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
-                }else if(tbBangsal.getValueAt(i,9).toString().contains("Laborat Ranap")){
-                    totallabrawatinap=totallabrawatinap+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
-                }else if(tbBangsal.getValueAt(i,9).toString().contains("Radiologi Ralan")){
-                    totalradrawatjalan=totalradrawatjalan+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
-                }else if(tbBangsal.getValueAt(i,9).toString().contains("Radiologi Ranap")){
-                    totalradrawatinap=totalradrawatinap+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
-                }else if(tbBangsal.getValueAt(i,9).toString().contains("Operasi Ralan")){
-                    totaloperasirawatjalan=totaloperasirawatjalan+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
-                }else if(tbBangsal.getValueAt(i,9).toString().contains("Operasi Ranap")){
-                    totaloperasirawatinap=totaloperasirawatinap+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
+            if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().contains("Rawat Jalan")){
+                    totalrawatjalan=totalrawatjalan+Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString());
+                }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().contains("Rawat Inap")){
+                    totalrawatinap=totalrawatinap+Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString());
+                }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().contains("Laborat Ralan")){
+                    totallabrawatjalan=totallabrawatjalan+Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString());
+                }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().contains("Laborat Ranap")){
+                    totallabrawatinap=totallabrawatinap+Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString());
+                }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().contains("Radiologi Ralan")){
+                    totalradrawatjalan=totalradrawatjalan+Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString());
+                }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().contains("Radiologi Ranap")){
+                    totalradrawatinap=totalradrawatinap+Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString());
+                }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().contains("Operasi Ralan")){
+                    totaloperasirawatjalan=totaloperasirawatjalan+Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString());
+                }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),9).toString().contains("Operasi Ranap")){
+                    totaloperasirawatinap=totaloperasirawatinap+Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString());
                 }
 
-                bayar=bayar+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
+                bayar=bayar+Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString());
             }
         }
         LCount1.setText(Valid.SetAngka(bayar));

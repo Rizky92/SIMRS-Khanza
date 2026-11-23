@@ -718,6 +718,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbPemeriksaan.setAutoCreateRowSorter(true);
         tbPemeriksaan.setName("tbPemeriksaan"); // NOI18N
         tbPemeriksaan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -818,6 +819,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbObat.setAutoCreateRowSorter(true);
         tbObat.setName("tbObat"); // NOI18N
         tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1065,10 +1067,10 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
             ttl=0;
             for(i=0;i<tbPemeriksaan.getRowCount();i++){
                 item=0;
-                if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
-                    item=Double.parseDouble(tbPemeriksaan.getValueAt(i,3).toString());
+                if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),0).toString().equals("true")){
+                    item=Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),3).toString());
                     ttl=ttl+item;
-                    Sequel.menyimpan("temporary_radiologi","'"+i+"','"+tbPemeriksaan.getValueAt(i,2).toString()+"','"+item+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Biaya Radiologi");
+                    Sequel.menyimpan("temporary_radiologi","'"+i+"','"+tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),2).toString()+"','"+item+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Biaya Radiologi");
                 }
             }
             i++;
@@ -1125,7 +1127,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahPeriksaActionPerformed
 
     private void tbPemeriksaanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemeriksaanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPemeriksaan.getRowCount()!=0){
             try {
                // getData2();
             } catch (java.lang.NullPointerException e) {
@@ -1140,7 +1142,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
                     int row=tbPemeriksaan.getSelectedColumn();
                     if((row!=0)||(row!=20)){
                         if(tbPemeriksaan.getSelectedRow()>-1){
-                            tbPemeriksaan.setValueAt(true,tbPemeriksaan.getSelectedRow(),0);
+                            tabMode.setValueAt(true,tbPemeriksaan.convertRowIndexToModel(tbPemeriksaan.getSelectedRow()),0);
                         }
                         TCariPeriksa.setText("");
                         TCariPeriksa.requestFocus();
@@ -1203,7 +1205,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahBhpActionPerformed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPemeriksaan.getRowCount()!=0){
             try {
                 //getData();
             } catch (java.lang.NullPointerException e) {
@@ -1212,7 +1214,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbPemeriksaan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 try {
                     //getData();
@@ -1231,7 +1233,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
                 int row=tbObat.getSelectedRow();
                 if(row!= -1){
-                    tabMode.setValueAt("", row,0);
+                    tabMode2.setValueAt("", tbObat.convertRowIndexToModel(row),0);
                 }
             }
         }
@@ -1270,7 +1272,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
             Valid.textKosong(KodePerujuk,"Dokter Perujuk");
         }else if(KodePj.getText().equals("")||NmDokterPj.getText().equals("")){
             Valid.textKosong(KodePj,"Dokter Penanggung Jawab");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbPemeriksaan.getRowCount()==0){
             Valid.textKosong(TCariPeriksa,"Data Pemeriksaan");
         }else{
             jmlparsial=0;
@@ -1330,8 +1332,8 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
             return;
         }
         jml=0;
-        for(i=0;i<tbPemeriksaan.getRowCount();i++){
-            if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
+        for(i=0;i<tabMode.getRowCount();i++){
+            if(tabMode.getValueAt(i,0).toString().equals("true")){
                 jml++;
             }
         }
@@ -1350,9 +1352,9 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             pemeriksaan="";
-            for(i=0;i<tbPemeriksaan.getRowCount();i++){
-                if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
-                    pemeriksaan=tbPemeriksaan.getValueAt(i,2).toString()+" dengan Proyeksi : "+tbPemeriksaan.getValueAt(i,11).toString()+", kV : "+tbPemeriksaan.getValueAt(i,12).toString()+", mAS : "+tbPemeriksaan.getValueAt(i,13).toString()+", FFD : "+tbPemeriksaan.getValueAt(i,14).toString()+", BSF : "+tbPemeriksaan.getValueAt(i,15).toString()+", Inak : "+tbPemeriksaan.getValueAt(i,16).toString()+", Jml Penyinaran : "+tbPemeriksaan.getValueAt(i,17).toString()+", Dosis Radiasi : "+tbPemeriksaan.getValueAt(i,18).toString()+", "+pemeriksaan;
+            for(i=0;i<tabMode.getRowCount();i++){
+                if(tabMode.getValueAt(i,0).toString().equals("true")){
+                    pemeriksaan=tabMode.getValueAt(i,2).toString()+" dengan Proyeksi : "+tabMode.getValueAt(i,11).toString()+", kV : "+tabMode.getValueAt(i,12).toString()+", mAS : "+tabMode.getValueAt(i,13).toString()+", FFD : "+tabMode.getValueAt(i,14).toString()+", BSF : "+tabMode.getValueAt(i,15).toString()+", Inak : "+tabMode.getValueAt(i,16).toString()+", Jml Penyinaran : "+tabMode.getValueAt(i,17).toString()+", Dosis Radiasi : "+tabMode.getValueAt(i,18).toString()+", "+pemeriksaan;
                 }
             }
             Map<String, Object> param = new HashMap<>();
@@ -1627,7 +1629,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         try{
             jml=0;
             for(i=0;i<tbPemeriksaan.getRowCount();i++){
-                if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
+                if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -1673,30 +1675,31 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
 
             index=0;
             for(i=0;i<tbPemeriksaan.getRowCount();i++){
-                if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
+                if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode[index]=tbPemeriksaan.getValueAt(i,1).toString();
-                    nama[index]=tbPemeriksaan.getValueAt(i,2).toString();
-                    total[index]=Double.parseDouble(tbPemeriksaan.getValueAt(i,3).toString());
-                    bagian_rs[index]=Double.parseDouble(tbPemeriksaan.getValueAt(i,4).toString());
-                    bhp[index]=Double.parseDouble(tbPemeriksaan.getValueAt(i,5).toString());
-                    tarif_perujuk[index]=Double.parseDouble(tbPemeriksaan.getValueAt(i,6).toString());
-                    tarif_tindakan_dokter[index]=Double.parseDouble(tbPemeriksaan.getValueAt(i,7).toString());
-                    tarif_tindakan_petugas[index]=Double.parseDouble(tbPemeriksaan.getValueAt(i,8).toString());
-                    kso[index]=Double.parseDouble(tbPemeriksaan.getValueAt(i,9).toString());
-                    menejemen[index]=Double.parseDouble(tbPemeriksaan.getValueAt(i,10).toString());
-                    pproyeksi[index]=tbPemeriksaan.getValueAt(i,11).toString();
-                    pkV[index]=tbPemeriksaan.getValueAt(i,12).toString();
-                    pmAS[index]=tbPemeriksaan.getValueAt(i,13).toString();
-                    pFFD[index]=tbPemeriksaan.getValueAt(i,14).toString();
-                    pBSF[index]=tbPemeriksaan.getValueAt(i,15).toString();
-                    pinak[index]=tbPemeriksaan.getValueAt(i,16).toString();
-                    pjml_penyinaran[index]=tbPemeriksaan.getValueAt(i,17).toString();
-                    pdosis[index]=tbPemeriksaan.getValueAt(i,18).toString();
+                    kode[index]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),1).toString();
+                    nama[index]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),2).toString();
+                    total[index]=Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),3).toString());
+                    bagian_rs[index]=Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),4).toString());
+                    bhp[index]=Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),5).toString());
+                    tarif_perujuk[index]=Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),6).toString());
+                    tarif_tindakan_dokter[index]=Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),7).toString());
+                    tarif_tindakan_petugas[index]=Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),8).toString());
+                    kso[index]=Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),9).toString());
+                    menejemen[index]=Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),10).toString());
+                    pproyeksi[index]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),11).toString();
+                    pkV[index]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),12).toString();
+                    pmAS[index]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),13).toString();
+                    pFFD[index]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),14).toString();
+                    pBSF[index]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),15).toString();
+                    pinak[index]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),16).toString();
+                    pjml_penyinaran[index]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),17).toString();
+                    pdosis[index]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),18).toString();
                     index++;
                 }
             }
 
+            tbPemeriksaan.suspendSorting();
             Valid.tabelKosong(tabMode);
             for(i=0;i<jml;i++){
                 tabMode.addRow(new Object[] {pilih[i],kode[i],nama[i],total[i],bagian_rs[i],bhp[i],tarif_perujuk[i],tarif_tindakan_dokter[i],tarif_tindakan_petugas[i],kso[i],menejemen[i],pproyeksi[i],pkV[i],pmAS[i],pFFD[i],pBSF[i],pinak[i],pjml_penyinaran[i],pdosis[i]});
@@ -1789,24 +1792,25 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi 2 : "+e);
         }
+        tbPemeriksaan.resumeSorting();
     }
 
     public void isReset(){
         jml=tbPemeriksaan.getRowCount();
         for(i=0;i<jml;i++){
-            tbPemeriksaan.setValueAt(false,i,0);
-            tbPemeriksaan.setValueAt("",i,11);
-            tbPemeriksaan.setValueAt("",i,12);
-            tbPemeriksaan.setValueAt("",i,13);
-            tbPemeriksaan.setValueAt("",i,14);
-            tbPemeriksaan.setValueAt("",i,15);
-            tbPemeriksaan.setValueAt("",i,16);
-            tbPemeriksaan.setValueAt("",i,17);
-            tbPemeriksaan.setValueAt("",i,18);
+            tabMode.setValueAt(false,tbPemeriksaan.convertRowIndexToModel(i),0);
+            tabMode.setValueAt("",tbPemeriksaan.convertRowIndexToModel(i),11);
+            tabMode.setValueAt("",tbPemeriksaan.convertRowIndexToModel(i),12);
+            tabMode.setValueAt("",tbPemeriksaan.convertRowIndexToModel(i),13);
+            tabMode.setValueAt("",tbPemeriksaan.convertRowIndexToModel(i),14);
+            tabMode.setValueAt("",tbPemeriksaan.convertRowIndexToModel(i),15);
+            tabMode.setValueAt("",tbPemeriksaan.convertRowIndexToModel(i),16);
+            tabMode.setValueAt("",tbPemeriksaan.convertRowIndexToModel(i),17);
+            tabMode.setValueAt("",tbPemeriksaan.convertRowIndexToModel(i),18);
         }
         jml=tbObat.getRowCount();
         for(i=0;i<jml;i++){
-            tbObat.setValueAt(0,i,0);
+            tabMode2.setValueAt(0,tbObat.convertRowIndexToModel(i),0);
         }
 
         HasilPeriksa.setText("");
@@ -1816,7 +1820,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         jml=0;
         for(i=0;i<tbObat.getRowCount();i++){
             //System.out.println(tbObat.getValueAt(i,0).toString());
-            if(!tbObat.getValueAt(i,0).toString().equals("")){
+            if(!tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("")){
                 jml++;
             }
         }
@@ -1827,16 +1831,17 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         satuan=new String[jml];
 
         index=0;
-        for(i=0;i<tabMode2.getRowCount();i++){
-            if(!tabMode2.getValueAt(i,0).toString().equals("")){
-                jumlah[index]=Double.parseDouble(tabMode2.getValueAt(i,0).toString());
-                kodebarang[index]=tabMode2.getValueAt(i,1).toString();
-                namabarang[index]=tabMode2.getValueAt(i,2).toString();
-                satuan[index]=tabMode2.getValueAt(i,3).toString();
+        for(i=0;i<tbObat.getRowCount();i++){
+            if(!tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("")){
+                jumlah[index]=Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString());
+                kodebarang[index]=tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),1).toString();
+                namabarang[index]=tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),2).toString();
+                satuan[index]=tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),3).toString();
                 index++;
             }
         }
 
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode2);
 
         for(i=0;i<jml;i++){
@@ -1874,6 +1879,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbObat.resumeSorting();
     }
 
 
@@ -2209,79 +2215,79 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
                 Sequel.AutoComitFalse();
                 sukses=true;
                 for(i=0;i<tbPemeriksaan.getRowCount();i++){
-                    if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
+                    if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),0).toString().equals("true")){
                         proyeksi="";
-                        if(tbPemeriksaan.getValueAt(i,11).toString().length()>50){
-                            proyeksi=tbPemeriksaan.getValueAt(i,11).toString().substring(0,49);
+                        if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),11).toString().length()>50){
+                            proyeksi=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),11).toString().substring(0,49);
                         }else{
-                            proyeksi=tbPemeriksaan.getValueAt(i,11).toString();
+                            proyeksi=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),11).toString();
                         }
 
                         kV="";
-                        if(tbPemeriksaan.getValueAt(i,12).toString().length()>10){
-                            kV=tbPemeriksaan.getValueAt(i,12).toString().substring(0,9);
+                        if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),12).toString().length()>10){
+                            kV=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),12).toString().substring(0,9);
                         }else{
-                            kV=tbPemeriksaan.getValueAt(i,12).toString();
+                            kV=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),12).toString();
                         }
 
                         mAS="";
-                        if(tbPemeriksaan.getValueAt(i,13).toString().length()>10){
-                            mAS=tbPemeriksaan.getValueAt(i,13).toString().substring(0,9);
+                        if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),13).toString().length()>10){
+                            mAS=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),13).toString().substring(0,9);
                         }else{
-                            mAS=tbPemeriksaan.getValueAt(i,13).toString();
+                            mAS=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),13).toString();
                         }
 
                         FFD="";
-                        if(tbPemeriksaan.getValueAt(i,14).toString().length()>10){
-                            FFD=tbPemeriksaan.getValueAt(i,14).toString().substring(0,9);
+                        if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),14).toString().length()>10){
+                            FFD=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),14).toString().substring(0,9);
                         }else{
-                            FFD=tbPemeriksaan.getValueAt(i,14).toString();
+                            FFD=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),14).toString();
                         }
 
                         BSF="";
-                        if(tbPemeriksaan.getValueAt(i,15).toString().length()>10){
-                            BSF=tbPemeriksaan.getValueAt(i,15).toString().substring(0,9);
+                        if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),15).toString().length()>10){
+                            BSF=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),15).toString().substring(0,9);
                         }else{
-                            BSF=tbPemeriksaan.getValueAt(i,15).toString();
+                            BSF=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),15).toString();
                         }
 
                         inak="";
-                        if(tbPemeriksaan.getValueAt(i,16).toString().length()>10){
-                            inak=tbPemeriksaan.getValueAt(i,16).toString().substring(0,9);
+                        if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),16).toString().length()>10){
+                            inak=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),16).toString().substring(0,9);
                         }else{
-                            inak=tbPemeriksaan.getValueAt(i,16).toString();
+                            inak=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),16).toString();
                         }
 
                         jml_penyinaran="";
-                        if(tbPemeriksaan.getValueAt(i,17).toString().length()>10){
-                            jml_penyinaran=tbPemeriksaan.getValueAt(i,17).toString().substring(0,9);
+                        if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),17).toString().length()>10){
+                            jml_penyinaran=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),17).toString().substring(0,9);
                         }else{
-                            jml_penyinaran=tbPemeriksaan.getValueAt(i,17).toString();
+                            jml_penyinaran=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),17).toString();
                         }
 
                         dosis="";
-                        if(tbPemeriksaan.getValueAt(i,18).toString().length()>20){
-                            dosis=tbPemeriksaan.getValueAt(i,18).toString().substring(0,19);
+                        if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),18).toString().length()>20){
+                            dosis=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),18).toString().substring(0,19);
                         }else{
-                            dosis=tbPemeriksaan.getValueAt(i,18).toString();
+                            dosis=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),18).toString();
                         }
 
                         if(Sequel.menyimpantf2("periksa_radiologi","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", "Pemeriksaan",24,new String[]{
-                            TNoRw.getText(),KdPtg.getText(),tbPemeriksaan.getValueAt(i,1).toString(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
+                            TNoRw.getText(),KdPtg.getText(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),1).toString(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
                             CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),KodePerujuk.getText(),
-                            tbPemeriksaan.getValueAt(i,4).toString(),tbPemeriksaan.getValueAt(i,5).toString(),tbPemeriksaan.getValueAt(i,6).toString(),
-                            tbPemeriksaan.getValueAt(i,7).toString(),tbPemeriksaan.getValueAt(i,8).toString(),tbPemeriksaan.getValueAt(i,9).toString(),
-                            tbPemeriksaan.getValueAt(i,10).toString(),tbPemeriksaan.getValueAt(i,3).toString(),
+                            tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),4).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),5).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),6).toString(),
+                            tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),7).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),8).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),9).toString(),
+                            tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),10).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),3).toString(),
                             KodePj.getText(),status,proyeksi, kV, mAS, FFD, BSF, inak, jml_penyinaran, dosis
                         })==true){
-                            ttlbhp=ttlbhp+Double.parseDouble(tbPemeriksaan.getValueAt(i,5).toString());
-                            ttljmdokter=ttljmdokter+Double.parseDouble(tbPemeriksaan.getValueAt(i,7).toString());
-                            ttljmpetugas=ttljmpetugas+Double.parseDouble(tbPemeriksaan.getValueAt(i,8).toString());
-                            ttlkso=ttlkso+Double.parseDouble(tbPemeriksaan.getValueAt(i,9).toString());
-                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbPemeriksaan.getValueAt(i,3).toString());
-                            ttljasasarana=ttljasasarana+Double.parseDouble(tbPemeriksaan.getValueAt(i,4).toString());
-                            ttljmperujuk=ttljmperujuk+Double.parseDouble(tbPemeriksaan.getValueAt(i,6).toString());
-                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbPemeriksaan.getValueAt(i,10).toString());
+                            ttlbhp=ttlbhp+Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),5).toString());
+                            ttljmdokter=ttljmdokter+Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),7).toString());
+                            ttljmpetugas=ttljmpetugas+Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),8).toString());
+                            ttlkso=ttlkso+Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),9).toString());
+                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),3).toString());
+                            ttljasasarana=ttljasasarana+Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),4).toString());
+                            ttljmperujuk=ttljmperujuk+Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),6).toString());
+                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),10).toString());
                         }else{
                             sukses=false;
                         }
@@ -2290,13 +2296,13 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
 
                 if(sukses==true){
                     for(i=0;i<tbObat.getRowCount();i++){
-                        if(Valid.SetAngka(tbObat.getValueAt(i,0).toString())>0){
+                        if(Valid.SetAngka(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString())>0){
                             if(Sequel.menyimpantf2("beri_bhp_radiologi","?,?,?,?,?,?,?,?","BHP",8, new String[]{
                                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
-                                tbObat.getValueAt(i,1).toString(),tbObat.getValueAt(i,3).toString(),tbObat.getValueAt(i,0).toString(),
-                                tbObat.getValueAt(i,4).toString(),Double.toString(Double.parseDouble(tbObat.getValueAt(i,4).toString())*Double.parseDouble(tbObat.getValueAt(i,0).toString()))
+                                tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),1).toString(),tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),3).toString(),tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString(),
+                                tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),4).toString(),Double.toString(Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),4).toString())*Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString()))
                             })==true){
-                                ttlbhp=ttlbhp+(Double.parseDouble(tbObat.getValueAt(i,4).toString())*Double.parseDouble(tbObat.getValueAt(i,0).toString()));
+                                ttlbhp=ttlbhp+(Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),4).toString())*Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString()));
                             }else{
                                 sukses=false;
                             }

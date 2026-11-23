@@ -219,6 +219,7 @@ public class GrafikPegawaiPerKelompokJabatan extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setSortable(false);
         tbBangsal.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbBangsal.setName("tbBangsal"); // NOI18N
         Scroll.setViewportView(tbBangsal);
@@ -544,12 +545,12 @@ public class GrafikPegawaiPerKelompokJabatan extends javax.swing.JDialog {
                     totalp=totalp+jmlp;
                     tabMode.addRow(new Object[]{rs.getString(3)+" ("+rs.getString(1)+")",rs.getString(2),"",jmll+"","",jmlp+"",""});
                 }
-                if(tabMode.getRowCount()>0){
+                if(tbBangsal.getRowCount()>0){
                     tabMode.addRow(new Object[]{"Jumlah : ",total+"","100 %",totall+"","100 %",totalp+"","100 %"});
                     for(i=0;i<tbBangsal.getRowCount();i++){
-                        tbBangsal.setValueAt(Math.round((Double.parseDouble(tbBangsal.getValueAt(i,1).toString())/total)*100)+" %",i,2);
-                        tbBangsal.setValueAt(Math.round((Double.parseDouble(tbBangsal.getValueAt(i,3).toString())/totall)*100)+" %",i,4);
-                        tbBangsal.setValueAt(Math.round((Double.parseDouble(tbBangsal.getValueAt(i,5).toString())/totalp)*100)+" %",i,6);
+                        tabMode.setValueAt(Math.round((Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString())/total)*100)+" %",tbBangsal.convertRowIndexToModel(i),2);
+                        tabMode.setValueAt(Math.round((Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString())/totall)*100)+" %",tbBangsal.convertRowIndexToModel(i),4);
+                        tabMode.setValueAt(Math.round((Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),5).toString())/totalp)*100)+" %",tbBangsal.convertRowIndexToModel(i),6);
                     }
                 }
             } catch (Exception e) {

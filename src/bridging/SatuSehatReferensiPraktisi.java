@@ -344,7 +344,7 @@ public final class SatuSehatReferensiPraktisi extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
 
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             try{
                 headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_JSON);
@@ -365,7 +365,7 @@ public final class SatuSehatReferensiPraktisi extends javax.swing.JDialog {
             }
         }
 
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, Belum Ada data di Server Satu Sehat");
         }
     }

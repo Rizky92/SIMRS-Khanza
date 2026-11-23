@@ -176,6 +176,7 @@ public final class DlgLhtPembayaranPihakKe3BankMandiri extends javax.swing.JDial
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setSortable(false);
         tbBangsal.setComponentPopupMenu(jPopupMenu1);
         tbBangsal.setName("tbBangsal"); // NOI18N
         Scroll.setViewportView(tbBangsal);

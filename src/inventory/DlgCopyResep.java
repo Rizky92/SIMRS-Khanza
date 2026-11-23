@@ -275,6 +275,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbPemisahan.setSortable(false);
         tbPemisahan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -319,7 +320,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbPemisahanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemisahanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbPemisahan.getRowCount()!=0){
             if(evt.getClickCount()==2){
                 if(akses.getberi_obat()==true){
                     BtnTambahActionPerformed(null);
@@ -329,7 +330,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemisahanMouseClicked
 
     private void tbPemisahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemisahanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbPemisahan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 if(akses.getberi_obat()==true){
                     BtnTambahActionPerformed(null);
@@ -349,12 +350,12 @@ public class DlgCopyResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else if(tbPemisahan.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data resep dokter..!!");
         }else{
-            if(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString().equals("")){
+            if(tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),0).toString().equals("")){
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih No.Resep..!!");
             }else {
                 jmlparsial=0;
@@ -393,16 +394,16 @@ public class DlgCopyResep extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkTanggalItemStateChanged
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else if(tbPemisahan.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data resep dokter..!!");
         }else{
-            if(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString().equals("")){
+            if(tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),0).toString().equals("")){
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih No.Resep ..!!");
-            }else if(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),8).toString().equals("Sudah Terlayani")){
+            }else if(tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),8).toString().equals("Sudah Terlayani")){
                 JOptionPane.showMessageDialog(rootPane,"Resep sudah terlayani, silahkan konfirmasi bagian farmasi ..!!");
-            } else if (!kddokter.equals(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(), 7).toString())) {
+            } else if (!kddokter.equals(tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()), 7).toString())) {
                 JOptionPane.showMessageDialog(null, "Maaf, tidak bisa mengubah resep dokter lain..!!");
             }else {
                 jmlparsial=0;
@@ -412,7 +413,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
                 if(jmlparsial>0){
                     panggilform2();
                 }else{
-                    if(Sequel.cariRegistrasi(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),3).toString())>0){
+                    if(Sequel.cariRegistrasi(tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),3).toString())>0){
                         JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi ..!!");
                     }else{
                         panggilform2();
@@ -431,19 +432,19 @@ public class DlgCopyResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else if(tbPemisahan.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data resep dokter..!!");
         }else{
-            if(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString().equals("")){
+            if(tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),0).toString().equals("")){
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih No.Resep..!!");
-            }else if(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),8).toString().equals("Sudah Terlayani")){
+            }else if(tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),8).toString().equals("Sudah Terlayani")){
                 JOptionPane.showMessageDialog(rootPane,"Resep sudah terlayani, silahkan konfirmasi bagian farmasi ..!!");
-            } else if (!kddokter.equals(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(), 7).toString())) {
+            } else if (!kddokter.equals(tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()), 7).toString())) {
                 JOptionPane.showMessageDialog(null, "Maaf, tidak bisa menghapus resep dokter lain..!!");
             }else {
-                Sequel.meghapus("resep_obat","no_resep",tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString());
+                Sequel.meghapus("resep_obat","no_resep",tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),0).toString());
                 runBackground(() ->tampil());
             }
         }
@@ -649,11 +650,11 @@ public class DlgCopyResep extends javax.swing.JDialog {
         resep.setLocationRelativeTo(internalFrame1);
         String namadokter = Sequel.cariIsiSmc("select dokter.nm_dokter from dokter where dokter.kd_dokter = ?", kddokter);
         resep.setNoRm(norawat,kddokter,namadokter,
-                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),4).toString()+" "+
-                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),5).toString(),
+                tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),4).toString()+" "+
+                tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),5).toString(),
                 kode_pj,status);
         resep.isCek();
-        resep.tampilobat4(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString());
+        resep.tampilobat4(tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),0).toString());
         resep.setVisible(true);
     }
 
@@ -662,15 +663,15 @@ public class DlgCopyResep extends javax.swing.JDialog {
         resep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
         resep.setLocationRelativeTo(internalFrame1);
         resep.MatikanJam();
-        resep.setNoRm(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),3).toString(),
-                Valid.SetTgl2(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),1).toString()),
-                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),2).toString().substring(0,2),
-                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),2).toString().substring(3,5),
-                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),2).toString().substring(6,8),
-                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),7).toString(),
-                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),6).toString(),status);
+        resep.setNoRm(tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),3).toString(),
+                Valid.SetTgl2(tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),1).toString()),
+                tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),2).toString().substring(0,2),
+                tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),2).toString().substring(3,5),
+                tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),2).toString().substring(6,8),
+                tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),7).toString(),
+                tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),6).toString(),status);
         resep.isCek();
-        resep.tampilobat3(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString());
+        resep.tampilobat3(tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),0).toString());
         resep.setVisible(true);
     }
 

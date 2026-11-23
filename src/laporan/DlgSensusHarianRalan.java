@@ -621,6 +621,7 @@ public final class DlgSensusHarianRalan extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        table.setSortable(false);
         table.setComponentPopupMenu(jPopupMenu1);
         table.setName("table"); // NOI18N
         Scroll.setViewportView(table);

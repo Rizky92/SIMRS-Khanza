@@ -1307,7 +1307,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             DTPTgl.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -1459,7 +1459,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1468,7 +1468,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1561,10 +1561,10 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
                     "no_rawat = ? and kode_paket = ? and tanggal = ? and jam_mulai = ? and jam_selesai = ? and status = ? and kd_dokter = ? and kd_ruang_ok = ?",
                     TNoRw.getText(), KdOperasi.getText(), Valid.getTglSmc(DTPTgl), Valid.getJamSmc(JamMulai, MenitMulai, DetikMulai), Valid.getJamSmc(JamSelesai, MenitSelesai, DetikSelesai),
                     Status.getSelectedItem().toString(), KdDokter.getText(), KdRuangOperasi.getText(), Catatan.getText(),
-                    tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString(),
-                    tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString(),
-                    tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 8).toString(),
-                    tbObat.getValueAt(tbObat.getSelectedRow(), 13).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 16).toString()
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString(), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString(),
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 5).toString(), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6).toString(),
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 7).toString(), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 8).toString(),
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 13).toString(), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 16).toString()
                 )) {
                     runBackground(() ->tampil());
                     emptTeks();
@@ -1706,7 +1706,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkAccorActionPerformed
 
     private void BtnKamarInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKamarInapActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -1733,7 +1733,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKamarInapActionPerformed
 
     private void BtnPermintaanLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPermintaanLabActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -1754,14 +1754,14 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPermintaanLabActionPerformed
 
     private void BtnRiwayatPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRiwayatPasienActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
             if(tbObat.getSelectedRow()!= -1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 RMRiwayatPerawatan resume=new RMRiwayatPerawatan(null,true);
-                resume.setNoRm(Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()),tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
+                resume.setNoRm(Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString()),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
                 resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 resume.setLocationRelativeTo(internalFrame1);
                 resume.setVisible(true);
@@ -1773,7 +1773,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnRiwayatPasienActionPerformed
 
     private void BtnTagihanOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTagihanOperasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -1787,7 +1787,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
                     dlgro.SetCariOperasi(KdOperasi.getText(),KdDokter.getText(),NmDokter.getText());
                     dlgro.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     dlgro.setLocationRelativeTo(internalFrame1);
-                    dlgro.setNoRm(TNoRw.getText(),TPasien.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),15).toString(),KdDokter.getText(),NmDokter.getText());
+                    dlgro.setNoRm(TNoRw.getText(),TPasien.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString(),KdDokter.getText(),NmDokter.getText());
                     dlgro.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }
@@ -1798,7 +1798,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTagihanOperasiActionPerformed
 
     private void BtnObatBhpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnObatBhpActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -1807,7 +1807,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi ..!!");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    if(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString().equals("Ranap")){
+                    if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString().equals("Ranap")){
                         if(!DEPOAKTIFOBAT.equals("")){
                             lokasistok=DEPOAKTIFOBAT;
                             akses.setkdbangsal(lokasistok);
@@ -1835,7 +1835,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
                     resep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                     resep.setLocationRelativeTo(internalFrame1);
                     resep.setNoRm(TNoRw.getText(),DTPTgl.getDate(),JamSelesai.getSelectedItem().toString(),MenitSelesai.getSelectedItem().toString(),
-                            DetikSelesai.getSelectedItem().toString(),KdDokter.getText(),NmDokter.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),15).toString().replaceAll("R","r"));
+                            DetikSelesai.getSelectedItem().toString(),KdDokter.getText(),NmDokter.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString().replaceAll("R","r"));
                     resep.isCek();
                     resep.tampilobat();
                     resep.setVisible(true);
@@ -1883,7 +1883,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnRuangOperasiKeyPressed
 
     private void BtnPreOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPreOperasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -1904,7 +1904,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPreOperasiActionPerformed
 
     private void BtnPreAnastesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPreAnastesiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -1925,7 +1925,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPreAnastesiActionPerformed
 
     private void BtnTransferAntarRuangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTransferAntarRuangActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -1946,7 +1946,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTransferAntarRuangActionPerformed
 
     private void BtnChecklistPreOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnChecklistPreOperasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -1967,7 +1967,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnChecklistPreOperasiActionPerformed
 
     private void BtnSignInSebelumAnestesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSignInSebelumAnestesiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -1988,7 +1988,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSignInSebelumAnestesiActionPerformed
 
     private void BtnTimeOutSebelumInsisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTimeOutSebelumInsisiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -2009,7 +2009,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTimeOutSebelumInsisiActionPerformed
 
     private void BtnSignOutSebelumMenutupLukaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSignOutSebelumMenutupLukaActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -2030,7 +2030,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSignOutSebelumMenutupLukaActionPerformed
 
     private void BtnChecklistPostOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnChecklistPostOperasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -2114,7 +2114,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSkorBromagePascaAnestesiActionPerformed
 
     private void BtnPenilaianPreInduksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenilaianPreInduksiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -2135,7 +2135,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPenilaianPreInduksiActionPerformed
 
     private void BtnCatatanAnastesiSedasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCatatanAnastesiSedasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -2156,7 +2156,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCatatanAnastesiSedasiActionPerformed
 
     private void BtnPengkajianPaskaOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPengkajianPaskaOperasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -2177,7 +2177,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPengkajianPaskaOperasiActionPerformed
 
     private void BtnCatatanObservasiRuangOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCatatanObservasiRuangOperasiActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else{
@@ -2375,7 +2375,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
 
@@ -2400,24 +2400,24 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            JamMulai.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString().substring(0,2));
-            MenitMulai.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString().substring(3,5));
-            DetikMulai.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString().substring(6,8));
-            JamSelesai.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString().substring(0,2));
-            DetikSelesai.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString().substring(3,5));
-            DetikSelesai.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString().substring(6,8));
-            Status.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            Kamar.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            KdOperasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            NmOperasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            KdDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            NmDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            KdRuangOperasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            NmRuangOperasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            Valid.SetTgl(DTPTgl,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            Catatan.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 18).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            JamMulai.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString().substring(0,2));
+            MenitMulai.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString().substring(3,5));
+            DetikMulai.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString().substring(6,8));
+            JamSelesai.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString().substring(0,2));
+            DetikSelesai.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString().substring(3,5));
+            DetikSelesai.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString().substring(6,8));
+            Status.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            Kamar.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            KdOperasi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            NmOperasi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            KdDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            NmDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            KdRuangOperasi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
+            NmRuangOperasi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17).toString());
+            Valid.SetTgl(DTPTgl,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            Catatan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 18).toString());
         }
     }
 

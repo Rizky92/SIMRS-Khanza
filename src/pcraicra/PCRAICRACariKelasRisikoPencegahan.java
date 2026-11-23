@@ -317,7 +317,7 @@ public final class PCRAICRACariKelasRisikoPencegahan extends javax.swing.JDialog
     }//GEN-LAST:event_formWindowOpened
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 dispose();
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
@@ -396,7 +396,7 @@ public final class PCRAICRACariKelasRisikoPencegahan extends javax.swing.JDialog
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     private void tampil2() {
@@ -435,7 +435,7 @@ public final class PCRAICRACariKelasRisikoPencegahan extends javax.swing.JDialog
             response = null;
             root = null;
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
     }
 
     public void emptTeks() {

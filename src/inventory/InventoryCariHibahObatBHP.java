@@ -198,6 +198,7 @@ public class InventoryCariHibahObatBHP extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -930,19 +931,19 @@ public class InventoryCariHibahObatBHP extends javax.swing.JDialog {
     }//GEN-LAST:event_nmjenisKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim().equals("")){
                 Valid.textKosong(TCari,"pilihan data");
             }else{
                 try {
                     pscaribeli=koneksi.prepareStatement("select no_hibah, totalnilai, kd_bangsal,tgl_hibah from hibah_obat_bhp where no_hibah=?");
                     try {
-                        pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+                        pscaribeli.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
                         rs=pscaribeli.executeQuery();
                         if(rs.next()){
                             Sequel.AutoComitFalse();
@@ -993,7 +994,7 @@ public class InventoryCariHibahObatBHP extends javax.swing.JDialog {
                                 }
                             }
                             if(sukses==true){
-                                Sequel.queryu2("delete from hibah_obat_bhp where no_hibah=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
+                                Sequel.queryu2("delete from hibah_obat_bhp where no_hibah=?",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()});
                                 Sequel.Commit();
                             }else{
                                 sukses=false;

@@ -567,6 +567,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
         Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll1.setName("Scroll1"); // NOI18N
 
+        tbDiagnosa.setAutoCreateRowSorter(true);
         tbDiagnosa.setName("tbDiagnosa"); // NOI18N
         tbDiagnosa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -614,6 +615,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
         Scroll2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll2.setName("Scroll2"); // NOI18N
 
+        tbProsedur.setAutoCreateRowSorter(true);
         tbProsedur.setName("tbProsedur"); // NOI18N
         tbProsedur.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -744,7 +746,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbProgramPRBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProgramPRBMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbProgramPRB.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -753,7 +755,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
     }//GEN-LAST:event_tbProgramPRBMouseClicked
 
     private void tbProgramPRBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbProgramPRBKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbProgramPRB.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -775,12 +777,12 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
                 dx="";
                 jml=0;
                 for(i=0;i<tbDiagnosa.getRowCount();i++){
-                    if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
+                    if(tabMode2.getValueAt(tbDiagnosa.convertRowIndexToModel(i),0).toString().equals("true")){
                         jml++;
                         if(jml==1){
-                            dx=dx+"{\"kode\":\"P;"+tbDiagnosa.getValueAt(i,1).toString()+"\"},";
+                            dx=dx+"{\"kode\":\"P;"+tabMode2.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString()+"\"},";
                         }else{
-                            dx=dx+"{\"kode\":\"S;"+tbDiagnosa.getValueAt(i,1).toString()+"\"},";
+                            dx=dx+"{\"kode\":\"S;"+tabMode2.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString()+"\"},";
                         }
                     }
                 }
@@ -791,9 +793,9 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
                 jml=0;
                 pros="";
                 for(i=0;i<tbProsedur.getRowCount();i++){
-                    if(tbProsedur.getValueAt(i,0).toString().equals("true")){
+                    if(tabMode3.getValueAt(tbProsedur.convertRowIndexToModel(i),0).toString().equals("true")){
                         jml++;
-                        pros=pros+"{\"kode\":\""+tbProsedur.getValueAt(i,1).toString()+"\"},";
+                        pros=pros+"{\"kode\":\""+tabMode3.getValueAt(tbProsedur.convertRowIndexToModel(i),1).toString()+"\"},";
                     }
                 }
                 if(jml>0){
@@ -827,23 +829,23 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
                     if(jml>0){
                         jml=0;
                         for(i=0;i<tbDiagnosa.getRowCount();i++){
-                            if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
+                            if(tabMode2.getValueAt(tbDiagnosa.convertRowIndexToModel(i),0).toString().equals("true")){
                                 jml++;
                                 if(jml==1){
                                     Sequel.menyimpan("bridging_rujukan_bpjs_khusus_diagnosa","?,?,?,?",4,new String[]{
-                                        NoRujukan.getText(),"P",tbDiagnosa.getValueAt(i,1).toString(),tbDiagnosa.getValueAt(i,2).toString()
+                                        NoRujukan.getText(),"P",tabMode2.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString(),tabMode2.getValueAt(tbDiagnosa.convertRowIndexToModel(i),2).toString()
                                     });
                                 }else{
                                     Sequel.menyimpan("bridging_rujukan_bpjs_khusus_diagnosa","?,?,?,?",4,new String[]{
-                                        NoRujukan.getText(),"S",tbDiagnosa.getValueAt(i,1).toString(),tbDiagnosa.getValueAt(i,2).toString()
+                                        NoRujukan.getText(),"S",tabMode2.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString(),tabMode2.getValueAt(tbDiagnosa.convertRowIndexToModel(i),2).toString()
                                     });
                                 }
                             }
                         }
                         for(i=0;i<tbProsedur.getRowCount();i++){
-                            if(tbProsedur.getValueAt(i,0).toString().equals("true")){
+                            if(tabMode3.getValueAt(tbProsedur.convertRowIndexToModel(i),0).toString().equals("true")){
                                 Sequel.menyimpan("bridging_rujukan_bpjs_khusus_prosedur","?,?,?",3,new String[]{
-                                    NoRujukan.getText(),tbProsedur.getValueAt(i,1).toString(),tbProsedur.getValueAt(i,2).toString()
+                                    NoRujukan.getText(),tabMode3.getValueAt(tbProsedur.convertRowIndexToModel(i),1).toString(),tabMode3.getValueAt(tbProsedur.convertRowIndexToModel(i),2).toString()
                                 });
                             }
                         }
@@ -955,7 +957,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
                 headers.add("X-Signature",api.getHmac(utc));
                 headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
                 requestEntity = new HttpEntity(headers);
-                URL = link+"/Rujukan/Khusus/List/Bulan/"+Integer.parseInt(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),3).toString().substring(5,7))+"/Tahun/"+tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),3).toString().substring(0,4);
+                URL = link+"/Rujukan/Khusus/List/Bulan/"+Integer.parseInt(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),3).toString().substring(5,7))+"/Tahun/"+tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),3).toString().substring(0,4);
                 System.out.println(URL);
                 root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
                 nameNode = root.path("metaData");
@@ -965,7 +967,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
                     //response = root.path("response");
                     if(response.path("rujukan").isArray()){
                         for(JsonNode list:response.path("rujukan")){
-                            if(list.path("norujukan").asText().equals(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),0).toString())){
+                            if(list.path("norujukan").asText().equals(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),0).toString())){
                                 idrujukan=list.path("idrujukan").asText();
                             }
                         }
@@ -1114,7 +1116,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbProgramPRB.getRowCount());
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -1122,15 +1124,17 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
 
     private void getData() {
         if(tbProgramPRB.getSelectedRow()!= -1){
-            NoRujukan.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),0).toString());
-            NoPeserta.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),1).toString());
-            NmPasien.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),2).toString());
+            NoRujukan.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),0).toString());
+            NoPeserta.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),1).toString());
+            NmPasien.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),2).toString());
+            tbDiagnosa.suspendSorting();
             Valid.tabelKosong(tabMode2);
+            tbProsedur.suspendSorting();
             Valid.tabelKosong(tabMode3);
             try{
                 ps=koneksi.prepareStatement("select * from bridging_rujukan_bpjs_khusus_diagnosa where no_rujukan=? order by status");
                 try {
-                    ps.setString(1,tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),0).toString());
                     rs=ps.executeQuery();
                     while(rs.next()){
                         tabMode2.addRow(new Object[]{
@@ -1150,7 +1154,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
 
                 ps=koneksi.prepareStatement("select * from bridging_rujukan_bpjs_khusus_prosedur where no_rujukan=?");
                 try {
-                    ps.setString(1,tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),0).toString());
                     rs=ps.executeQuery();
                     while(rs.next()){
                         tabMode3.addRow(new Object[]{
@@ -1171,6 +1175,8 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
                 System.out.println("Notifikasi : "+e);
             }
         }
+        tbDiagnosa.resumeSorting();
+        tbProsedur.resumeSorting();
     }
 
     public void setNoRm(String nokartu,String norm,String namapasien,String norujukan) {
@@ -1203,7 +1209,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
         try {
             jml=0;
             for(i=0;i<tbDiagnosa.getRowCount();i++){
-                if(Valid.SetAngka(tbDiagnosa.getValueAt(i,0).toString())>0){
+                if(Valid.SetAngka(tabMode2.getValueAt(tbDiagnosa.convertRowIndexToModel(i),0).toString())>0){
                     jml++;
                 }
             }
@@ -1215,13 +1221,14 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
             nama=new String[jml];
             index=0;
             for(i=0;i<tbDiagnosa.getRowCount();i++){
-                if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
+                if(tabMode2.getValueAt(tbDiagnosa.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode[index]=tbDiagnosa.getValueAt(i,1).toString();
-                    nama[index]=tbDiagnosa.getValueAt(i,2).toString();
+                    kode[index]=tabMode2.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString();
+                    nama[index]=tabMode2.getValueAt(tbDiagnosa.convertRowIndexToModel(i),2).toString();
                 }
             }
 
+            tbDiagnosa.suspendSorting();
             Valid.tabelKosong(tabMode2);
             for(i=0;i<jml;i++){
                 tabMode2.addRow(new Object[] {
@@ -1259,13 +1266,14 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
         }
+        tbDiagnosa.resumeSorting();
     }
 
     private void tampilProsedur() {
         try {
             jml=0;
             for(i=0;i<tbProsedur.getRowCount();i++){
-                if(Valid.SetAngka(tbProsedur.getValueAt(i,0).toString())>0){
+                if(Valid.SetAngka(tabMode3.getValueAt(tbProsedur.convertRowIndexToModel(i),0).toString())>0){
                     jml++;
                 }
             }
@@ -1277,13 +1285,14 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
             nama=new String[jml];
             index=0;
             for(i=0;i<tbProsedur.getRowCount();i++){
-                if(tbProsedur.getValueAt(i,0).toString().equals("true")){
+                if(tabMode3.getValueAt(tbProsedur.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode[index]=tbProsedur.getValueAt(i,1).toString();
-                    nama[index]=tbProsedur.getValueAt(i,2).toString();
+                    kode[index]=tabMode3.getValueAt(tbProsedur.convertRowIndexToModel(i),1).toString();
+                    nama[index]=tabMode3.getValueAt(tbProsedur.convertRowIndexToModel(i),2).toString();
                 }
             }
 
+            tbProsedur.suspendSorting();
             Valid.tabelKosong(tabMode3);
 
             for(i=0;i<jml;i++){
@@ -1322,6 +1331,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
         }
+        tbProsedur.resumeSorting();
     }
 
     private void emptTeks() {
@@ -1331,9 +1341,13 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
         NmPasien.setText("");
         Diagnosa.setText("");
         Prosedur.setText("");
+        tbDiagnosa.suspendSorting();
         Valid.tabelKosong(tabMode2);
+        tbProsedur.suspendSorting();
         Valid.tabelKosong(tabMode3);
         NoRujukan.requestFocus();
+        tbDiagnosa.resumeSorting();
+        tbProsedur.resumeSorting();
     }
 
     public static class HttpEntityEnclosingDeleteRequest extends HttpEntityEnclosingRequestBase {
@@ -1389,7 +1403,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
                             "\"request\": {" +
                                 "\"t_rujukan\": {" +
                                     "\"idRujukan\": \""+idrujukan+"\"," +
-                                    "\"noRujukan\": \""+tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),0).toString()+"\"," +
+                                    "\"noRujukan\": \""+tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),0).toString()+"\"," +
                                     "\"user\": \""+user+"\"" +
                                 "}" +
                             "}" +
@@ -1399,8 +1413,8 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
             System.out.println("code : "+nameNode.path("code").asText());
             System.out.println("message : "+nameNode.path("message").asText());
             if(nameNode.path("code").asText().equals("200")){
-                Sequel.meghapus("bridging_rujukan_bpjs_khusus_diagnosa","no_rujukan",tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),0).toString());
-                Sequel.meghapus("bridging_rujukan_bpjs_khusus_prosedur","no_rujukan",tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),0).toString());
+                Sequel.meghapus("bridging_rujukan_bpjs_khusus_diagnosa","no_rujukan",tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),0).toString());
+                Sequel.meghapus("bridging_rujukan_bpjs_khusus_prosedur","no_rujukan",tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),0).toString());
                 runBackground(() ->tampil());
             }else{
                 JOptionPane.showMessageDialog(null,nameNode.path("message").asText());

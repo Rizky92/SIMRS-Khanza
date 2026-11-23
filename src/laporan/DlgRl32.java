@@ -140,6 +140,7 @@ public final class DlgRl32 extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setSortable(false);
         tbBangsal.setName("tbBangsal"); // NOI18N
         Scroll.setViewportView(tbBangsal);
 
@@ -309,7 +310,7 @@ public final class DlgRl32 extends javax.swing.JDialog {
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                         for(int r=0;r<tabMode.getRowCount();r++){
-                            if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
+                            if(!tabMode.getValueAt(r,0).toString().contains(">>")){
                                 Sequel.menyimpan("temporary","'"+r+"','"+
                                                 tabMode.getValueAt(r,0).toString()+"','"+
                                                 tabMode.getValueAt(r,1).toString()+"','"+

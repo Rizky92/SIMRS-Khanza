@@ -915,8 +915,8 @@ public final class RMPenilaianBishop extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else{
-                if(akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString())){
-                    if(Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString(),Sequel.ambiltanggalsekarang())==true){
+                if(akses.getkode().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString())){
+                    if(Sequel.cekTanggal48jam(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString(),Sequel.ambiltanggalsekarang())==true){
                         hapus();
                     }
                 }else{
@@ -946,8 +946,8 @@ public final class RMPenilaianBishop extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString())){
-                        if(Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString(),Sequel.ambiltanggalsekarang())==true){
+                    if(akses.getkode().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString())){
+                        if(Sequel.cekTanggal48jam(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString(),Sequel.ambiltanggalsekarang())==true){
                             if(TanggalRegistrasi.getText().equals("")){
                                 TanggalRegistrasi.setText(Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
                             }
@@ -1040,27 +1040,27 @@ public final class RMPenilaianBishop extends javax.swing.JDialog {
                             for (i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append(
                                     "<tr class='isi'>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,1).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,2).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,3).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,4).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,5).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,6).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,7).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,8).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,9).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,10).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,11).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,12).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,13).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,14).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,15).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,16).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,0).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,1).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,2).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,3).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,4).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,5).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,6).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,7).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,8).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,9).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,10).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,11).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,12).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,13).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,14).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,15).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,16).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,17).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,18).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,19).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,20).toString()+"</td>"+
                                     "</tr>");
                             }
                             LoadHTML.setText(
@@ -1119,27 +1119,27 @@ public final class RMPenilaianBishop extends javax.swing.JDialog {
                             for (i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append(
                                     "<tr class='isi'>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,1).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,2).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,3).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,4).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,5).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,6).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,7).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,8).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,9).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,10).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,11).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,12).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,13).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,14).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,15).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,16).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,0).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,1).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,2).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,3).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,4).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,5).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,6).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,7).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,8).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,9).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,10).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,11).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,12).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,13).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,14).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,15).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,16).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,17).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,18).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,19).toString()+"</td>"+
+                                       "<td valign='top'>"+tabMode.getValueAt(i,20).toString()+"</td>"+
                                     "</tr>");
                             }
                             LoadHTML.setText(
@@ -1175,7 +1175,7 @@ public final class RMPenilaianBishop extends javax.swing.JDialog {
                             ); 
                             for (i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append(
-                                    "\""+tbObat.getValueAt(i,0).toString()+"\";\""+tbObat.getValueAt(i,1).toString()+"\";\""+tbObat.getValueAt(i,2).toString()+"\";\""+tbObat.getValueAt(i,3).toString()+"\";\""+tbObat.getValueAt(i,4).toString()+"\";\""+tbObat.getValueAt(i,5).toString()+"\";\""+tbObat.getValueAt(i,6).toString()+"\";\""+tbObat.getValueAt(i,7).toString()+"\";\""+tbObat.getValueAt(i,8).toString()+"\";\""+tbObat.getValueAt(i,9).toString()+"\";\""+tbObat.getValueAt(i,10).toString()+"\";\""+tbObat.getValueAt(i,11).toString()+"\";\""+tbObat.getValueAt(i,12).toString()+"\";\""+tbObat.getValueAt(i,13).toString()+"\";\""+tbObat.getValueAt(i,14).toString()+"\";\""+tbObat.getValueAt(i,15).toString()+"\";\""+tbObat.getValueAt(i,16).toString()+"\";\""+tbObat.getValueAt(i,17).toString()+"\";\""+tbObat.getValueAt(i,18).toString()+"\";\""+tbObat.getValueAt(i,19).toString()+"\";\""+tbObat.getValueAt(i,20).toString()+"\"\n"
+                                    "\""+tabMode.getValueAt(i,0).toString()+"\";\""+tabMode.getValueAt(i,1).toString()+"\";\""+tabMode.getValueAt(i,2).toString()+"\";\""+tabMode.getValueAt(i,3).toString()+"\";\""+tabMode.getValueAt(i,4).toString()+"\";\""+tabMode.getValueAt(i,5).toString()+"\";\""+tabMode.getValueAt(i,6).toString()+"\";\""+tabMode.getValueAt(i,7).toString()+"\";\""+tabMode.getValueAt(i,8).toString()+"\";\""+tabMode.getValueAt(i,9).toString()+"\";\""+tabMode.getValueAt(i,10).toString()+"\";\""+tabMode.getValueAt(i,11).toString()+"\";\""+tabMode.getValueAt(i,12).toString()+"\";\""+tabMode.getValueAt(i,13).toString()+"\";\""+tabMode.getValueAt(i,14).toString()+"\";\""+tabMode.getValueAt(i,15).toString()+"\";\""+tabMode.getValueAt(i,16).toString()+"\";\""+tabMode.getValueAt(i,17).toString()+"\";\""+tabMode.getValueAt(i,18).toString()+"\";\""+tabMode.getValueAt(i,19).toString()+"\";\""+tabMode.getValueAt(i,20).toString()+"\"\n"
                                 );
                             }
                             f = new File("DataPenilaianBishop.csv");            
@@ -1237,7 +1237,7 @@ public final class RMPenilaianBishop extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1246,7 +1246,7 @@ public final class RMPenilaianBishop extends javax.swing.JDialog {
 }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1298,13 +1298,13 @@ public final class RMPenilaianBishop extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());   
             param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+tbObat.getValueAt(tbObat.getSelectedRow(),7).toString().substring(0,10)); 
+            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString()+"\nID "+(finger.equals("")?tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString():finger)+"\n"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString().substring(0,10)); 
             Valid.MyReportqry(
                 "rptFormulirPenilaianBishop.jasper","report","::[ Formulir Penilaian Skor Bishop ]::","select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,penilaian_bishop_scor.kd_dokter,dokter.nm_dokter,penilaian_bishop_scor.tanggal,"+
                 "penilaian_bishop_scor.pembukaan,penilaian_bishop_scor.skor_pembukaan,penilaian_bishop_scor.pendataran,penilaian_bishop_scor.skor_pendataran,penilaian_bishop_scor.station,penilaian_bishop_scor.skor_station,penilaian_bishop_scor.konsistensi,penilaian_bishop_scor.skor_konsistensi,"+
                 "penilaian_bishop_scor.posisi,penilaian_bishop_scor.skor_posisi,penilaian_bishop_scor.skor,penilaian_bishop_scor.kategori,penilaian_bishop_scor.keterangan from penilaian_bishop_scor inner join reg_periksa on penilaian_bishop_scor.no_rawat=reg_periksa.no_rawat "+
-                "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on penilaian_bishop_scor.kd_dokter=dokter.kd_dokter where penilaian_bishop_scor.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param
+                "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on penilaian_bishop_scor.kd_dokter=dokter.kd_dokter where penilaian_bishop_scor.no_rawat='"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"'",param
             );
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
@@ -1544,7 +1544,7 @@ public final class RMPenilaianBishop extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
     
     public void emptTeks() {
@@ -1575,25 +1575,25 @@ public final class RMPenilaianBishop extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            JK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            Pembukaan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            SkorPembukaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            Pendataran.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            SkorPendataran.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            Station.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            SkorStation.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            Konsistensi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            SkorKonsistensi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            Posisi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            SkorPosisi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            TotalSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            Kategori.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
-            Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
-            Valid.SetTgl2(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            JK.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            TglLahir.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            Pembukaan.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            SkorPembukaan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            Pendataran.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            SkorPendataran.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            Station.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            SkorStation.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            Konsistensi.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            SkorKonsistensi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+            Posisi.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
+            SkorPosisi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17).toString());
+            TotalSkor.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18).toString());
+            Kategori.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19).toString());
+            Keterangan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20).toString());
+            Valid.SetTgl2(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
         }
     }
     
@@ -1688,39 +1688,39 @@ public final class RMPenilaianBishop extends javax.swing.JDialog {
     private void ganti() {
         if(Sequel.mengedittf("penilaian_bishop_scor","no_rawat=?","no_rawat=?,tanggal=?,pembukaan=?,skor_pembukaan=?,pendataran=?,skor_pendataran=?,station=?,skor_station=?,konsistensi=?,skor_konsistensi=?,posisi=?,skor_posisi=?,skor=?,kategori=?,keterangan=?,kd_dokter=?",17,new String[]{
             TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),Pembukaan.getSelectedItem().toString(),SkorPembukaan.getText(),Pendataran.getSelectedItem().toString(),SkorPendataran.getText(),Station.getSelectedItem().toString(),
-            SkorStation.getText(),Konsistensi.getSelectedItem().toString(),SkorKonsistensi.getText(),Posisi.getSelectedItem().toString(),SkorPosisi.getText(),TotalSkor.getText(),Kategori.getText(),Keterangan.getText(),KdDokter.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+            SkorStation.getText(),Konsistensi.getSelectedItem().toString(),SkorKonsistensi.getText(),Posisi.getSelectedItem().toString(),SkorPosisi.getText(),TotalSkor.getText(),Kategori.getText(),Keterangan.getText(),KdDokter.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
         })==true){
-               tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
-               tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),1);
-               tbObat.setValueAt(TPasien.getText(),tbObat.getSelectedRow(),2);
-               tbObat.setValueAt(JK.getText(),tbObat.getSelectedRow(),3);
-               tbObat.setValueAt(TglLahir.getText(),tbObat.getSelectedRow(),4);
-               tbObat.setValueAt(KdDokter.getText(),tbObat.getSelectedRow(),5);
-               tbObat.setValueAt(NmDokter.getText(),tbObat.getSelectedRow(),6);
-               tbObat.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),tbObat.getSelectedRow(),7);
-               tbObat.setValueAt(Pembukaan.getSelectedItem().toString(),tbObat.getSelectedRow(),8);
-               tbObat.setValueAt(SkorPembukaan.getText(),tbObat.getSelectedRow(),9);
-               tbObat.setValueAt(Pendataran.getSelectedItem().toString(),tbObat.getSelectedRow(),10);
-               tbObat.setValueAt(SkorPendataran.getText(),tbObat.getSelectedRow(),11);
-               tbObat.setValueAt(Station.getSelectedItem().toString(),tbObat.getSelectedRow(),12);
-               tbObat.setValueAt(SkorStation.getText(),tbObat.getSelectedRow(),13);
-               tbObat.setValueAt(Konsistensi.getSelectedItem().toString(),tbObat.getSelectedRow(),14);
-               tbObat.setValueAt(SkorKonsistensi.getText(),tbObat.getSelectedRow(),15);
-               tbObat.setValueAt(Posisi.getSelectedItem().toString(),tbObat.getSelectedRow(),16);
-               tbObat.setValueAt(SkorPosisi.getText(),tbObat.getSelectedRow(),17);
-               tbObat.setValueAt(TotalSkor.getText(),tbObat.getSelectedRow(),18);
-               tbObat.setValueAt(Kategori.getText(),tbObat.getSelectedRow(),19);
-               tbObat.setValueAt(Keterangan.getText(),tbObat.getSelectedRow(),20);
+               tabMode.setValueAt(TNoRw.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0);
+               tabMode.setValueAt(TNoRM.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1);
+               tabMode.setValueAt(TPasien.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2);
+               tabMode.setValueAt(JK.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3);
+               tabMode.setValueAt(TglLahir.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4);
+               tabMode.setValueAt(KdDokter.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5);
+               tabMode.setValueAt(NmDokter.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6);
+               tabMode.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7);
+               tabMode.setValueAt(Pembukaan.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8);
+               tabMode.setValueAt(SkorPembukaan.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9);
+               tabMode.setValueAt(Pendataran.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10);
+               tabMode.setValueAt(SkorPendataran.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11);
+               tabMode.setValueAt(Station.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12);
+               tabMode.setValueAt(SkorStation.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13);
+               tabMode.setValueAt(Konsistensi.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14);
+               tabMode.setValueAt(SkorKonsistensi.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15);
+               tabMode.setValueAt(Posisi.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16);
+               tabMode.setValueAt(SkorPosisi.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17);
+               tabMode.setValueAt(TotalSkor.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18);
+               tabMode.setValueAt(Kategori.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19);
+               tabMode.setValueAt(Keterangan.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20);
                emptTeks();
         }
     }
 
     private void hapus() {
         if(Sequel.queryu2tf("delete from penilaian_bishop_scor where no_rawat=?",1,new String[]{
-            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
         })==true){
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
@@ -1741,7 +1741,7 @@ public final class RMPenilaianBishop extends javax.swing.JDialog {
                 SkorStation.getText(),Konsistensi.getSelectedItem().toString(),SkorKonsistensi.getText(),Posisi.getSelectedItem().toString(),
                 SkorPosisi.getText(),TotalSkor.getText(),Kategori.getText(),Keterangan.getText()
             });
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
         }
     }

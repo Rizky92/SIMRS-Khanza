@@ -160,7 +160,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKtgPny.setAutoCreateRowSorter(false);
+        tbKtgPny.setAutoCreateRowSorter(true);
         tbKtgPny.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbKtgPny.setName("tbKtgPny"); // NOI18N
         tbKtgPny.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -467,8 +467,8 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbKtgPny.getRowCount();i++){
-            if(tbKtgPny.getValueAt(i,0).toString().equals("true")){
-                Sequel.meghapus("kategori_penyakit","kd_ktg",tbKtgPny.getValueAt(i,1).toString());
+            if(tabMode.getValueAt(tbKtgPny.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.meghapus("kategori_penyakit","kd_ktg",tabMode.getValueAt(tbKtgPny.convertRowIndexToModel(i),1).toString());
             }
         }
         runBackground(() ->tampil());
@@ -492,9 +492,9 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
             Valid.textKosong(TCiri,"ciri-ciri umum");
         }else{
             Valid.editTable(tabMode,"kategori_penyakit","kd_ktg","?","kd_ktg=?,nm_kategori=?,ciri_umum=?",4,new String[]{
-                TKd.getText(),TNm.getText(),TCiri.getText(),tbKtgPny.getValueAt(tbKtgPny.getSelectedRow(),1).toString()
+                TKd.getText(),TNm.getText(),TCiri.getText(),tabMode.getValueAt(tbKtgPny.convertRowIndexToModel(tbKtgPny.getSelectedRow()),1).toString()
             });
-            if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+            if(tbKtgPny.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -620,7 +620,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKtgPnyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKtgPnyMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKtgPny.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -629,7 +629,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKtgPnyMouseClicked
 
     private void tbKtgPnyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKtgPnyKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKtgPny.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -713,6 +713,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbKtgPny.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select * from kategori_penyakit "+(TCari.getText().trim().equals("")?"":"where kategori_penyakit.kd_ktg like ? or kategori_penyakit.nm_kategori like ? or kategori_penyakit.ciri_umum like ? ")+"order by kategori_penyakit.kd_ktg");
@@ -741,7 +742,8 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKtgPny.getRowCount());
+        tbKtgPny.resumeSorting();
     }
 
     public void emptTeks() {
@@ -756,9 +758,9 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
     private void getData() {
         i=tbKtgPny.getSelectedRow();
         if(i!= -1){
-            TKd.setText(tbKtgPny.getValueAt(i,1).toString());
-            TNm.setText(tbKtgPny.getValueAt(i,2).toString());
-            TCiri.setText(tbKtgPny.getValueAt(i,3).toString());
+            TKd.setText(tabMode.getValueAt(tbKtgPny.convertRowIndexToModel(i),1).toString());
+            TNm.setText(tabMode.getValueAt(tbKtgPny.convertRowIndexToModel(i),2).toString());
+            TCiri.setText(tabMode.getValueAt(tbKtgPny.convertRowIndexToModel(i),3).toString());
         }
     }
 

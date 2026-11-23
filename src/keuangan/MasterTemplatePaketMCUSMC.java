@@ -768,6 +768,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         Scroll3.setName("Scroll3"); // NOI18N
         Scroll3.setOpaque(true);
 
+        tbRadiologi.setAutoCreateRowSorter(true);
         tbRadiologi.setComponentPopupMenu(Popup);
         tbRadiologi.setName("tbRadiologi"); // NOI18N
         Scroll3.setViewportView(tbRadiologi);
@@ -822,6 +823,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         Scroll4.setName("Scroll4"); // NOI18N
         Scroll4.setOpaque(true);
 
+        tbLabPK.setAutoCreateRowSorter(true);
         tbLabPK.setComponentPopupMenu(Popup);
         tbLabPK.setName("tbLabPK"); // NOI18N
         tbLabPK.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -838,6 +840,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         Scroll5.setName("Scroll5"); // NOI18N
         Scroll5.setOpaque(true);
 
+        tbDetailLabPK.setAutoCreateRowSorter(true);
         tbDetailLabPK.setComponentPopupMenu(Popup);
         tbDetailLabPK.setName("tbDetailLabPK"); // NOI18N
         Scroll5.setViewportView(tbDetailLabPK);
@@ -899,6 +902,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         Scroll6.setName("Scroll6"); // NOI18N
         Scroll6.setOpaque(true);
 
+        tbLabPA.setAutoCreateRowSorter(true);
         tbLabPA.setComponentPopupMenu(Popup);
         tbLabPA.setName("tbLabPA"); // NOI18N
         Scroll6.setViewportView(tbLabPA);
@@ -938,6 +942,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         Scroll7.setName("Scroll7"); // NOI18N
         Scroll7.setOpaque(true);
 
+        tbLabMB.setAutoCreateRowSorter(true);
         tbLabMB.setComponentPopupMenu(Popup);
         tbLabMB.setName("tbLabMB"); // NOI18N
         tbLabMB.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -976,6 +981,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         Scroll8.setName("Scroll8"); // NOI18N
         Scroll8.setOpaque(true);
 
+        tbDetailLabMB.setAutoCreateRowSorter(true);
         tbDetailLabMB.setComponentPopupMenu(Popup);
         tbDetailLabMB.setName("tbDetailLabMB"); // NOI18N
         Scroll8.setViewportView(tbDetailLabMB);
@@ -1015,6 +1021,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         Scroll12.setName("Scroll12"); // NOI18N
         Scroll12.setOpaque(true);
 
+        tbTindakanDr.setAutoCreateRowSorter(true);
         tbTindakanDr.setComponentPopupMenu(Popup);
         tbTindakanDr.setName("tbTindakanDr"); // NOI18N
         Scroll12.setViewportView(tbTindakanDr);
@@ -1158,6 +1165,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         Scroll14.setName("Scroll14"); // NOI18N
         Scroll14.setOpaque(true);
 
+        tbTindakanDrPr.setAutoCreateRowSorter(true);
         tbTindakanDrPr.setComponentPopupMenu(Popup);
         tbTindakanDrPr.setName("tbTindakanDrPr"); // NOI18N
         Scroll14.setViewportView(tbTindakanDrPr);
@@ -1210,6 +1218,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         Scroll15.setName("Scroll15"); // NOI18N
         Scroll15.setOpaque(true);
 
+        tbTindakanPr.setAutoCreateRowSorter(true);
         tbTindakanPr.setComponentPopupMenu(Popup);
         tbTindakanPr.setName("tbTindakanPr"); // NOI18N
         Scroll15.setViewportView(tbTindakanPr);
@@ -1262,6 +1271,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         Scroll16.setName("Scroll16"); // NOI18N
         Scroll16.setOpaque(true);
 
+        tbTambahanBiaya.setAutoCreateRowSorter(true);
         tbTambahanBiaya.setName("tbTambahanBiaya"); // NOI18N
         Scroll16.setViewportView(tbTambahanBiaya);
 
@@ -1313,6 +1323,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         Scroll17.setName("Scroll17"); // NOI18N
         Scroll17.setOpaque(true);
 
+        tbTambahanBiaya1.setAutoCreateRowSorter(true);
         tbTambahanBiaya1.setName("tbTambahanBiaya1"); // NOI18N
         Scroll17.setViewportView(tbTambahanBiaya1);
 
@@ -2186,6 +2197,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     private void tampil() {
         if (!isLoading) {
             isLoading = true;
+            tbTemplate.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             new SwingWorker<Void, Object[]>() {
@@ -2237,9 +2249,10 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(String.valueOf(tabMode.getRowCount()));
+                    LCount.setText(String.valueOf(tbTemplate.getRowCount()));
                     MasterTemplatePaketMCUSMC.this.setCursor(Cursor.getDefaultCursor());
                     isLoading = false;
+                    tbTemplate.resumeSorting();
                 }
             }.execute();
         }
@@ -2251,13 +2264,14 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         final String kodePJ = kodeJenisBayar.getText();
         final List<Object[]> terpilih = new ArrayList<>();
         final Set<String> kodeTerpilih = new HashSet<>();
-        for (int i = 0; i < tabModeRadiologi.getRowCount(); i++) {
-            if (Boolean.TRUE.equals(tabModeRadiologi.getValueAt(i, 0))) {
-                terpilih.add(new Object[] {true, tabModeRadiologi.getValueAt(i, 1), tabModeRadiologi.getValueAt(i, 2), tabModeRadiologi.getValueAt(i, 3)});
-                kodeTerpilih.add(tabModeRadiologi.getValueAt(i, 1).toString());
+        for (int i = 0; i < tbRadiologi.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tabModeRadiologi.getValueAt(tbRadiologi.convertRowIndexToModel(i), 0))) {
+                terpilih.add(new Object[] {true, tabModeRadiologi.getValueAt(tbRadiologi.convertRowIndexToModel(i), 1), tabModeRadiologi.getValueAt(tbRadiologi.convertRowIndexToModel(i), 2), tabModeRadiologi.getValueAt(tbRadiologi.convertRowIndexToModel(i), 3)});
+                kodeTerpilih.add(tabModeRadiologi.getValueAt(tbRadiologi.convertRowIndexToModel(i), 1).toString());
             }
         }
 
+        tbRadiologi.suspendSorting();
         Valid.tabelKosongSmc(tabModeRadiologi);
         terpilih.forEach(tabModeRadiologi::addRow);
         new SwingWorker<Void, Object[]>() {
@@ -2311,6 +2325,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                 if (versi == versiMuat.get(tabModeRadiologi)) {
                     tabModeRadiologi.fireTableDataChanged();
                 }
+                tbRadiologi.resumeSorting();
             }
         }.execute();
     }
@@ -2321,13 +2336,14 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         final String kodePJ = kodeJenisBayar.getText();
         final List<Object[]> terpilih = new ArrayList<>();
         final Set<String> kodeTerpilih = new HashSet<>();
-        for (int i = 0; i < tabModeLabPK.getRowCount(); i++) {
-            if (Boolean.TRUE.equals(tabModeLabPK.getValueAt(i, 0))) {
-                terpilih.add(new Object[] {true, tabModeLabPK.getValueAt(i, 1), tabModeLabPK.getValueAt(i, 2), tabModeLabPK.getValueAt(i, 3)});
-                kodeTerpilih.add(tabModeLabPK.getValueAt(i, 1).toString());
+        for (int i = 0; i < tbLabPK.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tabModeLabPK.getValueAt(tbLabPK.convertRowIndexToModel(i), 0))) {
+                terpilih.add(new Object[] {true, tabModeLabPK.getValueAt(tbLabPK.convertRowIndexToModel(i), 1), tabModeLabPK.getValueAt(tbLabPK.convertRowIndexToModel(i), 2), tabModeLabPK.getValueAt(tbLabPK.convertRowIndexToModel(i), 3)});
+                kodeTerpilih.add(tabModeLabPK.getValueAt(tbLabPK.convertRowIndexToModel(i), 1).toString());
             }
         }
 
+        tbLabPK.suspendSorting();
         Valid.tabelKosongSmc(tabModeLabPK);
         terpilih.forEach(tabModeLabPK::addRow);
         new SwingWorker<Void, Object[]>() {
@@ -2381,6 +2397,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                     tabModeLabPK.fireTableDataChanged();
                     tampilDetailLabPK(noTemplate, cari);
                 }
+                tbLabPK.resumeSorting();
             }
         }.execute();
     }
@@ -2389,19 +2406,20 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         final int versi = versiMuat.merge(tabModeDetailLabPK, 1, Integer::sum);
         final String[] kata = cariDetailLabPK.getText().isBlank() ? new String[0] : cariDetailLabPK.getText().trim().toLowerCase().split("\\s+");
         final List<String[]> pemeriksaan = new ArrayList<>();
-        for (int i = 0; i < tabModeLabPK.getRowCount(); i++) {
-            if (Boolean.TRUE.equals(tabModeLabPK.getValueAt(i, 0))) {
-                pemeriksaan.add(new String[] {tabModeLabPK.getValueAt(i, 1).toString(), tabModeLabPK.getValueAt(i, 2).toString()});
+        for (int i = 0; i < tbLabPK.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tabModeLabPK.getValueAt(tbLabPK.convertRowIndexToModel(i), 0))) {
+                pemeriksaan.add(new String[] {tabModeLabPK.getValueAt(tbLabPK.convertRowIndexToModel(i), 1).toString(), tabModeLabPK.getValueAt(tbLabPK.convertRowIndexToModel(i), 2).toString()});
             }
         }
 
         final Set<String> idTerpilih = new HashSet<>();
-        for (int i = 0; i < tabModeDetailLabPK.getRowCount(); i++) {
-            if (Boolean.TRUE.equals(tabModeDetailLabPK.getValueAt(i, 0)) && !"".equals(tabModeDetailLabPK.getValueAt(i, 4))) {
-                idTerpilih.add(tabModeDetailLabPK.getValueAt(i, 4).toString());
+        for (int i = 0; i < tbDetailLabPK.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tabModeDetailLabPK.getValueAt(tbDetailLabPK.convertRowIndexToModel(i), 0)) && !"".equals(tabModeDetailLabPK.getValueAt(tbDetailLabPK.convertRowIndexToModel(i), 4))) {
+                idTerpilih.add(tabModeDetailLabPK.getValueAt(tbDetailLabPK.convertRowIndexToModel(i), 4).toString());
             }
         }
 
+        tbDetailLabPK.suspendSorting();
         Valid.tabelKosongSmc(tabModeDetailLabPK);
         new SwingWorker<Void, Object[]>() {
             @Override
@@ -2460,6 +2478,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                 if (versi == versiMuat.get(tabModeDetailLabPK)) {
                     tabModeDetailLabPK.fireTableDataChanged();
                 }
+                tbDetailLabPK.resumeSorting();
             }
         }.execute();
     }
@@ -2470,13 +2489,14 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         final String kodePJ = kodeJenisBayar.getText();
         final List<Object[]> terpilih = new ArrayList<>();
         final Set<String> kodeTerpilih = new HashSet<>();
-        for (int i = 0; i < tabModeLabPA.getRowCount(); i++) {
-            if (Boolean.TRUE.equals(tabModeLabPA.getValueAt(i, 0))) {
-                terpilih.add(new Object[] {true, tabModeLabPA.getValueAt(i, 1), tabModeLabPA.getValueAt(i, 2), tabModeLabPA.getValueAt(i, 3)});
-                kodeTerpilih.add(tabModeLabPA.getValueAt(i, 1).toString());
+        for (int i = 0; i < tbLabPA.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tabModeLabPA.getValueAt(tbLabPA.convertRowIndexToModel(i), 0))) {
+                terpilih.add(new Object[] {true, tabModeLabPA.getValueAt(tbLabPA.convertRowIndexToModel(i), 1), tabModeLabPA.getValueAt(tbLabPA.convertRowIndexToModel(i), 2), tabModeLabPA.getValueAt(tbLabPA.convertRowIndexToModel(i), 3)});
+                kodeTerpilih.add(tabModeLabPA.getValueAt(tbLabPA.convertRowIndexToModel(i), 1).toString());
             }
         }
 
+        tbLabPA.suspendSorting();
         Valid.tabelKosongSmc(tabModeLabPA);
         terpilih.forEach(tabModeLabPA::addRow);
         new SwingWorker<Void, Object[]>() {
@@ -2529,6 +2549,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                 if (versi == versiMuat.get(tabModeLabPA)) {
                     tabModeLabPA.fireTableDataChanged();
                 }
+                tbLabPA.resumeSorting();
             }
         }.execute();
     }
@@ -2539,13 +2560,14 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         final String kodePJ = kodeJenisBayar.getText();
         final List<Object[]> terpilih = new ArrayList<>();
         final Set<String> kodeTerpilih = new HashSet<>();
-        for (int i = 0; i < tabModeLabMB.getRowCount(); i++) {
-            if (Boolean.TRUE.equals(tabModeLabMB.getValueAt(i, 0))) {
-                terpilih.add(new Object[] {true, tabModeLabMB.getValueAt(i, 1), tabModeLabMB.getValueAt(i, 2), tabModeLabMB.getValueAt(i, 3)});
-                kodeTerpilih.add(tabModeLabMB.getValueAt(i, 1).toString());
+        for (int i = 0; i < tbLabMB.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tabModeLabMB.getValueAt(tbLabMB.convertRowIndexToModel(i), 0))) {
+                terpilih.add(new Object[] {true, tabModeLabMB.getValueAt(tbLabMB.convertRowIndexToModel(i), 1), tabModeLabMB.getValueAt(tbLabMB.convertRowIndexToModel(i), 2), tabModeLabMB.getValueAt(tbLabMB.convertRowIndexToModel(i), 3)});
+                kodeTerpilih.add(tabModeLabMB.getValueAt(tbLabMB.convertRowIndexToModel(i), 1).toString());
             }
         }
 
+        tbLabMB.suspendSorting();
         Valid.tabelKosongSmc(tabModeLabMB);
         terpilih.forEach(tabModeLabMB::addRow);
         new SwingWorker<Void, Object[]>() {
@@ -2599,6 +2621,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                     tabModeLabMB.fireTableDataChanged();
                     tampilDetailLabMB(noTemplate, cari);
                 }
+                tbLabMB.resumeSorting();
             }
         }.execute();
     }
@@ -2607,19 +2630,20 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         final int versi = versiMuat.merge(tabModeDetailLabMB, 1, Integer::sum);
         final String[] kata = cariDetailLabMB.getText().isBlank() ? new String[0] : cariDetailLabMB.getText().trim().toLowerCase().split("\\s+");
         final List<String[]> pemeriksaan = new ArrayList<>();
-        for (int i = 0; i < tabModeLabMB.getRowCount(); i++) {
-            if (Boolean.TRUE.equals(tabModeLabMB.getValueAt(i, 0))) {
-                pemeriksaan.add(new String[] {tabModeLabMB.getValueAt(i, 1).toString(), tabModeLabMB.getValueAt(i, 2).toString()});
+        for (int i = 0; i < tbLabMB.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tabModeLabMB.getValueAt(tbLabMB.convertRowIndexToModel(i), 0))) {
+                pemeriksaan.add(new String[] {tabModeLabMB.getValueAt(tbLabMB.convertRowIndexToModel(i), 1).toString(), tabModeLabMB.getValueAt(tbLabMB.convertRowIndexToModel(i), 2).toString()});
             }
         }
 
         final Set<String> idTerpilih = new HashSet<>();
-        for (int i = 0; i < tabModeDetailLabMB.getRowCount(); i++) {
-            if (Boolean.TRUE.equals(tabModeDetailLabMB.getValueAt(i, 0)) && !"".equals(tabModeDetailLabMB.getValueAt(i, 4))) {
-                idTerpilih.add(tabModeDetailLabMB.getValueAt(i, 4).toString());
+        for (int i = 0; i < tbDetailLabMB.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tabModeDetailLabMB.getValueAt(tbDetailLabMB.convertRowIndexToModel(i), 0)) && !"".equals(tabModeDetailLabMB.getValueAt(tbDetailLabMB.convertRowIndexToModel(i), 4))) {
+                idTerpilih.add(tabModeDetailLabMB.getValueAt(tbDetailLabMB.convertRowIndexToModel(i), 4).toString());
             }
         }
 
+        tbDetailLabMB.suspendSorting();
         Valid.tabelKosongSmc(tabModeDetailLabMB);
         new SwingWorker<Void, Object[]>() {
             @Override
@@ -2678,6 +2702,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                 if (versi == versiMuat.get(tabModeDetailLabMB)) {
                     tabModeDetailLabMB.fireTableDataChanged();
                 }
+                tbDetailLabMB.resumeSorting();
             }
         }.execute();
     }
@@ -2688,16 +2713,17 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         final String kodePJ = kodeJenisBayar.getText();
         final List<Object[]> terpilih = new ArrayList<>();
         final Set<String> kodeTerpilih = new HashSet<>();
-        for (int i = 0; i < tabModeTindakanDr.getRowCount(); i++) {
-            if (Boolean.TRUE.equals(tabModeTindakanDr.getValueAt(i, 0))) {
+        for (int i = 0; i < tbTindakanDr.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tabModeTindakanDr.getValueAt(tbTindakanDr.convertRowIndexToModel(i), 0))) {
                 terpilih.add(new Object[] {
-                    true, tabModeTindakanDr.getValueAt(i, 1), tabModeTindakanDr.getValueAt(i, 2), tabModeTindakanDr.getValueAt(i, 3), tabModeTindakanDr.getValueAt(i, 4), tabModeTindakanDr.getValueAt(i, 5),
-                    tabModeTindakanDr.getValueAt(i, 6)
+                    true, tabModeTindakanDr.getValueAt(tbTindakanDr.convertRowIndexToModel(i), 1), tabModeTindakanDr.getValueAt(tbTindakanDr.convertRowIndexToModel(i), 2), tabModeTindakanDr.getValueAt(tbTindakanDr.convertRowIndexToModel(i), 3), tabModeTindakanDr.getValueAt(tbTindakanDr.convertRowIndexToModel(i), 4), tabModeTindakanDr.getValueAt(tbTindakanDr.convertRowIndexToModel(i), 5),
+                    tabModeTindakanDr.getValueAt(tbTindakanDr.convertRowIndexToModel(i), 6)
                 });
-                kodeTerpilih.add(tabModeTindakanDr.getValueAt(i, 1).toString());
+                kodeTerpilih.add(tabModeTindakanDr.getValueAt(tbTindakanDr.convertRowIndexToModel(i), 1).toString());
             }
         }
 
+        tbTindakanDr.suspendSorting();
         Valid.tabelKosongSmc(tabModeTindakanDr);
         terpilih.forEach(tabModeTindakanDr::addRow);
         new SwingWorker<Void, Object[]>() {
@@ -2758,6 +2784,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                 if (versi == versiMuat.get(tabModeTindakanDr)) {
                     tabModeTindakanDr.fireTableDataChanged();
                 }
+                tbTindakanDr.resumeSorting();
             }
         }.execute();
     }
@@ -2768,16 +2795,17 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         final String kodePJ = kodeJenisBayar.getText();
         final List<Object[]> terpilih = new ArrayList<>();
         final Set<String> kodeTerpilih = new HashSet<>();
-        for (int i = 0; i < tabModeTindakanDrPr.getRowCount(); i++) {
-            if (Boolean.TRUE.equals(tabModeTindakanDrPr.getValueAt(i, 0))) {
+        for (int i = 0; i < tbTindakanDrPr.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tabModeTindakanDrPr.getValueAt(tbTindakanDrPr.convertRowIndexToModel(i), 0))) {
                 terpilih.add(new Object[] {
-                    true, tabModeTindakanDrPr.getValueAt(i, 1), tabModeTindakanDrPr.getValueAt(i, 2), tabModeTindakanDrPr.getValueAt(i, 3), tabModeTindakanDrPr.getValueAt(i, 4), tabModeTindakanDrPr.getValueAt(i, 5),
-                    tabModeTindakanDrPr.getValueAt(i, 6)
+                    true, tabModeTindakanDrPr.getValueAt(tbTindakanDrPr.convertRowIndexToModel(i), 1), tabModeTindakanDrPr.getValueAt(tbTindakanDrPr.convertRowIndexToModel(i), 2), tabModeTindakanDrPr.getValueAt(tbTindakanDrPr.convertRowIndexToModel(i), 3), tabModeTindakanDrPr.getValueAt(tbTindakanDrPr.convertRowIndexToModel(i), 4), tabModeTindakanDrPr.getValueAt(tbTindakanDrPr.convertRowIndexToModel(i), 5),
+                    tabModeTindakanDrPr.getValueAt(tbTindakanDrPr.convertRowIndexToModel(i), 6)
                 });
-                kodeTerpilih.add(tabModeTindakanDrPr.getValueAt(i, 1).toString());
+                kodeTerpilih.add(tabModeTindakanDrPr.getValueAt(tbTindakanDrPr.convertRowIndexToModel(i), 1).toString());
             }
         }
 
+        tbTindakanDrPr.suspendSorting();
         Valid.tabelKosongSmc(tabModeTindakanDrPr);
         terpilih.forEach(tabModeTindakanDrPr::addRow);
         new SwingWorker<Void, Object[]>() {
@@ -2838,6 +2866,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                 if (versi == versiMuat.get(tabModeTindakanDrPr)) {
                     tabModeTindakanDrPr.fireTableDataChanged();
                 }
+                tbTindakanDrPr.resumeSorting();
             }
         }.execute();
     }
@@ -2848,13 +2877,14 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         final String kodePJ = kodeJenisBayar.getText();
         final List<Object[]> terpilih = new ArrayList<>();
         final Set<String> kodeTerpilih = new HashSet<>();
-        for (int i = 0; i < tabModeTindakanPr.getRowCount(); i++) {
-            if (Boolean.TRUE.equals(tabModeTindakanPr.getValueAt(i, 0))) {
-                terpilih.add(new Object[] {true, tabModeTindakanPr.getValueAt(i, 1), tabModeTindakanPr.getValueAt(i, 2), tabModeTindakanPr.getValueAt(i, 3), tabModeTindakanPr.getValueAt(i, 4)});
-                kodeTerpilih.add(tabModeTindakanPr.getValueAt(i, 1).toString());
+        for (int i = 0; i < tbTindakanPr.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tabModeTindakanPr.getValueAt(tbTindakanPr.convertRowIndexToModel(i), 0))) {
+                terpilih.add(new Object[] {true, tabModeTindakanPr.getValueAt(tbTindakanPr.convertRowIndexToModel(i), 1), tabModeTindakanPr.getValueAt(tbTindakanPr.convertRowIndexToModel(i), 2), tabModeTindakanPr.getValueAt(tbTindakanPr.convertRowIndexToModel(i), 3), tabModeTindakanPr.getValueAt(tbTindakanPr.convertRowIndexToModel(i), 4)});
+                kodeTerpilih.add(tabModeTindakanPr.getValueAt(tbTindakanPr.convertRowIndexToModel(i), 1).toString());
             }
         }
 
+        tbTindakanPr.suspendSorting();
         Valid.tabelKosongSmc(tabModeTindakanPr);
         terpilih.forEach(tabModeTindakanPr::addRow);
         new SwingWorker<Void, Object[]>() {
@@ -2911,6 +2941,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                 if (versi == versiMuat.get(tabModeTindakanPr)) {
                     tabModeTindakanPr.fireTableDataChanged();
                 }
+                tbTindakanPr.resumeSorting();
             }
         }.execute();
     }
@@ -2918,12 +2949,13 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     private void tampilTambahanBiaya(String noTemplate) {
         final int versi = versiMuat.merge(tabModeTambahanBiaya, 1, Integer::sum);
         final List<Object[]> terisi = new ArrayList<>();
-        for (int i = 0; i < tabModeTambahanBiaya.getRowCount(); i++) {
-            if (!tabModeTambahanBiaya.getValueAt(i, 0).toString().isBlank()) {
-                terisi.add(new Object[] {tabModeTambahanBiaya.getValueAt(i, 0), tabModeTambahanBiaya.getValueAt(i, 1)});
+        for (int i = 0; i < tbTambahanBiaya.getRowCount(); i++) {
+            if (!tabModeTambahanBiaya.getValueAt(tbTambahanBiaya.convertRowIndexToModel(i), 0).toString().isBlank()) {
+                terisi.add(new Object[] {tabModeTambahanBiaya.getValueAt(tbTambahanBiaya.convertRowIndexToModel(i), 0), tabModeTambahanBiaya.getValueAt(tbTambahanBiaya.convertRowIndexToModel(i), 1)});
             }
         }
 
+        tbTambahanBiaya.suspendSorting();
         Valid.tabelKosongSmc(tabModeTambahanBiaya);
         terisi.forEach(tabModeTambahanBiaya::addRow);
         new SwingWorker<Void, Object[]>() {
@@ -2959,6 +2991,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                     tabModeTambahanBiaya.addRow(new Object[] {"", 0d});
                     tabModeTambahanBiaya.fireTableDataChanged();
                 }
+                tbTambahanBiaya.resumeSorting();
             }
         }.execute();
     }
@@ -2966,12 +2999,13 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     private void tampilPotonganBiaya(String noTemplate) {
         final int versi = versiMuat.merge(tabModePotonganBiaya, 1, Integer::sum);
         final List<Object[]> terisi = new ArrayList<>();
-        for (int i = 0; i < tabModePotonganBiaya.getRowCount(); i++) {
-            if (!tabModePotonganBiaya.getValueAt(i, 0).toString().isBlank()) {
-                terisi.add(new Object[] {tabModePotonganBiaya.getValueAt(i, 0), tabModePotonganBiaya.getValueAt(i, 1)});
+        for (int i = 0; i < tbTambahanBiaya1.getRowCount(); i++) {
+            if (!tabModePotonganBiaya.getValueAt(tbTambahanBiaya1.convertRowIndexToModel(i), 0).toString().isBlank()) {
+                terisi.add(new Object[] {tabModePotonganBiaya.getValueAt(tbTambahanBiaya1.convertRowIndexToModel(i), 0), tabModePotonganBiaya.getValueAt(tbTambahanBiaya1.convertRowIndexToModel(i), 1)});
             }
         }
 
+        tbTambahanBiaya1.suspendSorting();
         Valid.tabelKosongSmc(tabModePotonganBiaya);
         terisi.forEach(tabModePotonganBiaya::addRow);
         new SwingWorker<Void, Object[]>() {
@@ -3007,6 +3041,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                     tabModePotonganBiaya.addRow(new Object[] {"", 0d});
                     tabModePotonganBiaya.fireTableDataChanged();
                 }
+                tbTambahanBiaya1.resumeSorting();
             }
         }.execute();
     }
@@ -3026,9 +3061,9 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     private void tandaiSemua(boolean pilih) {
         if (Popup.getInvoker() instanceof widget.Table) {
             widget.Table tabel = (widget.Table) Popup.getInvoker();
-            for (int i = 0; i < tabel.getModel().getRowCount(); i++) {
-                if (tabel.getModel().isCellEditable(i, 0)) {
-                    tabel.getModel().setValueAt(pilih, i, 0);
+            for (int i = 0; i < tabel.getRowCount(); i++) {
+                if (tabel.isCellEditable(i, 0)) {
+                    tabel.setValueAt(pilih, i, 0);
                 }
             }
 
@@ -3104,11 +3139,11 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
 
     private void getData() {
         if (tbTemplate.getSelectedRow() != -1) {
-            String no = tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 0).toString();
+            String no = tabMode.getValueAt(tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow()), 0).toString();
             noTemplate.setText(no);
-            namaTemplate.setText(tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 1).toString());
+            namaTemplate.setText(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow()), 1).toString());
             kodeJenisBayar.setText(Sequel.cariIsiSmc("select template_paket_mcu_smc.kd_pj from template_paket_mcu_smc where template_paket_mcu_smc.no_template = ?", no));
-            namaJenisBayar.setText(tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 2).toString());
+            namaJenisBayar.setText(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow()), 2).toString());
             cariRadiologi.setText("");
             cariLabPK.setText("");
             cariDetailLabPK.setText("");
@@ -3198,9 +3233,9 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
             }
         }
 
-        for (int i = 0; i < tabModeRadiologi.getRowCount(); i++) {
-            if (Boolean.TRUE.equals(tabModeRadiologi.getValueAt(i, 0)) && !Sequel.menyimpantfSmc("template_paket_mcu_smc_permintaan_radiologi", "no_template, kd_jenis_prw",
-                noTemplate, tabModeRadiologi.getValueAt(i, 1).toString()
+        for (int i = 0; i < tbRadiologi.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tabModeRadiologi.getValueAt(tbRadiologi.convertRowIndexToModel(i), 0)) && !Sequel.menyimpantfSmc("template_paket_mcu_smc_permintaan_radiologi", "no_template, kd_jenis_prw",
+                noTemplate, tabModeRadiologi.getValueAt(tbRadiologi.convertRowIndexToModel(i), 1).toString()
             )) {
                 return false;
             }
@@ -3227,9 +3262,9 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
             }
         }
 
-        for (int i = 0; i < tabModeTindakanPr.getRowCount(); i++) {
-            if (Boolean.TRUE.equals(tabModeTindakanPr.getValueAt(i, 0)) && !Sequel.menyimpantfSmc("template_paket_mcu_smc_tindakan_pr", "no_template, kd_jenis_prw",
-                noTemplate, tabModeTindakanPr.getValueAt(i, 1).toString()
+        for (int i = 0; i < tbTindakanPr.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tabModeTindakanPr.getValueAt(tbTindakanPr.convertRowIndexToModel(i), 0)) && !Sequel.menyimpantfSmc("template_paket_mcu_smc_tindakan_pr", "no_template, kd_jenis_prw",
+                noTemplate, tabModeTindakanPr.getValueAt(tbTindakanPr.convertRowIndexToModel(i), 1).toString()
             )) {
                 return false;
             }

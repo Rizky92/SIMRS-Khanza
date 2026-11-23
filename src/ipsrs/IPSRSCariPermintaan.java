@@ -195,6 +195,7 @@ public class IPSRSCariPermintaan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -745,10 +746,10 @@ public class IPSRSCariPermintaan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"pilihan data");
         }else{
-            Sequel.queryu("delete from permintaan_non_medis where no_permintaan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+            Sequel.queryu("delete from permintaan_non_medis where no_permintaan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
             runBackground(() ->tampil());
         }
     }//GEN-LAST:event_ppHapusActionPerformed
@@ -823,14 +824,14 @@ public class IPSRSCariPermintaan extends javax.swing.JDialog {
     }//GEN-LAST:event_btnJenisActionPerformed
 
     private void ppDisetujuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDisetujuiActionPerformed
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"pilihan data");
         }else{
-            Sequel.queryu("update permintaan_non_medis set status='Disetujui' where no_permintaan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+            Sequel.queryu("update permintaan_non_medis set status='Disetujui' where no_permintaan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             IPSRSPengeluaran aplikasi=new IPSRSPengeluaran(null,false);
             aplikasi.tampilkanpermintaan=false;
-            aplikasi.tampil2(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim(),tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim()+", Ruangan "+tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString().trim()+", oleh "+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString().trim());
+            aplikasi.tampil2(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim()+", Ruangan "+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString().trim()+", oleh "+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString().trim());
             aplikasi.isCek();
             aplikasi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             aplikasi.setLocationRelativeTo(internalFrame1);
@@ -841,10 +842,10 @@ public class IPSRSCariPermintaan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppDisetujuiActionPerformed
 
     private void ppTidakDisetujuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTidakDisetujuiActionPerformed
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"pilihan data");
         }else{
-            Sequel.queryu("update permintaan_non_medis set status='Tidak Disetujui' where no_permintaan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+            Sequel.queryu("update permintaan_non_medis set status='Tidak Disetujui' where no_permintaan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
             runBackground(() ->tampil());
         }
     }//GEN-LAST:event_ppTidakDisetujuiActionPerformed

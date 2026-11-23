@@ -950,7 +950,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                     HubunganDenganPasien.getSelectedItem().toString(),SaksiKeluarga.getText(),KdDokter.getText(),NmDokter.getText(),
                     KdPerawat.getText(),NmPerawat.getText()
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbObat.getRowCount());
                 emptTeks();
             }
         }
@@ -983,7 +983,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else{
-                if(KdPerawat.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString())){
+                if(KdPerawat.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString())){
                     hapus();
                 }else{
                     JOptionPane.showMessageDialog(null,"Hanya bisa dihapus oleh petugas yang bersangkutan..!!");
@@ -1019,7 +1019,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(KdPerawat.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString())){
+                    if(KdPerawat.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString())){
                         ganti();
                     }else{
                         JOptionPane.showMessageDialog(null,"Hanya bisa diganti oleh petugas yang bersangkutan..!!");
@@ -1100,23 +1100,23 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                                         append("</tr>");
                             for (i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,0).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,1).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,2).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,3).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,4).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,5).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,6).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,7).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,8).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,9).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,10).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,11).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,12).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,13).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,14).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,15).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,16).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,0).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,1).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,2).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,3).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,4).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,5).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,6).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,7).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,8).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,9).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,10).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,11).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,12).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,13).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,14).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,15).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,16).toString()).append("</td>").
                                             append("</tr>");
                             }
                             LoadHTML.setText(
@@ -1168,23 +1168,23 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                                         append("</tr>");
                             for (i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,0).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,1).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,2).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,3).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,4).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,5).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,6).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,7).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,8).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,9).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,10).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,11).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,12).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,13).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,14).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,15).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,16).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,0).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,1).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,2).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,3).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,4).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,5).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,6).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,7).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,8).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,9).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,10).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,11).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,12).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,13).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,14).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,15).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabMode.getValueAt(i,16).toString()).append("</td>").
                                             append("</tr>");
                             }
                             LoadHTML.setText(
@@ -1219,8 +1219,8 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                                 "\"No.Pernyataan\";\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"Tgl.Lahir\";\"J.K.\";\"Tanggal\";\"Pembuat Pernyataan\";\"Alamat Pembuat Pernyataan\";\"Tgl.Lahir\";\"J.K.P.P.\";\"Hubungan\";\"Saksi I Keluarga\";\"Kode Dokter\";\"Nama Dokter\";\"Nip\";\"Saksi II Petugas\"\n"
                             );
                             for (i = 0; i < tabMode.getRowCount(); i++) {
-                                htmlContent.append("\"").append(tbObat.getValueAt(i,0).toString()).append("\";\"").append(tbObat.getValueAt(i,1).toString()).append("\";\"").append(tbObat.getValueAt(i,2).toString()).append("\";\"").append(tbObat.getValueAt(i,3).toString()).append("\";\"").append(tbObat.getValueAt(i,4).toString()).append("\";\"").append(tbObat.getValueAt(i,5).toString()).append("\";\"").append(tbObat.getValueAt(i,6).toString()).append("\";\"").append(tbObat.getValueAt(i,7).toString()).append("\";\"").append(tbObat.getValueAt(i,8).toString()).append("\";\"").append(tbObat.getValueAt(i,9).toString()).append("\";\"").
-                                                         append(tbObat.getValueAt(i,10).toString()).append("\";\"").append(tbObat.getValueAt(i,11).toString()).append("\";\"").append(tbObat.getValueAt(i,12).toString()).append("\";\"").append(tbObat.getValueAt(i,13).toString()).append("\";\"").append(tbObat.getValueAt(i,14).toString()).append("\";\"").append(tbObat.getValueAt(i,15).toString()).append("\";\"").append(tbObat.getValueAt(i,16).toString()).append("\"\n");
+                                htmlContent.append("\"").append(tabMode.getValueAt(i,0).toString()).append("\";\"").append(tabMode.getValueAt(i,1).toString()).append("\";\"").append(tabMode.getValueAt(i,2).toString()).append("\";\"").append(tabMode.getValueAt(i,3).toString()).append("\";\"").append(tabMode.getValueAt(i,4).toString()).append("\";\"").append(tabMode.getValueAt(i,5).toString()).append("\";\"").append(tabMode.getValueAt(i,6).toString()).append("\";\"").append(tabMode.getValueAt(i,7).toString()).append("\";\"").append(tabMode.getValueAt(i,8).toString()).append("\";\"").append(tabMode.getValueAt(i,9).toString()).append("\";\"").
+                                                         append(tabMode.getValueAt(i,10).toString()).append("\";\"").append(tabMode.getValueAt(i,11).toString()).append("\";\"").append(tabMode.getValueAt(i,12).toString()).append("\";\"").append(tabMode.getValueAt(i,13).toString()).append("\";\"").append(tabMode.getValueAt(i,14).toString()).append("\";\"").append(tabMode.getValueAt(i,15).toString()).append("\";\"").append(tabMode.getValueAt(i,16).toString()).append("\"\n");
                             }
                             f = new File("DataSuratPernyataanMemilihDPJP.csv");
                             bw = new BufferedWriter(new FileWriter(f));
@@ -1285,7 +1285,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
                 isPhoto();
@@ -1296,7 +1296,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1469,14 +1469,14 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkAccorActionPerformed
 
     private void btnAmbilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbilActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else{
             if(tbObat.getSelectedRow()>-1){
-                Sequel.queryu("insert into antripernyataanmemilihdpjp values('"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"','"+tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()+"')");
-                Sequel.queryu("delete from bukti_surat_pernyataan_memilih_dpjp where no_pernyataan='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'");
-                Sequel.queryu("delete from bukti_surat_pernyataan_memilih_dpjp_saksikeluarga where no_pernyataan='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'");
+                Sequel.queryu("insert into antripernyataanmemilihdpjp values('"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"','"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString()+"')");
+                Sequel.queryu("delete from bukti_surat_pernyataan_memilih_dpjp where no_pernyataan='"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"'");
+                Sequel.queryu("delete from bukti_surat_pernyataan_memilih_dpjp_saksikeluarga where no_pernyataan='"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"'");
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih No.Pernyataan terlebih dahulu..!!");
             }
@@ -1506,15 +1506,15 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("photo_penerima","http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/pernyataanmemilihdpjp/"+lokasifile);
                 param.put("photo_saksi","http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/pernyataanmemilihdpjp/"+lokasifile2);
-                finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-                finger2=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),14).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),13).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()));
-                param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),16).toString()+"\nID "+(finger2.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),15).toString():finger2)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()));
+                finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+                finger2=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString()+"\nID "+(finger.equals("")?tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString():finger)+"\n"+Valid.SetTgl3(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString()));
+                param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString()+"\nID "+(finger2.equals("")?tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString():finger2)+"\n"+Valid.SetTgl3(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString()));
                 Valid.MyReportqry("rptSuratPernyataanMemilihDPJP.jasper","report","::[ Surat Pernyataan Memilih DPJP Rawat Inap ]::",
                     "select surat_pernyataan_memilih_dpjp.no_pernyataan,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,pasien.tmp_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,surat_pernyataan_memilih_dpjp.tanggal,surat_pernyataan_memilih_dpjp.pembuat_pernyataan,surat_pernyataan_memilih_dpjp.alamat_pembuat_pernyataan,pasien.umur,pasien.no_tlp,"+
                     "surat_pernyataan_memilih_dpjp.tgl_lahir_pembuat_pernyataan,surat_pernyataan_memilih_dpjp.jk_pembuat_pernyataan,surat_pernyataan_memilih_dpjp.hubungan_pembuat_pernyataan,surat_pernyataan_memilih_dpjp.saksi_keluarga,surat_pernyataan_memilih_dpjp.kd_dokter,dokter.nm_dokter,surat_pernyataan_memilih_dpjp.nip,petugas.nama from surat_pernyataan_memilih_dpjp inner join reg_periksa on surat_pernyataan_memilih_dpjp.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis inner join dokter on dokter.kd_dokter=surat_pernyataan_memilih_dpjp.kd_dokter inner join petugas on petugas.nip=surat_pernyataan_memilih_dpjp.nip inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
-                    "where surat_pernyataan_memilih_dpjp.no_pernyataan='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
+                    "where surat_pernyataan_memilih_dpjp.no_pernyataan='"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"'",param);
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data terlebih dahulu..!!!!");
@@ -1724,7 +1724,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -1743,25 +1743,25 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoPenyataan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().replaceAll("L","Laki-laki").replaceAll("P","Perempuan"));
-            PembuatPernyataan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            AlamatPembuatPernyataan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString().equals("L")){
+            NoPenyataan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            TglLahir.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            Jk.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString().replaceAll("L","Laki-laki").replaceAll("P","Perempuan"));
+            PembuatPernyataan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            AlamatPembuatPernyataan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString().equals("L")){
                 JKPembuatPernyataan.setSelectedIndex(0);
             }else{
                 JKPembuatPernyataan.setSelectedIndex(1);
             }
-            HubunganDenganPasien.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            SaksiKeluarga.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            KdDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            NmDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            Valid.SetTgl2(TglPernyataan,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            Valid.SetTgl2(TanggalLahir,tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
+            HubunganDenganPasien.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            SaksiKeluarga.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            KdDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            NmDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            Valid.SetTgl2(TglPernyataan,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            Valid.SetTgl2(TanggalLahir,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
         }
     }
 
@@ -1833,11 +1833,11 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
 
     private void hapus() {
         if(Sequel.queryu2tf("delete from surat_pernyataan_memilih_dpjp where no_pernyataan=?",1,new String[]{
-            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
         })==true){
-            Sequel.queryu2("delete from dpjp_ranap where no_rawat=? and kd_dokter=?",2,new String[]{TNoRw.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()});
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            Sequel.queryu2("delete from dpjp_ranap where no_rawat=? and kd_dokter=?",2,new String[]{TNoRw.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString()});
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(""+tbObat.getRowCount());
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
@@ -1848,27 +1848,27 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
             "tgl_lahir_pembuat_pernyataan=?,jk_pembuat_pernyataan=?,hubungan_pembuat_pernyataan=?,saksi_keluarga=?",12,new String[]{
             NoPenyataan.getText(),TNoRw.getText(),Valid.SetTgl(TglPernyataan.getSelectedItem()+""),KdDokter.getText(),KdPerawat.getText(),PembuatPernyataan.getText(),
                     AlamatPembuatPernyataan.getText(),Valid.SetTgl(TanggalLahir.getSelectedItem()+""),JKPembuatPernyataan.getSelectedItem().toString().substring(0,1),
-                    HubunganDenganPasien.getSelectedItem().toString(),SaksiKeluarga.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                    HubunganDenganPasien.getSelectedItem().toString(),SaksiKeluarga.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
         })==true){
-            Sequel.queryu2("delete from dpjp_ranap where no_rawat=? and kd_dokter=?",2,new String[]{TNoRw.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()});
+            Sequel.queryu2("delete from dpjp_ranap where no_rawat=? and kd_dokter=?",2,new String[]{TNoRw.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString()});
             Sequel.menyimpan2("dpjp_ranap","?,?","Dokter",2,new String[]{TNoRw.getText(),KdDokter.getText()});
-            tbObat.setValueAt(NoPenyataan.getText(),tbObat.getSelectedRow(),0);
-            tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),1);
-            tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),2);
-            tbObat.setValueAt(TPasien.getText(),tbObat.getSelectedRow(),3);
-            tbObat.setValueAt(TglLahir.getText(),tbObat.getSelectedRow(),4);
-            tbObat.setValueAt(Jk.getText().substring(0,1),tbObat.getSelectedRow(),5);
-            tbObat.setValueAt(Valid.SetTgl(TglPernyataan.getSelectedItem()+""),tbObat.getSelectedRow(),6);
-            tbObat.setValueAt(PembuatPernyataan.getText(),tbObat.getSelectedRow(),7);
-            tbObat.setValueAt(AlamatPembuatPernyataan.getText(),tbObat.getSelectedRow(),8);
-            tbObat.setValueAt(Valid.SetTgl(TanggalLahir.getSelectedItem()+""),tbObat.getSelectedRow(),9);
-            tbObat.setValueAt(JKPembuatPernyataan.getSelectedItem().toString().substring(0,1),tbObat.getSelectedRow(),10);
-            tbObat.setValueAt(HubunganDenganPasien.getSelectedItem().toString(),tbObat.getSelectedRow(),11);
-            tbObat.setValueAt(SaksiKeluarga.getText(),tbObat.getSelectedRow(),12);
-            tbObat.setValueAt(KdDokter.getText(),tbObat.getSelectedRow(),13);
-            tbObat.setValueAt(NmDokter.getText(),tbObat.getSelectedRow(),14);
-            tbObat.setValueAt(KdPerawat.getText(),tbObat.getSelectedRow(),15);
-            tbObat.setValueAt(NmPerawat.getText(),tbObat.getSelectedRow(),16);
+            tabMode.setValueAt(NoPenyataan.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0);
+            tabMode.setValueAt(TNoRw.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1);
+            tabMode.setValueAt(TNoRM.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2);
+            tabMode.setValueAt(TPasien.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3);
+            tabMode.setValueAt(TglLahir.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4);
+            tabMode.setValueAt(Jk.getText().substring(0,1),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5);
+            tabMode.setValueAt(Valid.SetTgl(TglPernyataan.getSelectedItem()+""),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6);
+            tabMode.setValueAt(PembuatPernyataan.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7);
+            tabMode.setValueAt(AlamatPembuatPernyataan.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8);
+            tabMode.setValueAt(Valid.SetTgl(TanggalLahir.getSelectedItem()+""),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9);
+            tabMode.setValueAt(JKPembuatPernyataan.getSelectedItem().toString().substring(0,1),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10);
+            tabMode.setValueAt(HubunganDenganPasien.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11);
+            tabMode.setValueAt(SaksiKeluarga.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12);
+            tabMode.setValueAt(KdDokter.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13);
+            tabMode.setValueAt(NmDokter.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14);
+            tabMode.setValueAt(KdPerawat.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15);
+            tabMode.setValueAt(NmPerawat.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16);
             emptTeks();
         }
     }
@@ -1907,7 +1907,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
             try {
                 ps=koneksi.prepareStatement("select bukti_surat_pernyataan_memilih_dpjp.photo from bukti_surat_pernyataan_memilih_dpjp where bukti_surat_pernyataan_memilih_dpjp.no_pernyataan=?");
                 try {
-                    ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){
@@ -1937,7 +1937,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
             try {
                 ps=koneksi.prepareStatement("select bukti_surat_pernyataan_memilih_dpjp_saksikeluarga.photo from bukti_surat_pernyataan_memilih_dpjp_saksikeluarga where bukti_surat_pernyataan_memilih_dpjp_saksikeluarga.no_pernyataan=?");
                 try {
-                    ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){

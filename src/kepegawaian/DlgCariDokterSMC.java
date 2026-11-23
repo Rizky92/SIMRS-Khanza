@@ -306,7 +306,7 @@ public final class DlgCariDokterSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbKamar.getRowCount() != 0) {
             if (evt.getClickCount() == 2) {
                 dispose();
             }
@@ -314,7 +314,7 @@ public final class DlgCariDokterSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbKamar.getRowCount() != 0) {
             if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
                 dispose();
             } else if (evt.getKeyCode() == KeyEvent.VK_SHIFT) {
@@ -377,6 +377,7 @@ public final class DlgCariDokterSMC extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select jadwal.kd_dokter, dokter.nm_dokter, dokter.no_telp, " +
@@ -410,7 +411,8 @@ public final class DlgCariDokterSMC extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        LCount.setText("" + tabMode.getRowCount());
+        LCount.setText("" + tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void setJadwal(String tanggal, String poli) {

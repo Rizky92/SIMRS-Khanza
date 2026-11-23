@@ -181,6 +181,7 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -470,17 +471,17 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
                 if(Sequel.menyimpantf2("ipsrspengeluaran","?,?,?,?","No.Keluar",4,new String[]{NoKeluar.getText(),Valid.SetTgl(TglKeluar.getSelectedItem()+""),kdptg.getText(),Keterangan.getText()})==true){
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
-                         if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
-                             validasiStok(tbDokter.getValueAt(i, 1).toString(), tbDokter.getValueAt(i, 2).toString(), Valid.SetAngka(tbDokter.getValueAt(i, 0).toString()));
+                         if(Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0){
+                             validasiStok(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i), 1).toString(), tabMode.getValueAt(tbDokter.convertRowIndexToModel(i), 2).toString(), Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i), 0).toString()));
                             if(Sequel.menyimpantf2("ipsrsdetailpengeluaran","?,?,?,?,?,?","Transaksi Pengeluaran",6,new String[]{
-                                NoKeluar.getText(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,3).toString(),
-                                tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,5).toString(),tbDokter.getValueAt(i,6).toString()
+                                NoKeluar.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString(),
+                                tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString()
                             })==true){
-                                Trackbarang.catatRiwayat(tabMode.getValueAt(i,1).toString(),0,Valid.SetAngka(tabMode.getValueAt(i,0).toString()),"Stok Keluar", akses.getkode(),"Simpan");
+                                Trackbarang.catatRiwayat(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString(),0,Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString()),"Stok Keluar", akses.getkode(),"Simpan");
                                 Sequel.mengedit("ipsrsbarang","kode_brng=?","stok=stok-?",2,new String[]{
-                                    tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,1).toString()
+                                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString()
                                 });
-                                ttlJurnal+=Valid.SetAngka(tbDokter.getValueAt(i,6).toString());
+                                ttlJurnal+=Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString());
                             }else{
                                 sukses=false;
                             }
@@ -507,8 +508,8 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
                     Sequel.Commit();
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
-                        tbDokter.setValueAt("",i,0);
-                        tbDokter.setValueAt(0,i,6);
+                        tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),0);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),6);
                     }
                     getData();
                 }else{
@@ -563,8 +564,8 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            tbDokter.setValueAt("",i,0);
-            tbDokter.setValueAt("0",i,6);
+            tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),0);
+            tabMode.setValueAt("0",tbDokter.convertRowIndexToModel(i),6);
         }
         isHitungSmc();
     }//GEN-LAST:event_ppBersihkanActionPerformed
@@ -578,8 +579,8 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
                 i=tbDokter.getSelectedRow();
                 if(i!= -1){
-                    tbDokter.setValueAt("", i,0);
-                    tbDokter.setValueAt(0,i,6);
+                    tabMode.setValueAt("", tbDokter.convertRowIndexToModel(i),0);
+                    tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),6);
                     isHitungSmc();
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
@@ -750,7 +751,7 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
         row=tbDokter.getRowCount();
         jml=0;
         for(i=0;i<row;i++){
-            if(!tbDokter.getValueAt(i,0).toString().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("")){
                 jml++;
             }
         }
@@ -764,17 +765,18 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
         total=new double[jml];
         index=0;
         for(i=0;i<row;i++){
-            if(!tbDokter.getValueAt(i,0).toString().equals("")){
-                jumlah[index]=tbDokter.getValueAt(i,0).toString();
-                kodebarang[index]=tbDokter.getValueAt(i,1).toString();
-                namabarang[index]=tbDokter.getValueAt(i,2).toString();
-                satuan[index]=tbDokter.getValueAt(i,3).toString();
-                stok[index]=tbDokter.getValueAt(i,4).toString();
-                harga[index]=Double.parseDouble(tbDokter.getValueAt(i,5).toString());
-                total[index]=Double.parseDouble(tbDokter.getValueAt(i,6).toString());
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("")){
+                jumlah[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString();
+                kodebarang[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString();
+                namabarang[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString();
+                satuan[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString();
+                stok[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString();
+                harga[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString());
+                total[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString());
                 index++;
             }
         }
+        tbDokter.suspendSorting();
         Valid.tabelKosong(tabMode);
         for(i=0;i<jml;i++){
             tabMode.addRow(new Object[]{jumlah[i],kodebarang[i],namabarang[i],satuan[i],stok[i],harga[i],total[i]});
@@ -807,6 +809,7 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
+        tbDokter.resumeSorting();
     }
 
     public void isCek(){
@@ -825,20 +828,20 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
     private void getData(){
         row=tbDokter.getSelectedRow();
         if(row!= -1){
-            if(!tbDokter.getValueAt(row,0).toString().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString().equals("")){
                 try {
-                    tbDokter.setValueAt(Double.parseDouble(tbDokter.getValueAt(row,5).toString())*Double.parseDouble(tbDokter.getValueAt(row,0).toString()),row,6);
+                    tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),5).toString())*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString()),tbDokter.convertRowIndexToModel(row),6);
                 } catch (Exception e) {
-                    tbDokter.setValueAt("",row,0);
-                    tbDokter.setValueAt(0,row,6);
+                    tabMode.setValueAt("",tbDokter.convertRowIndexToModel(row),0);
+                    tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(row),6);
                 }
-                if(Double.parseDouble(tbDokter.getValueAt(row,0).toString())>Double.parseDouble(tbDokter.getValueAt(row,4).toString())){
+                if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString())>Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),4).toString())){
                     JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
-                    tbDokter.setValueAt("",row,0);
-                    tbDokter.setValueAt(0,row,6);
+                    tabMode.setValueAt("",tbDokter.convertRowIndexToModel(row),0);
+                    tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(row),6);
                 }
             }else{
-                tbDokter.setValueAt(0,row,6);
+                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(row),6);
             }
         }
 
@@ -935,8 +938,8 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
     private void isHitungSmc() {
         ttl = 0;
         for (int r = 0; r < tbDokter.getRowCount(); r++) {
-            if (Valid.SetAngka(tbDokter.getValueAt(r, 0).toString()) > 0) {
-                ttl += Valid.SetAngka(tbDokter.getValueAt(r, 6).toString());
+            if (Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(r), 0).toString()) > 0) {
+                ttl += Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(r), 6).toString());
             }
         }
         LTotal.setText(Valid.SetAngka(ttl));

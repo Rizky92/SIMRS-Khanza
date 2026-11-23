@@ -67,7 +67,7 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbKamar.getColumnCount(); i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(130);
@@ -347,6 +347,7 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbKamar.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             LCount.setText("0");
             new SwingWorker<Void, Object[]>() {
@@ -397,9 +398,10 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
+                    LCount.setText(tbKamar.getRowCount() + "");
                     OrthancDataACSN.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbKamar.resumeSorting();
                 }
             }.execute();
         }

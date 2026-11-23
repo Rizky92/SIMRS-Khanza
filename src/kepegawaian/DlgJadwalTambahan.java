@@ -132,6 +132,7 @@ public class DlgJadwalTambahan extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbJadwal.setAutoCreateRowSorter(true);
         tbJadwal.setName("tbJadwal"); // NOI18N
         tbJadwal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -345,44 +346,44 @@ public class DlgJadwalTambahan extends javax.swing.JDialog {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
 
-        for(i=0;i<tabMode.getRowCount();i++){
+        for(i=0;i<tbJadwal.getRowCount();i++){
             Sequel.menyimpan2("jadwal_tambahan","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", 34,
                 new String[]{
-                    tabMode.getValueAt(i,1).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),1).toString(),
                     ThnCari.getSelectedItem().toString(),
                     BlnCari.getSelectedItem().toString(),
-                    tabMode.getValueAt(i,5).toString(),
-                    tabMode.getValueAt(i,6).toString(),
-                    tabMode.getValueAt(i,7).toString(),
-                    tabMode.getValueAt(i,8).toString(),
-                    tabMode.getValueAt(i,9).toString(),tabMode.getValueAt(i,10).toString(),
-                    tabMode.getValueAt(i,11).toString(),tabMode.getValueAt(i,12).toString(),tabMode.getValueAt(i,13).toString(),
-                    tabMode.getValueAt(i,14).toString(),tabMode.getValueAt(i,15).toString(),tabMode.getValueAt(i,16).toString(),
-                    tabMode.getValueAt(i,17).toString(),tabMode.getValueAt(i,18).toString(),tabMode.getValueAt(i,19).toString(),
-                    tabMode.getValueAt(i,20).toString(),tabMode.getValueAt(i,21).toString(),tabMode.getValueAt(i,22).toString(),
-                    tabMode.getValueAt(i,23).toString(),tabMode.getValueAt(i,24).toString(),tabMode.getValueAt(i,25).toString(),
-                    tabMode.getValueAt(i,26).toString(),tabMode.getValueAt(i,27).toString(),tabMode.getValueAt(i,28).toString(),
-                    tabMode.getValueAt(i,29).toString(),tabMode.getValueAt(i,30).toString(),tabMode.getValueAt(i,31).toString(),
-                    tabMode.getValueAt(i,32).toString(),tabMode.getValueAt(i,33).toString(),tabMode.getValueAt(i,34).toString(),
-                    tabMode.getValueAt(i,35).toString()
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),5).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),6).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),7).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),8).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),9).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),10).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),11).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),12).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),13).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),14).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),15).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),16).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),17).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),18).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),19).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),20).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),21).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),22).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),23).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),24).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),25).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),26).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),27).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),28).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),29).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),30).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),31).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),32).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),33).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),34).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),35).toString()
                 },
                 "id=? and tahun=? and bulan=?","h1=?,h2=?,h3=?,h4=?,h5=?,h6=?,h7=?,h8=?,h9=?,h10=?,h11=?,h12=?,h13=?,h14=?,"+
                 "h15=?,h16=?,h17=?,h18=?,h19=?,h20=?,h21=?,h22=?,h23=?,h24=?,h25=?,h26=?,h27=?,h28=?,h29=?,h30=?,h31=?",34,
                 new String[]{
-                    tabMode.getValueAt(i,5).toString(),
-                    tabMode.getValueAt(i,6).toString(),
-                    tabMode.getValueAt(i,7).toString(),
-                    tabMode.getValueAt(i,8).toString(),
-                    tabMode.getValueAt(i,9).toString(),tabMode.getValueAt(i,10).toString(),
-                    tabMode.getValueAt(i,11).toString(),tabMode.getValueAt(i,12).toString(),tabMode.getValueAt(i,13).toString(),
-                    tabMode.getValueAt(i,14).toString(),tabMode.getValueAt(i,15).toString(),tabMode.getValueAt(i,16).toString(),
-                    tabMode.getValueAt(i,17).toString(),tabMode.getValueAt(i,18).toString(),tabMode.getValueAt(i,19).toString(),
-                    tabMode.getValueAt(i,20).toString(),tabMode.getValueAt(i,21).toString(),tabMode.getValueAt(i,22).toString(),
-                    tabMode.getValueAt(i,23).toString(),tabMode.getValueAt(i,24).toString(),tabMode.getValueAt(i,25).toString(),
-                    tabMode.getValueAt(i,26).toString(),tabMode.getValueAt(i,27).toString(),tabMode.getValueAt(i,28).toString(),
-                    tabMode.getValueAt(i,29).toString(),tabMode.getValueAt(i,30).toString(),tabMode.getValueAt(i,31).toString(),
-                    tabMode.getValueAt(i,32).toString(),tabMode.getValueAt(i,33).toString(),tabMode.getValueAt(i,34).toString(),
-                    tabMode.getValueAt(i,35).toString(),tabMode.getValueAt(i,1).toString(),ThnCari.getSelectedItem().toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),5).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),6).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),7).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),8).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),9).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),10).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),11).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),12).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),13).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),14).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),15).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),16).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),17).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),18).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),19).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),20).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),21).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),22).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),23).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),24).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),25).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),26).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),27).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),28).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),29).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),30).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),31).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),32).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),33).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),34).toString(),
+                    tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),35).toString(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),1).toString(),ThnCari.getSelectedItem().toString(),
                     BlnCari.getSelectedItem().toString()
                 });
         }
@@ -400,10 +401,10 @@ public class DlgJadwalTambahan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()!=0){
+        if(tbJadwal.getRowCount()!=0){
             if(tbJadwal.getSelectedRow()!= -1){
                 Sequel.queryu2("delete from jadwal_tambahan where id=? and tahun=? and bulan=?",3,new String[]{
-                        tabMode.getValueAt(tbJadwal.getSelectedRow(),1).toString(),
+                        tabMode.getValueAt(tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),1).toString(),
                         ThnCari.getSelectedItem().toString(),BlnCari.getSelectedItem().toString()
                 });
                 runBackground(() ->tampil());
@@ -629,7 +630,7 @@ public class DlgJadwalTambahan extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJadwalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJadwal.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 DlgJamMasuk jammasuk=new DlgJamMasuk(null,false);
                 jammasuk.addWindowListener(new WindowListener() {
@@ -641,7 +642,7 @@ public class DlgJadwalTambahan extends javax.swing.JDialog {
                     public void windowClosed(WindowEvent e) {
                         if(jammasuk.getTable().getSelectedRow()!= -1){
                             if(tbJadwal.getSelectedColumn()>4){
-                                tabMode.setValueAt(jammasuk.getTable().getValueAt(jammasuk.getTable().getSelectedRow(),1).toString(),tbJadwal.getSelectedRow(),tbJadwal.getSelectedColumn());
+                                tabMode.setValueAt(jammasuk.getTable().getValueAt(jammasuk.getTable().getSelectedRow(),1).toString(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),tbJadwal.getSelectedColumn());
                             }
                         }
                         tbJadwal.requestFocus();
@@ -673,7 +674,7 @@ public class DlgJadwalTambahan extends javax.swing.JDialog {
                 jammasuk.setLocationRelativeTo(internalFrame1);
                 jammasuk.setVisible(true);
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
-                tabMode.setValueAt("",tbJadwal.getSelectedRow(),tbJadwal.getSelectedColumn());
+                tabMode.setValueAt("",tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),tbJadwal.getSelectedColumn());
             }
         }
     }//GEN-LAST:event_tbJadwalKeyPressed
@@ -907,7 +908,7 @@ public class DlgJadwalTambahan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJadwal.getRowCount());
     }
 
     public void isCek(){

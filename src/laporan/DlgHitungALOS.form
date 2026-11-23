@@ -465,6 +465,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="Tabel1">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="jPopupMenu1"/>
                         </Property>
@@ -516,6 +517,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="Tabel2">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="jPopupMenu1"/>
                         </Property>

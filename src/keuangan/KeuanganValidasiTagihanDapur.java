@@ -516,7 +516,7 @@ public final class KeuanganValidasiTagihanDapur extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             KeuanganHutangDapurBelumLunas form=new KeuanganHutangDapurBelumLunas(null,false);
             form.isCek();
-            form.tampilTagihan2(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
+            form.tampilTagihan2(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
@@ -532,7 +532,7 @@ public final class KeuanganValidasiTagihanDapur extends javax.swing.JDialog {
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
         if(tbBangsal.getSelectedRow()!= -1){
-            LCount1.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),4).toString());
+            LCount1.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),4).toString());
         }
     }//GEN-LAST:event_tbBangsalMouseClicked
 

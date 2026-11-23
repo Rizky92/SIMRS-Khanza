@@ -195,6 +195,7 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -457,16 +458,16 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
                 sukses=true;
                 for(i=0;i<tbDokter.getRowCount();i++){
                     try {
-                        if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
-                            if(Sequel.menyimpantf2("utd_pengambilan_penunjang","'"+tbDokter.getValueAt(i,1).toString()+"','"+tbDokter.getValueAt(i,0).toString()+"','"+
-                                    tbDokter.getValueAt(i,3).toString()+"','"+tbDokter.getValueAt(i,4).toString()+"','"+Nip.getText()+"','"+
+                        if(Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0){
+                            if(Sequel.menyimpantf2("utd_pengambilan_penunjang","'"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString()+"','"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString()+"','"+
+                                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString()+"','"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString()+"','"+Nip.getText()+"','"+
                                     Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19)+"','"+Keterangan.getText()+"'","Pengambilan BHP UTD")==true){
-                                Trackbarang.catatRiwayat(tabMode.getValueAt(i,1).toString(),0,Valid.SetAngka(tabMode.getValueAt(i,0).toString()),"Pengambilan UTD", akses.getkode(),"Simpan");
+                                Trackbarang.catatRiwayat(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString(),0,Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString()),"Pengambilan UTD", akses.getkode(),"Simpan");
                                 Sequel.mengedit("ipsrsbarang","kode_brng=?","stok=stok-?",2,new String[]{
-                                    tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,1).toString()
+                                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString()
                                 });
-                                Sequel.menyimpan("utd_stok_penunjang","'"+tbDokter.getValueAt(i,1).toString()+"','"+tbDokter.getValueAt(i,0).toString()+"','"+tbDokter.getValueAt(i,3).toString()+"'",
-                                                    "stok=stok+"+tbDokter.getValueAt(i,0).toString()+",hargaterakhir='"+tbDokter.getValueAt(i,3).toString()+"'","kode_brng='"+tbDokter.getValueAt(i,1).toString()+"'");
+                                Sequel.menyimpan("utd_stok_penunjang","'"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString()+"','"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString()+"','"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString()+"'",
+                                                    "stok=stok+"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString()+",hargaterakhir='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString()+"'","kode_brng='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString()+"'");
                             }else{
                                 sukses=false;
                             }
@@ -491,8 +492,8 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
                 if(sukses==true){
                     Sequel.Commit();
                     for(index=0;index<tbDokter.getRowCount();index++){
-                        tbDokter.setValueAt(null,index,0);
-                        tbDokter.setValueAt(0,index,4);
+                        tabMode.setValueAt(null,tbDokter.convertRowIndexToModel(index),0);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(index),4);
                     }
                     LTotal.setText("0");
                     Tanggal.setDate(new Date());
@@ -552,8 +553,8 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
             for(i=0;i<tbDokter.getRowCount();i++){
-                tbDokter.setValueAt("",i,0);
-                tbDokter.setValueAt("0",i,4);
+                tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),0);
+                tabMode.setValueAt("0",tbDokter.convertRowIndexToModel(i),4);
             }
             isTotal();
     }//GEN-LAST:event_ppBersihkanActionPerformed
@@ -640,7 +641,7 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
     }//GEN-LAST:event_KeteranganKeyPressed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 if(tbDokter.getSelectedColumn()==1){
                     isTotal();
@@ -652,23 +653,23 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
                     isTotal();
                 }else if(tbDokter.getSelectedColumn()==2){
                     try {
-                        tbDokter.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString())*Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString()),tbDokter.getSelectedRow(),4);
+                        tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString())*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString()),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4);
                     } catch (Exception e) {
-                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),4);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4);
                     }
                 }else if(tbDokter.getSelectedColumn()==3){
                     try {
-                        tbDokter.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString())*Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString()),tbDokter.getSelectedRow(),4);
+                        tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString())*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString()),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4);
                     } catch (Exception e) {
-                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),4);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4);
                     }
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
                 try {
                     if(tbDokter.getSelectedColumn()==0){
-                        tbDokter.setValueAt(null,tbDokter.getSelectedRow(),0);
-                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),4);
-                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
+                        tabMode.setValueAt(null,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7);
                     }
                 } catch (Exception e) {
                 }
@@ -685,7 +686,7 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
                 stok_tujuan=0;
                 psstok2=koneksi.prepareStatement("select ifnull(stok,'0') from utd_stok_penunjang where kode_brng=?");
                 try {
-                    psstok2.setString(1,tabMode.getValueAt(i,1).toString());
+                    psstok2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString());
                     rsstok=psstok2.executeQuery();
                     if(rsstok.next()){
                         stok_tujuan=rsstok.getDouble(1);
@@ -700,9 +701,9 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
                         psstok2.close();
                     }
                 }
-                tbDokter.setValueAt(stok_tujuan,i,7);
+                tabMode.setValueAt(stok_tujuan,tbDokter.convertRowIndexToModel(i),7);
             } catch (Exception e) {
-                tbDokter.setValueAt(0,i,7);
+                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),7);
             }
         }
     }//GEN-LAST:event_ppStokActionPerformed
@@ -776,7 +777,7 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
         jml=0;
         for(i=0;i<row;i++){
             try {
-                if(Double.parseDouble(tbDokter.getValueAt(i,0).toString())>0){
+                if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0){
                     jml++;
                 }
             } catch (Exception e) {
@@ -795,20 +796,21 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
         index=0;
         for(i=0;i<row;i++){
             try {
-                if(Double.parseDouble(tbDokter.getValueAt(i,0).toString())>0){
-                    jumlah[index]=tbDokter.getValueAt(i,0).toString();
-                    kodebarang[index]=tbDokter.getValueAt(i,1).toString();
-                    namabarang[index]=tbDokter.getValueAt(i,2).toString();
-                    hbeli[index]=tbDokter.getValueAt(i,3).toString();
-                    total[index]=tbDokter.getValueAt(i,4).toString();
-                    satuan[index]=tbDokter.getValueAt(i,5).toString();
-                    stokasal[index]=tbDokter.getValueAt(i,6).toString();
-                    stoktujuan[index]=tbDokter.getValueAt(i,7).toString();
+                if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0){
+                    jumlah[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString();
+                    kodebarang[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString();
+                    namabarang[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString();
+                    hbeli[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString();
+                    total[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString();
+                    satuan[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString();
+                    stokasal[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString();
+                    stoktujuan[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),7).toString();
                     index++;
                 }
             } catch (Exception e) {
             }
         }
+        tbDokter.suspendSorting();
         Valid.tabelKosong(tabMode);
         for(i=0;i<jml;i++){
             tabMode.addRow(new Object[]{jumlah[i],kodebarang[i],namabarang[i],hbeli[i],total[i],satuan[i],stokasal[i],stoktujuan[i]});
@@ -839,17 +841,18 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
 
+        tbDokter.resumeSorting();
     }
 
     private void isTotal(){
         if(tbDokter.getSelectedRow()!= -1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().equals("")){
                 try {
-                    if(Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString())>0){
+                    if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString())>0){
                         stok_tujuan=0;
                         psstok2=koneksi.prepareStatement("select ifnull(stok,'0') from utd_stok_penunjang where kode_brng=?");
                         try {
-                            psstok2.setString(1,tabMode.getValueAt(tbDokter.getSelectedRow(),1).toString());
+                            psstok2.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
                             rsstok=psstok2.executeQuery();
                             if(rsstok.next()){
                                 stok_tujuan=rsstok.getDouble(1);
@@ -864,26 +867,26 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
                                 psstok2.close();
                             }
                         }
-                        tbDokter.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString())*Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString()),tbDokter.getSelectedRow(),4);
-                        tbDokter.setValueAt(stok_tujuan,tbDokter.getSelectedRow(),7);
+                        tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString())*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString()),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4);
+                        tabMode.setValueAt(stok_tujuan,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7);
                     }
                 } catch (Exception e) {
-                    tbDokter.setValueAt("",tbDokter.getSelectedRow(),0);
-                    tbDokter.setValueAt(0,tbDokter.getSelectedRow(),4);
-                    tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
+                    tabMode.setValueAt("",tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0);
+                    tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4);
+                    tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7);
                 }
             }else{
-                tbDokter.setValueAt(0,tbDokter.getSelectedRow(),4);
-                tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
+                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4);
+                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7);
             }
         }
 
         subtotal=0;
-        for(int r=0;r<tabMode.getRowCount();r++){
+        for(int r=0;r<tbDokter.getRowCount();r++){
             y=0;
             try {
-                if(Double.parseDouble(tabMode.getValueAt(r,0).toString())>0){
-                    y=Double.parseDouble(tabMode.getValueAt(r,4).toString());
+                if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(r),0).toString())>0){
+                    y=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(r),4).toString());
                 }
             } catch (Exception e) {
                 y=0;

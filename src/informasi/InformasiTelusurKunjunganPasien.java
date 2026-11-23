@@ -435,13 +435,13 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_TCari1KeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             runBackground(() ->tampil2());
         }
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 runBackground(() ->tampil2());
             }
@@ -576,7 +576,7 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbKamar.getRowCount());
         }
     }
 
@@ -599,17 +599,17 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
                     "stts<>'Batal' and reg_periksa.no_rkm_medis=? and penjab.png_jawab like ? "+
                     "order by reg_periksa.tgl_registrasi");
                 try {
-                    ps.setString(1,tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString());
                     ps.setString(2,"%"+TCari1.getText()+"%");
-                    ps.setString(3,tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString());
+                    ps.setString(3,tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString());
                     ps.setString(4,"%"+TCari1.getText()+"%");
-                    ps.setString(5,tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString());
+                    ps.setString(5,tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString());
                     ps.setString(6,"%"+TCari1.getText()+"%");
-                    ps.setString(7,tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString());
+                    ps.setString(7,tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString());
                     ps.setString(8,"%"+TCari1.getText()+"%");
-                    ps.setString(9,tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString());
+                    ps.setString(9,tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString());
                     ps.setString(10,"%"+TCari1.getText()+"%");
-                    ps.setString(11,tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString());
+                    ps.setString(11,tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString());
                     ps.setString(12,"%"+TCari1.getText()+"%");
                     rs=ps.executeQuery();
                     while(rs.next()){

@@ -148,6 +148,7 @@ public class DlgCekStok extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -401,6 +402,7 @@ public class DlgCekStok extends javax.swing.JDialog {
 
     private void tampil() {
         try{
+            tbDokter.suspendSorting();
             Valid.tabelKosong(tabMode);
             pstampil=koneksi.prepareStatement("select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat, "+
                 "databarang."+hppfarmasi+" as dasar from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
@@ -426,7 +428,7 @@ public class DlgCekStok extends javax.swing.JDialog {
                                  stokbarang=rsstok.getDouble(1);
                             }
                         }catch (Exception e) {
-                            tbDokter.setValueAt(0,i,6);
+                            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),6);
                         } finally{
                             if(rsstok!=null){
                                 rsstok.close();
@@ -456,6 +458,7 @@ public class DlgCekStok extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
+        tbDokter.resumeSorting();
     }
 
     private void runBackground(Runnable task) {

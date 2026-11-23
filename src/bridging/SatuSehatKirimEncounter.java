@@ -625,10 +625,10 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,8).toString().equals(""))&&tbObat.getValueAt(i,15).toString().equals("")){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString().equals(""))&&tabMode.getValueAt(tbObat.convertRowIndexToModel(i),15).toString().equals("")){
                     try {
-                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,8).toString());
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString());
                         if (iddokter.isBlank()) {
                             System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                             continue;
@@ -637,7 +637,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                             System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
                             continue;
                         }
-                        if(tbObat.getValueAt(i,10).toString().toLowerCase().contains("anc")){
+                        if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString().toLowerCase().contains("anc")){
                             idepisode="";
                             try{
                                 headers = new HttpHeaders();
@@ -648,7 +648,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                             "\"identifier\": [" +
                                                 "{" +
                                                     "\"system\": \"http://sys-ids.kemkes.go.id/episode-of-care/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                    "\"value\": \""+tbObat.getValueAt(i,2).toString()+"\"" +
+                                                    "\"value\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString()+"\"" +
                                                 "}" +
                                             "]" +
                                             "\"status\": \"active\"," +
@@ -656,7 +656,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                                 "{" +
                                                     "\"status\": \"active\"," +
                                                     "\"period\": {" +
-                                                        "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\"" +
+                                                        "\"start\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"\"" +
                                                     "}" +
                                                 "}" +
                                             "]," +
@@ -673,10 +673,10 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                             "]," +
                                             "\"patient\": {" +
                                                 "\"reference\": \"Patient/"+idpasien+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                                "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString()+"\"" +
                                             "}," +
                                             "\"period\": {" +
-                                                "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\"" +
+                                                "\"start\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"\"" +
                                             "}," +
                                             "\"managingOrganization\": {" +
                                                 "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
@@ -692,7 +692,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                 if(!response.asText().equals("")){
                                     idepisode=response.asText();
                                     Sequel.menyimpan("satu_sehat_episodeofcare","?,?","No.Rawat",2,new String[]{
-                                        tbObat.getValueAt(i,2).toString(),response.asText()
+                                        tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString(),response.asText()
                                     });
                                 }
                             } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -710,12 +710,12 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                             "\"status\": \"arrived\"," +
                                             "\"class\": {" +
                                                 "\"system\": \"http://terminology.hl7.org/CodeSystem/v3-ActCode\"," +
-                                                "\"code\": \""+(tbObat.getValueAt(i,13).toString().equals("Ralan")?"AMB":"IMP")+"\"," +
-                                                "\"display\": \""+(tbObat.getValueAt(i,13).toString().equals("Ralan")?"ambulatory":"inpatient encounter")+"\"" +
+                                                "\"code\": \""+(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString().equals("Ralan")?"AMB":"IMP")+"\"," +
+                                                "\"display\": \""+(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString().equals("Ralan")?"ambulatory":"inpatient encounter")+"\"" +
                                             "}," +
                                             "\"subject\": {" +
                                                 "\"reference\": \"Patient/"+idpasien+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                                "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString()+"\"" +
                                             "}," +
                                             "\"participant\": [" +
                                                 "{" +
@@ -732,18 +732,18 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                                     "]," +
                                                     "\"individual\": {" +
                                                         "\"reference\": \"Practitioner/"+iddokter+"\"," +
-                                                        "\"display\": \""+tbObat.getValueAt(i,7).toString()+"\"" +
+                                                        "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString()+"\"" +
                                                     "}" +
                                                 "}" +
                                             "]," +
                                             "\"period\": {" +
-                                                "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\"" +
+                                                "\"start\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"\"" +
                                             "}," +
                                             "\"location\": [" +
                                                 "{" +
                                                     "\"location\": {" +
-                                                        "\"reference\": \"Location/"+tbObat.getValueAt(i,11).toString()+"\"," +
-                                                        "\"display\": \""+tbObat.getValueAt(i,10).toString()+"\"" +
+                                                        "\"reference\": \"Location/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString()+"\"," +
+                                                        "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString()+"\"" +
                                                     "}" +
                                                 "}" +
                                             "]," +
@@ -751,8 +751,8 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                                 "{" +
                                                     "\"status\": \"arrived\"," +
                                                     "\"period\": {" +
-                                                        "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\"," +
-                                                        "\"end\": \""+tbObat.getValueAt(i,14).toString()+"\"" +
+                                                        "\"start\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"\"," +
+                                                        "\"end\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),14).toString()+"\"" +
                                                     "}" +
                                                 "}" +
                                             "]," +
@@ -767,7 +767,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                             "\"identifier\": [" +
                                                 "{" +
                                                     "\"system\": \"http://sys-ids.kemkes.go.id/encounter/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                    "\"value\": \""+tbObat.getValueAt(i,2).toString()+"\"" +
+                                                    "\"value\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString()+"\"" +
                                                 "}," +
                                                 "{" +
                                                     "\"system\": \"http://terminology.kemkes.go.id/CodeSystem/episodeofcare/ANC\"," +
@@ -784,7 +784,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                 response = root.path("id");
                                 if(!response.asText().equals("")){
                                     if(Sequel.menyimpantf2("satu_sehat_encounter","?,?","No.Rawat",2,new String[]{
-                                        tbObat.getValueAt(i,2).toString(),response.asText()
+                                        tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString(),response.asText()
                                     })==true){
                                         pengirim.setValueAt(tbObat,response.asText(),i,15);
                                         pengirim.setValueAt(tbObat,false,i,0);
@@ -795,7 +795,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                             }catch(Exception e){
                                 System.out.println("Notifikasi Bridging : "+e);
                             }
-                        }else if(tbObat.getValueAt(i,9).toString().equals("IGDK")){
+                        }else if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString().equals("IGDK")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -810,7 +810,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                         "}," +
                                         "\"subject\": {" +
                                             "\"reference\": \"Patient/"+idpasien+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                            "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString()+"\"" +
                                         "}," +
                                         "\"participant\": [" +
                                             "{" +
@@ -827,18 +827,18 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                                 "]," +
                                                 "\"individual\": {" +
                                                     "\"reference\": \"Practitioner/"+iddokter+"\"," +
-                                                    "\"display\": \""+tbObat.getValueAt(i,7).toString()+"\"" +
+                                                    "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString()+"\"" +
                                                 "}" +
                                             "}" +
                                         "]," +
                                         "\"period\": {" +
-                                            "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\"" +
+                                            "\"start\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"\"" +
                                         "}," +
                                         "\"location\": [" +
                                             "{" +
                                                 "\"location\": {" +
-                                                    "\"reference\": \"Location/"+tbObat.getValueAt(i,11).toString()+"\"," +
-                                                    "\"display\": \""+tbObat.getValueAt(i,10).toString()+"\"" +
+                                                    "\"reference\": \"Location/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString()+"\"," +
+                                                    "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString()+"\"" +
                                                 "}" +
                                             "}" +
                                         "]," +
@@ -846,8 +846,8 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                             "{" +
                                                 "\"status\": \"arrived\"," +
                                                 "\"period\": {" +
-                                                    "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\"," +
-                                                    "\"end\": \""+tbObat.getValueAt(i,14).toString()+"\"" +
+                                                    "\"start\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"\"," +
+                                                    "\"end\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),14).toString()+"\"" +
                                                 "}" +
                                             "}" +
                                         "]," +
@@ -857,7 +857,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                         "\"identifier\": [" +
                                             "{" +
                                                 "\"system\": \"http://sys-ids.kemkes.go.id/encounter/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,2).toString()+"\"" +
+                                                "\"value\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString()+"\"" +
                                             "}" +
                                         "]" +
                                     "}";
@@ -870,10 +870,10 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.menyimpantf2("satu_sehat_encounter","?,?","No.Rawat",2,new String[]{
-                                    tbObat.getValueAt(i,2).toString(),response.asText()
+                                    tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString(),response.asText()
                                 })==true){
-                                    tbObat.setValueAt(response.asText(),i,15);
-                                    tbObat.setValueAt(false,i,0);
+                                    tabMode.setValueAt(response.asText(),tbObat.convertRowIndexToModel(i),15);
+                                    tabMode.setValueAt(false,tbObat.convertRowIndexToModel(i),0);
                                 }
                             }
                         }catch(Exception e){
@@ -889,12 +889,12 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                             "\"status\": \"arrived\"," +
                                             "\"class\": {" +
                                                 "\"system\": \"http://terminology.hl7.org/CodeSystem/v3-ActCode\"," +
-                                                "\"code\": \""+(tbObat.getValueAt(i,13).toString().equals("Ralan")?"AMB":"IMP")+"\"," +
-                                                "\"display\": \""+(tbObat.getValueAt(i,13).toString().equals("Ralan")?"ambulatory":"inpatient encounter")+"\"" +
+                                                "\"code\": \""+(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString().equals("Ralan")?"AMB":"IMP")+"\"," +
+                                                "\"display\": \""+(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString().equals("Ralan")?"ambulatory":"inpatient encounter")+"\"" +
                                             "}," +
                                             "\"subject\": {" +
                                                 "\"reference\": \"Patient/"+idpasien+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                                "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString()+"\"" +
                                             "}," +
                                             "\"participant\": [" +
                                                 "{" +
@@ -911,18 +911,18 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                                     "]," +
                                                     "\"individual\": {" +
                                                         "\"reference\": \"Practitioner/"+iddokter+"\"," +
-                                                        "\"display\": \""+tbObat.getValueAt(i,7).toString()+"\"" +
+                                                        "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString()+"\"" +
                                                     "}" +
                                                 "}" +
                                             "]," +
                                             "\"period\": {" +
-                                                "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\"" +
+                                                "\"start\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"\"" +
                                             "}," +
                                             "\"location\": [" +
                                                 "{" +
                                                     "\"location\": {" +
-                                                        "\"reference\": \"Location/"+tbObat.getValueAt(i,11).toString()+"\"," +
-                                                        "\"display\": \""+tbObat.getValueAt(i,10).toString()+"\"" +
+                                                        "\"reference\": \"Location/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString()+"\"," +
+                                                        "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString()+"\"" +
                                                     "}" +
                                                 "}" +
                                             "]," +
@@ -930,8 +930,8 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                                 "{" +
                                                     "\"status\": \"arrived\"," +
                                                     "\"period\": {" +
-                                                        "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\"," +
-                                                        "\"end\": \""+tbObat.getValueAt(i,14).toString()+"\"" +
+                                                        "\"start\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"\"," +
+                                                        "\"end\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),14).toString()+"\"" +
                                                     "}" +
                                                 "}" +
                                             "]," +
@@ -941,7 +941,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                             "\"identifier\": [" +
                                                 "{" +
                                                     "\"system\": \"http://sys-ids.kemkes.go.id/encounter/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                    "\"value\": \""+tbObat.getValueAt(i,2).toString()+"\"" +
+                                                    "\"value\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString()+"\"" +
                                                 "}" +
                                             "]" +
                                         "}";
@@ -954,7 +954,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                 response = root.path("id");
                                 if(!response.asText().equals("")){
                                     if(Sequel.menyimpantf2("satu_sehat_encounter","?,?","No.Rawat",2,new String[]{
-                                        tbObat.getValueAt(i,2).toString(),response.asText()
+                                        tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString(),response.asText()
                                     })==true){
                                         pengirim.setValueAt(tbObat,response.asText(),i,15);
                                         pengirim.setValueAt(tbObat,false,i,0);
@@ -976,13 +976,13 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -994,10 +994,10 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,8).toString().equals(""))&&(!tbObat.getValueAt(i,15).toString().equals(""))){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),15).toString().equals(""))){
                     try {
-                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,8).toString());
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString());
                         if (iddokter.isBlank()) {
                             System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                             continue;
@@ -1006,18 +1006,18 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                             System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
                             continue;
                         }
-                        if(tbObat.getValueAt(i,9).toString().equals("IGDK")){
+                        if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString().equals("IGDK")){
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Encounter\"," +
-                                        "\"id\": \""+tbObat.getValueAt(i,15).toString()+"\"," +
+                                        "\"id\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),15).toString()+"\"," +
                                         "\"identifier\": [" +
                                             "{" +
                                                 "\"system\": \"http://sys-ids.kemkes.go.id/encounter/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,2).toString()+"\"" +
+                                                "\"value\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString()+"\"" +
                                             "}" +
                                         "]," +
                                         "\"status\": \"arrived\"," +
@@ -1028,7 +1028,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                         "}," +
                                         "\"subject\": {" +
                                             "\"reference\": \"Patient/"+idpasien+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                            "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString()+"\"" +
                                         "}," +
                                         "\"participant\": [" +
                                             "{" +
@@ -1045,18 +1045,18 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                                 "]," +
                                                 "\"individual\": {" +
                                                     "\"reference\": \"Practitioner/"+iddokter+"\"," +
-                                                    "\"display\": \""+tbObat.getValueAt(i,7).toString()+"\"" +
+                                                    "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString()+"\"" +
                                                 "}" +
                                             "}" +
                                         "]," +
                                         "\"period\": {" +
-                                            "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\"" +
+                                            "\"start\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"\"" +
                                         "}," +
                                         "\"location\": [" +
                                             "{" +
                                                 "\"location\": {" +
-                                                    "\"reference\": \"Location/"+tbObat.getValueAt(i,11).toString()+"\"," +
-                                                    "\"display\": \""+tbObat.getValueAt(i,10).toString()+"\"" +
+                                                    "\"reference\": \"Location/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString()+"\"," +
+                                                    "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString()+"\"" +
                                                 "}" +
                                             "}" +
                                         "]," +
@@ -1064,8 +1064,8 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                             "{" +
                                                 "\"status\": \"arrived\"," +
                                                 "\"period\": {" +
-                                                    "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\"," +
-                                                    "\"end\": \""+tbObat.getValueAt(i,14).toString()+"\"" +
+                                                    "\"start\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"\"," +
+                                                    "\"end\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),14).toString()+"\"" +
                                                 "}" +
                                             "}" +
                                         "]," +
@@ -1073,12 +1073,12 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                             "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
                                         "}" +
                                     "}";
-                            System.out.println("URL : "+link+"/Encounter/"+tbObat.getValueAt(i,15).toString());
+                            System.out.println("URL : "+link+"/Encounter/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),15).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Encounter/"+tbObat.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.getRest().exchange(link+"/Encounter/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
-                            tbObat.setValueAt(false,i,0);
+                            tabMode.setValueAt(false,tbObat.convertRowIndexToModel(i),0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
                             System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
@@ -1091,22 +1091,22 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                 headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                 json = "{" +
                                             "\"resourceType\": \"Encounter\"," +
-                                            "\"id\": \""+tbObat.getValueAt(i,15).toString()+"\"," +
+                                            "\"id\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),15).toString()+"\"," +
                                             "\"identifier\": [" +
                                                 "{" +
                                                     "\"system\": \"http://sys-ids.kemkes.go.id/encounter/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                    "\"value\": \""+tbObat.getValueAt(i,2).toString()+"\"" +
+                                                    "\"value\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString()+"\"" +
                                                 "}" +
                                             "]," +
                                             "\"status\": \"arrived\"," +
                                             "\"class\": {" +
                                                 "\"system\": \"http://terminology.hl7.org/CodeSystem/v3-ActCode\"," +
-                                                "\"code\": \""+(tbObat.getValueAt(i,13).toString().equals("Ralan")?"AMB":"IMP")+"\"," +
-                                                "\"display\": \""+(tbObat.getValueAt(i,13).toString().equals("Ralan")?"ambulatory":"inpatient encounter")+"\"" +
+                                                "\"code\": \""+(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString().equals("Ralan")?"AMB":"IMP")+"\"," +
+                                                "\"display\": \""+(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString().equals("Ralan")?"ambulatory":"inpatient encounter")+"\"" +
                                             "}," +
                                             "\"subject\": {" +
                                                 "\"reference\": \"Patient/"+idpasien+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                                "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString()+"\"" +
                                             "}," +
                                             "\"participant\": [" +
                                                 "{" +
@@ -1123,18 +1123,18 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                                     "]," +
                                                     "\"individual\": {" +
                                                         "\"reference\": \"Practitioner/"+iddokter+"\"," +
-                                                        "\"display\": \""+tbObat.getValueAt(i,7).toString()+"\"" +
+                                                        "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString()+"\"" +
                                                     "}" +
                                                 "}" +
                                             "]," +
                                             "\"period\": {" +
-                                                "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\"" +
+                                                "\"start\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"\"" +
                                             "}," +
                                             "\"location\": [" +
                                                 "{" +
                                                     "\"location\": {" +
-                                                        "\"reference\": \"Location/"+tbObat.getValueAt(i,11).toString()+"\"," +
-                                                        "\"display\": \""+tbObat.getValueAt(i,10).toString()+"\"" +
+                                                        "\"reference\": \"Location/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString()+"\"," +
+                                                        "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString()+"\"" +
                                                     "}" +
                                                 "}" +
                                             "]," +
@@ -1142,8 +1142,8 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                                 "{" +
                                                     "\"status\": \"arrived\"," +
                                                     "\"period\": {" +
-                                                        "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\"," +
-                                                        "\"end\": \""+tbObat.getValueAt(i,14).toString()+"\"" +
+                                                        "\"start\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"\"," +
+                                                        "\"end\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),14).toString()+"\"" +
                                                     "}" +
                                                 "}" +
                                             "]," +
@@ -1151,10 +1151,10 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                                                 "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
                                             "}" +
                                         "}";
-                                System.out.println("URL : "+link+"/Encounter/"+tbObat.getValueAt(i,15).toString());
+                                System.out.println("URL : "+link+"/Encounter/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),15).toString());
                                 System.out.println("Request JSON : "+json);
                                 requestEntity = new HttpEntity(json,headers);
-                                json=api.kirimSmc(link+"/Encounter/"+tbObat.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
+                                json=api.kirimSmc(link+"/Encounter/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),15).toString(), HttpMethod.PUT, requestEntity);
                                 System.out.println("Result JSON : "+json);
                                 pengirim.setValueAt(tbObat,false,i,0);
                             } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -1212,8 +1212,8 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
 
     private void ppPilihBelumDikirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihBelumDikirimActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            if (tbObat.getValueAt(i, 15).toString().isBlank()) {
-                tbObat.setValueAt(true,i,0);
+            if (tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 15).toString().isBlank()) {
+                tabMode.setValueAt(true,tbObat.convertRowIndexToModel(i),0);
             }
         }
     }//GEN-LAST:event_ppPilihBelumDikirimActionPerformed
@@ -1262,6 +1262,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -1309,7 +1310,8 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
+        tbObat.resumeSorting();
     }
 
     public void isCek(){

@@ -203,6 +203,7 @@ public class DlgCariPermintaanResepPulang extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbPemisahan.setSortable(false);
         tbPemisahan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -257,15 +258,15 @@ public class DlgCariPermintaanResepPulang extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkTanggalItemStateChanged
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbPemisahan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else if(tbPemisahan.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data permintaan dokter..!!");
         }else{
-            if(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString().equals("")){
+            if(tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),0).toString().equals("")){
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih No.Permintaan yang mau dihapus ..!!");
             }else {
-                Sequel.meghapus("permintaan_resep_pulang","no_permintaan",tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString());
+                Sequel.meghapus("permintaan_resep_pulang","no_permintaan",tabMode.getValueAt(tbPemisahan.convertRowIndexToModel(tbPemisahan.getSelectedRow()),0).toString());
                 runBackground(() ->tampil());
             }
         }

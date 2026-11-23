@@ -397,6 +397,7 @@ public class DlgCariBookingMCUPerusahaan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -790,10 +791,10 @@ public class DlgCariBookingMCUPerusahaan extends javax.swing.JDialog {
 
     private void BtnSelesaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSelesaiActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            if(tbDokter.getValueAt(i,0).toString().equals("true")){
-                Sequel.mengedit3("booking_mcu_perusahaan","no_mcu=?","status='Selesai'",1,new String[]{tbDokter.getValueAt(i,8).toString()});
-                tbDokter.setValueAt("Selesai",i, 11);
-                tbDokter.setValueAt(false,i,0);
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.mengedit3("booking_mcu_perusahaan","no_mcu=?","status='Selesai'",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString()});
+                tabMode.setValueAt("Selesai",tbDokter.convertRowIndexToModel(i), 11);
+                tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(i),0);
             }
         }
     }//GEN-LAST:event_BtnSelesaiActionPerformed
@@ -804,10 +805,10 @@ public class DlgCariBookingMCUPerusahaan extends javax.swing.JDialog {
 
     private void BtnMenungguActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenungguActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            if(tbDokter.getValueAt(i,0).toString().equals("true")){
-                Sequel.mengedit3("booking_mcu_perusahaan","no_mcu=?","status='Menunggu Hasil'",1,new String[]{tbDokter.getValueAt(i,8).toString()});
-                tbDokter.setValueAt("Menunggu Hasil",i, 11);
-                tbDokter.setValueAt(false,i,0);
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.mengedit3("booking_mcu_perusahaan","no_mcu=?","status='Menunggu Hasil'",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString()});
+                tabMode.setValueAt("Menunggu Hasil",tbDokter.convertRowIndexToModel(i), 11);
+                tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(i),0);
             }
         }
     }//GEN-LAST:event_BtnMenungguActionPerformed
@@ -818,43 +819,43 @@ public class DlgCariBookingMCUPerusahaan extends javax.swing.JDialog {
 
     private void ppPilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            tbDokter.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbDokter.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppPilihActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            tbDokter.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void ppBatalMCUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBatalMCUActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            if(tbDokter.getValueAt(i,0).toString().equals("true")){
-                if(Sequel.meghapustf("booking_mcu_perusahaan_berhasil_registrasi","no_mcu",tbDokter.getValueAt(i,8).toString())==true){
-                    if(Sequel.meghapustf("reg_periksa","no_rawat",tbDokter.getValueAt(i,14).toString())==true){
-                        Sequel.mengedit3("booking_mcu_perusahaan","no_mcu=?","status='Terdaftar'",1,new String[]{tbDokter.getValueAt(i,8).toString()});
-                        tabMode.removeRow(i);
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("true")){
+                if(Sequel.meghapustf("booking_mcu_perusahaan_berhasil_registrasi","no_mcu",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString())==true){
+                    if(Sequel.meghapustf("reg_periksa","no_rawat",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),14).toString())==true){
+                        Sequel.mengedit3("booking_mcu_perusahaan","no_mcu=?","status='Terdaftar'",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString()});
+                        tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                         i--;
                     }else{
                         Sequel.menyimpan2("booking_mcu_perusahaan_berhasil_registrasi","?,?",2,new String[]{
-                            tbDokter.getValueAt(i,8).toString(),tbDokter.getValueAt(i,14).toString()
+                            tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),14).toString()
                         });
                     }
                 }
             }
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }//GEN-LAST:event_ppBatalMCUActionPerformed
 
     private void ppRiwayatPerawatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRiwayatPerawatanActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
         }else{
             if(tbDokter.getSelectedRow()!= -1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 RMRiwayatPerawatan resume=new RMRiwayatPerawatan(null,true);
-                resume.setNoRm(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString());
+                resume.setNoRm(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString());
                 resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 resume.setLocationRelativeTo(internalFrame1);
                 resume.setVisible(true);
@@ -944,6 +945,7 @@ public class DlgCariBookingMCUPerusahaan extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbDokter.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             if(NmPoli.getText().trim().equals("")&&NmDokter.getText().trim().equals("")&&NmPerusahaan.getText().trim().equals("")&&TCari.getText().trim().equals("")){
@@ -1015,10 +1017,11 @@ public class DlgCariBookingMCUPerusahaan extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(""+tbDokter.getRowCount());
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbDokter.resumeSorting();
     }
 
     public void emptTeks() {

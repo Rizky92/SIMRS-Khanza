@@ -1186,9 +1186,9 @@ public class DlgDokter extends javax.swing.JDialog {
                 */
                 Sequel.mengupdatetfSmc("pegawai", "nik = ?, nama = ?, jk = ?, tmp_lahir = ?, tgl_lahir = ?, alamat = ?, agama = ?", "nik = ?", TKd.getText(), TNm.getText(),
                     CmbJk.getSelectedItem().toString().replaceAll("PEREMPUAN", "Wanita").replaceAll("LAKI-LAKI", "Pria").trim(), TTmp.getText(), Valid.getTglSmc(DTPLahir),
-                    TAlmt.getText(), cmbAgama.getSelectedItem().toString(), (String) tbDokter.getValueAt(tbDokter.getSelectedRow(), 0));
+                    TAlmt.getText(), cmbAgama.getSelectedItem().toString(), (String) tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 0));
                 Sequel.mengedit(
-                    "dokter","kd_dokter='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"'","kd_dokter='"+TKd.getText()+"',nm_dokter='"+TNm.getText()+
+                    "dokter","kd_dokter='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()+"'","kd_dokter='"+TKd.getText()+"',nm_dokter='"+TNm.getText()+
                     "',jk='"+CmbJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"',tmp_lahir='"+TTmp.getText()+
                     "',tgl_lahir='"+Valid.SetTgl(DTPLahir.getSelectedItem()+"")+"',gol_drh='"+CMbGd.getSelectedItem()+"',agama='"+cmbAgama.getSelectedItem()+
                     "',almt_tgl='"+TAlmt.getText()+"',no_telp='"+TTlp.getText()+"',email='"+Email.getText()+"',stts_nikah='"+CmbStts.getSelectedItem()+"'"+
@@ -1262,7 +1262,7 @@ public class DlgDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyTyped
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1386,7 +1386,7 @@ public class DlgDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRestoreActionPerformed
 
     private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1630,7 +1630,7 @@ public class DlgDokter extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDokter.getRowCount());
     }
 
     public void emptTeks() {
@@ -1656,21 +1656,21 @@ public class DlgDokter extends javax.swing.JDialog {
     private void getData() {
         int row=tbDokter.getSelectedRow();
         if(row!= -1){
-            TKd.setText(tbDokter.getValueAt(row,0).toString());
-            TNm.setText(tbDokter.getValueAt(row,1).toString());
-            TTmp.setText(tbDokter.getValueAt(row,3).toString());
-            CMbGd.setSelectedItem(tbDokter.getValueAt(row,5).toString());
-            cmbAgama.setSelectedItem(tbDokter.getValueAt(row,6).toString());
-            TAlmt.setText(tbDokter.getValueAt(row,7).toString());
-            TTlp.setText(tbDokter.getValueAt(row,8).toString());
-            Email.setText(tbDokter.getValueAt(row,9).toString());
-            CmbStts.setSelectedItem(tbDokter.getValueAt(row,10).toString());
-            TSpesialis.setText(tbDokter.getValueAt(row,11).toString());
-            Sequel.cariIsi("select spesialis.kd_sps from spesialis where spesialis.nm_sps='"+tbDokter.getValueAt(row,11).toString()+"'", KdSps);
-            TAlumni.setText(tbDokter.getValueAt(row,12).toString());
-            TNoi.setText(tbDokter.getValueAt(row,13).toString());
+            TKd.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString());
+            TNm.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),1).toString());
+            TTmp.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),3).toString());
+            CMbGd.setSelectedItem(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),5).toString());
+            cmbAgama.setSelectedItem(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),6).toString());
+            TAlmt.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),7).toString());
+            TTlp.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),8).toString());
+            Email.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),9).toString());
+            CmbStts.setSelectedItem(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),10).toString());
+            TSpesialis.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),11).toString());
+            Sequel.cariIsi("select spesialis.kd_sps from spesialis where spesialis.nm_sps='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),11).toString()+"'", KdSps);
+            TAlumni.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),12).toString());
+            TNoi.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),13).toString());
 
-            switch (tbDokter.getValueAt(row,2).toString()) {
+            switch (tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),2).toString()) {
                 case "L":
                     CmbJk.setSelectedItem("LAKI-LAKI");
                     break;
@@ -1679,7 +1679,7 @@ public class DlgDokter extends javax.swing.JDialog {
                     break;
             }
 
-            Valid.SetTgl(DTPLahir,tbDokter.getValueAt(row,4).toString());
+            Valid.SetTgl(DTPLahir,tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),4).toString());
         }
     }
 

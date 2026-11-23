@@ -230,6 +230,7 @@ public class IPSRSCariPemesanan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -859,14 +860,14 @@ public class IPSRSCariPemesanan extends javax.swing.JDialog {
     }//GEN-LAST:event_nmjenisKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-        if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString().trim().equals("")){
+        if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8).toString().trim().equals("")){
             Valid.textKosong(TCari,"No.Faktur");
         }else{
             try {
                 pscaripesan=koneksi.prepareStatement(
                     "select ipsrspemesanan.no_faktur,ipsrspemesanan.tagihan,ipsrspemesanan.tgl_faktur,ipsrspemesanan.status,ipsrspemesanan.ppn,(ipsrspemesanan.meterai+ipsrspemesanan.total2) as total from ipsrspemesanan where ipsrspemesanan.no_faktur=?");
                 try {
-                    pscaripesan.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                    pscaripesan.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                     rs=pscaripesan.executeQuery();
                     if(rs.next()){
                         Sequel.AutoComitFalse();
@@ -909,7 +910,7 @@ public class IPSRSCariPemesanan extends javax.swing.JDialog {
                         }
 
                         if(sukses==true){
-                            sukses=Sequel.queryu2tf("delete from ipsrspemesanan where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
+                            sukses=Sequel.queryu2tf("delete from ipsrspemesanan where no_faktur=?",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()});
                         }
 
                         if(sukses==true){
@@ -941,12 +942,12 @@ public class IPSRSCariPemesanan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void ppBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBayarActionPerformed
-        if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString().trim().equals("")){
+        if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8).toString().trim().equals("")){
             Valid.textKosong(TCari,"No.Faktur");
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             KeuanganBayarPemesananNonMedis bayarpesan=new KeuanganBayarPemesananNonMedis(null,false);
-            bayarpesan.setData(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+            bayarpesan.setData(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
             bayarpesan.tampil2();
             bayarpesan.isCek();
             bayarpesan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -958,7 +959,7 @@ public class IPSRSCariPemesanan extends javax.swing.JDialog {
 
     private void ChkAccorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkAccorActionPerformed
         if(tbDokter.getSelectedRow()!= -1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString().trim().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Faktur");
             }else{
                 isPhoto();
@@ -972,13 +973,13 @@ public class IPSRSCariPemesanan extends javax.swing.JDialog {
 
     private void btnAmbilPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbilPhotoActionPerformed
         if(tbDokter.getSelectedRow()!= -1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString().trim().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Faktur");
             }else{
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Sequel.meghapus("bukti_pemesanan_logistik", "no_faktur",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                Sequel.menyimpan2("bukti_pemesanan_logistik","?,''",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
-                Valid.panggilUrl("penerimaanlogistik/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&nofaktur="+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                Sequel.meghapus("bukti_pemesanan_logistik", "no_faktur",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+                Sequel.menyimpan2("bukti_pemesanan_logistik","?,''",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()});
+                Valid.panggilUrl("penerimaanlogistik/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&nofaktur="+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -990,7 +991,7 @@ public class IPSRSCariPemesanan extends javax.swing.JDialog {
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
         if(tbDokter.getSelectedRow()!= -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8).toString().trim().equals("")){
                 isPhoto();
                 panggilPhoto();
             }else{
@@ -1421,7 +1422,7 @@ public class IPSRSCariPemesanan extends javax.swing.JDialog {
             try {
                 ps=koneksi.prepareStatement("select bukti_pemesanan_logistik.photo from bukti_pemesanan_logistik where bukti_pemesanan_logistik.no_faktur=?");
                 try {
-                    ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){

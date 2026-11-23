@@ -984,9 +984,9 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(int i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")){
-                if(Sequel.meghapustf("rujuk_masuk","no_rawat",tbObat.getValueAt(i,4).toString())==true){
-                    tabMode.removeRow(i);
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")){
+                if(Sequel.meghapustf("rujuk_masuk","no_rawat",tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString())==true){
+                    tabMode.removeRow(tbObat.convertRowIndexToModel(i));
                     i--;
                 }
             }
@@ -1020,12 +1020,12 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
         }else if(JMPerujuk.getText().trim().equals("")){
             Valid.textKosong(JMPerujuk,"J.M. Perujuk");
         }else{
-            Sequel.mengedit("rujuk_masuk","no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()+"'",
+            Sequel.mengedit("rujuk_masuk","no_rawat='"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString()+"'",
                     "perujuk='"+TRujukan.getText()+"',alamat='"+TAlamat.getText()+"',no_rujuk='"+NoRujuk.getText()+"',"+
                     "jm_perujuk='"+JMPerujuk.getText()+"',dokter_perujuk='"+Dokter.getText()+"',kd_penyakit='"+kdDiagnosa.getText()+"',"+
                     "kategori_rujuk='"+KategoriRujuk.getSelectedItem().toString()+"',keterangan='"+Keterangan.getText()+"',"+
                     "no_balasan='"+NoBalasan.getText()+"'");
-            if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+            if(tbObat.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -1169,7 +1169,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_TNoRMKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1234,7 +1234,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCariRujukKeyPressed
 
     private void tbPerujukMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPerujukMouseClicked
-        if(tabMode2.getRowCount()!=0){
+        if(tbPerujuk.getRowCount()!=0){
             if(akses.getform().equals("DlgRujukMasuk")){
                 try {
                     getData2();
@@ -1246,7 +1246,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPerujukMouseClicked
 
     private void tbPerujukKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPerujukKeyPressed
-        if(tabMode2.getRowCount()!=0){
+        if(tbPerujuk.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData2();
@@ -1367,7 +1367,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
                 status="......................................................";
             }
 
-            param.put("html","Pada tanggal "+tbObat.getValueAt(tbObat.getSelectedRow(),9).toString()+" s/d "+tbObat.getValueAt(tbObat.getSelectedRow(),9).toString()+
+            param.put("html","Pada tanggal "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString()+" s/d "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString()+
                     " telah kami rawat/beri pengobatan "+diagnosa+". Sudah kami beri tindakan "+diagnosa2+
                     ". Penderita meninggal/telah sembuh kami pulangkan dengan keadaan "+keluar+". Terapi waktu pulang "+status+
                     ". Pemeriksaan lanjutan .........................................................\n\nSekian, "+
@@ -1462,11 +1462,11 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
             keluar=Sequel.cariIsi("select stts_pulang from kamar_inap where no_rawat=? and stts_pulang='-' order by STR_TO_DATE(concat(tgl_masuk,' ',jam_masuk),'%Y-%m-%d %H:%i:%s') desc limit 1",TNoRw.getText());
 
             param.put("html","Setelah penderita kami rawat di "+akses.getnamars()+" pulang dengan keadaan :\n"+
-                    "     "+keluar+" dengan diagnosa akhir "+tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()+"\n"+
+                    "     "+keluar+" dengan diagnosa akhir "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString()+"\n"+
                     "Atas kerjasamanya kami ucapkan terima kasih");
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
-            param.put("diagnosa",tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
+            param.put("diagnosa",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
             param.put("tindakan",diagnosa2);
             param.put("terpi",diagnosa);
             param.put("kotars",akses.getkabupatenrs());
@@ -1654,7 +1654,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
                     "Atas kerjasamanya kami ucapkan terima kasih");
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
-            param.put("diagnosa",tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
+            param.put("diagnosa",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
             param.put("tindakan",diagnosa2);
             param.put("terpi",diagnosa);
             param.put("kotars",akses.getkabupatenrs());
@@ -1675,7 +1675,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_MnBalasanRujukan2ActionPerformed
 
     private void tbObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1797,6 +1797,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             pstampil=koneksi.prepareStatement(
@@ -1881,7 +1882,8 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
+        tbObat.resumeSorting();
     }
 
     public void tampil3() {
@@ -1907,19 +1909,19 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TRujukan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TAlamat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            NoRujuk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            JMPerujuk.setText(Valid.SetAngka2(Double.parseDouble(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString())));
-            Dokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            KategoriRujuk.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            NoBalasan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
-            kdDiagnosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
-            NmDiagnosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
+            TRujukan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TAlamat.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            NoRujuk.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            JMPerujuk.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString())));
+            Dokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+            KategoriRujuk.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
+            NoBalasan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18).toString());
+            Keterangan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19).toString());
+            kdDiagnosa.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20).toString());
+            NmDiagnosa.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString());
         }
     }
 
@@ -2005,7 +2007,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
         } finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
-        LCount1.setText(""+tabMode2.getRowCount());
+        LCount1.setText(""+tbPerujuk.getRowCount());
     }
 
     public void tampil4() {
@@ -2047,13 +2049,13 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
             response = null;
             root = null;
         }
-        LCount1.setText(""+tabMode2.getRowCount());
+        LCount1.setText(""+tbPerujuk.getRowCount());
     }
 
     private void getData2() {
         if(tbPerujuk.getSelectedRow()!= -1){
-            TRujukan.setText(tbPerujuk.getValueAt(tbPerujuk.getSelectedRow(),0).toString());
-            TAlamat.setText(tbPerujuk.getValueAt(tbPerujuk.getSelectedRow(),1).toString());
+            TRujukan.setText(tabMode2.getValueAt(tbPerujuk.convertRowIndexToModel(tbPerujuk.getSelectedRow()),0).toString());
+            TAlamat.setText(tabMode2.getValueAt(tbPerujuk.convertRowIndexToModel(tbPerujuk.getSelectedRow()),1).toString());
         }
     }
 

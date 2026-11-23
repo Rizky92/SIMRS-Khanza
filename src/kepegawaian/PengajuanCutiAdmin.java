@@ -81,7 +81,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbObat.getColumnCount(); i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(85);
@@ -905,7 +905,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()> -1){
-            Sequel.meghapus("pengajuan_cuti","no_pengajuan",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            Sequel.meghapus("pengajuan_cuti","no_pengajuan",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
             tampilSmc();
             emptTeks();
         }
@@ -955,7 +955,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
                                 "urgensi = ?, alamat = ?, jumlah = ?, kepentingan = ?, nik_pj = ?, status = ?", "no_pengajuan = ?", NoPengajuan.getText(), Valid.getTglSmc(Tanggal),
                                 Valid.getTglSmc(Tgl1), Valid.getTglSmc(Tgl2), tglTMTKerja.getText(), tglTATKerja.getText(), KdPetugas.getText(), Urgensi.getSelectedItem().toString(),
                                 Alamat.getText(), Jumlah.getText(), Kepentingan.getText(), KdPetugasPJ.getText(), Status.getSelectedItem().toString(),
-                                tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()
+                                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString()
                             )) {
                                 emptTeks();
                                 tampilSmc();
@@ -970,7 +970,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
                                 "urgensi = ?, alamat = ?, jumlah = ?, kepentingan = ?, nik_pj = ?, status = ?", "no_pengajuan = ?", NoPengajuan.getText(), Valid.getTglSmc(Tanggal),
                                 Valid.getTglSmc(Tgl1), Valid.getTglSmc(Tgl2), "0000-00-00", "0000-00-00", KdPetugas.getText(), Urgensi.getSelectedItem().toString(),
                                 Alamat.getText(), Jumlah.getText(), Kepentingan.getText(), KdPetugasPJ.getText(), Status.getSelectedItem().toString(),
-                                tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()
+                                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString()
                             )) {
                                 emptTeks();
                                 tampilSmc();
@@ -1127,7 +1127,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1172,7 +1172,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void tbObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1528,23 +1528,23 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
 
     private void isiData() {
         if(tbObat.getSelectedRow()!= -1){
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            NoPengajuan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            Valid.SetTgl(Tgl1,tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            Valid.SetTgl(Tgl2,tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            tglTMTKerja.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString());
-            tglTATKerja.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString());
-            Bidang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            Departemen.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            Urgensi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            Alamat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            Jumlah.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            Kepentingan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            KdPetugasPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            NmPetugasPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            Status.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 17).toString());
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            NoPengajuan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            Valid.SetTgl(Tgl1,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            Valid.SetTgl(Tgl2,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            KdPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            NmPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            tglTMTKerja.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6).toString());
+            tglTATKerja.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 7).toString());
+            Bidang.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            Departemen.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            Urgensi.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            Alamat.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            Jumlah.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            Kepentingan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            KdPetugasPJ.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+            NmPetugasPJ.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
+            Status.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 17).toString());
         }
     }
 
@@ -1603,6 +1603,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbObat.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim();
@@ -1670,6 +1671,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
                     LCount1.setText(jumlahCuti + "");
                     PengajuanCutiAdmin.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbObat.resumeSorting();
                 }
             }.execute();
         }
@@ -1715,7 +1717,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
             ps.setString(++p, Valid.getTglSmc(Tgl1));
             ps.setString(++p, KdPetugas.getText());
             if (tbObat.getSelectedRow() >= 0) {
-                ps.setString(++p, tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
+                ps.setString(++p, tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString());
             }
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -1738,7 +1740,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         )) {
             ps.setString(1, KdPetugas.getText());
             if (tbObat.getSelectedRow() >= 0) {
-                ps.setString(2, tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
+                ps.setString(2, tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString());
             }
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -1790,7 +1792,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
 
         if (tbObat.getSelectedRow() >= 0) {
             return Sequel.cariExistsSmc("select * from pengajuan_cuti where pengajuan_cuti.nik = ? and pengajuan_cuti.no_pengajuan != ? and pengajuan_cuti.tanggal_awal <= ? " +
-                "and pengajuan_cuti.tanggal_akhir >= ?", KdPetugas.getText(), tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(), akhir.toString(), awal.toString());
+                "and pengajuan_cuti.tanggal_akhir >= ?", KdPetugas.getText(), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString(), akhir.toString(), awal.toString());
         }
 
         return Sequel.cariExistsSmc("select * from pengajuan_cuti where pengajuan_cuti.nik = ? and pengajuan_cuti.tanggal_awal <= ? " +

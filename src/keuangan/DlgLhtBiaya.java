@@ -149,6 +149,7 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
         Scroll.setOpaque(true);
 
         tbBangsal.setAutoCreateRowSorter(false);
+        tbBangsal.setSortable(false);
         tbBangsal.setName("tbBangsal"); // NOI18N
         Scroll.setViewportView(tbBangsal);
 
@@ -445,9 +446,9 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
                 }
                 //rs.close();
                 all=0;y=0;
-                for(i=0;i<tabMode.getRowCount();i++){
+                for(i=0;i<tbBangsal.getRowCount();i++){
                     try {
-                        y=Double.parseDouble(tabMode.getValueAt(i,6).toString());
+                        y=Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),6).toString());
                      } catch (Exception e) {
                          y=0;
                      }

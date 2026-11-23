@@ -194,6 +194,7 @@ public class DapurHibah extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -489,8 +490,8 @@ public class DapurHibah extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            tbDokter.setValueAt("",i,0);
-            tbDokter.setValueAt(0,i,5);
+            tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),0);
+            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),5);
         }
         sbttl=0;
         LTotal.setText("0");
@@ -625,14 +626,14 @@ public class DapurHibah extends javax.swing.JDialog {
                 })==true){
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
-                        if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
+                        if(Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0){
                             if(Sequel.menyimpantf2("dapur_detail_hibah","?,?,?,?,?,?","Transaksi Hibah",6,new String[]{
-                                NoFaktur.getText(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,3).toString(),
-                                tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,4).toString(),tbDokter.getValueAt(i,5).toString()
+                                NoFaktur.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString(),
+                                tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString()
                             })==true){
-                                Trackbarang.catatRiwayat(tbDokter.getValueAt(i,1).toString(),Valid.SetAngka(tbDokter.getValueAt(i,0).toString()),0,"Hibah", akses.getkode(),"Simpan");
+                                Trackbarang.catatRiwayat(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString(),Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString()),0,"Hibah", akses.getkode(),"Simpan");
                                 Sequel.mengedit("dapurbarang","kode_brng=?","stok=stok+?",2,new String[]{
-                                    tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,1).toString()
+                                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString()
                                 });
                             }else{
                                 sukses=false;
@@ -660,8 +661,8 @@ public class DapurHibah extends javax.swing.JDialog {
                     Sequel.Commit();
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
-                        tbDokter.setValueAt("",i,0);
-                        tbDokter.setValueAt(0,i,5);
+                        tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),0);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),5);
                     }
                     getData();
                 }else{
@@ -688,7 +689,7 @@ public class DapurHibah extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
                 i=tbDokter.getSelectedRow();
                 if(i!= -1){
-                    tbDokter.setValueAt("", i,0);
+                    tabMode.setValueAt("", tbDokter.convertRowIndexToModel(i),0);
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
@@ -874,6 +875,7 @@ public class DapurHibah extends javax.swing.JDialog {
 
     private void tampil() {
         try{
+            tbDokter.suspendSorting();
             Valid.tabelKosong(tabMode);
             file=new File("./cache/hibahdapur.iyem");
             file.createNewFile();
@@ -912,6 +914,7 @@ public class DapurHibah extends javax.swing.JDialog {
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
+        tbDokter.resumeSorting();
     }
 
     private void tampil2() {
@@ -920,7 +923,7 @@ public class DapurHibah extends javax.swing.JDialog {
             jml=0;
             for(i=0;i<row;i++){
                 try {
-                    if(Double.parseDouble(tbDokter.getValueAt(i,0).toString())>0){
+                    if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0){
                         jml++;
                     }
                 } catch (Exception e) {
@@ -937,18 +940,19 @@ public class DapurHibah extends javax.swing.JDialog {
             index=0;
             for(i=0;i<row;i++){
                 try {
-                    if(Double.parseDouble(tbDokter.getValueAt(i,0).toString())>0){
-                        jumlah[index]=Double.parseDouble(tbDokter.getValueAt(i,0).toString());
-                        kodebarang[index]=tbDokter.getValueAt(i,1).toString();
-                        namabarang[index]=tbDokter.getValueAt(i,2).toString();
-                        satuan[index]=tbDokter.getValueAt(i,3).toString();
-                        harga[index]=Double.parseDouble(tbDokter.getValueAt(i,4).toString());
-                        subtotal[index]=Double.parseDouble(tbDokter.getValueAt(i,5).toString());
+                    if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0){
+                        jumlah[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString());
+                        kodebarang[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString();
+                        namabarang[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString();
+                        satuan[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString();
+                        harga[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString());
+                        subtotal[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString());
                         index++;
                     }
                 } catch (Exception e) {
                 }
             }
+            tbDokter.suspendSorting();
             Valid.tabelKosong(tabMode);
             for(i=0;i<jml;i++){
                 tabMode.addRow(new Object[]{jumlah[i],kodebarang[i],namabarang[i],satuan[i],harga[i],subtotal[i]});
@@ -988,22 +992,23 @@ public class DapurHibah extends javax.swing.JDialog {
             response = null;
             root = null;
         }
+        tbDokter.resumeSorting();
     }
 
     private void getData(){
         row=tbDokter.getSelectedRow();
         if(row!= -1){
-            if(!tbDokter.getValueAt(row,0).toString().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString().equals("")){
                 try {
-                    if(Double.parseDouble(tbDokter.getValueAt(row,0).toString())>0){
-                        tbDokter.setValueAt(Double.parseDouble(tbDokter.getValueAt(row,0).toString())*Double.parseDouble(tbDokter.getValueAt(row,4).toString()), row,5);
+                    if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString())>0){
+                        tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString())*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),4).toString()), tbDokter.convertRowIndexToModel(row),5);
                     }
                 } catch (Exception e) {
-                    tbDokter.setValueAt("",row,0);
-                    tbDokter.setValueAt(0,row,5);
+                    tabMode.setValueAt("",tbDokter.convertRowIndexToModel(row),0);
+                    tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(row),5);
                 }
             }else{
-                tbDokter.setValueAt(0,row,5);
+                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(row),5);
             }
         }
 
@@ -1013,7 +1018,7 @@ public class DapurHibah extends javax.swing.JDialog {
         jml=tbDokter.getRowCount();
         for(i=0;i<jml;i++){
             try {
-                w=Double.parseDouble(tbDokter.getValueAt(i,5).toString());
+                w=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString());
             }catch (Exception e) {
                 w=0;
             }

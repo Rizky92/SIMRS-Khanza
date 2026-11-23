@@ -376,12 +376,12 @@ public final class SatuSehatReferensiKFASMC extends javax.swing.JDialog {
     public void tampil(String search) {
         TCari.setText(search);
         getAllProducts();
-        LCount.setText(String.valueOf(tabMode.getRowCount()));
+        LCount.setText(String.valueOf(tbKamar.getRowCount()));
     }
 
     public void tampil() {
         getAllProducts();
-        LCount.setText(String.valueOf(tabMode.getRowCount()));
+        LCount.setText(String.valueOf(tbKamar.getRowCount()));
     }
 
     public JTable getTable() {

@@ -332,6 +332,7 @@ public class DapurCariSuratPemesanan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -945,10 +946,10 @@ public class DapurCariSuratPemesanan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"No.Pemesanan");
         }else{
-            Sequel.queryu2("delete from surat_pemesanan_dapur where no_pemesanan=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
+            Sequel.queryu2("delete from surat_pemesanan_dapur where no_pemesanan=?",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()});
             runBackground(() ->tampil());
         }
     }//GEN-LAST:event_ppHapusActionPerformed
@@ -979,13 +980,13 @@ public class DapurCariSuratPemesanan extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void ppDatangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDatangActionPerformed
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"pilihan data");
         }else{
-            if(Sequel.cariIsi("select status from surat_pemesanan_dapur where no_pemesanan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()).equals("Sudah Datang")){
+            if(Sequel.cariIsi("select status from surat_pemesanan_dapur where no_pemesanan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()).equals("Sudah Datang")){
                 JOptionPane.showMessageDialog(null,"Data pemesanan sudah tervalidasi..!!");
             }else{
-                Sequel.queryu("update surat_pemesanan_dapur set status='Sudah Datang' where no_pemesanan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+                Sequel.queryu("update surat_pemesanan_dapur set status='Sudah Datang' where no_pemesanan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim());
                 DapurPemesanan aplikasi=new DapurPemesanan(null,false);
                 aplikasi.addWindowListener(new WindowAdapter() {
                     @Override
@@ -995,7 +996,7 @@ public class DapurCariSuratPemesanan extends javax.swing.JDialog {
                 });
                 aplikasi.tampikan=false;
                 aplikasi.isCek();
-                aplikasi.tampil(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+                aplikasi.tampil(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim());
                 aplikasi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 aplikasi.setLocationRelativeTo(internalFrame1);
                 aplikasi.setVisible(true);
@@ -1004,10 +1005,10 @@ public class DapurCariSuratPemesanan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppDatangActionPerformed
 
     private void ppProsesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppProsesActionPerformed
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"pilihan data");
         }else{
-            Sequel.queryu("update surat_pemesanan_dapur set status='Proses Pesan' where no_pemesanan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+            Sequel.queryu("update surat_pemesanan_dapur set status='Proses Pesan' where no_pemesanan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim());
             runBackground(() ->tampil());
         }
     }//GEN-LAST:event_ppProsesActionPerformed
@@ -1017,10 +1018,10 @@ public class DapurCariSuratPemesanan extends javax.swing.JDialog {
             Valid.textKosong(Apoteker,"Kepala Bagian Pengadaan");
         }else if(KabidKeu.getText().trim().equals("")){
             Valid.textKosong(KabidKeu,"Kepala Bagian Keuangan");
-        }else if(tbDokter.getRowCount()==0){
+        }else if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
-        }else if(tbDokter.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             try {
@@ -1035,7 +1036,7 @@ public class DapurCariSuratPemesanan extends javax.swing.JDialog {
                     "inner join kodesatuan on detail_surat_pemesanan_dapur.kode_sat=kodesatuan.kode_sat "+
                     "where surat_pemesanan_dapur.no_pemesanan=? ");
                 try {
-                    ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         Map<String, Object> param = new HashMap<>();
@@ -1165,7 +1166,7 @@ public class DapurCariSuratPemesanan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeek6ActionPerformed
 
     private void ppSuratPemesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSuratPemesananActionPerformed
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"No.Pemesanan");
         }else{
             DlgCetak.setLocationRelativeTo(internalFrame1);

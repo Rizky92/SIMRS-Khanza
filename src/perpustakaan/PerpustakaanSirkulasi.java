@@ -821,7 +821,7 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnInKeyPressed
 
     private void BtnOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOutActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamIn.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, Tabel kosong. Tidak ada data yang bisa Anda edit..!!!!");
             BtnIn.requestFocus();
         }else if(Penerbit.getText().trim().equals("")){
@@ -857,7 +857,7 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnOutKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-       if(tabMode.getRowCount()==0){
+       if(tbKamIn.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TNoI.requestFocus();
         }else if(TJudul.getText().trim().equals("")){
@@ -1123,7 +1123,7 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_TOutKeyPressed
 
     private void tbKamInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamInMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbKamIn.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1132,7 +1132,7 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamInMouseClicked
 
     private void tbKamInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamInKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamIn.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.requestFocus();
             }
@@ -1301,7 +1301,7 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tglKeyPressed
 
     private void tbKamInKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamInKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbKamIn.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1566,7 +1566,7 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamIn.getRowCount());
     }
 
     public void emptTeks() {
@@ -1587,15 +1587,15 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
         TOut.setText("");
         TIn.setText("");
         if(tbKamIn.getSelectedRow()!= -1){
-            TNoI.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
-            TJudul.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString()+", "+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),2).toString());
-            Penerbit.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),3).toString());
-            Pengarang.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),4).toString());
+            TNoI.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString());
+            TJudul.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),1).toString()+", "+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),2).toString());
+            Penerbit.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),3).toString());
+            Pengarang.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),4).toString());
             StatusBuku.setText("Dipinjam");
-            TNoA.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString());
-            TNmA.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),10).toString());
-            TIn.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),11).toString());
-            TOut.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),12).toString());
+            TNoA.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),9).toString());
+            TNmA.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),10).toString());
+            TIn.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),11).toString());
+            TOut.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),12).toString());
         }
     }
 

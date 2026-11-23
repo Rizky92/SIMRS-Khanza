@@ -539,6 +539,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbPengujian.setAutoCreateRowSorter(true);
         tbPengujian.setComponentPopupMenu(Popup);
         tbPengujian.setName("tbPengujian"); // NOI18N
         Scroll2.setViewportView(tbPengujian);
@@ -556,8 +557,8 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         for(i=0;i<tbPengujian.getRowCount();i++){
-            tbPengujian.setValueAt(false,i,0);
-            tbPengujian.setValueAt("",i,7);
+            tabMode.setValueAt(false,tbPengujian.convertRowIndexToModel(i),0);
+            tabMode.setValueAt("",tbPengujian.convertRowIndexToModel(i),7);
         }
         ChkInput.setSelected(true);
         isForm();
@@ -649,7 +650,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         jml=0;
         for(i=0;i<tbPengujian.getRowCount();i++){
-            if(tbPengujian.getValueAt(i,0).toString().equals("true")){
+            if(tabMode.getValueAt(tbPengujian.convertRowIndexToModel(i),0).toString().equals("true")){
                 jml++;
             }
         }
@@ -663,7 +664,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
             Valid.textKosong(TNoPenugasan,"Nomor Penugasan");
         }else if(KodeSampel.getText().equals("")||NamaSampel.getText().equals("")){
             Valid.textKosong(TCariPeriksa,"Sampel");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbPengujian.getRowCount()==0){
             Valid.textKosong(TCariPeriksa,"Data Hasil Peengujian");
         }else if(jml==0){
             Valid.textKosong(TCariPeriksa,"Data Hasil Peengujian");
@@ -676,9 +677,9 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
                 berhasil=true;
 
                 for(i=0;i<tbPengujian.getRowCount();i++){
-                    if(tbPengujian.getValueAt(i,0).toString().equals("true")){
+                    if(tabMode.getValueAt(tbPengujian.convertRowIndexToModel(i),0).toString().equals("true")){
                         if(Sequel.menyimpantf2("labkesling_hasil_pengujian_sampel","?,?,?,?,?","Hasil Pengujian",5,new String[]{
-                            TNoPenugasan.getText(),tbPengujian.getValueAt(i,1).toString(),tbPengujian.getValueAt(i,7).toString(),Valid.SetTgl(TanggalPenugasan.getSelectedItem()+"")+" "+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),"Belum Diverifikasi"
+                            TNoPenugasan.getText(),tabMode.getValueAt(tbPengujian.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbPengujian.convertRowIndexToModel(i),7).toString(),Valid.SetTgl(TanggalPenugasan.getSelectedItem()+"")+" "+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),"Belum Diverifikasi"
                         })==false){
                             berhasil=false;
                         }
@@ -690,8 +691,8 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
                     Sequel.Commit();
                     JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
                     for(i=0;i<tbPengujian.getRowCount();i++){
-                        tbPengujian.setValueAt(false,i,0);
-                        tbPengujian.setValueAt("",i,7);
+                        tabMode.setValueAt(false,tbPengujian.convertRowIndexToModel(i),0);
+                        tabMode.setValueAt("",tbPengujian.convertRowIndexToModel(i),7);
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -724,7 +725,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         runBackground(() ->tampil());
         for(i=0;i<tbPengujian.getRowCount();i++){
-            tbPengujian.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbPengujian.convertRowIndexToModel(i),0);
         }
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCariPeriksa.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -756,14 +757,14 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbPengujian.getRowCount();i++){
-            tbPengujian.setValueAt(false,i,0);
-            tbPengujian.setValueAt("",i,7);
+            tabMode.setValueAt(false,tbPengujian.convertRowIndexToModel(i),0);
+            tabMode.setValueAt("",tbPengujian.convertRowIndexToModel(i),7);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void ppSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSemuaActionPerformed
         for(i=0;i<tbPengujian.getRowCount();i++){
-            tbPengujian.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbPengujian.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppSemuaActionPerformed
 
@@ -836,7 +837,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
         try {
             jml=0;
             for(i=0;i<tbPengujian.getRowCount();i++){
-                if(tbPengujian.getValueAt(i,0).toString().equals("true")){
+                if(tabMode.getValueAt(tbPengujian.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -852,19 +853,20 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
 
             index=0;
             for(i=0;i<tbPengujian.getRowCount();i++){
-                if(tbPengujian.getValueAt(i,0).toString().equals("true")){
+                if(tabMode.getValueAt(tbPengujian.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    Kode[index]=tbPengujian.getValueAt(i,1).toString();
-                    NamaParameter[index]=tbPengujian.getValueAt(i,2).toString();
-                    MetodePengujian[index]=tbPengujian.getValueAt(i,3).toString();
-                    Satuan[index]=tbPengujian.getValueAt(i,4).toString();
-                    Kategori[index]=tbPengujian.getValueAt(i,5).toString();
-                    Normal[index]=tbPengujian.getValueAt(i,6).toString();
-                    Hasil[index]=tbPengujian.getValueAt(i,7).toString();
+                    Kode[index]=tabMode.getValueAt(tbPengujian.convertRowIndexToModel(i),1).toString();
+                    NamaParameter[index]=tabMode.getValueAt(tbPengujian.convertRowIndexToModel(i),2).toString();
+                    MetodePengujian[index]=tabMode.getValueAt(tbPengujian.convertRowIndexToModel(i),3).toString();
+                    Satuan[index]=tabMode.getValueAt(tbPengujian.convertRowIndexToModel(i),4).toString();
+                    Kategori[index]=tabMode.getValueAt(tbPengujian.convertRowIndexToModel(i),5).toString();
+                    Normal[index]=tabMode.getValueAt(tbPengujian.convertRowIndexToModel(i),6).toString();
+                    Hasil[index]=tabMode.getValueAt(tbPengujian.convertRowIndexToModel(i),7).toString();
                     index++;
                 }
             }
 
+            tbPengujian.suspendSorting();
             Valid.tabelKosong(tabMode);
             for(i=0;i<jml;i++){
                 tabMode.addRow(new Object[] {pilih[i],Kode[i],NamaParameter[i],MetodePengujian[i],Satuan[i],Kategori[i],Normal[i],Hasil[i]});
@@ -934,7 +936,8 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
             response = null;
             root = null;
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPengujian.getRowCount());
+        tbPengujian.resumeSorting();
     }
 
     public void setData(String nopenugasan,String nopermintaan,String kodepelanggan,String namapelanggan,String kodesampel,String namasampel,String kodeanalis,String namaanalis) {

@@ -775,7 +775,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbPemeriksaan.getSelectedRow()>-1){
-            tabMode.removeRow(tbPemeriksaan.getSelectedRow());
+            tabMode.removeRow(tbPemeriksaan.convertRowIndexToModel(tbPemeriksaan.getSelectedRow()));
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
         }
@@ -832,7 +832,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
             Valid.textKosong(BtnPetugas,"Petugas");
         }else if(TNoRekonsialiasi.getText().trim().equals("")||TNoRekonsialiasi.getText().trim().equals("-")){
             Valid.textKosong(TNoRekonsialiasi,"No.Rekonsiliasi");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbPemeriksaan.getRowCount()==0){
             Valid.textKosong(TNoRekonsialiasi,"Data Obat Rekonsiliasi");
         }else{
             reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
@@ -843,8 +843,8 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
                     })==true){
                         for (i = 0; i < tbPemeriksaan.getRowCount(); i++) {
                            Sequel.menyimpan2("rekonsiliasi_obat_detail_obat","?,?,?,?,?,?,?,?",8,new String[]{
-                               TNoRekonsialiasi.getText(),tbPemeriksaan.getValueAt(i,0).toString(),tbPemeriksaan.getValueAt(i,1).toString(),tbPemeriksaan.getValueAt(i,2).toString(),
-                               tbPemeriksaan.getValueAt(i,3).toString(),tbPemeriksaan.getValueAt(i,4).toString(),tbPemeriksaan.getValueAt(i,5).toString(),tbPemeriksaan.getValueAt(i,6).toString()
+                               TNoRekonsialiasi.getText(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),2).toString(),
+                               tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),4).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),5).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),6).toString()
                            });
                         }
                         Valid.tabelKosong(tabMode);

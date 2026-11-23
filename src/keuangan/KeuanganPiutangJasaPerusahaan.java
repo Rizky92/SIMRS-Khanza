@@ -226,6 +226,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -924,10 +925,10 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
                     getData();
                 }else if(tbDokter.getSelectedColumn()==5){
                     try {
-                        tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString())*
-                            (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())/100)),tbDokter.getSelectedRow(),6);
+                        tabMode.setValueAt(Math.round(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString())*
+                            (Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),5).toString())/100)),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6);
                     } catch (Exception e) {
-                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),6);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6);
                     }
 
                     getData();
@@ -953,10 +954,10 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
                         TCari.requestFocus();
                    }else if(tbDokter.getSelectedColumn()==5){
                        try {
-                           tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString())*
-                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())/100)),tbDokter.getSelectedRow(),6);
+                           tabMode.setValueAt(Math.round(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString())*
+                               (Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),5).toString())/100)),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6);
                        } catch (Exception e) {
-                           tbDokter.setValueAt(0,tbDokter.getSelectedRow(),6);
+                           tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6);
                        }
 
                        getData();
@@ -969,18 +970,18 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
                 try {
                     if(tbDokter.getSelectedColumn()==2){
-                        tbDokter.setValueAt("", tbDokter.getSelectedRow(),2);
-                        tbDokter.setValueAt(0, tbDokter.getSelectedRow(),3);
-                        tbDokter.setValueAt(0, tbDokter.getSelectedRow(),4);
-                        tbDokter.setValueAt(0, tbDokter.getSelectedRow(),5);
-                        tbDokter.setValueAt(0, tbDokter.getSelectedRow(),6);
-                        tbDokter.setValueAt(0, tbDokter.getSelectedRow(),7);
+                        tabMode.setValueAt("", tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2);
+                        tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3);
+                        tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4);
+                        tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),5);
+                        tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6);
+                        tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7);
                     }else if(tbDokter.getSelectedColumn()==3){
-                        tbDokter.setValueAt(0, tbDokter.getSelectedRow(),3);
-                        tbDokter.setValueAt(0, tbDokter.getSelectedRow(),4);
-                        tbDokter.setValueAt(0, tbDokter.getSelectedRow(),5);
-                        tbDokter.setValueAt(0, tbDokter.getSelectedRow(),6);
-                        tbDokter.setValueAt(0, tbDokter.getSelectedRow(),7);
+                        tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3);
+                        tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4);
+                        tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),5);
+                        tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6);
+                        tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7);
                     }
                 } catch (Exception e) {
                 }
@@ -992,10 +993,10 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
                         getData();
                    }else if(tbDokter.getSelectedColumn()==5){
                        try {
-                           tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString())*
-                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())/100)),tbDokter.getSelectedRow(),6);
+                           tabMode.setValueAt(Math.round(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString())*
+                               (Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),5).toString())/100)),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6);
                        } catch (Exception e) {
-                           tbDokter.setValueAt(0,tbDokter.getSelectedRow(),6);
+                           tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6);
                        }
 
                        getData();
@@ -1037,10 +1038,10 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
                         try {
-                            if(Valid.SetAngka(tbDokter.getValueAt(i,2).toString())>0){
+                            if(Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString())>0){
                                 if(Sequel.menyimpantf2("detail_piutang_jasa_perusahaan","?,?,?,?,?,?,?,?","Transaksi Piutang",8,new String[]{
-                                    NoPiutang.getText(),tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,2).toString(),tbDokter.getValueAt(i,3).toString(),
-                                    tbDokter.getValueAt(i,4).toString(),tbDokter.getValueAt(i,5).toString(),tbDokter.getValueAt(i,6).toString(),tbDokter.getValueAt(i,7).toString()
+                                    NoPiutang.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString(),
+                                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),7).toString()
                                 })==false){
                                     sukses=false;
                                 }
@@ -1076,12 +1077,12 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
                 if(sukses==true){
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
-                        tbDokter.setValueAt("",i,2);
-                        tbDokter.setValueAt(0,i,3);
-                        tbDokter.setValueAt(0,i,4);
-                        tbDokter.setValueAt(0,i,5);
-                        tbDokter.setValueAt(0,i,6);
-                        tbDokter.setValueAt(0,i,7);
+                        tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),2);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),3);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),4);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),5);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),6);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),7);
                     }
                     grandtotal=0;persenmenejemen=0;besarmenejemen=0;dppnilailain=0;persenppn=0;besarppn=0;persenpph=0;besarpph=0;totaltagihan=0;
                     LSubtotal.setText("0");
@@ -1122,7 +1123,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
             Valid.textKosong(Keterangan,"Keterangan");
         }else if(TotalTagihan.getText().trim().equals("")){
             Valid.textKosong(TotalTagihan,"Total Tagihan");
-        }else if(tbDokter.getRowCount()==0){
+        }else if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(grandtotal<=0){
@@ -1155,7 +1156,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                         row=tabMode.getRowCount();
                         for(i=0;i<row;i++){
-                            if(Valid.SetAngka(tbDokter.getValueAt(i,2).toString())>0){
+                            if(Valid.SetAngka(tabMode.getValueAt(i,2).toString())>0){
                                 Sequel.menyimpan("temporary","'"+i+"','"+
                                             tabMode.getValueAt(i,1).toString()+"','"+
                                             tabMode.getValueAt(i,2).toString()+"','"+
@@ -1369,7 +1370,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
             jml=0;
             for(i=0;i<row;i++){
                 try {
-                    if(Double.parseDouble(tbDokter.getValueAt(i,2).toString())>0){
+                    if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString())>0){
                         jml++;
                     }
                 } catch (Exception e) {
@@ -1388,36 +1389,36 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
             index=0;
             for(i=0;i<row;i++){
                 try {
-                    if(Double.parseDouble(tbDokter.getValueAt(i,2).toString())>0){
-                        kode[index]=tbDokter.getValueAt(i,0).toString();
-                        kategori[index]=tbDokter.getValueAt(i,1).toString();
+                    if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString())>0){
+                        kode[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString();
+                        kategori[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString();
                         try {
-                            jumlah[index]=Double.parseDouble(tbDokter.getValueAt(i,2).toString());
+                            jumlah[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString());
                         } catch (Exception e) {
                             jumlah[index]=0;
                         }
                         try {
-                            harga[index]=Double.parseDouble(tbDokter.getValueAt(i,3).toString());
+                            harga[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString());
                         } catch (Exception e) {
                             harga[index]=0;
                         }
                         try {
-                            subtotal[index]=Double.parseDouble(tbDokter.getValueAt(i,4).toString());
+                            subtotal[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString());
                         } catch (Exception e) {
                             subtotal[index]=0;
                         }
                         try {
-                            diskon[index]=Double.parseDouble(tbDokter.getValueAt(i,5).toString());
+                            diskon[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString());
                         } catch (Exception e) {
                             diskon[index]=0;
                         }
                         try {
-                            besardiskon[index]=Double.parseDouble(tbDokter.getValueAt(i,6).toString());
+                            besardiskon[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString());
                         } catch (Exception e) {
                             besardiskon[index]=0;
                         }
                         try {
-                            jmltotal[index]=Double.parseDouble(tbDokter.getValueAt(i,7).toString());
+                            jmltotal[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),7).toString());
                         } catch (Exception e) {
                             jmltotal[index]=0;
                         }
@@ -1426,6 +1427,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
                 } catch (Exception e) {
                 }
             }
+            tbDokter.suspendSorting();
             Valid.tabelKosong(tabMode);
             for(i=0;i<jml;i++){
                 tabMode.addRow(new Object[]{kode[i],kategori[i],jumlah[i],harga[i],subtotal[i],diskon[i],besardiskon[i],jmltotal[i]});
@@ -1468,22 +1470,23 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
             response = null;
             root = null;
         }
+        tbDokter.resumeSorting();
     }
 
     private void getData(){
         row=tbDokter.getSelectedRow();
         if(row!= -1){
-            if(!tbDokter.getValueAt(row,2).toString().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),2).toString().equals("")){
                 double jumlahitem=0,hargaitem=0,totalitem=0,diskonitem=0,totalbersih=0;
                 try {
-                    if(Valid.SetAngka(tbDokter.getValueAt(row,2).toString())>0){
+                    if(Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),2).toString())>0){
                         try {
-                            jumlahitem = Double.parseDouble(tbDokter.getValueAt(row,2).toString());
+                            jumlahitem = Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),2).toString());
                         } catch (Exception e) {
                             jumlahitem = 0;
                         }
                         try {
-                            hargaitem = Double.parseDouble(tbDokter.getValueAt(row,3).toString());
+                            hargaitem = Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),3).toString());
                         } catch (Exception e) {
                             hargaitem = 0;
                         }
@@ -1493,7 +1496,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
                             totalitem = 0;
                         }
                         try {
-                            diskonitem  = Double.parseDouble(tbDokter.getValueAt(row,6).toString());
+                            diskonitem  = Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),6).toString());
                         } catch (Exception e) {
                             diskonitem = 0;
                         }
@@ -1503,22 +1506,22 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
                             totalbersih = 0;
                         }
 
-                        tbDokter.setValueAt(totalitem, row,4);
-                        tbDokter.setValueAt(totalbersih, row,7);
+                        tabMode.setValueAt(totalitem, tbDokter.convertRowIndexToModel(row),4);
+                        tabMode.setValueAt(totalbersih, tbDokter.convertRowIndexToModel(row),7);
                     }
                 } catch (Exception e) {
-                    tbDokter.setValueAt(jumlahitem,tbDokter.getSelectedRow(),2);
-                    tbDokter.setValueAt(hargaitem,tbDokter.getSelectedRow(),3);
-                    tbDokter.setValueAt(totalitem,tbDokter.getSelectedRow(),4);
-                    tbDokter.setValueAt(diskonitem,tbDokter.getSelectedRow(),6);
-                    tbDokter.setValueAt(totalbersih,tbDokter.getSelectedRow(),7);
+                    tabMode.setValueAt(jumlahitem,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2);
+                    tabMode.setValueAt(hargaitem,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3);
+                    tabMode.setValueAt(totalitem,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4);
+                    tabMode.setValueAt(diskonitem,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6);
+                    tabMode.setValueAt(totalbersih,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7);
                 }
             }else{
-                tbDokter.setValueAt(0, tbDokter.getSelectedRow(),3);
-                tbDokter.setValueAt(0, tbDokter.getSelectedRow(),4);
-                tbDokter.setValueAt(0, tbDokter.getSelectedRow(),5);
-                tbDokter.setValueAt(0, tbDokter.getSelectedRow(),6);
-                tbDokter.setValueAt(0, tbDokter.getSelectedRow(),7);
+                tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3);
+                tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4);
+                tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),5);
+                tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6);
+                tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7);
             }
         }
 
@@ -1526,9 +1529,9 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
         jml=tbDokter.getRowCount();
         for(i=0;i<jml;i++){
             try {
-                x=Double.parseDouble(tbDokter.getValueAt(i,7).toString());
+                x=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),7).toString());
             } catch (Exception e) {
-                tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
+                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7);
                 x=0;
             }
             grandtotal=grandtotal+x;

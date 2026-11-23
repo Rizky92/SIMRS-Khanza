@@ -1048,6 +1048,7 @@ public class DlgSetNota extends javax.swing.JDialog {
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
+        tbAdmin2.setSortable(false);
         tbAdmin2.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbAdmin2.setName("tbAdmin2"); // NOI18N
         tbAdmin2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1352,6 +1353,7 @@ public class DlgSetNota extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbAdmin3.setSortable(false);
         tbAdmin3.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbAdmin3.setName("tbAdmin3"); // NOI18N
         tbAdmin3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1662,7 +1664,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                     KwitansiRanap.getText().trim().equals("")||NotaApotek.getText().trim().equals("")||NotaLab.getText().trim().equals("")||NotaToko.getText().trim().equals("")||
                     NotaLabkesling.getText().trim().equals("")||KwitansiLabKesling.getText().trim().equals("")){
                 Valid.textKosong(NotaRalan,"Semua field");
-            }else if(tabMode.getRowCount()==0){
+            }else if(tbAdmin.getRowCount()==0){
                 if(Sequel.menyimpantf("set_nota","'"+NotaRalan.getText()+"','"+KwitansiRalan.getText()+"','"+Nota1Ranap.getText()+"',"+
                         "'"+Nota2Ranap.getText()+"','"+KwitansiRanap.getText()+"','"+NotaApotek.getText()+"','"+NotaLab.getText()+"','"+NotaToko.getText()+"',"+
                         "'"+NotaLabkesling.getText()+"','"+KwitansiLabKesling.getText()+"','"+cmbYesRalan.getSelectedItem()+"','"+cmbYesRanap.getSelectedItem()+"',"+
@@ -1676,7 +1678,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                     runBackground(() ->tampil());
                     emptTeks();
                 }
-            }else if(tabMode.getRowCount()>0){
+            }else if(tbAdmin.getRowCount()>0){
                 JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Set Nota, Kwitansi, Verifikasi Penjualan...!!!!");
                 NotaRalan.requestFocus();
             }
@@ -1695,7 +1697,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                     (chkResepPulang.isSelected()==false)){
                 JOptionPane.showMessageDialog(null,"Maaf, Minimal harus ada 1 pilihan biaya yang dipakai ...!!!!");
                 chkLaborat.requestFocus();
-            }else if(tabMode2.getRowCount()==0){
+            }else if(tbAdmin2.getRowCount()==0){
                 laborat="No";radiologi="No";operasi="No";obat="No";
                 ranap_dokter="No";ranap_paramedis="No";ralan_dokter="No";
                 ralan_paramedis="No";tambahan="No";potongan="No";
@@ -1738,7 +1740,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                     runBackground(() ->tampil2());
                     emptTeks2();
                 }
-            }else if(tabMode2.getRowCount()>0){
+            }else if(tbAdmin2.getRowCount()>0){
                 JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Set Biaya Service Rawat Inap...!!!!");
                 NamaService.requestFocus();
             }
@@ -1757,7 +1759,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                     (chkResepPulang1.isSelected()==false)){
                 JOptionPane.showMessageDialog(null,"Maaf, Minimal harus ada 1 pilihan biaya yang dipakai ...!!!!");
                 chkLaborat.requestFocus();
-            }else if(tabMode3.getRowCount()==0){
+            }else if(tbAdmin3.getRowCount()==0){
                 laborat="No";radiologi="No";operasi="No";obat="No";
                 ranap_dokter="No";ranap_paramedis="No";ralan_dokter="No";
                 ralan_paramedis="No";tambahan="No";potongan="No";
@@ -1800,7 +1802,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                     runBackground(() ->tampil3());
                     emptTeks3();
                 }
-            }else if(tabMode3.getRowCount()>0){
+            }else if(tbAdmin3.getRowCount()>0){
                 JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Set Biaya Service Rawat Inap...!!!!");
                 NamaService.requestFocus();
             }
@@ -1841,7 +1843,7 @@ public class DlgSetNota extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(TabSetting.getSelectedIndex()==0){
-            if(tabMode.getRowCount()==0){
+            if(tbAdmin.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 NotaRalan.requestFocus();
             }else if(NotaRalan.getText().trim().equals("")){
@@ -1852,7 +1854,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                 emptTeks();
             }
         }else if(TabSetting.getSelectedIndex()==1){
-            if(tabMode2.getRowCount()==0){
+            if(tbAdmin2.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 NamaService.requestFocus();
             }else if(NamaService.getText().trim().equals("")){
@@ -1863,7 +1865,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                 emptTeks2();
             }
         }else if(TabSetting.getSelectedIndex()==2){
-            if(tabMode3.getRowCount()==0){
+            if(tbAdmin3.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 NamaService1.requestFocus();
             }else if(NamaService1.getText().trim().equals("")){
@@ -1886,10 +1888,10 @@ public class DlgSetNota extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbAdmin.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data jam minimal tidak boleh kosong ...!!!!");
             NotaRalan.requestFocus();
-        }else if(! (tabMode.getRowCount()==0)) {
+        }else if(! (tbAdmin.getRowCount()==0)) {
             dispose();
         }
     }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -1901,7 +1903,7 @@ public class DlgSetNota extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1910,7 +1912,7 @@ public class DlgSetNota extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -2254,7 +2256,7 @@ public class DlgSetNota extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkInput2ActionPerformed
 
     private void tbAdmin2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdmin2MouseClicked
-        if(tabMode2.getRowCount()!=0){
+        if(tbAdmin2.getRowCount()!=0){
             try {
                 getData2();
             } catch (java.lang.NullPointerException e) {
@@ -2263,7 +2265,7 @@ public class DlgSetNota extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdmin2MouseClicked
 
     private void tbAdmin2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdmin2KeyPressed
-        if(tabMode2.getRowCount()!=0){
+        if(tbAdmin2.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData2();
@@ -2274,7 +2276,7 @@ public class DlgSetNota extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdmin2KeyPressed
 
     private void tbAdmin3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdmin3MouseClicked
-        if(tabMode3.getRowCount()!=0){
+        if(tbAdmin3.getRowCount()!=0){
             try {
                 getData3();
             } catch (java.lang.NullPointerException e) {
@@ -2283,7 +2285,7 @@ public class DlgSetNota extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdmin3MouseClicked
 
     private void tbAdmin3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdmin3KeyPressed
-        if(tabMode3.getRowCount()!=0){
+        if(tbAdmin3.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData3();
@@ -2723,119 +2725,119 @@ public class DlgSetNota extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            NotaRalan.setText(tbAdmin.getValueAt(0,1).toString());
-            KwitansiRalan.setText(tbAdmin.getValueAt(1,1).toString());
-            Nota1Ranap.setText(tbAdmin.getValueAt(2,1).toString());
-            Nota2Ranap.setText(tbAdmin.getValueAt(3,1).toString());
-            KwitansiRanap.setText(tbAdmin.getValueAt(4,1).toString());
-            NotaApotek.setText(tbAdmin.getValueAt(5,1).toString());
-            NotaLab.setText(tbAdmin.getValueAt(6,1).toString());
-            NotaToko.setText(tbAdmin.getValueAt(7,1).toString());
-            NotaLabkesling.setText(tbAdmin.getValueAt(8,1).toString());
-            KwitansiLabKesling.setText(tbAdmin.getValueAt(9,1).toString());
-            cmbYesRalan.setSelectedItem(tbAdmin.getValueAt(10,1).toString());
-            cmbYesRanap.setSelectedItem(tbAdmin.getValueAt(11,1).toString());
-            cmbYesRincianRalan.setSelectedItem(tbAdmin.getValueAt(12,1).toString());
-            cmbYesRincianRanap.setSelectedItem(tbAdmin.getValueAt(13,1).toString());
-            cmbYesCentangDokterRalan.setSelectedItem(tbAdmin.getValueAt(14,1).toString());
-            cmbYesCentangDokterRanap.setSelectedItem(tbAdmin.getValueAt(15,1).toString());
-            cmbYesAdministrasiRanap.setSelectedItem(tbAdmin.getValueAt(16,1).toString());
-            cmbYesRincianOperasi.setSelectedItem(tbAdmin.getValueAt(17,1).toString());
-            cmbYesPPNRalan.setSelectedItem(tbAdmin.getValueAt(18,1).toString());
-            cmbYesPPNRanap.setSelectedItem(tbAdmin.getValueAt(19,1).toString());
-            cmbYesTombolNotaRalan.setSelectedItem(tbAdmin.getValueAt(20,1).toString());
-            cmbYesTombolNotaRanap.setSelectedItem(tbAdmin.getValueAt(21,1).toString());
-            cmbYesTombolPenjualan.setSelectedItem(tbAdmin.getValueAt(22,1).toString());
-            cmbYesTombolPenyerahanDarah.setSelectedItem(tbAdmin.getValueAt(23,1).toString());
-            cmbYesCetakPenjualan.setSelectedItem(tbAdmin.getValueAt(24,1).toString());
-            cmbYesTombolNotaPenjualan.setSelectedItem(tbAdmin.getValueAt(25,1).toString());
-            cmbYesCentangObatRalan.setSelectedItem(tbAdmin.getValueAt(26,1).toString());
-            cmbYesCentangObatRanap.setSelectedItem(tbAdmin.getValueAt(27,1).toString());
-            cmbYesCetakPenjualanToko.setSelectedItem(tbAdmin.getValueAt(28,1).toString());
-            cmbYesTombolNotaPenjualanToko.setSelectedItem(tbAdmin.getValueAt(29,1).toString());
-            cmbYesCetakLabKesling.setSelectedItem(tbAdmin.getValueAt(30,1).toString());
-            cmbYesTombolNotaLabKesling.setSelectedItem(tbAdmin.getValueAt(31,1).toString());
+            NotaRalan.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(0),1).toString());
+            KwitansiRalan.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(1),1).toString());
+            Nota1Ranap.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(2),1).toString());
+            Nota2Ranap.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(3),1).toString());
+            KwitansiRanap.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(4),1).toString());
+            NotaApotek.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(5),1).toString());
+            NotaLab.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(6),1).toString());
+            NotaToko.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(7),1).toString());
+            NotaLabkesling.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(8),1).toString());
+            KwitansiLabKesling.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(9),1).toString());
+            cmbYesRalan.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(10),1).toString());
+            cmbYesRanap.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(11),1).toString());
+            cmbYesRincianRalan.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(12),1).toString());
+            cmbYesRincianRanap.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(13),1).toString());
+            cmbYesCentangDokterRalan.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(14),1).toString());
+            cmbYesCentangDokterRanap.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(15),1).toString());
+            cmbYesAdministrasiRanap.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(16),1).toString());
+            cmbYesRincianOperasi.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(17),1).toString());
+            cmbYesPPNRalan.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(18),1).toString());
+            cmbYesPPNRanap.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(19),1).toString());
+            cmbYesTombolNotaRalan.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(20),1).toString());
+            cmbYesTombolNotaRanap.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(21),1).toString());
+            cmbYesTombolPenjualan.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(22),1).toString());
+            cmbYesTombolPenyerahanDarah.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(23),1).toString());
+            cmbYesCetakPenjualan.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(24),1).toString());
+            cmbYesTombolNotaPenjualan.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(25),1).toString());
+            cmbYesCentangObatRalan.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(26),1).toString());
+            cmbYesCentangObatRanap.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(27),1).toString());
+            cmbYesCetakPenjualanToko.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(28),1).toString());
+            cmbYesTombolNotaPenjualanToko.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(29),1).toString());
+            cmbYesCetakLabKesling.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(30),1).toString());
+            cmbYesTombolNotaLabKesling.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(31),1).toString());
         }
     }
 
     private void getData2() {
         int row=tbAdmin2.getSelectedRow();
         if(row!= -1){
-            NamaService.setText(tbAdmin2.getValueAt(0,1).toString());
-            BesarBiaya.setText(tbAdmin2.getValueAt(1,1).toString());
-            if(tbAdmin2.getValueAt(3,1).toString().equals("Yes")){
+            NamaService.setText(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(0),1).toString());
+            BesarBiaya.setText(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(1),1).toString());
+            if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(3),1).toString().equals("Yes")){
                 chkLaborat.setSelected(true);
-            }else if(tbAdmin2.getValueAt(3,1).toString().equals("No")){
+            }else if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(3),1).toString().equals("No")){
                 chkLaborat.setSelected(false);
             }
-            if(tbAdmin2.getValueAt(4,1).toString().equals("Yes")){
+            if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(4),1).toString().equals("Yes")){
                 chkRadiologi.setSelected(true);
-            }else if(tbAdmin2.getValueAt(4,1).toString().equals("No")){
+            }else if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(4),1).toString().equals("No")){
                 chkRadiologi.setSelected(false);
             }
-            if(tbAdmin2.getValueAt(5,1).toString().equals("Yes")){
+            if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(5),1).toString().equals("Yes")){
                 chkOperasi.setSelected(true);
-            }else if(tbAdmin2.getValueAt(5,1).toString().equals("No")){
+            }else if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(5),1).toString().equals("No")){
                 chkOperasi.setSelected(false);
             }
-            if(tbAdmin2.getValueAt(6,1).toString().equals("Yes")){
+            if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(6),1).toString().equals("Yes")){
                 chkObat.setSelected(true);
-            }else if(tbAdmin2.getValueAt(6,1).toString().equals("No")){
+            }else if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(6),1).toString().equals("No")){
                 chkObat.setSelected(false);
             }
-            if(tbAdmin2.getValueAt(7,1).toString().equals("Yes")){
+            if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(7),1).toString().equals("Yes")){
                 chkRanapDokter.setSelected(true);
-            }else if(tbAdmin2.getValueAt(7,1).toString().equals("No")){
+            }else if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(7),1).toString().equals("No")){
                 chkRanapDokter.setSelected(false);
             }
-            if(tbAdmin2.getValueAt(8,1).toString().equals("Yes")){
+            if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(8),1).toString().equals("Yes")){
                 chkRanapParamedis.setSelected(true);
-            }else if(tbAdmin2.getValueAt(8,1).toString().equals("No")){
+            }else if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(8),1).toString().equals("No")){
                 chkRanapParamedis.setSelected(false);
             }
-            if(tbAdmin2.getValueAt(9,1).toString().equals("Yes")){
+            if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(9),1).toString().equals("Yes")){
                 chkRalanDokter.setSelected(true);
-            }else if(tbAdmin2.getValueAt(9,1).toString().equals("No")){
+            }else if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(9),1).toString().equals("No")){
                 chkRalanDokter.setSelected(false);
             }
-            if(tbAdmin2.getValueAt(10,1).toString().equals("Yes")){
+            if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(10),1).toString().equals("Yes")){
                 chkRalanParamedis.setSelected(true);
-            }else if(tbAdmin2.getValueAt(10,1).toString().equals("No")){
+            }else if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(10),1).toString().equals("No")){
                 chkRalanParamedis.setSelected(false);
             }
-            if(tbAdmin2.getValueAt(11,1).toString().equals("Yes")){
+            if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(11),1).toString().equals("Yes")){
                 chkTambahan.setSelected(true);
-            }else if(tbAdmin2.getValueAt(11,1).toString().equals("No")){
+            }else if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(11),1).toString().equals("No")){
                 chkTambahan.setSelected(false);
             }
-            if(tbAdmin2.getValueAt(12,1).toString().equals("Yes")){
+            if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(12),1).toString().equals("Yes")){
                 chkPotongan.setSelected(true);
-            }else if(tbAdmin2.getValueAt(12,1).toString().equals("No")){
+            }else if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(12),1).toString().equals("No")){
                 chkPotongan.setSelected(false);
             }
-            if(tbAdmin2.getValueAt(13,1).toString().equals("Yes")){
+            if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(13),1).toString().equals("Yes")){
                 chkKamar.setSelected(true);
-            }else if(tbAdmin2.getValueAt(13,1).toString().equals("No")){
+            }else if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(13),1).toString().equals("No")){
                 chkKamar.setSelected(false);
             }
-            if(tbAdmin2.getValueAt(14,1).toString().equals("Yes")){
+            if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(14),1).toString().equals("Yes")){
                 chkRegistrasi.setSelected(true);
-            }else if(tbAdmin2.getValueAt(14,11).toString().equals("No")){
+            }else if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(14),11).toString().equals("No")){
                 chkRegistrasi.setSelected(false);
             }
-            if(tbAdmin2.getValueAt(15,1).toString().equals("Yes")){
+            if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(15),1).toString().equals("Yes")){
                 chkHarian.setSelected(true);
-            }else if(tbAdmin2.getValueAt(15,1).toString().equals("No")){
+            }else if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(15),1).toString().equals("No")){
                 chkHarian.setSelected(false);
             }
-            if(tbAdmin2.getValueAt(16,1).toString().equals("Yes")){
+            if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(16),1).toString().equals("Yes")){
                 chkRetur.setSelected(true);
-            }else if(tbAdmin2.getValueAt(16,1).toString().equals("No")){
+            }else if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(16),1).toString().equals("No")){
                 chkRetur.setSelected(false);
             }
-            if(tbAdmin2.getValueAt(17,1).toString().equals("Yes")){
+            if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(17),1).toString().equals("Yes")){
                 chkResepPulang.setSelected(true);
-            }else if(tbAdmin2.getValueAt(17,1).toString().equals("No")){
+            }else if(tabMode2.getValueAt(tbAdmin2.convertRowIndexToModel(17),1).toString().equals("No")){
                 chkResepPulang.setSelected(false);
             }
         }
@@ -2844,81 +2846,81 @@ public class DlgSetNota extends javax.swing.JDialog {
     private void getData3() {
         int row=tbAdmin3.getSelectedRow();
         if(row!= -1){
-            NamaService1.setText(tbAdmin3.getValueAt(0,1).toString());
-            BesarBiaya1.setText(tbAdmin3.getValueAt(1,1).toString());
-            if(tbAdmin3.getValueAt(3,1).toString().equals("Yes")){
+            NamaService1.setText(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(0),1).toString());
+            BesarBiaya1.setText(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(1),1).toString());
+            if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(3),1).toString().equals("Yes")){
                 chkLaborat1.setSelected(true);
-            }else if(tbAdmin3.getValueAt(3,1).toString().equals("No")){
+            }else if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(3),1).toString().equals("No")){
                 chkLaborat1.setSelected(false);
             }
-            if(tbAdmin3.getValueAt(4,1).toString().equals("Yes")){
+            if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(4),1).toString().equals("Yes")){
                 chkRadiologi1.setSelected(true);
-            }else if(tbAdmin3.getValueAt(4,1).toString().equals("No")){
+            }else if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(4),1).toString().equals("No")){
                 chkRadiologi1.setSelected(false);
             }
-            if(tbAdmin3.getValueAt(5,1).toString().equals("Yes")){
+            if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(5),1).toString().equals("Yes")){
                 chkOperasi1.setSelected(true);
-            }else if(tbAdmin3.getValueAt(5,1).toString().equals("No")){
+            }else if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(5),1).toString().equals("No")){
                 chkOperasi1.setSelected(false);
             }
-            if(tbAdmin3.getValueAt(6,1).toString().equals("Yes")){
+            if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(6),1).toString().equals("Yes")){
                 chkObat1.setSelected(true);
-            }else if(tbAdmin3.getValueAt(6,1).toString().equals("No")){
+            }else if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(6),1).toString().equals("No")){
                 chkObat1.setSelected(false);
             }
-            if(tbAdmin3.getValueAt(7,1).toString().equals("Yes")){
+            if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(7),1).toString().equals("Yes")){
                 chkRanapDokter1.setSelected(true);
-            }else if(tbAdmin3.getValueAt(7,1).toString().equals("No")){
+            }else if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(7),1).toString().equals("No")){
                 chkRanapDokter1.setSelected(false);
             }
-            if(tbAdmin3.getValueAt(8,1).toString().equals("Yes")){
+            if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(8),1).toString().equals("Yes")){
                 chkRanapParamedis1.setSelected(true);
-            }else if(tbAdmin3.getValueAt(8,1).toString().equals("No")){
+            }else if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(8),1).toString().equals("No")){
                 chkRanapParamedis1.setSelected(false);
             }
-            if(tbAdmin3.getValueAt(9,1).toString().equals("Yes")){
+            if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(9),1).toString().equals("Yes")){
                 chkRalanDokter1.setSelected(true);
-            }else if(tbAdmin3.getValueAt(9,1).toString().equals("No")){
+            }else if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(9),1).toString().equals("No")){
                 chkRalanDokter1.setSelected(false);
             }
-            if(tbAdmin3.getValueAt(10,1).toString().equals("Yes")){
+            if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(10),1).toString().equals("Yes")){
                 chkRalanParamedis1.setSelected(true);
-            }else if(tbAdmin3.getValueAt(10,1).toString().equals("No")){
+            }else if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(10),1).toString().equals("No")){
                 chkRalanParamedis1.setSelected(false);
             }
-            if(tbAdmin3.getValueAt(11,1).toString().equals("Yes")){
+            if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(11),1).toString().equals("Yes")){
                 chkTambahan1.setSelected(true);
-            }else if(tbAdmin3.getValueAt(11,1).toString().equals("No")){
+            }else if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(11),1).toString().equals("No")){
                 chkTambahan1.setSelected(false);
             }
-            if(tbAdmin3.getValueAt(12,1).toString().equals("Yes")){
+            if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(12),1).toString().equals("Yes")){
                 chkPotongan1.setSelected(true);
-            }else if(tbAdmin3.getValueAt(12,1).toString().equals("No")){
+            }else if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(12),1).toString().equals("No")){
                 chkPotongan1.setSelected(false);
             }
-            if(tbAdmin3.getValueAt(13,1).toString().equals("Yes")){
+            if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(13),1).toString().equals("Yes")){
                 chkKamar1.setSelected(true);
-            }else if(tbAdmin3.getValueAt(13,1).toString().equals("No")){
+            }else if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(13),1).toString().equals("No")){
                 chkKamar1.setSelected(false);
             }
-            if(tbAdmin3.getValueAt(14,1).toString().equals("Yes")){
+            if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(14),1).toString().equals("Yes")){
                 chkRegistrasi1.setSelected(true);
-            }else if(tbAdmin3.getValueAt(14,11).toString().equals("No")){
+            }else if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(14),11).toString().equals("No")){
                 chkRegistrasi1.setSelected(false);
             }
-            if(tbAdmin3.getValueAt(15,1).toString().equals("Yes")){
+            if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(15),1).toString().equals("Yes")){
                 chkHarian1.setSelected(true);
-            }else if(tbAdmin3.getValueAt(15,1).toString().equals("No")){
+            }else if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(15),1).toString().equals("No")){
                 chkHarian1.setSelected(false);
             }
-            if(tbAdmin3.getValueAt(16,1).toString().equals("Yes")){
+            if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(16),1).toString().equals("Yes")){
                 chkRetur1.setSelected(true);
-            }else if(tbAdmin3.getValueAt(16,1).toString().equals("No")){
+            }else if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(16),1).toString().equals("No")){
                 chkRetur1.setSelected(false);
             }
-            if(tbAdmin3.getValueAt(17,1).toString().equals("Yes")){
+            if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(17),1).toString().equals("Yes")){
                 chkResepPulang1.setSelected(true);
-            }else if(tbAdmin3.getValueAt(17,1).toString().equals("No")){
+            }else if(tabMode3.getValueAt(tbAdmin3.convertRowIndexToModel(17),1).toString().equals("No")){
                 chkResepPulang1.setSelected(false);
             }
         }

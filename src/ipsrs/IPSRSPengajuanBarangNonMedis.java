@@ -185,6 +185,7 @@ public class IPSRSPengajuanBarangNonMedis extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -490,7 +491,7 @@ public class IPSRSPengajuanBarangNonMedis extends javax.swing.JDialog {
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         jml=0;
         for(i=0;i<tbDokter.getRowCount();i++){
-            if(!tbDokter.getValueAt(i,0).toString().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("")){
                 jml++;
             }
         }
@@ -517,10 +518,10 @@ public class IPSRSPengajuanBarangNonMedis extends javax.swing.JDialog {
                         jml=tbDokter.getRowCount();
                         for(i=0;i<jml;i++){
                             try {
-                                if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
+                                if(Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0){
                                     if(Sequel.menyimpantf2("detail_pengajuan_barang_nonmedis","?,?,?,?,?,?","Detail Pengajuan Barang Non Medis",6,new String[]{
-                                         NoPengajuan.getText(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,3).toString(),
-                                         tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,5).toString(),tbDokter.getValueAt(i,6).toString()
+                                         NoPengajuan.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString(),
+                                         tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString()
                                     })==false){
                                         sukses=false;
                                     }
@@ -536,8 +537,8 @@ public class IPSRSPengajuanBarangNonMedis extends javax.swing.JDialog {
                     Sequel.Commit();
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
-                        tbDokter.setValueAt("",i,0);
-                        tbDokter.setValueAt(0,i,6);
+                        tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),0);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),6);
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -591,8 +592,8 @@ public class IPSRSPengajuanBarangNonMedis extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
             for(i=0;i<tbDokter.getRowCount();i++){
-                tbDokter.setValueAt("",i,0);
-                tbDokter.setValueAt("",i,7);
+                tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),0);
+                tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),7);
             }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -613,7 +614,7 @@ public class IPSRSPengajuanBarangNonMedis extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
                 i=tbDokter.getSelectedRow();
                 if(i!= -1){
-                    tbDokter.setValueAt("", i,0);
+                    tabMode.setValueAt("", tbDokter.convertRowIndexToModel(i),0);
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
@@ -855,7 +856,7 @@ public class IPSRSPengajuanBarangNonMedis extends javax.swing.JDialog {
             row=tbDokter.getRowCount();
             jml=0;
             for(i=0;i<row;i++){
-                if(!tbDokter.getValueAt(i,0).toString().equals("")){
+                if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("")){
                     jml++;
                 }
             }
@@ -870,17 +871,18 @@ public class IPSRSPengajuanBarangNonMedis extends javax.swing.JDialog {
 
             index=0;
             for(i=0;i<row;i++){
-                if(!tbDokter.getValueAt(i,0).toString().equals("")){
-                    jumlah[index]=tbDokter.getValueAt(i,0).toString();
-                    kodebarang[index]=tbDokter.getValueAt(i,1).toString();
-                    namabarang[index]=tbDokter.getValueAt(i,2).toString();
-                    satuan[index]=tbDokter.getValueAt(i,3).toString();
-                    ipsrsjenisbarang[index]=tbDokter.getValueAt(i,4).toString();
-                    harga[index]=Double.parseDouble(tbDokter.getValueAt(i,5).toString());
-                    subtotal[index]=Double.parseDouble(tbDokter.getValueAt(i,6).toString());
+                if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("")){
+                    jumlah[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString();
+                    kodebarang[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString();
+                    namabarang[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString();
+                    satuan[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString();
+                    ipsrsjenisbarang[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString();
+                    harga[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString());
+                    subtotal[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString());
                     index++;
                 }
             }
+            tbDokter.suspendSorting();
             Valid.tabelKosong(tabMode);
             for(i=0;i<jml;i++){
                 tabMode.addRow(new Object[]{jumlah[i],kodebarang[i],namabarang[i],satuan[i],ipsrsjenisbarang[i],harga[i],subtotal[i]});
@@ -922,6 +924,7 @@ public class IPSRSPengajuanBarangNonMedis extends javax.swing.JDialog {
             response = null;
             root = null;
         }
+        tbDokter.resumeSorting();
     }
 
     private void LoadData(){
@@ -951,17 +954,17 @@ public class IPSRSPengajuanBarangNonMedis extends javax.swing.JDialog {
     private void getData(){
         row=tbDokter.getSelectedRow();
         if(row!= -1){
-            if(!tbDokter.getValueAt(row,0).toString().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString().equals("")){
                 try {
-                    if(Double.parseDouble(tbDokter.getValueAt(row,0).toString())>0){
-                        tbDokter.setValueAt(Double.parseDouble(tbDokter.getValueAt(row,0).toString())*Double.parseDouble(tbDokter.getValueAt(row,5).toString()), row,6);
+                    if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString())>0){
+                        tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString())*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),5).toString()), tbDokter.convertRowIndexToModel(row),6);
                     }
                 } catch (Exception e) {
-                    tbDokter.setValueAt("", row,0);
-                    tbDokter.setValueAt(0, row,6);
+                    tabMode.setValueAt("", tbDokter.convertRowIndexToModel(row),0);
+                    tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(row),6);
                 }
             }else{
-                tbDokter.setValueAt(0, row,6);
+                tabMode.setValueAt(0, tbDokter.convertRowIndexToModel(row),6);
             }
         }
 
@@ -969,11 +972,11 @@ public class IPSRSPengajuanBarangNonMedis extends javax.swing.JDialog {
         jml=tbDokter.getRowCount();
         for(i=0;i<jml;i++){
             y=0;
-            if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
+            if(Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0){
                 try {
-                    y=Double.parseDouble(tbDokter.getValueAt(i,6).toString());
+                    y=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString());
                 } catch (Exception e) {
-                    tbDokter.setValueAt(0,tbDokter.getSelectedRow(),6);
+                    tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6);
                     y=0;
                 }
             }

@@ -147,7 +147,7 @@ public final class DlgRestoreTokoBarang extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbObat.setAutoCreateRowSorter(false);
+        tbObat.setAutoCreateRowSorter(true);
         tbObat.setName("tbObat"); // NOI18N
         Scroll.setViewportView(tbObat);
 
@@ -280,8 +280,8 @@ public final class DlgRestoreTokoBarang extends javax.swing.JDialog {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")){
-                Sequel.mengedit("tokobarang","kode_brng='"+tbObat.getValueAt(i,1).toString()+"'","status='1'");
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.mengedit("tokobarang","kode_brng='"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"'","status='1'");
             }
         }
         BtnCariActionPerformed(evt);
@@ -297,8 +297,8 @@ public final class DlgRestoreTokoBarang extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")){
-                Sequel.meghapus("tokobarang","kode_brng",tbObat.getValueAt(i,1).toString());
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.meghapus("tokobarang","kode_brng",tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString());
             }
         }
         BtnCariActionPerformed(evt);
@@ -417,6 +417,7 @@ public final class DlgRestoreTokoBarang extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             if(TCari.getText().trim().equals("")){
@@ -466,6 +467,7 @@ public final class DlgRestoreTokoBarang extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbObat.resumeSorting();
     }
 
     private void runBackground(Runnable task) {

@@ -170,6 +170,7 @@ public final class DlgLhtBankJabar extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setSortable(false);
         tbBangsal.setComponentPopupMenu(Popup);
         tbBangsal.setName("tbBangsal"); // NOI18N
         Scroll.setViewportView(tbBangsal);
@@ -446,7 +447,7 @@ public final class DlgLhtBankJabar extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptHtHTagihanBankJabar.jasper","report","::[ Surat Tagihan Pembayaran Bank Jabar ]::",
-               "select * from tagihan_bpd_jabar where tagihan_bpd_jabar.no_nota='"+tbBangsal.getValueAt(tbBangsal.getSelectedRow(),6).toString()+"'",param);
+               "select * from tagihan_bpd_jabar where tagihan_bpd_jabar.no_nota='"+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),6).toString()+"'",param);
             this.setCursor(Cursor.getDefaultCursor());
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");

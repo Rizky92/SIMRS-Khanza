@@ -80,7 +80,7 @@ public class InventoryStokAkhirFarmasiPerTanggalSMC extends javax.swing.JDialog 
         };
         tbDokter.setModel(tabMode);
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbDokter.getColumnCount(); i++) {
             if (i == 0) {
                 tbDokter.getColumnModel().getColumn(i).setPreferredWidth(110);
             } else if (i == 1) {
@@ -165,6 +165,7 @@ public class InventoryStokAkhirFarmasiPerTanggalSMC extends javax.swing.JDialog 
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -527,6 +528,7 @@ public class InventoryStokAkhirFarmasiPerTanggalSMC extends javax.swing.JDialog 
         }
         if (!ceksukses) {
             ceksukses = true;
+            tbDokter.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
@@ -544,7 +546,7 @@ public class InventoryStokAkhirFarmasiPerTanggalSMC extends javax.swing.JDialog 
                 column.setPreferredWidth(75);
             }
 
-            for (; i < tabMode.getColumnCount(); i++) {
+            for (; i < tbDokter.getColumnCount(); i++) {
                 TableColumn column = tbDokter.getColumnModel().getColumn(i);
                 column.setHeaderValue("");
                 column.setMinWidth(0);
@@ -635,6 +637,7 @@ public class InventoryStokAkhirFarmasiPerTanggalSMC extends javax.swing.JDialog 
                     tabMode.fireTableDataChanged();
                     InventoryStokAkhirFarmasiPerTanggalSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbDokter.resumeSorting();
                 }
             }.execute();
         }

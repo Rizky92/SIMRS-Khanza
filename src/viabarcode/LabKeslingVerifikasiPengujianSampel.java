@@ -516,6 +516,7 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbVerifikasi.setAutoCreateRowSorter(true);
         tbVerifikasi.setName("tbVerifikasi"); // NOI18N
         Scroll2.setViewportView(tbVerifikasi);
 
@@ -531,8 +532,8 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         autoNomor();
         for(i=0;i<tbVerifikasi.getRowCount();i++){
-            tbVerifikasi.setValueAt("",i,4);
-            tbVerifikasi.setValueAt("",i,5);
+            tabMode.setValueAt("",tbVerifikasi.convertRowIndexToModel(i),4);
+            tabMode.setValueAt("",tbVerifikasi.convertRowIndexToModel(i),5);
         }
         Catatan.setText("");
         ChkInput.setSelected(true);
@@ -586,7 +587,7 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
             Valid.textKosong(TNoVerifikasi,"Nomor Verifikasi");
         }else if(KodeSampel.getText().equals("")||NamaSampel.getText().equals("")){
             Valid.textKosong(TNoVerifikasi,"Sampel");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbVerifikasi.getRowCount()==0){
             Valid.textKosong(TNoVerifikasi,"Data Verifikasi");
         }else{
             int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
@@ -602,9 +603,9 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
                         })==true){
                         for(i=0;i<tbVerifikasi.getRowCount();i++){
                             if(Sequel.menyimpantf2("labkesling_detail_verifikasi_pengujian_sampel","?,?,?,?,?,?","Verifikasi",6,new String[]{
-                                TNoVerifikasi.getText(),tbVerifikasi.getValueAt(i,0).toString(),tbVerifikasi.getValueAt(i,1).toString(),tbVerifikasi.getValueAt(i,6).toString(),tbVerifikasi.getValueAt(i,4).toString(),tbVerifikasi.getValueAt(i,5).toString()
+                                TNoVerifikasi.getText(),tabMode.getValueAt(tbVerifikasi.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbVerifikasi.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbVerifikasi.convertRowIndexToModel(i),6).toString(),tabMode.getValueAt(tbVerifikasi.convertRowIndexToModel(i),4).toString(),tabMode.getValueAt(tbVerifikasi.convertRowIndexToModel(i),5).toString()
                             })==true){
-                                Sequel.queryu("update labkesling_hasil_pengujian_sampel set status='Sudah Diverifikasi' where no_penugasan='"+tbVerifikasi.getValueAt(i,0).toString()+"' and kode_parameter='"+tbVerifikasi.getValueAt(i,1).toString()+"'");
+                                Sequel.queryu("update labkesling_hasil_pengujian_sampel set status='Sudah Diverifikasi' where no_penugasan='"+tabMode.getValueAt(tbVerifikasi.convertRowIndexToModel(i),0).toString()+"' and kode_parameter='"+tabMode.getValueAt(tbVerifikasi.convertRowIndexToModel(i),1).toString()+"'");
                             }else{
                                 berhasil=false;
                             }
@@ -616,6 +617,7 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
                     if(berhasil==true){
                         Sequel.Commit();
                         JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
+                        tbVerifikasi.suspendSorting();
                         Valid.tabelKosong(tabMode);
                     }else{
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -630,6 +632,7 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
+        tbVerifikasi.resumeSorting();
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -704,9 +707,9 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
             Valid.textKosong(TNoVerifikasi,"Data Verifikasi");
         }else{
             Sequel.queryu("delete from temporary");
-            for(i=0;i<tbVerifikasi.getRowCount();i++){
+            for(i=0;i<tabMode.getRowCount();i++){
                 Sequel.menyimpan("temporary","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                    "0",tbVerifikasi.getValueAt(i,1).toString(),tbVerifikasi.getValueAt(i,2).toString(),tbVerifikasi.getValueAt(i,3).toString(),tbVerifikasi.getValueAt(i,7).toString(),tbVerifikasi.getValueAt(i,4).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+                    "0",tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,2).toString(),tabMode.getValueAt(i,3).toString(),tabMode.getValueAt(i,7).toString(),tabMode.getValueAt(i,4).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
                 });
             }
 
@@ -825,6 +828,7 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
 
     private void tampil() {
         try {
+            tbVerifikasi.suspendSorting();
             Valid.tabelKosong(tabMode);
             myObj = new FileReader("./cache/verifikasipengujiansampellabkesling.iyem");
             root = mapper.readTree(myObj);
@@ -850,7 +854,8 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
             response = null;
             root = null;
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbVerifikasi.getRowCount());
+        tbVerifikasi.resumeSorting();
     }
 
     public void setData(String nopermintaan,String kodepelanggan,String namapelanggan,String kodesampel,String namasampel) {

@@ -179,7 +179,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbBangsal.setAutoCreateRowSorter(false);
+        tbBangsal.setAutoCreateRowSorter(true);
         tbBangsal.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbBangsal.setComponentPopupMenu(jPopupMenu1);
         tbBangsal.setName("tbBangsal"); // NOI18N
@@ -448,7 +448,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
                     false,TKd.getText(),TNm.getText()
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbBangsal.getRowCount());
             }else{
                 TKd.requestFocus();
             }
@@ -475,13 +475,13 @@ public final class DlgBangsal extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbBangsal.getRowCount();i++){
-            if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                Sequel.mengedit("bangsal","kd_bangsal='"+tbBangsal.getValueAt(i,1).toString()+"'","status='0'");
-                tabMode.removeRow(i);
+            if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.mengedit("bangsal","kd_bangsal='"+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+"'","status='0'");
+                tabMode.removeRow(tbBangsal.convertRowIndexToModel(i));
                 i--;
             }
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbBangsal.getRowCount());
         emptTeks();
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -500,9 +500,9 @@ public final class DlgBangsal extends javax.swing.JDialog {
             Valid.textKosong(TNm,"nama bangsal");
         }else{
             if(tbBangsal.getSelectedRow()>-1){
-                if(Sequel.mengedittf("bangsal","kd_bangsal=?","nm_bangsal=?,kd_bangsal=?",3,new String[]{TNm.getText(),TKd.getText(),tbBangsal.getValueAt(tbBangsal.getSelectedRow(), 1).toString()})==true){
-                    tabMode.setValueAt(TKd.getText(),tbBangsal.getSelectedRow(),1);
-                    tabMode.setValueAt(TNm.getText(),tbBangsal.getSelectedRow(),2);
+                if(Sequel.mengedittf("bangsal","kd_bangsal=?","nm_bangsal=?,kd_bangsal=?",3,new String[]{TNm.getText(),TKd.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()), 1).toString()})==true){
+                    tabMode.setValueAt(TKd.getText(),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1);
+                    tabMode.setValueAt(TNm.getText(),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),2);
                     emptTeks();
                 }
             }
@@ -625,7 +625,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -635,7 +635,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -679,7 +679,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRestoreActionPerformed
 
     private void tbBangsalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbBangsal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -734,6 +734,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbBangsal.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select * from bangsal where bangsal.status='1' "+(TCari.getText().trim().equals("")?"":"and (bangsal.kd_bangsal like ? or bangsal.nm_bangsal like ?) ")+" order by bangsal.kd_bangsal");
@@ -761,7 +762,8 @@ public final class DlgBangsal extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbBangsal.getRowCount());
+        tbBangsal.resumeSorting();
     }
 
     public void emptTeks() {
@@ -774,8 +776,8 @@ public final class DlgBangsal extends javax.swing.JDialog {
 
     private void getData() {
         if(tbBangsal.getSelectedRow()!= -1){
-            TKd.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),1).toString());
-            TNm.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),2).toString());
+            TKd.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1).toString());
+            TNm.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),2).toString());
         }
     }
 

@@ -1003,14 +1003,14 @@ public final class DlgStokOpname extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,Kdbar,"opname","kd_bangsal='"+kdgudang.getText()+"' and tanggal='"+Tanggal.getSelectedItem()+"' and no_batch='"+nobatch.getText()+"' and no_faktur='"+nofaktur.getText()+"' and kode_brng")==true){
-            totalreal=totalreal-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),9).toString().replaceAll(",",""));
-            total=total-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString().replaceAll(",",""));
-            totallebih=totallebih-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),11).toString().replaceAll(",",""));
+            totalreal=totalreal-Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),9).toString().replaceAll(",",""));
+            total=total-Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),10).toString().replaceAll(",",""));
+            totallebih=totallebih-Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),11).toString().replaceAll(",",""));
             LTotalReal.setText(df2.format(totalreal));
             LTotalHilang.setText(df2.format(total));
             LTotalLebih.setText(df2.format(totallebih));
-            LCount.setText(""+tabMode.getRowCount());
-            tabMode.removeRow(tbKamar.getSelectedRow());
+            LCount.setText(""+tbKamar.getRowCount());
+            tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -1037,10 +1037,10 @@ public final class DlgStokOpname extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbKamar.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tbKamar.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1666,7 +1666,7 @@ public final class DlgStokOpname extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
         LTotalReal.setText(df2.format(totalreal));
         LTotalHilang.setText(df2.format(total));
         LTotalLebih.setText(df2.format(totallebih));
@@ -1693,22 +1693,22 @@ public final class DlgStokOpname extends javax.swing.JDialog {
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            Kdbar.setText(tbKamar.getValueAt(row,0).toString());
-            Kd2.setText(tbKamar.getValueAt(row,0).toString());
-            Nmbar.setText(tbKamar.getValueAt(row,1).toString());
-            Stok.setText(tbKamar.getValueAt(row,5).toString());
-            Real.setText(tbKamar.getValueAt(row,6).toString());
-            Selisih.setText(tbKamar.getValueAt(row,7).toString());
-            Lebih.setText(tbKamar.getValueAt(row,8).toString());
-            TotalReal.setText(tbKamar.getValueAt(row,9).toString());
-            Nominal.setText(tbKamar.getValueAt(row,10).toString());
-            NomiLebih.setText(tbKamar.getValueAt(row,11).toString());
-            Keterangan.setText(tbKamar.getValueAt(row,12).toString());
-            kdgudang.setText(tbKamar.getValueAt(row,13).toString());
-            nmgudang.setText(tbKamar.getValueAt(row,14).toString());
-            nobatch.setText(tbKamar.getValueAt(row,15).toString());
-            nofaktur.setText(tbKamar.getValueAt(row,16).toString());
-            Valid.SetTgl(Tanggal,tbKamar.getValueAt(row,4).toString());
+            Kdbar.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
+            Kd2.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
+            Nmbar.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
+            Stok.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),5).toString());
+            Real.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),6).toString());
+            Selisih.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),7).toString());
+            Lebih.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),8).toString());
+            TotalReal.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),9).toString());
+            Nominal.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),10).toString());
+            NomiLebih.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),11).toString());
+            Keterangan.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),12).toString());
+            kdgudang.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),13).toString());
+            nmgudang.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),14).toString());
+            nobatch.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),15).toString());
+            nofaktur.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),16).toString());
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),4).toString());
         }
     }
 

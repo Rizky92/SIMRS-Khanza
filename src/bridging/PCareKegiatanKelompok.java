@@ -462,6 +462,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
         Scroll.setOpaque(true);
 
         tbJnsPerawatan.setAutoCreateRowSorter(false);
+        tbJnsPerawatan.setSortable(false);
         tbJnsPerawatan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbJnsPerawatan.setComponentPopupMenu(Popup);
         tbJnsPerawatan.setName("tbJnsPerawatan"); // NOI18N
@@ -1046,7 +1047,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbJnsPerawatan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else{
@@ -1084,7 +1085,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
         }else{
             if(tbJnsPerawatan.getSelectedRow()!= -1){
                 try {
-                    URL = link+"/kelompok/kegiatan/"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString();
+                    URL = link+"/kelompok/kegiatan/"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString();
                     headers = new HttpHeaders();
                     headers.setContentType(MediaType.APPLICATION_JSON);
                     headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
@@ -1099,7 +1100,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
                     System.out.println("code : "+nameNode.path("code").asText());
                     System.out.println("message : "+nameNode.path("message").asText());
                     if(nameNode.path("code").asText().equals("200")){
-                        Sequel.meghapus("pcare_kegiatan_kelompok","eduId",tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+                        Sequel.meghapus("pcare_kegiatan_kelompok","eduId",tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
                         emptTeks();
                         runBackground(() ->tampil());
                     }else{
@@ -1279,7 +1280,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1364,12 +1365,12 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPoliRS1KeyPressed
 
     private void ppPesertaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPesertaBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbJnsPerawatan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else{
             if(tbJnsPerawatan.getSelectedRow()!= -1){
-                EduId.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+                EduId.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
                 WindowInputPeserta.setLocationRelativeTo(internalFrame1);
                 WindowInputPeserta.setVisible(true);
             }
@@ -1455,7 +1456,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
     }//GEN-LAST:event_NmPasienKeyPressed
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1609,7 +1610,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {
@@ -1626,16 +1627,16 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
 
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
-            kdClub.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-            NmClub.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-            Kegiatan.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
-            Kelompok.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
-            Materi.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
-            Pembicara.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
-            Lokasi.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString());
-            Keterangan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString());
-            Biaya.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString());
-            Valid.SetTgl(Tanggal,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
+            kdClub.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+            NmClub.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+            Kegiatan.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString());
+            Kelompok.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5).toString());
+            Materi.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),6).toString());
+            Pembicara.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7).toString());
+            Lokasi.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),8).toString());
+            Keterangan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),9).toString());
+            Biaya.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),10).toString());
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
         }
     }
 
@@ -1705,7 +1706,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
         restTemplate.setRequestFactory(factory);
 
         try {
-            URL = link+"/kelompok/kegiatan/"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString();
+            URL = link+"/kelompok/kegiatan/"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString();
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
@@ -1726,7 +1727,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
             System.out.println("code : "+nameNode.path("code").asText());
             System.out.println("message : "+nameNode.path("message").asText());
             if(nameNode.path("code").asText().equals("200")){
-                Sequel.meghapus("pcare_kegiatan_kelompok","eduId",tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+                Sequel.meghapus("pcare_kegiatan_kelompok","eduId",tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
                 emptTeks();
                 runBackground(() ->tampil());
             }else{

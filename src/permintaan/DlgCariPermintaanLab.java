@@ -826,6 +826,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbLabRalan.setSortable(false);
         tbLabRalan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -964,6 +965,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         scrollPane3.setName("scrollPane3"); // NOI18N
         scrollPane3.setOpaque(true);
 
+        tbLabRanap.setSortable(false);
         tbLabRanap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1918,7 +1920,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void tbLabRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLabRalanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbLabRalan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1927,7 +1929,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     }//GEN-LAST:event_tbLabRalanMouseClicked
 
     private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbLabRalanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbLabRalan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1940,11 +1942,11 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     private void TabRawatJalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatJalanMouseClicked
         TeksKosong();
         if(TabRawatJalan.getSelectedIndex()==0){
-            if(tabMode.getRowCount()==0){
+            if(tbLabRalan.getRowCount()==0){
                 runBackground(() -> tampil());
             }
         }else if(TabRawatJalan.getSelectedIndex()==1){
-            if(tabMode2.getRowCount()==0){
+            if(tbLabRalan2.getRowCount()==0){
                 runBackground(() -> tampil2());
             }
         }
@@ -2159,8 +2161,8 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                             Sequel.queryu("delete from antrilabpk");
                             Sequel.queryu("insert into antrilabpk values('1')");
                             TeksKosong();
-                            tbLabRalan.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbLabRalan.getSelectedRow(),5);
-                            tbLabRalan.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbLabRalan.getSelectedRow(),6);
+                            tabMode.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),5);
+                            tabMode.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),6);
                     }
                 }
             }else{
@@ -2202,8 +2204,8 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                             } catch (Exception e) {
                             }
                             TeksKosong();
-                            tbLabRanap.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbLabRanap.getSelectedRow(),5);
-                            tbLabRanap.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbLabRanap.getSelectedRow(),6);
+                            tabMode3.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),5);
+                            tabMode3.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),6);
                     }
                 }
             }else{
@@ -2344,7 +2346,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeek6ActionPerformed
 
     private void tbLabRanapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLabRanapMouseClicked
-        if(tabMode3.getRowCount()!=0){
+        if(tbLabRanap.getRowCount()!=0){
             try {
                 getData2();
             } catch (java.lang.NullPointerException e) {
@@ -2353,7 +2355,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     }//GEN-LAST:event_tbLabRanapMouseClicked
 
     private void tbLabRanapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbLabRanapKeyPressed
-        if(tabMode3.getRowCount()!=0){
+        if(tbLabRanap.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData2();
@@ -2374,11 +2376,11 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     private void TabRawatInapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatInapMouseClicked
         TeksKosong();
         if(TabRawatInap.getSelectedIndex()==0){
-            if(tabMode3.getRowCount()==0){
+            if(tbLabRanap.getRowCount()==0){
                 runBackground(() -> tampil3());
             }
         }else if(TabRawatInap.getSelectedIndex()==1){
-            if(tabMode4.getRowCount()==0){
+            if(tbLabRanap2.getRowCount()==0){
                 runBackground(() -> tampil4());
             }
         }
@@ -4290,21 +4292,21 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         TeksKosong();
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
+                if(tbLabRalan.getRowCount()==0){
                     runBackground(() -> tampil());
                 }
             }else if(TabRawatJalan.getSelectedIndex()==1){
-                if(tabMode2.getRowCount()==0){
+                if(tbLabRalan2.getRowCount()==0){
                     runBackground(() -> tampil2());
                 }
             }
         }else if(TabPilihRawat.getSelectedIndex()==1){
             if(TabRawatInap.getSelectedIndex()==0){
-                if(tabMode3.getRowCount()==0){
+                if(tbLabRanap.getRowCount()==0){
                     runBackground(() -> tampil3());
                 }
             }else if(TabRawatInap.getSelectedIndex()==1){
-                if(tabMode4.getRowCount()==0){
+                if(tbLabRanap2.getRowCount()==0){
                     runBackground(() -> tampil4());
                 }
             }
@@ -4315,9 +4317,9 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         if (TabPilihRawat.getSelectedIndex() == 0) {
             if (TabRawatJalan.getSelectedIndex() == 0) {
                 if (tbLabRalan.getSelectedRow() != -1) {
-                    if (tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0) != null && !tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString().isBlank()) {
+                    if (tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()), 0) != null && !tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()), 0).toString().isBlank()) {
                         try {
-                            int status = apiBioSysSmc.kirimOrder(tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString());
+                            int status = apiBioSysSmc.kirimOrder(tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()), 0).toString());
                             if (status == 200) {
                                 JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS BIOSYS..!!");
                             } else if (status == 406) {
@@ -4332,9 +4334,9 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         } else if (TabPilihRawat.getSelectedIndex() == 1) {
             if (TabRawatInap.getSelectedIndex() == 0) {
                 if (tbLabRanap.getSelectedRow() != -1) {
-                    if (tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0) != null || !tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString().isBlank()) {
+                    if (tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()), 0) != null || !tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()), 0).toString().isBlank()) {
                         try {
-                            int status = apiBioSysSmc.kirimOrder(tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString());
+                            int status = apiBioSysSmc.kirimOrder(tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()), 0).toString());
                             if (status == 200) {
                                 JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS BIOSYS..!!");
                             } else if (status == 406) {
@@ -4455,9 +4457,9 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         if (TabPilihRawat.getSelectedIndex() == 0) {
             if (TabRawatJalan.getSelectedIndex() == 0) {
                 if (tbLabRalan.getSelectedRow() != -1) {
-                    if (tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0) != null && !tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString().isBlank()) {
+                    if (tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()), 0) != null && !tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()), 0).toString().isBlank()) {
                         try {
-                            int status = apiBioSysSmc.updateOrder(tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString());
+                            int status = apiBioSysSmc.updateOrder(tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()), 0).toString());
                             if (status == 200) {
                                 JOptionPane.showMessageDialog(null, "Update data pasien selesai LIS BIOSYS..!!");
                             } else if (status == 204) {
@@ -4472,9 +4474,9 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         } else if (TabPilihRawat.getSelectedIndex() == 1) {
             if (TabRawatInap.getSelectedIndex() == 0) {
                 if (tbLabRanap.getSelectedRow() != -1) {
-                    if (tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0) != null || !tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString().isBlank()) {
+                    if (tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()), 0) != null || !tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()), 0).toString().isBlank()) {
                         try {
-                            int status = apiBioSysSmc.updateOrder(tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString());
+                            int status = apiBioSysSmc.updateOrder(tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()), 0).toString());
                             if (status == 200) {
                                 JOptionPane.showMessageDialog(null, "Update data pasien selesai LIS BIOSYS..!!");
                             } else if (status == 204) {
@@ -4785,7 +4787,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode2.getRowCount());
+            LCount.setText(""+tbLabRalan2.getRowCount());
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
@@ -4794,39 +4796,39 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
 
     private void getData() {
         if(tbLabRalan.getSelectedRow()!= -1){
-            NoPermintaan=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),0).toString();
-            NoRawat=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),1).toString();
-            Pasien=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),2).toString();
-            KodeDokter=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),9).toString();
-            DokterPerujuk=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),10).toString();
-            Ruang=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),11).toString();
-            InformasiTambahan=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),12).toString();
-            DiagnosaKlinis=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),13).toString();
-            Permintaan=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),3).toString();
-            JamPermintaan=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),4).toString();
-            Sampel=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),5).toString();
-            JamSampel=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),6).toString();
-            Hasil=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),7).toString();
-            JamHasil=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),8).toString();
+            NoPermintaan=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),0).toString();
+            NoRawat=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),1).toString();
+            Pasien=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),2).toString();
+            KodeDokter=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),9).toString();
+            DokterPerujuk=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),10).toString();
+            Ruang=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),11).toString();
+            InformasiTambahan=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),12).toString();
+            DiagnosaKlinis=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),13).toString();
+            Permintaan=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),3).toString();
+            JamPermintaan=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),4).toString();
+            Sampel=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),5).toString();
+            JamSampel=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),6).toString();
+            Hasil=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),7).toString();
+            JamHasil=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),8).toString();
         }
     }
 
     private void getData2() {
         if(tbLabRanap.getSelectedRow()!= -1){
-            NoPermintaan=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),0).toString();
-            NoRawat=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),1).toString();
-            Pasien=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),2).toString();
-            KodeDokter=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),9).toString();
-            DokterPerujuk=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),10).toString();
-            Ruang=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),11).toString();
-            InformasiTambahan=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),12).toString();
-            DiagnosaKlinis=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),13).toString();
-            Permintaan=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),3).toString();
-            JamPermintaan=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),4).toString();
-            Sampel=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),5).toString();
-            JamSampel=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),6).toString();
-            Hasil=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),7).toString();
-            JamHasil=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),8).toString();
+            NoPermintaan=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),0).toString();
+            NoRawat=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),1).toString();
+            Pasien=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),2).toString();
+            KodeDokter=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),9).toString();
+            DokterPerujuk=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),10).toString();
+            Ruang=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),11).toString();
+            InformasiTambahan=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),12).toString();
+            DiagnosaKlinis=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),13).toString();
+            Permintaan=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),3).toString();
+            JamPermintaan=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),4).toString();
+            Sampel=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),5).toString();
+            JamSampel=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),6).toString();
+            Hasil=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),7).toString();
+            JamHasil=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),8).toString();
         }
     }
 
@@ -5161,7 +5163,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            LCount.setText(""+tabMode4.getRowCount());
+            LCount.setText(""+tbLabRanap2.getRowCount());
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
@@ -5190,7 +5192,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                     permintaanbaru=0;
                     if(formalarm.contains("ralan")){
                         for(i=0;i<tbLabRalan.getRowCount();i++){
-                            if((!tbLabRalan.getValueAt(i,0).toString().equals(""))&&tbLabRalan.getValueAt(i,5).toString().equals("")){
+                            if((!tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(i),0).toString().equals(""))&&tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(i),5).toString().equals("")){
                                 permintaanbaru++;
                             }
                         }
@@ -5198,7 +5200,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
 
                     if(formalarm.contains("ranap")){
                         for(i=0;i<tbLabRanap.getRowCount();i++){
-                            if((!tbLabRanap.getValueAt(i,0).toString().equals(""))&&tbLabRanap.getValueAt(i,5).toString().equals("")){
+                            if((!tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(i),0).toString().equals(""))&&tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(i),5).toString().equals("")){
                                 permintaanbaru++;
                             }
                         }

@@ -257,6 +257,7 @@ public class DlgDeposit extends javax.swing.JDialog {
         Scroll.setOpaque(true);
 
         tbObat.setAutoCreateRowSorter(false);
+        tbObat.setSortable(false);
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setComponentPopupMenu(jPopupMenu1);
         tbObat.setName("tbObat"); // NOI18N
@@ -854,7 +855,7 @@ public class DlgDeposit extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             DTPTgl.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -868,18 +869,18 @@ public class DlgDeposit extends javax.swing.JDialog {
                     Sequel.AutoComitFalse();
                     sukses=true;
 
-                    if (Sequel.menghapustfSmc("deposit", "no_deposit = ?", tabMode.getValueAt(tbObat.getSelectedRow(), 0).toString())) {
+                    if (Sequel.menghapustfSmc("deposit", "no_deposit = ?", tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())) {
                         Sequel.deleteTampJurnal();
-                        if(Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", Valid.setAngkaSmc(tabMode.getValueAt(tbObat.getSelectedRow(), 6).toString()), 0)==false){
+                        if(Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", Valid.setAngkaSmc(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6).toString()), 0)==false){
                             sukses=false;
                         }
-                        if(Sequel.insertTampJurnal(tbObat.getValueAt(tbObat.getSelectedRow(), 12).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString(), 0, Valid.setAngkaSmc(tabMode.getValueAt(tbObat.getSelectedRow(), 6).toString()))==false){
+                        if(Sequel.insertTampJurnal(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 12).toString(), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 5).toString(), 0, Valid.setAngkaSmc(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6).toString()))==false){
                             sukses=false;
                         }
                         if(sukses==true){
-                            sukses=jur.simpanJurnal(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(), "U", "PEMBATALAN DEPOSIT PASIEN " + TNoRw.getText() + " " + TNoRM.getText() + " " + TPasien.getText() + ", OLEH " + akses.getkode());
+                            sukses=jur.simpanJurnal(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString(), "U", "PEMBATALAN DEPOSIT PASIEN " + TNoRw.getText() + " " + TNoRM.getText() + " " + TPasien.getText() + ", OLEH " + akses.getkode());
                         }
-                        if (sukses) sukses = Sequel.menghapustfSmc("tagihan_sadewa", "no_nota = ?", tabMode.getValueAt(tbObat.getSelectedRow(), 0).toString());
+                        if (sukses) sukses = Sequel.menghapustfSmc("tagihan_sadewa", "no_nota = ?", tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString());
                     } else {
                         sukses = false;
                     }
@@ -1027,7 +1028,7 @@ public class DlgDeposit extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1137,7 +1138,7 @@ public class DlgDeposit extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
         }else{
             if(tbObat.getSelectedRow()!= -1){
-                Valid.panggilUrl("billing/LaporanBilling6.php?norawat="+Nomor.getText().replaceAll(" ","_")+"&pasien="+TNoRM.getText()+"_"+TPasien.getText().replaceAll(" ","_")+"&tanggal="+DTPTgl.getSelectedItem()+"&deposit="+BesarDeposit.getText()+"&petugas="+tbObat.getValueAt(tbObat.getSelectedRow(),10).toString().replaceAll(" ","_")+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
+                Valid.panggilUrl("billing/LaporanBilling6.php?norawat="+Nomor.getText().replaceAll(" ","_")+"&pasien="+TNoRM.getText()+"_"+TPasien.getText().replaceAll(" ","_")+"&tanggal="+DTPTgl.getSelectedItem()+"&deposit="+BesarDeposit.getText()+"&petugas="+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString().replaceAll(" ","_")+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
             }
         }
     }//GEN-LAST:event_MnKwitansiDepositActionPerformed
@@ -1174,7 +1175,7 @@ public class DlgDeposit extends javax.swing.JDialog {
     }//GEN-LAST:event_DTPTglItemStateChanged
 
     private void tbObatMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 tbObat.changeSelection(tbObat.rowAtPoint(evt.getPoint()), tbObat.columnAtPoint(evt.getPoint()), false, false);
                 getData();
@@ -1310,8 +1311,8 @@ public class DlgDeposit extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
-        if(tabMode.getRowCount()>0){
+        LCount.setText(""+tbObat.getRowCount());
+        if(tbObat.getRowCount()>0){
             tabMode.addRow(new Object[]{
                 "","Total :","","","","",Valid.SetAngka(totaldeposit),"",Valid.SetAngka(totalppn),Valid.SetAngka(tottaldibayar),"","","",""
             });
@@ -1324,20 +1325,20 @@ public class DlgDeposit extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            Nomor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            cmbJam.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString().substring(11,13));
-            cmbMnt.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString().substring(14,16));
-            cmbDtk.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString().substring(17,19));
-            AkunBayar.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            BesarDeposit.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            Persenppn.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            BesarPPN.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            DibayarPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            Valid.SetTgl(DTPTgl,tbObat.getValueAt(tbObat.getSelectedRow(),4).toString().substring(0,10));
+            Nomor.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            cmbJam.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString().substring(11,13));
+            cmbMnt.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString().substring(14,16));
+            cmbDtk.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString().substring(17,19));
+            AkunBayar.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            BesarDeposit.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            Persenppn.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            BesarPPN.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            DibayarPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            Keterangan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            Valid.SetTgl(DTPTgl,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString().substring(0,10));
         }
     }
 

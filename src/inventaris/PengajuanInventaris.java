@@ -913,7 +913,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else {
-                if(akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString())||akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString())){
+                if(akses.getkode().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString())||akses.getkode().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString())){
                     hapus();
                 }else{
                     JOptionPane.showMessageDialog(null,"Harus oleh yang mengajukan/P.J.Terkait sesuai user login..!!");
@@ -956,7 +956,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else {
-                    if(akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString())||akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString())){
+                    if(akses.getkode().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString())||akses.getkode().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString())){
                         ganti();
                     }else{
                         JOptionPane.showMessageDialog(null,"Harus oleh yang mengajukan/P.J.Terkait sesuai user login..!!");
@@ -1095,7 +1095,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1153,7 +1153,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void tbObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1271,21 +1271,21 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_KeteranganKeyPressed
 
     private void ppProsesBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppProsesBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
         }else{
             if(tbObat.getSelectedRow()> -1){
                 if(akses.getkode().equals("Admin Utama")){
                     if(Sequel.mengedittf("pengajuan_inventaris","no_pengajuan=?","status='Proses Pengajuan'",1,new String[]{
-                            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
                         })==true){
                             runBackground(() ->tampil());
                             emptTeks();
                     }
                 }else {
-                    if(akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString())){
+                    if(akses.getkode().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString())){
                         if(Sequel.mengedittf("pengajuan_inventaris","no_pengajuan=?","status='Proses Pengajuan'",1,new String[]{
-                                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
                             })==true){
                                 runBackground(() ->tampil());
                                 emptTeks();
@@ -1301,21 +1301,21 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_ppProsesBtnPrintActionPerformed
 
     private void ppDosetujuiBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDosetujuiBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
         }else{
             if(tbObat.getSelectedRow()> -1){
                 if(akses.getkode().equals("Admin Utama")){
                     if(Sequel.mengedittf("pengajuan_inventaris","no_pengajuan=?","status='Disetujui'",1,new String[]{
-                            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
                         })==true){
                             runBackground(() ->tampil());
                             emptTeks();
                     }
                 }else {
-                    if(akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString())){
+                    if(akses.getkode().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString())){
                         if(Sequel.mengedittf("pengajuan_inventaris","no_pengajuan=?","status='Disetujui'",1,new String[]{
-                                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
                             })==true){
                                 runBackground(() ->tampil());
                                 emptTeks();
@@ -1331,21 +1331,21 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_ppDosetujuiBtnPrintActionPerformed
 
     private void ppDitolakBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDitolakBtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
         }else{
             if(tbObat.getSelectedRow()> -1){
                 if(akses.getkode().equals("Admin Utama")){
                     if(Sequel.mengedittf("pengajuan_inventaris","no_pengajuan=?","status='Ditolak'",1,new String[]{
-                            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
                         })==true){
                             runBackground(() ->tampil());
                             emptTeks();
                     }
                 }else {
-                    if(akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString())){
+                    if(akses.getkode().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString())){
                         if(Sequel.mengedittf("pengajuan_inventaris","no_pengajuan=?","status='Ditolak'",1,new String[]{
-                                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
                             })==true){
                                 runBackground(() ->tampil());
                                 emptTeks();
@@ -1502,7 +1502,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
         LCount1.setText(Valid.SetAngka(total));
     }
 
@@ -1524,22 +1524,22 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoPengajuan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Bidang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            Departemen.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            Urgensi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            LatarBelakang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            NamaBarang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            Spesifikasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            Jumlah.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            Harga.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            Total.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            KdPetugasPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            NmPetugasPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
+            NoPengajuan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            KdPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            NmPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            Bidang.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            Departemen.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            Urgensi.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            LatarBelakang.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            NamaBarang.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            Spesifikasi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            Jumlah.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            Harga.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            Total.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            Keterangan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            KdPetugasPJ.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            NmPetugasPJ.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
         }
     }
 
@@ -1584,9 +1584,9 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     }
 
     private void hapus() {
-        if(Sequel.meghapustf("pengajuan_inventaris","no_pengajuan",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString())==true){
-            tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+        if(Sequel.meghapustf("pengajuan_inventaris","no_pengajuan",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString())==true){
+            tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
+            LCount.setText(""+tbObat.getRowCount());
             emptTeks();
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
@@ -1598,7 +1598,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
                 NoPengajuan.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),KdPetugas.getText(),Urgensi.getSelectedItem().toString(),
                 LatarBelakang.getText(),NamaBarang.getText(),Spesifikasi.getText(),Jumlah.getText(),Harga.getText(),
                 Double.toString(Double.parseDouble(Harga.getText())*Double.parseDouble(Jumlah.getText())),Keterangan.getText(),
-                KdPetugasPJ.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                KdPetugasPJ.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();

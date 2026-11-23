@@ -816,10 +816,10 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                 tbPemberianObat.clearSelection();
                 tbPemberianObat.addRowSelectionInterval(selected[0], selected[0]);
             }
-            bangsal=tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),13).toString();
+            bangsal=tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),13).toString();
         }
 
-        if(tabModePO.getRowCount()==0){
+        if(tbPemberianObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -838,7 +838,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                         if(akses.getkode().equals("Admin Utama")){
                             hapus();
                         }else{
-                            if(Sequel.cekTanggal48jam(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),0).toString()+" "+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString(),Sequel.ambiltanggalsekarang())==true){
+                            if(Sequel.cekTanggal48jam(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),0).toString()+" "+tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),1).toString(),Sequel.ambiltanggalsekarang())==true){
                                 hapus();
                             }else{
                                 hapusdata=false;
@@ -853,7 +853,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                             if(akses.getkode().equals("Admin Utama")){
                                 hapus();
                             }else{
-                                if(Sequel.cekTanggal48jam(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),0).toString()+" "+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString(),Sequel.ambiltanggalsekarang())==true){
+                                if(Sequel.cekTanggal48jam(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),0).toString()+" "+tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),1).toString(),Sequel.ambiltanggalsekarang())==true){
                                     hapus();
                                 }else{
                                     hapusdata=false;
@@ -870,8 +870,8 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                     }
                     Sequel.AutoComitTrue();
                     if(hapusdata==true){
-                        tabModePO.removeRow(tbPemberianObat.getSelectedRow());
-                        LCount.setText(""+tabModePO.getRowCount());
+                        tabModePO.removeRow(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()));
+                        LCount.setText(""+tbPemberianObat.getRowCount());
                         LCount1.setText(""+Valid.SetAngka(jumlahtotal-ttljual));
                     } else {
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -1063,7 +1063,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbDtkKeyPressed
 
     private void tbPemberianObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemberianObatMouseClicked
-        if(tabModePO.getRowCount()!=0){
+        if(tbPemberianObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1072,7 +1072,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemberianObatMouseClicked
 
     private void tbPemberianObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemberianObatKeyPressed
-        if(tabModePO.getRowCount()!=0){
+        if(tbPemberianObat.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -1159,7 +1159,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnObat3ActionPerformed
 
     private void ppResepObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObatActionPerformed
-        if(tabModePO.getRowCount()==0){
+        if(tbPemberianObat.getRowCount()==0){
              JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
              TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
@@ -1170,7 +1170,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
             resep.setLocationRelativeTo(internalFrame1);
             resep.emptTeks();
             resep.isCek();
-            resep.setNoRm(TNoRw.getText(),Valid.SetTgl2(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),0).toString()),Valid.SetTgl2(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),0).toString()),tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString().substring(0,2),tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString().substring(3,5),tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString().substring(6,8),status);
+            resep.setNoRm(TNoRw.getText(),Valid.SetTgl2(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),0).toString()),Valid.SetTgl2(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),0).toString()),tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),1).toString().substring(0,2),tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),1).toString().substring(3,5),tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),1).toString().substring(6,8),status);
             resep.tampil2();
             resep.setVisible(true);
         }
@@ -1179,10 +1179,10 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     private void ppNoRawatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppNoRawatActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         tampilPO();
-        if(tabModePO.getRowCount()==0){
+        if(tbPemberianObat.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabModePO.getRowCount()!=0){
+        }else if(tbPemberianObat.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
@@ -1252,7 +1252,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     }//GEN-LAST:event_ppLokasiBtnPrintActionPerformed
 
     private void tbPemberianObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemberianObatKeyReleased
-        if(tabModePO.getRowCount()!=0){
+        if(tbPemberianObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1392,6 +1392,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
            "detail_pemberian_obat.no_faktur like ? or detail_pemberian_obat.no_batch like ?) ")+
            "order by detail_pemberian_obat.tgl_perawatan";
 
+        tbPemberianObat.suspendSorting();
         Valid.tabelKosong(tabModePO);
         try{
             ps=koneksi.prepareStatement(sql);
@@ -1433,8 +1434,9 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModePO.getRowCount());
+        LCount.setText(""+tbPemberianObat.getRowCount());
         LCount1.setText(""+Valid.SetAngka(jumlahtotal));
+        tbPemberianObat.resumeSorting();
     }
 
     public void tampilPO3() {
@@ -1461,6 +1463,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
            "detail_pemberian_obat.no_faktur like ? or detail_pemberian_obat.no_batch like ?) ")+
            "order by detail_pemberian_obat.tgl_perawatan";
 
+        tbPemberianObat.suspendSorting();
         Valid.tabelKosong(tabModePO);
         try{
             ps=koneksi.prepareStatement(sql);
@@ -1501,8 +1504,9 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModePO.getRowCount());
+        LCount.setText(""+tbPemberianObat.getRowCount());
         LCount1.setText(""+Valid.SetAngka(jumlahtotal));
+        tbPemberianObat.resumeSorting();
     }
 
     private void isRawat() {
@@ -1515,17 +1519,17 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 
     private void getData() {
         if(tbPemberianObat.getSelectedRow()!= -1){
-            cmbJam.setSelectedItem(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString().substring(0,2));
-            cmbMnt.setSelectedItem(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString().substring(3,5));
-            cmbDtk.setSelectedItem(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString().substring(6,8));
-            TNoRw.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString());
-            TNoRM.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),3).toString());
-            TPasien.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),4).toString());
-            TKdOb.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),5).toString());
-            TNmOb.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),6).toString());
-            TBiayaObat.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),10).toString());
-            THBeli.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),12).toString());
-            Valid.SetTgl(DTPBeri,tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),0).toString());
+            cmbJam.setSelectedItem(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),1).toString().substring(0,2));
+            cmbMnt.setSelectedItem(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),1).toString().substring(3,5));
+            cmbDtk.setSelectedItem(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),1).toString().substring(6,8));
+            TNoRw.setText(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),2).toString());
+            TNoRM.setText(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),3).toString());
+            TPasien.setText(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),4).toString());
+            TKdOb.setText(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),5).toString());
+            TNmOb.setText(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),6).toString());
+            TBiayaObat.setText(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),10).toString());
+            THBeli.setText(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),12).toString());
+            Valid.SetTgl(DTPBeri,tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()),0).toString());
         }
     }
 
@@ -1758,21 +1762,21 @@ public class DlgPemberianObat extends javax.swing.JDialog {
             "detail_pemberian_obat.no_batch = ? and detail_pemberian_obat.no_faktur = ?"
         )) {
             int p = 0;
-            ps.setString(++p, tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 2).toString());
-            ps.setString(++p, tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 5).toString());
-            ps.setString(++p, tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 0).toString());
-            ps.setString(++p, tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 1).toString());
-            ps.setString(++p, tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 14).toString());
-            ps.setString(++p, tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 15).toString());
+            ps.setString(++p, tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 2).toString());
+            ps.setString(++p, tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 5).toString());
+            ps.setString(++p, tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 0).toString());
+            ps.setString(++p, tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 1).toString());
+            ps.setString(++p, tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 14).toString());
+            ps.setString(++p, tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 15).toString());
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     statusberi = rs.getString("statusberi");
                     ttlhpp = rs.getDouble("ttlhpp");
                     ttljual = rs.getDouble("ttljual");
                     if (Sequel.menghapustfSmc("detail_pemberian_obat", "no_rawat = ? and kode_brng = ? and tgl_perawatan = ? and jam = ? and no_batch = ? and no_faktur = ?",
-                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 2).toString(), tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 5).toString(),
-                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 0).toString(), tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 1).toString(),
-                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 14).toString(), tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 15).toString()
+                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 2).toString(), tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 5).toString(),
+                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 0).toString(), tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 1).toString(),
+                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 14).toString(), tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 15).toString()
                     )) {
                         if (statusberi.equals("Ranap")) {
                             Sequel.deleteTampJurnal();
@@ -1793,7 +1797,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                                 }
                             }
                             if(sukses==true){
-                                sukses=jur.simpanJurnal(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 2).toString(), "U", "PEMBATALAN PEMBERIAN OBAT RAWAT INAP PASIEN " + TNoRM.getText() + " " + TPasien.getText() + " OLEH " + akses.getkode());
+                                sukses=jur.simpanJurnal(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 2).toString(), "U", "PEMBATALAN PEMBERIAN OBAT RAWAT INAP PASIEN " + TNoRM.getText() + " " + TPasien.getText() + " OLEH " + akses.getkode());
                             }
                         } else if (statusberi.equals("Ralan")) {
                             Sequel.deleteTampJurnal();
@@ -1814,67 +1818,67 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                                 }
                             }
                             if(sukses==true){
-                                sukses=jur.simpanJurnal(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 2).toString(), "U", "PEMBATALAN PEMBERIAN OBAT RAWAT JALAN PASIEN " + TNoRM.getText() + " " + TPasien.getText() + " OLEH " + akses.getkode());
+                                sukses=jur.simpanJurnal(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 2).toString(), "U", "PEMBATALAN PEMBERIAN OBAT RAWAT JALAN PASIEN " + TNoRM.getText() + " " + TPasien.getText() + " OLEH " + akses.getkode());
                             }
                         } else {
                             sukses = false;
                         }
                         if (sukses) {
                             Sequel.menghapusSmc("aturan_pakai", "no_rawat = ? and kode_brng = ? and tgl_perawatan = ? and jam = ?",
-                                tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 2).toString(),
-                                tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 5).toString(),
-                                tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 0).toString(),
-                                tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 1).toString()
+                                tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 2).toString(),
+                                tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 5).toString(),
+                                tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 0).toString(),
+                                tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 1).toString()
                             );
                             if (btnObat1.isEnabled()) {
                                 if (aktifkanbatch.equals("yes")) {
                                     Sequel.mengupdateSmc("data_batch", "sisa = sisa + ?", "no_batch = ? and kode_brng = ? and no_faktur = ?",
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 9).toString(),
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 14).toString(),
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 5).toString(),
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 15).toString()
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 9).toString(),
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 14).toString(),
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 5).toString(),
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 15).toString()
                                     );
                                     Trackobat.catatRiwayat(
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 5).toString(),
-                                        Valid.SetAngka(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 9).toString()),
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 5).toString(),
+                                        Valid.SetAngka(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 9).toString()),
                                         0, "Pemberian Obat", akses.getkode(), bangsal, "Hapus",
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 14).toString(),
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 15).toString(),
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 2).toString() + " " +
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 3).toString() + " " +
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 4).toString()
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 14).toString(),
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 15).toString(),
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 2).toString() + " " +
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 3).toString() + " " +
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 4).toString()
                                     );
                                     if (!Sequel.menyimpantfSmc("gudangbarang", null,
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 5).toString(), bangsal,
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 9).toString(),
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 14).toString(),
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 15).toString()
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 5).toString(), bangsal,
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 9).toString(),
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 14).toString(),
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 15).toString()
                                     )) {
                                         if (!Sequel.mengupdatetfSmc("gudangbarang", "stok = stok + ?", "kode_brng = ? and kd_bangsal = ? and no_batch = ? and no_faktur = ?",
-                                            tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 9).toString(),
-                                            tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 5).toString(), bangsal,
-                                            tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 14).toString(),
-                                            tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 15).toString()
+                                            tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 9).toString(),
+                                            tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 5).toString(), bangsal,
+                                            tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 14).toString(),
+                                            tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 15).toString()
                                         )) {
                                             sukses = false;
                                         }
                                     }
                                 } else {
                                     Trackobat.catatRiwayat(
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 5).toString(),
-                                        Valid.SetAngka(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 9).toString()),
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 5).toString(),
+                                        Valid.SetAngka(tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 9).toString()),
                                         0, "Pemberian Obat", akses.getkode(), bangsal, "Hapus", "", "",
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 2).toString() + " " +
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 3).toString() + " " +
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 4).toString()
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 2).toString() + " " +
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 3).toString() + " " +
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 4).toString()
                                     );
                                     if (!Sequel.menyimpantfSmc("gudangbarang", null,
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 5).toString(), bangsal,
-                                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 9).toString(), "", ""
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 5).toString(), bangsal,
+                                        tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 9).toString(), "", ""
                                     )) {
                                         if (!Sequel.mengupdatetfSmc("gudangbarang", "stok = stok + ?", "kode_brng = ? and kd_bangsal = ? and no_batch = '' and no_faktur = ''",
-                                            tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 9).toString(),
-                                            tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 5).toString(), bangsal
+                                            tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 9).toString(),
+                                            tabModePO.getValueAt(tbPemberianObat.convertRowIndexToModel(tbPemberianObat.getSelectedRow()), 5).toString(), bangsal
                                         )) {
                                             sukses = false;
                                         }

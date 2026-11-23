@@ -478,6 +478,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbMedis">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Klik pada cell Jml untuk memasukkan jumlah penggunaan"/>
                                 <Property name="name" type="java.lang.String" value="tbMedis" noResource="true"/>
                               </Properties>
@@ -618,6 +619,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbNonMedis">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Klik pada cell Jml untuk memasukkan jumlah penggunaan"/>
                                 <Property name="name" type="java.lang.String" value="tbNonMedis" noResource="true"/>
                               </Properties>
@@ -1442,7 +1444,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbTranfusiDarah">
                       <Properties>
-                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="jPopupMenu1"/>

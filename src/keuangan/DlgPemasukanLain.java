@@ -718,7 +718,7 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbResep.getRowCount()==0){
              JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
              Keterangan.requestFocus();
         }else if(Keterangan.getText().trim().equals("")){
@@ -727,19 +727,19 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
             if(tbResep.getSelectedRow()>-1){
                 Sequel.AutoComitFalse();
                 sukses = true;
-                if (Sequel.menghapustfSmc("pemasukan_lain", "no_masuk = ?", tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString())) {
+                if (Sequel.menghapustfSmc("pemasukan_lain", "no_masuk = ?", tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()), 0).toString())) {
                     try (PreparedStatement ps = koneksi.prepareStatement("select p.kd_rek, p.kd_rek2 from kategori_pemasukan_lain p where p.kode_kategori = ?")) {
-                        ps.setString(1, tbResep.getValueAt(tbResep.getSelectedRow(), 7).toString());
+                        ps.setString(1, tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()), 7).toString());
                         try (ResultSet rs = ps.executeQuery()) {
                             if (rs.next()) {
                                 Sequel.deleteTampJurnal();
-                                if(Sequel.insertTampJurnal(rs.getString(1), "Akun", (Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4), 0)==false){
+                                if(Sequel.insertTampJurnal(rs.getString(1), "Akun", (Double) tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()), 4), 0)==false){
                                     sukses=false;
                                 }
-                                if(Sequel.insertTampJurnal(rs.getString(2), "Kontra Akun", 0, (Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4))==false){
+                                if(Sequel.insertTampJurnal(rs.getString(2), "Kontra Akun", 0, (Double) tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()), 4))==false){
                                     sukses=false;
                                 }
-                                sukses = jur.simpanJurnal(tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString(), "U", "PEMBATALAN PEMASUKAN LAIN-LAIN OLEH " + akses.getkode());
+                                sukses = jur.simpanJurnal(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()), 0).toString(), "U", "PEMBATALAN PEMASUKAN LAIN-LAIN OLEH " + akses.getkode());
                             } else {
                                 sukses = false;
                             }
@@ -749,7 +749,7 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     if (sukses) {
-                        sukses = Sequel.menghapustfSmc("tagihan_sadewa", "no_nota = ?", tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString());
+                        sukses = Sequel.menghapustfSmc("tagihan_sadewa", "no_nota = ?", tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()), 0).toString());
                     }
                 } else {
                     sukses = false;
@@ -764,7 +764,7 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                 Sequel.AutoComitTrue();
 
                 if (sukses) {
-                    tabMode.removeRow(tbResep.getSelectedRow());
+                    tabMode.removeRow(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()));
                     emptTeks();
                     hitung();
                 } else {
@@ -898,7 +898,7 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbResepMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbResepMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbResep.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -907,7 +907,7 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
     }//GEN-LAST:event_tbResepMouseClicked
 
     private void tbResepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbResepKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbResep.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1075,7 +1075,7 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
             Valid.textKosong(KdPtg,"Petugas");
         }else if(KdKategori.getText().trim().equals("")||NmKategori.getText().trim().equals("")){
             Valid.textKosong(KdKategori,"Kode Kategori");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbResep.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             tbResep.requestFocus();
         }else {
@@ -1201,15 +1201,15 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
 
     private void hitung(){
         total=0;
-        for(int i=0;i<tabMode.getRowCount();i++){
-            if(!tbResep.getValueAt(i,0).toString().equals("")){
-                total=total+Valid.SetAngka(tbResep.getValueAt(i,4).toString());
+        for(int i=0;i<tbResep.getRowCount();i++){
+            if(!tabMode.getValueAt(tbResep.convertRowIndexToModel(i),0).toString().equals("")){
+                total=total+Valid.SetAngka(tabMode.getValueAt(tbResep.convertRowIndexToModel(i),4).toString());
             }else{
-                tabMode.removeRow(i);
+                tabMode.removeRow(tbResep.convertRowIndexToModel(i));
                 i--;
             }
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbResep.getRowCount());
         if(total>0){
             tabMode.addRow(new Object[]{"",">> Total Pemasukan :","","",total,"","",""});
         }
@@ -1227,15 +1227,15 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
 
     private void getData() {
         if(tbResep.getSelectedRow()!= -1){
-            Nomor.setText(tbResep.getValueAt(tbResep.getSelectedRow(),0).toString());
-            NmKategori.setText(tbResep.getValueAt(tbResep.getSelectedRow(),2).toString().replaceAll(tbResep.getValueAt(tbResep.getSelectedRow(),6).toString()+" ",""));
-            NmPtg.setText(tbResep.getValueAt(tbResep.getSelectedRow(),3).toString().replaceAll(tbResep.getValueAt(tbResep.getSelectedRow(),8).toString()+" ",""));
-            pemasukan.setText(Valid.SetAngka6(Double.parseDouble(tbResep.getValueAt(tbResep.getSelectedRow(),4).toString())));
-            Keterangan.setText(tbResep.getValueAt(tbResep.getSelectedRow(),5).toString());
-            Keperluan.setText(tbResep.getValueAt(tbResep.getSelectedRow(),6).toString());
-            KdKategori.setText(tbResep.getValueAt(tbResep.getSelectedRow(),7).toString());
-            KdPtg.setText(tbResep.getValueAt(tbResep.getSelectedRow(),8).toString());
-            Valid.SetTgl(Tanggal,tbResep.getValueAt(tbResep.getSelectedRow(),1).toString());
+            Nomor.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),0).toString());
+            NmKategori.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),2).toString().replaceAll(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),6).toString()+" ",""));
+            NmPtg.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),3).toString().replaceAll(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),8).toString()+" ",""));
+            pemasukan.setText(Valid.SetAngka6(Double.parseDouble(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),4).toString())));
+            Keterangan.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),5).toString());
+            Keperluan.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),6).toString());
+            KdKategori.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),7).toString());
+            KdPtg.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),8).toString());
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString());
         }
     }
 

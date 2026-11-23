@@ -478,8 +478,8 @@ public class DlgBiayaSekaliMasuk extends javax.swing.JDialog {
         }else if(BiayaHarian.getText().trim().equals("")){
             Valid.textKosong(BiayaHarian,"Besar Biaya");
         }else{
-            Sequel.mengedit("biaya_sekali","kd_kamar='"+tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0)+"' and nama_biaya='"+tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2)+"'","kd_kamar='"+kdkamar.getText()+"',nama_biaya='"+NmBiaya.getText()+"',besar_biaya='"+BiayaHarian.getText()+"'");
-            if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+            Sequel.mengedit("biaya_sekali","kd_kamar='"+tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0)+"' and nama_biaya='"+tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2)+"'","kd_kamar='"+kdkamar.getText()+"',nama_biaya='"+NmBiaya.getText()+"',besar_biaya='"+BiayaHarian.getText()+"'");
+            if(tbSpesialis.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -542,7 +542,7 @@ public class DlgBiayaSekaliMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -551,7 +551,7 @@ public class DlgBiayaSekaliMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisMouseClicked
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -727,7 +727,7 @@ public class DlgBiayaSekaliMasuk extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbSpesialis.getRowCount());
     }
 
     public void emptTeks() {
@@ -743,10 +743,10 @@ public class DlgBiayaSekaliMasuk extends javax.swing.JDialog {
     private void getData() {
         int row=tbSpesialis.getSelectedRow();
         if(row!= -1){
-            kdkamar.setText(tabMode.getValueAt(row,0).toString());
+            kdkamar.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),0).toString());
             isKmr();
-            NmBiaya.setText(tabMode.getValueAt(row,2).toString());
-            BiayaHarian.setText(tabMode.getValueAt(row,3).toString());
+            NmBiaya.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),2).toString());
+            BiayaHarian.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),3).toString());
         }
     }
 

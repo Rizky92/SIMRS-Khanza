@@ -383,7 +383,7 @@ public class frmPengaduan extends javax.swing.JFrame {
 
         Scroll.setOpaque(true);
 
-        tbPengaduan.setAutoCreateRowSorter(false);
+        tbPengaduan.setAutoCreateRowSorter(true);
         tbPengaduan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbPengaduanMouseClicked(evt);
@@ -656,8 +656,8 @@ public class frmPengaduan extends javax.swing.JFrame {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbPengaduan.getRowCount();i++){
-            if(tbPengaduan.getValueAt(i,0).toString().equals("true")){
-                Sequel.queryu2("delete from pengaduan where id=?",1,new String[]{tbPengaduan.getValueAt(i,1).toString()});
+            if(tabMode.getValueAt(tbPengaduan.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.queryu2("delete from pengaduan where id=?",1,new String[]{tabMode.getValueAt(tbPengaduan.convertRowIndexToModel(i),1).toString()});
             }
         }
         BtnCariActionPerformed(evt);
@@ -793,13 +793,13 @@ public class frmPengaduan extends javax.swing.JFrame {
 
     private void BtnJawabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJawabActionPerformed
         if(tbPengaduan.getSelectedRow()>-1){
-            nopengaduan=tbPengaduan.getValueAt(tbPengaduan.getSelectedRow(),1).toString();
+            nopengaduan=tabMode.getValueAt(tbPengaduan.convertRowIndexToModel(tbPengaduan.getSelectedRow()),1).toString();
             try {
                 ps=koneksi.prepareStatement("select pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk,pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop, "+
                    "pasien.no_tlp,pasien.jk,pasien.email from pasien inner join kelurahan inner join kecamatan inner join kabupaten inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
                    "and pasien.kd_kel=kelurahan.kd_kel and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis=? ");
                 try {
-                    ps.setString(1,tbPengaduan.getValueAt(tbPengaduan.getSelectedRow(),3).toString());
+                    ps.setString(1,tabMode.getValueAt(tbPengaduan.convertRowIndexToModel(tbPengaduan.getSelectedRow()),3).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         TNo.setText(rs.getString("no_rkm_medis"));
@@ -827,8 +827,8 @@ public class frmPengaduan extends javax.swing.JFrame {
                 System.out.println("Notif : "+e);
             }
 
-            TambahanPesan.setText(tbPengaduan.getValueAt(tbPengaduan.getSelectedRow(),5).toString());
-            BalasanPesan.setText(tbPengaduan.getValueAt(tbPengaduan.getSelectedRow(),6).toString());
+            TambahanPesan.setText(tabMode.getValueAt(tbPengaduan.convertRowIndexToModel(tbPengaduan.getSelectedRow()),5).toString());
+            BalasanPesan.setText(tabMode.getValueAt(tbPengaduan.convertRowIndexToModel(tbPengaduan.getSelectedRow()),6).toString());
             WindowBalas.setSize(internalFrame1.getWidth()-10, 300);
             WindowBalas.setLocationRelativeTo(internalFrame1);
             WindowBalas.setVisible(true);
@@ -982,6 +982,7 @@ public class frmPengaduan extends javax.swing.JFrame {
     private widget.Table tbPengaduan;
     // End of variables declaration//GEN-END:variables
     private void tampil() {
+        tbPengaduan.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             if(R1.isSelected()==true){
@@ -1045,7 +1046,8 @@ public class frmPengaduan extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbPengaduan.getRowCount());
+        tbPengaduan.resumeSorting();
     }
 
     private void jam(){
@@ -1063,7 +1065,7 @@ public class frmPengaduan extends javax.swing.JFrame {
                     pesanbaru=0;
                     runBackground(() ->tampil());
                     for(i=0;i<tbPengaduan.getRowCount();i++){
-                        if(tbPengaduan.getValueAt(i,6).toString().equals("")){
+                        if(tabMode.getValueAt(tbPengaduan.convertRowIndexToModel(i),6).toString().equals("")){
                             pesanbaru++;
                         }
                     }

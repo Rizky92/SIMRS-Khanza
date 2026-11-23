@@ -601,6 +601,7 @@ public final class DlgKunjunganRalan extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        table1.setSortable(false);
         table1.setComponentPopupMenu(jPopupMenu1);
         table1.setName("table1"); // NOI18N
         Scroll.setViewportView(table1);
@@ -619,6 +620,7 @@ public final class DlgKunjunganRalan extends javax.swing.JDialog {
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
+        table2.setSortable(false);
         table2.setComponentPopupMenu(jPopupMenu1);
         table2.setName("table2"); // NOI18N
         Scroll1.setViewportView(table2);
@@ -683,7 +685,7 @@ public final class DlgKunjunganRalan extends javax.swing.JDialog {
                             param.put("tanggal",Tgl2.getDate());
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                             for(int r=0;r<tabMode.getRowCount();r++){
-                                if(!table1.getValueAt(r,0).toString().contains(">>")){
+                                if(!tabMode.getValueAt(r,0).toString().contains(">>")){
                                     Sequel.menyimpan("temporary","'"+r+"','"+
                                                     tabMode.getValueAt(r,0).toString()+"','"+
                                                     tabMode.getValueAt(r,1).toString()+"','"+
@@ -736,7 +738,7 @@ public final class DlgKunjunganRalan extends javax.swing.JDialog {
                             param.put("tanggal",Tgl2.getDate());
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                             for(int r=0;r<tabMode2.getRowCount();r++){
-                                if(!table2.getValueAt(r,0).toString().contains(">>")){
+                                if(!tabMode2.getValueAt(r,0).toString().contains(">>")){
                                     Sequel.menyimpan("temporary","'"+r+"','"+
                                                     tabMode2.getValueAt(r,0).toString()+"','"+
                                                     tabMode2.getValueAt(r,1).toString()+"','"+
@@ -1480,7 +1482,7 @@ public final class DlgKunjunganRalan extends javax.swing.JDialog {
     private void getData() {
         int row=table1.getSelectedRow();
         if(row!= -1){
-            TKd.setText(tabMode.getValueAt(row,0).toString());
+            TKd.setText(tabMode.getValueAt(table1.convertRowIndexToModel(row),0).toString());
         }
     }
 

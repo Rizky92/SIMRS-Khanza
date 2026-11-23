@@ -376,7 +376,7 @@ public final class DlgJabatan extends javax.swing.JDialog {
                     TKd.getText(),TNm.getText()
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbJabatan.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -401,10 +401,10 @@ public final class DlgJabatan extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbJabatan.getSelectedRow()!= -1){
-            if(Sequel.meghapustf("jabatan","kd_jbtn",tbJabatan.getValueAt(tbJabatan.getSelectedRow(),0).toString())==true){
-                tabMode.removeRow(tbJabatan.getSelectedRow());
+            if(Sequel.meghapustf("jabatan","kd_jbtn",tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),0).toString())==true){
+                tabMode.removeRow(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()));
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbJabatan.getRowCount());
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus...!!!!");
@@ -427,10 +427,10 @@ public final class DlgJabatan extends javax.swing.JDialog {
         }else{
             if(tbJabatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("jabatan","kd_jbtn=?","kd_jbtn=?,nm_jbtn=?",3,new String[]{
-                        TKd.getText(),TNm.getText(),tbJabatan.getValueAt(tbJabatan.getSelectedRow(), 0).toString()
+                        TKd.getText(),TNm.getText(),tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()), 0).toString()
                     })==true){
-                    tabMode.setValueAt(TKd.getText(),tbJabatan.getSelectedRow(),0);
-                    tabMode.setValueAt(TNm.getText(),tbJabatan.getSelectedRow(),1);
+                    tabMode.setValueAt(TKd.getText(),tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),0);
+                    tabMode.setValueAt(TNm.getText(),tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),1);
                     emptTeks();
                 }
             }else{
@@ -497,7 +497,7 @@ public final class DlgJabatan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJabatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJabatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJabatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -506,7 +506,7 @@ public final class DlgJabatan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJabatanMouseClicked
 
     private void tbJabatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJabatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJabatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -614,13 +614,13 @@ public final class DlgJabatan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJabatan.getRowCount());
     }
 
     private void getData() {
         if(tbJabatan.getSelectedRow()!= -1){
-            TKd.setText(tbJabatan.getValueAt(tbJabatan.getSelectedRow(),0).toString());
-            TNm.setText(tbJabatan.getValueAt(tbJabatan.getSelectedRow(),1).toString());
+            TKd.setText(tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),0).toString());
+            TNm.setText(tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),1).toString());
         }
     }
 

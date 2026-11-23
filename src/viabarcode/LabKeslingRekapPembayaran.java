@@ -588,15 +588,15 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
                                         append("</tr>");
                             for (int i = 0; i < tabModePembayaran.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,0).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,1).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,2).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,3).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,4).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,5).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,6).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,7).toString()).append("</td>").
-                                                append("<td valign='top' align='right'>").append(tbPembayaran.getValueAt(i,8).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,0).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,1).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,2).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,3).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,4).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,5).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,6).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,7).toString()).append("</td>").
+                                                append("<td valign='top' align='right'>").append(tabModePembayaran.getValueAt(i,8).toString()).append("</td>").
                                             append("</tr>");
                             }
                             htmlContent.append("<tr class='isi'>").
@@ -645,15 +645,15 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
                                         append("</tr>");
                             for (int i = 0; i < tabModePembayaran.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,0).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,1).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,2).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,3).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,4).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,5).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,6).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbPembayaran.getValueAt(i,7).toString()).append("</td>").
-                                                append("<td valign='top' align='right'>").append(tbPembayaran.getValueAt(i,8).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,0).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,1).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,2).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,3).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,4).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,5).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,6).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModePembayaran.getValueAt(i,7).toString()).append("</td>").
+                                                append("<td valign='top' align='right'>").append(tabModePembayaran.getValueAt(i,8).toString()).append("</td>").
                                             append("</tr>");
                             }
                             htmlContent.append("<tr class='isi'>").
@@ -691,7 +691,7 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
                             htmlContent = new StringBuilder();
                             htmlContent.append("\"Tanggal Bayar\";\"No.Bayar/Nota\";\"Dibayar Oleh\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Pembayaran\"\n");
                             for (int i = 0; i < tabModePembayaran.getRowCount(); i++) {
-                                htmlContent.append("\"").append(tbPembayaran.getValueAt(i,0).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,1).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,2).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,3).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,4).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,5).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,6).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,7).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,8).toString()).append("\"\n");
+                                htmlContent.append("\"").append(tabModePembayaran.getValueAt(i,0).toString()).append("\";\"").append(tabModePembayaran.getValueAt(i,1).toString()).append("\";\"").append(tabModePembayaran.getValueAt(i,2).toString()).append("\";\"").append(tabModePembayaran.getValueAt(i,3).toString()).append("\";\"").append(tabModePembayaran.getValueAt(i,4).toString()).append("\";\"").append(tabModePembayaran.getValueAt(i,5).toString()).append("\";\"").append(tabModePembayaran.getValueAt(i,6).toString()).append("\";\"").append(tabModePembayaran.getValueAt(i,7).toString()).append("\";\"").append(tabModePembayaran.getValueAt(i,8).toString()).append("\"\n");
                             }
                             htmlContent.append("\"\";\"\";\"Record :\";\"").append(LTotal.getText()).append("\";\"\";\"\";\"\";\"Total Pembayaran : \";\"").append(total+"").append("\"\n");
                             f = new File("DataRekapPembayaranPengujianSampel.csv");
@@ -723,30 +723,30 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
             }else{
                 berhasil=true;
                 Sequel.AutoComitFalse();
-                if(Sequel.queryutf("delete from labkesling_pembayaran_pengujian_sampel where no_pembayaran='"+tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(),1).toString()+"'")==false){
+                if(Sequel.queryutf("delete from labkesling_pembayaran_pengujian_sampel where no_pembayaran='"+tabModePembayaran.getValueAt(tbPembayaran.convertRowIndexToModel(tbPembayaran.getSelectedRow()),1).toString()+"'")==false){
                     berhasil=false;
                 }else{
                     Sequel.deleteTampJurnal();
-                    if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Pelayanan_Lab_Kesling, "Suspen Piutang Pelayanan Lab Kesling", tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(), 8).toString(), "0");
+                    if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Pelayanan_Lab_Kesling, "Suspen Piutang Pelayanan Lab Kesling", tabModePembayaran.getValueAt(tbPembayaran.convertRowIndexToModel(tbPembayaran.getSelectedRow()), 8).toString(), "0");
                     if(berhasil==true){
                         for(i=0;i<tbDetailPembayaran.getRowCount();i++){
-                            if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(tbDetailPembayaran.getValueAt(i, 2).toString(), tbDetailPembayaran.getValueAt(i, 0).toString(), "0", tbDetailPembayaran.getValueAt(i, 1).toString());
+                            if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(tabModeDetailPermintaan.getValueAt(tbDetailPembayaran.convertRowIndexToModel(i), 2).toString(), tabModeDetailPermintaan.getValueAt(tbDetailPembayaran.convertRowIndexToModel(i), 0).toString(), "0", tabModeDetailPermintaan.getValueAt(tbDetailPembayaran.convertRowIndexToModel(i), 1).toString());
                         }
                     }
-                    if (berhasil) berhasil = jur.simpanJurnal(tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(), 1).toString(), "U", "PEMBATALAN PEMBAYARAN PELAYANAN LABORATORIUM KESEHATAN LINGKUNGAN " + tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(), 5).toString() + " DIPOSTING OLEH " + akses.getkode());
+                    if (berhasil) berhasil = jur.simpanJurnal(tabModePembayaran.getValueAt(tbPembayaran.convertRowIndexToModel(tbPembayaran.getSelectedRow()), 1).toString(), "U", "PEMBATALAN PEMBAYARAN PELAYANAN LABORATORIUM KESEHATAN LINGKUNGAN " + tabModePembayaran.getValueAt(tbPembayaran.convertRowIndexToModel(tbPembayaran.getSelectedRow()), 5).toString() + " DIPOSTING OLEH " + akses.getkode());
                     if(berhasil==true){
-                        if(Sequel.meghapustf("tagihan_sadewa","no_nota",tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(),1).toString())==false){
+                        if(Sequel.meghapustf("tagihan_sadewa","no_nota",tabModePembayaran.getValueAt(tbPembayaran.convertRowIndexToModel(tbPembayaran.getSelectedRow()),1).toString())==false){
                             berhasil=false;
                         }
                     }
                 }
                 if(berhasil==true){
-                    Sequel.queryu("update labkesling_validasi_pengujian_sampel set status='Belum Bayar' where no_permintaan='"+tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(),3).toString()+"'");
+                    Sequel.queryu("update labkesling_validasi_pengujian_sampel set status='Belum Bayar' where no_permintaan='"+tabModePembayaran.getValueAt(tbPembayaran.convertRowIndexToModel(tbPembayaran.getSelectedRow()),3).toString()+"'");
                     Sequel.Commit();
                     JOptionPane.showMessageDialog(null,"Proses hapus berhasil...!");
-                    tabModePembayaran.removeRow(tbPembayaran.getSelectedRow());
+                    tabModePembayaran.removeRow(tbPembayaran.convertRowIndexToModel(tbPembayaran.getSelectedRow()));
                     Valid.tabelKosong(tabModeDetailPermintaan);
-                    LTotal.setText(tabModePembayaran.getRowCount()+"");
+                    LTotal.setText(tbPembayaran.getRowCount()+"");
                 }else{
                     JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     Sequel.RollBack();
@@ -782,7 +782,7 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
                         "where labkesling_detail_pembayaran_pengujian_sampel.no_pembayaran=? "
                     );
                     try {
-                        ps.setString(1,tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(),1).toString());
+                        ps.setString(1,tabModePembayaran.getValueAt(tbPembayaran.convertRowIndexToModel(tbPembayaran.getSelectedRow()),1).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModeDetailPermintaan.addRow(new Object[]{
@@ -1093,7 +1093,7 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
                     });
                     total=total+rs.getDouble("pembayaran");
                 }
-                LTotal.setText(tabModePembayaran.getRowCount()+"");
+                LTotal.setText(tbPembayaran.getRowCount()+"");
                 LTotalBayar.setText(Valid.SetAngka(total));
             } catch (Exception e) {
                 System.out.println("Note : "+e);

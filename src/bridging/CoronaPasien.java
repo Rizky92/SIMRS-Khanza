@@ -1461,7 +1461,7 @@ public class CoronaPasien extends javax.swing.JDialog {
                 headers.add("X-rs-id",idrs);
                 headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
                 headers.add("X-pass",api.getHmac());
-                headers.add("nomr",tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
+                headers.add("nomr",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
                 requestEntity = new HttpEntity(headers);
                 root = mapper.readTree(api.getRest().exchange(link+"/Pasien", HttpMethod.DELETE,requestEntity, String.class).getBody());
                 response = root.path("pasien");
@@ -1469,7 +1469,7 @@ public class CoronaPasien extends javax.swing.JDialog {
                     for(JsonNode list:response){
                         if(list.path("status").asText().equals("200")){
                             if(Sequel.queryu2tf("delete from pasien_corona where no_rkm_medis=?",1,new String[]{
-                                    tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()
+                                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString()
                                 })==true){
                                 tampil();
                             }
@@ -1594,7 +1594,7 @@ public class CoronaPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1603,7 +1603,7 @@ public class CoronaPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1716,7 +1716,7 @@ public class CoronaPasien extends javax.swing.JDialog {
                             if(list.path("status").asText().equals("200")){
                                 if(Sequel.mengedittf("pasien_corona","no_rkm_medis=?","no_pengenal=?,no_rkm_medis=?,inisial=?,nama_lengkap=?,tgl_masuk=?,kode_jk=?,nama_jk=?,tgl_lahir=?,kode_kewarganegaraan=?,nama_kewarganegaraan=?,kode_penularan=?,sumber_penularan=?,kd_kelurahan=?,nm_kelurahan=?,kd_kecamatan=?,nm_kecamatan=?,kd_kabupaten=?,nm_kabupaten=?,kd_propinsi=?,nm_propinsi=?,tgl_keluar=?,kode_statuskeluar=?,nama_statuskeluar=?,tgl_lapor=?,kode_statusrawat=?,nama_statusrawat=?,kode_statusisolasi=?,nama_statusisolasi=?,email=?,notelp=?,sebab_kematian=?,kode_jenis_pasien=?,nama_jenis_pasien=?",34,new String[]{
                                     NoKTP.getText(),NoRM.getText(),Inisial.getText(),NamaPasien.getText(),Valid.SetTgl(TglMasuk.getSelectedItem()+""),KodeJK.getText(), NamaJK.getText(),Valid.SetTgl(TglLahir.getText()+""),KodeKewarganegaraan.getText(),NamaKewarganegaraan.getText(),KodePenularan.getText(),NamaPenularan.getText(),KodeKelurahan.getText(),NamaKelurahan.getText(),KodeKecamatan.getText(),NamaKecamatan.getText(),KodeKabupaten.getText(),NamaKabupaten.getText(),KodePropinsi.getText(),NamaPropinsi.getText(),Valid.SetTgl(TglKeluar.getSelectedItem()+""),KodeStatusKeluar.getText(),NamaStatusKeluar.getText(),
-                                    Valid.SetTgl(TglLapor.getSelectedItem()+"")+" "+TglLapor.getSelectedItem().toString().substring(11,19),KodeStatusRawat.getText(),NamaStatusRawat.getText(),KodeStatusIsolasi.getText(),NamaStatusIsolasi.getText(),Email.getText(),NoTelp.getText(),SebabKematian.getText(),KodeJenisPasien.getText(),NamaJenisPasien.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()
+                                    Valid.SetTgl(TglLapor.getSelectedItem()+"")+" "+TglLapor.getSelectedItem().toString().substring(11,19),KodeStatusRawat.getText(),NamaStatusRawat.getText(),KodeStatusIsolasi.getText(),NamaStatusIsolasi.getText(),Email.getText(),NoTelp.getText(),SebabKematian.getText(),KodeJenisPasien.getText(),NamaJenisPasien.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString()
                                 })==true){
                                     tampil();
                                     emptTeks();
@@ -2066,7 +2066,7 @@ public class CoronaPasien extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -2108,39 +2108,39 @@ public class CoronaPasien extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoKTP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            NoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            NamaPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            Inisial.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            KodeJK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            NamaJK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            Email.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            NoTelp.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            KodeKewarganegaraan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            NamaKewarganegaraan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            KodePenularan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            NamaPenularan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            KodeKelurahan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            NamaKelurahan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            KodeKecamatan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            NamaKecamatan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
-            KodeKabupaten.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
-            NamaKabupaten.setText(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
-            KodePropinsi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
-            NamaPropinsi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
-            KodeStatusKeluar.setText(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
-            NamaStatusKeluar.setText(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
-            KodeStatusRawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
-            NamaStatusRawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
-            KodeStatusIsolasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
-            NamaStatusIsolasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
-            SebabKematian.setText(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
-            KodeJenisPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString());
-            NamaJenisPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),32).toString());
-            TglLahir.setText(Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()));
-            Valid.SetTgl2(TglLapor,tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            Valid.SetTgl(TglMasuk,tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            Valid.SetTgl(TglKeluar,tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+            NoKTP.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            NoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            NamaPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            Inisial.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            KodeJK.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            NamaJK.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            Email.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            NoTelp.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            KodeKewarganegaraan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            NamaKewarganegaraan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            KodePenularan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            NamaPenularan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+            KodeKelurahan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
+            NamaKelurahan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17).toString());
+            KodeKecamatan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18).toString());
+            NamaKecamatan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19).toString());
+            KodeKabupaten.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20).toString());
+            NamaKabupaten.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString());
+            KodePropinsi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22).toString());
+            NamaPropinsi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23).toString());
+            KodeStatusKeluar.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),24).toString());
+            NamaStatusKeluar.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),25).toString());
+            KodeStatusRawat.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),26).toString());
+            NamaStatusRawat.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),27).toString());
+            KodeStatusIsolasi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),28).toString());
+            NamaStatusIsolasi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),29).toString());
+            SebabKematian.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),30).toString());
+            KodeJenisPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),31).toString());
+            NamaJenisPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),32).toString());
+            TglLahir.setText(Valid.SetTgl3(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString()));
+            Valid.SetTgl2(TglLapor,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            Valid.SetTgl(TglMasuk,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            Valid.SetTgl(TglKeluar,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
         }
     }
 

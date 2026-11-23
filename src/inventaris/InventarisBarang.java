@@ -727,7 +727,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
             Valid.textKosong(id_kategori,"Kategori");
         }else {
                 //menyimpan-------------------------------------------------
-                Sequel.mengedit("inventaris_barang","kode_barang='"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0) +"'",
+                Sequel.mengedit("inventaris_barang","kode_barang='"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0) +"'",
                         "kode_barang='"+kode_barang.getText()+"',nama_barang='"+nama_barang.getText()+"',jml_barang='"+jml_barang.getText()+"',kode_produsen='"+
                         kode_produsen.getText()+"',id_merk='"+id_merk.getText()+"',thn_produksi='"+thn_produksi.getSelectedItem()+"',isbn='"+isbn.getText()+"',id_kategori='"+
                         id_kategori.getText()+"',id_jenis='"+id_jenis.getText()+"'");
@@ -853,7 +853,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -862,7 +862,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -1155,7 +1155,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbJnsPerawatan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1268,7 +1268,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbJnsPerawatan.getRowCount());
     }
 
     public void emptTeks() {
@@ -1300,7 +1300,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
                        "select inventaris_barang.kode_barang, inventaris_barang.nama_barang, inventaris_barang.jml_barang, "+
                        "inventaris_barang.kode_produsen, inventaris_barang.id_merk, inventaris_barang.thn_produksi, inventaris_barang.isbn,"+
                        "inventaris_barang.id_kategori, inventaris_barang.id_jenis from inventaris_barang where inventaris_barang.kode_barang=? ");
-                ps.setString(1,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+                ps.setString(1,tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
                 ResultSet rs=ps.executeQuery();
                 if(rs.next()){
                     kode_barang.setText(rs.getString("kode_barang"));
@@ -1313,11 +1313,11 @@ public final class InventarisBarang extends javax.swing.JDialog {
                     id_kategori.setText(rs.getString("id_kategori"));
                     id_jenis.setText(rs.getString("id_jenis"));
                 }
-                nama_produsen.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-                nm_merk.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
-                nama_produsen.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-                nm_kategori.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
-                nm_jenis.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString());
+                nama_produsen.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+                nm_merk.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString());
+                nama_produsen.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+                nm_kategori.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7).toString());
+                nm_jenis.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),8).toString());
             } catch (SQLException ex) {
                 System.out.println("Notifikasi : "+ex);
             }

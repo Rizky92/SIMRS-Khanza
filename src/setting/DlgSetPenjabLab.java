@@ -484,7 +484,7 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
             Valid.textKosong(kddokter5,"Penanggung Jawab Laborat PA");
         }else if(TDokter6.getText().trim().equals("")||kddokter6.getText().trim().equals("")){
             Valid.textKosong(kddokter6,"Penanggung Jawab Laborat MB");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbAdmin.getRowCount()==0){
             if(Sequel.menyimpantf("set_pjlab","?,?,?,?,?,?","Penanggung Jawab",6,new String[]{
                 kddokter.getText(),kddokter2.getText(),kddokter3.getText(),kddokter4.getText(),kddokter5.getText(),kddokter6.getText()
             })==true){
@@ -494,7 +494,7 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
                 });
                 emptTeks();
             }
-        }else if(tabMode.getRowCount()>0){
+        }else if(tbAdmin.getRowCount()>0){
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Admin Utama ...!!!!");
             kddokter.requestFocus();
         }
@@ -519,7 +519,7 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbAdmin.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             kddokter.requestFocus();
         }else{
@@ -574,10 +574,10 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbAdmin.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data penanggung jawab lab & radiologi tidak boleh kosong ...!!!!");
             kddokter.requestFocus();
-        }else if(! (tabMode.getRowCount()==0)) {
+        }else if(! (tbAdmin.getRowCount()==0)) {
             dispose();
         }
     }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -589,7 +589,7 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -598,7 +598,7 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
     }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbAdmin.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -945,18 +945,18 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
 
     private void getData() {
         if(tbAdmin.getSelectedRow()!= -1){
-            TDokter.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
-            TDokter2.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),1).toString());
-            TDokter3.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),2).toString());
-            TDokter4.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),3).toString());
-            TDokter5.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),4).toString());
-            TDokter6.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),5).toString());
-            kddokter.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),6).toString());
-            kddokter2.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),7).toString());
-            kddokter3.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),8).toString());
-            kddokter4.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),9).toString());
-            kddokter5.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),10).toString());
-            kddokter6.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),11).toString());
+            TDokter.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),0).toString());
+            TDokter2.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),1).toString());
+            TDokter3.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),2).toString());
+            TDokter4.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),3).toString());
+            TDokter5.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),4).toString());
+            TDokter6.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),5).toString());
+            kddokter.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),6).toString());
+            kddokter2.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),7).toString());
+            kddokter3.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),8).toString());
+            kddokter4.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),9).toString());
+            kddokter5.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),10).toString());
+            kddokter6.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),11).toString());
         }
     }
 

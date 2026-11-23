@@ -209,6 +209,7 @@ public final class DlgAuditBundlePLABSI extends javax.swing.JDialog {
         Scroll.setOpaque(true);
         Scroll.setPreferredSize(new java.awt.Dimension(452, 200));
 
+        tbObat.setSortable(false);
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setName("tbObat"); // NOI18N
         tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -788,7 +789,7 @@ public final class DlgAuditBundlePLABSI extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()!= -1){
             if(Sequel.queryu2tf("delete from audit_bundle_plabsi where id_ruang=? and tanggal=?",2,new String[]{
-                tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();
@@ -813,9 +814,9 @@ public final class DlgAuditBundlePLABSI extends javax.swing.JDialog {
         }else{
             Sequel.mengedit("audit_bundle_plabsi","id_ruang=? and tanggal=?","tanggal=?,id_ruang=?,sebelum_melakukan_hand_hygiene=?,menggunakan_apd_lengkap=?,lokasi_pemasangan_sesuai=?,alat_yang_digunakan_steril=?,pembersihan_kulit=?,setelah_melakukan_hand_hygiene=?,perawatan_dressing_infus=?,spoit_yang_digunakan_disposible=?,memberi_tanggal_dan_jam_pemasangan_infus=?,set_infus_setiap_72jam=?",14,new String[]{
                 Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),KdRuang.getText(),MelakukanHandHygiene.getSelectedItem().toString(),Menggunakan_Apd.getSelectedItem().toString(),LokasiPemasangan.getSelectedItem().toString(),
-                AlatYangSteril.getSelectedItem().toString(),PembersihanKulit.getSelectedItem().toString(),MelakukanHandHygieneSesudah.getSelectedItem().toString(),PerawatanDressing.getSelectedItem().toString(),SpoitDisposable.getSelectedItem().toString(),PemberianTanggal.getSelectedItem().toString(),SetInfus.getSelectedItem().toString(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                AlatYangSteril.getSelectedItem().toString(),PembersihanKulit.getSelectedItem().toString(),MelakukanHandHygieneSesudah.getSelectedItem().toString(),PerawatanDressing.getSelectedItem().toString(),SpoitDisposable.getSelectedItem().toString(),PemberianTanggal.getSelectedItem().toString(),SetInfus.getSelectedItem().toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             });
-            if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+            if(tbObat.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -952,7 +953,7 @@ public final class DlgAuditBundlePLABSI extends javax.swing.JDialog {
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -961,7 +962,7 @@ public final class DlgAuditBundlePLABSI extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1352,20 +1353,20 @@ public final class DlgAuditBundlePLABSI extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            if(!tbObat.getValueAt(tbObat.getSelectedRow(),0).toString().equals("")){
-                KdRuang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-                NmRuang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-                MelakukanHandHygiene.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-                Menggunakan_Apd.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-                LokasiPemasangan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-                AlatYangSteril.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-                PembersihanKulit.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-                MelakukanHandHygieneSesudah.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-                PerawatanDressing.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-                SpoitDisposable.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-                PemberianTanggal.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-                SetInfus.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-                Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            if(!tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString().equals("")){
+                KdRuang.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+                NmRuang.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+                MelakukanHandHygiene.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+                Menggunakan_Apd.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+                LokasiPemasangan.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+                AlatYangSteril.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+                PembersihanKulit.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+                MelakukanHandHygieneSesudah.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+                PerawatanDressing.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+                SpoitDisposable.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+                PemberianTanggal.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+                SetInfus.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+                Valid.SetTgl(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
             }
         }
     }

@@ -79,7 +79,7 @@ public final class DlgPencarianLOINCSMC extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+        for (int i = 0; i < tbKamar.getColumnCount(); i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(50);
@@ -365,11 +365,12 @@ public final class DlgPencarianLOINCSMC extends javax.swing.JDialog {
             fetchNext = keyword.equals(lastKeyword);
 
             if (!fetchNext) {
+                tbKamar.suspendSorting();
                 Valid.tabelKosongSmc(tabMode);
                 LCount.setText("0 / 0");
             }
 
-            final int offset = tabMode.getRowCount();
+            final int offset = tbKamar.getRowCount();
 
             new SwingWorker<Void, Object[]>() {
                 private int totalRecords = 0;
@@ -420,9 +421,10 @@ public final class DlgPencarianLOINCSMC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + " / " + totalRecords);
+                    LCount.setText(tbKamar.getRowCount() + " / " + totalRecords);
                     DlgPencarianLOINCSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbKamar.resumeSorting();
                 }
             }.execute();
         }

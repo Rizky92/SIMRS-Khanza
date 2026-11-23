@@ -2905,7 +2905,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(TabRawat.getSelectedIndex()==1){
             if(tbDataSEP.getSelectedRow()!= -1){
-                reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener No.SEP "+tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString()+" mau dihapus..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener No.SEP "+tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString()+" mau dihapus..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
                     try {
                         bodyWithDeleteRequest();
@@ -2918,7 +2918,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==2){
             if(tbDataSEPInternal.getSelectedRow()!= -1){
-                reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener No.SEP "+tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString()+" mau dihapus..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener No.SEP "+tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString()+" mau dihapus..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
                     try {
                         bodyWithDeleteRequestInternal();
@@ -2983,7 +2983,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                         requestJson ="{" +
                                       "\"request\":{" +
                                             "\"t_sep\":{" +
-                                                "\"noSep\":\""+tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString()+"\"," +
+                                                "\"noSep\":\""+tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString()+"\"," +
                                                 "\"klsRawat\":{"+
                                                     "\"klsRawatHak\":\""+Kelas.getSelectedItem().toString().substring(0,1)+"\","+
                                                     "\"klsRawatNaik\":\""+(NaikKelas.getSelectedIndex()>0?NaikKelas.getSelectedItem().toString().substring(0,1):"")+"\","+
@@ -3043,11 +3043,11 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                                  JenisPeserta.getText(),JK.getText(),Eksekutif.getSelectedItem().toString().substring(0,1),COB.getSelectedItem().toString().substring(0,1),NoTelp.getText(),
                                  Katarak.getSelectedItem().toString().substring(0,1),tglkkl,Keterangan.getText(),Suplesi.getSelectedItem().toString().substring(0,1),NoSEPSuplesi.getText(),
                                  KdPropinsi.getText(),NmPropinsi.getText(),KdKabupaten.getText(),NmKabupaten.getText(),KdKecamatan.getText(),NmKecamatan.getText(),KdDPJPLayanan.getText(),
-                                 NmDPJPLayanan.getText(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString()
+                                 NmDPJPLayanan.getText(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString()
                              });
                              Sequel.mengedit("rujuk_masuk","no_rawat=?","no_rawat=?,perujuk=?,no_rujuk=?",4,new String[]{
                                  TNoRw.getText(),NmPpkRujukan.getText(),NoRujukan.getText(),
-                                 tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),1).toString()
+                                 tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),1).toString()
                              });
                              emptTeks();
                              TabRawat.setSelectedIndex(1);
@@ -3246,7 +3246,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbDataSEPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDataSEPMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDataSEP.getRowCount()!=0){
             try {
                getData();
             } catch (java.lang.NullPointerException e) {
@@ -3267,7 +3267,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDataSEPMouseClicked
 
     private void tbDataSEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDataSEPKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbDataSEP.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                    getData();
@@ -3558,9 +3558,9 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString()));
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString()));
                 param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
-                param.put("parameter",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
+                param.put("parameter",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString());
                 param.put("cetakanke", 1);
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReport("rptBridgingSEP.jasper","report","::[ Cetak SEP ]::",param);
@@ -3581,12 +3581,12 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString()));
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString()));
                 param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
-                param.put("no_sep",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
-                param.put("noskdp",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),43).toString());
-                param.put("tglrujukan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),5).toString());
-                param.put("kdpolitujuan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),15).toString());
+                param.put("no_sep",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
+                param.put("noskdp",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),43).toString());
+                param.put("tglrujukan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),5).toString());
+                param.put("kdpolitujuan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),15).toString());
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReport("rptBridgingSEPInternal.jasper","report","::[ Cetak SEP Internal ]::",param);
                 }else{
@@ -3657,7 +3657,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                                      "{" +
                                         "\"t_sep\":" +
                                            "{" +
-                                            "\"noSep\":\""+tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString()+"\"," +
+                                            "\"noSep\":\""+tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString()+"\"," +
                                             "\"statusPulang\":\""+StatusPulang.getSelectedItem().toString().substring(0,1)+"\"," +
                                             "\"noSuratMeninggal\":\""+(NoSuratKematian.getText().equals("")?"":NoSuratKematian.getText())+"\"," +
                                             "\"tglMeninggal\":\""+(TanggalKematian.isEnabled()==false?"":Valid.SetTgl(TanggalKematian.getSelectedItem()+""))+"\"," +
@@ -3676,7 +3676,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                     if(nameNode.path("code").asText().equals("200")){
                         Sequel.mengedit("bridging_sep","no_sep=?","tglpulang=?",2,new String[]{
                              Valid.SetTgl(TanggalPulang.getSelectedItem()+"")+" "+TanggalPulang.getSelectedItem().toString().substring(11,19),
-                             tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString()
+                             tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString()
                         });
                         emptTeks();
                         runBackground(() ->tampil());
@@ -3783,7 +3783,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         if(TabRawat.getSelectedIndex()==1){
             if(tbDataSEP.getSelectedRow()!= -1){
                 BPJSCekDetailSEP detail=new BPJSCekDetailSEP(null,false);
-                detail.tampil(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
+                detail.tampil(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString());
                 detail.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 detail.setLocationRelativeTo(internalFrame1);
                 detail.setVisible(true);
@@ -3794,7 +3794,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         }else if(TabRawat.getSelectedIndex()==2){
             if(tbDataSEPInternal.getSelectedRow()!= -1){
                 BPJSCekDetailSEP detail=new BPJSCekDetailSEP(null,false);
-                detail.tampil(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
+                detail.tampil(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
                 detail.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 detail.setLocationRelativeTo(internalFrame1);
                 detail.setVisible(true);
@@ -3955,7 +3955,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                     requestJson ="{" +
                                     "\"request\": {" +
                                         "\"t_rujukan\": {" +
-                                            "\"noSep\": \""+tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString()+"\"," +
+                                            "\"noSep\": \""+tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString()+"\"," +
                                             "\"tglRujukan\": \""+Valid.SetTgl(TanggalRujukKeluar.getSelectedItem()+"")+"\"," +
                                             "\"tglRencanaKunjungan\": \""+Valid.SetTgl(TanggalKunjungRujukan.getSelectedItem()+"")+"\"," +
                                             "\"ppkDirujuk\": \""+KdPpkRujukan1.getText()+"\"," +
@@ -3979,7 +3979,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                         //response = root.path("response");
 
                         if(Sequel.menyimpantf2("bridging_rujukan_bpjs","?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rujukan",14,new String[]{
-                                tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString(),Valid.SetTgl(TanggalRujukKeluar.getSelectedItem()+""),
+                                tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString(),Valid.SetTgl(TanggalRujukKeluar.getSelectedItem()+""),
                                 Valid.SetTgl(TanggalKunjungRujukan.getSelectedItem()+""),KdPpkRujukan1.getText(),NmPpkRujukan1.getText(),
                                 JenisPelayanan1.getSelectedItem().toString().substring(0,1),Catatan1.getText(),KdPenyakit1.getText(),NmPenyakit1.getText(),
                                 TipeRujukan.getSelectedItem().toString(),KdPoli1.getText(),NmPoli1.getText(),response.path("rujukan").path("noRujukan").asText(),
@@ -4182,8 +4182,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
     private void TipeRujukanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TipeRujukanItemStateChanged
         if(TipeRujukan.getSelectedItem().equals("2. Rujuk Balik")){
-            KdPpkRujukan1.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),7).toString());
-            NmPpkRujukan1.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),8).toString());
+            KdPpkRujukan1.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),7).toString());
+            NmPpkRujukan1.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),8).toString());
         }
     }//GEN-LAST:event_TipeRujukanItemStateChanged
 
@@ -4210,8 +4210,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString()));
-                param.put("parameter",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString()));
+                param.put("parameter",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString());
                 param.put("cetakanke", 1);
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReport("rptBridgingSEP3.jasper","report","::[ Cetak SEP ]::",param);
@@ -4233,11 +4233,11 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString()));
-                param.put("no_sep",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
-                param.put("noskdp",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),43).toString());
-                param.put("tglrujukan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),5).toString());
-                param.put("kdpolitujuan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),15).toString());
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString()));
+                param.put("no_sep",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
+                param.put("noskdp",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),43).toString());
+                param.put("tglrujukan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),5).toString());
+                param.put("kdpolitujuan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),15).toString());
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReport("rptBridgingSEPInternal3.jasper","report","::[ Cetak SEP Internal ]::",param);
                 }else{
@@ -4263,10 +4263,10 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("norawat",TNoRw.getText());
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString()));
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString()));
                 param.put("noreg",Sequel.cariIsi("select no_reg from reg_periksa where no_rawat=?",TNoRw.getText()));
                 param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
-                param.put("parameter",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
+                param.put("parameter",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString());
                 param.put("cetakanke", 1);
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReport("rptBridgingSEP5.jasper","report","::[ Cetak SEP ]::",param);
@@ -4288,13 +4288,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("norawat",TNoRw.getText());
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString()));
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString()));
                 param.put("noreg",Sequel.cariIsi("select no_reg from reg_periksa where no_rawat=?",TNoRw.getText()));
-                param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); param.put("no_sep",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
-                param.put("no_sep",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
-                param.put("noskdp",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),43).toString());
-                param.put("tglrujukan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),5).toString());
-                param.put("kdpolitujuan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),15).toString());
+                param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); param.put("no_sep",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
+                param.put("no_sep",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
+                param.put("noskdp",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),43).toString());
+                param.put("tglrujukan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),5).toString());
+                param.put("kdpolitujuan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),15).toString());
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReport("rptBridgingSEPInternal5.jasper","report","::[ Cetak SEP Internal ]::",param);
                 }else{
@@ -4320,11 +4320,11 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("norawat",TNoRw.getText());
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString()));
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString()));
                 param.put("dokter",Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kddokter));
                 param.put("noreg",Sequel.cariIsi("select no_reg from reg_periksa where no_rawat=?",TNoRw.getText()));
                 param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
-                param.put("parameter",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
+                param.put("parameter",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString());
                 param.put("cetakanke", 1);
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReport("rptBridgingSEP7.jasper","report","::[ Cetak SEP ]::",param);
@@ -4347,14 +4347,14 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("norawat",TNoRw.getText());
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString()));
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString()));
                 param.put("dokter",Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kddokter));
                 param.put("noreg",Sequel.cariIsi("select no_reg from reg_periksa where no_rawat=?",TNoRw.getText()));
-                param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); param.put("no_sep",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
-                param.put("no_sep",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
-                param.put("noskdp",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),43).toString());
-                param.put("tglrujukan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),5).toString());
-                param.put("kdpolitujuan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),15).toString());
+                param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); param.put("no_sep",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
+                param.put("no_sep",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
+                param.put("noskdp",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),43).toString());
+                param.put("tglrujukan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),5).toString());
+                param.put("kdpolitujuan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),15).toString());
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReport("rptBridgingSEPInternal7.jasper","report","::[ Cetak SEP Internal ]::",param);
                 }else{
@@ -4782,7 +4782,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 if(tbDataSEP.getSelectedRow()!= -1){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     RMRiwayatPerawatan resume=new RMRiwayatPerawatan(null,false);
-                    resume.setNoRm(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),2).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),3).toString());
+                    resume.setNoRm(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),2).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),3).toString());
                     resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     resume.setLocationRelativeTo(internalFrame1);
                     resume.setVisible(true);
@@ -4792,7 +4792,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 if(tbDataSEPInternal.getSelectedRow()!= -1){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     RMRiwayatPerawatan resume=new RMRiwayatPerawatan(null,false);
-                    resume.setNoRm(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),2).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),3).toString());
+                    resume.setNoRm(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),2).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),3).toString());
                     resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     resume.setLocationRelativeTo(internalFrame1);
                     resume.setVisible(true);
@@ -4812,9 +4812,9 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString()));
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString()));
                 param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
-                param.put("parameter",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
+                param.put("parameter",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString());
                 param.put("cetakanke", 1);
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReportPDF("rptBridgingSEP.jasper","report","::[ Cetak SEP ]::",param);
@@ -4835,12 +4835,12 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString()));
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString()));
                 param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
-                param.put("no_sep",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
-                param.put("noskdp",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),43).toString());
-                param.put("tglrujukan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),5).toString());
-                param.put("kdpolitujuan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),15).toString());
+                param.put("no_sep",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
+                param.put("noskdp",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),43).toString());
+                param.put("tglrujukan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),5).toString());
+                param.put("kdpolitujuan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),15).toString());
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReportPDF("rptBridgingSEPInternal.jasper","report","::[ Cetak SEP Internal ]::",param);
                 }else{
@@ -4865,8 +4865,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString()));
-                param.put("parameter",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString()));
+                param.put("parameter",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString());
                 param.put("cetakanke", 1);
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReportPDF("rptBridgingSEP3.jasper","report","::[ Cetak SEP ]::",param);
@@ -4888,11 +4888,11 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString()));
-                param.put("no_sep",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
-                param.put("noskdp",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),43).toString());
-                param.put("tglrujukan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),5).toString());
-                param.put("kdpolitujuan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),15).toString());
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString()));
+                param.put("no_sep",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
+                param.put("noskdp",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),43).toString());
+                param.put("tglrujukan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),5).toString());
+                param.put("kdpolitujuan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),15).toString());
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReportPDF("rptBridgingSEPInternal3.jasper","report","::[ Cetak SEP Internal ]::",param);
                 }else{
@@ -4917,10 +4917,10 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("norawat",TNoRw.getText());
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString()));
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString()));
                 param.put("noreg",Sequel.cariIsi("select no_reg from reg_periksa where no_rawat=?",TNoRw.getText()));
                 param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
-                param.put("parameter",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
+                param.put("parameter",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString());
                 param.put("cetakanke", 1);
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReportPDF("rptBridgingSEP5.jasper","report","::[ Cetak SEP ]::",param);
@@ -4942,13 +4942,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("norawat",TNoRw.getText());
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString()));
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString()));
                 param.put("noreg",Sequel.cariIsi("select no_reg from reg_periksa where no_rawat=?",TNoRw.getText()));
-                param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); param.put("no_sep",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
-                param.put("no_sep",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
-                param.put("noskdp",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),43).toString());
-                param.put("tglrujukan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),5).toString());
-                param.put("kdpolitujuan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),15).toString());
+                param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); param.put("no_sep",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
+                param.put("no_sep",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
+                param.put("noskdp",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),43).toString());
+                param.put("tglrujukan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),5).toString());
+                param.put("kdpolitujuan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),15).toString());
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReportPDF("rptBridgingSEPInternal5.jasper","report","::[ Cetak SEP Internal ]::",param);
                 }else{
@@ -4974,11 +4974,11 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("norawat",TNoRw.getText());
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString()));
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString()));
                 param.put("dokter",Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kddokter));
                 param.put("noreg",Sequel.cariIsi("select no_reg from reg_periksa where no_rawat=?",TNoRw.getText()));
                 param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
-                param.put("parameter",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
+                param.put("parameter",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString());
                 param.put("cetakanke", 1);
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReportPDF("rptBridgingSEP7.jasper","report","::[ Cetak SEP ]::",param);
@@ -5001,14 +5001,14 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("norawat",TNoRw.getText());
-                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString()));
+                param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString()));
                 param.put("dokter",Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kddokter));
                 param.put("noreg",Sequel.cariIsi("select no_reg from reg_periksa where no_rawat=?",TNoRw.getText()));
-                param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); param.put("no_sep",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
-                param.put("no_sep",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
-                param.put("noskdp",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),43).toString());
-                param.put("tglrujukan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),5).toString());
-                param.put("kdpolitujuan",tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),15).toString());
+                param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); param.put("no_sep",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
+                param.put("no_sep",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
+                param.put("noskdp",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),43).toString());
+                param.put("tglrujukan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),5).toString());
+                param.put("kdpolitujuan",tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),15).toString());
                 if(JenisPelayanan.getSelectedIndex()==0){
                     Valid.MyReportPDF("rptBridgingSEPInternal7.jasper","report","::[ Cetak SEP Internal ]::",param);
                 }else{
@@ -5077,7 +5077,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 if(tbDataSEP.getSelectedRow()!= -1){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     BPJSSuratKontrol form=new BPJSSuratKontrol(null,false);
-                    form.setNoRm(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),1).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),26).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),2).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),3).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),23).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),25).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),14).toString());
+                    form.setNoRm(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),1).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),26).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),2).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),3).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),23).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),25).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),14).toString());
                     form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     form.setLocationRelativeTo(internalFrame1);
                     form.setVisible(true);
@@ -5087,7 +5087,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 if(tbDataSEPInternal.getSelectedRow()!= -1){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     BPJSSuratKontrol form=new BPJSSuratKontrol(null,false);
-                    form.setNoRm(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),1).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),26).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),2).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),3).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),23).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),25).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),14).toString());
+                    form.setNoRm(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),1).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),26).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),2).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),3).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),23).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),25).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),14).toString());
                     form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     form.setLocationRelativeTo(internalFrame1);
                     form.setVisible(true);
@@ -5172,7 +5172,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 if(tbDataSEP.getSelectedRow()!= -1){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     BPJSSPRI form=new BPJSSPRI(null,false);
-                    form.setNoRm(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),1).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),26).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),2).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),3).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),23).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),25).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
+                    form.setNoRm(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),1).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),26).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),2).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),3).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),23).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),25).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString());
                     form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     form.setLocationRelativeTo(internalFrame1);
                     form.setVisible(true);
@@ -5182,7 +5182,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 if(tbDataSEPInternal.getSelectedRow()!= -1){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     BPJSSPRI form=new BPJSSPRI(null,false);
-                    form.setNoRm(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),1).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),26).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),2).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),3).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),23).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),25).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
+                    form.setNoRm(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),1).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),26).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),2).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),3).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),23).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),25).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
                     form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     form.setLocationRelativeTo(internalFrame1);
                     form.setVisible(true);
@@ -5205,12 +5205,12 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                             "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
                             "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis=?");
                         try {
-                            ps.setString(1,tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),2).toString());
+                            ps.setString(1,tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),2).toString());
                             rs=ps.executeQuery();
                             if(rs.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                 BPJSProgramPRB form=new BPJSProgramPRB(null,false);
-                                form.setNoRm(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),1).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),26).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),2).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),3).toString(),rs.getString("alamat"),rs.getString("email"),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),44).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),45).toString());
+                                form.setNoRm(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),1).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),26).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),2).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),3).toString(),rs.getString("alamat"),rs.getString("email"),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),44).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),45).toString());
                                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                 form.setLocationRelativeTo(internalFrame1);
                                 form.setVisible(true);
@@ -5241,12 +5241,12 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                             "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
                             "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis=?");
                         try {
-                            ps.setString(1,tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),2).toString());
+                            ps.setString(1,tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),2).toString());
                             rs=ps.executeQuery();
                             if(rs.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                 BPJSProgramPRB form=new BPJSProgramPRB(null,false);
-                                form.setNoRm(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),1).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),26).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),2).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),3).toString(),rs.getString("alamat"),rs.getString("email"),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),44).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),45).toString());
+                                form.setNoRm(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),1).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),26).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),2).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),3).toString(),rs.getString("alamat"),rs.getString("email"),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),44).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),45).toString());
                                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                 form.setLocationRelativeTo(internalFrame1);
                                 form.setVisible(true);
@@ -5464,7 +5464,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                         public void keyReleased(KeyEvent e) {}
                     });
 
-                    suplesi.setRM(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),26).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),3).toString(),Valid.SetTgl2(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),4).toString()));
+                    suplesi.setRM(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),26).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),3).toString(),Valid.SetTgl2(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),4).toString()));
                     suplesi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     suplesi.setLocationRelativeTo(internalFrame1);
                     suplesi.setVisible(true);
@@ -5511,7 +5511,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                         public void keyReleased(KeyEvent e) {}
                     });
 
-                    suplesi.setRM(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),26).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),3).toString(),Valid.SetTgl2(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),4).toString()));
+                    suplesi.setRM(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),26).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),3).toString(),Valid.SetTgl2(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),4).toString()));
                     suplesi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     suplesi.setLocationRelativeTo(internalFrame1);
                     suplesi.setVisible(true);
@@ -5530,7 +5530,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 if(tbDataSEP.getSelectedRow()!= -1){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     BPJSCekDataIndukKecelakaan form=new BPJSCekDataIndukKecelakaan(null,false);
-                    form.setRM(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),26).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),3).toString());
+                    form.setRM(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),26).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),3).toString());
                     form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     form.setLocationRelativeTo(internalFrame1);
                     form.setVisible(true);
@@ -5540,7 +5540,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 if(tbDataSEPInternal.getSelectedRow()!= -1){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     BPJSCekDataIndukKecelakaan form=new BPJSCekDataIndukKecelakaan(null,false);
-                    form.setRM(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),26).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),3).toString());
+                    form.setRM(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),26).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),3).toString());
                     form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     form.setLocationRelativeTo(internalFrame1);
                     form.setVisible(true);
@@ -5653,7 +5653,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 if(tbDataSEP.getSelectedRow()!= -1){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     BPJSCekDataSEPInternal form=new BPJSCekDataSEPInternal(null,false);
-                    form.setSEP(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
+                    form.setSEP(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString());
                     form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     form.setLocationRelativeTo(internalFrame1);
                     form.setVisible(true);
@@ -5663,7 +5663,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 if(tbDataSEPInternal.getSelectedRow()!= -1){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     BPJSCekDataSEPInternal form=new BPJSCekDataSEPInternal(null,false);
-                    form.setSEP(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
+                    form.setSEP(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
                     form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     form.setLocationRelativeTo(internalFrame1);
                     form.setVisible(true);
@@ -5720,7 +5720,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     }//GEN-LAST:event_ppDaftarRujukanBtnPrintActionPerformed
 
     private void tbDataSEPInternalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDataSEPInternalMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbDataSEP.getRowCount()!=0){
             try {
                getDataInternal();
             } catch (java.lang.NullPointerException e) {
@@ -5741,7 +5741,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDataSEPInternalMouseClicked
 
     private void tbDataSEPInternalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDataSEPInternalKeyPressed
-        if(tabModeInternal.getRowCount()!=0){
+        if(tbDataSEPInternal.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                    getDataInternal();
@@ -5796,12 +5796,12 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         }else{
             if(TabRawat.getSelectedIndex()==1){
                 if(tbDataSEP.getSelectedRow()!= -1){
-                    if(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),6).toString().equals("")){
+                    if(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),6).toString().equals("")){
                         JOptionPane.showMessageDialog(null,"No.Rujukan kosong...!!");
                     }else{
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         BPJSRujukanKhusus form=new BPJSRujukanKhusus(null,false);
-                        form.setNoRm(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),26).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),2).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),3).toString(),tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),6).toString());
+                        form.setNoRm(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),26).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),2).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),3).toString(),tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),6).toString());
                         form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         form.setLocationRelativeTo(internalFrame1);
                         form.setVisible(true);
@@ -5810,12 +5810,12 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 }
             }else if(TabRawat.getSelectedIndex()==2){
                 if(tbDataSEPInternal.getSelectedRow()!= -1){
-                    if(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),6).toString().equals("")){
+                    if(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),6).toString().equals("")){
                         JOptionPane.showMessageDialog(null,"No.Rujukan kosong...!!");
                     }else{
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         BPJSRujukanKhusus form=new BPJSRujukanKhusus(null,false);
-                        form.setNoRm(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),26).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),2).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),3).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),6).toString());
+                        form.setNoRm(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),26).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),2).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),3).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),6).toString());
                         form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         form.setLocationRelativeTo(internalFrame1);
                         form.setVisible(true);
@@ -5890,8 +5890,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         if(TabRawat.getSelectedIndex()==1){
             if(tbDataSEP.getSelectedRow()!= -1){
                 ApotekBPJSKunjunganSEP detail=new ApotekBPJSKunjunganSEP(null,false);
-                detail.NoSEP.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
-                detail.tampil2(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
+                detail.NoSEP.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString());
+                detail.tampil2(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString());
                 detail.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 detail.setLocationRelativeTo(internalFrame1);
                 detail.setVisible(true);
@@ -5902,8 +5902,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         }else if(TabRawat.getSelectedIndex()==2){
             if(tbDataSEPInternal.getSelectedRow()!= -1){
                 ApotekBPJSKunjunganSEP detail=new ApotekBPJSKunjunganSEP(null,false);
-                detail.NoSEP.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
-                detail.tampil2(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
+                detail.NoSEP.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
+                detail.tampil2(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString());
                 detail.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 detail.setLocationRelativeTo(internalFrame1);
                 detail.setVisible(true);
@@ -6352,7 +6352,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbDataSEP.getRowCount());
     }
 
     public void tampilInternal() {
@@ -6470,7 +6470,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabModeInternal.getRowCount());
+        LCount.setText(""+tbDataSEPInternal.getRowCount());
     }
 
     private void isRawat() {
@@ -6647,68 +6647,68 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private void getData() {
         if(tbDataSEP.getSelectedRow()!= -1){
             tab=1;
-            TNoRw.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),1).toString());
-            TNoRM.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),2).toString());
-            TPasien.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),3).toString());
-            NoRujukan.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),6).toString());
-            KdPpkRujukan.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),7).toString());
-            NmPpkRujukan.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),8).toString());
-            KdPPK.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),9).toString());
-            NmPPK.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),10).toString());
-            JenisPelayanan.setSelectedItem(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),11).toString());
-            Catatan.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),12).toString());
-            KdPenyakit.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),13).toString());
-            NmPenyakit.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),14).toString().replaceAll(KdPenyakit.getText(),""));
-            KdPoli.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),15).toString());
-            NmPoli.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),16).toString());
-            Kelas.setSelectedItem(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),17).toString());
-            NaikKelas.setSelectedItem(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),18).toString());
-            Pembiayaan.setSelectedItem(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),19).toString());
-            PenanggungJawab.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),20).toString());
-            LakaLantas.setSelectedItem(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),21).toString());
-            TglLahir.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),23).toString());
-            JenisPeserta.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),24).toString());
-            JK.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),25).toString());
-            NoKartu.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),26).toString());
-            AsalRujukan.setSelectedItem(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),28).toString());
-            Eksekutif.setSelectedItem(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),29).toString());
-            COB.setSelectedItem(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),30).toString());
-            NoTelp.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),31).toString());
-            Katarak.setSelectedItem(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),32).toString());
-            Keterangan.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),34).toString());
-            Suplesi.setSelectedItem(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),35).toString());
-            NoSEPSuplesi.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),36).toString());
-            KdPropinsi.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),37).toString());
-            NmPropinsi.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),38).toString());
-            KdKabupaten.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),39).toString());
-            NmKabupaten.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),40).toString());
-            KdKecamatan.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),41).toString());
-            NmKecamatan.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),42).toString());
-            NoSKDP.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),43).toString());
-            KdDPJP.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),44).toString());
-            NmDPJP.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),45).toString());
-            TujuanKunjungan.setSelectedItem(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),46).toString());
-            if(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),47).toString().equals("")){
+            TNoRw.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),1).toString());
+            TNoRM.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),2).toString());
+            TPasien.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),3).toString());
+            NoRujukan.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),6).toString());
+            KdPpkRujukan.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),7).toString());
+            NmPpkRujukan.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),8).toString());
+            KdPPK.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),9).toString());
+            NmPPK.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),10).toString());
+            JenisPelayanan.setSelectedItem(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),11).toString());
+            Catatan.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),12).toString());
+            KdPenyakit.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),13).toString());
+            NmPenyakit.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),14).toString().replaceAll(KdPenyakit.getText(),""));
+            KdPoli.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),15).toString());
+            NmPoli.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),16).toString());
+            Kelas.setSelectedItem(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),17).toString());
+            NaikKelas.setSelectedItem(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),18).toString());
+            Pembiayaan.setSelectedItem(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),19).toString());
+            PenanggungJawab.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),20).toString());
+            LakaLantas.setSelectedItem(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),21).toString());
+            TglLahir.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),23).toString());
+            JenisPeserta.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),24).toString());
+            JK.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),25).toString());
+            NoKartu.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),26).toString());
+            AsalRujukan.setSelectedItem(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),28).toString());
+            Eksekutif.setSelectedItem(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),29).toString());
+            COB.setSelectedItem(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),30).toString());
+            NoTelp.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),31).toString());
+            Katarak.setSelectedItem(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),32).toString());
+            Keterangan.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),34).toString());
+            Suplesi.setSelectedItem(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),35).toString());
+            NoSEPSuplesi.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),36).toString());
+            KdPropinsi.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),37).toString());
+            NmPropinsi.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),38).toString());
+            KdKabupaten.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),39).toString());
+            NmKabupaten.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),40).toString());
+            KdKecamatan.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),41).toString());
+            NmKecamatan.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),42).toString());
+            NoSKDP.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),43).toString());
+            KdDPJP.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),44).toString());
+            NmDPJP.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),45).toString());
+            TujuanKunjungan.setSelectedItem(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),46).toString());
+            if(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),47).toString().equals("")){
                 FlagProsedur.setSelectedIndex(0);
             }else{
-                FlagProsedur.setSelectedItem(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),47).toString());
+                FlagProsedur.setSelectedItem(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),47).toString());
             }
-            if(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),48).toString().equals("")){
+            if(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),48).toString().equals("")){
                 Penunjang.setSelectedIndex(0);
             }else{
-                Penunjang.setSelectedItem(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),48).toString());
+                Penunjang.setSelectedItem(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),48).toString());
             }
-            if(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),49).toString().equals("")){
+            if(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),49).toString().equals("")){
                 AsesmenPoli.setSelectedIndex(0);
             }else{
-                AsesmenPoli.setSelectedItem(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),49).toString());
+                AsesmenPoli.setSelectedItem(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),49).toString());
             }
-            KdDPJPLayanan.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),50).toString());
-            NmDPJPLayanan.setText(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),51).toString());
+            KdDPJPLayanan.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),50).toString());
+            NmDPJPLayanan.setText(tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),51).toString());
 
-            Valid.SetTgl(TanggalSEP,tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),4).toString());
-            Valid.SetTgl(TanggalRujuk,tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),5).toString());
-            Valid.SetTgl(TanggalKKL,tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),33).toString());
+            Valid.SetTgl(TanggalSEP,tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),4).toString());
+            Valid.SetTgl(TanggalRujuk,tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),5).toString());
+            Valid.SetTgl(TanggalKKL,tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),33).toString());
             Status.setText("AKTIF");
         }
     }
@@ -6716,56 +6716,56 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private void getDataInternal() {
         if(tbDataSEPInternal.getSelectedRow()!= -1){
             tab=2;
-            TNoRw.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),1).toString());
-            TNoRM.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),2).toString());
-            TPasien.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),3).toString());
-            NoRujukan.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),6).toString());
-            KdPpkRujukan.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),7).toString());
-            NmPpkRujukan.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),8).toString());
-            KdPPK.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),9).toString());
-            NmPPK.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),10).toString());
-            JenisPelayanan.setSelectedItem(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),11).toString());
-            Catatan.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),12).toString());
-            KdPenyakit.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),13).toString());
-            NmPenyakit.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),14).toString().replaceAll(KdPenyakit.getText(),""));
-            KdPoli.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),15).toString());
-            NmPoli.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),16).toString());
-            Kelas.setSelectedItem(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),17).toString());
-            NaikKelas.setSelectedItem(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),18).toString());
-            Pembiayaan.setSelectedItem(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),19).toString());
-            PenanggungJawab.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),20).toString());
-            LakaLantas.setSelectedItem(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),21).toString());
-            TglLahir.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),23).toString());
-            JenisPeserta.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),24).toString());
-            JK.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),25).toString());
-            NoKartu.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),26).toString());
-            AsalRujukan.setSelectedItem(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),28).toString());
-            Eksekutif.setSelectedItem(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),29).toString());
-            COB.setSelectedItem(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),30).toString());
-            NoTelp.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),31).toString());
-            Katarak.setSelectedItem(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),32).toString());
-            Keterangan.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),34).toString());
-            Suplesi.setSelectedItem(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),35).toString());
-            NoSEPSuplesi.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),36).toString());
-            KdPropinsi.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),37).toString());
-            NmPropinsi.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),38).toString());
-            KdKabupaten.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),39).toString());
-            NmKabupaten.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),40).toString());
-            KdKecamatan.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),41).toString());
-            NmKecamatan.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),42).toString());
-            NoSKDP.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),43).toString());
-            KdDPJP.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),44).toString());
-            NmDPJP.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),45).toString());
-            TujuanKunjungan.setSelectedItem(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),46).toString());
-            FlagProsedur.setSelectedItem(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),47).toString());
-            Penunjang.setSelectedItem(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),48).toString());
-            AsesmenPoli.setSelectedItem(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),49).toString());
-            KdDPJPLayanan.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),50).toString());
-            NmDPJPLayanan.setText(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),51).toString());
+            TNoRw.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),1).toString());
+            TNoRM.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),2).toString());
+            TPasien.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),3).toString());
+            NoRujukan.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),6).toString());
+            KdPpkRujukan.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),7).toString());
+            NmPpkRujukan.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),8).toString());
+            KdPPK.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),9).toString());
+            NmPPK.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),10).toString());
+            JenisPelayanan.setSelectedItem(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),11).toString());
+            Catatan.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),12).toString());
+            KdPenyakit.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),13).toString());
+            NmPenyakit.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),14).toString().replaceAll(KdPenyakit.getText(),""));
+            KdPoli.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),15).toString());
+            NmPoli.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),16).toString());
+            Kelas.setSelectedItem(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),17).toString());
+            NaikKelas.setSelectedItem(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),18).toString());
+            Pembiayaan.setSelectedItem(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),19).toString());
+            PenanggungJawab.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),20).toString());
+            LakaLantas.setSelectedItem(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),21).toString());
+            TglLahir.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),23).toString());
+            JenisPeserta.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),24).toString());
+            JK.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),25).toString());
+            NoKartu.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),26).toString());
+            AsalRujukan.setSelectedItem(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),28).toString());
+            Eksekutif.setSelectedItem(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),29).toString());
+            COB.setSelectedItem(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),30).toString());
+            NoTelp.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),31).toString());
+            Katarak.setSelectedItem(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),32).toString());
+            Keterangan.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),34).toString());
+            Suplesi.setSelectedItem(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),35).toString());
+            NoSEPSuplesi.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),36).toString());
+            KdPropinsi.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),37).toString());
+            NmPropinsi.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),38).toString());
+            KdKabupaten.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),39).toString());
+            NmKabupaten.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),40).toString());
+            KdKecamatan.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),41).toString());
+            NmKecamatan.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),42).toString());
+            NoSKDP.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),43).toString());
+            KdDPJP.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),44).toString());
+            NmDPJP.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),45).toString());
+            TujuanKunjungan.setSelectedItem(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),46).toString());
+            FlagProsedur.setSelectedItem(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),47).toString());
+            Penunjang.setSelectedItem(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),48).toString());
+            AsesmenPoli.setSelectedItem(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),49).toString());
+            KdDPJPLayanan.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),50).toString());
+            NmDPJPLayanan.setText(tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),51).toString());
 
-            Valid.SetTgl(TanggalSEP,tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),4).toString());
-            Valid.SetTgl(TanggalRujuk,tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),5).toString());
-            Valid.SetTgl(TanggalKKL,tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),33).toString());
+            Valid.SetTgl(TanggalSEP,tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),4).toString());
+            Valid.SetTgl(TanggalRujuk,tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),5).toString());
+            Valid.SetTgl(TanggalKKL,tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),33).toString());
             Status.setText("AKTIF");
         }
     }
@@ -6818,7 +6818,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 	    headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
             URL = link+"/SEP/2.0/delete";
-            requestJson ="{\"request\":{\"t_sep\":{\"noSep\":\""+tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString()+"\",\"user\":\""+user+"\"}}}";
+            requestJson ="{\"request\":{\"t_sep\":{\"noSep\":\""+tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString()+"\",\"user\":\""+user+"\"}}}";
             System.out.println("JSON : "+requestJson);
             requestEntity = new HttpEntity(requestJson,headers);
             root = mapper.readTree(restTemplate.exchange(URL, HttpMethod.DELETE,requestEntity, String.class).getBody());
@@ -6827,8 +6827,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             System.out.println("message : "+nameNode.path("message").asText());
             JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
             if(nameNode.path("code").asText().equals("200")){
-                Sequel.meghapus("bridging_sep","no_sep",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
-                tabMode.removeRow(tbDataSEP.getSelectedRow());
+                Sequel.meghapus("bridging_sep","no_sep",tabMode.getValueAt(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()),0).toString());
+                tabMode.removeRow(tbDataSEP.convertRowIndexToModel(tbDataSEP.getSelectedRow()));
                 emptTeks();
             }
         } catch (Exception e) {
@@ -6878,10 +6878,10 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             requestJson ="{" +
                                 "\"request\": {" +
                                     "\"t_sep\": {" +
-                                        "\"noSep\": \""+tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString()+"\"," +
-                                        "\"noSurat\": \""+tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),43).toString()+"\"," +
-                                        "\"tglRujukanInternal\": \""+tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),5).toString()+"\"," +
-                                        "\"kdPoliTuj\": \""+tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),15).toString()+"\"," +
+                                        "\"noSep\": \""+tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString()+"\"," +
+                                        "\"noSurat\": \""+tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),43).toString()+"\"," +
+                                        "\"tglRujukanInternal\": \""+tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),5).toString()+"\"," +
+                                        "\"kdPoliTuj\": \""+tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),15).toString()+"\"," +
                                         "\"user\": \""+user+"\"" +
                                     "}" +
                                 "}" +
@@ -6895,10 +6895,10 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
             if(nameNode.path("code").asText().equals("200")){
                 Sequel.queryu2("delete from bridging_sep_internal where no_sep=? and noskdp=? and tglrujukan=? and kdpolitujuan=?",4,new String[]{
-                    tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),43).toString(),
-                    tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),5).toString(),tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),15).toString()
+                    tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),0).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),43).toString(),
+                    tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),5).toString(),tabModeInternal.getValueAt(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()),15).toString()
                 });
-                tabModeInternal.removeRow(tbDataSEPInternal.getSelectedRow());
+                tabModeInternal.removeRow(tbDataSEPInternal.convertRowIndexToModel(tbDataSEPInternal.getSelectedRow()));
                 emptTeks();
             }
         } catch (Exception e) {

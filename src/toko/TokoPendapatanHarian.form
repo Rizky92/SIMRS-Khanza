@@ -111,6 +111,7 @@
               <SubComponents>
                 <Component class="widget.Table" name="tbPenjualan">
                   <Properties>
+                    <Property name="sortable" type="boolean" value="false"/>
                     <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                     <Property name="name" type="java.lang.String" value="tbPenjualan" noResource="true"/>
                   </Properties>
@@ -141,6 +142,7 @@
               <SubComponents>
                 <Component class="widget.Table" name="tbPiutang">
                   <Properties>
+                    <Property name="sortable" type="boolean" value="false"/>
                     <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                     <Property name="name" type="java.lang.String" value="tbPiutang" noResource="true"/>
                   </Properties>

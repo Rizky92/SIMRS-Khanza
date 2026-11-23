@@ -550,6 +550,7 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbValidasi.setAutoCreateRowSorter(true);
         tbValidasi.setName("tbValidasi"); // NOI18N
         Scroll2.setViewportView(tbValidasi);
 
@@ -565,8 +566,8 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         autoNomor();
         for(i=0;i<tbValidasi.getRowCount();i++){
-            tbValidasi.setValueAt("",i,3);
-            tbValidasi.setValueAt("",i,4);
+            tabMode.setValueAt("",tbValidasi.convertRowIndexToModel(i),3);
+            tabMode.setValueAt("",tbValidasi.convertRowIndexToModel(i),4);
         }
         Catatan.setText("");
         ChkInput.setSelected(true);
@@ -622,7 +623,7 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
             Valid.textKosong(TNoValidasi,"Nomor Validasi");
         }else if(KodeSampel.getText().equals("")||NamaSampel.getText().equals("")){
             Valid.textKosong(TNoValidasi,"Sampel");
-        }else if(tabMode.getRowCount()==0){
+        }else if(tbValidasi.getRowCount()==0){
             Valid.textKosong(TNoValidasi,"Data Validasi");
         }else{
             int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
@@ -638,21 +639,21 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
                         jasa_sarana=0;paket_bhp=0;jasa_pj_lab=0;jasa_pj_pengujian=0;jasa_verifikator=0;jasa_petugas=0;kso=0;jasa_menejemen=0;total=0;
                         for(i=0;i<tbValidasi.getRowCount();i++){
                             if(Sequel.menyimpantf2("labkesling_detail_validasi_pengujian_sampel","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Verifikasi",16,new String[]{
-                                TNoValidasi.getText(),tbValidasi.getValueAt(i,11).toString(),tbValidasi.getValueAt(i,9).toString(),tbValidasi.getValueAt(i,0).toString(),tbValidasi.getValueAt(i,5).toString(),tbValidasi.getValueAt(i,3).toString(),
-                                tbValidasi.getValueAt(i,4).toString(),tbValidasi.getValueAt(i,13).toString(),tbValidasi.getValueAt(i,14).toString(),tbValidasi.getValueAt(i,15).toString(),tbValidasi.getValueAt(i,16).toString(),
-                                tbValidasi.getValueAt(i,17).toString(),tbValidasi.getValueAt(i,18).toString(),tbValidasi.getValueAt(i,19).toString(),tbValidasi.getValueAt(i,20).toString(),tbValidasi.getValueAt(i,21).toString()
+                                TNoValidasi.getText(),tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),11).toString(),tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),9).toString(),tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),5).toString(),tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),3).toString(),
+                                tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),4).toString(),tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),13).toString(),tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),14).toString(),tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),15).toString(),tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),16).toString(),
+                                tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),17).toString(),tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),18).toString(),tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),19).toString(),tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),20).toString(),tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),21).toString()
                             })==false){
                                 berhasil=false;
                             }else{
-                                jasa_sarana=jasa_sarana+Double.parseDouble(tbValidasi.getValueAt(i,13).toString());
-                                paket_bhp=paket_bhp+Double.parseDouble(tbValidasi.getValueAt(i,14).toString());
-                                jasa_pj_lab=jasa_pj_lab+Double.parseDouble(tbValidasi.getValueAt(i,15).toString());
-                                jasa_pj_pengujian=jasa_pj_pengujian+Double.parseDouble(tbValidasi.getValueAt(i,16).toString());
-                                jasa_verifikator=jasa_verifikator+Double.parseDouble(tbValidasi.getValueAt(i,17).toString());
-                                jasa_petugas=jasa_petugas+Double.parseDouble(tbValidasi.getValueAt(i,18).toString());
-                                kso=kso+Double.parseDouble(tbValidasi.getValueAt(i,19).toString());
-                                jasa_menejemen=jasa_menejemen+Double.parseDouble(tbValidasi.getValueAt(i,20).toString());
-                                total=total+Double.parseDouble(tbValidasi.getValueAt(i,21).toString());
+                                jasa_sarana=jasa_sarana+Double.parseDouble(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),13).toString());
+                                paket_bhp=paket_bhp+Double.parseDouble(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),14).toString());
+                                jasa_pj_lab=jasa_pj_lab+Double.parseDouble(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),15).toString());
+                                jasa_pj_pengujian=jasa_pj_pengujian+Double.parseDouble(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),16).toString());
+                                jasa_verifikator=jasa_verifikator+Double.parseDouble(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),17).toString());
+                                jasa_petugas=jasa_petugas+Double.parseDouble(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),18).toString());
+                                kso=kso+Double.parseDouble(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),19).toString());
+                                jasa_menejemen=jasa_menejemen+Double.parseDouble(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),20).toString());
+                                total=total+Double.parseDouble(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i),21).toString());
                             }
                         }
                         if(berhasil==true){
@@ -703,6 +704,7 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
                         Sequel.queryu("update labkesling_verifikasi_pengujian_sampel set status='Sudah Divalidasi' where no_verifikasi='"+NoVerifikasi.getText()+"'");
                         Sequel.Commit();
                         JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
+                        tbValidasi.suspendSorting();
                         Valid.tabelKosong(tabMode);
                     }else{
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -717,6 +719,7 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
+        tbValidasi.resumeSorting();
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -791,9 +794,9 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
             Valid.textKosong(TNoValidasi,"Data Verifikasi");
         }else{
             Sequel.queryu("delete from temporary");
-            for(i=0;i<tbValidasi.getRowCount();i++){
+            for(i=0;i<tabMode.getRowCount();i++){
                 Sequel.menyimpan("temporary","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                    "0",tbValidasi.getValueAt(i,1).toString(),tbValidasi.getValueAt(i,2).toString(),tbValidasi.getValueAt(i,3).toString(),tbValidasi.getValueAt(i,5).toString(),tbValidasi.getValueAt(i,6).toString(),tbValidasi.getValueAt(i,7).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+                    "0",tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,2).toString(),tabMode.getValueAt(i,3).toString(),tabMode.getValueAt(i,5).toString(),tabMode.getValueAt(i,6).toString(),tabMode.getValueAt(i,7).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
                 });
             }
 
@@ -974,6 +977,7 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
 
     private void tampil() {
         try {
+            tbValidasi.suspendSorting();
             Valid.tabelKosong(tabMode);
             myObj = new FileReader("./cache/validasipengujiansampellabkesling.iyem");
             root = mapper.readTree(myObj);
@@ -1004,7 +1008,8 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
             response = null;
             root = null;
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbValidasi.getRowCount());
+        tbValidasi.resumeSorting();
     }
 
     public void setData(String nopermintaan,String kodepelanggan,String namapelanggan,String kodesampel,String namasampel,String kodeverifikator,String namaverifikator,String rentang,String noverifikasi) {

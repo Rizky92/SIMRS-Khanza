@@ -459,8 +459,8 @@ public class MasterTriaseSkala3 extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,kdskala,"master_triase_skala3","kode_skala3")==true){
             if(tbSpesialis.getSelectedRow()!= -1){
-                tabMode.removeRow(tbSpesialis.getSelectedRow());
-                LCount.setText(""+tabMode.getRowCount());
+                tabMode.removeRow(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()));
+                LCount.setText(""+tbSpesialis.getRowCount());
                 emptTeks();
             }
         }
@@ -482,9 +482,9 @@ public class MasterTriaseSkala3 extends javax.swing.JDialog {
         }else{
             if(tbSpesialis.getSelectedRow()> -1){
                 Sequel.mengedit("master_triase_skala3","kode_skala3=?","kode_skala3=?,pengkajian_skala3=?,kode_pemeriksaan=?",4,new String[]{
-                    kdskala.getText(),namaskala.getText(),kdpemeriksaan.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString()
+                    kdskala.getText(),namaskala.getText(),kdpemeriksaan.getText(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2).toString()
                 });
-                if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+                if(tbSpesialis.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
             }
         }
@@ -550,7 +550,7 @@ public class MasterTriaseSkala3 extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -559,7 +559,7 @@ public class MasterTriaseSkala3 extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisMouseClicked
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
@@ -599,7 +599,7 @@ public class MasterTriaseSkala3 extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void tbSpesialisKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyReleased
-        if(tabMode.getRowCount()!=0){
+        if(tbSpesialis.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -739,7 +739,7 @@ public class MasterTriaseSkala3 extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbSpesialis.getRowCount());
     }
 
     private void emptTeks() {
@@ -753,10 +753,10 @@ public class MasterTriaseSkala3 extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            kdpemeriksaan.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            nmpemeriksaan.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
-            kdskala.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString());
-            namaskala.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),3).toString());
+            kdpemeriksaan.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            nmpemeriksaan.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
+            kdskala.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2).toString());
+            namaskala.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),3).toString());
         }
     }
 

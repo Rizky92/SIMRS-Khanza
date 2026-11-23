@@ -197,6 +197,7 @@ public class TokoCariPemesanan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -739,7 +740,7 @@ public class TokoCariPemesanan extends javax.swing.JDialog {
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString().trim().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Faktur");
             }else{
                 try {
@@ -747,7 +748,7 @@ public class TokoCariPemesanan extends javax.swing.JDialog {
                         "select tokopemesanan.no_faktur,tokopemesanan.tagihan,tokopemesanan.tgl_faktur,tokopemesanan.status,"+
                         "tokopemesanan.ppn,(tokopemesanan.meterai+tokopemesanan.total2)as total from tokopemesanan where tokopemesanan.no_faktur=?");
                     try {
-                        pscaripesan.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        pscaripesan.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         rs=pscaripesan.executeQuery();
                         if(rs.next()){
                             Sequel.AutoComitFalse();
@@ -793,7 +794,7 @@ public class TokoCariPemesanan extends javax.swing.JDialog {
                             }
 
                             if(sukses==true){
-                                sukses=Sequel.queryu2tf("delete from tokopemesanan where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
+                                sukses=Sequel.queryu2tf("delete from tokopemesanan where no_faktur=?",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()});
                             }
 
                             if(sukses==true){
@@ -849,11 +850,11 @@ public class TokoCariPemesanan extends javax.swing.JDialog {
 
     private void ppBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBayarActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString().trim().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Faktur");
             }else{
                 KeuanganBayarPesanToko bayarpesan=new KeuanganBayarPesanToko(null,false);
-                bayarpesan.setData(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                bayarpesan.setData(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                 bayarpesan.tampil2();
                 bayarpesan.isCek();
                 bayarpesan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);

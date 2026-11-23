@@ -789,6 +789,7 @@
               <SubComponents>
                 <Component class="widget.Table" name="tbValidasi">
                   <Properties>
+                    <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                     <Property name="name" type="java.lang.String" value="tbValidasi" noResource="true"/>
                   </Properties>
                 </Component>

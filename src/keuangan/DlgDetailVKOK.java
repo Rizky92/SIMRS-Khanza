@@ -595,6 +595,7 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
         Scroll3.setName("Scroll3"); // NOI18N
         Scroll3.setOpaque(true);
 
+        tbOperasi.setSortable(false);
         tbOperasi.setName("tbOperasi"); // NOI18N
         tbOperasi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -620,6 +621,7 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
         Scroll10.setName("Scroll10"); // NOI18N
         Scroll10.setOpaque(true);
 
+        tbOperasi1.setSortable(false);
         tbOperasi1.setName("tbOperasi1"); // NOI18N
         tbOperasi1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

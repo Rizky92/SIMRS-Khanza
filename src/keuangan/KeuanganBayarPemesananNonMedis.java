@@ -971,7 +971,7 @@ public final class KeuanganBayarPemesananNonMedis extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tabMode.getRowCount()==0){
+        if(tbKamar.getRowCount()==0){
              JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else {
             if(tbKamar.getSelectedRow()>-1){
@@ -980,15 +980,15 @@ public final class KeuanganBayarPemesananNonMedis extends javax.swing.JDialog {
                     sukses=true;
                     if(Sequel.queryu2tf("delete from bayar_pemesanan_non_medis where tgl_bayar=? and no_faktur=? and "+
                             "no_bukti=? and nip=? and besar_bayar=? and keterangan=? and nama_bayar=?",7,new String[]{
-                        tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString(),
-                        tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString(),
-                        tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString(),
-                        tbKamar.getValueAt(tbKamar.getSelectedRow(),11).toString(),
-                        tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString(),
-                        tbKamar.getValueAt(tbKamar.getSelectedRow(),9).toString(),
-                        tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString()
+                        tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString(),
+                        tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),4).toString(),
+                        tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),7).toString(),
+                        tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),11).toString(),
+                        tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),8).toString(),
+                        tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),9).toString(),
+                        tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),6).toString()
                     })==true){
-                        if(Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString())==Double.parseDouble(BesarBayar.getText())){
+                        if(Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),8).toString())==Double.parseDouble(BesarBayar.getText())){
                             Sequel.mengedit("ipsrspemesanan","no_faktur=?","status='Belum Dibayar'",1,new String[]{NoFaktur.getText()});
                         }else{
                             Sequel.mengedit("ipsrspemesanan","no_faktur=?","status='Belum Lunas'",1,new String[]{NoFaktur.getText()});
@@ -1020,8 +1020,8 @@ public final class KeuanganBayarPemesananNonMedis extends javax.swing.JDialog {
                         }else{
                             total=0;
                             if(koderekening.equals(Host_to_Host_Bank_Mandiri)){
-                                total=Sequel.cariIsiAngka("select metode_pembayaran_bankmandiri.biaya_transaksi from metode_pembayaran_bankmandiri inner join pembayaran_pihak_ke3_bankmandiri on pembayaran_pihak_ke3_bankmandiri.kode_metode=metode_pembayaran_bankmandiri.kode_metode where pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran=?",tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString());
-                                Sequel.meghapus("pembayaran_pihak_ke3_bankmandiri","nomor_pembayaran",tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString());
+                                total=Sequel.cariIsiAngka("select metode_pembayaran_bankmandiri.biaya_transaksi from metode_pembayaran_bankmandiri inner join pembayaran_pihak_ke3_bankmandiri on pembayaran_pihak_ke3_bankmandiri.kode_metode=metode_pembayaran_bankmandiri.kode_metode where pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran=?",tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),7).toString());
+                                Sequel.meghapus("pembayaran_pihak_ke3_bankmandiri","nomor_pembayaran",tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),7).toString());
                             }
                             Sequel.deleteTampJurnal();
                             if (total > 0) {
@@ -1029,10 +1029,10 @@ public final class KeuanganBayarPemesananNonMedis extends javax.swing.JDialog {
                                     sukses=false;
                                 }
                             }
-                            if(Sequel.insertTampJurnal(koderekening, tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), ((Double) tbKamar.getValueAt(tbKamar.getSelectedRow(), 8)) + total, 0)==false){
+                            if(Sequel.insertTampJurnal(koderekening, tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 6).toString(), ((Double) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 8)) + total, 0)==false){
                                 sukses=false;
                             }
-                            if(Sequel.insertTampJurnal(Bayar_Pemesanan_Non_Medis, "HUTANG USAHA", 0, ((Double) tbKamar.getValueAt(tbKamar.getSelectedRow(), 8)))==false){
+                            if(Sequel.insertTampJurnal(Bayar_Pemesanan_Non_Medis, "HUTANG USAHA", 0, ((Double) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 8)))==false){
                                 sukses=false;
                             }
                             if(sukses==true){
@@ -1050,8 +1050,8 @@ public final class KeuanganBayarPemesananNonMedis extends javax.swing.JDialog {
                     }
                     Sequel.AutoComitTrue();
                     if(sukses==true){
-                        tabMode.removeRow(tbKamar.getSelectedRow());
-                        LCount.setText(""+tabMode.getRowCount());
+                        tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
+                        LCount.setText(""+tbKamar.getRowCount());
                         emptTeks();
                     } else {
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -1174,7 +1174,7 @@ public final class KeuanganBayarPemesananNonMedis extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbKamar.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1562,7 +1562,7 @@ public final class KeuanganBayarPemesananNonMedis extends javax.swing.JDialog {
 
     private void cetakbuktiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakbuktiActionPerformed
         if(tbKamar.getSelectedRow()>-1){
-            Valid.panggilUrl("billing/LaporanBuktiKasKeluar.php?kode="+NoBukti.getText()+"&tanggal="+Valid.SetTgl(TglBayar.getSelectedItem()+"")+"&akunbayar="+AkunBayar.getSelectedItem().toString().replaceAll(" ","_")+"&petugas="+tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString().replaceAll(" ","_")+"&dibayarkankepada="+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString().replaceAll(" ","_")+"&keterangan="+Keterangan.getText().replaceAll(" ","_")+"&notagihan="+NoFaktur.getText().replaceAll(" ","_")+"&nominal="+BesarBayar.getText()+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
+            Valid.panggilUrl("billing/LaporanBuktiKasKeluar.php?kode="+NoBukti.getText()+"&tanggal="+Valid.SetTgl(TglBayar.getSelectedItem()+"")+"&akunbayar="+AkunBayar.getSelectedItem().toString().replaceAll(" ","_")+"&petugas="+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),10).toString().replaceAll(" ","_")+"&dibayarkankepada="+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),5).toString().replaceAll(" ","_")+"&keterangan="+Keterangan.getText().replaceAll(" ","_")+"&notagihan="+NoFaktur.getText().replaceAll(" ","_")+"&nominal="+BesarBayar.getText()+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, pilih dulu data yang mau dicetak bukti kas keluarnya.\nKlik data pada table untuk memilih...!!!!");
         }
@@ -1570,7 +1570,7 @@ public final class KeuanganBayarPemesananNonMedis extends javax.swing.JDialog {
 
     private void tbKamarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseReleased
         tbKamar.changeSelection(tbKamar.rowAtPoint(evt.getPoint()), tbKamar.columnAtPoint(evt.getPoint()), false, false);
-        if (tabMode.getRowCount() != 0) {
+        if (tbKamar.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -1717,7 +1717,7 @@ public final class KeuanganBayarPemesananNonMedis extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbKamar.getRowCount());
         LTotal.setText(Valid.SetAngka(total));
     }
 
@@ -1747,13 +1747,13 @@ public final class KeuanganBayarPemesananNonMedis extends javax.swing.JDialog {
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            Valid.SetTgl(TglBayar,tbKamar.getValueAt(row,0).toString());
-            NoFaktur.setText(tbKamar.getValueAt(row,4).toString());
+            Valid.SetTgl(TglBayar,tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
+            NoFaktur.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),4).toString());
             //setData(no_faktur.getText());
-            AkunBayar.setSelectedItem(tbKamar.getValueAt(row,6).toString());
-            NoBukti.setText(tbKamar.getValueAt(row,7).toString());
-            BesarBayar.setText(Valid.SetAngka5(Double.parseDouble(tbKamar.getValueAt(row,8).toString())));
-            Keterangan.setText(tbKamar.getValueAt(row,9).toString());
+            AkunBayar.setSelectedItem(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),6).toString());
+            NoBukti.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),7).toString());
+            BesarBayar.setText(Valid.SetAngka5(Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),8).toString())));
+            Keterangan.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),9).toString());
         }
     }
 

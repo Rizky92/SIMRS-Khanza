@@ -203,6 +203,7 @@ public class DlgCariReturBeli extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -813,13 +814,13 @@ public class DlgCariReturBeli extends javax.swing.JDialog {
     }//GEN-LAST:event_TglRetur2KeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"No.Faktur");
         }else{
             try {
                 ps=koneksi.prepareStatement("select no_retur_beli, kd_bangsal from returbeli where no_retur_beli=?");
                 try {
-                    ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         Sequel.AutoComitFalse();
@@ -871,7 +872,7 @@ public class DlgCariReturBeli extends javax.swing.JDialog {
                         }
 
                         if(sukses==true){
-                            Sequel.queryu("delete from returbeli where no_retur_beli='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"'");
+                            Sequel.queryu("delete from returbeli where no_retur_beli='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()+"'");
                             Sequel.Commit();
                         }else{
                             sukses=false;

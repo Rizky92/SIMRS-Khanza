@@ -555,7 +555,7 @@ public final class ApotekBPJSMapingObatSMC extends javax.swing.JDialog {
                 tabMode.addRow(new Object[] {
                     kdobat.getText(), TObat.getText(), KdObatBPJS.getText(), NmObatBPJS.getText(), Harga.getText(), Restriksi.getText()
                 });
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbJnsPerawatan.getRowCount());
                 emptTeks();
             }
         }
@@ -582,15 +582,15 @@ public final class ApotekBPJSMapingObatSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if (tabMode.getRowCount() == 0) {
+        if (tbJnsPerawatan.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, tabel sudah kosong..!!");
         } else if (tbJnsPerawatan.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Silahkan pilih data obat yang mau dihapus..!!");
         } else {
-            if (Sequel.menghapustfSmc("maping_obat_apotek_bpjs", "kode_brng_apotek_bpjs = ?", tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 2).toString())) {
-                tabMode.removeRow(tbJnsPerawatan.getSelectedRow());
+            if (Sequel.menghapustfSmc("maping_obat_apotek_bpjs", "kode_brng_apotek_bpjs = ?", tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 2).toString())) {
+                tabMode.removeRow(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()));
                 emptTeks();
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText("" + tbJnsPerawatan.getRowCount());
             } else {
                 JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus data obat\nSilahkan hubungi administrator..!!");
             }
@@ -614,14 +614,14 @@ public final class ApotekBPJSMapingObatSMC extends javax.swing.JDialog {
             if (tbJnsPerawatan.getSelectedRow() >= 0) {
                 if (Sequel.mengupdatetfSmc("maping_obat_apotek_bpjs", "kode_brng = ?, kode_brng_apotek_bpjs = ?, nama_brng_apotek_bpjs = ?, harga = ?, restriksi = ?",
                     "kode_brng_apotek_bpjs = ?", kdobat.getText(), KdObatBPJS.getText(), NmObatBPJS.getText(), Harga.getText(), Restriksi.getText(),
-                    tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 2).toString()
+                    tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 2).toString()
                 )) {
-                    tbJnsPerawatan.setValueAt(kdobat.getText(), tbJnsPerawatan.getSelectedRow(), 0);
-                    tbJnsPerawatan.setValueAt(TObat.getText(), tbJnsPerawatan.getSelectedRow(), 1);
-                    tbJnsPerawatan.setValueAt(KdObatBPJS.getText(), tbJnsPerawatan.getSelectedRow(), 2);
-                    tbJnsPerawatan.setValueAt(NmObatBPJS.getText(), tbJnsPerawatan.getSelectedRow(), 3);
-                    tbJnsPerawatan.setValueAt(Double.valueOf(Harga.getText()), tbJnsPerawatan.getSelectedRow(), 4);
-                    tbJnsPerawatan.setValueAt(Restriksi.getText(), tbJnsPerawatan.getSelectedRow(), 5);
+                    tabMode.setValueAt(kdobat.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 0);
+                    tabMode.setValueAt(TObat.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 1);
+                    tabMode.setValueAt(KdObatBPJS.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 2);
+                    tabMode.setValueAt(NmObatBPJS.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 3);
+                    tabMode.setValueAt(Double.valueOf(Harga.getText()), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 4);
+                    tabMode.setValueAt(Restriksi.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 5);
                     emptTeks();
                 } else {
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengganti data obat\nSilahkan hubungi administrator..!!");
@@ -744,7 +744,7 @@ public final class ApotekBPJSMapingObatSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if (tbJnsPerawatan.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -753,7 +753,7 @@ public final class ApotekBPJSMapingObatSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
-        if (tabMode.getRowCount() != 0) {
+        if (tbJnsPerawatan.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
@@ -884,6 +884,7 @@ public final class ApotekBPJSMapingObatSMC extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbJnsPerawatan.suspendSorting();
         Valid.tabelKosong(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select m.kode_brng, o.nama_brng, m.kode_brng_apotek_bpjs, m.nama_brng_apotek_bpjs, m.harga, m.restriksi " +
@@ -909,7 +910,8 @@ public final class ApotekBPJSMapingObatSMC extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        LCount.setText("" + tabMode.getRowCount());
+        LCount.setText("" + tbJnsPerawatan.getRowCount());
+        tbJnsPerawatan.resumeSorting();
     }
 
     public void emptTeks() {
@@ -925,12 +927,12 @@ public final class ApotekBPJSMapingObatSMC extends javax.swing.JDialog {
 
     private void getData() {
         if (tbJnsPerawatan.getSelectedRow() != -1) {
-            kdobat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 0).toString());
-            TObat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 1).toString());
-            KdObatBPJS.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 2).toString());
-            NmObatBPJS.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 3).toString());
-            Harga.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 4).toString());
-            Restriksi.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 5).toString());
+            kdobat.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 0).toString());
+            TObat.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 1).toString());
+            KdObatBPJS.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 2).toString());
+            NmObatBPJS.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 3).toString());
+            Harga.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 4).toString());
+            Restriksi.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 5).toString());
         }
     }
 

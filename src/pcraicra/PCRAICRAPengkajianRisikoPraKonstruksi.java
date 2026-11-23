@@ -1142,6 +1142,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         Scroll6.setName("Scroll6"); // NOI18N
         Scroll6.setOpaque(true);
 
+        tbKelompokRisikoArea.setAutoCreateRowSorter(true);
         tbKelompokRisikoArea.setName("tbKelompokRisikoArea"); // NOI18N
         Scroll6.setViewportView(tbKelompokRisikoArea);
 
@@ -1238,6 +1239,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         Scroll7.setName("Scroll7"); // NOI18N
         Scroll7.setOpaque(true);
 
+        tbIdentifikasiRisikoInfeksi.setAutoCreateRowSorter(true);
         tbIdentifikasiRisikoInfeksi.setName("tbIdentifikasiRisikoInfeksi"); // NOI18N
         Scroll7.setViewportView(tbIdentifikasiRisikoInfeksi);
 
@@ -1320,6 +1322,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         Scroll8.setName("Scroll8"); // NOI18N
         Scroll8.setOpaque(true);
 
+        tbIdentifikasiRisikoKebakaran.setAutoCreateRowSorter(true);
         tbIdentifikasiRisikoKebakaran.setName("tbIdentifikasiRisikoKebakaran"); // NOI18N
         Scroll8.setViewportView(tbIdentifikasiRisikoKebakaran);
 
@@ -1402,6 +1405,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         Scroll9.setName("Scroll9"); // NOI18N
         Scroll9.setOpaque(true);
 
+        tbIdentifikasiRisikoKeselamatan.setAutoCreateRowSorter(true);
         tbIdentifikasiRisikoKeselamatan.setName("tbIdentifikasiRisikoKeselamatan"); // NOI18N
         Scroll9.setViewportView(tbIdentifikasiRisikoKeselamatan);
 
@@ -1484,6 +1488,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         Scroll10.setName("Scroll10"); // NOI18N
         Scroll10.setOpaque(true);
 
+        tbIdentifikasiRisikoUtilitas.setAutoCreateRowSorter(true);
         tbIdentifikasiRisikoUtilitas.setName("tbIdentifikasiRisikoUtilitas"); // NOI18N
         Scroll10.setViewportView(tbIdentifikasiRisikoUtilitas);
 
@@ -1640,6 +1645,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         Scroll11.setName("Scroll11"); // NOI18N
         Scroll11.setOpaque(true);
 
+        tbTindakanPengendalian.setAutoCreateRowSorter(true);
         tbTindakanPengendalian.setName("tbTindakanPengendalian"); // NOI18N
         Scroll11.setViewportView(tbTindakanPengendalian);
 
@@ -1805,6 +1811,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         Scroll12.setName("Scroll12"); // NOI18N
         Scroll12.setOpaque(true);
 
+        tbPersyaratanDipenuhi.setAutoCreateRowSorter(true);
         tbPersyaratanDipenuhi.setName("tbPersyaratanDipenuhi"); // NOI18N
         Scroll12.setViewportView(tbPersyaratanDipenuhi);
 
@@ -2229,11 +2236,11 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             })==true){
                 StringBuilder kelompokarea = new StringBuilder();
                 for (i = 0; i < tbKelompokRisikoArea.getRowCount(); i++) {
-                    if(tbKelompokRisikoArea.getValueAt(i,0).toString().equals("true")){
-                        if(Sequel.menyimpantf2("pcra_icra_pengkajian_risiko_prakonstruksi_kelompok_area","?,?",2,new String[]{NomorPengkajian.getText(),tbKelompokRisikoArea.getValueAt(i,1).toString()})==true){
-                            kelompokarea.append(tbKelompokRisikoArea.getValueAt(i,2).toString()).append(", ");
+                    if(tabModeKelompokRisikoArea.getValueAt(tbKelompokRisikoArea.convertRowIndexToModel(i),0).toString().equals("true")){
+                        if(Sequel.menyimpantf2("pcra_icra_pengkajian_risiko_prakonstruksi_kelompok_area","?,?",2,new String[]{NomorPengkajian.getText(),tabModeKelompokRisikoArea.getValueAt(tbKelompokRisikoArea.convertRowIndexToModel(i),1).toString()})==true){
+                            kelompokarea.append(tabModeKelompokRisikoArea.getValueAt(tbKelompokRisikoArea.convertRowIndexToModel(i),2).toString()).append(", ");
                         }
-                        tabModeKelompokRisikoArea.setValueAt(false,i,0);
+                        tabModeKelompokRisikoArea.setValueAt(false,tbKelompokRisikoArea.convertRowIndexToModel(i),0);
                     }
                 }
                 if (kelompokarea.length() > 0) {
@@ -2242,11 +2249,11 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
 
                 StringBuilder risikokebakaran = new StringBuilder();
                 for (i = 0; i < tbIdentifikasiRisikoKebakaran.getRowCount(); i++) {
-                    if(tbIdentifikasiRisikoKebakaran.getValueAt(i,0).toString().equals("true")){
-                        if(Sequel.menyimpantf2("pcra_icra_pengkajian_risiko_prakonstruksi_kebakaran","?,?",2,new String[]{NomorPengkajian.getText(),tbIdentifikasiRisikoKebakaran.getValueAt(i,1).toString()})==true){
-                            risikokebakaran.append(tbIdentifikasiRisikoKebakaran.getValueAt(i,2).toString()).append(", ");
+                    if(tabModeIdentifikasiRisikoKebakaran.getValueAt(tbIdentifikasiRisikoKebakaran.convertRowIndexToModel(i),0).toString().equals("true")){
+                        if(Sequel.menyimpantf2("pcra_icra_pengkajian_risiko_prakonstruksi_kebakaran","?,?",2,new String[]{NomorPengkajian.getText(),tabModeIdentifikasiRisikoKebakaran.getValueAt(tbIdentifikasiRisikoKebakaran.convertRowIndexToModel(i),1).toString()})==true){
+                            risikokebakaran.append(tabModeIdentifikasiRisikoKebakaran.getValueAt(tbIdentifikasiRisikoKebakaran.convertRowIndexToModel(i),2).toString()).append(", ");
                         }
-                        tabModeIdentifikasiRisikoKebakaran.setValueAt(false,i,0);
+                        tabModeIdentifikasiRisikoKebakaran.setValueAt(false,tbIdentifikasiRisikoKebakaran.convertRowIndexToModel(i),0);
                     }
                 }
                 if (risikokebakaran.length() > 0) {
@@ -2255,11 +2262,11 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
 
                 StringBuilder risikoinfeksi = new StringBuilder();
                 for (i = 0; i < tbIdentifikasiRisikoInfeksi.getRowCount(); i++) {
-                    if(tbIdentifikasiRisikoInfeksi.getValueAt(i,0).toString().equals("true")){
-                        if(Sequel.menyimpantf2("pcra_icra_pengkajian_risiko_prakonstruksi_infeksi","?,?",2,new String[]{NomorPengkajian.getText(),tbIdentifikasiRisikoInfeksi.getValueAt(i,1).toString()})==true){
-                            risikoinfeksi.append(tbIdentifikasiRisikoInfeksi.getValueAt(i,2).toString()).append(", ");
+                    if(tabModeIdentifikasiRisikoInfeksi.getValueAt(tbIdentifikasiRisikoInfeksi.convertRowIndexToModel(i),0).toString().equals("true")){
+                        if(Sequel.menyimpantf2("pcra_icra_pengkajian_risiko_prakonstruksi_infeksi","?,?",2,new String[]{NomorPengkajian.getText(),tabModeIdentifikasiRisikoInfeksi.getValueAt(tbIdentifikasiRisikoInfeksi.convertRowIndexToModel(i),1).toString()})==true){
+                            risikoinfeksi.append(tabModeIdentifikasiRisikoInfeksi.getValueAt(tbIdentifikasiRisikoInfeksi.convertRowIndexToModel(i),2).toString()).append(", ");
                         }
-                        tabModeIdentifikasiRisikoInfeksi.setValueAt(false,i,0);
+                        tabModeIdentifikasiRisikoInfeksi.setValueAt(false,tbIdentifikasiRisikoInfeksi.convertRowIndexToModel(i),0);
                     }
                 }
                 if (risikoinfeksi.length() > 0) {
@@ -2268,11 +2275,11 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
 
                 StringBuilder risikokeselamatan = new StringBuilder();
                 for (i = 0; i < tbIdentifikasiRisikoKeselamatan.getRowCount(); i++) {
-                    if(tbIdentifikasiRisikoKeselamatan.getValueAt(i,0).toString().equals("true")){
-                        if(Sequel.menyimpantf2("pcra_icra_pengkajian_risiko_prakonstruksi_keselamatan","?,?",2,new String[]{NomorPengkajian.getText(),tbIdentifikasiRisikoKeselamatan.getValueAt(i,1).toString()})==true){
-                            risikokeselamatan.append(tbIdentifikasiRisikoKeselamatan.getValueAt(i,2).toString()).append(", ");
+                    if(tabModeIdentifikasiRisikoKeselamatan.getValueAt(tbIdentifikasiRisikoKeselamatan.convertRowIndexToModel(i),0).toString().equals("true")){
+                        if(Sequel.menyimpantf2("pcra_icra_pengkajian_risiko_prakonstruksi_keselamatan","?,?",2,new String[]{NomorPengkajian.getText(),tabModeIdentifikasiRisikoKeselamatan.getValueAt(tbIdentifikasiRisikoKeselamatan.convertRowIndexToModel(i),1).toString()})==true){
+                            risikokeselamatan.append(tabModeIdentifikasiRisikoKeselamatan.getValueAt(tbIdentifikasiRisikoKeselamatan.convertRowIndexToModel(i),2).toString()).append(", ");
                         }
-                        tabModeIdentifikasiRisikoKeselamatan.setValueAt(false,i,0);
+                        tabModeIdentifikasiRisikoKeselamatan.setValueAt(false,tbIdentifikasiRisikoKeselamatan.convertRowIndexToModel(i),0);
                     }
                 }
                 if (risikokeselamatan.length() > 0) {
@@ -2281,11 +2288,11 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
 
                 StringBuilder risikoutilitas = new StringBuilder();
                 for (i = 0; i < tbIdentifikasiRisikoUtilitas.getRowCount(); i++) {
-                    if(tbIdentifikasiRisikoUtilitas.getValueAt(i,0).toString().equals("true")){
-                        if(Sequel.menyimpantf2("pcra_icra_pengkajian_risiko_prakonstruksi_utilitas","?,?",2,new String[]{NomorPengkajian.getText(),tbIdentifikasiRisikoUtilitas.getValueAt(i,1).toString()})==true){
-                            risikoutilitas.append(tbIdentifikasiRisikoUtilitas.getValueAt(i,2).toString()).append(", ");
+                    if(tabModeIdentifikasiRisikoUtilitas.getValueAt(tbIdentifikasiRisikoUtilitas.convertRowIndexToModel(i),0).toString().equals("true")){
+                        if(Sequel.menyimpantf2("pcra_icra_pengkajian_risiko_prakonstruksi_utilitas","?,?",2,new String[]{NomorPengkajian.getText(),tabModeIdentifikasiRisikoUtilitas.getValueAt(tbIdentifikasiRisikoUtilitas.convertRowIndexToModel(i),1).toString()})==true){
+                            risikoutilitas.append(tabModeIdentifikasiRisikoUtilitas.getValueAt(tbIdentifikasiRisikoUtilitas.convertRowIndexToModel(i),2).toString()).append(", ");
                         }
-                        tabModeIdentifikasiRisikoUtilitas.setValueAt(false,i,0);
+                        tabModeIdentifikasiRisikoUtilitas.setValueAt(false,tbIdentifikasiRisikoUtilitas.convertRowIndexToModel(i),0);
                     }
                 }
                 if (risikoutilitas.length() > 0) {
@@ -2294,11 +2301,11 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
 
                 StringBuilder pengendalian = new StringBuilder();
                 for (i = 0; i < tbTindakanPengendalian.getRowCount(); i++) {
-                    if(tbTindakanPengendalian.getValueAt(i,0).toString().equals("true")){
-                        if(Sequel.menyimpantf2("pcra_icra_pengkajian_risiko_prakonstruksi_pengendalian","?,?",2,new String[]{NomorPengkajian.getText(),tbTindakanPengendalian.getValueAt(i,1).toString()})==true){
-                            pengendalian.append(tbTindakanPengendalian.getValueAt(i,2).toString()).append(", ");
+                    if(tabModeTindakanPengendalian.getValueAt(tbTindakanPengendalian.convertRowIndexToModel(i),0).toString().equals("true")){
+                        if(Sequel.menyimpantf2("pcra_icra_pengkajian_risiko_prakonstruksi_pengendalian","?,?",2,new String[]{NomorPengkajian.getText(),tabModeTindakanPengendalian.getValueAt(tbTindakanPengendalian.convertRowIndexToModel(i),1).toString()})==true){
+                            pengendalian.append(tabModeTindakanPengendalian.getValueAt(tbTindakanPengendalian.convertRowIndexToModel(i),2).toString()).append(", ");
                         }
-                        tabModeTindakanPengendalian.setValueAt(false,i,0);
+                        tabModeTindakanPengendalian.setValueAt(false,tbTindakanPengendalian.convertRowIndexToModel(i),0);
                     }
                 }
                 if (pengendalian.length() > 0) {
@@ -2307,11 +2314,11 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
 
                 StringBuilder persyaratan = new StringBuilder();
                 for (i = 0; i < tbPersyaratanDipenuhi.getRowCount(); i++) {
-                    if(tbPersyaratanDipenuhi.getValueAt(i,0).toString().equals("true")){
-                        if(Sequel.menyimpantf2("pcra_icra_pengkajian_risiko_prakonstruksi_persyaratan","?,?",2,new String[]{NomorPengkajian.getText(),tbPersyaratanDipenuhi.getValueAt(i,1).toString()})==true){
-                            persyaratan.append(tbPersyaratanDipenuhi.getValueAt(i,2).toString()).append(", ");
+                    if(tabModePersyaratanDipenuhi.getValueAt(tbPersyaratanDipenuhi.convertRowIndexToModel(i),0).toString().equals("true")){
+                        if(Sequel.menyimpantf2("pcra_icra_pengkajian_risiko_prakonstruksi_persyaratan","?,?",2,new String[]{NomorPengkajian.getText(),tabModePersyaratanDipenuhi.getValueAt(tbPersyaratanDipenuhi.convertRowIndexToModel(i),1).toString()})==true){
+                            persyaratan.append(tabModePersyaratanDipenuhi.getValueAt(tbPersyaratanDipenuhi.convertRowIndexToModel(i),2).toString()).append(", ");
                         }
-                        tabModePersyaratanDipenuhi.setValueAt(false,i,0);
+                        tabModePersyaratanDipenuhi.setValueAt(false,tbPersyaratanDipenuhi.convertRowIndexToModel(i),0);
                     }
                 }
                 if (persyaratan.length() > 0) {
@@ -2327,7 +2334,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                     Valid.SetTgl(TanggalPengkajian.getSelectedItem()+"")+" "+TanggalPengkajian.getSelectedItem().toString().substring(11,19)
                 });
 
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(""+tbObat.getRowCount());
                 emptTeks();
             }
         }
@@ -2441,46 +2448,46 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                 for (i = 0; i < tabMode.getRowCount(); i++) {
                     htmlContent.append(
                         "<tr class='isi'>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,1).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,2).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,3).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,4).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,5).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,6).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,7).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,8).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,9).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,10).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,11).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,12).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,13).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,14).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,15).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,16).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,21).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,22).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,23).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,24).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,25).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,26).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,27).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,28).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,29).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,30).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,31).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,32).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,33).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,34).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,35).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,36).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,37).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,38).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,39).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,0).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,1).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,2).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,3).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,4).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,5).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,6).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,7).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,8).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,9).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,10).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,11).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,12).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,13).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,14).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,15).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,16).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,17).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,18).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,19).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,20).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,21).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,22).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,23).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,24).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,25).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,26).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,27).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,28).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,29).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,30).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,31).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,32).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,33).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,34).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,35).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,36).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,37).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,38).toString()+"</td>"+
+                            "<td valign='top'>"+tabMode.getValueAt(i,39).toString()+"</td>"+
                         "</tr>");
                 }
                 LoadHTML.setText(
@@ -2576,7 +2583,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
@@ -2588,7 +2595,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
-        if(tabMode.getRowCount()!=0){
+        if(tbObat.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -2684,8 +2691,8 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                 param.put("lokalis",getClass().getResource("/picture/semua.png").openStream());
             } catch (Exception e) {
             }
-            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()));
+            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString()+"\nID "+(finger.equals("")?tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString():finger)+"\n"+Valid.SetTgl3(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString()));
 
             Valid.MyReportqry("rptCetakPenilaianAwalMedisRalan.jasper","report","::[ Laporan Pengkajian Awal Medis Rawat Jalan ]::",
                 "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,penilaian_medis_ralan.tanggal,"+
@@ -2695,7 +2702,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                 "penilaian_medis_ralan.ket_fisik,penilaian_medis_ralan.ket_lokalis,penilaian_medis_ralan.penunjang,penilaian_medis_ralan.diagnosis,penilaian_medis_ralan.tata,penilaian_medis_ralan.konsulrujuk,dokter.nm_dokter "+
                 "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "inner join penilaian_medis_ralan on reg_periksa.no_rawat=penilaian_medis_ralan.no_rawat "+
-                "inner join dokter on penilaian_medis_ralan.nip=dokter.nip where penilaian_medis_ralan.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
+                "inner join dokter on penilaian_medis_ralan.nip=dokter.nip where penilaian_medis_ralan.no_rawat='"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"'",param);
         }
     }//GEN-LAST:event_MnPenilaianMedisActionPerformed
 
@@ -3980,7 +3987,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(""+tbObat.getRowCount());
     }
 
     public void emptTeks() {
@@ -4035,16 +4042,16 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoProyek.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            DeskripsiPekerjaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            NamaProyek.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            YangBertanggungJawab.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            KontraktorPelaksana.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            DibutuhkanICRA.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            KodeManajer.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            DeskripsiLokasiProyek.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            PenyebabRisikoLainnya.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            Valid.SetTgl2(TanggalMulai,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
+            NoProyek.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            DeskripsiPekerjaan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            NamaProyek.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            YangBertanggungJawab.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            KontraktorPelaksana.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            DibutuhkanICRA.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            KodeManajer.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            DeskripsiLokasiProyek.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            PenyebabRisikoLainnya.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            Valid.SetTgl2(TanggalMulai,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
         }
     }
 
@@ -4106,6 +4113,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
 
     private void tampilKelompokRisiko() {
         try{
+            tbKelompokRisikoArea.suspendSorting();
             Valid.tabelKosong(tabModeKelompokRisikoArea);
             file=new File("./cache/pcrakelompokrisikoarea.iyem");
             file.createNewFile();
@@ -4142,13 +4150,14 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
+        tbKelompokRisikoArea.resumeSorting();
     }
 
     private void tampilKelompokRisiko2() {
         try{
             jml=0;
             for(i=0;i<tbKelompokRisikoArea.getRowCount();i++){
-                if(tbKelompokRisikoArea.getValueAt(i,0).toString().equals("true")){
+                if(tabModeKelompokRisikoArea.getValueAt(tbKelompokRisikoArea.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -4159,14 +4168,15 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
 
             index=0;
             for(i=0;i<tbKelompokRisikoArea.getRowCount();i++){
-                if(tbKelompokRisikoArea.getValueAt(i,0).toString().equals("true")){
+                if(tabModeKelompokRisikoArea.getValueAt(tbKelompokRisikoArea.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode[index]=tbKelompokRisikoArea.getValueAt(i,1).toString();
-                    nama[index]=tbKelompokRisikoArea.getValueAt(i,2).toString();
+                    kode[index]=tabModeKelompokRisikoArea.getValueAt(tbKelompokRisikoArea.convertRowIndexToModel(i),1).toString();
+                    nama[index]=tabModeKelompokRisikoArea.getValueAt(tbKelompokRisikoArea.convertRowIndexToModel(i),2).toString();
                     index++;
                 }
             }
 
+            tbKelompokRisikoArea.suspendSorting();
             Valid.tabelKosong(tabModeKelompokRisikoArea);
 
             for(i=0;i<jml;i++){
@@ -4199,10 +4209,12 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             response = null;
             root = null;
         }
+        tbKelompokRisikoArea.resumeSorting();
     }
 
     private void tampilIdentifikasiRisikoKebakaran() {
         try{
+            tbIdentifikasiRisikoKebakaran.suspendSorting();
             Valid.tabelKosong(tabModeIdentifikasiRisikoKebakaran);
             file=new File("./cache/pcraidentifikasirisikokebakaran.iyem");
             file.createNewFile();
@@ -4239,13 +4251,14 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
+        tbIdentifikasiRisikoKebakaran.resumeSorting();
     }
 
     private void tampilIdentifikasiRisikoKebakaran2() {
         try{
             jml=0;
             for(i=0;i<tbIdentifikasiRisikoKebakaran.getRowCount();i++){
-                if(tbIdentifikasiRisikoKebakaran.getValueAt(i,0).toString().equals("true")){
+                if(tabModeIdentifikasiRisikoKebakaran.getValueAt(tbIdentifikasiRisikoKebakaran.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -4256,14 +4269,15 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
 
             index=0;
             for(i=0;i<tbIdentifikasiRisikoKebakaran.getRowCount();i++){
-                if(tbIdentifikasiRisikoKebakaran.getValueAt(i,0).toString().equals("true")){
+                if(tabModeIdentifikasiRisikoKebakaran.getValueAt(tbIdentifikasiRisikoKebakaran.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode[index]=tbIdentifikasiRisikoKebakaran.getValueAt(i,1).toString();
-                    nama[index]=tbIdentifikasiRisikoKebakaran.getValueAt(i,2).toString();
+                    kode[index]=tabModeIdentifikasiRisikoKebakaran.getValueAt(tbIdentifikasiRisikoKebakaran.convertRowIndexToModel(i),1).toString();
+                    nama[index]=tabModeIdentifikasiRisikoKebakaran.getValueAt(tbIdentifikasiRisikoKebakaran.convertRowIndexToModel(i),2).toString();
                     index++;
                 }
             }
 
+            tbIdentifikasiRisikoKebakaran.suspendSorting();
             Valid.tabelKosong(tabModeIdentifikasiRisikoKebakaran);
 
             for(i=0;i<jml;i++){
@@ -4296,10 +4310,12 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             response = null;
             root = null;
         }
+        tbIdentifikasiRisikoKebakaran.resumeSorting();
     }
 
     private void tampilIdentifikasiRisikoInfeksi() {
         try{
+            tbIdentifikasiRisikoInfeksi.suspendSorting();
             Valid.tabelKosong(tabModeIdentifikasiRisikoInfeksi);
             file=new File("./cache/pcraidentifikasirisikoinfeksi.iyem");
             file.createNewFile();
@@ -4336,13 +4352,14 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
+        tbIdentifikasiRisikoInfeksi.resumeSorting();
     }
 
     private void tampilIdentifikasiRisikoInfeksi2() {
         try{
             jml=0;
             for(i=0;i<tbIdentifikasiRisikoInfeksi.getRowCount();i++){
-                if(tbIdentifikasiRisikoInfeksi.getValueAt(i,0).toString().equals("true")){
+                if(tabModeIdentifikasiRisikoInfeksi.getValueAt(tbIdentifikasiRisikoInfeksi.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -4353,14 +4370,15 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
 
             index=0;
             for(i=0;i<tbIdentifikasiRisikoInfeksi.getRowCount();i++){
-                if(tbIdentifikasiRisikoInfeksi.getValueAt(i,0).toString().equals("true")){
+                if(tabModeIdentifikasiRisikoInfeksi.getValueAt(tbIdentifikasiRisikoInfeksi.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode[index]=tbIdentifikasiRisikoInfeksi.getValueAt(i,1).toString();
-                    nama[index]=tbIdentifikasiRisikoInfeksi.getValueAt(i,2).toString();
+                    kode[index]=tabModeIdentifikasiRisikoInfeksi.getValueAt(tbIdentifikasiRisikoInfeksi.convertRowIndexToModel(i),1).toString();
+                    nama[index]=tabModeIdentifikasiRisikoInfeksi.getValueAt(tbIdentifikasiRisikoInfeksi.convertRowIndexToModel(i),2).toString();
                     index++;
                 }
             }
 
+            tbIdentifikasiRisikoInfeksi.suspendSorting();
             Valid.tabelKosong(tabModeIdentifikasiRisikoInfeksi);
 
             for(i=0;i<jml;i++){
@@ -4393,10 +4411,12 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             response = null;
             root = null;
         }
+        tbIdentifikasiRisikoInfeksi.resumeSorting();
     }
 
     private void tampilIdentifikasiRisikoKeselamatan() {
         try{
+            tbIdentifikasiRisikoKeselamatan.suspendSorting();
             Valid.tabelKosong(tabModeIdentifikasiRisikoKeselamatan);
             file=new File("./cache/pcraidentifikasirisikokeselamatan.iyem");
             file.createNewFile();
@@ -4433,13 +4453,14 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
+        tbIdentifikasiRisikoKeselamatan.resumeSorting();
     }
 
     private void tampilIdentifikasiRisikoKeselamatan2() {
         try{
             jml=0;
             for(i=0;i<tbIdentifikasiRisikoKeselamatan.getRowCount();i++){
-                if(tbIdentifikasiRisikoKeselamatan.getValueAt(i,0).toString().equals("true")){
+                if(tabModeIdentifikasiRisikoKeselamatan.getValueAt(tbIdentifikasiRisikoKeselamatan.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -4450,14 +4471,15 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
 
             index=0;
             for(i=0;i<tbIdentifikasiRisikoKeselamatan.getRowCount();i++){
-                if(tbIdentifikasiRisikoKeselamatan.getValueAt(i,0).toString().equals("true")){
+                if(tabModeIdentifikasiRisikoKeselamatan.getValueAt(tbIdentifikasiRisikoKeselamatan.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode[index]=tbIdentifikasiRisikoKeselamatan.getValueAt(i,1).toString();
-                    nama[index]=tbIdentifikasiRisikoKeselamatan.getValueAt(i,2).toString();
+                    kode[index]=tabModeIdentifikasiRisikoKeselamatan.getValueAt(tbIdentifikasiRisikoKeselamatan.convertRowIndexToModel(i),1).toString();
+                    nama[index]=tabModeIdentifikasiRisikoKeselamatan.getValueAt(tbIdentifikasiRisikoKeselamatan.convertRowIndexToModel(i),2).toString();
                     index++;
                 }
             }
 
+            tbIdentifikasiRisikoKeselamatan.suspendSorting();
             Valid.tabelKosong(tabModeIdentifikasiRisikoKeselamatan);
 
             for(i=0;i<jml;i++){
@@ -4490,10 +4512,12 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             response = null;
             root = null;
         }
+        tbIdentifikasiRisikoKeselamatan.resumeSorting();
     }
 
     private void tampilIdentifikasiRisikoUtilitas() {
         try{
+            tbIdentifikasiRisikoUtilitas.suspendSorting();
             Valid.tabelKosong(tabModeIdentifikasiRisikoUtilitas);
             file=new File("./cache/pcraidentifikasirisikoutilitas.iyem");
             file.createNewFile();
@@ -4530,13 +4554,14 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
+        tbIdentifikasiRisikoUtilitas.resumeSorting();
     }
 
     private void tampilIdentifikasiRisikoUtilitas2() {
         try{
             jml=0;
             for(i=0;i<tbIdentifikasiRisikoUtilitas.getRowCount();i++){
-                if(tbIdentifikasiRisikoUtilitas.getValueAt(i,0).toString().equals("true")){
+                if(tabModeIdentifikasiRisikoUtilitas.getValueAt(tbIdentifikasiRisikoUtilitas.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -4547,14 +4572,15 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
 
             index=0;
             for(i=0;i<tbIdentifikasiRisikoUtilitas.getRowCount();i++){
-                if(tbIdentifikasiRisikoUtilitas.getValueAt(i,0).toString().equals("true")){
+                if(tabModeIdentifikasiRisikoUtilitas.getValueAt(tbIdentifikasiRisikoUtilitas.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode[index]=tbIdentifikasiRisikoUtilitas.getValueAt(i,1).toString();
-                    nama[index]=tbIdentifikasiRisikoUtilitas.getValueAt(i,2).toString();
+                    kode[index]=tabModeIdentifikasiRisikoUtilitas.getValueAt(tbIdentifikasiRisikoUtilitas.convertRowIndexToModel(i),1).toString();
+                    nama[index]=tabModeIdentifikasiRisikoUtilitas.getValueAt(tbIdentifikasiRisikoUtilitas.convertRowIndexToModel(i),2).toString();
                     index++;
                 }
             }
 
+            tbIdentifikasiRisikoUtilitas.suspendSorting();
             Valid.tabelKosong(tabModeIdentifikasiRisikoUtilitas);
 
             for(i=0;i<jml;i++){
@@ -4587,10 +4613,12 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             response = null;
             root = null;
         }
+        tbIdentifikasiRisikoUtilitas.resumeSorting();
     }
 
     private void tampilTindakanPengendalian() {
         try{
+            tbTindakanPengendalian.suspendSorting();
             Valid.tabelKosong(tabModeTindakanPengendalian);
             file=new File("./cache/pcratindakanpengendalian.iyem");
             file.createNewFile();
@@ -4627,13 +4655,14 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
+        tbTindakanPengendalian.resumeSorting();
     }
 
     private void tampilTindakanPengendalian2() {
         try{
             jml=0;
             for(i=0;i<tbTindakanPengendalian.getRowCount();i++){
-                if(tbTindakanPengendalian.getValueAt(i,0).toString().equals("true")){
+                if(tabModeTindakanPengendalian.getValueAt(tbTindakanPengendalian.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -4644,14 +4673,15 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
 
             index=0;
             for(i=0;i<tbTindakanPengendalian.getRowCount();i++){
-                if(tbTindakanPengendalian.getValueAt(i,0).toString().equals("true")){
+                if(tabModeTindakanPengendalian.getValueAt(tbTindakanPengendalian.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode[index]=tbTindakanPengendalian.getValueAt(i,1).toString();
-                    nama[index]=tbTindakanPengendalian.getValueAt(i,2).toString();
+                    kode[index]=tabModeTindakanPengendalian.getValueAt(tbTindakanPengendalian.convertRowIndexToModel(i),1).toString();
+                    nama[index]=tabModeTindakanPengendalian.getValueAt(tbTindakanPengendalian.convertRowIndexToModel(i),2).toString();
                     index++;
                 }
             }
 
+            tbTindakanPengendalian.suspendSorting();
             Valid.tabelKosong(tabModeTindakanPengendalian);
 
             for(i=0;i<jml;i++){
@@ -4684,10 +4714,12 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             response = null;
             root = null;
         }
+        tbTindakanPengendalian.resumeSorting();
     }
 
     private void tampilPersyaratanDipenuhi() {
         try{
+            tbPersyaratanDipenuhi.suspendSorting();
             Valid.tabelKosong(tabModePersyaratanDipenuhi);
             file=new File("./cache/pcrapersyaratandipenuhi.iyem");
             file.createNewFile();
@@ -4724,13 +4756,14 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
+        tbPersyaratanDipenuhi.resumeSorting();
     }
 
     private void tampilPersyaratanDipenuhi2() {
         try{
             jml=0;
             for(i=0;i<tbPersyaratanDipenuhi.getRowCount();i++){
-                if(tbPersyaratanDipenuhi.getValueAt(i,0).toString().equals("true")){
+                if(tabModePersyaratanDipenuhi.getValueAt(tbPersyaratanDipenuhi.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -4741,14 +4774,15 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
 
             index=0;
             for(i=0;i<tbPersyaratanDipenuhi.getRowCount();i++){
-                if(tbPersyaratanDipenuhi.getValueAt(i,0).toString().equals("true")){
+                if(tabModePersyaratanDipenuhi.getValueAt(tbPersyaratanDipenuhi.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode[index]=tbPersyaratanDipenuhi.getValueAt(i,1).toString();
-                    nama[index]=tbPersyaratanDipenuhi.getValueAt(i,2).toString();
+                    kode[index]=tabModePersyaratanDipenuhi.getValueAt(tbPersyaratanDipenuhi.convertRowIndexToModel(i),1).toString();
+                    nama[index]=tabModePersyaratanDipenuhi.getValueAt(tbPersyaratanDipenuhi.convertRowIndexToModel(i),2).toString();
                     index++;
                 }
             }
 
+            tbPersyaratanDipenuhi.suspendSorting();
             Valid.tabelKosong(tabModePersyaratanDipenuhi);
 
             for(i=0;i<jml;i++){
@@ -4781,6 +4815,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             response = null;
             root = null;
         }
+        tbPersyaratanDipenuhi.resumeSorting();
     }
 
     private void runBackground(Runnable task) {
