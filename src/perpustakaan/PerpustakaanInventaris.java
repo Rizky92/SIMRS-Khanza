@@ -985,7 +985,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void no_inventarisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_no_inventarisKeyPressed
@@ -993,147 +993,147 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_no_inventarisKeyPressed
 
     private void kode_bukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kode_bukuKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        isBarang();
-    }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        isBarang();
-        status_buku.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        isBarang();
-        btnRuang.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-        btnBarangActionPerformed(null);
-    }
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            isBarang();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isBarang();
+            status_buku.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isBarang();
+            btnRuang.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            btnBarangActionPerformed(null);
+        }
     }//GEN-LAST:event_kode_bukuKeyPressed
 
     private void btnBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangActionPerformed
-    PerpustakaanKoleksi barang=new PerpustakaanKoleksi(null,false);
-    barang.addWindowListener(new WindowListener() {
-        @Override
-        public void windowOpened(WindowEvent e) {}
-        @Override
-        public void windowClosing(WindowEvent e) {}
-        @Override
-        public void windowClosed(WindowEvent e) {
-            if(barang.getTable().getSelectedRow()!= -1){
-                kode_buku.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),0).toString());
-                judul_buku.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
-                nm_produsen.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),3).toString());
-                nm_merk.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),4).toString());
-                nm_kategori.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),7).toString());
-                nm_jenis.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),8).toString());
+        PerpustakaanKoleksi barang=new PerpustakaanKoleksi(null,false);
+        barang.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(barang.getTable().getSelectedRow()!= -1){
+                    kode_buku.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),0).toString());
+                    judul_buku.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
+                    nm_produsen.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),3).toString());
+                    nm_merk.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),4).toString());
+                    nm_kategori.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),7).toString());
+                    nm_jenis.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),8).toString());
+                }
+                kode_buku.requestFocus();
             }
-            kode_buku.requestFocus();
-        }
-        @Override
-        public void windowIconified(WindowEvent e) {}
-        @Override
-        public void windowDeiconified(WindowEvent e) {}
-        @Override
-        public void windowActivated(WindowEvent e) {}
-        @Override
-        public void windowDeactivated(WindowEvent e) {}
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
 
-    });
+        });
 
-    barang.getTable().addKeyListener(new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {}
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                barang.dispose();
+        barang.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    barang.dispose();
+                }
             }
-        }
-        @Override
-        public void keyReleased(KeyEvent e) {}
-    });
-    barang.isCek();
-    barang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    barang.setLocationRelativeTo(internalFrame1);
-    barang.setAlwaysOnTop(false);
-    barang.setVisible(true);
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        barang.isCek();
+        barang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        barang.setLocationRelativeTo(internalFrame1);
+        barang.setAlwaysOnTop(false);
+        barang.setVisible(true);
     }//GEN-LAST:event_btnBarangActionPerformed
 
     private void kd_ruangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kd_ruangKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        Sequel.cariIsi("select perpustakaan_ruang.nm_ruang from perpustakaan_ruang where perpustakaan_ruang.kd_ruang=?",nm_ruang,kd_ruang.getText());
-    }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        btnBarang.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        no_rak.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-        btnRuangActionPerformed(null);
-    }
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            Sequel.cariIsi("select perpustakaan_ruang.nm_ruang from perpustakaan_ruang where perpustakaan_ruang.kd_ruang=?",nm_ruang,kd_ruang.getText());
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            btnBarang.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            no_rak.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            btnRuangActionPerformed(null);
+        }
     }//GEN-LAST:event_kd_ruangKeyPressed
 
     private void btnRuangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRuangActionPerformed
-    PerpustakaanRuang ruang=new PerpustakaanRuang(null,false);
-    ruang.addWindowListener(new WindowListener() {
-        @Override
-        public void windowOpened(WindowEvent e) {}
-        @Override
-        public void windowClosing(WindowEvent e) {}
-        @Override
-        public void windowClosed(WindowEvent e) {
-            if(ruang.getTable().getSelectedRow()!= -1){
-                kd_ruang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),0).toString());
-                nm_ruang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
-                kd_ruang.requestFocus();
+        PerpustakaanRuang ruang=new PerpustakaanRuang(null,false);
+        ruang.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(ruang.getTable().getSelectedRow()!= -1){
+                    kd_ruang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),0).toString());
+                    nm_ruang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
+                    kd_ruang.requestFocus();
+                }
             }
-        }
-        @Override
-        public void windowIconified(WindowEvent e) {}
-        @Override
-        public void windowDeiconified(WindowEvent e) {}
-        @Override
-        public void windowActivated(WindowEvent e) {}
-        @Override
-        public void windowDeactivated(WindowEvent e) {}
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
 
-    });
+        });
 
-    ruang.getTable().addKeyListener(new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {}
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                ruang.dispose();
+        ruang.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    ruang.dispose();
+                }
             }
-        }
-        @Override
-        public void keyReleased(KeyEvent e) {}
-    });
-    ruang.isCek();
-    ruang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    ruang.setLocationRelativeTo(internalFrame1);
-    ruang.setAlwaysOnTop(false);
-    ruang.setVisible(true);
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        ruang.isCek();
+        ruang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        ruang.setLocationRelativeTo(internalFrame1);
+        ruang.setAlwaysOnTop(false);
+        ruang.setVisible(true);
     }//GEN-LAST:event_btnRuangActionPerformed
 
     private void tgl_pengadaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tgl_pengadaanKeyPressed
-    Valid.pindah(evt,no_inventaris,harga);
+        Valid.pindah(evt,no_inventaris,harga);
     }//GEN-LAST:event_tgl_pengadaanKeyPressed
 
     private void status_bukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_status_bukuKeyPressed
-    Valid.pindah(evt,asal_buku,btnBarang);
+        Valid.pindah(evt,asal_buku,btnBarang);
     }//GEN-LAST:event_status_bukuKeyPressed
 
     private void hargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hargaKeyPressed
-    Valid.pindah(evt,tgl_pengadaan,asal_buku);
+        Valid.pindah(evt,tgl_pengadaan,asal_buku);
     }//GEN-LAST:event_hargaKeyPressed
 
     private void asal_bukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_asal_bukuKeyPressed
-    Valid.pindah(evt,harga,status_buku);
+        Valid.pindah(evt,harga,status_buku);
     }//GEN-LAST:event_asal_bukuKeyPressed
 
     private void no_boxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_no_boxKeyPressed
-    Valid.pindah(evt,no_rak,BtnSimpan);
+        Valid.pindah(evt,no_rak,BtnSimpan);
     }//GEN-LAST:event_no_boxKeyPressed
 
     private void no_rakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_no_rakKeyPressed
-    Valid.pindah(evt,kd_ruang,no_box);
+        Valid.pindah(evt,kd_ruang,no_box);
     }//GEN-LAST:event_no_rakKeyPressed
 
     private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBarcodeBtnPrintActionPerformed

@@ -466,6 +466,7 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
             if (reply == JOptionPane.YES_OPTION) {
                 Sequel.AutoComitFalse();
                 sukses=true;
+                double ttlJurnal=0;
                 if(Sequel.menyimpantf2("ipsrspengeluaran","?,?,?,?","No.Keluar",4,new String[]{NoKeluar.getText(),Valid.SetTgl(TglKeluar.getSelectedItem()+""),kdptg.getText(),Keterangan.getText()})==true){
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
@@ -479,6 +480,7 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
                                 Sequel.mengedit("ipsrsbarang","kode_brng=?","stok=stok-?",2,new String[]{
                                     tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,1).toString()
                                 });
+                                ttlJurnal+=Valid.SetAngka(tbDokter.getValueAt(i,6).toString());
                             }else{
                                 sukses=false;
                             }
@@ -490,10 +492,10 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Stok_Keluar_Ipsrs from set_akun"), "PERSEDIAAN BARANG", ttl, 0)==false){
+                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Stok_Keluar_Ipsrs from set_akun"), "PERSEDIAAN BARANG", ttlJurnal, 0)==false){
                         sukses=false;
                     }
-                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Stok_Keluar_Ipsrs from set_akun"), "KAS DI TANGAN", 0, ttl)==false){
+                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Stok_Keluar_Ipsrs from set_akun"), "KAS DI TANGAN", 0, ttlJurnal)==false){
                         sukses=false;
                     }
                     if(sukses==true){
@@ -560,10 +562,11 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            for(i=0;i<tbDokter.getRowCount();i++){
-                tbDokter.setValueAt("",i,0);
-                tbDokter.setValueAt("0",i,6);
-            }
+        for(i=0;i<tbDokter.getRowCount();i++){
+            tbDokter.setValueAt("",i,0);
+            tbDokter.setValueAt("0",i,6);
+        }
+        isHitungSmc();
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
@@ -576,6 +579,8 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
                 i=tbDokter.getSelectedRow();
                 if(i!= -1){
                     tbDokter.setValueAt("", i,0);
+                    tbDokter.setValueAt(0,i,6);
+                    isHitungSmc();
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
@@ -830,13 +835,15 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
                 if(Double.parseDouble(tbDokter.getValueAt(row,0).toString())>Double.parseDouble(tbDokter.getValueAt(row,4).toString())){
                     JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
                     tbDokter.setValueAt("",row,0);
+                    tbDokter.setValueAt(0,row,6);
                 }
             }else{
                 tbDokter.setValueAt(0,row,6);
             }
         }
 
-        isHitung();
+        // isHitung();
+        isHitungSmc();
     }
 
     private void autoNomor() {
@@ -860,9 +867,13 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
                 while(rs.next()){
                     if(rs.getDouble("jumlah")>rs.getDouble("stok")){
                         JOptionPane.showMessageDialog(null,"Stok tidak mencukupi...!");
+                        // tabMode.addRow(new Object[]{
+                        //     "",rs.getString(1),rs.getString(2),rs.getString(3),
+                        //     rs.getString(4),rs.getDouble(5),(rs.getDouble("jumlah")*rs.getDouble("harga"))
+                        // });
                         tabMode.addRow(new Object[]{
                             "",rs.getString(1),rs.getString(2),rs.getString(3),
-                            rs.getString(4),rs.getDouble(5),(rs.getDouble("jumlah")*rs.getDouble("harga"))
+                            rs.getString(4),rs.getDouble(5),0d
                         });
                     }else{
                         tabMode.addRow(new Object[]{
@@ -882,7 +893,8 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            isHitung();
+            // isHitung();
+            isHitungSmc();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -892,6 +904,7 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
         runBackground(() ->tampil(nopermintaan,keterangan));
     }
 
+    /*
     private void isHitung(){
         ttl=0;
         jml=tbDokter.getRowCount();
@@ -914,6 +927,17 @@ public class IPSRSPengeluaran extends javax.swing.JDialog {
                 keluar=0;
             }
             ttl=ttl+keluar;
+        }
+        LTotal.setText(Valid.SetAngka(ttl));
+    }
+    */
+
+    private void isHitungSmc() {
+        ttl = 0;
+        for (int r = 0; r < tbDokter.getRowCount(); r++) {
+            if (Valid.SetAngka(tbDokter.getValueAt(r, 0).toString()) > 0) {
+                ttl += Valid.SetAngka(tbDokter.getValueAt(r, 6).toString());
+            }
         }
         LTotal.setText(Valid.SetAngka(ttl));
     }

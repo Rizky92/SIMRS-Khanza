@@ -1028,7 +1028,7 @@ public class DlgReturPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnMmbActionPerformed
 
     private void JenisjualItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JenisjualItemStateChanged
-   cariBatch();
+        cariBatch();
     }//GEN-LAST:event_JenisjualItemStateChanged
 
     private void ppCetakNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCetakNotaActionPerformed

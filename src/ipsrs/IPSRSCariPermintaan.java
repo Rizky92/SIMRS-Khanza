@@ -745,12 +745,12 @@ public class IPSRSCariPermintaan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-    if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
-        Valid.textKosong(TCari,"pilihan data");
-    }else{
-        Sequel.queryu("delete from permintaan_non_medis where no_permintaan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
-        runBackground(() ->tampil());
-    }
+        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            Valid.textKosong(TCari,"pilihan data");
+        }else{
+            Sequel.queryu("delete from permintaan_non_medis where no_permintaan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+            runBackground(() ->tampil());
+        }
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

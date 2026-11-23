@@ -762,14 +762,14 @@ public class TokoCariPengajuanBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-    if(tbDokter.getSelectedRow()> -1){
-        if(Sequel.cariInteger("select count(no_pengajuan) from toko_pengajuan_barang where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim())==0){
-                Valid.textKosong(TCari,"pilihan data");
-        }else{
-            Sequel.queryu("delete from toko_pengajuan_barang where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
-            runBackground(() ->tampil());
+        if(tbDokter.getSelectedRow()> -1){
+            if(Sequel.cariInteger("select count(no_pengajuan) from toko_pengajuan_barang where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim())==0){
+                    Valid.textKosong(TCari,"pilihan data");
+            }else{
+                Sequel.queryu("delete from toko_pengajuan_barang where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+                runBackground(() ->tampil());
+            }
         }
-    }
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

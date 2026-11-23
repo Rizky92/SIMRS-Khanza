@@ -877,62 +877,63 @@ public class IPSRSCariPengeluaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-  if(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim().equals("")){
-      Valid.textKosong(TCari,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-  }else{
-     try {
-         psdetailpengeluaran=koneksi.prepareStatement("select kode_brng,jumlah,total from ipsrsdetailpengeluaran where no_keluar=? ");
-         try {
-            Sequel.AutoComitFalse();
-            sukses=true;
-            psdetailpengeluaran.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-            rs2=psdetailpengeluaran.executeQuery();
-            total=0;
-            while(rs2.next()){
-               Trackbarang.catatRiwayat(rs2.getString("kode_brng"),rs2.getDouble("jumlah"),0,"Stok Keluar", akses.getkode(),"Hapus");
-               Sequel.mengedit("ipsrsbarang","kode_brng=?","stok=stok+?",2,new String[]{
-                   rs2.getString("jumlah"),rs2.getString("kode_brng")
-               });
-               total=total+rs2.getDouble("total");
-            }
-            Sequel.deleteTampJurnal();
-            if(Sequel.insertTampJurnal(Sequel.cariIsi("select Stok_Keluar_Ipsrs from set_akun"), "PERSEDIAAN BARANG", 0, total)==false){
-                sukses=false;
-            }
-            if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Stok_Keluar_Ipsrs from set_akun"), "KAS DI TANGAN", total, 0)==false){
-                sukses=false;
-            }
-            if(sukses==true){
-                sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN PENGGUNAAN BARANG NON MEDIS"+", OLEH "+akses.getkode());
-            }
+        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim().equals("")){
+            Valid.textKosong(TCari,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+        }else{
+            try {
+                psdetailpengeluaran=koneksi.prepareStatement("select kode_brng,jumlah,total from ipsrsdetailpengeluaran where no_keluar=? ");
+                try {
+                    Sequel.AutoComitFalse();
+                    sukses=true;
+                    psdetailpengeluaran.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+                    rs2=psdetailpengeluaran.executeQuery();
+                    total=0;
+                    while(rs2.next()){
+                        Trackbarang.catatRiwayat(rs2.getString("kode_brng"),rs2.getDouble("jumlah"),0,"Stok Keluar", akses.getkode(),"Hapus");
+                        Sequel.mengedit("ipsrsbarang","kode_brng=?","stok=stok+?",2,new String[]{
+                            rs2.getString("jumlah"),rs2.getString("kode_brng")
+                        });
+                        total=total+rs2.getDouble("total");
+                    }
+                    Sequel.deleteTampJurnal();
+                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Stok_Keluar_Ipsrs from set_akun"), "PERSEDIAAN BARANG", 0, total)==false){
+                        sukses=false;
+                    }
+                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Stok_Keluar_Ipsrs from set_akun"), "KAS DI TANGAN", total, 0)==false){
+                        sukses=false;
+                    }
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN PENGGUNAAN BARANG NON MEDIS"+", OLEH "+akses.getkode());
+                    }
 
-            if(sukses==true){
-                Sequel.queryu2("delete from ipsrspengeluaran where no_keluar=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
-                Sequel.Commit();
-            }else{
-                sukses=false;
-                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                Sequel.RollBack();
-            }
+                    if(sukses==true){
+                        Sequel.queryu2("delete from ipsrspengeluaran where no_keluar=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
+                        Sequel.Commit();
+                    }else{
+                        sukses=false;
+                        Sequel.RollBack();
+                    }
 
-            Sequel.AutoComitTrue();
-            if(sukses==true){
-                runBackground(() ->tampil());
+                    Sequel.AutoComitTrue();
+                    if(sukses==true){
+                        runBackground(() ->tampil());
+                    } else {
+                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                    if(psdetailpengeluaran!=null){
+                        psdetailpengeluaran.close();
+                    }
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex);
             }
-         } catch (Exception e) {
-             System.out.println("Notif : "+e);
-         } finally{
-             if(rs2!=null){
-                 rs2.close();
-             }
-             if(psdetailpengeluaran!=null){
-                 psdetailpengeluaran.close();
-             }
-         }
-     } catch (SQLException ex) {
-         System.out.println(ex);
-     }
-  }
+        }
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJenisActionPerformed

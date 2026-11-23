@@ -1178,7 +1178,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void TAlamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAlamatKeyPressed
-    Valid.pindah(evt,TRujukan,kdDiagnosa);
+        Valid.pindah(evt,TRujukan,kdDiagnosa);
     }//GEN-LAST:event_TAlamatKeyPressed
 
     private void TCariPerujukKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariPerujukKeyPressed

@@ -786,11 +786,11 @@ public final class TokoMember extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPetugasMouseClicked
 
     private void EmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmailKeyPressed
-    Valid.pindah(evt,NoTelp,BtnSimpan);
+        Valid.pindah(evt,NoTelp,BtnSimpan);
     }//GEN-LAST:event_EmailKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

@@ -709,7 +709,7 @@ public final class DlgJenis extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarKeyPressed
 
     private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
-   Valid.pindah(evt,Kd,Nm);
+        Valid.pindah(evt,Kd,Nm);
     }//GEN-LAST:event_KeteranganKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

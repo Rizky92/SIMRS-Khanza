@@ -1452,61 +1452,61 @@ public class DlgCariPermintaanLabPA extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-    if(TabPilihRawat.getSelectedIndex()==0){
-        if(TabRawatJalan.getSelectedIndex()==0){
-            if(!NoRawat.equals("")){
-                if(NoPermintaan.trim().equals("")){
-                    Valid.textKosong(TCari,"No.Permintaan");
-                }else{
-                    if(Sampel.equals("")||akses.getkode().equals("Admin Utama")){
-                        if(Sequel.cariInteger("select count(permintaan_pemeriksaan_labpa.noorder) from permintaan_pemeriksaan_labpa where permintaan_pemeriksaan_labpa.stts_bayar='Sudah' and permintaan_pemeriksaan_labpa.noorder=?",NoPermintaan)>0){
-                            JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
-                        }else{
-                            Sequel.meghapus("permintaan_labpa","noorder",NoPermintaan);
-                            TeksKosong();
-                            runBackground(() ->tampil());
-                        }
+        if(TabPilihRawat.getSelectedIndex()==0){
+            if(TabRawatJalan.getSelectedIndex()==0){
+                if(!NoRawat.equals("")){
+                    if(NoPermintaan.trim().equals("")){
+                        Valid.textKosong(TCari,"No.Permintaan");
                     }else{
-                        JOptionPane.showMessageDialog(null,"Maaf, Sudah dilakukan pengambilan sampel...!!!!");
+                        if(Sampel.equals("")||akses.getkode().equals("Admin Utama")){
+                            if(Sequel.cariInteger("select count(permintaan_pemeriksaan_labpa.noorder) from permintaan_pemeriksaan_labpa where permintaan_pemeriksaan_labpa.stts_bayar='Sudah' and permintaan_pemeriksaan_labpa.noorder=?",NoPermintaan)>0){
+                                JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
+                            }else{
+                                Sequel.meghapus("permintaan_labpa","noorder",NoPermintaan);
+                                TeksKosong();
+                                runBackground(() ->tampil());
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Maaf, Sudah dilakukan pengambilan sampel...!!!!");
+                        }
                     }
+                }else{
+                    JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data permintaan...!!!!");
+                    TCari.requestFocus();
                 }
-            }else{
-                JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data permintaan...!!!!");
+            }else if(TabRawatJalan.getSelectedIndex()==1){
+                JOptionPane.showMessageDialog(null,"Hanya bisa dilakukan hapus di Data Permintaan..!!!");
+                TabRawatJalan.setSelectedIndex(0);
                 TCari.requestFocus();
             }
-        }else if(TabRawatJalan.getSelectedIndex()==1){
-            JOptionPane.showMessageDialog(null,"Hanya bisa dilakukan hapus di Data Permintaan..!!!");
-            TabRawatJalan.setSelectedIndex(0);
-            TCari.requestFocus();
-        }
-    }else if(TabPilihRawat.getSelectedIndex()==1){
-        if(TabRawatInap.getSelectedIndex()==0){
-            if(!NoRawat.equals("")){
-                if(NoPermintaan.trim().equals("")){
-                    Valid.textKosong(TCari,"No.Permintaan");
-                }else{
-                    if(Sampel.equals("")||akses.getkode().equals("Admin Utama")){
-                        if(Sequel.cariInteger("select count(permintaan_pemeriksaan_labpa.noorder) from permintaan_pemeriksaan_labpa where permintaan_pemeriksaan_labpa.stts_bayar='Sudah' and permintaan_pemeriksaan_labpa.noorder=?",NoPermintaan)>0){
-                            JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
-                        }else{
-                            Sequel.meghapus("permintaan_labpa","noorder",NoPermintaan);
-                            TeksKosong();
-                            runBackground(() ->tampil3());
-                        }
+        }else if(TabPilihRawat.getSelectedIndex()==1){
+            if(TabRawatInap.getSelectedIndex()==0){
+                if(!NoRawat.equals("")){
+                    if(NoPermintaan.trim().equals("")){
+                        Valid.textKosong(TCari,"No.Permintaan");
                     }else{
-                        JOptionPane.showMessageDialog(null,"Maaf, Sudah dilakukan pengambilan sampel...!!!!");
+                        if(Sampel.equals("")||akses.getkode().equals("Admin Utama")){
+                            if(Sequel.cariInteger("select count(permintaan_pemeriksaan_labpa.noorder) from permintaan_pemeriksaan_labpa where permintaan_pemeriksaan_labpa.stts_bayar='Sudah' and permintaan_pemeriksaan_labpa.noorder=?",NoPermintaan)>0){
+                                JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
+                            }else{
+                                Sequel.meghapus("permintaan_labpa","noorder",NoPermintaan);
+                                TeksKosong();
+                                runBackground(() ->tampil3());
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Maaf, Sudah dilakukan pengambilan sampel...!!!!");
+                        }
                     }
+                }else{
+                    JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data permintaan...!!!!");
+                    TCari.requestFocus();
                 }
-            }else{
-                JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data permintaan...!!!!");
+            }else if(TabRawatInap.getSelectedIndex()==1){
+                JOptionPane.showMessageDialog(null,"Hanya bisa dilakukan hapus di Data Permintaan..!!!");
+                TabRawatInap.setSelectedIndex(0);
                 TCari.requestFocus();
             }
-        }else if(TabRawatInap.getSelectedIndex()==1){
-            JOptionPane.showMessageDialog(null,"Hanya bisa dilakukan hapus di Data Permintaan..!!!");
-            TabRawatInap.setSelectedIndex(0);
-            TCari.requestFocus();
         }
-    }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1518,16 +1518,16 @@ public class DlgCariPermintaanLabPA extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void tbLabRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLabRalanMouseClicked
-    if(tbLabRalan.getRowCount()!=0){
-        try {
-            getData();
-        } catch (java.lang.NullPointerException e) {
+        if(tbLabRalan.getRowCount()!=0){
+            try {
+                getData();
+            } catch (java.lang.NullPointerException e) {
+            }
         }
-    }
     }//GEN-LAST:event_tbLabRalanMouseClicked
 
     private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbLabRalanKeyPressed
-   if(tbLabRalan.getRowCount()!=0){
+        if(tbLabRalan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1726,42 +1726,42 @@ public class DlgCariPermintaanLabPA extends javax.swing.JDialog {
                 }else{
                     if(Sequel.mengedittf("permintaan_labpa","noorder=?","tgl_sampel=?,jam_sampel=?",3,new String[]{
                         Valid.SetTgl(TanggalPulang.getSelectedItem()+""),TanggalPulang.getSelectedItem().toString().substring(11,19),NoPermintaan
-                        })==true){
-                            WindowAmbilSampel.dispose();
-                            try {
-                                pilihan = (String)JOptionPane.showInputDialog(null,"Waktu pengambilan sampel berhasil disimpan, apakah ada yang ingin dicetak..?","Konfirmasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Tidak Ada","Barcode No.Permintaan 1","Barcode No.Permintaan 2","Lembar Permintaan Lab","Lembar Permintaan Lab & Barcode No.Permintaan 1","Lembar Permintaan Lab & Barcode No.Permintaan 2"},"Tidak Ada");
-                                switch (pilihan) {
-                                    case "Tidak Ada":
-                                        break;
-                                    case "Barcode No.Permintaan 1":
-                                        BtnBarcodePermintaanActionPerformed(evt);
-                                        break;
-                                    case "Barcode No.Permintaan 2":
-                                        BtnBarcodePermintaan2ActionPerformed(evt);
-                                        break;
-                                    case "Lembar Permintaan Lab":
-                                        BtnCetakHasilLabActionPerformed(evt);
-                                        break;
-                                    case "Lembar Permintaan Lab & Barcode No.Permintaan 1":
-                                        BtnBarcodePermintaanActionPerformed(evt);
-                                        getData();
-                                        getData2();
-                                        BtnCetakHasilLabActionPerformed(evt);
-                                        break;
-                                    case "Lembar Permintaan Lab & Barcode No.Permintaan 2":
-                                        BtnBarcodePermintaan2ActionPerformed(evt);
-                                        getData();
-                                        getData2();
-                                        BtnCetakHasilLabActionPerformed(evt);
-                                        break;
-                                }
-                            } catch (Exception e) {
+                    })==true){
+                        WindowAmbilSampel.dispose();
+                        try {
+                            pilihan = (String)JOptionPane.showInputDialog(null,"Waktu pengambilan sampel berhasil disimpan, apakah ada yang ingin dicetak..?","Konfirmasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Tidak Ada","Barcode No.Permintaan 1","Barcode No.Permintaan 2","Lembar Permintaan Lab","Lembar Permintaan Lab & Barcode No.Permintaan 1","Lembar Permintaan Lab & Barcode No.Permintaan 2"},"Tidak Ada");
+                            switch (pilihan) {
+                                case "Tidak Ada":
+                                    break;
+                                case "Barcode No.Permintaan 1":
+                                    BtnBarcodePermintaanActionPerformed(evt);
+                                    break;
+                                case "Barcode No.Permintaan 2":
+                                    BtnBarcodePermintaan2ActionPerformed(evt);
+                                    break;
+                                case "Lembar Permintaan Lab":
+                                    BtnCetakHasilLabActionPerformed(evt);
+                                    break;
+                                case "Lembar Permintaan Lab & Barcode No.Permintaan 1":
+                                    BtnBarcodePermintaanActionPerformed(evt);
+                                    getData();
+                                    getData2();
+                                    BtnCetakHasilLabActionPerformed(evt);
+                                    break;
+                                case "Lembar Permintaan Lab & Barcode No.Permintaan 2":
+                                    BtnBarcodePermintaan2ActionPerformed(evt);
+                                    getData();
+                                    getData2();
+                                    BtnCetakHasilLabActionPerformed(evt);
+                                    break;
                             }
-                            Sequel.queryu("delete from antrilabpa");
-                            Sequel.queryu("insert into antrilabpa values('1')");
-                            TeksKosong();
-                            tbLabRalan.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbLabRalan.getSelectedRow(),5);
-                            tbLabRalan.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbLabRalan.getSelectedRow(),6);
+                        } catch (Exception e) {
+                        }
+                        Sequel.queryu("delete from antrilabpa");
+                        Sequel.queryu("insert into antrilabpa values('1')");
+                        TeksKosong();
+                        tbLabRalan.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbLabRalan.getSelectedRow(),5);
+                        tbLabRalan.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbLabRalan.getSelectedRow(),6);
                     }
                 }
             }else{
@@ -1775,33 +1775,33 @@ public class DlgCariPermintaanLabPA extends javax.swing.JDialog {
                 }else{
                     if(Sequel.mengedittf("permintaan_labpa","noorder=?","tgl_sampel=?,jam_sampel=?",3,new String[]{
                         Valid.SetTgl(TanggalPulang.getSelectedItem()+""),TanggalPulang.getSelectedItem().toString().substring(11,19),NoPermintaan
-                        })==true){
-                            WindowAmbilSampel.dispose();
-                            try {
-                                pilihan = (String)JOptionPane.showInputDialog(null,"Waktu pengambilan sampel berhasil disimpan, Apakah ada yang ingin dicetak..?","Konfirmasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Tidak Ada","Barcode No.Permintaan 1","Barcode No.Permintaan 2","Lembar Permintaan Lab & Barcode No.Permintaan 1","Lembar Permintaan Lab & Barcode No.Permintaan 2"},"Tidak Ada");
-                                switch (pilihan) {
-                                    case "Tidak Ada":
-                                        break;
-                                    case "Barcode No.Permintaan 1":
-                                        BtnBarcodePermintaanActionPerformed(evt);
-                                        break;
-                                    case "Barcode No.Permintaan 2":
-                                        BtnBarcodePermintaan2ActionPerformed(evt);
-                                        break;
-                                    case "Lembar Permintaan Lab & Barcode No.Permintaan 1":
-                                        BtnBarcodePermintaanActionPerformed(evt);
-                                        BtnCetakHasilLabActionPerformed(null);
-                                        break;
-                                    case "Lembar Permintaan Lab & Barcode No.Permintaan 2":
-                                        BtnBarcodePermintaan2ActionPerformed(evt);
-                                        BtnCetakHasilLabActionPerformed(null);
-                                        break;
-                                }
-                            } catch (Exception e) {
+                    })==true){
+                        WindowAmbilSampel.dispose();
+                        try {
+                            pilihan = (String)JOptionPane.showInputDialog(null,"Waktu pengambilan sampel berhasil disimpan, Apakah ada yang ingin dicetak..?","Konfirmasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Tidak Ada","Barcode No.Permintaan 1","Barcode No.Permintaan 2","Lembar Permintaan Lab & Barcode No.Permintaan 1","Lembar Permintaan Lab & Barcode No.Permintaan 2"},"Tidak Ada");
+                            switch (pilihan) {
+                                case "Tidak Ada":
+                                    break;
+                                case "Barcode No.Permintaan 1":
+                                    BtnBarcodePermintaanActionPerformed(evt);
+                                    break;
+                                case "Barcode No.Permintaan 2":
+                                    BtnBarcodePermintaan2ActionPerformed(evt);
+                                    break;
+                                case "Lembar Permintaan Lab & Barcode No.Permintaan 1":
+                                    BtnBarcodePermintaanActionPerformed(evt);
+                                    BtnCetakHasilLabActionPerformed(null);
+                                    break;
+                                case "Lembar Permintaan Lab & Barcode No.Permintaan 2":
+                                    BtnBarcodePermintaan2ActionPerformed(evt);
+                                    BtnCetakHasilLabActionPerformed(null);
+                                    break;
                             }
-                            TeksKosong();
-                            tbLabRanap.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbLabRanap.getSelectedRow(),5);
-                            tbLabRanap.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbLabRanap.getSelectedRow(),6);
+                        } catch (Exception e) {
+                        }
+                        TeksKosong();
+                        tbLabRanap.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbLabRanap.getSelectedRow(),5);
+                        tbLabRanap.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbLabRanap.getSelectedRow(),6);
                     }
                 }
             }else{

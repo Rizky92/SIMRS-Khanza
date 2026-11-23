@@ -739,7 +739,7 @@ public final class DlgPoli extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyPressed
-   Valid.pindah(evt,Kd,By);
+        Valid.pindah(evt,Kd,By);
     }//GEN-LAST:event_NmKeyPressed
 
     private void ppOrderKodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppOrderKodeActionPerformed

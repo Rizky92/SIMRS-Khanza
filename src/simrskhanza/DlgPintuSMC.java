@@ -639,7 +639,7 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyPressed
-    Valid.pindah(evt, Kd, TCari);
+        Valid.pindah(evt, Kd, TCari);
     }//GEN-LAST:event_NmKeyPressed
 
     private void Kd2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kd2KeyPressed

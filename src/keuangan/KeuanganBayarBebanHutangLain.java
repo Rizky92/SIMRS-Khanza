@@ -1136,7 +1136,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarKeyPressed
 
     private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
-   Valid.pindah(evt,AkunBayar,BtnSimpan);
+        Valid.pindah(evt,AkunBayar,BtnSimpan);
     }//GEN-LAST:event_KeteranganKeyPressed
 
     private void Kd2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kd2KeyPressed

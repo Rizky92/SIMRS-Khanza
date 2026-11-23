@@ -694,7 +694,7 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-   if(KdRuang.getText().trim().equals("")||NmRuang.getText().trim().equals("")){
+        if(KdRuang.getText().trim().equals("")||NmRuang.getText().trim().equals("")){
             Valid.textKosong(btnPetugas,"Ruang/Unit");
         }else{
             if(Sequel.menyimpantf("audit_bundle_isk","?,?,?,?,?,?,?,?,?,?","Data",10,new String[]{

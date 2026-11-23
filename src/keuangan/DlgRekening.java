@@ -909,7 +909,7 @@ public final class DlgRekening extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarKeyPressed
 
     private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyPressed
-   Valid.pindah(evt,Kd,Tipe);
+        Valid.pindah(evt,Kd,Tipe);
     }//GEN-LAST:event_NmKeyPressed
 
     private void Kd2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kd2KeyPressed

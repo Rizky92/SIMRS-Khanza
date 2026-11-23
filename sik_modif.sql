@@ -828,6 +828,8 @@ ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tat_kerja` date NOT NULL 
 
 ALTER TABLE `pengajuan_cuti` MODIFY COLUMN IF EXISTS `urgensi` enum('Tahunan','Besar','Sakit','Bersalin','Alasan Penting','Keterangan Lainnya','Lainnya','Panjang (10 Tahun)') NOT NULL AFTER `nik`;
 
+ALTER TABLE `pengajuan_cuti` MODIFY COLUMN IF EXISTS `kepentingan` varchar(150) NOT NULL DEFAULT '' AFTER `jumlah`;
+
 CREATE TABLE IF NOT EXISTS `pengajuan_izin_smc`  (
   `no_pengajuan` varchar(17) NOT NULL,
   `tanggal` date NOT NULL,
@@ -2094,6 +2096,8 @@ ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `izin` enum('','1 Bulan TMT','
 ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `hakizin` int NOT NULL DEFAULT 0 AFTER `izin`;
 
 ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `max_menit` int NOT NULL DEFAULT 0 AFTER `hakizin`;
+
+ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `bebas_scanlog` enum('Tidak','Ya') NOT NULL DEFAULT 'Tidak' AFTER `max_menit`;
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `kd_dokter` varchar(20) NOT NULL AFTER `tanggalakhir`;
 

@@ -700,83 +700,83 @@ public class TokoCariPembelian extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-    if(tbDokter.getSelectedRow()> -1){
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim().equals("")){
-          JOptionPane.showMessageDialog(null,"Silahkan pilih No.Faktur");
-        }else{
-           try {
-               pscaribeli=koneksi.prepareStatement(
-                       "select tokopembelian.no_faktur,tokopembelian.tagihan,tokopembelian.tgl_beli,tokopembelian.ppn,(tokopembelian.meterai+tokopembelian.total) as total from tokopembelian where tokopembelian.no_faktur=?");
-               try {
-                  pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-                  rs=pscaribeli.executeQuery();
-                  if(rs.next()){
-                      Sequel.AutoComitFalse();
-                      sukses=true;
-                      pstoko_detail_beli=koneksi.prepareStatement("select toko_detail_beli.kode_brng,toko_detail_beli.jumlah from toko_detail_beli where toko_detail_beli.no_faktur=? ");
-                      try {
-                          pstoko_detail_beli.setString(1,rs.getString(1));
-                          rs2=pstoko_detail_beli.executeQuery();
-                          while(rs2.next()){
-                              Trackbarang.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah"),"Pengadaan", akses.getkode(),"Hapus");
-                              Sequel.mengedit("tokobarang","kode_brng=?","stok=stok-?",2,new String[]{
-                                     rs2.getString("jumlah"),rs2.getString("kode_brng")
-                              });
-                          }
-                      } catch (Exception e) {
-                          System.out.println("Notif : "+e);
-                      } finally{
-                          if(rs2!=null){
-                              rs2.close();
-                          }
-                          if(pstoko_detail_beli!=null){
-                              pstoko_detail_beli.close();
-                          }
-                      }
+        if(tbDokter.getSelectedRow()> -1){
+            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim().equals("")){
+                JOptionPane.showMessageDialog(null,"Silahkan pilih No.Faktur");
+            }else{
+                try {
+                    pscaribeli=koneksi.prepareStatement(
+                        "select tokopembelian.no_faktur,tokopembelian.tagihan,tokopembelian.tgl_beli,tokopembelian.ppn,(tokopembelian.meterai+tokopembelian.total) as total from tokopembelian where tokopembelian.no_faktur=?");
+                    try {
+                        pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+                        rs=pscaribeli.executeQuery();
+                        if(rs.next()){
+                            Sequel.AutoComitFalse();
+                            sukses=true;
+                            pstoko_detail_beli=koneksi.prepareStatement("select toko_detail_beli.kode_brng,toko_detail_beli.jumlah from toko_detail_beli where toko_detail_beli.no_faktur=? ");
+                            try {
+                                pstoko_detail_beli.setString(1,rs.getString(1));
+                                rs2=pstoko_detail_beli.executeQuery();
+                                while(rs2.next()){
+                                    Trackbarang.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah"),"Pengadaan", akses.getkode(),"Hapus");
+                                    Sequel.mengedit("tokobarang","kode_brng=?","stok=stok-?",2,new String[]{
+                                        rs2.getString("jumlah"),rs2.getString("kode_brng")
+                                    });
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif : "+e);
+                            } finally{
+                                if(rs2!=null){
+                                    rs2.close();
+                                }
+                                if(pstoko_detail_beli!=null){
+                                    pstoko_detail_beli.close();
+                                }
+                            }
 
-                      Sequel.deleteTampJurnal();
-                      if(Sequel.insertTampJurnal(akunpengadaan, "PEMBELIAN",0,rs.getDouble("total"))==false){
-                          sukses=false;
-                      }
-                      if(rs.getDouble("ppn")>0){
-                          if(Sequel.insertTampJurnal(PPN_Masukan,"PPN Masukan Toko",0,rs.getDouble("ppn"))==false){
-                              sukses=false;
-                          }
-                      }
-                      if(Sequel.insertTampJurnal(Sequel.cariIsi("select tokopembelian.kd_rek from tokopembelian where tokopembelian.no_faktur =?",rs.getString("no_faktur")),"KAS DI TANGAN",rs.getDouble("tagihan"),0)==false){
-                          sukses=false;
-                      }
-                      if(sukses==true){
-                          sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","PEMBATALAN PENGADAAN BARANG TOKO"+", OLEH "+akses.getkode());
-                      }
-                      if(sukses==true){
-                           Sequel.queryu2("delete from tokopembelian where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
-                           Sequel.Commit();
-                      }else{
-                          JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                          Sequel.RollBack();
-                      }
+                            Sequel.deleteTampJurnal();
+                            if(Sequel.insertTampJurnal(akunpengadaan, "PEMBELIAN",0,rs.getDouble("total"))==false){
+                                sukses=false;
+                            }
+                            if(rs.getDouble("ppn")>0){
+                                if(Sequel.insertTampJurnal(PPN_Masukan,"PPN Masukan Toko",0,rs.getDouble("ppn"))==false){
+                                    sukses=false;
+                                }
+                            }
+                            if(Sequel.insertTampJurnal(Sequel.cariIsi("select tokopembelian.kd_rek from tokopembelian where tokopembelian.no_faktur =?",rs.getString("no_faktur")),"KAS DI TANGAN",rs.getDouble("tagihan"),0)==false){
+                                sukses=false;
+                            }
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","PEMBATALAN PENGADAAN BARANG TOKO"+", OLEH "+akses.getkode());
+                            }
+                            if(sukses==true){
+                                Sequel.queryu2("delete from tokopembelian where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
+                                Sequel.Commit();
+                            }else{
+                                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                                Sequel.RollBack();
+                            }
 
-                      Sequel.AutoComitTrue();
-                      if(sukses==true){
-                          runBackground(() ->tampil());
-                      }
-                  }
-               } catch (Exception e) {
-                   System.out.println("Notif : "+e);
-               } finally{
-                   if(rs!=null){
-                       rs.close();
-                   }
-                   if(pscaribeli!=null){
-                       pscaribeli.close();
-                   }
-               }
-           } catch (Exception ex) {
-               System.out.println(ex);
-           }
+                            Sequel.AutoComitTrue();
+                            if(sukses==true){
+                                runBackground(() ->tampil());
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : "+e);
+                    } finally{
+                        if(rs!=null){
+                            rs.close();
+                        }
+                        if(pscaribeli!=null){
+                            pscaribeli.close();
+                        }
+                    }
+                } catch (Exception ex) {
+                    System.out.println(ex);
+                }
+            }
         }
-    }
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

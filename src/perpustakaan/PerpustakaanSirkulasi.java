@@ -1140,50 +1140,50 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamInKeyPressed
 
     private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek2ActionPerformed
-    PerpustakaanInventaris perpustakaan_inventaris=new PerpustakaanInventaris(null,false);
-    perpustakaan_inventaris.addWindowListener(new WindowListener() {
-        @Override
-        public void windowOpened(WindowEvent e) {}
-        @Override
-        public void windowClosing(WindowEvent e) {}
-        @Override
-        public void windowClosed(WindowEvent e) {
-            if(perpustakaan_inventaris.getTable().getSelectedRow()!= -1){
-                InventarisCari.setText(perpustakaan_inventaris.getTable().getValueAt(perpustakaan_inventaris.getTable().getSelectedRow(),2).toString());
-                InventarisCari.requestFocus();
+        PerpustakaanInventaris perpustakaan_inventaris=new PerpustakaanInventaris(null,false);
+        perpustakaan_inventaris.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(perpustakaan_inventaris.getTable().getSelectedRow()!= -1){
+                    InventarisCari.setText(perpustakaan_inventaris.getTable().getValueAt(perpustakaan_inventaris.getTable().getSelectedRow(),2).toString());
+                    InventarisCari.requestFocus();
+                }
             }
-        }
-        @Override
-        public void windowIconified(WindowEvent e) {}
-        @Override
-        public void windowDeiconified(WindowEvent e) {}
-        @Override
-        public void windowActivated(WindowEvent e) {}
-        @Override
-        public void windowDeactivated(WindowEvent e) {}
-    });
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
 
-    perpustakaan_inventaris.getTable().addKeyListener(new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {}
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                perpustakaan_inventaris.dispose();
+        perpustakaan_inventaris.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    perpustakaan_inventaris.dispose();
+                }
             }
-        }
-        @Override
-        public void keyReleased(KeyEvent e) {}
-    });
-    perpustakaan_inventaris.isCek();
-    perpustakaan_inventaris.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    perpustakaan_inventaris.setLocationRelativeTo(internalFrame1);
-    perpustakaan_inventaris.setAlwaysOnTop(false);
-    perpustakaan_inventaris.setVisible(true);
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        perpustakaan_inventaris.isCek();
+        perpustakaan_inventaris.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        perpustakaan_inventaris.setLocationRelativeTo(internalFrame1);
+        perpustakaan_inventaris.setAlwaysOnTop(false);
+        perpustakaan_inventaris.setVisible(true);
     }//GEN-LAST:event_BtnSeek2ActionPerformed
 
     private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek2KeyPressed
-   Valid.pindah(evt,TglPinjam2,TCari);
+        Valid.pindah(evt,TglPinjam2,TCari);
     }//GEN-LAST:event_BtnSeek2KeyPressed
 
     private void InventarisCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_InventarisCariKeyPressed
@@ -1193,17 +1193,17 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_InventarisCariKeyPressed
 
     private void TNoIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoIKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        isInventaris();
-    }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        isInventaris();
-        BtnCloseIn.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        isInventaris();
-        //peminjam.requestFocus();
-    } else if(evt.getKeyCode()==KeyEvent.VK_UP){
-        btnInvActionPerformed(null);
-    }
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            isInventaris();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isInventaris();
+            BtnCloseIn.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isInventaris();
+            //peminjam.requestFocus();
+        } else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            btnInvActionPerformed(null);
+        }
     }//GEN-LAST:event_TNoIKeyPressed
 
     private void btnInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvActionPerformed

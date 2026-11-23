@@ -713,7 +713,7 @@ public final class DlgKategoriPemasukan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarKeyPressed
 
     private void NmAkunKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmAkunKeyPressed
-//   Valid.pindah(evt,Kd,Tahun);
+        // Valid.pindah(evt,Kd,Tahun);
     }//GEN-LAST:event_NmAkunKeyPressed
 
     private void Kd2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kd2KeyPressed

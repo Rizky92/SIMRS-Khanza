@@ -705,46 +705,46 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
     }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void btnBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBankActionPerformed
-    MandiriCariBankTujuanTransfer banktujuan=new MandiriCariBankTujuanTransfer(null,false);
-    banktujuan.addWindowListener(new WindowListener() {
-        @Override
-        public void windowOpened(WindowEvent e) {}
-        @Override
-        public void windowClosing(WindowEvent e) {}
-        @Override
-        public void windowClosed(WindowEvent e) {
-            if(banktujuan.getTable().getSelectedRow()!= -1){
-                KodeBank.setText(banktujuan.getTable().getValueAt(banktujuan.getTable().getSelectedRow(),0).toString());
-                BankTujuan.setText(banktujuan.getTable().getValueAt(banktujuan.getTable().getSelectedRow(),1).toString());
-                btnBank.requestFocus();
+        MandiriCariBankTujuanTransfer banktujuan=new MandiriCariBankTujuanTransfer(null,false);
+        banktujuan.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(banktujuan.getTable().getSelectedRow()!= -1){
+                    KodeBank.setText(banktujuan.getTable().getValueAt(banktujuan.getTable().getSelectedRow(),0).toString());
+                    BankTujuan.setText(banktujuan.getTable().getValueAt(banktujuan.getTable().getSelectedRow(),1).toString());
+                    btnBank.requestFocus();
+                }
             }
-        }
-        @Override
-        public void windowIconified(WindowEvent e) {}
-        @Override
-        public void windowDeiconified(WindowEvent e) {}
-        @Override
-        public void windowActivated(WindowEvent e) {}
-        @Override
-        public void windowDeactivated(WindowEvent e) {}
-    });
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
 
-    banktujuan.getTable().addKeyListener(new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {}
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                banktujuan.dispose();
+        banktujuan.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    banktujuan.dispose();
+                }
             }
-        }
-        @Override
-        public void keyReleased(KeyEvent e) {}
-    });
-    banktujuan.isCek();
-    banktujuan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    banktujuan.setLocationRelativeTo(internalFrame1);
-    banktujuan.setVisible(true);
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        banktujuan.isCek();
+        banktujuan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        banktujuan.setLocationRelativeTo(internalFrame1);
+        banktujuan.setVisible(true);
     }//GEN-LAST:event_btnBankActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

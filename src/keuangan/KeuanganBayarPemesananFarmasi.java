@@ -1175,7 +1175,7 @@ public final class KeuanganBayarPemesananFarmasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarKeyPressed
 
     private void NoBuktiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoBuktiKeyPressed
-   Valid.pindah(evt,Keterangan,BesarBayar);
+        Valid.pindah(evt,Keterangan,BesarBayar);
     }//GEN-LAST:event_NoBuktiKeyPressed
 
     private void Kd2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kd2KeyPressed

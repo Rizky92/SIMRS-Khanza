@@ -240,16 +240,16 @@ public class DlgCatatan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-    if(TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
-        Valid.textKosong(TNoRM,"No.Rekam Medis");
-    }else if(TCatatan.getText().trim().equals("")){
-        Valid.textKosong(TCatatan,"Catatan");
-    }else{
-        Sequel.mengedit2("catatan_pasien","no_rkm_medis=?","catatan=?",2,new String[]{
-            TCatatan.getText(),TNoRM.getText()
-        });
-        BtnKeluarActionPerformed(evt);
-    }
+        if(TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
+            Valid.textKosong(TNoRM,"No.Rekam Medis");
+        }else if(TCatatan.getText().trim().equals("")){
+            Valid.textKosong(TCatatan,"Catatan");
+        }else{
+            Sequel.mengedit2("catatan_pasien","no_rkm_medis=?","catatan=?",2,new String[]{
+                TCatatan.getText(),TNoRM.getText()
+            });
+            BtnKeluarActionPerformed(evt);
+        }
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed

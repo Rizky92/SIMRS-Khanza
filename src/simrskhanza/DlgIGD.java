@@ -6768,7 +6768,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKelActionPerformed
 
     private void btnKecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKecActionPerformed
-   if (kec == null || !kec.isDisplayable()) {
+        if (kec == null || !kec.isDisplayable()) {
             kec=new DlgKecamatan(null,false);
             kec.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             kec.addWindowListener(new WindowAdapter() {
@@ -6904,10 +6904,10 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_ppGrafikDemografiActionPerformed
 
     private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRujukMasukActionPerformed
-   if(TPasien.getText().trim().equals("")){
-                JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
-                tbPetugas.requestFocus();
-      }else{
+        if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+            tbPetugas.requestFocus();
+        }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             DlgRujukMasuk rujukmasuk=new DlgRujukMasuk(null,false);
             rujukmasuk.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
@@ -6922,7 +6922,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_MnRujukMasukActionPerformed
 
     private void kdpnjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpnjKeyPressed
-       if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select penjab.png_jawab from penjab where penjab.kd_pj=?",nmpnj,kdpnj.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select penjab.png_jawab from penjab where penjab.kd_pj=?",nmpnj,kdpnj.getText());
