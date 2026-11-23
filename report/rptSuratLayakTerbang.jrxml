@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.0.0  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptSuratTidakHamil" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="23b08b13-d2ac-4c33-8e4f-a878f29013ec">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="lokal"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -255,7 +255,7 @@
 					<font fontName="Tahoma" size="12"/>
 					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Yang bersangkutan sekarang usia kehamilan "+$F{kehamilan}+" minggu dan dinyatakan aman untuk melakukan perjalan lewat udara (naik pesawat)."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Yang bersangkutan sekarang usia kehamilan "+$F{kehamilan}+" minggu dan dinyatakan aman untuk melakukan perjalanan lewat udara (naik pesawat)."]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
 				<reportElement x="274" y="500" width="274" height="15" uuid="85bcac56-a364-4b88-97e6-724ae9b94c28">
