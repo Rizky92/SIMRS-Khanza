@@ -1206,7 +1206,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 i=tbObat.getSelectedColumn();
                 if((i==1)||(i==11)||(i==8)||(i==9)){
                     if(tbObat.getSelectedRow()!= -1){
-                        tabModeobat.setValueAt("",tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),i);
+                        tabModeobat.setValueAt("",tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),tbObat.convertColumnIndexToModel(i));
                     }
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){

@@ -7046,10 +7046,10 @@ public class DlgUser extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_V){
                 if(tbUser.getSelectedColumn()>4){
                     if(tbUser.getSelectedRow()!=-1){
-                        if(tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()),tbUser.getSelectedColumn()).toString().equals("false")){
-                            tabMode.setValueAt(true,tbUser.convertRowIndexToModel(tbUser.getSelectedRow()),tbUser.getSelectedColumn());
+                        if(tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()),tbUser.convertColumnIndexToModel(tbUser.getSelectedColumn())).toString().equals("false")){
+                            tabMode.setValueAt(true,tbUser.convertRowIndexToModel(tbUser.getSelectedRow()),tbUser.convertColumnIndexToModel(tbUser.getSelectedColumn()));
                         }else{
-                            tabMode.setValueAt(false,tbUser.convertRowIndexToModel(tbUser.getSelectedRow()),tbUser.getSelectedColumn());
+                            tabMode.setValueAt(false,tbUser.convertRowIndexToModel(tbUser.getSelectedRow()),tbUser.convertColumnIndexToModel(tbUser.getSelectedColumn()));
                         }
                     }
                 }

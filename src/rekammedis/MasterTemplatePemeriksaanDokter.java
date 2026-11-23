@@ -2593,7 +2593,7 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
                 i=tbObatNonRacikan.getSelectedColumn();
                 if((i==1)||(i==7)){
                     if(tbObatNonRacikan.getSelectedRow()!= -1){
-                        tabModeObatUmum.setValueAt("",tbObatNonRacikan.convertRowIndexToModel(tbObatNonRacikan.getSelectedRow()),i);
+                        tabModeObatUmum.setValueAt("",tbObatNonRacikan.convertRowIndexToModel(tbObatNonRacikan.getSelectedRow()),tbObatNonRacikan.convertColumnIndexToModel(i));
                     }
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){

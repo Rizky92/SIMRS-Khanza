@@ -3513,7 +3513,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
 
             for (int i = 0; i < tbtindakan.getRowCount(); i++) {
                 if ((Boolean) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 0)) {
-                    Object[] row = new Object[tbtindakan.getColumnCount()];
+                    Object[] row = new Object[tabMode.getColumnCount()];
                     for (int j = 0; j < row.length; j++) {
                         row[j] = tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), j);
                     }

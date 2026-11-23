@@ -859,12 +859,12 @@ public final class DlgBarcodeRalan extends javax.swing.JDialog {
                         TCariObat.setText("");
                         TCariObat.requestFocus();
                     }else if(i==9){
-                        if(tabModeObat.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),i).toString().equals("0")) {
-                            tabModeObat.setValueAt(embalasetuslah.getEmbalase(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),i);
+                        if(tabModeObat.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),tbObat.convertColumnIndexToModel(i)).toString().equals("0")) {
+                            tabModeObat.setValueAt(embalasetuslah.getEmbalase(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),tbObat.convertColumnIndexToModel(i));
                         }
                     }else if(i==10){
-                        if(tabModeObat.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),i).toString().equals("0")) {
-                            tabModeObat.setValueAt(embalasetuslah.getTuslah(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),i);
+                        if(tabModeObat.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),tbObat.convertColumnIndexToModel(i)).toString().equals("0")) {
+                            tabModeObat.setValueAt(embalasetuslah.getTuslah(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),tbObat.convertColumnIndexToModel(i));
                         }
                         TCariObat.setText("");
                         TCariObat.requestFocus();

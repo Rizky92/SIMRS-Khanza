@@ -2592,7 +2592,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     if(i==1){
                         try {
                             akses.setform("DlgBilingRalan");
-                            switch (tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()),i).toString()) {
+                            switch (tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()),tbBilling.convertColumnIndexToModel(i)).toString()) {
                                 case "Tindakan":
                                     if(akses.gettindakan_ralan()==true){
                                         MnInputTindakanActionPerformed(null);
@@ -2617,7 +2617,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                             }
                         } catch (Exception e) {
                             akses.setform("DlgBilingRalan");
-                            switch (tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()),i).toString()) {
+                            switch (tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()),tbBilling.convertColumnIndexToModel(i)).toString()) {
                                 case "Tindakan":
                                     if(akses.gettindakan_ralan()==true){
                                         MnInputTindakanActionPerformed(null);
@@ -2699,7 +2699,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     if(i==1){
                         try {
                             akses.setform("DlgBilingRalan");
-                            switch (tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), i).toString()) {
+                            switch (tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(i)).toString()) {
                                 case "Tindakan":
                                     if(akses.gettindakan_ralan()==true){
                                         MnInputTindakanActionPerformed(null);
@@ -2724,7 +2724,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                             }
                         } catch (Exception e) {
                             akses.setform("DlgBilingRalan");
-                            switch (tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), i).toString()) {
+                            switch (tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(i)).toString()) {
                                 case "Tindakan":
                                     if(akses.gettindakan_ralan()==true){
                                         MnInputTindakanActionPerformed(null);

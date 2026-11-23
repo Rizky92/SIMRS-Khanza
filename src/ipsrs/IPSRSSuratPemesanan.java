@@ -1631,9 +1631,9 @@ public class IPSRSSuratPemesanan extends javax.swing.JDialog {
             return;
         }
         if (0 == kolom) {
-            tabMode.setValueAt("", tbDokter.convertRowIndexToModel(baris), kolom);
+            tabMode.setValueAt("", tbDokter.convertRowIndexToModel(baris), tbDokter.convertColumnIndexToModel(kolom));
         } else if ((4 == kolom) || (6 == kolom) || (7 == kolom)) {
-            tabMode.setValueAt(0d, tbDokter.convertRowIndexToModel(baris), kolom);
+            tabMode.setValueAt(0d, tbDokter.convertRowIndexToModel(baris), tbDokter.convertColumnIndexToModel(kolom));
         }
         evt.consume();
     }

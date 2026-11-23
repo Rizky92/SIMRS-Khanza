@@ -165,7 +165,7 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
             int col = tbObat.getColumnModel().getSelectionModel().getLeadSelectionIndex();
 
             if (col == 3) {
-                LabelCatatan.setText("<html><body width=\"250px\">" + tabModeObat.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectionModel().getLeadSelectionIndex()), col).toString() + "</body></html>");
+                LabelCatatan.setText("<html><body width=\"250px\">" + tabModeObat.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectionModel().getLeadSelectionIndex()), tbObat.convertColumnIndexToModel(col)).toString() + "</body></html>");
                 DlgRestriksi.setLocationRelativeTo(internalFrame1);
                 DlgRestriksi.setVisible(true);
             }
@@ -282,7 +282,7 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
             int col = tbDetailRacikanObat.getColumnModel().getSelectionModel().getLeadSelectionIndex();
 
             if (col == 4) {
-                LabelCatatan.setText("<html><body width=\"250px\">" + tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(tbDetailRacikanObat.getSelectionModel().getLeadSelectionIndex()), col).toString() + "</body></html>");
+                LabelCatatan.setText("<html><body width=\"250px\">" + tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(tbDetailRacikanObat.getSelectionModel().getLeadSelectionIndex()), tbDetailRacikanObat.convertColumnIndexToModel(col)).toString() + "</body></html>");
                 DlgRestriksi.setLocationRelativeTo(internalFrame1);
                 DlgRestriksi.setVisible(true);
             }

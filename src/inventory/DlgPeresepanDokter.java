@@ -1049,7 +1049,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                     i=tbResep.getSelectedColumn();
                     if((i==1)||(i==2)){
                         if(tbResep.getSelectedRow()!= -1){
-                            tabModeResep.setValueAt("",tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),i);
+                            tabModeResep.setValueAt("",tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),tbResep.convertColumnIndexToModel(i));
                         }
                     }
                 }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){

@@ -716,7 +716,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
                 if(tbObat.getSelectedRow()!= -1){
                     if((tbObat.getSelectedColumn()==4)||(tbObat.getSelectedColumn()==5)||(tbObat.getSelectedColumn()==6)||(tbObat.getSelectedColumn()==7)||(tbObat.getSelectedColumn()==10)){
                         try {
-                            tabMode.setValueAt(null,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),tbObat.getSelectedColumn());
+                            tabMode.setValueAt(null,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),tbObat.convertColumnIndexToModel(tbObat.getSelectedColumn()));
                         } catch (Exception e) {
                         }
                     }
@@ -1123,7 +1123,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
                 }
                 if(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),0).toString().equals("false")){
                     if((stokmasuk-(pagi+siang+sore+malam))<0){
-                        tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),kolom);
+                        tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),tbObat.convertColumnIndexToModel(kolom));
                         JOptionPane.showMessageDialog(null,"Maaf, Stok tidak cukup....!!!");
                         tbObat.requestFocus();
                     }else{
@@ -1156,7 +1156,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
                         }
 
                         if((stokmasuk-((pagi/kapasitas)+(siang/kapasitas)+(sore/kapasitas)+(malam/kapasitas)))<0){
-                            tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),kolom);
+                            tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),tbObat.convertColumnIndexToModel(kolom));
                             JOptionPane.showMessageDialog(null,"Maaf, Stok tidak cukup....!!!");
                             tbObat.requestFocus();
                         }else{
@@ -1181,7 +1181,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
                     stokmasuk=0;
                 }
                 if((stokmasuk-retur)<0){
-                    tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),kolom);
+                    tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),tbObat.convertColumnIndexToModel(kolom));
                     JOptionPane.showMessageDialog(null,"Maaf, Stok tidak cukup....!!!");
                     tbObat.requestFocus();
                 }else{

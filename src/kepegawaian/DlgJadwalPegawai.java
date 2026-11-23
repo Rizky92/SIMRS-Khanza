@@ -639,7 +639,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
                     public void windowClosed(WindowEvent e) {
                         if(jammasuk.getTable().getSelectedRow()!= -1){
                             if(tbJadwal.getSelectedColumn()>4){
-                                tabMode.setValueAt(jammasuk.getTable().getValueAt(jammasuk.getTable().getSelectedRow(),1).toString(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),tbJadwal.getSelectedColumn());
+                                tabMode.setValueAt(jammasuk.getTable().getValueAt(jammasuk.getTable().getSelectedRow(),1).toString(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),tbJadwal.convertColumnIndexToModel(tbJadwal.getSelectedColumn()));
                             }
                         }
                         tbJadwal.requestFocus();
@@ -671,7 +671,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
                 jammasuk.setLocationRelativeTo(internalFrame1);
                 jammasuk.setVisible(true);
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
-                tabMode.setValueAt("",tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),tbJadwal.getSelectedColumn());
+                tabMode.setValueAt("",tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),tbJadwal.convertColumnIndexToModel(tbJadwal.getSelectedColumn()));
             }
         }
     }//GEN-LAST:event_tbJadwalKeyPressed

@@ -995,7 +995,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                         if (-1 != terpilih) {
                             Object kode = jammasuk.getTable().getValueAt(terpilih, 1);
                             batalkanEditSmc();
-                            tabMode.setValueAt(null == kode ? "" : kode.toString(), tbJadwal.convertRowIndexToModel(baris), kolom);
+                            tabMode.setValueAt(null == kode ? "" : kode.toString(), tbJadwal.convertRowIndexToModel(baris), tbJadwal.convertColumnIndexToModel(kolom));
                         }
                         tbJadwal.changeSelection(baris, kolom, false, false);
                         tbJadwal.requestFocus();
@@ -1043,7 +1043,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                 if (-1 != tbJadwal.getSelectedRow() && -1 != tbJadwal.getSelectedColumn()) {
                     evt.consume();
                     batalkanEditSmc();
-                    tabMode.setValueAt("", tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), tbJadwal.getSelectedColumn());
+                    tabMode.setValueAt("", tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), tbJadwal.convertColumnIndexToModel(tbJadwal.getSelectedColumn()));
                 }
             }
         }
@@ -1631,7 +1631,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                             int nomor = 1;
                             while (rs.next()) {
                                 String[] shift = jadwal.getOrDefault(rs.getString("id"), new String[31]);
-                                Object[] baris = new Object[tbJadwal.getColumnCount()];
+                                Object[] baris = new Object[tabMode.getColumnCount()];
                                 baris[0] = String.valueOf(nomor++);
                                 baris[KOLOM_ID] = rs.getString("id");
                                 baris[2] = rs.getString("nik");

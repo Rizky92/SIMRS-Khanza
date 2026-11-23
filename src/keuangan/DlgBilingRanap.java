@@ -2563,7 +2563,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                 if(kolom==1){
                     try {
                         akses.setform("DlgBilingRanap");
-                        if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Rincian Biaya")){
+                        if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Rincian Biaya")){
                             if(akses.gettindakan_ranap()==true){
                                 if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                                     JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
@@ -2595,7 +2595,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                     perawatan.setVisible(true);
                                 }
                             }
-                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Resep Pulang")){
+                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Resep Pulang")){
                             if(akses.getresep_pulang()==true){
                                 if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                                     JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
@@ -2610,7 +2610,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                     inputresep.setVisible(true);
                                 }
                             }
-                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Obat & BHP")){
+                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Obat & BHP")){
                             if(akses.getberi_obat()==true){
                                 if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                                     JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
@@ -2641,11 +2641,11 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                     dlgobt.setVisible(true);
                                 }
                             }
-                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Tambahan Biaya")){
+                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Tambahan Biaya")){
                             if(akses.gettambahan_biaya()==true){
                                 MnTambahanActionPerformed(null);
                             }
-                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Potongan Biaya")){
+                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Potongan Biaya")){
                             if(akses.getpotongan_biaya()==true){
                                 MnPotonganActionPerformed(null);
                             }
@@ -2653,7 +2653,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                     } catch (Exception e) {
                         akses.setform("DlgBilingRanap");
                         try {
-                            if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Rincian Biaya")){
+                            if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Rincian Biaya")){
                                 if(akses.gettindakan_ranap()==true){
                                     if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                                         JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
@@ -2685,7 +2685,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                         perawatan.setVisible(true);
                                     }
                                 }
-                            }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Resep Pulang")){
+                            }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Resep Pulang")){
                                 if(akses.getresep_pulang()==true){
                                     if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                                         JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
@@ -2700,7 +2700,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                         inputresep.setVisible(true);
                                     }
                                 }
-                            }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Obat & BHP")){
+                            }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Obat & BHP")){
                                 if(akses.getberi_obat()==true){
                                     if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                                         JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
@@ -2731,11 +2731,11 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                         dlgobt.setVisible(true);
                                     }
                                 }
-                            }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Tambahan Biaya")){
+                            }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Tambahan Biaya")){
                                 if(akses.gettambahan_biaya()==true){
                                     MnTambahanActionPerformed(null);
                                 }
-                            }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Potongan Biaya")){
+                            }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Potongan Biaya")){
                                 if(akses.getpotongan_biaya()==true){
                                     MnPotonganActionPerformed(null);
                                 }
@@ -2803,7 +2803,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                 if(kolom==1){
                     try {
                         akses.setform("DlgBilingRanap");
-                        if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Rincian Biaya")){
+                        if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Rincian Biaya")){
                             if(akses.gettindakan_ranap()==true){
                                 if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                                     JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
@@ -2835,7 +2835,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                     perawatan.setVisible(true);
                                 }
                             }
-                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Resep Pulang")){
+                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Resep Pulang")){
                             if(akses.getresep_pulang()==true){
                                 if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                                     JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
@@ -2850,7 +2850,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                     inputresep.setVisible(true);
                                 }
                             }
-                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Obat & BHP")){
+                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Obat & BHP")){
                             if(akses.getberi_obat()==true){
                                 if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                                     JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
@@ -2881,18 +2881,18 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                     dlgobt.setVisible(true);
                                 }
                             }
-                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Tambahan Biaya")){
+                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Tambahan Biaya")){
                             if(akses.gettambahan_biaya()==true){
                                 MnTambahanActionPerformed(null);
                             }
-                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Potongan Biaya")){
+                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Potongan Biaya")){
                             if(akses.getpotongan_biaya()==true){
                                 MnPotonganActionPerformed(null);
                             }
                         }
                     } catch (Exception e) {
                         akses.setform("DlgBilingRanap");
-                        if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Rincian Biaya")){
+                        if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Rincian Biaya")){
                             if(akses.gettindakan_ranap()==true){
                                 if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                                     JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
@@ -2924,7 +2924,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                     perawatan.setVisible(true);
                                 }
                             }
-                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Resep Pulang")){
+                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Resep Pulang")){
                             if(akses.getresep_pulang()==true){
                                 if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                                     JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
@@ -2939,7 +2939,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                     inputresep.setVisible(true);
                                 }
                             }
-                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Obat & BHP")){
+                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Obat & BHP")){
                             if(akses.getberi_obat()==true){
                                 if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                                     JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
@@ -2970,11 +2970,11 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                     dlgobt.setVisible(true);
                                 }
                             }
-                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Tambahan Biaya")){
+                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Tambahan Biaya")){
                             if(akses.gettambahan_biaya()==true){
                                 MnTambahanActionPerformed(null);
                             }
-                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), kolom).toString().contains("Potongan Biaya")){
+                        }else if(tabModeRwJlDr.getValueAt(tbBilling.convertRowIndexToModel(tbBilling.getSelectedRow()), tbBilling.convertColumnIndexToModel(kolom)).toString().contains("Potongan Biaya")){
                             if(akses.getpotongan_biaya()==true){
                                 MnPotonganActionPerformed(null);
                             }
