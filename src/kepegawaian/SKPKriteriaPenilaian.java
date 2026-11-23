@@ -510,13 +510,13 @@ public final class SKPKriteriaPenilaian extends javax.swing.JDialog {
         }else{
             if(tbBangsal.getSelectedRow()>-1){
                 if(Sequel.mengedittf("skp_kriteria_penilaian","kode_kriteria=?","kode_kriteria=?,nama_kriteria=?,kode_kategori=?",4,new String[]{
-                    Kode.getText(),Kriteria.getText(),KdKategori.getText(),tbBangsal.getValueAt(tbBangsal.getSelectedRow(), 0).toString()
+                    Kode.getText(),Kriteria.getText(),KdKategori.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()), 0).toString()
                 })==true){
-                    tbBangsal.setValueAt(Kode.getText(),tbBangsal.getSelectedRow(),0);
-                    tbBangsal.setValueAt(Kriteria.getText(),tbBangsal.getSelectedRow(),1);
-                    tbBangsal.setValueAt(KdKategori.getText(),tbBangsal.getSelectedRow(),2);
-                    tbBangsal.setValueAt(NmKategori.getText(),tbBangsal.getSelectedRow(),3);
-                    tbBangsal.setValueAt(Sasaran.getText(),tbBangsal.getSelectedRow(),4);
+                    tabMode.setValueAt(Kode.getText(),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0);
+                    tabMode.setValueAt(Kriteria.getText(),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1);
+                    tabMode.setValueAt(KdKategori.getText(),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),2);
+                    tabMode.setValueAt(NmKategori.getText(),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),3);
+                    tabMode.setValueAt(Sasaran.getText(),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),4);
                     emptTeks();
                 }
             }
@@ -839,11 +839,11 @@ public final class SKPKriteriaPenilaian extends javax.swing.JDialog {
 
     private void getData() {
         if(tbBangsal.getSelectedRow()!= -1){
-            Kode.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
-            Kriteria.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),1).toString());
-            KdKategori.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),2).toString());
-            NmKategori.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),3).toString());
-            Sasaran.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),4).toString());
+            Kode.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
+            Kriteria.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1).toString());
+            KdKategori.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),2).toString());
+            NmKategori.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),3).toString());
+            Sasaran.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),4).toString());
         }
     }
 

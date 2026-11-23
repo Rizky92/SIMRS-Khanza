@@ -432,7 +432,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbBangsal.getSelectedRow()>-1){
-            Sequel.meghapus("ruang_ok","kd_ruang_ok",tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
+            Sequel.meghapus("ruang_ok","kd_ruang_ok",tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
             runBackground(() ->tampil());
             emptTeks();
         }
@@ -453,7 +453,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
             Valid.textKosong(TNm,"Nama Ruang Operasi");
         }else{
             if(tbBangsal.getSelectedRow()>-1){
-                Sequel.mengedit("ruang_ok","kd_ruang_ok=?","nm_ruang_ok=?,kd_ruang_ok=?",3,new String[]{TNm.getText(),TKd.getText(),tbBangsal.getValueAt(tbBangsal.getSelectedRow(), 0).toString()});
+                Sequel.mengedit("ruang_ok","kd_ruang_ok=?","nm_ruang_ok=?,kd_ruang_ok=?",3,new String[]{TNm.getText(),TKd.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()), 0).toString()});
                 if(tbBangsal.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
             }
@@ -683,8 +683,8 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
 
     private void getData() {
         if(tbBangsal.getSelectedRow()!= -1){
-            TKd.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
-            TNm.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),1).toString());
+            TKd.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
+            TNm.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1).toString());
         }
     }
 

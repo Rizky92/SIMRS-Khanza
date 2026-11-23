@@ -679,7 +679,7 @@ public final class SatuSehatMapingLaboratSMC extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if (tbJnsPerawatan.getRowCount() > 0) {
             if (tbJnsPerawatan.getSelectedRow() >= 0) {
-                if (Sequel.menghapustfSmc("satu_sehat_mapping_lab", "id_template = ?", tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 0).toString())) {
+                if (Sequel.menghapustfSmc("satu_sehat_mapping_lab", "id_template = ?", tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 0).toString())) {
                     tabMode.removeRow(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()));
                     emptTeks();
                     LCount.setText("" + tbJnsPerawatan.getRowCount());
@@ -718,17 +718,17 @@ public final class SatuSehatMapingLaboratSMC extends javax.swing.JDialog {
         }else{
             if(tbJnsPerawatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("satu_sehat_mapping_lab","id_template=?","id_template=?,code=?,system=?,display=?,sampel_code=?,sampel_system=?,sampel_display=?",8,new String[]{
-                        IDTemplate.getText(),PeriksaCode.getText(),PeriksaSystem.getText(),PeriksaDisplay.getText(),SampelCode.getText(),SampelSystem.getText(),SampelDisplay.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()
+                        IDTemplate.getText(),PeriksaCode.getText(),PeriksaSystem.getText(),PeriksaDisplay.getText(),SampelCode.getText(),SampelSystem.getText(),SampelDisplay.getText(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString()
                     })==true){
-                    tbJnsPerawatan.setValueAt(PeriksaCode.getText(),tbJnsPerawatan.getSelectedRow(),0);
-                    tbJnsPerawatan.setValueAt(PeriksaSystem.getText(),tbJnsPerawatan.getSelectedRow(),1);
-                    tbJnsPerawatan.setValueAt(IDTemplate.getText(),tbJnsPerawatan.getSelectedRow(),2);
-                    tbJnsPerawatan.setValueAt(NamaPemeriksaan.getText(),tbJnsPerawatan.getSelectedRow(),3);
-                    tbJnsPerawatan.setValueAt(NamaTindakan.getText(), tbJnsPerawatan.getSelectedRow(), 4);
-                    tbJnsPerawatan.setValueAt(PeriksaDisplay.getText(),tbJnsPerawatan.getSelectedRow(),5);
-                    tbJnsPerawatan.setValueAt(SampelCode.getText(),tbJnsPerawatan.getSelectedRow(),6);
-                    tbJnsPerawatan.setValueAt(SampelSystem.getText(),tbJnsPerawatan.getSelectedRow(),7);
-                    tbJnsPerawatan.setValueAt(SampelDisplay.getText(),tbJnsPerawatan.getSelectedRow(),8);
+                    tabMode.setValueAt(PeriksaCode.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0);
+                    tabMode.setValueAt(PeriksaSystem.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1);
+                    tabMode.setValueAt(IDTemplate.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2);
+                    tabMode.setValueAt(NamaPemeriksaan.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3);
+                    tabMode.setValueAt(NamaTindakan.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 4);
+                    tabMode.setValueAt(PeriksaDisplay.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5);
+                    tabMode.setValueAt(SampelCode.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),6);
+                    tabMode.setValueAt(SampelSystem.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7);
+                    tabMode.setValueAt(SampelDisplay.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),8);
                     emptTeks();
                 }
             }
@@ -1139,15 +1139,15 @@ public final class SatuSehatMapingLaboratSMC extends javax.swing.JDialog {
 
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
-            PeriksaCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-            PeriksaSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-            IDTemplate.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-            NamaPemeriksaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-            NamaTindakan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
-            PeriksaDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
-            SampelCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
-            SampelSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
-            SampelDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString());
+            PeriksaCode.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+            PeriksaSystem.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+            IDTemplate.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+            NamaPemeriksaan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+            NamaTindakan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString());
+            PeriksaDisplay.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5).toString());
+            SampelCode.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),6).toString());
+            SampelSystem.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7).toString());
+            SampelDisplay.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),8).toString());
         }
     }
 
@@ -1180,6 +1180,7 @@ public final class SatuSehatMapingLaboratSMC extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbJnsPerawatan.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             LCount.setText("0");
             new SwingWorker<Void, Object[]>() {
@@ -1234,6 +1235,7 @@ public final class SatuSehatMapingLaboratSMC extends javax.swing.JDialog {
                     LCount.setText(tbJnsPerawatan.getRowCount() + "");
                     SatuSehatMapingLaboratSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbJnsPerawatan.resumeSorting();
                 }
             }.execute();
         }

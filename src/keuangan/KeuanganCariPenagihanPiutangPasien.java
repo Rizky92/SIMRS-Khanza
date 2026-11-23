@@ -303,6 +303,7 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -975,10 +976,10 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"pilihan data");
             }else{
-                Sequel.queryu("delete from penagihan_piutang where no_tagihan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString().trim());
+                Sequel.queryu("delete from penagihan_piutang where no_tagihan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString().trim());
                 tampilSmc();
             }
         }
@@ -1012,10 +1013,10 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
 
     private void ppDisetujuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDisetujuiActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"pilihan data");
             }else{
-                Sequel.queryu("update penagihan_piutang set status='Sudah Dibayar' where no_tagihan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString().trim());
+                Sequel.queryu("update penagihan_piutang set status='Sudah Dibayar' where no_tagihan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString().trim());
                 tampilSmc();
             }
         }
@@ -1024,10 +1025,10 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
 
     private void ppTidakDisetujuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTidakDisetujuiActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"pilihan data");
             }else{
-                Sequel.queryu("update penagihan_piutang set status='Proses Penagihan' where no_tagihan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString().trim());
+                Sequel.queryu("update penagihan_piutang set status='Proses Penagihan' where no_tagihan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString().trim());
                 tampilSmc();
             }
         }
@@ -1043,13 +1044,13 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
 
     private void ppVerifikasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppVerifikasiActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"pilihan data");
             }else{
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 KeuanganPiutangBelumLunas form=new KeuanganPiutangBelumLunas(null,false);
                 form.isCek();
-                form.tampiltagihan2(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString().trim());
+                form.tampiltagihan2(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString().trim());
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
                 form.setVisible(true);
@@ -1060,7 +1061,7 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
 
     private void ChkAccorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkAccorActionPerformed
         if(tbDokter.getSelectedRow()!= -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Penagihan");
             }else{
                 isPhoto();
@@ -1074,13 +1075,13 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
 
     private void btnAmbilPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbilPhotoActionPerformed
         if(tbDokter.getSelectedRow()!= -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Penagihan");
             }else{
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Sequel.meghapus("bukti_penagihan_piutang", "no_tagihan",tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
-                Sequel.menyimpan2("bukti_penagihan_piutang","?,''",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()});
-                Valid.panggilUrl("penagihanpiutang/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&notagihan="+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
+                Sequel.meghapus("bukti_penagihan_piutang", "no_tagihan",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString());
+                Sequel.menyimpan2("bukti_penagihan_piutang","?,''",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString()});
+                Valid.panggilUrl("penagihanpiutang/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&notagihan="+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString());
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -1092,7 +1093,7 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
         if(tbDokter.getSelectedRow()!= -1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 isPhoto();
                 panggilPhoto();
             }else{
@@ -1103,7 +1104,7 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void ppCetakInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCetakInvoiceActionPerformed
-        nopenagihan = tbDokter.getValueAt(tbDokter.getSelectedRow(), 3).toString();
+        nopenagihan = tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 3).toString();
 
         cetakInvoice();
     }//GEN-LAST:event_ppCetakInvoiceActionPerformed
@@ -1437,7 +1438,7 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
             try {
                 ps=koneksi.prepareStatement("select bukti_penagihan_piutang.photo from bukti_penagihan_piutang where bukti_penagihan_piutang.no_tagihan=?");
                 try {
-                    ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
+                    ps.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){

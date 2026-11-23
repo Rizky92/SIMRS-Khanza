@@ -1410,7 +1410,7 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("parameter",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            param.put("parameter",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
             param.put("logo",Sequel.cariGambar("select inhealth from gambar"));
             if(JenisPelayanan.getSelectedIndex()==0){
                 Valid.MyReport("rptBridgingSJP.jasper","report","::[ Cetak SJP ]::",param);
@@ -2030,26 +2030,26 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
-            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
-            JK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
-            NoKartu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
-            NoRujukan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            KdPPK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            NmPPK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            KdPpkRujukan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            NmPpkRujukan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            KdPenyakit.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            NmPenyakit.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            KdPenyakit2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            NmPenyakit2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            Catatan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            LakaLantas.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
-            LokasiLaka.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
-            Valid.SetTgl2(TanggalSEP,tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            Valid.SetTgl2(TanggalRujuk,tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),24).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),25).toString());
+            TglLahir.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),26).toString());
+            JK.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),27).toString());
+            NoKartu.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),28).toString());
+            NoRujukan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            KdPPK.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            NmPPK.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            KdPpkRujukan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            NmPpkRujukan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            KdPenyakit.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            NmPenyakit.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            KdPenyakit2.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            NmPenyakit2.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            Catatan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            LakaLantas.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString());
+            LokasiLaka.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22).toString());
+            Valid.SetTgl2(TanggalSEP,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            Valid.SetTgl2(TanggalRujuk,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
 
         }
     }
@@ -2135,7 +2135,7 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
             headers.add("Content-Type","application/json");
 	        requestJson ="{ \"token\": \""+koneksiDB.TOKENINHEALTH()+"\"," +
                             "\"kodeprovider\": \""+KdPPK.getText()+"\"," +
-                            "\"nosjp\": \""+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"\"," +
+                            "\"nosjp\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"\"," +
                             "\"nomormedicalreport\": \""+TNoRM.getText()+"\","+
                             "\"nomorasalrujukan\": \""+NoRujukan.getText()+"\","+
                             "\"kodeproviderasalrujukan\": \""+KdPpkRujukan.getText()+"\","+
@@ -2154,7 +2154,7 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
             if(root.path("ERRORCODE").asText().equals("00")){
                 if(Sequel.mengedittf("bridging_inhealth","no_sjp=?","kdppkrujukan=?,nmppkrujukan=?,no_rawat=?,nomr=?,nama_pasien=?,no_rujukan=?,tglrujukan=?,diagawal=?,nmdiagnosaawal=?,kdpolitujuan=?,nmpolitujuan=?,user=?,catatan=?,diagawal2=?,nmdiagnosaawal2=?,lakalantas=?", 17,new String[]{
                     KdPpkRujukan.getText(), NmPpkRujukan.getText(),TNoRw.getText(),TNoRM.getText(),TPasien.getText(),NoRujukan.getText(),Valid.SetTgl(TanggalRujuk.getSelectedItem()+"")+" "+TanggalRujuk.getSelectedItem().toString().substring(11,19),
-                    KdPenyakit.getText(),NmPenyakit.getText(),KdPoli.getText(),NmPoli.getText(),user,Catatan.getText(),KdPenyakit2.getText(),NmPenyakit2.getText(),LakaLantas.getSelectedItem().toString().substring(0,1),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                    KdPenyakit.getText(),NmPenyakit.getText(),KdPoli.getText(),NmPoli.getText(),user,Catatan.getText(),KdPenyakit2.getText(),NmPenyakit2.getText(),LakaLantas.getSelectedItem().toString().substring(0,1),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
                 })==true){
                     emptTeks();
                     runBackground(() ->tampil());
@@ -2178,7 +2178,7 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
             headers.add("Content-Type","application/json");
     	    requestJson ="{ \"token\": \""+koneksiDB.TOKENINHEALTH()+"\"," +
                             "\"kodeprovider\": \""+KdPPK.getText()+"\"," +
-                            "\"nosjp\": \""+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"\"," +
+                            "\"nosjp\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"\"," +
                             "\"alasanhapus\": \""+"kesalahan-input"+"\"," +
                             "\"username\": \""+user+"\""+
                          "}";
@@ -2187,7 +2187,7 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(rest.exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
             if(root.path("ERRORCODE").asText().equals("00")){
-                Sequel.meghapus("bridging_inhealth","no_sjp",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+                Sequel.meghapus("bridging_inhealth","no_sjp",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
                 runBackground(() ->tampil());
                 emptTeks();
             }else{

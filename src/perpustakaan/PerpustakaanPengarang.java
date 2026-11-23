@@ -424,7 +424,7 @@ public class PerpustakaanPengarang extends javax.swing.JDialog {
         }else{
             if(tbSpesialis.getSelectedRow()> -1){
                 Sequel.mengedit("perpustakaan_pengarang","kode_pengarang=?","kode_pengarang=?,nama_pengarang=?",3,new String[]{
-                    TKd.getText(),TNm.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
+                    TKd.getText(),TNm.getText(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString()
                 });
                 if(tbSpesialis.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
@@ -631,8 +631,8 @@ public class PerpustakaanPengarang extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            TKd.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            TNm.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
+            TKd.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            TNm.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
         }
     }
 

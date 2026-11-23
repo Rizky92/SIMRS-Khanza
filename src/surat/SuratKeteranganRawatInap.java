@@ -716,17 +716,17 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
                 if (Sequel.mengupdatetfSmc("surat_keterangan_rawat_inap",
                     "no_surat = ?, no_rawat = ?, tanggalawal = ?, tanggalakhir = ?, lamasakit = ?, kd_dokter = ?", "no_surat = ?",
                     NoSurat.getText(), TNoRw.getText(), Valid.getTglSmc(TanggalAwal), Valid.getTglSmc(TanggalAkhir),
-                    LamaSakit.getText(), KdDokter.getText(), tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                    LamaSakit.getText(), KdDokter.getText(), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
                 )) {
-                    tbObat.setValueAt(NoSurat.getText(), tbObat.getSelectedRow(), 0);
-                    tbObat.setValueAt(TNoRw.getText(), tbObat.getSelectedRow(), 1);
-                    tbObat.setValueAt(TNoRM.getText(), tbObat.getSelectedRow(), 2);
-                    tbObat.setValueAt(TPasien.getText(), tbObat.getSelectedRow(), 3);
-                    tbObat.setValueAt(Valid.getTglSmc(TanggalAwal), tbObat.getSelectedRow(), 4);
-                    tbObat.setValueAt(Valid.getTglSmc(TanggalAkhir), tbObat.getSelectedRow(), 5);
-                    tbObat.setValueAt(LamaSakit.getText(), tbObat.getSelectedRow(), 6);
-                    tbObat.setValueAt(KdDokter.getText(), tbObat.getSelectedRow(), 7);
-                    tbObat.setValueAt(NmDokter.getText(), tbObat.getSelectedRow(), 8);
+                    tabMode.setValueAt(NoSurat.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0);
+                    tabMode.setValueAt(TNoRw.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1);
+                    tabMode.setValueAt(TNoRM.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2);
+                    tabMode.setValueAt(TPasien.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 3);
+                    tabMode.setValueAt(Valid.getTglSmc(TanggalAwal), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 4);
+                    tabMode.setValueAt(Valid.getTglSmc(TanggalAkhir), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 5);
+                    tabMode.setValueAt(LamaSakit.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6);
+                    tabMode.setValueAt(KdDokter.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 7);
+                    tabMode.setValueAt(NmDokter.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 8);
                     emptTeks();
                 }
             }
@@ -913,7 +913,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu pasien...!!!");
         } else {
             Map<String, Object> param = new HashMap<>();
-            param.put("no_surat", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
+            param.put("no_surat", tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString());
             param.put("namars", akses.getnamars());
             param.put("alamatrs", akses.getalamatrs());
             param.put("kotars", akses.getkabupatenrs());
@@ -921,8 +921,8 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
             param.put("kontakrs", akses.getkontakrs());
             param.put("emailrs", akses.getemailrs());
             param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-            String finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString());
-            param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString() + "\nID " + (finger.equals("") ? tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString() : finger));
+            String finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6).toString());
+            param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 7).toString() + "\nID " + (finger.equals("") ? tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6).toString() : finger));
             Valid.reportSmc("rptSuratKeteranganRawatInap2.jasper", "report", "::[ Surat Keterangan Rawat Inap ]::", param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -1039,6 +1039,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select surat_keterangan_rawat_inap.*, reg_periksa.no_rkm_medis, pasien.nm_pasien, dokter.nm_dokter from surat_keterangan_rawat_inap " +
@@ -1070,6 +1071,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         }
 
         LCount.setText(String.valueOf(tbObat.getRowCount()));
+        tbObat.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1088,15 +1090,15 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Valid.SetTgl(TanggalAwal,tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            Valid.SetTgl(TanggalAkhir,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            LamaSakit.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString());
-            KdDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString());
-            NmDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 8).toString());
+            NoSurat.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            Valid.SetTgl(TanggalAwal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            Valid.SetTgl(TanggalAkhir,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            LamaSakit.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6).toString());
+            KdDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 7).toString());
+            NmDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 8).toString());
         }
     }
 

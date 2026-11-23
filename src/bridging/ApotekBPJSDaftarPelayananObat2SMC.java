@@ -406,6 +406,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
 
         scrollPane1.setName("scrollPane1"); // NOI18N
 
+        tbObat.setAutoCreateRowSorter(true);
         tbObat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -423,6 +424,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
 
         scrollPane2.setName("scrollPane2"); // NOI18N
 
+        tbDetailRacikanObat.setAutoCreateRowSorter(true);
         tbDetailRacikanObat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -663,7 +665,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                 JOptionPane.showMessageDialog(null, "No. SEP Apotek sudah dilakukan verifikasi klaim..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             } else
             */
-            if (Boolean.parseBoolean(tbKamar.getValueAt(tbKamar.getSelectedRow(), 10).toString()) && Sequel.cariExistsSmc("select * from bayar_piutang where bayar_piutang.no_rawat = ? and bayar_piutang.no_rkm_medis = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString())) {
+            if (Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 10).toString()) && Sequel.cariExistsSmc("select * from bayar_piutang where bayar_piutang.no_rawat = ? and bayar_piutang.no_rkm_medis = ?", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 3).toString())) {
                 JOptionPane.showMessageDialog(null, "Piutang obat sudah terverifikasi..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             /*
             } else if (Sequel.cariRegistrasi(Sequel.cariIsiSmc("select bridging_sep.no_rawat from bridging_sep where bridging_sep.no_sep = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString())) > 0) {
@@ -693,7 +695,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
             ApotekBPJSEditResepObatSMC form = new ApotekBPJSEditResepObatSMC(null, false);
             form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
             form.setLocationRelativeTo(internalFrame1);
-            form.tampilresep(tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString());
+            form.tampilresep(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString());
             form.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -709,7 +711,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
             ApotekBPJSKirimResepObatSMC apol = new ApotekBPJSKirimResepObatSMC(null, false);
             apol.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
             apol.setLocationRelativeTo(internalFrame1);
-            apol.tampiCopyResepSmc(tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 2).toString());
+            apol.tampiCopyResepSmc(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 2).toString());
             apol.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -724,7 +726,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
             form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
             form.setLocationRelativeTo(internalFrame1);
             form.isCek();
-            form.tampilResepApotekBPJSSmc(tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 2).toString());
+            form.tampilResepApotekBPJSSmc(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 2).toString());
             form.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -737,14 +739,14 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
     private void MnPemberianObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemberianObatActionPerformed
         if (tbKamar.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
-        } else if ((Boolean) tbKamar.getValueAt(tbKamar.getSelectedRow(), 10)) {
+        } else if ((Boolean) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 10)) {
             JOptionPane.showMessageDialog(null, "Maaf, resep ini sudah menjadi piutang obat..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             DlgPemberianObat form = new DlgPemberianObat(null, false);
             form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
             form.setLocationRelativeTo(internalFrame1);
-            String norawat = Sequel.cariIsiSmc("select bridging_sep.no_rawat from bridging_sep where bridging_sep.no_sep = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString());
+            String norawat = Sequel.cariIsiSmc("select bridging_sep.no_rawat from bridging_sep where bridging_sep.no_sep = ?", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 1).toString());
             Date tglawal = Sequel.cariTglSmc("select reg_periksa.tgl_registrasi from reg_periksa where reg_periksa.no_rawat = ?", norawat);
             form.isCek();
             form.setNoRm3(norawat, tglawal, new Date(), Sequel.cariIsiSmc("select reg_periksa.status_lanjut from reg_periksa where reg_periksa.no_rawat = ?", norawat));
@@ -757,11 +759,11 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
         JTable invoker = (JTable) ppCek.getInvoker();
         if (invoker == tbObat) {
             for (int i = 0; i < tbObat.getRowCount(); i++) {
-                tbObat.setValueAt(true, i, 0);
+                tabModeObat.setValueAt(true, tbObat.convertRowIndexToModel(i), 0);
             }
         } else if (invoker == tbDetailRacikanObat) {
             for (int i = 0; i < tbDetailRacikanObat.getRowCount(); i++) {
-                tbDetailRacikanObat.setValueAt(true, i, 0);
+                tabModeDetailRacikanObat.setValueAt(true, tbDetailRacikanObat.convertRowIndexToModel(i), 0);
             }
         }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
@@ -770,11 +772,11 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
         JTable invoker = (JTable) ppCek.getInvoker();
         if (invoker == tbObat) {
             for (int i = 0; i < tbObat.getRowCount(); i++) {
-                tbObat.setValueAt(false, i, 0);
+                tabModeObat.setValueAt(false, tbObat.convertRowIndexToModel(i), 0);
             }
         } else if (invoker == tbDetailRacikanObat) {
             for (int i = 0; i < tbDetailRacikanObat.getRowCount(); i++) {
-                tbDetailRacikanObat.setValueAt(false, i, 0);
+                tabModeDetailRacikanObat.setValueAt(false, tbDetailRacikanObat.convertRowIndexToModel(i), 0);
             }
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
@@ -925,7 +927,9 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
 
     private void getData() {
         if (tbKamar.getSelectedRow() >= 0) {
+            tbObat.suspendSorting();
             Valid.tabelKosong(tabModeObat);
+            tbDetailRacikanObat.suspendSorting();
             Valid.tabelKosong(tabModeDetailRacikanObat);
             kodeobat.clear();
             try {
@@ -935,7 +939,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                     "maping_obat_apotek_bpjs m on a.kode_brng_apotek_bpjs = m.kode_brng_apotek_bpjs left join databarang o on " +
                     "m.kode_brng = o.kode_brng where a.no_sjp = ?"
                 )) {
-                    ps.setString(1, tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString());
+                    ps.setString(1, tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString());
                     try (ResultSet rs = ps.executeQuery()) {
                         while (rs.next()) {
                             if (rs.getString("no_racik") == null) {
@@ -958,6 +962,8 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                 System.out.println("Notif : " + e);
             }
         }
+        tbObat.resumeSorting();
+        tbDetailRacikanObat.resumeSorting();
     }
 
     private boolean cekStatusKlaim() {
@@ -971,13 +977,13 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
             headers.add("user_key", koneksiDB.USERKEYAPIAPOTEKBPJS());
             entity = new HttpEntity(headers);
 
-            String bln = tbKamar.getValueAt(tbKamar.getSelectedRow(), 9).toString().substring(5, 7),
-                   thn = tbKamar.getValueAt(tbKamar.getSelectedRow(), 9).toString().substring(0, 4);
+            String bln = tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 9).toString().substring(5, 7),
+                   thn = tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 9).toString().substring(0, 4);
             if (bln.startsWith("0")) {
                 bln = bln.substring(1, 2);
             }
 
-            URL = URLAPIAPOTEKBPJS + "/monitoring/klaim/" + bln + "/" + thn + "/" + tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString().substring(0, 1) + "/1";
+            URL = URLAPIAPOTEKBPJS + "/monitoring/klaim/" + bln + "/" + thn + "/" + tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 8).toString().substring(0, 1) + "/1";
             System.out.println(URL);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, entity, String.class).getBody());
             metadata = root.path("metaData");
@@ -988,7 +994,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                     String nosepapotek = "";
                     for (JsonNode list : response.path("listsep")) {
                         nosepapotek = list.path("nosepapotek").asText("");
-                        if (nosepapotek != null && !nosepapotek.isBlank() && nosepapotek.equals(tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString())) {
+                        if (nosepapotek != null && !nosepapotek.isBlank() && nosepapotek.equals(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString())) {
                             return true;
                         }
                     }
@@ -1025,7 +1031,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
     }
 
     private void hapusResep() {
-        if (JOptionPane.showConfirmDialog(null, "Hapus no. apotek " + tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString() + "?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "Hapus no. apotek " + tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString() + "?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             try {
                 headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -1036,9 +1042,9 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                 headers.add("user_key", koneksiDB.USERKEYAPIAPOTEKBPJS());
                 URL = URLAPIAPOTEKBPJS + "/hapusresep";
                 json = mapper.createObjectNode();
-                json.put("nosjp", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString());
-                json.put("refasalsjp", tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString());
-                json.put("noresep", tbKamar.getValueAt(tbKamar.getSelectedRow(), 2).toString());
+                json.put("nosjp", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString());
+                json.put("refasalsjp", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 1).toString());
+                json.put("noresep", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 2).toString());
                 System.out.println(json.toString());
                 entity = new HttpEntity(json.toString(), headers);
                 root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.DELETE, entity, String.class).getBody());
@@ -1046,8 +1052,8 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                 System.out.println("code : " + metadata.path("code").asText());
                 System.out.println("message : " + metadata.path("message").asText());
                 if (metadata.path("code").asText().equals("200")) {
-                    Sequel.menghapusSmc("bridging_apotek_bpjs", "no_sjp = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString());
-                    JOptionPane.showMessageDialog(null, "Resep " + tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString() + " Berhasil diHapus");
+                    Sequel.menghapusSmc("bridging_apotek_bpjs", "no_sjp = ?", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString());
+                    JOptionPane.showMessageDialog(null, "Resep " + tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString() + " Berhasil diHapus");
                     tampil();
                 } else {
                     JOptionPane.showMessageDialog(null, metadata.path("message").asText(), "Peringatan", JOptionPane.WARNING_MESSAGE);
@@ -1066,7 +1072,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
     private void hapusObat() {
         if (tbObat.getRowCount() > 0) {
             for (int i = tbObat.getRowCount() - 1; i >= 0; i--) {
-                if ((Boolean) tbObat.getValueAt(i, 0)) {
+                if ((Boolean) tabModeObat.getValueAt(tbObat.convertRowIndexToModel(i), 0)) {
                     try {
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -1079,30 +1085,30 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                         URL = URLAPIAPOTEKBPJS + "/pelayanan/obat/hapus";
                         System.out.println(URL);
                         json = mapper.createObjectNode();
-                        json.put("nosepapotek", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString());
-                        json.put("noresep", tbKamar.getValueAt(tbKamar.getSelectedRow(), 2).toString());
-                        json.put("kodeobat", tbObat.getValueAt(i, 9).toString());
+                        json.put("nosepapotek", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString());
+                        json.put("noresep", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 2).toString());
+                        json.put("kodeobat", tabModeObat.getValueAt(tbObat.convertRowIndexToModel(i), 9).toString());
                         json.put("tipeobat", "N");
                         System.out.println(mapper.writeValueAsString(json));
                         entity = new HttpEntity(mapper.writeValueAsString(json), headers);
                         root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.DELETE, entity, String.class).getBody());
                         metadata = root.path("metaData");
-                        System.out.println("Hapus obat " + tbObat.getValueAt(i, 9).toString() + " " + tbObat.getValueAt(i, 10).toString() + " : " + metadata.path("code").asText() + " " + metadata.path("message").asText());
+                        System.out.println("Hapus obat " + tabModeObat.getValueAt(tbObat.convertRowIndexToModel(i), 9).toString() + " " + tabModeObat.getValueAt(tbObat.convertRowIndexToModel(i), 10).toString() + " : " + metadata.path("code").asText() + " " + metadata.path("message").asText());
                         if (metadata.path("code").asText().equals("200")) {
-                            if (Sequel.menghapustfSmc("bridging_apotek_bpjs_obat", "no_sjp = ? and kode_brng_apotek_bpjs = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(), tbObat.getValueAt(i, 9).toString())) {
-                                kodeobat.add(tbObat.getValueAt(i, 2).toString());
+                            if (Sequel.menghapustfSmc("bridging_apotek_bpjs_obat", "no_sjp = ? and kode_brng_apotek_bpjs = ?", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString(), tabModeObat.getValueAt(tbObat.convertRowIndexToModel(i), 9).toString())) {
+                                kodeobat.add(tabModeObat.getValueAt(tbObat.convertRowIndexToModel(i), 2).toString());
                                 tabModeObat.removeRow(tbObat.convertRowIndexToModel(i));
                             } else {
-                                JOptionPane.showMessageDialog(null, "Gagal menghapus " + tbObat.getValueAt(i, 2).toString() + " - " + tbObat.getValueAt(i, 3).toString() + " dari resep..!!", "Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Gagal menghapus " + tabModeObat.getValueAt(tbObat.convertRowIndexToModel(i), 2).toString() + " - " + tabModeObat.getValueAt(tbObat.convertRowIndexToModel(i), 3).toString() + " dari resep..!!", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
                             if (metadata.path("message").asText().contains("tidak ditemukan")) {
-                                if (JOptionPane.showConfirmDialog(null, "Obat " + tbObat.getValueAt(i, 2).toString() + " - " + tbObat.getValueAt(i, 3).toString() + " " + metadata.path("message").asText() + ",\napakah anda ingin menghapus obat ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                                    if (Sequel.menghapustfSmc("bridging_apotek_bpjs_obat", "no_sjp = ? and kode_brng_apotek_bpjs = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(), tbObat.getValueAt(i, 9).toString())) {
-                                        kodeobat.add(tbObat.getValueAt(i, 2).toString());
+                                if (JOptionPane.showConfirmDialog(null, "Obat " + tabModeObat.getValueAt(tbObat.convertRowIndexToModel(i), 2).toString() + " - " + tabModeObat.getValueAt(tbObat.convertRowIndexToModel(i), 3).toString() + " " + metadata.path("message").asText() + ",\napakah anda ingin menghapus obat ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                                    if (Sequel.menghapustfSmc("bridging_apotek_bpjs_obat", "no_sjp = ? and kode_brng_apotek_bpjs = ?", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString(), tabModeObat.getValueAt(tbObat.convertRowIndexToModel(i), 9).toString())) {
+                                        kodeobat.add(tabModeObat.getValueAt(tbObat.convertRowIndexToModel(i), 2).toString());
                                         tabModeObat.removeRow(tbObat.convertRowIndexToModel(i));
                                     } else {
-                                        JOptionPane.showMessageDialog(null, "Gagal menghapus " + tbObat.getValueAt(i, 2).toString() + " - " + tbObat.getValueAt(i, 3).toString() + " dari resep..!!", "Error", JOptionPane.ERROR_MESSAGE);
+                                        JOptionPane.showMessageDialog(null, "Gagal menghapus " + tabModeObat.getValueAt(tbObat.convertRowIndexToModel(i), 2).toString() + " - " + tabModeObat.getValueAt(tbObat.convertRowIndexToModel(i), 3).toString() + " dari resep..!!", "Error", JOptionPane.ERROR_MESSAGE);
                                     }
                                 }
                             } else {
@@ -1125,7 +1131,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
     private void hapusObatRacikan() {
         if (tbDetailRacikanObat.getRowCount() > 0) {
             for (int i = tbDetailRacikanObat.getRowCount() - 1; i >= 0; i--) {
-                if ((Boolean) tbDetailRacikanObat.getValueAt(i, 0)) {
+                if ((Boolean) tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(i), 0)) {
                     try {
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -1138,30 +1144,30 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                         URL = URLAPIAPOTEKBPJS + "/pelayanan/obat/hapus";
                         System.out.println(URL);
                         json = mapper.createObjectNode();
-                        json.put("nosepapotek", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString());
-                        json.put("noresep", tbKamar.getValueAt(tbKamar.getSelectedRow(), 2).toString());
-                        json.put("kodeobat", tbDetailRacikanObat.getValueAt(i, 11).toString());
-                        json.put("tipeobat", "R." + Valid.padleftSmc(tbDetailRacikanObat.getValueAt(i, 1).toString(), 2, '0'));
+                        json.put("nosepapotek", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString());
+                        json.put("noresep", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 2).toString());
+                        json.put("kodeobat", tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(i), 11).toString());
+                        json.put("tipeobat", "R." + Valid.padleftSmc(tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(i), 1).toString(), 2, '0'));
                         System.out.println(mapper.writeValueAsString(json));
                         entity = new HttpEntity(mapper.writeValueAsString(json), headers);
                         root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.DELETE, entity, String.class).getBody());
                         metadata = root.path("metaData");
-                        System.out.println("Hapus obat " + tbDetailRacikanObat.getValueAt(i, 11).toString() + " " + tbDetailRacikanObat.getValueAt(i, 12).toString() + " : " + metadata.path("code").asText() + " " + metadata.path("message").asText());
+                        System.out.println("Hapus obat " + tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(i), 11).toString() + " " + tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(i), 12).toString() + " : " + metadata.path("code").asText() + " " + metadata.path("message").asText());
                         if (metadata.path("code").asText().equals("200")) {
-                            if (Sequel.menghapustfSmc("bridging_apotek_bpjs_obat", "no_sjp = ? and kode_brng_apotek_bpjs = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(), tbDetailRacikanObat.getValueAt(i, 11).toString())) {
-                                kodeobat.add(tbDetailRacikanObat.getValueAt(i, 3).toString());
+                            if (Sequel.menghapustfSmc("bridging_apotek_bpjs_obat", "no_sjp = ? and kode_brng_apotek_bpjs = ?", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString(), tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(i), 11).toString())) {
+                                kodeobat.add(tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(i), 3).toString());
                                 tabModeDetailRacikanObat.removeRow(tbDetailRacikanObat.convertRowIndexToModel(i));
                             } else {
-                                JOptionPane.showMessageDialog(null, "Gagal menghapus " + tbDetailRacikanObat.getValueAt(i, 3).toString() + " - " + tbDetailRacikanObat.getValueAt(i, 4).toString() + " dari resep..!!", "Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Gagal menghapus " + tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(i), 3).toString() + " - " + tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(i), 4).toString() + " dari resep..!!", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
                             if (metadata.path("message").asText().contains("tidak ditemukan")) {
-                                if (JOptionPane.showConfirmDialog(null, "Obat " + tbDetailRacikanObat.getValueAt(i, 3).toString() + " - " + tbDetailRacikanObat.getValueAt(i, 4).toString() + " " + metadata.path("message").asText() + ",\napakah anda ingin menghapus obat ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                                    if (Sequel.menghapustfSmc("bridging_apotek_bpjs_obat", "no_sjp = ? and kode_brng_apotek_bpjs = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(), tbDetailRacikanObat.getValueAt(i, 11).toString())) {
-                                        kodeobat.add(tbDetailRacikanObat.getValueAt(i, 3).toString());
+                                if (JOptionPane.showConfirmDialog(null, "Obat " + tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(i), 3).toString() + " - " + tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(i), 4).toString() + " " + metadata.path("message").asText() + ",\napakah anda ingin menghapus obat ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                                    if (Sequel.menghapustfSmc("bridging_apotek_bpjs_obat", "no_sjp = ? and kode_brng_apotek_bpjs = ?", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString(), tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(i), 11).toString())) {
+                                        kodeobat.add(tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(i), 3).toString());
                                         tabModeDetailRacikanObat.removeRow(tbDetailRacikanObat.convertRowIndexToModel(i));
                                     } else {
-                                        JOptionPane.showMessageDialog(null, "Gagal menghapus " + tbDetailRacikanObat.getValueAt(i, 3).toString() + " - " + tbDetailRacikanObat.getValueAt(i, 4).toString() + " dari resep..!!", "Error", JOptionPane.ERROR_MESSAGE);
+                                        JOptionPane.showMessageDialog(null, "Gagal menghapus " + tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(i), 3).toString() + " - " + tabModeDetailRacikanObat.getValueAt(tbDetailRacikanObat.convertRowIndexToModel(i), 4).toString() + " dari resep..!!", "Error", JOptionPane.ERROR_MESSAGE);
                                     }
                                 }
                             } else {

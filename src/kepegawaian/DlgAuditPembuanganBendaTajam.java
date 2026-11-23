@@ -194,6 +194,7 @@ public final class DlgAuditPembuanganBendaTajam extends javax.swing.JDialog {
         Scroll.setOpaque(true);
         Scroll.setPreferredSize(new java.awt.Dimension(452, 200));
 
+        tbObat.setSortable(false);
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setName("tbObat"); // NOI18N
         tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -692,7 +693,7 @@ public final class DlgAuditPembuanganBendaTajam extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()!= -1){
             if(Sequel.queryu2tf("delete from audit_pembuangan_benda_tajam where id_ruang=? and tanggal=?",2,new String[]{
-                tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();
@@ -719,7 +720,7 @@ public final class DlgAuditPembuanganBendaTajam extends javax.swing.JDialog {
                 "safety_box_tigaperempat_diganti=?,safety_box_keadaan_bersih=?,saftey_box_tertutup_setelah_digunakan=?",10,new String[]{
                 Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),KdRuang.getText(),SetiapInjeksiNeedleLangsungDimasukkanSafetyBox.getSelectedItem().toString(),
                 SetiapPemasanganIvCanulaLangsungDimasukkanSafetyBox.getSelectedItem().toString(),SetiapBendaTajamJarumDimasukkanSafetyXox.getSelectedItem().toString(),SafetyBoxTigaperempatDiganti.getSelectedItem().toString(),
-                SafetyBoxKeadaanBersih.getSelectedItem().toString(),SafteyBoxTertutupSetelahDigunakan.getSelectedItem().toString(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                SafetyBoxKeadaanBersih.getSelectedItem().toString(),SafteyBoxTertutupSetelahDigunakan.getSelectedItem().toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             });
             if(tbObat.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
@@ -1209,16 +1210,16 @@ public final class DlgAuditPembuanganBendaTajam extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            if(!tbObat.getValueAt(tbObat.getSelectedRow(),0).toString().equals("")){
-                KdRuang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-                NmRuang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-                SetiapInjeksiNeedleLangsungDimasukkanSafetyBox.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-                SetiapPemasanganIvCanulaLangsungDimasukkanSafetyBox.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-                SetiapBendaTajamJarumDimasukkanSafetyXox.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-                SafetyBoxTigaperempatDiganti.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-                SafetyBoxKeadaanBersih.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-                SafteyBoxTertutupSetelahDigunakan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-                Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            if(!tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString().equals("")){
+                KdRuang.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+                NmRuang.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+                SetiapInjeksiNeedleLangsungDimasukkanSafetyBox.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+                SetiapPemasanganIvCanulaLangsungDimasukkanSafetyBox.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+                SetiapBendaTajamJarumDimasukkanSafetyXox.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+                SafetyBoxTigaperempatDiganti.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+                SafetyBoxKeadaanBersih.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+                SafteyBoxTertutupSetelahDigunakan.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+                Valid.SetTgl(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
             }
         }
     }

@@ -234,6 +234,7 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setAutoCreateRowSorter(true);
         tbBangsal.setComponentPopupMenu(jPopupMenu1);
         tbBangsal.setName("tbBangsal"); // NOI18N
         tbBangsal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -608,7 +609,7 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
          if(tbBangsal.getSelectedRow()!= -1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             KeuanganCariPiutangJasaPerusahaan form=new KeuanganCariPiutangJasaPerusahaan(null,false);
-            form.cariNoTagihan(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),1).toString(),Valid.SetTgl2(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),2).toString()));
+            form.cariNoTagihan(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1).toString(),Valid.SetTgl2(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),2).toString()));
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
             form.setAlwaysOnTop(false);
@@ -654,30 +655,30 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
 
             row=tbBangsal.getRowCount();
             for(i=0;i<row;i++){
-                if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                    if(Double.parseDouble(tbBangsal.getValueAt(i,8).toString())<0){
+                if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                    if(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),8).toString())<0){
                         JOptionPane.showMessageDialog(null,"Nilai pelunasan lebih besar dari sisa piutang...!!");
-                        tbBangsal.setValueAt(false,i,0);
+                        tabMode.setValueAt(false,tbBangsal.convertRowIndexToModel(i),0);
                         sukses=false;
                     }else{
                         ////"P"0,"No.Piutang"1,"Tgl.Piutang"2,"Kode"3,"Peminjam"4,"Keterangan"5,"Total Piutang"6,"Cicilan"7,"Sisa Piutang"8,"Jatuh Tempo"9,"Bayar"10,"Kode Rek"11,"Akun"12
                         if(Sequel.menyimpantf("bayar_piutang_lainlain","?,?,?,?,?,?,?","Data",7,new String[]{
-                            Valid.SetTgl(Tanggal.getSelectedItem()+""),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,10).toString(),"diverifikasi oleh "+akses.getkode(),
-                            tbBangsal.getValueAt(i,1).toString(),koderekening,AkunBayar.getSelectedItem().toString()
+                            Valid.SetTgl(Tanggal.getSelectedItem()+""),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString(),"diverifikasi oleh "+akses.getkode(),
+                            tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),koderekening,AkunBayar.getSelectedItem().toString()
                         })==true){
-                            if(Double.parseDouble(tbBangsal.getValueAt(i,8).toString())<=1){
-                                Sequel.mengedit("piutang_lainlain","nota_piutang='"+tbBangsal.getValueAt(i,1).toString()+"'","status='Sudah Lunas'");
+                            if(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),8).toString())<=1){
+                                Sequel.mengedit("piutang_lainlain","nota_piutang='"+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+"'","status='Sudah Lunas'");
                             }
-                            Sequel.mengedit("piutang_lainlain","nota_piutang='"+tbBangsal.getValueAt(i,1).toString()+"'","sisapiutang=sisapiutang-"+tbBangsal.getValueAt(i,10).toString());
+                            Sequel.mengedit("piutang_lainlain","nota_piutang='"+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString()+"'","sisapiutang=sisapiutang-"+tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),10).toString());
                             Sequel.deleteTampJurnal();
-                            if(Sequel.insertTampJurnal(tbBangsal.getValueAt(i, 11).toString(), tbBangsal.getValueAt(i, 12).toString(), "0", tbBangsal.getValueAt(i, 10).toString())==false){
+                            if(Sequel.insertTampJurnal(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i), 11).toString(), tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i), 12).toString(), "0", tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i), 10).toString())==false){
                                 sukses=false;
                             }
-                            if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), tbBangsal.getValueAt(i, 10).toString(), "0")==false){
+                            if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i), 10).toString(), "0")==false){
                                 sukses=false;
                             }
                             if(sukses==true){
-                                sukses=jur.simpanJurnal(tbBangsal.getValueAt(i,1).toString(),"U","BAYAR PIUTANG JASA PERUSAHAAN"+", OLEH "+akses.getkode());
+                                sukses=jur.simpanJurnal(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString(),"U","BAYAR PIUTANG JASA PERUSAHAAN"+", OLEH "+akses.getkode());
                             }
                         }else{
                             sukses=false;
@@ -701,7 +702,7 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
                 LCount.setText("0");
                 LCount1.setText("0");
                 for(i=0;i<tbBangsal.getRowCount();i++){
-                    if(tbBangsal.getValueAt(i,0).toString().equals("true")){
+                    if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
                         tabMode.removeRow(tbBangsal.convertRowIndexToModel(i));
                         i--;
                     }
@@ -782,13 +783,13 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         total=0;
         for(i=0;i<tbBangsal.getRowCount();i++){
-            tbBangsal.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbBangsal.convertRowIndexToModel(i),0);
             getdata(i);
         }
         row=tbBangsal.getRowCount();
         for(i=0;i<row;i++){
-            if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                 total=total+Valid.SetAngka(tbBangsal.getValueAt(i,6).toString());
+            if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                 total=total+Valid.SetAngka(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),6).toString());
             }
         }
         LCount1.setText(Valid.SetAngka(total));
@@ -799,13 +800,13 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         total=0;
         for(i=0;i<tbBangsal.getRowCount();i++){
-            tbBangsal.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbBangsal.convertRowIndexToModel(i),0);
             getdata(i);
         }
         row=tbBangsal.getRowCount();
         for(i=0;i<row;i++){
-            if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                 total=total+Valid.SetAngka(tbBangsal.getValueAt(i,6).toString());
+            if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                 total=total+Valid.SetAngka(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),6).toString());
             }
         }
         LCount1.setText(Valid.SetAngka(total));
@@ -862,6 +863,7 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
     // End of variables declaration//GEN-END:variables
 
     private void tampil(){
+        tbBangsal.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             sisapiutang=0;
@@ -904,37 +906,38 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbBangsal.resumeSorting();
     }
 
     private void getdata() {
         total=0;
         try {
             if(tbBangsal.getSelectedRow()!= -1){
-                if(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().equals("true")){
-                    if(Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),8).toString())<0){
+                if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString().equals("true")){
+                    if(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),8).toString())<0){
                         JOptionPane.showMessageDialog(null,"Nilai pelunasan lebih besar dari sisa piutang...!!");
-                       tbBangsal.setValueAt(false,tbBangsal.getSelectedRow(),0);
+                       tabMode.setValueAt(false,tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0);
                     }else{
-                        tbBangsal.setValueAt(
-                                Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),6).toString())-
-                                (Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),7).toString())+
-                                Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),10).toString())),
-                                tbBangsal.getSelectedRow(),8);
+                        tabMode.setValueAt(
+                                Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),6).toString())-
+                                (Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),7).toString())+
+                                Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),10).toString())),
+                                tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),8);
                     }
-                }else if(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().equals("false")){
-                    tbBangsal.setValueAt(
-                                Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),6).toString())-
-                                Double.parseDouble(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),7).toString()),
-                                tbBangsal.getSelectedRow(),8);
-                    tbBangsal.setValueAt(0,tbBangsal.getSelectedRow(),10);
+                }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString().equals("false")){
+                    tabMode.setValueAt(
+                                Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),6).toString())-
+                                Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),7).toString()),
+                                tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),8);
+                    tabMode.setValueAt(0,tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),10);
                 }
             }
         } catch (Exception e) {
         }
         row=tbBangsal.getRowCount();
         for(i=0;i<row;i++){
-            if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                 total=total+Valid.SetAngka(tbBangsal.getValueAt(i,6).toString());
+            if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                 total=total+Valid.SetAngka(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),6).toString());
             }
         }
         LCount1.setText(Valid.SetAngka(total));
@@ -943,23 +946,23 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
     private void getdata(int pilih) {
         try {
             if(pilih!= -1){
-                if(tbBangsal.getValueAt(pilih,0).toString().equals("true")){
-                    if(Double.parseDouble(tbBangsal.getValueAt(pilih,8).toString())<0){
+                if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(pilih),0).toString().equals("true")){
+                    if(Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(pilih),8).toString())<0){
                         JOptionPane.showMessageDialog(null,"Nilai pelunasan lebih besar dari sisa piutang...!!");
-                       tbBangsal.setValueAt(false,pilih,0);
+                       tabMode.setValueAt(false,tbBangsal.convertRowIndexToModel(pilih),0);
                     }else{
-                        tbBangsal.setValueAt(
-                                Double.parseDouble(tbBangsal.getValueAt(pilih,6).toString())-
-                                (Double.parseDouble(tbBangsal.getValueAt(pilih,7).toString())+
-                                Double.parseDouble(tbBangsal.getValueAt(pilih,10).toString())),
-                                pilih,8);
+                        tabMode.setValueAt(
+                                Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(pilih),6).toString())-
+                                (Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(pilih),7).toString())+
+                                Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(pilih),10).toString())),
+                                tbBangsal.convertRowIndexToModel(pilih),8);
                     }
-                }else if(tbBangsal.getValueAt(pilih,0).toString().equals("false")){
-                    tbBangsal.setValueAt(
-                                Double.parseDouble(tbBangsal.getValueAt(pilih,6).toString())-
-                                Double.parseDouble(tbBangsal.getValueAt(pilih,7).toString()),
-                                pilih,8);
-                    tbBangsal.setValueAt(0,pilih,10);
+                }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(pilih),0).toString().equals("false")){
+                    tabMode.setValueAt(
+                                Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(pilih),6).toString())-
+                                Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(pilih),7).toString()),
+                                tbBangsal.convertRowIndexToModel(pilih),8);
+                    tabMode.setValueAt(0,tbBangsal.convertRowIndexToModel(pilih),10);
                 }
             }
         } catch (Exception e) {

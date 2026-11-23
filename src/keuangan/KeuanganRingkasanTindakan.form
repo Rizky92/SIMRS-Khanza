@@ -125,6 +125,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbRalanDokter">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbRalanDokter" noResource="true"/>
                       </Properties>
                     </Component>
@@ -437,6 +438,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbRalanParamedis">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbRalanParamedis" noResource="true"/>
                       </Properties>
                     </Component>
@@ -749,6 +751,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbRalanDokterParamedis">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbRalanDokterParamedis" noResource="true"/>
                       </Properties>
                     </Component>
@@ -1124,6 +1127,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbOperasi">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbOperasi" noResource="true"/>
                       </Properties>
                     </Component>
@@ -1436,6 +1440,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbRanapDokter">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbRanapDokter" noResource="true"/>
                       </Properties>
                     </Component>
@@ -1685,6 +1690,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbRanapParamedis">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbRanapParamedis" noResource="true"/>
                       </Properties>
                     </Component>
@@ -1934,6 +1940,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbRanapDokterParamedis">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbRanapDokterParamedis" noResource="true"/>
                       </Properties>
                     </Component>
@@ -2246,6 +2253,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbRadiologi">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbRadiologi" noResource="true"/>
                       </Properties>
                     </Component>
@@ -2558,6 +2566,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbLaborat">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbLaborat" noResource="true"/>
                       </Properties>
                     </Component>
@@ -2870,6 +2879,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbDetailLaborat">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbDetailLaborat" noResource="true"/>
                       </Properties>
                     </Component>

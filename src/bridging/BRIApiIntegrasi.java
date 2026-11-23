@@ -682,13 +682,13 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
     private void getData() {
         int row=tbSpesialis.getSelectedRow();
         if(row!= -1){
-            kdrek.setText(tbSpesialis.getValueAt(row,0).toString());
-            nmrek.setText(tbSpesialis.getValueAt(row,1).toString());
-            ConsumerKey.setText(tbSpesialis.getValueAt(row,2).toString());
-            ConsumerSecret.setText(tbSpesialis.getValueAt(row,3).toString());
-            InstitutionCode.setText(tbSpesialis.getValueAt(row,4).toString());
-            BrivaNo.setText(tbSpesialis.getValueAt(row,5).toString());
-            UrlApi.setText(tbSpesialis.getValueAt(row,6).toString());
+            kdrek.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),0).toString());
+            nmrek.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),1).toString());
+            ConsumerKey.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),2).toString());
+            ConsumerSecret.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),3).toString());
+            InstitutionCode.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),4).toString());
+            BrivaNo.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),5).toString());
+            UrlApi.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),6).toString());
         }
     }
 

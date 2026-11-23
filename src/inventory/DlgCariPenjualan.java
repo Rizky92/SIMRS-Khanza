@@ -725,6 +725,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1177,13 +1178,13 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
         }else if(tbDokter.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Nota");
             }else if(tbDokter.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
                 kdbar.requestFocus();
             }else {
-                Valid.panggilUrl("billing/NotaApotek2.php?nonota="+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim()+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
+                Valid.panggilUrl("billing/NotaApotek2.php?nonota="+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim()+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
             }
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -1196,14 +1197,14 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
         }else if(tbDokter.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Nota");
             }else{
                 try {
                     pscarijual=koneksi.prepareStatement(
                        "select penjualan.nota_jual,penjualan.kd_bangsal,penjualan.status,penjualan.kd_rek,penjualan.ongkir,penjualan.ppn from penjualan where penjualan.nota_jual=?");
                     try {
-                        pscarijual.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+                        pscarijual.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim());
                         rs=pscarijual.executeQuery();
                         if(rs.next()){
                             Sequel.AutoComitFalse();
@@ -1268,14 +1269,14 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
                                     }
 
                                     if(sukses==true){
-                                        Sequel.queryu("delete from tagihan_sadewa where no_nota='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim()+"'");
-                                        Sequel.queryu("delete from penjualan where nota_jual='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim()+"'");
+                                        Sequel.queryu("delete from tagihan_sadewa where no_nota='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim()+"'");
+                                        Sequel.queryu("delete from penjualan where nota_jual='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim()+"'");
                                     }
                                 }else{
                                     JOptionPane.showMessageDialog(null,"Hanya Admin yang diijinkan untuk menghapus jika statusnya sudah bayar..!!");
                                 }
                             }else{
-                                Sequel.queryu("delete from penjualan where nota_jual='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim()+"'");
+                                Sequel.queryu("delete from penjualan where nota_jual='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim()+"'");
                             }
 
                             if(sukses==true){
@@ -1410,7 +1411,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
         }else if(tbDokter.getSelectedRow()<= -1){
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Nota");
             }else{
                 WindowGantiCaraBayar.setSize(630,80);
@@ -1436,7 +1437,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
         }else if(tbDokter.getSelectedRow()<= -1){
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Nota");
             }else{
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1449,7 +1450,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
                 param.put("emailrs",akses.getemailrs());
 
                 if(Sequel.cariInteger(
-                        "select count(*) from detailjual where detailjual.nota_jual=? and detailjual.aturan_pakai<>''",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim())>0){
+                        "select count(*) from detailjual where detailjual.nota_jual=? and detailjual.aturan_pakai<>''",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim())>0){
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptItemResepPenjualan.jasper","report","::[ Aturan Pakai Obat ]::",
                         "select penjualan.nota_jual,penjualan.tgl_jual, "+
@@ -1458,11 +1459,11 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
                         "from penjualan inner join detailjual on penjualan.nota_jual=detailjual.nota_jual "+
                         "inner join databarang on detailjual.kode_brng=databarang.kode_brng "+
                         "inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat "+
-                        "where penjualan.nota_jual='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim()+"' and detailjual.aturan_pakai<>''",param);
+                        "where penjualan.nota_jual='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim()+"' and detailjual.aturan_pakai<>''",param);
                 }
 
                 if(Sequel.cariInteger(
-                        "select count(*) from obat_racikan_jual where obat_racikan_jual.nota_jual=? and obat_racikan_jual.aturan_pakai<>''",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim())>0){
+                        "select count(*) from obat_racikan_jual where obat_racikan_jual.nota_jual=? and obat_racikan_jual.aturan_pakai<>''",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim())>0){
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptItemResepPenjualan2.jasper","report","::[ Aturan Pakai Obat ]::",
                         "select penjualan.nota_jual,penjualan.tgl_jual,metode_racik.nm_racik, "+
@@ -1470,7 +1471,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
                         "obat_racikan_jual.aturan_pakai,obat_racikan_jual.jml_dr "+
                         "from penjualan inner join obat_racikan_jual on penjualan.nota_jual=obat_racikan_jual.nota_jual "+
                         "inner join metode_racik on obat_racikan_jual.kd_racik=metode_racik.kd_racik "+
-                        "where obat_racikan_jual.nota_jual='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim()+"' and obat_racikan_jual.aturan_pakai<>''",param);
+                        "where obat_racikan_jual.nota_jual='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim()+"' and obat_racikan_jual.aturan_pakai<>''",param);
                 }
                 this.setCursor(Cursor.getDefaultCursor());
             }
@@ -1484,7 +1485,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
         }else if(tbDokter.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Nota");
             }else{
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1497,7 +1498,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
                 param.put("emailrs",akses.getemailrs());
 
                 if(Sequel.cariInteger(
-                        "select count(*) from detailjual where detailjual.nota_jual=? and detailjual.aturan_pakai<>''",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim())>0){
+                        "select count(*) from detailjual where detailjual.nota_jual=? and detailjual.aturan_pakai<>''",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim())>0){
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptItemResepPenjualan3.jasper","report","::[ Aturan Pakai Obat ]::",
                         "select penjualan.nota_jual,penjualan.tgl_jual, "+
@@ -1507,11 +1508,11 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
                         "inner join databarang on detailjual.kode_brng=databarang.kode_brng "+
                         "inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat "+
                         "inner join jenis on databarang.kdjns=jenis.kdjns "+
-                        "where penjualan.nota_jual='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim()+"' and detailjual.aturan_pakai<>''",param);
+                        "where penjualan.nota_jual='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim()+"' and detailjual.aturan_pakai<>''",param);
                 }
 
                 if(Sequel.cariInteger(
-                        "select count(*) from obat_racikan_jual where obat_racikan_jual.nota_jual=? and obat_racikan_jual.aturan_pakai<>''",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim())>0){
+                        "select count(*) from obat_racikan_jual where obat_racikan_jual.nota_jual=? and obat_racikan_jual.aturan_pakai<>''",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim())>0){
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptItemResepPenjualan2.jasper","report","::[ Aturan Pakai Obat ]::",
                         "select penjualan.nota_jual,penjualan.tgl_jual,metode_racik.nm_racik, "+
@@ -1519,7 +1520,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
                         "obat_racikan_jual.aturan_pakai,obat_racikan_jual.jml_dr "+
                         "from penjualan inner join obat_racikan_jual on penjualan.nota_jual=obat_racikan_jual.nota_jual "+
                         "inner join metode_racik on obat_racikan_jual.kd_racik=metode_racik.kd_racik "+
-                        "where obat_racikan_jual.nota_jual='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim()+"' and obat_racikan_jual.aturan_pakai<>''",param);
+                        "where obat_racikan_jual.nota_jual='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim()+"' and obat_racikan_jual.aturan_pakai<>''",param);
                 }
 
                 this.setCursor(Cursor.getDefaultCursor());
@@ -1534,7 +1535,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
         }else if(tbDokter.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Nota");
             }else{
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1546,7 +1547,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
                 if(Sequel.cariInteger(
-                        "select count(*) from detailjual where detailjual.nota_jual=? and detailjual.aturan_pakai<>''",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim())>0){
+                        "select count(*) from detailjual where detailjual.nota_jual=? and detailjual.aturan_pakai<>''",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim())>0){
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptItemResepPenjualan5.jasper","report","::[ Aturan Pakai Obat ]::",
                         "select penjualan.nota_jual,penjualan.tgl_jual, "+
@@ -1555,11 +1556,11 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
                         "from penjualan inner join detailjual on penjualan.nota_jual=detailjual.nota_jual "+
                         "inner join databarang on detailjual.kode_brng=databarang.kode_brng "+
                         "inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat "+
-                        "where penjualan.nota_jual='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim()+"' and detailjual.aturan_pakai<>''",param);
+                        "where penjualan.nota_jual='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim()+"' and detailjual.aturan_pakai<>''",param);
                 }
 
                 if(Sequel.cariInteger(
-                        "select count(*) from obat_racikan_jual where obat_racikan_jual.nota_jual=? and obat_racikan_jual.aturan_pakai<>''",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim())>0){
+                        "select count(*) from obat_racikan_jual where obat_racikan_jual.nota_jual=? and obat_racikan_jual.aturan_pakai<>''",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim())>0){
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptItemResepPenjualan6.jasper","report","::[ Aturan Pakai Obat ]::",
                         "select penjualan.nota_jual,penjualan.tgl_jual,metode_racik.nm_racik, "+
@@ -1567,7 +1568,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
                         "obat_racikan_jual.aturan_pakai,obat_racikan_jual.jml_dr "+
                         "from penjualan inner join obat_racikan_jual on penjualan.nota_jual=obat_racikan_jual.nota_jual "+
                         "inner join metode_racik on obat_racikan_jual.kd_racik=metode_racik.kd_racik "+
-                        "where obat_racikan_jual.nota_jual='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim()+"' and obat_racikan_jual.aturan_pakai<>''",param);
+                        "where obat_racikan_jual.nota_jual='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim()+"' and obat_racikan_jual.aturan_pakai<>''",param);
                 }
 
                 this.setCursor(Cursor.getDefaultCursor());
@@ -1580,21 +1581,21 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCloseIn4ActionPerformed
 
     private void BtnSimpan4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpan4ActionPerformed
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"No.Nota");
         }else{
             try {
                 pscarijual=koneksi.prepareStatement(
                     "select penjualan.nota_jual,penjualan.kd_bangsal,penjualan.status,penjualan.no_rkm_medis,penjualan.nm_pasien,penjualan.tgl_jual,penjualan.ongkir,penjualan.ppn from penjualan where penjualan.nota_jual=?");
                 try {
-                    pscarijual.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+                    pscarijual.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim());
                     rs=pscarijual.executeQuery();
                     if(rs.next()){
                         if(rs.getString("status").equals("Sudah Dibayar")){
                             JOptionPane.showMessageDialog(rootPane,"Maaf transaksi penjualan sudah diverifikasi..!!");
                         }else{
                             kdrek="";
-                            ttljual=rs.getDouble("ongkir")+rs.getDouble("ppn")+Sequel.cariIsiAngka("select sum(detailjual.total) from detailjual where detailjual.nota_jual=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+                            ttljual=rs.getDouble("ongkir")+rs.getDouble("ppn")+Sequel.cariIsiAngka("select sum(detailjual.total) from detailjual where detailjual.nota_jual=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim());
 
                             try {
                                 myObj = new FileReader("./cache/akunbayar.iyem");
@@ -1617,7 +1618,7 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
                             }
 
                             Sequel.mengedit("penjualan","nota_jual=?","kd_rek=?,nama_bayar=?",3,new String[]{
-                                kdrek,AkunBayar.getSelectedItem().toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim()
+                                kdrek,AkunBayar.getSelectedItem().toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim()
                             });
 
                             Sequel.AutoComitFalse();

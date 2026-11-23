@@ -376,6 +376,7 @@ public final class DlgCariMasterMenolakAnjuranMedis extends javax.swing.JDialog 
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             file=new File("./cache/masterMAM.iyem");
@@ -413,6 +414,7 @@ public final class DlgCariMasterMenolakAnjuranMedis extends javax.swing.JDialog 
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(""+tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {
@@ -431,6 +433,7 @@ public final class DlgCariMasterMenolakAnjuranMedis extends javax.swing.JDialog 
         try {
             myObj = new FileReader("./cache/masterMAM.iyem");
             root = mapper.readTree(myObj);
+            tbKamar.suspendSorting();
             Valid.tabelKosong(tabMode);
             response = root.path("masterMAM");
             if(response.isArray()){
@@ -463,6 +466,7 @@ public final class DlgCariMasterMenolakAnjuranMedis extends javax.swing.JDialog 
             root = null;
         }
         LCount.setText(""+tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     private void runBackground(Runnable task) {

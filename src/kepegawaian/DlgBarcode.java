@@ -777,10 +777,10 @@ public final class DlgBarcode extends javax.swing.JDialog {
     private void getData() {
         int row=tbBangsal.getSelectedRow();
         if(row!= -1){
-            Id.setText(tbBangsal.getValueAt(row,0).toString());
-            Nik.setText(tbBangsal.getValueAt(row,1).toString());
-            Nm.setText(tbBangsal.getValueAt(row,2).toString());
-            Bcd.setText(tbBangsal.getValueAt(row,3).toString());
+            Id.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),0).toString());
+            Nik.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),1).toString());
+            Nm.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),2).toString());
+            Bcd.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),3).toString());
         }
     }
 

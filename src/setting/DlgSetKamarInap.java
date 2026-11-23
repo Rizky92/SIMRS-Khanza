@@ -631,14 +631,14 @@ public class DlgSetKamarInap extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            Jam.setText(tbAdmin.getValueAt(row,0).toString());
-            cmbYes.setSelectedItem(tbAdmin.getValueAt(row,1).toString());
-            fee.setText(tbAdmin.getValueAt(row,2).toString());
-            cmbYes2.setSelectedItem(tbAdmin.getValueAt(row,3).toString());
-            Bayi.setText(tbAdmin.getValueAt(row,4).toString());
-            cmbYes3.setSelectedItem(tbAdmin.getValueAt(row,5).toString());
-            cmbYes4.setSelectedItem(tbAdmin.getValueAt(row,6).toString());
-            cmbYes5.setSelectedItem(tbAdmin.getValueAt(row,7).toString());
+            Jam.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),0).toString());
+            cmbYes.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),1).toString());
+            fee.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),2).toString());
+            cmbYes2.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),3).toString());
+            Bayi.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),4).toString());
+            cmbYes3.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),5).toString());
+            cmbYes4.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),6).toString());
+            cmbYes5.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),7).toString());
         }
     }
 

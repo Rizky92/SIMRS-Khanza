@@ -599,7 +599,7 @@ public class LabKeslingPelanggan extends javax.swing.JDialog {
             Valid.textKosong(PersonalDihubungi,"Nomer Rekening");
         }else{
             Valid.editTable(tabMode,"labkesling_pelanggan","kode_pelanggan","?","kode_pelanggan=?,nama_pelanggan=?,alamat=?,kota=?,no_telp=?,kegiatan_usaha=?,personal_dihubungi=?",8,new String[]{
-                Kode.getText(),Nama.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),KegiatanUsaha.getText(),PersonalDihubungi.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
+                Kode.getText(),Nama.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),KegiatanUsaha.getText(),PersonalDihubungi.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()
             });
             if(tbDokter.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
@@ -849,6 +849,7 @@ public class LabKeslingPelanggan extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbDokter.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -893,6 +894,7 @@ public class LabKeslingPelanggan extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbDokter.getRowCount());
+        tbDokter.resumeSorting();
     }
 
     public void emptTeks() {
@@ -909,13 +911,13 @@ public class LabKeslingPelanggan extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            Kode.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            Nama.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-            Alamat.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString());
-            Kota.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
-            Telp.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
-            KegiatanUsaha.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString());
-            PersonalDihubungi.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString());
+            Kode.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+            Nama.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
+            Alamat.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString());
+            Kota.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString());
+            Telp.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
+            KegiatanUsaha.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),5).toString());
+            PersonalDihubungi.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6).toString());
         }
     }
 

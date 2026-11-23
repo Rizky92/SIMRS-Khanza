@@ -738,14 +738,14 @@ public final class TokoBayarPiutang extends javax.swing.JDialog {
                 sukses=true;
 
                 if(Sequel.queryu2tf("delete from toko_bayar_piutang where tgl_bayar=? and no_member=? and nota_piutang=? and kd_rek=? and kd_rek_kontra=?", 5,new String[]{
-                    tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString(),
-                    tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString()
+                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),5).toString(),
+                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),6).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),7).toString()
                 })==true){
                     Sequel.deleteTampJurnal();
-                    if(Sequel.insertTampJurnal(tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString(), "BAYAR PIUTANG TOKO", Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString()), 0)==false){
+                    if(Sequel.insertTampJurnal(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 7).toString(), "BAYAR PIUTANG TOKO", Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3).toString()), 0)==false){
                         sukses=false;
                     }
-                    if(Sequel.insertTampJurnal(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), "Kontra Akun", 0, Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString()))==false){
+                    if(Sequel.insertTampJurnal(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 6).toString(), "Kontra Akun", 0, Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3).toString()))==false){
                         sukses=false;
                     }
                     if(sukses==true){
@@ -997,12 +997,12 @@ public final class TokoBayarPiutang extends javax.swing.JDialog {
         }else if(tbKamar.getRowCount()!=0){
             if(tbKamar.getSelectedRow()>-1){
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                Sequel.menyimpan("temporary","'0','No. Nota',': "+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
-                Sequel.menyimpan("temporary","'1','Tgl. Bayar',': "+tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
-                Sequel.menyimpan("temporary","'2','No. Member',': "+tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
-                Sequel.menyimpan("temporary","'3','Nama Member',': "+tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
-                Sequel.menyimpan("temporary","'4','Keterangan',': "+tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
-                Sequel.menyimpan("temporary","'5','Besar Cicilan',': "+Valid.SetAngka(Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString())) +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
+                Sequel.menyimpan("temporary","'0','No. Nota',': "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),5).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
+                Sequel.menyimpan("temporary","'1','Tgl. Bayar',': "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
+                Sequel.menyimpan("temporary","'2','No. Member',': "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
+                Sequel.menyimpan("temporary","'3','Nama Member',': "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
+                Sequel.menyimpan("temporary","'4','Keterangan',': "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),4).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
+                Sequel.menyimpan("temporary","'5','Besar Cicilan',': "+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3).toString())) +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
 
                 Valid.panggilUrl("billing/LaporanPiutang.php?petugas="+akses.getkode().replaceAll(" ","_")+"&tanggal="+Tanggal.getSelectedItem().toString().replaceAll(" ","_")+"&alamatip="+akses.getalamatip()+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
             }
@@ -1177,6 +1177,7 @@ public final class TokoBayarPiutang extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -1217,6 +1218,7 @@ public final class TokoBayarPiutang extends javax.swing.JDialog {
         }
         LCount.setText(""+tbKamar.getRowCount());
         LTotal.setText(Valid.SetAngka(total));
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1246,12 +1248,12 @@ public final class TokoBayarPiutang extends javax.swing.JDialog {
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            Kdmem.setText(tbKamar.getValueAt(row,1).toString());
-            Nmmem.setText(tbKamar.getValueAt(row,2).toString());
-            Cicilan.setText(tbKamar.getValueAt(row,3).toString());
-            Keterangan.setText(tbKamar.getValueAt(row,4).toString());
-            NoNota.setText(tbKamar.getValueAt(row,5).toString());
-            Valid.SetTgl(Tanggal,tbKamar.getValueAt(row,0).toString());
+            Kdmem.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
+            Nmmem.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),2).toString());
+            Cicilan.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),3).toString());
+            Keterangan.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),4).toString());
+            NoNota.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),5).toString());
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
         }
     }
 

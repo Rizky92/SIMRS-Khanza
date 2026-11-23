@@ -917,10 +917,10 @@ public final class InhealthTagihan extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSJP.getSelectedRow()!= -1){
-            TNoRM.setText(tbSJP.getValueAt(tbSJP.getSelectedRow(),24).toString());
-            TPasien.setText(tbSJP.getValueAt(tbSJP.getSelectedRow(),25).toString());
+            TNoRM.setText(tabMode.getValueAt(tbSJP.convertRowIndexToModel(tbSJP.getSelectedRow()),24).toString());
+            TPasien.setText(tabMode.getValueAt(tbSJP.convertRowIndexToModel(tbSJP.getSelectedRow()),25).toString());
             totaltagihan=0;
-            tagihanKamar(tbSJP.getValueAt(tbSJP.getSelectedRow(),1).toString());
+            tagihanKamar(tabMode.getValueAt(tbSJP.convertRowIndexToModel(tbSJP.getSelectedRow()),1).toString());
             LTagihan.setText(Valid.SetAngka(totaltagihan));
         }
     }

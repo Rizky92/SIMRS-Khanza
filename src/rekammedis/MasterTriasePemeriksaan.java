@@ -428,7 +428,7 @@ public class MasterTriasePemeriksaan extends javax.swing.JDialog {
         }else{
             if(tbSpesialis.getSelectedRow()> -1){
                 Sequel.mengedit("master_triase_pemeriksaan","kode_pemeriksaan=?","kode_pemeriksaan=?,nama_pemeriksaan=?",3,new String[]{
-                    TKd.getText(),TNm.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
+                    TKd.getText(),TNm.getText(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString()
                 });
                 if(tbSpesialis.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
@@ -634,8 +634,8 @@ public class MasterTriasePemeriksaan extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            TKd.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            TNm.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
+            TKd.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            TNm.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
         }
     }
 

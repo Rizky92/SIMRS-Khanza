@@ -227,6 +227,7 @@ public class InventarisPemesanan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -760,11 +761,11 @@ public class InventarisPemesanan extends javax.swing.JDialog {
                 })==true){
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
-                        if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
+                        if(Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0){
                             if(Sequel.menyimpantf2("inventaris_detail_pesan","?,?,?,?,?,?,?,?","Transaksi Penerimaan",8,new String[]{
-                                NoFaktur.getText(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,0).toString(),
-                                tbDokter.getValueAt(i,7).toString(),tbDokter.getValueAt(i,8).toString(),tbDokter.getValueAt(i,9).toString(),
-                                tbDokter.getValueAt(i,10).toString(),tbDokter.getValueAt(i,11).toString()
+                                NoFaktur.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString(),
+                                tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),7).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),9).toString(),
+                                tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),10).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),11).toString()
                             })==false){
                                 sukses=false;
                             }
@@ -796,12 +797,12 @@ public class InventarisPemesanan extends javax.swing.JDialog {
                     Sequel.Commit();
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
-                        tbDokter.setValueAt("",i,0);
-                        tbDokter.setValueAt(0,i,7);
-                        tbDokter.setValueAt(0,i,8);
-                        tbDokter.setValueAt(0,i,9);
-                        tbDokter.setValueAt(0,i,10);
-                        tbDokter.setValueAt(0,i,11);
+                        tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),0);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),7);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),8);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),9);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),10);
+                        tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),11);
                     }
                     Meterai.setText("0");
                     getData();
@@ -857,12 +858,12 @@ public class InventarisPemesanan extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            tbDokter.setValueAt("",i,0);
-            tbDokter.setValueAt(false,i,4);
-            tbDokter.setValueAt(0,i,6);
-            tbDokter.setValueAt(0,i,7);
-            tbDokter.setValueAt(0,i,8);
-            tbDokter.setValueAt(0,i,9);
+            tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),0);
+            tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(i),4);
+            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),6);
+            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),7);
+            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),8);
+            tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(i),9);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -1006,8 +1007,8 @@ public class InventarisPemesanan extends javax.swing.JDialog {
                 if((tbDokter.getSelectedColumn()==1)||(tbDokter.getSelectedColumn()==7)||(tbDokter.getSelectedColumn()==8)||(tbDokter.getSelectedColumn()==10)){
                     getData();
                 }else if(tbDokter.getSelectedColumn()==9){
-                    tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())*
-                        (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
+                    tabMode.setValueAt(Math.round(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8).toString())*
+                        (Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9).toString())/100)),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10);
                     getData();
                 }
             } catch (java.lang.NullPointerException e) {
@@ -1030,9 +1031,9 @@ public class InventarisPemesanan extends javax.swing.JDialog {
                         TCari.setText("");
                         TCari.requestFocus();
                     }else if(tbDokter.getSelectedColumn()==9){
-                        if(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())>0){
-                            tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())*
-                                (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
+                        if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9).toString())>0){
+                            tabMode.setValueAt(Math.round(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8).toString())*
+                                (Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9).toString())/100)),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10);
                     }
                     getData();
                 }
@@ -1041,7 +1042,7 @@ public class InventarisPemesanan extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
             i=tbDokter.getSelectedRow();
             if(i!= -1){
-                tbDokter.setValueAt("", i,0);
+                tabMode.setValueAt("", tbDokter.convertRowIndexToModel(i),0);
             }
         }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
             TCari.setText("");
@@ -1050,9 +1051,9 @@ public class InventarisPemesanan extends javax.swing.JDialog {
             if((tbDokter.getSelectedColumn()==1)||(tbDokter.getSelectedColumn()==7)||(tbDokter.getSelectedColumn()==8)){
                 getData();
             }else if((tbDokter.getSelectedColumn()==9)||(tbDokter.getSelectedColumn()==10)){
-                if(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())>0){
-                    tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())*
-                        (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
+                if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9).toString())>0){
+                    tabMode.setValueAt(Math.round(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8).toString())*
+                        (Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9).toString())/100)),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10);
                 }
                 getData();
             }
@@ -1211,7 +1212,7 @@ public class InventarisPemesanan extends javax.swing.JDialog {
         jml=0;
         for(i=0;i<row;i++){
             try {
-                if(Double.parseDouble(tbDokter.getValueAt(i,0).toString())>0){
+                if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0){
                     jml++;
                 }
             } catch (Exception e) {
@@ -1234,25 +1235,26 @@ public class InventarisPemesanan extends javax.swing.JDialog {
         index=0;
         for(i=0;i<row;i++){
             try {
-                if(Double.parseDouble(tbDokter.getValueAt(i,0).toString())>0){
-                    jumlah[index]=Double.parseDouble(tbDokter.getValueAt(i,0).toString());
-                    kodebarang[index]=tbDokter.getValueAt(i,1).toString();
-                    namabarang[index]=tbDokter.getValueAt(i,2).toString();
-                    produsen[index]=tbDokter.getValueAt(i,3).toString();
-                    merk[index]=tbDokter.getValueAt(i,4).toString();
-                    kategori[index]=tbDokter.getValueAt(i,5).toString();
-                    jenis[index]=tbDokter.getValueAt(i,6).toString();
-                    harga[index]=Double.parseDouble(tbDokter.getValueAt(i,7).toString());
-                    subtotal[index]=Double.parseDouble(tbDokter.getValueAt(i,8).toString());
-                    diskon[index]=Double.parseDouble(tbDokter.getValueAt(i,9).toString());
-                    besardiskon[index]=Double.parseDouble(tbDokter.getValueAt(i,10).toString());
-                    jmltotal[index]=Double.parseDouble(tbDokter.getValueAt(i,11).toString());
+                if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString())>0){
+                    jumlah[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString());
+                    kodebarang[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString();
+                    namabarang[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString();
+                    produsen[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString();
+                    merk[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString();
+                    kategori[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString();
+                    jenis[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString();
+                    harga[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),7).toString());
+                    subtotal[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString());
+                    diskon[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),9).toString());
+                    besardiskon[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),10).toString());
+                    jmltotal[index]=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),11).toString());
                     index++;
                 }
             } catch (Exception e) {
             }
         }
 
+        tbDokter.suspendSorting();
         Valid.tabelKosong(tabMode);
         for(i=0;i<jml;i++){
             tabMode.addRow(new Object[]{jumlah[i],kodebarang[i],namabarang[i],produsen[i],merk[i],kategori[i],jenis[i],harga[i],subtotal[i],diskon[i],besardiskon[i],jmltotal[i]});
@@ -1327,29 +1329,30 @@ public class InventarisPemesanan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbDokter.resumeSorting();
     }
 
     private void getData(){
         row=tbDokter.getSelectedRow();
         if(row!= -1){
-            if(!tbDokter.getValueAt(row,0).toString().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString().equals("")){
                 try {
-                    if(Double.parseDouble(tbDokter.getValueAt(row,0).toString())>0){
-                        tbDokter.setValueAt(Double.parseDouble(tbDokter.getValueAt(row,0).toString())*Double.parseDouble(tbDokter.getValueAt(row,7).toString()), row,8);
-                        tbDokter.setValueAt(Double.parseDouble(tbDokter.getValueAt(row,8).toString())-Double.parseDouble(tbDokter.getValueAt(row,10).toString()), row,11);
+                    if(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString())>0){
+                        tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString())*Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),7).toString()), tbDokter.convertRowIndexToModel(row),8);
+                        tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),8).toString())-Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),10).toString()), tbDokter.convertRowIndexToModel(row),11);
                     }
                 } catch (Exception e) {
-                    tbDokter.setValueAt("",row,0);
-                    tbDokter.setValueAt(0,row,8);
-                    tbDokter.setValueAt(0,row,9);
-                    tbDokter.setValueAt(0,row,10);
-                    tbDokter.setValueAt(0,row,11);
+                    tabMode.setValueAt("",tbDokter.convertRowIndexToModel(row),0);
+                    tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(row),8);
+                    tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(row),9);
+                    tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(row),10);
+                    tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(row),11);
                 }
             }else{
-                tbDokter.setValueAt(0,row,8);
-                tbDokter.setValueAt(0,row,9);
-                tbDokter.setValueAt(0,row,10);
-                tbDokter.setValueAt(0,row,11);
+                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(row),8);
+                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(row),9);
+                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(row),10);
+                tabMode.setValueAt(0,tbDokter.convertRowIndexToModel(row),11);
             }
         }
 
@@ -1363,13 +1366,13 @@ public class InventarisPemesanan extends javax.swing.JDialog {
         jml=tbDokter.getRowCount();
         for(i=0;i<jml;i++){
             try {
-                w=Double.parseDouble(tbDokter.getValueAt(i,8).toString());
+                w=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString());
             }catch (Exception e) {
                 w=0;
             }
             sbttl=sbttl+w;
             try {
-                y=Double.parseDouble(tbDokter.getValueAt(i,10).toString());
+                y=Double.parseDouble(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),10).toString());
             }catch (Exception e) {
                 y=0;
             }

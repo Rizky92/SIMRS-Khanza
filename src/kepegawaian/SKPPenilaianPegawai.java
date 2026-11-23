@@ -189,6 +189,7 @@ public class SKPPenilaianPegawai extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -563,7 +564,7 @@ public class SKPPenilaianPegawai extends javax.swing.JDialog {
         jml=0;
         row=tbDokter.getRowCount();
         for(i=0;i<row;i++){
-            if(tbDokter.getValueAt(i,2).toString().equals("true")||tbDokter.getValueAt(i,3).toString().equals("true")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString().equals("true")||tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString().equals("true")){
                 jml++;
             }
         }
@@ -587,9 +588,9 @@ public class SKPPenilaianPegawai extends javax.swing.JDialog {
                     })==true){
                     row=tbDokter.getRowCount();
                     for(i=0;i<row;i++){
-                        if(tbDokter.getValueAt(i,2).toString().equals("true")||tbDokter.getValueAt(i,3).toString().equals("true")){
+                        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString().equals("true")||tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString().equals("true")){
                             if(Sequel.menyimpantf2("skp_detail_penilaian","?,?,?","Data",3,new String[]{
-                                    NoPenilaian.getText(),tbDokter.getValueAt(i,0).toString(),(tbDokter.getValueAt(i,2).toString().equals("true")?"Ya":"Tidak")
+                                    NoPenilaian.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString(),(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString().equals("true")?"Ya":"Tidak")
                                 })==false){
                                 sukses=false;
                             }
@@ -602,8 +603,8 @@ public class SKPPenilaianPegawai extends javax.swing.JDialog {
                     Sequel.Commit();
                     JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
                     for(i=0;i<tbDokter.getRowCount();i++){
-                        tbDokter.setValueAt(false,i,2);
-                        tbDokter.setValueAt(false,i,3);
+                        tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(i),2);
+                        tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(i),3);
                     }
                     autoNomor();
                     TCari.requestFocus();
@@ -658,8 +659,8 @@ public class SKPPenilaianPegawai extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            tbDokter.setValueAt(false,i,2);
-            tbDokter.setValueAt(false,i,3);
+            tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(i),2);
+            tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(i),3);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -906,13 +907,13 @@ public class SKPPenilaianPegawai extends javax.swing.JDialog {
             try {
                 if(tbDokter.getSelectedRow()!= -1){
                     if(tbDokter.getSelectedColumn()==2){
-                        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString().equals("true")){
-                            tbDokter.setValueAt(false,tbDokter.getSelectedRow(),3);
+                        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString().equals("true")){
+                            tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3);
                         }
                     }
                     if(tbDokter.getSelectedColumn()==3){
-                        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString().equals("true")){
-                            tbDokter.setValueAt(false,tbDokter.getSelectedRow(),2);
+                        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString().equals("true")){
+                            tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2);
                         }
                     }
                 }
@@ -1027,7 +1028,7 @@ public class SKPPenilaianPegawai extends javax.swing.JDialog {
             row=tbDokter.getRowCount();
             jml=0;
             for(i=0;i<row;i++){
-                if(tbDokter.getValueAt(i,2).toString().equals("true")||tbDokter.getValueAt(i,3).toString().equals("true")){
+                if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString().equals("true")||tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString().equals("true")){
                     jml++;
                 }
             }
@@ -1038,22 +1039,23 @@ public class SKPPenilaianPegawai extends javax.swing.JDialog {
             Tidak=new Boolean[jml];
             index=0;
             for(i=0;i<row;i++){
-                if(tbDokter.getValueAt(i,2).toString().equals("true")||tbDokter.getValueAt(i,3).toString().equals("true")){
-                    KodeKriteria[index]=tbDokter.getValueAt(i,0).toString();
-                    Kriteria[index]=tbDokter.getValueAt(i,1).toString();
-                    if(tbDokter.getValueAt(i,2).toString().equals("true")){
+                if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString().equals("true")||tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString().equals("true")){
+                    KodeKriteria[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString();
+                    Kriteria[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString();
+                    if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString().equals("true")){
                         Ya[index]=true;
-                    }else if(tbDokter.getValueAt(i,2).toString().equals("false")){
+                    }else if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString().equals("false")){
                         Ya[index]=false;
                     }
-                    if(tbDokter.getValueAt(i,3).toString().equals("true")){
+                    if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString().equals("true")){
                         Tidak[index]=true;
-                    }else if(tbDokter.getValueAt(i,3).toString().equals("false")){
+                    }else if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString().equals("false")){
                         Tidak[index]=false;
                     }
                     index++;
                 }
             }
+            tbDokter.suspendSorting();
             Valid.tabelKosong(tabMode);
             for(i=0;i<jml;i++){
                 tabMode.addRow(new Object[]{KodeKriteria[i],Kriteria[i],Ya[i],Tidak[i]});
@@ -1095,6 +1097,7 @@ public class SKPPenilaianPegawai extends javax.swing.JDialog {
             response = null;
             root = null;
         }
+        tbDokter.resumeSorting();
     }
 
     public void isCek(){

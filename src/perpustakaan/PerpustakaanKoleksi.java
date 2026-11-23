@@ -728,7 +728,7 @@ public final class PerpustakaanKoleksi extends javax.swing.JDialog {
         }else {
             if(tbJnsPerawatan.getSelectedRow()> -1){
                 //menyimpan-------------------------------------------------
-                Sequel.mengedit("perpustakaan_buku","kode_buku='"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0) +"'",
+                Sequel.mengedit("perpustakaan_buku","kode_buku='"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0) +"'",
                         "kode_buku='"+KodeBuku.getText()+"',judul_buku='"+Judul.getText()+"',jml_halaman='"+Halaman.getText()+"',kode_penerbit='"+
                         KodePenerbit.getText()+"',kode_pengarang='"+KodePengarang.getText()+"',thn_terbit='"+ThnTerbit.getSelectedItem()+"',isbn='"+ISBN.getText()+"',id_kategori='"+
                         KodeKategori.getText()+"',id_jenis='"+IdJenis.getText()+"'");
@@ -1313,19 +1313,19 @@ public final class PerpustakaanKoleksi extends javax.swing.JDialog {
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
             try {
-                NamaPenerbit.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-                NamaPengarang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
-                NamaPenerbit.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-                NamaKategori.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
-                nm_jenis.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString());
-                ThnTerbit.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
+                NamaPenerbit.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+                NamaPengarang.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString());
+                NamaPenerbit.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+                NamaKategori.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7).toString());
+                nm_jenis.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),8).toString());
+                ThnTerbit.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5).toString());
 
                 ps=koneksi.prepareStatement(
                        "select perpustakaan_buku.kode_buku, perpustakaan_buku.judul_buku, perpustakaan_buku.jml_halaman, "+
                        "perpustakaan_buku.kode_penerbit, perpustakaan_buku.kode_pengarang, perpustakaan_buku.thn_terbit, perpustakaan_buku.isbn,"+
                        "perpustakaan_buku.id_kategori, perpustakaan_buku.id_jenis from perpustakaan_buku where perpustakaan_buku.kode_buku=? ");
                 try {
-                    ps.setString(1,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         KodeBuku.setText(rs.getString("kode_buku"));

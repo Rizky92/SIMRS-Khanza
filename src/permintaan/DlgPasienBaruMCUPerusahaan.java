@@ -268,6 +268,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -416,74 +417,74 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            if(tbDokter.getValueAt(i,0).toString().equals("true")&&tbDokter.getValueAt(i,34).toString().equals("Menunggu Konfirmasi")){
-                Sequel.queryu4("insert ignore into kelurahan values(?,?)",2,new String[]{"0",tbDokter.getValueAt(i,9).toString()});
-                kdkel=Sequel.cariIsi("select kelurahan.kd_kel from kelurahan where kelurahan.nm_kel=?",tbDokter.getValueAt(i,9).toString());
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("true")&&tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),34).toString().equals("Menunggu Konfirmasi")){
+                Sequel.queryu4("insert ignore into kelurahan values(?,?)",2,new String[]{"0",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),9).toString()});
+                kdkel=Sequel.cariIsi("select kelurahan.kd_kel from kelurahan where kelurahan.nm_kel=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),9).toString());
 
-                Sequel.queryu4("insert ignore into kecamatan values(?,?)",2,new String[]{"0",tbDokter.getValueAt(i,10).toString()});
-                kdkec=Sequel.cariIsi("select kecamatan.kd_kec from kecamatan where kecamatan.nm_kec=?",tbDokter.getValueAt(i,10).toString());
+                Sequel.queryu4("insert ignore into kecamatan values(?,?)",2,new String[]{"0",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),10).toString()});
+                kdkec=Sequel.cariIsi("select kecamatan.kd_kec from kecamatan where kecamatan.nm_kec=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),10).toString());
 
-                Sequel.queryu4("insert ignore into kabupaten values(?,?)",2,new String[]{"0",tbDokter.getValueAt(i,11).toString()});
-                kdkab=Sequel.cariIsi("select kabupaten.kd_kab from kabupaten where kabupaten.nm_kab=?",tbDokter.getValueAt(i,11).toString());
+                Sequel.queryu4("insert ignore into kabupaten values(?,?)",2,new String[]{"0",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),11).toString()});
+                kdkab=Sequel.cariIsi("select kabupaten.kd_kab from kabupaten where kabupaten.nm_kab=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),11).toString());
 
-                Sequel.queryu4("insert ignore into propinsi values(?,?)",2,new String[]{"0",tbDokter.getValueAt(i,12).toString()});
-                kdprop=Sequel.cariIsi("select propinsi.kd_prop from propinsi where propinsi.nm_prop=?",tbDokter.getValueAt(i,12).toString());
+                Sequel.queryu4("insert ignore into propinsi values(?,?)",2,new String[]{"0",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),12).toString()});
+                kdprop=Sequel.cariIsi("select propinsi.kd_prop from propinsi where propinsi.nm_prop=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),12).toString());
 
-                Sequel.queryu4("insert ignore into bahasa_pasien values(?,?)",2,new String[]{"0",tbDokter.getValueAt(i,30).toString()});
-                kdbahasa=Sequel.cariIsi("select bahasa_pasien.id from bahasa_pasien where bahasa_pasien.nama_bahasa=?",tbDokter.getValueAt(i,30).toString());
+                Sequel.queryu4("insert ignore into bahasa_pasien values(?,?)",2,new String[]{"0",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),30).toString()});
+                kdbahasa=Sequel.cariIsi("select bahasa_pasien.id from bahasa_pasien where bahasa_pasien.nama_bahasa=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),30).toString());
 
-                Sequel.queryu4("insert ignore into cacat_fisik values(?,?)",2,new String[]{"0",tbDokter.getValueAt(i,31).toString()});
-                kdcacatfisik=Sequel.cariIsi("select cacat_fisik.id from cacat_fisik where cacat_fisik.nama_cacat=?",tbDokter.getValueAt(i,31).toString());
+                Sequel.queryu4("insert ignore into cacat_fisik values(?,?)",2,new String[]{"0",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),31).toString()});
+                kdcacatfisik=Sequel.cariIsi("select cacat_fisik.id from cacat_fisik where cacat_fisik.nama_cacat=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),31).toString());
 
-                Sequel.queryu4("insert ignore into suku_bangsa values(?,?)",2,new String[]{"0",tbDokter.getValueAt(i,29).toString()});
-                kdsuku=Sequel.cariIsi("select suku_bangsa.id from suku_bangsa where suku_bangsa.nama_suku_bangsa=?",tbDokter.getValueAt(i,29).toString());
+                Sequel.queryu4("insert ignore into suku_bangsa values(?,?)",2,new String[]{"0",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),29).toString()});
+                kdsuku=Sequel.cariIsi("select suku_bangsa.id from suku_bangsa where suku_bangsa.nama_suku_bangsa=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),29).toString());
                 autoNomor();
 
                 if(Sequel.menyimpantf2("pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rekam Medis Pasien",36,new String[]{
-                    TNo.getText(),tbDokter.getValueAt(i,2).toString(),tbDokter.getValueAt(i,3).toString(),tbDokter.getValueAt(i,4).toString(),tbDokter.getValueAt(i,5).toString(),
-                    tbDokter.getValueAt(i,6).toString(),tbDokter.getValueAt(i,7).toString(),tbDokter.getValueAt(i,8).toString(),tbDokter.getValueAt(i,13).toString(),tbDokter.getValueAt(i,14).toString(),
-                    tbDokter.getValueAt(i,15).toString(),tbDokter.getValueAt(i,16).toString(),tbDokter.getValueAt(i,17).toString(),tbDokter.getValueAt(i,18).toString(),tbDokter.getValueAt(i,19).toString(),
-                    tbDokter.getValueAt(i,20).toString(),tbDokter.getValueAt(i,21).toString(),tbDokter.getValueAt(i,22).toString(),KodeCaraBayar,"",kdkel,kdkec,kdkab,tbDokter.getValueAt(i,23).toString(),
-                    tbDokter.getValueAt(i,24).toString(),tbDokter.getValueAt(i,25).toString(),tbDokter.getValueAt(i,26).toString(),tbDokter.getValueAt(i,27).toString(),KodePerusahaan,kdsuku,kdbahasa,
-                    kdcacatfisik,tbDokter.getValueAt(i,32).toString(),tbDokter.getValueAt(i,33).toString(),kdprop,tbDokter.getValueAt(i,28).toString()
+                    TNo.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString(),
+                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),7).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),13).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),14).toString(),
+                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),15).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),16).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),18).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),19).toString(),
+                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),20).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),21).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),22).toString(),KodeCaraBayar,"",kdkel,kdkec,kdkab,tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),23).toString(),
+                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),24).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),25).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),26).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),27).toString(),KodePerusahaan,kdsuku,kdbahasa,
+                    kdcacatfisik,tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),32).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),33).toString(),kdprop,tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),28).toString()
                 })==false){
                     autoNomor();
                     if(Sequel.menyimpantf2("pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rekam Medis Pasien",36,new String[]{
-                        TNo.getText(),tbDokter.getValueAt(i,2).toString(),tbDokter.getValueAt(i,3).toString(),tbDokter.getValueAt(i,4).toString(),tbDokter.getValueAt(i,5).toString(),
-                        tbDokter.getValueAt(i,6).toString(),tbDokter.getValueAt(i,7).toString(),tbDokter.getValueAt(i,8).toString(),tbDokter.getValueAt(i,13).toString(),tbDokter.getValueAt(i,14).toString(),
-                        tbDokter.getValueAt(i,15).toString(),tbDokter.getValueAt(i,16).toString(),tbDokter.getValueAt(i,17).toString(),tbDokter.getValueAt(i,18).toString(),tbDokter.getValueAt(i,19).toString(),
-                        tbDokter.getValueAt(i,20).toString(),tbDokter.getValueAt(i,21).toString(),tbDokter.getValueAt(i,22).toString(),KodeCaraBayar,"",kdkel,kdkec,kdkab,tbDokter.getValueAt(i,23).toString(),
-                        tbDokter.getValueAt(i,24).toString(),tbDokter.getValueAt(i,25).toString(),tbDokter.getValueAt(i,26).toString(),tbDokter.getValueAt(i,27).toString(),KodePerusahaan,kdsuku,kdbahasa,
-                        kdcacatfisik,tbDokter.getValueAt(i,32).toString(),tbDokter.getValueAt(i,33).toString(),kdprop,tbDokter.getValueAt(i,28).toString()
+                        TNo.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString(),
+                        tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),7).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),13).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),14).toString(),
+                        tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),15).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),16).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),18).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),19).toString(),
+                        tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),20).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),21).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),22).toString(),KodeCaraBayar,"",kdkel,kdkec,kdkab,tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),23).toString(),
+                        tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),24).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),25).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),26).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),27).toString(),KodePerusahaan,kdsuku,kdbahasa,
+                        kdcacatfisik,tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),32).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),33).toString(),kdprop,tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),28).toString()
                     })==false){
                         autoNomor();
                         if(Sequel.menyimpantf2("pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rekam Medis Pasien",36,new String[]{
-                            TNo.getText(),tbDokter.getValueAt(i,2).toString(),tbDokter.getValueAt(i,3).toString(),tbDokter.getValueAt(i,4).toString(),tbDokter.getValueAt(i,5).toString(),
-                            tbDokter.getValueAt(i,6).toString(),tbDokter.getValueAt(i,7).toString(),tbDokter.getValueAt(i,8).toString(),tbDokter.getValueAt(i,13).toString(),tbDokter.getValueAt(i,14).toString(),
-                            tbDokter.getValueAt(i,15).toString(),tbDokter.getValueAt(i,16).toString(),tbDokter.getValueAt(i,17).toString(),tbDokter.getValueAt(i,18).toString(),tbDokter.getValueAt(i,19).toString(),
-                            tbDokter.getValueAt(i,20).toString(),tbDokter.getValueAt(i,21).toString(),tbDokter.getValueAt(i,22).toString(),KodeCaraBayar,"",kdkel,kdkec,kdkab,tbDokter.getValueAt(i,23).toString(),
-                            tbDokter.getValueAt(i,24).toString(),tbDokter.getValueAt(i,25).toString(),tbDokter.getValueAt(i,26).toString(),tbDokter.getValueAt(i,27).toString(),KodePerusahaan,kdsuku,kdbahasa,
-                            kdcacatfisik,tbDokter.getValueAt(i,32).toString(),tbDokter.getValueAt(i,33).toString(),kdprop,tbDokter.getValueAt(i,28).toString()
+                            TNo.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString(),
+                            tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),7).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),13).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),14).toString(),
+                            tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),15).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),16).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),18).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),19).toString(),
+                            tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),20).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),21).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),22).toString(),KodeCaraBayar,"",kdkel,kdkec,kdkab,tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),23).toString(),
+                            tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),24).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),25).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),26).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),27).toString(),KodePerusahaan,kdsuku,kdbahasa,
+                            kdcacatfisik,tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),32).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),33).toString(),kdprop,tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),28).toString()
                         })==false){
                             autoNomor();
                             if(Sequel.menyimpantf2("pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rekam Medis Pasien",36,new String[]{
-                                TNo.getText(),tbDokter.getValueAt(i,2).toString(),tbDokter.getValueAt(i,3).toString(),tbDokter.getValueAt(i,4).toString(),tbDokter.getValueAt(i,5).toString(),
-                                tbDokter.getValueAt(i,6).toString(),tbDokter.getValueAt(i,7).toString(),tbDokter.getValueAt(i,8).toString(),tbDokter.getValueAt(i,13).toString(),tbDokter.getValueAt(i,14).toString(),
-                                tbDokter.getValueAt(i,15).toString(),tbDokter.getValueAt(i,16).toString(),tbDokter.getValueAt(i,17).toString(),tbDokter.getValueAt(i,18).toString(),tbDokter.getValueAt(i,19).toString(),
-                                tbDokter.getValueAt(i,20).toString(),tbDokter.getValueAt(i,21).toString(),tbDokter.getValueAt(i,22).toString(),KodeCaraBayar,"",kdkel,kdkec,kdkab,tbDokter.getValueAt(i,23).toString(),
-                                tbDokter.getValueAt(i,24).toString(),tbDokter.getValueAt(i,25).toString(),tbDokter.getValueAt(i,26).toString(),tbDokter.getValueAt(i,27).toString(),KodePerusahaan,kdsuku,kdbahasa,
-                                kdcacatfisik,tbDokter.getValueAt(i,32).toString(),tbDokter.getValueAt(i,33).toString(),kdprop,tbDokter.getValueAt(i,28).toString()
+                                TNo.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),4).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),5).toString(),
+                                tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),6).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),7).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),8).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),13).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),14).toString(),
+                                tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),15).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),16).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),18).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),19).toString(),
+                                tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),20).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),21).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),22).toString(),KodeCaraBayar,"",kdkel,kdkec,kdkab,tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),23).toString(),
+                                tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),24).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),25).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),26).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),27).toString(),KodePerusahaan,kdsuku,kdbahasa,
+                                kdcacatfisik,tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),32).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),33).toString(),kdprop,tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),28).toString()
                             })==false){
                                 autoNomor();
                             }else{
                                 Sequel.queryu2("delete from set_no_rkm_medis");
                                 Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{TNo.getText()});
-                                Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(booking_mcu_perusahaan.no_mcu,4),signed)),0)+1 from booking_mcu_perusahaan where booking_mcu_perusahaan.tanggal_mcu='"+tbDokter.getValueAt(i,17).toString()+"'","MCU",4,TNoBooking);
+                                Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(booking_mcu_perusahaan.no_mcu,4),signed)),0)+1 from booking_mcu_perusahaan where booking_mcu_perusahaan.tanggal_mcu='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString()+"'","MCU",4,TNoBooking);
                                 if(Sequel.menyimpantf2("booking_mcu_perusahaan","current_date(),current_time(),?,?,?,'Terdaftar',?","No.Booking",4,new String[]{
-                                    TNo.getText(),tbDokter.getValueAt(i,17).toString(),TNoBooking.getText(),KodePerusahaan
+                                    TNo.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString(),TNoBooking.getText(),KodePerusahaan
                                 })==true){
                                     if(Sequel.mengedittf2("booking_mcu_perusahaan_pasien_baru","no_pengajuan=?","status='Sudah Dikonfirmasi'",1,new String[]{
-                                        tbDokter.getValueAt(i,1).toString()
+                                        tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString()
                                     })==true){
                                         tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                                         i--;
@@ -493,12 +494,12 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
                         }else{
                             Sequel.queryu2("delete from set_no_rkm_medis");
                             Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{TNo.getText()});
-                            Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(booking_mcu_perusahaan.no_mcu,4),signed)),0)+1 from booking_mcu_perusahaan where booking_mcu_perusahaan.tanggal_mcu='"+tbDokter.getValueAt(i,17).toString()+"'","MCU",4,TNoBooking);
+                            Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(booking_mcu_perusahaan.no_mcu,4),signed)),0)+1 from booking_mcu_perusahaan where booking_mcu_perusahaan.tanggal_mcu='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString()+"'","MCU",4,TNoBooking);
                             if(Sequel.menyimpantf2("booking_mcu_perusahaan","current_date(),current_time(),?,?,?,'Terdaftar',?","No.Booking",4,new String[]{
-                                TNo.getText(),tbDokter.getValueAt(i,17).toString(),TNoBooking.getText(),KodePerusahaan
+                                TNo.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString(),TNoBooking.getText(),KodePerusahaan
                             })==true){
                                 if(Sequel.mengedittf2("booking_mcu_perusahaan_pasien_baru","no_pengajuan=?","status='Sudah Dikonfirmasi'",1,new String[]{
-                                    tbDokter.getValueAt(i,1).toString()
+                                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString()
                                 })==true){
                                     tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                                     i--;
@@ -508,12 +509,12 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
                     }else{
                         Sequel.queryu2("delete from set_no_rkm_medis");
                         Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{TNo.getText()});
-                        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(booking_mcu_perusahaan.no_mcu,4),signed)),0)+1 from booking_mcu_perusahaan where booking_mcu_perusahaan.tanggal_mcu='"+tbDokter.getValueAt(i,17).toString()+"'","MCU",4,TNoBooking);
+                        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(booking_mcu_perusahaan.no_mcu,4),signed)),0)+1 from booking_mcu_perusahaan where booking_mcu_perusahaan.tanggal_mcu='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString()+"'","MCU",4,TNoBooking);
                         if(Sequel.menyimpantf2("booking_mcu_perusahaan","current_date(),current_time(),?,?,?,'Terdaftar',?","No.Booking",4,new String[]{
-                            TNo.getText(),tbDokter.getValueAt(i,17).toString(),TNoBooking.getText(),KodePerusahaan
+                            TNo.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString(),TNoBooking.getText(),KodePerusahaan
                         })==true){
                             if(Sequel.mengedittf2("booking_mcu_perusahaan_pasien_baru","no_pengajuan=?","status='Sudah Dikonfirmasi'",1,new String[]{
-                                tbDokter.getValueAt(i,1).toString()
+                                tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString()
                             })==true){
                                 tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                                 i--;
@@ -523,12 +524,12 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
                 }else{
                     Sequel.queryu2("delete from set_no_rkm_medis");
                     Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{TNo.getText()});
-                    Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(booking_mcu_perusahaan.no_mcu,4),signed)),0)+1 from booking_mcu_perusahaan where booking_mcu_perusahaan.tanggal_mcu='"+tbDokter.getValueAt(i,17).toString()+"'","MCU",4,TNoBooking);
+                    Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(booking_mcu_perusahaan.no_mcu,4),signed)),0)+1 from booking_mcu_perusahaan where booking_mcu_perusahaan.tanggal_mcu='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString()+"'","MCU",4,TNoBooking);
                     if(Sequel.menyimpantf2("booking_mcu_perusahaan","current_date(),current_time(),?,?,?,'Terdaftar',?","No.Booking",4,new String[]{
-                        TNo.getText(),tbDokter.getValueAt(i,17).toString(),TNoBooking.getText(),KodePerusahaan
+                        TNo.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),17).toString(),TNoBooking.getText(),KodePerusahaan
                     })==true){
                         if(Sequel.mengedittf2("booking_mcu_perusahaan_pasien_baru","no_pengajuan=?","status='Sudah Dikonfirmasi'",1,new String[]{
-                            tbDokter.getValueAt(i,1).toString()
+                            tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString()
                         })==true){
                             tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                             i--;
@@ -578,7 +579,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            tbDokter.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -587,13 +588,13 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
             try {
                 if(tbDokter.getSelectedRow()!= -1){
                     if(tbDokter.getSelectedColumn()==2){
-                        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString().equals("true")){
-                            tbDokter.setValueAt(false,tbDokter.getSelectedRow(),3);
+                        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString().equals("true")){
+                            tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3);
                         }
                     }
                     if(tbDokter.getSelectedColumn()==3){
-                        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString().equals("true")){
-                            tbDokter.setValueAt(false,tbDokter.getSelectedRow(),2);
+                        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString().equals("true")){
+                            tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2);
                         }
                     }
                 }
@@ -604,8 +605,8 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            if(tbDokter.getValueAt(i,0).toString().equals("true")&&tbDokter.getValueAt(i,34).toString().equals("Menunggu Konfirmasi")){
-                if(Sequel.meghapustf("booking_mcu_perusahaan_pasien_baru","no_pengajuan",tbDokter.getValueAt(i,1).toString())==true){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("true")&&tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),34).toString().equals("Menunggu Konfirmasi")){
+                if(Sequel.meghapustf("booking_mcu_perusahaan_pasien_baru","no_pengajuan",tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString())==true){
                     tabMode.removeRow(tbDokter.convertRowIndexToModel(i));
                     i--;
                 }
@@ -621,7 +622,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
 
     private void ppPilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            tbDokter.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbDokter.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppPilihActionPerformed
 
@@ -717,6 +718,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
+        tbDokter.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             if(TCari.getText().equals("")){
@@ -786,6 +788,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbDokter.resumeSorting();
     }
 
     private void autoNomor() {

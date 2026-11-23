@@ -124,6 +124,7 @@ public class IPSRSStokAkhirPerTanggalSMC extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -452,6 +453,7 @@ public class IPSRSStokAkhirPerTanggalSMC extends javax.swing.JDialog {
             }
 
             tbDokter.repaint();
+            tbDokter.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
 
             new SwingWorker<Void, Object[]>() {
@@ -535,6 +537,7 @@ public class IPSRSStokAkhirPerTanggalSMC extends javax.swing.JDialog {
                     tabMode.fireTableDataChanged();
                     IPSRSStokAkhirPerTanggalSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbDokter.resumeSorting();
                 }
             }.execute();
         }

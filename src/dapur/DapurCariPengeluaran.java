@@ -484,6 +484,7 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -834,15 +835,15 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim().equals("")){
-            Valid.textKosong(TCari,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+        if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim().equals("")){
+            Valid.textKosong(TCari,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
         }else{
             try {
                 psdetailpengeluaran=koneksi.prepareStatement("select kode_brng,jumlah,total from dapurdetailpengeluaran where no_keluar=? ");
                 try {
                     Sequel.AutoComitFalse();
                     sukses=true;
-                    psdetailpengeluaran.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+                    psdetailpengeluaran.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
                     rs2=psdetailpengeluaran.executeQuery();
                     total=0;
                     while(rs2.next()){
@@ -860,10 +861,10 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
                         sukses=false;
                     }
                     if(sukses==true){
-                        sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN PENGGUNAAN BARANG DAPUR KERING DAN BASAH"+", OLEH "+akses.getkode());
+                        sukses=jur.simpanJurnal(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString(),"U","PEMBATALAN PENGGUNAAN BARANG DAPUR KERING DAN BASAH"+", OLEH "+akses.getkode());
                     }
                     if(sukses==true){
-                        Sequel.queryu2("delete from dapurpengeluaran where no_keluar=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
+                        Sequel.queryu2("delete from dapurpengeluaran where no_keluar=?",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()});
                         Sequel.Commit();
                     }else{
                         Sequel.RollBack();

@@ -281,6 +281,7 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbObat.setAutoCreateRowSorter(true);
         tbObat.setComponentPopupMenu(jPopupMenu1);
         tbObat.setName("tbObat"); // NOI18N
         Scroll.setViewportView(tbObat);
@@ -623,11 +624,11 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString().equals(""))){
                     try {
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
-                        if(tbObat.getValueAt(i,11).toString().equals("")){
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString());
+                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString());
+                        if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString().equals("")){
                             try{
                                 headers = new HttpHeaders();
                                 headers.setContentType(MediaType.APPLICATION_JSON);
@@ -635,20 +636,20 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
                                 json = "{"+
                                             "\"resourceType\": \"QuestionnaireResponse\"," +
                                             "\"status\": \"completed\"," +
-                                            "\"authored\": \""+tbObat.getValueAt(i,9).toString().replaceAll(" ","T")+"+07:00\"," +
+                                            "\"authored\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString().replaceAll(" ","T")+"+07:00\"," +
                                             "\"subject\": {" +
                                                 "\"reference\": \"Patient/"+idpasien+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                                "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString()+"\"" +
                                             "}," +
                                             "\"source\": {" +
                                                 "\"reference\": \"Patient/"+idpasien+"\"" +
                                             "}," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString()+"\"" +
                                             "}," +
                                             "\"author\": {" +
                                                 "\"reference\": \"Practitioner/"+idpraktisi+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
+                                                "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),6).toString()+"\"" +
                                             "}," +
                                             "\"item\": [" +
                                                 "{" +
@@ -658,17 +659,17 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
                                                         "{" +
                                                             "\"linkId\": \"no-rawat\"," +
                                                             "\"text\": \"No. Rawat\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,2).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"no-rm\"," +
                                                             "\"text\": \"No. RM\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,3).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),3).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"no-resep\"," +
                                                             "\"text\": \"No. Resep\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,10).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString()+"\"}]" +
                                                         "}" +
                                                     "]" +
                                                 "}," +
@@ -679,82 +680,82 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
                                                         "{" +
                                                             "\"linkId\": \"tr-1-tepat-identifikasi-pasien\"," +
                                                             "\"text\": \"1. Tepat Identifikasi Pasien\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,12).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),12).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-1-tepat-identifikasi-pasien-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,13).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-2-tepat-obat\"," +
                                                             "\"text\": \"2. Tepat Obat\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,14).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),14).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-2-tepat-obat-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,15).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),15).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-3-tepat-dosis\"," +
                                                             "\"text\": \"3. Tepat Dosis\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,16).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),16).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-3-tepat-dosis-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,17).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),17).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-4-tepat-cara-pemberian\"," +
                                                             "\"text\": \"4. Tepat Cara Pemberian\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,18).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),18).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-4-tepat-cara-pemberian-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,19).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),19).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-5-tepat-waktu-pemberian\"," +
                                                             "\"text\": \"5. Tepat Waktu Pemberian\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,20).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),20).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-5-tepat-waktu-pemberian-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,21).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),21).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-6-duplikasi-obat\"," +
                                                             "\"text\": \"6. Ada Tidak Duplikasi Obat\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,22).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),22).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-6-duplikasi-obat-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,23).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),23).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-7-interaksi-obat\"," +
                                                             "\"text\": \"7. Interaksi Obat\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,24).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),24).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-7-interaksi-obat-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,25).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),25).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-8-kontra-indikasi-obat\"," +
                                                             "\"text\": \"8. Kontra Indikasi Obat\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,26).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),26).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-8-kontra-indikasi-obat-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,27).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),27).toString()+"\"}]" +
                                                         "}" +
                                                     "]" +
                                                 "}," +
@@ -765,27 +766,27 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
                                                         "{" +
                                                             "\"linkId\": \"to-1-tepat-pasien\"," +
                                                             "\"text\": \"1. Tepat Pasien\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,28).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),28).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"to-2-tepat-obat\"," +
                                                             "\"text\": \"2. Tepat Obat\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,29).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),29).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"to-3-tepat-dosis\"," +
                                                             "\"text\": \"3. Tepat Dosis\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,30).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),30).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"to-4-tepat-cara-pemberian\"," +
                                                             "\"text\": \"4. Tepat Cara Pemberian\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,31).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),31).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"to-5-tepat-waktu-pemberian\"," +
                                                             "\"text\": \"5. Tepat Waktu Pemberian\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,32).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),32).toString()+"\"}]" +
                                                         "}" +
                                                     "]" +
                                                 "}" +
@@ -800,7 +801,7 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
                                 response = root.path("id");
                                 if(!response.asText().equals("")){
                                     if(Sequel.menyimpantf2("satu_sehat_questionresponse_telaah_farmasi","?,?","No.Resep",2,new String[]{
-                                        tbObat.getValueAt(i,10).toString(),response.asText()
+                                        tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString(),response.asText()
                                     })==true){
                                         pengirim.setValueAt(tbObat,response.asText(),i,11);
                                         pengirim.setValueAt(tbObat,false,i,0);
@@ -822,20 +823,20 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void ppPilihBelumDikirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihBelumDikirimActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,11).toString().isBlank()){
-                tbObat.setValueAt(true,i,0);
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString().isBlank()){
+                tabMode.setValueAt(true,tbObat.convertRowIndexToModel(i),0);
             }
         }
     }//GEN-LAST:event_ppPilihBelumDikirimActionPerformed
@@ -848,33 +849,33 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString().equals(""))){
                     try {
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
-                        if(!tbObat.getValueAt(i,11).toString().equals("")){
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString());
+                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString());
+                        if(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString().equals("")){
                             try{
                                 headers = new HttpHeaders();
                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                 headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                 json = "{"+
                                             "\"resourceType\": \"QuestionnaireResponse\"," +
-                                            "\"id\": \""+tbObat.getValueAt(i,11).toString()+"\"," +
+                                            "\"id\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString()+"\"," +
                                             "\"status\": \"completed\"," +
-                                            "\"authored\": \""+tbObat.getValueAt(i,9).toString().replaceAll(" ","T")+"+07:00\"," +
+                                            "\"authored\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString().replaceAll(" ","T")+"+07:00\"," +
                                             "\"subject\": {" +
                                                 "\"reference\": \"Patient/"+idpasien+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                                "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString()+"\"" +
                                             "}," +
                                             "\"source\": {" +
                                                 "\"reference\": \"Patient/"+idpasien+"\"" +
                                             "}," +
                                             "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
+                                                "\"reference\": \"Encounter/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString()+"\"" +
                                             "}," +
                                             "\"author\": {" +
                                                 "\"reference\": \"Practitioner/"+idpraktisi+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
+                                                "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),6).toString()+"\"" +
                                             "}," +
                                             "\"item\": [" +
                                                 "{" +
@@ -884,17 +885,17 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
                                                         "{" +
                                                             "\"linkId\": \"no-rawat\"," +
                                                             "\"text\": \"No. Rawat\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,2).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"no-rm\"," +
                                                             "\"text\": \"No. RM\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,3).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),3).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"no-resep\"," +
                                                             "\"text\": \"No. Resep\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,10).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString()+"\"}]" +
                                                         "}" +
                                                     "]" +
                                                 "}," +
@@ -905,82 +906,82 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
                                                         "{" +
                                                             "\"linkId\": \"tr-1-tepat-identifikasi-pasien\"," +
                                                             "\"text\": \"1. Tepat Identifikasi Pasien\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,12).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),12).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-1-tepat-identifikasi-pasien-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,13).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-2-tepat-obat\"," +
                                                             "\"text\": \"2. Tepat Obat\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,14).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),14).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-2-tepat-obat-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,15).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),15).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-3-tepat-dosis\"," +
                                                             "\"text\": \"3. Tepat Dosis\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,16).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),16).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-3-tepat-dosis-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,17).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),17).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-4-tepat-cara-pemberian\"," +
                                                             "\"text\": \"4. Tepat Cara Pemberian\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,18).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),18).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-4-tepat-cara-pemberian-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,19).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),19).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-5-tepat-waktu-pemberian\"," +
                                                             "\"text\": \"5. Tepat Waktu Pemberian\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,20).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),20).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-5-tepat-waktu-pemberian-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,21).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),21).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-6-duplikasi-obat\"," +
                                                             "\"text\": \"6. Ada Tidak Duplikasi Obat\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,22).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),22).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-6-duplikasi-obat-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,23).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),23).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-7-interaksi-obat\"," +
                                                             "\"text\": \"7. Interaksi Obat\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,24).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),24).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-7-interaksi-obat-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,25).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),25).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-8-kontra-indikasi-obat\"," +
                                                             "\"text\": \"8. Kontra Indikasi Obat\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,26).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),26).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"tr-8-kontra-indikasi-obat-ket\"," +
                                                             "\"text\": \"Keterangan\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,27).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),27).toString()+"\"}]" +
                                                         "}" +
                                                     "]" +
                                                 "}," +
@@ -991,36 +992,36 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
                                                         "{" +
                                                             "\"linkId\": \"to-1-tepat-pasien\"," +
                                                             "\"text\": \"1. Tepat Pasien\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,28).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),28).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"to-2-tepat-obat\"," +
                                                             "\"text\": \"2. Tepat Obat\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,29).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),29).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"to-3-tepat-dosis\"," +
                                                             "\"text\": \"3. Tepat Dosis\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,30).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),30).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"to-4-tepat-cara-pemberian\"," +
                                                             "\"text\": \"4. Tepat Cara Pemberian\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,31).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),31).toString()+"\"}]" +
                                                         "}," +
                                                         "{" +
                                                             "\"linkId\": \"to-5-tepat-waktu-pemberian\"," +
                                                             "\"text\": \"5. Tepat Waktu Pemberian\"," +
-                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,32).toString()+"\"}]" +
+                                                            "\"answer\": [{\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),32).toString()+"\"}]" +
                                                         "}" +
                                                     "]" +
                                                 "}" +
                                             "]" +
                                         "}";
-                                System.out.println("URL : "+link+"/QuestionnaireResponse/"+tbObat.getValueAt(i,11).toString());
+                                System.out.println("URL : "+link+"/QuestionnaireResponse/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString());
                                 System.out.println("Request JSON : "+json);
                                 requestEntity = new HttpEntity(json,headers);
-                                json=api.kirimSmc(link+"/QuestionnaireResponse/"+tbObat.getValueAt(i,11).toString(), HttpMethod.PUT, requestEntity);
+                                json=api.kirimSmc(link+"/QuestionnaireResponse/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString(), HttpMethod.PUT, requestEntity);
                                 System.out.println("Result JSON : "+json);
                                 pengirim.setValueAt(tbObat,false,i,0);
                             } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -1121,6 +1122,7 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -1181,6 +1183,7 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbObat.getRowCount());
+        tbObat.resumeSorting();
     }
 
     public void isCek(){

@@ -479,11 +479,11 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
         }else{
             if(tbBangsal.getSelectedRow()>-1){
                 if(Sequel.mengedittf("skp_kategori_penilaian","kode_kategori=?","kode_kategori=?,nama_kategori=?,sasaran=?",4,new String[]{
-                    Kode.getText(),Kategori.getText(),Sasaran.getSelectedItem().toString().substring(0,1),tbBangsal.getValueAt(tbBangsal.getSelectedRow(), 0).toString()
+                    Kode.getText(),Kategori.getText(),Sasaran.getSelectedItem().toString().substring(0,1),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()), 0).toString()
                 })==true){
-                    tbBangsal.setValueAt(Kode.getText(),tbBangsal.getSelectedRow(),0);
-                    tbBangsal.setValueAt(Kategori.getText(),tbBangsal.getSelectedRow(),1);
-                    tbBangsal.setValueAt(Sasaran.getSelectedItem().toString(),tbBangsal.getSelectedRow(),2);
+                    tabMode.setValueAt(Kode.getText(),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0);
+                    tabMode.setValueAt(Kategori.getText(),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1);
+                    tabMode.setValueAt(Sasaran.getSelectedItem().toString(),tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),2);
                     emptTeks();
                 }
             }
@@ -754,9 +754,9 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
 
     private void getData() {
         if(tbBangsal.getSelectedRow()!= -1){
-            Kode.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
-            Kategori.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),1).toString());
-            Sasaran.setSelectedItem(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),2).toString());
+            Kode.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
+            Kategori.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1).toString());
+            Sasaran.setSelectedItem(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),2).toString());
         }
     }
 

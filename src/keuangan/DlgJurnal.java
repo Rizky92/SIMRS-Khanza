@@ -730,9 +730,9 @@ public class DlgJurnal extends javax.swing.JDialog {
                         row=tbDokter.getRowCount();
 
                         for(i=0;i<row;i++){
-                            if(!tbDokter.getValueAt(i,0).toString().equals("")){
+                            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("")){
                                 if(Sequel.menyimpantf2("detailjurnal","?,?,?,?","Kode Rekening",4,new String[]{
-                                    NoJur.getText(),tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,2).toString(),tbDokter.getValueAt(i,3).toString()
+                                    NoJur.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString()
                                 })==false){
                                     sukses=false;
                                 }
@@ -895,8 +895,8 @@ public class DlgJurnal extends javax.swing.JDialog {
             row=tbDokter.getRowCount();
 
             for(i=0;i<row;i++){
-                ttldebet=ttldebet+Valid.SetAngka(tbDokter.getValueAt(i,2).toString());
-                ttlkredit=ttlkredit+Valid.SetAngka(tbDokter.getValueAt(i,3).toString());
+                ttldebet=ttldebet+Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString());
+                ttlkredit=ttlkredit+Valid.SetAngka(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),3).toString());
             }
 
             if(tbDokter.getRowCount()>0){
@@ -923,7 +923,7 @@ public class DlgJurnal extends javax.swing.JDialog {
         int row=tbDokter.getSelectedRow();
         if(row!= -1){
             try {
-                kdrek.setText(tbDokter.getValueAt(row,0).toString());
+                kdrek.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString());
                 ps=koneksi.prepareStatement("select rekening.nm_rek, rekening.tipe, rekening.balance from rekening where rekening.kd_rek=?");
                 try {
                     ps.setString(1,kdrek.getText());
@@ -944,8 +944,8 @@ public class DlgJurnal extends javax.swing.JDialog {
                     }
                 }
                 Sequel.cariIsi("select rekeningtahun.saldo_awal from rekeningtahun where rekeningtahun.kd_rek=? order by rekeningtahun.thn desc limit 1",saldoawal,kdrek.getText());
-                debet.setText(tbDokter.getValueAt(row,2).toString());
-                kredit.setText(tbDokter.getValueAt(row,3).toString());
+                debet.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),2).toString());
+                kredit.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),3).toString());
             } catch (Exception ex) {
                 System.out.println(ex);
             }

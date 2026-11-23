@@ -1128,12 +1128,12 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
     public void hitung(){
         hewani=0;nabati=0;karbo=0;sayur=0;buah=0;x=0;
         for(i=0;i<tbDataDiet.getRowCount();i++){
-            if(!tbDataDiet.getValueAt(i,0).toString().equals("")){
-                karbo=karbo+Valid.SetInteger(tbDataDiet.getValueAt(i,6).toString());
-                hewani=hewani+Valid.SetInteger(tbDataDiet.getValueAt(i,7).toString());
-                nabati=nabati+Valid.SetInteger(tbDataDiet.getValueAt(i,8).toString());
-                sayur=sayur+Valid.SetInteger(tbDataDiet.getValueAt(i,9).toString());
-                buah=buah+Valid.SetInteger(tbDataDiet.getValueAt(i,10).toString());
+            if(!tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(i),0).toString().equals("")){
+                karbo=karbo+Valid.SetInteger(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(i),6).toString());
+                hewani=hewani+Valid.SetInteger(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(i),7).toString());
+                nabati=nabati+Valid.SetInteger(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(i),8).toString());
+                sayur=sayur+Valid.SetInteger(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(i),9).toString());
+                buah=buah+Valid.SetInteger(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(i),10).toString());
                 x++;
             }else{
                 tabMode.removeRow(tbDataDiet.convertRowIndexToModel(i));
@@ -1159,19 +1159,19 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDataDiet.getSelectedRow()!= -1){
-            if(!tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),0).toString().equals("")){
-                TNoRw.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),0).toString());
-                TPasien.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),1).toString());
-                Ruang.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),2).toString());
-                Tanggal.setText(Valid.SetTgl3(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),3).toString()));
-                WaktuDiet.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),4).toString());
-                JamDiet.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),5).toString());
-                Karbo.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),6).toString());
-                Hewani.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),7).toString());
-                Nabati.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),8).toString());
-                Sayur.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),9).toString());
-                Buah.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),10).toString());
-                Kamar.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),11).toString());
+            if(!tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),0).toString().equals("")){
+                TNoRw.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),0).toString());
+                TPasien.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),1).toString());
+                Ruang.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),2).toString());
+                Tanggal.setText(Valid.SetTgl3(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),3).toString()));
+                WaktuDiet.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),4).toString());
+                JamDiet.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),5).toString());
+                Karbo.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),6).toString());
+                Hewani.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),7).toString());
+                Nabati.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),8).toString());
+                Sayur.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),9).toString());
+                Buah.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),10).toString());
+                Kamar.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),11).toString());
             }else{
                 TNoRw.setText("");
                 TPasien.setText("");

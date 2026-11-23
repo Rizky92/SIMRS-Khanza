@@ -120,6 +120,7 @@ public final class BPJSAntreanPerKodebooking extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbJnsPerawatan.setSortable(false);
         tbJnsPerawatan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbJnsPerawatan.setName("tbJnsPerawatan"); // NOI18N
         Scroll.setViewportView(tbJnsPerawatan);
@@ -236,7 +237,7 @@ public final class BPJSAntreanPerKodebooking extends javax.swing.JDialog {
         } else if (tabMode.getRowCount() != 0) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.deleteTemporary();
-            for (int i = 0; i < tbJnsPerawatan.getRowCount(); i++) {
+            for (int i = 0; i < tabMode.getRowCount(); i++) {
                 Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2));
             }
 

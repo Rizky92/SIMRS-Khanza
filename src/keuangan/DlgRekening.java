@@ -414,6 +414,7 @@ public final class DlgRekening extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbKamar.setSortable(false);
         tbKamar.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbKamar.setComponentPopupMenu(jPopupMenu1);
         tbKamar.setName("tbKamar"); // NOI18N
@@ -1570,10 +1571,10 @@ public final class DlgRekening extends javax.swing.JDialog {
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            Kd.setText(tbKamar.getValueAt(row,0).toString());
-            Kd2.setText(tbKamar.getValueAt(row,0).toString());
-            Nm.setText(tbKamar.getValueAt(row,1).toString());
-            switch (tbKamar.getValueAt(row,4).toString()) {
+            Kd.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
+            Kd2.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
+            Nm.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
+            switch (tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),4).toString()) {
                 case "N":
                     Tipe.setSelectedIndex(0);
                     break;
@@ -1585,7 +1586,7 @@ public final class DlgRekening extends javax.swing.JDialog {
                     break;
             }
 
-            switch (tbKamar.getValueAt(row,5).toString()) {
+            switch (tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),5).toString()) {
                 case "D":
                     Balan.setSelectedIndex(0);
                     break;

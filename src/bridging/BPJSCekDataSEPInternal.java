@@ -554,10 +554,10 @@ public final class BPJSCekDataSEPInternal extends javax.swing.JDialog {
             requestJson ="{" +
                                 "\"request\": {" +
                                     "\"t_sep\": {" +
-                                        "\"noSep\": \""+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString()+"\"," +
-                                        "\"noSurat\": \""+tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString()+"\"," +
-                                        "\"tglRujukanInternal\": \""+tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString()+"\"," +
-                                        "\"kdPoliTuj\": \""+tbKamar.getValueAt(tbKamar.getSelectedRow(),13).toString()+"\"," +
+                                        "\"noSep\": \""+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),5).toString()+"\"," +
+                                        "\"noSurat\": \""+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),10).toString()+"\"," +
+                                        "\"tglRujukanInternal\": \""+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),4).toString()+"\"," +
+                                        "\"kdPoliTuj\": \""+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),13).toString()+"\"," +
                                         "\"user\": \""+user+"\"" +
                                     "}" +
                                 "}" +

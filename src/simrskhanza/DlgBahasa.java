@@ -340,7 +340,7 @@ public class DlgBahasa extends javax.swing.JDialog {
             Valid.textKosong(Nama,"Bahasa");
         }else{
             if(tbkecamatan.getSelectedRow()!= -1){
-                if(Sequel.meghapustf("bahasa_pasien","id",tbkecamatan.getValueAt(tbkecamatan.getSelectedRow(),0).toString())==true){
+                if(Sequel.meghapustf("bahasa_pasien","id",tabMode.getValueAt(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()),0).toString())==true){
                     tabMode.removeRow(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()));
                     emptTeks();
                     LCount.setText(""+tbkecamatan.getRowCount());
@@ -533,7 +533,7 @@ public class DlgBahasa extends javax.swing.JDialog {
 
     private void getData() {
         if(tbkecamatan.getSelectedRow()!= -1){
-            Nama.setText(tbkecamatan.getValueAt(tbkecamatan.getSelectedRow(),1).toString());
+            Nama.setText(tabMode.getValueAt(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()),1).toString());
         }
     }
 

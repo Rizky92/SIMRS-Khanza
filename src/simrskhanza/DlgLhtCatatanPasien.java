@@ -365,7 +365,7 @@ public final class DlgLhtCatatanPasien extends javax.swing.JDialog {
                         @Override
                         public void windowDeactivated(WindowEvent e) {}
                     });
-                    catatan.setNoRm(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
+                    catatan.setNoRm(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
                     catatan.setSize(720,330);
                     catatan.setLocationRelativeTo(internalFrame1);
                     catatan.setVisible(true);
@@ -397,7 +397,7 @@ public final class DlgLhtCatatanPasien extends javax.swing.JDialog {
                         @Override
                         public void windowDeactivated(WindowEvent e) {}
                     });
-                    catatan.setNoRm(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
+                    catatan.setNoRm(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
                     catatan.setSize(720,330);
                     catatan.setLocationRelativeTo(internalFrame1);
                     catatan.setVisible(true);
@@ -452,7 +452,7 @@ public final class DlgLhtCatatanPasien extends javax.swing.JDialog {
                 @Override
                 public void windowDeactivated(WindowEvent e) {}
             });
-            catatan.setNoRm(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
+            catatan.setNoRm(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
             catatan.setSize(720,330);
             catatan.setLocationRelativeTo(internalFrame1);
             catatan.setVisible(true);

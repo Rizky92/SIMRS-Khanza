@@ -354,6 +354,7 @@ public class TokoCariSuplier extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbDokter.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             file=new File("./cache/supliertoko.iyem");
@@ -398,12 +399,14 @@ public class TokoCariSuplier extends javax.swing.JDialog {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(""+tbDokter.getRowCount());
+        tbDokter.resumeSorting();
     }
 
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/supliertoko.iyem");
             root = mapper.readTree(myObj);
+            tbDokter.suspendSorting();
             Valid.tabelKosong(tabMode);
             response = root.path("supliertoko");
             if(response.isArray()){
@@ -436,6 +439,7 @@ public class TokoCariSuplier extends javax.swing.JDialog {
             root = null;
         }
         LCount.setText(""+tbDokter.getRowCount());
+        tbDokter.resumeSorting();
     }
 
     public void emptTeks() {

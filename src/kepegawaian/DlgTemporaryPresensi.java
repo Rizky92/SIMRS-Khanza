@@ -271,7 +271,7 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbTemporary.setAutoCreateRowSorter(false);
+        tbTemporary.setAutoCreateRowSorter(true);
         tbTemporary.setComponentPopupMenu(Popup2);
         tbTemporary.setName("tbTemporary"); // NOI18N
         Scroll.setViewportView(tbTemporary);
@@ -459,15 +459,15 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
 
         for(i=0;i<tbTemporary.getRowCount();i++){
-            if(tbTemporary.getValueAt(i,0).toString().equals("true")){
+            if(tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),0).toString().equals("true")){
                 Sequel.queryu2("insert into rekap_presensi values(?,?,?,?,?,?,?,?,?)", 9,new String[]{
-                    tbTemporary.getValueAt(i,1).toString(),tbTemporary.getValueAt(i,4).toString(),
-                    tbTemporary.getValueAt(i,5).toString(),tbTemporary.getValueAt(i,6).toString(),
-                    tbTemporary.getValueAt(i,7).toString(),tbTemporary.getValueAt(i,8).toString(),
-                    tbTemporary.getValueAt(i,9).toString(),"-",tbTemporary.getValueAt(i,10).toString(),
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),4).toString(),
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),5).toString(),tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),6).toString(),
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),7).toString(),tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),8).toString(),
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),9).toString(),"-",tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),10).toString(),
                 });
                 Sequel.queryu2("delete from temporary_presensi where id=? and jam_datang=?",2,new String[]{
-                    tbTemporary.getValueAt(i,1).toString(),tbTemporary.getValueAt(i,5).toString()
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),5).toString()
                 });
             }
         }
@@ -486,9 +486,9 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
 
         for(i=0;i<tbTemporary.getRowCount();i++){
-            if(tbTemporary.getValueAt(i,0).toString().equals("true")){
+            if(tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),0).toString().equals("true")){
                 Sequel.queryu2("delete from temporary_presensi where id=? and jam_datang=?",2,new String[]{
-                    tbTemporary.getValueAt(i,1).toString(),tbTemporary.getValueAt(i,5).toString()
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),5).toString()
                 });
             }
         }
@@ -624,15 +624,15 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
     private void ppVerifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppVerifyActionPerformed
 
         for(i=0;i<tbTemporary.getRowCount();i++){
-            if(Double.parseDouble(tbTemporary.getValueAt(i,9).toString())>16){
+            if(Double.parseDouble(tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),9).toString())>16){
                 Sequel.queryu2("insert into rekap_presensi values(?,?,?,?,?,?,?,?,?)", 9,new String[]{
-                    tbTemporary.getValueAt(i,1).toString(),tbTemporary.getValueAt(i,4).toString(),
-                    tbTemporary.getValueAt(i,5).toString(),tbTemporary.getValueAt(i,6).toString(),
-                    tbTemporary.getValueAt(i,7).toString(),tbTemporary.getValueAt(i,8).toString(),
-                    tbTemporary.getValueAt(i,9).toString(),"-",tbTemporary.getValueAt(i,10).toString(),
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),4).toString(),
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),5).toString(),tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),6).toString(),
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),7).toString(),tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),8).toString(),
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),9).toString(),"-",tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),10).toString(),
                 });
                 Sequel.queryu2("delete from temporary_presensi where id=? and jam_datang=?",2,new String[]{
-                    tbTemporary.getValueAt(i,1).toString(),tbTemporary.getValueAt(i,5).toString()
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),5).toString()
                 });
             }
         }
@@ -644,13 +644,13 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
 
         for(i=0;i<tbTemporary.getRowCount();i++){
                 Sequel.queryu2("insert into rekap_presensi values(?,?,?,?,?,?,?,?,?)", 9,new String[]{
-                    tbTemporary.getValueAt(i,1).toString(),tbTemporary.getValueAt(i,4).toString(),
-                    tbTemporary.getValueAt(i,5).toString(),tbTemporary.getValueAt(i,6).toString(),
-                    tbTemporary.getValueAt(i,7).toString(),tbTemporary.getValueAt(i,8).toString(),
-                    tbTemporary.getValueAt(i,9).toString(),"-",tbTemporary.getValueAt(i,10).toString(),
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),4).toString(),
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),5).toString(),tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),6).toString(),
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),7).toString(),tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),8).toString(),
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),9).toString(),"-",tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),10).toString(),
                 });
                 Sequel.queryu2("delete from temporary_presensi where id=? and jam_datang=?",2,new String[]{
-                    tbTemporary.getValueAt(i,1).toString(),tbTemporary.getValueAt(i,5).toString()
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),5).toString()
                 });
         }
 
@@ -661,7 +661,7 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
 
         for(i=0;i<tbTemporary.getRowCount();i++){
                 Sequel.queryu2("delete from temporary_presensi where id=? and jam_datang=?",2,new String[]{
-                    tbTemporary.getValueAt(i,1).toString(),tbTemporary.getValueAt(i,5).toString()
+                    tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbTemporary.convertRowIndexToModel(i),5).toString()
                 });
         }
 
@@ -670,7 +670,7 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
         for(i=0;i<tbTemporary.getRowCount();i++){
-            tbTemporary.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbTemporary.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
@@ -686,7 +686,7 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
 
     private void ppBersihkanSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanSemuaActionPerformed
         for(i=0;i<tbTemporary.getRowCount();i++){
-            tbTemporary.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbTemporary.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanSemuaActionPerformed
 
@@ -733,6 +733,7 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbTemporary.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -776,6 +777,7 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
         }
         LCount.setText(""+tbTemporary.getRowCount());
 
+        tbTemporary.resumeSorting();
     }
 
     public void isCek(){

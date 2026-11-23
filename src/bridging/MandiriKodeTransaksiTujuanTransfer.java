@@ -527,7 +527,7 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbJnsPerawatan.getSelectedRow()!= -1){
             if(Sequel.queryu2tf("delete from kodetransaksi_tujuan_transfer_bankmandiri where kode_metode=? and kode_bank=?",2,new String[]{
-                tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()
+                tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString()
                 })==true){
                 tabMode.removeRow(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()));
                 emptTeks();
@@ -556,13 +556,13 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
         }else{
             if(tbJnsPerawatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("kodetransaksi_tujuan_transfer_bankmandiri","kode_metode=? and kode_bank=?","kode_metode=?,kode_bank=?,kode_transaksi=?",5,new String[]{
-                        KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()
+                        KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString()
                     })==true){
-                    tbJnsPerawatan.setValueAt(KodeMetode.getText(),tbJnsPerawatan.getSelectedRow(),0);
-                    tbJnsPerawatan.setValueAt(MetodePembayaran.getText(),tbJnsPerawatan.getSelectedRow(),1);
-                    tbJnsPerawatan.setValueAt(KodeBank.getText(),tbJnsPerawatan.getSelectedRow(),2);
-                    tbJnsPerawatan.setValueAt(BankTujuan.getText(),tbJnsPerawatan.getSelectedRow(),3);
-                    tbJnsPerawatan.setValueAt(KodeTransaksi.getText(),tbJnsPerawatan.getSelectedRow(),4);
+                    tabMode.setValueAt(KodeMetode.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0);
+                    tabMode.setValueAt(MetodePembayaran.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1);
+                    tabMode.setValueAt(KodeBank.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2);
+                    tabMode.setValueAt(BankTujuan.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3);
+                    tabMode.setValueAt(KodeTransaksi.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4);
                     emptTeks();
                 }else{
                     JOptionPane.showMessageDialog(null,"Maaf, gagal mengubah data...!!!!");
@@ -877,11 +877,11 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
 
     private void getData() {
        if(tbJnsPerawatan.getSelectedRow()!= -1){
-           KodeMetode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-           MetodePembayaran.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-           KodeBank.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-           BankTujuan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-           KodeTransaksi.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
+           KodeMetode.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+           MetodePembayaran.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+           KodeBank.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+           BankTujuan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+           KodeTransaksi.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString());
         }
     }
 

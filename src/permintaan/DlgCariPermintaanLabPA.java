@@ -1760,8 +1760,8 @@ public class DlgCariPermintaanLabPA extends javax.swing.JDialog {
                         Sequel.queryu("delete from antrilabpa");
                         Sequel.queryu("insert into antrilabpa values('1')");
                         TeksKosong();
-                        tbLabRalan.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbLabRalan.getSelectedRow(),5);
-                        tbLabRalan.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbLabRalan.getSelectedRow(),6);
+                        tabMode.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),5);
+                        tabMode.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),6);
                     }
                 }
             }else{
@@ -1800,8 +1800,8 @@ public class DlgCariPermintaanLabPA extends javax.swing.JDialog {
                         } catch (Exception e) {
                         }
                         TeksKosong();
-                        tbLabRanap.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbLabRanap.getSelectedRow(),5);
-                        tbLabRanap.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbLabRanap.getSelectedRow(),6);
+                        tabMode3.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),5);
+                        tabMode3.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),6);
                     }
                 }
             }else{
@@ -2577,55 +2577,55 @@ public class DlgCariPermintaanLabPA extends javax.swing.JDialog {
 
     private void getData() {
         if(tbLabRalan.getSelectedRow()!= -1){
-            NoPermintaan=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),0).toString();
-            NoRawat=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),1).toString();
-            Pasien=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),2).toString();
-            Permintaan=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),3).toString();
-            JamPermintaan=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),4).toString();
-            Sampel=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),5).toString();
-            JamSampel=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),6).toString();
-            Hasil=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),7).toString();
-            JamHasil=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),8).toString();
-            KodeDokter=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),9).toString();
-            DokterPerujuk=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),10).toString();
-            Ruang=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),11).toString();
-            InformasiTambahan=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),12).toString();
-            DiagnosaKlinis=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),13).toString();
-            tanggalbahan=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),16).toString();
-            diperolehdengan=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),17).toString();
-            lokasijaringan=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),18).toString();
-            diawetkandengan=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),19).toString();
-            pernahdilakukandi=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),20).toString();
-            tanggalpa=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),21).toString();
-            nomorpa=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),22).toString();
-            diagnosapa=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),23).toString();
+            NoPermintaan=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),0).toString();
+            NoRawat=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),1).toString();
+            Pasien=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),2).toString();
+            Permintaan=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),3).toString();
+            JamPermintaan=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),4).toString();
+            Sampel=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),5).toString();
+            JamSampel=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),6).toString();
+            Hasil=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),7).toString();
+            JamHasil=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),8).toString();
+            KodeDokter=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),9).toString();
+            DokterPerujuk=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),10).toString();
+            Ruang=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),11).toString();
+            InformasiTambahan=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),12).toString();
+            DiagnosaKlinis=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),13).toString();
+            tanggalbahan=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),16).toString();
+            diperolehdengan=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),17).toString();
+            lokasijaringan=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),18).toString();
+            diawetkandengan=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),19).toString();
+            pernahdilakukandi=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),20).toString();
+            tanggalpa=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),21).toString();
+            nomorpa=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),22).toString();
+            diagnosapa=tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(tbLabRalan.getSelectedRow()),23).toString();
         }
     }
 
     private void getData2() {
         if(tbLabRanap.getSelectedRow()!= -1){
-            NoPermintaan=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),0).toString();
-            NoRawat=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),1).toString();
-            Pasien=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),2).toString();
-            Permintaan=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),3).toString();
-            JamPermintaan=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),4).toString();
-            Sampel=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),5).toString();
-            JamSampel=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),6).toString();
-            Hasil=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),7).toString();
-            JamHasil=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),8).toString();
-            KodeDokter=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),9).toString();
-            DokterPerujuk=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),10).toString();
-            Ruang=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),11).toString();
-            InformasiTambahan=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),12).toString();
-            DiagnosaKlinis=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),13).toString();
-            tanggalbahan=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),16).toString();
-            diperolehdengan=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),17).toString();
-            lokasijaringan=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),18).toString();
-            diawetkandengan=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),19).toString();
-            pernahdilakukandi=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),20).toString();
-            tanggalpa=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),21).toString();
-            nomorpa=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),22).toString();
-            diagnosapa=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),23).toString();
+            NoPermintaan=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),0).toString();
+            NoRawat=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),1).toString();
+            Pasien=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),2).toString();
+            Permintaan=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),3).toString();
+            JamPermintaan=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),4).toString();
+            Sampel=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),5).toString();
+            JamSampel=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),6).toString();
+            Hasil=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),7).toString();
+            JamHasil=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),8).toString();
+            KodeDokter=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),9).toString();
+            DokterPerujuk=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),10).toString();
+            Ruang=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),11).toString();
+            InformasiTambahan=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),12).toString();
+            DiagnosaKlinis=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),13).toString();
+            tanggalbahan=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),16).toString();
+            diperolehdengan=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),17).toString();
+            lokasijaringan=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),18).toString();
+            diawetkandengan=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),19).toString();
+            pernahdilakukandi=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),20).toString();
+            tanggalpa=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),21).toString();
+            nomorpa=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),22).toString();
+            diagnosapa=tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(tbLabRanap.getSelectedRow()),23).toString();
         }
     }
 
@@ -2936,7 +2936,7 @@ public class DlgCariPermintaanLabPA extends javax.swing.JDialog {
                     if(formalarm.contains("ralan")){
                         runBackground(() ->tampil());
                         for(i=0;i<tbLabRalan.getRowCount();i++){
-                            if((!tbLabRalan.getValueAt(i,0).toString().equals(""))&&tbLabRalan.getValueAt(i,5).toString().equals("")){
+                            if((!tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(i),0).toString().equals(""))&&tabMode.getValueAt(tbLabRalan.convertRowIndexToModel(i),5).toString().equals("")){
                                 permintaanbaru++;
                             }
                         }
@@ -2945,7 +2945,7 @@ public class DlgCariPermintaanLabPA extends javax.swing.JDialog {
                     if(formalarm.contains("ranap")){
                         runBackground(() ->tampil3());
                         for(i=0;i<tbLabRanap.getRowCount();i++){
-                            if((!tbLabRanap.getValueAt(i,0).toString().equals(""))&&tbLabRanap.getValueAt(i,5).toString().equals("")){
+                            if((!tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(i),0).toString().equals(""))&&tabMode3.getValueAt(tbLabRanap.convertRowIndexToModel(i),5).toString().equals("")){
                                 permintaanbaru++;
                             }
                         }

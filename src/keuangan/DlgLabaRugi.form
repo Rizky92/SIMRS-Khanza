@@ -288,6 +288,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="Table1">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="0" rowCount="4"/>
                         </Property>
@@ -342,6 +343,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="Table2">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="0" rowCount="4"/>
                         </Property>
@@ -396,6 +398,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="Table3">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="0" rowCount="4"/>
                         </Property>

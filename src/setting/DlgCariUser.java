@@ -300,6 +300,7 @@ public final class DlgCariUser extends javax.swing.JDialog {
     }
 
     private void tampil2() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
 
         try (FileReader fr = new FileReader("./cache/cariuser.iyem")) {
@@ -330,9 +331,11 @@ public final class DlgCariUser extends javax.swing.JDialog {
         }
 
         LCount.setText(String.valueOf(tbKamar.getRowCount()));
+        tbKamar.resumeSorting();
     }
 
     private void tampil3() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
 
         try {
@@ -363,6 +366,7 @@ public final class DlgCariUser extends javax.swing.JDialog {
         }
 
         LCount.setText(String.valueOf(tbKamar.getRowCount()));
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {

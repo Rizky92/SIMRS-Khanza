@@ -813,10 +813,10 @@ public final class DlgHarian extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbBangsal.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tbBangsal.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -1333,44 +1333,44 @@ public final class DlgHarian extends javax.swing.JDialog {
         if(row!= -1){
             no=row;
             Idpresensi.setText(id[no]);
-            Nik.setText(tbBangsal.getValueAt(row,0).toString());
-            Nm.setText(tbBangsal.getValueAt(row,1).toString());
-            Shift.setSelectedItem(tbBangsal.getValueAt(row,2).toString());
-            if(!tbBangsal.getValueAt(row,3).toString().equals("")){
-                Jam.setSelectedItem(tbBangsal.getValueAt(row,3).toString().substring(11,13));
-                Menit.setSelectedItem(tbBangsal.getValueAt(row,3).toString().substring(14,16));
-                Detik.setSelectedItem(tbBangsal.getValueAt(row,3).toString().substring(17,19));
-            }else if(tbBangsal.getValueAt(row,3).toString().equals("")){
+            Nik.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),0).toString());
+            Nm.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),1).toString());
+            Shift.setSelectedItem(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),2).toString());
+            if(!tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),3).toString().equals("")){
+                Jam.setSelectedItem(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),3).toString().substring(11,13));
+                Menit.setSelectedItem(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),3).toString().substring(14,16));
+                Detik.setSelectedItem(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),3).toString().substring(17,19));
+            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),3).toString().equals("")){
                 Jam.setSelectedItem("00");
                 Menit.setSelectedItem("00");
                 Detik.setSelectedItem("00");
             }
 
-            if(!tbBangsal.getValueAt(row,4).toString().equals("")){
-                Jam2.setSelectedItem(tbBangsal.getValueAt(row,4).toString().substring(11,13));
-                Menit2.setSelectedItem(tbBangsal.getValueAt(row,4).toString().substring(14,16));
-                Detik2.setSelectedItem(tbBangsal.getValueAt(row,4).toString().substring(17,19));
-            }else if(tbBangsal.getValueAt(row,4).toString().equals("")){
+            if(!tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),4).toString().equals("")){
+                Jam2.setSelectedItem(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),4).toString().substring(11,13));
+                Menit2.setSelectedItem(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),4).toString().substring(14,16));
+                Detik2.setSelectedItem(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),4).toString().substring(17,19));
+            }else if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),4).toString().equals("")){
                 Jam2.setSelectedItem("00");
                 Menit2.setSelectedItem("00");
                 Detik2.setSelectedItem("00");
             }
-            catatan.setText(tbBangsal.getValueAt(row,8).toString());
+            catatan.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),8).toString());
 
             try {
                 tglMasuk.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(
-                                tbBangsal.getValueAt(row,3).toString().substring(0,4)+"-"+
-                                tbBangsal.getValueAt(row,3).toString().substring(5,7)+"-"+
-                                tbBangsal.getValueAt(row,3).toString().substring(8,10)));
+                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),3).toString().substring(0,4)+"-"+
+                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),3).toString().substring(5,7)+"-"+
+                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),3).toString().substring(8,10)));
             } catch (ParseException ex) {
                 Logger.getLogger(DlgHarian.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             try {
                 tglPulang.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(
-                                tbBangsal.getValueAt(row,4).toString().substring(0,4)+"-"+
-                                tbBangsal.getValueAt(row,4).toString().substring(5,7)+"-"+
-                                tbBangsal.getValueAt(row,4).toString().substring(8,10)));
+                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),4).toString().substring(0,4)+"-"+
+                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),4).toString().substring(5,7)+"-"+
+                                tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),4).toString().substring(8,10)));
             } catch (ParseException ex) {
                 Logger.getLogger(DlgHarian.class.getName()).log(Level.SEVERE, null, ex);
             }

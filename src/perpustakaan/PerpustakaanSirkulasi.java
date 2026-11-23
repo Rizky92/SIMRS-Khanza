@@ -1587,15 +1587,15 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
         TOut.setText("");
         TIn.setText("");
         if(tbKamIn.getSelectedRow()!= -1){
-            TNoI.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
-            TJudul.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString()+", "+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),2).toString());
-            Penerbit.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),3).toString());
-            Pengarang.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),4).toString());
+            TNoI.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString());
+            TJudul.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),1).toString()+", "+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),2).toString());
+            Penerbit.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),3).toString());
+            Pengarang.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),4).toString());
             StatusBuku.setText("Dipinjam");
-            TNoA.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString());
-            TNmA.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),10).toString());
-            TIn.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),11).toString());
-            TOut.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),12).toString());
+            TNoA.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),9).toString());
+            TNmA.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),10).toString());
+            TIn.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),11).toString());
+            TOut.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),12).toString());
         }
     }
 

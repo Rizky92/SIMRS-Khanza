@@ -522,7 +522,7 @@ public final class DlgObatOperasi extends javax.swing.JDialog {
             Valid.textKosong(kdsat,"kode satuan");
         }else{
             Sequel.mengedit("obatbhp_ok","kd_obat=?","kd_obat=?,nm_obat=?,kode_sat=?,hargasatuan=?",5,new String[]{
-                TKd.getText(),TNama.getText(),kdsat.getText(),THarga.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                TKd.getText(),TNama.getText(),kdsat.getText(),THarga.getText(),tabMode2.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             });
             if(tbObat.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
@@ -839,11 +839,11 @@ public final class DlgObatOperasi extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getRowCount()!= -1){
-            TKd.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            nmsat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            kdsat.setText(Sequel.cariIsi("select kode_sat from obatbhp_ok where kd_obat=?",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()));
-            THarga.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
+            TKd.setText(tabMode2.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            TNama.setText(tabMode2.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            nmsat.setText(tabMode2.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            kdsat.setText(Sequel.cariIsi("select kode_sat from obatbhp_ok where kd_obat=?",tabMode2.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()));
+            THarga.setText(tabMode2.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
         }
     }
 

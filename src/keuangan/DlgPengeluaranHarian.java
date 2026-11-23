@@ -901,17 +901,17 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
             if(tbResep.getSelectedRow()>-1){
                 Sequel.AutoComitFalse();
                 sukses = true;
-                if (Sequel.menghapustfSmc("pengeluaran_harian", "no_keluar = ?", tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString())) {
+                if (Sequel.menghapustfSmc("pengeluaran_harian", "no_keluar = ?", tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()), 0).toString())) {
                     try (PreparedStatement ps = koneksi.prepareStatement("select k.kd_rek, k.kd_rek2 from kategori_pengeluaran_harian k where k.kode_kategori = ?")) {
-                        ps.setString(1, tbResep.getValueAt(tbResep.getSelectedRow(), 6).toString());
+                        ps.setString(1, tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()), 6).toString());
                         try (ResultSet rs = ps.executeQuery()) {
                             if (rs.next()) {
                                 total = 0;
                                 if (rs.getString("kd_rek2").equals(Host_to_Host_Bank_Mandiri)) {
                                     total = Sequel.cariDoubleSmc("select m.biaya_transaksi from metode_pembayaran_bankmandiri m join " +
                                         "pembayaran_pihak_ke3_bankmandiri m2 on m2.kode_metode = m.kode_metode where m2.nomor_pembayaran = ?",
-                                        tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString());
-                                    Sequel.menghapusSmc("pembayaran_pihak_ke3_bankmandiri", "nomor_pembayaran = ?", tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString());
+                                        tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()), 0).toString());
+                                    Sequel.menghapusSmc("pembayaran_pihak_ke3_bankmandiri", "nomor_pembayaran = ?", tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()), 0).toString());
                                 }
                                 Sequel.deleteTampJurnal();
                                 if (total > 0) {
@@ -919,13 +919,13 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
                                         sukses=false;
                                     }
                                 }
-                                if(Sequel.insertTampJurnal(rs.getString("kd_rek"), "Akun", 0, (Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4))==false){
+                                if(Sequel.insertTampJurnal(rs.getString("kd_rek"), "Akun", 0, (Double) tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()), 4))==false){
                                     sukses=false;
                                 }
-                                if(Sequel.insertTampJurnal(rs.getString("kd_rek2"), "Kontra Akun", ((Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4)) + total, 0)==false){
+                                if(Sequel.insertTampJurnal(rs.getString("kd_rek2"), "Kontra Akun", ((Double) tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()), 4)) + total, 0)==false){
                                     sukses=false;
                                 }
-                                sukses = jur.simpanJurnal(tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString(), "U", "PEMBATALAN PENGELUARAN HARIAN, OLEH " + akses.getkode());
+                                sukses = jur.simpanJurnal(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()), 0).toString(), "U", "PEMBATALAN PENGELUARAN HARIAN, OLEH " + akses.getkode());
                             } else {
                                 sukses = false;
                             }
@@ -1396,7 +1396,7 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
                     psakun.setString(1,KdKategori.getText());
                     rs=psakun.executeQuery();
                     if(rs.next()){
-                        Valid.panggilUrl("billing/LaporanBuktiKasKeluar.php?kode="+Nomor.getText()+"&tanggal="+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"&akunbayar="+rs.getString("nm_rek").replaceAll(" ","_")+"&petugas="+tbResep.getValueAt(tbResep.getSelectedRow(),3).toString().replaceAll(" ","_")+"&dibayarkankepada=-&keterangan="+Keterangan.getText().replaceAll(" ","_")+"&notagihan="+tbResep.getValueAt(tbResep.getSelectedRow(),2).toString().replaceAll(" ","_")+"&nominal="+Pengeluaran.getText()+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
+                        Valid.panggilUrl("billing/LaporanBuktiKasKeluar.php?kode="+Nomor.getText()+"&tanggal="+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"&akunbayar="+rs.getString("nm_rek").replaceAll(" ","_")+"&petugas="+tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),3).toString().replaceAll(" ","_")+"&dibayarkankepada=-&keterangan="+Keterangan.getText().replaceAll(" ","_")+"&notagihan="+tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),2).toString().replaceAll(" ","_")+"&nominal="+Pengeluaran.getText()+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
                     }else{
                         JOptionPane.showMessageDialog(null,"Maaf, kategori pengeluaran tidak ditemukan...!!!!");
                     }
@@ -1565,8 +1565,8 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
     private void hitung(){
         total=0;
         for(i=0;i<tbResep.getRowCount();i++){
-            if(!tbResep.getValueAt(i,0).toString().equals("")){
-                total=total+Valid.SetAngka(tbResep.getValueAt(i,4).toString());
+            if(!tabMode.getValueAt(tbResep.convertRowIndexToModel(i),0).toString().equals("")){
+                total=total+Valid.SetAngka(tabMode.getValueAt(tbResep.convertRowIndexToModel(i),4).toString());
             }else{
                 tabMode.removeRow(tbResep.convertRowIndexToModel(i));
                 i--;
@@ -1591,13 +1591,13 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
 
     private void getData() {
         if(tbResep.getSelectedRow()!= -1){
-            Nomor.setText(tbResep.getValueAt(tbResep.getSelectedRow(),0).toString());
-            NmKategori.setText(tbResep.getValueAt(tbResep.getSelectedRow(),2).toString().replaceAll(tbResep.getValueAt(tbResep.getSelectedRow(),6).toString()+" ",""));
-            NmPtg.setText(tbResep.getValueAt(tbResep.getSelectedRow(),3).toString().replaceAll(tbResep.getValueAt(tbResep.getSelectedRow(),7).toString()+" ",""));
-            Pengeluaran.setText(Valid.SetAngka((Double)tbResep.getValueAt(tbResep.getSelectedRow(),4)));
-            Keterangan.setText(tbResep.getValueAt(tbResep.getSelectedRow(),5).toString());
-            KdKategori.setText(tbResep.getValueAt(tbResep.getSelectedRow(),6).toString());
-            Valid.SetTgl(Tanggal,tbResep.getValueAt(tbResep.getSelectedRow(),1).toString());
+            Nomor.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),0).toString());
+            NmKategori.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),2).toString().replaceAll(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),6).toString()+" ",""));
+            NmPtg.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),3).toString().replaceAll(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),7).toString()+" ",""));
+            Pengeluaran.setText(Valid.SetAngka((Double)tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),4)));
+            Keterangan.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),5).toString());
+            KdKategori.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),6).toString());
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString());
         }
     }
 

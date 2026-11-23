@@ -1035,7 +1035,7 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
 
     private void getData() {
         if(tbKamIn.getSelectedRow()!= -1){
-            NomorKendaraan.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
+            NomorKendaraan.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString());
         }
     }
 

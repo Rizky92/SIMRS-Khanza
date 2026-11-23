@@ -215,6 +215,7 @@ public final class DlgStatusDataRM extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setSortable(false);
         tbBangsal.setComponentPopupMenu(jPopupMenu1);
         tbBangsal.setName("tbBangsal"); // NOI18N
         tbBangsal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -688,7 +689,7 @@ public final class DlgStatusDataRM extends javax.swing.JDialog {
             penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             penyakit.setLocationRelativeTo(internalFrame1);
             penyakit.isCek();
-            penyakit.setNoRm(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString(),Tgl1.getDate(),Tgl2.getDate(),tbBangsal.getValueAt(tbBangsal.getSelectedRow(),6).toString());
+            penyakit.setNoRm(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString(),Tgl1.getDate(),Tgl2.getDate(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),6).toString());
             penyakit.setVisible(true);
         }
     }//GEN-LAST:event_MnInputDiagnosaActionPerformed
@@ -879,7 +880,7 @@ public final class DlgStatusDataRM extends javax.swing.JDialog {
     private void getData() {
         int row=tbBangsal.getSelectedRow();
         if(row!= -1){
-            TKd.setText(tbBangsal.getValueAt(row,0).toString());
+            TKd.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),0).toString());
         }
     }
 

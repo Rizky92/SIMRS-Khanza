@@ -523,6 +523,7 @@ public class DlgRekapObatPasien extends javax.swing.JDialog {
         scrollPane4.setOpaque(true);
 
         tbDokter.setAutoCreateRowSorter(false);
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -544,6 +545,7 @@ public class DlgRekapObatPasien extends javax.swing.JDialog {
         scrollPane5.setOpaque(true);
 
         tbDokter2.setAutoCreateRowSorter(false);
+        tbDokter2.setSortable(false);
         tbDokter2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},

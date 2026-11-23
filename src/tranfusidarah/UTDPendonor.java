@@ -901,7 +901,7 @@ public class UTDPendonor extends javax.swing.JDialog {
             if(tbDokter.getSelectedRow()!= -1){
                 Valid.editTable(tabMode,"utd_pendonor","no_pendonor","?","no_pendonor=?,nama=?,no_ktp=?,jk=?,tmp_lahir=?,tgl_lahir=?,alamat=?,kd_kel=?,kd_kec=?,kd_kab=?,kd_prop=?,golongan_darah=?,resus=?,no_telp=?",15,new String[]{
                     NoId.getText(),Nama.getText(),KTP.getText(),JK.getSelectedItem().toString().substring(0,1),Lahir.getText(),Valid.SetTgl(DTPLahir.getSelectedItem()+""),
-                    Alamat.getText(),kdkel,kdkec,kdkab,kdprop,GD.getSelectedItem().toString(),Resus.getSelectedItem().toString(),Telp.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
+                    Alamat.getText(),kdkel,kdkec,kdkab,kdprop,GD.getSelectedItem().toString(),Resus.getSelectedItem().toString(),Telp.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()
                 });
                 if(tbDokter.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
@@ -1646,24 +1646,24 @@ public class UTDPendonor extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            NoId.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            Nama.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-            KTP.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString());
-            JK.setSelectedItem(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString().replaceAll("P","PEREMPUAN").replaceAll("L","LAKI-LAKI"));
-            Lahir.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
-            Valid.SetTgl(DTPLahir,tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString());
-            Alamat.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString());
-            kdkel=tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString();
-            Kelurahan.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString());
-            kdkec=tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString();
-            Kecamatan.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString());
-            kdkab=tbDokter.getValueAt(tbDokter.getSelectedRow(),11).toString();
-            Kabupaten.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),12).toString());
-            kdprop=tbDokter.getValueAt(tbDokter.getSelectedRow(),13).toString();
-            Propinsi.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),14).toString());
-            GD.setSelectedItem(tbDokter.getValueAt(tbDokter.getSelectedRow(),15).toString());
-            Resus.setSelectedItem(tbDokter.getValueAt(tbDokter.getSelectedRow(),16).toString());
-            Telp.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),17).toString());
+            NoId.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+            Nama.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
+            KTP.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString());
+            JK.setSelectedItem(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString().replaceAll("P","PEREMPUAN").replaceAll("L","LAKI-LAKI"));
+            Lahir.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
+            Valid.SetTgl(DTPLahir,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),5).toString());
+            Alamat.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6).toString());
+            kdkel=tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),7).toString();
+            Kelurahan.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),8).toString());
+            kdkec=tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),9).toString();
+            Kecamatan.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10).toString());
+            kdkab=tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),11).toString();
+            Kabupaten.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),12).toString());
+            kdprop=tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),13).toString();
+            Propinsi.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),14).toString());
+            GD.setSelectedItem(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),15).toString());
+            Resus.setSelectedItem(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),16).toString());
+            Telp.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),17).toString());
         }
     }
 

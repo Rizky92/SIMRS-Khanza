@@ -235,7 +235,7 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKamar.setAutoCreateRowSorter(false);
+        tbKamar.setAutoCreateRowSorter(true);
         tbKamar.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbKamar.setComponentPopupMenu(Popup);
         tbKamar.setName("tbKamar"); // NOI18N
@@ -738,8 +738,8 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbKamar.getRowCount();i++){
-            if(tbKamar.getValueAt(i,0).toString().equals("true")){
-                Sequel.mengupdateSmc("penjab", "status = '0'", "kd_pj = ?", tbKamar.getValueAt(i, 1).toString());
+            if(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.mengupdateSmc("penjab", "status = '0'", "kd_pj = ?", tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString());
             }
         }
         BtnCariActionPerformed(evt);
@@ -996,9 +996,9 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
     private void btnAmbilPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbilPhotoActionPerformed
         if(tbKamar.getSelectedRow()!= -1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Sequel.meghapus("penjab_dokumen_kerjasama", "kd_pj",tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
-            Sequel.menyimpan2("penjab_dokumen_kerjasama","?,current_date(),''",1,new String[]{tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString()});
-            Valid.panggilUrl("dokumenasuransi/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&kdpj="+tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString().replaceAll(" ","_"));
+            Sequel.meghapus("penjab_dokumen_kerjasama", "kd_pj",tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString());
+            Sequel.menyimpan2("penjab_dokumen_kerjasama","?,current_date(),''",1,new String[]{tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString()});
+            Valid.panggilUrl("dokumenasuransi/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&kdpj="+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString().replaceAll(" ","_"));
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_btnAmbilPhotoActionPerformed
@@ -1084,6 +1084,7 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select * from penjab where penjab.status = '1' " + (TCari.getText().isBlank() ? "" :
@@ -1115,6 +1116,7 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
         LCount.setText(String.valueOf(tbKamar.getRowCount()));
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1133,15 +1135,15 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
 
     private void getData() {
         if(tbKamar.getSelectedRow()!= -1){
-            KdAsuransi.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString());
-            Kd2.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString());
-            NmAsuransi.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 2).toString());
-            Perusahaan.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString());
-            AlamatAsuransi.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString());
-            NoTelp.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 5).toString());
-            Email.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString());
-            Attn.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString());
-            NoNPWP.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString());
+            KdAsuransi.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 1).toString());
+            Kd2.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 1).toString());
+            NmAsuransi.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 2).toString());
+            Perusahaan.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 3).toString());
+            AlamatAsuransi.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 4).toString());
+            NoTelp.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 5).toString());
+            Email.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 6).toString());
+            Attn.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 7).toString());
+            NoNPWP.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 8).toString());
         }
     }
 
@@ -1199,7 +1201,7 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
             try {
                 ps=koneksi.prepareStatement("select penjab_dokumen_kerjasama.photo,date_format(penjab_dokumen_kerjasama.kerjasama_berakhir,'%d-%m-%Y') as tanggal from penjab_dokumen_kerjasama where penjab_dokumen_kerjasama.kd_pj=?");
                 try {
-                    ps.setString(1,tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
+                    ps.setString(1,tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){

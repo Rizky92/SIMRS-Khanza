@@ -647,7 +647,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
 
     private void getData() {
         if(tbpropinsi.getSelectedRow()!= -1){
-            Nama.setText(tbpropinsi.getValueAt(tbpropinsi.getSelectedRow(),0).toString());
+            Nama.setText(tabMode.getValueAt(tbpropinsi.convertRowIndexToModel(tbpropinsi.getSelectedRow()),0).toString());
         }
     }
 

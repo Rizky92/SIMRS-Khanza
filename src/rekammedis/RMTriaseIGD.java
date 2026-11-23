@@ -1028,6 +1028,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
         Scroll3.setName("Scroll3"); // NOI18N
         Scroll3.setOpaque(true);
 
+        tbSkala1.setAutoCreateRowSorter(true);
         tbSkala1.setForeground(new java.awt.Color(170, 0, 0));
         tbSkala1.setName("tbSkala1"); // NOI18N
         tbSkala1.setSelectionForeground(new java.awt.Color(0, 255, 0));
@@ -1039,6 +1040,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
         Scroll4.setName("Scroll4"); // NOI18N
         Scroll4.setOpaque(true);
 
+        tbSkala2.setAutoCreateRowSorter(true);
         tbSkala2.setForeground(new java.awt.Color(255, 0, 0));
         tbSkala2.setName("tbSkala2"); // NOI18N
         tbSkala2.setSelectionForeground(new java.awt.Color(0, 255, 0));
@@ -1447,6 +1449,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
         Scroll6.setName("Scroll6"); // NOI18N
         Scroll6.setOpaque(true);
 
+        tbSkala3.setAutoCreateRowSorter(true);
         tbSkala3.setForeground(new java.awt.Color(200, 200, 0));
         tbSkala3.setName("tbSkala3"); // NOI18N
         tbSkala3.setSelectionForeground(new java.awt.Color(0, 255, 0));
@@ -1458,6 +1461,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
         Scroll7.setName("Scroll7"); // NOI18N
         Scroll7.setOpaque(true);
 
+        tbSkala4.setAutoCreateRowSorter(true);
         tbSkala4.setForeground(new java.awt.Color(0, 170, 0));
         tbSkala4.setName("tbSkala4"); // NOI18N
         tbSkala4.setSelectionForeground(new java.awt.Color(0, 255, 0));
@@ -1469,6 +1473,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
         Scroll8.setName("Scroll8"); // NOI18N
         Scroll8.setOpaque(true);
 
+        tbSkala5.setAutoCreateRowSorter(true);
         tbSkala5.setForeground(new java.awt.Color(150, 150, 150));
         tbSkala5.setName("tbSkala5"); // NOI18N
         tbSkala5.setSelectionForeground(new java.awt.Color(0, 255, 0));
@@ -1971,12 +1976,12 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
             if(TabTriase.getSelectedIndex()==0){
                 jmlskala1=0;jmlskala2=0;
                 for(i=0;i<tbSkala1.getRowCount();i++){
-                    if(tbSkala1.getValueAt(i,0).toString().equals("true")){
+                    if(tabModeSkala1.getValueAt(tbSkala1.convertRowIndexToModel(i),0).toString().equals("true")){
                         jmlskala1++;
                     }
                 }
                 for(i=0;i<tbSkala2.getRowCount();i++){
-                    if(tbSkala2.getValueAt(i,0).toString().equals("true")){
+                    if(tabModeSkala2.getValueAt(tbSkala2.convertRowIndexToModel(i),0).toString().equals("true")){
                         jmlskala2++;
                     }
                 }
@@ -2030,11 +2035,11 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                             })==true){
                             if(TabSkala1dan2.getSelectedIndex()==0){
                                 for(i=0;i<tbSkala1.getRowCount();i++){
-                                    if(tbSkala1.getValueAt(i,0).toString().equals("true")){
+                                    if(tabModeSkala1.getValueAt(tbSkala1.convertRowIndexToModel(i),0).toString().equals("true")){
                                         if(Sequel.menyimpantfSmc("data_triase_igddetail_skala1", "no_rawat, kode_skala1",new String[]{
-                                                TNoRw.getText(),tbSkala1.getValueAt(i,1).toString()
+                                                TNoRw.getText(),tabModeSkala1.getValueAt(tbSkala1.convertRowIndexToModel(i),1).toString()
                                             })==true){
-                                                tbSkala1.setValueAt(false,i,0);
+                                                tabModeSkala1.setValueAt(false,tbSkala1.convertRowIndexToModel(i),0);
                                         }else{
                                             sukses=false;
                                         }
@@ -2042,11 +2047,11 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                                 }
                             }else if(TabSkala1dan2.getSelectedIndex()==1){
                                 for(i=0;i<tbSkala2.getRowCount();i++){
-                                    if(tbSkala2.getValueAt(i,0).toString().equals("true")){
+                                    if(tabModeSkala2.getValueAt(tbSkala2.convertRowIndexToModel(i),0).toString().equals("true")){
                                         if(Sequel.menyimpantfSmc("data_triase_igddetail_skala2", "no_rawat, kode_skala2",new String[]{
-                                                TNoRw.getText(),tbSkala2.getValueAt(i,1).toString()
+                                                TNoRw.getText(),tabModeSkala2.getValueAt(tbSkala2.convertRowIndexToModel(i),1).toString()
                                             })==true){
-                                                tbSkala2.setValueAt(false,i,0);
+                                                tabModeSkala2.setValueAt(false,tbSkala2.convertRowIndexToModel(i),0);
                                         }else{
                                             sukses=false;
                                         }
@@ -2063,17 +2068,17 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
             }else if(TabTriase.getSelectedIndex()==1){
                 jmlskala3=0;jmlskala4=0;jmlskala5=0;
                 for(i=0;i<tbSkala3.getRowCount();i++){
-                    if(tbSkala3.getValueAt(i,0).toString().equals("true")){
+                    if(tabModeSkala3.getValueAt(tbSkala3.convertRowIndexToModel(i),0).toString().equals("true")){
                         jmlskala3++;
                     }
                 }
                 for(i=0;i<tbSkala4.getRowCount();i++){
-                    if(tbSkala4.getValueAt(i,0).toString().equals("true")){
+                    if(tabModeSkala4.getValueAt(tbSkala4.convertRowIndexToModel(i),0).toString().equals("true")){
                         jmlskala4++;
                     }
                 }
                 for(i=0;i<tbSkala5.getRowCount();i++){
-                    if(tbSkala5.getValueAt(i,0).toString().equals("true")){
+                    if(tabModeSkala5.getValueAt(tbSkala5.convertRowIndexToModel(i),0).toString().equals("true")){
                         jmlskala5++;
                     }
                 }
@@ -2127,11 +2132,11 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                             })==true){
                             if(TabSkala3dan4dan5.getSelectedIndex()==0){
                                 for(i=0;i<tbSkala3.getRowCount();i++){
-                                    if(tbSkala3.getValueAt(i,0).toString().equals("true")){
+                                    if(tabModeSkala3.getValueAt(tbSkala3.convertRowIndexToModel(i),0).toString().equals("true")){
                                         if(Sequel.menyimpantfSmc("data_triase_igddetail_skala3", "no_rawat, kode_skala3",new String[]{
-                                                TNoRw.getText(),tbSkala3.getValueAt(i,1).toString()
+                                                TNoRw.getText(),tabModeSkala3.getValueAt(tbSkala3.convertRowIndexToModel(i),1).toString()
                                             })==true){
-                                                tbSkala3.setValueAt(false,i,0);
+                                                tabModeSkala3.setValueAt(false,tbSkala3.convertRowIndexToModel(i),0);
                                         }else{
                                             sukses=false;
                                         }
@@ -2139,11 +2144,11 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                                 }
                             }else if(TabSkala3dan4dan5.getSelectedIndex()==1){
                                 for(i=0;i<tbSkala4.getRowCount();i++){
-                                    if(tbSkala4.getValueAt(i,0).toString().equals("true")){
+                                    if(tabModeSkala4.getValueAt(tbSkala4.convertRowIndexToModel(i),0).toString().equals("true")){
                                         if(Sequel.menyimpantfSmc("data_triase_igddetail_skala4", "no_rawat, kode_skala4",new String[]{
-                                                TNoRw.getText(),tbSkala4.getValueAt(i,1).toString()
+                                                TNoRw.getText(),tabModeSkala4.getValueAt(tbSkala4.convertRowIndexToModel(i),1).toString()
                                             })==true){
-                                                tbSkala4.setValueAt(false,i,0);
+                                                tabModeSkala4.setValueAt(false,tbSkala4.convertRowIndexToModel(i),0);
                                         }else{
                                             sukses=false;
                                         }
@@ -2151,11 +2156,11 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                                 }
                             }else if(TabSkala3dan4dan5.getSelectedIndex()==2){
                                 for(i=0;i<tbSkala5.getRowCount();i++){
-                                    if(tbSkala5.getValueAt(i,0).toString().equals("true")){
+                                    if(tabModeSkala5.getValueAt(tbSkala5.convertRowIndexToModel(i),0).toString().equals("true")){
                                         if(Sequel.menyimpantfSmc("data_triase_igddetail_skala5", "no_rawat, kode_skala5",new String[]{
-                                                TNoRw.getText(),tbSkala5.getValueAt(i,1).toString()
+                                                TNoRw.getText(),tabModeSkala5.getValueAt(tbSkala5.convertRowIndexToModel(i),1).toString()
                                             })==true){
-                                                tbSkala5.setValueAt(false,i,0);
+                                                tabModeSkala5.setValueAt(false,tbSkala5.convertRowIndexToModel(i),0);
                                         }else{
                                             sukses=false;
                                         }
@@ -2329,39 +2334,39 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                                     "<td valign='top' cellpadding='0' cellspacing='0'>"+
                                         "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>"+
                                             "<tr class='isi2'>"+
-                                                "<td width='34%' valign='top'>No.Rawat</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>"+tbTriase.getValueAt(i,0).toString()+"</td>"+
+                                                "<td width='34%' valign='top'>No.Rawat</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>"+tabMode.getValueAt(i,0).toString()+"</td>"+
                                             "</tr>"+
                                             "<tr class='isi2'>"+
-                                                "<td width='34%' valign='top'>No.R.M.</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>"+tbTriase.getValueAt(i,1).toString()+"</td>"+
+                                                "<td width='34%' valign='top'>No.R.M.</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>"+tabMode.getValueAt(i,1).toString()+"</td>"+
                                             "</tr>"+
                                             "<tr class='isi2'>"+
-                                                "<td width='34%' valign='top'>Nama Pasien</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>"+tbTriase.getValueAt(i,2).toString()+"</td>"+
-                                            "</tr>"+
-                                        "</table>"+
-                                    "</td>"+
-                                    "<td valign='top' cellpadding='0' cellspacing='0'>"+
-                                        "<table width='100%' border='0' cellpadding='0' cellspacing='0' align='center'>"+
-                                            "<tr class='isi2'>"+
-                                                "<td width='34%' valign='top'>Tgl.Kunjungan</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>"+tbTriase.getValueAt(i,3).toString()+"</td>"+
-                                            "</tr>"+
-                                            "<tr class='isi2'>"+
-                                                "<td width='34%' valign='top'>Cara Masuk</td><td valign='top'>:</td><td width='65%' valign='top'>"+tbTriase.getValueAt(i,4).toString()+"</td>"+
-                                            "</tr>"+
-                                            "<tr class='isi2'>"+
-                                                "<td width='34%' valign='top'>Transportasi</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>"+tbTriase.getValueAt(i,5).toString()+"</td>"+
+                                                "<td width='34%' valign='top'>Nama Pasien</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>"+tabMode.getValueAt(i,2).toString()+"</td>"+
                                             "</tr>"+
                                         "</table>"+
                                     "</td>"+
                                     "<td valign='top' cellpadding='0' cellspacing='0'>"+
                                         "<table width='100%' border='0' cellpadding='0' cellspacing='0' align='center'>"+
                                             "<tr class='isi2'>"+
-                                                "<td width='31%' valign='top'>Alasan Kedatangan</td><td valign='top'>:&nbsp;</td><td width='68%' valign='top'>"+tbTriase.getValueAt(i,6).toString()+"</td>"+
+                                                "<td width='34%' valign='top'>Tgl.Kunjungan</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>"+tabMode.getValueAt(i,3).toString()+"</td>"+
                                             "</tr>"+
                                             "<tr class='isi2'>"+
-                                                "<td width='31%' valign='top'>Keterangan</td><td valign='top'>:&nbsp;</td><td width='68%' valign='top'>"+tbTriase.getValueAt(i,7).toString()+"</td>"+
+                                                "<td width='34%' valign='top'>Cara Masuk</td><td valign='top'>:</td><td width='65%' valign='top'>"+tabMode.getValueAt(i,4).toString()+"</td>"+
                                             "</tr>"+
                                             "<tr class='isi2'>"+
-                                                "<td width='31%' valign='top'>Macam Kasus</td><td valign='top'>:&nbsp;</td><td width='68%' valign='top'>"+tbTriase.getValueAt(i,9).toString()+"</td>"+
+                                                "<td width='34%' valign='top'>Transportasi</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>"+tabMode.getValueAt(i,5).toString()+"</td>"+
+                                            "</tr>"+
+                                        "</table>"+
+                                    "</td>"+
+                                    "<td valign='top' cellpadding='0' cellspacing='0'>"+
+                                        "<table width='100%' border='0' cellpadding='0' cellspacing='0' align='center'>"+
+                                            "<tr class='isi2'>"+
+                                                "<td width='31%' valign='top'>Alasan Kedatangan</td><td valign='top'>:&nbsp;</td><td width='68%' valign='top'>"+tabMode.getValueAt(i,6).toString()+"</td>"+
+                                            "</tr>"+
+                                            "<tr class='isi2'>"+
+                                                "<td width='31%' valign='top'>Keterangan</td><td valign='top'>:&nbsp;</td><td width='68%' valign='top'>"+tabMode.getValueAt(i,7).toString()+"</td>"+
+                                            "</tr>"+
+                                            "<tr class='isi2'>"+
+                                                "<td width='31%' valign='top'>Macam Kasus</td><td valign='top'>:&nbsp;</td><td width='68%' valign='top'>"+tabMode.getValueAt(i,9).toString()+"</td>"+
                                             "</tr>"+
                                         "</table>"+
                                     "</td>"
@@ -2374,7 +2379,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                                 "data_triase_igd.no_rawat from data_triase_igdprimer inner join data_triase_igd on data_triase_igd.no_rawat="+
                                 "data_triase_igdprimer.no_rawat where data_triase_igd.no_rawat=?");
                             try {
-                                ps.setString(1,tbTriase.getValueAt(i,0).toString());
+                                ps.setString(1,tabMode.getValueAt(i,0).toString());
                                 rs=ps.executeQuery();
                                 if(rs.next()){
                                     htmlContent.append(
@@ -2559,7 +2564,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                                 "data_triase_igd.no_rawat from data_triase_igdsekunder inner join data_triase_igd on data_triase_igd.no_rawat="+
                                 "data_triase_igdsekunder.no_rawat where data_triase_igd.no_rawat=?");
                             try {
-                                ps.setString(1,tbTriase.getValueAt(i,0).toString());
+                                ps.setString(1,tabMode.getValueAt(i,0).toString());
                                 rs=ps.executeQuery();
                                 if(rs.next()){
                                     htmlContent.append(
@@ -2931,21 +2936,26 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 if(tbTriase.getSelectedRow()!= -1){
                     try {
+                        tbSkala1.suspendSorting();
                         Valid.tabelKosong(tabModeSkala1);
+                        tbSkala2.suspendSorting();
                         Valid.tabelKosong(tabModeSkala2);
+                        tbSkala3.suspendSorting();
                         Valid.tabelKosong(tabModeSkala3);
+                        tbSkala4.suspendSorting();
                         Valid.tabelKosong(tabModeSkala4);
+                        tbSkala5.suspendSorting();
                         Valid.tabelKosong(tabModeSkala5);
-                        TNoRw.setText(tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
-                        TNoRM.setText(tbTriase.getValueAt(tbTriase.getSelectedRow(),1).toString());
-                        TPasien.setText(tbTriase.getValueAt(tbTriase.getSelectedRow(),2).toString());
-                        Valid.SetTgl2(TanggalKunjungan,tbTriase.getValueAt(tbTriase.getSelectedRow(),3).toString());
-                        CaraMasuk.setSelectedItem(tbTriase.getValueAt(tbTriase.getSelectedRow(),4).toString());
-                        Transportasi.setSelectedItem(tbTriase.getValueAt(tbTriase.getSelectedRow(),5).toString());
-                        AlasanKedatangan.setSelectedItem(tbTriase.getValueAt(tbTriase.getSelectedRow(),6).toString());
-                        KeteranganKedatangan.setText(tbTriase.getValueAt(tbTriase.getSelectedRow(),7).toString());
-                        KdKasus.setText(tbTriase.getValueAt(tbTriase.getSelectedRow(),8).toString());
-                        NmKasus.setText(tbTriase.getValueAt(tbTriase.getSelectedRow(),9).toString());
+                        TNoRw.setText(tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
+                        TNoRM.setText(tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),1).toString());
+                        TPasien.setText(tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),2).toString());
+                        Valid.SetTgl2(TanggalKunjungan,tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),3).toString());
+                        CaraMasuk.setSelectedItem(tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),4).toString());
+                        Transportasi.setSelectedItem(tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),5).toString());
+                        AlasanKedatangan.setSelectedItem(tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),6).toString());
+                        KeteranganKedatangan.setText(tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),7).toString());
+                        KdKasus.setText(tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),8).toString());
+                        NmKasus.setText(tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),9).toString());
                         TabPilihan.setSelectedIndex(0);
                         ps=koneksi.prepareStatement(
                                 "select data_triase_igdprimer.keluhan_utama,data_triase_igdprimer.kebutuhan_khusus,data_triase_igdprimer.catatan,"+
@@ -2954,7 +2964,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                                 "data_triase_igd.no_rawat from data_triase_igdprimer inner join data_triase_igd on data_triase_igd.no_rawat="+
                                 "data_triase_igdprimer.no_rawat where data_triase_igd.no_rawat=?");
                         try {
-                            ps.setString(1,tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
+                            ps.setString(1,tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
                             rs=ps.executeQuery();
                             if(rs.next()){
                                 kodepetugas=rs.getString("nik");
@@ -3097,7 +3107,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                                 "data_triase_igd.no_rawat from data_triase_igdsekunder inner join data_triase_igd on data_triase_igd.no_rawat="+
                                 "data_triase_igdsekunder.no_rawat where data_triase_igd.no_rawat=?");
                         try {
-                            ps.setString(1,tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
+                            ps.setString(1,tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
                             rs=ps.executeQuery();
                             if(rs.next()){
                                 kodepetugas=rs.getString("nik");
@@ -3293,6 +3303,11 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                 }
             }
         }
+        tbSkala1.resumeSorting();
+        tbSkala2.resumeSorting();
+        tbSkala3.resumeSorting();
+        tbSkala4.resumeSorting();
+        tbSkala5.resumeSorting();
     }//GEN-LAST:event_tbTriaseKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -3910,7 +3925,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                             "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and pegawai.nik=data_triase_igdprimer.nik "+
                             "and master_triase_macam_kasus.kode_kasus=data_triase_igd.kode_kasus where data_triase_igd.no_rawat=?");
                         try {
-                            ps.setString(1,tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
+                            ps.setString(1,tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
                             rs=ps.executeQuery();
                             if(rs.next()){
                                 param.put("norawat",rs.getString("no_rawat"));
@@ -4031,7 +4046,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                             "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and pegawai.nik=data_triase_igdprimer.nik "+
                             "and master_triase_macam_kasus.kode_kasus=data_triase_igd.kode_kasus where data_triase_igd.no_rawat=?");
                         try {
-                            ps.setString(1,tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
+                            ps.setString(1,tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
                             rs=ps.executeQuery();
                             if(rs.next()){
                                 param.put("norawat",rs.getString("no_rawat"));
@@ -4152,7 +4167,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                             "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and pegawai.nik=data_triase_igdsekunder.nik "+
                             "and master_triase_macam_kasus.kode_kasus=data_triase_igd.kode_kasus where data_triase_igd.no_rawat=?");
                         try {
-                            ps.setString(1,tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
+                            ps.setString(1,tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
                             rs=ps.executeQuery();
                             if(rs.next()){
                                 param.put("norawat",rs.getString("no_rawat"));
@@ -4272,7 +4287,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                             "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and pegawai.nik=data_triase_igdsekunder.nik "+
                             "and master_triase_macam_kasus.kode_kasus=data_triase_igd.kode_kasus where data_triase_igd.no_rawat=?");
                         try {
-                            ps.setString(1,tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
+                            ps.setString(1,tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
                             rs=ps.executeQuery();
                             if(rs.next()){
                                 param.put("norawat",rs.getString("no_rawat"));
@@ -4392,7 +4407,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                             "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and pegawai.nik=data_triase_igdsekunder.nik "+
                             "and master_triase_macam_kasus.kode_kasus=data_triase_igd.kode_kasus where data_triase_igd.no_rawat=?");
                         try {
-                            ps.setString(1,tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
+                            ps.setString(1,tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
                             rs=ps.executeQuery();
                             if(rs.next()){
                                 param.put("norawat",rs.getString("no_rawat"));
@@ -4840,7 +4855,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
             try{
                 jml=0;
                 for(i=0;i<tbSkala1.getRowCount();i++){
-                    if(tbSkala1.getValueAt(i,0).toString().equals("true")){
+                    if(tabModeSkala1.getValueAt(tbSkala1.convertRowIndexToModel(i),0).toString().equals("true")){
                         jml++;
                     }
                 }
@@ -4854,14 +4869,15 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
 
                 index=0;
                 for(i=0;i<tbSkala1.getRowCount();i++){
-                    if(tbSkala1.getValueAt(i,0).toString().equals("true")){
+                    if(tabModeSkala1.getValueAt(tbSkala1.convertRowIndexToModel(i),0).toString().equals("true")){
                         pilih[index]=true;
-                        kode[index]=tbSkala1.getValueAt(i,1).toString();
-                        pengkajian[index]=tbSkala1.getValueAt(i,2).toString();
+                        kode[index]=tabModeSkala1.getValueAt(tbSkala1.convertRowIndexToModel(i),1).toString();
+                        pengkajian[index]=tabModeSkala1.getValueAt(tbSkala1.convertRowIndexToModel(i),2).toString();
                         index++;
                     }
                 }
 
+                tbSkala1.suspendSorting();
                 Valid.tabelKosong(tabModeSkala1);
 
                 for(i=0;i<jml;i++){
@@ -4873,7 +4889,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                 ps=koneksi.prepareStatement(
                         "select * from master_triase_skala1 where kode_pemeriksaan=? and pengkajian_skala1 like ? order by master_triase_skala1.kode_skala1");
                 try {
-                    ps.setString(1,tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),0).toString());
+                    ps.setString(1,tabModePemeriksaan.getValueAt(tbPemeriksaan.convertRowIndexToModel(tbPemeriksaan.getSelectedRow()),0).toString());
                     ps.setString(2,"%"+TCariSkala1.getText().trim()+"%");
                     rs=ps.executeQuery();
                     while(rs.next()){
@@ -4893,6 +4909,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                 System.out.println("Notifikasi : "+e);
             }
         }
+        tbSkala1.resumeSorting();
     }
 
     private void tampilskala2() {
@@ -4900,7 +4917,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
             try{
                 jml=0;
                 for(i=0;i<tbSkala2.getRowCount();i++){
-                    if(tbSkala2.getValueAt(i,0).toString().equals("true")){
+                    if(tabModeSkala2.getValueAt(tbSkala2.convertRowIndexToModel(i),0).toString().equals("true")){
                         jml++;
                     }
                 }
@@ -4914,14 +4931,15 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
 
                 index=0;
                 for(i=0;i<tbSkala2.getRowCount();i++){
-                    if(tbSkala2.getValueAt(i,0).toString().equals("true")){
+                    if(tabModeSkala2.getValueAt(tbSkala2.convertRowIndexToModel(i),0).toString().equals("true")){
                         pilih[index]=true;
-                        kode[index]=tbSkala2.getValueAt(i,1).toString();
-                        pengkajian[index]=tbSkala2.getValueAt(i,2).toString();
+                        kode[index]=tabModeSkala2.getValueAt(tbSkala2.convertRowIndexToModel(i),1).toString();
+                        pengkajian[index]=tabModeSkala2.getValueAt(tbSkala2.convertRowIndexToModel(i),2).toString();
                         index++;
                     }
                 }
 
+                tbSkala2.suspendSorting();
                 Valid.tabelKosong(tabModeSkala2);
 
                 for(i=0;i<jml;i++){
@@ -4933,7 +4951,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                 ps=koneksi.prepareStatement(
                         "select * from master_triase_skala2 where kode_pemeriksaan=? and pengkajian_skala2 like ? order by master_triase_skala2.kode_skala2");
                 try {
-                    ps.setString(1,tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),0).toString());
+                    ps.setString(1,tabModePemeriksaan.getValueAt(tbPemeriksaan.convertRowIndexToModel(tbPemeriksaan.getSelectedRow()),0).toString());
                     ps.setString(2,"%"+TCariSkala1.getText().trim()+"%");
                     rs=ps.executeQuery();
                     while(rs.next()){
@@ -4953,6 +4971,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                 System.out.println("Notifikasi : "+e);
             }
         }
+        tbSkala2.resumeSorting();
     }
 
     private void tampilskala3() {
@@ -4960,7 +4979,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
             try{
                 jml=0;
                 for(i=0;i<tbSkala3.getRowCount();i++){
-                    if(tbSkala3.getValueAt(i,0).toString().equals("true")){
+                    if(tabModeSkala3.getValueAt(tbSkala3.convertRowIndexToModel(i),0).toString().equals("true")){
                         jml++;
                     }
                 }
@@ -4974,14 +4993,15 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
 
                 index=0;
                 for(i=0;i<tbSkala3.getRowCount();i++){
-                    if(tbSkala3.getValueAt(i,0).toString().equals("true")){
+                    if(tabModeSkala3.getValueAt(tbSkala3.convertRowIndexToModel(i),0).toString().equals("true")){
                         pilih[index]=true;
-                        kode[index]=tbSkala3.getValueAt(i,1).toString();
-                        pengkajian[index]=tbSkala3.getValueAt(i,2).toString();
+                        kode[index]=tabModeSkala3.getValueAt(tbSkala3.convertRowIndexToModel(i),1).toString();
+                        pengkajian[index]=tabModeSkala3.getValueAt(tbSkala3.convertRowIndexToModel(i),2).toString();
                         index++;
                     }
                 }
 
+                tbSkala3.suspendSorting();
                 Valid.tabelKosong(tabModeSkala3);
 
                 for(i=0;i<jml;i++){
@@ -4993,7 +5013,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                 ps=koneksi.prepareStatement(
                         "select * from master_triase_skala3 where kode_pemeriksaan=? and pengkajian_skala3 like ? order by master_triase_skala3.kode_skala3");
                 try {
-                    ps.setString(1,tbPemeriksaan2.getValueAt(tbPemeriksaan2.getSelectedRow(),0).toString());
+                    ps.setString(1,tabModePemeriksaan2.getValueAt(tbPemeriksaan2.convertRowIndexToModel(tbPemeriksaan2.getSelectedRow()),0).toString());
                     ps.setString(2,"%"+TCariSkala3.getText().trim()+"%");
                     rs=ps.executeQuery();
                     while(rs.next()){
@@ -5013,6 +5033,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                 System.out.println("Notifikasi : "+e);
             }
         }
+        tbSkala3.resumeSorting();
     }
 
     private void tampilskala4() {
@@ -5020,7 +5041,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
             try{
                 jml=0;
                 for(i=0;i<tbSkala4.getRowCount();i++){
-                    if(tbSkala4.getValueAt(i,0).toString().equals("true")){
+                    if(tabModeSkala4.getValueAt(tbSkala4.convertRowIndexToModel(i),0).toString().equals("true")){
                         jml++;
                     }
                 }
@@ -5034,14 +5055,15 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
 
                 index=0;
                 for(i=0;i<tbSkala4.getRowCount();i++){
-                    if(tbSkala4.getValueAt(i,0).toString().equals("true")){
+                    if(tabModeSkala4.getValueAt(tbSkala4.convertRowIndexToModel(i),0).toString().equals("true")){
                         pilih[index]=true;
-                        kode[index]=tbSkala4.getValueAt(i,1).toString();
-                        pengkajian[index]=tbSkala4.getValueAt(i,2).toString();
+                        kode[index]=tabModeSkala4.getValueAt(tbSkala4.convertRowIndexToModel(i),1).toString();
+                        pengkajian[index]=tabModeSkala4.getValueAt(tbSkala4.convertRowIndexToModel(i),2).toString();
                         index++;
                     }
                 }
 
+                tbSkala4.suspendSorting();
                 Valid.tabelKosong(tabModeSkala4);
 
                 for(i=0;i<jml;i++){
@@ -5053,7 +5075,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                 ps=koneksi.prepareStatement(
                         "select * from master_triase_skala4 where kode_pemeriksaan=? and pengkajian_skala4 like ? order by master_triase_skala4.kode_skala4");
                 try {
-                    ps.setString(1,tbPemeriksaan2.getValueAt(tbPemeriksaan2.getSelectedRow(),0).toString());
+                    ps.setString(1,tabModePemeriksaan2.getValueAt(tbPemeriksaan2.convertRowIndexToModel(tbPemeriksaan2.getSelectedRow()),0).toString());
                     ps.setString(2,"%"+TCariSkala3.getText().trim()+"%");
                     rs=ps.executeQuery();
                     while(rs.next()){
@@ -5073,6 +5095,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                 System.out.println("Notifikasi : "+e);
             }
         }
+        tbSkala4.resumeSorting();
     }
 
     private void tampilskala5() {
@@ -5080,7 +5103,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
             try{
                 jml=0;
                 for(i=0;i<tbSkala5.getRowCount();i++){
-                    if(tbSkala5.getValueAt(i,0).toString().equals("true")){
+                    if(tabModeSkala5.getValueAt(tbSkala5.convertRowIndexToModel(i),0).toString().equals("true")){
                         jml++;
                     }
                 }
@@ -5094,14 +5117,15 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
 
                 index=0;
                 for(i=0;i<tbSkala5.getRowCount();i++){
-                    if(tbSkala5.getValueAt(i,0).toString().equals("true")){
+                    if(tabModeSkala5.getValueAt(tbSkala5.convertRowIndexToModel(i),0).toString().equals("true")){
                         pilih[index]=true;
-                        kode[index]=tbSkala5.getValueAt(i,1).toString();
-                        pengkajian[index]=tbSkala5.getValueAt(i,2).toString();
+                        kode[index]=tabModeSkala5.getValueAt(tbSkala5.convertRowIndexToModel(i),1).toString();
+                        pengkajian[index]=tabModeSkala5.getValueAt(tbSkala5.convertRowIndexToModel(i),2).toString();
                         index++;
                     }
                 }
 
+                tbSkala5.suspendSorting();
                 Valid.tabelKosong(tabModeSkala5);
 
                 for(i=0;i<jml;i++){
@@ -5113,7 +5137,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                 ps=koneksi.prepareStatement(
                         "select * from master_triase_skala5 where kode_pemeriksaan=? and pengkajian_skala5 like ? order by master_triase_skala5.kode_skala5");
                 try {
-                    ps.setString(1,tbPemeriksaan2.getValueAt(tbPemeriksaan2.getSelectedRow(),0).toString());
+                    ps.setString(1,tabModePemeriksaan2.getValueAt(tbPemeriksaan2.convertRowIndexToModel(tbPemeriksaan2.getSelectedRow()),0).toString());
                     ps.setString(2,"%"+TCariSkala3.getText().trim()+"%");
                     rs=ps.executeQuery();
                     while(rs.next()){
@@ -5133,6 +5157,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                 System.out.println("Notifikasi : "+e);
             }
         }
+        tbSkala5.resumeSorting();
     }
 
     public void isCek(){
@@ -5158,8 +5183,8 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
     private void getData() {
         if(tbTriase.getSelectedRow()!= -1){
             try {
-                TNoRM1.setText(tbTriase.getValueAt(tbTriase.getSelectedRow(),1).toString());
-                TPasien1.setText(tbTriase.getValueAt(tbTriase.getSelectedRow(),2).toString());
+                TNoRM1.setText(tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),1).toString());
+                TPasien1.setText(tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),2).toString());
                 ps=koneksi.prepareStatement(
                         "select data_triase_igdprimer.keluhan_utama,data_triase_igdprimer.kebutuhan_khusus,data_triase_igdprimer.catatan,"+
                         "data_triase_igdprimer.plan,data_triase_igdprimer.tanggaltriase,data_triase_igdprimer.nik,data_triase_igd.tekanan_darah,"+
@@ -5167,7 +5192,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                         "data_triase_igd.no_rawat from data_triase_igdprimer inner join data_triase_igd on data_triase_igd.no_rawat="+
                         "data_triase_igdprimer.no_rawat where data_triase_igd.no_rawat=?");
                 try {
-                    ps.setString(1,tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         kodepetugas=rs.getString("nik");
@@ -5375,7 +5400,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                         "data_triase_igd.no_rawat from data_triase_igdsekunder inner join data_triase_igd on data_triase_igd.no_rawat="+
                         "data_triase_igdsekunder.no_rawat where data_triase_igd.no_rawat=?");
                 try {
-                    ps.setString(1,tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         kodepetugas=rs.getString("nik");
@@ -5664,14 +5689,14 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
     }
 
     private void hapus() {
-        Sequel.meghapus("data_triase_igd","no_rawat",tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
-        Sequel.meghapus("data_triase_igdprimer","no_rawat",tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
-        Sequel.meghapus("data_triase_igdsekunder","no_rawat",tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
-        Sequel.meghapus("data_triase_igddetail_skala1","no_rawat",tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
-        Sequel.meghapus("data_triase_igddetail_skala2","no_rawat",tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
-        Sequel.meghapus("data_triase_igddetail_skala3","no_rawat",tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
-        Sequel.meghapus("data_triase_igddetail_skala4","no_rawat",tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
-        Sequel.meghapus("data_triase_igddetail_skala5","no_rawat",tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
+        Sequel.meghapus("data_triase_igd","no_rawat",tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
+        Sequel.meghapus("data_triase_igdprimer","no_rawat",tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
+        Sequel.meghapus("data_triase_igdsekunder","no_rawat",tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
+        Sequel.meghapus("data_triase_igddetail_skala1","no_rawat",tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
+        Sequel.meghapus("data_triase_igddetail_skala2","no_rawat",tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
+        Sequel.meghapus("data_triase_igddetail_skala3","no_rawat",tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
+        Sequel.meghapus("data_triase_igddetail_skala4","no_rawat",tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
+        Sequel.meghapus("data_triase_igddetail_skala5","no_rawat",tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
         runBackground(() ->tampil());
         TNoRM1.setText("");
         TPasien1.setText("");
@@ -5683,22 +5708,22 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
     private void ganti() {
         Sequel.AutoComitFalse();
         sukses=true;
-        Sequel.meghapus("data_triase_igdprimer","no_rawat",tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
-        Sequel.meghapus("data_triase_igddetail_skala1","no_rawat",tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
-        Sequel.meghapus("data_triase_igddetail_skala2","no_rawat",tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
-        Sequel.meghapus("data_triase_igdsekunder","no_rawat",tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
-        Sequel.meghapus("data_triase_igddetail_skala3","no_rawat",tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
-        Sequel.meghapus("data_triase_igddetail_skala4","no_rawat",tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
-        Sequel.meghapus("data_triase_igddetail_skala5","no_rawat",tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString());
+        Sequel.meghapus("data_triase_igdprimer","no_rawat",tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
+        Sequel.meghapus("data_triase_igddetail_skala1","no_rawat",tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
+        Sequel.meghapus("data_triase_igddetail_skala2","no_rawat",tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
+        Sequel.meghapus("data_triase_igdsekunder","no_rawat",tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
+        Sequel.meghapus("data_triase_igddetail_skala3","no_rawat",tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
+        Sequel.meghapus("data_triase_igddetail_skala4","no_rawat",tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
+        Sequel.meghapus("data_triase_igddetail_skala5","no_rawat",tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString());
         if(TabTriase.getSelectedIndex()==0){
             jmlskala1=0;jmlskala2=0;
             for(i=0;i<tbSkala1.getRowCount();i++){
-                if(tbSkala1.getValueAt(i,0).toString().equals("true")){
+                if(tabModeSkala1.getValueAt(tbSkala1.convertRowIndexToModel(i),0).toString().equals("true")){
                     jmlskala1++;
                 }
             }
             for(i=0;i<tbSkala2.getRowCount();i++){
-                if(tbSkala2.getValueAt(i,0).toString().equals("true")){
+                if(tabModeSkala2.getValueAt(tbSkala2.convertRowIndexToModel(i),0).toString().equals("true")){
                     jmlskala2++;
                 }
             }
@@ -5737,7 +5762,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                         TNoRw.getText(),Valid.SetTgl(TanggalKunjungan.getSelectedItem()+"")+" "+TanggalKunjungan.getSelectedItem().toString().substring(11,19),
                         CaraMasuk.getSelectedItem().toString(),Transportasi.getSelectedItem().toString(),AlasanKedatangan.getSelectedItem().toString(),
                         KeteranganKedatangan.getText(),KdKasus.getText(),PrimerTensi.getText(),PrimerNadi.getText(),PrimerRespirasi.getText(),PrimerSuhu.getText(),
-                        PrimerSaturasi.getText(),PrimerNyeri.getText(),tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString()
+                        PrimerSaturasi.getText(),PrimerNyeri.getText(),tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString()
                     })==true){
                     if(PrimerResusitasi.isSelected()==true){
                         keputusan="Ruang Resusitasi";
@@ -5757,14 +5782,14 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                     )) {
                         if(TabSkala1dan2.getSelectedIndex()==0){
                             for(i=0;i<tbSkala1.getRowCount();i++){
-                                if(tbSkala1.getValueAt(i,0).toString().equals("true")){
+                                if(tabModeSkala1.getValueAt(tbSkala1.convertRowIndexToModel(i),0).toString().equals("true")){
                                     /*
                                     if(Sequel.menyimpantf2("data_triase_igddetail_skala1","?,?,''","Skala 1",2,new String[]{
                                         TNoRw.getText(),tbSkala1.getValueAt(i,1).toString()
                                     })==true){
                                     */
-                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala1", "no_rawat, kode_skala1", TNoRw.getText(), tbSkala1.getValueAt(i, 1).toString())) {
-                                        tbSkala1.setValueAt(false,i,0);
+                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala1", "no_rawat, kode_skala1", TNoRw.getText(), tabModeSkala1.getValueAt(tbSkala1.convertRowIndexToModel(i), 1).toString())) {
+                                        tabModeSkala1.setValueAt(false,tbSkala1.convertRowIndexToModel(i),0);
                                     }else{
                                         sukses=false;
                                     }
@@ -5772,14 +5797,14 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                             }
                         }else if(TabSkala1dan2.getSelectedIndex()==1){
                             for(i=0;i<tbSkala2.getRowCount();i++){
-                                if(tbSkala2.getValueAt(i,0).toString().equals("true")){
+                                if(tabModeSkala2.getValueAt(tbSkala2.convertRowIndexToModel(i),0).toString().equals("true")){
                                     /*
                                     if(Sequel.menyimpantf2("data_triase_igddetail_skala2","?,?,''","Skala 2",2,new String[]{
                                         TNoRw.getText(),tbSkala2.getValueAt(i,1).toString()
                                     })==true){
                                     */
-                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala2", "no_rawat, kode_skala2", TNoRw.getText(), tbSkala2.getValueAt(i, 1).toString())) {
-                                        tbSkala2.setValueAt(false,i,0);
+                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala2", "no_rawat, kode_skala2", TNoRw.getText(), tabModeSkala2.getValueAt(tbSkala2.convertRowIndexToModel(i), 1).toString())) {
+                                        tabModeSkala2.setValueAt(false,tbSkala2.convertRowIndexToModel(i),0);
                                     }else{
                                         sukses=false;
                                     }
@@ -5796,17 +5821,17 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
         }else if(TabTriase.getSelectedIndex()==1){
             jmlskala3=0;jmlskala4=0;jmlskala5=0;
             for(i=0;i<tbSkala3.getRowCount();i++){
-                if(tbSkala3.getValueAt(i,0).toString().equals("true")){
+                if(tabModeSkala3.getValueAt(tbSkala3.convertRowIndexToModel(i),0).toString().equals("true")){
                     jmlskala3++;
                 }
             }
             for(i=0;i<tbSkala4.getRowCount();i++){
-                if(tbSkala4.getValueAt(i,0).toString().equals("true")){
+                if(tabModeSkala4.getValueAt(tbSkala4.convertRowIndexToModel(i),0).toString().equals("true")){
                     jmlskala4++;
                 }
             }
             for(i=0;i<tbSkala5.getRowCount();i++){
-                if(tbSkala5.getValueAt(i,0).toString().equals("true")){
+                if(tabModeSkala5.getValueAt(tbSkala5.convertRowIndexToModel(i),0).toString().equals("true")){
                     jmlskala5++;
                 }
             }
@@ -5845,7 +5870,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                         TNoRw.getText(),Valid.SetTgl(TanggalKunjungan.getSelectedItem()+"")+" "+TanggalKunjungan.getSelectedItem().toString().substring(11,19),
                         CaraMasuk.getSelectedItem().toString(),Transportasi.getSelectedItem().toString(),AlasanKedatangan.getSelectedItem().toString(),
                         KeteranganKedatangan.getText(),KdKasus.getText(),SekunderTensi.getText(),SekunderNadi.getText(),SekunderRespirasi.getText(),SekunderSuhu.getText(),
-                        SekunderSaturasi.getText(),SekunderNyeri.getText(),tbTriase.getValueAt(tbTriase.getSelectedRow(),0).toString()
+                        SekunderSaturasi.getText(),SekunderNyeri.getText(),tabMode.getValueAt(tbTriase.convertRowIndexToModel(tbTriase.getSelectedRow()),0).toString()
                     })==true){
                     if(SekunderZonaKuning.isSelected()==true){
                         keputusan="Zona Kuning";
@@ -5865,14 +5890,14 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                     )) {
                         if(TabSkala3dan4dan5.getSelectedIndex()==0){
                             for(i=0;i<tbSkala3.getRowCount();i++){
-                                if(tbSkala3.getValueAt(i,0).toString().equals("true")){
+                                if(tabModeSkala3.getValueAt(tbSkala3.convertRowIndexToModel(i),0).toString().equals("true")){
                                     /*
                                     if(Sequel.menyimpantf2("data_triase_igddetail_skala3","?,?,''","Skala 3",2,new String[]{
                                         TNoRw.getText(),tbSkala3.getValueAt(i,1).toString()
                                     })==true){
                                     */
-                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala3", "no_rawat, kode_skala3", TNoRw.getText(), tbSkala3.getValueAt(i, 1).toString())) {
-                                        tbSkala3.setValueAt(false,i,0);
+                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala3", "no_rawat, kode_skala3", TNoRw.getText(), tabModeSkala3.getValueAt(tbSkala3.convertRowIndexToModel(i), 1).toString())) {
+                                        tabModeSkala3.setValueAt(false,tbSkala3.convertRowIndexToModel(i),0);
                                     }else{
                                         sukses=false;
                                     }
@@ -5880,14 +5905,14 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                             }
                         }else if(TabSkala3dan4dan5.getSelectedIndex()==1){
                             for(i=0;i<tbSkala4.getRowCount();i++){
-                                if(tbSkala4.getValueAt(i,0).toString().equals("true")){
+                                if(tabModeSkala4.getValueAt(tbSkala4.convertRowIndexToModel(i),0).toString().equals("true")){
                                     /*
                                     if(Sequel.menyimpantf2("data_triase_igddetail_skala4","?,?,''","Skala 4",2,new String[]{
                                         TNoRw.getText(),tbSkala4.getValueAt(i,1).toString()
                                     })==true){
                                     */
-                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala4", "no_rawat, kode_skala4", TNoRw.getText(), tbSkala4.getValueAt(i, 1).toString())) {
-                                        tbSkala4.setValueAt(false,i,0);
+                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala4", "no_rawat, kode_skala4", TNoRw.getText(), tabModeSkala4.getValueAt(tbSkala4.convertRowIndexToModel(i), 1).toString())) {
+                                        tabModeSkala4.setValueAt(false,tbSkala4.convertRowIndexToModel(i),0);
                                     }else{
                                         sukses=false;
                                     }
@@ -5895,14 +5920,14 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                             }
                         }else if(TabSkala3dan4dan5.getSelectedIndex()==2){
                             for(i=0;i<tbSkala5.getRowCount();i++){
-                                if(tbSkala5.getValueAt(i,0).toString().equals("true")){
+                                if(tabModeSkala5.getValueAt(tbSkala5.convertRowIndexToModel(i),0).toString().equals("true")){
                                     /*
                                     if(Sequel.menyimpantf2("data_triase_igddetail_skala5","?,?,''","Skala 5",2,new String[]{
                                         TNoRw.getText(),tbSkala5.getValueAt(i,1).toString()
                                     })==true){
                                     */
-                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala5", "no_rawat, kode_skala5", TNoRw.getText(), tbSkala5.getValueAt(i, 1).toString())) {
-                                        tbSkala5.setValueAt(false,i,0);
+                                    if (Sequel.menyimpantfSmc("data_triase_igddetail_skala5", "no_rawat, kode_skala5", TNoRw.getText(), tabModeSkala5.getValueAt(tbSkala5.convertRowIndexToModel(i), 1).toString())) {
+                                        tabModeSkala5.setValueAt(false,tbSkala5.convertRowIndexToModel(i),0);
                                     }else{
                                         sukses=false;
                                     }

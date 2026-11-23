@@ -788,10 +788,10 @@ public final class DlgKonversi extends javax.swing.JDialog {
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            n1.setText(tbKamar.getValueAt(row,0).toString());
-            kdsat1.setSelectedItem(tbKamar.getValueAt(row,1).toString());
-            n2.setText(tbKamar.getValueAt(row,3).toString());
-            kdsat2.setSelectedItem(tbKamar.getValueAt(row,4).toString());
+            n1.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
+            kdsat1.setSelectedItem(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
+            n2.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),3).toString());
+            kdsat2.setSelectedItem(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),4).toString());
         }
     }
 

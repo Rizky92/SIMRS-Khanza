@@ -499,9 +499,9 @@ public class DlgSetKeterlambatan extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            Toleransi.setText(tbAdmin.getValueAt(row,0).toString().replaceAll(" Menit",""));
-            Terlambat1.setText(tbAdmin.getValueAt(row,1).toString().replaceAll(" Menit",""));
-            Terlambat2.setText(tbAdmin.getValueAt(row,2).toString().replaceAll(" Menit",""));
+            Toleransi.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),0).toString().replaceAll(" Menit",""));
+            Terlambat1.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),1).toString().replaceAll(" Menit",""));
+            Terlambat2.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),2).toString().replaceAll(" Menit",""));
         }
     }
 

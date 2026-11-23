@@ -984,14 +984,14 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            Tahun.setSelectedItem(tbKamar.getValueAt(row,0).toString());
-            Kd.setText(tbKamar.getValueAt(row,1).toString());
-            Kd2.setText(tbKamar.getValueAt(row,1).toString());
-            Nm.setText(tbKamar.getValueAt(row,2).toString());
-            Tipe.setText(tbKamar.getValueAt(row,3).toString());
-            Balance.setText(tbKamar.getValueAt(row,4).toString());
+            Tahun.setSelectedItem(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
+            Kd.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
+            Kd2.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
+            Nm.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),2).toString());
+            Tipe.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),3).toString());
+            Balance.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),4).toString());
             // Saldo.setText(tbKamar.getValueAt(row,5).toString().replaceAll(",", ""));
-            Saldo.setText(BigDecimal.valueOf(((Number) tbKamar.getValueAt(row, 5)).doubleValue()).setScale(2, RoundingMode.HALF_UP).stripTrailingZeros().toPlainString());
+            Saldo.setText(BigDecimal.valueOf(((Number) tabMode.getValueAt(tbKamar.convertRowIndexToModel(row), 5)).doubleValue()).setScale(2, RoundingMode.HALF_UP).stripTrailingZeros().toPlainString());
         }
     }
 
@@ -1020,6 +1020,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbKamar.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim();
@@ -1099,6 +1100,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
                     LCount.setText(tbKamar.getRowCount() + "");
                     DlgRekeningTahun.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbKamar.resumeSorting();
                 }
             }.execute();
         }

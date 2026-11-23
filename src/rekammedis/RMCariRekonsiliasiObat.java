@@ -310,6 +310,7 @@ public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -832,13 +833,13 @@ public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
         }else if(tbDokter.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else {
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().equals("")){
-                if(Sequel.cariInteger("select count(rekonsiliasi_obat_konfirmasi.no_rekonsiliasi) from rekonsiliasi_obat_konfirmasi where rekonsiliasi_obat_konfirmasi.no_rekonsiliasi=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())==0){
-                    Sequel.meghapus("rekonsiliasi_obat","no_rekonsiliasi",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().equals("")){
+                if(Sequel.cariInteger("select count(rekonsiliasi_obat_konfirmasi.no_rekonsiliasi) from rekonsiliasi_obat_konfirmasi where rekonsiliasi_obat_konfirmasi.no_rekonsiliasi=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString())==0){
+                    Sequel.meghapus("rekonsiliasi_obat","no_rekonsiliasi",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                     runBackground(() ->tampil());
                 }else{
                     if(akses.getkonfirmasi_rekonsiliasi_obat()==true){
-                        Sequel.meghapus("rekonsiliasi_obat","no_rekonsiliasi",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        Sequel.meghapus("rekonsiliasi_obat","no_rekonsiliasi",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                         runBackground(() ->tampil());
                     }else{
                         JOptionPane.showMessageDialog(null,"Maaf, Rekonsiliasi sudah dikonfirmasi oleh apoteker..!!");
@@ -865,8 +866,8 @@ public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
         }else if(tbDokter.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else {
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().equals("")){
-                NoRekonsiliasi.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().equals("")){
+                NoRekonsiliasi.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                 DiterimaFarmasi.requestFocus();
                 DlgKonfirmasiObatRekonsiliasi.setLocationRelativeTo(internalFrame1);
                 DlgKonfirmasiObatRekonsiliasi.setVisible(true);

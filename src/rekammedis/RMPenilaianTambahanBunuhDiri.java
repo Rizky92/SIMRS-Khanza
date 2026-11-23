@@ -1437,7 +1437,7 @@ public final class RMPenilaianTambahanBunuhDiri extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else{
-                if(KdPetugas.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),39).toString())){
+                if(KdPetugas.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),39).toString())){
                     hapus();
                 }else{
                     JOptionPane.showMessageDialog(null,"Hanya bisa dihapus oleh petugas yang bersangkutan..!!");
@@ -1466,7 +1466,7 @@ public final class RMPenilaianTambahanBunuhDiri extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(KdPetugas.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),39).toString())){
+                    if(KdPetugas.getText().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),39).toString())){
                         ganti();
                     }else{
                         JOptionPane.showMessageDialog(null,"Hanya bisa diganti oleh petugas yang bersangkutan..!!");
@@ -1669,8 +1669,8 @@ public final class RMPenilaianTambahanBunuhDiri extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),39).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),40).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),39).toString():finger)+"\n"+Tanggal.getSelectedItem());
+            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),39).toString());
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),40).toString()+"\nID "+(finger.equals("")?tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),39).toString():finger)+"\n"+Tanggal.getSelectedItem());
             Valid.MyReportqry("rptFormulirPenilaianTambahanBunuhDiri.jasper","report","::[ Formulir Pengkajian Tambahan Bunuh Diri ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,penilaian_tambahan_bunuh_diri.tanggal,date_format(reg_periksa.tgl_registrasi,'%d-%m-%Y')as tgl_registrasi,reg_periksa.jam_reg,"+
                     "penilaian_tambahan_bunuh_diri.statik_hidup_sendiri,penilaian_tambahan_bunuh_diri.statik_skorhidup_sendiri,penilaian_tambahan_bunuh_diri.statik_upaya_suicide,"+
@@ -1688,7 +1688,7 @@ public final class RMPenilaianTambahanBunuhDiri extends javax.swing.JDialog {
                     "from penilaian_tambahan_bunuh_diri inner join reg_periksa on penilaian_tambahan_bunuh_diri.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
                     "inner join petugas on penilaian_tambahan_bunuh_diri.nip=petugas.nip inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
-                    "where reg_periksa.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
+                    "where reg_periksa.no_rawat='"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"'",param);
         }
     }//GEN-LAST:event_MnPenilaianTambahanBunuhDiriActionPerformed
 
@@ -2171,50 +2171,50 @@ public final class RMPenilaianTambahanBunuhDiri extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            JK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            TglLahir.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            JK.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
 
-            FaktorStatik1.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            SkorStatik1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            FaktorStatik2.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            SkorStatik2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            FaktorStatik3.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            SkorStatik3.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            FaktorStatik4.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            SkorStatik4.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            FaktorStatik5.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            SkorStatik5.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            FaktorStatik6.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            SkorStatik6.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            FaktorStatik7.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            SkorStatik7.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
-            TotalStatik.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
-            FaktorDinamis1.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
-            SkorDinamis1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
-            FaktorDinamis2.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
-            SkorDinamis2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
-            FaktorDinamis3.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
-            SkorDinamis3.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
-            FaktorDinamis4.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
-            SkorDinamis4.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
-            FaktorDinamis5.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
-            SkorDinamis5.setText(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
-            FaktorDinamis6.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString());
-            SkorDinamis6.setText(tbObat.getValueAt(tbObat.getSelectedRow(),32).toString());
-            FaktorDinamis7.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),33).toString());
-            SkorDinamis7.setText(tbObat.getValueAt(tbObat.getSelectedRow(),34).toString());
-            TotalDinamis.setText(tbObat.getValueAt(tbObat.getSelectedRow(),35).toString());
-            FaktorPencegahan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),36).toString());
-            SkorTotal.setText(tbObat.getValueAt(tbObat.getSelectedRow(),37).toString());
-            Level.setText(tbObat.getValueAt(tbObat.getSelectedRow(),38).toString());
+            FaktorStatik1.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            SkorStatik1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            FaktorStatik2.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            SkorStatik2.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            FaktorStatik3.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            SkorStatik3.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            FaktorStatik4.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            SkorStatik4.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            FaktorStatik5.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            SkorStatik5.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+            FaktorStatik6.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
+            SkorStatik6.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17).toString());
+            FaktorStatik7.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18).toString());
+            SkorStatik7.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19).toString());
+            TotalStatik.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20).toString());
+            FaktorDinamis1.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString());
+            SkorDinamis1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22).toString());
+            FaktorDinamis2.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23).toString());
+            SkorDinamis2.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),24).toString());
+            FaktorDinamis3.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),25).toString());
+            SkorDinamis3.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),26).toString());
+            FaktorDinamis4.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),27).toString());
+            SkorDinamis4.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),28).toString());
+            FaktorDinamis5.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),29).toString());
+            SkorDinamis5.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),30).toString());
+            FaktorDinamis6.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),31).toString());
+            SkorDinamis6.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),32).toString());
+            FaktorDinamis7.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),33).toString());
+            SkorDinamis7.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),34).toString());
+            TotalDinamis.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),35).toString());
+            FaktorPencegahan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),36).toString());
+            SkorTotal.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),37).toString());
+            Level.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),38).toString());
 
-            Jam.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(11,13));
-            Menit.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(14,16));
-            Detik.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(17,19));
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
+            Jam.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString().substring(11,13));
+            Menit.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString().substring(14,16));
+            Detik.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString().substring(17,19));
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
         }
     }
     private void isRawat() {
@@ -2363,56 +2363,56 @@ public final class RMPenilaianTambahanBunuhDiri extends javax.swing.JDialog {
                 FaktorStatik7.getSelectedItem().toString(),SkorStatik7.getText(),TotalStatik.getText(),FaktorDinamis1.getSelectedItem().toString(),SkorDinamis1.getText(),
                 FaktorDinamis2.getSelectedItem().toString(),SkorDinamis2.getText(),FaktorDinamis3.getSelectedItem().toString(),SkorDinamis3.getText(),FaktorDinamis4.getSelectedItem().toString(),SkorDinamis4.getText(),
                 FaktorDinamis5.getSelectedItem().toString(),SkorDinamis5.getText(),FaktorDinamis6.getSelectedItem().toString(),SkorDinamis6.getText(),FaktorDinamis7.getSelectedItem().toString(),SkorDinamis7.getText(),
-                TotalDinamis.getText(),FaktorPencegahan.getText(),SkorTotal.getText(),Level.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                TotalDinamis.getText(),FaktorPencegahan.getText(),SkorTotal.getText(),Level.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             })==true){
-            tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
-            tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),1);
-            tbObat.setValueAt(TPasien.getText(),tbObat.getSelectedRow(),2);
-            tbObat.setValueAt(TglLahir.getText(),tbObat.getSelectedRow(),3);
-            tbObat.setValueAt(JK.getText(),tbObat.getSelectedRow(),4);
-            tbObat.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),tbObat.getSelectedRow(),5);
-            tbObat.setValueAt(FaktorStatik1.getSelectedItem().toString(),tbObat.getSelectedRow(),6);
-            tbObat.setValueAt(SkorStatik1.getText(),tbObat.getSelectedRow(),7);
-            tbObat.setValueAt(FaktorStatik2.getSelectedItem().toString(),tbObat.getSelectedRow(),8);
-            tbObat.setValueAt(SkorStatik2.getText(),tbObat.getSelectedRow(),9);
-            tbObat.setValueAt(FaktorStatik3.getSelectedItem().toString(),tbObat.getSelectedRow(),10);
-            tbObat.setValueAt(SkorStatik3.getText(),tbObat.getSelectedRow(),11);
-            tbObat.setValueAt(FaktorStatik4.getSelectedItem().toString(),tbObat.getSelectedRow(),12);
-            tbObat.setValueAt(SkorStatik4.getText(),tbObat.getSelectedRow(),13);
-            tbObat.setValueAt(FaktorStatik5.getSelectedItem().toString(),tbObat.getSelectedRow(),14);
-            tbObat.setValueAt(SkorStatik5.getText(),tbObat.getSelectedRow(),15);
-            tbObat.setValueAt(FaktorStatik6.getSelectedItem().toString(),tbObat.getSelectedRow(),16);
-            tbObat.setValueAt(SkorStatik6.getText(),tbObat.getSelectedRow(),17);
-            tbObat.setValueAt(FaktorStatik7.getSelectedItem().toString(),tbObat.getSelectedRow(),18);
-            tbObat.setValueAt(SkorStatik7.getText(),tbObat.getSelectedRow(),19);
-            tbObat.setValueAt(TotalStatik.getText(),tbObat.getSelectedRow(),20);
-            tbObat.setValueAt(FaktorDinamis1.getSelectedItem().toString(),tbObat.getSelectedRow(),21);
-            tbObat.setValueAt(SkorDinamis1.getText(),tbObat.getSelectedRow(),22);
-            tbObat.setValueAt(FaktorDinamis2.getSelectedItem().toString(),tbObat.getSelectedRow(),23);
-            tbObat.setValueAt(SkorDinamis2.getText(),tbObat.getSelectedRow(),24);
-            tbObat.setValueAt(FaktorDinamis3.getSelectedItem().toString(),tbObat.getSelectedRow(),25);
-            tbObat.setValueAt(SkorDinamis3.getText(),tbObat.getSelectedRow(),26);
-            tbObat.setValueAt(FaktorDinamis4.getSelectedItem().toString(),tbObat.getSelectedRow(),27);
-            tbObat.setValueAt(SkorDinamis4.getText(),tbObat.getSelectedRow(),28);
-            tbObat.setValueAt(FaktorDinamis5.getSelectedItem().toString(),tbObat.getSelectedRow(),29);
-            tbObat.setValueAt(SkorDinamis5.getText(),tbObat.getSelectedRow(),30);
-            tbObat.setValueAt(FaktorDinamis6.getSelectedItem().toString(),tbObat.getSelectedRow(),31);
-            tbObat.setValueAt(SkorDinamis6.getText(),tbObat.getSelectedRow(),32);
-            tbObat.setValueAt(FaktorDinamis7.getSelectedItem().toString(),tbObat.getSelectedRow(),33);
-            tbObat.setValueAt(SkorDinamis7.getText(),tbObat.getSelectedRow(),34);
-            tbObat.setValueAt(TotalDinamis.getText(),tbObat.getSelectedRow(),35);
-            tbObat.setValueAt(FaktorPencegahan.getText(),tbObat.getSelectedRow(),36);
-            tbObat.setValueAt(SkorTotal.getText(),tbObat.getSelectedRow(),37);
-            tbObat.setValueAt(Level.getText(),tbObat.getSelectedRow(),38);
-            tbObat.setValueAt(KdPetugas.getText(),tbObat.getSelectedRow(),39);
-            tbObat.setValueAt(NmPetugas.getText(),tbObat.getSelectedRow(),40);
+            tabMode.setValueAt(TNoRw.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0);
+            tabMode.setValueAt(TNoRM.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1);
+            tabMode.setValueAt(TPasien.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2);
+            tabMode.setValueAt(TglLahir.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3);
+            tabMode.setValueAt(JK.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4);
+            tabMode.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5);
+            tabMode.setValueAt(FaktorStatik1.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6);
+            tabMode.setValueAt(SkorStatik1.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7);
+            tabMode.setValueAt(FaktorStatik2.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8);
+            tabMode.setValueAt(SkorStatik2.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9);
+            tabMode.setValueAt(FaktorStatik3.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10);
+            tabMode.setValueAt(SkorStatik3.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11);
+            tabMode.setValueAt(FaktorStatik4.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12);
+            tabMode.setValueAt(SkorStatik4.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13);
+            tabMode.setValueAt(FaktorStatik5.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14);
+            tabMode.setValueAt(SkorStatik5.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15);
+            tabMode.setValueAt(FaktorStatik6.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16);
+            tabMode.setValueAt(SkorStatik6.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17);
+            tabMode.setValueAt(FaktorStatik7.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18);
+            tabMode.setValueAt(SkorStatik7.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19);
+            tabMode.setValueAt(TotalStatik.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20);
+            tabMode.setValueAt(FaktorDinamis1.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21);
+            tabMode.setValueAt(SkorDinamis1.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22);
+            tabMode.setValueAt(FaktorDinamis2.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),23);
+            tabMode.setValueAt(SkorDinamis2.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),24);
+            tabMode.setValueAt(FaktorDinamis3.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),25);
+            tabMode.setValueAt(SkorDinamis3.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),26);
+            tabMode.setValueAt(FaktorDinamis4.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),27);
+            tabMode.setValueAt(SkorDinamis4.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),28);
+            tabMode.setValueAt(FaktorDinamis5.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),29);
+            tabMode.setValueAt(SkorDinamis5.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),30);
+            tabMode.setValueAt(FaktorDinamis6.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),31);
+            tabMode.setValueAt(SkorDinamis6.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),32);
+            tabMode.setValueAt(FaktorDinamis7.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),33);
+            tabMode.setValueAt(SkorDinamis7.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),34);
+            tabMode.setValueAt(TotalDinamis.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),35);
+            tabMode.setValueAt(FaktorPencegahan.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),36);
+            tabMode.setValueAt(SkorTotal.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),37);
+            tabMode.setValueAt(Level.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),38);
+            tabMode.setValueAt(KdPetugas.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),39);
+            tabMode.setValueAt(NmPetugas.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),40);
             emptTeks();
         }
     }
 
     private void hapus() {
         if(Sequel.queryu2tf("delete from penilaian_tambahan_bunuh_diri where no_rawat=?",1,new String[]{
-            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+            tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
         })==true){
             tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
             emptTeks();

@@ -558,12 +558,12 @@ public final class DlgKategoriPemasukan extends javax.swing.JDialog {
         }else{
             if(tbKamar.getSelectedRow()>-1){
                 if(Sequel.mengedittf("kategori_pemasukan_lain","kode_kategori=?","kode_kategori=?,nama_kategori=?,kd_rek=?,kd_rek2=?",5,new String[]{
-                    Kd.getText(),Nm.getText(),KdAkun.getText(),KdKontraAkun.getText(),tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString()
+                    Kd.getText(),Nm.getText(),KdAkun.getText(),KdKontraAkun.getText(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString()
                 })==true){
-                    tbKamar.setValueAt(Kd.getText(),tbKamar.getSelectedRow(),0);
-                    tbKamar.setValueAt(Nm.getText(),tbKamar.getSelectedRow(),1);
-                    tbKamar.setValueAt(NmAkun.getText(),tbKamar.getSelectedRow(),2);
-                    tbKamar.setValueAt(NmKontraAKun.getText(),tbKamar.getSelectedRow(),3);
+                    tabMode.setValueAt(Kd.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0);
+                    tabMode.setValueAt(Nm.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1);
+                    tabMode.setValueAt(NmAkun.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2);
+                    tabMode.setValueAt(NmKontraAKun.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3);
                     emptTeks();
                 }
             }
@@ -983,12 +983,12 @@ public final class DlgKategoriPemasukan extends javax.swing.JDialog {
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            Kd.setText(tbKamar.getValueAt(row,0).toString());
-            Nm.setText(tbKamar.getValueAt(row,1).toString());
-            NmAkun.setText(tbKamar.getValueAt(row,2).toString());
-            NmKontraAKun.setText(tbKamar.getValueAt(row,3).toString());
-            Sequel.cariIsi("select kd_rek from kategori_pemasukan_lain where kode_kategori=?",KdAkun,tbKamar.getValueAt(row,0).toString());
-            Sequel.cariIsi("select kd_rek2 from kategori_pemasukan_lain where kode_kategori=?",KdKontraAkun,tbKamar.getValueAt(row,0).toString());
+            Kd.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
+            Nm.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
+            NmAkun.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),2).toString());
+            NmKontraAKun.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),3).toString());
+            Sequel.cariIsi("select kd_rek from kategori_pemasukan_lain where kode_kategori=?",KdAkun,tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
+            Sequel.cariIsi("select kd_rek2 from kategori_pemasukan_lain where kode_kategori=?",KdKontraAkun,tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
         }
     }
 

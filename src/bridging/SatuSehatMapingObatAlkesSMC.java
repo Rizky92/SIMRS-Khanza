@@ -1076,25 +1076,25 @@ public final class SatuSehatMapingObatAlkesSMC extends javax.swing.JDialog {
                     "kode_brng = ?",
                     KodeBarang.getText(), KFACode.getText(), KFASystem.getText(), KFADisplay.getText(), FormCode.getText(), FormSystem.getText(),
                     FormDisplay.getText(), NumeratorCode.getText(), NumeratorSystem.getText(), DenominatorCode.getText(), DenominatorSystem.getText(),
-                    RouteCode.getText(), RouteSystem.getText(), RouteDisplay.getText(), tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 2).toString()
+                    RouteCode.getText(), RouteSystem.getText(), RouteDisplay.getText(), tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 2).toString()
                 )) {
-                    tbJnsPerawatan.setValueAt(KFACode.getText(), tbJnsPerawatan.getSelectedRow(), 0);
-                    tbJnsPerawatan.setValueAt(KFASystem.getText(), tbJnsPerawatan.getSelectedRow(), 1);
-                    tbJnsPerawatan.setValueAt(KodeBarang.getText(), tbJnsPerawatan.getSelectedRow(), 2);
-                    tbJnsPerawatan.setValueAt(NamaBarang.getText(), tbJnsPerawatan.getSelectedRow(), 3);
-                    tbJnsPerawatan.setValueAt(Satuan.getText(), tbJnsPerawatan.getSelectedRow(), 4);
-                    tbJnsPerawatan.setValueAt(Kategori.getText(), tbJnsPerawatan.getSelectedRow(), 5);
-                    tbJnsPerawatan.setValueAt(KFADisplay.getText(), tbJnsPerawatan.getSelectedRow(), 6);
-                    tbJnsPerawatan.setValueAt(FormCode.getText(), tbJnsPerawatan.getSelectedRow(), 7);
-                    tbJnsPerawatan.setValueAt(FormSystem.getText(), tbJnsPerawatan.getSelectedRow(), 8);
-                    tbJnsPerawatan.setValueAt(FormDisplay.getText(), tbJnsPerawatan.getSelectedRow(), 9);
-                    tbJnsPerawatan.setValueAt(NumeratorCode.getText(), tbJnsPerawatan.getSelectedRow(), 10);
-                    tbJnsPerawatan.setValueAt(NumeratorSystem.getText(), tbJnsPerawatan.getSelectedRow(), 11);
-                    tbJnsPerawatan.setValueAt(DenominatorCode.getText(), tbJnsPerawatan.getSelectedRow(), 12);
-                    tbJnsPerawatan.setValueAt(DenominatorSystem.getText(), tbJnsPerawatan.getSelectedRow(), 13);
-                    tbJnsPerawatan.setValueAt(RouteCode.getText(), tbJnsPerawatan.getSelectedRow(), 14);
-                    tbJnsPerawatan.setValueAt(RouteSystem.getText(), tbJnsPerawatan.getSelectedRow(), 15);
-                    tbJnsPerawatan.setValueAt(RouteDisplay.getText(), tbJnsPerawatan.getSelectedRow(), 16);
+                    tabMode.setValueAt(KFACode.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 0);
+                    tabMode.setValueAt(KFASystem.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 1);
+                    tabMode.setValueAt(KodeBarang.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 2);
+                    tabMode.setValueAt(NamaBarang.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 3);
+                    tabMode.setValueAt(Satuan.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 4);
+                    tabMode.setValueAt(Kategori.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 5);
+                    tabMode.setValueAt(KFADisplay.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 6);
+                    tabMode.setValueAt(FormCode.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 7);
+                    tabMode.setValueAt(FormSystem.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 8);
+                    tabMode.setValueAt(FormDisplay.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 9);
+                    tabMode.setValueAt(NumeratorCode.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 10);
+                    tabMode.setValueAt(NumeratorSystem.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 11);
+                    tabMode.setValueAt(DenominatorCode.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 12);
+                    tabMode.setValueAt(DenominatorSystem.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 13);
+                    tabMode.setValueAt(RouteCode.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 14);
+                    tabMode.setValueAt(RouteSystem.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 15);
+                    tabMode.setValueAt(RouteDisplay.getText(), tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 16);
                     emptTeks();
                 }
             }
@@ -1503,23 +1503,23 @@ public final class SatuSehatMapingObatAlkesSMC extends javax.swing.JDialog {
 
     private void getData() {
         if (tbJnsPerawatan.getSelectedRow() != -1) {
-            KFACode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 0).toString());
-            KFASystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 1).toString());
-            KodeBarang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 2).toString());
-            NamaBarang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 3).toString());
-            Satuan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 4).toString());
-            Kategori.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 5).toString());
-            KFADisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 6).toString());
-            FormCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 7).toString());
-            FormSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 8).toString());
-            FormDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 9).toString());
-            NumeratorCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 10).toString());
-            NumeratorSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 11).toString());
-            DenominatorCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 12).toString());
-            DenominatorSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 13).toString());
-            RouteCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 14).toString());
-            RouteSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 15).toString());
-            RouteDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 16).toString());
+            KFACode.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 0).toString());
+            KFASystem.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 1).toString());
+            KodeBarang.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 2).toString());
+            NamaBarang.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 3).toString());
+            Satuan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 4).toString());
+            Kategori.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 5).toString());
+            KFADisplay.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 6).toString());
+            FormCode.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 7).toString());
+            FormSystem.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 8).toString());
+            FormDisplay.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 9).toString());
+            NumeratorCode.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 10).toString());
+            NumeratorSystem.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 11).toString());
+            DenominatorCode.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 12).toString());
+            DenominatorSystem.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 13).toString());
+            RouteCode.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 14).toString());
+            RouteSystem.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 15).toString());
+            RouteDisplay.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 16).toString());
         }
     }
 

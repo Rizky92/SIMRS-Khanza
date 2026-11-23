@@ -523,7 +523,7 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
         }else{
             if(tbSpesialis.getSelectedRow()>-1){
                 Sequel.mengedit("set_input_parsial","kd_pj=?","kd_pj=?",2,new String[]{
-                    kdpj.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
+                    kdpj.getText(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString()
                 });
                 runBackground(() ->tampil());
                 emptTeks();
@@ -677,8 +677,8 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
     private void getData() {
         int row=tbSpesialis.getSelectedRow();
         if(row!= -1){
-            kdpj.setText(tbSpesialis.getValueAt(row,0).toString());
-            nmpj.setText(tbSpesialis.getValueAt(row,1).toString());
+            kdpj.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),0).toString());
+            nmpj.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),1).toString());
         }
     }
 

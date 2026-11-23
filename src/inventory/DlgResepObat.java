@@ -524,6 +524,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbTambahan.setAutoCreateRowSorter(true);
         tbTambahan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -607,6 +608,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         scrollPane2.setName("scrollPane2"); // NOI18N
         scrollPane2.setOpaque(true);
 
+        tbTambahan1.setAutoCreateRowSorter(true);
         tbTambahan1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -697,6 +699,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbResep.setSortable(false);
         tbResep.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbResep.setComponentPopupMenu(Popup2);
         tbResep.setName("tbResep"); // NOI18N
@@ -1615,7 +1618,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
             param.put("noresep",NoResep.getText());
             param.put("jam",cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            param.put("noantrian", Sequel.cariIsiSmc("select antriloketfarmasi_smc.nomor from antriloketfarmasi_smc where antriloketfarmasi_smc.no_resep = ?", tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString()));
+            param.put("noantrian", Sequel.cariIsiSmc("select antriloketfarmasi_smc.nomor from antriloketfarmasi_smc where antriloketfarmasi_smc.no_resep = ?", tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()), 0).toString()));
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",KdDokter.getText());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+NmDokter.getText()+"\nID "+(finger.equals("")?KdDokter.getText():finger)+"\n"+DTPBeri.getSelectedItem());
 
@@ -1638,18 +1641,18 @@ public final class DlgResepObat extends javax.swing.JDialog {
         }else{
             for(i=0;i<tbTambahan.getRowCount();i++){
                 Sequel.queryu2("delete from aturan_pakai where tgl_perawatan=? and jam=? and no_rawat=? and kode_brng=?",4,new String[]{
-                    tbTambahan.getValueAt(i,0).toString(),tbTambahan.getValueAt(i,1).toString(),
-                    tbTambahan.getValueAt(i,2).toString(),tbTambahan.getValueAt(i,3).toString()
+                    tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i),0).toString(),tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i),1).toString(),
+                    tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i),2).toString(),tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i),3).toString()
                 });
-                if(!tbTambahan.getValueAt(i,5).toString().equals("")){
+                if(!tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i),5).toString().equals("")){
                     Sequel.menyimpan("aturan_pakai","?,?,?,?,?",5,new String[]{
-                        tbTambahan.getValueAt(i,0).toString(),tbTambahan.getValueAt(i,1).toString(),
-                        tbTambahan.getValueAt(i,2).toString(),tbTambahan.getValueAt(i,3).toString(),
-                        tbTambahan.getValueAt(i,5).toString()
+                        tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i),0).toString(),tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i),1).toString(),
+                        tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i),2).toString(),tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i),3).toString(),
+                        tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i),5).toString()
                     });
                     Sequel.mengupdateSmc("detail_pemberian_obat", "tgl_kadaluarsa = ?", "tgl_perawatan = ? and jam = ? and no_rawat = ? and kode_brng = ?",
-                        (null != tbTambahan.getValueAt(i, 6) && (!tbTambahan.getValueAt(i, 6).toString().isBlank()) ? tbTambahan.getValueAt(i, 6).toString() : null),
-                        tbTambahan.getValueAt(i, 0).toString(), tbTambahan.getValueAt(i, 1).toString(), tbTambahan.getValueAt(i, 2).toString(), tbTambahan.getValueAt(i, 3).toString()
+                        (null != tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i), 6) && (!tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i), 6).toString().isBlank()) ? tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i), 6).toString() : null),
+                        tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i), 0).toString(), tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i), 1).toString(), tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i), 2).toString(), tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i), 3).toString()
                     );
                 }
             }
@@ -1707,7 +1710,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
                         @Override
                         public void windowClosed(WindowEvent e) {
                             if(aturanpakai.getTable().getSelectedRow()!= -1){
-                                tbTambahan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan.getSelectedRow(),5);
+                                tabmodeUbahRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan.convertRowIndexToModel(tbTambahan.getSelectedRow()),5);
                                 tbTambahan.requestFocus();
                             }
                         }
@@ -1742,7 +1745,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
                         @Override
                         public void windowClosed(WindowEvent e) {
                             if(aturanpakai.getTable().getSelectedRow()!= -1){
-                                tbTambahan1.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan1.getSelectedRow(),5);
+                                tabmodeUbahRacikan2.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan1.convertRowIndexToModel(tbTambahan1.getSelectedRow()),5);
                                 tbTambahan1.requestFocus();
                             }
                         }
@@ -1772,7 +1775,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
             Valid.textKosong(NoResepUbah1,"Data");
         }else{
             for(i=0;i<tbTambahan1.getRowCount();i++){
-                if(!tbTambahan1.getValueAt(i,5).toString().equals("")){
+                if(!tabmodeUbahRacikan2.getValueAt(tbTambahan1.convertRowIndexToModel(i),5).toString().equals("")){
                     /*
                     Sequel.queryu2("update obat_racikan set aturan_pakai=? where tgl_perawatan=? and jam=? and no_rawat=? and no_racik=?",5,new String[]{
                         tbTambahan1.getValueAt(i,5).toString(),tbTambahan1.getValueAt(i,0).toString(),tbTambahan1.getValueAt(i,1).toString(),
@@ -1780,9 +1783,9 @@ public final class DlgResepObat extends javax.swing.JDialog {
                     });
                     */
                     Sequel.mengupdateSmc("obat_racikan", "aturan_pakai = ?, tgl_kadaluarsa = ?", "tgl_perawatan = ? and jam = ? and no_rawat = ? and no_racik = ?",
-                        tbTambahan1.getValueAt(i, 5).toString(), (null != tbTambahan1.getValueAt(i, 6) && (!tbTambahan1.getValueAt(i, 6).toString().isBlank()) ?
-                        tbTambahan1.getValueAt(i, 6).toString() : null), tbTambahan1.getValueAt(i, 0).toString(), tbTambahan1.getValueAt(i, 1).toString(),
-                        tbTambahan1.getValueAt(i, 2).toString(), tbTambahan1.getValueAt(i, 3).toString());
+                        tabmodeUbahRacikan2.getValueAt(tbTambahan1.convertRowIndexToModel(i), 5).toString(), (null != tabmodeUbahRacikan2.getValueAt(tbTambahan1.convertRowIndexToModel(i), 6) && (!tabmodeUbahRacikan2.getValueAt(tbTambahan1.convertRowIndexToModel(i), 6).toString().isBlank()) ?
+                        tabmodeUbahRacikan2.getValueAt(tbTambahan1.convertRowIndexToModel(i), 6).toString() : null), tabmodeUbahRacikan2.getValueAt(tbTambahan1.convertRowIndexToModel(i), 0).toString(), tabmodeUbahRacikan2.getValueAt(tbTambahan1.convertRowIndexToModel(i), 1).toString(),
+                        tabmodeUbahRacikan2.getValueAt(tbTambahan1.convertRowIndexToModel(i), 2).toString(), tabmodeUbahRacikan2.getValueAt(tbTambahan1.convertRowIndexToModel(i), 3).toString());
                 }
             }
             runBackground(() -> tampil());
@@ -2678,17 +2681,17 @@ public final class DlgResepObat extends javax.swing.JDialog {
     private void getData() {
         if(tbResep.getSelectedRow()!= -1){
             getno=1;
-            NoResep.setText(tbResep.getValueAt(tbResep.getSelectedRow(),0).toString());
+            NoResep.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),0).toString());
             if(!NoResep.getText().equals("")){
                 Sequel.cariIsi("select resep_obat.no_rawat from resep_obat where resep_obat.no_resep=?",TNoRw,NoResep.getText());
                 Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",TNoRm,TNoRw.getText());
                 Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",TPasien,TNoRm.getText());
                 Sequel.cariIsi("select resep_obat.kd_dokter from resep_obat where resep_obat.no_resep=?",KdDokter,NoResep.getText());
                 NmDokter.setText(Sequel.CariDokter(KdDokter.getText()));
-                cmbJam.setSelectedItem(tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(11,13));
-                cmbMnt.setSelectedItem(tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(14,16));
-                cmbDtk.setSelectedItem(tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(17,19));
-                Valid.SetTgl(DTPBeri,tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(0,10));
+                cmbJam.setSelectedItem(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(11,13));
+                cmbMnt.setSelectedItem(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(14,16));
+                cmbDtk.setSelectedItem(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(17,19));
+                Valid.SetTgl(DTPBeri,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(0,10));
 
                 TabDataMouseClicked(null);
             }
@@ -2771,6 +2774,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }
 
     private void tampilresep() {
+        tbTambahan.suspendSorting();
         Valid.tabelKosong(tabmodeUbahRacikan);
         try {
             try {
@@ -2780,11 +2784,11 @@ public final class DlgResepObat extends javax.swing.JDialog {
                         "inner join databarang on detail_pemberian_obat.kode_brng=databarang.kode_brng where "+
                         "detail_pemberian_obat.tgl_perawatan=? and detail_pemberian_obat.jam=? and "+
                         "detail_pemberian_obat.no_rawat=? and databarang.kode_brng not in (select kode_brng from detail_obat_racikan where tgl_perawatan=? and jam=? and no_rawat=?)");
-                ps2.setString(1,tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(0,10));
-                ps2.setString(2,tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(11,13)+":"+tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(14,16)+":"+tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(17,19));
+                ps2.setString(1,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(0,10));
+                ps2.setString(2,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(11,13)+":"+tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(14,16)+":"+tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(17,19));
                 ps2.setString(3,TNoRw.getText());
-                ps2.setString(4,tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(0,10));
-                ps2.setString(5,tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(11,13)+":"+tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(14,16)+":"+tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(17,19));
+                ps2.setString(4,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(0,10));
+                ps2.setString(5,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(11,13)+":"+tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(14,16)+":"+tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(17,19));
                 ps2.setString(6,TNoRw.getText());
                 rs2=ps2.executeQuery();
                 while(rs2.next()){
@@ -2808,9 +2812,11 @@ public final class DlgResepObat extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
+        tbTambahan.resumeSorting();
     }
 
     private void tampilresep2() {
+        tbTambahan1.suspendSorting();
         Valid.tabelKosong(tabmodeUbahRacikan2);
         try {
             try {
@@ -2820,8 +2826,8 @@ public final class DlgResepObat extends javax.swing.JDialog {
                         "obat_racikan.aturan_pakai,obat_racikan.tgl_kadaluarsa from obat_racikan where "+
                         "obat_racikan.tgl_perawatan=? and obat_racikan.jam=? "+
                         "and obat_racikan.no_rawat=?");
-                ps2.setString(1,tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(0,10));
-                ps2.setString(2,tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(11,13)+":"+tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(14,16)+":"+tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(17,19));
+                ps2.setString(1,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(0,10));
+                ps2.setString(2,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(11,13)+":"+tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(14,16)+":"+tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),1).toString().substring(17,19));
                 ps2.setString(3,TNoRw.getText());
                 rs2=ps2.executeQuery();
                 while(rs2.next()){
@@ -2843,6 +2849,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
+        tbTambahan1.resumeSorting();
     }
 
     private void autoresep() {

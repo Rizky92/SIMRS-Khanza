@@ -482,7 +482,7 @@ public class MasterRencanaKeperawatanIGD extends javax.swing.JDialog {
         }else{
             if(tbSpesialis.getSelectedRow()> -1){
                 Sequel.mengedit("master_rencana_keperawatan_igd","kode_rencana=?","kode_rencana=?,rencana_keperawatan=?,kode_masalah=?",4,new String[]{
-                    kdrencana.getText(),namarencana.getText(),kdmasalah.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString()
+                    kdrencana.getText(),namarencana.getText(),kdmasalah.getText(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2).toString()
                 });
                 if(tbSpesialis.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
@@ -755,10 +755,10 @@ public class MasterRencanaKeperawatanIGD extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            kdmasalah.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            nmmasalah.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
-            kdrencana.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString());
-            namarencana.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),3).toString());
+            kdmasalah.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            nmmasalah.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
+            kdrencana.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2).toString());
+            namarencana.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),3).toString());
         }
     }
 

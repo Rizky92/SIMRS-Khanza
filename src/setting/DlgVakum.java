@@ -160,6 +160,7 @@ public class DlgVakum extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbAdmin.setAutoCreateRowSorter(true);
         tbAdmin.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbAdmin.setComponentPopupMenu(Popup);
         tbAdmin.setName("tbAdmin"); // NOI18N
@@ -323,12 +324,12 @@ public class DlgVakum extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbAdmin.getRowCount();i++){
-            if(tbAdmin.getValueAt(i,0).toString().equals("true")){
-                hapus(tbAdmin.getValueAt(i,1).toString());
+            if(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(i),0).toString().equals("true")){
+                hapus(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(i),1).toString());
             }
         }
         for(i=0;i<tbAdmin.getRowCount();i++){
-            tbAdmin.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbAdmin.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -389,13 +390,13 @@ public class DlgVakum extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbAdmin.getRowCount();i++){
-            tbAdmin.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbAdmin.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void ppCentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCentangActionPerformed
         for(i=0;i<tbAdmin.getRowCount();i++){
-            tbAdmin.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbAdmin.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppCentangActionPerformed
 
@@ -451,6 +452,7 @@ public class DlgVakum extends javax.swing.JDialog {
     }
 
     private void tampil() {
+        tbAdmin.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("show tables;");
@@ -476,6 +478,7 @@ public class DlgVakum extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
+        tbAdmin.resumeSorting();
     }
 
     private void runBackground(Runnable task) {

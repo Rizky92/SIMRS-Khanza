@@ -170,6 +170,7 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbJadwal.setAutoCreateRowSorter(true);
         tbJadwal.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbJadwal.setName("tbJadwal"); // NOI18N
         tbJadwal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -513,8 +514,8 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(int i=0;i<tbJadwal.getRowCount();i++){
-            if(tbJadwal.getValueAt(i,0).toString().equals("true")){
-                if(Sequel.meghapustf("akun_piutang","nama_bayar",tbJadwal.getValueAt(i,1).toString())==true){
+            if(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),0).toString().equals("true")){
+                if(Sequel.meghapustf("akun_piutang","nama_bayar",tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),1).toString())==true){
                     tabMode.removeRow(tbJadwal.convertRowIndexToModel(i));
                     i--;
                 }
@@ -541,14 +542,14 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
         }else{
             if(tbJadwal.getSelectedRow()>-1){
                 if(Sequel.mengedittf("akun_piutang","nama_bayar=?","nama_bayar=?,kd_rek=?,kd_pj=?",4,new String[]{
-                    nama.getText(),kdrek.getText(),kdpnj.getText(),tbJadwal.getValueAt(tbJadwal.getSelectedRow(),1).toString()
+                    nama.getText(),kdrek.getText(),kdpnj.getText(),tabMode.getValueAt(tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),1).toString()
                 })==true){
-                    tbJadwal.setValueAt(false,tbJadwal.getSelectedRow(),0);
-                    tbJadwal.setValueAt(nama.getText(),tbJadwal.getSelectedRow(),1);
-                    tbJadwal.setValueAt(kdrek.getText(),tbJadwal.getSelectedRow(),2);
-                    tbJadwal.setValueAt(nmrek.getText(),tbJadwal.getSelectedRow(),3);
-                    tbJadwal.setValueAt(nmpnj.getText(),tbJadwal.getSelectedRow(),4);
-                    tbJadwal.setValueAt(kdpnj.getText(),tbJadwal.getSelectedRow(),5);
+                    tabMode.setValueAt(false,tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),0);
+                    tabMode.setValueAt(nama.getText(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),1);
+                    tabMode.setValueAt(kdrek.getText(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),2);
+                    tabMode.setValueAt(nmrek.getText(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),3);
+                    tabMode.setValueAt(nmpnj.getText(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),4);
+                    tabMode.setValueAt(kdpnj.getText(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),5);
                     emptTeks();
                 }
             }else{
@@ -886,6 +887,7 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbJadwal.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -920,6 +922,7 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
         }
         int b=tbJadwal.getRowCount();
         LCount.setText(""+b);
+        tbJadwal.resumeSorting();
     }
 
     public void emptTeks() {
@@ -934,11 +937,11 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
     private void getData() {
         int row=tbJadwal.getSelectedRow();
         if(row!= -1){
-            nama.setText(tbJadwal.getValueAt(row,1).toString());
-            kdrek.setText(tbJadwal.getValueAt(row,2).toString());
-            nmrek.setText(tbJadwal.getValueAt(row,3).toString());
-            nmpnj.setText(tbJadwal.getValueAt(row,4).toString());
-            kdpnj.setText(tbJadwal.getValueAt(row,5).toString());
+            nama.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),1).toString());
+            kdrek.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),2).toString());
+            nmrek.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),3).toString());
+            nmpnj.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),4).toString());
+            kdpnj.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),5).toString());
         }
     }
 

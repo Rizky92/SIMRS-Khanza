@@ -403,7 +403,7 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if (tbSpesialis.getSelectedRow() >= 0) {
             if (Sequel.menghapustfSmc("smc_master_masalah_keperawatan", "menu = ? and kode_masalah = ?",
-                tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 0).toString(), tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 1).toString()
+                tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()), 0).toString(), tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()), 1).toString()
             )) {
                 tabMode.removeRow(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()));
                 emptTeks();
@@ -428,12 +428,12 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
         } else {
             if (tbSpesialis.getSelectedRow() >= 0) {
                 if (Sequel.mengupdatetfSmc("smc_master_masalah_keperawatan", "menu = ?, kode_masalah = ?, nama_masalah = ?", "menu = ? and kode_masalah = ?",
-                    menu.getSelectedItem().toString(), kode.getText(), masalah.getText(), tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 0).toString(),
-                    tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 1).toString()
+                    menu.getSelectedItem().toString(), kode.getText(), masalah.getText(), tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()), 0).toString(),
+                    tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()), 1).toString()
                 )) {
-                    tbSpesialis.setValueAt(menu.getSelectedItem().toString(), tbSpesialis.getSelectedRow(), 0);
-                    tbSpesialis.setValueAt(kode.getText(), tbSpesialis.getSelectedRow(), 1);
-                    tbSpesialis.setValueAt(masalah.getText(), tbSpesialis.getSelectedRow(), 2);
+                    tabMode.setValueAt(menu.getSelectedItem().toString(), tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()), 0);
+                    tabMode.setValueAt(kode.getText(), tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()), 1);
+                    tabMode.setValueAt(masalah.getText(), tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()), 2);
                     emptTeks();
                 }
             }
@@ -610,6 +610,7 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             LCount.setText("0");
+            tbSpesialis.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim();
@@ -653,6 +654,7 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
                     LCount.setText(tbSpesialis.getRowCount() + "");
                     MasterMasalahKeperawatanSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbSpesialis.resumeSorting();
                 }
             }.execute();
         }
@@ -670,9 +672,9 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
 
     private void getData() {
         if (tbSpesialis.getSelectedRow() != -1) {
-            menu.setSelectedItem(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 0).toString());
-            kode.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 1).toString());
-            masalah.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 2).toString());
+            menu.setSelectedItem(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()), 0).toString());
+            kode.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()), 1).toString());
+            masalah.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()), 2).toString());
         }
     }
 

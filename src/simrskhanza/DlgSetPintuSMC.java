@@ -191,6 +191,7 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbJadwal.setAutoCreateRowSorter(true);
         tbJadwal.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbJadwal.setName("tbJadwal"); // NOI18N
         tbJadwal.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -547,9 +548,9 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for (int i = 0; i < tbJadwal.getRowCount(); i++) {
-            if (tbJadwal.getValueAt(i, 0).toString().equals("true")) {
-                if (Sequel.queryutf("delete from set_pintu_smc where kd_pintu='" + tbJadwal.getValueAt(i, 1).toString() + "' and kd_dokter='" + tbJadwal.getValueAt(i, 3).toString() + "' " +
-                    "and kd_poli='" + tbJadwal.getValueAt(i, 5).toString() + "'") == true) {
+            if (tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i), 0).toString().equals("true")) {
+                if (Sequel.queryutf("delete from set_pintu_smc where kd_pintu='" + tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i), 1).toString() + "' and kd_dokter='" + tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i), 3).toString() + "' " +
+                    "and kd_poli='" + tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i), 5).toString() + "'") == true) {
                     tabMode.removeRow(tbJadwal.convertRowIndexToModel(i));
                     i--;
                 }
@@ -795,6 +796,7 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbJadwal.suspendSorting();
         Valid.tabelKosong(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select set_pintu_smc.kd_pintu, pintu_smc.nm_pintu, set_pintu_smc.kd_dokter, dokter.nm_dokter, set_pintu_smc.kd_poli, poliklinik.nm_poli " +
@@ -825,6 +827,7 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
         }
 
         LCount.setText("" + tbJadwal.getRowCount());
+        tbJadwal.resumeSorting();
     }
 
     public void emptTeks() {
@@ -840,12 +843,12 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
 
     private void getData() {
         if (tbJadwal.getSelectedRow() >= 0) {
-            kdPintu.setText(tbJadwal.getValueAt(tbJadwal.getSelectedRow(), 1).toString());
-            nmPintu.setText(tbJadwal.getValueAt(tbJadwal.getSelectedRow(), 2).toString());
-            kddokter.setText(tbJadwal.getValueAt(tbJadwal.getSelectedRow(), 3).toString());
-            nmdokter.setText(tbJadwal.getValueAt(tbJadwal.getSelectedRow(), 4).toString());
-            KdPoli.setText(tbJadwal.getValueAt(tbJadwal.getSelectedRow(), 5).toString());
-            TPoli.setText(tbJadwal.getValueAt(tbJadwal.getSelectedRow(), 6).toString());
+            kdPintu.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 1).toString());
+            nmPintu.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 2).toString());
+            kddokter.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 3).toString());
+            nmdokter.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 4).toString());
+            KdPoli.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 5).toString());
+            TPoli.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 6).toString());
         }
     }
 

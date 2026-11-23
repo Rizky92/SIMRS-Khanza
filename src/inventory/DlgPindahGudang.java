@@ -1574,19 +1574,19 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            kddari.setText(tbKamar.getValueAt(row,0).toString());
-            nmdari.setText(tbKamar.getValueAt(row,1).toString());
-            kdke.setText(tbKamar.getValueAt(row,2).toString());
-            nmke.setText(tbKamar.getValueAt(row,3).toString());
-            kdbarang.setText(tbKamar.getValueAt(row,4).toString());
-            nmbarang.setText(tbKamar.getValueAt(row,5).toString());
-            jumlah.setText(tbKamar.getValueAt(row,6).toString());
-            harga.setText(tbKamar.getValueAt(row,7).toString());
-            total.setText(tbKamar.getValueAt(row,8).toString());
-            Keterangan.setText(tbKamar.getValueAt(row,10).toString());
-            nobatch.setText(tbKamar.getValueAt(row,11).toString());
-            nofaktur.setText(tbKamar.getValueAt(row,12).toString());
-            Valid.SetTgl2(Tanggal,tbKamar.getValueAt(row,9).toString());
+            kddari.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
+            nmdari.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
+            kdke.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),2).toString());
+            nmke.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),3).toString());
+            kdbarang.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),4).toString());
+            nmbarang.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),5).toString());
+            jumlah.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),6).toString());
+            harga.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),7).toString());
+            total.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),8).toString());
+            Keterangan.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),10).toString());
+            nobatch.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),11).toString());
+            nofaktur.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),12).toString());
+            Valid.SetTgl2(Tanggal,tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),9).toString());
         }
     }
 
@@ -1624,7 +1624,7 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
             }
             Sequel.AutoComitTrue();
             if(sukses==true){
-                LTotalMutasi.setText(""+Valid.SetAngka(nilaitotal-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString())));
+                LTotalMutasi.setText(""+Valid.SetAngka(nilaitotal-Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),8).toString())));
                 tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
                 LCount.setText(""+tbKamar.getRowCount());
             }

@@ -414,7 +414,7 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbKamar.getSelectedRow()!= -1){
-            if(Sequel.meghapustf("kategori_piutang_jasa_perusahaan","kode_kategori",tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString())==true){
+            if(Sequel.meghapustf("kategori_piutang_jasa_perusahaan","kode_kategori",tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString())==true){
                 tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
                 emptTeks();
                 LCount.setText(""+tbKamar.getRowCount());
@@ -440,10 +440,10 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
         }else{
             if(tbKamar.getSelectedRow()>-1){
                 if(Sequel.mengedittf("kategori_piutang_jasa_perusahaan","kode_kategori=?","kode_kategori=?,nama_kategori=?",3,new String[]{
-                        Kd.getText(),Nm.getText(),tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString()
+                        Kd.getText(),Nm.getText(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0).toString()
                     })==true){
-                    tbKamar.setValueAt(Kd.getText(),tbKamar.getSelectedRow(),0);
-                    tbKamar.setValueAt(Nm.getText(),tbKamar.getSelectedRow(),1);
+                    tabMode.setValueAt(Kd.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0);
+                    tabMode.setValueAt(Nm.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1);
                     emptTeks();
                 }
             }else{
@@ -705,8 +705,8 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            Kd.setText(tbKamar.getValueAt(row,0).toString());
-            Nm.setText(tbKamar.getValueAt(row,1).toString());
+            Kd.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
+            Nm.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
         }
     }
 

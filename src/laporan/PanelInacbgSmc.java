@@ -329,6 +329,7 @@ public class PanelInacbgSmc extends widget.panelisi {
         Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll1.setOpaque(true);
 
+        tbICD10.setAutoCreateRowSorter(true);
         tbICD10.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 tbICD10PropertyChange(evt);
@@ -367,6 +368,7 @@ public class PanelInacbgSmc extends widget.panelisi {
         Scroll2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll2.setOpaque(true);
 
+        tbICD9CM.setAutoCreateRowSorter(true);
         tbICD9CM.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbICD9CM.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -384,6 +386,7 @@ public class PanelInacbgSmc extends widget.panelisi {
         Scroll.setOpaque(true);
         Scroll.setPreferredSize(new java.awt.Dimension(800, 401));
 
+        tbDiagnosaPasien.setAutoCreateRowSorter(true);
         tbDiagnosaPasien.setComponentPopupMenu(jPopupMenu1);
         tbDiagnosaPasien.setPreferredScrollableViewportSize(new java.awt.Dimension(800, 455));
         tbDiagnosaPasien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -444,9 +447,9 @@ public class PanelInacbgSmc extends widget.panelisi {
             (!tbICD9CM.isEditing()) &&
             (tbICD9CM.getSelectedColumn() == 0)) {
             if (tbICD9CM.getSelectedColumn() == 0) {
-                if ((Boolean) tbICD9CM.getValueAt(tbICD9CM.getSelectedRow(), 0) &&
+                if ((Boolean) tabModeICD9CM.getValueAt(tbICD9CM.convertRowIndexToModel(tbICD9CM.getSelectedRow()), 0) &&
                     !cekValiditasICD9CM(tbICD9CM.getSelectedRow())) {
-                    tbICD9CM.setValueAt(1, tbICD9CM.getSelectedRow(), 1);
+                    tabModeICD9CM.setValueAt(1, tbICD9CM.convertRowIndexToModel(tbICD9CM.getSelectedRow()), 1);
                 }
             }
         }
@@ -461,9 +464,9 @@ public class PanelInacbgSmc extends widget.panelisi {
             evt.getPropertyName().equals("tableCellEditor") &&
             (!tbICD10.isEditing()) &&
             tbICD10.getSelectedColumn() == 0) {
-            if ((Boolean) tbICD10.getValueAt(tbICD10.getSelectedRow(), 0) &&
+            if ((Boolean) tabModeICD10.getValueAt(tbICD10.convertRowIndexToModel(tbICD10.getSelectedRow()), 0) &&
                 !cekValiditasICD10(tbICD10.getSelectedRow())) {
-                tbICD10.setValueAt(false, tbICD10.getSelectedRow(), 0);
+                tabModeICD10.setValueAt(false, tbICD10.convertRowIndexToModel(tbICD10.getSelectedRow()), 0);
             }
         }
     }//GEN-LAST:event_tbICD10PropertyChange
@@ -475,7 +478,7 @@ public class PanelInacbgSmc extends widget.panelisi {
             JOptionPane.showMessageDialog(null, "Status grouping INACBG sudah final..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
             int selected = tbDiagnosaPasien.getSelectedRow();
-            if (tbDiagnosaPasien.getValueAt(selected, 5).toString().equals("1")) {
+            if (tabModeDiagnosaPasien.getValueAt(tbDiagnosaPasien.convertRowIndexToModel(selected), 5).toString().equals("1")) {
                 JOptionPane.showMessageDialog(null, "Diagnosa tidak valid..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             } else {
                 tabModeDiagnosaPasien.moveRow(selected, selected, 0);
@@ -487,8 +490,8 @@ public class PanelInacbgSmc extends widget.panelisi {
 
                     for (int i = 0; i < tbDiagnosaPasien.getRowCount(); i++) {
                         if (!Sequel.mengupdatetfSmc("inacbg_diagnosa_pasien_smc", "urut = ?", "no_sep = ? and kode_icd10 = ? and urut = ? and keterangan = ''",
-                            String.valueOf(i + 1), nosep, tbDiagnosaPasien.getValueAt(i, 1).toString(),
-                            tbDiagnosaPasien.getValueAt(i, 4).toString()
+                            String.valueOf(i + 1), nosep, tabModeDiagnosaPasien.getValueAt(tbDiagnosaPasien.convertRowIndexToModel(i), 1).toString(),
+                            tabModeDiagnosaPasien.getValueAt(tbDiagnosaPasien.convertRowIndexToModel(i), 4).toString()
                         )) {
                             sukses = false;
                         }
@@ -543,7 +546,7 @@ public class PanelInacbgSmc extends widget.panelisi {
             JOptionPane.showMessageDialog(null, "Status grouping INACBG sudah final..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
             int selected = tbProsedurPasien.getSelectedRow();
-            if (tbProsedurPasien.getValueAt(selected, 5).toString().equals("1")) {
+            if (tabModeProsedurPasien.getValueAt(tbProsedurPasien.convertRowIndexToModel(selected), 5).toString().equals("1")) {
                 JOptionPane.showMessageDialog(null, "Prosedur tidak valid..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             } else {
                 tabModeProsedurPasien.moveRow(selected, selected, 0);
@@ -555,8 +558,8 @@ public class PanelInacbgSmc extends widget.panelisi {
 
                     for (int i = 0; i < tbProsedurPasien.getRowCount(); i++) {
                         if (!Sequel.mengupdatetfSmc("inacbg_prosedur_pasien_smc", "urut = ?", "no_sep = ? and kode_icd9 = ? and urut = ? and keterangan = ''",
-                            String.valueOf(i + 1), nosep, tbProsedurPasien.getValueAt(i, 1).toString(),
-                            tbProsedurPasien.getValueAt(i, 4).toString()
+                            String.valueOf(i + 1), nosep, tabModeProsedurPasien.getValueAt(tbProsedurPasien.convertRowIndexToModel(i), 1).toString(),
+                            tabModeProsedurPasien.getValueAt(tbProsedurPasien.convertRowIndexToModel(i), 4).toString()
                         )) {
                             sukses = false;
                         }
@@ -632,7 +635,7 @@ public class PanelInacbgSmc extends widget.panelisi {
     }
 
     private boolean cekValiditasICD10(int selectedRow) {
-        if (tbICD10.getValueAt(selectedRow, 3).toString().equals("0")) {
+        if (tabModeICD10.getValueAt(tbICD10.convertRowIndexToModel(selectedRow), 3).toString().equals("0")) {
             JOptionPane.showMessageDialog(null, "Kode diagnosa tidak bisa digunakan untuk coding..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return false;
         }
@@ -641,7 +644,7 @@ public class PanelInacbgSmc extends widget.panelisi {
     }
 
     private boolean cekValiditasICD9CM(int selectedRow) {
-        if (tbICD9CM.getValueAt(selectedRow, 4).toString().equals("0")) {
+        if (tabModeICD9CM.getValueAt(tbICD9CM.convertRowIndexToModel(selectedRow), 4).toString().equals("0")) {
             JOptionPane.showMessageDialog(null, "Kode prosedur tidak bisa digunakan untuk coding..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return false;
         }
@@ -660,6 +663,7 @@ public class PanelInacbgSmc extends widget.panelisi {
     }
 
     public void tampilDiagnosa() {
+        tbDiagnosaPasien.suspendSorting();
         Valid.tabelKosong(tabModeDiagnosaPasien);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select dx.*, if (dx.urut = 1, 'Utama', '') as stts, " +
@@ -678,9 +682,11 @@ public class PanelInacbgSmc extends widget.panelisi {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+        tbDiagnosaPasien.resumeSorting();
     }
 
     public void tampilProsedur() {
+        tbProsedurPasien.suspendSorting();
         Valid.tabelKosong(tabModeProsedurPasien);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select p.*, if(p.urut = 1, 'Utama', '') as stts, " +
@@ -699,6 +705,7 @@ public class PanelInacbgSmc extends widget.panelisi {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+        tbProsedurPasien.resumeSorting();
     }
 
     private void tampilICD10(boolean pilihPertama) {
@@ -713,13 +720,13 @@ public class PanelInacbgSmc extends widget.panelisi {
 
             if (!Diagnosa.getText().isBlank()) {
                 for (int i = 0; i < tbICD10.getRowCount(); i++) {
-                    if ((Boolean) tbICD10.getValueAt(i, 0)) {
-                        icd.add((String) tbICD10.getValueAt(i, 1));
+                    if ((Boolean) tabModeICD10.getValueAt(tbICD10.convertRowIndexToModel(i), 0)) {
+                        icd.add((String) tabModeICD10.getValueAt(tbICD10.convertRowIndexToModel(i), 1));
                         Map<String, Object> row = new HashMap<>();
                         row.put("p", true);
-                        row.put("code1", (String) tbICD10.getValueAt(i, 1));
-                        row.put("deskripsi", (String) tbICD10.getValueAt(i, 2));
-                        row.put("validcode", (String) tbICD10.getValueAt(i, 3));
+                        row.put("code1", (String) tabModeICD10.getValueAt(tbICD10.convertRowIndexToModel(i), 1));
+                        row.put("deskripsi", (String) tabModeICD10.getValueAt(tbICD10.convertRowIndexToModel(i), 2));
+                        row.put("validcode", (String) tabModeICD10.getValueAt(tbICD10.convertRowIndexToModel(i), 3));
                         row.put("urut", dx++);
                         rows.add(row);
                     }
@@ -728,6 +735,7 @@ public class PanelInacbgSmc extends widget.panelisi {
                 pilihPertama = false;
             }
 
+            tbICD10.suspendSorting();
             Valid.tabelKosong(tabModeICD10);
 
             rows.forEach(r -> tabModeICD10.addRow(new Object[] {
@@ -794,6 +802,7 @@ public class PanelInacbgSmc extends widget.panelisi {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+        tbICD10.resumeSorting();
     }
 
     private void tampilICD9CM(boolean pilihPertama) {
@@ -808,13 +817,13 @@ public class PanelInacbgSmc extends widget.panelisi {
 
             if (pilihPertama && !Prosedur.getText().isBlank()) {
                 for (int i = 0; i < tbICD9CM.getRowCount(); i++) {
-                    if ((Boolean) tbICD9CM.getValueAt(i, 0)) {
-                        icd.add((String) tbICD9CM.getValueAt(i, 1));
+                    if ((Boolean) tabModeICD9CM.getValueAt(tbICD9CM.convertRowIndexToModel(i), 0)) {
+                        icd.add((String) tabModeICD9CM.getValueAt(tbICD9CM.convertRowIndexToModel(i), 1));
                         Map<String, Object> row = new HashMap<>();
                         row.put("p", true);
-                        row.put("code1", tbICD9CM.getValueAt(i, 1));
-                        row.put("deskripsi", tbICD9CM.getValueAt(i, 2));
-                        row.put("validcode", tbICD9CM.getValueAt(i, 3));
+                        row.put("code1", tabModeICD9CM.getValueAt(tbICD9CM.convertRowIndexToModel(i), 1));
+                        row.put("deskripsi", tabModeICD9CM.getValueAt(tbICD9CM.convertRowIndexToModel(i), 2));
+                        row.put("validcode", tabModeICD9CM.getValueAt(tbICD9CM.convertRowIndexToModel(i), 3));
                         row.put("urut", px++);
                         rows.add(row);
                     }
@@ -823,6 +832,7 @@ public class PanelInacbgSmc extends widget.panelisi {
                 pilihPertama = false;
             }
 
+            tbICD9CM.suspendSorting();
             Valid.tabelKosong(tabModeICD9CM);
 
             rows.forEach(r -> tabModeICD9CM.addRow(new Object[] {
@@ -889,6 +899,7 @@ public class PanelInacbgSmc extends widget.panelisi {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+        tbICD9CM.resumeSorting();
     }
 
     public void tampilICD() {
@@ -960,7 +971,7 @@ public class PanelInacbgSmc extends widget.panelisi {
 
                     if (hapusOtomatis) {
                         for (int i = 0; i < tbICD10.getRowCount(); i++) {
-                            if ((Boolean) tbICD10.getValueAt(i, 0)) {
+                            if ((Boolean) tabModeICD10.getValueAt(tbICD10.convertRowIndexToModel(i), 0)) {
                                 updateDiagnosa = true;
                                 break;
                             }
@@ -972,13 +983,13 @@ public class PanelInacbgSmc extends widget.panelisi {
                     }
 
                     for (int i = 0; i < tbICD10.getRowCount(); i++) {
-                        if (!(Boolean) tbICD10.getValueAt(i, 0)) {
+                        if (!(Boolean) tabModeICD10.getValueAt(tbICD10.convertRowIndexToModel(i), 0)) {
                             continue;
                         }
 
                         if (!Sequel.menyimpantfSmc("inacbg_diagnosa_pasien_smc", null, nosep,
-                            tbICD10.getValueAt(i, 1).toString(), tbICD10.getValueAt(i, 2).toString(),
-                            String.valueOf((Integer) tbICD10.getValueAt(i, 4) + 100), "", "0"
+                            tabModeICD10.getValueAt(tbICD10.convertRowIndexToModel(i), 1).toString(), tabModeICD10.getValueAt(tbICD10.convertRowIndexToModel(i), 2).toString(),
+                            String.valueOf((Integer) tabModeICD10.getValueAt(tbICD10.convertRowIndexToModel(i), 4) + 100), "", "0"
                         )) {
                             sukses = false;
                         }
@@ -1015,7 +1026,7 @@ public class PanelInacbgSmc extends widget.panelisi {
 
                     if (hapusOtomatis) {
                         for (int i = 0; i < tbICD9CM.getRowCount(); i++) {
-                            if ((Boolean) tbICD9CM.getValueAt(i, 0)) {
+                            if ((Boolean) tabModeICD9CM.getValueAt(tbICD9CM.convertRowIndexToModel(i), 0)) {
                                 updateProsedur = true;
                                 break;
                             }
@@ -1027,13 +1038,13 @@ public class PanelInacbgSmc extends widget.panelisi {
                     }
 
                     for (int i = 0; i < tbICD9CM.getRowCount(); i++) {
-                        if (!(Boolean) tbICD9CM.getValueAt(i, 0)) {
+                        if (!(Boolean) tabModeICD9CM.getValueAt(tbICD9CM.convertRowIndexToModel(i), 0)) {
                             continue;
                         }
 
                         if (!Sequel.menyimpantfSmc("inacbg_prosedur_pasien_smc", null, nosep,
-                            tbICD9CM.getValueAt(i, 1).toString(), tbICD9CM.getValueAt(i, 2).toString(),
-                            String.valueOf((Integer) tbICD9CM.getValueAt(i, 4) + 100), "", "0"
+                            tabModeICD9CM.getValueAt(tbICD9CM.convertRowIndexToModel(i), 1).toString(), tabModeICD9CM.getValueAt(tbICD9CM.convertRowIndexToModel(i), 2).toString(),
+                            String.valueOf((Integer) tabModeICD9CM.getValueAt(tbICD9CM.convertRowIndexToModel(i), 4) + 100), "", "0"
                         )) {
                             sukses = false;
                         }
@@ -1096,17 +1107,17 @@ public class PanelInacbgSmc extends widget.panelisi {
                             boolean sukses = true;
 
                             for (int i = tbDiagnosaPasien.getRowCount() - 1; i >= 0; i--) {
-                                if (!(Boolean) tbDiagnosaPasien.getValueAt(i, 0)) {
+                                if (!(Boolean) tabModeDiagnosaPasien.getValueAt(tbDiagnosaPasien.convertRowIndexToModel(i), 0)) {
                                     continue;
                                 }
 
-                                if (tbDiagnosaPasien.getValueAt(i, 6).toString().equals("1")) {
-                                    tbDiagnosaPasien.setValueAt(false, i, 0);
-                                    JOptionPane.showMessageDialog(null, "Diagnosa \"" + tbDiagnosaPasien.getValueAt(i, 1).toString() + " " + tbDiagnosaPasien.getValueAt(i, 2).toString() + "\" sudah valid..!!");
+                                if (tabModeDiagnosaPasien.getValueAt(tbDiagnosaPasien.convertRowIndexToModel(i), 6).toString().equals("1")) {
+                                    tabModeDiagnosaPasien.setValueAt(false, tbDiagnosaPasien.convertRowIndexToModel(i), 0);
+                                    JOptionPane.showMessageDialog(null, "Diagnosa \"" + tabModeDiagnosaPasien.getValueAt(tbDiagnosaPasien.convertRowIndexToModel(i), 1).toString() + " " + tabModeDiagnosaPasien.getValueAt(tbDiagnosaPasien.convertRowIndexToModel(i), 2).toString() + "\" sudah valid..!!");
                                     continue;
                                 }
 
-                                if (Sequel.menghapustfSmc("inacbg_diagnosa_pasien_smc", "no_sep = ? and kode_icd10 = ? and locked = 0", nosep, (String) tbDiagnosaPasien.getValueAt(i, 1))) {
+                                if (Sequel.menghapustfSmc("inacbg_diagnosa_pasien_smc", "no_sep = ? and kode_icd10 = ? and locked = 0", nosep, (String) tabModeDiagnosaPasien.getValueAt(tbDiagnosaPasien.convertRowIndexToModel(i), 1))) {
                                     tabModeDiagnosaPasien.removeRow(tbDiagnosaPasien.convertRowIndexToModel(i));
                                 }
                             }
@@ -1144,17 +1155,17 @@ public class PanelInacbgSmc extends widget.panelisi {
                             boolean sukses = true;
                             Sequel.AutoComitFalse();
                             for (int i = tbProsedurPasien.getRowCount() - 1; i >= 0; i--) {
-                                if (!(Boolean) tbProsedurPasien.getValueAt(i, 0)) {
+                                if (!(Boolean) tabModeProsedurPasien.getValueAt(tbProsedurPasien.convertRowIndexToModel(i), 0)) {
                                     continue;
                                 }
 
-                                if (tbProsedurPasien.getValueAt(i, 6).toString().equals("1")) {
-                                    tbProsedurPasien.setValueAt(false, i, 0);
-                                    JOptionPane.showMessageDialog(null, "Prosedur \"" + tbProsedurPasien.getValueAt(i, 1).toString() + " " + tbProsedurPasien.getValueAt(i, 2).toString() + "\" sudah valid..!!");
+                                if (tabModeProsedurPasien.getValueAt(tbProsedurPasien.convertRowIndexToModel(i), 6).toString().equals("1")) {
+                                    tabModeProsedurPasien.setValueAt(false, tbProsedurPasien.convertRowIndexToModel(i), 0);
+                                    JOptionPane.showMessageDialog(null, "Prosedur \"" + tabModeProsedurPasien.getValueAt(tbProsedurPasien.convertRowIndexToModel(i), 1).toString() + " " + tabModeProsedurPasien.getValueAt(tbProsedurPasien.convertRowIndexToModel(i), 2).toString() + "\" sudah valid..!!");
                                     continue;
                                 }
 
-                                if (Sequel.menghapustfSmc("inacbg_prosedur_pasien_smc", "no_sep = ? and kode_icd9 = ? and locked = 0", nosep, (String) tbProsedurPasien.getValueAt(i, 1))) {
+                                if (Sequel.menghapustfSmc("inacbg_prosedur_pasien_smc", "no_sep = ? and kode_icd9 = ? and locked = 0", nosep, (String) tabModeProsedurPasien.getValueAt(tbProsedurPasien.convertRowIndexToModel(i), 1))) {
                                     tabModeProsedurPasien.removeRow(tbProsedurPasien.convertRowIndexToModel(i));
                                 }
                             }

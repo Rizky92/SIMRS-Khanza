@@ -497,9 +497,9 @@ public class DlgSetHargaToko extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            Distributor.setText(tbAdmin.getValueAt(row,0).toString());
-            Grosir.setText(tbAdmin.getValueAt(row,1).toString());
-            Retail.setText(tbAdmin.getValueAt(row,2).toString());
+            Distributor.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),0).toString());
+            Grosir.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),1).toString());
+            Retail.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),2).toString());
         }
     }
 

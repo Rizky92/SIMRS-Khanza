@@ -183,6 +183,7 @@ public class DlgJadwal extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbJadwal.setAutoCreateRowSorter(true);
         tbJadwal.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbJadwal.setName("tbJadwal"); // NOI18N
         tbJadwal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -657,9 +658,9 @@ public class DlgJadwal extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(int i=0;i<tbJadwal.getRowCount();i++){
-            if(tbJadwal.getValueAt(i,0).toString().equals("true")){
-                if(Sequel.queryutf("delete from jadwal where kd_dokter='"+tbJadwal.getValueAt(i,1).toString()+"' and hari_kerja='"+tbJadwal.getValueAt(i,3).toString()+"' "+
-                              "and jam_mulai='"+tbJadwal.getValueAt(i,4).toString()+"'")==true){
+            if(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),0).toString().equals("true")){
+                if(Sequel.queryutf("delete from jadwal where kd_dokter='"+tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),1).toString()+"' and hari_kerja='"+tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),3).toString()+"' "+
+                              "and jam_mulai='"+tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),4).toString()+"'")==true){
                     tabMode.removeRow(tbJadwal.convertRowIndexToModel(i));
                     i--;
                 }
@@ -688,19 +689,19 @@ public class DlgJadwal extends javax.swing.JDialog {
                 if(Sequel.queryutf("update jadwal set jam_mulai='"+cmbJam1.getSelectedItem()+":"+cmbMnt1.getSelectedItem()+":"+cmbDtk1.getSelectedItem()+"',"+
                         "jam_selesai='"+cmbJam2.getSelectedItem()+":"+cmbMnt2.getSelectedItem()+":"+cmbDtk2.getSelectedItem()+"',"+
                         "kd_poli='"+KdPoli.getText()+"',kd_dokter='"+kddokter.getText()+"',hari_kerja='"+cmbHari.getSelectedItem()+"',kuota='"+Kuota.getText()+"' where "+
-                        "kd_dokter='"+tbJadwal.getValueAt(tbJadwal.getSelectedRow(),1).toString()+"' "+
-                        "and hari_kerja='"+tbJadwal.getValueAt(tbJadwal.getSelectedRow(),3).toString()+"' "+
-                        "and jam_mulai='"+tbJadwal.getValueAt(tbJadwal.getSelectedRow(),4).toString()+"' "+
-                        "and jam_selesai='"+tbJadwal.getValueAt(tbJadwal.getSelectedRow(),5).toString()+"'")==true){
-                    tbJadwal.setValueAt(false,tbJadwal.getSelectedRow(),0);
-                    tbJadwal.setValueAt(kddokter.getText(),tbJadwal.getSelectedRow(),1);
-                    tbJadwal.setValueAt(nmdokter.getText(),tbJadwal.getSelectedRow(),2);
-                    tbJadwal.setValueAt(cmbHari.getSelectedItem().toString(),tbJadwal.getSelectedRow(),3);
-                    tbJadwal.setValueAt(cmbJam1.getSelectedItem()+":"+cmbMnt1.getSelectedItem()+":"+cmbDtk1.getSelectedItem(),tbJadwal.getSelectedRow(),4);
-                    tbJadwal.setValueAt(cmbJam2.getSelectedItem()+":"+cmbMnt2.getSelectedItem()+":"+cmbDtk2.getSelectedItem(),tbJadwal.getSelectedRow(),5);
-                    tbJadwal.setValueAt(TPoli.getText(),tbJadwal.getSelectedRow(),6);
-                    tbJadwal.setValueAt(Double.parseDouble(Kuota.getText()),tbJadwal.getSelectedRow(),7);
-                    tbJadwal.setValueAt(KdPoli.getText(), tbJadwal.getSelectedRow(), 8);
+                        "kd_dokter='"+tabMode.getValueAt(tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),1).toString()+"' "+
+                        "and hari_kerja='"+tabMode.getValueAt(tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),3).toString()+"' "+
+                        "and jam_mulai='"+tabMode.getValueAt(tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),4).toString()+"' "+
+                        "and jam_selesai='"+tabMode.getValueAt(tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),5).toString()+"'")==true){
+                    tabMode.setValueAt(false,tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),0);
+                    tabMode.setValueAt(kddokter.getText(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),1);
+                    tabMode.setValueAt(nmdokter.getText(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),2);
+                    tabMode.setValueAt(cmbHari.getSelectedItem().toString(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),3);
+                    tabMode.setValueAt(cmbJam1.getSelectedItem()+":"+cmbMnt1.getSelectedItem()+":"+cmbDtk1.getSelectedItem(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),4);
+                    tabMode.setValueAt(cmbJam2.getSelectedItem()+":"+cmbMnt2.getSelectedItem()+":"+cmbDtk2.getSelectedItem(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),5);
+                    tabMode.setValueAt(TPoli.getText(),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),6);
+                    tabMode.setValueAt(Double.parseDouble(Kuota.getText()),tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()),7);
+                    tabMode.setValueAt(KdPoli.getText(), tbJadwal.convertRowIndexToModel(tbJadwal.getSelectedRow()), 8);
                     emptTeks();
                 }
             }
@@ -1016,6 +1017,7 @@ public class DlgJadwal extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbJadwal.suspendSorting();
         Valid.tabelKosong(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select jadwal.kd_dokter, dokter.nm_dokter, jadwal.hari_kerja, jadwal.jam_mulai, jadwal.jam_selesai, poliklinik.nm_poli, jadwal.kuota, jadwal.kd_poli from " +
@@ -1043,6 +1045,7 @@ public class DlgJadwal extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
         LCount.setText("" + tbJadwal.getRowCount());
+        tbJadwal.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1066,18 +1069,18 @@ public class DlgJadwal extends javax.swing.JDialog {
     private void getData() {
         int row=tbJadwal.getSelectedRow();
         if(row!= -1){
-            kddokter.setText(tbJadwal.getValueAt(row,1).toString());
-            nmdokter.setText(tbJadwal.getValueAt(row,2).toString());
-            cmbHari.setSelectedItem(tbJadwal.getValueAt(row,3).toString());
-            cmbJam1.setSelectedItem(tbJadwal.getValueAt(row,4).toString().substring(0,2));
-            cmbMnt1.setSelectedItem(tbJadwal.getValueAt(row,4).toString().substring(3,5));
-            cmbDtk1.setSelectedItem(tbJadwal.getValueAt(row,4).toString().substring(6,8));
-            cmbJam2.setSelectedItem(tbJadwal.getValueAt(row,5).toString().substring(0,2));
-            cmbMnt2.setSelectedItem(tbJadwal.getValueAt(row,5).toString().substring(3,5));
-            cmbDtk2.setSelectedItem(tbJadwal.getValueAt(row,5).toString().substring(6,8));
-            TPoli.setText(tbJadwal.getValueAt(row,6).toString());
-            Kuota.setText(Valid.SetAngka(Double.parseDouble(tbJadwal.getValueAt(row,7).toString())));
-            KdPoli.setText(tbJadwal.getValueAt(row, 8).toString());
+            kddokter.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),1).toString());
+            nmdokter.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),2).toString());
+            cmbHari.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),3).toString());
+            cmbJam1.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),4).toString().substring(0,2));
+            cmbMnt1.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),4).toString().substring(3,5));
+            cmbDtk1.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),4).toString().substring(6,8));
+            cmbJam2.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),5).toString().substring(0,2));
+            cmbMnt2.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),5).toString().substring(3,5));
+            cmbDtk2.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),5).toString().substring(6,8));
+            TPoli.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),6).toString());
+            Kuota.setText(Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),7).toString())));
+            KdPoli.setText(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row), 8).toString());
         }
     }
 

@@ -495,6 +495,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
+        tbtindakan.setAutoCreateRowSorter(true);
         tbtindakan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbtindakan.setName("tbtindakan"); // NOI18N
         tbtindakan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -591,6 +592,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbObat.setAutoCreateRowSorter(true);
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setName("tbObat"); // NOI18N
         tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1900,7 +1902,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
             int row2=tbtindakan.getRowCount();
             for(int r=0;r<row2;r++){
-                tbtindakan.setValueAt("",r,0);
+                tabMode.setValueAt("",tbtindakan.convertRowIndexToModel(r),0);
             }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -2032,7 +2034,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
                 int row=tbObat.getSelectedRow();
                 if(row!= -1){
-                    tbObat.setValueAt("", row,0);
+                    tabMode2.setValueAt("", tbObat.convertRowIndexToModel(row),0);
                 }
             }
         }
@@ -2096,7 +2098,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
                     int row=tbtindakan.getSelectedColumn();
                     if((row!=0)||(row!=28)){
                         if(tbtindakan.getSelectedRow()>-1){
-                          tbtindakan.setValueAt(true,tbtindakan.getSelectedRow(),0);
+                          tabMode.setValueAt(true,tbtindakan.convertRowIndexToModel(tbtindakan.getSelectedRow()),0);
                         }
                         TCariPaket.setText("");
                         TCariPaket.requestFocus();
@@ -2915,7 +2917,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         jml=0;
         for(i=0;i<tbtindakan.getRowCount();i++){
-            if(tbtindakan.getValueAt(i,0).toString().equals("true")){
+            if(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),0).toString().equals("true")){
                 jml++;
             }
         }
@@ -2987,7 +2989,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
                 sukses=true;
                 ttljmdokter=0;ttljmpetugas=0;ttlpendapatan=0;ttlbhp=0;
                 for(i=0;i<tbtindakan.getRowCount();i++){
-                    if(tbtindakan.getValueAt(i,0).toString().equals("true")){
+                    if(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),0).toString().equals("true")){
                         if(Sequel.menyimpantf2("operasi","'"+TNoRw.getText()+"','"+Valid.getTglJamSmc(tgl,Jam,Menit,Detik)
                             +"','"+jenis.getText()+"','"+Kategori.getSelectedItem()+"','"+kdoperator1.getText()+"','"+kdoperator2.getText()+"','"+kdoperator3.getText()
                             +"','"+kdasistoperator1.getText()+"','"+kdasistoperator2.getText()+"','"+kdasistoperator3.getText()+"','"+kdInstrumen.getText()
@@ -2995,59 +2997,59 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
                             +"','"+kdbidan.getText()+"','"+kdbidan2.getText()+"','"+kdbidan3.getText()+"','"+kdprwluar.getText()
                             +"','"+kdonloop1.getText()+"','"+kdonloop2.getText()+"','"+kdonloop3.getText()+"','"+kdonloop4.getText()+"','"+kdonloop5.getText()
                             +"','"+kdpjanak.getText()+"','"+kddrumum.getText()
-                            +"','"+tbtindakan.getValueAt(i,1).toString()
-                            +"','"+tbtindakan.getValueAt(i,4).toString()
-                            +"','"+tbtindakan.getValueAt(i,5).toString()
-                            +"','"+tbtindakan.getValueAt(i,6).toString()
-                            +"','"+tbtindakan.getValueAt(i,7).toString()
-                            +"','"+tbtindakan.getValueAt(i,8).toString()
-                            +"','"+tbtindakan.getValueAt(i,9).toString()
-                            +"','"+tbtindakan.getValueAt(i,10).toString()
-                            +"','"+tbtindakan.getValueAt(i,11).toString()
-                            +"','"+tbtindakan.getValueAt(i,12).toString()
-                            +"','"+tbtindakan.getValueAt(i,13).toString()
-                            +"','"+tbtindakan.getValueAt(i,14).toString()
-                            +"','"+tbtindakan.getValueAt(i,15).toString()
-                            +"','"+tbtindakan.getValueAt(i,16).toString()
-                            +"','"+tbtindakan.getValueAt(i,17).toString()
-                            +"','"+tbtindakan.getValueAt(i,18).toString()
-                            +"','"+tbtindakan.getValueAt(i,19).toString()
-                            +"','"+tbtindakan.getValueAt(i,20).toString()
-                            +"','"+tbtindakan.getValueAt(i,21).toString()
-                            +"','"+tbtindakan.getValueAt(i,22).toString()
-                            +"','"+tbtindakan.getValueAt(i,23).toString()
-                            +"','"+tbtindakan.getValueAt(i,24).toString()
-                            +"','"+tbtindakan.getValueAt(i,25).toString()
-                            +"','"+tbtindakan.getValueAt(i,26).toString()
-                            +"','"+tbtindakan.getValueAt(i,27).toString()
-                            +"','"+tbtindakan.getValueAt(i,28).toString()
-                            +"','"+tbtindakan.getValueAt(i,29).toString()
-                            +"','"+tbtindakan.getValueAt(i,30).toString()
-                            +"','"+tbtindakan.getValueAt(i,31).toString()+"','"+status+"'","data")==true){
-                            ttljmdokter=ttljmdokter+Double.parseDouble(tbtindakan.getValueAt(i,4).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,5).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,6).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,11).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,13).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,30).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,31).toString());
-                            ttljmpetugas=ttljmpetugas+Double.parseDouble(tbtindakan.getValueAt(i,7).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,8).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,9).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,10).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,12).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,14).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,15).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,16).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,17).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,18).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,19).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,24).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,25).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,26).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,27).toString())+
-                                    Double.parseDouble(tbtindakan.getValueAt(i,28).toString());
-                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbtindakan.getValueAt(i,32).toString());
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),1).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),4).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),5).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),6).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),7).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),8).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),9).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),10).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),11).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),12).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),13).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),14).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),15).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),16).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),17).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),18).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),19).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),20).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),21).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),22).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),23).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),24).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),25).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),26).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),27).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),28).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),29).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),30).toString()
+                            +"','"+tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),31).toString()+"','"+status+"'","data")==true){
+                            ttljmdokter=ttljmdokter+Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),4).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),5).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),6).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),11).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),13).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),30).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),31).toString());
+                            ttljmpetugas=ttljmpetugas+Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),7).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),8).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),9).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),10).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),12).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),14).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),15).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),16).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),17).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),18).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),19).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),24).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),25).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),26).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),27).toString())+
+                                    Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),28).toString());
+                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),32).toString());
                         }else{
                             sukses=false;
                         }
@@ -3056,11 +3058,11 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
                 if(sukses==true){
                     for(int r=0;r<tbObat.getRowCount();r++){
-                        if(Valid.SetAngka(tbObat.getValueAt(r,0).toString())>0){
+                        if(Valid.SetAngka(tabMode2.getValueAt(tbObat.convertRowIndexToModel(r),0).toString())>0){
                             if(Sequel.menyimpantf2("beri_obat_operasi","'"+TNoRw.getText()+"','"+Valid.getTglJamSmc(tgl,Jam,Menit,Detik)+
-                                "','"+tbObat.getValueAt(r,1).toString()+"','"+tbObat.getValueAt(r,4).toString()+
-                                "','"+tbObat.getValueAt(r,0).toString()+"'","data")==true){
-                                ttlbhp=ttlbhp+Double.parseDouble(tbObat.getValueAt(r,5).toString());
+                                "','"+tabMode2.getValueAt(tbObat.convertRowIndexToModel(r),1).toString()+"','"+tabMode2.getValueAt(tbObat.convertRowIndexToModel(r),4).toString()+
+                                "','"+tabMode2.getValueAt(tbObat.convertRowIndexToModel(r),0).toString()+"'","data")==true){
+                                ttlbhp=ttlbhp+Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(r),5).toString());
                             }else{
                                 sukses=false;
                             }
@@ -3160,11 +3162,11 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
                 if(sukses==true){
                     Sequel.Commit();
                     for(int r=0;r<tbtindakan.getRowCount();r++){
-                        tbtindakan.setValueAt(false,r,0);
+                        tabMode.setValueAt(false,tbtindakan.convertRowIndexToModel(r),0);
                     }
                     runBackground(() ->tampil());
                     for(int r=0;r<tbObat.getRowCount();r++){
-                        tbObat.setValueAt("",r,0);
+                        tabMode2.setValueAt("",tbObat.convertRowIndexToModel(r),0);
                     }
                     runBackground(() ->tampil2());
                     LTotal.setText("Total Biaya : 0");
@@ -3661,7 +3663,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     private void tampil() {
         jml=0;
         for(i=0;i<tbtindakan.getRowCount();i++){
-            if(tbtindakan.getValueAt(i,0).toString().equals("true")){
+            if(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),0).toString().equals("true")){
                 jml++;
             }
         }
@@ -3735,44 +3737,45 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         ttltindakan=new double[jml];
         index=0;
         for(i=0;i<tbtindakan.getRowCount();i++){
-            if(tbtindakan.getValueAt(i,0).toString().equals("true")){
+            if(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),0).toString().equals("true")){
                 pilih[index]=true;
-                kode_paket[index]=tbtindakan.getValueAt(i,1).toString();
-                nm_perawatan[index]=tbtindakan.getValueAt(i,2).toString();
-                kategori[index]=tbtindakan.getValueAt(i,3).toString();
-                operator1[index]=Double.parseDouble(tbtindakan.getValueAt(i,4).toString());
-                operator2[index]=Double.parseDouble(tbtindakan.getValueAt(i,5).toString());
-                operator3[index]=Double.parseDouble(tbtindakan.getValueAt(i,6).toString());
-                asisten_operator1[index]=Double.parseDouble(tbtindakan.getValueAt(i,7).toString());
-                asisten_operator2[index]=Double.parseDouble(tbtindakan.getValueAt(i,8).toString());
-                asisten_operator3[index]=Double.parseDouble(tbtindakan.getValueAt(i,9).toString());
-                instrumen[index]=Double.parseDouble(tbtindakan.getValueAt(i,10).toString());
-                dokter_anak[index]=Double.parseDouble(tbtindakan.getValueAt(i,11).toString());
-                perawaat_resusitas[index]=Double.parseDouble(tbtindakan.getValueAt(i,12).toString());
-                dokter_anestesi[index]=Double.parseDouble(tbtindakan.getValueAt(i,13).toString());
-                asisten_anestesi[index]=Double.parseDouble(tbtindakan.getValueAt(i,14).toString());
-                asisten_anestesi2[index]=Double.parseDouble(tbtindakan.getValueAt(i,15).toString());
-                bidan[index]=Double.parseDouble(tbtindakan.getValueAt(i,16).toString());
-                bidan2[index]=Double.parseDouble(tbtindakan.getValueAt(i,17).toString());
-                bidan3[index]=Double.parseDouble(tbtindakan.getValueAt(i,18).toString());
-                perawat_luar[index]=Double.parseDouble(tbtindakan.getValueAt(i,19).toString());
-                alat[index]=Double.parseDouble(tbtindakan.getValueAt(i,20).toString());
-                sewa_ok[index]=Double.parseDouble(tbtindakan.getValueAt(i,21).toString());
-                akomodasi[index]=Double.parseDouble(tbtindakan.getValueAt(i,22).toString());
-                bagian_rs[index]=Double.parseDouble(tbtindakan.getValueAt(i,23).toString());
-                omloop[index]=Double.parseDouble(tbtindakan.getValueAt(i,24).toString());
-                omloop2[index]=Double.parseDouble(tbtindakan.getValueAt(i,25).toString());
-                omloop3[index]=Double.parseDouble(tbtindakan.getValueAt(i,26).toString());
-                omloop4[index]=Double.parseDouble(tbtindakan.getValueAt(i,27).toString());
-                omloop5[index]=Double.parseDouble(tbtindakan.getValueAt(i,28).toString());
-                sarpras[index]=Double.parseDouble(tbtindakan.getValueAt(i,29).toString());
-                dokter_pjanak[index]=Double.parseDouble(tbtindakan.getValueAt(i,30).toString());
-                dokter_umum[index]=Double.parseDouble(tbtindakan.getValueAt(i,31).toString());
-                ttltindakan[index]=Double.parseDouble(tbtindakan.getValueAt(i,32).toString());
+                kode_paket[index]=tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),1).toString();
+                nm_perawatan[index]=tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),2).toString();
+                kategori[index]=tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),3).toString();
+                operator1[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),4).toString());
+                operator2[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),5).toString());
+                operator3[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),6).toString());
+                asisten_operator1[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),7).toString());
+                asisten_operator2[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),8).toString());
+                asisten_operator3[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),9).toString());
+                instrumen[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),10).toString());
+                dokter_anak[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),11).toString());
+                perawaat_resusitas[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),12).toString());
+                dokter_anestesi[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),13).toString());
+                asisten_anestesi[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),14).toString());
+                asisten_anestesi2[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),15).toString());
+                bidan[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),16).toString());
+                bidan2[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),17).toString());
+                bidan3[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),18).toString());
+                perawat_luar[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),19).toString());
+                alat[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),20).toString());
+                sewa_ok[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),21).toString());
+                akomodasi[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),22).toString());
+                bagian_rs[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),23).toString());
+                omloop[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),24).toString());
+                omloop2[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),25).toString());
+                omloop3[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),26).toString());
+                omloop4[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),27).toString());
+                omloop5[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),28).toString());
+                sarpras[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),29).toString());
+                dokter_pjanak[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),30).toString());
+                dokter_umum[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),31).toString());
+                ttltindakan[index]=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i),32).toString());
                 index++;
             }
         }
 
+        tbtindakan.suspendSorting();
         Valid.tabelKosong(tabMode);
         for(i=0;i<jml;i++){
             tabMode.addRow(new Object[]{pilih[i],kode_paket[i],nm_perawatan[i],kategori[i],operator1[i],
@@ -3906,6 +3909,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
 
+        tbtindakan.resumeSorting();
     }
 
     //obat
@@ -3913,7 +3917,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         jml=0;
         for(i=0;i<tbObat.getRowCount();i++){
             //System.out.println(tbObat.getValueAt(i,0).toString());
-            if(!tbObat.getValueAt(i,0).toString().equals("")){
+            if(!tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("")){
                 jml++;
             }
         }
@@ -3927,17 +3931,18 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         index=0;
         for(i=0;i<tbObat.getRowCount();i++){
-            if(!tbObat.getValueAt(i,0).toString().equals("")){
-                jmlobat[index]=Double.parseDouble(tbObat.getValueAt(i,0).toString());
-                kd_obat[index]=tbObat.getValueAt(i,1).toString();
-                nm_obat[index]=tbObat.getValueAt(i,2).toString();
-                satuan[index]=tbObat.getValueAt(i,3).toString();
-                hargasatuan[index]=Double.parseDouble(tbObat.getValueAt(i,4).toString());
-                ttlobat[index]=Double.parseDouble(tbObat.getValueAt(i,5).toString());
+            if(!tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("")){
+                jmlobat[index]=Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString());
+                kd_obat[index]=tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),1).toString();
+                nm_obat[index]=tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),2).toString();
+                satuan[index]=tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),3).toString();
+                hargasatuan[index]=Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),4).toString());
+                ttlobat[index]=Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),5).toString());
                 index++;
             }
         }
 
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode2);
 
         for(i=0;i<jml;i++){
@@ -3976,6 +3981,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
+        tbObat.resumeSorting();
     }
 
 
@@ -3985,14 +3991,14 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         if(row!= -1){
            int kolom=tbObat.getSelectedColumn();
            if((kolom==0)||(kolom==1)){
-               if(!tbObat.getValueAt(row,0).toString().equals("")){
+               if(!tabMode2.getValueAt(tbObat.convertRowIndexToModel(row),0).toString().equals("")){
                    try {
-                       tbObat.setValueAt(Valid.SetAngka2(Double.parseDouble(tbObat.getValueAt(row,0).toString())*Double.parseDouble(tbObat.getValueAt(row,4).toString())), row,5);
+                       tabMode2.setValueAt(Valid.SetAngka2(Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(row),0).toString())*Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(row),4).toString())), tbObat.convertRowIndexToModel(row),5);
                    } catch (Exception e) {
-                       tbObat.setValueAt(0, row,5);
+                       tabMode2.setValueAt(0, tbObat.convertRowIndexToModel(row),5);
                    }
-                }else if(tbObat.getValueAt(row,0).toString().equals("")){
-                    tbObat.setValueAt(0, row,5);
+                }else if(tabMode2.getValueAt(tbObat.convertRowIndexToModel(row),0).toString().equals("")){
+                    tabMode2.setValueAt(0, tbObat.convertRowIndexToModel(row),5);
                 }
             }
 
@@ -4000,13 +4006,13 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
             y=0;
             int row2=tbObat.getRowCount();
             for(int r=0;r<row2;r++){
-                if(!tbObat.getValueAt(r,5).toString().isEmpty()){
+                if(!tabMode2.getValueAt(tbObat.convertRowIndexToModel(r),5).toString().isEmpty()){
                     try {
-                        y=Double.parseDouble(tbObat.getValueAt(r,5).toString());
+                        y=Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(r),5).toString());
                     } catch (Exception e) {
                         y=0;
                     }
-                }else if(tbObat.getValueAt(r,5).toString().isEmpty()){
+                }else if(tabMode2.getValueAt(tbObat.convertRowIndexToModel(r),5).toString().isEmpty()){
                     y=0;
                 }
                 biayaobat=biayaobat+y;
@@ -4017,38 +4023,38 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     private void getData2(){
        int row=tbtindakan.getSelectedRow();
         if(row!= -1){
-            if(tbtindakan.getValueAt(tbtindakan.getSelectedRow(),0).toString().equals("true")){
+            if(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(tbtindakan.getSelectedRow()),0).toString().equals("true")){
                 try {
-                    tbtindakan.setValueAt(Double.parseDouble(tbtindakan.getValueAt(row,4).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,5).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,6).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,7).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,8).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,9).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,10).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,11).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,12).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,13).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,14).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,15).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,16).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,17).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,18).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,19).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,20).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,21).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,22).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,23).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,24).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,25).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,26).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,27).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,28).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,29).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,30).toString())+
-                                     Double.parseDouble(tbtindakan.getValueAt(row,31).toString()), row,32);
+                    tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),4).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),5).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),6).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),7).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),8).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),9).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),10).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),11).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),12).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),13).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),14).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),15).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),16).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),17).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),18).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),19).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),20).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),21).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),22).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),23).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),24).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),25).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),26).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),27).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),28).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),29).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),30).toString())+
+                                     Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row),31).toString()), tbtindakan.convertRowIndexToModel(row),32);
                 } catch (Exception e) {
-                    tbtindakan.setValueAt(0, row,32);
+                    tabMode.setValueAt(0, tbtindakan.convertRowIndexToModel(row),32);
                 }
             }
 
@@ -4056,10 +4062,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
             y=0;
             int row2=tbtindakan.getRowCount();
             for(int r=0;r<row2;r++){
-                switch (tbtindakan.getValueAt(r,0).toString()) {
+                switch (tabMode.getValueAt(tbtindakan.convertRowIndexToModel(r),0).toString()) {
                     case "true":
                         try {
-                            y=Double.parseDouble(tbtindakan.getValueAt(r,32).toString());
+                            y=Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(r),32).toString());
                         } catch (Exception e) {
                             y=0;
                         }

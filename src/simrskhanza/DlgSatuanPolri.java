@@ -338,7 +338,7 @@ public class DlgSatuanPolri extends javax.swing.JDialog {
         if(Nama.getText().trim().equals("")){
             Valid.textKosong(Nama,"Satuan POLRI");
         }else{
-            Sequel.meghapus("satuan_polri","id",tbkecamatan.getValueAt(tbkecamatan.getSelectedRow(),0).toString());
+            Sequel.meghapus("satuan_polri","id",tabMode.getValueAt(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()),0).toString());
             runBackground(() ->tampil());
             emptTeks();
         }
@@ -493,6 +493,7 @@ public class DlgSatuanPolri extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbkecamatan.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select * from satuan_polri where nama_satuan like ? ");
@@ -516,6 +517,7 @@ public class DlgSatuanPolri extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbkecamatan.getRowCount());
+        tbkecamatan.resumeSorting();
     }
 
     public void emptTeks() {
@@ -526,7 +528,7 @@ public class DlgSatuanPolri extends javax.swing.JDialog {
 
     private void getData() {
         if(tbkecamatan.getSelectedRow()!= -1){
-            Nama.setText(tbkecamatan.getValueAt(tbkecamatan.getSelectedRow(),1).toString());
+            Nama.setText(tabMode.getValueAt(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()),1).toString());
         }
     }
 

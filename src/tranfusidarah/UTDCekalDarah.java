@@ -963,6 +963,7 @@ public final class UTDCekalDarah extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             if(TCari.getText().equals("")){
@@ -1040,6 +1041,7 @@ public final class UTDCekalDarah extends javax.swing.JDialog {
         }
         int b=tbObat.getRowCount();
         LCount.setText(""+b);
+        tbObat.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1056,15 +1058,15 @@ public final class UTDCekalDarah extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoDonor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            IDPendonor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            Nama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            Telp.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Valid.SetTgl(TanggalCekal,tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            Dinas.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            KodePetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            NamaPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
+            NoDonor.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            IDPendonor.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            Nama.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            Telp.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            Valid.SetTgl(TanggalCekal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            Dinas.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            KodePetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            NamaPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            Keterangan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
         }
     }
 

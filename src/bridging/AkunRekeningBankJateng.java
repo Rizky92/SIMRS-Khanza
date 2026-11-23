@@ -582,10 +582,10 @@ public class AkunRekeningBankJateng extends javax.swing.JDialog {
     private void getData() {
         int row=tbSpesialis.getSelectedRow();
         if(row!= -1){
-            kdrek.setText(tbSpesialis.getValueAt(row,0).toString());
-            nmrek.setText(tbSpesialis.getValueAt(row,1).toString());
-            TKd.setText(tbSpesialis.getValueAt(row,2).toString());
-            TPass.setText(tbSpesialis.getValueAt(row,3).toString());
+            kdrek.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),0).toString());
+            nmrek.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),1).toString());
+            TKd.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),2).toString());
+            TPass.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),3).toString());
         }
     }
 

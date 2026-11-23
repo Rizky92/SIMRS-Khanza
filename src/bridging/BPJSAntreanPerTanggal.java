@@ -480,7 +480,7 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             BPJSCekKodeBooking detail=new BPJSCekKodeBooking(null,false);
-            detail.tampil(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+            detail.tampil(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
             detail.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             detail.setLocationRelativeTo(internalFrame1);
             detail.setVisible(true);

@@ -524,12 +524,12 @@ public final class BPJSMapingDokterDPJP extends javax.swing.JDialog {
         }else{
             if(tbJnsPerawatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("maping_dokter_dpjpvclaim","kd_dokter=?","kd_dokter=?,kd_dokter_bpjs=?,nm_dokter_bpjs=?",4,new String[]{
-                        kdpoli.getText(),KdPoliPCare.getText(),NmPoliPCare.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                        kdpoli.getText(),KdPoliPCare.getText(),NmPoliPCare.getText(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString()
                     })==true){
-                    tbJnsPerawatan.setValueAt(kdpoli.getText(),tbJnsPerawatan.getSelectedRow(), 0);
-                    tbJnsPerawatan.setValueAt(TPoli.getText(),tbJnsPerawatan.getSelectedRow(), 1);
-                    tbJnsPerawatan.setValueAt(KdPoliPCare.getText(),tbJnsPerawatan.getSelectedRow(), 2);
-                    tbJnsPerawatan.setValueAt(NmPoliPCare.getText(),tbJnsPerawatan.getSelectedRow(), 3);
+                    tabMode.setValueAt(kdpoli.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 0);
+                    tabMode.setValueAt(TPoli.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 1);
+                    tabMode.setValueAt(KdPoliPCare.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 2);
+                    tabMode.setValueAt(NmPoliPCare.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 3);
                     emptTeks();
                 }
             }
@@ -834,10 +834,10 @@ public final class BPJSMapingDokterDPJP extends javax.swing.JDialog {
 
     private void getData() {
        if(tbJnsPerawatan.getSelectedRow()!= -1){
-           kdpoli.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-           TPoli.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-           KdPoliPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-           NmPoliPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
+           kdpoli.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+           TPoli.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+           KdPoliPCare.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+           NmPoliPCare.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
         }
     }
 

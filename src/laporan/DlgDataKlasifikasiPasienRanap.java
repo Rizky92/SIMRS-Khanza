@@ -632,7 +632,7 @@ public final class DlgDataKlasifikasiPasienRanap extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()!= -1){
             if(Sequel.queryu2tf("delete from data_klasifikasi_pasien_ranap where tanggal=? and no_rawat=?",2,new String[]{
-                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()
+                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString()
             })==true){
                 runBackground(() ->tampil());
             }else{
@@ -661,7 +661,7 @@ public final class DlgDataKlasifikasiPasienRanap extends javax.swing.JDialog {
                     Sequel.mengedit("data_klasifikasi_pasien_ranap","tanggal=? and no_rawat=?","tanggal=?,no_rawat=?,Minimal=?,Partial=?,Total=?",7,new String[]{
                         Valid.SetTgl(Tanggal.getSelectedItem()+""),TNoRw.getText(),
                         Minimal.getSelectedItem().toString(),Partial.getSelectedItem().toString(),Total.getSelectedItem().toString(),
-                        tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()
+                        tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString()
                     });
                     if(tbObat.getRowCount()!=0){runBackground(() ->tampil());}
                     emptTeks();
@@ -1016,14 +1016,14 @@ public final class DlgDataKlasifikasiPasienRanap extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Total.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            Partial.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            Total.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            Kamar.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            Total.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            Partial.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            Total.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            Kamar.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
         }
     }
 

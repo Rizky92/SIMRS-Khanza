@@ -171,7 +171,7 @@ public final class RMCariJumlahObat extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKamar.setAutoCreateRowSorter(false);
+        tbKamar.setAutoCreateRowSorter(true);
         tbKamar.setComponentPopupMenu(jPopupMenu1);
         tbKamar.setName("tbKamar"); // NOI18N
         tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -363,13 +363,13 @@ public final class RMCariJumlahObat extends javax.swing.JDialog {
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
         for(z=0;z<tbKamar.getRowCount();z++){
-            tbKamar.setValueAt(true,z,0);
+            tabMode.setValueAt(true,tbKamar.convertRowIndexToModel(z),0);
         }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(z=0;z<tbKamar.getRowCount();z++){
-            tbKamar.setValueAt(false,z,0);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(z),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -407,6 +407,7 @@ public final class RMCariJumlahObat extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -438,6 +439,7 @@ public final class RMCariJumlahObat extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {

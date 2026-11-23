@@ -470,8 +470,8 @@ public class DlgEEksekutif extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            String kode=tbAdmin.getValueAt(row,0).toString();
-            String nama=tbAdmin.getValueAt(row,1).toString();
+            String kode=tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),0).toString();
+            String nama=tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),1).toString();
             TKd.setText(kode);
             TNm.setText(nama);
         }

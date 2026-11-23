@@ -880,7 +880,7 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
             }else{
                 if(tbBayarDenda.getSelectedRow()!= -1){
                     if(Sequel.queryu2tf("delete from perpustakaan_bayar_denda_harian where tgl_denda=? and no_anggota=? and no_inventaris=?",3,new String[]{
-                            tbBayarDenda.getValueAt(tbBayarDenda.getSelectedRow(),0).toString(),tbBayarDenda.getValueAt(tbBayarDenda.getSelectedRow(),1).toString(),tbBayarDenda.getValueAt(tbBayarDenda.getSelectedRow(),3).toString()
+                            tabMode.getValueAt(tbBayarDenda.convertRowIndexToModel(tbBayarDenda.getSelectedRow()),0).toString(),tabMode.getValueAt(tbBayarDenda.convertRowIndexToModel(tbBayarDenda.getSelectedRow()),1).toString(),tabMode.getValueAt(tbBayarDenda.convertRowIndexToModel(tbBayarDenda.getSelectedRow()),3).toString()
                         })==true){
                             runBackground(() ->tampil());
                             emptTeks();
@@ -897,8 +897,8 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
             }else{
                 if(tbDendaLain.getSelectedRow()!= -1){
                     if(Sequel.queryu2tf("delete from perpustakaan_bayar_denda where tgl_denda=? and no_anggota=? and no_inventaris=? and kode_denda=?",4,new String[]{
-                            tbDendaLain.getValueAt(tbDendaLain.getSelectedRow(),0).toString(),tbDendaLain.getValueAt(tbDendaLain.getSelectedRow(),1).toString(),
-                            tbDendaLain.getValueAt(tbDendaLain.getSelectedRow(),3).toString(),tbDendaLain.getValueAt(tbDendaLain.getSelectedRow(),5).toString()
+                            tabMode2.getValueAt(tbDendaLain.convertRowIndexToModel(tbDendaLain.getSelectedRow()),0).toString(),tabMode2.getValueAt(tbDendaLain.convertRowIndexToModel(tbDendaLain.getSelectedRow()),1).toString(),
+                            tabMode2.getValueAt(tbDendaLain.convertRowIndexToModel(tbDendaLain.getSelectedRow()),3).toString(),tabMode2.getValueAt(tbDendaLain.convertRowIndexToModel(tbDendaLain.getSelectedRow()),5).toString()
                         })==true){
                             runBackground(() ->tampil2());
                             emptTeks2();
@@ -1567,29 +1567,29 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
 
     private void getData() {
         if(tbBayarDenda.getSelectedRow()!= -1){
-            Valid.SetTgl(tgl,tbBayarDenda.getValueAt(tbBayarDenda.getSelectedRow(),0).toString());
-            TNoA.setText(tbBayarDenda.getValueAt(tbBayarDenda.getSelectedRow(),1).toString());
-            TNmA.setText(tbBayarDenda.getValueAt(tbBayarDenda.getSelectedRow(),2).toString());
-            TNoI.setText(tbBayarDenda.getValueAt(tbBayarDenda.getSelectedRow(),3).toString());
+            Valid.SetTgl(tgl,tabMode.getValueAt(tbBayarDenda.convertRowIndexToModel(tbBayarDenda.getSelectedRow()),0).toString());
+            TNoA.setText(tabMode.getValueAt(tbBayarDenda.convertRowIndexToModel(tbBayarDenda.getSelectedRow()),1).toString());
+            TNmA.setText(tabMode.getValueAt(tbBayarDenda.convertRowIndexToModel(tbBayarDenda.getSelectedRow()),2).toString());
+            TNoI.setText(tabMode.getValueAt(tbBayarDenda.convertRowIndexToModel(tbBayarDenda.getSelectedRow()),3).toString());
             isInventaris();
-            Keterlambatan.setText(tbBayarDenda.getValueAt(tbBayarDenda.getSelectedRow(),5).toString());
-            DendaKeterlambatan.setText(Valid.SetAngka(Double.parseDouble(tbBayarDenda.getValueAt(tbBayarDenda.getSelectedRow(),6).toString())));
+            Keterlambatan.setText(tabMode.getValueAt(tbBayarDenda.convertRowIndexToModel(tbBayarDenda.getSelectedRow()),5).toString());
+            DendaKeterlambatan.setText(Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(tbBayarDenda.convertRowIndexToModel(tbBayarDenda.getSelectedRow()),6).toString())));
             isDendaHarian();
         }
     }
 
     private void getData2() {
         if(tbDendaLain.getSelectedRow()!= -1){
-            Valid.SetTgl(tgl,tbDendaLain.getValueAt(tbDendaLain.getSelectedRow(),0).toString());
-            TNoA.setText(tbDendaLain.getValueAt(tbDendaLain.getSelectedRow(),1).toString());
-            TNmA.setText(tbDendaLain.getValueAt(tbDendaLain.getSelectedRow(),2).toString());
-            TNoI.setText(tbDendaLain.getValueAt(tbDendaLain.getSelectedRow(),3).toString());
+            Valid.SetTgl(tgl,tabMode2.getValueAt(tbDendaLain.convertRowIndexToModel(tbDendaLain.getSelectedRow()),0).toString());
+            TNoA.setText(tabMode2.getValueAt(tbDendaLain.convertRowIndexToModel(tbDendaLain.getSelectedRow()),1).toString());
+            TNmA.setText(tabMode2.getValueAt(tbDendaLain.convertRowIndexToModel(tbDendaLain.getSelectedRow()),2).toString());
+            TNoI.setText(tabMode2.getValueAt(tbDendaLain.convertRowIndexToModel(tbDendaLain.getSelectedRow()),3).toString());
             isInventaris();
-            KdJenisDenda.setText(tbDendaLain.getValueAt(tbDendaLain.getSelectedRow(),5).toString());
-            JenisDenda.setText(tbDendaLain.getValueAt(tbDendaLain.getSelectedRow(),6).toString());
-            DendaLain.setText(tbDendaLain.getValueAt(tbDendaLain.getSelectedRow(),7).toString());
-            BesarDendaLain.setText(tbDendaLain.getValueAt(tbDendaLain.getSelectedRow(),8).toString());
-            Keterangan.setText(tbDendaLain.getValueAt(tbDendaLain.getSelectedRow(),9).toString());
+            KdJenisDenda.setText(tabMode2.getValueAt(tbDendaLain.convertRowIndexToModel(tbDendaLain.getSelectedRow()),5).toString());
+            JenisDenda.setText(tabMode2.getValueAt(tbDendaLain.convertRowIndexToModel(tbDendaLain.getSelectedRow()),6).toString());
+            DendaLain.setText(tabMode2.getValueAt(tbDendaLain.convertRowIndexToModel(tbDendaLain.getSelectedRow()),7).toString());
+            BesarDendaLain.setText(tabMode2.getValueAt(tbDendaLain.convertRowIndexToModel(tbDendaLain.getSelectedRow()),8).toString());
+            Keterangan.setText(tabMode2.getValueAt(tbDendaLain.convertRowIndexToModel(tbDendaLain.getSelectedRow()),9).toString());
             isDendaLain();
         }
     }

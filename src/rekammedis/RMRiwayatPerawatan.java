@@ -933,6 +933,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
+        tbRegistrasi.setSortable(false);
         tbRegistrasi.setName("tbRegistrasi"); // NOI18N
         tbRegistrasi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -3754,7 +3755,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 try {
                     R4.setSelected(true);
-                    NoRawat.setText(tbRegistrasi.getValueAt(tbRegistrasi.getSelectedRow(),1).toString());
+                    NoRawat.setText(tabModeRegistrasi.getValueAt(tbRegistrasi.convertRowIndexToModel(tbRegistrasi.getSelectedRow()),1).toString());
                     TabRawat.setSelectedIndex(2);
                     tampilPerawatan();
                 } catch (java.lang.NullPointerException e) {
@@ -3768,7 +3769,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             if((evt.getClickCount()==2)){
                 try {
                     R4.setSelected(true);
-                    NoRawat.setText(tbRegistrasi.getValueAt(tbRegistrasi.getSelectedRow(),1).toString());
+                    NoRawat.setText(tabModeRegistrasi.getValueAt(tbRegistrasi.convertRowIndexToModel(tbRegistrasi.getSelectedRow()),1).toString());
                     TabRawat.setSelectedIndex(2);
                     tampilPerawatan();
                 } catch (java.lang.NullPointerException e) {

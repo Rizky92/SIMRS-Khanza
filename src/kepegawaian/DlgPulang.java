@@ -643,8 +643,8 @@ public final class DlgPulang extends javax.swing.JDialog {
         int row=tbBangsal.getSelectedRow();
         if(row!= -1){
             id_pegawai.setText(primary[row]);
-            jam_datang.setText(tbBangsal.getValueAt(row,3).toString());
-            catatan.setText(tbBangsal.getValueAt(row,8).toString());
+            jam_datang.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),3).toString());
+            catatan.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),8).toString());
 
         }
     }

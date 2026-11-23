@@ -401,7 +401,7 @@ public final class PCRAICRATindakanPengendalian extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbJabatan.getSelectedRow()!= -1){
-            if(Sequel.meghapustf("pcra_icra_tindakan_pengendalian","kode_pengendalian",tbJabatan.getValueAt(tbJabatan.getSelectedRow(),0).toString())==true){
+            if(Sequel.meghapustf("pcra_icra_tindakan_pengendalian","kode_pengendalian",tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),0).toString())==true){
                 tabMode.removeRow(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()));
                 emptTeks();
                 LCount.setText(""+tbJabatan.getRowCount());
@@ -427,10 +427,10 @@ public final class PCRAICRATindakanPengendalian extends javax.swing.JDialog {
         }else{
             if(tbJabatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("pcra_icra_tindakan_pengendalian","kode_pengendalian=?","kode_pengendalian=?,nama_pengendalian=?",3,new String[]{
-                        KodePengendalian.getText(),NamaPengendalian.getText(),tbJabatan.getValueAt(tbJabatan.getSelectedRow(), 0).toString()
+                        KodePengendalian.getText(),NamaPengendalian.getText(),tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()), 0).toString()
                     })==true){
-                    tbJabatan.setValueAt(KodePengendalian.getText(),tbJabatan.getSelectedRow(),0);
-                    tbJabatan.setValueAt(NamaPengendalian.getText(),tbJabatan.getSelectedRow(),1);
+                    tabMode.setValueAt(KodePengendalian.getText(),tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),0);
+                    tabMode.setValueAt(NamaPengendalian.getText(),tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),1);
                     emptTeks();
                 }
             }else{
@@ -619,8 +619,8 @@ public final class PCRAICRATindakanPengendalian extends javax.swing.JDialog {
 
     private void getData() {
         if(tbJabatan.getSelectedRow()!= -1){
-            KodePengendalian.setText(tbJabatan.getValueAt(tbJabatan.getSelectedRow(),0).toString());
-            NamaPengendalian.setText(tbJabatan.getValueAt(tbJabatan.getSelectedRow(),1).toString());
+            KodePengendalian.setText(tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),0).toString());
+            NamaPengendalian.setText(tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),1).toString());
         }
     }
 

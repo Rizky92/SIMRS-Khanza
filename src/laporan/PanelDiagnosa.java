@@ -423,6 +423,7 @@ public class PanelDiagnosa extends widget.panelisi {
         Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll1.setOpaque(true);
 
+        tbDiagnosa.setAutoCreateRowSorter(true);
         tbDiagnosa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbDiagnosaMouseClicked(evt);
@@ -481,6 +482,7 @@ public class PanelDiagnosa extends widget.panelisi {
         Scroll2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll2.setOpaque(true);
 
+        tbProsedur.setAutoCreateRowSorter(true);
         tbProsedur.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbProsedur.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -512,7 +514,7 @@ public class PanelDiagnosa extends widget.panelisi {
         Scroll.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         Scroll.setOpaque(true);
 
-        tbDiagnosaPasien.setAutoCreateRowSorter(false);
+        tbDiagnosaPasien.setAutoCreateRowSorter(true);
         tbDiagnosaPasien.setComponentPopupMenu(jPopupMenu1);
         Scroll.setViewportView(tbDiagnosaPasien);
 
@@ -526,7 +528,7 @@ public class PanelDiagnosa extends widget.panelisi {
         Scroll3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         Scroll3.setOpaque(true);
 
-        tbTindakanPasien.setAutoCreateRowSorter(false);
+        tbTindakanPasien.setAutoCreateRowSorter(true);
         tbTindakanPasien.setComponentPopupMenu(jPopupMenu1);
         Scroll3.setViewportView(tbTindakanPasien);
 
@@ -600,7 +602,7 @@ public class PanelDiagnosa extends widget.panelisi {
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
         }else{
             Sequel.queryu2("update diagnosa_pasien set status_penyakit='Baru' where no_rawat=? and kd_penyakit=?",2,new String[]{
-                tbDiagnosaPasien.getValueAt(tbDiagnosaPasien.getSelectedRow(),2).toString(),tbDiagnosaPasien.getValueAt(tbDiagnosaPasien.getSelectedRow(),5).toString()
+                TabModeDiagnosaPasien.getValueAt(tbDiagnosaPasien.convertRowIndexToModel(tbDiagnosaPasien.getSelectedRow()),2).toString(),TabModeDiagnosaPasien.getValueAt(tbDiagnosaPasien.convertRowIndexToModel(tbDiagnosaPasien.getSelectedRow()),5).toString()
             });
             runBackground(() ->tampil());
         }
@@ -611,7 +613,7 @@ public class PanelDiagnosa extends widget.panelisi {
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
         }else{
             Sequel.queryu2("update diagnosa_pasien set status_penyakit='Lama' where no_rawat=? and kd_penyakit=?",2,new String[]{
-                tbDiagnosaPasien.getValueAt(tbDiagnosaPasien.getSelectedRow(),2).toString(),tbDiagnosaPasien.getValueAt(tbDiagnosaPasien.getSelectedRow(),5).toString()
+                TabModeDiagnosaPasien.getValueAt(tbDiagnosaPasien.convertRowIndexToModel(tbDiagnosaPasien.getSelectedRow()),2).toString(),TabModeDiagnosaPasien.getValueAt(tbDiagnosaPasien.convertRowIndexToModel(tbDiagnosaPasien.getSelectedRow()),5).toString()
             });
             runBackground(() ->tampil());
         }
@@ -621,15 +623,15 @@ public class PanelDiagnosa extends widget.panelisi {
         if(tbDiagnosa.getRowCount()!=0){
             try {
                 if(tbDiagnosa.getSelectedRow()!= -1){
-                    if(tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),0).toString().equals("true")&&tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),7).toString().equals("0")){
-                        tbDiagnosa.setValueAt(false,tbDiagnosa.getSelectedRow(),0);
-                        tbDiagnosa.setValueAt("",tbDiagnosa.getSelectedRow(),11);
-                        JOptionPane.showMessageDialog(null,"Maaf, kode diagnosa "+tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),1).toString()+" valid code 0. Hanya berfungsi sebagai header..!!");
-                    }else if(tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),0).toString().equals("true")&&tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),7).toString().equals("1")){
-                        if(tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),8).toString().equals("N")&&tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),11).toString().equals("1")){
-                            tbDiagnosa.setValueAt(false,tbDiagnosa.getSelectedRow(),0);
-                            tbDiagnosa.setValueAt("",tbDiagnosa.getSelectedRow(),11);
-                            JOptionPane.showMessageDialog(null,"Maaf, kode diagnosa "+tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),1).toString()+" Accpdx N. Tidak bisa menjadi diagnosa utama..!!");
+                    if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),0).toString().equals("true")&&tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),7).toString().equals("0")){
+                        tabModeDiagnosa.setValueAt(false,tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),0);
+                        tabModeDiagnosa.setValueAt("",tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),11);
+                        JOptionPane.showMessageDialog(null,"Maaf, kode diagnosa "+tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),1).toString()+" valid code 0. Hanya berfungsi sebagai header..!!");
+                    }else if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),0).toString().equals("true")&&tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),7).toString().equals("1")){
+                        if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),8).toString().equals("N")&&tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),11).toString().equals("1")){
+                            tabModeDiagnosa.setValueAt(false,tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),0);
+                            tabModeDiagnosa.setValueAt("",tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),11);
+                            JOptionPane.showMessageDialog(null,"Maaf, kode diagnosa "+tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),1).toString()+" Accpdx N. Tidak bisa menjadi diagnosa utama..!!");
                         }
                     }
                 }
@@ -642,15 +644,15 @@ public class PanelDiagnosa extends widget.panelisi {
         if(tbDiagnosa.getRowCount()!=0){
             try {
                 if(tbDiagnosa.getSelectedRow()!= -1){
-                    if(tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),0).toString().equals("true")&&tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),7).toString().equals("0")){
-                        tbDiagnosa.setValueAt(false,tbDiagnosa.getSelectedRow(),0);
-                        tbDiagnosa.setValueAt("",tbDiagnosa.getSelectedRow(),11);
-                        JOptionPane.showMessageDialog(null,"Maaf, kode diagnosa "+tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),1).toString()+" valid code 0. Hanya berfungsi sebagai header..!!");
-                    }else if(tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),0).toString().equals("true")&&tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),7).toString().equals("1")){
-                        if(tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),8).toString().equals("N")&&tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),11).toString().equals("1")){
-                            tbDiagnosa.setValueAt(false,tbDiagnosa.getSelectedRow(),0);
-                            tbDiagnosa.setValueAt("",tbDiagnosa.getSelectedRow(),11);
-                            JOptionPane.showMessageDialog(null,"Maaf, kode diagnosa "+tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(),1).toString()+" Accpdx N. Tidak bisa menjadi diagnosa utama..!!");
+                    if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),0).toString().equals("true")&&tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),7).toString().equals("0")){
+                        tabModeDiagnosa.setValueAt(false,tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),0);
+                        tabModeDiagnosa.setValueAt("",tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),11);
+                        JOptionPane.showMessageDialog(null,"Maaf, kode diagnosa "+tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),1).toString()+" valid code 0. Hanya berfungsi sebagai header..!!");
+                    }else if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),0).toString().equals("true")&&tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),7).toString().equals("1")){
+                        if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),8).toString().equals("N")&&tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),11).toString().equals("1")){
+                            tabModeDiagnosa.setValueAt(false,tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),0);
+                            tabModeDiagnosa.setValueAt("",tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),11);
+                            JOptionPane.showMessageDialog(null,"Maaf, kode diagnosa "+tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(tbDiagnosa.getSelectedRow()),1).toString()+" Accpdx N. Tidak bisa menjadi diagnosa utama..!!");
                         }
                     }
                 }
@@ -662,23 +664,23 @@ public class PanelDiagnosa extends widget.panelisi {
     private void tbDiagnosaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbDiagnosaPropertyChange
         i=1;
         for(int z=0;z<tbDiagnosa.getRowCount();z++){
-            if(tbDiagnosa.getValueAt(z,0).toString().equals("true")){
-                tbDiagnosa.setValueAt(i,z,11);
-                if(tbDiagnosa.getValueAt(z,0).toString().equals("true")&&tbDiagnosa.getValueAt(z,7).toString().equals("0")){
-                    tbDiagnosa.setValueAt(false,z,0);
-                    tbDiagnosa.setValueAt("",z,11);
-                    JOptionPane.showMessageDialog(null,"Maaf, kode diagnosa "+tbDiagnosa.getValueAt(z,1).toString()+" valid code 0. Hanya berfungsi sebagai header..!!");
-                }else if(tbDiagnosa.getValueAt(z,0).toString().equals("true")&&tbDiagnosa.getValueAt(z,7).toString().equals("1")){
-                    if(tbDiagnosa.getValueAt(z,8).toString().equals("N")&&tbDiagnosa.getValueAt(z,11).toString().equals("1")){
-                        tbDiagnosa.setValueAt(false,z,0);
-                        tbDiagnosa.setValueAt("",z,11);
-                        JOptionPane.showMessageDialog(null,"Maaf, kode diagnosa "+tbDiagnosa.getValueAt(z,1).toString()+" Accpdx N. Tidak bisa menjadi diagnosa utama..!!");
+            if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(z),0).toString().equals("true")){
+                tabModeDiagnosa.setValueAt(i,tbDiagnosa.convertRowIndexToModel(z),11);
+                if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(z),0).toString().equals("true")&&tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(z),7).toString().equals("0")){
+                    tabModeDiagnosa.setValueAt(false,tbDiagnosa.convertRowIndexToModel(z),0);
+                    tabModeDiagnosa.setValueAt("",tbDiagnosa.convertRowIndexToModel(z),11);
+                    JOptionPane.showMessageDialog(null,"Maaf, kode diagnosa "+tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(z),1).toString()+" valid code 0. Hanya berfungsi sebagai header..!!");
+                }else if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(z),0).toString().equals("true")&&tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(z),7).toString().equals("1")){
+                    if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(z),8).toString().equals("N")&&tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(z),11).toString().equals("1")){
+                        tabModeDiagnosa.setValueAt(false,tbDiagnosa.convertRowIndexToModel(z),0);
+                        tabModeDiagnosa.setValueAt("",tbDiagnosa.convertRowIndexToModel(z),11);
+                        JOptionPane.showMessageDialog(null,"Maaf, kode diagnosa "+tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(z),1).toString()+" Accpdx N. Tidak bisa menjadi diagnosa utama..!!");
                     }else{
                         i++;
                     }
                 }
             }else{
-                tbDiagnosa.setValueAt("",z,11);
+                tabModeDiagnosa.setValueAt("",tbDiagnosa.convertRowIndexToModel(z),11);
             }
         }
     }//GEN-LAST:event_tbDiagnosaPropertyChange
@@ -687,18 +689,18 @@ public class PanelDiagnosa extends widget.panelisi {
         if(tbProsedur.getRowCount()!=0){
             try {
                 if(tbProsedur.getSelectedRow()!= -1){
-                    if(tbProsedur.getValueAt(tbProsedur.getSelectedRow(),0).toString().equals("true")){
-                        if(tbProsedur.getValueAt(tbProsedur.getSelectedRow(),4).toString().equals("0")){
-                            tbProsedur.setValueAt(false,tbProsedur.getSelectedRow(),0);
-                            tbProsedur.setValueAt("",tbProsedur.getSelectedRow(),7);
-                            tbProsedur.setValueAt("",tbProsedur.getSelectedRow(),8);
-                            JOptionPane.showMessageDialog(null,"Maaf, kode prosedur "+tbProsedur.getValueAt(tbProsedur.getSelectedRow(),1).toString()+" valid code 0. Hanya berfungsi sebagai header..!!");
-                        }else if(tbProsedur.getValueAt(tbProsedur.getSelectedRow(),4).toString().equals("1")){
-                            if(tbProsedur.getValueAt(tbProsedur.getSelectedRow(),5).toString().equals("N")&&tbProsedur.getValueAt(tbProsedur.getSelectedRow(),7).toString().equals("1")){
-                                tbProsedur.setValueAt(false,tbProsedur.getSelectedRow(),0);
-                                tbProsedur.setValueAt("",tbProsedur.getSelectedRow(),7);
-                                tbProsedur.setValueAt("",tbProsedur.getSelectedRow(),8);
-                                JOptionPane.showMessageDialog(null,"Maaf, kode prosedur "+tbProsedur.getValueAt(tbProsedur.getSelectedRow(),1).toString()+" Accpdx N. Tidak bisa menjadi prosedur utama..!!");
+                    if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),0).toString().equals("true")){
+                        if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),4).toString().equals("0")){
+                            tabModeProsedur.setValueAt(false,tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),0);
+                            tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),7);
+                            tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),8);
+                            JOptionPane.showMessageDialog(null,"Maaf, kode prosedur "+tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),1).toString()+" valid code 0. Hanya berfungsi sebagai header..!!");
+                        }else if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),4).toString().equals("1")){
+                            if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),5).toString().equals("N")&&tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),7).toString().equals("1")){
+                                tabModeProsedur.setValueAt(false,tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),0);
+                                tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),7);
+                                tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),8);
+                                JOptionPane.showMessageDialog(null,"Maaf, kode prosedur "+tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),1).toString()+" Accpdx N. Tidak bisa menjadi prosedur utama..!!");
                             }
                         }
                     }
@@ -712,18 +714,18 @@ public class PanelDiagnosa extends widget.panelisi {
         if(tbProsedur.getRowCount()!=0){
             try {
                 if(tbProsedur.getSelectedRow()!= -1){
-                    if(tbProsedur.getValueAt(tbProsedur.getSelectedRow(),0).toString().equals("true")){
-                        if(tbProsedur.getValueAt(tbProsedur.getSelectedRow(),4).toString().equals("0")){
-                            tbProsedur.setValueAt(false,tbProsedur.getSelectedRow(),0);
-                            tbProsedur.setValueAt("",tbProsedur.getSelectedRow(),7);
-                            tbProsedur.setValueAt("",tbProsedur.getSelectedRow(),8);
-                            JOptionPane.showMessageDialog(null,"Maaf, kode prosedur "+tbProsedur.getValueAt(tbProsedur.getSelectedRow(),1).toString()+" valid code 0. Hanya berfungsi sebagai header..!!");
-                        }else if(tbProsedur.getValueAt(tbProsedur.getSelectedRow(),4).toString().equals("1")){
-                            if(tbProsedur.getValueAt(tbProsedur.getSelectedRow(),5).toString().equals("N")&&tbProsedur.getValueAt(tbProsedur.getSelectedRow(),7).toString().equals("1")){
-                                tbProsedur.setValueAt(false,tbProsedur.getSelectedRow(),0);
-                                tbProsedur.setValueAt("",tbProsedur.getSelectedRow(),7);
-                                tbProsedur.setValueAt("",tbProsedur.getSelectedRow(),8);
-                                JOptionPane.showMessageDialog(null,"Maaf, kode prosedur "+tbProsedur.getValueAt(tbProsedur.getSelectedRow(),1).toString()+" Accpdx N. Tidak bisa menjadi prosedur utama..!!");
+                    if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),0).toString().equals("true")){
+                        if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),4).toString().equals("0")){
+                            tabModeProsedur.setValueAt(false,tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),0);
+                            tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),7);
+                            tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),8);
+                            JOptionPane.showMessageDialog(null,"Maaf, kode prosedur "+tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),1).toString()+" valid code 0. Hanya berfungsi sebagai header..!!");
+                        }else if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),4).toString().equals("1")){
+                            if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),5).toString().equals("N")&&tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),7).toString().equals("1")){
+                                tabModeProsedur.setValueAt(false,tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),0);
+                                tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),7);
+                                tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),8);
+                                JOptionPane.showMessageDialog(null,"Maaf, kode prosedur "+tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(tbProsedur.getSelectedRow()),1).toString()+" Accpdx N. Tidak bisa menjadi prosedur utama..!!");
                             }
                         }
                     }
@@ -736,29 +738,29 @@ public class PanelDiagnosa extends widget.panelisi {
     private void tbProsedurPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbProsedurPropertyChange
         i=1;
         for(int z=0;z<tbProsedur.getRowCount();z++){
-            if(tbProsedur.getValueAt(z,0).toString().equals("true")){
-                tbProsedur.setValueAt(i,z,7);
-                if(tbProsedur.getValueAt(z,8).toString().equals("")){
-                    tbProsedur.setValueAt("1",z,8);
+            if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(z),0).toString().equals("true")){
+                tabModeProsedur.setValueAt(i,tbProsedur.convertRowIndexToModel(z),7);
+                if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(z),8).toString().equals("")){
+                    tabModeProsedur.setValueAt("1",tbProsedur.convertRowIndexToModel(z),8);
                 }
-                if(tbProsedur.getValueAt(z,0).toString().equals("true")&&tbProsedur.getValueAt(z,4).toString().equals("0")){
-                    tbProsedur.setValueAt(false,z,0);
-                    tbProsedur.setValueAt("",z,7);
-                    tbProsedur.setValueAt("",z,8);
-                    JOptionPane.showMessageDialog(null,"Maaf, kode prosedur "+tbProsedur.getValueAt(z,1).toString()+" valid code 0. Hanya berfungsi sebagai header..!!");
-                }else if(tbProsedur.getValueAt(z,0).toString().equals("true")&&tbProsedur.getValueAt(z,4).toString().equals("1")){
-                    if(tbProsedur.getValueAt(z,5).toString().equals("N")&&tbProsedur.getValueAt(z,7).toString().equals("1")){
-                        tbProsedur.setValueAt(false,z,0);
-                        tbProsedur.setValueAt("",z,7);
-                        tbProsedur.setValueAt("",z,8);
-                        JOptionPane.showMessageDialog(null,"Maaf, kode prosedur "+tbProsedur.getValueAt(z,1).toString()+" Accpdx N. Tidak bisa menjadi prosedur utama..!!");
+                if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(z),0).toString().equals("true")&&tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(z),4).toString().equals("0")){
+                    tabModeProsedur.setValueAt(false,tbProsedur.convertRowIndexToModel(z),0);
+                    tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(z),7);
+                    tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(z),8);
+                    JOptionPane.showMessageDialog(null,"Maaf, kode prosedur "+tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(z),1).toString()+" valid code 0. Hanya berfungsi sebagai header..!!");
+                }else if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(z),0).toString().equals("true")&&tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(z),4).toString().equals("1")){
+                    if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(z),5).toString().equals("N")&&tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(z),7).toString().equals("1")){
+                        tabModeProsedur.setValueAt(false,tbProsedur.convertRowIndexToModel(z),0);
+                        tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(z),7);
+                        tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(z),8);
+                        JOptionPane.showMessageDialog(null,"Maaf, kode prosedur "+tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(z),1).toString()+" Accpdx N. Tidak bisa menjadi prosedur utama..!!");
                     }else{
                         i++;
                     }
                 }
             }else{
-                tbProsedur.setValueAt("",z,7);
-                tbProsedur.setValueAt("",z,8);
+                tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(z),7);
+                tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(z),8);
             }
         }
     }//GEN-LAST:event_tbProsedurPropertyChange
@@ -791,6 +793,7 @@ public class PanelDiagnosa extends widget.panelisi {
     public widget.Table tbTindakanPasien;
     // End of variables declaration//GEN-END:variables
     private void tampil() {
+        tbDiagnosaPasien.suspendSorting();
         Valid.tabelKosong(TabModeDiagnosaPasien);
         try{
             psdiagnosapasien=koneksi.prepareStatement(
@@ -848,6 +851,7 @@ public class PanelDiagnosa extends widget.panelisi {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbDiagnosaPasien.resumeSorting();
     }
 
     public int getRecord(){
@@ -871,7 +875,7 @@ public class PanelDiagnosa extends widget.panelisi {
         try{
             jml=0;
             for(i=0;i<tbDiagnosa.getRowCount();i++){
-                if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
+                if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -891,23 +895,24 @@ public class PanelDiagnosa extends widget.panelisi {
 
             index=0;
             for(i=0;i<tbDiagnosa.getRowCount();i++){
-                if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
+                if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode[index]=tbDiagnosa.getValueAt(i,1).toString();
-                    nama[index]=tbDiagnosa.getValueAt(i,2).toString();
-                    ciripny[index]=tbDiagnosa.getValueAt(i,3).toString();
-                    keterangan[index]=tbDiagnosa.getValueAt(i,4).toString();
-                    kategori[index]=tbDiagnosa.getValueAt(i,5).toString();
-                    cirium[index]=tbDiagnosa.getValueAt(i,6).toString();
-                    validcode[index]=tbDiagnosa.getValueAt(i,7).toString();
-                    accpdx[index]=tbDiagnosa.getValueAt(i,8).toString();
-                    asterisk[index]=tbDiagnosa.getValueAt(i,9).toString();
-                    im[index]=tbDiagnosa.getValueAt(i,10).toString();
-                    urut[index]=tbDiagnosa.getValueAt(i,11).toString();
+                    kode[index]=tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString();
+                    nama[index]=tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),2).toString();
+                    ciripny[index]=tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),3).toString();
+                    keterangan[index]=tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),4).toString();
+                    kategori[index]=tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),5).toString();
+                    cirium[index]=tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),6).toString();
+                    validcode[index]=tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),7).toString();
+                    accpdx[index]=tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),8).toString();
+                    asterisk[index]=tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),9).toString();
+                    im[index]=tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),10).toString();
+                    urut[index]=tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),11).toString();
                     index++;
                 }
             }
 
+            tbDiagnosa.suspendSorting();
             Valid.tabelKosong(tabModeDiagnosa);
             for(i=0;i<jml;i++){
                 tabModeDiagnosa.addRow(new Object[] {pilih[i],kode[i],nama[i],ciripny[i],keterangan[i],kategori[i],cirium[i],validcode[i],accpdx[i],asterisk[i],im[i],urut[i]});
@@ -973,13 +978,14 @@ public class PanelDiagnosa extends widget.panelisi {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbDiagnosa.resumeSorting();
     }
 
     private void tampilprosedure() {
         try{
             jml=0;
             for(i=0;i<tbProsedur.getRowCount();i++){
-                if(tbProsedur.getValueAt(i,0).toString().equals("true")){
+                if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -995,20 +1001,21 @@ public class PanelDiagnosa extends widget.panelisi {
             multy=new String[jml];
             index=0;
             for(i=0;i<tbProsedur.getRowCount();i++){
-                if(tbProsedur.getValueAt(i,0).toString().equals("true")){
+                if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode2[index]=tbProsedur.getValueAt(i,1).toString();
-                    panjang[index]=tbProsedur.getValueAt(i,2).toString();
-                    pendek[index]=tbProsedur.getValueAt(i,3).toString();
-                    validcode[index]=tbProsedur.getValueAt(i,4).toString();
-                    accpdx[index]=tbProsedur.getValueAt(i,5).toString();
-                    im[index]=tbProsedur.getValueAt(i,6).toString();
-                    urut[index]=tbProsedur.getValueAt(i,7).toString();
-                    multy[index]=tbProsedur.getValueAt(i,8).toString();
+                    kode2[index]=tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),1).toString();
+                    panjang[index]=tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),2).toString();
+                    pendek[index]=tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),3).toString();
+                    validcode[index]=tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),4).toString();
+                    accpdx[index]=tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),5).toString();
+                    im[index]=tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),6).toString();
+                    urut[index]=tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),7).toString();
+                    multy[index]=tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),8).toString();
                     index++;
                 }
             }
 
+            tbProsedur.suspendSorting();
             Valid.tabelKosong(tabModeProsedur);
             for(i=0;i<jml;i++){
                 tabModeProsedur.addRow(new Object[] {pilih[i],kode2[i],panjang[i],pendek[i],validcode[i],accpdx[i],im[i],urut[i],multy[i]});
@@ -1052,9 +1059,11 @@ public class PanelDiagnosa extends widget.panelisi {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbProsedur.resumeSorting();
     }
 
     private void tampil2() {
+        tbTindakanPasien.suspendSorting();
         Valid.tabelKosong(TabModeTindakanPasien);
         try{
             pstindakanpasien=koneksi.prepareStatement(
@@ -1109,6 +1118,7 @@ public class PanelDiagnosa extends widget.panelisi {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbTindakanPasien.resumeSorting();
     }
 
     public void setRM(String norawat,String norm,String tanggal1,String tanggal2,String status,String keyword){
@@ -1125,69 +1135,69 @@ public class PanelDiagnosa extends widget.panelisi {
             Sequel.AutoComitFalse();
             index=1;
             for(i=0;i<tbDiagnosa.getRowCount();i++){
-                if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
+                if(tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),0).toString().equals("true")){
                     if(Sequel.cariInteger(
                             "select count(diagnosa_pasien.kd_penyakit) from diagnosa_pasien "+
                             "inner join reg_periksa on diagnosa_pasien.no_rawat=reg_periksa.no_rawat "+
                             "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where "+
-                            "pasien.no_rkm_medis='"+norm+"' and diagnosa_pasien.kd_penyakit='"+tbDiagnosa.getValueAt(i,1).toString()+"'")>0){
+                            "pasien.no_rkm_medis='"+norm+"' and diagnosa_pasien.kd_penyakit='"+tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString()+"'")>0){
                         Sequel.menyimpan("diagnosa_pasien","?,?,?,?,?","Penyakit",5,new String[]{
-                            norawat,tbDiagnosa.getValueAt(i,1).toString(),status,tbDiagnosa.getValueAt(i,11).toString(),"Lama"
+                            norawat,tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString(),status,tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),11).toString(),"Lama"
                         });
                     }else{
                         Sequel.menyimpan("diagnosa_pasien","?,?,?,?,?","Penyakit",5,new String[]{
-                            norawat,tbDiagnosa.getValueAt(i,1).toString(),status,tbDiagnosa.getValueAt(i,11).toString(),"Baru"
+                            norawat,tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString(),status,tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),11).toString(),"Baru"
                         });
                     }
 
                     if(index==1){
                         if(status.equals("Ralan")){
                             Sequel.mengedit("resume_pasien","no_rawat=?","kd_diagnosa_utama=?",2,new String[]{
-                                tbDiagnosa.getValueAt(i,1).toString(),norawat
+                                tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }else if(status.equals("Ranap")){
                             Sequel.mengedit("resume_pasien_ranap","no_rawat=?","kd_diagnosa_utama=?",2,new String[]{
-                                tbDiagnosa.getValueAt(i,1).toString(),norawat
+                                tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }
                     }else if(index==2){
                         if(status.equals("Ralan")){
                             Sequel.mengedit("resume_pasien","no_rawat=?","kd_diagnosa_sekunder=?",2,new String[]{
-                                tbDiagnosa.getValueAt(i,1).toString(),norawat
+                                tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }else if(status.equals("Ranap")){
                             Sequel.mengedit("resume_pasien_ranap","no_rawat=?","kd_diagnosa_sekunder=?",2,new String[]{
-                                tbDiagnosa.getValueAt(i,1).toString(),norawat
+                                tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }
                     }else if(index==3){
                         if(status.equals("Ralan")){
                             Sequel.mengedit("resume_pasien","no_rawat=?","kd_diagnosa_sekunder2=?",2,new String[]{
-                                tbDiagnosa.getValueAt(i,1).toString(),norawat
+                                tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }else if(status.equals("Ranap")){
                             Sequel.mengedit("resume_pasien_ranap","no_rawat=?","kd_diagnosa_sekunder2=?",2,new String[]{
-                                tbDiagnosa.getValueAt(i,1).toString(),norawat
+                                tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }
                     }else if(index==4){
                         if(status.equals("Ralan")){
                             Sequel.mengedit("resume_pasien","no_rawat=?","kd_diagnosa_sekunder3=?",2,new String[]{
-                                tbDiagnosa.getValueAt(i,1).toString(),norawat
+                                tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }else if(status.equals("Ranap")){
                             Sequel.mengedit("resume_pasien_ranap","no_rawat=?","kd_diagnosa_sekunder3=?",2,new String[]{
-                                tbDiagnosa.getValueAt(i,1).toString(),norawat
+                                tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }
                     }else if(index==5){
                         if(status.equals("Ralan")){
                             Sequel.mengedit("resume_pasien","no_rawat=?","kd_diagnosa_sekunder4=?",2,new String[]{
-                                tbDiagnosa.getValueAt(i,1).toString(),norawat
+                                tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }else if(status.equals("Ranap")){
                             Sequel.mengedit("resume_pasien_ranap","no_rawat=?","kd_diagnosa_sekunder4=?",2,new String[]{
-                                tbDiagnosa.getValueAt(i,1).toString(),norawat
+                                tabModeDiagnosa.getValueAt(tbDiagnosa.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }
                     }
@@ -1197,8 +1207,8 @@ public class PanelDiagnosa extends widget.panelisi {
             }
             Sequel.AutoComitTrue();
             for(i=0;i<tbDiagnosa.getRowCount();i++){
-               tbDiagnosa.setValueAt(false,i,0);
-               tbDiagnosa.setValueAt("",i,11);
+               tabModeDiagnosa.setValueAt(false,tbDiagnosa.convertRowIndexToModel(i),0);
+               tabModeDiagnosa.setValueAt("",tbDiagnosa.convertRowIndexToModel(i),11);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,"Maaf, gagal menyimpan data. Kemungkinan ada data diagnosa yang sama dimasukkan sebelumnya...!");
@@ -1208,49 +1218,49 @@ public class PanelDiagnosa extends widget.panelisi {
             Sequel.AutoComitFalse();
             index=1;
             for(i=0;i<tbProsedur.getRowCount();i++){
-                if(tbProsedur.getValueAt(i,0).toString().equals("true")){
+                if(tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),0).toString().equals("true")){
                     Sequel.menyimpan("prosedur_pasien","?,?,?,?,?","ICD 9",5,new String[]{
-                        norawat,tbProsedur.getValueAt(i,1).toString(),status,tbProsedur.getValueAt(i,7).toString(),tbProsedur.getValueAt(i,8).toString()
+                        norawat,tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),1).toString(),status,tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),7).toString(),tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),8).toString()
                     });
 
                     if(index==1){
                         if(status.equals("Ralan")){
                             Sequel.mengedit("resume_pasien","no_rawat=?","kd_prosedur_utama=?",2,new String[]{
-                                tbProsedur.getValueAt(i,1).toString(),norawat
+                                tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }else if(status.equals("Ranap")){
                             Sequel.mengedit("resume_pasien_ranap","no_rawat=?","kd_prosedur_utama=?",2,new String[]{
-                                tbProsedur.getValueAt(i,1).toString(),norawat
+                                tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }
                     }else if(index==2){
                         if(status.equals("Ralan")){
                             Sequel.mengedit("resume_pasien","no_rawat=?","kd_prosedur_sekunder=?",2,new String[]{
-                                tbProsedur.getValueAt(i,1).toString(),norawat
+                                tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }else if(status.equals("Ranap")){
                             Sequel.mengedit("resume_pasien_ranap","no_rawat=?","kd_prosedur_sekunder=?",2,new String[]{
-                                tbProsedur.getValueAt(i,1).toString(),norawat
+                                tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }
                     }else if(index==3){
                         if(status.equals("Ralan")){
                             Sequel.mengedit("resume_pasien","no_rawat=?","kd_prosedur_sekunder2=?",2,new String[]{
-                                tbProsedur.getValueAt(i,1).toString(),norawat
+                                tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }else if(status.equals("Ranap")){
                             Sequel.mengedit("resume_pasien_ranap","no_rawat=?","kd_prosedur_sekunder2=?",2,new String[]{
-                                tbProsedur.getValueAt(i,1).toString(),norawat
+                                tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }
                     }else if(index==4){
                         if(status.equals("Ralan")){
                             Sequel.mengedit("resume_pasien","no_rawat=?","kd_prosedur_sekunder3=?",2,new String[]{
-                                tbProsedur.getValueAt(i,1).toString(),norawat
+                                tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }else if(status.equals("Ranap")){
                             Sequel.mengedit("resume_pasien_ranap","no_rawat=?","kd_prosedur_sekunder3=?",2,new String[]{
-                                tbProsedur.getValueAt(i,1).toString(),norawat
+                                tabModeProsedur.getValueAt(tbProsedur.convertRowIndexToModel(i),1).toString(),norawat
                             });
                         }
                     }
@@ -1260,9 +1270,9 @@ public class PanelDiagnosa extends widget.panelisi {
             }
             Sequel.AutoComitTrue();
             for(i=0;i<tbProsedur.getRowCount();i++){
-               tbProsedur.setValueAt(false,i,0);
-               tbProsedur.setValueAt("",i,7);
-               tbProsedur.setValueAt("",i,8);
+               tabModeProsedur.setValueAt(false,tbProsedur.convertRowIndexToModel(i),0);
+               tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(i),7);
+               tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(i),8);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,"Maaf, gagal menyimpan data. Kemungkinan ada data prosedur/ICD9 yang sama dimasukkan sebelumnya...!");
@@ -1286,13 +1296,13 @@ public class PanelDiagnosa extends widget.panelisi {
     public void batal(){
         Diagnosa.setText("");
         for(i=0;i<tbDiagnosa.getRowCount();i++){
-            tbDiagnosa.setValueAt(false,i,0);
-            tbDiagnosa.setValueAt("",i,11);
+            tabModeDiagnosa.setValueAt(false,tbDiagnosa.convertRowIndexToModel(i),0);
+            tabModeDiagnosa.setValueAt("",tbDiagnosa.convertRowIndexToModel(i),11);
         }
         for(i=0;i<tbProsedur.getRowCount();i++){
-            tbProsedur.setValueAt(false,i,0);
-            tbProsedur.setValueAt("",i,7);
-            tbProsedur.setValueAt("",i,8);
+            tabModeProsedur.setValueAt(false,tbProsedur.convertRowIndexToModel(i),0);
+            tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(i),7);
+            tabModeProsedur.setValueAt("",tbProsedur.convertRowIndexToModel(i),8);
         }
         Prosedur.setText("");
     }
@@ -1303,9 +1313,9 @@ public class PanelDiagnosa extends widget.panelisi {
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             }else{
                 for(i=0;i<tbDiagnosaPasien.getRowCount();i++){
-                    if(tbDiagnosaPasien.getValueAt(i,0).toString().equals("true")){
+                    if(TabModeDiagnosaPasien.getValueAt(tbDiagnosaPasien.convertRowIndexToModel(i),0).toString().equals("true")){
                         Sequel.queryu2("delete from diagnosa_pasien where no_rawat=? and kd_penyakit=?",2,new String[]{
-                            tbDiagnosaPasien.getValueAt(i,2).toString(),tbDiagnosaPasien.getValueAt(i,5).toString()
+                            TabModeDiagnosaPasien.getValueAt(tbDiagnosaPasien.convertRowIndexToModel(i),2).toString(),TabModeDiagnosaPasien.getValueAt(tbDiagnosaPasien.convertRowIndexToModel(i),5).toString()
                         });
                     }
                 }
@@ -1315,9 +1325,9 @@ public class PanelDiagnosa extends widget.panelisi {
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             }else{
                 for(i=0;i<tbTindakanPasien.getRowCount();i++){
-                    if(tbTindakanPasien.getValueAt(i,0).toString().equals("true")){
+                    if(TabModeTindakanPasien.getValueAt(tbTindakanPasien.convertRowIndexToModel(i),0).toString().equals("true")){
                         Sequel.queryu2("delete from prosedur_pasien where no_rawat=? and kode=?",2,new String[]{
-                            tbTindakanPasien.getValueAt(i,2).toString(),tbTindakanPasien.getValueAt(i,5).toString()
+                            TabModeTindakanPasien.getValueAt(tbTindakanPasien.convertRowIndexToModel(i),2).toString(),TabModeTindakanPasien.getValueAt(tbTindakanPasien.convertRowIndexToModel(i),5).toString()
                         });
                     }
                 }

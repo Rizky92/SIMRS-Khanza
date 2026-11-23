@@ -482,7 +482,7 @@ public class MasterTriaseSkala1 extends javax.swing.JDialog {
         }else{
             if(tbSpesialis.getSelectedRow()> -1){
                 Sequel.mengedit("master_triase_skala1","kode_skala1=?","kode_skala1=?,pengkajian_skala1=?,kode_pemeriksaan=?",4,new String[]{
-                    kdskala.getText(),namaskala.getText(),kdpemeriksaan.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString()
+                    kdskala.getText(),namaskala.getText(),kdpemeriksaan.getText(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2).toString()
                 });
                 if(tbSpesialis.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
@@ -753,10 +753,10 @@ public class MasterTriaseSkala1 extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            kdpemeriksaan.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            nmpemeriksaan.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
-            kdskala.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString());
-            namaskala.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),3).toString());
+            kdpemeriksaan.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            nmpemeriksaan.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
+            kdskala.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2).toString());
+            namaskala.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),3).toString());
         }
     }
 

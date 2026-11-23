@@ -602,7 +602,7 @@ public final class KeuanganKlaimRalan extends javax.swing.JDialog {
     private void MnBillingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnBillingActionPerformed
         if(tbBangsal.getSelectedRow()!= -1){
             DlgBilingRalan billing=new DlgBilingRalan(null,false);
-            billing.TNoRw.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),2).toString());
+            billing.TNoRw.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),2).toString());
             if(Sequel.cariInteger("select count(no_rawat) from piutang_pasien where no_rawat=?",billing.TNoRw.getText())>0){
                 billing.setPiutang();
             }

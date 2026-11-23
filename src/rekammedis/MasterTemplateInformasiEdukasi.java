@@ -495,12 +495,12 @@ public class MasterTemplateInformasiEdukasi extends javax.swing.JDialog {
         }else{
             if(tbSpesialis.getSelectedRow()> -1){
                 if(Sequel.mengedittf("template_pelaksanaan_informasi_edukasi","no_template=?","no_template=?,materi_edukasi=?,lama_edukasi=?,metode_edukasi=?",5,new String[]{
-                    KodeEdukasi.getText(),Template.getText(),LamaEdukasi.getText(),Metode.getSelectedItem().toString(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
+                    KodeEdukasi.getText(),Template.getText(),LamaEdukasi.getText(),Metode.getSelectedItem().toString(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString()
                 })==true){
-                    tbSpesialis.setValueAt(KodeEdukasi.getText(),tbSpesialis.getSelectedRow(),0);
-                    tbSpesialis.setValueAt(Template.getText(),tbSpesialis.getSelectedRow(),1);
-                    tbSpesialis.setValueAt(LamaEdukasi.getText(),tbSpesialis.getSelectedRow(),2);
-                    tbSpesialis.setValueAt(Metode.getSelectedItem().toString(),tbSpesialis.getSelectedRow(),3);
+                    tabMode.setValueAt(KodeEdukasi.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0);
+                    tabMode.setValueAt(Template.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1);
+                    tabMode.setValueAt(LamaEdukasi.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2);
+                    tabMode.setValueAt(Metode.getSelectedItem().toString(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),3);
                     emptTeks();
                 }
             }
@@ -725,10 +725,10 @@ public class MasterTemplateInformasiEdukasi extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            KodeEdukasi.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            Template.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
-            LamaEdukasi.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString());
-            Metode.setSelectedItem(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),3).toString());
+            KodeEdukasi.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            Template.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
+            LamaEdukasi.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2).toString());
+            Metode.setSelectedItem(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),3).toString());
         }
     }
 

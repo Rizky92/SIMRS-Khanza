@@ -347,6 +347,7 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbRalan.setSortable(false);
         tbRalan.setToolTipText("");
         tbRalan.setName("tbRalan"); // NOI18N
         Scroll.setViewportView(tbRalan);
@@ -364,6 +365,7 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
         Scroll2.setOpaque(true);
 
         tbRanap.setAutoCreateRowSorter(false);
+        tbRanap.setSortable(false);
         tbRanap.setToolTipText("");
         tbRanap.setName("tbRanap"); // NOI18N
         Scroll2.setViewportView(tbRanap);
@@ -381,6 +383,7 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
         Scroll3.setOpaque(true);
 
         tbPemasukan.setAutoCreateRowSorter(false);
+        tbPemasukan.setSortable(false);
         tbPemasukan.setToolTipText("");
         tbPemasukan.setName("tbPemasukan"); // NOI18N
         tbPemasukan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -408,6 +411,7 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
         Scroll5.setOpaque(true);
 
         tbDeposit.setAutoCreateRowSorter(false);
+        tbDeposit.setSortable(false);
         tbDeposit.setToolTipText("");
         tbDeposit.setName("tbDeposit"); // NOI18N
         tbDeposit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -435,6 +439,7 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
         Scroll4.setOpaque(true);
 
         tbPengeluaran.setAutoCreateRowSorter(false);
+        tbPengeluaran.setSortable(false);
         tbPengeluaran.setToolTipText("");
         tbPengeluaran.setName("tbPengeluaran"); // NOI18N
         tbPengeluaran.addMouseListener(new java.awt.event.MouseAdapter() {

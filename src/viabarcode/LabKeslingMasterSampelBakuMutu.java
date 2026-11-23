@@ -450,9 +450,9 @@ public class LabKeslingMasterSampelBakuMutu extends javax.swing.JDialog {
         }else{
             if(Valid.editTabletf(tabMode,"labkesling_master_sampel","kode_sampel",KodeSampel,"nama_sampel='"+NamaSampel.getText()+"',baku_mutu='"+BakuMutu.getText()+"'")==true){
                 if(tbSpesialis.getSelectedRow()>-1){
-                    tbSpesialis.setValueAt(KodeSampel.getText(),tbSpesialis.getSelectedRow(),0);
-                    tbSpesialis.setValueAt(NamaSampel.getText(),tbSpesialis.getSelectedRow(),1);
-                    tbSpesialis.setValueAt(BakuMutu.getText(),tbSpesialis.getSelectedRow(),2);
+                    tabMode.setValueAt(KodeSampel.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0);
+                    tabMode.setValueAt(NamaSampel.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1);
+                    tabMode.setValueAt(BakuMutu.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2);
                     emptTeks();
                 }
             }
@@ -611,6 +611,7 @@ public class LabKeslingMasterSampelBakuMutu extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbSpesialis.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -640,6 +641,7 @@ public class LabKeslingMasterSampelBakuMutu extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbSpesialis.getRowCount());
+        tbSpesialis.resumeSorting();
     }
 
     public void emptTeks() {
@@ -652,9 +654,9 @@ public class LabKeslingMasterSampelBakuMutu extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            KodeSampel.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            NamaSampel.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
-            BakuMutu.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString());
+            KodeSampel.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            NamaSampel.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
+            BakuMutu.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2).toString());
         }
     }
 

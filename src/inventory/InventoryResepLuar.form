@@ -762,6 +762,7 @@
               <SubComponents>
                 <Component class="widget.Table" name="tbResep">
                   <Properties>
+                    <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                     <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                       <ComponentRef name="Popup"/>
                     </Property>
@@ -819,6 +820,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbObatResepRacikan">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="name" type="java.lang.String" value="tbObatResepRacikan" noResource="true"/>
                       </Properties>
                       <Events>
@@ -852,7 +854,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbDetailResepObatRacikan">
                       <Properties>
-                        <Property name="autoCreateRowSorter" type="boolean" value="false"/>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="Popup"/>
                         </Property>

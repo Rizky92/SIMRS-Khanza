@@ -568,6 +568,7 @@ public class DlgCariPengeluaranApotek extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1046,12 +1047,12 @@ public class DlgCariPengeluaranApotek extends javax.swing.JDialog {
         }else if(tbDokter.getSelectedRow()<= -1){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Keluar");
             }else{
                 if(!akses.getkode().equals("Admin Utama")){
                     if(!DEPOAKTIFOBAT.equals("")){
-                        if(!DEPOAKTIFOBAT.equals(Sequel.cariIsi("select kd_bangsal from pengeluaran_obat_bhp where no_keluar=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim()))){
+                        if(!DEPOAKTIFOBAT.equals(Sequel.cariIsi("select kd_bangsal from pengeluaran_obat_bhp where no_keluar=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim()))){
                             JOptionPane.showMessageDialog(null,"Anda tidak punya hak akses untuk menghapus stok keluar dari depo ini...!");
                         }else{
                             hapus();
@@ -1362,7 +1363,7 @@ public class DlgCariPengeluaranApotek extends javax.swing.JDialog {
            ps=koneksi.prepareStatement(
                    "select pengeluaran_obat_bhp.no_keluar,pengeluaran_obat_bhp.kd_bangsal from pengeluaran_obat_bhp where pengeluaran_obat_bhp.no_keluar=?");
            try {
-              ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+              ps.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim());
               rs=ps.executeQuery();
               if(rs.next()){
                   ps2=koneksi.prepareStatement(
@@ -1416,7 +1417,7 @@ public class DlgCariPengeluaranApotek extends javax.swing.JDialog {
                   }
               }
               if(sukses==true){
-                  Sequel.queryu("delete from pengeluaran_obat_bhp where no_keluar='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim()+"'");
+                  Sequel.queryu("delete from pengeluaran_obat_bhp where no_keluar='"+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim()+"'");
                   Sequel.Commit();
               }else{
                   sukses=false;

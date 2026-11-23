@@ -1260,8 +1260,8 @@ public class BPJSSPRI extends javax.swing.JDialog {
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
             param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
-            param.put("parameter",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()+"\nID "+tbObat.getValueAt(tbObat.getSelectedRow(),10).toString()+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()));
+            param.put("parameter",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString()+"\nID "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString()+"\n"+Valid.SetTgl3(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString()));
             Valid.MyReportqry("rptBridgingSuratPRI2.jasper","report","::[ Data Surat PRI VClaim ]::",
                     "select bridging_surat_pri_bpjs.no_rawat,bridging_surat_pri_bpjs.no_kartu,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,"+
                     "pasien.jk,bridging_surat_pri_bpjs.diagnosa,bridging_surat_pri_bpjs.tgl_surat,bridging_surat_pri_bpjs.no_surat,"+
@@ -1572,21 +1572,21 @@ public class BPJSSPRI extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoRawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            NoKartu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            NoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            NmPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            JK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().replaceAll("P","PEREMPUAN").replaceAll("L","LAKI-LAKI"));
-            Diagnosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            KdDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            NmDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            KdPoli.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            NmPoli.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            NoSEP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            Valid.SetTgl(TanggalSurat,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            Valid.SetTgl(TanggalKontrol,tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
+            NoRawat.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            NoKartu.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            NoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            NmPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            TglLahir.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            JK.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString().replaceAll("P","PEREMPUAN").replaceAll("L","LAKI-LAKI"));
+            Diagnosa.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            NoSurat.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            KdDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            NmDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            KdPoli.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            NmPoli.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            NoSEP.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            Valid.SetTgl(TanggalSurat,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            Valid.SetTgl(TanggalKontrol,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
         }
     }
 

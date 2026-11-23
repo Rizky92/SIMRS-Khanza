@@ -731,7 +731,7 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
                 if(akses.getjml2()>=1){
                     if(akses.getkode().equals(nip.getText())){
                         if(Sequel.mengedittf("permintaan_perbaikan_inventaris","no_permintaan=?","no_permintaan=?,no_inventaris=?,nik=?,tanggal=?,deskripsi_kerusakan=?",6,new String[]{
-                                nopermintaan.getText(),no_inventaris.getText(),nip.getText(),Valid.SetTgl(tgl_permintaan.getSelectedItem()+"")+" "+tgl_permintaan.getSelectedItem().toString().substring(11,19),deskripsi.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                                nopermintaan.getText(),no_inventaris.getText(),nip.getText(),Valid.SetTgl(tgl_permintaan.getSelectedItem()+"")+" "+tgl_permintaan.getSelectedItem().toString().substring(11,19),deskripsi.getText(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString()
                             })==true){
                                 runBackground(() ->tampil());
                                 emptTeks();
@@ -741,7 +741,7 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
                     }
                 }else{
                     if(Sequel.mengedittf("permintaan_perbaikan_inventaris","no_permintaan=?","no_permintaan=?,no_inventaris=?,nik=?,tanggal=?,deskripsi_kerusakan=?",6,new String[]{
-                            nopermintaan.getText(),no_inventaris.getText(),nip.getText(),Valid.SetTgl(tgl_permintaan.getSelectedItem()+"")+" "+tgl_permintaan.getSelectedItem().toString().substring(11,19),deskripsi.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                            nopermintaan.getText(),no_inventaris.getText(),nip.getText(),Valid.SetTgl(tgl_permintaan.getSelectedItem()+"")+" "+tgl_permintaan.getSelectedItem().toString().substring(11,19),deskripsi.getText(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString()
                         })==true){
                             runBackground(() ->tampil());
                             emptTeks();
@@ -1330,17 +1330,17 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
 
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
-            Valid.SetTgl2(tgl_permintaan,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),12).toString());
-             nopermintaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-             no_inventaris.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-             nama_barang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()+" "+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-             merk.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
-             kategori.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
-             jenis.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
-             nip.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString());
-             nama_petugas.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString());
-             departemen.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString());
-             deskripsi.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString());
+            Valid.SetTgl2(tgl_permintaan,tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),12).toString());
+             nopermintaan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+             no_inventaris.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+             nama_barang.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString()+" "+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+             merk.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString());
+             kategori.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),6).toString());
+             jenis.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7).toString());
+             nip.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),9).toString());
+             nama_petugas.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),10).toString());
+             departemen.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),11).toString());
+             deskripsi.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),13).toString());
         }
     }
 

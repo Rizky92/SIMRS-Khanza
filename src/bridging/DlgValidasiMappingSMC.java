@@ -249,6 +249,7 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbValidasi.setAutoCreateRowSorter(true);
         tbValidasi.setComponentPopupMenu(Popup);
         tbValidasi.setName("tbValidasi"); // NOI18N
         Scroll.setViewportView(tbValidasi);
@@ -440,6 +441,7 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
     }
 
     public void setData(JTable tabel, int[] urutan) {
+        tbValidasi.suspendSorting();
         Valid.tabelKosongSmc(tabMode);
 
         for (int i = 0; i < tabel.getRowCount(); i++) {
@@ -456,6 +458,7 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         tabMode.fireTableDataChanged();
         LProgres.setText("0 / " + tbValidasi.getRowCount());
         hitungMasalah();
+        tbValidasi.resumeSorting();
     }
 
     @Override
@@ -478,14 +481,14 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
     }
 
     private boolean perluKoreksi(int baris) {
-        return !tbValidasi.getValueAt(baris, 7).toString().isBlank() || !tbValidasi.getValueAt(baris, 8).toString().isBlank();
+        return !tabMode.getValueAt(tbValidasi.convertRowIndexToModel(baris), 7).toString().isBlank() || !tabMode.getValueAt(tbValidasi.convertRowIndexToModel(baris), 8).toString().isBlank();
     }
 
     private void hitungMasalah() {
         int jumlah = 0;
 
         for (int i = 0; i < tbValidasi.getRowCount(); i++) {
-            if (!tbValidasi.getValueAt(i, 9).toString().isBlank()) {
+            if (!tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i), 9).toString().isBlank()) {
                 jumlah++;
             }
         }
@@ -511,13 +514,13 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         final List<Object[]> antrian = new ArrayList<>();
 
         for (int i = 0; i < tbValidasi.getRowCount(); i++) {
-            tbValidasi.setValueAt(false, i, 0);
-            tbValidasi.setValueAt("", i, 7);
-            tbValidasi.setValueAt("", i, 8);
-            tbValidasi.setValueAt("", i, 9);
+            tabMode.setValueAt(false, tbValidasi.convertRowIndexToModel(i), 0);
+            tabMode.setValueAt("", tbValidasi.convertRowIndexToModel(i), 7);
+            tabMode.setValueAt("", tbValidasi.convertRowIndexToModel(i), 8);
+            tabMode.setValueAt("", tbValidasi.convertRowIndexToModel(i), 9);
             antrian.add(new Object[] {
-                tbValidasi.convertRowIndexToModel(i), tbValidasi.getValueAt(i, 1).toString(), tbValidasi.getValueAt(i, 4).toString(),
-                tbValidasi.getValueAt(i, 5).toString(), tbValidasi.getValueAt(i, 6).toString()
+                tbValidasi.convertRowIndexToModel(i), tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i), 1).toString(), tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i), 4).toString(),
+                tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i), 5).toString(), tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i), 6).toString()
             });
         }
 
@@ -641,9 +644,9 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         }
 
         final int baris = tbValidasi.getSelectedRow();
-        final String kunci = tbValidasi.getValueAt(baris, 2).toString();
-        final String jenis = tbValidasi.getValueAt(baris, 1).toString();
-        final String nama = tbValidasi.getValueAt(baris, 3).toString();
+        final String kunci = tabMode.getValueAt(tbValidasi.convertRowIndexToModel(baris), 2).toString();
+        final String jenis = tabMode.getValueAt(tbValidasi.convertRowIndexToModel(baris), 1).toString();
+        final String nama = tabMode.getValueAt(tbValidasi.convertRowIndexToModel(baris), 3).toString();
 
         if (JENIS_SAMPEL.equals(jenis)) {
             DlgPencarianSnomedSMC refSampel = new DlgPencarianSnomedSMC(null, false);
@@ -683,7 +686,7 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
 
     private int cariBaris(String kunci, String jenis) {
         for (int i = 0; i < tbValidasi.getRowCount(); i++) {
-            if (kunci.equals(tbValidasi.getValueAt(i, 2).toString()) && jenis.equals(tbValidasi.getValueAt(i, 1).toString())) {
+            if (kunci.equals(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i), 2).toString()) && jenis.equals(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i), 1).toString())) {
                 return i;
             }
         }
@@ -701,15 +704,15 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         String codeBaru = bersihkan(code);
         String displayBaru = potong(display, PANJANG_DISPLAY);
 
-        tbValidasi.setValueAt(codeBaru.equals(tbValidasi.getValueAt(baris, 4).toString()) ? "" : codeBaru, baris, 7);
-        tbValidasi.setValueAt(displayBaru.equalsIgnoreCase(tbValidasi.getValueAt(baris, 6).toString()) ? "" : displayBaru, baris, 8);
+        tabMode.setValueAt(codeBaru.equals(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(baris), 4).toString()) ? "" : codeBaru, tbValidasi.convertRowIndexToModel(baris), 7);
+        tabMode.setValueAt(displayBaru.equalsIgnoreCase(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(baris), 6).toString()) ? "" : displayBaru, tbValidasi.convertRowIndexToModel(baris), 8);
 
         if (perluKoreksi(baris)) {
-            tbValidasi.setValueAt(true, baris, 0);
-            tbValidasi.setValueAt("Koreksi manual dari pencarian referensi", baris, 9);
+            tabMode.setValueAt(true, tbValidasi.convertRowIndexToModel(baris), 0);
+            tabMode.setValueAt("Koreksi manual dari pencarian referensi", tbValidasi.convertRowIndexToModel(baris), 9);
         } else {
-            tbValidasi.setValueAt(false, baris, 0);
-            tbValidasi.setValueAt("", baris, 9);
+            tabMode.setValueAt(false, tbValidasi.convertRowIndexToModel(baris), 0);
+            tabMode.setValueAt("", tbValidasi.convertRowIndexToModel(baris), 9);
         }
 
         hitungMasalah();
@@ -828,7 +831,7 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
                 continue;
             }
 
-            tbValidasi.setValueAt(tandai && (!hanyaDisplay || !tbValidasi.getValueAt(i, 8).toString().isBlank()), i, 0);
+            tabMode.setValueAt(tandai && (!hanyaDisplay || !tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i), 8).toString().isBlank()), tbValidasi.convertRowIndexToModel(i), 0);
         }
     }
 
@@ -840,7 +843,7 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         int terpilih = 0;
 
         for (int i = 0; i < tbValidasi.getRowCount(); i++) {
-            if (Boolean.TRUE.equals(tbValidasi.getValueAt(i, 0)) && perluKoreksi(i)) {
+            if (Boolean.TRUE.equals(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i), 0)) && perluKoreksi(i)) {
                 terpilih++;
             }
         }
@@ -859,13 +862,13 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         int berhasil = 0;
 
         for (int i = tbValidasi.getRowCount() - 1; i >= 0; i--) {
-            if (!Boolean.TRUE.equals(tbValidasi.getValueAt(i, 0)) || !perluKoreksi(i)) {
+            if (!Boolean.TRUE.equals(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i), 0)) || !perluKoreksi(i)) {
                 continue;
             }
 
-            boolean sampel = JENIS_SAMPEL.equals(tbValidasi.getValueAt(i, 1).toString());
-            String codeKoreksi = tbValidasi.getValueAt(i, 7).toString();
-            String displayKoreksi = tbValidasi.getValueAt(i, 8).toString();
+            boolean sampel = JENIS_SAMPEL.equals(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i), 1).toString());
+            String codeKoreksi = tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i), 7).toString();
+            String displayKoreksi = tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i), 8).toString();
             List<String> kolom = new ArrayList<>();
             List<String> nilai = new ArrayList<>();
 
@@ -879,7 +882,7 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
                 nilai.add(displayKoreksi);
             }
 
-            nilai.add(tbValidasi.getValueAt(i, 2).toString());
+            nilai.add(tabMode.getValueAt(tbValidasi.convertRowIndexToModel(i), 2).toString());
 
             if (!Sequel.mengupdatetfSmc(tabel, String.join(", ", kolom), kolomKunci + "=?", nilai.toArray(String[]::new))) {
                 continue;

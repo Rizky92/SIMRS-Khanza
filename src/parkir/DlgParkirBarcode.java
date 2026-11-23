@@ -459,7 +459,7 @@ public class DlgParkirBarcode extends javax.swing.JDialog {
             Valid.textKosong(nomer_kartu,"Nomer Kartu");
         }else{
             Sequel.mengedit("parkir_barcode","kode_barcode=?","kode_barcode=?,nomer_kartu=?",3,new String[]{
-                barcode.getText(),nomer_kartu.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
+                barcode.getText(),nomer_kartu.getText(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString()
             });
             if(tbSpesialis.getRowCount()!=0){tampil();}
             emptTeks();
@@ -732,8 +732,8 @@ public class DlgParkirBarcode extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            barcode.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            nomer_kartu.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
+            barcode.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            nomer_kartu.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
         }
     }
 

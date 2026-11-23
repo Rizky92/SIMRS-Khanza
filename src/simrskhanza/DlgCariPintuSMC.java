@@ -375,6 +375,7 @@ public final class DlgCariPintuSMC extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosongSmc(tabMode);
         try {
             File file = new File("./cache/pinturuanganpolismc.iyem");
@@ -410,6 +411,7 @@ public final class DlgCariPintuSMC extends javax.swing.JDialog {
         }
 
         LCount.setText("" + tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {
@@ -425,6 +427,7 @@ public final class DlgCariPintuSMC extends javax.swing.JDialog {
     }
 
     private void tampil2() {
+        tbKamar.suspendSorting();
         Valid.tabelKosongSmc(tabMode);
 
         try (FileReader fr = new FileReader("./cache/pinturuanganpolismc.iyem")) {
@@ -449,5 +452,6 @@ public final class DlgCariPintuSMC extends javax.swing.JDialog {
         }
 
         LCount.setText("" + tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 }

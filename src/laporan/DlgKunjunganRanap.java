@@ -706,7 +706,7 @@ public final class DlgKunjunganRanap extends javax.swing.JDialog {
                         case "Laporan 5 (Jasper)":
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                             for(int r=0;r<tabMode.getRowCount();r++){
-                                if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
+                                if(!tabMode.getValueAt(r,0).toString().contains(">>")){
                                     Sequel.menyimpan("temporary","'"+r+"','"+
                                                 tabMode.getValueAt(r,0).toString()+"','"+
                                                 tabMode.getValueAt(r,1).toString()+"','"+
@@ -748,7 +748,7 @@ public final class DlgKunjunganRanap extends javax.swing.JDialog {
                         case "Laporan 5 (Jasper)":
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                             for(int r=0;r<tabMode2.getRowCount();r++){
-                                if(!tbBangsal2.getValueAt(r,0).toString().contains(">>")){
+                                if(!tabMode2.getValueAt(r,0).toString().contains(">>")){
                                     Sequel.menyimpan("temporary","'"+r+"','"+
                                                 tabMode2.getValueAt(r,0).toString()+"','"+
                                                 tabMode2.getValueAt(r,1).toString()+"','"+
@@ -1542,7 +1542,7 @@ public final class DlgKunjunganRanap extends javax.swing.JDialog {
     private void getData() {
         int row=tbBangsal.getSelectedRow();
         if(row!= -1){
-            TKd.setText(tbBangsal.getValueAt(row,0).toString());
+            TKd.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),0).toString());
         }
     }
 

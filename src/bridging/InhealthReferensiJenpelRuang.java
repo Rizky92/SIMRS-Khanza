@@ -567,7 +567,7 @@ public class InhealthReferensiJenpelRuang extends javax.swing.JDialog {
             if(tbSpesialis.getSelectedRow()>-1){
                 Sequel.mengedit("inhealth_jenpel_ruang_rawat","kd_kamar=?","kd_kamar=?,kode_jenpel_ruang_rawat=?,nama_jenpel_ruang_rawat=?,tarif=?",5,new String[]{
                     kdkamar.getText(),KdJenisPelayanan.getText(),NmJenisPelayanan.getText(),Tarif.getText(),
-                    tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
+                    tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString()
                 });
                 tampil();
                 emptTeks();
@@ -791,12 +791,12 @@ public class InhealthReferensiJenpelRuang extends javax.swing.JDialog {
     private void getData() {
         int row=tbSpesialis.getSelectedRow();
         if(row!= -1){
-            kdkamar.setText(tbSpesialis.getValueAt(row,0).toString());
-            TKdBngsal.setText(tbSpesialis.getValueAt(row,1).toString());
-            TBangsal.setText(tbSpesialis.getValueAt(row,2).toString());
-            KdJenisPelayanan.setText(tbSpesialis.getValueAt(row,3).toString());
-            NmJenisPelayanan.setText(tbSpesialis.getValueAt(row,4).toString());
-            Tarif.setText(tbSpesialis.getValueAt(row,5).toString());
+            kdkamar.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),0).toString());
+            TKdBngsal.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),1).toString());
+            TBangsal.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),2).toString());
+            KdJenisPelayanan.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),3).toString());
+            NmJenisPelayanan.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),4).toString());
+            Tarif.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),5).toString());
         }
     }
 }

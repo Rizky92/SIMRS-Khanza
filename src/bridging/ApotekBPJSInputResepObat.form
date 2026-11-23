@@ -910,6 +910,7 @@
               <SubComponents>
                 <Component class="widget.Table" name="tbObat">
                   <Properties>
+                    <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                     <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                     <Property name="name" type="java.lang.String" value="tbObat" noResource="true"/>
                   </Properties>
@@ -967,6 +968,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbObatRacikan">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                         <Property name="name" type="java.lang.String" value="tbObatRacikan" noResource="true"/>
                       </Properties>
@@ -995,7 +997,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbDetailObatRacikan">
                       <Properties>
-                        <Property name="autoCreateRowSorter" type="boolean" value="false"/>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                         <Property name="name" type="java.lang.String" value="tbDetailObatRacikan" noResource="true"/>
                       </Properties>

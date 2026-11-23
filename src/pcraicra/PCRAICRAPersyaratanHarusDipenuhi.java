@@ -401,7 +401,7 @@ public final class PCRAICRAPersyaratanHarusDipenuhi extends javax.swing.JDialog 
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbPersyaratan.getSelectedRow()!= -1){
-            if(Sequel.meghapustf("pcra_icra_persyaratan_harus_dipenuhi","kode_persyaratan",tbPersyaratan.getValueAt(tbPersyaratan.getSelectedRow(),0).toString())==true){
+            if(Sequel.meghapustf("pcra_icra_persyaratan_harus_dipenuhi","kode_persyaratan",tabMode.getValueAt(tbPersyaratan.convertRowIndexToModel(tbPersyaratan.getSelectedRow()),0).toString())==true){
                 tabMode.removeRow(tbPersyaratan.convertRowIndexToModel(tbPersyaratan.getSelectedRow()));
                 emptTeks();
                 LCount.setText(""+tbPersyaratan.getRowCount());
@@ -427,10 +427,10 @@ public final class PCRAICRAPersyaratanHarusDipenuhi extends javax.swing.JDialog 
         }else{
             if(tbPersyaratan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("pcra_icra_persyaratan_harus_dipenuhi","kode_persyaratan=?","kode_persyaratan=?,nama_persyaratan=?",3,new String[]{
-                        KodePersyaratan.getText(),NamaPersyaratan.getText(),tbPersyaratan.getValueAt(tbPersyaratan.getSelectedRow(), 0).toString()
+                        KodePersyaratan.getText(),NamaPersyaratan.getText(),tabMode.getValueAt(tbPersyaratan.convertRowIndexToModel(tbPersyaratan.getSelectedRow()), 0).toString()
                     })==true){
-                    tbPersyaratan.setValueAt(KodePersyaratan.getText(),tbPersyaratan.getSelectedRow(),0);
-                    tbPersyaratan.setValueAt(NamaPersyaratan.getText(),tbPersyaratan.getSelectedRow(),1);
+                    tabMode.setValueAt(KodePersyaratan.getText(),tbPersyaratan.convertRowIndexToModel(tbPersyaratan.getSelectedRow()),0);
+                    tabMode.setValueAt(NamaPersyaratan.getText(),tbPersyaratan.convertRowIndexToModel(tbPersyaratan.getSelectedRow()),1);
                     emptTeks();
                 }
             }else{
@@ -619,8 +619,8 @@ public final class PCRAICRAPersyaratanHarusDipenuhi extends javax.swing.JDialog 
 
     private void getData() {
         if(tbPersyaratan.getSelectedRow()!= -1){
-            KodePersyaratan.setText(tbPersyaratan.getValueAt(tbPersyaratan.getSelectedRow(),0).toString());
-            NamaPersyaratan.setText(tbPersyaratan.getValueAt(tbPersyaratan.getSelectedRow(),1).toString());
+            KodePersyaratan.setText(tabMode.getValueAt(tbPersyaratan.convertRowIndexToModel(tbPersyaratan.getSelectedRow()),0).toString());
+            NamaPersyaratan.setText(tabMode.getValueAt(tbPersyaratan.convertRowIndexToModel(tbPersyaratan.getSelectedRow()),1).toString());
         }
     }
 

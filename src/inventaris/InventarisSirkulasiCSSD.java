@@ -744,7 +744,7 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
             tbKamIn.requestFocus();
         }else if((! Merk.getText().trim().equals(""))&&(TOut.getText().trim().equals(""))){
             if(tbKamIn.getSelectedRow()>-1){
-                if(!tbKamIn.getValueAt(tbKamIn.getSelectedRow(),16).toString().equals("")){
+                if(!tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),16).toString().equals("")){
                     aksi="kembali";
                     NoInventaris.setEditable(false);
                     Sequel.cariIsi("select inventaris.status_barang from inventaris where inventaris.no_inventaris='"+NoInventaris.getText()+"'",Status);
@@ -917,10 +917,10 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
                 }
             }else if(aksi.equals("steril")){
                 if(Sequel.menyimpantf("inventaris_sterilisasi_cssd","'"+Keterangan.getText()+"','"+NoSirkulasi.getText()+"','"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19)+"','"+NIP.getText()+"'","No.Sirkulasi")==true){
-                    tbKamIn.setValueAt(Keterangan.getText(),tbKamIn.getSelectedRow(),13);
-                    tbKamIn.setValueAt(NIP.getText(),tbKamIn.getSelectedRow(),14);
-                    tbKamIn.setValueAt(NamaPetugas.getText(),tbKamIn.getSelectedRow(),15);
-                    tbKamIn.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),tbKamIn.getSelectedRow(),16);
+                    tabMode.setValueAt(Keterangan.getText(),tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),13);
+                    tabMode.setValueAt(NIP.getText(),tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),14);
+                    tabMode.setValueAt(NamaPetugas.getText(),tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),15);
+                    tabMode.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),16);
                     WindowInput.dispose();
                 }
             }else if(aksi.equals("kembali")){
@@ -1148,7 +1148,7 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
             tbKamIn.requestFocus();
         }else if((! Merk.getText().trim().equals(""))&&(TOut.getText().trim().equals(""))){
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),16).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),16).toString().equals("")){
                     aksi="steril";
                     NoInventaris.setEditable(false);
                     Sequel.cariIsi("select inventaris.status_barang from inventaris where inventaris.no_inventaris='"+NoInventaris.getText()+"'",Status);
@@ -1157,7 +1157,7 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
                     WindowInput.setAlwaysOnTop(false);
                     WindowInput.setVisible(true);
                 }else{
-                    JOptionPane.showMessageDialog(null,"Maaf, sudah dilakukan sterilisasi pada tanggal "+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),16).toString()+"...!!!");
+                    JOptionPane.showMessageDialog(null,"Maaf, sudah dilakukan sterilisasi pada tanggal "+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),16).toString()+"...!!!");
                 }
             }
         }
@@ -1356,13 +1356,13 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
         TOut.setText("");
         TIn.setText("");
         if(tbKamIn.getSelectedRow()!= -1){
-            NoSirkulasi.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
-            NoInventaris.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString());
-            NamaBarang.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),2).toString()+", "+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),3).toString());
-            Jenis.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString());
-            Merk.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString());
+            NoSirkulasi.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString());
+            NoInventaris.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),1).toString());
+            NamaBarang.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),2).toString()+", "+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),3).toString());
+            Jenis.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),9).toString());
+            Merk.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),5).toString());
             //TIn.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),11).toString());
-            TOut.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString());
+            TOut.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),20).toString());
         }
     }
 

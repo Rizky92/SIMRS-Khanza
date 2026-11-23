@@ -877,7 +877,7 @@ public final class KeuanganPengajuanBiaya extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else {
-                if(akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString())||akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString())){
+                if(akses.getkode().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString())||akses.getkode().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString())){
                     hapus();
                 }else{
                     JOptionPane.showMessageDialog(null,"Harus oleh yang mengajukan/P.J.Terkait sesuai user login..!!");
@@ -922,7 +922,7 @@ public final class KeuanganPengajuanBiaya extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else {
-                    if(akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString())||akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString())){
+                    if(akses.getkode().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString())||akses.getkode().equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString())){
                         ganti();
                     }else{
                         JOptionPane.showMessageDialog(null,"Harus oleh yang mengajukan/P.J.Terkait sesuai user login..!!");
@@ -1381,23 +1381,23 @@ public final class KeuanganPengajuanBiaya extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoPengajuan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Bidang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            Departemen.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            Urgensi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            Uraian.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            Tujuan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            TargetSasaran.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            Lokasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            Jumlah.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            Harga.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            Total.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            KdPetugasPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            NmPetugasPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
+            NoPengajuan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            KdPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            NmPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            Bidang.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            Departemen.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            Urgensi.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            Uraian.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            Tujuan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            TargetSasaran.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            Lokasi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            Jumlah.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            Harga.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            Total.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            Keterangan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            KdPetugasPJ.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+            NmPetugasPJ.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
         }
     }
 
@@ -1444,25 +1444,25 @@ public final class KeuanganPengajuanBiaya extends javax.swing.JDialog {
                 NoPengajuan.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),KdPetugas.getText(),Urgensi.getSelectedItem().toString(),
                 Uraian.getText(),Tujuan.getText(),TargetSasaran.getText(),Lokasi.getText(),Jumlah.getText(),Harga.getText(),
                 Double.toString(Double.parseDouble(Harga.getText())*Double.parseDouble(Jumlah.getText())),Keterangan.getText(),KdPetugasPJ.getText(),
-                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             })==true){
-                tbObat.setValueAt(NoPengajuan.getText(),tbObat.getSelectedRow(),0);
-                tbObat.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+""),tbObat.getSelectedRow(),1);
-                tbObat.setValueAt(KdPetugas.getText(),tbObat.getSelectedRow(),2);
-                tbObat.setValueAt(NmPetugas.getText(),tbObat.getSelectedRow(),3);
-                tbObat.setValueAt(Bidang.getText(),tbObat.getSelectedRow(),4);
-                tbObat.setValueAt(Departemen.getText(),tbObat.getSelectedRow(),5);
-                tbObat.setValueAt(Urgensi.getSelectedItem().toString(),tbObat.getSelectedRow(),6);
-                tbObat.setValueAt(Uraian.getText(),tbObat.getSelectedRow(),7);
-                tbObat.setValueAt(Tujuan.getText(),tbObat.getSelectedRow(),8);
-                tbObat.setValueAt(TargetSasaran.getText(),tbObat.getSelectedRow(),9);
-                tbObat.setValueAt(Lokasi.getText(),tbObat.getSelectedRow(),10);
-                tbObat.setValueAt(Double.parseDouble(Jumlah.getText()),tbObat.getSelectedRow(),11);
-                tbObat.setValueAt(Double.parseDouble(Harga.getText()),tbObat.getSelectedRow(),12);
-                tbObat.setValueAt((Double.parseDouble(Harga.getText())*Double.parseDouble(Jumlah.getText())),tbObat.getSelectedRow(),13);
-                tbObat.setValueAt(Keterangan.getText(),tbObat.getSelectedRow(),14);
-                tbObat.setValueAt(KdPetugasPJ.getText(),tbObat.getSelectedRow(),15);
-                tbObat.setValueAt(NmPetugasPJ.getText(),tbObat.getSelectedRow(),16);
+                tabMode.setValueAt(NoPengajuan.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0);
+                tabMode.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+""),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1);
+                tabMode.setValueAt(KdPetugas.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2);
+                tabMode.setValueAt(NmPetugas.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3);
+                tabMode.setValueAt(Bidang.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4);
+                tabMode.setValueAt(Departemen.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5);
+                tabMode.setValueAt(Urgensi.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6);
+                tabMode.setValueAt(Uraian.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7);
+                tabMode.setValueAt(Tujuan.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8);
+                tabMode.setValueAt(TargetSasaran.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9);
+                tabMode.setValueAt(Lokasi.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10);
+                tabMode.setValueAt(Double.parseDouble(Jumlah.getText()),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11);
+                tabMode.setValueAt(Double.parseDouble(Harga.getText()),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12);
+                tabMode.setValueAt((Double.parseDouble(Harga.getText())*Double.parseDouble(Jumlah.getText())),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13);
+                tabMode.setValueAt(Keterangan.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14);
+                tabMode.setValueAt(KdPetugasPJ.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15);
+                tabMode.setValueAt(NmPetugasPJ.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16);
                 emptTeks();
                 hitung();
         }
@@ -1471,14 +1471,14 @@ public final class KeuanganPengajuanBiaya extends javax.swing.JDialog {
     private void hitung(){
         total=0;
         for(i=0;i<tbObat.getRowCount();i++){
-            total=total+Valid.SetAngka(tbObat.getValueAt(i,13).toString());
+            total=total+Valid.SetAngka(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString());
         }
         LCount.setText(""+tbObat.getRowCount());
         LCount1.setText(Valid.SetAngka(total));
     }
 
     private void hapus() {
-        if(Sequel.meghapustf("pengajuan_biaya","no_pengajuan",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString())==true){
+        if(Sequel.meghapustf("pengajuan_biaya","no_pengajuan",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString())==true){
             tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
             LCount.setText(""+tbObat.getRowCount());
             emptTeks();

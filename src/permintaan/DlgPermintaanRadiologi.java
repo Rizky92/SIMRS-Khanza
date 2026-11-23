@@ -569,6 +569,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbPemeriksaan.setAutoCreateRowSorter(true);
         tbPemeriksaan.setName("tbPemeriksaan"); // NOI18N
         tbPemeriksaan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -681,7 +682,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
                     int row=tbPemeriksaan.getSelectedColumn();
                     if((row!=0)||(row!=20)){
                         if(tbPemeriksaan.getSelectedRow()>-1){
-                            tbPemeriksaan.setValueAt(true,tbPemeriksaan.getSelectedRow(),0);
+                            tabMode.setValueAt(true,tbPemeriksaan.convertRowIndexToModel(tbPemeriksaan.getSelectedRow()),0);
                         }
                         TCariPeriksa.setText("");
                         TCariPeriksa.requestFocus();
@@ -709,7 +710,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         jml=0;
         for(i=0;i<tbPemeriksaan.getRowCount();i++){
-            if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
+            if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),0).toString().equals("true")){
                 jml++;
             }
         }
@@ -801,8 +802,8 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         jml=0;
-        for(i=0;i<tbPemeriksaan.getRowCount();i++){
-            if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
+        for(i=0;i<tabMode.getRowCount();i++){
+            if(tabMode.getValueAt(i,0).toString().equals("true")){
                 jml++;
             }
         }
@@ -817,11 +818,11 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
         }else{
 
             Sequel.queryu("delete from temporary_permintaan_radiologi");
-            for(i=0;i<tbPemeriksaan.getRowCount();i++){
-                if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
+            for(i=0;i<tabMode.getRowCount();i++){
+                if(tabMode.getValueAt(i,0).toString().equals("true")){
                     Sequel.menyimpan("temporary_permintaan_radiologi","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                        "0",tbPemeriksaan.getValueAt(i,1).toString(),
-                        tbPemeriksaan.getValueAt(i,2).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+                        "0",tabMode.getValueAt(i,1).toString(),
+                        tabMode.getValueAt(i,2).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
                     });
                 }
             }
@@ -1050,7 +1051,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
         try{
             jml=0;
             for(i=0;i<tbPemeriksaan.getRowCount();i++){
-                if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
+                if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -1061,14 +1062,15 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
 
             index=0;
             for(i=0;i<tbPemeriksaan.getRowCount();i++){
-                if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
+                if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode[index]=tbPemeriksaan.getValueAt(i,1).toString();
-                    nama[index]=tbPemeriksaan.getValueAt(i,2).toString();
+                    kode[index]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),1).toString();
+                    nama[index]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),2).toString();
                     index++;
                 }
             }
 
+            tbPemeriksaan.suspendSorting();
             Valid.tabelKosong(tabMode);
             for(i=0;i<jml;i++){
                 tabMode.addRow(new Object[] {pilih[i],kode[i],nama[i]});
@@ -1168,14 +1170,17 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
             response = null;
             root = null;
         }
+        tbPemeriksaan.resumeSorting();
     }
 
     public void isReset(){
         jml=tbPemeriksaan.getRowCount();
         for(i=0;i<jml;i++){
-            tbPemeriksaan.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbPemeriksaan.convertRowIndexToModel(i),0);
         }
+        tbPemeriksaan.suspendSorting();
         Valid.tabelKosong(tabMode);
+        tbPemeriksaan.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1414,9 +1419,9 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
                     });
                     if(sukses){
                         for(i=0;i<tbPemeriksaan.getRowCount();i++){
-                            if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
+                            if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),0).toString().equals("true")){
                                 Sequel.menyimpantfSmc("permintaan_pemeriksaan_radiologi","noorder, kd_jenis_prw, stts_bayar",
-                                    TNoPermintaan.getText(),tbPemeriksaan.getValueAt(i,1).toString(),"Belum");
+                                    TNoPermintaan.getText(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),1).toString(),"Belum");
                             }
                         }
                     } else {

@@ -1026,9 +1026,9 @@ public final class DlgPetugas extends javax.swing.JDialog {
                 */
                 Sequel.mengupdatetfSmc("pegawai", "nik = ?, nama = ?, jk = ?, tmp_lahir = ?, tgl_lahir = ?, alamat = ?, agama = ?", "nik = ?", TNip.getText(), TNm.getText(),
                     CmbJk.getSelectedItem().toString().replaceAll("PEREMPUAN", "Wanita").replaceAll("LAKI-LAKI", "Pria").trim(), TTmp.getText(), Valid.getTglSmc(DTPLahir),
-                    TAlmt.getText(), cmbAgama.getSelectedItem().toString(), (String) tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 0));
+                    TAlmt.getText(), cmbAgama.getSelectedItem().toString(), (String) tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()), 0));
                 Sequel.mengedit(
-                    "petugas","nip='"+tbPetugas.getValueAt(tbPetugas.getSelectedRow(),0).toString()+"'","nip='"+TNip.getText()+"',nama='"+TNm.getText()+"',"+
+                    "petugas","nip='"+tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),0).toString()+"'","nip='"+TNip.getText()+"',nama='"+TNm.getText()+"',"+
                     "jk='"+CmbJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"',tmp_lahir='"+TTmp.getText()+"',"+
                     "tgl_lahir='"+Valid.SetTgl(DTPLahir.getSelectedItem()+"")+"',gol_darah='"+CMbGd.getSelectedItem()+"',agama='"+cmbAgama.getSelectedItem()+"',"+
                     "stts_nikah='"+CmbStts.getSelectedItem()+"',alamat='"+TAlmt.getText()+"',kd_jbtn='"+KdJbtn.getText()+"',no_telp='"+TTlp.getText()+"',"+
@@ -1434,10 +1434,10 @@ public final class DlgPetugas extends javax.swing.JDialog {
     private void getData() {
         int row=tbPetugas.getSelectedRow();
         if(row!= -1){
-            TNip.setText(tbPetugas.getValueAt(row,0).toString());
-            TNm.setText(tbPetugas.getValueAt(row,1).toString());
+            TNip.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),0).toString());
+            TNm.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),1).toString());
 
-            switch (tbPetugas.getValueAt(row,2).toString()) {
+            switch (tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),2).toString()) {
                 case "L":
                     CmbJk.setSelectedItem("LAKI-LAKI");
                     break;
@@ -1446,17 +1446,17 @@ public final class DlgPetugas extends javax.swing.JDialog {
                     break;
             }
 
-            TTmp.setText(tbPetugas.getValueAt(row,3).toString());
+            TTmp.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),3).toString());
 
-            CMbGd.setSelectedItem(tbPetugas.getValueAt(row,5).toString());
-            cmbAgama.setSelectedItem(tbPetugas.getValueAt(row,6).toString());
-            CmbStts.setSelectedItem(tbPetugas.getValueAt(row,7).toString());
-            TAlmt.setText(tbPetugas.getValueAt(row,8).toString());
-            Sequel.cariIsi("select jabatan.kd_jbtn from jabatan where jabatan.nm_jbtn='"+tbPetugas.getValueAt(row,9).toString()+"'", KdJbtn);
-            TJbtn.setText(tbPetugas.getValueAt(row,9).toString());
-            TTlp.setText(tbPetugas.getValueAt(row,10).toString());
-            Email.setText(tbPetugas.getValueAt(row,11).toString());
-            Valid.SetTgl(DTPLahir,tbPetugas.getValueAt(row,4).toString());
+            CMbGd.setSelectedItem(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),5).toString());
+            cmbAgama.setSelectedItem(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),6).toString());
+            CmbStts.setSelectedItem(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),7).toString());
+            TAlmt.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),8).toString());
+            Sequel.cariIsi("select jabatan.kd_jbtn from jabatan where jabatan.nm_jbtn='"+tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),9).toString()+"'", KdJbtn);
+            TJbtn.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),9).toString());
+            TTlp.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),10).toString());
+            Email.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),11).toString());
+            Valid.SetTgl(DTPLahir,tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),4).toString());
         }
     }
 

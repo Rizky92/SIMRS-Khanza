@@ -343,27 +343,27 @@ public final class IPSRSCariPengambilanPenunjangUTD extends javax.swing.JDialog 
         }else{
             Sequel.AutoComitFalse();
             sukses=true;
-            if(Sequel.queryutf("delete from utd_pengambilan_penunjang where kode_brng='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),0)+"' "+
-                          "and nip='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),6)+"' "+
-                          "and tanggal='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString()+"' "+
-                          "and jml='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),2)+"'")==true){
-                Trackbarang.catatRiwayat(tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString(),Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString()),0,"Pengambilan UTD", akses.getkode(),"Hapus");
+            if(Sequel.queryutf("delete from utd_pengambilan_penunjang where kode_brng='"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0)+"' "+
+                          "and nip='"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),6)+"' "+
+                          "and tanggal='"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),7).toString()+"' "+
+                          "and jml='"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2)+"'")==true){
+                Trackbarang.catatRiwayat(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString(),Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2).toString()),0,"Pengambilan UTD", akses.getkode(),"Hapus");
                 Sequel.mengedit("ipsrsbarang","kode_brng=?","stok=stok+?",2,new String[]{
-                                    tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString(),
-                                    tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString()
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString()
                                 });
-                Sequel.menyimpan("utd_stok_penunjang","'"+tbKamar.getValueAt(tbKamar.getSelectedRow(),0)+"','"+tbKamar.getValueAt(tbKamar.getSelectedRow(),2)+"','"+tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString()+"'",
-                                 "stok=stok-"+tbKamar.getValueAt(tbKamar.getSelectedRow(),2),"kode_brng='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),0)+"'");
+                Sequel.menyimpan("utd_stok_penunjang","'"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0)+"','"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2)+"','"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3).toString()+"'",
+                                 "stok=stok-"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2),"kode_brng='"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0)+"'");
             }else{
                 sukses=false;
             }
 
             if(sukses==true){
                 Sequel.deleteTampJurnal();
-                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Pengambilan_Penunjang_Utd from set_akun"), "PENGAMBILAN BARANG NON MEDIS UTD", 0, Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString()))==false){
+                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Pengambilan_Penunjang_Utd from set_akun"), "PENGAMBILAN BARANG NON MEDIS UTD", 0, Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 4).toString()))==false){
                     sukses=false;
                 }
-                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Pengambilan_Penunjang_Utd from set_akun"), "PERSEDIAAN BARANG NON MEDIS", Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString()), 0)==false){
+                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Pengambilan_Penunjang_Utd from set_akun"), "PERSEDIAAN BARANG NON MEDIS", Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 4).toString()), 0)==false){
                     sukses=false;
                 }
                 if(sukses==true){

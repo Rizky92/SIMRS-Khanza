@@ -114,6 +114,7 @@
               <SubComponents>
                 <Component class="widget.Table" name="tbBangsal">
                   <Properties>
+                    <Property name="sortable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="tbBangsal" noResource="true"/>
                   </Properties>
                 </Component>
@@ -143,6 +144,7 @@
               <SubComponents>
                 <Component class="widget.Table" name="tbBangsal2">
                   <Properties>
+                    <Property name="sortable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="tbBangsal2" noResource="true"/>
                   </Properties>
                 </Component>
@@ -172,6 +174,7 @@
               <SubComponents>
                 <Component class="widget.Table" name="tbBangsal3">
                   <Properties>
+                    <Property name="sortable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="tbBangsal3" noResource="true"/>
                   </Properties>
                 </Component>

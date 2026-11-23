@@ -1237,29 +1237,29 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
                                             append("</tr>");
                                 for (int i = 0; i < tabModePermintaan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,12).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,13).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,14).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,15).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,16).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,17).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,18).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,19).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,20).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,21).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,22).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,13).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,14).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,15).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,16).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,17).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,18).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,19).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,20).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,21).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,22).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -1317,29 +1317,29 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
                                             append("</tr>");
                                 for (int i = 0; i < tabModePermintaan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,12).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,13).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,14).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,15).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,16).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,17).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,18).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,19).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,20).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,21).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbPermintaan.getValueAt(i,22).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,13).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,14).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,15).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,16).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,17).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,18).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,19).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,20).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,21).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModePermintaan.getValueAt(i,22).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -1374,7 +1374,7 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
                                     "\"Waktu Diterima\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Alamat Pelanggan\";\"Kegiatan Usaha\";\"Personal Dihubungi\";\"Kontak Pelanggan\";\"NIP\";\"Sampel Diterima Oleh\";\"Waktu Sampling\";\"Lokasi Sampling\";\"Deskripsi Sampel\";\"Jenis Sampel\";\"Jml.Sampel\";\"Sampling Dilakukan Oleh\";\"Volume Sampel\";\"Wadah Sampel\";\"Kondisi Wadah Sampel\";\"Kode Sampel\";\"Nama Sampel\";\"Baku Mutu\";\"Status\"\n"
                                 );
                                 for (int i = 0; i < tabModePermintaan.getRowCount(); i++) {
-                                    htmlContent.append("\"").append(tbPermintaan.getValueAt(i,0).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,1).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,2).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,3).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,4).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,5).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,6).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,7).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,8).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,9).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,10).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,11).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,12).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,13).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,14).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,15).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,16).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,17).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,18).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,19).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,20).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,21).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,22).toString()).append("\"\n");
+                                    htmlContent.append("\"").append(tabModePermintaan.getValueAt(i,0).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,1).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,2).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,3).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,4).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,5).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,6).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,7).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,8).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,9).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,10).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,11).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,12).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,13).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,14).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,15).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,16).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,17).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,18).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,19).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,20).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,21).toString()).append("\";\"").append(tabModePermintaan.getValueAt(i,22).toString()).append("\"\n");
                                 }
                                 f = new File("DataPermintaanPengujianSampel.csv");
                                 bw = new BufferedWriter(new FileWriter(f));
@@ -1451,35 +1451,35 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
                                             append("</tr>");
                                 for (int i = 0; i < tabModeRekapPermintaan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,12).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,13).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,14).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,15).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,16).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,17).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,18).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,19).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,20).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,21).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,22).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,23).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,24).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,25).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,26).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,27).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,28).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,13).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,14).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,15).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,16).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,17).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,18).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,19).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,20).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,21).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,22).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,23).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,24).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,25).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,26).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,27).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,28).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -1543,35 +1543,35 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
                                             append("</tr>");
                                 for (int i = 0; i < tabModeRekapPermintaan.getRowCount(); i++) {
                                     htmlContent.append("<tr class='isi'>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,0).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,1).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,2).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,3).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,4).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,5).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,6).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,7).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,8).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,9).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,10).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,11).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,12).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,13).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,14).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,15).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,16).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,17).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,18).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,19).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,20).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,21).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,22).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,23).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,24).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,25).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,26).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,27).toString()).append("</td>").
-                                                    append("<td valign='top'>").append(tbRekapPermintaan.getValueAt(i,28).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,0).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,1).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,2).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,3).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,4).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,5).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,6).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,7).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,8).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,9).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,10).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,11).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,12).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,13).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,14).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,15).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,16).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,17).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,18).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,19).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,20).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,21).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,22).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,23).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,24).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,25).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,26).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,27).toString()).append("</td>").
+                                                    append("<td valign='top'>").append(tabModeRekapPermintaan.getValueAt(i,28).toString()).append("</td>").
                                                 append("</tr>");
                                 }
                                 LoadHTML.setText(
@@ -1606,7 +1606,7 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
                                     "\"Waktu Diterima\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Alamat Pelanggan\";\"Kegiatan Usaha\";\"Personal Dihubungi\";\"Kontak Pelanggan\";\"NIP\";\"Sampel Diterima Oleh\";\"Waktu Sampling\";\"Lokasi Sampling\";\"Deskripsi Sampel\";\"Jenis Sampel\";\"Jml.Sampel\";\"Sampling Dilakukan Oleh\";\"Volume Sampel\";\"Wadah Sampel\";\"Kondisi Wadah Sampel\";\"Kode Sampel\";\"Nama Sampel\";\"Baku Mutu\";\"Status\";\"Kode Param\";\"Nama Parameter\";\"Metode Pengujian\";\"Satuan\";\"Kategori\";\"Nilai Normal\"\n"
                                 );
                                 for (int i = 0; i < tabModeRekapPermintaan.getRowCount(); i++) {
-                                    htmlContent.append("\"").append(tbRekapPermintaan.getValueAt(i,0).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,1).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,2).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,3).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,4).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,5).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,6).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,7).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,8).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,9).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,10).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,11).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,12).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,13).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,14).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,15).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,16).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,17).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,18).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,19).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,20).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,21).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,22).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,23).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,24).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,25).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,26).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,27).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,28).toString()).append("\"\n");
+                                    htmlContent.append("\"").append(tabModeRekapPermintaan.getValueAt(i,0).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,1).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,2).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,3).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,4).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,5).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,6).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,7).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,8).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,9).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,10).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,11).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,12).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,13).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,14).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,15).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,16).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,17).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,18).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,19).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,20).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,21).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,22).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,23).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,24).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,25).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,26).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,27).toString()).append("\";\"").append(tabModeRekapPermintaan.getValueAt(i,28).toString()).append("\"\n");
                                 }
                                 f = new File("DataRekapPermintaanPengujianSampel.csv");
                                 bw = new BufferedWriter(new FileWriter(f));
@@ -1676,13 +1676,13 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
 
     private void ppDapatDilayaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDapatDilayaniActionPerformed
         if(tbPermintaan.getSelectedRow()!= -1){
-            if(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),22).toString().equals("Permintaan Baru")){
-                NoPermintaanVerifikasi2.setText(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString());
-                AsalPermintaan2.setText(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),2).toString()+" "+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),3).toString());
+            if(tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),22).toString().equals("Permintaan Baru")){
+                NoPermintaanVerifikasi2.setText(tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),1).toString());
+                AsalPermintaan2.setText(tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),2).toString()+" "+tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),3).toString());
                 WindowInput2.setVisible(true);
                 Keterangan2.requestFocus();
             }else {
-                JOptionPane.showMessageDialog(null,"Status permintaan sudah "+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),22).toString()+"...!");
+                JOptionPane.showMessageDialog(null,"Status permintaan sudah "+tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),22).toString()+"...!");
             }
         }else{
             JOptionPane.showMessageDialog(null,"Silahkan pilih data permintaan...!!!");
@@ -1714,8 +1714,8 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
                         "and labkesling_nilai_normal_baku_mutu.kode_sampel=? order by labkesling_detail_permintaan_pengujian_sampel.kode_parameter"
                     );
                     try {
-                        ps.setString(1,tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString());
-                        ps.setString(2,tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),19).toString());
+                        ps.setString(1,tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),1).toString());
+                        ps.setString(2,tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),19).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModeDetailPermintaan.addRow(new Object[]{
@@ -1761,29 +1761,29 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
                     Sequel.queryu("delete from temporary");
                     for(i=0;i<tbDetailPermintaan.getRowCount();i++){
                         Sequel.menyimpan("temporary","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                            "0",tbDetailPermintaan.getValueAt(i,0).toString(),tbDetailPermintaan.getValueAt(i,1).toString(),tbDetailPermintaan.getValueAt(i,2).toString(),tbDetailPermintaan.getValueAt(i,4).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+                            "0",tabModeDetailPermintaan.getValueAt(tbDetailPermintaan.convertRowIndexToModel(i),0).toString(),tabModeDetailPermintaan.getValueAt(tbDetailPermintaan.convertRowIndexToModel(i),1).toString(),tabModeDetailPermintaan.getValueAt(tbDetailPermintaan.convertRowIndexToModel(i),2).toString(),tabModeDetailPermintaan.getValueAt(tbDetailPermintaan.convertRowIndexToModel(i),4).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
                         });
                     }
                     Map<String, Object> param = new HashMap<>();
-                    param.put("namapelanggan",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),3).toString().trim());
-                    param.put("alamatpelanggan",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),4).toString().trim());
-                    param.put("kegiatanusaha",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),5).toString().trim());
-                    param.put("personaldihubungi",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),6).toString().trim());
-                    param.put("kontakpelanggan",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),7).toString().trim());
-                    param.put("lokasisampling",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),11).toString().trim());
-                    param.put("waktusampling",Valid.SetTgl5(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),10).toString().trim()));
-                    param.put("jenissampel",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),13).toString().trim());
-                    param.put("jumlahsampel",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),14).toString().trim());
-                    param.put("volumesampel",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),16).toString().trim());
-                    param.put("wadahsampel",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),17).toString().trim());
-                    param.put("kondisiwadah",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),18).toString().trim());
-                    param.put("kodesampel",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),19).toString().trim()+" "+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),20).toString().trim());
-                    param.put("petugassampling",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),15).toString().trim());
-                    param.put("waktupenerimaan",Valid.SetTgl5(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),0).toString().trim()));
-                    param.put("deskripsisampel",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),12).toString().trim());
-                    param.put("bakumutu",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),21).toString().trim());
-                    param.put("petugaspelayanan",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),9).toString().trim());
-                    param.put("nomorpermintaan",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString().trim());
+                    param.put("namapelanggan",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),3).toString().trim());
+                    param.put("alamatpelanggan",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),4).toString().trim());
+                    param.put("kegiatanusaha",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),5).toString().trim());
+                    param.put("personaldihubungi",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),6).toString().trim());
+                    param.put("kontakpelanggan",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),7).toString().trim());
+                    param.put("lokasisampling",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),11).toString().trim());
+                    param.put("waktusampling",Valid.SetTgl5(tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),10).toString().trim()));
+                    param.put("jenissampel",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),13).toString().trim());
+                    param.put("jumlahsampel",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),14).toString().trim());
+                    param.put("volumesampel",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),16).toString().trim());
+                    param.put("wadahsampel",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),17).toString().trim());
+                    param.put("kondisiwadah",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),18).toString().trim());
+                    param.put("kodesampel",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),19).toString().trim()+" "+tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),20).toString().trim());
+                    param.put("petugassampling",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),15).toString().trim());
+                    param.put("waktupenerimaan",Valid.SetTgl5(tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),0).toString().trim()));
+                    param.put("deskripsisampel",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),12).toString().trim());
+                    param.put("bakumutu",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),21).toString().trim());
+                    param.put("petugaspelayanan",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),9).toString().trim());
+                    param.put("nomorpermintaan",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),1).toString().trim());
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
@@ -1791,8 +1791,8 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("emailrs",akses.getemailrs());
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),8).toString().trim());
-                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),9).toString().trim()+"\nID "+(finger.equals("")?tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),8).toString().trim():finger)+"\n"+Valid.SetTgl5(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),0).toString().trim()));
+                    String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),8).toString().trim());
+                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),9).toString().trim()+"\nID "+(finger.equals("")?tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),8).toString().trim():finger)+"\n"+Valid.SetTgl5(tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),0).toString().trim()));
                     Valid.MyReport("rptPermintaanPengujianSampelLaboratKesling.jasper","report","::[ Permintaan Pengujian Sampel Laborat Kesehatan Lingkungan ]::",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else{
@@ -1806,13 +1806,13 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
 
     private void ppTidakDapatDilayaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTidakDapatDilayaniActionPerformed
         if(tbPermintaan.getSelectedRow()!= -1){
-            if(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),22).toString().equals("Permintaan Baru")){
-                NoPermintaanVerifikasi.setText(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString());
-                AsalPermintaan.setText(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),2).toString()+" "+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),3).toString());
+            if(tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),22).toString().equals("Permintaan Baru")){
+                NoPermintaanVerifikasi.setText(tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),1).toString());
+                AsalPermintaan.setText(tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),2).toString()+" "+tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),3).toString());
                 WindowInput.setVisible(true);
                 Keterangan.requestFocus();
             }else {
-                JOptionPane.showMessageDialog(null,"Status permintaan sudah "+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),22).toString()+"...!");
+                JOptionPane.showMessageDialog(null,"Status permintaan sudah "+tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),22).toString()+"...!");
             }
         }else{
             JOptionPane.showMessageDialog(null,"Silahkan pilih data permintaan...!!!");
@@ -1822,8 +1822,8 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(TabData.getSelectedIndex()==0){
             if(tbPermintaan.getSelectedRow()!= -1){
-                if(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),22).toString().equals("Permintaan Baru")){
-                    if(Sequel.queryutf("delete from labkesling_permintaan_pengujian_sampel where no_permintaan='"+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString()+"'")==true){
+                if(tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),22).toString().equals("Permintaan Baru")){
+                    if(Sequel.queryutf("delete from labkesling_permintaan_pengujian_sampel where no_permintaan='"+tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),1).toString()+"'")==true){
                         tabModePermintaan.removeRow(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()));
                         Valid.tabelKosong(tabModeDetailPermintaan);
                         LTotal.setText(tbPermintaan.getRowCount()+"");
@@ -1836,8 +1836,8 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
             }
         }else if(TabData.getSelectedIndex()==1){
             if(tbRekapPermintaan.getSelectedRow()!= -1){
-                if(tbRekapPermintaan.getValueAt(tbRekapPermintaan.getSelectedRow(),22).toString().equals("Permintaan Baru")){
-                    if(Sequel.queryutf("delete from labkesling_detail_permintaan_pengujian_sampel where no_permintaan='"+tbRekapPermintaan.getValueAt(tbRekapPermintaan.getSelectedRow(),1).toString()+"' and kode_parameter='"+tbRekapPermintaan.getValueAt(tbRekapPermintaan.getSelectedRow(),23).toString()+"'")==true){
+                if(tabModeRekapPermintaan.getValueAt(tbRekapPermintaan.convertRowIndexToModel(tbRekapPermintaan.getSelectedRow()),22).toString().equals("Permintaan Baru")){
+                    if(Sequel.queryutf("delete from labkesling_detail_permintaan_pengujian_sampel where no_permintaan='"+tabModeRekapPermintaan.getValueAt(tbRekapPermintaan.convertRowIndexToModel(tbRekapPermintaan.getSelectedRow()),1).toString()+"' and kode_parameter='"+tabModeRekapPermintaan.getValueAt(tbRekapPermintaan.convertRowIndexToModel(tbRekapPermintaan.getSelectedRow()),23).toString()+"'")==true){
                         tabModeRekapPermintaan.removeRow(tbRekapPermintaan.convertRowIndexToModel(tbRekapPermintaan.getSelectedRow()));
                         LTotal.setText(tbRekapPermintaan.getRowCount()+"");
                     }
@@ -1879,8 +1879,8 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
             if(Sequel.menyimpantf("labkesling_permintaan_pengujian_sampel_tidak_dilayani","?,?","No.Permintaan",2,new String[]{
                 NoPermintaanVerifikasi.getText(),Keterangan.getText()
             })==true){
-                Sequel.queryu("update labkesling_permintaan_pengujian_sampel set status='Tidak Dapat Dilayani' where no_permintaan='"+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString().trim()+"'");
-                tbPermintaan.setValueAt("Tidak Dapat Dilayani",tbPermintaan.getSelectedRow(),22);
+                Sequel.queryu("update labkesling_permintaan_pengujian_sampel set status='Tidak Dapat Dilayani' where no_permintaan='"+tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),1).toString().trim()+"'");
+                tabModePermintaan.setValueAt("Tidak Dapat Dilayani",tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),22);
                 Keterangan.setText("");
                 WindowInput.dispose();
             }
@@ -1926,8 +1926,8 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
             if(Sequel.menyimpantf("labkesling_permintaan_pengujian_sampel_dilayani","?,?,'Belum Ada Penugasan'","No.Permintaan",2,new String[]{
                 NoPermintaanVerifikasi2.getText(),Keterangan2.getText()
             })==true){
-                Sequel.queryu("update labkesling_permintaan_pengujian_sampel set status='Dapat Dilayani' where no_permintaan='"+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString()+"'");
-                tbPermintaan.setValueAt("Dapat Dilayani",tbPermintaan.getSelectedRow(),22);
+                Sequel.queryu("update labkesling_permintaan_pengujian_sampel set status='Dapat Dilayani' where no_permintaan='"+tabModePermintaan.getValueAt(tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),1).toString()+"'");
+                tabModePermintaan.setValueAt("Dapat Dilayani",tbPermintaan.convertRowIndexToModel(tbPermintaan.getSelectedRow()),22);
                 Keterangan2.setText("");
                 WindowInput2.dispose();
             }

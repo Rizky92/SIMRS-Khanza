@@ -718,6 +718,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbDetailPK">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbDetailPK" noResource="true"/>
                       </Properties>
                       <AuxValues>
@@ -832,6 +833,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbDetailMB">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbDetailMB" noResource="true"/>
                       </Properties>
                       <AuxValues>

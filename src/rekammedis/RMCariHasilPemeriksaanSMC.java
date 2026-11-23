@@ -342,6 +342,7 @@ public final class RMCariHasilPemeriksaanSMC extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         String cari = TCari.getText().trim().toLowerCase();
         for (String[] pemeriksaan : PEMERIKSAAN) {
@@ -351,6 +352,7 @@ public final class RMCariHasilPemeriksaanSMC extends javax.swing.JDialog {
             muat(pemeriksaan, cari);
         }
         LCount.setText("" + tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     private boolean diminta(String nama) {

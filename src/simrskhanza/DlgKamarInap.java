@@ -5649,6 +5649,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbKamIn.setAutoCreateRowSorter(true);
         tbKamIn.setToolTipText("Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan");
         tbKamIn.setComponentPopupMenu(jPopupMenu1);
         tbKamIn.setName("tbKamIn"); // NOI18N
@@ -6249,7 +6250,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             "',ttl_biaya='"+ttlbiaya.getText()+"',stts_pulang='"+cmbStatus.getSelectedItem()+"',diagnosa_akhir='"+diagnosaakhir.getText()+"',lama='"+TJmlHari.getText()+"'")==true){
                         if(tbKamIn.getRowCount()>1){
                             try {
-                                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow()+1,0).toString().equals("")){
+                                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()+1),0).toString().equals("")){
                                     tabMode.removeRow(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()+1));
                                 }
                             } catch (Exception e) {
@@ -6419,15 +6420,15 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         if(tbKamIn.getRowCount()==0){
                             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
                             TCari.requestFocus();
-                        }else if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                        }else if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                             try {
                                 psanak=koneksi.prepareStatement(
                                     "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                                 try {
-                                    psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                                    psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                                     rs2=psanak.executeQuery();
                                     if(rs2.next()){
-                                        if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+                                        if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                                             JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                                             TCari.requestFocus();
                                         }else{
@@ -6525,12 +6526,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         if(tbKamIn.getRowCount()==0){
                             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
                             TCari.requestFocus();
-                        }else if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                        }else if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                             try {
                                 psanak=koneksi.prepareStatement(
                                     "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                                 try {
-                                    psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                                    psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                                     rs2=psanak.executeQuery();
                                     if(rs2.next()){
                                         akses.setform("DlgKamarInap");
@@ -6548,7 +6549,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                             akses.setkdbangsal(bangsal);
                                         }
 
-                                        if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+                                        if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                                             JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                                             TCari.requestFocus();
                                         }else{
@@ -6668,16 +6669,16 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
       }else{
           if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                   try {
-                      if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+                      if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                             JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                             TCari.requestFocus();
                       }else{
                            psanak=koneksi.prepareStatement(
                                 "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                           try {
-                                psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                                psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                                 rs2=psanak.executeQuery();
                                 if(rs2.next()){
                                       bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
@@ -6712,8 +6713,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                       if (!formrawatinap.isVisible()) {
                                             formrawatinap.emptTeks();
                                             formrawatinap.isCek();
-                                            formrawatinap.setKamar(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,7).toString());
-                                            formrawatinap.setJenisBayar(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,6).toString());
+                                            formrawatinap.setKamar(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),7).toString());
+                                            formrawatinap.setJenisBayar(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),6).toString());
                                             if(R1.isSelected()==true){
                                                 formrawatinap.setNoRm(rs2.getString("no_rawat2"),new Date(),new Date());
                                             }else if(R2.isSelected()==true){
@@ -6777,8 +6778,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     if (!formrawatinap.isVisible()) {
                         formrawatinap.emptTeks();
                         formrawatinap.isCek();
-                        formrawatinap.setKamar(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
-                        formrawatinap.setJenisBayar(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString());
+                        formrawatinap.setKamar(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
+                        formrawatinap.setJenisBayar(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),6).toString());
                         if(R1.isSelected()==true){
                             formrawatinap.setNoRm(norawat.getText(),new Date(),new Date());
                         }else if(R2.isSelected()==true){
@@ -6803,13 +6804,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
       }else{
           if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2 from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
                             "inner join ranap_gabung on ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 akses.setform("DlgKamarInap");
@@ -6895,12 +6896,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
       }else{
           if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 DlgRujuk dlgrjk=new DlgRujuk(null,false);
@@ -6958,12 +6959,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
       }else{
           if(tbKamIn.getSelectedRow()>-1){
-              if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+              if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                       try {
                           psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                           try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                   bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
@@ -7048,7 +7049,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
       }else{
           if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
                     tbKamIn.requestFocus();
                 }else{
@@ -7171,13 +7172,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
       }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2 from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
                             "inner join ranap_gabung on ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 DlgPemberianDiet rawatinap=new DlgPemberianDiet(null,false);
@@ -7186,11 +7187,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 rawatinap.emptTeks();
                                 rawatinap.isCek();
                                 if(R1.isSelected()==true){
-                                    rawatinap.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis")+" "+rs2.getString("nm_pasien"),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,20).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,9).toString(),new Date(),new Date());
+                                    rawatinap.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis")+" "+rs2.getString("nm_pasien"),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),20).toString(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),7).toString(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),9).toString(),new Date(),new Date());
                                 }else if(R2.isSelected()==true){
-                                    rawatinap.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis")+" "+rs2.getString("nm_pasien"),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,20).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,9).toString(),DTPCari1.getDate(),DTPCari2.getDate());
+                                    rawatinap.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis")+" "+rs2.getString("nm_pasien"),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),20).toString(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),7).toString(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),9).toString(),DTPCari1.getDate(),DTPCari2.getDate());
                                 }else if(R3.isSelected()==true){
-                                    rawatinap.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis")+" "+rs2.getString("nm_pasien"),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,20).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,9).toString(),DTPCari3.getDate(),DTPCari4.getDate());
+                                    rawatinap.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis")+" "+rs2.getString("nm_pasien"),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),20).toString(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),7).toString(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),9).toString(),DTPCari3.getDate(),DTPCari4.getDate());
                                 }
                                 rawatinap.setVisible(true);
                             }else{
@@ -7217,11 +7218,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     rawatinap.emptTeks();
                     rawatinap.isCek();
                     if(R1.isSelected()==true){
-                        rawatinap.setNoRm(TNoRwCari.getText(),TNoRMCari.getText()+" "+TPasienCari.getText(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString(),new Date(),new Date());
+                        rawatinap.setNoRm(TNoRwCari.getText(),TNoRMCari.getText()+" "+TPasienCari.getText(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),20).toString(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),9).toString(),new Date(),new Date());
                     }else if(R2.isSelected()==true){
-                        rawatinap.setNoRm(TNoRwCari.getText(),TNoRMCari.getText()+" "+TPasienCari.getText(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString(),DTPCari1.getDate(),DTPCari2.getDate());
+                        rawatinap.setNoRm(TNoRwCari.getText(),TNoRMCari.getText()+" "+TPasienCari.getText(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),20).toString(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),9).toString(),DTPCari1.getDate(),DTPCari2.getDate());
                     }else if(R3.isSelected()==true){
-                        rawatinap.setNoRm(TNoRwCari.getText(),TNoRMCari.getText()+" "+TPasienCari.getText(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString(),DTPCari3.getDate(),DTPCari4.getDate());
+                        rawatinap.setNoRm(TNoRwCari.getText(),TNoRMCari.getText()+" "+TPasienCari.getText(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),20).toString(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),9).toString(),DTPCari3.getDate(),DTPCari4.getDate());
                     }
                     rawatinap.setVisible(true);
                 }
@@ -7239,16 +7240,16 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
-                        if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+                        if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                             JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                             TCari.requestFocus();
                         }else{
                             psanak=koneksi.prepareStatement(
                                 "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                             try {
-                                psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                                psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                                 rs2=psanak.executeQuery();
                                 if(rs2.next()){
                                     akses.setform("DlgKamarInap");
@@ -7297,9 +7298,9 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
-                        if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+                        if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                             JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                             TCari.requestFocus();
                         }else{
@@ -7307,7 +7308,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2 from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
                                 "inner join ranap_gabung on ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
                             try {
-                                psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                                psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                                 rs2=psanak.executeQuery();
                                 if(rs2.next()){
                                     DlgTagihanOperasi dlgro=new DlgTagihanOperasi(null,false);
@@ -7350,15 +7351,15 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
       }else{
           if(tbKamIn.getSelectedRow()>-1){
-             if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+             if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                   try {
                       psanak=koneksi.prepareStatement(
                           "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                       try {
-                          psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                          psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                           rs2=psanak.executeQuery();
                           if(rs2.next()){
-                              if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+                              if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                                   JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                                   TCari.requestFocus();
                               }else{
@@ -7388,9 +7389,9 @@ public class DlgKamarInap extends javax.swing.JDialog {
                       JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                       TCari.requestFocus();
                 }else{
-                      Sequel.queryu("delete from operasi where no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0) +"'");
-                      Sequel.queryu("delete from beri_obat_operasi where no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0)+"'");
-                      Sequel.queryu("delete from laporan_operasi where no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0)+"'");
+                      Sequel.queryu("delete from operasi where no_rawat='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0) +"'");
+                      Sequel.queryu("delete from beri_obat_operasi where no_rawat='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0)+"'");
+                      Sequel.queryu("delete from laporan_operasi where no_rawat='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0)+"'");
                 }
              }
           }
@@ -7403,15 +7404,15 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
       }else{
           if(tbKamIn.getSelectedRow()>-1){
-             if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+             if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                   try {
                       psanak=koneksi.prepareStatement(
                           "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                       try {
-                          psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                          psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                           rs2=psanak.executeQuery();
                           if(rs2.next()){
-                              if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+                              if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                                   JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                                   TCari.requestFocus();
                              }else{
@@ -7440,7 +7441,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                       JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                       TCari.requestFocus();
                 }else{
-                    Sequel.queryu("delete from beri_obat_operasi where no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0) +"'");
+                    Sequel.queryu("delete from beri_obat_operasi where no_rawat='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0) +"'");
                 }
 
              }
@@ -7454,12 +7455,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
       }else{
           if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 akses.setform("DlgKamarInap");
@@ -7527,12 +7528,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
                  emptTeks();
                  tbKamIn.requestFocus();
         }else if((TOut.getText().length()==0)&&(norawat.getText().length()>0)){
-            norawatpindah.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 0).toString());
-            TNoRMpindah.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 1).toString());
-            TPasienpindah.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 2).toString());
-            kdkamarasal.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 20).toString());
-            tglmasuk = tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 11).toString();
-            jammasuk = tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 12).toString();
+            norawatpindah.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()), 0).toString());
+            TNoRMpindah.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()), 1).toString());
+            TPasienpindah.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()), 2).toString());
+            kdkamarasal.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()), 20).toString());
+            tglmasuk = tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()), 11).toString();
+            jammasuk = tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()), 12).toString();
             TKdBngsalasal.setText(Sequel.cariIsiSmc("select kd_bangsal from kamar where kd_kamar = ?", kdkamarasal.getText()));
             TBangsalasal.setText(Sequel.cariIsiSmc("select nm_bangsal from bangsal where kd_bangsal = ?", TKdBngsalasal.getText()));
             kdkamarpindah.setText("");
@@ -7838,7 +7839,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             }
                             if(tbKamIn.getRowCount()>1){
                                 try {
-                                    if(tbKamIn.getValueAt(tbKamIn.getSelectedRow()+1,0).toString().equals("")){
+                                    if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()+1),0).toString().equals("")){
                                         tabMode.removeRow(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()+1));
                                     }
                                 } catch (Exception e) {
@@ -7859,13 +7860,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2 from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
                             "inner join ranap_gabung on ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
@@ -7945,7 +7946,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             Sequel.mengedit("reg_periksa","no_rawat=?"," kd_pj=?",2,new String[]{kdpenjab.getText(),norawat.getText()});
             //Sequel.menyimpan("ubah_penjab","?,?,?,?","Ubah Jenis Bayar",4,new String[]{norawat.getText(),now,kdpj,kdpenjab.getText()});
             if(tbKamIn.getSelectedRow()>-1){
-                tbKamIn.setValueAt(nmpenjab.getText(),tbKamIn.getSelectedRow(),6);
+                tabMode.setValueAt(nmpenjab.getText(),tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),6);
             }
             WindowCaraBayar.dispose();
         }
@@ -8040,8 +8041,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='Sehat'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
-                    tbKamIn.setValueAt("Sehat",tbKamIn.getSelectedRow(),16);
+                    Sequel.mengedit("kamar","kd_kamar='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),20).toString()+"'","status='KOSONG'");
+                    tabMode.setValueAt("Sehat",tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),16);
                 }
             }
         }
@@ -8062,8 +8063,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='Rujuk'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
-                    tbKamIn.setValueAt("Rujuk",tbKamIn.getSelectedRow(),16);
+                    Sequel.mengedit("kamar","kd_kamar='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),20).toString()+"'","status='KOSONG'");
+                    tabMode.setValueAt("Rujuk",tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),16);
                 }
             }
         }
@@ -8084,8 +8085,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='APS'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
-                    tbKamIn.setValueAt("APS",tbKamIn.getSelectedRow(),16);
+                    Sequel.mengedit("kamar","kd_kamar='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),20).toString()+"'","status='KOSONG'");
+                    tabMode.setValueAt("APS",tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),16);
                 }
             }
         }
@@ -8106,8 +8107,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='+'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
-                    tbKamIn.setValueAt("+",tbKamIn.getSelectedRow(),16);
+                    Sequel.mengedit("kamar","kd_kamar='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),20).toString()+"'","status='KOSONG'");
+                    tabMode.setValueAt("+",tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),16);
                 }
             }
         }
@@ -8128,8 +8129,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='Meninggal'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
-                    tbKamIn.setValueAt("Meninggal",tbKamIn.getSelectedRow(),16);
+                    Sequel.mengedit("kamar","kd_kamar='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),20).toString()+"'","status='KOSONG'");
+                    tabMode.setValueAt("Meninggal",tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),16);
                 }
             }
         }
@@ -8150,8 +8151,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='Sembuh'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
-                    tbKamIn.setValueAt("Sembuh",tbKamIn.getSelectedRow(),16);
+                    Sequel.mengedit("kamar","kd_kamar='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),20).toString()+"'","status='KOSONG'");
+                    tabMode.setValueAt("Sembuh",tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),16);
                 }
             }
         }
@@ -8172,8 +8173,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='Membaik'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
-                    tbKamIn.setValueAt("Membaik",tbKamIn.getSelectedRow(),16);
+                    Sequel.mengedit("kamar","kd_kamar='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),20).toString()+"'","status='KOSONG'");
+                    tabMode.setValueAt("Membaik",tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),16);
                 }
             }
         }
@@ -8194,8 +8195,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='Pulang Paksa'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
-                    tbKamIn.setValueAt("Pulang Paksa",tbKamIn.getSelectedRow(),16);
+                    Sequel.mengedit("kamar","kd_kamar='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),20).toString()+"'","status='KOSONG'");
+                    tabMode.setValueAt("Pulang Paksa",tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),16);
                 }
             }
         }
@@ -8216,7 +8217,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='-'");
-                    tbKamIn.setValueAt("-",tbKamIn.getSelectedRow(),16);
+                    tabMode.setValueAt("-",tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),16);
                 }
             }
         }
@@ -8237,12 +8238,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 DlgDeposit deposit=new DlgDeposit(null,false);
@@ -8298,12 +8299,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 DlgResepObat resep=new DlgResepObat(null,false);
@@ -8409,8 +8410,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
-                    if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
+                    if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                         JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                         TCari.requestFocus();
                     }else{
@@ -8419,7 +8420,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2 from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
                                 "inner join ranap_gabung on ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
                             try {
-                                psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                                psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                                 rs2=psanak.executeQuery();
                                 if(rs2.next()){
                                     bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
@@ -8497,16 +8498,16 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
-                        if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+                        if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                             JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                             TCari.requestFocus();
                         }else{
                             psanak=koneksi.prepareStatement(
                                 "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                             try {
-                                psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                                psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                                 rs2=psanak.executeQuery();
                                 if(rs2.next()){
                                     DlgPeriksaRadiologi periksarad=new DlgPeriksaRadiologi(null,false);
@@ -8608,7 +8609,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     }else if(WindowInputKamar.isVisible()==false){
                         if(Sequel.mengedittf("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","diagnosa_akhir='"+key+"'")==true){
                             if(tbKamIn.getSelectedRow()!= -1){
-                                tbKamIn.setValueAt(key,tbKamIn.getSelectedRow(),10);
+                                tabMode.setValueAt(key,tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),10);
                             }
                         }
                     }
@@ -8825,7 +8826,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='-',tgl_keluar='0000-00-00',jam_keluar='00:00:00'");
                     if(tbKamIn.getRowCount()>1){
                         try {
-                            if(tbKamIn.getValueAt(tbKamIn.getSelectedRow()+1,0).toString().equals("")){
+                            if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()+1),0).toString().equals("")){
                                 tabMode.removeRow(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()+1));
                             }
                         } catch (Exception e) {
@@ -8843,12 +8844,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 DlgDiagnosaPenyakit diagnosa=new DlgDiagnosaPenyakit(null,false);
@@ -8888,7 +8889,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                         }else if(WindowInputKamar.isVisible()==false){
                                             if(Sequel.mengedittf("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","diagnosa_akhir='"+key+"'")==true){
                                                 if(tbKamIn.getSelectedRow()!= -1){
-                                                    tbKamIn.setValueAt(key,tbKamIn.getSelectedRow(),10);
+                                                    tabMode.setValueAt(key,tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),10);
                                                 }
                                             }
                                         }
@@ -8973,7 +8974,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             }else if(WindowInputKamar.isVisible()==false){
                                 if(Sequel.mengedittf("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","diagnosa_akhir='"+key+"'")==true){
                                     if(tbKamIn.getSelectedRow()!= -1){
-                                        tbKamIn.setValueAt(key,tbKamIn.getSelectedRow(),10);
+                                        tabMode.setValueAt(key,tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),10);
                                     }
                                 }
                             }
@@ -9023,12 +9024,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 DlgDpjp dpjp=new DlgDpjp(null,false);
@@ -9108,8 +9109,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
-                    if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
+                    if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                         JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                         TCari.requestFocus();
                     }else{
@@ -9117,7 +9118,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             psanak=koneksi.prepareStatement(
                                 "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                             try {
-                                psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                                psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                                 rs2=psanak.executeQuery();
                                 if(rs2.next()){
                                     akses.setform("DlgReturJual");
@@ -9137,7 +9138,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                     DlgReturJual returjual=new DlgReturJual(null,false);
                                     returjual.emptTeks();
                                     returjual.isCek();
-                                    returjual.setPasien(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString(),rs2.getString("no_rawat2"));
+                                    returjual.setPasien(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),1).toString(),rs2.getString("no_rawat2"));
                                     returjual.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                     returjual.setLocationRelativeTo(internalFrame1);
                                     returjual.setVisible(true);
@@ -9181,7 +9182,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         DlgReturJual returjual=new DlgReturJual(null,false);
                         returjual.emptTeks();
                         returjual.isCek();
-                        returjual.setPasien(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString(),norawat.getText());
+                        returjual.setPasien(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),1).toString(),norawat.getText());
                         returjual.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         returjual.setLocationRelativeTo(internalFrame1);
                         returjual.setVisible(true);
@@ -9242,7 +9243,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='Status Belum Lengkap'");
-                    tbKamIn.setValueAt("Status Belum Lengkap",tbKamIn.getSelectedRow(),16);
+                    tabMode.setValueAt("Status Belum Lengkap",tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),16);
                 }
             }
         }
@@ -9254,7 +9255,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.no_peserta, "+
@@ -9262,7 +9263,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             "from reg_periksa inner join pasien inner join ranap_gabung on "+
                             "pasien.no_rkm_medis=reg_periksa.no_rkm_medis and ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -9272,7 +9273,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 param.put("nokartu",rs2.getString("no_peserta"));
                                 param.put("umur",rs2.getString("umur"));
                                 param.put("alamatpasien",rs2.getString("alamat"));
-                                param.put("ruang",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString().replaceAll("  "," "));
+                                param.put("ruang",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString().replaceAll("  "," "));
                                 param.put("namars",akses.getnamars());
                                 param.put("alamatrs",akses.getalamatrs());
                                 param.put("kotars",akses.getkabupatenrs());
@@ -9308,7 +9309,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         param.put("nokartu",Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_rkm_medis=?",TNoRM.getText()));
                         param.put("umur",Sequel.cariIsi("select pasien.umur from pasien where pasien.no_rkm_medis=?",TNoRM.getText()));
                         param.put("alamatpasien",Sequel.cariIsi("select concat(pasien.alamatpj,', ',pasien.kelurahanpj,', ',pasien.kecamatanpj,', ',pasien.kabupatenpj) from pasien where pasien.no_rkm_medis=?",TNoRM.getText()));
-                        param.put("ruang",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString().replaceAll("  "," "));
+                        param.put("ruang",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString().replaceAll("  "," "));
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
                         param.put("kotars",akses.getkabupatenrs());
@@ -9366,7 +9367,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     "on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? ");
                 dokterranap="";
                 try {
-                    psdpjp.setString(1,tbKamIn.getValueAt(i,0).toString());
+                    psdpjp.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(i),0).toString());
                     rs=psdpjp.executeQuery();
                     while(rs.next()){
                         dokterranap=rs.getString("nm_dokter")+", "+dokterranap;
@@ -9381,7 +9382,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         psdpjp.close();
                     }
                 }
-                tbKamIn.setValueAt(dokterranap,i,18);
+                tabMode.setValueAt(dokterranap,tbKamIn.convertRowIndexToModel(i),18);
             } catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }
@@ -9394,12 +9395,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -9408,7 +9409,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 dlgki.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                 dlgki.setLocationRelativeTo(internalFrame1);
                                 dlgki.isCek();
-                                dlgki.setNoRm(rs2.getString("no_rawat2"),Valid.SetTgl2(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),11).toString()),"1. Ranap","","");
+                                dlgki.setNoRm(rs2.getString("no_rawat2"),Valid.SetTgl2(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),11).toString()),"1. Ranap","","");
                                 dlgki.setVisible(true);
                                 this.setCursor(Cursor.getDefaultCursor());
                             }else{
@@ -9435,7 +9436,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     dlgki.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     dlgki.setLocationRelativeTo(internalFrame1);
                     dlgki.isCek();
-                    dlgki.setNoRm(norawat.getText(),Valid.SetTgl2(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),11).toString()),"1. Ranap","","");
+                    dlgki.setNoRm(norawat.getText(),Valid.SetTgl2(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),11).toString()),"1. Ranap","","");
                     dlgki.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }
@@ -9453,7 +9454,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMRiwayatPerawatan resume=new RMRiwayatPerawatan(null,true);
-            resume.setNoRm(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString(), tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),2).toString());
+            resume.setNoRm(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString(), tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),1).toString(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),2).toString());
             resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             resume.setLocationRelativeTo(internalFrame1);
             resume.setVisible(true);
@@ -9471,7 +9472,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             DlgCatatan catatan=new DlgCatatan(null,true);
-            catatan.setNoRm(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString());
+            catatan.setNoRm(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),1).toString());
             catatan.setSize(720,330);
             catatan.setLocationRelativeTo(internalFrame1);
             catatan.setVisible(true);
@@ -9485,12 +9486,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 DlgDataHAIs hais=new DlgDataHAIs(null,false);
@@ -9600,7 +9601,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.no_peserta, "+
@@ -9609,7 +9610,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             "pasien.no_rkm_medis=reg_periksa.no_rkm_medis and ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
 
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -9623,9 +9624,9 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 param.put("kotars",akses.getkabupatenrs());
                                 param.put("propinsirs",akses.getpropinsirs());
                                 param.put("kontakrs",akses.getkontakrs());
-                                param.put("tanggalmasuk",Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString()));
-                                param.put("kamar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
-                                param.put("carabayar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString());
+                                param.put("tanggalmasuk",Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString()));
+                                param.put("kamar",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
+                                param.put("carabayar",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),6).toString());
                                 param.put("emailrs",akses.getemailrs());
                                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                 Valid.MyReport("rptSuratPengantarPulang.jasper",param,"::[ Surat Pengantar Pulang ]::");
@@ -9659,9 +9660,9 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         param.put("kotars",akses.getkabupatenrs());
                         param.put("propinsirs",akses.getpropinsirs());
                         param.put("kontakrs",akses.getkontakrs());
-                        param.put("tanggalmasuk",Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()));
-                        param.put("kamar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
-                        param.put("carabayar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString());
+                        param.put("tanggalmasuk",Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString()));
+                        param.put("kamar",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
+                        param.put("carabayar",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),6).toString());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                         Valid.MyReport("rptSuratPengantarPulang.jasper",param,"::[ Surat Pengantar Pulang ]::");
@@ -9701,12 +9702,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
       }else{
           if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -9773,16 +9774,16 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
-                        if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+                        if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                               JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                               TCari.requestFocus();
                         }else{
                               psanak=koneksi.prepareStatement(
                                     "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                               try {
-                                    psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                                    psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                                     rs2=psanak.executeQuery();
                                     if(rs2.next()){
                                         DlgRawatJalan dlgrwjl=new DlgRawatJalan(null,false);
@@ -9947,7 +9948,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.no_peserta, "+
@@ -9956,7 +9957,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             "pasien.no_rkm_medis=reg_periksa.no_rkm_medis and ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
 
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -9970,10 +9971,10 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 param.put("kotars",akses.getkabupatenrs());
                                 param.put("propinsirs",akses.getpropinsirs());
                                 param.put("kontakrs",akses.getkontakrs());
-                                param.put("tanggalmasuk",Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString()));
-                                param.put("kamar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
-                                param.put("norawat",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
-                                param.put("carabayar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString());
+                                param.put("tanggalmasuk",Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString()));
+                                param.put("kamar",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
+                                param.put("norawat",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString());
+                                param.put("carabayar",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),6).toString());
                                 param.put("emailrs",akses.getemailrs());
                                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                 Valid.MyReport("rptFormulirPenerimaanPasien.jasper",param,"::[ Formulir Penerimaan Pasien ]::");
@@ -10007,10 +10008,10 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         param.put("kotars",akses.getkabupatenrs());
                         param.put("propinsirs",akses.getpropinsirs());
                         param.put("kontakrs",akses.getkontakrs());
-                        param.put("tanggalmasuk",Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()));
-                        param.put("kamar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
-                        param.put("norawat",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
-                        param.put("carabayar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString());
+                        param.put("tanggalmasuk",Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString()));
+                        param.put("kamar",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
+                        param.put("norawat",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString());
+                        param.put("carabayar",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),6).toString());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                         Valid.MyReport("rptFormulirPenerimaanPasien.jasper",param,"::[ Formulir Penerimaan Pasien ]::"); this.setCursor(Cursor.getDefaultCursor());
@@ -10025,12 +10026,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -10039,11 +10040,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 aplikasi.setLocationRelativeTo(internalFrame1);
                                 aplikasi.isCek();
                                 if(R1.isSelected()==true){
-                                    aplikasi.setNoRm(rs2.getString("no_rawat2"),new Date(),new Date(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
+                                    aplikasi.setNoRm(rs2.getString("no_rawat2"),new Date(),new Date(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
                                 }else if(R2.isSelected()==true){
-                                    aplikasi.setNoRm(rs2.getString("no_rawat2"),DTPCari1.getDate(),DTPCari2.getDate(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
+                                    aplikasi.setNoRm(rs2.getString("no_rawat2"),DTPCari1.getDate(),DTPCari2.getDate(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
                                 }else if(R3.isSelected()==true){
-                                    aplikasi.setNoRm(rs2.getString("no_rawat2"),DTPCari3.getDate(),DTPCari4.getDate(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
+                                    aplikasi.setNoRm(rs2.getString("no_rawat2"),DTPCari3.getDate(),DTPCari4.getDate(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
                                 }
                                 aplikasi.setVisible(true);
                                 this.setCursor(Cursor.getDefaultCursor());
@@ -10071,11 +10072,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     aplikasi.setLocationRelativeTo(internalFrame1);
                     aplikasi.isCek();
                     if(R1.isSelected()==true){
-                        aplikasi.setNoRm(norawat.getText(),new Date(),new Date(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
+                        aplikasi.setNoRm(norawat.getText(),new Date(),new Date(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
                     }else if(R2.isSelected()==true){
-                        aplikasi.setNoRm(norawat.getText(),DTPCari1.getDate(),DTPCari2.getDate(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
+                        aplikasi.setNoRm(norawat.getText(),DTPCari1.getDate(),DTPCari2.getDate(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
                     }else if(R3.isSelected()==true){
-                        aplikasi.setNoRm(norawat.getText(),DTPCari3.getDate(),DTPCari4.getDate(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
+                        aplikasi.setNoRm(norawat.getText(),DTPCari3.getDate(),DTPCari4.getDate(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
                     }
                     aplikasi.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
@@ -10090,20 +10091,20 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2 from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
                             "inner join ranap_gabung on ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     DlgBookingOperasi form=new DlgBookingOperasi(null,false);
                                     form.isCek();
                                     form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                     form.setLocationRelativeTo(internalFrame1);
-                                    form.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis"),rs2.getString("nm_pasien"),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString(),"Ranap");
+                                    form.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis"),rs2.getString("nm_pasien"),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString(),"Ranap");
                                     form.setVisible(true);
                               }else{
                                   JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
@@ -10127,7 +10128,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     form.isCek();
                     form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     form.setLocationRelativeTo(internalFrame1);
-                    form.setNoRm(norawat.getText(),TNoRM.getText(),TPasien.getText(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString(),"Ranap");
+                    form.setNoRm(norawat.getText(),TNoRM.getText(),TPasien.getText(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString(),"Ranap");
                     form.setVisible(true);
                 }
             }
@@ -10140,12 +10141,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -10201,12 +10202,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -10262,12 +10263,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -10333,12 +10334,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else {
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -10404,7 +10405,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.no_peserta, "+
@@ -10412,7 +10413,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                               "from reg_periksa inner join pasien inner join ranap_gabung on "+
                               "pasien.no_rkm_medis=reg_periksa.no_rkm_medis and ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -10474,7 +10475,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.no_peserta, "+
@@ -10482,7 +10483,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                               "from reg_periksa inner join pasien inner join ranap_gabung on "+
                               "pasien.no_rkm_medis=reg_periksa.no_rkm_medis and ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -10800,13 +10801,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select pasien.no_rkm_medis,pasien.nm_pasien from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
                             "inner join ranap_gabung on ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     SuratKontrol form=new SuratKontrol(null,false);
@@ -10852,12 +10853,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -10907,12 +10908,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -10960,8 +10961,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
         if(tbKamIn.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
-        }else if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
-            if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+        }else if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
+            if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                 JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                 TCari.requestFocus();
             }else{
@@ -10969,7 +10970,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     psanak=koneksi.prepareStatement(
                           "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                     try {
-                          psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                          psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                           rs2=psanak.executeQuery();
                           if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -10992,7 +10993,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 resep.setNoRm(rs2.getString("no_rawat2"),new Date(),"ranap", Sequel.cariIsiSmc(
                                     "select kamar.kd_bangsal from kamar join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal " +
                                     "where concat(kamar.kd_kamar, ' ', bangsal.nm_bangsal) = ?",
-                                    tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 7).toString()
+                                    tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()), 7).toString()
                                 ));
                                 resep.isCek();
                                 resep.tampilobat();
@@ -11042,7 +11043,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 resep.setNoRm(norawat.getText(),new Date(),"ranap",Sequel.cariIsiSmc(
                     "select kamar.kd_bangsal from kamar join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal " +
                     "where concat(kamar.kd_kamar, ' ', bangsal.nm_bangsal) = ?",
-                    tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 7).toString()
+                    tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()), 7).toString()
                 ));
                 resep.isCek();
                 resep.tampilobat();
@@ -11059,12 +11060,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -11114,7 +11115,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.no_peserta, "+
@@ -11123,7 +11124,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             "pasien.no_rkm_medis=reg_periksa.no_rkm_medis and ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
 
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -11137,11 +11138,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 param.put("kotars",akses.getkabupatenrs());
                                 param.put("propinsirs",akses.getpropinsirs());
                                 param.put("kontakrs",akses.getkontakrs());
-                                param.put("tanggalmasuk",Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString()));
-                                param.put("jammasuk",Sequel.cariIsi("select jam_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString()));
-                                param.put("kamar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
-                                param.put("norawat",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
-                                param.put("carabayar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString());
+                                param.put("tanggalmasuk",Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString()));
+                                param.put("jammasuk",Sequel.cariIsi("select jam_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString()));
+                                param.put("kamar",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
+                                param.put("norawat",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString());
+                                param.put("carabayar",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),6).toString());
                                 param.put("emailrs",akses.getemailrs());
                                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                 Valid.MyReport("rptFormulirPenerimaanPasien2.jasper",param,"::[ Formulir Penerimaan Pasien ]::");
@@ -11175,11 +11176,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         param.put("kotars",akses.getkabupatenrs());
                         param.put("propinsirs",akses.getpropinsirs());
                         param.put("kontakrs",akses.getkontakrs());
-                        param.put("tanggalmasuk",Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()));
-                        param.put("jammasuk",Sequel.cariIsi("select jam_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()));
-                        param.put("kamar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
-                        param.put("norawat",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
-                        param.put("carabayar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString());
+                        param.put("tanggalmasuk",Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString()));
+                        param.put("jammasuk",Sequel.cariIsi("select jam_masuk from kamar_inap where no_rawat=? order by tgl_masuk asc limit 1",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString()));
+                        param.put("kamar",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
+                        param.put("norawat",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString());
+                        param.put("carabayar",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),6).toString());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                         Valid.MyReport("rptFormulirPenerimaanPasien2.jasper",param,"::[ Formulir Penerimaan Pasien ]::"); this.setCursor(Cursor.getDefaultCursor());
@@ -11260,12 +11261,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -11315,7 +11316,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.no_peserta, "+
@@ -11324,7 +11325,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             "pasien.no_rkm_medis=reg_periksa.no_rkm_medis and ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
 
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -11335,9 +11336,9 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 param.put("propinsirs",akses.getpropinsirs());
                                 param.put("kontakrs",akses.getkontakrs());
                                 param.put("emailrs",akses.getemailrs());
-                                param.put("kamar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
+                                param.put("kamar",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
                                 param.put("tanggalmasuk",Sequel.cariIsi("select concat(DATE_FORMAT(reg_periksa.tgl_registrasi, '%e %M %Y'),' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat='"+rs2.getString("no_rawat2")+"'"));
-                                param.put("tanggalkeluar",Sequel.cariIsi("select concat(if(kamar_inap.tgl_keluar='0000-00-00',DATE_FORMAT(CURDATE(), '%e %M %Y'),DATE_FORMAT(kamar_inap.tgl_keluar, '%e %M %Y')),' ',kamar_inap.jam_keluar) from kamar_inap where kamar_inap.no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString()+"' order by kamar_inap.tgl_keluar desc limit 1"));
+                                param.put("tanggalkeluar",Sequel.cariIsi("select concat(if(kamar_inap.tgl_keluar='0000-00-00',DATE_FORMAT(CURDATE(), '%e %M %Y'),DATE_FORMAT(kamar_inap.tgl_keluar, '%e %M %Y')),' ',kamar_inap.jam_keluar) from kamar_inap where kamar_inap.no_rawat='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString()+"' order by kamar_inap.tgl_keluar desc limit 1"));
                                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                 Valid.MyReportqry("SuratJaminanPelayananInap.jasper","report","::[ Surat Jaminan Pelayanan ]::",
                                         "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg, "+
@@ -11373,9 +11374,9 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("emailrs",akses.getemailrs());
-                    param.put("kamar",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
-                    param.put("tanggalmasuk",Sequel.cariIsi("select concat(DATE_FORMAT(reg_periksa.tgl_registrasi, '%e %M %Y'),' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()+"'"));
-                    param.put("tanggalkeluar",Sequel.cariIsi("select concat(if(kamar_inap.tgl_keluar='0000-00-00',DATE_FORMAT(CURDATE(), '%e %M %Y'),DATE_FORMAT(kamar_inap.tgl_keluar, '%e %M %Y')),' ',kamar_inap.jam_keluar) from kamar_inap where kamar_inap.no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()+"' order by kamar_inap.tgl_keluar desc limit 1"));
+                    param.put("kamar",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
+                    param.put("tanggalmasuk",Sequel.cariIsi("select concat(DATE_FORMAT(reg_periksa.tgl_registrasi, '%e %M %Y'),' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString()+"'"));
+                    param.put("tanggalkeluar",Sequel.cariIsi("select concat(if(kamar_inap.tgl_keluar='0000-00-00',DATE_FORMAT(CURDATE(), '%e %M %Y'),DATE_FORMAT(kamar_inap.tgl_keluar, '%e %M %Y')),' ',kamar_inap.jam_keluar) from kamar_inap where kamar_inap.no_rawat='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString()+"' order by kamar_inap.tgl_keluar desc limit 1"));
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("SuratJaminanPelayananInap.jasper","report","::[ Surat Jaminan Pelayanan ]::",
                             "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg, "+
@@ -11383,7 +11384,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab,"+
                             "pasien.no_peserta,pasien.tgl_lahir from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab " +
                             "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj "+
-                            "and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()+"'",param);
+                            "and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString()+"'",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }
@@ -11408,12 +11409,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -11473,12 +11474,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -11538,12 +11539,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -11603,13 +11604,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                  if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                  if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                       try {
                           psanak=koneksi.prepareStatement(
                               "select pasien.no_rkm_medis from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
                             "inner join ranap_gabung on ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
                           try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     DlgPenjualan penjualan=new DlgPenjualan(null,false);
@@ -11687,7 +11688,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         }else{
             Sequel.mengedit("kamar_inap","no_rawat=?"," diagnosa_awal=?",2,new String[]{DiagnosaAwalSementara.getText(),norawat.getText()});
             if(tbKamIn.getSelectedRow()>-1){
-                tbKamIn.setValueAt(DiagnosaAwalSementara.getText(),tbKamIn.getSelectedRow(),9);
+                tabMode.setValueAt(DiagnosaAwalSementara.getText(),tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),9);
             }
             WindowDiagnosaMasuk.dispose();
         }
@@ -11703,7 +11704,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         }else{
             Sequel.mengedit("kamar_inap","no_rawat=?"," diagnosa_akhir=?",2,new String[]{DiagnosaAkhirSementara.getText(),norawat.getText()});
             if(tbKamIn.getSelectedRow()>-1){
-                tbKamIn.setValueAt(DiagnosaAkhirSementara.getText(),tbKamIn.getSelectedRow(),10);
+                tabMode.setValueAt(DiagnosaAkhirSementara.getText(),tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),10);
             }
             WindowDiagnosaAkhir.dispose();
         }
@@ -11827,8 +11828,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
         if(tbKamIn.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
-        }else if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
-            if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+        }else if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
+            if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                 JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                 TCari.requestFocus();
             }else{
@@ -11836,7 +11837,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     psanak=koneksi.prepareStatement(
                           "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                     try {
-                          psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                          psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                           rs2=psanak.executeQuery();
                           if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -11918,12 +11919,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 DlgDataKlasifikasiPasienRanap hais=new DlgDataKlasifikasiPasienRanap(null,false);
@@ -11983,12 +11984,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -12050,16 +12051,16 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
-                        if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+                        if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                             JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                             TCari.requestFocus();
                         }else{
                             psanak=koneksi.prepareStatement(
                                 "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                             try {
-                                psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                                psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                                 rs2=psanak.executeQuery();
                                 if(rs2.next()){
                                     akses.setform("DlgKamarInap");
@@ -12173,11 +12174,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 form.isCek();
                 form.emptTeks();
                 if(R1.isSelected()==true){
-                    form.setNoRm(norawat.getText(),new Date(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString(),TNoRMCari.getText());
+                    form.setNoRm(norawat.getText(),new Date(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),6).toString(),TNoRMCari.getText());
                 }else if(R2.isSelected()==true){
-                    form.setNoRm(norawat.getText(),DTPCari2.getDate(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString(),TNoRMCari.getText());
+                    form.setNoRm(norawat.getText(),DTPCari2.getDate(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),6).toString(),TNoRMCari.getText());
                 }else if(R3.isSelected()==true){
-                    form.setNoRm(norawat.getText(),DTPCari4.getDate(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString(),TNoRMCari.getText());
+                    form.setNoRm(norawat.getText(),DTPCari4.getDate(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),6).toString(),TNoRMCari.getText());
                 }
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
@@ -12193,12 +12194,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 ps=koneksi.prepareStatement("select * from bridging_sep where bridging_sep.jnspelayanan = '1' and bridging_sep.no_rawat=? order by bridging_sep.tglsep desc limit 1");
@@ -12286,12 +12287,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     SuratKeteranganRawatInap form=new SuratKeteranganRawatInap(null,false);
@@ -12417,11 +12418,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 resume.setLocationRelativeTo(internalFrame1);
                 if(R1.isSelected()==true){
-                    resume.setNoRm(TNoRwCari.getText(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),3).toString(),new Date(),new Date());
+                    resume.setNoRm(TNoRwCari.getText(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),3).toString(),new Date(),new Date());
                 }else if(R2.isSelected()==true){
-                    resume.setNoRm(TNoRwCari.getText(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),3).toString(),DTPCari1.getDate(),DTPCari2.getDate());
+                    resume.setNoRm(TNoRwCari.getText(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),3).toString(),DTPCari1.getDate(),DTPCari2.getDate());
                 }else if(R3.isSelected()==true){
-                    resume.setNoRm(TNoRwCari.getText(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),3).toString(),DTPCari3.getDate(),DTPCari4.getDate());
+                    resume.setNoRm(TNoRwCari.getText(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),3).toString(),DTPCari3.getDate(),DTPCari4.getDate());
                 }
                 resume.tampil();
                 resume.setVisible(true);
@@ -12511,7 +12512,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.no_peserta, "+
@@ -12519,7 +12520,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             "from reg_periksa inner join pasien inner join ranap_gabung on "+
                             "pasien.no_rkm_medis=reg_periksa.no_rkm_medis and ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 Map<String, Object> param = new HashMap<>();
@@ -12527,8 +12528,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 param.put("jkel",Sequel.cariIsi("select if(pasien.jk='L','Laki-Laki','Perempuan') from pasien where pasien.no_rkm_medis=?",rs2.getString("no_rkm_medis")));
                                 param.put("lahir",Sequel.cariIsi("select DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') from pasien where pasien.no_rkm_medis=?",rs2.getString("no_rkm_medis")));
                                 param.put("norm",rs2.getString("no_rkm_medis"));
-                                param.put("ruang",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString().replaceAll("  "," "));
-                                param.put("kelas", Sequel.cariIsi("select kamar.kelas from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where kamar.kd_kamar=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()));
+                                param.put("ruang",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString().replaceAll("  "," "));
+                                param.put("kelas", Sequel.cariIsi("select kamar.kelas from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where kamar.kd_kamar=? ",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),20).toString()));
                                 param.put("tanggaldaftar",Sequel.cariIsi("select DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y') from reg_periksa where reg_periksa.no_rawat=?",rs2.getString("no_rawat2")));
                                 param.put("jamdaftar",Sequel.cariIsi("select reg_periksa.jam_reg from reg_periksa where reg_periksa.no_rawat=?",rs2.getString("no_rawat2")));
                                 param.put("noreg",Sequel.cariIsi("select reg_periksa.no_reg from reg_periksa where reg_periksa.no_rawat=?",rs2.getString("no_rawat2")));
@@ -12537,7 +12538,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 param.put("bangsa","Jawa/Indonesia");
                                 param.put("pekerjaan",Sequel.cariIsi("select pasien.agama from pasien where pasien.no_rkm_medis=?",rs2.getString("no_rkm_medis")));
                                 param.put("status","Single");
-                                param.put("alamat",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),3).toString());
+                                param.put("alamat",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),3).toString());
                                 param.put("keluarga",Sequel.cariIsi("select pasien.namakeluarga from pasien where pasien.no_rkm_medis=?",rs2.getString("no_rkm_medis")));
                                 param.put("telp",Sequel.cariIsi("select pasien.no_tlp from pasien where pasien.no_rkm_medis=?",rs2.getString("no_rkm_medis")));
                                 param.put("rujukandari",Sequel.cariIsi("select rujuk_masuk.perujuk from rujuk_masuk where rujuk_masuk.no_rawat=?",rs2.getString("no_rawat2")));
@@ -12602,8 +12603,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         param.put("jkel",Sequel.cariIsi("select if(pasien.jk='L','Laki-Laki','Perempuan') from pasien where pasien.no_rkm_medis=?",TNoRMCari.getText()));
                         param.put("lahir",Sequel.cariIsi("select DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') from pasien where pasien.no_rkm_medis=?",TNoRMCari.getText()));
                         param.put("norm",TNoRMCari.getText());
-                        param.put("ruang",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString().replaceAll("  "," "));
-                        param.put("kelas", Sequel.cariIsi("select kamar.kelas from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where kamar.kd_kamar=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()));
+                        param.put("ruang",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString().replaceAll("  "," "));
+                        param.put("kelas", Sequel.cariIsi("select kamar.kelas from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where kamar.kd_kamar=? ",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),20).toString()));
                         param.put("tanggaldaftar",Sequel.cariIsi("select DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y') from reg_periksa where reg_periksa.no_rawat=?",TNoRwCari.getText()));
                         param.put("jamdaftar",Sequel.cariIsi("select reg_periksa.jam_reg from reg_periksa where reg_periksa.no_rawat=?",TNoRwCari.getText()));
                         param.put("noreg",Sequel.cariIsi("select reg_periksa.no_reg from reg_periksa where reg_periksa.no_rawat=?",TNoRwCari.getText()));
@@ -12612,7 +12613,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         param.put("bangsa","Jawa/Indonesia");
                         param.put("pekerjaan",Sequel.cariIsi("select pasien.agama from pasien where pasien.no_rkm_medis=?",TNoRMCari.getText()));
                         param.put("status",Sequel.cariIsi("select pasien.stts_nikah from pasien where pasien.no_rkm_medis=?",TNoRMCari.getText()));
-                        param.put("alamat",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),3).toString());
+                        param.put("alamat",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),3).toString());
                         param.put("keluarga",Sequel.cariIsi("select pasien.namakeluarga from pasien where pasien.no_rkm_medis=?",TNoRMCari.getText()));
                         param.put("telp",Sequel.cariIsi("select pasien.no_tlp from pasien where pasien.no_rkm_medis=?",TNoRMCari.getText()));
                         param.put("rujukandari",Sequel.cariIsi("select rujuk_masuk.perujuk from rujuk_masuk where rujuk_masuk.no_rawat=?",TNoRwCari.getText()));
@@ -12746,8 +12747,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
         if(tbKamIn.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
-        }else if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
-            if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+        }else if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
+            if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                 JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                 TCari.requestFocus();
             }else{
@@ -12755,7 +12756,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     psanak=koneksi.prepareStatement(
                           "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                     try {
-                          psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                          psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                           rs2=psanak.executeQuery();
                           if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -12835,12 +12836,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -12986,11 +12987,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 form.isCek();
                 form.emptTeks();
                 if(R1.isSelected()==true){
-                    form.setNoRm(norawat.getText(),new Date(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString(),TNoRMCari.getText());
+                    form.setNoRm(norawat.getText(),new Date(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),6).toString(),TNoRMCari.getText());
                 }else if(R2.isSelected()==true){
-                    form.setNoRm(norawat.getText(),DTPCari2.getDate(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString(),TNoRMCari.getText());
+                    form.setNoRm(norawat.getText(),DTPCari2.getDate(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),6).toString(),TNoRMCari.getText());
                 }else if(R3.isSelected()==true){
-                    form.setNoRm(norawat.getText(),DTPCari4.getDate(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString(),TNoRMCari.getText());
+                    form.setNoRm(norawat.getText(),DTPCari4.getDate(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),6).toString(),TNoRMCari.getText());
                 }
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
@@ -13006,12 +13007,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -13071,12 +13072,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -13125,12 +13126,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -13193,12 +13194,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             tbKamIn.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()!= -1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -13260,16 +13261,16 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
-                        if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+                        if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                             JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                             TCari.requestFocus();
                         }else{
                             psanak=koneksi.prepareStatement(
                                 "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                             try {
-                                psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                                psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                                 rs2=psanak.executeQuery();
                                 if(rs2.next()){
                                     akses.setform("DlgKamarInap");
@@ -13318,12 +13319,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -13383,12 +13384,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -13448,12 +13449,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -13503,12 +13504,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -13620,12 +13621,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -13787,12 +13788,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -13852,12 +13853,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -13907,12 +13908,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -13972,13 +13973,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2 from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
                               "inner join ranap_gabung on ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -14028,12 +14029,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -14083,12 +14084,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -14150,12 +14151,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -14215,12 +14216,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -14280,12 +14281,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -14345,12 +14346,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -14412,12 +14413,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -14477,12 +14478,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -14542,12 +14543,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -14597,12 +14598,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -14662,12 +14663,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -14727,12 +14728,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -14817,12 +14818,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -14884,12 +14885,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -15052,12 +15053,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -15135,12 +15136,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -15202,12 +15203,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -15269,12 +15270,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -15336,12 +15337,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -15401,12 +15402,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -15468,12 +15469,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                               "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                              psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                              psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                               rs2=psanak.executeQuery();
                               if(rs2.next()){
                                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -15535,12 +15536,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -15602,12 +15603,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -15669,12 +15670,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -15734,12 +15735,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -15826,12 +15827,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -15898,11 +15899,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 form.isCek();
                 form.emptTeks();
                 if(R1.isSelected()==true){
-                    form.setNoRm(norawat.getText(),new Date(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
+                    form.setNoRm(norawat.getText(),new Date(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
                 }else if(R2.isSelected()==true){
-                    form.setNoRm(norawat.getText(),DTPCari2.getDate(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
+                    form.setNoRm(norawat.getText(),DTPCari2.getDate(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
                 }else if(R3.isSelected()==true){
-                    form.setNoRm(norawat.getText(),DTPCari4.getDate(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
+                    form.setNoRm(norawat.getText(),DTPCari4.getDate(),tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),7).toString());
                 }
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
@@ -15918,12 +15919,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -16033,12 +16034,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -16100,12 +16101,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -16400,15 +16401,15 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         if(tbKamIn.getRowCount()==0){
                             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
                             TCari.requestFocus();
-                        }else if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                        }else if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                             try {
                                 psanak=koneksi.prepareStatement(
                                     "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                                 try {
-                                    psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                                    psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                                     rs2=psanak.executeQuery();
                                     if(rs2.next()){
-                                        if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+                                        if(Sequel.cariRegistrasi(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString())>0){
                                             JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                                             TCari.requestFocus();
                                         }else{
@@ -16493,12 +16494,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -16560,12 +16561,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -16627,12 +16628,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -16694,12 +16695,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -16761,12 +16762,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -16828,12 +16829,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -16895,12 +16896,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -16974,9 +16975,9 @@ public class DlgKamarInap extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             emptTeksUpdatePulang();
             if (tbKamIn.getSelectedRow() > -1) {
-                if (tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 0).toString().equals("")) {
+                if (tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()), 0).toString().equals("")) {
                     try (PreparedStatement ps = koneksi.prepareStatement("select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat = ?")) {
-                        ps.setString(1, tbKamIn.getValueAt(tbKamIn.getSelectedRow() - 1, 0).toString());
+                        ps.setString(1, tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow() - 1), 0).toString());
                         try (ResultSet rs = ps.executeQuery()) {
                             if (rs2.next()) {
                                 try (PreparedStatement ps2 = koneksi.prepareStatement(
@@ -17024,7 +17025,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         "join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                         "where bridging_sep.jnspelayanan = '1' and bridging_sep.no_rawat = ? order by bridging_sep.tglsep desc limit 1"
                     )) {
-                        ps.setString(1, tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 0).toString());
+                        ps.setString(1, tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()), 0).toString());
                         try (ResultSet rs = ps.executeQuery()) {
                             if (rs.next()) {
                                 WindowUpdatePulang.setSize(608, 264);
@@ -17058,12 +17059,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -17125,12 +17126,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -17192,12 +17193,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -17259,12 +17260,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -17326,12 +17327,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -17422,12 +17423,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -17487,12 +17488,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -17593,12 +17594,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -17650,12 +17651,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -17715,12 +17716,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -17784,12 +17785,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -17851,12 +17852,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -17918,12 +17919,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -17985,12 +17986,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18052,7 +18053,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18081,12 +18082,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18148,12 +18149,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18215,12 +18216,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18282,12 +18283,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18349,12 +18350,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18416,12 +18417,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18485,12 +18486,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18552,12 +18553,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18621,12 +18622,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18686,12 +18687,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18753,12 +18754,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18818,12 +18819,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18885,12 +18886,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18952,7 +18953,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -18976,12 +18977,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 SuratPernyataanMemilihDPJP form=new SuratPernyataanMemilihDPJP(null,false);
@@ -19039,12 +19040,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19108,12 +19109,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19177,7 +19178,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19206,12 +19207,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19275,12 +19276,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19344,7 +19345,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19373,12 +19374,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19440,12 +19441,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19507,7 +19508,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19537,12 +19538,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 SuratSerahTerimaBarangAnggotaTubuh form=new SuratSerahTerimaBarangAnggotaTubuh(null,false);
@@ -19600,12 +19601,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19657,7 +19658,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19680,7 +19681,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19703,7 +19704,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19726,12 +19727,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19781,12 +19782,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19836,12 +19837,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19891,12 +19892,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19946,12 +19947,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -20001,12 +20002,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -20056,12 +20057,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -20111,12 +20112,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -20166,12 +20167,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -20221,7 +20222,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -20244,7 +20245,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -20267,7 +20268,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -20290,12 +20291,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -20345,7 +20346,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -20857,6 +20858,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
     }
 
     private synchronized void tampil2() {
+        tbKamIn.suspendSorting();
         Valid.tabelKosong(tabMode);
         new SwingWorker<Void, Object[]>() {
             @Override
@@ -20957,11 +20959,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
             protected void done() {
                 LCount.setText(""+i);
                 ceksukses = false;
+                tbKamIn.resumeSorting();
             }
         }.execute();
     }
 
     private synchronized void tampil3() {
+        tbKamIn.suspendSorting();
         Valid.tabelKosong(tabMode);
         new SwingWorker<Void, Void>() {
             @Override
@@ -21040,6 +21044,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             protected void done() {
                 LCount.setText(""+i);
                 ceksukses = false;
+                tbKamIn.resumeSorting();
             }
         }.execute();
     }
@@ -21099,23 +21104,23 @@ public class DlgKamarInap extends javax.swing.JDialog {
         TIn.setText("");
         JamMasuk.setText("");
         if(tbKamIn.getSelectedRow()!= -1){
-            norawat.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
-            TNoRM.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString());
-            TPasien.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),2).toString());
-            TNoRwCari.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
-            TNoRMCari.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString());
-            TPasienCari.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),2).toString());
+            norawat.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString());
+            TNoRM.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),1).toString());
+            TPasien.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),2).toString());
+            TNoRwCari.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString());
+            TNoRMCari.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),1).toString());
+            TPasienCari.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),2).toString());
             // norawatpindah.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
             // TNoRMpindah.setText(TNoRM.getText());
             // TPasienpindah.setText(TPasien.getText());
-            kdkamar.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString());
-            diagnosaawal.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString());
-            diagnosaakhir.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),10).toString());
-            TIn.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),11).toString());
-            JamMasuk.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),12).toString());
-            TOut.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),13).toString());
-            ttlbiaya.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),15).toString());
-            cmbStatus.setSelectedItem(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),16).toString());
+            kdkamar.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),20).toString());
+            diagnosaawal.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),9).toString());
+            diagnosaakhir.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),10).toString());
+            TIn.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),11).toString());
+            JamMasuk.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),12).toString());
+            TOut.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),13).toString());
+            ttlbiaya.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),15).toString());
+            cmbStatus.setSelectedItem(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),16).toString());
         }
     }
 
@@ -21581,17 +21586,17 @@ public class DlgKamarInap extends javax.swing.JDialog {
     private void updateHari(){
         if((R1.isSelected()==true)&&(akses.getstatus()==false)){
             for(i=0;i<tbKamIn.getRowCount();i++){
-                if(tbKamIn.getValueAt(i,13).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(i),13).toString().equals("")){
                     if(pengaturankamarinap.getHitungHariAwal().equals("Yes")){
-                        Sequel.mengedit(" kamar_inap "," no_rawat='"+tbKamIn.getValueAt(i,0).toString()+"' and "+
-                            " kd_kamar='"+Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tbKamIn.getValueAt(i,7).toString())+"' "+
-                            " and tgl_masuk='"+tbKamIn.getValueAt(i,11).toString()+"' and jam_masuk='"+tbKamIn.getValueAt(i,12).toString()+"'",
+                        Sequel.mengedit(" kamar_inap "," no_rawat='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(i),0).toString()+"' and "+
+                            " kd_kamar='"+Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(i),7).toString())+"' "+
+                            " and tgl_masuk='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(i),11).toString()+"' and jam_masuk='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(i),12).toString()+"'",
                             " lama=if(to_days(NOW())-to_days(concat(tgl_masuk,' ',jam_masuk))=0,if(time_to_sec(NOW())-time_to_sec(concat(tgl_masuk,' ',jam_masuk))>(3600*"+pengaturankamarinap.getJamMinimalKamar()+"),1,0),to_days(NOW())-to_days(concat(tgl_masuk,' ',jam_masuk)))+1,"+
                             " ttl_biaya=(if(to_days(NOW())-to_days(concat(tgl_masuk,' ',jam_masuk))=0,if(time_to_sec(NOW())-time_to_sec(concat(tgl_masuk,' ',jam_masuk))>(3600*"+pengaturankamarinap.getJamMinimalKamar()+"),1,0),to_days(NOW())-to_days(concat(tgl_masuk,' ',jam_masuk)))+1)*trf_kamar");
                     }else{
-                        Sequel.mengedit(" kamar_inap "," no_rawat='"+tbKamIn.getValueAt(i,0).toString()+"' and "+
-                            " kd_kamar='"+Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tbKamIn.getValueAt(i,7).toString())+"' "+
-                            " and tgl_masuk='"+tbKamIn.getValueAt(i,11).toString()+"' and jam_masuk='"+tbKamIn.getValueAt(i,12).toString()+"'",
+                        Sequel.mengedit(" kamar_inap "," no_rawat='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(i),0).toString()+"' and "+
+                            " kd_kamar='"+Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tabMode.getValueAt(tbKamIn.convertRowIndexToModel(i),7).toString())+"' "+
+                            " and tgl_masuk='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(i),11).toString()+"' and jam_masuk='"+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(i),12).toString()+"'",
                             " lama=if(to_days(NOW())-to_days(concat(tgl_masuk,' ',jam_masuk))=0,if(time_to_sec(NOW())-time_to_sec(concat(tgl_masuk,' ',jam_masuk))>(3600*"+pengaturankamarinap.getJamMinimalKamar()+"),1,0),to_days(NOW())-to_days(concat(tgl_masuk,' ',jam_masuk))),"+
                             " ttl_biaya=if(to_days(NOW())-to_days(concat(tgl_masuk,' ',jam_masuk))=0,if(time_to_sec(NOW())-time_to_sec(concat(tgl_masuk,' ',jam_masuk))>(3600*"+pengaturankamarinap.getJamMinimalKamar()+"),1,0),to_days(NOW())-to_days(concat(tgl_masuk,' ',jam_masuk)))*trf_kamar");
                     }
@@ -22728,6 +22733,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbKamIn.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             final boolean kunciTampilDPJP = KUNCIDOKTERRANAP.trim().equals("yes") && !akses.getakses_dokter_lain_rawat_jalan();
 
@@ -22893,12 +22899,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             if (!kunciTampilDPJP) {
                                 final Map<String, String> dpjpRows = tampilDPJP(rows);
                                 for (int i = 0; i < tbKamIn.getRowCount(); i++) {
-                                    String dpjp = dpjpRows.get(tbKamIn.getValueAt(i, 0).toString());
+                                    String dpjp = dpjpRows.get(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(i), 0).toString());
                                     if (dpjp == null) {
                                         continue;
                                     }
 
-                                    tbKamIn.setValueAt(dpjp, i, 18);
+                                    tabMode.setValueAt(dpjp, tbKamIn.convertRowIndexToModel(i), 18);
                                 }
                             }
                         }
@@ -22909,6 +22915,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     LCount.setText(tbKamIn.getRowCount() + "");
                     DlgKamarInap.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbKamIn.resumeSorting();
                 }
             }.execute();
         }
@@ -22966,12 +22973,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                if(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
                             "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()-1),0).toString());
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));

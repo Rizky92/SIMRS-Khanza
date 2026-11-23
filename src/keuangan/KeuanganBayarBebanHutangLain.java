@@ -948,8 +948,8 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
             sukses=true;
 
             if(Sequel.queryu2tf("delete from bayar_beban_hutang_lain where tgl_bayar=? and kode_pemberi_hutang=? and no_hutang=? and kd_rek=? and nama_bayar=?", 5,new String[]{
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString(),
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString()
+                tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),5).toString(),
+                tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),6).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),7).toString()
             })==true){
                 kontraakun="";
                 namakontraakun="";
@@ -959,7 +959,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
                     response = root.path("pemberihutang");
                     if(response.isArray()){
                        for(JsonNode list:response){
-                           if(list.path("Kode").asText().equals(tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString())){
+                           if(list.path("Kode").asText().equals(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString())){
                                 kontraakun=list.path("KodeRekening").asText();
                                 namakontraakun=list.path("NamaRekening").asText();
                            }
@@ -973,12 +973,12 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
                     response = null;
                     root = null;
                 }
-                Sequel.mengedit("beban_hutang_lain","no_hutang='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString()+"'","status='Belum Lunas', sisahutang=sisahutang+"+tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString());
+                Sequel.mengedit("beban_hutang_lain","no_hutang='"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),5).toString()+"'","status='Belum Lunas', sisahutang=sisahutang+"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3).toString());
                 Sequel.deleteTampJurnal();
-                if(Sequel.insertTampJurnal(kontraakun, namakontraakun, "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString())==false){
+                if(Sequel.insertTampJurnal(kontraakun, namakontraakun, "0", tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 3).toString())==false){
                     sukses=false;
                 }
-                if(Sequel.insertTampJurnal(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString(), "0")==false){
+                if(Sequel.insertTampJurnal(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 6).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 7).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 3).toString(), "0")==false){
                     sukses=false;
                 }
                 if(sukses==true){
@@ -998,7 +998,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
             Sequel.AutoComitTrue();
 
             if(sukses==true){
-                total=total-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString());
+                total=total-Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3).toString());
                 LTotal.setText(Valid.SetAngka(total));
                 tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
                 LCount.setText(""+tbKamar.getRowCount());
@@ -1454,7 +1454,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
 
     private void cetakbuktiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakbuktiActionPerformed
         if(tbKamar.getSelectedRow()>-1){
-            Valid.panggilUrl("billing/LaporanBuktiKasKeluar.php?kode="+NoBukti.getText()+"&tanggal="+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"&akunbayar="+AkunBayar.getSelectedItem().toString().replaceAll(" ","_")+"&petugas="+akses.getkode().replaceAll(" ","_")+Sequel.cariIsi("select pegawai.nama from pegawai where pegawai.nik=?",akses.getkode()).replaceAll(" ","_")+"&dibayarkankepada="+tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString().replaceAll(" ","_")+"&keterangan="+Keterangan.getText().replaceAll(" ","_")+"&notagihan="+NoHutang.getText().replaceAll(" ","_")+"&nominal="+Cicilan.getText()+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
+            Valid.panggilUrl("billing/LaporanBuktiKasKeluar.php?kode="+NoBukti.getText()+"&tanggal="+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"&akunbayar="+AkunBayar.getSelectedItem().toString().replaceAll(" ","_")+"&petugas="+akses.getkode().replaceAll(" ","_")+Sequel.cariIsi("select pegawai.nama from pegawai where pegawai.nik=?",akses.getkode()).replaceAll(" ","_")+"&dibayarkankepada="+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2).toString().replaceAll(" ","_")+"&keterangan="+Keterangan.getText().replaceAll(" ","_")+"&notagihan="+NoHutang.getText().replaceAll(" ","_")+"&nominal="+Cicilan.getText()+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, pilih dulu data yang mau dicetak bukti kas keluarnya.\nKlik data pada table untuk memilih...!!!!");
         }
@@ -1620,13 +1620,13 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            KdPemberiHutang.setText(tbKamar.getValueAt(row,1).toString());
-            NmPemberiHutang.setText(tbKamar.getValueAt(row,2).toString());
-            Cicilan.setText(Valid.SetAngka5(Double.parseDouble(tbKamar.getValueAt(row,3).toString())));
-            Keterangan.setText(tbKamar.getValueAt(row,4).toString());
-            NoHutang.setText(tbKamar.getValueAt(row,5).toString());
-            NoBukti.setText(tbKamar.getValueAt(row,8).toString());
-            Valid.SetTgl(Tanggal,tbKamar.getValueAt(row,0).toString());
+            KdPemberiHutang.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
+            NmPemberiHutang.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),2).toString());
+            Cicilan.setText(Valid.SetAngka5(Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),3).toString())));
+            Keterangan.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),4).toString());
+            NoHutang.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),5).toString());
+            NoBukti.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),8).toString());
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
         }
     }
 

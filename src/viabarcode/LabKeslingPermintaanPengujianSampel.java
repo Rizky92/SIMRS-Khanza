@@ -817,6 +817,7 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbPermintaan.setAutoCreateRowSorter(true);
         tbPermintaan.setComponentPopupMenu(Popup);
         tbPermintaan.setName("tbPermintaan"); // NOI18N
         Scroll2.setViewportView(tbPermintaan);
@@ -925,7 +926,7 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         jml=0;
         for(i=0;i<tbPermintaan.getRowCount();i++){
-            if(tbPermintaan.getValueAt(i,0).toString().equals("true")){
+            if(tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),0).toString().equals("true")){
                 jml++;
             }
         }
@@ -969,9 +970,9 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
                             JenisSampel.getText(),JmlSampel.getText(),DisamplingOleh.getText(),VolumeSampel.getText(),WadahSampel.getText(),KondisiWadah.getText(),KodeSampel.getText()
                         })==true){
                         for(i=0;i<tbPermintaan.getRowCount();i++){
-                            if(tbPermintaan.getValueAt(i,0).toString().equals("true")){
+                            if(tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),0).toString().equals("true")){
                                 Sequel.menyimpan2("labkesling_detail_permintaan_pengujian_sampel","?,?","pemeriksaan radiologi",2,new String[]{
-                                    TNoPermintaan.getText(),tbPermintaan.getValueAt(i,1).toString()
+                                    TNoPermintaan.getText(),tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),1).toString()
                                 });
                             }
                         }
@@ -985,9 +986,9 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
                                 JenisSampel.getText(),JmlSampel.getText(),DisamplingOleh.getText(),VolumeSampel.getText(),WadahSampel.getText(),KondisiWadah.getText(),KodeSampel.getText()
                             })==true){
                             for(i=0;i<tbPermintaan.getRowCount();i++){
-                                if(tbPermintaan.getValueAt(i,0).toString().equals("true")){
+                                if(tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),0).toString().equals("true")){
                                     Sequel.menyimpan2("labkesling_detail_permintaan_pengujian_sampel","?,?","pemeriksaan radiologi",2,new String[]{
-                                        TNoPermintaan.getText(),tbPermintaan.getValueAt(i,1).toString()
+                                        TNoPermintaan.getText(),tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),1).toString()
                                     });
                                 }
                             }
@@ -1001,9 +1002,9 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
                                     JenisSampel.getText(),JmlSampel.getText(),DisamplingOleh.getText(),VolumeSampel.getText(),WadahSampel.getText(),KondisiWadah.getText(),KodeSampel.getText()
                                 })==true){
                                 for(i=0;i<tbPermintaan.getRowCount();i++){
-                                    if(tbPermintaan.getValueAt(i,0).toString().equals("true")){
+                                    if(tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),0).toString().equals("true")){
                                         Sequel.menyimpan2("labkesling_detail_permintaan_pengujian_sampel","?,?","pemeriksaan radiologi",2,new String[]{
-                                            TNoPermintaan.getText(),tbPermintaan.getValueAt(i,1).toString()
+                                            TNoPermintaan.getText(),tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),1).toString()
                                         });
                                     }
                                 }
@@ -1017,9 +1018,9 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
                                         JenisSampel.getText(),JmlSampel.getText(),DisamplingOleh.getText(),VolumeSampel.getText(),WadahSampel.getText(),KondisiWadah.getText(),KodeSampel.getText()
                                     })==true){
                                     for(i=0;i<tbPermintaan.getRowCount();i++){
-                                        if(tbPermintaan.getValueAt(i,0).toString().equals("true")){
+                                        if(tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),0).toString().equals("true")){
                                             Sequel.menyimpan2("labkesling_detail_permintaan_pengujian_sampel","?,?","pemeriksaan radiologi",2,new String[]{
-                                                TNoPermintaan.getText(),tbPermintaan.getValueAt(i,1).toString()
+                                                TNoPermintaan.getText(),tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),1).toString()
                                             });
                                         }
                                     }
@@ -1098,8 +1099,8 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         jml=0;
-        for(i=0;i<tbPermintaan.getRowCount();i++){
-            if(tbPermintaan.getValueAt(i,0).toString().equals("true")){
+        for(i=0;i<tabMode.getRowCount();i++){
+            if(tabMode.getValueAt(i,0).toString().equals("true")){
                 jml++;
             }
         }
@@ -1133,10 +1134,10 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
             Valid.textKosong(TCariPeriksa,"Data Permintaan");
         }else{
             Sequel.queryu("delete from temporary");
-            for(i=0;i<tbPermintaan.getRowCount();i++){
-                if(tbPermintaan.getValueAt(i,0).toString().equals("true")){
+            for(i=0;i<tabMode.getRowCount();i++){
+                if(tabMode.getValueAt(i,0).toString().equals("true")){
                     Sequel.menyimpan("temporary","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                        "0",tbPermintaan.getValueAt(i,1).toString(),tbPermintaan.getValueAt(i,2).toString(),tbPermintaan.getValueAt(i,3).toString(),tbPermintaan.getValueAt(i,5).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+                        "0",tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,2).toString(),tabMode.getValueAt(i,3).toString(),tabMode.getValueAt(i,5).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
                     });
                 }
             }
@@ -1387,13 +1388,13 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbPermintaan.getRowCount();i++){
-            tbPermintaan.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbPermintaan.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void ppSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSemuaActionPerformed
         for(i=0;i<tbPermintaan.getRowCount();i++){
-            tbPermintaan.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbPermintaan.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppSemuaActionPerformed
 
@@ -1489,6 +1490,7 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
 
 
     private void tampil() {
+        tbPermintaan.suspendSorting();
         Valid.tabelKosong(tabMode);
         try {
             file=new File("./cache/permintaanpengujiansampellabkesling.iyem");
@@ -1530,13 +1532,14 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(""+tbPermintaan.getRowCount());
+        tbPermintaan.resumeSorting();
     }
 
     private void tampil2() {
         try {
             jml=0;
             for(i=0;i<tbPermintaan.getRowCount();i++){
-                if(tbPermintaan.getValueAt(i,0).toString().equals("true")){
+                if(tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -1550,17 +1553,18 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
 
             index=0;
             for(i=0;i<tbPermintaan.getRowCount();i++){
-                if(tbPermintaan.getValueAt(i,0).toString().equals("true")){
+                if(tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    Kode[index]=tbPermintaan.getValueAt(i,1).toString();
-                    NamaParameter[index]=tbPermintaan.getValueAt(i,2).toString();
-                    MetodePengujian[index]=tbPermintaan.getValueAt(i,3).toString();
-                    Satuan[index]=tbPermintaan.getValueAt(i,4).toString();
-                    Kategori[index]=tbPermintaan.getValueAt(i,5).toString();
+                    Kode[index]=tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),1).toString();
+                    NamaParameter[index]=tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),2).toString();
+                    MetodePengujian[index]=tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),3).toString();
+                    Satuan[index]=tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),4).toString();
+                    Kategori[index]=tabMode.getValueAt(tbPermintaan.convertRowIndexToModel(i),5).toString();
                     index++;
                 }
             }
 
+            tbPermintaan.suspendSorting();
             Valid.tabelKosong(tabMode);
             for(i=0;i<jml;i++){
                 tabMode.addRow(new Object[] {pilih[i],Kode[i],NamaParameter[i],MetodePengujian[i],Satuan[i],Kategori[i]});
@@ -1631,14 +1635,17 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
             root = null;
         }
         LCount.setText(""+tbPermintaan.getRowCount());
+        tbPermintaan.resumeSorting();
     }
 
     public void isReset(){
         jml=tbPermintaan.getRowCount();
         for(i=0;i<jml;i++){
-            tbPermintaan.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbPermintaan.convertRowIndexToModel(i),0);
         }
+        tbPermintaan.suspendSorting();
         Valid.tabelKosong(tabMode);
+        tbPermintaan.resumeSorting();
     }
 
     public void emptTeks() {

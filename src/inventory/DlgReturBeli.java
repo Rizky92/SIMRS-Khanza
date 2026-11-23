@@ -1357,14 +1357,14 @@ public class DlgReturBeli extends javax.swing.JDialog {
     private void getData() {
        int row=tbDokter.getSelectedRow();
         if(row!= -1){
-            NoFaktur.setText(tbDokter.getValueAt(row,0).toString());
-            Kdbar.setText(tbDokter.getValueAt(row,1).toString());
-            nmbar.setText(tbDokter.getValueAt(row,2).toString());
-            Satuanbar.setText(tbDokter.getValueAt(row,3).toString());
-            Hargaretur.setText(tbDokter.getValueAt(row,4).toString());
-            Jmlretur.setText(tbDokter.getValueAt(row,5).toString());
-            NoBatch.setText(tbDokter.getValueAt(row,7).toString());
-            Kadaluwarsa.setText(tbDokter.getValueAt(row,8).toString());
+            NoFaktur.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString());
+            Kdbar.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),1).toString());
+            nmbar.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),2).toString());
+            Satuanbar.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),3).toString());
+            Hargaretur.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),4).toString());
+            Jmlretur.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),5).toString());
+            NoBatch.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),7).toString());
+            Kadaluwarsa.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),8).toString());
             isHitung();
         }
     }

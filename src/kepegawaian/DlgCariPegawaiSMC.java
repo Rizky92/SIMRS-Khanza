@@ -384,6 +384,7 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbKamar.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim().toLowerCase();
@@ -509,6 +510,7 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
                     LCount.setText(tbKamar.getRowCount() + "");
                     DlgCariPegawaiSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbKamar.resumeSorting();
                 }
             }.execute();
         }
@@ -518,6 +520,7 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbKamar.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             SwingWorker<Void, Object[]> worker = new SwingWorker<>() {
                 final String cari = TCari.getText().trim().toLowerCase();
@@ -570,6 +573,7 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
                     LCount.setText(tbKamar.getRowCount() + "");
                     DlgCariPegawaiSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbKamar.resumeSorting();
                 }
             };
 

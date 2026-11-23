@@ -180,6 +180,7 @@ public final class DlgCariReg extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbPetugas.setAutoCreateRowSorter(true);
         tbPetugas.setToolTipText("Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan");
         tbPetugas.setName("tbPetugas"); // NOI18N
         Scroll.setViewportView(tbPetugas);
@@ -405,6 +406,7 @@ public final class DlgCariReg extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbPetugas.suspendSorting();
         Valid.tabelKosong(tabMode);
         try {
             ps=koneksi.prepareStatement("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
@@ -471,6 +473,7 @@ public final class DlgCariReg extends javax.swing.JDialog {
         }
 
         LCount.setText(""+tbPetugas.getRowCount());
+        tbPetugas.resumeSorting();
     }
 
     public JTable getTable(){

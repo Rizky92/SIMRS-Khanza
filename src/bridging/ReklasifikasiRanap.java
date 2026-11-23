@@ -219,6 +219,7 @@ public final class ReklasifikasiRanap extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setSortable(false);
         tbBangsal.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbBangsal.setComponentPopupMenu(jPopupMenu1);
         tbBangsal.setName("tbBangsal"); // NOI18N
@@ -680,7 +681,7 @@ public final class ReklasifikasiRanap extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
         }else{
             DlgBilingRanap billing=new DlgBilingRanap(null,false);
-            billing.TNoRw.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
+            billing.TNoRw.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
             billing.isCek();
             billing.isRawat();
             billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -1443,7 +1444,7 @@ public final class ReklasifikasiRanap extends javax.swing.JDialog {
     private void getData() {
         int row=tbBangsal.getSelectedRow();
         if(row!= -1){
-            TKd.setText(tbBangsal.getValueAt(row,1).toString());
+            TKd.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),1).toString());
         }
     }
 

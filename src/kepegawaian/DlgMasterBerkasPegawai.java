@@ -169,7 +169,7 @@ public final class DlgMasterBerkasPegawai extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbBangsal.setAutoCreateRowSorter(false);
+        tbBangsal.setAutoCreateRowSorter(true);
         tbBangsal.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbBangsal.setName("tbBangsal"); // NOI18N
         tbBangsal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -492,8 +492,8 @@ public final class DlgMasterBerkasPegawai extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbBangsal.getRowCount();i++){
-            if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                Sequel.meghapus("master_berkas_pegawai","kode",tbBangsal.getValueAt(i,1).toString());
+            if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.meghapus("master_berkas_pegawai","kode",tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString());
             }
         }
         runBackground(() ->tampil());
@@ -519,7 +519,7 @@ public final class DlgMasterBerkasPegawai extends javax.swing.JDialog {
             if(tbBangsal.getSelectedRow()>-1){
                 Sequel.mengedit("master_berkas_pegawai","kode=?","kode=?,kategori=?,nama_berkas=?,no_urut=?",5,new String[]{
                     TKd.getText(),CmbKategori.getSelectedItem().toString(),TNm.getText(),
-                    TUrut.getText(),tbBangsal.getValueAt(tbBangsal.getSelectedRow(), 1).toString()
+                    TUrut.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()), 1).toString()
                 });
                 if(tbBangsal.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
@@ -749,6 +749,7 @@ public final class DlgMasterBerkasPegawai extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbBangsal.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -779,6 +780,7 @@ public final class DlgMasterBerkasPegawai extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbBangsal.getRowCount());
+        tbBangsal.resumeSorting();
     }
 
     public void emptTeks() {
@@ -792,10 +794,10 @@ public final class DlgMasterBerkasPegawai extends javax.swing.JDialog {
 
     private void getData() {
         if(tbBangsal.getSelectedRow()!= -1){
-            TKd.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),1).toString());
-            CmbKategori.setSelectedItem(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),2).toString());
-            TNm.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),3).toString());
-            TUrut.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),4).toString());
+            TKd.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1).toString());
+            CmbKategori.setSelectedItem(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),2).toString());
+            TNm.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),3).toString());
+            TUrut.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),4).toString());
         }
     }
 

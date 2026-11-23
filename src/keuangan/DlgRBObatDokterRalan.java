@@ -161,6 +161,7 @@ public class DlgRBObatDokterRalan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -542,9 +543,9 @@ public class DlgRBObatDokterRalan extends javax.swing.JDialog {
                 a=0;
                 for(i=0;i<tbDokter.getRowCount();i++){
                     try {
-                        if((!tbDokter.getValueAt(i,1).toString().substring(0,1).equals(""))&&(!tbDokter.getValueAt(i,1).toString().substring(0,1).equals(" "))){
+                        if((!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString().substring(0,1).equals(""))&&(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString().substring(0,1).equals(" "))){
                             a++;
-                            tbDokter.setValueAt(a+".", i,0);
+                            tabMode.setValueAt(a+".", tbDokter.convertRowIndexToModel(i),0);
                         }
                     } catch (Exception e) {
                     }

@@ -522,8 +522,8 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
         if (tbTemplate.getSelectedRow() >= 0) {
             if (JOptionPane.showConfirmDialog(null, "Eeiiiiiits, udah bener mau dihapus..??", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if (Sequel.menghapustfSmc("template_umum_smc", "no_template = ? and menu = ? and field = ?",
-                    tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 2).toString(), tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 7).toString(),
-                    tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 8).toString()
+                    tabMode.getValueAt(tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow()), 2).toString(), tabMode.getValueAt(tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow()), 7).toString(),
+                    tabMode.getValueAt(tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow()), 8).toString()
                 )) {
                     tabMode.removeRow(tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow()));
                     emptTeks();
@@ -550,17 +550,17 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
             int row = tbTemplate.getSelectedRow();
             if (Sequel.mengupdatetfSmc("template_umum_smc", "no_template = ?, menu = ?, field = ?, kd_dokter = ?, nama_template = ?, isi_template = ?", "no_template = ? and menu = ? and field = ?",
                 noTemplate.getText(), getKodeMenu(), getKodeField(), getKodeDokter(), namaTemplate.getText(), isiTemplate.getText(),
-                tbTemplate.getValueAt(row, 2).toString(), tbTemplate.getValueAt(row, 7).toString(), tbTemplate.getValueAt(row, 8).toString()
+                tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 2).toString(), tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 7).toString(), tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 8).toString()
             )) {
-                tbTemplate.setValueAt(menu.getSelectedItem().toString(), row, 0);
-                tbTemplate.setValueAt(field.getSelectedItem().toString(), row, 1);
-                tbTemplate.setValueAt(noTemplate.getText(), row, 2);
-                tbTemplate.setValueAt(namaTemplate.getText(), row, 3);
-                tbTemplate.setValueAt(kdDokter.getText().trim(), row, 4);
-                tbTemplate.setValueAt(getNamaDokter(), row, 5);
-                tbTemplate.setValueAt(isiTemplate.getText(), row, 6);
-                tbTemplate.setValueAt(getKodeMenu(), row, 7);
-                tbTemplate.setValueAt(getKodeField(), row, 8);
+                tabMode.setValueAt(menu.getSelectedItem().toString(), tbTemplate.convertRowIndexToModel(row), 0);
+                tabMode.setValueAt(field.getSelectedItem().toString(), tbTemplate.convertRowIndexToModel(row), 1);
+                tabMode.setValueAt(noTemplate.getText(), tbTemplate.convertRowIndexToModel(row), 2);
+                tabMode.setValueAt(namaTemplate.getText(), tbTemplate.convertRowIndexToModel(row), 3);
+                tabMode.setValueAt(kdDokter.getText().trim(), tbTemplate.convertRowIndexToModel(row), 4);
+                tabMode.setValueAt(getNamaDokter(), tbTemplate.convertRowIndexToModel(row), 5);
+                tabMode.setValueAt(isiTemplate.getText(), tbTemplate.convertRowIndexToModel(row), 6);
+                tabMode.setValueAt(getKodeMenu(), tbTemplate.convertRowIndexToModel(row), 7);
+                tabMode.setValueAt(getKodeField(), tbTemplate.convertRowIndexToModel(row), 8);
                 emptTeks();
             } else {
                 JOptionPane.showMessageDialog(null, "Gagal mengganti template, kemungkinan nomor template sudah digunakan..!!");
@@ -821,6 +821,7 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             LCount.setText("0");
+            tbTemplate.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
 
             new SwingWorker<Void, Object[]>() {
@@ -892,6 +893,7 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
                     LCount.setText(tbTemplate.getRowCount() + "");
                     MasterTemplateUmumSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbTemplate.resumeSorting();
                 }
             }.execute();
         }
@@ -979,14 +981,14 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
         if (tbTemplate.getSelectedRow() != -1) {
             int row = tbTemplate.getSelectedRow();
             memuat = true;
-            menu.setSelectedKey(tbTemplate.getValueAt(row, 7).toString());
-            field.setSelectedKey(tbTemplate.getValueAt(row, 8).toString());
+            menu.setSelectedKey(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 7).toString());
+            field.setSelectedKey(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 8).toString());
             memuat = false;
-            noTemplate.setText(tbTemplate.getValueAt(row, 2).toString());
-            namaTemplate.setText(tbTemplate.getValueAt(row, 3).toString());
-            kdDokter.setText(tbTemplate.getValueAt(row, 4).toString());
-            nmDokter.setText(tbTemplate.getValueAt(row, 5).toString());
-            isiTemplate.setText(tbTemplate.getValueAt(row, 6).toString());
+            noTemplate.setText(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 2).toString());
+            namaTemplate.setText(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 3).toString());
+            kdDokter.setText(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 4).toString());
+            nmDokter.setText(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 5).toString());
+            isiTemplate.setText(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(row), 6).toString());
         }
     }
 

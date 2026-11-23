@@ -651,7 +651,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
 
     private void getData() {
         if(tbkelurahan.getSelectedRow()!= -1){
-            Nama.setText(tbkelurahan.getValueAt(tbkelurahan.getSelectedRow(),0).toString());
+            Nama.setText(tabMode.getValueAt(tbkelurahan.convertRowIndexToModel(tbkelurahan.getSelectedRow()),0).toString());
         }
     }
 

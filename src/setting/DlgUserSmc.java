@@ -236,6 +236,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbUser.setAutoCreateRowSorter(true);
         tbUser.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbUser.setComponentPopupMenu(jPopupMenu1);
         tbUser.setName("tbUser"); // NOI18N
@@ -576,14 +577,14 @@ public class DlgUserSmc extends javax.swing.JDialog {
         } else {
             if (tbUser.getSelectedRow() != -1) {
                 if (Sequel.executeRawSmc("update user set id_user = aes_encrypt(?, 'nur'), password = aes_encrypt(?, 'windi') where id_user = aes_encrypt(?, 'nur')",
-                    TKd.getText(), TPass.getText(), tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString()
+                    TKd.getText(), TPass.getText(), tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 0).toString()
                 )) {
-                    if (!TKd.getText().equals(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
+                    if (!TKd.getText().equals(tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 0).toString())) {
                         Sequel.executeRawSmc("update user_password_smc set user_password_smc.id_user = aes_encrypt(?, 'nur') where user_password_smc.id_user = aes_encrypt(?, 'nur')",
-                            TKd.getText(), tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString()
+                            TKd.getText(), tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 0).toString()
                         );
                     }
-                    tbUser.setValueAt(TKd.getText(), tbUser.getSelectedRow(), 0);
+                    tabMode.setValueAt(TKd.getText(), tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 0);
                     emptTeks();
                 }
             }
@@ -765,7 +766,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
     private void tbUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUserMouseClicked
         if (tbUser.getRowCount() != 0) {
             if (copyhakakses.equals("copy")) {
-                if (userdicopy.equals(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
+                if (userdicopy.equals(tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 0).toString())) {
                     userdicopy = "";
                     copyhakakses = "";
                     JOptionPane.showMessageDialog(null, "Copy hak akses gagal karena user dicopy dan user tujuan yang dipilih sama..!!");
@@ -813,7 +814,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
                             JOptionPane.showMessageDialog(null, "Tidak ada hak akses yang bisa dicopy..!!");
                             return;
                         } else {
-                            if (Sequel.mengupdatetfSmc("user", sj.toString(), "aes_decrypt(id_user, 'nur') = ?", tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
+                            if (Sequel.mengupdatetfSmc("user", sj.toString(), "aes_decrypt(id_user, 'nur') = ?", tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 0).toString())) {
                                 userdicopy = "";
                                 copyhakakses = "";
                                 JOptionPane.showMessageDialog(null, "Copy hak akses user berhasil!");
@@ -903,6 +904,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbUser.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim();
@@ -951,6 +953,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
                     LCount.setText(tbUser.getRowCount() + "");
                     DlgUserSmc.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbUser.resumeSorting();
                 }
             }.execute();
         }
@@ -970,8 +973,8 @@ public class DlgUserSmc extends javax.swing.JDialog {
 
     private void getData() {
         if (tbUser.getSelectedRow() != -1) {
-            TKd.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString());
-            TNmUser.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 1).toString());
+            TKd.setText(tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 0).toString());
+            TNmUser.setText(tabMode.getValueAt(tbUser.convertRowIndexToModel(tbUser.getSelectedRow()), 1).toString());
             TPass.setText(Sequel.cariIsiSmc("select aes_decrypt(user.password, 'windi') from user where user.id_user = aes_encrypt(?, 'nur')", TKd.getText()));
         }
     }

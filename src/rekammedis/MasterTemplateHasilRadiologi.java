@@ -492,10 +492,10 @@ public class MasterTemplateHasilRadiologi extends javax.swing.JDialog {
             Valid.textKosong(Template,"Template Hasil Radiologi");
         }else{
             if(Valid.editTabletf(tabMode,"template_hasil_radiologi","no_template","?","no_template=?,nama_pemeriksaan=?,template_hasil_radiologi=?",4,new String[]{
-                Kd.getText(),Nm.getText(),Template.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
+                Kd.getText(),Nm.getText(),Template.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()
             })==true){
-                tbDokter.setValueAt(Kd.getText(),tbDokter.getSelectedRow(),0);
-                tbDokter.setValueAt(Template.getText(),tbDokter.getSelectedRow(),1);
+                tabMode.setValueAt(Kd.getText(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0);
+                tabMode.setValueAt(Template.getText(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1);
                 emptTeks();TabRawat.setSelectedIndex(1);
             }
         }
@@ -707,9 +707,9 @@ public class MasterTemplateHasilRadiologi extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            Kd.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            Nm.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-            Template.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString());
+            Kd.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+            Nm.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
+            Template.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString());
         }
     }
 

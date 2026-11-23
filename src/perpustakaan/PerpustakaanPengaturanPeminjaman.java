@@ -504,9 +504,9 @@ public class PerpustakaanPengaturanPeminjaman extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            MakBuku.setText(tbAdmin.getValueAt(row,0).toString());
-            Lama.setText(tbAdmin.getValueAt(row,1).toString());
-            Denda.setText(tbAdmin.getValueAt(row,2).toString());
+            MakBuku.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),0).toString());
+            Lama.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),1).toString());
+            Denda.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),2).toString());
         }
     }
 

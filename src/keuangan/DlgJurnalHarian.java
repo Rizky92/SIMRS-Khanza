@@ -823,6 +823,7 @@ public class DlgJurnalHarian extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbDokter.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             ttldebet = 0;
             ttlkredit = 0;
@@ -917,6 +918,7 @@ public class DlgJurnalHarian extends javax.swing.JDialog {
                     kredit.setText(Valid.SetAngka(ttlkredit));
                     DlgJurnalHarian.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbDokter.resumeSorting();
                 }
             }.execute();
         }

@@ -468,7 +468,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
             Valid.textKosong(no_inventaris,"Barang");
         }else{
             Sequel.mengedit("cssd_barang","no_inventaris=?","no_inventaris=?,jenis_barang=?",3,new String[]{
-                no_inventaris.getText(),KategoriBarang.getSelectedItem().toString(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
+                no_inventaris.getText(),KategoriBarang.getSelectedItem().toString(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString()
             });
             if(tbSpesialis.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
@@ -792,9 +792,9 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            no_inventaris.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            nama_barang.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString());
-            KategoriBarang.setSelectedItem(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),4).toString());
+            no_inventaris.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            nama_barang.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2).toString());
+            KategoriBarang.setSelectedItem(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),4).toString());
         }
     }
 

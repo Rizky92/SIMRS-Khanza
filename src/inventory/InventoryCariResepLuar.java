@@ -255,6 +255,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbTambahan.setAutoCreateRowSorter(true);
         tbTambahan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -338,6 +339,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
         scrollPane2.setName("scrollPane2"); // NOI18N
         scrollPane2.setOpaque(true);
 
+        tbTambahan1.setAutoCreateRowSorter(true);
         tbTambahan1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -425,6 +427,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbResep.setSortable(false);
         tbResep.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbResep.setComponentPopupMenu(Popup2);
         tbResep.setName("tbResep"); // NOI18N
@@ -615,8 +618,8 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
              JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
              TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){
-            if(!tbResep.getValueAt(tbResep.getSelectedRow(),0).toString().equals("")){
-                Sequel.meghapus("resep_luar","no_resep",tbResep.getValueAt(tbResep.getSelectedRow(),0).toString());
+            if(!tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),0).toString().equals("")){
+                Sequel.meghapus("resep_luar","no_resep",tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),0).toString());
                 runBackground(() ->tampil());
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus resep. Pilih dulu data yang mau dihapus. Klik data Nomor Resep untuk memilih...!!!!");
@@ -754,7 +757,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
             Sequel.queryu2("delete from resep_luar_obat where no_resep=?",1,new String[]{NoResepUbah3.getText()});
             for(i=0;i<tbTambahan.getRowCount();i++){
                 Sequel.menyimpan("resep_luar_obat","?,?,?,?",4,new String[]{
-                    NoResepUbah3.getText(),tbTambahan.getValueAt(i,0).toString(),tbTambahan.getValueAt(i,2).toString(),tbTambahan.getValueAt(i,3).toString()
+                    NoResepUbah3.getText(),tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i),0).toString(),tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i),2).toString(),tabmodeUbahRacikan.getValueAt(tbTambahan.convertRowIndexToModel(i),3).toString()
                 });
             }
 
@@ -783,10 +786,10 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                         public void windowClosed(WindowEvent e) {
                             if(aturanpakai.getTable().getSelectedRow()!= -1){
                                 if(pilihan==1){
-                                    tbTambahan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan.getSelectedRow(),5);
+                                    tabmodeUbahRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan.convertRowIndexToModel(tbTambahan.getSelectedRow()),5);
                                     tbTambahan.requestFocus();
                                 }else if(pilihan==2){
-                                    tbTambahan1.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan1.getSelectedRow(),5);
+                                    tabmodeUbahRacikan2.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan1.convertRowIndexToModel(tbTambahan1.getSelectedRow()),5);
                                     tbTambahan1.requestFocus();
                                 }
                             }
@@ -824,10 +827,10 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                         public void windowClosed(WindowEvent e) {
                             if(aturanpakai.getTable().getSelectedRow()!= -1){
                                 if(pilihan==1){
-                                    tbTambahan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan.getSelectedRow(),5);
+                                    tabmodeUbahRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan.convertRowIndexToModel(tbTambahan.getSelectedRow()),5);
                                     tbTambahan.requestFocus();
                                 }else if(pilihan==2){
-                                    tbTambahan1.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan1.getSelectedRow(),5);
+                                    tabmodeUbahRacikan2.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan1.convertRowIndexToModel(tbTambahan1.getSelectedRow()),5);
                                     tbTambahan1.requestFocus();
                                 }
                             }
@@ -859,7 +862,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
         }else{
             for(i=0;i<tbTambahan1.getRowCount();i++){
                 Sequel.queryu2("update resep_luar_racikan set aturan_pakai=?,nama_racik=? where no_resep=? and no_racik=?",4,new String[]{
-                    tbTambahan1.getValueAt(i,2).toString(),tbTambahan1.getValueAt(i,1).toString(),NoResepUbah4.getText(),tbTambahan1.getValueAt(i,0).toString()
+                    tabmodeUbahRacikan2.getValueAt(tbTambahan1.convertRowIndexToModel(i),2).toString(),tabmodeUbahRacikan2.getValueAt(tbTambahan1.convertRowIndexToModel(i),1).toString(),NoResepUbah4.getText(),tabmodeUbahRacikan2.getValueAt(tbTambahan1.convertRowIndexToModel(i),0).toString()
                 });
             }
 
@@ -877,8 +880,8 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){
-            if(!tbResep.getValueAt(tbResep.getSelectedRow(),0).toString().equals("")){
-                NoResepUbah3.setText(tbResep.getValueAt(tbResep.getSelectedRow(),0).toString());
+            if(!tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),0).toString().equals("")){
+                NoResepUbah3.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),0).toString());
                 runBackground(() ->tampilresep());
                 WindowInput3.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 WindowInput3.setLocationRelativeTo(internalFrame1);
@@ -892,8 +895,8 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){
-            if(!tbResep.getValueAt(tbResep.getSelectedRow(),0).toString().equals("")){
-                NoResepUbah4.setText(tbResep.getValueAt(tbResep.getSelectedRow(),0).toString());
+            if(!tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),0).toString().equals("")){
+                NoResepUbah4.setText(tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),0).toString());
                 runBackground(() ->tampilresep2());
                 WindowInput4.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 WindowInput4.setLocationRelativeTo(internalFrame1);
@@ -907,7 +910,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){
-            if(!tbResep.getValueAt(tbResep.getSelectedRow(),0).toString().equals("")){
+            if(!tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),0).toString().equals("")){
                 try{
                     ps=koneksi.prepareStatement("select resep_luar.no_resep,resep_luar.tgl_perawatan,resep_luar.jam,reg_periksa.kd_pj,"+
                             " resep_luar.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_luar.kd_dokter,dokter.nm_dokter "+
@@ -915,7 +918,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                             " inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                             " inner join dokter on resep_luar.kd_dokter=dokter.kd_dokter where resep_luar.no_resep=? ");
                     try{
-                        ps.setString(1,tbResep.getValueAt(tbResep.getSelectedRow(),0).toString());
+                        ps.setString(1,tabMode.getValueAt(tbResep.convertRowIndexToModel(tbResep.getSelectedRow()),0).toString());
                         rs=ps.executeQuery();
                         if(rs.next()){
                             i=0;
@@ -1246,6 +1249,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
     }
 
     private void tampilresep() {
+        tbTambahan.suspendSorting();
         Valid.tabelKosong(tabmodeUbahRacikan);
         try {
             try {
@@ -1272,9 +1276,11 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
+        tbTambahan.resumeSorting();
     }
 
     private void tampilresep2() {
+        tbTambahan1.suspendSorting();
         Valid.tabelKosong(tabmodeUbahRacikan2);
         try {
             try {
@@ -1300,6 +1306,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
+        tbTambahan1.resumeSorting();
     }
 
     public void setNoRm(String norwt,Date tgl1) {

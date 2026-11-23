@@ -151,6 +151,7 @@ public final class DlgSatuan extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbKamar.setAutoCreateRowSorter(true);
         tbKamar.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbKamar.setName("tbKamar"); // NOI18N
         tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -429,8 +430,8 @@ public final class DlgSatuan extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbKamar.getRowCount();i++){
-            if(tbKamar.getValueAt(i,0).toString().equals("true")){
-                Sequel.meghapus("kodesatuan","kode_sat",tbKamar.getValueAt(i,1).toString());
+            if(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.meghapus("kodesatuan","kode_sat",tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString());
             }
         }
         BtnCariActionPerformed(evt);
@@ -452,7 +453,7 @@ public final class DlgSatuan extends javax.swing.JDialog {
             Valid.textKosong(Nm,"Nama Satuan");
         }else{
             Valid.editTable(tabMode,"kodesatuan","kode_sat","?","satuan=?,kode_sat=?",3,new String[]{
-                Nm.getText(),Kd.getText(),tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString()
+                Nm.getText(),Kd.getText(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString()
             });
             if(tbKamar.getRowCount()!=0){BtnCariActionPerformed(evt);}
             emptTeks();
@@ -664,6 +665,7 @@ public final class DlgSatuan extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select kode_sat,satuan  "+
@@ -690,6 +692,7 @@ public final class DlgSatuan extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {
@@ -702,8 +705,8 @@ public final class DlgSatuan extends javax.swing.JDialog {
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            Kd.setText(tbKamar.getValueAt(row,1).toString());
-            Nm.setText(tbKamar.getValueAt(row,2).toString());
+            Kd.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
+            Nm.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),2).toString());
         }
     }
 

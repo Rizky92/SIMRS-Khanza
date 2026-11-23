@@ -475,7 +475,7 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                         for(int r=0;r<tabMode.getRowCount();r++){
-                            if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
+                            if(!tabMode.getValueAt(r,0).toString().contains(">>")){
                                 Sequel.menyimpan("temporary","'"+r+"','"+
                                                 tabMode.getValueAt(r,0).toString()+"','"+
                                                 tabMode.getValueAt(r,1).toString()+"','"+
@@ -877,7 +877,7 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
     private void getData() {
         int row=tbBangsal.getSelectedRow();
         if(row!= -1){
-            TKd.setText(tbBangsal.getValueAt(row,0).toString());
+            TKd.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),0).toString());
         }
     }
 

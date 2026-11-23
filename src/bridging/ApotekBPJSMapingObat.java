@@ -523,12 +523,12 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
         }else{
             if(tbJnsPerawatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("maping_obat_apotek_bpjs","kode_brng=?","kode_brng=?,kode_brng_apotek_bpjs=?,nama_brng_apotek_bpjs=?",4,new String[]{
-                        kdobat.getText(),KdObatBPJS.getText(),NmObatBPJS.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                        kdobat.getText(),KdObatBPJS.getText(),NmObatBPJS.getText(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString()
                     })==true){
-                    tbJnsPerawatan.setValueAt(kdobat.getText(),tbJnsPerawatan.getSelectedRow(),0);
-                    tbJnsPerawatan.setValueAt(TObat.getText(),tbJnsPerawatan.getSelectedRow(),1);
-                    tbJnsPerawatan.setValueAt(KdObatBPJS.getText(),tbJnsPerawatan.getSelectedRow(),2);
-                    tbJnsPerawatan.setValueAt(NmObatBPJS.getText(),tbJnsPerawatan.getSelectedRow(),3);
+                    tabMode.setValueAt(kdobat.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0);
+                    tabMode.setValueAt(TObat.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1);
+                    tabMode.setValueAt(KdObatBPJS.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2);
+                    tabMode.setValueAt(NmObatBPJS.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3);
                     emptTeks();
                 }
             }
@@ -790,10 +790,10 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
 
     private void getData() {
        if(tbJnsPerawatan.getSelectedRow()!= -1){
-           kdobat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-           TObat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-           KdObatBPJS.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-           NmObatBPJS.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
+           kdobat.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+           TObat.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+           KdObatBPJS.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+           NmObatBPJS.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
         }
     }
 

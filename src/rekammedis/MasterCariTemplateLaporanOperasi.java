@@ -325,7 +325,7 @@ public final class MasterCariTemplateLaporanOperasi extends javax.swing.JDialog 
         if(tbKamar.getRowCount()!=0){
             try {
                 if(tbKamar.getSelectedRow()!= -1){
-                    Template.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString());
+                    Template.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),6).toString());
                 }
             } catch (java.lang.NullPointerException e) {
             }

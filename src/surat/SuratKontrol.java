@@ -928,30 +928,30 @@ public class SuratKontrol extends javax.swing.JDialog {
         }else if(!(TPasien.getText().trim().equals(""))){
             if(tbObat.getSelectedRow()!= -1){
                 if (Sequel.menghapustfSmc("skdp_bpjs", "tahun = ? and no_antrian = ?",
-                    tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(),
-                    tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString()
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString(),
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString()
                 )) {
                     if (JADIKANBOOKINGSURATKONTROL) {
                         if (BOOKINGLANGSUNGREGISTRASI) {
                             norawat = Sequel.cariIsiSmc("select booking_registrasi.no_rawat from booking_registrasi where " +
                                 "booking_registrasi.no_rkm_medis = ? and booking_registrasi.tanggal_periksa = ?",
-                                tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(),
-                                tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()
+                                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString(),
+                                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9).toString()
                             );
 
                             if (!norawat.isBlank()) {
                                 Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?",
-                                    tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(),
-                                    tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()
+                                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString(),
+                                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9).toString()
                                 );
                                 Sequel.menghapustfSmc("reg_periksa", "no_rawat = ? and no_rkm_medis = ? and tgl_registrasi = ? and status_lanjut = 'Ralan' " +
                                     "and stts = 'Belum' and not exists(select * from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat)",
-                                    norawat, tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()
+                                    norawat, tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString(), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9).toString()
                                 );
                             }
                         } else {
                             Sequel.menghapusSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?",
-                                tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()
+                                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString(), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9).toString()
                             );
                         }
                     }
@@ -1256,25 +1256,25 @@ public class SuratKontrol extends javax.swing.JDialog {
                     "rtl2 = ?, tanggal_datang = ?, tanggal_rujukan = ?, no_antrian = ?, kd_dokter = ?, status = ?", "tahun = ? and no_antrian = ?",
                     TanggalPeriksa.getSelectedItem().toString().substring(6, 10), TNoRM.getText(), Diagnosa.getText(), Terapi.getText(), Alasan1.getText(),
                     Alasan2.getText(), Rtl1.getText(), Rtl2.getText(), Valid.getTglSmc(TanggalPeriksa), Valid.getTglSmc(TanggalSurat), NoAntrian.getText(),
-                    KdDokter.getText(), Status.getSelectedItem().toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(),
-                    tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString()
+                    KdDokter.getText(), Status.getSelectedItem().toString(), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString(),
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString()
                 )) {
                     if (JADIKANBOOKINGSURATKONTROL) {
                         if (BOOKINGLANGSUNGREGISTRASI) {
                             norawat = Sequel.cariIsiSmc("select booking_registrasi.no_rawat from booking_registrasi where " +
                                 "booking_registrasi.no_rkm_medis = ? and booking_registrasi.tanggal_periksa = ?",
-                                tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(),
-                                tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()
+                                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString(),
+                                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9).toString()
                             );
 
                             if (!norawat.isBlank()) {
                                 Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?",
-                                    tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(),
-                                    tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()
+                                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString(),
+                                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9).toString()
                                 );
                                 Sequel.menghapustfSmc("reg_periksa", "no_rawat = ? and no_rkm_medis = ? and tgl_registrasi = ? and status_lanjut = 'Ralan' " +
                                     "and stts = 'Belum' and not exists(select * from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat)",
-                                    norawat, tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()
+                                    norawat, tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString(), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9).toString()
                                 );
                             }
 
@@ -1345,28 +1345,28 @@ public class SuratKontrol extends javax.swing.JDialog {
                         } else {
                             Sequel.mengupdateSmc("booking_registrasi", "tanggal_booking = ?, no_rkm_medis = ?, tanggal_periksa = ?, kd_dokter = ?, kd_poli = ?, no_reg = ?",
                                 "no_rkm_medis = ? and tanggal_periksa = ?", Valid.getTglSmc(TanggalSurat), TNoRM.getText(), Valid.getTglSmc(TanggalPeriksa), KdDokter.getText(),
-                                KdPoli.getText(), NoReg.getText(), tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()
+                                KdPoli.getText(), NoReg.getText(), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString(), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9).toString()
                             );
                         }
                     }
-                    tbObat.setValueAt(TanggalPeriksa.getSelectedItem().toString().substring(6, 10), tbObat.getSelectedRow(), 0);
-                    tbObat.setValueAt(TNoRM.getText(), tbObat.getSelectedRow(), 1);
-                    tbObat.setValueAt(TPasien.getText(), tbObat.getSelectedRow(), 2);
-                    tbObat.setValueAt(Diagnosa.getText(), tbObat.getSelectedRow(), 3);
-                    tbObat.setValueAt(Terapi.getText(), tbObat.getSelectedRow(), 4);
-                    tbObat.setValueAt(Alasan1.getText(), tbObat.getSelectedRow(), 5);
-                    tbObat.setValueAt(Alasan2.getText(), tbObat.getSelectedRow(), 6);
-                    tbObat.setValueAt(Rtl1.getText(), tbObat.getSelectedRow(), 7);
-                    tbObat.setValueAt(Rtl2.getText(), tbObat.getSelectedRow(), 8);
-                    tbObat.setValueAt(Valid.getTglSmc(TanggalPeriksa), tbObat.getSelectedRow(), 9);
-                    tbObat.setValueAt(Valid.getTglSmc(TanggalSurat), tbObat.getSelectedRow(), 10);
-                    tbObat.setValueAt(NoAntrian.getText(), tbObat.getSelectedRow(), 11);
-                    tbObat.setValueAt(NoReg.getText(), tbObat.getSelectedRow(), 12);
-                    tbObat.setValueAt(KdDokter.getText(), tbObat.getSelectedRow(), 13);
-                    tbObat.setValueAt(NmDokter.getText(), tbObat.getSelectedRow(), 14);
-                    tbObat.setValueAt(KdPoli.getText(), tbObat.getSelectedRow(), 15);
-                    tbObat.setValueAt(NmPoli.getText(), tbObat.getSelectedRow(), 16);
-                    tbObat.setValueAt(Status.getSelectedItem().toString(), tbObat.getSelectedRow(), 17);
+                    tabMode.setValueAt(TanggalPeriksa.getSelectedItem().toString().substring(6, 10), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0);
+                    tabMode.setValueAt(TNoRM.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1);
+                    tabMode.setValueAt(TPasien.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2);
+                    tabMode.setValueAt(Diagnosa.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 3);
+                    tabMode.setValueAt(Terapi.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 4);
+                    tabMode.setValueAt(Alasan1.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 5);
+                    tabMode.setValueAt(Alasan2.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6);
+                    tabMode.setValueAt(Rtl1.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 7);
+                    tabMode.setValueAt(Rtl2.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 8);
+                    tabMode.setValueAt(Valid.getTglSmc(TanggalPeriksa), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9);
+                    tabMode.setValueAt(Valid.getTglSmc(TanggalSurat), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 10);
+                    tabMode.setValueAt(NoAntrian.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11);
+                    tabMode.setValueAt(NoReg.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 12);
+                    tabMode.setValueAt(KdDokter.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 13);
+                    tabMode.setValueAt(NmDokter.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 14);
+                    tabMode.setValueAt(KdPoli.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 15);
+                    tabMode.setValueAt(NmPoli.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 16);
+                    tabMode.setValueAt(Status.getSelectedItem().toString(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 17);
                     emptTeks();
                 } else {
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengupdate surat kontrol..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
@@ -1588,28 +1588,28 @@ public class SuratKontrol extends javax.swing.JDialog {
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),14).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),13).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString()));
+                finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString()+"\nID "+(finger.equals("")?tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString():finger)+"\n"+Valid.SetTgl3(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString()));
                 Sequel.queryu("delete from temporary_booking_registrasi");
                 Sequel.menyimpan("temporary_booking_registrasi","'0','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()+"','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()+"','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()+"','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()+"','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()+"','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()+"','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),8).toString()+"','"+
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()+"','"+
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString()+"','"+
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString()+"','"+
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString()+"','"+
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString()+"','"+
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString()+"','"+
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString()+"','"+
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString()+"','"+
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString()+"','"+
                     TanggalPeriksa.getSelectedItem()+"','"+
                     TanggalSurat.getSelectedItem()+"','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()+"','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),12).toString()+"','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()+"','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),14).toString()+"','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),15).toString()+"','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),16).toString()+"','"+
-                    tbObat.getValueAt(tbObat.getSelectedRow(),17).toString()+"','','','','','','','','','','','','','','','','','','',''","Surat Kotrol");
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString()+"','"+
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString()+"','"+
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString()+"','"+
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString()+"','"+
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString()+"','"+
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString()+"','"+
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17).toString()+"','','','','','','','','','','','','','','','','','','',''","Surat Kotrol");
 
                 Valid.MyReport("rptSuratSKDPBPJS.jasper","report","::[ Surat Kontrol ]::",param);
                 this.setCursor(Cursor.getDefaultCursor());
@@ -1756,6 +1756,7 @@ public class SuratKontrol extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         String status = "";
         if (R1.isSelected()) {
@@ -1827,6 +1828,7 @@ public class SuratKontrol extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
         LCount.setText("" + tbObat.getRowCount());
+        tbObat.resumeSorting();
     }
 
 
@@ -1928,29 +1930,29 @@ public class SuratKontrol extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            Diagnosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Terapi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            Alasan1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            Alasan2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            Rtl1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            Rtl2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            Diagnosa.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            Terapi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            Alasan1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            Alasan2.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            Rtl1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            Rtl2.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
             try {
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                TanggalPeriksa.setDate(df.parse(tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()));
-                TanggalSurat.setDate(df.parse(tbObat.getValueAt(tbObat.getSelectedRow(), 10).toString()));
+                TanggalPeriksa.setDate(df.parse(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9).toString()));
+                TanggalSurat.setDate(df.parse(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 10).toString()));
             } catch (Exception e) {
-                Valid.SetTgl2(TanggalPeriksa, tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString());
-                Valid.SetTgl2(TanggalSurat, tbObat.getValueAt(tbObat.getSelectedRow(), 10).toString());
+                Valid.SetTgl2(TanggalPeriksa, tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9).toString());
+                Valid.SetTgl2(TanggalSurat, tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 10).toString());
             }
-            NoAntrian.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            NoReg.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            KdDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            NmDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            KdPoli.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            NmPoli.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            Status.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
+            NoAntrian.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            NoReg.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            KdDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            NmDokter.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            KdPoli.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+            NmPoli.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
+            Status.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17).toString());
         }
     }
 

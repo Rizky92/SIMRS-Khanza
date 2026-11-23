@@ -235,7 +235,7 @@ public final class DlgKamar extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKamar.setAutoCreateRowSorter(false);
+        tbKamar.setAutoCreateRowSorter(true);
         tbKamar.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbKamar.setComponentPopupMenu(jPopupMenu1);
         tbKamar.setName("tbKamar"); // NOI18N
@@ -701,8 +701,8 @@ public final class DlgKamar extends javax.swing.JDialog {
             ceksukses = true;
             tbKamar.clearSelection();
             for (int i = tbKamar.getRowCount() - 1; i >= 0; i--) {
-                if (tbKamar.getValueAt(i, 0).toString().equals("true")) {
-                    Sequel.mengupdatetfSmc("kamar", "statusdata = '0'", "kd_kamar = ?", tbKamar.getValueAt(i, 1).toString());
+                if (tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 0).toString().equals("true")) {
+                    Sequel.mengupdatetfSmc("kamar", "statusdata = '0'", "kd_kamar = ?", tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString());
                     tabMode.removeRow(tbKamar.convertRowIndexToModel(i));
                 }
             }
@@ -730,15 +730,15 @@ public final class DlgKamar extends javax.swing.JDialog {
             if(tbKamar.getSelectedRow()>-1){
                 if(Sequel.mengedittf("kamar","kd_kamar=?","kd_bangsal=?,trf_kamar=?,status=?,kelas=?,kd_kamar=?",6,new String[]{
                     kd_bangsal.getText(),TTarif.getText(),CmbStatus.getSelectedItem().toString(),Kelas.getSelectedItem().toString(),
-                    TKd.getText(),tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString()
+                    TKd.getText(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString()
                 })==true){
-                    tbKamar.setValueAt(false,tbKamar.getSelectedRow(),0);
-                    tbKamar.setValueAt(TKd.getText(),tbKamar.getSelectedRow(),1);
-                    tbKamar.setValueAt(kd_bangsal.getText(),tbKamar.getSelectedRow(),2);
-                    tbKamar.setValueAt(TBangsal.getText(),tbKamar.getSelectedRow(),3);
-                    tbKamar.setValueAt(Kelas.getSelectedItem().toString(),tbKamar.getSelectedRow(),4);
-                    tbKamar.setValueAt(Double.parseDouble(TTarif.getText()),tbKamar.getSelectedRow(),5);
-                    tbKamar.setValueAt(CmbStatus.getSelectedItem().toString(),tbKamar.getSelectedRow(),6);
+                    tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0);
+                    tabMode.setValueAt(TKd.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1);
+                    tabMode.setValueAt(kd_bangsal.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2);
+                    tabMode.setValueAt(TBangsal.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3);
+                    tabMode.setValueAt(Kelas.getSelectedItem().toString(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),4);
+                    tabMode.setValueAt(Double.parseDouble(TTarif.getText()),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),5);
+                    tabMode.setValueAt(CmbStatus.getSelectedItem().toString(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),6);
                     emptTeks();
                 }
             }
@@ -1094,12 +1094,12 @@ public final class DlgKamar extends javax.swing.JDialog {
         SwingUtilities.invokeLater(() -> {
             if (tbKamar.getRowCount() > 0) {
                 for (int i = 0; i < tbKamar.getRowCount(); i++) {
-                    if (Sequel.cariExistsSmc("select * from kamar_inap where kamar_inap.kd_kamar = ? and kamar_inap.stts_pulang = '-'", (String) tbKamar.getValueAt(i, 1))) {
-                        Sequel.mengupdateSmc("kamar", "status = 'ISI'", "kd_kamar = ?", (String) tbKamar.getValueAt(i, 1));
-                        tbKamar.setValueAt("ISI", i, 6);
+                    if (Sequel.cariExistsSmc("select * from kamar_inap where kamar_inap.kd_kamar = ? and kamar_inap.stts_pulang = '-'", (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1))) {
+                        Sequel.mengupdateSmc("kamar", "status = 'ISI'", "kd_kamar = ?", (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1));
+                        tabMode.setValueAt("ISI", tbKamar.convertRowIndexToModel(i), 6);
                     } else {
-                        Sequel.mengupdateSmc("kamar", "status = 'KOSONG'", "kd_kamar = ?", (String) tbKamar.getValueAt(i, 1));
-                        tbKamar.setValueAt("KOSONG", i, 6);
+                        Sequel.mengupdateSmc("kamar", "status = 'KOSONG'", "kd_kamar = ?", (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1));
+                        tabMode.setValueAt("KOSONG", tbKamar.convertRowIndexToModel(i), 6);
                     }
                 }
             }
@@ -1169,6 +1169,7 @@ public final class DlgKamar extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select kamar.kd_kamar, kamar.kd_bangsal, bangsal.nm_bangsal, kamar.kelas, kamar.trf_kamar, kamar.status from bangsal inner join kamar on kamar.kd_bangsal = bangsal.kd_bangsal " +
@@ -1202,6 +1203,7 @@ public final class DlgKamar extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
         LCount.setText("" + tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void tampil2() {
@@ -1231,12 +1233,12 @@ public final class DlgKamar extends javax.swing.JDialog {
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            TKd.setText(tbKamar.getValueAt(row,1).toString());
-            kd_bangsal.setText(tbKamar.getValueAt(row,2).toString());
-            TBangsal.setText(tbKamar.getValueAt(row,3).toString());
-            Kelas.setSelectedItem(tbKamar.getValueAt(row,4).toString());
-            TTarif.setText(Valid.SetAngka2(Double.parseDouble(tbKamar.getValueAt(row,5).toString())));
-            CmbStatus.setSelectedItem(tbKamar.getValueAt(row,6).toString());
+            TKd.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
+            kd_bangsal.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),2).toString());
+            TBangsal.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),3).toString());
+            Kelas.setSelectedItem(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),4).toString());
+            TTarif.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),5).toString())));
+            CmbStatus.setSelectedItem(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),6).toString());
         }
     }
 
@@ -1281,6 +1283,7 @@ public final class DlgKamar extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbKamar.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             new SwingWorker<Void, Object[]>() {
                 final String kdbangsal = kdbangsalcari.getText().trim();
@@ -1336,6 +1339,7 @@ public final class DlgKamar extends javax.swing.JDialog {
                     LCount.setText("" + tbKamar.getRowCount());
                     DlgKamar.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbKamar.resumeSorting();
                 }
             }.execute();
         }

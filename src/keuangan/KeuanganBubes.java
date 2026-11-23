@@ -516,7 +516,7 @@ public class KeuanganBubes extends javax.swing.JDialog {
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
             form.setAlwaysOnTop(false);
-            form.setJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+            form.setJurnal(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
             form.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }else{

@@ -286,7 +286,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKamar.setAutoCreateRowSorter(false);
+        tbKamar.setAutoCreateRowSorter(true);
         tbKamar.setComponentPopupMenu(Popup);
         tbKamar.setName("tbKamar"); // NOI18N
         tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -591,13 +591,13 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
                     if(tbKamar.getSelectedRow()>-1){
                         i=tbKamar.getSelectedColumn();
                         if(i==0){
-                            tbKamar.setValueAt(true,tbKamar.getSelectedRow(),0);
+                            tabMode.setValueAt(true,tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0);
                         }else if(i==1){
-                            tbKamar.setValueAt(true,tbKamar.getSelectedRow(),1);
+                            tabMode.setValueAt(true,tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1);
                         }else if(i==2){
-                            tbKamar.setValueAt(true,tbKamar.getSelectedRow(),2);
+                            tabMode.setValueAt(true,tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2);
                         }else if(i==3){
-                            tbKamar.setValueAt(true,tbKamar.getSelectedRow(),3);
+                            tabMode.setValueAt(true,tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3);
                         }
                     }
                     getData();
@@ -649,10 +649,10 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbKamar.getRowCount();i++){
-            tbKamar.setValueAt(false,i,0);
-            tbKamar.setValueAt(false,i,1);
-            tbKamar.setValueAt(false,i,2);
-            tbKamar.setValueAt(false,i,3);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),0);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),1);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),2);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),3);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -1023,32 +1023,33 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             ArrayNode tindakan = mapper.createArrayNode();
             Set<String> where = new HashSet<>();
             for (int i = 0; i < tbKamar.getRowCount(); i++) {
-                if ((Boolean) tbKamar.getValueAt(i, 0)
-                    || (Boolean) tbKamar.getValueAt(i, 1)
-                    || (Boolean) tbKamar.getValueAt(i, 2)
-                    || (Boolean) tbKamar.getValueAt(i, 3)
+                if ((Boolean) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 0)
+                    || (Boolean) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1)
+                    || (Boolean) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 2)
+                    || (Boolean) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 3)
                 ) {
                     ObjectNode row = mapper.createObjectNode();
-                    row.put("pg", (Boolean) tbKamar.getValueAt(i, 0));
-                    row.put("sg", (Boolean) tbKamar.getValueAt(i, 1));
-                    row.put("sr", (Boolean) tbKamar.getValueAt(i, 2));
-                    row.put("mlm", (Boolean) tbKamar.getValueAt(i, 3));
-                    row.put("kd_jenis_prw", tbKamar.getValueAt(i, 4).toString());
-                    row.put("nm_perawatan", tbKamar.getValueAt(i, 5).toString());
-                    row.put("nm_kategori", tbKamar.getValueAt(i, 6).toString());
-                    row.put("total_bayar", (Double) tbKamar.getValueAt(i, 7));
-                    row.put("bagian_rs", (Double) tbKamar.getValueAt(i, 8));
-                    row.put("bhp", (Double) tbKamar.getValueAt(i, 9));
-                    row.put("tarif_tindakandr", (Double) tbKamar.getValueAt(i, 10));
-                    row.put("tarif_tindakanpr", (Double) tbKamar.getValueAt(i, 11));
-                    row.put("kso", (Double) tbKamar.getValueAt(i, 12));
-                    row.put("menejemen", (Double) tbKamar.getValueAt(i, 13));
-                    row.put("kelas", tbKamar.getValueAt(i, 14).toString());
+                    row.put("pg", (Boolean) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 0));
+                    row.put("sg", (Boolean) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1));
+                    row.put("sr", (Boolean) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 2));
+                    row.put("mlm", (Boolean) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 3));
+                    row.put("kd_jenis_prw", tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString());
+                    row.put("nm_perawatan", tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 5).toString());
+                    row.put("nm_kategori", tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 6).toString());
+                    row.put("total_bayar", (Double) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7));
+                    row.put("bagian_rs", (Double) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8));
+                    row.put("bhp", (Double) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9));
+                    row.put("tarif_tindakandr", (Double) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10));
+                    row.put("tarif_tindakanpr", (Double) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11));
+                    row.put("kso", (Double) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12));
+                    row.put("menejemen", (Double) tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13));
+                    row.put("kelas", tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 14).toString());
                     tindakan.add(row);
-                    where.add(tbKamar.getValueAt(i, 4).toString());
+                    where.add(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString());
                 }
             }
 
+            tbKamar.suspendSorting();
             Valid.tabelKosong(tabMode);
             for (JsonNode row : tindakan) {
                 tabMode.addRow(new Object[] {
@@ -1134,6 +1135,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
         LCount.setText("" + tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void tampil2() {
@@ -1218,10 +1220,13 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
 
                 @Override
                 protected void process(List<Object[]> chunks) {
+                    tbKamar.suspendSorting();
+                    tbKamar.suspendSorting();
                     Valid.tabelKosong(tabMode);
                     LCount.setText("0");
                     DlgCariPerawatanRanap2.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     chunks.forEach(tabMode::addRow);
+                    tbKamar.resumeSorting();
                 }
 
                 @Override
@@ -1234,6 +1239,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
                     }
+                    tbKamar.resumeSorting();
                 }
             }.execute();
         }
@@ -1340,10 +1346,10 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
     private void emptTeks() {
         TCari.setText("");
          for(i=0;i<tbKamar.getRowCount();i++){
-            tbKamar.setValueAt(false,i,0);
-            tbKamar.setValueAt(false,i,1);
-            tbKamar.setValueAt(false,i,2);
-            tbKamar.setValueAt(false,i,3);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),0);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),1);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),2);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),3);
          }
         TCari.requestFocus();
     }
@@ -1353,10 +1359,10 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             if(TNoRw.getText().trim().equals("")||kddokter.getText().trim().equals("")){
                 Valid.textKosong(TCari,"Dokter/Paramedis");
                 for(i=0;i<tbKamar.getRowCount();i++){
-                    tbKamar.setValueAt(false,i,0);
-                    tbKamar.setValueAt(false,i,1);
-                    tbKamar.setValueAt(false,i,2);
-                    tbKamar.setValueAt(false,i,3);
+                    tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),0);
+                    tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),1);
+                    tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),2);
+                    tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),3);
                 }
             }
         }
@@ -1415,10 +1421,10 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         TCari.requestFocus();
 
         for(i=0;i<tbKamar.getRowCount();i++){
-            tbKamar.setValueAt(false,i,0);
-            tbKamar.setValueAt(false,i,1);
-            tbKamar.setValueAt(false,i,2);
-            tbKamar.setValueAt(false,i,3);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),0);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),1);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),2);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),3);
         }
     }
 
@@ -1447,379 +1453,379 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
                 hapusttljmdokter = 0; hapusttljmperawat = 0; hapusttlkso = 0; hapusttlpendapatan = 0; hapusttljasasarana = 0; hapusttlbhp = 0; hapusttlmenejemen = 0;
                 for (i = 0; i < tbKamar.getRowCount(); i++) {
                     pg = false; sg = false; sr = false; mlm = false;
-                    if (tindakanTerinput.path(pilihtable).has(tbKamar.getValueAt(i, 4).toString())) {
-                        pg = tindakanTerinput.path(pilihtable).path(tbKamar.getValueAt(i, 4).toString()).path("pg").asBoolean();
-                        sg = tindakanTerinput.path(pilihtable).path(tbKamar.getValueAt(i, 4).toString()).path("sg").asBoolean();
-                        sr = tindakanTerinput.path(pilihtable).path(tbKamar.getValueAt(i, 4).toString()).path("sr").asBoolean();
-                        mlm = tindakanTerinput.path(pilihtable).path(tbKamar.getValueAt(i, 4).toString()).path("mlm").asBoolean();
+                    if (tindakanTerinput.path(pilihtable).has(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString())) {
+                        pg = tindakanTerinput.path(pilihtable).path(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString()).path("pg").asBoolean();
+                        sg = tindakanTerinput.path(pilihtable).path(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString()).path("sg").asBoolean();
+                        sr = tindakanTerinput.path(pilihtable).path(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString()).path("sr").asBoolean();
+                        mlm = tindakanTerinput.path(pilihtable).path(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString()).path("mlm").asBoolean();
                     }
                     switch (pilihtable) {
                         case "rawat_inap_dr":
-                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && !pg) {
+                            if (Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 0).toString()) && !pg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
-                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(),
-                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString()
                                 )) {
-                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    ttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    ttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    ttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    ttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
-                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && pg) {
+                            } else if (!Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 0).toString()) && pg) {
                                 if (Sequel.menghapustfSmc("rawat_inap_dr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "07:00:00"
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), Valid.getTglSmc(DTPTgl), "07:00:00"
                                 )) {
-                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    hapusttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    hapusttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
                             }
 
-                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && !sg) {
+                            if (Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString()) && !sg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
-                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(),
-                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString()
                                 )) {
-                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    ttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    ttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    ttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    ttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
-                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && sg) {
+                            } else if (!Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString()) && sg) {
                                 if (Sequel.menghapustfSmc("rawat_inap_dr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "12:00:00"
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), Valid.getTglSmc(DTPTgl), "12:00:00"
                                 )) {
-                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    hapusttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    hapusttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
                             }
 
-                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && !sr) {
+                            if (Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 2).toString()) && !sr) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
-                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(),
-                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString()
                                 )) {
-                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    ttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    ttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    ttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    ttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
-                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && sr) {
+                            } else if (!Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 2).toString()) && sr) {
                                 if (Sequel.menghapustfSmc("rawat_inap_dr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "16:00:00"
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), Valid.getTglSmc(DTPTgl), "16:00:00"
                                 )) {
-                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    hapusttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    hapusttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
                             }
 
-                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && !mlm) {
+                            if (Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 3).toString()) && !mlm) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
-                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(),
-                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString()
                                 )) {
-                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    ttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    ttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    ttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    ttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
-                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && mlm) {
+                            } else if (!Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 3).toString()) && mlm) {
                                 if (Sequel.menghapustfSmc("rawat_inap_dr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "20:00:00"
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), Valid.getTglSmc(DTPTgl), "20:00:00"
                                 )) {
-                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    hapusttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    hapusttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
                             }
                             break;
                         case "rawat_inap_pr":
-                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && !pg) {
+                            if (Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 0).toString()) && !pg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
-                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 11).toString(),
-                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString()
                                 )) {
-                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    ttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    ttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    ttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    ttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
-                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && pg) {
+                            } else if (!Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 0).toString()) && pg) {
                                 if (Sequel.menghapustfSmc("rawat_inap_pr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "07:00:00"
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), Valid.getTglSmc(DTPTgl), "07:00:00"
                                 )) {
-                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    hapusttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    hapusttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
                             }
 
-                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && !sg) {
+                            if (Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString()) && !sg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
-                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 11).toString(),
-                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString()
                                 )) {
-                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    ttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    ttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    ttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    ttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
-                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && sg) {
+                            } else if (!Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString()) && sg) {
                                 if (Sequel.menghapustfSmc("rawat_inap_pr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "12:00:00"
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), Valid.getTglSmc(DTPTgl), "12:00:00"
                                 )) {
-                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    hapusttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    hapusttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
                             }
 
-                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && !sr) {
+                            if (Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 2).toString()) && !sr) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
-                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 11).toString(),
-                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString()
                                 )) {
-                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    ttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    ttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    ttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    ttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
-                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && sr) {
+                            } else if (!Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 2).toString()) && sr) {
                                 if (Sequel.menghapustfSmc("rawat_inap_pr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "16:00:00"
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), Valid.getTglSmc(DTPTgl), "16:00:00"
                                 )) {
-                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    hapusttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    hapusttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
                             }
 
-                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && !mlm) {
+                            if (Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 3).toString()) && !mlm) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
-                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 11).toString(),
-                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString()
                                 )) {
-                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    ttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    ttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    ttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    ttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
-                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && mlm) {
+                            } else if (!Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 3).toString()) && mlm) {
                                 if (Sequel.menghapustfSmc("rawat_inap_pr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "20:00:00"
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), Valid.getTglSmc(DTPTgl), "20:00:00"
                                 )) {
-                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    hapusttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    hapusttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
                             }
                             break;
                         case "rawat_inap_drpr":
-                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && !pg) {
+                            if (Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 0).toString()) && !pg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
-                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 11).toString(),
-                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString()
                                 )) {
-                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    ttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    ttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    ttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    ttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    ttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
-                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && pg) {
+                            } else if (!Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 0).toString()) && pg) {
                                 if (Sequel.menghapustfSmc("rawat_inap_drpr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "07:00:00"
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), Valid.getTglSmc(DTPTgl), "07:00:00"
                                 )) {
-                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    hapusttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    hapusttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    hapusttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
                             }
 
-                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && !sg) {
+                            if (Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString()) && !sg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
-                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 11).toString(),
-                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString()
                                 )) {
-                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    ttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    ttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    ttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    ttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    ttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
-                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && sg) {
+                            } else if (!Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString()) && sg) {
                                 if (Sequel.menghapustfSmc("rawat_inap_drpr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "12:00:00"
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), Valid.getTglSmc(DTPTgl), "12:00:00"
                                 )) {
-                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    hapusttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    hapusttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    hapusttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
                             }
 
-                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && !sr) {
+                            if (Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 2).toString()) && !sr) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
-                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 11).toString(),
-                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString()
                                 )) {
-                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    ttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    ttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    ttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    ttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    ttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
-                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && sr) {
+                            } else if (!Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 2).toString()) && sr) {
                                 if (Sequel.menghapustfSmc("rawat_inap_drpr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "16:00:00"
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), Valid.getTglSmc(DTPTgl), "16:00:00"
                                 )) {
-                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    hapusttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    hapusttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    hapusttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
                             }
 
-                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && !mlm) {
+                            if (Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 3).toString()) && !mlm) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
-                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 11).toString(),
-                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString()
                                 )) {
-                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    ttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    ttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    ttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    ttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    ttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }
-                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && mlm) {
+                            } else if (!Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 3).toString()) && mlm) {
                                 if (Sequel.menghapustfSmc("rawat_inap_drpr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "20:00:00"
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString(), Valid.getTglSmc(DTPTgl), "20:00:00"
                                 )) {
-                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
-                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
-                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
-                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
-                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    hapusttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
+                                    hapusttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 11).toString());
+                                    hapusttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
                                 } else {
                                     sukses = false;
                                 }

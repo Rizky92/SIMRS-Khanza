@@ -458,8 +458,8 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            Embalase.setText(tbAdmin.getValueAt(row,0).toString());
-            Tuslah.setText(tbAdmin.getValueAt(row,1).toString());
+            Embalase.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),0).toString());
+            Tuslah.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),1).toString());
         }
     }
 

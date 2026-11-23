@@ -127,6 +127,7 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbJadwal.setAutoCreateRowSorter(true);
         tbJadwal.setName("tbJadwal"); // NOI18N
         Scroll.setViewportView(tbJadwal);
 

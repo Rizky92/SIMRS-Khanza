@@ -788,20 +788,20 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
                 if(Sequel.mengedittf("surat_keterangan_sehat","no_surat=?","no_surat=?,no_rawat=?,tanggalsurat=?,berat=?,tinggi=?,tensi=?,suhu=?,butawarna=?,keperluan=?,kesimpulan=?",11,new String[]{
                     NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Bb.getText(),Tb.getText(),Tensi.getText(),Suhu.getText(),CmbButaWarna.getSelectedItem().toString(),
                     Keperluan.getText(),CmbKesimpulan.getSelectedItem().toString(),
-                    tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
                 })==true){
-                    tbObat.setValueAt(NoSurat.getText(),tbObat.getSelectedRow(),0);
-                    tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),1);
-                    tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),2);
-                    tbObat.setValueAt(TPasien.getText(),tbObat.getSelectedRow(),3);
-                    tbObat.setValueAt(Valid.SetTgl(TanggalSurat.getSelectedItem()+""),tbObat.getSelectedRow(),4);
-                    tbObat.setValueAt(Bb.getText(),tbObat.getSelectedRow(),5);
-                    tbObat.setValueAt(Tb.getText(),tbObat.getSelectedRow(),6);
-                    tbObat.setValueAt(Tensi.getText(),tbObat.getSelectedRow(),7);
-                    tbObat.setValueAt(Suhu.getText(),tbObat.getSelectedRow(),8);
-                    tbObat.setValueAt(CmbButaWarna.getSelectedItem().toString(),tbObat.getSelectedRow(),9);
-                    tbObat.setValueAt(Keperluan.getText(),tbObat.getSelectedRow(),10);
-                    tbObat.setValueAt(CmbKesimpulan.getSelectedItem().toString(),tbObat.getSelectedRow(),11);
+                    tabMode.setValueAt(NoSurat.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0);
+                    tabMode.setValueAt(TNoRw.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1);
+                    tabMode.setValueAt(TNoRM.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2);
+                    tabMode.setValueAt(TPasien.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3);
+                    tabMode.setValueAt(Valid.SetTgl(TanggalSurat.getSelectedItem()+""),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4);
+                    tabMode.setValueAt(Bb.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5);
+                    tabMode.setValueAt(Tb.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6);
+                    tabMode.setValueAt(Tensi.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7);
+                    tabMode.setValueAt(Suhu.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8);
+                    tabMode.setValueAt(CmbButaWarna.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9);
+                    tabMode.setValueAt(Keperluan.getText(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10);
+                    tabMode.setValueAt(CmbKesimpulan.getSelectedItem().toString(),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11);
                     emptTeks();
                 }
             }
@@ -1162,6 +1162,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             tgl=" surat_keterangan_sehat.tanggalsurat between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
@@ -1211,6 +1212,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbObat.getRowCount());
+        tbObat.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1232,18 +1234,18 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Valid.SetTgl(TanggalSurat,tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            Bb.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            Tb.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            Tensi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            Suhu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            CmbButaWarna.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            Keperluan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            CmbKesimpulan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+            NoSurat.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            Valid.SetTgl(TanggalSurat,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            Bb.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            Tb.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            Tensi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            Suhu.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            CmbButaWarna.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            Keperluan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            CmbKesimpulan.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
         }
     }
 

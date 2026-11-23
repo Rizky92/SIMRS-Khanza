@@ -221,7 +221,7 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKamar.setAutoCreateRowSorter(false);
+        tbKamar.setAutoCreateRowSorter(true);
         tbKamar.setComponentPopupMenu(jPopupMenu1);
         tbKamar.setName("tbKamar"); // NOI18N
         tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -528,13 +528,13 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
         for(i=0;i<tbKamar.getRowCount();i++){
-            tbKamar.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbKamar.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbKamar.getRowCount();i++){
-            tbKamar.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -739,7 +739,7 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
             try {
                 ps=koneksi.prepareStatement("select penjab_dokumen_kerjasama.photo,date_format(penjab_dokumen_kerjasama.kerjasama_berakhir,'%d-%m-%Y') as tanggal from penjab_dokumen_kerjasama where penjab_dokumen_kerjasama.kd_pj=?");
                 try {
-                    ps.setString(1,tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
+                    ps.setString(1,tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){
@@ -773,6 +773,7 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbKamar.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             LCount.setText("0");
             new SwingWorker<Void, String[]>() {
@@ -826,6 +827,7 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
                     LCount.setText(tbKamar.getRowCount() + "");
                     DlgCariCaraBayar2.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbKamar.resumeSorting();
                 }
             }.execute();
         }
@@ -836,6 +838,7 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
             if (!ceksukses) {
                 ceksukses = true;
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                tbKamar.suspendSorting();
                 Valid.tabelKosongSmc(tabMode);
                 LCount.setText("0");
                 new SwingWorker<Void, String[]>() {
@@ -886,6 +889,7 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
                         LCount.setText(tbKamar.getRowCount() + "");
                         DlgCariCaraBayar2.this.setCursor(Cursor.getDefaultCursor());
                         ceksukses = false;
+                        tbKamar.resumeSorting();
                     }
                 }.execute();
             }

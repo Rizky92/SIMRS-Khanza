@@ -654,10 +654,10 @@ public final class SatuSehatKirimDiagnosticReportLabPK extends javax.swing.JDial
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&tbObat.getValueAt(i,20).toString().equals("")){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString().equals(""))&&tabMode.getValueAt(tbObat.convertRowIndexToModel(i),20).toString().equals("")){
                     try {
-                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString());
                         if (iddokter.isBlank()) {
                             System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                             continue;
@@ -676,7 +676,7 @@ public final class SatuSehatKirimDiagnosticReportLabPK extends javax.swing.JDial
                                             "{" +
                                                 "\"system\": \"http://sys-ids.kemkes.go.id/diagnostic/"+koneksiDB.IDSATUSEHAT()+"/lab\"," +
                                                 "\"use\": \"official\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,9).toString()+"."+tbObat.getValueAt(i,17).toString()+"\"" +
+                                                "\"value\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString()+"."+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),17).toString()+"\"" +
                                             "}" +
                                         "]," +
                                         "\"status\": \"final\"," +
@@ -694,9 +694,9 @@ public final class SatuSehatKirimDiagnosticReportLabPK extends javax.swing.JDial
                                         "\"code\": {" +
                                             "\"coding\": [" +
                                                 "{" +
-                                                    "\"code\": \""+tbObat.getValueAt(i,13).toString()+"\"," +
-                                                    "\"display\": \""+tbObat.getValueAt(i,15).toString()+"\"," +
-                                                    "\"system\": \""+tbObat.getValueAt(i,14).toString()+"\"" +
+                                                    "\"code\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString()+"\"," +
+                                                    "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),15).toString()+"\"," +
+                                                    "\"system\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),14).toString()+"\"" +
                                                 "}" +
                                             "]" +
                                         "}," +
@@ -704,29 +704,29 @@ public final class SatuSehatKirimDiagnosticReportLabPK extends javax.swing.JDial
                                             "\"reference\": \"Patient/"+idpasien+"\"" +
                                         "}," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                        "\"issued\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"issued\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString().replaceAll(" ","T")+"+07:00\"," +
                                         "\"performer\": [" +
                                             "{" +
                                                 "\"reference\": \"Practitioner/"+iddokter+"\"" +
                                             "}" +
                                         "]," +
                                         "\"specimen\": [{" +
-                                            "\"reference\": \"Specimen/"+tbObat.getValueAt(i,18).toString()+"\"" +
+                                            "\"reference\": \"Specimen/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),18).toString()+"\"" +
                                         "}]," +
                                         "\"result\": [" +
                                             "{" +
-                                                "\"reference\": \"Observation/"+tbObat.getValueAt(i,19).toString()+"\"" +
+                                                "\"reference\": \"Observation/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),19).toString()+"\"" +
                                             "}" +
                                         "]," +
                                         "\"basedOn\": [" +
                                             "{" +
-                                                "\"reference\": \"ServiceRequest/"+tbObat.getValueAt(i,16).toString()+"\"" +
+                                                "\"reference\": \"ServiceRequest/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),16).toString()+"\"" +
                                             "}" +
                                         "]," +
-                                        "\"conclusion\": \""+tbObat.getValueAt(i,21).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
+                                        "\"conclusion\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),21).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
                                     "}";
                             System.out.println("URL : "+link+"/DiagnosticReport");
                             System.out.println("Request JSON : "+json);
@@ -737,7 +737,7 @@ public final class SatuSehatKirimDiagnosticReportLabPK extends javax.swing.JDial
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.menyimpantf2("satu_sehat_diagnosticreport_lab","?,?,?,?","No.Order",4,new String[]{
-                                    tbObat.getValueAt(i,9).toString(),tbObat.getValueAt(i,22).toString(),tbObat.getValueAt(i,17).toString(),response.asText()
+                                    tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),22).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),17).toString(),response.asText()
                                 })==true){
                                     pengirim.setValueAt(tbObat,response.asText(),i,20);
                                     pengirim.setValueAt(tbObat,false,i,0);
@@ -758,13 +758,13 @@ public final class SatuSehatKirimDiagnosticReportLabPK extends javax.swing.JDial
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -776,10 +776,10 @@ public final class SatuSehatKirimDiagnosticReportLabPK extends javax.swing.JDial
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&(!tbObat.getValueAt(i,20).toString().equals(""))){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),20).toString().equals(""))){
                     try {
-                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString());
                         if (iddokter.isBlank()) {
                             System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                             continue;
@@ -794,12 +794,12 @@ public final class SatuSehatKirimDiagnosticReportLabPK extends javax.swing.JDial
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"DiagnosticReport\"," +
-                                        "\"id\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
+                                        "\"id\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),20).toString()+"\"," +
                                         "\"identifier\": [" +
                                             "{" +
                                                 "\"system\": \"http://sys-ids.kemkes.go.id/diagnostic/"+koneksiDB.IDSATUSEHAT()+"/lab\"," +
                                                 "\"use\": \"official\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,9).toString()+"."+tbObat.getValueAt(i,17).toString()+"\"" +
+                                                "\"value\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString()+"."+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),17).toString()+"\"" +
                                             "}" +
                                         "]," +
                                         "\"status\": \"final\"," +
@@ -817,9 +817,9 @@ public final class SatuSehatKirimDiagnosticReportLabPK extends javax.swing.JDial
                                         "\"code\": {" +
                                             "\"coding\": [" +
                                                 "{" +
-                                                    "\"code\": \""+tbObat.getValueAt(i,13).toString()+"\"," +
-                                                    "\"display\": \""+tbObat.getValueAt(i,15).toString()+"\"," +
-                                                    "\"system\": \""+tbObat.getValueAt(i,14).toString()+"\"" +
+                                                    "\"code\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString()+"\"," +
+                                                    "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),15).toString()+"\"," +
+                                                    "\"system\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),14).toString()+"\"" +
                                                 "}" +
                                             "]" +
                                         "}," +
@@ -827,34 +827,34 @@ public final class SatuSehatKirimDiagnosticReportLabPK extends javax.swing.JDial
                                             "\"reference\": \"Patient/"+idpasien+"\"" +
                                         "}," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                        "\"issued\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"issued\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString().replaceAll(" ","T")+"+07:00\"," +
                                         "\"performer\": [" +
                                             "{" +
                                                 "\"reference\": \"Practitioner/"+iddokter+"\"" +
                                             "}" +
                                         "]," +
                                         "\"specimen\": [{" +
-                                            "\"reference\": \"Specimen/"+tbObat.getValueAt(i,18).toString()+"\"" +
+                                            "\"reference\": \"Specimen/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),18).toString()+"\"" +
                                         "}]," +
                                         "\"result\": [" +
                                             "{" +
-                                                "\"reference\": \"Observation/"+tbObat.getValueAt(i,19).toString()+"\"" +
+                                                "\"reference\": \"Observation/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),19).toString()+"\"" +
                                             "}" +
                                         "]," +
                                         "\"basedOn\": [" +
                                             "{" +
-                                                "\"reference\": \"ServiceRequest/"+tbObat.getValueAt(i,16).toString()+"\"" +
+                                                "\"reference\": \"ServiceRequest/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),16).toString()+"\"" +
                                             "}" +
                                         "]," +
-                                        "\"conclusion\": \""+tbObat.getValueAt(i,21).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
+                                        "\"conclusion\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),21).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
                                     "}";
-                            System.out.println("URL : "+link+"/DiagnosticReport/"+tbObat.getValueAt(i,20).toString());
+                            System.out.println("URL : "+link+"/DiagnosticReport/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),20).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.kirimSmc(link+"/DiagnosticReport/"+tbObat.getValueAt(i,20).toString(), HttpMethod.PUT, requestEntity);
+                            json=api.kirimSmc(link+"/DiagnosticReport/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),20).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             pengirim.setValueAt(tbObat,false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -911,8 +911,8 @@ public final class SatuSehatKirimDiagnosticReportLabPK extends javax.swing.JDial
 
     private void ppPilihBelumDikirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihBelumDikirimActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            if (tbObat.getValueAt(i, 20).toString().isBlank()) {
-                tbObat.setValueAt(true,i,0);
+            if (tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 20).toString().isBlank()) {
+                tabMode.setValueAt(true,tbObat.convertRowIndexToModel(i),0);
             }
         }
     }//GEN-LAST:event_ppPilihBelumDikirimActionPerformed
@@ -961,6 +961,7 @@ public final class SatuSehatKirimDiagnosticReportLabPK extends javax.swing.JDial
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -1098,6 +1099,7 @@ public final class SatuSehatKirimDiagnosticReportLabPK extends javax.swing.JDial
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbObat.getRowCount());
+        tbObat.resumeSorting();
     }
 
     public void isCek(){

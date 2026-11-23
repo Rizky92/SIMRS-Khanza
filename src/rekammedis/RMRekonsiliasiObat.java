@@ -843,8 +843,8 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
                     })==true){
                         for (i = 0; i < tbPemeriksaan.getRowCount(); i++) {
                            Sequel.menyimpan2("rekonsiliasi_obat_detail_obat","?,?,?,?,?,?,?,?",8,new String[]{
-                               TNoRekonsialiasi.getText(),tbPemeriksaan.getValueAt(i,0).toString(),tbPemeriksaan.getValueAt(i,1).toString(),tbPemeriksaan.getValueAt(i,2).toString(),
-                               tbPemeriksaan.getValueAt(i,3).toString(),tbPemeriksaan.getValueAt(i,4).toString(),tbPemeriksaan.getValueAt(i,5).toString(),tbPemeriksaan.getValueAt(i,6).toString()
+                               TNoRekonsialiasi.getText(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),2).toString(),
+                               tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),4).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),5).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),6).toString()
                            });
                         }
                         Valid.tabelKosong(tabMode);

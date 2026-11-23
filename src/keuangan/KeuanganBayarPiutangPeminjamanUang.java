@@ -774,8 +774,8 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
             sukses=true;
 
             if(Sequel.queryu2tf("delete from bayar_piutang_lainlain where tgl_bayar=? and kode_peminjam=? and nota_piutang=? and kd_rek=? and nama_bayar=?", 5,new String[]{
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString(),
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString()
+                tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),5).toString(),
+                tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),6).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),7).toString()
             })==true){
                 kontraakun="";
                 namakontraakun="";
@@ -785,7 +785,7 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
                     response = root.path("peminjampiutang");
                     if(response.isArray()){
                        for(JsonNode list:response){
-                           if(list.path("Kode").asText().equals(tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString())){
+                           if(list.path("Kode").asText().equals(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString())){
                                 kontraakun=list.path("KodeRekening").asText();
                                 namakontraakun=list.path("NamaRekening").asText();
                            }
@@ -799,12 +799,12 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
                     response = null;
                     root = null;
                 }
-                Sequel.mengedit("piutang_lainlain","nota_piutang='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString()+"'","status='Belum Lunas', sisapiutang=sisapiutang+"+tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString());
+                Sequel.mengedit("piutang_lainlain","nota_piutang='"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),5).toString()+"'","status='Belum Lunas', sisapiutang=sisapiutang+"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3).toString());
                 Sequel.deleteTampJurnal();
-                if(Sequel.insertTampJurnal(kontraakun, namakontraakun, Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString()), 0)==false){
+                if(Sequel.insertTampJurnal(kontraakun, namakontraakun, Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 3).toString()), 0)==false){
                     sukses=false;
                 }
-                if(Sequel.insertTampJurnal(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString(), 0, Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString()))==false){
+                if(Sequel.insertTampJurnal(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 6).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 7).toString(), 0, Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 3).toString()))==false){
                     sukses=false;
                 }
                 if(sukses==true){
@@ -824,7 +824,7 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
             Sequel.AutoComitTrue();
 
             if(sukses==true){
-                total=total-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString());
+                total=total-Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3).toString());
                 LTotal.setText(Valid.SetAngka(total));
                 tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
                 LCount.setText(""+tbKamar.getRowCount());
@@ -1022,12 +1022,12 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
         }else if(tbKamar.getRowCount()!=0){
             if(tbKamar.getSelectedRow()>-1){
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                Sequel.menyimpan("temporary","'0','No. Nota',': "+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
-                Sequel.menyimpan("temporary","'1','Tgl. Bayar',': "+tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
-                Sequel.menyimpan("temporary","'2','Kode Peminjam',': "+tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
-                Sequel.menyimpan("temporary","'3','Nama Peminjam',': "+tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
-                Sequel.menyimpan("temporary","'4','Keterangan',': "+tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
-                Sequel.menyimpan("temporary","'5','Besar Cicilan',': "+Valid.SetAngka(Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString())) +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
+                Sequel.menyimpan("temporary","'0','No. Nota',': "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),5).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
+                Sequel.menyimpan("temporary","'1','Tgl. Bayar',': "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
+                Sequel.menyimpan("temporary","'2','Kode Peminjam',': "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
+                Sequel.menyimpan("temporary","'3','Nama Peminjam',': "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
+                Sequel.menyimpan("temporary","'4','Keterangan',': "+tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),4).toString() +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
+                Sequel.menyimpan("temporary","'5','Besar Cicilan',': "+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3).toString())) +"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
 
                 Valid.panggilUrl("billing/LaporanPiutang.php?petugas="+akses.getkode().replaceAll(" ","_")+"&tanggal="+Tanggal.getSelectedItem().toString().replaceAll(" ","_")+"&alamatip="+akses.getalamatip()+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
             }
@@ -1293,12 +1293,12 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
     private void getData() {
         int row=tbKamar.getSelectedRow();
         if(row!= -1){
-            KdPeminjam.setText(tbKamar.getValueAt(row,1).toString());
-            NmPeminjam.setText(tbKamar.getValueAt(row,2).toString());
-            Cicilan.setText(tbKamar.getValueAt(row,3).toString());
-            Keterangan.setText(tbKamar.getValueAt(row,4).toString());
-            NoNota.setText(tbKamar.getValueAt(row,5).toString());
-            Valid.SetTgl(Tanggal,tbKamar.getValueAt(row,0).toString());
+            KdPeminjam.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
+            NmPeminjam.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),2).toString());
+            Cicilan.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),3).toString());
+            Keterangan.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),4).toString());
+            NoNota.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),5).toString());
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
         }
     }
 

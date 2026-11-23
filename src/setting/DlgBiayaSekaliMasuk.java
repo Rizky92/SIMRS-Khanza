@@ -478,7 +478,7 @@ public class DlgBiayaSekaliMasuk extends javax.swing.JDialog {
         }else if(BiayaHarian.getText().trim().equals("")){
             Valid.textKosong(BiayaHarian,"Besar Biaya");
         }else{
-            Sequel.mengedit("biaya_sekali","kd_kamar='"+tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0)+"' and nama_biaya='"+tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2)+"'","kd_kamar='"+kdkamar.getText()+"',nama_biaya='"+NmBiaya.getText()+"',besar_biaya='"+BiayaHarian.getText()+"'");
+            Sequel.mengedit("biaya_sekali","kd_kamar='"+tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0)+"' and nama_biaya='"+tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2)+"'","kd_kamar='"+kdkamar.getText()+"',nama_biaya='"+NmBiaya.getText()+"',besar_biaya='"+BiayaHarian.getText()+"'");
             if(tbSpesialis.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
         }
@@ -743,10 +743,10 @@ public class DlgBiayaSekaliMasuk extends javax.swing.JDialog {
     private void getData() {
         int row=tbSpesialis.getSelectedRow();
         if(row!= -1){
-            kdkamar.setText(tbSpesialis.getValueAt(row,0).toString());
+            kdkamar.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),0).toString());
             isKmr();
-            NmBiaya.setText(tbSpesialis.getValueAt(row,2).toString());
-            BiayaHarian.setText(tbSpesialis.getValueAt(row,3).toString());
+            NmBiaya.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),2).toString());
+            BiayaHarian.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),3).toString());
         }
     }
 

@@ -652,7 +652,7 @@ public class DlgKabupaten extends javax.swing.JDialog {
 
     private void getData() {
         if(tbkabupaten.getSelectedRow()!= -1){
-            Nama.setText(tbkabupaten.getValueAt(tbkabupaten.getSelectedRow(),0).toString());
+            Nama.setText(tabMode.getValueAt(tbkabupaten.convertRowIndexToModel(tbkabupaten.getSelectedRow()),0).toString());
         }
     }
 

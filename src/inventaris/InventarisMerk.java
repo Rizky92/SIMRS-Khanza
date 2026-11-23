@@ -421,7 +421,7 @@ public class InventarisMerk extends javax.swing.JDialog {
             Valid.textKosong(TNm,"Nama Merk");
         }else{
             Sequel.mengedit("inventaris_merk","id_merk=?","id_merk=?,nama_merk=?",3,new String[]{
-                TKd.getText(),TNm.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
+                TKd.getText(),TNm.getText(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString()
             });
             if(tbSpesialis.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
@@ -615,8 +615,8 @@ public class InventarisMerk extends javax.swing.JDialog {
     private void getData() {
         i=tbSpesialis.getSelectedRow();
         if(i!= -1){
-            TKd.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            TNm.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
+            TKd.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            TNm.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
         }
     }
 

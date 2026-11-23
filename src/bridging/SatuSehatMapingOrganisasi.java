@@ -576,7 +576,7 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
                     headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                     json = "{" +
                                 "\"resourceType\": \"Organization\"," +
-                                "\"id\": \""+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()+"\"," +
+                                "\"id\": \""+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString()+"\"," +
                                 "\"active\": false," +
                                 "\"identifier\": [" +
                                     "{" +
@@ -656,7 +656,7 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
                     System.out.println("URL : "+link+"/Organization");
                     System.out.println("Request JSON : "+json);
                     requestEntity = new HttpEntity(json,headers);
-                    json=api.getRest().exchange(link+"/Organization/"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                    json=api.getRest().exchange(link+"/Organization/"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                     System.out.println("Result JSON : "+json);
                     root = mapper.readTree(json);
                     response = root.path("id");
@@ -698,7 +698,7 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
                     headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                     json = "{" +
                                 "\"resourceType\": \"Organization\"," +
-                                "\"id\": \""+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()+"\"," +
+                                "\"id\": \""+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString()+"\"," +
                                 "\"active\": true," +
                                 "\"identifier\": [" +
                                     "{" +
@@ -778,17 +778,17 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
                     System.out.println("URL : "+link+"/Organization");
                     System.out.println("Request JSON : "+json);
                     requestEntity = new HttpEntity(json,headers);
-                    json=api.getRest().exchange(link+"/Organization/"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                    json=api.getRest().exchange(link+"/Organization/"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                     System.out.println("Result JSON : "+json);
                     root = mapper.readTree(json);
                     response = root.path("id");
                     if(!response.asText().equals("")){
                         if(Sequel.mengedittf("satu_sehat_mapping_departemen","dep_id=?","dep_id=?,id_organisasi_satusehat=?",3,new String[]{
-                                KodeDepartemen.getText(),response.asText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                                KodeDepartemen.getText(),response.asText(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString()
                             })==true){
-                            tbJnsPerawatan.setValueAt(KodeDepartemen.getText(),tbJnsPerawatan.getSelectedRow(),0);
-                            tbJnsPerawatan.setValueAt(NamaDepartemen.getText(),tbJnsPerawatan.getSelectedRow(),1);
-                            tbJnsPerawatan.setValueAt(response.asText(),tbJnsPerawatan.getSelectedRow(),3);
+                            tabMode.setValueAt(KodeDepartemen.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0);
+                            tabMode.setValueAt(NamaDepartemen.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1);
+                            tabMode.setValueAt(response.asText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3);
                             emptTeks();
                         }
                     }else{
@@ -1050,8 +1050,8 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
 
     private void getData() {
        if(tbJnsPerawatan.getSelectedRow()!= -1){
-           KodeDepartemen.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-           NamaDepartemen.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
+           KodeDepartemen.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+           NamaDepartemen.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
         }
     }
 

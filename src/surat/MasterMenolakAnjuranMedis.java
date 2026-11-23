@@ -430,10 +430,10 @@ public class MasterMenolakAnjuranMedis extends javax.swing.JDialog {
         }else{
             if(tbSpesialis.getSelectedRow()> -1){
                 if(Sequel.mengedittf("master_menolak_anjuran_medis","kode_penolakan=?","kode_penolakan=?,nama_penolakan=?",3,new String[]{
-                    TKd.getText(),TNm.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
+                    TKd.getText(),TNm.getText(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString()
                 })==true){
-                    tbSpesialis.setValueAt(TKd.getText(),tbSpesialis.getSelectedRow(),0);
-                    tbSpesialis.setValueAt(TNm.getText(),tbSpesialis.getSelectedRow(),1);
+                    tabMode.setValueAt(TKd.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0);
+                    tabMode.setValueAt(TNm.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1);
                     emptTeks();
                 }
             }
@@ -601,6 +601,7 @@ public class MasterMenolakAnjuranMedis extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbSpesialis.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select * from master_menolak_anjuran_medis "+(TCari.getText().trim().equals("")?"":"where master_menolak_anjuran_medis.kode_penolakan like ? or master_menolak_anjuran_medis.nama_penolakan like ? ")+" order by master_menolak_anjuran_medis.kode_penolakan");
@@ -627,6 +628,7 @@ public class MasterMenolakAnjuranMedis extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbSpesialis.getRowCount());
+        tbSpesialis.resumeSorting();
     }
 
     private void emptTeks() {
@@ -640,8 +642,8 @@ public class MasterMenolakAnjuranMedis extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            TKd.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            TNm.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
+            TKd.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            TNm.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
         }
     }
 

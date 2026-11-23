@@ -184,6 +184,7 @@ public class DapurCariPembelian extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -784,13 +785,13 @@ public class DapurCariPembelian extends javax.swing.JDialog {
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
         if(tbDokter.getSelectedRow()>-1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Faktur");
             }else{
                 try {
                     pscaribeli=koneksi.prepareStatement("select dapurpembelian.no_faktur,dapurpembelian.tagihan,dapurpembelian.tgl_beli,dapurpembelian.kd_rek,dapurpembelian.ppn,(dapurpembelian.total+dapurpembelian.meterai) as total from dapurpembelian where dapurpembelian.no_faktur=?");
                     try {
-                        pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+                        pscaribeli.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
                         rs=pscaribeli.executeQuery();
                         if(rs.next()){
                             Sequel.AutoComitFalse();
@@ -833,7 +834,7 @@ public class DapurCariPembelian extends javax.swing.JDialog {
                                 sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","PEMBATALAN PEMBELIAN BARANG DAPUR KERING & BASAH"+", OLEH "+akses.getkode());
                             }
                             if(sukses==true){
-                                Sequel.queryu2("delete from dapurpembelian where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
+                                Sequel.queryu2("delete from dapurpembelian where no_faktur=?",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()});
                                 Sequel.Commit();
                                 runBackground(() ->tampil());
                             }else{

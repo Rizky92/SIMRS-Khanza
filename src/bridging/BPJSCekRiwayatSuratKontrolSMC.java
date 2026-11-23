@@ -327,22 +327,22 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
         if (tbKamar.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Silahkan pilih data rencana kontrol yang mau ditarik..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
-            if (tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString().startsWith("1")) {
+            if (tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 4).toString().startsWith("1")) {
                 JOptionPane.showMessageDialog(null, "Maaf, hanya bisa menarik data rencana kontrol..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             } else {
-                if (!Sequel.menyimpantfSmc("bridging_surat_kontrol_bpjs", null, (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 7),
-                    (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 5), (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 0),
-                    (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 6), (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 13),
-                    (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 14), (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 11),
-                    (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 12), "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+                if (!Sequel.menyimpantfSmc("bridging_surat_kontrol_bpjs", null, (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 7),
+                    (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 5), (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0),
+                    (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 6), (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 13),
+                    (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 14), (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 11),
+                    (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 12), "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                     "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
                 )) {
-                    if (Sequel.cariExistsSmc("select * from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = ?", (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 0))) {
-                        if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Rencana Kontrol " + (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 0) + " sudah ada,\napakah ingin menggunakan data rencana kontrol dari BPJS Kesehatan?", "Konfirmasi", JOptionPane.YES_NO_OPTION)) {
+                    if (Sequel.cariExistsSmc("select * from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = ?", (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0))) {
+                        if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Rencana Kontrol " + (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0) + " sudah ada,\napakah ingin menggunakan data rencana kontrol dari BPJS Kesehatan?", "Konfirmasi", JOptionPane.YES_NO_OPTION)) {
                             Sequel.mengupdatetfSmc("bridging_surat_kontrol_bpjs", "tgl_surat = ?, tgl_rencana = ?, kd_dokter_bpjs = ?, nm_dokter_bpjs = ?, kd_poli_bpjs = ?, nm_poli_bpjs = ?, no_sep = ?", "no_surat = ?",
-                                (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 5), (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 6), (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 13),
-                                (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 14), (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 11), (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 12),
-                                (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 7), (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 0));
+                                (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 5), (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 6), (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 13),
+                                (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 14), (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 11), (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 12),
+                                (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 7), (String) tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), 0));
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menyimpan data rencana kontrol..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
@@ -411,6 +411,7 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
     private void tampilSmc() {
         if (!isLoading) {
             isLoading = true;
+            tbKamar.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             final String nokartu = NoKartu.getText();
@@ -473,6 +474,7 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
                     isLoading = false;
                     tabMode.fireTableDataChanged();
                     BPJSCekRiwayatSuratKontrolSMC.this.setCursor(Cursor.getDefaultCursor());
+                    tbKamar.resumeSorting();
                 }
             }.execute();
         }

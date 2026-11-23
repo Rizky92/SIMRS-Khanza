@@ -609,15 +609,15 @@ public class InventorySuplier extends javax.swing.JDialog {
             Valid.textKosong(NoRek,"Nomer Rekening");
         }else{
             if(Valid.editTabletf(tabMode,"datasuplier","kode_suplier","?","kode_suplier=?,nama_suplier=?,alamat=?,kota=?,no_telp=?,nama_bank=?,rekening=?",8,new String[]{
-                Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),Bank.getText(),NoRek.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
+                Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),Bank.getText(),NoRek.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()
             })==true){
-                tbDokter.setValueAt(Kd.getText(),tbDokter.getSelectedRow(),0);
-                tbDokter.setValueAt(Nm.getText(),tbDokter.getSelectedRow(),1);
-                tbDokter.setValueAt(Alamat.getText(),tbDokter.getSelectedRow(),2);
-                tbDokter.setValueAt(Kota.getText(),tbDokter.getSelectedRow(),3);
-                tbDokter.setValueAt(Telp.getText(),tbDokter.getSelectedRow(),4);
-                tbDokter.setValueAt(Bank.getText(),tbDokter.getSelectedRow(),5);
-                tbDokter.setValueAt(NoRek.getText(),tbDokter.getSelectedRow(),6);
+                tabMode.setValueAt(Kd.getText(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0);
+                tabMode.setValueAt(Nm.getText(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1);
+                tabMode.setValueAt(Alamat.getText(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2);
+                tabMode.setValueAt(Kota.getText(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3);
+                tabMode.setValueAt(Telp.getText(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4);
+                tabMode.setValueAt(Bank.getText(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),5);
+                tabMode.setValueAt(NoRek.getText(),tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6);
                 emptTeks();
             }
         }
@@ -950,13 +950,13 @@ public class InventorySuplier extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            Kd.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            Nm.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-            Alamat.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString());
-            Kota.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
-            Telp.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
-            Bank.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString());
-            NoRek.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString());
+            Kd.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+            Nm.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
+            Alamat.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString());
+            Kota.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString());
+            Telp.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
+            Bank.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),5).toString());
+            NoRek.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6).toString());
         }
     }
 

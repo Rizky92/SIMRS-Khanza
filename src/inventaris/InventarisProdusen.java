@@ -563,7 +563,7 @@ public final class InventarisProdusen extends javax.swing.JDialog {
             Valid.textKosong(TNm,"Nama Produsen");
         }else {
                 //menyimpan-------------------------------------------------
-                Sequel.mengedit("inventaris_produsen","kode_produsen='"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0) +"'","kode_produsen='"+TKd.getText()+"',nama_produsen='"+TNm.getText()+"',"+
+                Sequel.mengedit("inventaris_produsen","kode_produsen='"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0) +"'","kode_produsen='"+TKd.getText()+"',nama_produsen='"+TNm.getText()+"',"+
                         "alamat_produsen='"+TAlamat.getText()+"',"+
                         "no_telp='"+TTlp.getText()+"',"+
                         "email='"+TEmail.getText()+"',"+
@@ -876,12 +876,12 @@ public final class InventarisProdusen extends javax.swing.JDialog {
 
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
-            TKd.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-            TNm.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-            TAlamat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-            TTlp.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-            TEmail.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
-            TWeb.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
+            TKd.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+            TNm.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+            TAlamat.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+            TTlp.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+            TEmail.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString());
+            TWeb.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5).toString());
         }
     }
 

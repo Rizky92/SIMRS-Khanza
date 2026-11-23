@@ -206,7 +206,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbPenyakit.setAutoCreateRowSorter(false);
+        tbPenyakit.setAutoCreateRowSorter(true);
         tbPenyakit.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPenyakit.setName("tbPenyakit"); // NOI18N
         tbPenyakit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -708,8 +708,8 @@ public final class DlgPenyakit extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(z=0;z<tbPenyakit.getRowCount();z++){
-            if(tbPenyakit.getValueAt(z,0).toString().equals("true")){
-                Sequel.meghapus("penyakit","kd_penyakit",tbPenyakit.getValueAt(z,1).toString());
+            if(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(z),0).toString().equals("true")){
+                Sequel.meghapus("penyakit","kd_penyakit",tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(z),1).toString());
             }
         }
         runBackground(() ->tampil());
@@ -738,7 +738,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
         }else{
             if(Valid.editTabletf(tabMode,"penyakit","kd_penyakit","?","nm_penyakit=?,ciri_ciri=?,keterangan=?,kd_ktg=?,kd_penyakit=?,status=?,validcode=?,accpdx=?,asterisk=?,im=?",11,new String[]{
                 TNm.getText(),TCiri.getText(),TKeterangan.getText(),kd_ktg.getText(),TKd.getText(),cmbStatus.getSelectedItem().toString(),cmbValidCode.getSelectedItem().toString(),cmbACCPDX.getSelectedItem().toString(),
-                cmbAsterisk.getSelectedItem().toString(),cmbIM.getSelectedItem().toString(),tbPenyakit.getValueAt(tbPenyakit.getSelectedRow(),1).toString()
+                cmbAsterisk.getSelectedItem().toString(),cmbIM.getSelectedItem().toString(),tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(tbPenyakit.getSelectedRow()),1).toString()
             })==true){
                 if(tbPenyakit.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
@@ -934,7 +934,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_A){
                 for(z=0;z<tbPenyakit.getRowCount();z++){
-                    tbPenyakit.setValueAt(true,z,0);
+                    tabMode.setValueAt(true,tbPenyakit.convertRowIndexToModel(z),0);
                 }
             }
 
@@ -1067,6 +1067,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbPenyakit.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select penyakit.kd_penyakit,penyakit.nm_penyakit,penyakit.ciri_ciri,penyakit.keterangan,"+
@@ -1158,6 +1159,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbPenyakit.getRowCount());
+        tbPenyakit.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1173,17 +1175,17 @@ public final class DlgPenyakit extends javax.swing.JDialog {
     private void getData() {
         int row=tbPenyakit.getSelectedRow();
         if(row!= -1){
-            TKd.setText(tbPenyakit.getValueAt(row,1).toString());
-            TNm.setText(tbPenyakit.getValueAt(row,2).toString());
-            TCiri.setText(tbPenyakit.getValueAt(row,3).toString());
-            TKeterangan.setText(tbPenyakit.getValueAt(row,4).toString());
-            TKtg.setText(tbPenyakit.getValueAt(row,5).toString());
-            Sequel.cariIsi("select penyakit.kd_ktg from penyakit where penyakit.kd_penyakit=?", kd_ktg,tbPenyakit.getValueAt(row,1).toString());
-            cmbStatus.setSelectedItem(tbPenyakit.getValueAt(row,6).toString());
-            cmbValidCode.setSelectedItem(tbPenyakit.getValueAt(row,7).toString());
-            cmbACCPDX.setSelectedItem(tbPenyakit.getValueAt(row,8).toString());
-            cmbAsterisk.setSelectedItem(tbPenyakit.getValueAt(row,9).toString());
-            cmbIM.setSelectedItem(tbPenyakit.getValueAt(row,10).toString());
+            TKd.setText(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),1).toString());
+            TNm.setText(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),2).toString());
+            TCiri.setText(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),3).toString());
+            TKeterangan.setText(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),4).toString());
+            TKtg.setText(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),5).toString());
+            Sequel.cariIsi("select penyakit.kd_ktg from penyakit where penyakit.kd_penyakit=?", kd_ktg,tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),1).toString());
+            cmbStatus.setSelectedItem(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),6).toString());
+            cmbValidCode.setSelectedItem(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),7).toString());
+            cmbACCPDX.setSelectedItem(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),8).toString());
+            cmbAsterisk.setSelectedItem(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),9).toString());
+            cmbIM.setSelectedItem(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),10).toString());
         }
     }
 

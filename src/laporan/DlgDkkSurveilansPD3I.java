@@ -447,7 +447,7 @@ public final class DlgDkkSurveilansPD3I extends javax.swing.JDialog {
     private void getData() {
         int row=tbBangsal.getSelectedRow();
         if(row!= -1){
-            TKd.setText(tbBangsal.getValueAt(row,0).toString());
+            TKd.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),0).toString());
         }
     }
 

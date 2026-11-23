@@ -673,14 +673,14 @@ public class LabKeslingCariPermintaanPengujianSampelDapatDilayani extends javax.
                                         append("</tr>");
                             for (int i = 0; i < tabModeTidakDapatDilayani.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,0).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,1).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,2).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,3).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,4).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,5).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,6).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,7).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,0).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,1).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,2).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,3).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,4).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,5).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,6).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,7).toString()).append("</td>").
                                             append("</tr>");
                             }
                             LoadHTML.setText(
@@ -723,14 +723,14 @@ public class LabKeslingCariPermintaanPengujianSampelDapatDilayani extends javax.
                                         append("</tr>");
                             for (int i = 0; i < tabModeTidakDapatDilayani.getRowCount(); i++) {
                                 htmlContent.append("<tr class='isi'>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,0).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,1).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,2).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,3).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,4).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,5).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,6).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbDapatDilayani.getValueAt(i,7).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,0).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,1).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,2).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,3).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,4).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,5).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,6).toString()).append("</td>").
+                                                append("<td valign='top'>").append(tabModeTidakDapatDilayani.getValueAt(i,7).toString()).append("</td>").
                                             append("</tr>");
                             }
                             LoadHTML.setText(
@@ -765,7 +765,7 @@ public class LabKeslingCariPermintaanPengujianSampelDapatDilayani extends javax.
                                 "\"Waktu Diterima\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Penugasan\";\"Kebutuhan Sub Kontrak Pengujian/Keterangan Lainnya\"\n"
                             );
                             for (int i = 0; i < tabModeTidakDapatDilayani.getRowCount(); i++) {
-                                htmlContent.append("\"").append(tbDapatDilayani.getValueAt(i,0).toString()).append("\";\"").append(tbDapatDilayani.getValueAt(i,1).toString()).append("\";\"").append(tbDapatDilayani.getValueAt(i,2).toString()).append("\";\"").append(tbDapatDilayani.getValueAt(i,3).toString()).append("\";\"").append(tbDapatDilayani.getValueAt(i,4).toString()).append("\";\"").append(tbDapatDilayani.getValueAt(i,5).toString()).append("\";\"").append(tbDapatDilayani.getValueAt(i,6).toString()).append("\";\"").append(tbDapatDilayani.getValueAt(i,7).toString()).append("\"\n");
+                                htmlContent.append("\"").append(tabModeTidakDapatDilayani.getValueAt(i,0).toString()).append("\";\"").append(tabModeTidakDapatDilayani.getValueAt(i,1).toString()).append("\";\"").append(tabModeTidakDapatDilayani.getValueAt(i,2).toString()).append("\";\"").append(tabModeTidakDapatDilayani.getValueAt(i,3).toString()).append("\";\"").append(tabModeTidakDapatDilayani.getValueAt(i,4).toString()).append("\";\"").append(tabModeTidakDapatDilayani.getValueAt(i,5).toString()).append("\";\"").append(tabModeTidakDapatDilayani.getValueAt(i,6).toString()).append("\";\"").append(tabModeTidakDapatDilayani.getValueAt(i,7).toString()).append("\"\n");
                             }
                             f = new File("DataPermintaanPengujianSampelDilayani.csv");
                             bw = new BufferedWriter(new FileWriter(f));
@@ -791,8 +791,8 @@ public class LabKeslingCariPermintaanPengujianSampelDapatDilayani extends javax.
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbDapatDilayani.getSelectedRow()!= -1){
-            if(Sequel.queryutf("delete from labkesling_permintaan_pengujian_sampel_dilayani where no_permintaan='"+tbDapatDilayani.getValueAt(tbDapatDilayani.getSelectedRow(),1).toString()+"'")==true){
-                Sequel.queryu("update labkesling_permintaan_pengujian_sampel set status='Permintaan Baru' where no_permintaan='"+tbDapatDilayani.getValueAt(tbDapatDilayani.getSelectedRow(),1).toString()+"'");
+            if(Sequel.queryutf("delete from labkesling_permintaan_pengujian_sampel_dilayani where no_permintaan='"+tabModeTidakDapatDilayani.getValueAt(tbDapatDilayani.convertRowIndexToModel(tbDapatDilayani.getSelectedRow()),1).toString()+"'")==true){
+                Sequel.queryu("update labkesling_permintaan_pengujian_sampel set status='Permintaan Baru' where no_permintaan='"+tabModeTidakDapatDilayani.getValueAt(tbDapatDilayani.convertRowIndexToModel(tbDapatDilayani.getSelectedRow()),1).toString()+"'");
                 tabModeTidakDapatDilayani.removeRow(tbDapatDilayani.convertRowIndexToModel(tbDapatDilayani.getSelectedRow()));
                 Valid.tabelKosong(tabModeDetailPermintaan);
                 LTotal.setText(tbDapatDilayani.getRowCount()+"");
@@ -938,7 +938,7 @@ public class LabKeslingCariPermintaanPengujianSampelDapatDilayani extends javax.
                     StringBuilder iyembuilder = new StringBuilder();
 
                     for(i=0;i<tbDetailPermintaan.getRowCount();i++){
-                        iyembuilder.append("{\"Kode\":\"").append(tbDetailPermintaan.getValueAt(i,0).toString()).append("\",\"NamaParameter\":\"").append(tbDetailPermintaan.getValueAt(i,1).toString()).append("\",\"MetodePengujian\":\"").append(tbDetailPermintaan.getValueAt(i,2).toString()).append("\",\"Satuan\":\"").append(tbDetailPermintaan.getValueAt(i,3).toString()).append("\",\"Kategori\":\"").append(tbDetailPermintaan.getValueAt(i,4).toString()).append("\"},");
+                        iyembuilder.append("{\"Kode\":\"").append(tabModeDetailPermintaan.getValueAt(tbDetailPermintaan.convertRowIndexToModel(i),0).toString()).append("\",\"NamaParameter\":\"").append(tabModeDetailPermintaan.getValueAt(tbDetailPermintaan.convertRowIndexToModel(i),1).toString()).append("\",\"MetodePengujian\":\"").append(tabModeDetailPermintaan.getValueAt(tbDetailPermintaan.convertRowIndexToModel(i),2).toString()).append("\",\"Satuan\":\"").append(tabModeDetailPermintaan.getValueAt(tbDetailPermintaan.convertRowIndexToModel(i),3).toString()).append("\",\"Kategori\":\"").append(tabModeDetailPermintaan.getValueAt(tbDetailPermintaan.convertRowIndexToModel(i),4).toString()).append("\"},");
                     }
 
                     if (iyembuilder.length() > 0) {
@@ -963,7 +963,7 @@ public class LabKeslingCariPermintaanPengujianSampelDapatDilayani extends javax.
                     @Override
                     public void windowClosed(WindowEvent e) {
                         if(form.berhasil==true){
-                            tbDapatDilayani.setValueAt("Sudah Ada Penugasan",tbDapatDilayani.getSelectedRow(),6);
+                            tabModeTidakDapatDilayani.setValueAt("Sudah Ada Penugasan",tbDapatDilayani.convertRowIndexToModel(tbDapatDilayani.getSelectedRow()),6);
                         }
                     }
                     @Override
@@ -978,7 +978,7 @@ public class LabKeslingCariPermintaanPengujianSampelDapatDilayani extends javax.
                 form.isCek();
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(this);
-                form.setData(tbDapatDilayani.getValueAt(tbDapatDilayani.getSelectedRow(),1).toString(),tbDapatDilayani.getValueAt(tbDapatDilayani.getSelectedRow(),2).toString(),tbDapatDilayani.getValueAt(tbDapatDilayani.getSelectedRow(),3).toString(),tbDapatDilayani.getValueAt(tbDapatDilayani.getSelectedRow(),4).toString(),tbDapatDilayani.getValueAt(tbDapatDilayani.getSelectedRow(),5).toString());
+                form.setData(tabModeTidakDapatDilayani.getValueAt(tbDapatDilayani.convertRowIndexToModel(tbDapatDilayani.getSelectedRow()),1).toString(),tabModeTidakDapatDilayani.getValueAt(tbDapatDilayani.convertRowIndexToModel(tbDapatDilayani.getSelectedRow()),2).toString(),tabModeTidakDapatDilayani.getValueAt(tbDapatDilayani.convertRowIndexToModel(tbDapatDilayani.getSelectedRow()),3).toString(),tabModeTidakDapatDilayani.getValueAt(tbDapatDilayani.convertRowIndexToModel(tbDapatDilayani.getSelectedRow()),4).toString(),tabModeTidakDapatDilayani.getValueAt(tbDapatDilayani.convertRowIndexToModel(tbDapatDilayani.getSelectedRow()),5).toString());
                 form.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
             }else if(ChkAccor.isSelected()==false){
@@ -1014,8 +1014,8 @@ public class LabKeslingCariPermintaanPengujianSampelDapatDilayani extends javax.
                         "and labkesling_nilai_normal_baku_mutu.kode_sampel=? order by labkesling_detail_permintaan_pengujian_sampel.kode_parameter"
                     );
                     try {
-                        ps.setString(1,tbDapatDilayani.getValueAt(tbDapatDilayani.getSelectedRow(),1).toString());
-                        ps.setString(2,tbDapatDilayani.getValueAt(tbDapatDilayani.getSelectedRow(),4).toString());
+                        ps.setString(1,tabModeTidakDapatDilayani.getValueAt(tbDapatDilayani.convertRowIndexToModel(tbDapatDilayani.getSelectedRow()),1).toString());
+                        ps.setString(2,tabModeTidakDapatDilayani.getValueAt(tbDapatDilayani.convertRowIndexToModel(tbDapatDilayani.getSelectedRow()),4).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModeDetailPermintaan.addRow(new Object[]{

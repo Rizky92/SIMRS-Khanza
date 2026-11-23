@@ -516,8 +516,8 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
             if(tbSpesialis.getSelectedRow()>-1){
                 Sequel.mengedit("set_harga_kamar","kd_kamar=? and kd_pj=?","kd_kamar=?,kd_pj=?,tarif=?",5,new String[]{
                     kdkamar.getText(),kdpj.getText(),Tarif.getText(),
-                    tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString(),
-                    tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),3).toString()
+                    tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString(),
+                    tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),3).toString()
                 });
                 runBackground(() ->tampil());
                 emptTeks();
@@ -849,12 +849,12 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
     private void getData() {
         int row=tbSpesialis.getSelectedRow();
         if(row!= -1){
-            kdkamar.setText(tbSpesialis.getValueAt(row,0).toString());
-            TKdBngsal.setText(tbSpesialis.getValueAt(row,1).toString());
-            TBangsal.setText(tbSpesialis.getValueAt(row,2).toString());
-            kdpj.setText(tbSpesialis.getValueAt(row,3).toString());
-            nmpj.setText(tbSpesialis.getValueAt(row,4).toString());
-            Tarif.setText(tbSpesialis.getValueAt(row,5).toString());
+            kdkamar.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),0).toString());
+            TKdBngsal.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),1).toString());
+            TBangsal.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),2).toString());
+            kdpj.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),3).toString());
+            nmpj.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),4).toString());
+            Tarif.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),5).toString());
         }
     }
 

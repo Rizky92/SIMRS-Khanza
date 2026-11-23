@@ -737,7 +737,7 @@ public final class TokoMember extends javax.swing.JDialog {
         }else{
             if(tbPetugas.getSelectedRow()> -1){
                 if(Sequel.mengedittf("tokomember","no_member=?","no_member=?,nama=?,jk=?,tmp_lahir=?,tgl_lahir=?,alamat=?,no_telp=?,email=?",9,new String[]{
-                    NoMember.getText(),NamaMember.getText(),JK.getSelectedItem().toString().substring(0,1),TmpLahir.getText(),Valid.SetTgl(TglLahir.getSelectedItem()+""),Alamat.getText(),NoTelp.getText(),Email.getText(),tbPetugas.getValueAt(tbPetugas.getSelectedRow(),0).toString()
+                    NoMember.getText(),NamaMember.getText(),JK.getSelectedItem().toString().substring(0,1),TmpLahir.getText(),Valid.SetTgl(TglLahir.getSelectedItem()+""),Alamat.getText(),NoTelp.getText(),Email.getText(),tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),0).toString()
                 })==true){
                     emptTeks();
                     runBackground(() ->tampil());
@@ -918,6 +918,7 @@ public final class TokoMember extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbPetugas.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -954,6 +955,7 @@ public final class TokoMember extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbPetugas.getRowCount());
+        tbPetugas.resumeSorting();
     }
 
     public void emptTeks() {
@@ -973,14 +975,14 @@ public final class TokoMember extends javax.swing.JDialog {
     private void getData() {
         row=tbPetugas.getSelectedRow();
         if(row!= -1){
-            NoMember.setText(tbPetugas.getValueAt(row,0).toString());
-            NamaMember.setText(tbPetugas.getValueAt(row,1).toString());
-            JK.setSelectedItem(tbPetugas.getValueAt(row,2).toString().replaceAll("L","LAKI-LAKI").replaceAll("P","Perempuan"));
-            TmpLahir.setText(tbPetugas.getValueAt(row,3).toString());
-            Alamat.setText(tbPetugas.getValueAt(row,5).toString());
-            NoTelp.setText(tbPetugas.getValueAt(row,6).toString());
-            Email.setText(tbPetugas.getValueAt(row,7).toString());
-            Valid.SetTgl(TglLahir,tbPetugas.getValueAt(row,4).toString());
+            NoMember.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),0).toString());
+            NamaMember.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),1).toString());
+            JK.setSelectedItem(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),2).toString().replaceAll("L","LAKI-LAKI").replaceAll("P","Perempuan"));
+            TmpLahir.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),3).toString());
+            Alamat.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),5).toString());
+            NoTelp.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),6).toString());
+            Email.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),7).toString());
+            Valid.SetTgl(TglLahir,tabMode.getValueAt(tbPetugas.convertRowIndexToModel(row),4).toString());
         }
     }
 

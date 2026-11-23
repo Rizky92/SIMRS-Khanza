@@ -166,7 +166,7 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbPenyakit.setAutoCreateRowSorter(false);
+        tbPenyakit.setAutoCreateRowSorter(true);
         tbPenyakit.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPenyakit.setName("tbPenyakit"); // NOI18N
         tbPenyakit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -511,8 +511,8 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(z=0;z<tbPenyakit.getRowCount();z++){
-            if(tbPenyakit.getValueAt(z,0).toString().equals("true")){
-                Sequel.meghapus("insiden_keselamatan","kode_insiden",tbPenyakit.getValueAt(z,1).toString());
+            if(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(z),0).toString().equals("true")){
+                Sequel.meghapus("insiden_keselamatan","kode_insiden",tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(z),1).toString());
             }
         }
         runBackground(() ->tampil());
@@ -534,7 +534,7 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
             Valid.textKosong(Nama,"Nama Insiden");
         }else{
             Valid.editTable(tabMode,"insiden_keselamatan","kode_insiden","?","kode_insiden=?,nama_insiden=?,jenis_insiden=?,dampak=?",5,new String[]{
-                Kode.getText(),Nama.getText(),Jenis.getSelectedItem().toString(),Dampak.getSelectedItem().toString(),tbPenyakit.getValueAt(tbPenyakit.getSelectedRow(),1).toString()
+                Kode.getText(),Nama.getText(),Jenis.getSelectedItem().toString(),Dampak.getSelectedItem().toString(),tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(tbPenyakit.getSelectedRow()),1).toString()
             });
             if(tbPenyakit.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
@@ -676,7 +676,7 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_A){
                 for(z=0;z<tbPenyakit.getRowCount();z++){
-                    tbPenyakit.setValueAt(true,z,0);
+                    tabMode.setValueAt(true,tbPenyakit.convertRowIndexToModel(z),0);
                 }
             }
 
@@ -770,6 +770,7 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbPenyakit.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -801,6 +802,7 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbPenyakit.getRowCount());
+        tbPenyakit.resumeSorting();
     }
 
     public void emptTeks() {
@@ -813,10 +815,10 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
     private void getData() {
         int row=tbPenyakit.getSelectedRow();
         if(row!= -1){
-            Kode.setText(tbPenyakit.getValueAt(row,1).toString());
-            Nama.setText(tbPenyakit.getValueAt(row,2).toString());
-            Jenis.setSelectedItem(tbPenyakit.getValueAt(row,3).toString());
-            Dampak.setSelectedItem(tbPenyakit.getValueAt(row,4).toString());
+            Kode.setText(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),1).toString());
+            Nama.setText(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),2).toString());
+            Jenis.setSelectedItem(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),3).toString());
+            Dampak.setSelectedItem(tabMode.getValueAt(tbPenyakit.convertRowIndexToModel(row),4).toString());
         }
     }
 

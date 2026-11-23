@@ -144,7 +144,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKategori.setAutoCreateRowSorter(false);
+        tbKategori.setAutoCreateRowSorter(true);
         tbKategori.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbKategori.setName("tbKategori"); // NOI18N
         tbKategori.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -414,8 +414,8 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbKategori.getRowCount();i++){
-            if(tbKategori.getValueAt(i,0).toString().equals("true")){
-                if(Sequel.meghapustf("kategori_perawatan","kd_kategori",tbKategori.getValueAt(i,1).toString())==true){
+            if(tabMode.getValueAt(tbKategori.convertRowIndexToModel(i),0).toString().equals("true")){
+                if(Sequel.meghapustf("kategori_perawatan","kd_kategori",tabMode.getValueAt(tbKategori.convertRowIndexToModel(i),1).toString())==true){
                     tabMode.removeRow(tbKategori.convertRowIndexToModel(i));
                     i--;
                 }
@@ -440,11 +440,11 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
             Valid.textKosong(TNm,"nama kategori");
         }else{
             if(Valid.editTabletf(tabMode,"kategori_perawatan","kd_kategori","?","kd_kategori=?,nm_kategori=?",3,new String[]{
-                TKd.getText(),TNm.getText(),tbKategori.getValueAt(tbKategori.getSelectedRow(),1).toString()
+                TKd.getText(),TNm.getText(),tabMode.getValueAt(tbKategori.convertRowIndexToModel(tbKategori.getSelectedRow()),1).toString()
             })==true){
                 if(tbKategori.getSelectedRow()!= -1){
-                    tbKategori.setValueAt(TKd.getText(),tbKategori.getSelectedRow(),1);
-                    tbKategori.setValueAt(TNm.getText(),tbKategori.getSelectedRow(),2);
+                    tabMode.setValueAt(TKd.getText(),tbKategori.convertRowIndexToModel(tbKategori.getSelectedRow()),1);
+                    tabMode.setValueAt(TNm.getText(),tbKategori.convertRowIndexToModel(tbKategori.getSelectedRow()),2);
                 }
                 emptTeks();
             }
@@ -601,6 +601,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil(){
+        tbKategori.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -627,12 +628,13 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbKategori.getRowCount());
+        tbKategori.resumeSorting();
     }
 
     private void getData() {
         if(tbKategori.getSelectedRow()!= -1){
-            TKd.setText(tbKategori.getValueAt(tbKategori.getSelectedRow(),1).toString());
-            TNm.setText(tbKategori.getValueAt(tbKategori.getSelectedRow(),2).toString());
+            TKd.setText(tabMode.getValueAt(tbKategori.convertRowIndexToModel(tbKategori.getSelectedRow()),1).toString());
+            TNm.setText(tabMode.getValueAt(tbKategori.convertRowIndexToModel(tbKategori.getSelectedRow()),2).toString());
         }
     }
 

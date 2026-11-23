@@ -647,10 +647,10 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,16).toString().equals(""))&&tbObat.getValueAt(i,18).toString().equals("")){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),16).toString().equals(""))&&tabMode.getValueAt(tbObat.convertRowIndexToModel(i),18).toString().equals("")){
                     try {
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
-                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,16).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString());
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),16).toString());
                         if (iddokter.isBlank()) {
                             System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                             continue;
@@ -659,9 +659,9 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                             System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
                             continue;
                         }
-                        String acsn=tbObat.getValueAt(i,19).toString();
+                        String acsn=tabMode.getValueAt(tbObat.convertRowIndexToModel(i),19).toString();
                         if (acsn.isBlank()) {
-                            System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tbObat.getValueAt(i,5).toString()+"!");
+                            System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString()+"!");
                             continue;
                         }
 
@@ -692,9 +692,9 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                                         "\"code\": {" +
                                             "\"coding\": [" +
                                                 "{" +
-                                                    "\"system\": \""+tbObat.getValueAt(i,9).toString()+"\"," +
-                                                    "\"code\": \""+tbObat.getValueAt(i,8).toString()+"\"," +
-                                                    "\"display\": \""+tbObat.getValueAt(i,10).toString()+"\"" +
+                                                    "\"system\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                    "\"code\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString()+"\"," +
+                                                    "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString()+"\"" +
                                                 "}" +
                                             "]" +
                                         "}," +
@@ -707,16 +707,16 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,17).toString()+"\"," +
-                                            "\"display\": \"Hasil Pemeriksaan Radiologi "+tbObat.getValueAt(i,7).toString()+" No.Rawat "+tbObat.getValueAt(i,1).toString()+", Atas Nama Pasien "+tbObat.getValueAt(i,3).toString()+", No.RM "+tbObat.getValueAt(i,2).toString()+", Pada Tanggal "+tbObat.getValueAt(i,6).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),17).toString()+"\"," +
+                                            "\"display\": \"Hasil Pemeriksaan Radiologi "+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString()+" No.Rawat "+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+", Atas Nama Pasien "+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),3).toString()+", No.RM "+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString()+", Pada Tanggal "+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),6).toString()+"\"" +
                                         "}," +
                                         "\"specimen\": {" +
-                                            "\"reference\": \"Specimen/"+tbObat.getValueAt(i,13).toString()+"\"" +
+                                            "\"reference\": \"Specimen/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString()+"\"" +
                                         "}," +
                                         //"\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
-                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,20).toString().replace(" ","T")+"+07:00\"," +
-                                        "\"issued\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
+                                        "\"effectiveDateTime\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),20).toString().replace(" ","T")+"+07:00\"," +
+                                        "\"issued\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),6).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -727,7 +727,7 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.menyimpantf2("satu_sehat_observation_radiologi","?,?,?","No.Order",3,new String[]{
-                                    tbObat.getValueAt(i,5).toString(),tbObat.getValueAt(i,12).toString(),response.asText()
+                                    tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),12).toString(),response.asText()
                                 })==true){
                                     pengirim.setValueAt(tbObat,response.asText(),i,18);
                                     pengirim.setValueAt(tbObat,false,i,0);
@@ -748,13 +748,13 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -766,10 +766,10 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,16).toString().equals(""))&&(!tbObat.getValueAt(i,18).toString().equals(""))){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),16).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),18).toString().equals(""))){
                     try {
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
-                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,16).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString());
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),16).toString());
                         if (iddokter.isBlank()) {
                             System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
                             continue;
@@ -778,9 +778,9 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                             System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
                             continue;
                         }
-                        String acsn=tbObat.getValueAt(i,19).toString();
+                        String acsn=tabMode.getValueAt(tbObat.convertRowIndexToModel(i),19).toString();
                         if (acsn.isBlank()) {
-                            System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tbObat.getValueAt(i,5).toString()+"!");
+                            System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString()+"!");
                             continue;
                         }
 
@@ -790,7 +790,7 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
-                                        "\"id\": \""+tbObat.getValueAt(i,18).toString()+"\"," +
+                                        "\"id\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),18).toString()+"\"," +
                                         "\"identifier\": [" +
                                             "{" +
                                                 "\"system\": \"http://sys-ids.kemkes.go.id/observation/"+koneksiDB.IDSATUSEHAT()+"\"," +
@@ -812,9 +812,9 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                                         "\"code\": {" +
                                             "\"coding\": [" +
                                                 "{" +
-                                                    "\"system\": \""+tbObat.getValueAt(i,9).toString()+"\"," +
-                                                    "\"code\": \""+tbObat.getValueAt(i,8).toString()+"\"," +
-                                                    "\"display\": \""+tbObat.getValueAt(i,10).toString()+"\"" +
+                                                    "\"system\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                    "\"code\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString()+"\"," +
+                                                    "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString()+"\"" +
                                                 "}" +
                                             "]" +
                                         "}," +
@@ -827,21 +827,21 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                                             "}" +
                                         "]," +
                                         "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,17).toString()+"\"," +
-                                            "\"display\": \"Hasil Pemeriksaan Radiologi "+tbObat.getValueAt(i,7).toString()+" No.Rawat "+tbObat.getValueAt(i,1).toString()+", Atas Nama Pasien "+tbObat.getValueAt(i,3).toString()+", Pada Tanggal "+tbObat.getValueAt(i,6).toString()+"\"" +
+                                            "\"reference\": \"Encounter/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),17).toString()+"\"," +
+                                            "\"display\": \"Hasil Pemeriksaan Radiologi "+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString()+" No.Rawat "+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+", Atas Nama Pasien "+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),3).toString()+", Pada Tanggal "+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),6).toString()+"\"" +
                                         "}," +
                                         "\"specimen\": {" +
-                                            "\"reference\": \"Specimen/"+tbObat.getValueAt(i,13).toString()+"\"" +
+                                            "\"reference\": \"Specimen/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString()+"\"" +
                                         "}," +
                                         //"\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
-                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,20).toString().replace(" ","T")+"+07:00\"," +
-                                        "\"issued\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
-                                        "\"valueString\": \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
+                                        "\"effectiveDateTime\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),20).toString().replace(" ","T")+"+07:00\"," +
+                                        "\"issued\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),6).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"valueString\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
                                    "}";
-                            System.out.println("URL : "+link+"/Observation/"+tbObat.getValueAt(i,18).toString());
+                            System.out.println("URL : "+link+"/Observation/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),18).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.kirimSmc(link+"/Observation/"+tbObat.getValueAt(i,18).toString(), HttpMethod.PUT, requestEntity);
+                            json=api.kirimSmc(link+"/Observation/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),18).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             pengirim.setValueAt(tbObat,false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -904,8 +904,8 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
 
     private void ppPilihBelumDikirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihBelumDikirimActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            if (tbObat.getValueAt(i, 18).toString().isBlank()) {
-                tbObat.setValueAt(true,i,0);
+            if (tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 18).toString().isBlank()) {
+                tabMode.setValueAt(true,tbObat.convertRowIndexToModel(i),0);
             }
         }
     }//GEN-LAST:event_ppPilihBelumDikirimActionPerformed
@@ -1088,6 +1088,7 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbObat.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             LCount.setText("0");
             new SwingWorker<Void, Object[]>() {
@@ -1156,6 +1157,7 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                     LCount.setText(tbObat.getRowCount() + "");
                     SatuSehatKirimObservationRadiologi.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbObat.resumeSorting();
                 }
             }.execute();
         }

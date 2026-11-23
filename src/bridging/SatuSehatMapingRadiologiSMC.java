@@ -695,16 +695,16 @@ public final class SatuSehatMapingRadiologiSMC extends javax.swing.JDialog {
         }else{
             if(tbJnsPerawatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("satu_sehat_mapping_radiologi","kd_jenis_prw=?","kd_jenis_prw=?,code=?,system=?,display=?,sampel_code=?,sampel_system=?,sampel_display=?",8,new String[]{
-                        KodePemeriksaan.getText(),PeriksaCode.getText(),PeriksaSystem.getText(),PeriksaDisplay.getText(),SampelCode.getText(),SampelSystem.getText(),SampelDisplay.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()
+                        KodePemeriksaan.getText(),PeriksaCode.getText(),PeriksaSystem.getText(),PeriksaDisplay.getText(),SampelCode.getText(),SampelSystem.getText(),SampelDisplay.getText(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString()
                     })==true){
-                    tbJnsPerawatan.setValueAt(PeriksaCode.getText(),tbJnsPerawatan.getSelectedRow(),0);
-                    tbJnsPerawatan.setValueAt(PeriksaSystem.getText(),tbJnsPerawatan.getSelectedRow(),1);
-                    tbJnsPerawatan.setValueAt(KodePemeriksaan.getText(),tbJnsPerawatan.getSelectedRow(),2);
-                    tbJnsPerawatan.setValueAt(NamaPemeriksaan.getText(),tbJnsPerawatan.getSelectedRow(),3);
-                    tbJnsPerawatan.setValueAt(PeriksaDisplay.getText(),tbJnsPerawatan.getSelectedRow(),4);
-                    tbJnsPerawatan.setValueAt(SampelCode.getText(),tbJnsPerawatan.getSelectedRow(),5);
-                    tbJnsPerawatan.setValueAt(SampelSystem.getText(),tbJnsPerawatan.getSelectedRow(),6);
-                    tbJnsPerawatan.setValueAt(SampelDisplay.getText(),tbJnsPerawatan.getSelectedRow(),7);
+                    tabMode.setValueAt(PeriksaCode.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0);
+                    tabMode.setValueAt(PeriksaSystem.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1);
+                    tabMode.setValueAt(KodePemeriksaan.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2);
+                    tabMode.setValueAt(NamaPemeriksaan.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3);
+                    tabMode.setValueAt(PeriksaDisplay.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4);
+                    tabMode.setValueAt(SampelCode.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5);
+                    tabMode.setValueAt(SampelSystem.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),6);
+                    tabMode.setValueAt(SampelDisplay.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7);
                     emptTeks();
                 }
             }
@@ -1101,14 +1101,14 @@ public final class SatuSehatMapingRadiologiSMC extends javax.swing.JDialog {
 
     private void getData() {
        if(tbJnsPerawatan.getSelectedRow()!= -1){
-           PeriksaCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-           PeriksaSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-           KodePemeriksaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-           NamaPemeriksaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-           PeriksaDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
-           SampelCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
-           SampelSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
-           SampelDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
+           PeriksaCode.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+           PeriksaSystem.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+           KodePemeriksaan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+           NamaPemeriksaan.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+           PeriksaDisplay.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString());
+           SampelCode.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5).toString());
+           SampelSystem.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),6).toString());
+           SampelDisplay.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7).toString());
         }
     }
 

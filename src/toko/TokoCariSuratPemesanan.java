@@ -210,6 +210,7 @@ public class TokoCariSuratPemesanan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -787,10 +788,10 @@ public class TokoCariSuratPemesanan extends javax.swing.JDialog {
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Pemesanan");
             }else{
-                Sequel.queryu2("delete from toko_surat_pemesanan where no_pemesanan=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
+                Sequel.queryu2("delete from toko_surat_pemesanan where no_pemesanan=?",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()});
                 runBackground(() ->tampil());
             }
         }
@@ -823,18 +824,18 @@ public class TokoCariSuratPemesanan extends javax.swing.JDialog {
 
     private void ppDatangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDatangActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"pilihan data");
             }else{
-                if(Sequel.cariIsi("select status from toko_surat_pemesanan where no_pemesanan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()).equals("Sudah Datang")){
+                if(Sequel.cariIsi("select status from toko_surat_pemesanan where no_pemesanan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()).equals("Sudah Datang")){
                     JOptionPane.showMessageDialog(null,"Data pemesanan sudah tervalidasi..!!");
                 }else{
-                    Sequel.queryu("update toko_surat_pemesanan set status='Sudah Datang' where no_pemesanan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+                    Sequel.queryu("update toko_surat_pemesanan set status='Sudah Datang' where no_pemesanan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim());
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     TokoPemesanan aplikasi=new TokoPemesanan(null,false);
                     aplikasi.tampikan=false;
                     aplikasi.isCek();
-                    aplikasi.tampil(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+                    aplikasi.tampil(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim());
                     aplikasi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     aplikasi.setLocationRelativeTo(internalFrame1);
                     aplikasi.setVisible(true);
@@ -848,10 +849,10 @@ public class TokoCariSuratPemesanan extends javax.swing.JDialog {
 
     private void ppProsesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppProsesActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"pilihan data");
             }else{
-                Sequel.queryu("update toko_surat_pemesanan set status='Proses Pesan' where no_pemesanan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+                Sequel.queryu("update toko_surat_pemesanan set status='Proses Pesan' where no_pemesanan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim());
                 runBackground(() ->tampil());
             }
         }

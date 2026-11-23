@@ -165,6 +165,7 @@ public class InventoryStokAkhirFarmasiPerTanggalSMC extends javax.swing.JDialog 
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -527,6 +528,7 @@ public class InventoryStokAkhirFarmasiPerTanggalSMC extends javax.swing.JDialog 
         }
         if (!ceksukses) {
             ceksukses = true;
+            tbDokter.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
@@ -635,6 +637,7 @@ public class InventoryStokAkhirFarmasiPerTanggalSMC extends javax.swing.JDialog 
                     tabMode.fireTableDataChanged();
                     InventoryStokAkhirFarmasiPerTanggalSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbDokter.resumeSorting();
                 }
             }.execute();
         }

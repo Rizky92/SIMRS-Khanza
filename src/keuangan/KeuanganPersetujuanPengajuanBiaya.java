@@ -721,7 +721,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
         }else{
             if(tbBangsal.getSelectedRow()> -1){
                 if(Sequel.mengedittf("pengajuan_biaya","no_pengajuan=?","status='Ditolak'",1,new String[]{
-                        tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString()
+                        tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString()
                     })==true){
                         tabMode.removeRow(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()));
                         hitung();
@@ -759,7 +759,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
                     NoPengajuan.getText(),Jumlah.getText(),Harga.getText(),Double.toString(Double.parseDouble(Harga.getText())*Double.parseDouble(Jumlah.getText()))
                 })==true){
                     if(Sequel.mengedittf("pengajuan_biaya","no_pengajuan=?","status='Disetujui'",1,new String[]{
-                            tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString()
+                            tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString()
                         })==true){
                             tabMode.removeRow(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()));
                             hitung();
@@ -937,7 +937,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
     private void hitung(){
         belumdisetujui=0;
         for(i=0;i<tbBangsal.getRowCount();i++){
-            belumdisetujui=belumdisetujui+Valid.SetAngka(tbBangsal.getValueAt(i,13).toString());
+            belumdisetujui=belumdisetujui+Valid.SetAngka(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),13).toString());
         }
         LCount.setText(""+Valid.SetAngka(belumdisetujui));
     }
@@ -953,9 +953,9 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
 
     private void getData() {
         if(tbBangsal.getSelectedRow()!= -1){
-            NoPengajuan.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
-            Jumlah.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),11).toString());
-            Harga.setText(Valid.SetAngka(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),12).toString())+"");
+            NoPengajuan.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString());
+            Jumlah.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),11).toString());
+            Harga.setText(Valid.SetAngka(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),12).toString())+"");
         }
     }
 

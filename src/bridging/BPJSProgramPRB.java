@@ -319,6 +319,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
         Scroll.setOpaque(true);
 
         tbProgramPRB.setAutoCreateRowSorter(false);
+        tbProgramPRB.setSortable(false);
         tbProgramPRB.setComponentPopupMenu(jPopupMenu1);
         tbProgramPRB.setName("tbProgramPRB"); // NOI18N
         tbProgramPRB.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -753,6 +754,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
         Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll1.setName("Scroll1"); // NOI18N
 
+        tbObat.setAutoCreateRowSorter(true);
         tbObat.setName("tbObat"); // NOI18N
         tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1090,8 +1092,8 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
                 obat="";
                 z=0;
                 for(i=0;i<tbObat.getRowCount();i++){
-                    if(Valid.SetAngka(tbObat.getValueAt(i,0).toString())>0){
-                        obat=obat+"{\"kdObat\":\""+tbObat.getValueAt(i,1).toString()+"\",\"signa1\":\""+tbObat.getValueAt(i,3).toString().trim()+"\",\"signa2\":\""+tbObat.getValueAt(i,4).toString().trim()+"\",\"jmlObat\":\""+Valid.SetAngka2(Double.parseDouble(tbObat.getValueAt(i,0).toString()))+"\"},";
+                    if(Valid.SetAngka(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString())>0){
+                        obat=obat+"{\"kdObat\":\""+tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"\",\"signa1\":\""+tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),3).toString().trim()+"\",\"signa2\":\""+tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),4).toString().trim()+"\",\"jmlObat\":\""+Valid.SetAngka2(Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString()))+"\"},";
                         z++;
                     }
                 }
@@ -1140,9 +1142,9 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
                         })==true){
                         if(z>0){
                             for(i=0;i<tbObat.getRowCount();i++){
-                                if(Valid.SetAngka(tbObat.getValueAt(i,0).toString())>0){
+                                if(Valid.SetAngka(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString())>0){
                                     Sequel.menyimpan("bridging_srb_bpjs_obat","?,?,?,?,?,?,?",7,new String[]{
-                                        NoSEP.getText(),response.asText(),tbObat.getValueAt(i,1).toString(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,0).toString(),tbObat.getValueAt(i,3).toString(),tbObat.getValueAt(i,4).toString()
+                                        NoSEP.getText(),response.asText(),tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),1).toString(),tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),2).toString(),tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString(),tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),3).toString(),tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),4).toString()
                                     });
                                 }
                             }
@@ -1200,8 +1202,8 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
                     obat="";
                     z=0;
                     for(i=0;i<tbObat.getRowCount();i++){
-                        if(Valid.SetAngka(tbObat.getValueAt(i,0).toString())>0){
-                            obat=obat+"{\"kdObat\":\""+tbObat.getValueAt(i,1).toString()+"\",\"signa1\":\""+tbObat.getValueAt(i,3).toString().trim()+"\",\"signa2\":\""+tbObat.getValueAt(i,4).toString().trim()+"\",\"jmlObat\":\""+tbObat.getValueAt(i,0).toString()+"\"},";
+                        if(Valid.SetAngka(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString())>0){
+                            obat=obat+"{\"kdObat\":\""+tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"\",\"signa1\":\""+tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),3).toString().trim()+"\",\"signa2\":\""+tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),4).toString().trim()+"\",\"jmlObat\":\""+tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString()+"\"},";
                             z++;
                         }
                     }
@@ -1225,7 +1227,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
                     requestJson ="{" +
                                     "\"request\":{" +
                                         "\"t_prb\":{" +
-                                            "\"noSrb\":\""+tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),7).toString()+"\"," +
+                                            "\"noSrb\":\""+tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),7).toString()+"\"," +
                                             "\"noSep\":\""+NoSEP.getText()+"\"," +
                                             "\"alamat\":\""+Alamat.getText()+"\"," +
                                             "\"email\":\""+Email.getText()+"\"," +
@@ -1246,14 +1248,14 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
                         response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc)).path("noSRB");
                         if(Sequel.queryu2tf("update bridging_srb_bpjs set no_sep=?,no_srb=?,tgl_srb=?,alamat=?,email=?,kodeprogram=?,namaprogram=?,kodedpjp=?,nmdpjp=?,user=?,keterangan=?,saran=? where no_sep=? and no_srb=?",14,new String[]{
                                 NoSEP.getText(),response.asText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Alamat.getText(),Email.getText(),KdProgram.getText(),NmProgram.getText(),KdDPJP.getText(),NmDPJP.getText(),KdDPJP.getText(),Keterangan.getText(),Saran.getText(),
-                                tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),6).toString(),tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),7).toString()
+                                tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),6).toString(),tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),7).toString()
                             })==true){
                             if(z>0){
-                                Sequel.meghapus("bridging_srb_bpjs_obat","no_sep","no_srb",tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),6).toString(),tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),7).toString());
+                                Sequel.meghapus("bridging_srb_bpjs_obat","no_sep","no_srb",tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),6).toString(),tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),7).toString());
                                 for(i=0;i<tbObat.getRowCount();i++){
-                                    if(Valid.SetAngka(tbObat.getValueAt(i,0).toString())>0){
+                                    if(Valid.SetAngka(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString())>0){
                                         Sequel.menyimpan("bridging_srb_bpjs_obat","?,?,?,?,?,?,?",7,new String[]{
-                                            NoSEP.getText(),response.asText(),tbObat.getValueAt(i,1).toString(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,0).toString(),tbObat.getValueAt(i,3).toString(),tbObat.getValueAt(i,4).toString()
+                                            NoSEP.getText(),response.asText(),tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),1).toString(),tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),2).toString(),tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString(),tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),3).toString(),tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),4).toString()
                                         });
                                     }
                                 }
@@ -1336,12 +1338,12 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
             param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),10).toString()+"\nID "+tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),9).toString()+"\n"+Valid.SetTgl3(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),8).toString()));
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),10).toString()+"\nID "+tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),9).toString()+"\n"+Valid.SetTgl3(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),8).toString()));
             obat="";
             z=1;
             for(i=0;i<tbObat.getRowCount();i++){
-                if(Valid.SetAngka(tbObat.getValueAt(i,0).toString())>0){
-                    obat=obat+z+". "+tbObat.getValueAt(i,3).toString().trim()+"x"+tbObat.getValueAt(i,4).toString().trim()+"  "+tbObat.getValueAt(i,2).toString()+"  "+tbObat.getValueAt(i,0).toString()+"\n";
+                if(Valid.SetAngka(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString())>0){
+                    obat=obat+z+". "+tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),3).toString().trim()+"x"+tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),4).toString().trim()+"  "+tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),2).toString()+"  "+tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString()+"\n";
                     z++;
                 }
             }
@@ -1351,8 +1353,8 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
                 "bridging_sep.diagawal,bridging_sep.nmdiagnosaawal,bridging_srb_bpjs.email,bridging_sep.no_kartu,bridging_sep.no_sep,bridging_srb_bpjs.no_srb,bridging_srb_bpjs.tgl_srb,"+
                 "bridging_srb_bpjs.kodedpjp,bridging_srb_bpjs.nmdpjp,bridging_srb_bpjs.kodeprogram,bridging_srb_bpjs.namaprogram,"+
                 "bridging_srb_bpjs.keterangan,bridging_srb_bpjs.saran from bridging_sep inner join bridging_srb_bpjs "+
-                "on bridging_srb_bpjs.no_sep=bridging_sep.no_sep where bridging_sep.no_sep='"+tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),6).toString()+"' "+
-                "and bridging_srb_bpjs.no_srb='"+tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),7).toString()+"'",param);
+                "on bridging_srb_bpjs.no_sep=bridging_sep.no_sep where bridging_sep.no_sep='"+tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),6).toString()+"' "+
+                "and bridging_srb_bpjs.no_srb='"+tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),7).toString()+"'",param);
             this.setCursor(Cursor.getDefaultCursor());
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data Program PRB yang mau dicetak...!!!!");
@@ -1600,25 +1602,26 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
 
     private void getData() {
         if(tbProgramPRB.getSelectedRow()!= -1){
-            NoRawat.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),0).toString());
-            NoRM.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),1).toString());
-            NmPasien.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),2).toString());
-            Alamat.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),3).toString());
-            Email.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),4).toString());
-            NoKartu.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),5).toString());
-            NoSEP.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),6).toString());
-            KdDPJP.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),9).toString());
-            NmDPJP.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),10).toString());
-            KdProgram.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),11).toString());
-            NmProgram.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),12).toString());
-            Keterangan.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),13).toString());
-            Saran.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),14).toString());
+            NoRawat.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),0).toString());
+            NoRM.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),1).toString());
+            NmPasien.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),2).toString());
+            Alamat.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),3).toString());
+            Email.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),4).toString());
+            NoKartu.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),5).toString());
+            NoSEP.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),6).toString());
+            KdDPJP.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),9).toString());
+            NmDPJP.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),10).toString());
+            KdProgram.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),11).toString());
+            NmProgram.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),12).toString());
+            Keterangan.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),13).toString());
+            Saran.setText(tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),14).toString());
+            tbObat.suspendSorting();
             Valid.tabelKosong(tabMode2);
             try{
                 ps=koneksi.prepareStatement("select * from bridging_srb_bpjs_obat where bridging_srb_bpjs_obat.no_sep=? and bridging_srb_bpjs_obat.no_srb=?");
                 try {
-                    ps.setString(1,tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),6).toString());
-                    ps.setString(2,tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),7).toString());
+                    ps.setString(1,tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),6).toString());
+                    ps.setString(2,tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),7).toString());
                     rs=ps.executeQuery();
                     while(rs.next()){
                         tabMode2.addRow(new Object[]{
@@ -1638,8 +1641,9 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }
-            Valid.SetTgl(Tanggal,tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),8).toString());
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),8).toString());
         }
+        tbObat.resumeSorting();
     }
 
     public void setNoRm(String norawat,String nosep,String nokartu,String norm,String namapasien,String alamat,String email,String kodedpjp,String namadpjp) {
@@ -1683,7 +1687,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
         try {
             z=0;
             for(i=0;i<tbObat.getRowCount();i++){
-                if(Valid.SetAngka(tbObat.getValueAt(i,0).toString())>0){
+                if(Valid.SetAngka(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString())>0){
                     z++;
                 }
             }
@@ -1699,20 +1703,21 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
             signa2=new String[z];
             z=0;
             for(i=0;i<tbObat.getRowCount();i++){
-                if(Valid.SetAngka(tbObat.getValueAt(i,0).toString())>0){
+                if(Valid.SetAngka(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString())>0){
                     try {
-                        jumlah[z]=Double.parseDouble(tbObat.getValueAt(i,0).toString());
+                        jumlah[z]=Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),0).toString());
                     } catch (Exception e) {
                         jumlah[z]=0;
                     }
-                    kodeobat[z]=tbObat.getValueAt(i,1).toString();
-                    namaobat[z]=tbObat.getValueAt(i,2).toString();
-                    signa1[z]=tbObat.getValueAt(i,3).toString();
-                    signa2[z]=tbObat.getValueAt(i,4).toString();
+                    kodeobat[z]=tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),1).toString();
+                    namaobat[z]=tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),2).toString();
+                    signa1[z]=tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),3).toString();
+                    signa2[z]=tabMode2.getValueAt(tbObat.convertRowIndexToModel(i),4).toString();
                     z++;
                 }
             }
 
+            tbObat.suspendSorting();
             Valid.tabelKosong(tabMode2);
 
             for(i=0;i<z;i++){
@@ -1752,6 +1757,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
         }
+        tbObat.resumeSorting();
     }
 
     private void emptTeks() {
@@ -1760,8 +1766,10 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
         Keterangan.setText("");
         Saran.setText("");
         ObatPRB.setText("");
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode2);
         Alamat.requestFocus();
+        tbObat.resumeSorting();
     }
 
     @Test
@@ -1801,7 +1809,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
             requestEntity = new HttpEntity(headers);
             URL = link+"/PRB/Delete";
-            requestJson ="{\"request\":{\"t_prb\":{\"noSrb\":\""+tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),7).toString()+"\",\"noSep\":\""+tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),6).toString()+"\",\"user\": \""+tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),9).toString()+"\"}}}";
+            requestJson ="{\"request\":{\"t_prb\":{\"noSrb\":\""+tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),7).toString()+"\",\"noSep\":\""+tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),6).toString()+"\",\"user\": \""+tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),9).toString()+"\"}}}";
             requestEntity = new HttpEntity(requestJson,headers);
             root = mapper.readTree(restTemplate.exchange(URL, HttpMethod.DELETE,requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
@@ -1809,8 +1817,8 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
             System.out.println("message : "+nameNode.path("message").asText());
             JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
             if(nameNode.path("code").asText().equals("200")){
-                Sequel.meghapus("bridging_srb_bpjs","no_sep","no_srb",tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),6).toString(),tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),7).toString());
-                Sequel.meghapus("bridging_srb_bpjs_obat","no_sep","no_srb",tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),6).toString(),tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),7).toString());
+                Sequel.meghapus("bridging_srb_bpjs","no_sep","no_srb",tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),6).toString(),tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),7).toString());
+                Sequel.meghapus("bridging_srb_bpjs_obat","no_sep","no_srb",tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),6).toString(),tabMode.getValueAt(tbProgramPRB.convertRowIndexToModel(tbProgramPRB.getSelectedRow()),7).toString());
                 runBackground(() ->tampil());
             }
         } catch (Exception e) {

@@ -850,8 +850,8 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
             }else if(! NmPoli.getText().trim().equals("")){
                 Sequel.queryu("update set_depo_ralan set kd_bangsal='"+KodeDepoRalan.getText()+"', kd_poli='"+KodePoli.getText()+"' "+
-                              "where kd_bangsal='"+tbRalan.getValueAt(tbRalan.getSelectedRow(),2).toString()+"' and "+
-                              "kd_poli='"+tbRalan.getValueAt(tbRalan.getSelectedRow(),0).toString()+"'");
+                              "where kd_bangsal='"+tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()),2).toString()+"' and "+
+                              "kd_poli='"+tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(tbRalan.getSelectedRow()),0).toString()+"'");
                 runBackground(() ->tampilralan());
                 emptTeks();
             }
@@ -863,8 +863,8 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
             }else if(! NamaBangsalRanap.getText().trim().equals("")){
                 Sequel.queryu("update set_depo_ranap set kd_bangsal='"+KodeBangsalRanap.getText()+"',kd_depo='"+KodeDepoRanap.getText()+"' "+
-                              "where kd_bangsal='"+tbRanap.getValueAt(tbRanap.getSelectedRow(),0).toString()+"' and "+
-                              "kd_depo='"+tbRanap.getValueAt(tbRanap.getSelectedRow(),2).toString()+"'");
+                              "where kd_bangsal='"+tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()),0).toString()+"' and "+
+                              "kd_depo='"+tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(tbRanap.getSelectedRow()),2).toString()+"'");
                 runBackground(() ->tampilranap());
                 emptTeks();
             }
@@ -1187,9 +1187,9 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            kdbangsal.setText(tbAdmin.getValueAt(row,0).toString());
-            nmbangsal.setText(tbAdmin.getValueAt(row,1).toString());
-            cmbstok.setSelectedItem(tbAdmin.getValueAt(row,2).toString());
+            kdbangsal.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),0).toString());
+            nmbangsal.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),1).toString());
+            cmbstok.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),2).toString());
         }
     }
 
@@ -1272,20 +1272,20 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
     private void getDataRalan() {
         int row=tbRalan.getSelectedRow();
         if(row!= -1){
-            KodePoli.setText(tbRalan.getValueAt(row,0).toString());
-            NmPoli.setText(tbRalan.getValueAt(row,1).toString());
-            KodeDepoRalan.setText(tbRalan.getValueAt(row,2).toString());
-            NmDepoRalan.setText(tbRalan.getValueAt(row,3).toString());
+            KodePoli.setText(tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(row),0).toString());
+            NmPoli.setText(tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(row),1).toString());
+            KodeDepoRalan.setText(tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(row),2).toString());
+            NmDepoRalan.setText(tabModeRalan.getValueAt(tbRalan.convertRowIndexToModel(row),3).toString());
         }
     }
 
     private void getDataRanap() {
         int row=tbRanap.getSelectedRow();
         if(row!= -1){
-            KodeBangsalRanap.setText(tbRanap.getValueAt(row,0).toString());
-            NamaBangsalRanap.setText(tbRanap.getValueAt(row,1).toString());
-            KodeDepoRanap.setText(tbRanap.getValueAt(row,2).toString());
-            NamaDepoRanap.setText(tbRanap.getValueAt(row,3).toString());
+            KodeBangsalRanap.setText(tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(row),0).toString());
+            NamaBangsalRanap.setText(tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(row),1).toString());
+            KodeDepoRanap.setText(tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(row),2).toString());
+            NamaDepoRanap.setText(tabModeRanap.getValueAt(tbRanap.convertRowIndexToModel(row),3).toString());
         }
     }
 

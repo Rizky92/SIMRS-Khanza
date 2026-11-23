@@ -1053,7 +1053,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbJnsPerawatan.setAutoCreateRowSorter(false);
+        tbJnsPerawatan.setAutoCreateRowSorter(true);
         tbJnsPerawatan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbJnsPerawatan.setComponentPopupMenu(jPopupMenu1);
         tbJnsPerawatan.setName("tbJnsPerawatan"); // NOI18N
@@ -1222,8 +1222,8 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbJnsPerawatan.getRowCount();i++){
-            if(tbJnsPerawatan.getValueAt(i,0).toString().equals("true")){
-                Sequel.mengedit("paket_operasi","kode_paket='"+tbJnsPerawatan.getValueAt(i,1).toString()+"'","status='0'");
+            if(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.mengedit("paket_operasi","kode_paket='"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),1).toString()+"'","status='0'");
             }
         }
         runBackground(() ->tampil());
@@ -1303,7 +1303,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             Valid.textKosong(kdpnj,"Jenis Bayar");
         }else{
             if(tbJnsPerawatan.getSelectedRow()!= -1){
-                Sequel.mengedit("paket_operasi","kode_paket='"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1) +"'",
+                Sequel.mengedit("paket_operasi","kode_paket='"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1) +"'",
                         "kode_paket='"+TKd.getText()+"',nm_perawatan='"+TNm.getText()+"',operator1='"+TOperator1.getText()+"',operator2='"+TOperator2.getText()+"',operator3='"+TOperator3.getText()+
                         "',asisten_operator1='"+TAsisOperator1.getText()+"',asisten_operator2='"+TAsisOperator2.getText()+"',asisten_operator3='"+TAsisOperator3.getText()+"',instrumen='"+TInstrumen.getText()+
                         "',dokter_anak='"+TAnak.getText()+"',perawaat_resusitas='"+TResusitas.getText()+"',kategori='"+Kategori.getSelectedItem()+
@@ -1450,7 +1450,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
                 getData();
                 if(evt.getClickCount()==2){
                     TabRawat.setSelectedIndex(0);
-                    Kelas.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),34).toString());
+                    Kelas.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),34).toString());
                 }
             } catch (java.lang.NullPointerException e) {
             }
@@ -1468,12 +1468,12 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
                 try {
                     getData();
                     TabRawat.setSelectedIndex(0);
-                    Kelas.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),34).toString());
+                    Kelas.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),34).toString());
                 } catch (java.lang.NullPointerException e) {
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_A){
                 for(i=0;i<tbJnsPerawatan.getRowCount();i++){
-                    tbJnsPerawatan.setValueAt(true,i,0);
+                    tabMode.setValueAt(true,tbJnsPerawatan.convertRowIndexToModel(i),0);
                 }
             }
         }
@@ -2016,6 +2016,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbJnsPerawatan.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             pstampil=koneksi.prepareStatement(
@@ -2098,6 +2099,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbJnsPerawatan.getRowCount());
+        tbJnsPerawatan.resumeSorting();
     }
 
     public void emptTeks() {
@@ -2142,40 +2144,40 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
 
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
-            TKd.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-            TNm.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-            Kategori.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-            TOperator1.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString())));
-            TOperator2.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString())));
-            TOperator3.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString())));
-            TAsisOperator1.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString())));
-            TAsisOperator2.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString())));
-            TAsisOperator3.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString())));
-            TInstrumen.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString())));
-            TAnastesi.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString())));
-            TAsisAnastesi.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),12).toString())));
-            TAsisAnastesi1.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString())));
-            TAnak.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString())));
-            TResusitas.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),15).toString())));
-            TBidan1.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),16).toString())));
-            TBidan2.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),17).toString())));
-            TBidan3.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),18).toString())));
-            TPerawatLuar.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),19).toString())));
-            TAlat.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),20).toString())));
-            TSewaOK.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),21).toString())));
-            TAkomodasi.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),22).toString())));
-            TBagianRS.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),23).toString())));
-            TOmloop1.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),24).toString())));
-            TOmloop2.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),25).toString())));
-            TOmloop3.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),26).toString())));
-            TOmloop4.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),27).toString())));
-            TOmloop5.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),28).toString())));
-            TSarpras.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),29).toString())));
-            TdrPJAnak.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),30).toString())));
-            TdrUmum.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),31).toString())));
-            TTotal.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),32).toString())));
-            Sequel.cariIsi("select kd_pj from paket_operasi where kode_paket=?", kdpnj,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-            nmpnj.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),33).toString());
+            TKd.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+            TNm.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+            Kategori.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+            TOperator1.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString())));
+            TOperator2.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5).toString())));
+            TOperator3.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),6).toString())));
+            TAsisOperator1.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7).toString())));
+            TAsisOperator2.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),8).toString())));
+            TAsisOperator3.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),9).toString())));
+            TInstrumen.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),10).toString())));
+            TAnastesi.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),11).toString())));
+            TAsisAnastesi.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),12).toString())));
+            TAsisAnastesi1.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),13).toString())));
+            TAnak.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),14).toString())));
+            TResusitas.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),15).toString())));
+            TBidan1.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),16).toString())));
+            TBidan2.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),17).toString())));
+            TBidan3.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),18).toString())));
+            TPerawatLuar.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),19).toString())));
+            TAlat.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),20).toString())));
+            TSewaOK.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),21).toString())));
+            TAkomodasi.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),22).toString())));
+            TBagianRS.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),23).toString())));
+            TOmloop1.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),24).toString())));
+            TOmloop2.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),25).toString())));
+            TOmloop3.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),26).toString())));
+            TOmloop4.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),27).toString())));
+            TOmloop5.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),28).toString())));
+            TSarpras.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),29).toString())));
+            TdrPJAnak.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),30).toString())));
+            TdrUmum.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),31).toString())));
+            TTotal.setText(Valid.SetAngka2(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),32).toString())));
+            Sequel.cariIsi("select kd_pj from paket_operasi where kode_paket=?", kdpnj,tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+            nmpnj.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),33).toString());
         }
     }
 

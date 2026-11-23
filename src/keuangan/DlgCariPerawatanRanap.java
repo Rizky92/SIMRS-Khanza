@@ -321,7 +321,7 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKamar.setAutoCreateRowSorter(false);
+        tbKamar.setAutoCreateRowSorter(true);
         tbKamar.setComponentPopupMenu(Popup);
         tbKamar.setName("tbKamar"); // NOI18N
         tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -678,7 +678,7 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
                     if(i==1){
                         int baris=tbKamar.getSelectedRow();
                         if(baris>-1){
-                          tbKamar.setValueAt(true,tbKamar.getSelectedRow(),0);
+                          tabMode.setValueAt(true,tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0);
                         }
                         TCari.setText("");
                         TCari.requestFocus();
@@ -954,7 +954,7 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
             for(i=0;i<tbKamar.getRowCount();i++){
-                tbKamar.setValueAt(false,i,0);
+                tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),0);
             }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -1322,6 +1322,7 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
 
     private void tampil() {
         try{
+            tbKamar.suspendSorting();
             Valid.tabelKosong(tabMode);
             file=new File("./cache/tarifranap.iyem");
             file.createNewFile();
@@ -1468,13 +1469,14 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(""+tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void tampil2() {
         try{
             jml=0;
             for(i=0;i<tbKamar.getRowCount();i++){
-                if(tbKamar.getValueAt(i,0).toString().equals("true")){
+                if(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -1494,23 +1496,24 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
 
             index=0;
             for(i=0;i<tbKamar.getRowCount();i++){
-                if(tbKamar.getValueAt(i,0).toString().equals("true")){
+                if(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode[index]=tbKamar.getValueAt(i,1).toString();
-                    nama[index]=tbKamar.getValueAt(i,2).toString();
-                    kategori[index]=tbKamar.getValueAt(i,3).toString();
-                    totaltnd[index]=Double.parseDouble(tbKamar.getValueAt(i,4).toString());
-                    bagianrs[index]=Double.parseDouble(tbKamar.getValueAt(i,5).toString());
-                    bhp[index]=Double.parseDouble(tbKamar.getValueAt(i,6).toString());
-                    jmdokter[index]=Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                    jmperawat[index]=Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                    kso[index]=Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                    menejemen[index]=Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                    kelastarif[index]=tbKamar.getValueAt(i,11).toString();
+                    kode[index]=tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString();
+                    nama[index]=tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),2).toString();
+                    kategori[index]=tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),3).toString();
+                    totaltnd[index]=Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),4).toString());
+                    bagianrs[index]=Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),5).toString());
+                    bhp[index]=Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),6).toString());
+                    jmdokter[index]=Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),7).toString());
+                    jmperawat[index]=Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),8).toString());
+                    kso[index]=Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),9).toString());
+                    menejemen[index]=Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),10).toString());
+                    kelastarif[index]=tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),11).toString();
                     index++;
                 }
             }
 
+            tbKamar.suspendSorting();
             Valid.tabelKosong(tabMode);
 
             for(i=0;i<jml;i++){
@@ -1585,6 +1588,7 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
             root = null;
         }
         LCount.setText(""+tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void tampil3() {
@@ -1606,7 +1610,7 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
     public void setNoRm(String norwt,String pilihtable,Date tanggal,String jam,String menit,String detik,boolean status,String pasien) {
         aktifpcare="no";
         for(i=0;i<tbKamar.getRowCount();i++){
-            tbKamar.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbKamar.convertRowIndexToModel(i),0);
         }
         TNoRw.setText(norwt);
         TPasien.setText(pasien);
@@ -1800,82 +1804,82 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
                 sukses = true;
                 ttljmdokter = 0; ttljmperawat = 0; ttlkso = 0; ttlpendapatan = 0; ttljasasarana = 0; ttlbhp = 0; ttlmenejemen = 0;
                 for (i = 0; i < tbKamar.getRowCount(); i++) {
-                    if (Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString())) {
+                    if (Boolean.parseBoolean(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 0).toString())) {
                         switch (pilihtable) {
                             case "rawat_inap_dr":
                                 if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 1).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk),
-                                    tbKamar.getValueAt(i, 5).toString(), tbKamar.getValueAt(i, 6).toString(), tbKamar.getValueAt(i, 7).toString(), tbKamar.getValueAt(i, 9).toString(),
-                                    tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 4).toString()
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 5).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 6).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString()
                                 )) {
-                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
-                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 4).toString());
-                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 5).toString());
-                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 6).toString());
-                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    ttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    ttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
+                                    ttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString());
+                                    ttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 5).toString());
+                                    ttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 6).toString());
+                                    ttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
                                     if (aktifpcare.equals("yes")) {
                                         simpanTindakanPCare(
-                                            nokunjungan, Sequel.cariIsiSmc("select kd_tindakan_pcare from maping_tindakan_pcare where kd_jenis_prw = ?", tbKamar.getValueAt(i, 1).toString()),
-                                            TNoRw.getText(), Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk), tbKamar.getValueAt(i, 1).toString(), tbKamar.getValueAt(i, 5).toString(),
-                                            tbKamar.getValueAt(i, 6).toString(), tbKamar.getValueAt(i, 7).toString(), "0", tbKamar.getValueAt(i, 9).toString(),
-                                            tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 4).toString()
+                                            nokunjungan, Sequel.cariIsiSmc("select kd_tindakan_pcare from maping_tindakan_pcare where kd_jenis_prw = ?", tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString()),
+                                            TNoRw.getText(), Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 5).toString(),
+                                            tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 6).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString(), "0", tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(),
+                                            tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString()
                                         );
                                     }
                                 } else {
                                     sukses = false;
-                                    JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan tindakan " + tbKamar.getValueAt(i, 2).toString() + ". Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
+                                    JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan tindakan " + tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 2).toString() + ". Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
                                 }
                                 break;
                             case "rawat_inap_pr":
                                 if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 1).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk),
-                                    tbKamar.getValueAt(i, 5).toString(), tbKamar.getValueAt(i, 6).toString(), tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(),
-                                    tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 4).toString()
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 5).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 6).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString()
                                 )) {
-                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
-                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 4).toString());
-                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 5).toString());
-                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 6).toString());
-                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    ttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    ttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
+                                    ttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString());
+                                    ttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 5).toString());
+                                    ttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 6).toString());
+                                    ttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
                                     if (aktifpcare.equals("yes")) {
                                         simpanTindakanPCare(
-                                            nokunjungan, Sequel.cariIsiSmc("select kd_tindakan_pcare from maping_tindakan_pcare where kd_jenis_prw = ?", tbKamar.getValueAt(i, 1).toString()),
-                                            TNoRw.getText(), Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk), tbKamar.getValueAt(i, 1).toString(), tbKamar.getValueAt(i, 5).toString(),
-                                            tbKamar.getValueAt(i, 6).toString(), "0", tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(),
-                                            tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 4).toString()
+                                            nokunjungan, Sequel.cariIsiSmc("select kd_tindakan_pcare from maping_tindakan_pcare where kd_jenis_prw = ?", tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString()),
+                                            TNoRw.getText(), Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 5).toString(),
+                                            tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 6).toString(), "0", tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(),
+                                            tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString()
                                         );
                                     }
                                 } else {
                                     sukses = false;
-                                    JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan tindakan " + tbKamar.getValueAt(i, 2).toString() + ". Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
+                                    JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan tindakan " + tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 2).toString() + ". Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
                                 }
                                 break;
                             case "rawat_inap_drpr":
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 1).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk),
-                                    tbKamar.getValueAt(i, 5).toString(), tbKamar.getValueAt(i, 6).toString(), tbKamar.getValueAt(i, 7).toString(), tbKamar.getValueAt(i, 8).toString(),
-                                    tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 4).toString()
+                                    TNoRw.getText(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 5).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 6).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(),
+                                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString()
                                 )) {
-                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
-                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
-                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
-                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 4).toString());
-                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 5).toString());
-                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 6).toString());
-                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    ttljmdokter += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString());
+                                    ttljmperawat += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString());
+                                    ttlkso += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString());
+                                    ttlpendapatan += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString());
+                                    ttljasasarana += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 5).toString());
+                                    ttlbhp += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 6).toString());
+                                    ttlmenejemen += Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString());
                                     if (aktifpcare.equals("yes")) {
                                         simpanTindakanPCare(
-                                            nokunjungan, Sequel.cariIsiSmc("select kd_tindakan_pcare from maping_tindakan_pcare where kd_jenis_prw = ?", tbKamar.getValueAt(i, 1).toString()),
-                                            TNoRw.getText(), Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk), tbKamar.getValueAt(i, 1).toString(), tbKamar.getValueAt(i, 5).toString(),
-                                            tbKamar.getValueAt(i, 6).toString(), tbKamar.getValueAt(i, 7).toString(), tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(),
-                                            tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 4).toString()
+                                            nokunjungan, Sequel.cariIsiSmc("select kd_tindakan_pcare from maping_tindakan_pcare where kd_jenis_prw = ?", tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString()),
+                                            TNoRw.getText(), Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 1).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 5).toString(),
+                                            tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 6).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 7).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 8).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 9).toString(),
+                                            tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 10).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 4).toString()
                                         );
                                     }
                                 } else {
                                     sukses = false;
-                                    JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan tindakan " + tbKamar.getValueAt(i, 2).toString() + ". Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
+                                    JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan tindakan " + tabMode.getValueAt(tbKamar.convertRowIndexToModel(i), 2).toString() + ". Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
                                 }
                                 break;
                         }

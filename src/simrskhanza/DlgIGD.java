@@ -4476,6 +4476,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbPetugas.setAutoCreateRowSorter(true);
         tbPetugas.setToolTipText("Klik data di table, kemudian klik kanan untuk menampilkan menu yang dibutuhkan");
         tbPetugas.setComponentPopupMenu(jPopupMenu1);
         tbPetugas.setName("tbPetugas"); // NOI18N
@@ -5242,8 +5243,8 @@ public final class DlgIGD extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbPetugas.getRowCount();i++){
-            if(tbPetugas.getValueAt(i,0).toString().equals("true")){
-                if(Sequel.meghapustf("reg_periksa","no_rawat",tbPetugas.getValueAt(i,2).toString())==true){
+            if(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(i),0).toString().equals("true")){
+                if(Sequel.meghapustf("reg_periksa","no_rawat",tabMode.getValueAt(tbPetugas.convertRowIndexToModel(i),2).toString())==true){
                     tabMode.removeRow(tbPetugas.convertRowIndexToModel(i));
                     i--;
                 }
@@ -5383,7 +5384,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                             biaya=Sequel.cariIsiAngka("select poliklinik.registrasi from poliklinik where poliklinik.kd_poli='IGDK'");
                             break;
                 }
-                if(Sequel.cariRegistrasi(tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString()) > 0){
+                if(Sequel.cariRegistrasi(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()), 2).toString()) > 0){
                     JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh diubah.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                     TCari.requestFocus();
                 }else{
@@ -5392,26 +5393,26 @@ public final class DlgIGD extends javax.swing.JDialog {
                                 "p_jawab=?,almt_pj=?,biaya_reg=?,hubunganpj=?,stts_daftar=?,kd_pj=?,umurdaftar=?,sttsumur=? where no_rawat=?",16,new String[]{
                                 TNoRw.getText(),TNoReg.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                                 KdDokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),""+biaya,THbngn.getText(),
-                                TStatus.getText(),kdpnj.getText(),umur,sttsumur,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString()
+                                TStatus.getText(),kdpnj.getText(),umur,sttsumur,tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString()
                             })==true){
-                            tbPetugas.setValueAt(TNoReg.getText(),tbPetugas.getSelectedRow(),1);
-                            tbPetugas.setValueAt(TNoRw.getText(),tbPetugas.getSelectedRow(),2);
-                            tbPetugas.setValueAt(Valid.SetTgl(DTPReg.getSelectedItem()+""),tbPetugas.getSelectedRow(),3);
-                            tbPetugas.setValueAt(CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),tbPetugas.getSelectedRow(),4);
-                            tbPetugas.setValueAt(KdDokter.getText(),tbPetugas.getSelectedRow(),5);
-                            tbPetugas.setValueAt(TDokter.getText(),tbPetugas.getSelectedRow(),6);
-                            tbPetugas.setValueAt(TNoRM.getText(),tbPetugas.getSelectedRow(),7);
-                            tbPetugas.setValueAt(TPasien.getText(),tbPetugas.getSelectedRow(),8);
-                            tbPetugas.setValueAt(JK.getText(),tbPetugas.getSelectedRow(),9);
-                            tbPetugas.setValueAt(umur+" "+sttsumur,tbPetugas.getSelectedRow(),10);
-                            tbPetugas.setValueAt("IGD",tbPetugas.getSelectedRow(),11);
-                            tbPetugas.setValueAt(TPngJwb.getText(),tbPetugas.getSelectedRow(),12);
-                            tbPetugas.setValueAt(TAlmt.getText(),tbPetugas.getSelectedRow(),13);
-                            tbPetugas.setValueAt(THbngn.getText(),tbPetugas.getSelectedRow(),14);
-                            tbPetugas.setValueAt(Valid.SetAngka(biaya),tbPetugas.getSelectedRow(),15);
-                            tbPetugas.setValueAt(TStatus.getText(),tbPetugas.getSelectedRow(),16);
-                            tbPetugas.setValueAt(nmpnj.getText(),tbPetugas.getSelectedRow(),17);
-                            tbPetugas.setValueAt(kdpnj.getText(),tbPetugas.getSelectedRow(),19);
+                            tabMode.setValueAt(TNoReg.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),1);
+                            tabMode.setValueAt(TNoRw.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2);
+                            tabMode.setValueAt(Valid.SetTgl(DTPReg.getSelectedItem()+""),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),3);
+                            tabMode.setValueAt(CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),4);
+                            tabMode.setValueAt(KdDokter.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),5);
+                            tabMode.setValueAt(TDokter.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),6);
+                            tabMode.setValueAt(TNoRM.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),7);
+                            tabMode.setValueAt(TPasien.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),8);
+                            tabMode.setValueAt(JK.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),9);
+                            tabMode.setValueAt(umur+" "+sttsumur,tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),10);
+                            tabMode.setValueAt("IGD",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),11);
+                            tabMode.setValueAt(TPngJwb.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),12);
+                            tabMode.setValueAt(TAlmt.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),13);
+                            tabMode.setValueAt(THbngn.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),14);
+                            tabMode.setValueAt(Valid.SetAngka(biaya),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),15);
+                            tabMode.setValueAt(TStatus.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),16);
+                            tabMode.setValueAt(nmpnj.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),17);
+                            tabMode.setValueAt(kdpnj.getText(),tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),19);
                             emptTeks();
                         }
                     }else{
@@ -5485,804 +5486,804 @@ public final class DlgIGD extends javax.swing.JDialog {
                         if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                             JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi..!!");
                         }else{
-                            if(normdipilih.equals(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),7).toString())){
+                            if(normdipilih.equals(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),7).toString())){
                                 Sequel.queryu2("update asuhan_gizi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update aturan_pakai set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_detail_periksa_lab set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_detail_periksa_lab_perujuk set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_operasi_dokter_anak set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_operasi_dokter_anestesi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_operasi_dokter_pjanak set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_operasi_dokter_umum set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_operasi_operator1 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_operasi_operator2 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_operasi_operator3 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_periksa_lab set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_periksa_lab_perujuk set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_periksa_radiologi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_periksa_radiologi_perujuk set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_rawat_inap_dr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_rawat_inap_drpr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_rawat_jl_dr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bayar_rawat_jl_drpr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update beri_bhp_radiologi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update beri_obat_operasi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update berkas_digital_perawatan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update billing set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update booking_operasi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bridging_inhealth set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bridging_sep set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bridging_sep_internal set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update bridging_surat_pri_bpjs set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update catatan_perawatan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_HAIs set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_klasifikasi_pasien_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_tb set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igd set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igddetail_skala1 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igddetail_skala2 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igddetail_skala3 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igddetail_skala4 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igddetail_skala5 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igdprimer set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update data_triase_igdsekunder set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update deposit set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_beri_diet set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_nota_inap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_nota_jalan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_obat_racikan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_pemberian_obat set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_penagihan_piutang set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_periksa_lab set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_periksa_labpa set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_periksa_labpa_gambar set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update detail_piutang_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update deteksi_dini_corona set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update diagnosa_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update dpjp_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update gambar_radiologi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update hasil_radiologi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update hemodialisa set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update inacbg_klaim_baru2 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update inacbg_noklaim_corona set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update insiden_keselamatan_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update kamar_inap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update laporan_operasi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update monitoring_asuhan_gizi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update mutasi_berkas set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update nota_inap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update nota_jalan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update obat_racikan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update operasi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pcare_kunjungan_umum set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pcare_obat_diberikan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pcare_pendaftaran set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pcare_tindakan_ralan_diberikan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pcare_tindakan_ranap_diberikan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pemeriksaan_ginekologi_ralan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pemeriksaan_ginekologi_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pemeriksaan_obstetri_ralan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pemeriksaan_obstetri_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pemeriksaan_ralan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pemeriksaan_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pengembalian_deposit set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update pengurangan_biaya set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_gigi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_gigi_masalah set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_igd set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_igd_masalah set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_kebidanan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_kebidanan_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_mata set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_mata_masalah set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_ralan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_ralan_bayi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_ralan_bayi_masalah set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_ralan_masalah set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_awal_keperawatan_ralan_rencana set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_fisioterapi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_mcu set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_medis_igd set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_medis_ralan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_medis_ralan_anak set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_medis_ralan_kandungan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_medis_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update penilaian_medis_ranap_kandungan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update perawatan_corona set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update periksa_lab set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update periksa_radiologi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update perkiraan_biaya_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_lab set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_labpa set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_obat set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_radiologi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_registrasi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_resep_pulang set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update permintaan_stok_obat_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update piutang_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update prosedur_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update ranap_gabung set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update rawat_inap_dr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update rawat_inap_drpr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update rawat_inap_pr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update rawat_jl_dr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update rawat_jl_drpr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update rawat_jl_pr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update referensi_mobilejkn_bpjs_taskid set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update resep_luar set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update resep_obat set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update resep_pulang set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update resume_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update resume_pasien_ranap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update returpasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 if(Sequel.queryu2tf("update rujuk set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 )==false){
                                     Sequel.meghapus("rujuk","no_rawat", norawatdipilih);
                                 }
                                 if(Sequel.queryu2tf("update rujuk_masuk set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 )==false){
                                     Sequel.meghapus("rujuk_masuk","no_rawat", norawatdipilih);
                                 }
                                 Sequel.queryu2("update rujukan_internal_poli set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update rvp_klaim_bpjs set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update saran_kesan_lab set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update sisrute_rujukan_keluar set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update skrining_gizi set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update stok_obat_pasien set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_cuti_hamil set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_bebas_tato set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_bebas_tbc set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_hamil set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_buta_warna set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_keterangan_covid set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_keterangan_rawat_inap set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_keterangan_sehat set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_kewaspadaan_kesehatan set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_skbn set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update suratsakit set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update suratsakitpihak2 set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update tagihan_obat_langsung set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update resep_luar set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_bebas_tbc set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_buta_warna set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update surat_bebas_tato set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update tambahan_biaya set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update ubah_penjab set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 Sequel.queryu2("update uji_fungsi_kfr set no_rawat=? where no_rawat=?",2,
                                     new String[]{
-                                        tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString(),norawatdipilih
+                                        tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString(),norawatdipilih
                                     }
                                 );
                                 if(Sequel.queryu2tf("delete from reg_periksa where no_rawat=?",1,new String[]{norawatdipilih})==true){
                                     for(i=0;i<tbPetugas.getRowCount();i++){
-                                        if(tbPetugas.getValueAt(i,2).toString().equals(norawatdipilih)){
+                                        if(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(i),2).toString().equals(norawatdipilih)){
                                             tabMode.removeRow(tbPetugas.convertRowIndexToModel(i));
                                         }
                                     }
@@ -6412,7 +6413,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             tbPetugas.requestFocus();
         }else{
             if(tbPetugas.getSelectedRow()!= -1){
-                if(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),18).toString().equals("Batal")){
+                if(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18).toString().equals("Batal")){
                     JOptionPane.showMessageDialog(null,"Pasien berstatus batal periksa...!");
                 }else{
                     if(Sequel.cariRegistrasi(TNoRw.getText())>0){
@@ -6462,7 +6463,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                     if (dlgrwjl == null) return;
                     if (!dlgrwjl.isVisible()) {
                         dlgrwjl.SetPoli("IGDK");
-                        dlgrwjl.SetPj(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),19).toString());
+                        dlgrwjl.SetPj(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),19).toString());
                         dlgrwjl.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate());
                         dlgrwjl.isCek();
                     }
@@ -7656,7 +7657,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             dlgki.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             dlgki.setLocationRelativeTo(internalFrame1);
             dlgki.isCek();
-            dlgki.setNoRm4(TNoRw.getText(), DTPReg.getDate(), "2. Ralan", "IGDK", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 5).toString());
+            dlgki.setNoRm4(TNoRw.getText(), DTPReg.getDate(), "2. Ralan", "IGDK", tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()), 5).toString());
             // dlgki.setNoRm(TNoRw.getText(),DTPReg.getDate(),"2. Ralan","IGDK","Unit IGD/UGD");
             dlgki.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -7851,7 +7852,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Diterima',now(),now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRw.getText()+"'");
             Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Berkas Diterima'");
             if(tbPetugas.getSelectedRow()>-1){
-                tbPetugas.setValueAt("Berkas Diterima",tbPetugas.getSelectedRow(),18);
+                tabMode.setValueAt("Berkas Diterima",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
             }
         }
     }//GEN-LAST:event_ppBerkasBtnPrintActionPerformed
@@ -7865,7 +7866,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             }else {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Sudah'");
                 if(tbPetugas.getSelectedRow()>-1){
-                    tbPetugas.setValueAt("Sudah",tbPetugas.getSelectedRow(),18);
+                    tabMode.setValueAt("Sudah",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
                 }
             }
         }
@@ -7880,7 +7881,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             }else {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Belum'");
                 if(tbPetugas.getSelectedRow()>-1){
-                    tbPetugas.setValueAt("Belum",tbPetugas.getSelectedRow(),18);
+                    tabMode.setValueAt("Belum",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
                 }
             }
 
@@ -7899,7 +7900,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 }else{
                     Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Batal',biaya_reg='0'");
                     if(tbPetugas.getSelectedRow()>-1){
-                        tbPetugas.setValueAt("Batal",tbPetugas.getSelectedRow(),18);
+                        tabMode.setValueAt("Batal",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
                     }
                 }
             }
@@ -7916,7 +7917,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Dirujuk'");
                 MnRujukActionPerformed(evt);
                 if(tbPetugas.getSelectedRow()>-1){
-                    tbPetugas.setValueAt("Dirujuk",tbPetugas.getSelectedRow(),18);
+                    tabMode.setValueAt("Dirujuk",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
                 }
             }
         }
@@ -7932,7 +7933,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Dirawat'");
                 MnKamarInapActionPerformed(evt);
                 if(tbPetugas.getSelectedRow()>-1){
-                    tbPetugas.setValueAt("Dirawat",tbPetugas.getSelectedRow(),18);
+                    tabMode.setValueAt("Dirawat",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
                 }
             }
         }
@@ -7954,7 +7955,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 dlgPasienMati.isCek();
                 dlgPasienMati.setVisible(true);
                 if(tbPetugas.getSelectedRow()>-1){
-                    tbPetugas.setValueAt("Meninggal",tbPetugas.getSelectedRow(),18);
+                    tabMode.setValueAt("Meninggal",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
                 }
             }
 
@@ -8510,7 +8511,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             }else {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Pulang Paksa'");
                 if(tbPetugas.getSelectedRow()>-1){
-                    tbPetugas.setValueAt("Pulang Paksa",tbPetugas.getSelectedRow(),18);
+                    tabMode.setValueAt("Pulang Paksa",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
                 }
             }
         }
@@ -8522,7 +8523,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         }else{
             Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"status_poli='Baru'");
             if(tbPetugas.getSelectedRow()>-1){
-                tbPetugas.setValueAt("Baru",tbPetugas.getSelectedRow(),16);
+                tabMode.setValueAt("Baru",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),16);
             }
         }
     }//GEN-LAST:event_MnStatusBaruActionPerformed
@@ -8533,7 +8534,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         }else{
             Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"status_poli='Lama'");
             if(tbPetugas.getSelectedRow()>-1){
-                tbPetugas.setValueAt("Lama",tbPetugas.getSelectedRow(),18);
+                tabMode.setValueAt("Lama",tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),18);
             }
         }
     }//GEN-LAST:event_MnStatusLamaActionPerformed
@@ -10650,13 +10651,13 @@ public final class DlgIGD extends javax.swing.JDialog {
                 if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                     int reply = JOptionPane.showConfirmDialog(rootPane,"Data billing sudah terverifikasi, apakah yakin mau digabung..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
                     if (reply == JOptionPane.YES_OPTION) {
-                        norawatdipilih=tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString();
-                        normdipilih=tbPetugas.getValueAt(tbPetugas.getSelectedRow(),7).toString();
+                        norawatdipilih=tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString();
+                        normdipilih=tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),7).toString();
                         JOptionPane.showMessageDialog(rootPane,"Silahkan pilih No.Rawat yang mau digabung...!");
                     }
                 }else{
-                    norawatdipilih=tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString();
-                    normdipilih=tbPetugas.getValueAt(tbPetugas.getSelectedRow(),7).toString();
+                    norawatdipilih=tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString();
+                    normdipilih=tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),7).toString();
                     JOptionPane.showMessageDialog(rootPane,"Silahkan pilih No.Rawat yang mau digabung...!");
                 }
             }
@@ -10727,7 +10728,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 RMPenilaianAwalMedisHemodialisa form=new RMPenilaianAwalMedisHemodialisa(null,false);
                 form.isCek();
-                form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),tbPetugas.getValueAt(tbPetugas.getSelectedRow(),11).toString());
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),11).toString());
                 form.emptTeks();
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
@@ -11161,7 +11162,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 DlgCariTagihanOperasi form=new DlgCariTagihanOperasi(null,false);
                 //form.emptTeks();
-                form.setPasien(TNoRw.getText(),Valid.SetTgl2(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),3).toString()));
+                form.setPasien(TNoRw.getText(),Valid.SetTgl2(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),3).toString()));
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
                 form.setVisible(true);
@@ -13224,23 +13225,23 @@ public final class DlgIGD extends javax.swing.JDialog {
 
     private void getData() {
         if(tbPetugas.getSelectedRow()!= -1){
-            TNoReg.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),1).toString());
-            TNoRw.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
-            Kd2.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
-            Valid.SetTgl(DTPReg,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),3).toString());
-            CmbJam.setSelectedItem(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),4).toString().substring(0,2));
-            CmbMenit.setSelectedItem(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),4).toString().substring(3,5));
-            CmbDetik.setSelectedItem(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),4).toString().substring(6,8));
-            KdDokter.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),5).toString());
-            TDokter.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),6).toString());
-            TNoRM.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),7).toString());
+            TNoReg.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),1).toString());
+            TNoRw.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString());
+            Kd2.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),2).toString());
+            Valid.SetTgl(DTPReg,tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),3).toString());
+            CmbJam.setSelectedItem(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),4).toString().substring(0,2));
+            CmbMenit.setSelectedItem(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),4).toString().substring(3,5));
+            CmbDetik.setSelectedItem(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),4).toString().substring(6,8));
+            KdDokter.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),5).toString());
+            TDokter.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),6).toString());
+            TNoRM.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),7).toString());
             isCekPasien();
-            TPngJwb.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),12).toString());
-            TAlmt.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),13).toString());
-            THbngn.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),14).toString());
-            TStatus.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),16).toString());
-            nmpnj.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),17).toString());
-            kdpnj.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),19).toString());
+            TPngJwb.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),12).toString());
+            TAlmt.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),13).toString());
+            THbngn.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),14).toString());
+            TStatus.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),16).toString());
+            nmpnj.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),17).toString());
+            kdpnj.setText(tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),19).toString());
         }
     }
 
@@ -13811,7 +13812,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         if(tbPetugas.getSelectedRow()!= -1){
             jmlparsial=0;
             if(aktifkanparsial.equals("yes")){
-                jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",tbPetugas.getValueAt(tbPetugas.getSelectedRow(),19).toString());
+                jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),19).toString());
             }
             if(jmlparsial>0){
                 DlgBilingParsialRalan parsialralan=new DlgBilingParsialRalan(null,false);
@@ -13822,7 +13823,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 parsialralan.setNoRm(TNoRw.getText(),KdDokter.getText(),TDokter.getText(),"IGDK");
                 parsialralan.setVisible(true);
             }else{
-                JOptionPane.showMessageDialog(null,"Maaf, Cara bayar "+tbPetugas.getValueAt(tbPetugas.getSelectedRow(),17).toString()+" tidak diijinkan menggunakan Billing Parsial...!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Cara bayar "+tabMode.getValueAt(tbPetugas.convertRowIndexToModel(tbPetugas.getSelectedRow()),17).toString()+" tidak diijinkan menggunakan Billing Parsial...!!!");
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
@@ -15118,6 +15119,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     private void tampilSmc() {
         if(ceksukses==false){
             ceksukses=true;
+            tbPetugas.suspendSorting();
             Valid.tabelKosong(tabMode);
             final String cari = TCari.getText().trim(),
                 tglAwal = Valid.getTglSmc(DTPCari1),
@@ -15187,6 +15189,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                     tabMode.fireTableDataChanged();
                     LCount.setText("" + tbPetugas.getRowCount());
                     ceksukses = false;
+                    tbPetugas.resumeSorting();
                 }
             }.execute();
         }

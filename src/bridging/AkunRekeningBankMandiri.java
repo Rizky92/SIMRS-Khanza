@@ -830,17 +830,17 @@ public class AkunRekeningBankMandiri extends javax.swing.JDialog {
     private void getData() {
         int row=tbSpesialis.getSelectedRow();
         if(row!= -1){
-            kdrek.setText(tbSpesialis.getValueAt(row,0).toString());
-            nmrek.setText(tbSpesialis.getValueAt(row,1).toString());
-            KdRekBiaya.setText(tbSpesialis.getValueAt(row,2).toString());
-            NmRekBiaya.setText(tbSpesialis.getValueAt(row,3).toString());
-            Username.setText(tbSpesialis.getValueAt(row,4).toString());
-            Password.setText(tbSpesialis.getValueAt(row,5).toString());
-            ClientID.setText(tbSpesialis.getValueAt(row,6).toString());
-            ClientSecret.setText(tbSpesialis.getValueAt(row,7).toString());
-            KodeFaskes.setText(tbSpesialis.getValueAt(row,8).toString());
-            KodeMCM.setText(tbSpesialis.getValueAt(row,9).toString());
-            NoRekening.setText(tbSpesialis.getValueAt(row,10).toString());
+            kdrek.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),0).toString());
+            nmrek.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),1).toString());
+            KdRekBiaya.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),2).toString());
+            NmRekBiaya.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),3).toString());
+            Username.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),4).toString());
+            Password.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),5).toString());
+            ClientID.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),6).toString());
+            ClientSecret.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),7).toString());
+            KodeFaskes.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),8).toString());
+            KodeMCM.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),9).toString());
+            NoRekening.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),10).toString());
         }
     }
 

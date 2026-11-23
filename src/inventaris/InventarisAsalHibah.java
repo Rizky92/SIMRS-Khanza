@@ -558,7 +558,7 @@ public class InventarisAsalHibah extends javax.swing.JDialog {
             Valid.textKosong(Kota,"Kota");
         }else{
             Valid.editTable(tabMode,"pemberihibah","kode_pemberi","?","kode_pemberi=?,nama_pemberi=?,alamat=?,kota=?,no_telp=?",6,new String[]{
-                Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
+                Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()
             });
             if(tbDokter.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
@@ -871,11 +871,11 @@ public class InventarisAsalHibah extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            Kd.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            Nm.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-            Alamat.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString());
-            Kota.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
-            Telp.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
+            Kd.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+            Nm.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
+            Alamat.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString());
+            Kota.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString());
+            Telp.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
         }
     }
 

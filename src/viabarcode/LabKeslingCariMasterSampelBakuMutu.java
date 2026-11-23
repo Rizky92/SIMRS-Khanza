@@ -378,6 +378,7 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try {
             file=new File("./cache/sampelbakumutulabkesling.iyem");
@@ -417,6 +418,7 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(""+tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {
@@ -435,6 +437,7 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
         try {
             myObj = new FileReader("./cache/sampelbakumutulabkesling.iyem");
             root = mapper.readTree(myObj);
+            tbKamar.suspendSorting();
             Valid.tabelKosong(tabMode);
             response = root.path("sampelbakumutulabkesling");
             if(response.isArray()){
@@ -467,6 +470,7 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
             root = null;
         }
         LCount.setText(""+tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     private void runBackground(Runnable task) {

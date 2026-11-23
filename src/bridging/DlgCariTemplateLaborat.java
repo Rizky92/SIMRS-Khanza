@@ -352,6 +352,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
     private void tampilSmc() {
         if (!ceksukses) {
             ceksukses = true;
+            tbKamar.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             LCount.setText("0");
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -413,6 +414,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
                     LCount.setText(tbKamar.getRowCount() + "");
                     DlgCariTemplateLaborat.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbKamar.resumeSorting();
                 }
             }.execute();
         }
@@ -420,6 +422,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
 
     private void tampil2Smc() {
         if (!ceksukses) {
+            tbKamar.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             LCount.setText("0");
             if (new File("./cache/templatelaborat.iyem").isFile()) {
@@ -466,6 +469,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
                         LCount.setText(tbKamar.getRowCount() + "");
                         DlgCariTemplateLaborat.this.setCursor(Cursor.getDefaultCursor());
                         ceksukses = false;
+                        tbKamar.resumeSorting();
                     }
                 }.execute();
             } else {

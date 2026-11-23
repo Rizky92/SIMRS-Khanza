@@ -311,6 +311,7 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -656,7 +657,7 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
         }else{
             index=0;
             for(i=0;i<tbDokter.getRowCount();i++){
-                if(tbDokter.getValueAt(i,0).toString().equals("true")){
+                if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("true")){
                     index++;
                     try {
                         headers = new HttpHeaders();
@@ -665,7 +666,7 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
                         headers.add("X-pass",api.getHmac());
                         body="{" +
                                 "\"nomr\" : \""+norm.getText()+"\"," +
-                                "\"icd\"  : \""+tbDokter.getValueAt(i,1).toString()+"\"," +
+                                "\"icd\"  : \""+tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString()+"\"," +
                                 "\"level\": \""+(index==1?"1":"2")+"\"" +
                               "}";
                         requestEntity = new HttpEntity(body,headers);
@@ -675,9 +676,9 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
                             for(JsonNode list:response){
                                 if(list.path("status").asText().equals("200")){
                                     if(Sequel.menyimpantf("diagnosa_corona","?,?,?,?","Diagnosa Pasien",4,new String[]{
-                                        norm.getText(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,2).toString(),(index==1?"Primer":"Sekunder")
+                                        norm.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString(),(index==1?"Primer":"Sekunder")
                                     })==true){
-                                        tbDokter.setValueAt(false,i,0);
+                                        tabMode.setValueAt(false,tbDokter.convertRowIndexToModel(i),0);
                                     }
                                 }else{
                                     JOptionPane.showMessageDialog(rootPane,list.path("message").asText());
@@ -739,8 +740,8 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
-            tbDokter.setValueAt("",i,0);
-            tbDokter.setValueAt("0",i,4);
+            tabMode.setValueAt("",tbDokter.convertRowIndexToModel(i),0);
+            tabMode.setValueAt("0",tbDokter.convertRowIndexToModel(i),4);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -817,9 +818,9 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
                 headers.add("X-rs-id",idrs);
                 headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
                 headers.add("X-pass",api.getHmac());
-                headers.add("nomr",tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
-                headers.add("icd",tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString());
-                headers.add("level",tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString().replaceAll("Primer","1").replaceAll("Sekunder","2"));
+                headers.add("nomr",tabMode2.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString());
+                headers.add("icd",tabMode2.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),4).toString());
+                headers.add("level",tabMode2.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),6).toString().replaceAll("Primer","1").replaceAll("Sekunder","2"));
                 requestEntity = new HttpEntity(headers);
                 root = mapper.readTree(api.getRest().exchange(link+"/Pasien/diagnosis", HttpMethod.DELETE, requestEntity, String.class).getBody());
                 response = root.path("diagnosis");
@@ -827,7 +828,7 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
                     for(JsonNode list:response){
                         if(list.path("status").asText().equals("200")){
                             if(Sequel.queryu2tf("delete from diagnosa_corona where no_rkm_medis=? and kode_icd=? and status=?",3,new String[]{
-                                    tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString()
+                                    tabMode2.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString(),tabMode2.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),4).toString(),tabMode2.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),6).toString()
                                 })==true){
                                 tampil2();
                             }
@@ -963,7 +964,7 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
         row=tbDokter.getRowCount();
         jml=0;
         for(i=0;i<row;i++){
-            if(tbDokter.getValueAt(i,0).toString().equals("true")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("true")){
                 jml++;
             }
         }
@@ -973,14 +974,15 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
         pilihan=new boolean[jml];
         index=0;
         for(i=0;i<tbDokter.getRowCount();i++){
-            if(tbDokter.getValueAt(i,0).toString().equals("true")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),0).toString().equals("true")){
                 pilihan[index]=true;
-                kodepenyakit[index]=tbDokter.getValueAt(i,1).toString();
-                namapenyakit[index]=tbDokter.getValueAt(i,2).toString();
+                kodepenyakit[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),1).toString();
+                namapenyakit[index]=tabMode.getValueAt(tbDokter.convertRowIndexToModel(i),2).toString();
                 index++;
             }
         }
 
+        tbDokter.suspendSorting();
         Valid.tabelKosong(tabMode);
 
         for(i=0;i<jml;i++){
@@ -1016,6 +1018,7 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
             }
         }
 
+        tbDokter.resumeSorting();
     }
 
     public void isCek(){

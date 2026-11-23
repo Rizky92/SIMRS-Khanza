@@ -661,8 +661,8 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
     private void getData() {
         int row=tbObatPenyakit.getSelectedRow();
         if(row!= -1){
-            kdpj.setText(tbObatPenyakit.getValueAt(row,0).toString());
-            nmpj.setText(tbObatPenyakit.getValueAt(row,1).toString());
+            kdpj.setText(tabMode.getValueAt(tbObatPenyakit.convertRowIndexToModel(row),0).toString());
+            nmpj.setText(tabMode.getValueAt(tbObatPenyakit.convertRowIndexToModel(row),1).toString());
         }
     }
 

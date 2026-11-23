@@ -339,7 +339,7 @@ public class DlgGolonganTNI extends javax.swing.JDialog {
             Valid.textKosong(Nama,"Golongan TNI");
         }else{
             if(tbkecamatan.getSelectedRow()!= -1){
-                if(Sequel.meghapustf("golongan_tni","id",tbkecamatan.getValueAt(tbkecamatan.getSelectedRow(),0).toString())==true){
+                if(Sequel.meghapustf("golongan_tni","id",tabMode.getValueAt(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()),0).toString())==true){
                     tabMode.removeRow(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()));
                     emptTeks();
                     LCount.setText(""+tbkecamatan.getRowCount());
@@ -529,7 +529,7 @@ public class DlgGolonganTNI extends javax.swing.JDialog {
 
     private void getData() {
         if(tbkecamatan.getSelectedRow()!= -1){
-            Nama.setText(tbkecamatan.getValueAt(tbkecamatan.getSelectedRow(),1).toString());
+            Nama.setText(tabMode.getValueAt(tbkecamatan.convertRowIndexToModel(tbkecamatan.getSelectedRow()),1).toString());
         }
     }
 

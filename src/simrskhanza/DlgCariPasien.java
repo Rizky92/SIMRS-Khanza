@@ -211,7 +211,7 @@ public class DlgCariPasien extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbPasien.setAutoCreateRowSorter(false);
+        tbPasien.setAutoCreateRowSorter(true);
         tbPasien.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPasien.setName("tbPasien"); // NOI18N
         tbPasien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -372,7 +372,7 @@ public class DlgCariPasien extends javax.swing.JDialog {
                 TCari.requestFocus();
             }else if(evt.getKeyCode()==KeyEvent.VK_A){
                 for(z=0;z<tbPasien.getRowCount();z++){
-                    tbPasien.setValueAt(true,z,0);
+                    tabMode.setValueAt(true,tbPasien.convertRowIndexToModel(z),0);
                 }
             }
         }
@@ -538,6 +538,7 @@ public class DlgCariPasien extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbPasien.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             if(cmbHlm.getSelectedItem().toString().equals("Semua")){
@@ -695,6 +696,7 @@ public class DlgCariPasien extends javax.swing.JDialog {
         }
 
         LCount.setText(""+tbPasien.getRowCount());
+        tbPasien.resumeSorting();
     }
 
     public void emptTeks() {
@@ -705,7 +707,7 @@ public class DlgCariPasien extends javax.swing.JDialog {
     private void getData() {
         if(tbPasien.getSelectedRow()!= -1){
             try {
-                Kd2.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),1).toString());
+                Kd2.setText(tabMode.getValueAt(tbPasien.convertRowIndexToModel(tbPasien.getSelectedRow()),1).toString());
             } catch (Exception ex) {
             }
         }

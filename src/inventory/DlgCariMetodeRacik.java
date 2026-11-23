@@ -483,7 +483,7 @@ public final class DlgCariMetodeRacik extends javax.swing.JDialog {
     }
 
     public Object getSelectedValue(int column) {
-        return tbKamar.getValueAt(tbKamar.getSelectedRow(), column);
+        return tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()), column);
     }
 
     private void runBackground(Runnable task) {

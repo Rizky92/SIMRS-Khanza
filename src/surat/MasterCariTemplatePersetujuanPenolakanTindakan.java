@@ -383,6 +383,7 @@ public final class MasterCariTemplatePersetujuanPenolakanTindakan extends javax.
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -420,6 +421,7 @@ public final class MasterCariTemplatePersetujuanPenolakanTindakan extends javax.
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {

@@ -71,7 +71,7 @@
           <SubComponents>
             <Component class="widget.Table" name="tbPasien">
               <Properties>
-                <Property name="autoCreateRowSorter" type="boolean" value="false"/>
+                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                 <Property name="name" type="java.lang.String" value="tbPasien" noResource="true"/>
               </Properties>
               <Events>
@@ -548,6 +548,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbDiagnosa">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                         <Property name="name" type="java.lang.String" value="tbDiagnosa" noResource="true"/>
                       </Properties>

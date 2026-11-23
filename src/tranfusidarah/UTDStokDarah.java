@@ -771,7 +771,7 @@ public class UTDStokDarah extends javax.swing.JDialog {
                     NoKantong.getText(),KodeKomponen.getText(),GolonganDarah.getSelectedItem().toString(),
                     Resus.getSelectedItem().toString(),Valid.SetTgl(Aftap.getSelectedItem()+""),
                     Valid.SetTgl(Kadaluarsa.getSelectedItem()+""),Asal.getSelectedItem().toString(),
-                    tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
+                    tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()
               })==true){
                 emptTeks();
                 runBackground(() ->tampil());
@@ -1165,6 +1165,7 @@ public class UTDStokDarah extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbDokter.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             if(panelCari.isVisible()==false){
@@ -1248,6 +1249,7 @@ public class UTDStokDarah extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbDokter.getRowCount());
+        tbDokter.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1259,14 +1261,14 @@ public class UTDStokDarah extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            NoKantong.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            KodeKomponen.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),14).toString());
-            NamaKomponen.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-            GolonganDarah.setSelectedItem(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString());
-            Resus.setSelectedItem(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
-            Valid.SetTgl(Aftap,tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
-            Valid.SetTgl(Kadaluarsa,tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString());
-            Asal.setSelectedItem(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString());
+            NoKantong.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+            KodeKomponen.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),14).toString());
+            NamaKomponen.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
+            GolonganDarah.setSelectedItem(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString());
+            Resus.setSelectedItem(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString());
+            Valid.SetTgl(Aftap,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
+            Valid.SetTgl(Kadaluarsa,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),5).toString());
+            Asal.setSelectedItem(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6).toString());
         }
     }
 

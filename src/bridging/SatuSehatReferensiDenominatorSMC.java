@@ -339,6 +339,7 @@ public final class SatuSehatReferensiDenominatorSMC extends javax.swing.JDialog 
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbKamar.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
 
             new SwingWorker<Void, String[]>() {
@@ -396,6 +397,7 @@ public final class SatuSehatReferensiDenominatorSMC extends javax.swing.JDialog 
                     LCount.setText("" + tbKamar.getRowCount());
                     SatuSehatReferensiDenominatorSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbKamar.resumeSorting();
                 }
             }.execute();
         }
@@ -406,6 +408,7 @@ public final class SatuSehatReferensiDenominatorSMC extends javax.swing.JDialog 
             if (!ceksukses) {
                 ceksukses = true;
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                tbKamar.suspendSorting();
                 Valid.tabelKosongSmc(tabMode);
 
                 new SwingWorker<Void, String[]>() {
@@ -464,6 +467,7 @@ public final class SatuSehatReferensiDenominatorSMC extends javax.swing.JDialog 
                         LCount.setText("" + tbKamar.getRowCount());
                         SatuSehatReferensiDenominatorSMC.this.setCursor(Cursor.getDefaultCursor());
                         ceksukses = false;
+                        tbKamar.resumeSorting();
                     }
                 }.execute();
             }

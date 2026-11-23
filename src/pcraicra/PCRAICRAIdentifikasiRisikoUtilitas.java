@@ -401,7 +401,7 @@ public final class PCRAICRAIdentifikasiRisikoUtilitas extends javax.swing.JDialo
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbJabatan.getSelectedRow()!= -1){
-            if(Sequel.meghapustf("pcra_icra_identifkasi_risiko_utilitas","kode_risiko",tbJabatan.getValueAt(tbJabatan.getSelectedRow(),0).toString())==true){
+            if(Sequel.meghapustf("pcra_icra_identifkasi_risiko_utilitas","kode_risiko",tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),0).toString())==true){
                 tabMode.removeRow(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()));
                 emptTeks();
                 LCount.setText(""+tbJabatan.getRowCount());
@@ -427,10 +427,10 @@ public final class PCRAICRAIdentifikasiRisikoUtilitas extends javax.swing.JDialo
         }else{
             if(tbJabatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("pcra_icra_identifkasi_risiko_utilitas","kode_risiko=?","kode_risiko=?,nama_risiko=?",3,new String[]{
-                        KodeRisiko.getText(),NamaRisiko.getText(),tbJabatan.getValueAt(tbJabatan.getSelectedRow(), 0).toString()
+                        KodeRisiko.getText(),NamaRisiko.getText(),tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()), 0).toString()
                     })==true){
-                    tbJabatan.setValueAt(KodeRisiko.getText(),tbJabatan.getSelectedRow(),0);
-                    tbJabatan.setValueAt(NamaRisiko.getText(),tbJabatan.getSelectedRow(),1);
+                    tabMode.setValueAt(KodeRisiko.getText(),tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),0);
+                    tabMode.setValueAt(NamaRisiko.getText(),tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),1);
                     emptTeks();
                 }
             }else{
@@ -619,8 +619,8 @@ public final class PCRAICRAIdentifikasiRisikoUtilitas extends javax.swing.JDialo
 
     private void getData() {
         if(tbJabatan.getSelectedRow()!= -1){
-            KodeRisiko.setText(tbJabatan.getValueAt(tbJabatan.getSelectedRow(),0).toString());
-            NamaRisiko.setText(tbJabatan.getValueAt(tbJabatan.getSelectedRow(),1).toString());
+            KodeRisiko.setText(tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),0).toString());
+            NamaRisiko.setText(tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),1).toString());
         }
     }
 

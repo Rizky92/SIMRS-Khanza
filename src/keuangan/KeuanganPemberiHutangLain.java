@@ -579,7 +579,7 @@ public final class KeuanganPemberiHutangLain extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbKamar.getSelectedRow()>-1){
             if(Sequel.mengedittf("pemberi_hutang_lain","kode_pemberi_hutang=?","status='0'",1,new String[]{
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString()
+                tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString()
             })==true){
                 tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
                 emptTeks();
@@ -613,14 +613,14 @@ public final class KeuanganPemberiHutangLain extends javax.swing.JDialog {
         }else{
             if(tbKamar.getSelectedRow()>-1){
                 if(Sequel.mengedittf("pemberi_hutang_lain","kode_pemberi_hutang=?","kode_pemberi_hutang=?,nama_pemberi_hutang=?,alamat=?,no_telp=?,kd_rek=?",6,new String[]{
-                    KdPemberi.getText(),NmPemberi.getText(),AlamatPemberiHutang.getText(),NoTelp.getText(),KodeRekening.getText(),tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString()
+                    KdPemberi.getText(),NmPemberi.getText(),AlamatPemberiHutang.getText(),NoTelp.getText(),KodeRekening.getText(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString()
                 })==true){
-                    tbKamar.setValueAt(KdPemberi.getText(),tbKamar.getSelectedRow(),0);
-                    tbKamar.setValueAt(NmPemberi.getText(),tbKamar.getSelectedRow(),1);
-                    tbKamar.setValueAt(AlamatPemberiHutang.getText(),tbKamar.getSelectedRow(),2);
-                    tbKamar.setValueAt(NoTelp.getText(),tbKamar.getSelectedRow(),3);
-                    tbKamar.setValueAt(KodeRekening.getText(),tbKamar.getSelectedRow(),4);
-                    tbKamar.setValueAt(NamaRekening.getText(),tbKamar.getSelectedRow(),5);
+                    tabMode.setValueAt(KdPemberi.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0);
+                    tabMode.setValueAt(NmPemberi.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1);
+                    tabMode.setValueAt(AlamatPemberiHutang.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2);
+                    tabMode.setValueAt(NoTelp.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3);
+                    tabMode.setValueAt(KodeRekening.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),4);
+                    tabMode.setValueAt(NamaRekening.getText(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),5);
                     emptTeks();
                 }
             }else{
@@ -990,12 +990,12 @@ public final class KeuanganPemberiHutangLain extends javax.swing.JDialog {
 
     private void getData() {
         if(tbKamar.getSelectedRow()!= -1){
-            KdPemberi.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString());
-            NmPemberi.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
-            AlamatPemberiHutang.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString());
-            NoTelp.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString());
-            KodeRekening.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString());
-            NamaRekening.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString());
+            KdPemberi.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString());
+            NmPemberi.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),1).toString());
+            AlamatPemberiHutang.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2).toString());
+            NoTelp.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),3).toString());
+            KodeRekening.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),4).toString());
+            NamaRekening.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),5).toString());
         }
     }
 

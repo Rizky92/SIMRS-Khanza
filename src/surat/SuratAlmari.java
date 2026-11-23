@@ -449,8 +449,8 @@ public final class SuratAlmari extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbBangsal.getRowCount();i++){
-            if(tbBangsal.getValueAt(i,0).toString().equals("true")){
-                Sequel.meghapus("surat_lemari","kd",tbBangsal.getValueAt(i,1).toString());
+            if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.meghapus("surat_lemari","kd",tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString());
             }
         }
         runBackground(() ->tampil());
@@ -472,7 +472,7 @@ public final class SuratAlmari extends javax.swing.JDialog {
             Valid.textKosong(TNm,"almari");
         }else{
             if(tbBangsal.getSelectedRow()>-1){
-                Sequel.mengedit("surat_lemari","kd=?","lemari=?,kd=?",3,new String[]{TNm.getText(),TKd.getText(),tbBangsal.getValueAt(tbBangsal.getSelectedRow(), 1).toString()});
+                Sequel.mengedit("surat_lemari","kd=?","lemari=?,kd=?",3,new String[]{TNm.getText(),TKd.getText(),tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()), 1).toString()});
                 if(tbBangsal.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
             }
@@ -689,6 +689,7 @@ public final class SuratAlmari extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbBangsal.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select * from surat_lemari "+(TCari.getText().trim().equals("")?"":"where surat_lemari.kd like ? or surat_lemari.lemari like ? ")+"order by surat_lemari.kd");
@@ -716,6 +717,7 @@ public final class SuratAlmari extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbBangsal.getRowCount());
+        tbBangsal.resumeSorting();
     }
 
     public void emptTeks() {
@@ -728,8 +730,8 @@ public final class SuratAlmari extends javax.swing.JDialog {
 
     private void getData() {
         if(tbBangsal.getSelectedRow()!= -1){
-            TKd.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),1).toString());
-            TNm.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),2).toString());
+            TKd.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1).toString());
+            TNm.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),2).toString());
         }
     }
 

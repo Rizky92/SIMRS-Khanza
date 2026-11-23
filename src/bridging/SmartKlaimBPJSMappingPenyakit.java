@@ -585,13 +585,13 @@ public final class SmartKlaimBPJSMappingPenyakit extends javax.swing.JDialog {
         }else{
             if(tbJnsPerawatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("mapping_penyakit_smart_klaim_bpjs","icd10=?","kode_snomed=?,display=?,system=?,icd10=?",5,new String[]{
-                        KodeSnomed.getText(),Display.getText(),SnomedSystem.getText(),KodePenyakit.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString()
+                        KodeSnomed.getText(),Display.getText(),SnomedSystem.getText(),KodePenyakit.getText(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString()
                     })==true){
-                    tbJnsPerawatan.setValueAt(KodeSnomed.getText(),tbJnsPerawatan.getSelectedRow(),0);
-                    tbJnsPerawatan.setValueAt(Display.getText(),tbJnsPerawatan.getSelectedRow(),1);
-                    tbJnsPerawatan.setValueAt(SnomedSystem.getText(),tbJnsPerawatan.getSelectedRow(),2);
-                    tbJnsPerawatan.setValueAt(KodePenyakit.getText(),tbJnsPerawatan.getSelectedRow(),3);
-                    tbJnsPerawatan.setValueAt(NamaPenyakit.getText(),tbJnsPerawatan.getSelectedRow(),4);
+                    tabMode.setValueAt(KodeSnomed.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0);
+                    tabMode.setValueAt(Display.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1);
+                    tabMode.setValueAt(SnomedSystem.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2);
+                    tabMode.setValueAt(KodePenyakit.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3);
+                    tabMode.setValueAt(NamaPenyakit.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4);
                     emptTeks();
                 }
             }
@@ -877,11 +877,11 @@ public final class SmartKlaimBPJSMappingPenyakit extends javax.swing.JDialog {
 
     private void getData() {
        if(tbJnsPerawatan.getSelectedRow()!= -1){
-           KodeSnomed.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-           Display.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-           SnomedSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-           KodePenyakit.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-           NamaPenyakit.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
+           KodeSnomed.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+           Display.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+           SnomedSystem.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+           KodePenyakit.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+           NamaPenyakit.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString());
         }
     }
 

@@ -401,7 +401,7 @@ public final class PCRAICRAJenisAktivitasProyek extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbJabatan.getSelectedRow()!= -1){
-            if(Sequel.meghapustf("pcra_icra_jenis_aktivitas_proyek","kode_aktivitas",tbJabatan.getValueAt(tbJabatan.getSelectedRow(),0).toString())==true){
+            if(Sequel.meghapustf("pcra_icra_jenis_aktivitas_proyek","kode_aktivitas",tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),0).toString())==true){
                 tabMode.removeRow(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()));
                 emptTeks();
                 LCount.setText(""+tbJabatan.getRowCount());
@@ -427,10 +427,10 @@ public final class PCRAICRAJenisAktivitasProyek extends javax.swing.JDialog {
         }else{
             if(tbJabatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("pcra_icra_jenis_aktivitas_proyek","kode_aktivitas=?","kode_aktivitas=?,nama_aktivitas=?",3,new String[]{
-                        KodeAktivitas.getText(),NamaAktivitas.getText(),tbJabatan.getValueAt(tbJabatan.getSelectedRow(), 0).toString()
+                        KodeAktivitas.getText(),NamaAktivitas.getText(),tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()), 0).toString()
                     })==true){
-                    tbJabatan.setValueAt(KodeAktivitas.getText(),tbJabatan.getSelectedRow(),0);
-                    tbJabatan.setValueAt(NamaAktivitas.getText(),tbJabatan.getSelectedRow(),1);
+                    tabMode.setValueAt(KodeAktivitas.getText(),tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),0);
+                    tabMode.setValueAt(NamaAktivitas.getText(),tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),1);
                     emptTeks();
                 }
             }else{
@@ -619,8 +619,8 @@ public final class PCRAICRAJenisAktivitasProyek extends javax.swing.JDialog {
 
     private void getData() {
         if(tbJabatan.getSelectedRow()!= -1){
-            KodeAktivitas.setText(tbJabatan.getValueAt(tbJabatan.getSelectedRow(),0).toString());
-            NamaAktivitas.setText(tbJabatan.getValueAt(tbJabatan.getSelectedRow(),1).toString());
+            KodeAktivitas.setText(tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),0).toString());
+            NamaAktivitas.setText(tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),1).toString());
         }
     }
 

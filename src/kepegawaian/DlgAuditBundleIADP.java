@@ -188,6 +188,7 @@ public final class DlgAuditBundleIADP extends javax.swing.JDialog {
         Scroll.setOpaque(true);
         Scroll.setPreferredSize(new java.awt.Dimension(452, 200));
 
+        tbObat.setSortable(false);
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setName("tbObat"); // NOI18N
         tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -674,7 +675,7 @@ public final class DlgAuditBundleIADP extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()!= -1){
             if(Sequel.queryu2tf("delete from audit_bundle_iadp where nik=? and tanggal=?",2,new String[]{
-                tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();
@@ -699,7 +700,7 @@ public final class DlgAuditBundleIADP extends javax.swing.JDialog {
         }else{
             Sequel.mengedit("audit_bundle_iadp","nik=? and tanggal=?","tanggal=?,nik=?,handhygiene=?,apd=?,skin_antiseptik=?,lokasi_iv=?,perawatan_rutin=?",9,new String[]{
                 Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),Nip.getText(),HandHygiene.getSelectedItem().toString(),APD.getSelectedItem().toString(),SkinAntiSeptik.getSelectedItem().toString(),
-                LokasiIV.getSelectedItem().toString(),PerawatanRutin.getSelectedItem().toString(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                LokasiIV.getSelectedItem().toString(),PerawatanRutin.getSelectedItem().toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             });
             if(tbObat.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
@@ -1158,15 +1159,15 @@ public final class DlgAuditBundleIADP extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            if(!tbObat.getValueAt(tbObat.getSelectedRow(),0).toString().equals("")){
-                Nip.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-                NamaPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-                HandHygiene.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-                APD.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-                SkinAntiSeptik.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-                LokasiIV.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-                PerawatanRutin.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-                Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            if(!tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString().equals("")){
+                Nip.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+                NamaPetugas.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+                HandHygiene.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+                APD.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+                SkinAntiSeptik.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+                LokasiIV.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+                PerawatanRutin.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+                Valid.SetTgl(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
             }
         }
     }

@@ -377,6 +377,7 @@ public final class DlgCariDokterSMC extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select jadwal.kd_dokter, dokter.nm_dokter, dokter.no_telp, " +
@@ -411,6 +412,7 @@ public final class DlgCariDokterSMC extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
         LCount.setText("" + tbKamar.getRowCount());
+        tbKamar.resumeSorting();
     }
 
     public void setJadwal(String tanggal, String poli) {

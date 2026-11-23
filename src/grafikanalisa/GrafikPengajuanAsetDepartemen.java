@@ -271,6 +271,7 @@ public class GrafikPengajuanAsetDepartemen extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setSortable(false);
         tbBangsal.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbBangsal.setName("tbBangsal"); // NOI18N
         Scroll.setViewportView(tbBangsal);
@@ -513,8 +514,8 @@ public class GrafikPengajuanAsetDepartemen extends javax.swing.JDialog {
                 if(tbBangsal.getRowCount()>0){
                     tabMode.addRow(new Object[]{"Jumlah : ",jumlah+"","100 %",total,"100 %"});
                     for(i=0;i<tbBangsal.getRowCount();i++){
-                        tbBangsal.setValueAt(Valid.SetAngka6((Double.parseDouble(tbBangsal.getValueAt(i,1).toString())/jumlah)*100)+" %",i,2);
-                        tbBangsal.setValueAt(Valid.SetAngka6((Double.parseDouble(tbBangsal.getValueAt(i,3).toString())/total)*100)+" %",i,4);
+                        tabMode.setValueAt(Valid.SetAngka6((Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),1).toString())/jumlah)*100)+" %",tbBangsal.convertRowIndexToModel(i),2);
+                        tabMode.setValueAt(Valid.SetAngka6((Double.parseDouble(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),3).toString())/total)*100)+" %",tbBangsal.convertRowIndexToModel(i),4);
                     }
                 }
             } catch (Exception e) {

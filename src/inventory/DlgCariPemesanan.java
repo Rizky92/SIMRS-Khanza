@@ -792,6 +792,7 @@ public class DlgCariPemesanan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1238,7 +1239,7 @@ public class DlgCariPemesanan extends javax.swing.JDialog {
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
         if(tbDokter.getSelectedRow()!= -1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString().trim().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Faktur");
             }else{
                 int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, yakin mau dihapus...??","Konfirmasi",JOptionPane.YES_NO_OPTION);
@@ -1247,7 +1248,7 @@ public class DlgCariPemesanan extends javax.swing.JDialog {
                         pscaripesan=koneksi.prepareStatement(
                             "select pemesanan.no_faktur, pemesanan.tagihan, pemesanan.kd_bangsal,pemesanan.tgl_faktur,pemesanan.status,pemesanan.no_order,pemesanan.ppn,(pemesanan.total2+pemesanan.meterai) as total from pemesanan where pemesanan.no_faktur=?");
                         try {
-                            pscaripesan.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                            pscaripesan.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                             rs=pscaripesan.executeQuery();
                             if(rs.next()){
                                 Sequel.AutoComitFalse();
@@ -1303,7 +1304,7 @@ public class DlgCariPemesanan extends javax.swing.JDialog {
                                     }
                                 }
                                 if(sukses==true){
-                                    sukses=Sequel.queryu2tf("delete from pemesanan where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
+                                    sukses=Sequel.queryu2tf("delete from pemesanan where no_faktur=?",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()});
                                 }
                                 if(sukses==true){
                                     Sequel.Commit();
@@ -1339,12 +1340,12 @@ public class DlgCariPemesanan extends javax.swing.JDialog {
 
     private void ppBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBayarActionPerformed
         if(tbDokter.getSelectedRow()!= -1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString().trim().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Faktur");
             }else{
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 KeuanganBayarPemesananFarmasi bayarpesan=new KeuanganBayarPemesananFarmasi(null,false);
-                bayarpesan.setData(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                bayarpesan.setData(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                 bayarpesan.tampil2();
                 bayarpesan.isCek();
                 bayarpesan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -1359,12 +1360,12 @@ public class DlgCariPemesanan extends javax.swing.JDialog {
 
     private void ppUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUbahActionPerformed
         if(tbDokter.getSelectedRow()!= -1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString().trim().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Faktur");
             }else{
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 DlgUbahPemesanan ubahpesan=new DlgUbahPemesanan(null,false);
-                ubahpesan.isCek(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                ubahpesan.isCek(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                 ubahpesan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 ubahpesan.setLocationRelativeTo(internalFrame1);
                 ubahpesan.setVisible(true);
@@ -1435,7 +1436,7 @@ public class DlgCariPemesanan extends javax.swing.JDialog {
     private void ChkAccorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkAccorActionPerformed
         if(tbDokter.getSelectedRow()!= -1){
             if(TabRawat.getSelectedIndex()==0){
-                if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString().trim().equals("")){
+                if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10).toString().trim().equals("")){
                     Valid.textKosong(TCari,"No.Faktur");
                 }else{
                     isPhoto();
@@ -1452,13 +1453,13 @@ public class DlgCariPemesanan extends javax.swing.JDialog {
 
     private void btnAmbilPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbilPhotoActionPerformed
         if(tbDokter.getSelectedRow()!= -1){
-            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString().trim().equals("")){
+            if(!tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Faktur");
             }else{
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Sequel.meghapus("bukti_pemesanan", "no_faktur",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                Sequel.menyimpan2("bukti_pemesanan","?,''",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
-                Valid.panggilUrl("penerimaanapotek/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&nofaktur="+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                Sequel.meghapus("bukti_pemesanan", "no_faktur",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+                Sequel.menyimpan2("bukti_pemesanan","?,''",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()});
+                Valid.panggilUrl("penerimaanapotek/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&nofaktur="+tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -1470,7 +1471,7 @@ public class DlgCariPemesanan extends javax.swing.JDialog {
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
         if(tbDokter.getSelectedRow()!= -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),10).toString().trim().equals("")){
                 isPhoto();
                 panggilPhoto();
             }else{
@@ -1979,7 +1980,7 @@ public class DlgCariPemesanan extends javax.swing.JDialog {
             try {
                 ps=koneksi.prepareStatement("select bukti_pemesanan.photo from bukti_pemesanan where bukti_pemesanan.no_faktur=?");
                 try {
-                    ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){

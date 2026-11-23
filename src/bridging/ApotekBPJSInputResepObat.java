@@ -806,6 +806,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbObat.setAutoCreateRowSorter(true);
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setName("tbObat"); // NOI18N
         tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -837,6 +838,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         Scroll1.setOpaque(true);
         Scroll1.setPreferredSize(new java.awt.Dimension(454, 90));
 
+        tbObatRacikan.setAutoCreateRowSorter(true);
         tbObatRacikan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObatRacikan.setName("tbObatRacikan"); // NOI18N
         Scroll1.setViewportView(tbObatRacikan);
@@ -847,7 +849,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
-        tbDetailObatRacikan.setAutoCreateRowSorter(false);
+        tbDetailObatRacikan.setAutoCreateRowSorter(true);
         tbDetailObatRacikan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbDetailObatRacikan.setName("tbDetailObatRacikan"); // NOI18N
         tbDetailObatRacikan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -884,10 +886,10 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
             if(tbObat.getSelectedRow()!= -1){
                 i=tbObat.getSelectedColumn();
                 if((i==3)||(i==4)||(i==5)){
-                    Double signasatu=Valid.SetAngka(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-                    Double signadua=Valid.SetAngka(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-                    Double hari=Valid.SetAngka(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-                    tbObat.setValueAt((signadua*signasatu*hari),tbObat.getSelectedRow(),0);
+                    Double signasatu=Valid.SetAngka(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+                    Double signadua=Valid.SetAngka(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+                    Double hari=Valid.SetAngka(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+                    tabModeobat.setValueAt((signadua*signasatu*hari),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0);
                 }else if(i==6){
                     if(JADIKANPIUTANGAPOTEKBPJS.equals("yes")){
                         sisacari=0;
@@ -895,7 +897,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                             psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                             try {
                                 psstok.setString(1,kdgudang.getText());
-                                psstok.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+                                psstok.setString(2,tabModeobat.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
                                 rsstok=psstok.executeQuery();
                                 if(rsstok.next()){
                                     sisacari=rsstok.getDouble(1);
@@ -914,7 +916,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                         } catch (Exception e) {
                             System.out.println("Notif : "+e);
                         }
-                        tbObat.setValueAt(sisacari,tbObat.getSelectedRow(),9);
+                        tabModeobat.setValueAt(sisacari,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9);
                     }
                 }
             }
@@ -927,10 +929,10 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                 if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)||(evt.getKeyCode()==KeyEvent.VK_RIGHT)){
                     i=tbObat.getSelectedColumn();
                     if((i==3)||(i==4)||(i==5)){
-                        Double signasatu=Valid.SetAngka(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-                        Double signadua=Valid.SetAngka(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-                        Double hari=Valid.SetAngka(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-                        tbObat.setValueAt((signadua*signasatu*hari),tbObat.getSelectedRow(),0);
+                        Double signasatu=Valid.SetAngka(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+                        Double signadua=Valid.SetAngka(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+                        Double hari=Valid.SetAngka(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+                        tabModeobat.setValueAt((signadua*signasatu*hari),tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0);
                     }else if(i==6){
                         if(JADIKANPIUTANGAPOTEKBPJS.equals("yes")){
                             sisacari=0;
@@ -938,7 +940,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                                 psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                                 try {
                                     psstok.setString(1,kdgudang.getText());
-                                    psstok.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+                                    psstok.setString(2,tabModeobat.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
                                     rsstok=psstok.executeQuery();
                                     if(rsstok.next()){
                                         sisacari=rsstok.getDouble(1);
@@ -957,7 +959,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                             } catch (Exception e) {
                                 System.out.println("Notif : "+e);
                             }
-                            tbObat.setValueAt(sisacari,tbObat.getSelectedRow(),9);
+                            tabModeobat.setValueAt(sisacari,tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9);
                         }
                     }
                 }
@@ -1036,17 +1038,17 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                                     URL = link + "/obatnonracikan/v3/insert";
                                     System.out.println("URL : "+URL);
                                     for(i=0;i<tbObat.getRowCount();i++){
-                                        if(Valid.SetAngka(tbObat.getValueAt(i,0).toString())>0){
+                                        if(Valid.SetAngka(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),0).toString())>0){
                                             try {
                                                 requestJson = "{"+
                                                                 "\"NOSJP\":\""+response.path("noApotik").asText()+"\","+
                                                                 "\"NORESEP\":\""+NoResep.getText().substring(NoResep.getText().length()-5)+"\","+
-                                                                "\"KDOBT\": \""+tbObat.getValueAt(i,1).toString()+"\","+
-                                                                "\"NMOBAT\": \""+tbObat.getValueAt(i,2).toString()+"\","+
-                                                                "\"SIGNA1OBT\":"+tbObat.getValueAt(i,3).toString()+","+
-                                                                "\"SIGNA2OBT\":"+tbObat.getValueAt(i,4).toString()+","+
-                                                                "\"JMLOBT\":"+tbObat.getValueAt(i,0).toString()+","+
-                                                                "\"JHO\":"+tbObat.getValueAt(i,5).toString()+","+
+                                                                "\"KDOBT\": \""+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()+"\","+
+                                                                "\"NMOBAT\": \""+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),2).toString()+"\","+
+                                                                "\"SIGNA1OBT\":"+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),3).toString()+","+
+                                                                "\"SIGNA2OBT\":"+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),4).toString()+","+
+                                                                "\"JMLOBT\":"+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),0).toString()+","+
+                                                                "\"JHO\":"+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),5).toString()+","+
                                                                 "\"CatKhsObt\":\"OK\""+
                                                             "}";
                                                 System.out.println("Obat Non Racikan : "+requestJson);
@@ -1056,7 +1058,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                                                 System.out.println("Respon JSON : "+nameNode);
                                                 if(nameNode.path("code").asText().equals("200")) {
                                                     if(Sequel.menyimpantf("bridging_resep_apotek_bpjs_nonracikan","?,?,?,?,?,?,?","Obat Non Racikan BPJS",7,new String[]{
-                                                        response.path("noApotik").asText(),NoResep.getText(),tbObat.getValueAt(i,1).toString(),tbObat.getValueAt(i,3).toString(),tbObat.getValueAt(i,4).toString(),tbObat.getValueAt(i,0).toString(),tbObat.getValueAt(i,5).toString()
+                                                        response.path("noApotik").asText(),NoResep.getText(),tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),1).toString(),tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),3).toString(),tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),4).toString(),tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),0).toString(),tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),5).toString()
                                                     })==false) {
                                                         sukses=false;
                                                     }
@@ -1077,20 +1079,20 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                                     URL = link + "/obatracikan/v3/insert";
                                     System.out.println("URL : "+URL);
                                     for(i=0;i<tbDetailObatRacikan.getRowCount();i++){
-                                        if(Valid.SetAngka(tbDetailObatRacikan.getValueAt(i,1).toString())>0){
+                                        if(Valid.SetAngka(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),1).toString())>0){
                                             try {
                                                 requestJson = "{"+
                                                                 "\"NOSJP\":\""+response.path("noApotik").asText()+"\","+
                                                                 "\"NORESEP\":\""+NoResep.getText().substring(NoResep.getText().length()-5)+"\","+
-                                                                "\"JNSROBT\":\""+(tbDetailObatRacikan.getValueAt(i,0).toString().length()==1?"R.0"+tbDetailObatRacikan.getValueAt(i,0).toString():"R."+tbDetailObatRacikan.getValueAt(i,0).toString())+"\","+
-                                                                "\"KDOBT\":\""+tbDetailObatRacikan.getValueAt(i,2).toString()+"\","+
-                                                                "\"NMOBAT\":\""+tbDetailObatRacikan.getValueAt(i,3).toString()+"\","+
-                                                                "\"SIGNA1OBT\":"+tbDetailObatRacikan.getValueAt(i,4).toString()+","+
-                                                                "\"SIGNA2OBT\":"+tbDetailObatRacikan.getValueAt(i,5).toString()+","+
-                                                                "\"PERMINTAAN\":"+tbDetailObatRacikan.getValueAt(i,1).toString()+","+
-                                                                "\"JMLOBT\":"+tbDetailObatRacikan.getValueAt(i,1).toString()+","+
-                                                                "\"JHO\":"+tbDetailObatRacikan.getValueAt(i,6).toString()+","+
-                                                                "\"CatKhsObt\":\"RACIKAN "+tbDetailObatRacikan.getValueAt(i,0).toString()+"\""+
+                                                                "\"JNSROBT\":\""+(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),0).toString().length()==1?"R.0"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),0).toString():"R."+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),0).toString())+"\","+
+                                                                "\"KDOBT\":\""+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),2).toString()+"\","+
+                                                                "\"NMOBAT\":\""+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),3).toString()+"\","+
+                                                                "\"SIGNA1OBT\":"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),4).toString()+","+
+                                                                "\"SIGNA2OBT\":"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),5).toString()+","+
+                                                                "\"PERMINTAAN\":"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),1).toString()+","+
+                                                                "\"JMLOBT\":"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),1).toString()+","+
+                                                                "\"JHO\":"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),6).toString()+","+
+                                                                "\"CatKhsObt\":\"RACIKAN "+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),0).toString()+"\""+
                                                             "}";
                                                 System.out.println("Obat Racikan : "+requestJson);
                                                 requestEntity = new HttpEntity(requestJson, headers);
@@ -1099,9 +1101,9 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                                                 System.out.println("Respon JSON : "+nameNode);
                                                 if(nameNode.path("code").asText().equals("200")) {
                                                     if(Sequel.menyimpantf("bridging_resep_apotek_bpjs_racikan","?,?,?,?,?,?,?,?,?","Obat Racikan",9,new String[]{
-                                                        response.path("noApotik").asText(),(tbDetailObatRacikan.getValueAt(i,0).toString().length()==1?"R.0"+tbDetailObatRacikan.getValueAt(i,0).toString():"R."+tbDetailObatRacikan.getValueAt(i,0).toString()),NoResep.getText(),
-                                                        tbDetailObatRacikan.getValueAt(i,2).toString(),tbDetailObatRacikan.getValueAt(i,4).toString(),tbDetailObatRacikan.getValueAt(i,5).toString(),tbDetailObatRacikan.getValueAt(i,1).toString(),tbDetailObatRacikan.getValueAt(i,1).toString(),
-                                                        tbDetailObatRacikan.getValueAt(i,6).toString()
+                                                        response.path("noApotik").asText(),(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),0).toString().length()==1?"R.0"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),0).toString():"R."+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),0).toString()),NoResep.getText(),
+                                                        tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),2).toString(),tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),4).toString(),tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),5).toString(),tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),1).toString(),tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),1).toString(),
+                                                        tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),6).toString()
                                                     })==false) {
                                                         sukses=false;
                                                     }
@@ -1143,14 +1145,14 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                                 row2=tbObat.getRowCount();
                                 for(r=0;r<row2;r++){
                                     try {
-                                        Double piutang=Valid.SetAngka(tbObat.getValueAt(r,6).toString());
+                                        Double piutang=Valid.SetAngka(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),6).toString());
                                         if(piutang>0){
-                                            Double totalpiutang=piutang*Valid.SetAngka(tbObat.getValueAt(r,8).toString());
-                                            if(Sequel.menyimpantf2("detailpiutang","'"+nopiutang+"','"+tbObat.getValueAt(r,11).toString()+"','"+tbObat.getValueAt(r,12).toString()+"','"+tbObat.getValueAt(r,8).toString()+"','"+tbObat.getValueAt(r,7).toString()+"',"+
-                                                    "'"+piutang+"','"+totalpiutang+"','0','0','"+totalpiutang+"','"+tbObat.getValueAt(r,13).toString()+"','"+tbObat.getValueAt(r,14).toString()+"','"+tbObat.getValueAt(r,10).toString()+"'","Obat/BHP/Alkes"
+                                            Double totalpiutang=piutang*Valid.SetAngka(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),8).toString());
+                                            if(Sequel.menyimpantf2("detailpiutang","'"+nopiutang+"','"+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),11).toString()+"','"+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),12).toString()+"','"+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),8).toString()+"','"+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),7).toString()+"',"+
+                                                    "'"+piutang+"','"+totalpiutang+"','0','0','"+totalpiutang+"','"+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),13).toString()+"','"+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),14).toString()+"','"+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),10).toString()+"'","Obat/BHP/Alkes"
                                                 )==true){
-                                                    Trackobat.catatRiwayat(tbObat.getValueAt(r,11).toString(),0,piutang,"Piutang",akses.getkode(),kdgudang.getText(),"Simpan","","",nopiutang+" "+TPasien.getText());
-                                                    Sequel.menyimpan("gudangbarang","'"+tbObat.getValueAt(r,11).toString()+"','"+kdgudang.getText()+"','-"+piutang+"','',''","stok=stok-'"+piutang+"'","kode_brng='"+tbObat.getValueAt(r,11).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='' and no_faktur=''");
+                                                    Trackobat.catatRiwayat(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),11).toString(),0,piutang,"Piutang",akses.getkode(),kdgudang.getText(),"Simpan","","",nopiutang+" "+TPasien.getText());
+                                                    Sequel.menyimpan("gudangbarang","'"+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),11).toString()+"','"+kdgudang.getText()+"','-"+piutang+"','',''","stok=stok-'"+piutang+"'","kode_brng='"+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),11).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='' and no_faktur=''");
                                             }else{
                                             sukses=false;
                                             }
@@ -1164,14 +1166,14 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                                     row2=tbDetailObatRacikan.getRowCount();
                                     for(r=0;r<row2;r++){
                                         try {
-                                            Double piutang=Valid.SetAngka(tbDetailObatRacikan.getValueAt(r,7).toString());
+                                            Double piutang=Valid.SetAngka(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),7).toString());
                                             if(piutang>0){
-                                                Double totalpiutang=piutang*Valid.SetAngka(tbDetailObatRacikan.getValueAt(r,9).toString());
-                                                if(Sequel.menyimpantf2("detailpiutang","'"+nopiutang+"','"+tbDetailObatRacikan.getValueAt(r,11).toString()+"','"+tbDetailObatRacikan.getValueAt(r,12).toString()+"','"+tbDetailObatRacikan.getValueAt(r,9).toString()+"','"+tbDetailObatRacikan.getValueAt(r,8).toString()+"','"+piutang+"',"+
-                                                        "'"+totalpiutang+"','0','0','"+totalpiutang+"','"+tbDetailObatRacikan.getValueAt(r,13).toString()+"','"+tbDetailObatRacikan.getValueAt(r,14).toString()+"','"+tbDetailObatRacikan.getValueAt(r,4).toString()+"x"+tbDetailObatRacikan.getValueAt(r,5).toString()+"'","Obat/BHP/Alkes"
+                                                Double totalpiutang=piutang*Valid.SetAngka(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),9).toString());
+                                                if(Sequel.menyimpantf2("detailpiutang","'"+nopiutang+"','"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),11).toString()+"','"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),12).toString()+"','"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),9).toString()+"','"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),8).toString()+"','"+piutang+"',"+
+                                                        "'"+totalpiutang+"','0','0','"+totalpiutang+"','"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),13).toString()+"','"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),14).toString()+"','"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),4).toString()+"x"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),5).toString()+"'","Obat/BHP/Alkes"
                                                     )==true){
-                                                    Trackobat.catatRiwayat(tbDetailObatRacikan.getValueAt(r,11).toString(),0,piutang,"Piutang",akses.getkode(),kdgudang.getText(),"Simpan","","",nopiutang+" "+nopiutang+" "+TPasien.getText());
-                                                    Sequel.menyimpan("gudangbarang","'"+tbDetailObatRacikan.getValueAt(r,11).toString()+"','"+kdgudang.getText()+"','-"+piutang+"','',''","stok=stok-'"+piutang+"'","kode_brng='"+tbDetailObatRacikan.getValueAt(r,11).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='' and no_faktur=''");
+                                                    Trackobat.catatRiwayat(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),11).toString(),0,piutang,"Piutang",akses.getkode(),kdgudang.getText(),"Simpan","","",nopiutang+" "+nopiutang+" "+TPasien.getText());
+                                                    Sequel.menyimpan("gudangbarang","'"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),11).toString()+"','"+kdgudang.getText()+"','-"+piutang+"','',''","stok=stok-'"+piutang+"'","kode_brng='"+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),11).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='' and no_faktur=''");
                                                 }else{
                                                 sukses=false;
                                                 }
@@ -1302,7 +1304,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                                 fileWriter = new FileWriter(file);
                                 StringBuilder iyembuilder = new StringBuilder();
                                 for(i=0;i<tbObat.getRowCount();i++){
-                                    iyembuilder.append("{\"Jml\":\"").append(tbObat.getValueAt(i,0).toString()).append("\",\"KodeBarang\":\"").append(tbObat.getValueAt(i,11).toString()).append("\",\"NamaBarang\":\"").append(tbObat.getValueAt(i,2).toString()).append("\",\"AturanPakai\":\"").append(tbObat.getValueAt(i,3).toString()).append("x").append(tbObat.getValueAt(i,4).toString()).append("\"},");
+                                    iyembuilder.append("{\"Jml\":\"").append(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),0).toString()).append("\",\"KodeBarang\":\"").append(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),11).toString()).append("\",\"NamaBarang\":\"").append(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),2).toString()).append("\",\"AturanPakai\":\"").append(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),3).toString()).append("x").append(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(i),4).toString()).append("\"},");
                                 }
 
                                 if (iyembuilder.length() > 0) {
@@ -1319,7 +1321,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                                 fileWriter = new FileWriter(file);
                                 iyembuilder = new StringBuilder();
                                 for(i=0;i<tbObatRacikan.getRowCount();i++){
-                                    iyembuilder.append("{\"No\":\"").append(tbObatRacikan.getValueAt(i,0).toString()).append("\",\"NamaRacikan\":\"").append(tbObatRacikan.getValueAt(i,1).toString()).append("\",\"KodeRacik\":\"").append(tbObatRacikan.getValueAt(i,2).toString()).append("\",\"MetodeRacik\":\"").append(tbObatRacikan.getValueAt(i,3).toString()).append("\",\"JmlRacik\":\"").append(tbObatRacikan.getValueAt(i,4).toString()).append("\",\"AturanPakai\":\"").append(tbObatRacikan.getValueAt(i,5).toString()).append("\",\"Keterangan\":\"").append(tbObatRacikan.getValueAt(i,6).toString()).append("\"},");
+                                    iyembuilder.append("{\"No\":\"").append(tabModeObatRacikan.getValueAt(tbObatRacikan.convertRowIndexToModel(i),0).toString()).append("\",\"NamaRacikan\":\"").append(tabModeObatRacikan.getValueAt(tbObatRacikan.convertRowIndexToModel(i),1).toString()).append("\",\"KodeRacik\":\"").append(tabModeObatRacikan.getValueAt(tbObatRacikan.convertRowIndexToModel(i),2).toString()).append("\",\"MetodeRacik\":\"").append(tabModeObatRacikan.getValueAt(tbObatRacikan.convertRowIndexToModel(i),3).toString()).append("\",\"JmlRacik\":\"").append(tabModeObatRacikan.getValueAt(tbObatRacikan.convertRowIndexToModel(i),4).toString()).append("\",\"AturanPakai\":\"").append(tabModeObatRacikan.getValueAt(tbObatRacikan.convertRowIndexToModel(i),5).toString()).append("\",\"Keterangan\":\"").append(tabModeObatRacikan.getValueAt(tbObatRacikan.convertRowIndexToModel(i),6).toString()).append("\"},");
                                 }
 
                                 if (iyembuilder.length() > 0) {
@@ -1336,7 +1338,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                                 fileWriter = new FileWriter(file);
                                 iyembuilder = new StringBuilder();
                                 for(i=0;i<tbDetailObatRacikan.getRowCount();i++){
-                                    iyembuilder.append("{\"No\":\"").append(tbDetailObatRacikan.getValueAt(i,0).toString()).append("\",\"Jml\":\"").append(tbDetailObatRacikan.getValueAt(i,1).toString()).append("\",\"KodeBarang\":\"").append(tbDetailObatRacikan.getValueAt(i,11).toString()).append("\",\"NamaBarang\":\"").append(tbDetailObatRacikan.getValueAt(i,3).toString()).append("\"},");
+                                    iyembuilder.append("{\"No\":\"").append(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),0).toString()).append("\",\"Jml\":\"").append(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),1).toString()).append("\",\"KodeBarang\":\"").append(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),11).toString()).append("\",\"NamaBarang\":\"").append(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(i),3).toString()).append("\"},");
                                 }
 
                                 if (iyembuilder.length() > 0) {
@@ -1412,10 +1414,10 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                 if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)||(evt.getKeyCode()==KeyEvent.VK_RIGHT)){
                     i=tbDetailObatRacikan.getSelectedColumn();
                     if((i==4)||(i==5)||(i==6)){
-                        Double signasatu=Valid.SetAngka(tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),4).toString());
-                        Double signadua=Valid.SetAngka(tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),5).toString());
-                        Double hari=Valid.SetAngka(tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),6).toString());
-                        tbDetailObatRacikan.setValueAt((signadua*signasatu*hari),tbDetailObatRacikan.getSelectedRow(),1);
+                        Double signasatu=Valid.SetAngka(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getSelectedRow()),4).toString());
+                        Double signadua=Valid.SetAngka(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getSelectedRow()),5).toString());
+                        Double hari=Valid.SetAngka(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getSelectedRow()),6).toString());
+                        tabModeDetailObatRacikan.setValueAt((signadua*signasatu*hari),tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getSelectedRow()),1);
                     }else if(i==7){
                         if(JADIKANPIUTANGAPOTEKBPJS.equals("yes")){
                             sisacari=0;
@@ -1423,7 +1425,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                                 psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                                 try {
                                     psstok.setString(1,kdgudang.getText());
-                                    psstok.setString(2,tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),11).toString());
+                                    psstok.setString(2,tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getSelectedRow()),11).toString());
                                     rsstok=psstok.executeQuery();
                                     if(rsstok.next()){
                                         sisacari=rsstok.getDouble(1);
@@ -1442,7 +1444,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                             } catch (Exception e) {
                                 System.out.println("Notif : "+e);
                             }
-                            tbDetailObatRacikan.setValueAt(sisacari,tbDetailObatRacikan.getSelectedRow(),10);
+                            tabModeDetailObatRacikan.setValueAt(sisacari,tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getSelectedRow()),10);
                         }
                     }
                 }
@@ -1461,10 +1463,10 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
             if(tbDetailObatRacikan.getSelectedRow()!= -1){
                 i=tbDetailObatRacikan.getSelectedColumn();
                 if((i==4)||(i==5)||(i==6)){
-                    Double signasatu=Valid.SetAngka(tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),4).toString());
-                    Double signadua=Valid.SetAngka(tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),5).toString());
-                    Double hari=Valid.SetAngka(tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),6).toString());
-                    tbDetailObatRacikan.setValueAt((signadua*signasatu*hari),tbDetailObatRacikan.getSelectedRow(),1);
+                    Double signasatu=Valid.SetAngka(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getSelectedRow()),4).toString());
+                    Double signadua=Valid.SetAngka(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getSelectedRow()),5).toString());
+                    Double hari=Valid.SetAngka(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getSelectedRow()),6).toString());
+                    tabModeDetailObatRacikan.setValueAt((signadua*signasatu*hari),tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getSelectedRow()),1);
                 }else if(i==7){
                     if(JADIKANPIUTANGAPOTEKBPJS.equals("yes")){
                         sisacari=0;
@@ -1472,7 +1474,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                             psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                             try {
                                 psstok.setString(1,kdgudang.getText());
-                                psstok.setString(2,tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),11).toString());
+                                psstok.setString(2,tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getSelectedRow()),11).toString());
                                 rsstok=psstok.executeQuery();
                                 if(rsstok.next()){
                                     sisacari=rsstok.getDouble(1);
@@ -1491,7 +1493,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
                         } catch (Exception e) {
                             System.out.println("Notif : "+e);
                         }
-                        tbDetailObatRacikan.setValueAt(sisacari,tbDetailObatRacikan.getSelectedRow(),10);
+                        tabModeDetailObatRacikan.setValueAt(sisacari,tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getSelectedRow()),10);
                     }
                 }
             }
@@ -1523,14 +1525,14 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(TabRawat.getSelectedIndex()==0){
             if(tbObat.getSelectedRow()!=-1){
-                int reply = JOptionPane.showConfirmDialog(rootPane,"Yakin mau dihapus obat "+tbObat.getValueAt(tbObat.getSelectedRow(),2)+"...?","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                int reply = JOptionPane.showConfirmDialog(rootPane,"Yakin mau dihapus obat "+tabModeobat.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2)+"...?","Konfirmasi",JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
                     tabModeobat.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
                 }
             }
         }else if(TabRawat.getSelectedIndex()==1){
             if(tbDetailObatRacikan.getSelectedRow()!=-1){
-                int reply = JOptionPane.showConfirmDialog(rootPane,"Yakin mau dihapus obat "+tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(), 3)+"...?","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                int reply = JOptionPane.showConfirmDialog(rootPane,"Yakin mau dihapus obat "+tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getSelectedRow()), 3)+"...?","Konfirmasi",JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
                     tabModeDetailObatRacikan.removeRow(tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getSelectedRow()));
                 }
@@ -1734,8 +1736,11 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         }
 
         try {
+            tbObat.suspendSorting();
             Valid.tabelKosong(tabModeobat);
+            tbObatRacikan.suspendSorting();
             Valid.tabelKosong(tabModeObatRacikan);
+            tbDetailObatRacikan.suspendSorting();
             Valid.tabelKosong(tabModeDetailObatRacikan);
             if(kenaikan>0){
                 psobat=koneksi.prepareStatement(
@@ -2062,6 +2067,9 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
+        tbObat.resumeSorting();
+        tbObatRacikan.resumeSorting();
+        tbDetailObatRacikan.resumeSorting();
     }
 
     private void hitungObat() {
@@ -2070,19 +2078,19 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         row2=tbObat.getRowCount();
         for(r=0;r<row2;r++){
             try {
-                if(Double.parseDouble(tbObat.getValueAt(r,6).toString())>0){
+                if(Double.parseDouble(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),6).toString())>0){
                     try {
-                        y=Math.round(Double.parseDouble(tbObat.getValueAt(r,6).toString())*Double.parseDouble(tbObat.getValueAt(r,8).toString()));
+                        y=Math.round(Double.parseDouble(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),6).toString())*Double.parseDouble(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),8).toString()));
                     } catch (Exception e) {
                         y=0;
                     }
                     ttl=ttl+y;
                     if(JADIKANPIUTANGAPOTEKBPJS.equals("yes")){
-                        Double piutang=Valid.SetAngka(tbObat.getValueAt(r,6).toString());
-                        Double stok=Valid.SetAngka(tbObat.getValueAt(r,9).toString());
+                        Double piutang=Valid.SetAngka(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),6).toString());
+                        Double stok=Valid.SetAngka(tabModeobat.getValueAt(tbObat.convertRowIndexToModel(r),9).toString());
                         if(piutang>stok){
                             JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
-                            tbObat.setValueAt(stok,r,6);
+                            tabModeobat.setValueAt(stok,tbObat.convertRowIndexToModel(r),6);
                         }
                     }
                 }
@@ -2092,19 +2100,19 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         row2=tbDetailObatRacikan.getRowCount();
         for(r=0;r<row2;r++){
             try {
-                if(Double.parseDouble(tbDetailObatRacikan.getValueAt(r,7).toString())>0){
+                if(Double.parseDouble(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),7).toString())>0){
                     try {
-                        y=Math.round(Double.parseDouble(tbDetailObatRacikan.getValueAt(r,7).toString())*Double.parseDouble(tbDetailObatRacikan.getValueAt(r,9).toString()));
+                        y=Math.round(Double.parseDouble(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),7).toString())*Double.parseDouble(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),9).toString()));
                     } catch (Exception e) {
                         y=0;
                     }
                     ttl=ttl+y;
                     if(JADIKANPIUTANGAPOTEKBPJS.equals("yes")){
-                        Double piutang=Valid.SetAngka(tbDetailObatRacikan.getValueAt(r,7).toString());
-                        Double stok=Valid.SetAngka(tbDetailObatRacikan.getValueAt(r,10).toString());
+                        Double piutang=Valid.SetAngka(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),7).toString());
+                        Double stok=Valid.SetAngka(tabModeDetailObatRacikan.getValueAt(tbDetailObatRacikan.convertRowIndexToModel(r),10).toString());
                         if(piutang>stok){
                             JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
-                            tbDetailObatRacikan.setValueAt(stok,r,7);
+                            tabModeDetailObatRacikan.setValueAt(stok,tbDetailObatRacikan.convertRowIndexToModel(r),7);
                         }
                     }
                 }

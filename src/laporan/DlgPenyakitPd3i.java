@@ -476,8 +476,8 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            kdpenyakit.setText(tbAdmin.getValueAt(row,0).toString());
-            nmpenyakit.setText(tbAdmin.getValueAt(row,1).toString());
+            kdpenyakit.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),0).toString());
+            nmpenyakit.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),1).toString());
         }
     }
 

@@ -1403,14 +1403,14 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
         TOut.setText("");
         TIn.setText("");
         if(tbKamIn.getSelectedRow()!= -1){
-            no_inventaris.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
-            nama_barang.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString()+", "+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),2).toString());
-            jenis.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),8).toString());
-            merk.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),4).toString());
-            peminjam.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString());
-            tlp.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),10).toString());
-            TIn.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),11).toString());
-            TOut.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),12).toString());
+            no_inventaris.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),0).toString());
+            nama_barang.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),1).toString()+", "+tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),2).toString());
+            jenis.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),8).toString());
+            merk.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),4).toString());
+            peminjam.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),9).toString());
+            tlp.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),10).toString());
+            TIn.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),11).toString());
+            TOut.setText(tabMode.getValueAt(tbKamIn.convertRowIndexToModel(tbKamIn.getSelectedRow()),12).toString());
         }
     }
 

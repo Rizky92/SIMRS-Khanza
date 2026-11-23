@@ -1444,15 +1444,15 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDataDiet.getSelectedRow()!= -1){
-            TNoRw.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),0).toString());
-            TPasien.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),1).toString());
-            Ruang.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),2).toString());
-            WaktuDiet.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),4).toString());
-            JamDiet.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),5).toString());
-            NmDiet.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),6).toString());
-            Kamar.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),8).toString());
-            KdDiet.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),9).toString());
-            Valid.SetTgl(DTPTgl,tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),3).toString());
+            TNoRw.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),0).toString());
+            TPasien.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),1).toString());
+            Ruang.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),2).toString());
+            WaktuDiet.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),4).toString());
+            JamDiet.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),5).toString());
+            NmDiet.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),6).toString());
+            Kamar.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),8).toString());
+            KdDiet.setText(tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),9).toString());
+            Valid.SetTgl(DTPTgl,tabMode.getValueAt(tbDataDiet.convertRowIndexToModel(tbDataDiet.getSelectedRow()),3).toString());
         }
     }
 

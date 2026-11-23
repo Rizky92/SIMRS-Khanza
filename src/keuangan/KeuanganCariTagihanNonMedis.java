@@ -146,6 +146,7 @@ public class KeuanganCariTagihanNonMedis extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -682,13 +683,13 @@ public class KeuanganCariTagihanNonMedis extends javax.swing.JDialog {
 
     private void MnHapusTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHapusTagihanActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"pilihan data");
             }else{
                 try {
                     ps=koneksi.prepareStatement("select ipsrs_detail_titip_faktur.no_faktur from ipsrs_detail_titip_faktur where ipsrs_detail_titip_faktur.no_tagihan=?");
                     try {
-                       ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+                       ps.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim());
                        rs=ps.executeQuery();
                        while(rs.next()){
                            Sequel.queryu("update ipsrspemesanan set status='Belum Lunas' where no_faktur=?",rs.getString("no_faktur"));
@@ -703,7 +704,7 @@ public class KeuanganCariTagihanNonMedis extends javax.swing.JDialog {
                             ps.close();
                         }
                     }
-                    Sequel.queryu("delete from ipsrs_titip_faktur where no_tagihan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+                    Sequel.queryu("delete from ipsrs_titip_faktur where no_tagihan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim());
                     runBackground(() ->tampil());
                 } catch (Exception e) {
                     System.out.println("Notif : "+e);
@@ -714,10 +715,10 @@ public class KeuanganCariTagihanNonMedis extends javax.swing.JDialog {
 
     private void MnDitagihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDitagihkanActionPerformed
        if(tbDokter.getSelectedRow()> -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"pilihan data");
             }else{
-                Sequel.queryu("update ipsrs_titip_faktur set status='Ditagihkan' where no_tagihan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+                Sequel.queryu("update ipsrs_titip_faktur set status='Ditagihkan' where no_tagihan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim());
                 runBackground(() ->tampil());
             }
         }
@@ -725,20 +726,20 @@ public class KeuanganCariTagihanNonMedis extends javax.swing.JDialog {
 
     private void MnDibayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDibayarActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"pilihan data");
             }else{
-                if(Sequel.cariIsi("select status from ipsrs_titip_faktur where no_tagihan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()).equals("Ditagihkan")){
+                if(Sequel.cariIsi("select status from ipsrs_titip_faktur where no_tagihan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()).equals("Ditagihkan")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     KeuanganHutangNonMedisBelumLunas form=new KeuanganHutangNonMedisBelumLunas(null,false);
                     form.isCek();
-                    form.tampilTagihan2(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                    form.tampilTagihan2(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
                     form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     form.setLocationRelativeTo(internalFrame1);
                     form.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else{
-                    tbDokter.setValueAt("Dibayar",tbDokter.getSelectedRow(),4);
+                    tabMode.setValueAt("Dibayar",tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4);
                     JOptionPane.showMessageDialog(null,"Tagihan sudah dibayar..!!!");
                 }
             }
@@ -747,10 +748,10 @@ public class KeuanganCariTagihanNonMedis extends javax.swing.JDialog {
 
     private void MnDitagihkan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDitagihkan1ActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"pilihan data");
             }else{
-                Sequel.queryu("update ipsrs_titip_faktur set status='Dibayar' where no_tagihan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+                Sequel.queryu("update ipsrs_titip_faktur set status='Dibayar' where no_tagihan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString().trim());
                 runBackground(() ->tampil());
             }
         }

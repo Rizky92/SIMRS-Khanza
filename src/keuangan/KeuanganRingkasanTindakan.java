@@ -792,6 +792,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbRalanDokter.setSortable(false);
         tbRalanDokter.setName("tbRalanDokter"); // NOI18N
         Scroll.setViewportView(tbRalanDokter);
 
@@ -934,6 +935,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
+        tbRalanParamedis.setSortable(false);
         tbRalanParamedis.setName("tbRalanParamedis"); // NOI18N
         Scroll1.setViewportView(tbRalanParamedis);
 
@@ -1076,6 +1078,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbRalanDokterParamedis.setSortable(false);
         tbRalanDokterParamedis.setName("tbRalanDokterParamedis"); // NOI18N
         Scroll2.setViewportView(tbRalanDokterParamedis);
 
@@ -1249,6 +1252,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
         Scroll3.setName("Scroll3"); // NOI18N
         Scroll3.setOpaque(true);
 
+        tbOperasi.setSortable(false);
         tbOperasi.setName("tbOperasi"); // NOI18N
         Scroll3.setViewportView(tbOperasi);
 
@@ -1391,6 +1395,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
         Scroll4.setName("Scroll4"); // NOI18N
         Scroll4.setOpaque(true);
 
+        tbRanapDokter.setSortable(false);
         tbRanapDokter.setName("tbRanapDokter"); // NOI18N
         Scroll4.setViewportView(tbRanapDokter);
 
@@ -1502,6 +1507,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
         Scroll5.setName("Scroll5"); // NOI18N
         Scroll5.setOpaque(true);
 
+        tbRanapParamedis.setSortable(false);
         tbRanapParamedis.setName("tbRanapParamedis"); // NOI18N
         Scroll5.setViewportView(tbRanapParamedis);
 
@@ -1613,6 +1619,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
         Scroll6.setName("Scroll6"); // NOI18N
         Scroll6.setOpaque(true);
 
+        tbRanapDokterParamedis.setSortable(false);
         tbRanapDokterParamedis.setName("tbRanapDokterParamedis"); // NOI18N
         Scroll6.setViewportView(tbRanapDokterParamedis);
 
@@ -1755,6 +1762,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
         Scroll7.setName("Scroll7"); // NOI18N
         Scroll7.setOpaque(true);
 
+        tbRadiologi.setSortable(false);
         tbRadiologi.setName("tbRadiologi"); // NOI18N
         Scroll7.setViewportView(tbRadiologi);
 
@@ -1897,6 +1905,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
         Scroll8.setName("Scroll8"); // NOI18N
         Scroll8.setOpaque(true);
 
+        tbLaborat.setSortable(false);
         tbLaborat.setName("tbLaborat"); // NOI18N
         Scroll8.setViewportView(tbLaborat);
 
@@ -2039,6 +2048,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
         Scroll9.setName("Scroll9"); // NOI18N
         Scroll9.setOpaque(true);
 
+        tbDetailLaborat.setSortable(false);
         tbDetailLaborat.setName("tbDetailLaborat"); // NOI18N
         Scroll9.setViewportView(tbDetailLaborat);
 

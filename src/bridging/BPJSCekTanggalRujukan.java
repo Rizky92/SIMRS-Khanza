@@ -560,13 +560,13 @@ public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TabRawat.getSelectedIndex()==0){
             if(tbBangsal.getSelectedRow()!= -1){
-                if(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),41).toString().equals("")){
+                if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),41).toString().equals("")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     BPJSCekNoRujukanPCare form=new BPJSCekNoRujukanPCare(null,false);
                     form.isCek();
                     form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
                     form.setLocationRelativeTo(internalFrame1);
-                    form.SetRujukan(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),4).toString());
+                    form.SetRujukan(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),4).toString());
                     form.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else{
@@ -579,13 +579,13 @@ public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==1){
             if(tbBangsal2.getSelectedRow()!= -1){
-                if(tbBangsal2.getValueAt(tbBangsal2.getSelectedRow(),41).toString().equals("")){
+                if(tabMode2.getValueAt(tbBangsal2.convertRowIndexToModel(tbBangsal2.getSelectedRow()),41).toString().equals("")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     BPJSCekNoRujukanRS form=new BPJSCekNoRujukanRS(null,false);
                     form.isCek();
                     form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
                     form.setLocationRelativeTo(internalFrame1);
-                    form.SetRujukan(tbBangsal2.getValueAt(tbBangsal2.getSelectedRow(),4).toString());
+                    form.SetRujukan(tabMode2.getValueAt(tbBangsal2.convertRowIndexToModel(tbBangsal2.getSelectedRow()),4).toString());
                     form.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else{

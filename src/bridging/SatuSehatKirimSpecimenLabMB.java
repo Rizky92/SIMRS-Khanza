@@ -617,9 +617,9 @@ public final class SatuSehatKirimSpecimenLabMB extends javax.swing.JDialog {
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&tbObat.getValueAt(i,13).toString().equals("")){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString().equals(""))&&tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString().equals("")){
                     try {
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString());
                         if (idpasien.isBlank()) {
                             System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
                             continue;
@@ -633,29 +633,29 @@ public final class SatuSehatKirimSpecimenLabMB extends javax.swing.JDialog {
                                         "\"identifier\": [" +
                                             "{" +
                                                 "\"system\": \"http://sys-ids.kemkes.go.id/specimen/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,5).toString()+"."+tbObat.getValueAt(i,12).toString()+"\"" +
+                                                "\"value\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString()+"."+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),12).toString()+"\"" +
                                             "}" +
                                         "]," +
                                         "\"status\": \"available\"," +
                                         "\"type\": {" +
                                             "\"coding\": [" +
                                                 "{" +
-                                                    "\"system\": \""+tbObat.getValueAt(i,9).toString()+"\"," +
-                                                    "\"code\": \""+tbObat.getValueAt(i,8).toString()+"\"," +
-                                                    "\"display\": \""+tbObat.getValueAt(i,10).toString()+"\"" +
+                                                    "\"system\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                    "\"code\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString()+"\"," +
+                                                    "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString()+"\"" +
                                                 "}" +
                                             "]" +
                                         "}," +
                                         "\"subject\": {" +
                                             "\"reference\": \"Patient/"+idpasien+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,3).toString()+"\"" +
+                                            "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),3).toString()+"\"" +
                                         "}," +
                                         "\"request\": [" +
                                             "{" +
-                                                "\"reference\": \"ServiceRequest/"+tbObat.getValueAt(i,11).toString()+"\"" +
+                                                "\"reference\": \"ServiceRequest/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString()+"\"" +
                                             "}" +
                                         "]," +
-                                        "\"receivedTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"" +
+                                        "\"receivedTime\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),6).toString().replaceAll(" ","T")+"+07:00\"" +
                                     "}";
                             System.out.println("URL : "+link+"/Specimen");
                             System.out.println("Request JSON : "+json);
@@ -666,7 +666,7 @@ public final class SatuSehatKirimSpecimenLabMB extends javax.swing.JDialog {
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.menyimpantf2("satu_sehat_specimen_lab_mb","?,?,?,?","No.Order",4,new String[]{
-                                    tbObat.getValueAt(i,5).toString(),tbObat.getValueAt(i,14).toString(),tbObat.getValueAt(i,12).toString(),response.asText()
+                                    tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),14).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),12).toString(),response.asText()
                                 })==true){
                                     pengirim.setValueAt(tbObat,response.asText(),i,13);
                                     pengirim.setValueAt(tbObat,false,i,0);
@@ -687,13 +687,13 @@ public final class SatuSehatKirimSpecimenLabMB extends javax.swing.JDialog {
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            tbObat.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbObat.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -705,9 +705,9 @@ public final class SatuSehatKirimSpecimenLabMB extends javax.swing.JDialog {
                     break;
                 }
                 pengirim.incrementIfSelected(tbObat,i);
-                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,13).toString().equals(""))){
+                if(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString().equals("true")&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString().equals(""))&&(!tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString().equals(""))){
                     try {
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString());
                         if (idpasien.isBlank()) {
                             System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
                             continue;
@@ -718,38 +718,38 @@ public final class SatuSehatKirimSpecimenLabMB extends javax.swing.JDialog {
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                             json = "{" +
                                         "\"resourceType\": \"Specimen\"," +
-                                        "\"id\": \""+tbObat.getValueAt(i,13).toString()+"\"," +
+                                        "\"id\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString()+"\"," +
                                         "\"identifier\": [" +
                                             "{" +
                                                 "\"system\": \"http://sys-ids.kemkes.go.id/specimen/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,5).toString()+"."+tbObat.getValueAt(i,12).toString()+"\"" +
+                                                "\"value\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString()+"."+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),12).toString()+"\"" +
                                             "}" +
                                         "]," +
                                         "\"status\": \"available\"," +
                                         "\"type\": {" +
                                             "\"coding\": [" +
                                                 "{" +
-                                                    "\"system\": \""+tbObat.getValueAt(i,9).toString()+"\"," +
-                                                    "\"code\": \""+tbObat.getValueAt(i,8).toString()+"\"," +
-                                                    "\"display\": \""+tbObat.getValueAt(i,10).toString()+"\"" +
+                                                    "\"system\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString()+"\"," +
+                                                    "\"code\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString()+"\"," +
+                                                    "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString()+"\"" +
                                                 "}" +
                                             "]" +
                                         "}," +
                                         "\"subject\": {" +
                                             "\"reference\": \"Patient/"+idpasien+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,3).toString()+"\"" +
+                                            "\"display\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),3).toString()+"\"" +
                                         "}," +
                                         "\"request\": [" +
                                             "{" +
-                                                "\"reference\": \"ServiceRequest/"+tbObat.getValueAt(i,11).toString()+"\"" +
+                                                "\"reference\": \"ServiceRequest/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString()+"\"" +
                                             "}" +
                                         "]," +
-                                        "\"receivedTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"" +
+                                        "\"receivedTime\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),6).toString().replaceAll(" ","T")+"+07:00\"" +
                                     "}";
-                            System.out.println("URL : "+link+"/Specimen/"+tbObat.getValueAt(i,13).toString());
+                            System.out.println("URL : "+link+"/Specimen/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.kirimSmc(link+"/Specimen/"+tbObat.getValueAt(i,13).toString(), HttpMethod.PUT, requestEntity);
+                            json=api.kirimSmc(link+"/Specimen/"+tabMode.getValueAt(tbObat.convertRowIndexToModel(i),13).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             pengirim.setValueAt(tbObat,false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -806,8 +806,8 @@ public final class SatuSehatKirimSpecimenLabMB extends javax.swing.JDialog {
 
     private void ppPilihBelumDikirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihBelumDikirimActionPerformed
         for(i=0;i<tbObat.getRowCount();i++){
-            if (tbObat.getValueAt(i, 13).toString().isBlank()) {
-                tbObat.setValueAt(true,i,0);
+            if (tabMode.getValueAt(tbObat.convertRowIndexToModel(i), 13).toString().isBlank()) {
+                tabMode.setValueAt(true,tbObat.convertRowIndexToModel(i),0);
             }
         }
     }//GEN-LAST:event_ppPilihBelumDikirimActionPerformed
@@ -856,6 +856,7 @@ public final class SatuSehatKirimSpecimenLabMB extends javax.swing.JDialog {
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
     private void tampil() {
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -961,6 +962,7 @@ public final class SatuSehatKirimSpecimenLabMB extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbObat.getRowCount());
+        tbObat.resumeSorting();
     }
 
     public void isCek(){

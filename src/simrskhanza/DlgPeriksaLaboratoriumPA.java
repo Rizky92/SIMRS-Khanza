@@ -685,6 +685,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
         Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll1.setName("Scroll1"); // NOI18N
 
+        tbTarif.setAutoCreateRowSorter(true);
         tbTarif.setName("tbTarif"); // NOI18N
         tbTarif.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -784,6 +785,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbPemeriksaan.setAutoCreateRowSorter(true);
         tbPemeriksaan.setComponentPopupMenu(Popup);
         tbPemeriksaan.setName("tbPemeriksaan"); // NOI18N
         tbPemeriksaan.setRowHeight(150);
@@ -799,7 +801,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         jml=0;
         for(i=0;i<tbPemeriksaan.getRowCount();i++){
-            if(!tbPemeriksaan.getValueAt(i,2).toString().equals("")){
+            if(!tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),2).toString().equals("")){
                 jml++;
             }
         }
@@ -858,8 +860,8 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         jml=0;
-        for(i=0;i<tbPemeriksaan.getRowCount();i++){
-            if(!tbPemeriksaan.getValueAt(i,2).toString().equals("")){
+        for(i=0;i<tabMode.getRowCount();i++){
+            if(!tabMode.getValueAt(i,2).toString().equals("")){
                 jml++;
             }
         }
@@ -877,10 +879,10 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
             Valid.textKosong(Pemeriksaan,"Data Pemeriksaan");
         }else{
             Sequel.queryu("delete from temporary_lab where temp36 = '"+akses.getkode()+"' and temp37 = '"+akses.getalamatip()+"'");
-            for(i=0;i<tbPemeriksaan.getRowCount();i++){
+            for(i=0;i<tabMode.getRowCount();i++){
                 Sequel.menyimpan("temporary_lab","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                    ""+i,tbPemeriksaan.getValueAt(i,0).toString(),tbPemeriksaan.getValueAt(i,1).toString(),tbPemeriksaan.getValueAt(i,2).toString(),
-                    tbPemeriksaan.getValueAt(i,3).toString(),tbPemeriksaan.getValueAt(i,4).toString(),tbPemeriksaan.getValueAt(i,5).toString(),
+                    ""+i,tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,2).toString(),
+                    tabMode.getValueAt(i,3).toString(),tabMode.getValueAt(i,4).toString(),tabMode.getValueAt(i,5).toString(),
                     "","","","","","","","","","","","","","","","","","","","","","","","","","","","","",akses.getkode(),akses.getalamatip()
                 });
             }
@@ -996,11 +998,11 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         try{
             for(i=0;i<tbPemeriksaan.getRowCount();i++){
-                tbPemeriksaan.setValueAt("",i,1);
-                tbPemeriksaan.setValueAt("",i,2);
-                tbPemeriksaan.setValueAt("",i,3);
-                tbPemeriksaan.setValueAt("",i,4);
-                tbPemeriksaan.setValueAt("",i,5);
+                tabMode.setValueAt("",tbPemeriksaan.convertRowIndexToModel(i),1);
+                tabMode.setValueAt("",tbPemeriksaan.convertRowIndexToModel(i),2);
+                tabMode.setValueAt("",tbPemeriksaan.convertRowIndexToModel(i),3);
+                tabMode.setValueAt("",tbPemeriksaan.convertRowIndexToModel(i),4);
+                tabMode.setValueAt("",tbPemeriksaan.convertRowIndexToModel(i),5);
             }
         }catch(Exception ex){
         }
@@ -1032,11 +1034,13 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
     private void tbTarifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTarifMouseClicked
         if(tbTarif.getRowCount()!=0){
             try {
+                tbPemeriksaan.suspendSorting();
                 Valid.tabelKosong(tabMode);
                 tampil();
             } catch (java.lang.NullPointerException e) {
             }
         }
+        tbPemeriksaan.resumeSorting();
     }//GEN-LAST:event_tbTarifMouseClicked
 
     private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
@@ -1106,10 +1110,10 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
             Sequel.queryu("delete from temporary_lab");
             ttl=0;
             for(i=0;i<tbTarif.getRowCount();i++){
-                if(tbTarif.getValueAt(i,0).toString().equals("true")){
-                    item=Double.parseDouble(tbTarif.getValueAt(i,3).toString());
+                if(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),0).toString().equals("true")){
+                    item=Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),3).toString());
                     ttl=ttl+item;
-                    Sequel.menyimpan("temporary_lab","'"+i+"','"+tbTarif.getValueAt(i,1).toString()+"','"+tbTarif.getValueAt(i,2).toString()+"','"+tbTarif.getValueAt(i,3).toString()+"','Pemeriksaan','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Biaya Lab");
+                    Sequel.menyimpan("temporary_lab","'"+i+"','"+tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),1).toString()+"','"+tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),2).toString()+"','"+tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),3).toString()+"','Pemeriksaan','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Biaya Lab");
                 }
             }
             i++;
@@ -1339,7 +1343,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
         try {
             jml2=0;
             for(i2=0;i2<tbPemeriksaan.getRowCount();i2++){
-                if(!tbPemeriksaan.getValueAt(i2,2).toString().equals("")){
+                if(!tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i2),2).toString().equals("")){
                     jml2++;
                 }
             }
@@ -1361,18 +1365,19 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
 
             index2=0;
             for(i2=0;i2<tbPemeriksaan.getRowCount();i2++){
-                if(!tbPemeriksaan.getValueAt(i2,2).toString().equals("")){
-                    nama2[index2]=tbPemeriksaan.getValueAt(i2,0).toString();
-                    diagnosaklinik[index2]=tbPemeriksaan.getValueAt(i2,1).toString();
-                    makroskopik[index2]=tbPemeriksaan.getValueAt(i2,2).toString();
-                    mikroskopik[index2]=tbPemeriksaan.getValueAt(i2,3).toString();
-                    kesimpulan[index2]=tbPemeriksaan.getValueAt(i2,4).toString();
-                    kesan[index2]=tbPemeriksaan.getValueAt(i2,5).toString();
-                    kode2[index2]=tbPemeriksaan.getValueAt(i2,6).toString();
+                if(!tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i2),2).toString().equals("")){
+                    nama2[index2]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i2),0).toString();
+                    diagnosaklinik[index2]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i2),1).toString();
+                    makroskopik[index2]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i2),2).toString();
+                    mikroskopik[index2]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i2),3).toString();
+                    kesimpulan[index2]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i2),4).toString();
+                    kesan[index2]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i2),5).toString();
+                    kode2[index2]=tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i2),6).toString();
                     index2++;
                 }
             }
 
+            tbPemeriksaan.suspendSorting();
             Valid.tabelKosong(tabMode);
 
             for(i2=0;i2<jml2;i2++){
@@ -1382,14 +1387,15 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
             }
 
             for(i2=0;i2<tbTarif.getRowCount();i2++){
-                if(tbTarif.getValueAt(i2,0).toString().equals("true")){
-                    tabMode.addRow(new Object[]{tbTarif.getValueAt(i2,2).toString(),"","","","","",tbTarif.getValueAt(i2,1).toString()});
+                if(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i2),0).toString().equals("true")){
+                    tabMode.addRow(new Object[]{tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i2),2).toString(),"","","","","",tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i2),1).toString()});
                 }
             }
         } catch (Exception e) {
             System.out.println("Error Detail : "+e);
         }
 
+        tbPemeriksaan.resumeSorting();
     }
 
     private void tampil(String order) {
@@ -1397,8 +1403,8 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
             Valid.tabelKosong(tabMode);
 
             for(i2=0;i2<tbTarif.getRowCount();i2++){
-                if(tbTarif.getValueAt(i2,0).toString().equals("true")){
-                    tabMode.addRow(new Object[]{tbTarif.getValueAt(i2,2).toString(),"","","","","",tbTarif.getValueAt(i2,1).toString()});
+                if(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i2),0).toString().equals("true")){
+                    tabMode.addRow(new Object[]{tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i2),2).toString(),"","","","","",tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i2),1).toString()});
                 }
             }
         } catch (Exception e) {
@@ -1492,7 +1498,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
     public void isReset(){
         jml=tbTarif.getRowCount();
         for(i=0;i<jml;i++){
-            tbTarif.setValueAt(false,i,0);
+            tabMode2.setValueAt(false,tbTarif.convertRowIndexToModel(i),0);
         }
         Valid.tabelKosong(tabMode);
         runBackground(() ->tampiltarif());
@@ -1619,7 +1625,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
         try{
             jml=0;
             for(i=0;i<tbTarif.getRowCount();i++){
-                if(tbTarif.getValueAt(i,0).toString().equals("true")){
+                if(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),0).toString().equals("true")){
                     jml++;
                 }
             }
@@ -1638,22 +1644,23 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
 
             index=0;
             for(i=0;i<tbTarif.getRowCount();i++){
-                if(tbTarif.getValueAt(i,0).toString().equals("true")){
+                if(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),0).toString().equals("true")){
                     pilih[index]=true;
-                    kode[index]=tbTarif.getValueAt(i,1).toString();
-                    nama[index]=tbTarif.getValueAt(i,2).toString();
-                    total[index]=Double.parseDouble(tbTarif.getValueAt(i,3).toString());
-                    bagian_rs[index]=Double.parseDouble(tbTarif.getValueAt(i,4).toString());
-                    bhp[index]=Double.parseDouble(tbTarif.getValueAt(i,5).toString());
-                    tarif_perujuk[index]=Double.parseDouble(tbTarif.getValueAt(i,6).toString());
-                    tarif_tindakan_dokter[index]=Double.parseDouble(tbTarif.getValueAt(i,7).toString());
-                    tarif_tindakan_petugas[index]=Double.parseDouble(tbTarif.getValueAt(i,8).toString());
-                    kso[index]=Double.parseDouble(tbTarif.getValueAt(i,9).toString());
-                    menejemen[index]=Double.parseDouble(tbTarif.getValueAt(i,10).toString());
+                    kode[index]=tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),1).toString();
+                    nama[index]=tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),2).toString();
+                    total[index]=Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),3).toString());
+                    bagian_rs[index]=Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),4).toString());
+                    bhp[index]=Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),5).toString());
+                    tarif_perujuk[index]=Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),6).toString());
+                    tarif_tindakan_dokter[index]=Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),7).toString());
+                    tarif_tindakan_petugas[index]=Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),8).toString());
+                    kso[index]=Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),9).toString());
+                    menejemen[index]=Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),10).toString());
                     index++;
                 }
             }
 
+            tbTarif.suspendSorting();
             Valid.tabelKosong(tabMode2);
 
             for(i=0;i<jml;i++){
@@ -1753,6 +1760,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbTarif.resumeSorting();
     }
 
     private void tampiltarif(String order) {
@@ -1829,7 +1837,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
             } else {
                 jml=0;
                 for(i=0;i<tbPemeriksaan.getRowCount();i++){
-                    if(tbPemeriksaan.getValueAt(i,2).toString().equals("")){
+                    if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),2).toString().equals("")){
                         jml++;
                     }
                 }
@@ -1849,7 +1857,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
         } else {
             jml=0;
             for(i=0;i<tbPemeriksaan.getRowCount();i++){
-                if(tbPemeriksaan.getValueAt(i,2).toString().equals("")){
+                if(tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),2).toString().equals("")){
                     jml++;
                 }
             }
@@ -1875,22 +1883,22 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
             Sequel.AutoComitFalse();
             sukses=true;
             for(i=0;i<tbTarif.getRowCount();i++){
-                if(tbTarif.getValueAt(i,0).toString().equals("true")){
+                if(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),0).toString().equals("true")){
                     if(Sequel.menyimpantf2("periksa_lab","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'PA'","Kode Pemeriksaan",16,new String[]{
-                            TNoRw.getText(),KdPtg.getText(),tbTarif.getValueAt(i,1).toString(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
+                            TNoRw.getText(),KdPtg.getText(),tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),1).toString(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
                             CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),KodePerujuk.getText(),
-                            tbTarif.getValueAt(i,4).toString(),tbTarif.getValueAt(i,5).toString(),tbTarif.getValueAt(i,6).toString(),
-                            tbTarif.getValueAt(i,7).toString(),tbTarif.getValueAt(i,8).toString(),tbTarif.getValueAt(i,9).toString(),
-                            tbTarif.getValueAt(i,10).toString(),tbTarif.getValueAt(i,3).toString(),KodePj.getText(),status
+                            tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),4).toString(),tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),5).toString(),tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),6).toString(),
+                            tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),7).toString(),tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),8).toString(),tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),9).toString(),
+                            tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),10).toString(),tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),3).toString(),KodePj.getText(),status
                     })==true){
-                        ttlbhp=ttlbhp+Double.parseDouble(tbTarif.getValueAt(i,5).toString());
-                        ttljmdokter=ttljmdokter+Double.parseDouble(tbTarif.getValueAt(i,7).toString());
-                        ttljmpetugas=ttljmpetugas+Double.parseDouble(tbTarif.getValueAt(i,8).toString());
-                        ttlkso=ttlkso+Double.parseDouble(tbTarif.getValueAt(i,9).toString());
-                        ttlpendapatan=ttlpendapatan+Double.parseDouble(tbTarif.getValueAt(i,3).toString());
-                        ttljasasarana=ttljasasarana+Double.parseDouble(tbTarif.getValueAt(i,4).toString());
-                        ttljmperujuk=ttljmperujuk+Double.parseDouble(tbTarif.getValueAt(i,6).toString());
-                        ttlmenejemen=ttlmenejemen+Double.parseDouble(tbTarif.getValueAt(i,10).toString());
+                        ttlbhp=ttlbhp+Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),5).toString());
+                        ttljmdokter=ttljmdokter+Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),7).toString());
+                        ttljmpetugas=ttljmpetugas+Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),8).toString());
+                        ttlkso=ttlkso+Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),9).toString());
+                        ttlpendapatan=ttlpendapatan+Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),3).toString());
+                        ttljasasarana=ttljasasarana+Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),4).toString());
+                        ttljmperujuk=ttljmperujuk+Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),6).toString());
+                        ttlmenejemen=ttlmenejemen+Double.parseDouble(tabMode2.getValueAt(tbTarif.convertRowIndexToModel(i),10).toString());
                     }else{
                         sukses=false;
                     }
@@ -1899,10 +1907,10 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
 
             if(sukses==true){
                 for(i=0;i<tbPemeriksaan.getRowCount();i++){
-                    if(!tbPemeriksaan.getValueAt(i,2).toString().equals("")){
+                    if(!tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),2).toString().equals("")){
                         if(Sequel.menyimpantf2("detail_periksa_labpa","?,?,?,?,?,?,?,?,?","Pemeriksaan Lab",9,new String[]{
-                                TNoRw.getText(),tbPemeriksaan.getValueAt(i,6).toString(),Valid.SetTgl(Tanggal.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
-                                tbPemeriksaan.getValueAt(i,1).toString(),tbPemeriksaan.getValueAt(i,2).toString(),tbPemeriksaan.getValueAt(i,3).toString(),tbPemeriksaan.getValueAt(i,4).toString(),tbPemeriksaan.getValueAt(i,5).toString()
+                                TNoRw.getText(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),6).toString(),Valid.SetTgl(Tanggal.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
+                                tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),4).toString(),tabMode.getValueAt(tbPemeriksaan.convertRowIndexToModel(i),5).toString()
                             })==false){
                             sukses=false;
                         }

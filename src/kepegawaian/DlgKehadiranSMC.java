@@ -746,6 +746,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
         Scroll2.setName("Scroll2"); // NOI18N
 
+        tbScanLog.setAutoCreateRowSorter(true);
         tbScanLog.setToolTipText("Ubah kolom mode untuk mengoreksi scan masuk/pulang, klik kanan untuk memindahkan scan ke shift hari sebelumnya/berikutnya"); // NOI18N
         tbScanLog.setComponentPopupMenu(PopupScanLog);
         tbScanLog.setName("tbScanLog"); // NOI18N
@@ -2013,6 +2014,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
         kolom.addAll(List.of(KOLOM_REKAP));
 
+        tbKehadiran.suspendSorting();
         tabMode.setDataVector(new Object[0][], kolom.toArray());
         tbKehadiran.getColumnModel().getColumn(0).setPreferredWidth(100);
         tbKehadiran.getColumnModel().getColumn(1).setPreferredWidth(200);
@@ -2026,6 +2028,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         for (int i = 0; i < KOLOM_REKAP.length; i++) {
             tbKehadiran.getColumnModel().getColumn(kolomRekap + i).setPreferredWidth(LEBAR_KOLOM_REKAP[i]);
         }
+        tbKehadiran.resumeSorting();
     }
 
     private Map<String, List<PresensiTersimpan>> loadPresensi(LocalDate awal, LocalDate akhir) throws Exception {
@@ -3587,6 +3590,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
         isLoading = true;
 
+        tbScanLog.suspendSorting();
         tabModeScan.setRowCount(0);
         for (ScanFinger scan : scanDetail) {
             tabModeScan.addRow(new Object[] {
@@ -3599,6 +3603,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         }
 
         isLoading = false;
+        tbScanLog.resumeSorting();
     }
 
     private String detailTable() {

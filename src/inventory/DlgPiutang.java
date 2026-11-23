@@ -1907,17 +1907,17 @@ public class DlgPiutang extends javax.swing.JDialog {
     private void getData() {
        int row=tbDokter.getSelectedRow();
         if(row!= -1){
-            kdbar.setText(tbDokter.getValueAt(row,0).toString());
-            nmbar.setText(tbDokter.getValueAt(row,1).toString());
-            satuanbar.setText(tbDokter.getValueAt(row,2).toString());
-            HrgJual.setText(tbDokter.getValueAt(row,3).toString());
-            Jmljual.setText(tbDokter.getValueAt(row,4).toString());
-            subtotal.setText(tbDokter.getValueAt(row,5).toString());
-            Disc.setText(tbDokter.getValueAt(row,6).toString());
-            Bsrdisc.setText(tbDokter.getValueAt(row,7).toString());
-            Total.setText(tbDokter.getValueAt(row,8).toString());
-            NoBatch.setText(tbDokter.getValueAt(row,9).toString());
-            NoFaktur.setText(tbDokter.getValueAt(row,10).toString());
+            kdbar.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),0).toString());
+            nmbar.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),1).toString());
+            satuanbar.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),2).toString());
+            HrgJual.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),3).toString());
+            Jmljual.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),4).toString());
+            subtotal.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),5).toString());
+            Disc.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),6).toString());
+            Bsrdisc.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),7).toString());
+            Total.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),8).toString());
+            NoBatch.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),9).toString());
+            NoFaktur.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(row),10).toString());
         }
     }
 

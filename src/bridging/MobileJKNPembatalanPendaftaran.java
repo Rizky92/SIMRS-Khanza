@@ -405,7 +405,7 @@ public final class MobileJKNPembatalanPendaftaran extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbJnsPerawatan.getSelectedRow()>-1){
-            Sequel.meghapus("referensi_mobilejkn_bpjs_batal","nomorreferensi",tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
+            Sequel.meghapus("referensi_mobilejkn_bpjs_batal","nomorreferensi",tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
             runBackground(() ->tampil());
         }else{
             JOptionPane.showMessageDialog(null,"Silahkan pilih data yang mau dihapus..!!!");

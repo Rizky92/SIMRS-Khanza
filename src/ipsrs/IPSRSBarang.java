@@ -651,14 +651,14 @@ public final class IPSRSBarang extends javax.swing.JDialog {
             Valid.textKosong(kdjenis,"Jenis Barang");
         }else {
             if(Sequel.mengedittf("ipsrsbarang","kode_brng=?","kode_brng=?,nama_brng=?,kode_sat=?,jenis=?,stok=?,harga=?",7,new String[]{
-                    kode_brng.getText(),nama_brng.getText(),kode_sat.getText(),kdjenis.getText(),stok.getText(),harga.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                    kode_brng.getText(),nama_brng.getText(),kode_sat.getText(),kdjenis.getText(),stok.getText(),harga.getText(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString()
             })==true){
-                tbJnsPerawatan.setValueAt(kode_brng.getText(),tbJnsPerawatan.getSelectedRow(),0);
-                tbJnsPerawatan.setValueAt(nama_brng.getText(),tbJnsPerawatan.getSelectedRow(),1);
-                tbJnsPerawatan.setValueAt(nama_sat.getText(),tbJnsPerawatan.getSelectedRow(),2);
-                tbJnsPerawatan.setValueAt(nmjenis.getText(),tbJnsPerawatan.getSelectedRow(),3);
-                tbJnsPerawatan.setValueAt(Double.parseDouble(stok.getText()),tbJnsPerawatan.getSelectedRow(),4);
-                tbJnsPerawatan.setValueAt(Double.parseDouble(harga.getText()),tbJnsPerawatan.getSelectedRow(),5);
+                tabMode.setValueAt(kode_brng.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0);
+                tabMode.setValueAt(nama_brng.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1);
+                tabMode.setValueAt(nama_sat.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2);
+                tabMode.setValueAt(nmjenis.getText(),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3);
+                tabMode.setValueAt(Double.parseDouble(stok.getText()),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4);
+                tabMode.setValueAt(Double.parseDouble(harga.getText()),tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5);
                 emptTeks();
             }
         }
@@ -1064,12 +1064,12 @@ public final class IPSRSBarang extends javax.swing.JDialog {
 
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
-            kode_brng.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-            nama_brng.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-            nama_sat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-            nmjenis.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-            stok.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
-            harga.setText(Valid.SetAngka6(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString())));
+            kode_brng.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
+            nama_brng.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString());
+            nama_sat.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString());
+            nmjenis.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+            stok.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString());
+            harga.setText(Valid.SetAngka6(Double.parseDouble(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5).toString())));
             kode_sat.setText(Sequel.cariIsi("select ipsrsbarang.kode_sat from ipsrsbarang where ipsrsbarang.kode_brng=?",kode_brng.getText()));
             kdjenis.setText(Sequel.cariIsi("select ipsrsbarang.jenis from ipsrsbarang where ipsrsbarang.kode_brng=?",kode_brng.getText()));
         }

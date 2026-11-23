@@ -430,10 +430,10 @@ public class MasterImunisasi extends javax.swing.JDialog {
         }else{
             if(tbSpesialis.getSelectedRow()> -1){
                 if(Sequel.mengedittf("master_imunisasi","kode_imunisasi=?","kode_imunisasi=?,nama_imunisasi=?",3,new String[]{
-                    TKd.getText(),TNm.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
+                    TKd.getText(),TNm.getText(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString()
                 })==true){
-                    tbSpesialis.setValueAt(TKd.getText(),tbSpesialis.getSelectedRow(),0);
-                    tbSpesialis.setValueAt(TNm.getText(),tbSpesialis.getSelectedRow(),1);
+                    tabMode.setValueAt(TKd.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0);
+                    tabMode.setValueAt(TNm.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1);
                     emptTeks();
                 }
             }
@@ -638,8 +638,8 @@ public class MasterImunisasi extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            TKd.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            TNm.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
+            TKd.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            TNm.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
         }
     }
 

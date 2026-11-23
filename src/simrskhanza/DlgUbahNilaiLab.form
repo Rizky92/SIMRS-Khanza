@@ -579,6 +579,7 @@
           <SubComponents>
             <Component class="widget.Table" name="tbPemeriksaan">
               <Properties>
+                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                 <Property name="name" type="java.lang.String" value="tbPemeriksaan" noResource="true"/>
               </Properties>
             </Component>

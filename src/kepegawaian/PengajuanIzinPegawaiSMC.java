@@ -936,8 +936,8 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if (tbObat.getSelectedRow() >= 0) {
-            if ("Proses Pengajuan".equals(tbObat.getValueAt(tbObat.getSelectedRow(), 14).toString())) {
-                if (Sequel.menghapustfSmc("pengajuan_izin_smc", "no_pengajuan = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())) {
+            if ("Proses Pengajuan".equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 14).toString())) {
+                if (Sequel.menghapustfSmc("pengajuan_izin_smc", "no_pengajuan = ?", tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString())) {
                     tabMode.removeRow(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()));
                     emptTeks();
                 } else {
@@ -975,35 +975,35 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "Maaf, durasi pengambilan izin per hari tidak boleh lebih dari " + pesan + "..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             } else if (Sequel.cariExistsSmc("select * from pengajuan_izin_smc where pengajuan_izin_smc.nik = ? and pengajuan_izin_smc.tmt = ? and pengajuan_izin_smc.tat = ? " +
                 "and pengajuan_izin_smc.izin = ? and pengajuan_izin_smc.tanggal_izin = ? and pengajuan_izin_smc.no_pengajuan != ?", KdPetugas.getText(), tglTMTKerja, tglTATKerja, izin,
-                Valid.getTglSmc(TglIzin), tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()
+                Valid.getTglSmc(TglIzin), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString()
             )) {
                 JOptionPane.showMessageDialog(null, "Maaf, sudah ada pengajuan izin di tanggal yang sama..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             } else {
                 if (tbObat.getSelectedRow() > -1) {
-                    if ("Proses Pengajuan".equals(tbObat.getValueAt(tbObat.getSelectedRow(), 14).toString())) {
+                    if ("Proses Pengajuan".equals(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 14).toString())) {
                         if (Sequel.mengupdatetfSmc("pengajuan_izin_smc", "no_pengajuan = ?, tanggal = ?, tmt = ?, tat = ?, izin = ?, urgensi = ?, tanggal_izin = ?, jam_mulai = ?, jam_akhir = ?, kepentingan = ?, nik_pj = ?",
                             "no_pengajuan = ? and status = 'Proses Pengajuan'", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), tglTMTKerja, tglTATKerja, izin, Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin),
-                            Valid.getJamSmc(Jam1, Menit1, Detik1), Valid.getJamSmc(Jam2, Menit2, Detik2), Kepentingan.getText(), KdPetugasPJ.getText(), tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()
+                            Valid.getJamSmc(Jam1, Menit1, Detik1), Valid.getJamSmc(Jam2, Menit2, Detik2), Kepentingan.getText(), KdPetugasPJ.getText(), tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString()
                         )) {
-                            tbObat.setValueAt(NoPengajuan.getText(), tbObat.getSelectedRow(), 0);
-                            tbObat.setValueAt(Valid.getTglSmc(Tanggal), tbObat.getSelectedRow(), 1);
-                            tbObat.setValueAt(Urgensi.getSelectedItem().toString(), tbObat.getSelectedRow(), 2);
-                            tbObat.setValueAt(Valid.getTglSmc(TglIzin), tbObat.getSelectedRow(), 3);
+                            tabMode.setValueAt(NoPengajuan.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0);
+                            tabMode.setValueAt(Valid.getTglSmc(Tanggal), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1);
+                            tabMode.setValueAt(Urgensi.getSelectedItem().toString(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2);
+                            tabMode.setValueAt(Valid.getTglSmc(TglIzin), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 3);
                             if (Urgensi.getSelectedItem().toString().equals("Tidak Masuk Kerja")) {
-                                tbObat.setValueAt("", tbObat.getSelectedRow(), 4);
-                                tbObat.setValueAt("", tbObat.getSelectedRow(), 5);
+                                tabMode.setValueAt("", tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 4);
+                                tabMode.setValueAt("", tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 5);
                             } else {
-                                tbObat.setValueAt(Valid.getJamSmc(Jam1, Menit1, Detik1), tbObat.getSelectedRow(), 4);
-                                tbObat.setValueAt(Valid.getJamSmc(Jam2, Menit2, Detik2), tbObat.getSelectedRow(), 5);
+                                tabMode.setValueAt(Valid.getJamSmc(Jam1, Menit1, Detik1), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 4);
+                                tabMode.setValueAt(Valid.getJamSmc(Jam2, Menit2, Detik2), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 5);
                             }
-                            tbObat.setValueAt(Kepentingan.getText(), tbObat.getSelectedRow(), 6);
-                            tbObat.setValueAt(String.valueOf(Integer.parseInt(Sisa.getText()) - 1), tbObat.getSelectedRow(), 7);
-                            tbObat.setValueAt(tglTMTKerja, tbObat.getSelectedRow(), 8);
-                            tbObat.setValueAt(tglTATKerja, tbObat.getSelectedRow(), 9);
-                            tbObat.setValueAt(KdPetugasPJ.getText(), tbObat.getSelectedRow(), 10);
-                            tbObat.setValueAt(NmPetugasPJ.getText(), tbObat.getSelectedRow(), 11);
-                            tbObat.setValueAt(departemen, tbObat.getSelectedRow(), 12);
-                            tbObat.setValueAt(bidang, tbObat.getSelectedRow(), 13);
+                            tabMode.setValueAt(Kepentingan.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6);
+                            tabMode.setValueAt(String.valueOf(Integer.parseInt(Sisa.getText()) - 1), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 7);
+                            tabMode.setValueAt(tglTMTKerja, tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 8);
+                            tabMode.setValueAt(tglTATKerja, tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9);
+                            tabMode.setValueAt(KdPetugasPJ.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 10);
+                            tabMode.setValueAt(NmPetugasPJ.getText(), tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11);
+                            tabMode.setValueAt(departemen, tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 12);
+                            tabMode.setValueAt(bidang, tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 13);
                             emptTeks();
                         }
                     } else {
@@ -1259,10 +1259,10 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
 
     private void ppSetujuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSetujuiActionPerformed
         if (tbObat2.getSelectedRow() > -1) {
-            if ("Proses Pengajuan".equals(tbObat2.getValueAt(tbObat2.getSelectedRow(), 14).toString())) {
-                if (Sequel.mengupdatetfSmc("pengajuan_izin_smc", "status = 'Disetujui', normatif = 'Tidak'", "no_pengajuan = ?", tbObat2.getValueAt(tbObat2.getSelectedRow(), 0).toString())) {
-                    tbObat2.setValueAt("Disetujui", tbObat2.getSelectedRow(), 14);
-                    tbObat2.setValueAt("Tidak", tbObat2.getSelectedRow(), 15);
+            if ("Proses Pengajuan".equals(tabMode2.getValueAt(tbObat2.convertRowIndexToModel(tbObat2.getSelectedRow()), 14).toString())) {
+                if (Sequel.mengupdatetfSmc("pengajuan_izin_smc", "status = 'Disetujui', normatif = 'Tidak'", "no_pengajuan = ?", tabMode2.getValueAt(tbObat2.convertRowIndexToModel(tbObat2.getSelectedRow()), 0).toString())) {
+                    tabMode2.setValueAt("Disetujui", tbObat2.convertRowIndexToModel(tbObat2.getSelectedRow()), 14);
+                    tabMode2.setValueAt("Tidak", tbObat2.convertRowIndexToModel(tbObat2.getSelectedRow()), 15);
                     tampil2Smc();
                 }
             }
@@ -1271,10 +1271,10 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
 
     private void ppSetujuiNormatifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSetujuiNormatifActionPerformed
         if (tbObat2.getSelectedRow() > -1) {
-            if ("Proses Pengajuan".equals(tbObat2.getValueAt(tbObat2.getSelectedRow(), 14).toString())) {
-                if (Sequel.mengupdatetfSmc("pengajuan_izin_smc", "status = 'Disetujui', normatif = 'Ya'", "no_pengajuan = ?", tbObat2.getValueAt(tbObat2.getSelectedRow(), 0).toString())) {
-                    tbObat2.setValueAt("Disetujui", tbObat2.getSelectedRow(), 14);
-                    tbObat2.setValueAt("Ya", tbObat2.getSelectedRow(), 15);
+            if ("Proses Pengajuan".equals(tabMode2.getValueAt(tbObat2.convertRowIndexToModel(tbObat2.getSelectedRow()), 14).toString())) {
+                if (Sequel.mengupdatetfSmc("pengajuan_izin_smc", "status = 'Disetujui', normatif = 'Ya'", "no_pengajuan = ?", tabMode2.getValueAt(tbObat2.convertRowIndexToModel(tbObat2.getSelectedRow()), 0).toString())) {
+                    tabMode2.setValueAt("Disetujui", tbObat2.convertRowIndexToModel(tbObat2.getSelectedRow()), 14);
+                    tabMode2.setValueAt("Ya", tbObat2.convertRowIndexToModel(tbObat2.getSelectedRow()), 15);
                     tampil2Smc();
                 }
             }
@@ -1282,9 +1282,9 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_ppSetujuiNormatifActionPerformed
 
     private void ppTolakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTolakActionPerformed
-        if ("Proses Pengajuan".equals(tbObat2.getValueAt(tbObat2.getSelectedRow(), 14).toString())) {
-            if (Sequel.mengupdatetfSmc("pengajuan_izin_smc", "status = 'Ditolak'", "no_pengajuan = ?", tbObat2.getValueAt(tbObat2.getSelectedRow(), 0).toString())) {
-                tbObat2.setValueAt("Ditolak", tbObat2.getSelectedRow(), 14);
+        if ("Proses Pengajuan".equals(tabMode2.getValueAt(tbObat2.convertRowIndexToModel(tbObat2.getSelectedRow()), 14).toString())) {
+            if (Sequel.mengupdatetfSmc("pengajuan_izin_smc", "status = 'Ditolak'", "no_pengajuan = ?", tabMode2.getValueAt(tbObat2.convertRowIndexToModel(tbObat2.getSelectedRow()), 0).toString())) {
+                tabMode2.setValueAt("Ditolak", tbObat2.convertRowIndexToModel(tbObat2.getSelectedRow()), 14);
                 tampil2Smc();
             }
         }
@@ -1483,20 +1483,20 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
 
     private void getData() {
         if (tbObat.getSelectedRow() != -1) {
-            Valid.SetTgl(Tanggal, tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString());
-            NoPengajuan.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
-            Urgensi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString());
-            Valid.SetTgl(TglIzin, tbObat.getValueAt(tbObat.getSelectedRow(), 3).toString());
-            Valid.setJamSmc(Jam1, Menit1, Detik1, tbObat.getValueAt(tbObat.getSelectedRow(), 4).toString());
-            Valid.setJamSmc(Jam2, Menit2, Detik2, tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString());
-            Kepentingan.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString());
-            Sisa.setText(String.valueOf(Integer.parseInt(tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString()) + 1));
-            tglTMTKerja = tbObat.getValueAt(tbObat.getSelectedRow(), 8).toString();
-            tglTATKerja = tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString();
-            KdPetugasPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 10).toString());
-            NmPetugasPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString());
-            departemen = tbObat.getValueAt(tbObat.getSelectedRow(), 12).toString();
-            bidang = tbObat.getValueAt(tbObat.getSelectedRow(), 13).toString();
+            Valid.SetTgl(Tanggal, tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 1).toString());
+            NoPengajuan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString());
+            Urgensi.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 2).toString());
+            Valid.SetTgl(TglIzin, tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 3).toString());
+            Valid.setJamSmc(Jam1, Menit1, Detik1, tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 4).toString());
+            Valid.setJamSmc(Jam2, Menit2, Detik2, tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 5).toString());
+            Kepentingan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 6).toString());
+            Sisa.setText(String.valueOf(Integer.parseInt(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 7).toString()) + 1));
+            tglTMTKerja = tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 8).toString();
+            tglTATKerja = tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 9).toString();
+            KdPetugasPJ.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 10).toString());
+            NmPetugasPJ.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 11).toString());
+            departemen = tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 12).toString();
+            bidang = tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 13).toString();
         }
     }
 
@@ -1537,6 +1537,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbObat.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim();
@@ -1598,6 +1599,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                     LCount1.setText(tbObat.getRowCount() + "");
                     PengajuanIzinPegawaiSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbObat.resumeSorting();
                 }
             }.execute();
         }
@@ -1607,6 +1609,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tbObat2.suspendSorting();
             Valid.tabelKosongSmc(tabMode2);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari2.getText().trim();
@@ -1668,6 +1671,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                     LCount2.setText(tbObat2.getRowCount() + "");
                     PengajuanIzinPegawaiSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbObat2.resumeSorting();
                 }
             }.execute();
         }
@@ -1717,7 +1721,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                 ps.setString(++p, KdPetugas.getText());
                 ps.setString(++p, Urgensi.getSelectedItem().toString());
                 if (tbObat.getSelectedRow() >= 0) {
-                    ps.setString(++p, tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
+                    ps.setString(++p, tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()), 0).toString());
                 }
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {

@@ -202,6 +202,7 @@ public final class DlgLihatPesan extends javax.swing.JDialog {
 
     public void tampil() {
         try{
+            tbPesan.suspendSorting();
             Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement("select * from sms");
             try {
@@ -224,5 +225,6 @@ public final class DlgLihatPesan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbPesan.resumeSorting();
     }
 }

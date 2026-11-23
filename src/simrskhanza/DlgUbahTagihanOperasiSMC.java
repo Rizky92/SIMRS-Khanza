@@ -434,6 +434,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
+        tbtindakan.setAutoCreateRowSorter(true);
         tbtindakan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbtindakan.setName("tbtindakan"); // NOI18N
         tbtindakan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -530,6 +531,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbObat.setAutoCreateRowSorter(true);
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setName("tbObat"); // NOI18N
         tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1593,7 +1595,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         int row2 = tbtindakan.getRowCount();
         for (int r = 0; r < row2; r++) {
-            tbtindakan.setValueAt(false, r, 0);
+            tabMode.setValueAt(false, tbtindakan.convertRowIndexToModel(r), 0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -1724,7 +1726,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
             } else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
                 int row = tbObat.getSelectedRow();
                 if (row != -1) {
-                    tbObat.setValueAt("", row, 0);
+                    tabMode2.setValueAt("", tbObat.convertRowIndexToModel(row), 0);
                 }
             }
         }
@@ -1788,7 +1790,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
                     int row = tbtindakan.getSelectedColumn();
                     if ((row != 0) || (row != 28)) {
                         if (tbtindakan.getSelectedRow() > -1) {
-                            tbtindakan.setValueAt(true, tbtindakan.getSelectedRow(), 0);
+                            tabMode.setValueAt(true, tbtindakan.convertRowIndexToModel(tbtindakan.getSelectedRow()), 0);
                         }
                         TCariPaket.setText("");
                         TCariPaket.requestFocus();
@@ -2641,7 +2643,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
 
         jml = 0;
         for (int i = 0; i < tbtindakan.getRowCount(); i++) {
-            if (tbtindakan.getValueAt(i, 0).toString().equals("true")) {
+            if (tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 0).toString().equals("true")) {
                 jml++;
             }
         }
@@ -2836,36 +2838,36 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
                 ttlbhp = 0;
 
                 for (int i = 0; i < tbtindakan.getRowCount() && sukses; i++) {
-                    if ((Boolean) tbtindakan.getValueAt(i, 0)) {
-                        double biayaOperator1 = ((Number) tbtindakan.getValueAt(i, 4)).doubleValue();
-                        double biayaOperator2 = ((Number) tbtindakan.getValueAt(i, 5)).doubleValue();
-                        double biayaOperator3 = ((Number) tbtindakan.getValueAt(i, 6)).doubleValue();
-                        double biayaAsistenOperator1 = ((Number) tbtindakan.getValueAt(i, 7)).doubleValue();
-                        double biayaAsistenOperator2 = ((Number) tbtindakan.getValueAt(i, 8)).doubleValue();
-                        double biayaAsistenOperator3 = ((Number) tbtindakan.getValueAt(i, 9)).doubleValue();
-                        double biayaInstrumen = ((Number) tbtindakan.getValueAt(i, 10)).doubleValue();
-                        double biayaDokterAnak = ((Number) tbtindakan.getValueAt(i, 11)).doubleValue();
-                        double biayaPerawatResusitas = ((Number) tbtindakan.getValueAt(i, 12)).doubleValue();
-                        double biayaDokterAnestesi = ((Number) tbtindakan.getValueAt(i, 13)).doubleValue();
-                        double biayaAsistenAnestesi = ((Number) tbtindakan.getValueAt(i, 14)).doubleValue();
-                        double biayaAsistenAnestesi2 = ((Number) tbtindakan.getValueAt(i, 15)).doubleValue();
-                        double biayaBidan = ((Number) tbtindakan.getValueAt(i, 16)).doubleValue();
-                        double biayaBidan2 = ((Number) tbtindakan.getValueAt(i, 17)).doubleValue();
-                        double biayaBidan3 = ((Number) tbtindakan.getValueAt(i, 18)).doubleValue();
-                        double biayaPerawatLuar = ((Number) tbtindakan.getValueAt(i, 19)).doubleValue();
-                        double biayaAlat = ((Number) tbtindakan.getValueAt(i, 20)).doubleValue();
-                        double biayaSewaOK = ((Number) tbtindakan.getValueAt(i, 21)).doubleValue();
-                        double biayaAkomodasi = ((Number) tbtindakan.getValueAt(i, 22)).doubleValue();
-                        double biayaBagianRS = ((Number) tbtindakan.getValueAt(i, 23)).doubleValue();
-                        double biayaOmloop = ((Number) tbtindakan.getValueAt(i, 24)).doubleValue();
-                        double biayaOmloop2 = ((Number) tbtindakan.getValueAt(i, 25)).doubleValue();
-                        double biayaOmloop3 = ((Number) tbtindakan.getValueAt(i, 26)).doubleValue();
-                        double biayaOmloop4 = ((Number) tbtindakan.getValueAt(i, 27)).doubleValue();
-                        double biayaOmloop5 = ((Number) tbtindakan.getValueAt(i, 28)).doubleValue();
-                        double biayaSarpras = ((Number) tbtindakan.getValueAt(i, 29)).doubleValue();
-                        double biayaDokterPJAnak = ((Number) tbtindakan.getValueAt(i, 30)).doubleValue();
-                        double biayaDokterUmum = ((Number) tbtindakan.getValueAt(i, 31)).doubleValue();
-                        double total = ((Number) tbtindakan.getValueAt(i, 32)).doubleValue();
+                    if ((Boolean) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 0)) {
+                        double biayaOperator1 = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 4)).doubleValue();
+                        double biayaOperator2 = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 5)).doubleValue();
+                        double biayaOperator3 = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 6)).doubleValue();
+                        double biayaAsistenOperator1 = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 7)).doubleValue();
+                        double biayaAsistenOperator2 = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 8)).doubleValue();
+                        double biayaAsistenOperator3 = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 9)).doubleValue();
+                        double biayaInstrumen = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 10)).doubleValue();
+                        double biayaDokterAnak = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 11)).doubleValue();
+                        double biayaPerawatResusitas = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 12)).doubleValue();
+                        double biayaDokterAnestesi = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 13)).doubleValue();
+                        double biayaAsistenAnestesi = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 14)).doubleValue();
+                        double biayaAsistenAnestesi2 = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 15)).doubleValue();
+                        double biayaBidan = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 16)).doubleValue();
+                        double biayaBidan2 = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 17)).doubleValue();
+                        double biayaBidan3 = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 18)).doubleValue();
+                        double biayaPerawatLuar = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 19)).doubleValue();
+                        double biayaAlat = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 20)).doubleValue();
+                        double biayaSewaOK = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 21)).doubleValue();
+                        double biayaAkomodasi = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 22)).doubleValue();
+                        double biayaBagianRS = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 23)).doubleValue();
+                        double biayaOmloop = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 24)).doubleValue();
+                        double biayaOmloop2 = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 25)).doubleValue();
+                        double biayaOmloop3 = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 26)).doubleValue();
+                        double biayaOmloop4 = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 27)).doubleValue();
+                        double biayaOmloop5 = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 28)).doubleValue();
+                        double biayaSarpras = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 29)).doubleValue();
+                        double biayaDokterPJAnak = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 30)).doubleValue();
+                        double biayaDokterUmum = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 31)).doubleValue();
+                        double total = ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 32)).doubleValue();
 
                         sukses = Sequel.menyimpantfSmc("operasi", "no_rawat, tgl_operasi, jenis_anasthesi, kategori, operator1, operator2, operator3, asisten_operator1, asisten_operator2, asisten_operator3, instrumen, dokter_anak, " +
                             "perawaat_resusitas, dokter_anestesi, asisten_anestesi, asisten_anestesi2, bidan, bidan2, bidan3, perawat_luar, omloop, omloop2, omloop3, omloop4, omloop5, dokter_pjanak, dokter_umum, kode_paket, biayaoperator1, " +
@@ -2874,7 +2876,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
                             "biayasarpras, biaya_dokter_pjanak, biaya_dokter_umum, status", TNoRw.getText(), tglOperasi, jenis.getText(), Kategori.getSelectedItem().toString(), kdoperator1.getText(), kdoperator2.getText(),
                             kdoperator3.getText(), kdasistoperator1.getText(), kdasistoperator2.getText(), kdasistoperator3.getText(), kdInstrumen.getText(), kddranak.getText(), kdprwresust.getText(), kdanestesi.getText(),
                             kdasistanestesi.getText(), kdasistanestesi2.getText(), kdbidan.getText(), kdbidan2.getText(), kdbidan3.getText(), kdprwluar.getText(), kdonloop1.getText(), kdonloop2.getText(), kdonloop3.getText(),
-                            kdonloop4.getText(), kdonloop5.getText(), kdpjanak.getText(), kddrumum.getText(), tbtindakan.getValueAt(i, 1).toString(), String.valueOf(biayaOperator1), String.valueOf(biayaOperator2), String.valueOf(biayaOperator3),
+                            kdonloop4.getText(), kdonloop5.getText(), kdpjanak.getText(), kddrumum.getText(), tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 1).toString(), String.valueOf(biayaOperator1), String.valueOf(biayaOperator2), String.valueOf(biayaOperator3),
                             String.valueOf(biayaAsistenOperator1), String.valueOf(biayaAsistenOperator2), String.valueOf(biayaAsistenOperator3), String.valueOf(biayaInstrumen), String.valueOf(biayaDokterAnak), String.valueOf(biayaPerawatResusitas),
                             String.valueOf(biayaDokterAnestesi), String.valueOf(biayaAsistenAnestesi), String.valueOf(biayaAsistenAnestesi2), String.valueOf(biayaBidan), String.valueOf(biayaBidan2), String.valueOf(biayaBidan3),
                             String.valueOf(biayaPerawatLuar), String.valueOf(biayaAlat), String.valueOf(biayaSewaOK), String.valueOf(biayaAkomodasi), String.valueOf(biayaBagianRS), String.valueOf(biayaOmloop), String.valueOf(biayaOmloop2),
@@ -2891,11 +2893,11 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
                 }
 
                 for (int i = 0; i < tbObat.getRowCount() && sukses; i++) {
-                    double jumlah = Valid.SetAngka(tbObat.getValueAt(i, 0).toString());
+                    double jumlah = Valid.SetAngka(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i), 0).toString());
                     if (jumlah > 0) {
-                        double harga = Valid.SetAngka(tbObat.getValueAt(i, 4).toString());
+                        double harga = Valid.SetAngka(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i), 4).toString());
                         sukses = Sequel.menyimpantfSmc("beri_obat_operasi", "no_rawat, tanggal, kd_obat, hargasatuan, jumlah", TNoRw.getText(), tglOperasi,
-                            tbObat.getValueAt(i, 1).toString(), String.valueOf(harga), String.valueOf(jumlah));
+                            tabMode2.getValueAt(tbObat.convertRowIndexToModel(i), 1).toString(), String.valueOf(harga), String.valueOf(jumlah));
 
                         if (sukses) {
                             ttlbhp += jumlah * harga;
@@ -3510,16 +3512,17 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
             Set<String> kodeTerpilih = new HashSet<>();
 
             for (int i = 0; i < tbtindakan.getRowCount(); i++) {
-                if ((Boolean) tbtindakan.getValueAt(i, 0)) {
+                if ((Boolean) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 0)) {
                     Object[] row = new Object[tbtindakan.getColumnCount()];
                     for (int j = 0; j < row.length; j++) {
-                        row[j] = tbtindakan.getValueAt(i, j);
+                        row[j] = tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), j);
                     }
                     selected.add(row);
-                    kodeTerpilih.add(tbtindakan.getValueAt(i, 1).toString());
+                    kodeTerpilih.add(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 1).toString());
                 }
             }
 
+            tbtindakan.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
 
             new SwingWorker<Void, Object[]>() {
@@ -3598,6 +3601,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
                     hitungTotal();
                     DlgUbahTagihanOperasiSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbtindakan.resumeSorting();
                 }
             }.execute();
         }
@@ -3613,14 +3617,15 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
             Set<String> kodeTerpilih = new HashSet<>();
 
             for (int i = 0; i < tbObat.getRowCount(); i++) {
-                if (Valid.SetAngka(tbObat.getValueAt(i, 0).toString()) > 0) {
+                if (Valid.SetAngka(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i), 0).toString()) > 0) {
                     selected.add(new Object[] {
-                        tbObat.getValueAt(i, 0), tbObat.getValueAt(i, 1), tbObat.getValueAt(i, 2), tbObat.getValueAt(i, 3), tbObat.getValueAt(i, 4), tbObat.getValueAt(i, 5)
+                        tabMode2.getValueAt(tbObat.convertRowIndexToModel(i), 0), tabMode2.getValueAt(tbObat.convertRowIndexToModel(i), 1), tabMode2.getValueAt(tbObat.convertRowIndexToModel(i), 2), tabMode2.getValueAt(tbObat.convertRowIndexToModel(i), 3), tabMode2.getValueAt(tbObat.convertRowIndexToModel(i), 4), tabMode2.getValueAt(tbObat.convertRowIndexToModel(i), 5)
                     });
-                    kodeTerpilih.add(tbObat.getValueAt(i, 1).toString());
+                    kodeTerpilih.add(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i), 1).toString());
                 }
             }
 
+            tbObat.suspendSorting();
             Valid.tabelKosongSmc(tabMode2);
 
             new SwingWorker<Void, Object[]>() {
@@ -3672,6 +3677,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
                     hitungTotal();
                     DlgUbahTagihanOperasiSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses2 = false;
+                    tbObat.resumeSorting();
                 }
             }.execute();
         }
@@ -3680,14 +3686,14 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
     private void hitungTotal() {
         biayatindakan = 0;
         for (int i = 0; i < tbtindakan.getRowCount(); i++) {
-            if ((Boolean) tbtindakan.getValueAt(i, 0)) {
-                biayatindakan += ((Number) tbtindakan.getValueAt(i, 32)).doubleValue();
+            if ((Boolean) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 0)) {
+                biayatindakan += ((Number) tabMode.getValueAt(tbtindakan.convertRowIndexToModel(i), 32)).doubleValue();
             }
         }
 
         biayaobat = 0;
         for (int i = 0; i < tbObat.getRowCount(); i++) {
-            biayaobat += Valid.SetAngka(tbObat.getValueAt(i, 0).toString()) * Valid.SetAngka(tbObat.getValueAt(i, 4).toString());
+            biayaobat += Valid.SetAngka(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i), 0).toString()) * Valid.SetAngka(tabMode2.getValueAt(tbObat.convertRowIndexToModel(i), 4).toString());
         }
 
         LTotal.setText("Total Biaya : " + Valid.SetAngka(biayaobat + biayatindakan));
@@ -3698,14 +3704,14 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
         if (row != -1) {
             int kolom = tbObat.getSelectedColumn();
             if ((kolom == 0) || (kolom == 1)) {
-                if (!tbObat.getValueAt(row, 0).toString().equals("")) {
+                if (!tabMode2.getValueAt(tbObat.convertRowIndexToModel(row), 0).toString().equals("")) {
                     try {
-                        tbObat.setValueAt(Valid.SetAngka2(Double.parseDouble(tbObat.getValueAt(row, 0).toString()) * Double.parseDouble(tbObat.getValueAt(row, 4).toString())), row, 5);
+                        tabMode2.setValueAt(Valid.SetAngka2(Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(row), 0).toString()) * Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(row), 4).toString())), tbObat.convertRowIndexToModel(row), 5);
                     } catch (Exception e) {
-                        tbObat.setValueAt(0, row, 5);
+                        tabMode2.setValueAt(0, tbObat.convertRowIndexToModel(row), 5);
                     }
-                } else if (tbObat.getValueAt(row, 0).toString().equals("")) {
-                    tbObat.setValueAt(0, row, 5);
+                } else if (tabMode2.getValueAt(tbObat.convertRowIndexToModel(row), 0).toString().equals("")) {
+                    tabMode2.setValueAt(0, tbObat.convertRowIndexToModel(row), 5);
                 }
             }
 
@@ -3713,13 +3719,13 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
             y = 0;
             int row2 = tbObat.getRowCount();
             for (int r = 0; r < row2; r++) {
-                if (!tbObat.getValueAt(r, 5).toString().isEmpty()) {
+                if (!tabMode2.getValueAt(tbObat.convertRowIndexToModel(r), 5).toString().isEmpty()) {
                     try {
-                        y = Double.parseDouble(tbObat.getValueAt(r, 5).toString());
+                        y = Double.parseDouble(tabMode2.getValueAt(tbObat.convertRowIndexToModel(r), 5).toString());
                     } catch (Exception e) {
                         y = 0;
                     }
-                } else if (tbObat.getValueAt(r, 5).toString().isEmpty()) {
+                } else if (tabMode2.getValueAt(tbObat.convertRowIndexToModel(r), 5).toString().isEmpty()) {
                     y = 0;
                 }
                 biayaobat = biayaobat + y;
@@ -3730,38 +3736,38 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
     private void getData2() {
         int row = tbtindakan.getSelectedRow();
         if (row != -1) {
-            if (tbtindakan.getValueAt(tbtindakan.getSelectedRow(), 0).toString().equals("true")) {
+            if (tabMode.getValueAt(tbtindakan.convertRowIndexToModel(tbtindakan.getSelectedRow()), 0).toString().equals("true")) {
                 try {
-                    tbtindakan.setValueAt(Double.parseDouble(tbtindakan.getValueAt(row, 4).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 5).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 6).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 7).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 8).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 9).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 10).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 11).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 12).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 13).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 14).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 15).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 16).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 17).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 18).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 19).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 20).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 21).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 22).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 23).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 24).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 25).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 26).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 27).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 28).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 29).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 30).toString()) +
-                        Double.parseDouble(tbtindakan.getValueAt(row, 31).toString()), row, 32);
+                    tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 4).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 5).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 6).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 7).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 8).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 9).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 10).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 11).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 12).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 13).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 14).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 15).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 16).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 17).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 18).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 19).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 20).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 21).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 22).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 23).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 24).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 25).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 26).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 27).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 28).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 29).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 30).toString()) +
+                        Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(row), 31).toString()), tbtindakan.convertRowIndexToModel(row), 32);
                 } catch (Exception e) {
-                    tbtindakan.setValueAt(0, row, 32);
+                    tabMode.setValueAt(0, tbtindakan.convertRowIndexToModel(row), 32);
                 }
             }
 
@@ -3769,10 +3775,10 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
             y = 0;
             int row2 = tbtindakan.getRowCount();
             for (int r = 0; r < row2; r++) {
-                switch (tbtindakan.getValueAt(r, 0).toString()) {
+                switch (tabMode.getValueAt(tbtindakan.convertRowIndexToModel(r), 0).toString()) {
                     case "true":
                         try {
-                            y = Double.parseDouble(tbtindakan.getValueAt(r, 32).toString());
+                            y = Double.parseDouble(tabMode.getValueAt(tbtindakan.convertRowIndexToModel(r), 32).toString());
                         } catch (Exception e) {
                             y = 0;
                         }

@@ -405,7 +405,7 @@ public class DlgDiet extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbSpesialis.getSelectedRow()!= -1){
-            if(Sequel.meghapustf("diet","kd_diet",tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString())==true){
+            if(Sequel.meghapustf("diet","kd_diet",tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString())==true){
                 tabMode.removeRow(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()));
                 emptTeks();
                 LCount.setText(""+tbSpesialis.getRowCount());
@@ -431,10 +431,10 @@ public class DlgDiet extends javax.swing.JDialog {
         }else{
             if(tbSpesialis.getSelectedRow()>-1){
                 if(Sequel.mengedittf("diet","kd_diet=?","kd_diet=?,nama_diet=?",3,new String[]{
-                        TKd.getText(),TNm.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 0).toString()
+                        TKd.getText(),TNm.getText(),tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()), 0).toString()
                     })==true){
-                    tbSpesialis.setValueAt(TKd.getText(),tbSpesialis.getSelectedRow(),0);
-                    tbSpesialis.setValueAt(TNm.getText(),tbSpesialis.getSelectedRow(),1);
+                    tabMode.setValueAt(TKd.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0);
+                    tabMode.setValueAt(TNm.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1);
                     emptTeks();
                 }
             }else{
@@ -628,8 +628,8 @@ public class DlgDiet extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            TKd.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            TNm.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
+            TKd.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            TNm.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
         }
     }
 

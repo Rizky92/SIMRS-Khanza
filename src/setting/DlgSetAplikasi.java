@@ -744,23 +744,23 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     private void getData() {
         int row = tbAdmin.getSelectedRow();
         if (row != -1) {
-            Nm.setText((String) tbAdmin.getValueAt(row, 0));
-            Almt.setText((String) tbAdmin.getValueAt(row, 1));
-            Kota.setText((String) tbAdmin.getValueAt(row, 2));
-            Propinsi.setText((String) tbAdmin.getValueAt(row, 3));
-            YesNo.setSelectedItem((String) tbAdmin.getValueAt(row, 4));
-            Kontak.setText((String) tbAdmin.getValueAt(row, 6));
-            Email.setText((String) tbAdmin.getValueAt(row, 7));
-            kdPPKBPJS.setText((String) tbAdmin.getValueAt(row, 9));
-            kdPPKApotekOnline.setText((String) tbAdmin.getValueAt(row, 10));
-            kdPPKInhealth.setText((String) tbAdmin.getValueAt(row, 11));
-            kdPPKKemenkes.setText((String) tbAdmin.getValueAt(row, 12));
-            BatasEdit2x24jam.setSelectedItem((String) tbAdmin.getValueAt(row, 13));
-            SistemImportKoding.setSelectedItem((String) tbAdmin.getValueAt(row, 14));
-            CutoffGaji.setSelectedItem((String) tbAdmin.getValueAt(row, 15));
+            Nm.setText((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 0));
+            Almt.setText((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 1));
+            Kota.setText((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 2));
+            Propinsi.setText((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 3));
+            YesNo.setSelectedItem((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 4));
+            Kontak.setText((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 6));
+            Email.setText((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 7));
+            kdPPKBPJS.setText((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 9));
+            kdPPKApotekOnline.setText((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 10));
+            kdPPKInhealth.setText((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 11));
+            kdPPKKemenkes.setText((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 12));
+            BatasEdit2x24jam.setSelectedItem((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 13));
+            SistemImportKoding.setSelectedItem((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 14));
+            CutoffGaji.setSelectedItem((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 15));
             try {
-                ((Painter) PhotoGambar).fromBase64((String) tbAdmin.getValueAt(row, 5));
-                ((Painter) PhotoLogo).fromBase64((String) tbAdmin.getValueAt(row, 8));
+                ((Painter) PhotoGambar).fromBase64((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 5));
+                ((Painter) PhotoLogo).fromBase64((String) tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row), 8));
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }

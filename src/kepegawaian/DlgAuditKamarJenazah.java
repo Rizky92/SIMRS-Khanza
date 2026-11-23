@@ -178,6 +178,7 @@ public final class DlgAuditKamarJenazah extends javax.swing.JDialog {
         Scroll.setOpaque(true);
         Scroll.setPreferredSize(new java.awt.Dimension(452, 200));
 
+        tbObat.setSortable(false);
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setName("tbObat"); // NOI18N
         tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -623,7 +624,7 @@ public final class DlgAuditKamarJenazah extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()!= -1){
             if(Sequel.queryu2tf("delete from audit_kamar_jenazah where tanggal=?",1,new String[]{
-                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();
@@ -649,7 +650,7 @@ public final class DlgAuditKamarJenazah extends javax.swing.JDialog {
                 Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),Audit1.getSelectedItem().toString(),
                 Audit2.getSelectedItem().toString(),Audit3.getSelectedItem().toString(),Audit4.getSelectedItem().toString(),
                 Audit5.getSelectedItem().toString(),Audit6.getSelectedItem().toString(),Audit7.getSelectedItem().toString(),
-                Audit8.getSelectedItem().toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                Audit8.getSelectedItem().toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             });
             if(tbObat.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
@@ -1026,16 +1027,16 @@ public final class DlgAuditKamarJenazah extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString().length()>10){
-                Audit1.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-                Audit2.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-                Audit3.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-                Audit4.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-                Audit5.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-                Audit6.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-                Audit7.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-                Audit8.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-                Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            if(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString().length()>10){
+                Audit1.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+                Audit2.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+                Audit3.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+                Audit4.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+                Audit5.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+                Audit6.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+                Audit7.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+                Audit8.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+                Valid.SetTgl(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
             }
         }
     }

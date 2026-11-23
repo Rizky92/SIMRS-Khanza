@@ -916,7 +916,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()!= -1){
             if(Sequel.queryu2tf("delete from data_HAIs where tanggal=? and no_rawat=?",2,new String[]{
-                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()
+                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString()
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();
@@ -968,7 +968,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
                 IVL.getText(),UC.getText(),VAP.getText(),IAD.getText(),PLEB.getText(),ISK.getText(),ILO.getText(),
                 Deku.getSelectedItem().toString(),Sputum.getText(),Darah.getText(),Urine.getText(),Antibiotik.getText(),
                 HAP.getText(),Tania.getText(),Scabies.getText(),
-                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()
+                tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString()
             });
             if(tbObat.getRowCount()!=0){runBackground(() ->tampil());}
             emptTeks();
@@ -1381,28 +1381,28 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            ETT.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            CVL.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            IVL.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            UC.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            VAP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            IAD.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            PLEB.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            ISK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            ILO.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            HAP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            Tania.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            Scabies.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            Deku.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            Sputum.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            Darah.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            Urine.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
-            Antibiotik.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
-            Kamar.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            TNoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TNoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            TPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            ETT.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            CVL.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            IVL.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            UC.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            VAP.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            IAD.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            PLEB.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            ISK.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            ILO.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            HAP.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            Tania.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            Scabies.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+            Deku.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
+            Sputum.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17).toString());
+            Darah.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18).toString());
+            Urine.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19).toString());
+            Antibiotik.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20).toString());
+            Kamar.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22).toString());
+            Valid.SetTgl(Tanggal,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
         }
     }
 

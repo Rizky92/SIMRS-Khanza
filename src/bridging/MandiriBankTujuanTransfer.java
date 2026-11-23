@@ -400,7 +400,7 @@ public final class MandiriBankTujuanTransfer extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbJabatan.getSelectedRow()!= -1){
-            if(Sequel.meghapustf("bank_tujuan_transfer_bankmandiri","kode_bank",tbJabatan.getValueAt(tbJabatan.getSelectedRow(),0).toString())==true){
+            if(Sequel.meghapustf("bank_tujuan_transfer_bankmandiri","kode_bank",tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),0).toString())==true){
                 tabMode.removeRow(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()));
                 emptTeks();
                 LCount.setText(""+tbJabatan.getRowCount());
@@ -426,10 +426,10 @@ public final class MandiriBankTujuanTransfer extends javax.swing.JDialog {
         }else{
             if(tbJabatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("bank_tujuan_transfer_bankmandiri","kode_bank=?","kode_bank=?,nama_bank=?",3,new String[]{
-                        TKd.getText(),TNm.getText(),tbJabatan.getValueAt(tbJabatan.getSelectedRow(), 0).toString()
+                        TKd.getText(),TNm.getText(),tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()), 0).toString()
                     })==true){
-                    tbJabatan.setValueAt(TKd.getText(),tbJabatan.getSelectedRow(),0);
-                    tbJabatan.setValueAt(TNm.getText(),tbJabatan.getSelectedRow(),1);
+                    tabMode.setValueAt(TKd.getText(),tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),0);
+                    tabMode.setValueAt(TNm.getText(),tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),1);
                     emptTeks();
                 }
             }else{
@@ -616,8 +616,8 @@ public final class MandiriBankTujuanTransfer extends javax.swing.JDialog {
 
     private void getData() {
         if(tbJabatan.getSelectedRow()!= -1){
-            TKd.setText(tbJabatan.getValueAt(tbJabatan.getSelectedRow(),0).toString());
-            TNm.setText(tbJabatan.getValueAt(tbJabatan.getSelectedRow(),1).toString());
+            TKd.setText(tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),0).toString());
+            TNm.setText(tabMode.getValueAt(tbJabatan.convertRowIndexToModel(tbJabatan.getSelectedRow()),1).toString());
         }
     }
 

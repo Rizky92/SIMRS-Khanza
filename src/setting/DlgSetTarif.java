@@ -705,18 +705,18 @@ public class DlgSetTarif extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            YesNo1.setSelectedItem(tbAdmin.getValueAt(row,0).toString());
-            YesNo2.setSelectedItem(tbAdmin.getValueAt(row,1).toString());
-            YesNo3.setSelectedItem(tbAdmin.getValueAt(row,2).toString());
-            YesNo4.setSelectedItem(tbAdmin.getValueAt(row,3).toString());
-            YesNo5.setSelectedItem(tbAdmin.getValueAt(row,4).toString());
-            YesNo6.setSelectedItem(tbAdmin.getValueAt(row,5).toString());
-            YesNo7.setSelectedItem(tbAdmin.getValueAt(row,6).toString());
-            YesNo8.setSelectedItem(tbAdmin.getValueAt(row,7).toString());
-            YesNo9.setSelectedItem(tbAdmin.getValueAt(row,8).toString());
-            YesNo10.setSelectedItem(tbAdmin.getValueAt(row,9).toString());
-            YesNo11.setSelectedItem(tbAdmin.getValueAt(row,10).toString());
-            YesNo12.setSelectedItem(tbAdmin.getValueAt(row,11).toString());
+            YesNo1.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),0).toString());
+            YesNo2.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),1).toString());
+            YesNo3.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),2).toString());
+            YesNo4.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),3).toString());
+            YesNo5.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),4).toString());
+            YesNo6.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),5).toString());
+            YesNo7.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),6).toString());
+            YesNo8.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),7).toString());
+            YesNo9.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),8).toString());
+            YesNo10.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),9).toString());
+            YesNo11.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),10).toString());
+            YesNo12.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),11).toString());
         }
     }
 

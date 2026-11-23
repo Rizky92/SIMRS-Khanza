@@ -230,7 +230,7 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbJnsPerawatan.setAutoCreateRowSorter(false);
+        tbJnsPerawatan.setAutoCreateRowSorter(true);
         tbJnsPerawatan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbJnsPerawatan.setName("tbJnsPerawatan"); // NOI18N
         tbJnsPerawatan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -718,21 +718,21 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbJnsPerawatan.getRowCount();i++){
-            if(tbJnsPerawatan.getValueAt(i,0).toString().equals("true")){
+            if(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),0).toString().equals("true")){
                 try {
                     headers = new HttpHeaders();
                     headers.add("X-rs-id",idrs);
                     headers.add("X-pass",api.getHmac());
                     headers.add("Content-Type","application/xml; charset=ISO-8859-1");
                     requestEntity = new HttpEntity(headers);
-                    System.out.println(URL+"/sisrute/hapusdata/"+idrs+"/"+tbJnsPerawatan.getValueAt(i,2).toString().substring(0,4)+"/"+tbJnsPerawatan.getValueAt(i,1).toString().substring(0,4));
-                    requestXML=api.getRest().exchange(URL+"/sisrute/hapusdata/"+idrs+"/"+tbJnsPerawatan.getValueAt(i,1).toString().substring(0,4)+"/"+tbJnsPerawatan.getValueAt(i,2).toString().substring(0,4), HttpMethod.POST, requestEntity, String.class).getBody();
+                    System.out.println(URL+"/sisrute/hapusdata/"+idrs+"/"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),2).toString().substring(0,4)+"/"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),1).toString().substring(0,4));
+                    requestXML=api.getRest().exchange(URL+"/sisrute/hapusdata/"+idrs+"/"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),1).toString().substring(0,4)+"/"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),2).toString().substring(0,4), HttpMethod.POST, requestEntity, String.class).getBody();
                     System.out.println(requestXML);
                     root = mapper.readTree(requestXML);
                     respon=root.path("deskripsi").asText();
                     if(root.path("deskripsi").asText().toLowerCase().contains("berhasil")){
                         Sequel.queryu2("delete from siranap_ketersediaan_kamar where kode_ruang_siranap=? and kelas_ruang_siranap=? and kd_bangsal=? and kelas=?",4,new String[]{
-                            tbJnsPerawatan.getValueAt(i,1).toString(),tbJnsPerawatan.getValueAt(i,2).toString(),tbJnsPerawatan.getValueAt(i,3).toString(),tbJnsPerawatan.getValueAt(i,5).toString()
+                            tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),3).toString(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),5).toString()
                         });
                     }else{
                         JOptionPane.showMessageDialog(null,nameNode.path("deskripsi").asText());
@@ -781,14 +781,14 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
                 headers.add("X-pass",api.getHmac());
                 headers.add("Content-Type","application/xml; charset=ISO-8859-1");
                 requestEntity = new HttpEntity(headers);
-                requestXML=api.getRest().exchange(URL+"/sisrute/hapusdata/"+idrs+"/"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString().substring(0,4)+"/"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString().substring(0,4), HttpMethod.POST, requestEntity, String.class).getBody();
+                requestXML=api.getRest().exchange(URL+"/sisrute/hapusdata/"+idrs+"/"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString().substring(0,4)+"/"+tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString().substring(0,4), HttpMethod.POST, requestEntity, String.class).getBody();
                 System.out.println(requestXML);
                 root = mapper.readTree(requestXML);
                 respon=root.path("deskripsi").asText();
                 if(root.path("response").asText().equals("1")){
                     Sequel.queryu2("delete from siranap_ketersediaan_kamar where kode_ruang_siranap=? and kelas_ruang_siranap=? and kd_bangsal=? and kelas=?",4,new String[]{
-                        tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString(),
-                        tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString()
+                        tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),1).toString(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),2).toString(),
+                        tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5).toString()
                     });
                 }else{
                     JOptionPane.showMessageDialog(null,nameNode.path("deskripsi").asText());
@@ -1157,6 +1157,7 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbJnsPerawatan.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
            ps=koneksi.prepareStatement(
@@ -1199,6 +1200,7 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbJnsPerawatan.getRowCount());
+        tbJnsPerawatan.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1214,14 +1216,14 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
 
     private void getData() {
        if(tbJnsPerawatan.getSelectedRow()!= -1){
-           KdKamar.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-           NmKamar.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
-           Kelas.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
-           Kapasitas.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
-           Tersedia.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
-           TersediaMenunggu.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString());
-           TersediaPria.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString());
-           TersediaWanita.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString());
+           KdKamar.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),3).toString());
+           NmKamar.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),4).toString());
+           Kelas.setSelectedItem(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),5).toString());
+           Kapasitas.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),6).toString());
+           Tersedia.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),7).toString());
+           TersediaMenunggu.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),8).toString());
+           TersediaPria.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),9).toString());
+           TersediaWanita.setText(tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),10).toString());
        }
     }
 

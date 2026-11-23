@@ -5246,34 +5246,34 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
 
     private void getData3() {
         if(tbPermintaanStok.getSelectedRow()!= -1){
-            NoResep=tbPermintaanStok.getValueAt(tbPermintaanStok.getSelectedRow(),0).toString();
-            TglPeresepan=tbPermintaanStok.getValueAt(tbPermintaanStok.getSelectedRow(),1).toString();
-            JamPeresepan=tbPermintaanStok.getValueAt(tbPermintaanStok.getSelectedRow(),2).toString();
-            NoRawat=tbPermintaanStok.getValueAt(tbPermintaanStok.getSelectedRow(),3).toString();
-            NoRM=tbPermintaanStok.getValueAt(tbPermintaanStok.getSelectedRow(),4).toString();
-            Pasien=tbPermintaanStok.getValueAt(tbPermintaanStok.getSelectedRow(),5).toString();
-            DokterPeresep=tbPermintaanStok.getValueAt(tbPermintaanStok.getSelectedRow(),6).toString();
-            Status=tbPermintaanStok.getValueAt(tbPermintaanStok.getSelectedRow(),7).toString();
-            KodeDokter=tbPermintaanStok.getValueAt(tbPermintaanStok.getSelectedRow(),8).toString();
-            Ruang=tbPermintaanStok.getValueAt(tbPermintaanStok.getSelectedRow(),9).toString();
-            KodeRuang=tbPermintaanStok.getValueAt(tbPermintaanStok.getSelectedRow(),10).toString();
+            NoResep=tabMode5.getValueAt(tbPermintaanStok.convertRowIndexToModel(tbPermintaanStok.getSelectedRow()),0).toString();
+            TglPeresepan=tabMode5.getValueAt(tbPermintaanStok.convertRowIndexToModel(tbPermintaanStok.getSelectedRow()),1).toString();
+            JamPeresepan=tabMode5.getValueAt(tbPermintaanStok.convertRowIndexToModel(tbPermintaanStok.getSelectedRow()),2).toString();
+            NoRawat=tabMode5.getValueAt(tbPermintaanStok.convertRowIndexToModel(tbPermintaanStok.getSelectedRow()),3).toString();
+            NoRM=tabMode5.getValueAt(tbPermintaanStok.convertRowIndexToModel(tbPermintaanStok.getSelectedRow()),4).toString();
+            Pasien=tabMode5.getValueAt(tbPermintaanStok.convertRowIndexToModel(tbPermintaanStok.getSelectedRow()),5).toString();
+            DokterPeresep=tabMode5.getValueAt(tbPermintaanStok.convertRowIndexToModel(tbPermintaanStok.getSelectedRow()),6).toString();
+            Status=tabMode5.getValueAt(tbPermintaanStok.convertRowIndexToModel(tbPermintaanStok.getSelectedRow()),7).toString();
+            KodeDokter=tabMode5.getValueAt(tbPermintaanStok.convertRowIndexToModel(tbPermintaanStok.getSelectedRow()),8).toString();
+            Ruang=tabMode5.getValueAt(tbPermintaanStok.convertRowIndexToModel(tbPermintaanStok.getSelectedRow()),9).toString();
+            KodeRuang=tabMode5.getValueAt(tbPermintaanStok.convertRowIndexToModel(tbPermintaanStok.getSelectedRow()),10).toString();
             baris=tbPermintaanStok.getSelectedRow();
         }
     }
 
     private void getData4() {
         if(tbPermintaanResepPulang.getSelectedRow()!= -1){
-            NoResep=tbPermintaanResepPulang.getValueAt(tbPermintaanResepPulang.getSelectedRow(),0).toString();
-            TglPeresepan=tbPermintaanResepPulang.getValueAt(tbPermintaanResepPulang.getSelectedRow(),1).toString();
-            JamPeresepan=tbPermintaanResepPulang.getValueAt(tbPermintaanResepPulang.getSelectedRow(),2).toString();
-            NoRawat=tbPermintaanResepPulang.getValueAt(tbPermintaanResepPulang.getSelectedRow(),3).toString();
-            NoRM=tbPermintaanResepPulang.getValueAt(tbPermintaanResepPulang.getSelectedRow(),4).toString();
-            Pasien=tbPermintaanResepPulang.getValueAt(tbPermintaanResepPulang.getSelectedRow(),5).toString();
-            DokterPeresep=tbPermintaanResepPulang.getValueAt(tbPermintaanResepPulang.getSelectedRow(),6).toString();
-            Status=tbPermintaanResepPulang.getValueAt(tbPermintaanResepPulang.getSelectedRow(),7).toString();
-            KodeDokter=tbPermintaanResepPulang.getValueAt(tbPermintaanResepPulang.getSelectedRow(),8).toString();
-            Ruang=tbPermintaanResepPulang.getValueAt(tbPermintaanResepPulang.getSelectedRow(),9).toString();
-            KodeRuang=tbPermintaanResepPulang.getValueAt(tbPermintaanResepPulang.getSelectedRow(),10).toString();
+            NoResep=tabMode7.getValueAt(tbPermintaanResepPulang.convertRowIndexToModel(tbPermintaanResepPulang.getSelectedRow()),0).toString();
+            TglPeresepan=tabMode7.getValueAt(tbPermintaanResepPulang.convertRowIndexToModel(tbPermintaanResepPulang.getSelectedRow()),1).toString();
+            JamPeresepan=tabMode7.getValueAt(tbPermintaanResepPulang.convertRowIndexToModel(tbPermintaanResepPulang.getSelectedRow()),2).toString();
+            NoRawat=tabMode7.getValueAt(tbPermintaanResepPulang.convertRowIndexToModel(tbPermintaanResepPulang.getSelectedRow()),3).toString();
+            NoRM=tabMode7.getValueAt(tbPermintaanResepPulang.convertRowIndexToModel(tbPermintaanResepPulang.getSelectedRow()),4).toString();
+            Pasien=tabMode7.getValueAt(tbPermintaanResepPulang.convertRowIndexToModel(tbPermintaanResepPulang.getSelectedRow()),5).toString();
+            DokterPeresep=tabMode7.getValueAt(tbPermintaanResepPulang.convertRowIndexToModel(tbPermintaanResepPulang.getSelectedRow()),6).toString();
+            Status=tabMode7.getValueAt(tbPermintaanResepPulang.convertRowIndexToModel(tbPermintaanResepPulang.getSelectedRow()),7).toString();
+            KodeDokter=tabMode7.getValueAt(tbPermintaanResepPulang.convertRowIndexToModel(tbPermintaanResepPulang.getSelectedRow()),8).toString();
+            Ruang=tabMode7.getValueAt(tbPermintaanResepPulang.convertRowIndexToModel(tbPermintaanResepPulang.getSelectedRow()),9).toString();
+            KodeRuang=tabMode7.getValueAt(tbPermintaanResepPulang.convertRowIndexToModel(tbPermintaanResepPulang.getSelectedRow()),10).toString();
             baris=tbPermintaanResepPulang.getSelectedRow();
         }
     }
@@ -7299,12 +7299,12 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                             }
                         }
                         for(i=0;i<tbPermintaanStok.getRowCount();i++){
-                            if(tbPermintaanStok.getValueAt(i,7).toString().equals("Belum Terlayani")){
+                            if(tabMode5.getValueAt(tbPermintaanStok.convertRowIndexToModel(i),7).toString().equals("Belum Terlayani")){
                                 resepbaru++;
                             }
                         }
                         for(i=0;i<tbPermintaanResepPulang.getRowCount();i++){
-                            if(tbPermintaanResepPulang.getValueAt(i,7).toString().equals("Belum Terlayani")){
+                            if(tabMode7.getValueAt(tbPermintaanResepPulang.convertRowIndexToModel(i),7).toString().equals("Belum Terlayani")){
                                 resepbaru++;
                             }
                         }
@@ -7425,6 +7425,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             ceksukses = true;
             i = 0;
             LCount.setText("" + i);
+            tbResepRalan.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim();
@@ -7557,6 +7558,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         });
                     }
                     autoaksi = false;
+                    tbResepRalan.resumeSorting();
                 }
             }.execute();
         }
@@ -7568,6 +7570,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             i = 0;
             LCount.setText("" + i);
+            tbDetailResepRalan.suspendSorting();
             Valid.tabelKosongSmc(tabMode2);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim();
@@ -7727,6 +7730,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                     LCount.setText("" + i);
                     DlgDaftarPermintaanResep.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbDetailResepRalan.resumeSorting();
                 }
             }.execute();
         }
@@ -7738,6 +7742,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             i = 0;
             LCount.setText("" + i);
+            tbResepRanap.suspendSorting();
             Valid.tabelKosongSmc(tabMode3);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim();
@@ -7919,6 +7924,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         });
                     }
                     autoaksi = false;
+                    tbResepRanap.resumeSorting();
                 }
             }.execute();
         }
@@ -7930,6 +7936,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             i = 0;
             LCount.setText("" + i);
+            tbDetailResepRanap.suspendSorting();
             Valid.tabelKosongSmc(tabMode4);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim();
@@ -8121,6 +8128,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                     LCount.setText("" + i);
                     DlgDaftarPermintaanResep.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbDetailResepRanap.resumeSorting();
                 }
             }.execute();
         }
@@ -8132,6 +8140,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             i = 0;
             LCount.setText("" + i);
+            tbPermintaanStok.suspendSorting();
             Valid.tabelKosongSmc(tabMode5);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim();
@@ -8266,6 +8275,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                     LCount.setText("" + i);
                     DlgDaftarPermintaanResep.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbPermintaanStok.resumeSorting();
                 }
             }.execute();
         }
@@ -8277,6 +8287,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             i = 0;
             LCount.setText("" + i);
+            tbDetailPermintaanStok.suspendSorting();
             Valid.tabelKosongSmc(tabMode6);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim();
@@ -8438,6 +8449,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                     LCount.setText("" + i);
                     DlgDaftarPermintaanResep.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbDetailPermintaanStok.resumeSorting();
                 }
             }.execute();
         }
@@ -8449,6 +8461,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             i = 0;
             LCount.setText("" + i);
+            tbPermintaanResepPulang.suspendSorting();
             Valid.tabelKosongSmc(tabMode7);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim();
@@ -8583,6 +8596,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                     LCount.setText("" + i);
                     DlgDaftarPermintaanResep.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbPermintaanResepPulang.resumeSorting();
                 }
             }.execute();
         }
@@ -8594,6 +8608,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             i = 0;
             LCount.setText("" + i);
+            tbDetailPermintaanResepPulang.suspendSorting();
             Valid.tabelKosongSmc(tabMode8);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim();
@@ -8749,6 +8764,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                     LCount.setText("" + i);
                     DlgDaftarPermintaanResep.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbDetailPermintaanResepPulang.resumeSorting();
                 }
             }.execute();
         }

@@ -301,11 +301,11 @@ public final class PCareCariKegiatanKelompok extends javax.swing.JDialog {
         if(tbKamar.getRowCount()>0){
             for(i=0;i<tbKamar.getRowCount();i++){
                 Sequel.menyimpan2("pcare_kegiatan_kelompok","?,?,?,?,?,?,?,?,?,?,?","Edu ID",11,new String[]{
-                    tbKamar.getValueAt(i,10).toString(),tbKamar.getValueAt(i,1).toString(),tbKamar.getValueAt(i,7).toString(),
-                    Valid.SetTgl(tbKamar.getValueAt(i,11)+""),tbKamar.getValueAt(i,12).toString(),
-                    tbKamar.getValueAt(i,13).toString(),tbKamar.getValueAt(i,14).toString(),
-                    tbKamar.getValueAt(i,15).toString(),tbKamar.getValueAt(i,16).toString(),
-                    tbKamar.getValueAt(i,17).toString(),tbKamar.getValueAt(i,18).toString()
+                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),10).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),7).toString(),
+                    Valid.SetTgl(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),11)+""),tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),12).toString(),
+                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),13).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),14).toString(),
+                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),15).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),16).toString(),
+                    tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),17).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),18).toString()
                 });
             }
             JOptionPane.showMessageDialog(rootPane,"Proses simpan selesai...!");

@@ -1497,6 +1497,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbAdmin2">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                         <Property name="name" type="java.lang.String" value="tbAdmin2" noResource="true"/>
                       </Properties>
@@ -1949,6 +1950,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbAdmin3">
                       <Properties>
+                        <Property name="sortable" type="boolean" value="false"/>
                         <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                         <Property name="name" type="java.lang.String" value="tbAdmin3" noResource="true"/>
                       </Properties>

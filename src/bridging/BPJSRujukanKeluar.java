@@ -699,7 +699,7 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
                     requestJson ="{" +
                                     "\"request\": {" +
                                         "\"t_rujukan\": {" +
-                                            "\"noRujukan\": \""+tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()+"\"," +
+                                            "\"noRujukan\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString()+"\"," +
                                             "\"tglRujukan\": \""+Valid.SetTgl(TanggalRujukKeluar.getSelectedItem()+"")+"\"," +
                                             "\"tglRencanaKunjungan\": \""+Valid.SetTgl(TanggalKunjungRujukan.getSelectedItem()+"")+"\"," +
                                             "\"ppkDirujuk\": \""+KdPpkRujukan1.getText()+"\"," +
@@ -723,10 +723,10 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
 
                         Sequel.mengedit3("bridging_rujukan_bpjs","no_rujukan=?","ppkDirujuk=?,tipeRujukan=?,jnsPelayanan=?,catatan=?,diagRujukan=?,poliRujukan=?,nm_ppkDirujuk=?,nama_diagRujukan=?,nama_poliRujukan=?,tglRencanaKunjungan=?",11,new String[]{
                             KdPpkRujukan1.getText(),TipeRujukan.getSelectedItem().toString(),JenisPelayanan1.getSelectedItem().toString().substring(0,1),Catatan1.getText(),KdPenyakit1.getText(),KdPoli1.getText(),NmPpkRujukan1.getText(),
-                            NmPenyakit1.getText(),NmPoli1.getText(),Valid.SetTgl(TanggalKunjungRujukan.getSelectedItem()+""),tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()
+                            NmPenyakit1.getText(),NmPoli1.getText(),Valid.SetTgl(TanggalKunjungRujukan.getSelectedItem()+""),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString()
                         });
                         Sequel.mengedit3("rujuk","no_rujuk=?","keterangan_diagnosa=?,keterangan=?",3,new String[]{
-                            NmPenyakit1.getText(),Catatan1.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()
+                            NmPenyakit1.getText(),Catatan1.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString()
                         });
                         runBackground(() ->tampil());
                         emptTeks();
@@ -876,7 +876,7 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("norujuk",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
+            param.put("norujuk",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
             param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
             Valid.MyReport("rptBridgingRujukanBPJS.jasper",param,"::[ Surat Rujukan Keluar VClaim ]::");
             this.setCursor(Cursor.getDefaultCursor());
@@ -1221,17 +1221,17 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TipeRujukan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            KdPpkRujukan1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            NmPpkRujukan1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            KdPenyakit1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            NmPenyakit1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            KdPoli1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            NmPoli1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            JenisPelayanan1.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            Catatan1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            Valid.SetTgl(TanggalRujukKeluar,tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            Valid.SetTgl(TanggalKunjungRujukan,tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
+            TipeRujukan.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            KdPpkRujukan1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            NmPpkRujukan1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            KdPenyakit1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            NmPenyakit1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            KdPoli1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            NmPoli1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            JenisPelayanan1.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            Catatan1.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            Valid.SetTgl(TanggalRujukKeluar,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString());
+            Valid.SetTgl(TanggalKunjungRujukan,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
         }
     }
 
@@ -1293,7 +1293,7 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
             requestJson ="{" +
                             "\"request\": {" +
                                 "\"t_rujukan\": {" +
-                                    "\"noRujukan\": \""+tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()+"\"," +
+                                    "\"noRujukan\": \""+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString()+"\"," +
                                     "\"user\": \""+user+"\"" +
                                 "}" +
                             "}" +
@@ -1303,8 +1303,8 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
             System.out.println("code : "+nameNode.path("code").asText());
             System.out.println("message : "+nameNode.path("message").asText());
             if(nameNode.path("code").asText().equals("200")){
-                Sequel.meghapus("bridging_rujukan_bpjs","no_rujukan",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-                Sequel.meghapus("rujuk","no_rujuk",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
+                Sequel.meghapus("bridging_rujukan_bpjs","no_rujukan",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+                Sequel.meghapus("rujuk","no_rujuk",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
                 runBackground(() ->tampil());
                 emptTeks();
             }else{

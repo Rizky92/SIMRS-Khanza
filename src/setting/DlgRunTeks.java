@@ -554,13 +554,13 @@ public class DlgRunTeks extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            TTeks.setText(tbAdmin.getValueAt(row,0).toString());
-            YesNo.setSelectedItem(tbAdmin.getValueAt(row,1).toString());
+            TTeks.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),0).toString());
+            YesNo.setSelectedItem(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),1).toString());
             try {
                 ResultSet hasil = koneksi.createStatement().executeQuery(
-                        "select gambar from runtext where teks='"+tbAdmin.getValueAt(row,0).toString()+"'");
+                        "select gambar from runtext where teks='"+tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),0).toString()+"'");
                 for (int I = 0; hasil.next(); I++) {
-                    ((Painter) PhotoGambar).setImage(gambar(tbAdmin.getValueAt(row,0).toString()));
+                    ((Painter) PhotoGambar).setImage(gambar(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),0).toString()));
                     Blob blob = hasil.getBlob(1);
                     ((Painter) PhotoGambar).setImageIcon(new javax.swing.ImageIcon(
                         blob.getBytes(1, (int) (blob.length()))));

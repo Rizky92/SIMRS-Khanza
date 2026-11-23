@@ -1827,34 +1827,34 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
     private void getData() {
         int row=Table1.getSelectedRow();
         if(row!= -1){
-            kddokter.setText(Table1.getValueAt(row,0).toString());
-            nmdokter.setText(Table1.getValueAt(row,1).toString());
-            kdtindakan.setText(Table1.getValueAt(row,2).toString());
-            nmtindakan.setText(Table1.getValueAt(row,3).toString());
-            kdpj.setText(Table1.getValueAt(row,4).toString());
-            nmpj.setText(Table1.getValueAt(row,5).toString());
+            kddokter.setText(tabMode.getValueAt(Table1.convertRowIndexToModel(row),0).toString());
+            nmdokter.setText(tabMode.getValueAt(Table1.convertRowIndexToModel(row),1).toString());
+            kdtindakan.setText(tabMode.getValueAt(Table1.convertRowIndexToModel(row),2).toString());
+            nmtindakan.setText(tabMode.getValueAt(Table1.convertRowIndexToModel(row),3).toString());
+            kdpj.setText(tabMode.getValueAt(Table1.convertRowIndexToModel(row),4).toString());
+            nmpj.setText(tabMode.getValueAt(Table1.convertRowIndexToModel(row),5).toString());
         }
     }
 
     private void getData2() {
         int row=Table2.getSelectedRow();
         if(row!= -1){
-            kdtindakan2.setText(Table2.getValueAt(row,0).toString());
-            nmtindakan2.setText(Table2.getValueAt(row,1).toString());
-            kdpj2.setText(Table2.getValueAt(row,2).toString());
-            nmpj2.setText(Table2.getValueAt(row,3).toString());
+            kdtindakan2.setText(tabMode2.getValueAt(Table2.convertRowIndexToModel(row),0).toString());
+            nmtindakan2.setText(tabMode2.getValueAt(Table2.convertRowIndexToModel(row),1).toString());
+            kdpj2.setText(tabMode2.getValueAt(Table2.convertRowIndexToModel(row),2).toString());
+            nmpj2.setText(tabMode2.getValueAt(Table2.convertRowIndexToModel(row),3).toString());
         }
     }
 
     private void getData3() {
         int row=Table3.getSelectedRow();
         if(row!= -1){
-            kddokter3.setText(Table3.getValueAt(row,0).toString());
-            nmdokter3.setText(Table3.getValueAt(row,1).toString());
-            kdtindakan3.setText(Table3.getValueAt(row,2).toString());
-            nmtindakan3.setText(Table3.getValueAt(row,3).toString());
-            kdpj3.setText(Table3.getValueAt(row,4).toString());
-            nmpj3.setText(Table3.getValueAt(row,5).toString());
+            kddokter3.setText(tabMode3.getValueAt(Table3.convertRowIndexToModel(row),0).toString());
+            nmdokter3.setText(tabMode3.getValueAt(Table3.convertRowIndexToModel(row),1).toString());
+            kdtindakan3.setText(tabMode3.getValueAt(Table3.convertRowIndexToModel(row),2).toString());
+            nmtindakan3.setText(tabMode3.getValueAt(Table3.convertRowIndexToModel(row),3).toString());
+            kdpj3.setText(tabMode3.getValueAt(Table3.convertRowIndexToModel(row),4).toString());
+            nmpj3.setText(tabMode3.getValueAt(Table3.convertRowIndexToModel(row),5).toString());
         }
     }
 

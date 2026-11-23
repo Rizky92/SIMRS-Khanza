@@ -717,6 +717,7 @@
               <SubComponents>
                 <Component class="widget.Table" name="tbRegistrasi">
                   <Properties>
+                    <Property name="sortable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="tbRegistrasi" noResource="true"/>
                   </Properties>
                   <Events>

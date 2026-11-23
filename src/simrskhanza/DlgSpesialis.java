@@ -429,8 +429,8 @@ public class DlgSpesialis extends javax.swing.JDialog {
         }else{
             if(Valid.editTabletf(tabMode,"spesialis","kd_sps",TKd,"nm_sps='"+TNm.getText()+"'")==true){
                 if(tbSpesialis.getSelectedRow()>-1){
-                    tbSpesialis.setValueAt(TKd.getText(),tbSpesialis.getSelectedRow(),0);
-                    tbSpesialis.setValueAt(TNm.getText(),tbSpesialis.getSelectedRow(),1);
+                    tabMode.setValueAt(TKd.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0);
+                    tabMode.setValueAt(TNm.getText(),tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1);
                     emptTeks();
                 }
             }
@@ -583,6 +583,7 @@ public class DlgSpesialis extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbSpesialis.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -611,6 +612,7 @@ public class DlgSpesialis extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbSpesialis.getRowCount());
+        tbSpesialis.resumeSorting();
     }
 
     public void emptTeks() {
@@ -624,8 +626,8 @@ public class DlgSpesialis extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            TKd.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            TNm.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
+            TKd.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            TNm.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
         }
     }
 

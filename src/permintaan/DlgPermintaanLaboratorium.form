@@ -767,6 +767,7 @@
                       <SubComponents>
                         <Component class="widget.Table" name="tbDetailPK">
                           <Properties>
+                            <Property name="sortable" type="boolean" value="false"/>
                             <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                               <ComponentRef name="Popup"/>
                             </Property>
@@ -896,6 +897,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbTarifPK">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="name" type="java.lang.String" value="tbTarifPK" noResource="true"/>
                               </Properties>
                               <Events>
@@ -1310,6 +1312,7 @@
                       <SubComponents>
                         <Component class="widget.Table" name="tbTarifPA">
                           <Properties>
+                            <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                             <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                               <ComponentRef name="Popup"/>
                             </Property>
@@ -1363,6 +1366,7 @@
                       <SubComponents>
                         <Component class="widget.Table" name="tbDetailMB">
                           <Properties>
+                            <Property name="sortable" type="boolean" value="false"/>
                             <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                               <ComponentRef name="PopupMB"/>
                             </Property>
@@ -1492,6 +1496,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbTarifMB">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="name" type="java.lang.String" value="tbTarifMB" noResource="true"/>
                               </Properties>
                               <Events>

@@ -1110,7 +1110,7 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
                         rujukanbaru=0;
                         tampil();
                         for(i=0;i<tbBangsal.getRowCount();i++){
-                            if(tbBangsal.getValueAt(i,18).toString().toLowerCase().contains("belum direspon")){
+                            if(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(i),18).toString().toLowerCase().contains("belum direspon")){
                                 rujukanbaru++;
                             }
                         }
@@ -1143,42 +1143,42 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
 
     private void getData() {
         if(tbBangsal.getSelectedRow()!= -1){
-            No=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString();
-            RMFaskes=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),1).toString();
-            NamaPasien=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),2).toString();
-            Kontak=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),3).toString();
-            Alamat=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),4).toString();
-            TempatLahir=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),5).toString();
-            TglLahir=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),6).toString();
-            JK=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),7).toString();
-            NoKartuJKN=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),8).toString();
-            NIK=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),9).toString();
-            NoRujuk=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),10).toString();
-            KodeAsal=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),11).toString();
-            NamaFaskesAsal=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),12).toString();
-            KodeTujuan=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),13).toString();
-            NamaFaskesTujuan=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),14).toString();
-            JenisRujukan=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),15).toString();
-            Alasan=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),16).toString();
-            AlasanLainnya=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),17).toString();
-            Status=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),18).toString();
-            TglRujuk=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),19).toString();
-            DignosaRujuk=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),20).toString();
-            AnamnesisPemeriksaanFisik=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),21).toString();
-            Kesadaran=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),22).toString();
-            Tensi=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),23).toString();
-            Nadi=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),24).toString();
-            Suhu=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),25).toString();
-            Respirasi=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),26).toString();
-            Nyeri=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),27).toString();
-            KeadaanUmum=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),28).toString();
-            Alergi=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),29).toString();
-            Laboratorium=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),30).toString();
-            Radiologi=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),31).toString();
-            TerapiTindakan=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),32).toString();
-            SttsPasien=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),33).toString();
-            SttsRegistrasi=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),34).toString();
-            NoRmRS=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),35).toString();
+            No=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),0).toString();
+            RMFaskes=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),1).toString();
+            NamaPasien=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),2).toString();
+            Kontak=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),3).toString();
+            Alamat=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),4).toString();
+            TempatLahir=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),5).toString();
+            TglLahir=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),6).toString();
+            JK=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),7).toString();
+            NoKartuJKN=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),8).toString();
+            NIK=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),9).toString();
+            NoRujuk=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),10).toString();
+            KodeAsal=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),11).toString();
+            NamaFaskesAsal=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),12).toString();
+            KodeTujuan=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),13).toString();
+            NamaFaskesTujuan=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),14).toString();
+            JenisRujukan=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),15).toString();
+            Alasan=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),16).toString();
+            AlasanLainnya=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),17).toString();
+            Status=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),18).toString();
+            TglRujuk=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),19).toString();
+            DignosaRujuk=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),20).toString();
+            AnamnesisPemeriksaanFisik=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),21).toString();
+            Kesadaran=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),22).toString();
+            Tensi=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),23).toString();
+            Nadi=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),24).toString();
+            Suhu=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),25).toString();
+            Respirasi=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),26).toString();
+            Nyeri=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),27).toString();
+            KeadaanUmum=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),28).toString();
+            Alergi=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),29).toString();
+            Laboratorium=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),30).toString();
+            Radiologi=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),31).toString();
+            TerapiTindakan=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),32).toString();
+            SttsPasien=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),33).toString();
+            SttsRegistrasi=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),34).toString();
+            NoRmRS=tabMode.getValueAt(tbBangsal.convertRowIndexToModel(tbBangsal.getSelectedRow()),35).toString();
         }
     }
 }

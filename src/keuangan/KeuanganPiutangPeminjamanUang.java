@@ -768,7 +768,7 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
             sukses=true;
 
             if(Sequel.queryu2tf("delete from piutang_lainlain where nota_piutang=?", 1,new String[]{
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString()
+                tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString()
             })==true){
                 kontraakun="";
                 namakontraakun="";
@@ -778,7 +778,7 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
                     response = root.path("peminjampiutang");
                     if(response.isArray()){
                        for(JsonNode list:response){
-                           if(list.path("Kode").asText().equals(tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString())){
+                           if(list.path("Kode").asText().equals(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),4).toString())){
                                 kontraakun=list.path("KodeRekening").asText();
                                 namakontraakun=list.path("NamaRekening").asText();
                            }
@@ -793,10 +793,10 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
                     root = null;
                 }
                 Sequel.deleteTampJurnal();
-                if(Sequel.insertTampJurnal(tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString(), Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString()), 0)==false){
+                if(Sequel.insertTampJurnal(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),6).toString(), tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),7).toString(), Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),10).toString()), 0)==false){
                     sukses=false;
                 }
-                if(Sequel.insertTampJurnal(kontraakun, namakontraakun, 0, Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString()))==false){
+                if(Sequel.insertTampJurnal(kontraakun, namakontraakun, 0, Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),10).toString()))==false){
                     sukses=false;
                 }
                 if(sukses==true){
@@ -816,9 +816,9 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
             Sequel.AutoComitTrue();
 
             if(sukses==true){
-                total=total-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString());
+                total=total-Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),10).toString());
                 LTotal.setText(Valid.SetAngka(total));
-                sisapiutang=sisapiutang-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString());
+                sisapiutang=sisapiutang-Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),10).toString());
                 LTotal1.setText(Valid.SetAngka(sisapiutang));
                 tabMode.removeRow(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()));
                 LCount.setText(""+tbKamar.getRowCount());
@@ -1118,7 +1118,7 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             KeuanganBayarPiutangPeminjamanUang bayarpiutang=new KeuanganBayarPiutangPeminjamanUang(null,false);
             bayarpiutang.emptTeks();
-            bayarpiutang.setData(tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString());
+            bayarpiutang.setData(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),4).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),5).toString());
             bayarpiutang.isCek();
             bayarpiutang.tampil2();
             bayarpiutang.setSize(this.getWidth()-20,this.getHeight()-20);

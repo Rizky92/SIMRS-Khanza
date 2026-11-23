@@ -356,6 +356,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbPengadaan.setSortable(false);
         tbPengadaan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPengadaan.setName("tbPengadaan"); // NOI18N
         Scroll.setViewportView(tbPengadaan);
@@ -366,6 +367,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbPembelian.setSortable(false);
         tbPembelian.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPembelian.setName("tbPembelian"); // NOI18N
         Scroll2.setViewportView(tbPembelian);
@@ -376,6 +378,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
         Scroll3.setName("Scroll3"); // NOI18N
         Scroll3.setOpaque(true);
 
+        tbRawatJalan.setSortable(false);
         tbRawatJalan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbRawatJalan.setName("tbRawatJalan"); // NOI18N
         Scroll3.setViewportView(tbRawatJalan);
@@ -386,6 +389,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
         Scroll4.setName("Scroll4"); // NOI18N
         Scroll4.setOpaque(true);
 
+        tbObatJualBebas.setSortable(false);
         tbObatJualBebas.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObatJualBebas.setName("tbObatJualBebas"); // NOI18N
         Scroll4.setViewportView(tbObatJualBebas);
@@ -396,6 +400,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
         Scroll5.setName("Scroll5"); // NOI18N
         Scroll5.setOpaque(true);
 
+        tbRawatInap.setSortable(false);
         tbRawatInap.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbRawatInap.setName("tbRawatInap"); // NOI18N
         Scroll5.setViewportView(tbRawatInap);
@@ -406,6 +411,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
         Scroll6.setName("Scroll6"); // NOI18N
         Scroll6.setOpaque(true);
 
+        tbPiutangObat.setSortable(false);
         tbPiutangObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPiutangObat.setName("tbPiutangObat"); // NOI18N
         Scroll6.setViewportView(tbPiutangObat);

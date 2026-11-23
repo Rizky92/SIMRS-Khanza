@@ -181,6 +181,7 @@ public class TokoCariPembelian extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -701,14 +702,14 @@ public class TokoCariPembelian extends javax.swing.JDialog {
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
         if(tbDokter.getSelectedRow()> -1){
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim().equals("")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim().equals("")){
                 JOptionPane.showMessageDialog(null,"Silahkan pilih No.Faktur");
             }else{
                 try {
                     pscaribeli=koneksi.prepareStatement(
                         "select tokopembelian.no_faktur,tokopembelian.tagihan,tokopembelian.tgl_beli,tokopembelian.ppn,(tokopembelian.meterai+tokopembelian.total) as total from tokopembelian where tokopembelian.no_faktur=?");
                     try {
-                        pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+                        pscaribeli.setString(1,tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
                         rs=pscaribeli.executeQuery();
                         if(rs.next()){
                             Sequel.AutoComitFalse();
@@ -750,7 +751,7 @@ public class TokoCariPembelian extends javax.swing.JDialog {
                                 sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","PEMBATALAN PENGADAAN BARANG TOKO"+", OLEH "+akses.getkode());
                             }
                             if(sukses==true){
-                                Sequel.queryu2("delete from tokopembelian where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
+                                Sequel.queryu2("delete from tokopembelian where no_faktur=?",1,new String[]{tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString()});
                                 Sequel.Commit();
                             }else{
                                 JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");

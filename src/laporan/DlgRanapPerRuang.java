@@ -175,6 +175,7 @@ public final class DlgRanapPerRuang extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setSortable(false);
         tbBangsal.setName("tbBangsal"); // NOI18N
         tbBangsal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -193,6 +194,7 @@ public final class DlgRanapPerRuang extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbBangsal2.setSortable(false);
         tbBangsal2.setName("tbBangsal2"); // NOI18N
         tbBangsal2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -422,7 +424,7 @@ public final class DlgRanapPerRuang extends javax.swing.JDialog {
                         case "Laporan 5 (Jasper)":
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                             for(int r=0;r<tabMode.getRowCount();r++){
-                                if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
+                                if(!tabMode.getValueAt(r,0).toString().contains(">>")){
                                     Sequel.menyimpan("temporary","'"+r+"','"+
                                                     tabMode.getValueAt(r,0).toString()+"','"+
                                                     tabMode.getValueAt(r,1).toString()+"','"+
@@ -455,7 +457,7 @@ public final class DlgRanapPerRuang extends javax.swing.JDialog {
                         case "Laporan 5 (Jasper)":
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                             for(int r=0;r<tabMode2.getRowCount();r++){
-                                if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
+                                if(!tabMode.getValueAt(r,0).toString().contains(">>")){
                                     Sequel.menyimpan("temporary","'"+r+"','"+
                                                     tabMode2.getValueAt(r,0).toString()+"','"+
                                                     tabMode2.getValueAt(r,1).toString()+"','"+
@@ -910,7 +912,7 @@ public final class DlgRanapPerRuang extends javax.swing.JDialog {
     private void getData() {
         int row=tbBangsal.getSelectedRow();
         if(row!= -1){
-            TKd.setText(tbBangsal.getValueAt(row,0).toString());
+            TKd.setText(tabMode.getValueAt(tbBangsal.convertRowIndexToModel(row),0).toString());
         }
     }
 

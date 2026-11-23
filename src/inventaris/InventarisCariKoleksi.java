@@ -756,7 +756,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
             try {
                 ps=koneksi.prepareStatement("select inventaris_gambar.photo from inventaris_gambar where inventaris_gambar.no_inventaris=?");
                 try {
-                    ps.setString(1,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()),0).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
                         if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){

@@ -603,7 +603,7 @@ public class TokoSuplier extends javax.swing.JDialog {
         }else{
             if(tbDokter.getSelectedRow()> -1){
                 Valid.editTable(tabMode,"tokosuplier","kode_suplier","?","kode_suplier=?,nama_suplier=?,alamat=?,kota=?,no_telp=?,nama_bank=?,rekening=?",8,new String[]{
-                    Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),Bank.getText(),NoRek.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
+                    Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),Bank.getText(),NoRek.getText(),tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString()
                 });
                 if(tbDokter.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
@@ -883,6 +883,7 @@ public class TokoSuplier extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbDokter.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -921,6 +922,7 @@ public class TokoSuplier extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbDokter.getRowCount());
+        tbDokter.resumeSorting();
     }
 
     public void emptTeks() {
@@ -938,13 +940,13 @@ public class TokoSuplier extends javax.swing.JDialog {
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            Kd.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            Nm.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-            Alamat.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString());
-            Kota.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString());
-            Telp.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
-            Bank.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString());
-            NoRek.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString());
+            Kd.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),0).toString());
+            Nm.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString());
+            Alamat.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString());
+            Kota.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),3).toString());
+            Telp.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),4).toString());
+            Bank.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),5).toString());
+            NoRek.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),6).toString());
         }
     }
 

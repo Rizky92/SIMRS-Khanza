@@ -945,18 +945,18 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
 
     private void getData() {
         if(tbAdmin.getSelectedRow()!= -1){
-            TDokter.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
-            TDokter2.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),1).toString());
-            TDokter3.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),2).toString());
-            TDokter4.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),3).toString());
-            TDokter5.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),4).toString());
-            TDokter6.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),5).toString());
-            kddokter.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),6).toString());
-            kddokter2.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),7).toString());
-            kddokter3.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),8).toString());
-            kddokter4.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),9).toString());
-            kddokter5.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),10).toString());
-            kddokter6.setText(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),11).toString());
+            TDokter.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),0).toString());
+            TDokter2.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),1).toString());
+            TDokter3.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),2).toString());
+            TDokter4.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),3).toString());
+            TDokter5.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),4).toString());
+            TDokter6.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),5).toString());
+            kddokter.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),6).toString());
+            kddokter2.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),7).toString());
+            kddokter3.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),8).toString());
+            kddokter4.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),9).toString());
+            kddokter5.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),10).toString());
+            kddokter6.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(tbAdmin.getSelectedRow()),11).toString());
         }
     }
 

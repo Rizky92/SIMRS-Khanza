@@ -152,7 +152,7 @@ public class DlgJamMasuk extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbJadwal.setAutoCreateRowSorter(false);
+        tbJadwal.setAutoCreateRowSorter(true);
         tbJadwal.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbJadwal.setName("tbJadwal"); // NOI18N
         tbJadwal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -513,8 +513,8 @@ public class DlgJamMasuk extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(int i=0;i<tbJadwal.getRowCount();i++){
-            if(tbJadwal.getValueAt(i,0).toString().equals("true")){
-                Sequel.queryu("delete from jam_masuk where shift='"+tbJadwal.getValueAt(i,1).toString()+"'");
+            if(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),0).toString().equals("true")){
+                Sequel.queryu("delete from jam_masuk where shift='"+tabMode.getValueAt(tbJadwal.convertRowIndexToModel(i),1).toString()+"'");
             }
         }
         runBackground(() ->tampil());
@@ -749,6 +749,7 @@ public class DlgJamMasuk extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbJadwal.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select * from jam_masuk "+(TCari.getText().trim().equals("")?"":"where jam_masuk.shift like ? ")+"order by jam_masuk.shift");
@@ -775,6 +776,7 @@ public class DlgJamMasuk extends javax.swing.JDialog {
         }
         int b=tbJadwal.getRowCount();
         LCount.setText(""+b);
+        tbJadwal.resumeSorting();
     }
 
 
@@ -792,13 +794,13 @@ public class DlgJamMasuk extends javax.swing.JDialog {
     private void getData() {
         int row=tbJadwal.getSelectedRow();
         if(row!= -1){
-            cmbShift.setSelectedItem(tbJadwal.getValueAt(row,1).toString());
-            cmbJam1.setSelectedItem(tbJadwal.getValueAt(row,2).toString().substring(0,2));
-            cmbMnt1.setSelectedItem(tbJadwal.getValueAt(row,2).toString().substring(3,5));
-            cmbDtk1.setSelectedItem(tbJadwal.getValueAt(row,2).toString().substring(6,8));
-            cmbJam2.setSelectedItem(tbJadwal.getValueAt(row,3).toString().substring(0,2));
-            cmbMnt2.setSelectedItem(tbJadwal.getValueAt(row,3).toString().substring(3,5));
-            cmbDtk2.setSelectedItem(tbJadwal.getValueAt(row,3).toString().substring(6,8));
+            cmbShift.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),1).toString());
+            cmbJam1.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),2).toString().substring(0,2));
+            cmbMnt1.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),2).toString().substring(3,5));
+            cmbDtk1.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),2).toString().substring(6,8));
+            cmbJam2.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),3).toString().substring(0,2));
+            cmbMnt2.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),3).toString().substring(3,5));
+            cmbDtk2.setSelectedItem(tabMode.getValueAt(tbJadwal.convertRowIndexToModel(row),3).toString().substring(6,8));
         }
     }
 

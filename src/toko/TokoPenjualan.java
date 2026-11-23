@@ -668,6 +668,7 @@ public class TokoPenjualan extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbObat.setAutoCreateRowSorter(true);
         tbObat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -729,16 +730,16 @@ public class TokoPenjualan extends javax.swing.JDialog {
                 try {
                     switch (tbObat.getSelectedColumn()) {
                         case 0:
-                            tbObat.setValueAt("", tbObat.getSelectedRow(),0);
+                            tabMode.setValueAt("", tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0);
                             break;
                         case 7:
-                            tbObat.setValueAt(0, tbObat.getSelectedRow(),7);
+                            tabMode.setValueAt(0, tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7);
                             break;
                         case 8:
-                            tbObat.setValueAt(0, tbObat.getSelectedRow(),8);
+                            tabMode.setValueAt(0, tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8);
                             break;
                         case 9:
-                            tbObat.setValueAt(0, tbObat.getSelectedRow(),9);
+                            tabMode.setValueAt(0, tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9);
                             break;
                         default:
                             break;
@@ -756,16 +757,16 @@ public class TokoPenjualan extends javax.swing.JDialog {
                 try {
                     switch (tbObat.getSelectedColumn()) {
                         case 0:
-                            tbObat.setValueAt("", tbObat.getSelectedRow(),0);
+                            tabMode.setValueAt("", tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0);
                             break;
                         case 7:
-                            tbObat.setValueAt(0, tbObat.getSelectedRow(),7);
+                            tabMode.setValueAt(0, tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7);
                             break;
                         case 8:
-                            tbObat.setValueAt(0, tbObat.getSelectedRow(),8);
+                            tabMode.setValueAt(0, tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8);
                             break;
                         case 9:
-                            tbObat.setValueAt(0, tbObat.getSelectedRow(),9);
+                            tabMode.setValueAt(0, tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9);
                             break;
                         default:
                             break;
@@ -1109,12 +1110,12 @@ public class TokoPenjualan extends javax.swing.JDialog {
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
             int row2=tbObat.getRowCount();
             for(int r=0;r<row2;r++){
-                tbObat.setValueAt("",r,0);
-                tbObat.setValueAt(0,r,6);
-                tbObat.setValueAt(0,r,7);
-                tbObat.setValueAt(0,r,8);
-                tbObat.setValueAt(0,r,9);
-                tbObat.setValueAt(0,r,10);
+                tabMode.setValueAt("",tbObat.convertRowIndexToModel(r),0);
+                tabMode.setValueAt(0,tbObat.convertRowIndexToModel(r),6);
+                tabMode.setValueAt(0,tbObat.convertRowIndexToModel(r),7);
+                tabMode.setValueAt(0,tbObat.convertRowIndexToModel(r),8);
+                tabMode.setValueAt(0,tbObat.convertRowIndexToModel(r),9);
+                tabMode.setValueAt(0,tbObat.convertRowIndexToModel(r),10);
             }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -1292,7 +1293,7 @@ public class TokoPenjualan extends javax.swing.JDialog {
         jml=0;
         for(i=0;i<row;i++){
             try {
-                if(Double.parseDouble(tbObat.getValueAt(i,0).toString())>0){
+                if(Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString())>0){
                     jml++;
                 }
             } catch (Exception e) {
@@ -1317,26 +1318,27 @@ public class TokoPenjualan extends javax.swing.JDialog {
         index=0;
         for(i=0;i<row;i++){
             try {
-                if(Double.parseDouble(tbObat.getValueAt(i,0).toString())>0){
-                    jumlah[index]=Double.parseDouble(tbObat.getValueAt(i,0).toString());
-                    kodebarang[index]=tbObat.getValueAt(i,1).toString();
-                    namabarang[index]=tbObat.getValueAt(i,2).toString();
-                    kategori[index]=tbObat.getValueAt(i,3).toString();
-                    satuan[index]=tbObat.getValueAt(i,4).toString();
-                    harga[index]=Double.parseDouble(tbObat.getValueAt(i,5).toString());
-                    subtotal[index]=Double.parseDouble(tbObat.getValueAt(i,6).toString());
-                    diskon[index]=Double.parseDouble(tbObat.getValueAt(i,7).toString());
-                    besardiskon[index]=Double.parseDouble(tbObat.getValueAt(i,8).toString());
-                    tambahan[index]=Double.parseDouble(tbObat.getValueAt(i,9).toString());
-                    totaljual[index]=Double.parseDouble(tbObat.getValueAt(i,10).toString());
-                    stok[index]=Double.parseDouble(tbObat.getValueAt(i,11).toString());
-                    hbeli[index]=Double.parseDouble(tbObat.getValueAt(i,12).toString());
+                if(Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString())>0){
+                    jumlah[index]=Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString());
+                    kodebarang[index]=tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString();
+                    namabarang[index]=tabMode.getValueAt(tbObat.convertRowIndexToModel(i),2).toString();
+                    kategori[index]=tabMode.getValueAt(tbObat.convertRowIndexToModel(i),3).toString();
+                    satuan[index]=tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString();
+                    harga[index]=Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString());
+                    subtotal[index]=Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),6).toString());
+                    diskon[index]=Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString());
+                    besardiskon[index]=Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString());
+                    tambahan[index]=Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString());
+                    totaljual[index]=Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString());
+                    stok[index]=Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),11).toString());
+                    hbeli[index]=Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),12).toString());
                     index++;
                 }
             } catch (Exception e) {
             }
         }
 
+        tbObat.suspendSorting();
         Valid.tabelKosong(tabMode);
 
         for(i=0;i<jml;i++){
@@ -1404,6 +1406,7 @@ public class TokoPenjualan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbObat.resumeSorting();
     }
 
 
@@ -1411,54 +1414,54 @@ public class TokoPenjualan extends javax.swing.JDialog {
     private void getData(){
         row=tbObat.getSelectedRow();
         if(row!= -1){
-            if(!tbObat.getValueAt(row,0).toString().equals("")){
+            if(!tabMode.getValueAt(tbObat.convertRowIndexToModel(row),0).toString().equals("")){
                 kolom=tbObat.getSelectedColumn();
-                if(Double.parseDouble(tbObat.getValueAt(row,0).toString())>0){
-                    stokbarang=Double.parseDouble(tbObat.getValueAt(row,11).toString());
-                    y=Valid.SetAngka(tbObat.getValueAt(row,0).toString());
+                if(Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),0).toString())>0){
+                    stokbarang=Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),11).toString());
+                    y=Valid.SetAngka(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),0).toString());
                     if(stokbarang<y){
-                        tbObat.setValueAt("",row,0);
+                        tabMode.setValueAt("",tbObat.convertRowIndexToModel(row),0);
                         JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
                         tbObat.requestFocus();
                     }
                     if((kolom==0)||(kolom==1)||(kolom==2)||(kolom==3)||(kolom==4)||(kolom==5)){
                         try {
-                            tbObat.setValueAt(Double.parseDouble(tbObat.getValueAt(row,0).toString())*Double.parseDouble(tbObat.getValueAt(row,5).toString()), row,6);
+                            tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),0).toString())*Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),5).toString()), tbObat.convertRowIndexToModel(row),6);
                         } catch (Exception e) {
-                            tbObat.setValueAt(0, row,6);
+                            tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),6);
                         }
 
                         try {
-                            tbObat.setValueAt(Double.parseDouble(tbObat.getValueAt(row,6).toString())-Double.parseDouble(tbObat.getValueAt(row,8).toString())+Double.parseDouble(tbObat.getValueAt(row,9).toString()), row,10);
+                            tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),6).toString())-Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),8).toString())+Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),9).toString()), tbObat.convertRowIndexToModel(row),10);
                         } catch (Exception e) {
-                            tbObat.setValueAt(0, row,10);
+                            tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),10);
                         }
                     }else if(kolom==7){
                         try {
-                            tbObat.setValueAt(Double.parseDouble(tbObat.getValueAt(row,6).toString())*(Double.parseDouble(tbObat.getValueAt(row,7).toString())/100), row,8);
+                            tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),6).toString())*(Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),7).toString())/100), tbObat.convertRowIndexToModel(row),8);
                         } catch (Exception e) {
-                            tbObat.setValueAt(0, row,8);
+                            tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),8);
                         }
 
                         try {
-                            tbObat.setValueAt(Double.parseDouble(tbObat.getValueAt(row,6).toString())-Double.parseDouble(tbObat.getValueAt(row,8).toString())+Double.parseDouble(tbObat.getValueAt(row,9).toString()), row,10);
+                            tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),6).toString())-Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),8).toString())+Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),9).toString()), tbObat.convertRowIndexToModel(row),10);
                         } catch (Exception e) {
-                            tbObat.setValueAt(0, row,10);
+                            tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),10);
                         }
                     }else if((kolom==8)||(kolom==9)){
                         try {
-                            tbObat.setValueAt(Double.parseDouble(tbObat.getValueAt(row,6).toString())-Double.parseDouble(tbObat.getValueAt(row,8).toString())+Double.parseDouble(tbObat.getValueAt(row,9).toString()), row,10);
+                            tabMode.setValueAt(Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),6).toString())-Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),8).toString())+Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(row),9).toString()), tbObat.convertRowIndexToModel(row),10);
                         } catch (Exception e) {
-                            tbObat.setValueAt(0, row,10);
+                            tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),10);
                         }
                     }
                 }
             }else{
-                tbObat.setValueAt(0, row,6);
-                tbObat.setValueAt(0, row,7);
-                tbObat.setValueAt(0, row,8);
-                tbObat.setValueAt(0, row,9);
-                tbObat.setValueAt(0, row,10);
+                tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),6);
+                tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),7);
+                tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),8);
+                tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),9);
+                tabMode.setValueAt(0, tbObat.convertRowIndexToModel(row),10);
             }
         }
         ttl=0;
@@ -1468,14 +1471,14 @@ public class TokoPenjualan extends javax.swing.JDialog {
 
         for(int r=0;r<tbObat.getRowCount();r++){
             try {
-                y=Double.parseDouble(tbObat.getValueAt(r,10).toString());
+                y=Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(r),10).toString());
             } catch (Exception e) {
                 y=0;
             }
             ttl=ttl+y;
 
             try {
-                z=Double.parseDouble(tbObat.getValueAt(r,12).toString())*Double.parseDouble(tbObat.getValueAt(r,0).toString());
+                z=Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(r),12).toString())*Double.parseDouble(tabMode.getValueAt(tbObat.convertRowIndexToModel(r),0).toString());
             } catch (Exception e) {
                 z=0;
             }
@@ -1543,16 +1546,16 @@ public class TokoPenjualan extends javax.swing.JDialog {
 
     private void isSimpan() {
         for(i=0;i<tbObat.getRowCount();i++){
-            if(Valid.SetAngka(tbObat.getValueAt(i,0).toString())>0){
+            if(Valid.SetAngka(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString())>0){
                 if(Sequel.menyimpantf2("toko_detail_jual","?,?,?,?,?,?,?,?,?,?,?","Barang",11,new String[]{
-                        NoNota.getText(),tbObat.getValueAt(i,1).toString(),tbObat.getValueAt(i,4).toString(),tbObat.getValueAt(i,5).toString(),
-                        tbObat.getValueAt(i,12).toString(),tbObat.getValueAt(i,0).toString(),tbObat.getValueAt(i,6).toString(),
-                        tbObat.getValueAt(i,7).toString(),tbObat.getValueAt(i,8).toString(),tbObat.getValueAt(i,9).toString(),
-                        tbObat.getValueAt(i,10).toString()
+                        NoNota.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),4).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),5).toString(),
+                        tabMode.getValueAt(tbObat.convertRowIndexToModel(i),12).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),6).toString(),
+                        tabMode.getValueAt(tbObat.convertRowIndexToModel(i),7).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),8).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),9).toString(),
+                        tabMode.getValueAt(tbObat.convertRowIndexToModel(i),10).toString()
                     })==true){
-                    Trackbarang.catatRiwayat(tbObat.getValueAt(i,1).toString(),0,Valid.SetAngka(tbObat.getValueAt(i,0).toString()),"Penjualan", akses.getkode(),"Simpan");
+                    Trackbarang.catatRiwayat(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString(),0,Valid.SetAngka(tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString()),"Penjualan", akses.getkode(),"Simpan");
                     Sequel.mengedit("tokobarang","kode_brng=?","stok=stok-?",2,new String[]{
-                        tbObat.getValueAt(i,0).toString(),tbObat.getValueAt(i,1).toString()
+                        tabMode.getValueAt(tbObat.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbObat.convertRowIndexToModel(i),1).toString()
                     });
                 }else{
                     sukses=false;

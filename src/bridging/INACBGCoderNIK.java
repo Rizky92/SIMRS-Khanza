@@ -681,9 +681,9 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
 
     private void getData() {
         if(tbSpesialis.getSelectedRow()!= -1){
-            NIK.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString());
-            Nama.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
-            CoderNIK.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString());
+            NIK.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),0).toString());
+            Nama.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),1).toString());
+            CoderNIK.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(tbSpesialis.getSelectedRow()),2).toString());
         }
     }
 

@@ -595,10 +595,10 @@ public class DlgPasswordBPJS extends javax.swing.JDialog {
     private void getData() {
         int row=tbSpesialis.getSelectedRow();
         if(row!= -1){
-            kdpj.setText(tbSpesialis.getValueAt(row,0).toString());
-            nmpj.setText(tbSpesialis.getValueAt(row,1).toString());
-            TKd.setText(tbSpesialis.getValueAt(row,2).toString());
-            TPass.setText(tbSpesialis.getValueAt(row,3).toString());
+            kdpj.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),0).toString());
+            nmpj.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),1).toString());
+            TKd.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),2).toString());
+            TPass.setText(tabMode.getValueAt(tbSpesialis.convertRowIndexToModel(row),3).toString());
         }
     }
 

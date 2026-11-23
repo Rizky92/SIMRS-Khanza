@@ -854,8 +854,8 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
         if (tbDokter.getSelectedRow() != -1) {
-            InformasiTambahanRadiologi.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString());
-            InformasiTambahanLab.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString());
+            InformasiTambahanRadiologi.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 1).toString());
+            InformasiTambahanLab.setText(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 1).toString());
         }
         runBackground(() -> tampilDetailTemplate());
     }//GEN-LAST:event_tbDokterMouseClicked
@@ -1068,6 +1068,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
         }
         sb.append("order by template_paket_mcu_smc.keterangan");
 
+        tbDokter.suspendSorting();
         Valid.tabelKosong(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement(sb.toString())) {
             int p = 0;
@@ -1091,6 +1092,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
             System.out.println("Notifikasi : " + e);
         }
         LCount.setText("" + tbDokter.getRowCount());
+        tbDokter.resumeSorting();
     }
 
     public void tampil2() {
@@ -1132,7 +1134,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
         if (tbDokter.getSelectedRow() == -1) {
             return "";
         }
-        return tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString();
+        return tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()), 0).toString();
     }
 
     private void tampilDetailTemplate() {
@@ -1308,9 +1310,9 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
         dokter.isCek();
         dokter.setVisible(true);
         if (tabelDokter.getSelectedRow() != -1) {
-            tabel.setValueAt(tabelDokter.getValueAt(tabelDokter.getSelectedRow(), 0).toString(), baris, KOL_TINDAKAN_KODE_DOKTER);
-            tabel.setValueAt(tabelDokter.getValueAt(tabelDokter.getSelectedRow(), 1).toString(), baris, KOL_TINDAKAN_NAMA_DOKTER);
-            tabel.setValueAt(true, baris, KOL_TINDAKAN_DOKTER_TEMPLATE);
+            tabel.getModel().setValueAt(tabelDokter.getValueAt(tabelDokter.getSelectedRow(), 0).toString(), tabel.convertRowIndexToModel(baris), KOL_TINDAKAN_KODE_DOKTER);
+            tabel.getModel().setValueAt(tabelDokter.getValueAt(tabelDokter.getSelectedRow(), 1).toString(), tabel.convertRowIndexToModel(baris), KOL_TINDAKAN_NAMA_DOKTER);
+            tabel.getModel().setValueAt(true, tabel.convertRowIndexToModel(baris), KOL_TINDAKAN_DOKTER_TEMPLATE);
         }
         dokter = null;
     }
@@ -1318,9 +1320,9 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
     private void isiDokterTindakan() {
         for (widget.Table tabel : new widget.Table[] {tbTindakanDr, tbTindakanDrPr}) {
             for (i = 0; i < tabel.getRowCount(); i++) {
-                if (!Boolean.TRUE.equals(tabel.getValueAt(i, KOL_TINDAKAN_DOKTER_TEMPLATE))) {
-                    tabel.setValueAt(KdDokter.getText(), i, KOL_TINDAKAN_KODE_DOKTER);
-                    tabel.setValueAt(NmDokter.getText(), i, KOL_TINDAKAN_NAMA_DOKTER);
+                if (!Boolean.TRUE.equals(tabel.getModel().getValueAt(tabel.convertRowIndexToModel(i), KOL_TINDAKAN_DOKTER_TEMPLATE))) {
+                    tabel.getModel().setValueAt(KdDokter.getText(), tabel.convertRowIndexToModel(i), KOL_TINDAKAN_KODE_DOKTER);
+                    tabel.getModel().setValueAt(NmDokter.getText(), tabel.convertRowIndexToModel(i), KOL_TINDAKAN_NAMA_DOKTER);
                 }
             }
         }
@@ -1332,7 +1334,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
         }
         for (widget.Table tabel : new widget.Table[] {tbTindakanDr, tbTindakanDrPr}) {
             for (i = 0; i < tabel.getRowCount(); i++) {
-                if (!Boolean.TRUE.equals(tabel.getValueAt(i, KOL_TINDAKAN_DOKTER_TEMPLATE))) {
+                if (!Boolean.TRUE.equals(tabel.getModel().getValueAt(tabel.convertRowIndexToModel(i), KOL_TINDAKAN_DOKTER_TEMPLATE))) {
                     return true;
                 }
             }
@@ -1341,7 +1343,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
     }
 
     private String angkaTeks(widget.Table tabel, int baris, int kolom) {
-        Object nilai = tabel.getValueAt(baris, kolom);
+        Object nilai = tabel.getModel().getValueAt(tabel.convertRowIndexToModel(baris), kolom);
         if (null == nilai) {
             return "0";
         }
@@ -1349,7 +1351,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
     }
 
     private String dokterTindakan(widget.Table tabel, int baris) {
-        String kdDokter = String.valueOf(tabel.getValueAt(baris, KOL_TINDAKAN_KODE_DOKTER));
+        String kdDokter = String.valueOf(tabel.getModel().getValueAt(tabel.convertRowIndexToModel(baris), KOL_TINDAKAN_KODE_DOKTER));
         if (kdDokter.isBlank() || "null".equals(kdDokter)) {
             return KdDokter.getText();
         }
@@ -1566,13 +1568,13 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
             sukses = false;
             return;
         }
-        ttlpendapatan = ttlpendapatan + Valid.getAngkaSmc(tabel.getValueAt(baris, KOL_TINDAKAN_TARIF));
-        ttljasasarana = ttljasasarana + Valid.getAngkaSmc(tabel.getValueAt(baris, KOL_TINDAKAN_BAGIAN_RS));
-        ttlbhp = ttlbhp + Valid.getAngkaSmc(tabel.getValueAt(baris, KOL_TINDAKAN_BHP));
-        ttljmdokter = ttljmdokter + Valid.getAngkaSmc(tabel.getValueAt(baris, KOL_TINDAKAN_JM_DOKTER));
-        ttljmperawat = ttljmperawat + Valid.getAngkaSmc(tabel.getValueAt(baris, KOL_TINDAKAN_JM_PETUGAS));
-        ttlkso = ttlkso + Valid.getAngkaSmc(tabel.getValueAt(baris, KOL_TINDAKAN_KSO));
-        ttlmenejemen = ttlmenejemen + Valid.getAngkaSmc(tabel.getValueAt(baris, KOL_TINDAKAN_MENEJEMEN));
+        ttlpendapatan = ttlpendapatan + Valid.getAngkaSmc(tabel.getModel().getValueAt(tabel.convertRowIndexToModel(baris), KOL_TINDAKAN_TARIF));
+        ttljasasarana = ttljasasarana + Valid.getAngkaSmc(tabel.getModel().getValueAt(tabel.convertRowIndexToModel(baris), KOL_TINDAKAN_BAGIAN_RS));
+        ttlbhp = ttlbhp + Valid.getAngkaSmc(tabel.getModel().getValueAt(tabel.convertRowIndexToModel(baris), KOL_TINDAKAN_BHP));
+        ttljmdokter = ttljmdokter + Valid.getAngkaSmc(tabel.getModel().getValueAt(tabel.convertRowIndexToModel(baris), KOL_TINDAKAN_JM_DOKTER));
+        ttljmperawat = ttljmperawat + Valid.getAngkaSmc(tabel.getModel().getValueAt(tabel.convertRowIndexToModel(baris), KOL_TINDAKAN_JM_PETUGAS));
+        ttlkso = ttlkso + Valid.getAngkaSmc(tabel.getModel().getValueAt(tabel.convertRowIndexToModel(baris), KOL_TINDAKAN_KSO));
+        ttlmenejemen = ttlmenejemen + Valid.getAngkaSmc(tabel.getModel().getValueAt(tabel.convertRowIndexToModel(baris), KOL_TINDAKAN_MENEJEMEN));
     }
 
     private void simpanJurnalTindakan() {

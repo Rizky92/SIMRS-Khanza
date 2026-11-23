@@ -213,6 +213,7 @@ public class DlgCariPengajuanBarangNonMedis extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setSortable(false);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -764,10 +765,10 @@ public class DlgCariPengajuanBarangNonMedis extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-        if(Sequel.cariInteger("select count(no_pengajuan) from pengajuan_barang_nonmedis where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim())==0){
+        if(Sequel.cariInteger("select count(no_pengajuan) from pengajuan_barang_nonmedis where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim())==0){
                 Valid.textKosong(TCari,"pilihan data");
         }else{
-            Sequel.queryu("delete from pengajuan_barang_nonmedis where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+            Sequel.queryu("delete from pengajuan_barang_nonmedis where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
             runBackground(() ->tampil());
         }
     }//GEN-LAST:event_ppHapusActionPerformed
@@ -816,27 +817,27 @@ public class DlgCariPengajuanBarangNonMedis extends javax.swing.JDialog {
     }//GEN-LAST:event_btnJenisActionPerformed
 
     private void ppProsesPengajuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppProsesPengajuanActionPerformed
-        if(Sequel.cariInteger("select count(no_pengajuan) from pengajuan_barang_nonmedis where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim())==0){
+        if(Sequel.cariInteger("select count(no_pengajuan) from pengajuan_barang_nonmedis where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim())==0){
             Valid.textKosong(TCari,"pilihan data");
         }else{
-            Sequel.queryu("update pengajuan_barang_nonmedis set status='Proses Pengajuan' where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+            Sequel.queryu("update pengajuan_barang_nonmedis set status='Proses Pengajuan' where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
             runBackground(() ->tampil());
         }
     }//GEN-LAST:event_ppProsesPengajuanActionPerformed
 
     private void ppDisetujuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDisetujuiActionPerformed
-        if(Sequel.cariInteger("select count(no_pengajuan) from pengajuan_barang_nonmedis where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim())==0){
+        if(Sequel.cariInteger("select count(no_pengajuan) from pengajuan_barang_nonmedis where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim())==0){
             Valid.textKosong(TCari,"pilihan data");
         }else{
-            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString().equals("Disetujui")){
+            if(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),2).toString().equals("Disetujui")){
                 JOptionPane.showMessageDialog(null,"Data pengajuan sudah tervalidasi..!!");
             }else{
-                Sequel.queryu("update pengajuan_barang_nonmedis set status='Disetujui' where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+                Sequel.queryu("update pengajuan_barang_nonmedis set status='Disetujui' where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 IPSRSSuratPemesanan aplikasi=new IPSRSSuratPemesanan(null,false);
                 aplikasi.tampilkan=false;
                 aplikasi.isCek();
-                aplikasi.panggilgetData(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+                aplikasi.panggilgetData(tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
                 aplikasi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 aplikasi.setLocationRelativeTo(internalFrame1);
                 aplikasi.setVisible(true);
@@ -847,10 +848,10 @@ public class DlgCariPengajuanBarangNonMedis extends javax.swing.JDialog {
     }//GEN-LAST:event_ppDisetujuiActionPerformed
 
     private void ppDitolakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDitolakActionPerformed
-        if(Sequel.cariInteger("select count(no_pengajuan) from pengajuan_barang_nonmedis where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim())==0){
+        if(Sequel.cariInteger("select count(no_pengajuan) from pengajuan_barang_nonmedis where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim())==0){
             Valid.textKosong(TCari,"pilihan data");
         }else{
-            Sequel.queryu("update pengajuan_barang_nonmedis set status='Ditolak' where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+            Sequel.queryu("update pengajuan_barang_nonmedis set status='Ditolak' where no_pengajuan=?",tabMode.getValueAt(tbDokter.convertRowIndexToModel(tbDokter.getSelectedRow()),1).toString().trim());
             runBackground(() ->tampil());
         }
     }//GEN-LAST:event_ppDitolakActionPerformed

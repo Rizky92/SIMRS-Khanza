@@ -705,10 +705,10 @@ public final class DlgSetResepPerCaraBayar extends javax.swing.JDialog {
     private void getData() {
         int row=tbObatPenyakit.getSelectedRow();
         if(row!= -1){
-            KodeBayar.setText(tbObatPenyakit.getValueAt(row,0).toString());
-            NamaBayar.setText(tbObatPenyakit.getValueAt(row,1).toString());
-            KodeObat.setText(tbObatPenyakit.getValueAt(row,2).toString());
-            NamaObat.setText(tbObatPenyakit.getValueAt(row,3).toString());
+            KodeBayar.setText(tabMode.getValueAt(tbObatPenyakit.convertRowIndexToModel(row),0).toString());
+            NamaBayar.setText(tabMode.getValueAt(tbObatPenyakit.convertRowIndexToModel(row),1).toString());
+            KodeObat.setText(tabMode.getValueAt(tbObatPenyakit.convertRowIndexToModel(row),2).toString());
+            NamaObat.setText(tabMode.getValueAt(tbObatPenyakit.convertRowIndexToModel(row),3).toString());
         }
     }
 

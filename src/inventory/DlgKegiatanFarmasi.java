@@ -198,6 +198,7 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbBangsal.setSortable(false);
         tbBangsal.setName("tbBangsal"); // NOI18N
         Scroll.setViewportView(tbBangsal);
 
@@ -207,6 +208,7 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbBangsal2.setSortable(false);
         tbBangsal2.setName("tbBangsal2"); // NOI18N
         Scroll2.setViewportView(tbBangsal2);
 
@@ -216,6 +218,7 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
         Scroll3.setName("Scroll3"); // NOI18N
         Scroll3.setOpaque(true);
 
+        tbBangsal3.setSortable(false);
         tbBangsal3.setName("tbBangsal3"); // NOI18N
         Scroll3.setViewportView(tbBangsal3);
 
@@ -387,7 +390,7 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
                                 param.put("tanggal",Tgl2.getDate());
                                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                                 for(int r=0;r<tabMode.getRowCount();r++){
-                                    if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
+                                    if(!tabMode.getValueAt(r,0).toString().contains(">>")){
                                         Sequel.menyimpan("temporary","'"+r+"','"+
                                                     tabMode.getValueAt(r,0).toString()+"','"+
                                                     tabMode.getValueAt(r,1).toString()+"','"+
@@ -429,7 +432,7 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
                                 param.put("tanggal",Tgl2.getDate());
                                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                                 for(int r=0;r<tabMode2.getRowCount();r++){
-                                    if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
+                                    if(!tabMode.getValueAt(r,0).toString().contains(">>")){
                                         Sequel.menyimpan("temporary","'"+r+"','"+
                                                     tabMode2.getValueAt(r,0).toString()+"','"+
                                                     tabMode2.getValueAt(r,1).toString()+"','"+
@@ -471,7 +474,7 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
                                 param.put("tanggal",Tgl2.getDate());
                                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                                 for(int r=0;r<tabMode3.getRowCount();r++){
-                                    if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
+                                    if(!tabMode.getValueAt(r,0).toString().contains(">>")){
                                         Sequel.menyimpan("temporary","'"+r+"','"+
                                                     tabMode3.getValueAt(r,0).toString()+"','"+
                                                     tabMode3.getValueAt(r,1).toString()+"','"+

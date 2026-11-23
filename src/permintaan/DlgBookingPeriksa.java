@@ -1110,7 +1110,7 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
                     if(tbObat.getSelectedRow()>-1){
                         ChkAccor.setSelected(true);
                         isMenu();
-                        NoBokingDipilih.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+                        NoBokingDipilih.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
                         DataBalasan.setText(Sequel.cariIsi("select balasan from booking_periksa_balasan where no_booking=?",NoBokingDipilih.getText()));
                     }
                 }
@@ -1127,7 +1127,7 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
                         if(tbObat.getSelectedRow()>-1){
                             ChkAccor.setSelected(true);
                             isMenu();
-                            NoBokingDipilih.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+                            NoBokingDipilih.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
                             DataBalasan.setText(Sequel.cariIsi("select balasan from booking_periksa_balasan where no_booking=?",NoBokingDipilih.getText()));
                         }
                     }
@@ -1372,7 +1372,7 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
         if(R1.isSelected()==true){
             if(tbObat.getSelectedRow()>-1){
                 emptTeks();
-                i=Sequel.cariInteger("select (TO_DAYS('"+tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()+"')-TO_DAYS(current_date()))");
+                i=Sequel.cariInteger("select (TO_DAYS('"+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString()+"')-TO_DAYS(current_date()))");
                 if(i>0){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     if(aktifjadwal.equals("aktif")){
@@ -1417,7 +1417,7 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
         if(tbObat.getSelectedRow()>-1){
             i=JOptionPane.showConfirmDialog(null, "Menghapus data booking periksa yang sudah tervalidasi,\notomatis akan menghapus data booking registrasi untuk pasien\ntersebut, tetapi tidak menghapus data pasien yang sudah tersimpan.\nApa Anda yakin untuk menghapusnya...????","Konfirmasi",JOptionPane.YES_NO_OPTION);
             if(i==JOptionPane.YES_OPTION){
-                Sequel.meghapus("booking_periksa","no_booking",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+                Sequel.meghapus("booking_periksa","no_booking",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
                 NoBokingDipilih.setText("");
                 DataBalasan.setText("");
                 ChkAccor.setSelected(false);
@@ -2246,11 +2246,11 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
 
     private void getData(){
         if(tbObat.getSelectedRow()!= -1){
-            NoBooking.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TanggalBooking.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TanggalPeriksa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            NamaPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            arrSplit = tbObat.getValueAt(tbObat.getSelectedRow(),4).toString().toUpperCase().split(",");
+            NoBooking.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            TanggalBooking.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            TanggalPeriksa.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            NamaPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            arrSplit = tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),4).toString().toUpperCase().split(",");
             try {
                 if(!arrSplit[0].equals("")){
                     Alamat.setText(arrSplit[0]);
@@ -2291,11 +2291,11 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
                 Propinsi.setText("-");
             }
 
-            NoTelp.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            Email.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            KdPoli.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
-            NmPoli.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            TambahanPesan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
+            NoTelp.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),5).toString());
+            Email.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),6).toString());
+            KdPoli.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),7).toString());
+            NmPoli.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            TambahanPesan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
         }
     }
 

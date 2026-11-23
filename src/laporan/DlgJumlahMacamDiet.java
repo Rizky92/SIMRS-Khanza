@@ -116,6 +116,7 @@ public class DlgJumlahMacamDiet extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbJadwal.setSortable(false);
         tbJadwal.setName("tbJadwal"); // NOI18N
         Scroll.setViewportView(tbJadwal);
 

@@ -684,6 +684,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbIdentifikasiMPP">
                               <Properties>
+                                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="name" type="java.lang.String" value="tbIdentifikasiMPP" noResource="true"/>
                               </Properties>
                             </Component>

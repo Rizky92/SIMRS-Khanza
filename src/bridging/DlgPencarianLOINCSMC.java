@@ -365,6 +365,7 @@ public final class DlgPencarianLOINCSMC extends javax.swing.JDialog {
             fetchNext = keyword.equals(lastKeyword);
 
             if (!fetchNext) {
+                tbKamar.suspendSorting();
                 Valid.tabelKosongSmc(tabMode);
                 LCount.setText("0 / 0");
             }
@@ -423,6 +424,7 @@ public final class DlgPencarianLOINCSMC extends javax.swing.JDialog {
                     LCount.setText(tbKamar.getRowCount() + " / " + totalRecords);
                     DlgPencarianLOINCSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbKamar.resumeSorting();
                 }
             }.execute();
         }

@@ -208,6 +208,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbJnsPerawatan.setAutoCreateRowSorter(true);
         tbJnsPerawatan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbJnsPerawatan.setComponentPopupMenu(jPopupMenu1);
         tbJnsPerawatan.setName("tbJnsPerawatan"); // NOI18N
@@ -430,10 +431,10 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        if(tbJnsPerawatan.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tbJnsPerawatan.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
@@ -532,17 +533,17 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         } else {
             boolean adaTask99 = false;
             for (int i = 0; i < tbJnsPerawatan.getRowCount(); i++) {
-                if (tbJnsPerawatan.getValueAt(i, 0).toString().equals("true")) {
-                    if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs_taskid where no_rawat = ? and taskid = '99'", tbJnsPerawatan.getValueAt(i, 1).toString())) {
+                if (tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i), 0).toString().equals("true")) {
+                    if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs_taskid where no_rawat = ? and taskid = '99'", tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i), 1).toString())) {
                         adaTask99 = true;
                         continue;
                     }
                     if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Batal',validasi=now()",1,new String[]{
-                        tbJnsPerawatan.getValueAt(i,15).toString()
+                        tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),15).toString()
                     })==true){
                         Sequel.menyimpan2("referensi_mobilejkn_bpjs_batal","?,?,?,now(),?,?,?",6,new String[]{
-                            tbJnsPerawatan.getValueAt(i,2).toString(),tbJnsPerawatan.getValueAt(i,1).toString(),
-                            tbJnsPerawatan.getValueAt(i,12).toString(),"Dibatalkan Oleh Admin","Belum",tbJnsPerawatan.getValueAt(i,15).toString()
+                            tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),2).toString(),tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),1).toString(),
+                            tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),12).toString(),"Dibatalkan Oleh Admin","Belum",tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),15).toString()
                         });
                     }
                 }
@@ -567,11 +568,11 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!");
         } else {
             for (int i = 0; i < tbJnsPerawatan.getRowCount(); i++) {
-                if (tbJnsPerawatan.getValueAt(i, 0).toString().equals("true")) {
+                if (tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i), 0).toString().equals("true")) {
                     if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Checkin',validasi=now()",1,new String[]{
-                        tbJnsPerawatan.getValueAt(i,15).toString()
+                        tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),15).toString()
                     })==true){
-                        Sequel.meghapus("referensi_mobilejkn_bpjs_batal","nobooking",tbJnsPerawatan.getValueAt(i,15).toString());
+                        Sequel.meghapus("referensi_mobilejkn_bpjs_batal","nobooking",tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),15).toString());
                     }
                 }
             }
@@ -592,11 +593,11 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!");
         } else {
             for (int i = 0; i < tbJnsPerawatan.getRowCount(); i++) {
-                if (tbJnsPerawatan.getValueAt(i, 0).toString().equals("true")) {
+                if (tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i), 0).toString().equals("true")) {
                     if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Belum',validasi='0000-00-00 00:00:00'",1,new String[]{
-                        tbJnsPerawatan.getValueAt(i,15).toString()
+                        tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),15).toString()
                     })==true){
-                        Sequel.meghapus("referensi_mobilejkn_bpjs_batal","nobooking",tbJnsPerawatan.getValueAt(i,15).toString());
+                        Sequel.meghapus("referensi_mobilejkn_bpjs_batal","nobooking",tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(i),15).toString());
                     }
                 }
             }
@@ -637,13 +638,13 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
         for(i=0;i<tbJnsPerawatan.getRowCount();i++){
-            tbJnsPerawatan.setValueAt(true,i,0);
+            tabMode.setValueAt(true,tbJnsPerawatan.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbJnsPerawatan.getRowCount();i++){
-            tbJnsPerawatan.setValueAt(false,i,0);
+            tabMode.setValueAt(false,tbJnsPerawatan.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -691,6 +692,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbJnsPerawatan.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -749,6 +751,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbJnsPerawatan.getRowCount());
+        tbJnsPerawatan.resumeSorting();
     }
 
     private void runBackground(Runnable task) {

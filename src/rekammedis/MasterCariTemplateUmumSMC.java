@@ -391,6 +391,7 @@ public class MasterCariTemplateUmumSMC extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             LCount.setText("0");
             Template.setText("");
+            tbTemplate.suspendSorting();
             Valid.tabelKosongSmc(tabMode);
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().trim();
@@ -438,6 +439,7 @@ public class MasterCariTemplateUmumSMC extends javax.swing.JDialog {
                     LCount.setText(tbTemplate.getRowCount() + "");
                     MasterCariTemplateUmumSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
+                    tbTemplate.resumeSorting();
                 }
             }.execute();
         }
@@ -445,7 +447,7 @@ public class MasterCariTemplateUmumSMC extends javax.swing.JDialog {
 
     private void getData() {
         if (tbTemplate.getSelectedRow() != -1) {
-            Template.setText(tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 3).toString());
+            Template.setText(tabMode.getValueAt(tbTemplate.convertRowIndexToModel(tbTemplate.getSelectedRow()), 3).toString());
             Template.setCaretPosition(0);
         }
     }

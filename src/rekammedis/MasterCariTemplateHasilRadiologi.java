@@ -317,7 +317,7 @@ public final class MasterCariTemplateHasilRadiologi extends javax.swing.JDialog 
         if(tbKamar.getRowCount()!=0){
             try {
                 if(tbKamar.getSelectedRow()!= -1){
-                    Template.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString());
+                    Template.setText(tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),2).toString());
                 }
             } catch (java.lang.NullPointerException e) {
             }

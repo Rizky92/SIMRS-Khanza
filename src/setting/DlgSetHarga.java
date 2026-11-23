@@ -2165,17 +2165,17 @@ public class DlgSetHarga extends javax.swing.JDialog {
     private void ppUPdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUPdateActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         for (int i = 0; i < tbAdmin.getRowCount(); i++) {
-            Sequel.queryu2("update databarang set ralan=round(h_beli+(h_beli*("+tbAdmin.getValueAt(i,0).toString()+"/100))),"+
-                "kelas1=round(h_beli+(h_beli*("+tbAdmin.getValueAt(i,1).toString()+"/100))),"+
-                "kelas2=round(h_beli+(h_beli*("+tbAdmin.getValueAt(i,2).toString()+"/100))),"+
-                "kelas3=round(h_beli+(h_beli*("+tbAdmin.getValueAt(i,3).toString()+"/100))),"+
-                "utama=round(h_beli+(h_beli*("+tbAdmin.getValueAt(i,4).toString()+"/100))),"+
-                "vip=round(h_beli+(h_beli*("+tbAdmin.getValueAt(i,5).toString()+"/100))),"+
-                "vvip=round(h_beli+(h_beli*("+tbAdmin.getValueAt(i,6).toString()+"/100))),"+
-                "beliluar=round(h_beli+(h_beli*("+tbAdmin.getValueAt(i,7).toString()+"/100))),"+
-                "jualbebas=round(h_beli+(h_beli*("+tbAdmin.getValueAt(i,8).toString()+"/100))),"+
-                "karyawan=round(h_beli+(h_beli*("+tbAdmin.getValueAt(i,9).toString()+"/100))) where "+
-                "kdjns='"+tbAdmin.getValueAt(i,10).toString()+"'");
+            Sequel.queryu2("update databarang set ralan=round(h_beli+(h_beli*("+tabMode.getValueAt(tbAdmin.convertRowIndexToModel(i),0).toString()+"/100))),"+
+                "kelas1=round(h_beli+(h_beli*("+tabMode.getValueAt(tbAdmin.convertRowIndexToModel(i),1).toString()+"/100))),"+
+                "kelas2=round(h_beli+(h_beli*("+tabMode.getValueAt(tbAdmin.convertRowIndexToModel(i),2).toString()+"/100))),"+
+                "kelas3=round(h_beli+(h_beli*("+tabMode.getValueAt(tbAdmin.convertRowIndexToModel(i),3).toString()+"/100))),"+
+                "utama=round(h_beli+(h_beli*("+tabMode.getValueAt(tbAdmin.convertRowIndexToModel(i),4).toString()+"/100))),"+
+                "vip=round(h_beli+(h_beli*("+tabMode.getValueAt(tbAdmin.convertRowIndexToModel(i),5).toString()+"/100))),"+
+                "vvip=round(h_beli+(h_beli*("+tabMode.getValueAt(tbAdmin.convertRowIndexToModel(i),6).toString()+"/100))),"+
+                "beliluar=round(h_beli+(h_beli*("+tabMode.getValueAt(tbAdmin.convertRowIndexToModel(i),7).toString()+"/100))),"+
+                "jualbebas=round(h_beli+(h_beli*("+tabMode.getValueAt(tbAdmin.convertRowIndexToModel(i),8).toString()+"/100))),"+
+                "karyawan=round(h_beli+(h_beli*("+tabMode.getValueAt(tbAdmin.convertRowIndexToModel(i),9).toString()+"/100))) where "+
+                "kdjns='"+tabMode.getValueAt(tbAdmin.convertRowIndexToModel(i),10).toString()+"'");
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_ppUPdateActionPerformed
@@ -2755,16 +2755,16 @@ public class DlgSetHarga extends javax.swing.JDialog {
     private void ppUPdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUPdate1ActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         for (int i = 0; i < tbPengaturanHargaUmum.getRowCount(); i++) {
-            Sequel.queryu2("update databarang set ralan=round(h_beli+(h_beli*("+tbPengaturanHargaUmum.getValueAt(i,0).toString()+"/100))),"+
-                "kelas1=round(h_beli+(h_beli*("+tbPengaturanHargaUmum.getValueAt(i,1).toString()+"/100))),"+
-                "kelas2=round(h_beli+(h_beli*("+tbPengaturanHargaUmum.getValueAt(i,2).toString()+"/100))),"+
-                "kelas3=round(h_beli+(h_beli*("+tbPengaturanHargaUmum.getValueAt(i,3).toString()+"/100))),"+
-                "utama=round(h_beli+(h_beli*("+tbPengaturanHargaUmum.getValueAt(i,4).toString()+"/100))),"+
-                "vip=round(h_beli+(h_beli*("+tbPengaturanHargaUmum.getValueAt(i,5).toString()+"/100))),"+
-                "vvip=round(h_beli+(h_beli*("+tbPengaturanHargaUmum.getValueAt(i,6).toString()+"/100))),"+
-                "beliluar=round(h_beli+(h_beli*("+tbPengaturanHargaUmum.getValueAt(i,7).toString()+"/100))),"+
-                "jualbebas=round(h_beli+(h_beli*("+tbPengaturanHargaUmum.getValueAt(i,8).toString()+"/100))),"+
-                "karyawan=round(h_beli+(h_beli*("+tbPengaturanHargaUmum.getValueAt(i,9).toString()+"/100)))");
+            Sequel.queryu2("update databarang set ralan=round(h_beli+(h_beli*("+tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(i),0).toString()+"/100))),"+
+                "kelas1=round(h_beli+(h_beli*("+tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(i),1).toString()+"/100))),"+
+                "kelas2=round(h_beli+(h_beli*("+tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(i),2).toString()+"/100))),"+
+                "kelas3=round(h_beli+(h_beli*("+tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(i),3).toString()+"/100))),"+
+                "utama=round(h_beli+(h_beli*("+tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(i),4).toString()+"/100))),"+
+                "vip=round(h_beli+(h_beli*("+tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(i),5).toString()+"/100))),"+
+                "vvip=round(h_beli+(h_beli*("+tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(i),6).toString()+"/100))),"+
+                "beliluar=round(h_beli+(h_beli*("+tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(i),7).toString()+"/100))),"+
+                "jualbebas=round(h_beli+(h_beli*("+tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(i),8).toString()+"/100))),"+
+                "karyawan=round(h_beli+(h_beli*("+tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(i),9).toString()+"/100)))");
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_ppUPdate1ActionPerformed
@@ -2772,17 +2772,17 @@ public class DlgSetHarga extends javax.swing.JDialog {
     private void ppUPdate2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUPdate2ActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         for (int i = 0; i < tbPengaturanHargaPerBarang.getRowCount(); i++) {
-            Sequel.queryu2("update databarang set ralan=round(h_beli+(h_beli*("+tbPengaturanHargaPerBarang.getValueAt(i,0).toString()+"/100))),"+
-                "kelas1=round(h_beli+(h_beli*("+tbPengaturanHargaPerBarang.getValueAt(i,1).toString()+"/100))),"+
-                "kelas2=round(h_beli+(h_beli*("+tbPengaturanHargaPerBarang.getValueAt(i,2).toString()+"/100))),"+
-                "kelas3=round(h_beli+(h_beli*("+tbPengaturanHargaPerBarang.getValueAt(i,3).toString()+"/100))),"+
-                "utama=round(h_beli+(h_beli*("+tbPengaturanHargaPerBarang.getValueAt(i,4).toString()+"/100))),"+
-                "vip=round(h_beli+(h_beli*("+tbPengaturanHargaPerBarang.getValueAt(i,5).toString()+"/100))),"+
-                "vvip=round(h_beli+(h_beli*("+tbPengaturanHargaPerBarang.getValueAt(i,6).toString()+"/100))),"+
-                "beliluar=round(h_beli+(h_beli*("+tbPengaturanHargaPerBarang.getValueAt(i,7).toString()+"/100))),"+
-                "jualbebas=round(h_beli+(h_beli*("+tbPengaturanHargaPerBarang.getValueAt(i,8).toString()+"/100))),"+
-                "karyawan=round(h_beli+(h_beli*("+tbPengaturanHargaPerBarang.getValueAt(i,9).toString()+"/100))) where "+
-                "kode_brng='"+tbPengaturanHargaPerBarang.getValueAt(i,10).toString()+"'");
+            Sequel.queryu2("update databarang set ralan=round(h_beli+(h_beli*("+tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(i),0).toString()+"/100))),"+
+                "kelas1=round(h_beli+(h_beli*("+tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(i),1).toString()+"/100))),"+
+                "kelas2=round(h_beli+(h_beli*("+tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(i),2).toString()+"/100))),"+
+                "kelas3=round(h_beli+(h_beli*("+tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(i),3).toString()+"/100))),"+
+                "utama=round(h_beli+(h_beli*("+tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(i),4).toString()+"/100))),"+
+                "vip=round(h_beli+(h_beli*("+tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(i),5).toString()+"/100))),"+
+                "vvip=round(h_beli+(h_beli*("+tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(i),6).toString()+"/100))),"+
+                "beliluar=round(h_beli+(h_beli*("+tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(i),7).toString()+"/100))),"+
+                "jualbebas=round(h_beli+(h_beli*("+tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(i),8).toString()+"/100))),"+
+                "karyawan=round(h_beli+(h_beli*("+tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(i),9).toString()+"/100))) where "+
+                "kode_brng='"+tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(i),10).toString()+"'");
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_ppUPdate2ActionPerformed
@@ -3062,60 +3062,60 @@ public class DlgSetHarga extends javax.swing.JDialog {
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            ralan.setText(tbAdmin.getValueAt(row,0).toString());
-            ranapk1.setText(tbAdmin.getValueAt(row,1).toString());
-            ranapk2.setText(tbAdmin.getValueAt(row,2).toString());
-            ranapk3.setText(tbAdmin.getValueAt(row,3).toString());
-            ranaputama.setText(tbAdmin.getValueAt(row,4).toString());
-            ranapvip.setText(tbAdmin.getValueAt(row,5).toString());
-            ranapvvip.setText(tbAdmin.getValueAt(row,6).toString());
-            beliluar.setText(tbAdmin.getValueAt(row,7).toString());
-            jualbebas.setText(tbAdmin.getValueAt(row,8).toString());
-            karyawan.setText(tbAdmin.getValueAt(row,9).toString());
-            kdjns.setText(tbAdmin.getValueAt(row,10).toString());
-            nmjns.setText(tbAdmin.getValueAt(row,11).toString());
+            ralan.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),0).toString());
+            ranapk1.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),1).toString());
+            ranapk2.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),2).toString());
+            ranapk3.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),3).toString());
+            ranaputama.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),4).toString());
+            ranapvip.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),5).toString());
+            ranapvvip.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),6).toString());
+            beliluar.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),7).toString());
+            jualbebas.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),8).toString());
+            karyawan.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),9).toString());
+            kdjns.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),10).toString());
+            nmjns.setText(tabMode.getValueAt(tbAdmin.convertRowIndexToModel(row),11).toString());
         }
     }
 
     private void getDataPengaturanHargaUmum() {
         int row=tbPengaturanHargaUmum.getSelectedRow();
         if(row!= -1){
-            ralanumum.setText(tbPengaturanHargaUmum.getValueAt(row,0).toString());
-            ranapk1umum.setText(tbPengaturanHargaUmum.getValueAt(row,1).toString());
-            ranapk2umum.setText(tbPengaturanHargaUmum.getValueAt(row,2).toString());
-            ranapk3umum.setText(tbPengaturanHargaUmum.getValueAt(row,3).toString());
-            ranaputamaumum.setText(tbPengaturanHargaUmum.getValueAt(row,4).toString());
-            ranapvipumum.setText(tbPengaturanHargaUmum.getValueAt(row,5).toString());
-            ranapvvipumum.setText(tbPengaturanHargaUmum.getValueAt(row,6).toString());
-            beliluarumum.setText(tbPengaturanHargaUmum.getValueAt(row,7).toString());
-            jualbebasumum.setText(tbPengaturanHargaUmum.getValueAt(row,8).toString());
-            karyawanumum.setText(tbPengaturanHargaUmum.getValueAt(row,9).toString());
+            ralanumum.setText(tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(row),0).toString());
+            ranapk1umum.setText(tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(row),1).toString());
+            ranapk2umum.setText(tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(row),2).toString());
+            ranapk3umum.setText(tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(row),3).toString());
+            ranaputamaumum.setText(tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(row),4).toString());
+            ranapvipumum.setText(tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(row),5).toString());
+            ranapvvipumum.setText(tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(row),6).toString());
+            beliluarumum.setText(tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(row),7).toString());
+            jualbebasumum.setText(tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(row),8).toString());
+            karyawanumum.setText(tabModePengaturanHargaUmum.getValueAt(tbPengaturanHargaUmum.convertRowIndexToModel(row),9).toString());
         }
     }
 
     private void getDataPengaturanUmum() {
         int row=tbPengaturanUmum.getSelectedRow();
         if(row!= -1){
-            cmbPengaturan.setSelectedItem(tbPengaturanUmum.getValueAt(row,0).toString());
-            cmbHargaDasar.setSelectedItem(tbPengaturanUmum.getValueAt(row,1).toString());
+            cmbPengaturan.setSelectedItem(tabModePengaturanUmum.getValueAt(tbPengaturanUmum.convertRowIndexToModel(row),0).toString());
+            cmbHargaDasar.setSelectedItem(tabModePengaturanUmum.getValueAt(tbPengaturanUmum.convertRowIndexToModel(row),1).toString());
         }
     }
 
     private void getDataPengaturanHargaPerBarang() {
         int row=tbPengaturanHargaPerBarang.getSelectedRow();
         if(row!= -1){
-            ralanperbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,0).toString());
-            ranapk1perbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,1).toString());
-            ranapk2perbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,2).toString());
-            ranapk3perbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,3).toString());
-            ranaputamaperbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,4).toString());
-            ranapvipperbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,5).toString());
-            ranapvvipperbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,6).toString());
-            beliluarperbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,7).toString());
-            jualbebasperbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,8).toString());
-            karyawanperbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,9).toString());
-            kdbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,10).toString());
-            nmbarang.setText(tbPengaturanHargaPerBarang.getValueAt(row,11).toString());
+            ralanperbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(row),0).toString());
+            ranapk1perbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(row),1).toString());
+            ranapk2perbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(row),2).toString());
+            ranapk3perbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(row),3).toString());
+            ranaputamaperbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(row),4).toString());
+            ranapvipperbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(row),5).toString());
+            ranapvvipperbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(row),6).toString());
+            beliluarperbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(row),7).toString());
+            jualbebasperbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(row),8).toString());
+            karyawanperbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(row),9).toString());
+            kdbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(row),10).toString());
+            nmbarang.setText(tabModePengaturanHargaPerBarang.getValueAt(tbPengaturanHargaPerBarang.convertRowIndexToModel(row),11).toString());
         }
     }
 

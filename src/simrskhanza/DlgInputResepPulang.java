@@ -234,7 +234,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKamar.setAutoCreateRowSorter(false);
+        tbKamar.setAutoCreateRowSorter(true);
         tbKamar.setComponentPopupMenu(Popup);
         tbKamar.setName("tbKamar"); // NOI18N
         tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -449,7 +449,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
             index=0;
             jml=tbKamar.getRowCount();
             for(i=0;i<jml;i++){
-                if((Valid.SetAngka(tbKamar.getValueAt(i,0).toString())>0)&&(tbKamar.getValueAt(i,8).toString().trim().equals("")||tbKamar.getValueAt(i,9).toString().trim().equals(""))){
+                if((Valid.SetAngka(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString())>0)&&(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),8).toString().trim().equals("")||tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),9).toString().trim().equals(""))){
                     index++;
                 }
             }
@@ -464,24 +464,24 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
             Sequel.AutoComitFalse();
             sukses=true;
             for(i=0;i<tbKamar.getRowCount();i++){
-                if(Valid.SetAngka(tbKamar.getValueAt(i,0).toString())>0){
+                if(Valid.SetAngka(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString())>0){
                     if(Sequel.menyimpantf("resep_pulang","?,?,?,?,?,?,?,?,?,?,?","data",11,new String[]{
-                            TNoRw.getText(),tbKamar.getValueAt(i,1).toString(),tbKamar.getValueAt(i,0).toString(),
-                            tbKamar.getValueAt(i,6).toString(),""+Double.parseDouble(tbKamar.getValueAt(i,6).toString())*Double.parseDouble(tbKamar.getValueAt(i,0).toString()),
-                            tbKamar.getValueAt(i,4).toString(),Tanggal.getText(),Jam.getText(),kdgudang.getText(),
-                            tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,9).toString()
+                            TNoRw.getText(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString(),
+                            tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),6).toString(),""+Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),6).toString())*Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString()),
+                            tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),4).toString(),Tanggal.getText(),Jam.getText(),kdgudang.getText(),
+                            tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),8).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),9).toString()
                         })==true){
                             if(aktifkanbatch.equals("yes")){
                                 Sequel.mengedit3("data_batch","no_batch=? and kode_brng=? and no_faktur=?","sisa=sisa-?",4,new String[]{
-                                    ""+tbKamar.getValueAt(i,0).toString(),tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,1).toString(),tbKamar.getValueAt(i,9).toString()
+                                    ""+tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),8).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),9).toString()
                                 });
-                                Trackobat.catatRiwayat(tbKamar.getValueAt(i,1).toString(),0,Valid.SetAngka(tbKamar.getValueAt(i,0).toString()),"Resep Pulang",akses.getkode(),kdgudang.getText(),"Simpan",tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,9).toString(),TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText());
-                                Sequel.menyimpan("gudangbarang","'"+tbKamar.getValueAt(i,1).toString()+"','"+kdgudang.getText()+"','-"+tbKamar.getValueAt(i,0).toString()+"','"+tbKamar.getValueAt(i,8).toString()+"','"+tbKamar.getValueAt(i,9).toString()+"'",
-                                            "stok=stok-'"+tbKamar.getValueAt(i,0).toString()+"'","kode_brng='"+tbKamar.getValueAt(i,1).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='"+tbKamar.getValueAt(i,8).toString()+"' and no_faktur='"+tbKamar.getValueAt(i,9).toString()+"'");
+                                Trackobat.catatRiwayat(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString(),0,Valid.SetAngka(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString()),"Resep Pulang",akses.getkode(),kdgudang.getText(),"Simpan",tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),8).toString(),tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),9).toString(),TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText());
+                                Sequel.menyimpan("gudangbarang","'"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString()+"','"+kdgudang.getText()+"','-"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString()+"','"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),8).toString()+"','"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),9).toString()+"'",
+                                            "stok=stok-'"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString()+"'","kode_brng='"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),8).toString()+"' and no_faktur='"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),9).toString()+"'");
                             }else{
-                                Trackobat.catatRiwayat(tbKamar.getValueAt(i,1).toString(),0,Valid.SetAngka(tbKamar.getValueAt(i,0).toString()),"Resep Pulang",akses.getkode(),kdgudang.getText(),"Simpan","","",TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText());
-                                Sequel.menyimpan("gudangbarang","'"+tbKamar.getValueAt(i,1).toString()+"','"+kdgudang.getText()+"','-"+tbKamar.getValueAt(i,0).toString()+"','',''",
-                                            "stok=stok-'"+tbKamar.getValueAt(i,0).toString()+"'","kode_brng='"+tbKamar.getValueAt(i,1).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='' and no_faktur=''");
+                                Trackobat.catatRiwayat(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString(),0,Valid.SetAngka(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString()),"Resep Pulang",akses.getkode(),kdgudang.getText(),"Simpan","","",TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText());
+                                Sequel.menyimpan("gudangbarang","'"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString()+"','"+kdgudang.getText()+"','-"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString()+"','',''",
+                                            "stok=stok-'"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString()+"'","kode_brng='"+tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='' and no_faktur=''");
                             }
 
                     }else{
@@ -588,7 +588,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbKamar.getRowCount();i++){
-            tbKamar.setValueAt("",i,0);
+            tabMode.setValueAt("",tbKamar.convertRowIndexToModel(i),0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
@@ -623,7 +623,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
                         @Override
                         public void windowClosed(WindowEvent e) {
                             if(aturan.getTable().getSelectedRow()!= -1){
-                                tbKamar.setValueAt(aturan.getTable().getValueAt(aturan.getTable().getSelectedRow(),0).toString(),tbKamar.getSelectedRow(),4);
+                                tabMode.setValueAt(aturan.getTable().getValueAt(aturan.getTable().getSelectedRow(),0).toString(),tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),4);
                             }
                             tbKamar.requestFocus();
                         }
@@ -806,7 +806,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
     public void tampil() {
         jml=0;
         for(i=0;i<tbKamar.getRowCount();i++){
-            if(!tbKamar.getValueAt(i,0).toString().equals("")){
+            if(!tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString().equals("")){
                 jml++;
             }
         }
@@ -836,22 +836,23 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
 
         index=0;
         for(i=0;i<tbKamar.getRowCount();i++){
-            if(!tbKamar.getValueAt(i,0).toString().equals("")){
-                jumlah[index]=Double.parseDouble(tbKamar.getValueAt(i,0).toString());
-                kodebarang[index]=tbKamar.getValueAt(i,1).toString();
-                namabarang[index]=tbKamar.getValueAt(i,2).toString();
-                kodesatuan[index]=tbKamar.getValueAt(i,3).toString();
-                dosis[index]=tbKamar.getValueAt(i,4).toString();
-                letakbarang[index]=tbKamar.getValueAt(i,5).toString();
-                harga[index]=Double.parseDouble(tbKamar.getValueAt(i,6).toString());
-                namajenis[index]=tbKamar.getValueAt(i,7).toString();
-                nobatch[index]=tbKamar.getValueAt(i,8).toString();
-                nofaktur[index]=tbKamar.getValueAt(i,9).toString();
-                stok[index]=Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+            if(!tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString().equals("")){
+                jumlah[index]=Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),0).toString());
+                kodebarang[index]=tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),1).toString();
+                namabarang[index]=tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),2).toString();
+                kodesatuan[index]=tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),3).toString();
+                dosis[index]=tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),4).toString();
+                letakbarang[index]=tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),5).toString();
+                harga[index]=Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),6).toString());
+                namajenis[index]=tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),7).toString();
+                nobatch[index]=tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),8).toString();
+                nofaktur[index]=tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),9).toString();
+                stok[index]=Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(i),10).toString());
                 index++;
             }
         }
 
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
 
         for(i=0;i<jml;i++){
@@ -1027,6 +1028,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbKamar.resumeSorting();
     }
 
     public void emptTeks() {
@@ -1083,6 +1085,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
 
     private void tampil2(String nopermintaan) {
         this.nopermintaan=nopermintaan;
+        tbKamar.suspendSorting();
         Valid.tabelKosong(tabMode);
         try{
             if(aktifkanbatch.equals("yes")){
@@ -1285,6 +1288,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+        tbKamar.resumeSorting();
     }
 
     public void tampil3(String nopermintaan) {
@@ -1296,17 +1300,17 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
         if(kdgudang.getText().trim().equals("")){
              Valid.textKosong(TCari,"Asal Stok");
         }else if(row!= -1){
-             if(!tbKamar.getValueAt(row,0).toString().equals("")){
+             if(!tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString().equals("")){
                 try {
-                    if(Double.parseDouble(tbKamar.getValueAt(row,0).toString())>0){
+                    if(Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString())>0){
                         stokbarang=0;
                         if(aktifkanbatch.equals("yes")){
                             psobat=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
                             try {
                                 psobat.setString(1,kdgudang.getText());
-                                psobat.setString(2,tbKamar.getValueAt(row,1).toString());
-                                psobat.setString(3,tbKamar.getValueAt(row,8).toString());
-                                psobat.setString(4,tbKamar.getValueAt(row,9).toString());
+                                psobat.setString(2,tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
+                                psobat.setString(3,tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),8).toString());
+                                psobat.setString(4,tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),9).toString());
                                 rs=psobat.executeQuery();
                                 if(rs.next()){
                                     stokbarang=rs.getDouble(1);
@@ -1325,7 +1329,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
                             psobat=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                             try {
                                 psobat.setString(1,kdgudang.getText());
-                                psobat.setString(2,tbKamar.getValueAt(row,1).toString());
+                                psobat.setString(2,tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),1).toString());
                                 rs=psobat.executeQuery();
                                 if(rs.next()){
                                     stokbarang=rs.getDouble(1);
@@ -1342,10 +1346,10 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
                             }
                         }
 
-                        tbKamar.setValueAt(stokbarang,row,10);
+                        tabMode.setValueAt(stokbarang,tbKamar.convertRowIndexToModel(row),10);
                         y=0;
                         try {
-                            y=Double.parseDouble(tbKamar.getValueAt(row,0).toString());
+                            y=Double.parseDouble(tabMode.getValueAt(tbKamar.convertRowIndexToModel(row),0).toString());
                         } catch (Exception e) {
                             y=0;
                         }
@@ -1353,11 +1357,11 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
                         if(stokbarang<y){
                               JOptionPane.showMessageDialog(null,"Maaf, Stok tidak cukup....!!!");
                               TCari.requestFocus();
-                              tbKamar.setValueAt("", row,0);
+                              tabMode.setValueAt("", tbKamar.convertRowIndexToModel(row),0);
                         }
                     }
                 } catch (Exception e) {
-                    tbKamar.setValueAt("", row,0);
+                    tabMode.setValueAt("", tbKamar.convertRowIndexToModel(row),0);
                 }
              }
         }

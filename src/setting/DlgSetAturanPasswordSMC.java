@@ -378,12 +378,12 @@ public class DlgSetAturanPasswordSMC extends javax.swing.JDialog {
     private void getData() {
         int row = tbAturan.getSelectedRow();
         if (row != -1) {
-            PanjangMinimal.setText("-".equals(tbAturan.getValueAt(row, 0)) ? "" : tbAturan.getValueAt(row, 0).toString());
-            HurufBesar.setSelected("Yes".equals(tbAturan.getValueAt(row, 1)));
-            HurufKecil.setSelected("Yes".equals(tbAturan.getValueAt(row, 2)));
-            Angka.setSelected("Yes".equals(tbAturan.getValueAt(row, 3)));
-            Simbol.setSelected("Yes".equals(tbAturan.getValueAt(row, 4)));
-            HariPeringatan.setText("-".equals(tbAturan.getValueAt(row, 5)) ? "" : tbAturan.getValueAt(row, 5).toString());
+            PanjangMinimal.setText("-".equals(tabMode.getValueAt(tbAturan.convertRowIndexToModel(row), 0)) ? "" : tabMode.getValueAt(tbAturan.convertRowIndexToModel(row), 0).toString());
+            HurufBesar.setSelected("Yes".equals(tabMode.getValueAt(tbAturan.convertRowIndexToModel(row), 1)));
+            HurufKecil.setSelected("Yes".equals(tabMode.getValueAt(tbAturan.convertRowIndexToModel(row), 2)));
+            Angka.setSelected("Yes".equals(tabMode.getValueAt(tbAturan.convertRowIndexToModel(row), 3)));
+            Simbol.setSelected("Yes".equals(tabMode.getValueAt(tbAturan.convertRowIndexToModel(row), 4)));
+            HariPeringatan.setText("-".equals(tabMode.getValueAt(tbAturan.convertRowIndexToModel(row), 5)) ? "" : tabMode.getValueAt(tbAturan.convertRowIndexToModel(row), 5).toString());
         }
     }
 

@@ -1146,7 +1146,7 @@ public class DlgPermintaanPelayananInformasiObat extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()>-1){
             if(Sequel.queryu2tf("delete from pelayanan_informasi_obat where no_permintaan=?",1,new String[]{
-                    tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                    tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();
@@ -1525,7 +1525,7 @@ public class DlgPermintaanPelayananInformasiObat extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(!tbObat.getValueAt(tbObat.getSelectedRow(),21).toString().equals("")){
+                    if(!tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString().equals("")){
                         JOptionPane.showMessageDialog(null,"Sudah ada jawaban apoteker, data tidak bisa diubah ..!!");
                     }else{
                         ganti();
@@ -1608,7 +1608,7 @@ public class DlgPermintaanPelayananInformasiObat extends javax.swing.JDialog {
             TCari.requestFocus();
         }else{
             if(tbObat.getSelectedRow()!= -1){
-                if(!tbObat.getValueAt(tbObat.getSelectedRow(),21).toString().equals("")){
+                if(!tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString().equals("")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
@@ -1617,8 +1617,8 @@ public class DlgPermintaanPelayananInformasiObat extends javax.swing.JDialog {
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("emailrs",akses.getemailrs());
-                    finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
-                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),22).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),21).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString()));
+                    finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString());
+                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),22).toString()+"\nID "+(finger.equals("")?tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),21).toString():finger)+"\n"+Valid.SetTgl3(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20).toString()));
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptDokumentasiPelayananInformasiObat.jasper","report","::[ Dokumentasi Pelayanan Informasi Obat ]::",
                             "select pasien.tgl_lahir,pelayanan_informasi_obat.no_permintaan,pelayanan_informasi_obat.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,reg_periksa.umurdaftar,"+
@@ -2045,23 +2045,23 @@ public class DlgPermintaanPelayananInformasiObat extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoPermintaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            NoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            NoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            NmPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Metode.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            Penanya.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            StatusPenanya.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            NoTelp.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            JenisPertanyaan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            KeteranganJenisPertanyaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            UraianPertanyaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            Jawaban.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            Referensi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            PenyampaianJawaban.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            MetodeJawab.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
-            Valid.SetTgl2(TanggalPermintaan,tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            Valid.SetTgl2(TanggalJawab,tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
+            NoPermintaan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString());
+            NoRw.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),1).toString());
+            NoRM.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),2).toString());
+            NmPasien.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),3).toString());
+            Metode.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),9).toString());
+            Penanya.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),10).toString());
+            StatusPenanya.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),11).toString());
+            NoTelp.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),12).toString());
+            JenisPertanyaan.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),13).toString());
+            KeteranganJenisPertanyaan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),14).toString());
+            UraianPertanyaan.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),15).toString());
+            Jawaban.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),16).toString());
+            Referensi.setText(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),17).toString());
+            PenyampaianJawaban.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),18).toString());
+            MetodeJawab.setSelectedItem(tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),19).toString());
+            Valid.SetTgl2(TanggalPermintaan,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),8).toString());
+            Valid.SetTgl2(TanggalJawab,tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),20).toString());
         }
     }
 
@@ -2165,7 +2165,7 @@ public class DlgPermintaanPelayananInformasiObat extends javax.swing.JDialog {
         if(Sequel.mengedittf("pelayanan_informasi_obat","no_permintaan=?","no_permintaan=?,no_rawat=?,tanggal=?,metode=?,penanya=?,status_penanya=?,no_telp_penanya=?,jenis_pertanyaan=?,keterangan_jenis_pertanyaan=?,uraian_pertanyaan=?",11,new String[]{
                 NoPermintaan.getText(),NoRw.getText(),Valid.SetTgl(TanggalPermintaan.getSelectedItem()+"")+" "+TanggalPermintaan.getSelectedItem().toString().substring(11,19),
                 Metode.getSelectedItem().toString(),Penanya.getText(),StatusPenanya.getSelectedItem().toString(),NoTelp.getText(),JenisPertanyaan.getSelectedItem().toString(),
-                KeteranganJenisPertanyaan.getText(),UraianPertanyaan.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                KeteranganJenisPertanyaan.getText(),UraianPertanyaan.getText(),tabMode.getValueAt(tbObat.convertRowIndexToModel(tbObat.getSelectedRow()),0).toString()
              })==true){
                 runBackground(() ->tampil());
                 emptTeks();

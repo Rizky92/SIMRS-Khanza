@@ -599,17 +599,17 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
                     "stts<>'Batal' and reg_periksa.no_rkm_medis=? and penjab.png_jawab like ? "+
                     "order by reg_periksa.tgl_registrasi");
                 try {
-                    ps.setString(1,tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString());
+                    ps.setString(1,tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString());
                     ps.setString(2,"%"+TCari1.getText()+"%");
-                    ps.setString(3,tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString());
+                    ps.setString(3,tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString());
                     ps.setString(4,"%"+TCari1.getText()+"%");
-                    ps.setString(5,tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString());
+                    ps.setString(5,tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString());
                     ps.setString(6,"%"+TCari1.getText()+"%");
-                    ps.setString(7,tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString());
+                    ps.setString(7,tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString());
                     ps.setString(8,"%"+TCari1.getText()+"%");
-                    ps.setString(9,tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString());
+                    ps.setString(9,tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString());
                     ps.setString(10,"%"+TCari1.getText()+"%");
-                    ps.setString(11,tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString());
+                    ps.setString(11,tabMode.getValueAt(tbKamar.convertRowIndexToModel(tbKamar.getSelectedRow()),0).toString());
                     ps.setString(12,"%"+TCari1.getText()+"%");
                     rs=ps.executeQuery();
                     while(rs.next()){
