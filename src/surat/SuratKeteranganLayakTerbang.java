@@ -570,9 +570,12 @@ public final class SuratKeteranganLayakTerbang extends javax.swing.JDialog {
             Valid.textKosong(NoSurat,"No.Surat");
         }else if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"pasien");
-        }else if(Kehamilan.getText().trim().equals("")){
-            Valid.textKosong(Kehamilan,"Kehamilan");
+        // }else if(Kehamilan.getText().trim().equals("")){
+        //     Valid.textKosong(Kehamilan,"Kehamilan");
         }else{
+            if (Kehamilan.getText().isBlank()) {
+                Kehamilan.setText("0");
+            }
             if(Sequel.menyimpantf("surat_keterangan_layak_terbang","?,?,?,?","No.Surat",4,new String[]{
                     NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalPeriksa.getSelectedItem()+""),Kehamilan.getText()
             })==true){
@@ -626,10 +629,13 @@ public final class SuratKeteranganLayakTerbang extends javax.swing.JDialog {
             Valid.textKosong(NoSurat,"No.Surat");
         }else if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"pasien");
-        }else if(Kehamilan.getText().trim().equals("")){
-            Valid.textKosong(Kehamilan,"Kehamilan");
+        // }else if(Kehamilan.getText().trim().equals("")){
+        //     Valid.textKosong(Kehamilan,"Kehamilan");
         }else{
             if(tbObat.getSelectedRow()!= -1){
+                if (Kehamilan.getText().isBlank()) {
+                    Kehamilan.setText("0");
+                }
                 if(Sequel.mengedittf("surat_keterangan_layak_terbang","no_surat=?","no_surat=?,no_rawat=?,tanggal_periksa=?,kehamilan=?",5,new String[]{
                     NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalPeriksa.getSelectedItem()+""),Kehamilan.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
                     })==true){
