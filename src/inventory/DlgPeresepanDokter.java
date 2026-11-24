@@ -921,14 +921,14 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         Scroll1.setPreferredSize(new java.awt.Dimension(454, 90));
 
         tbObatResepRacikan.setName("tbObatResepRacikan"); // NOI18N
-        tbObatResepRacikan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                tbObatResepRacikanPropertyChange(evt);
-            }
-        });
         tbObatResepRacikan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tbObatResepRacikanKeyPressed(evt);
+            }
+        });
+        tbObatResepRacikan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tbObatResepRacikanPropertyChange(evt);
             }
         });
         Scroll1.setViewportView(tbObatResepRacikan);
@@ -940,7 +940,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
-        tbDetailResepObatRacikan.setAutoCreateRowSorter(false);
         tbDetailResepObatRacikan.setComponentPopupMenu(Popup);
         tbDetailResepObatRacikan.setName("tbDetailResepObatRacikan"); // NOI18N
         tbDetailResepObatRacikan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
