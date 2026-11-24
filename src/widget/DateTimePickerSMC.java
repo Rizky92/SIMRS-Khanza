@@ -52,7 +52,7 @@ import javax.swing.plaf.basic.ComboPopup;
  * Re-implementation of {@code uz.ncipro.calendar.JDateTimePicker}, keeping its contract so existing forms behave the same:
  * <ul>
  * <li>the selected item is the date formatted with {@link #getDisplayFormat()};</li>
- * <li>every date change replaces the single item, firing item and action events;</li>
+ * <li>every date change replaces the single item, firing item and action events; setting the date that is already shown fires none;</li>
  * <li>edited text is parsed leniently when the editor commits (enter, focus lost, or opening the popup), and unparseable text keeps the previous date;</li>
  * <li>clicking a day closes the popup; the month and year spinners (arrows or mouse wheel) keep it open and change the date immediately. Wheel events that Windows delivers to the owner dialog instead of the popup are rerouted to the popup, so scrolling never dismisses it.</li>
  * </ul>
@@ -104,12 +104,18 @@ public class DateTimePickerSMC extends JComboBox {
 
     /**
      * Sets the date and replaces the displayed text with it.
+     * <p>
+     * Setting the instant that is already selected leaves the displayed text alone and fires no item or action events, as in {@code uz.ncipro.calendar.JDateTimePicker}, so an item listener that writes the date back to its own picker does not recurse.
      *
      * @param date the new date value, must not be {@code null}
      */
     public void setDate(Date date) {
+        Date previous = calendar().getTime();
         calendar().setTime(date);
-        refreshValue();
+
+        if (!previous.equals(date)) {
+            refreshValue();
+        }
     }
 
     /**
