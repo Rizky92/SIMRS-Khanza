@@ -4,6 +4,7 @@ import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.platform.win32.WinUser;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
@@ -23,11 +24,13 @@ import java.awt.SecondaryLoop;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 import javax.swing.JComponent;
@@ -69,11 +72,115 @@ public final class LoadingOverlaySMC extends JComponent {
     private static final int SWP_NOSIZE = 0x0001;
     private static final int SWP_NOMOVE = 0x0002;
     private static final int SWP_NOACTIVATE = 0x0010;
+    private static final long SCREEN_TIMEOUT = 60_000;
+    private static final int CANCEL_DELAY = 3000;
+    private static final int WATCH_INTERVAL = 50;
+    private static final int HOTKEY_ID = 0x4C4F;
+    private static final int VK_ESCAPE = 0x1B;
+    private static final int PM_REMOVE = 0x0001;
+    private static final int HWND_NOTOPMOST = -2;
+    private static final String CANCEL_TEXT = "Batalkan (Esc)";
+    private static final int CANCEL_WIDTH = 220;
+    private static final int CANCEL_HEIGHT = 52;
+    private static final int CANCEL_GAP = 24;
 
     private static final Map<Window, LoadingOverlaySMC> OVERLAYS = new IdentityHashMap<>();
     private static boolean keyDispatcherInstalled = false;
     private static int scopeDepth = 0;
     private static int suspendDepth = 0;
+    private static volatile ScreenScope screenScope = null;
+
+    /**
+     * How a {@link #runOverScreen} call ended.
+     */
+    public enum ScreenOutcome {
+        /** The task ran to its end. */
+        COMPLETED,
+        /** The cover was dismissed with its cancel button or the Escape key before the task ended. */
+        CANCELLED,
+        /** The cover was dismissed because the task outlasted {@link #SCREEN_TIMEOUT}. */
+        TIMED_OUT
+    }
+
+    /**
+     * State of one {@link #runOverScreen} call that other threads may touch. A watchdog thread enforces the time limit and owns the Escape hotkey,
+     * so both still work when the event dispatch thread is stuck: stopping hides the cover natively first and only then asks Swing to clean up.
+     */
+    private static final class ScreenScope {
+        private final JWindow cover;
+        private final WinDef.HWND coverHandle;
+        private final long deadline;
+        private final AtomicReference<ScreenOutcome> outcome = new AtomicReference<>();
+        private volatile SecondaryLoop loop;
+        private volatile boolean closed = false;
+
+        ScreenScope(JWindow cover, WinDef.HWND coverHandle, long deadline) {
+            this.cover = cover;
+            this.coverHandle = coverHandle;
+            this.deadline = deadline;
+        }
+
+        boolean stopped() {
+            return outcome.get() != null;
+        }
+
+        void stop(ScreenOutcome reason) {
+            if (closed || !outcome.compareAndSet(null, reason)) {
+                return;
+            }
+            System.out.println("Notif : layar tunggu " + (ScreenOutcome.TIMED_OUT == reason ? "melewati batas waktu " + SCREEN_TIMEOUT / 1000 + " detik" : "dibatalkan") + ", layar dibuka kembali");
+            if (coverHandle != null) {
+                try {
+                    User32.INSTANCE.SetWindowPos(coverHandle, new WinDef.HWND(Pointer.createConstant(HWND_NOTOPMOST)), 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+                    User32.INSTANCE.ShowWindow(coverHandle, WinUser.SW_HIDE);
+                } catch (RuntimeException | LinkageError e) {
+                    System.out.println("Notif : " + e);
+                }
+            }
+            SecondaryLoop current = loop;
+            if (current != null) {
+                current.exit();
+            }
+            EventQueue.invokeLater(() -> cover.setVisible(false));
+        }
+
+        void close() {
+            closed = true;
+        }
+
+        void watch() {
+            boolean hotkey = false;
+            try {
+                hotkey = User32.INSTANCE.RegisterHotKey(null, HOTKEY_ID, WinUser.MOD_NOREPEAT, VK_ESCAPE);
+            } catch (RuntimeException | LinkageError e) {
+                System.out.println("Notif : " + e);
+            }
+            if (!hotkey) {
+                System.out.println("Notif : tombol Esc tidak dapat dipasang untuk membatalkan layar tunggu");
+            }
+
+            WinUser.MSG pesan = new WinUser.MSG();
+            try {
+                while (!closed && !stopped()) {
+                    while (hotkey && User32.INSTANCE.PeekMessage(pesan, null, 0, 0, PM_REMOVE)) {
+                        if (WinUser.WM_HOTKEY == pesan.message && HOTKEY_ID == pesan.wParam.intValue()) {
+                            stop(ScreenOutcome.CANCELLED);
+                        }
+                    }
+                    if (System.nanoTime() - deadline >= 0) {
+                        stop(ScreenOutcome.TIMED_OUT);
+                    }
+                    Thread.sleep(WATCH_INTERVAL);
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            } finally {
+                if (hotkey) {
+                    User32.INSTANCE.UnregisterHotKey(null, HOTKEY_ID);
+                }
+            }
+        }
+    }
 
     private final JRootPane rootPane;
     private final Component previousGlassPane;
@@ -85,6 +192,10 @@ public final class LoadingOverlaySMC extends JComponent {
     private boolean revealed = false;
     private int depth = 0;
     private int angle = 0;
+    private Runnable cancelAction = null;
+    private Timer cancelTimer = null;
+    private boolean cancelVisible = false;
+    private boolean cancelPressed = false;
 
     private LoadingOverlaySMC(JRootPane rootPane) {
         this.rootPane = rootPane;
@@ -96,6 +207,19 @@ public final class LoadingOverlaySMC extends JComponent {
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
         MouseAdapter swallow = new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                cancelPressed = cancelHit(e);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                boolean clicked = cancelPressed && cancelHit(e);
+                cancelPressed = false;
+                if (clicked) {
+                    cancelAction.run();
+                }
+            }
         };
         addMouseListener(swallow);
         addMouseMotionListener(swallow);
@@ -195,21 +319,28 @@ public final class LoadingOverlaySMC extends JComponent {
      * other applications. The cover swallows mouse and touch input but never takes the keyboard focus, so keystrokes sent with
      * {@link java.awt.Robot} still reach whichever application is in the foreground. Meant for driving another application on the patient's
      * behalf, e.g. logging in to a biometric app, without the patient being able to interfere.
+     * <p>
+     * The cover never outlives {@link #SCREEN_TIMEOUT}, whatever the task does, and it can be dismissed early with the cancel button shown on the
+     * card after {@link #CANCEL_DELAY} milliseconds or with the Escape key, which is registered as a system-wide hotkey while the cover is up. Once
+     * the cover is dismissed, every {@link #background} or {@link #sleep} call the task makes throws a {@link CancellationException}, so a task that
+     * polls through them stops at its next step.
      *
      * @param owner a component inside the window that started the work; it is blocked as well
      * @param message the text shown under the spinner, or {@code null} for a generic one
      * @param task the work to run
+     * @return whether the task ran to its end or the cover was dismissed first
      */
-    public static void runOverScreen(Component owner, String message, Runnable task) {
-        if (!EventQueue.isDispatchThread()) {
+    public static ScreenOutcome runOverScreen(Component owner, String message, Runnable task) {
+        if (!EventQueue.isDispatchThread() || screenScope != null) {
             task.run();
-            return;
+            return ScreenOutcome.COMPLETED;
         }
 
         Window ownerWindow = windowOf(owner);
         GraphicsConfiguration configuration = ownerWindow != null ? ownerWindow.getGraphicsConfiguration() : GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
 
         JWindow cover = new JWindow(configuration);
+        cover.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         cover.setFocusableWindowState(false);
         cover.setAlwaysOnTop(true);
         JComponent hitArea = new JComponent() {
@@ -225,18 +356,51 @@ public final class LoadingOverlaySMC extends JComponent {
         }
         cover.setBounds(configuration.getBounds());
 
-        Timer raise = new Timer(COVER_RAISE_DELAY, e -> raiseAboveOthers(cover));
         boolean ownerBlocked = begin(owner, message);
         cover.setVisible(true);
+        ScreenScope scope = new ScreenScope(cover, handleOf(cover), System.nanoTime() + SCREEN_TIMEOUT * 1_000_000L);
+        screenScope = scope;
+        Thread watchdog = new Thread(scope::watch, "LoadingOverlayWatchdog");
+        watchdog.setDaemon(true);
+        watchdog.start();
+        Timer raise = new Timer(COVER_RAISE_DELAY, e -> {
+            if (!scope.stopped()) {
+                raiseAboveOthers(cover);
+            }
+        });
         raise.start();
+        boolean coverBlocked = begin(cover, message);
+        if (coverBlocked) {
+            OVERLAYS.get(cover).enableCancel(() -> scope.stop(ScreenOutcome.CANCELLED));
+        }
         try {
             run(cover, message, task);
+        } catch (CancellationException e) {
+            if (!scope.stopped()) {
+                throw e;
+            }
         } finally {
+            scope.close();
+            screenScope = null;
             raise.stop();
+            if (coverBlocked) {
+                end(cover);
+            }
             cover.dispose();
             if (ownerBlocked) {
                 end(owner);
             }
+        }
+        ScreenOutcome outcome = scope.outcome.get();
+        return outcome == null ? ScreenOutcome.COMPLETED : outcome;
+    }
+
+    private static WinDef.HWND handleOf(Window window) {
+        try {
+            return new WinDef.HWND(Native.getWindowPointer(window));
+        } catch (RuntimeException | LinkageError e) {
+            System.out.println("Notif : " + e);
+            return null;
         }
     }
 
@@ -297,9 +461,24 @@ public final class LoadingOverlaySMC extends JComponent {
             return task.call();
         }
 
+        ScreenScope scope = screenScope;
+        if (scope != null && scope.stopped()) {
+            throw new CancellationException("Layar tunggu sudah ditutup");
+        }
+
         SecondaryLoop loop = Toolkit.getDefaultToolkit().getSystemEventQueue().createSecondaryLoop();
         AtomicReference<T> result = new AtomicReference<>();
         AtomicReference<Throwable> failure = new AtomicReference<>();
+
+        SecondaryLoop previousLoop = null;
+        if (scope != null) {
+            previousLoop = scope.loop;
+            scope.loop = loop;
+            if (scope.stopped()) {
+                scope.loop = previousLoop;
+                throw new CancellationException("Layar tunggu sudah ditutup");
+            }
+        }
 
         new SwingWorker<Void, Void>() {
             @Override
@@ -314,7 +493,17 @@ public final class LoadingOverlaySMC extends JComponent {
                 return null;
             }
         }.execute();
-        loop.enter();
+        try {
+            loop.enter();
+        } finally {
+            if (scope != null) {
+                scope.loop = previousLoop;
+            }
+        }
+
+        if (scope != null && scope.stopped()) {
+            throw new CancellationException("Layar tunggu sudah ditutup");
+        }
 
         Throwable t = failure.get();
         if (t instanceof Exception) {
@@ -423,7 +612,29 @@ public final class LoadingOverlaySMC extends JComponent {
         showTimer.start();
     }
 
+    private void enableCancel(Runnable action) {
+        cancelAction = action;
+        cancelTimer = new Timer(CANCEL_DELAY, e -> {
+            cancelVisible = true;
+            repaint();
+        });
+        cancelTimer.setRepeats(false);
+        cancelTimer.start();
+    }
+
+    private boolean cancelHit(MouseEvent e) {
+        return cancelAction != null && cancelVisible && revealed && suspendDepth == 0 && cancelBounds(getFontMetrics(MESSAGE_FONT)).contains(e.getPoint());
+    }
+
+    private Rectangle cancelBounds(FontMetrics metrics) {
+        Rectangle card = cardBounds(metrics, message.split("\n"));
+        return new Rectangle(card.x + (card.width - CANCEL_WIDTH) / 2, card.y + card.height - CARD_PADDING - CANCEL_HEIGHT, CANCEL_WIDTH, CANCEL_HEIGHT);
+    }
+
     private void uninstall() {
+        if (cancelTimer != null) {
+            cancelTimer.stop();
+        }
         showTimer.stop();
         frameTimer.stop();
         setVisible(false);
@@ -453,7 +664,7 @@ public final class LoadingOverlaySMC extends JComponent {
         }
 
         int width = Math.max(CARD_MIN_WIDTH, textWidth + CARD_PADDING * 2);
-        int height = CARD_PADDING + SPINNER_SIZE + 24 + lines.length * metrics.getHeight() + CARD_PADDING;
+        int height = CARD_PADDING + SPINNER_SIZE + 24 + lines.length * metrics.getHeight() + (cancelVisible ? CANCEL_GAP + CANCEL_HEIGHT : 0) + CARD_PADDING;
         return new Rectangle((getWidth() - width) / 2, (getHeight() - height) / 2, width, height);
     }
 
@@ -495,6 +706,13 @@ public final class LoadingOverlaySMC extends JComponent {
             for (String line : lines) {
                 g2.drawString(line, card.x + (card.width - metrics.stringWidth(line)) / 2, textY);
                 textY += metrics.getHeight();
+            }
+
+            if (cancelAction != null && cancelVisible) {
+                Rectangle button = cancelBounds(metrics);
+                g2.setStroke(new BasicStroke(2f));
+                g2.drawRoundRect(button.x, button.y, button.width, button.height, 16, 16);
+                g2.drawString(CANCEL_TEXT, button.x + (button.width - metrics.stringWidth(CANCEL_TEXT)) / 2, button.y + (button.height - metrics.getHeight()) / 2 + metrics.getAscent());
             }
         } finally {
             g2.dispose();

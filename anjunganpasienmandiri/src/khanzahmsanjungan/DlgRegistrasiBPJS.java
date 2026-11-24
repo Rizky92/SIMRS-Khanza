@@ -1310,7 +1310,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         } else {
             SwingUtilities.invokeLater(() -> {
                 boolean[] timeout = {false};
-                LoadingOverlaySMC.runOverScreen(this, "Membuka aplikasi sidik jari...", () -> {
+                LoadingOverlaySMC.ScreenOutcome hasil = LoadingOverlaySMC.runOverScreen(this, "Membuka aplikasi sidik jari...", () -> {
                     try {
                         AplikasiBiometrikSMC.bukaFingerprint(pathFingerprint, EnkripsiAES.decrypt(userLoginValidasi), EnkripsiAES.decrypt(passLoginValidasi), noPeserta.getText().trim(), timeoutFingerprintSmc);
                         fingerprintAktif = true;
@@ -1320,7 +1320,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         System.out.println("Notif : " + e);
                     }
                 });
-                if (timeout[0]) {
+                if (timeout[0] || LoadingOverlaySMC.ScreenOutcome.TIMED_OUT == hasil) {
                     Valid.popupGagalDialog("Aplikasi sidik jari tidak merespon..!!\nSilahkan hubungi petugas.", 5);
                 }
             });
@@ -1333,7 +1333,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         } else {
             SwingUtilities.invokeLater(() -> {
                 boolean[] timeout = {false};
-                LoadingOverlaySMC.runOverScreen(this, "Membuka aplikasi FRISTA...", () -> {
+                LoadingOverlaySMC.ScreenOutcome hasil = LoadingOverlaySMC.runOverScreen(this, "Membuka aplikasi FRISTA...", () -> {
                     try {
                         AplikasiBiometrikSMC.bukaFrista(pathFrista, EnkripsiAES.decrypt(userLoginValidasi), EnkripsiAES.decrypt(passLoginValidasi), noPeserta.getText().trim(), timeoutFristaSmc);
                         fristaAktif = true;
@@ -1344,7 +1344,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         System.out.println("Notif : " + e);
                     }
                 });
-                if (timeout[0]) {
+                if (timeout[0] || LoadingOverlaySMC.ScreenOutcome.TIMED_OUT == hasil) {
                     Valid.popupGagalDialog("Aplikasi FRISTA tidak merespon..!!\nSilahkan hubungi petugas.", 5);
                 }
             });

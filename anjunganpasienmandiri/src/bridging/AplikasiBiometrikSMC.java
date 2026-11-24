@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
@@ -51,6 +52,7 @@ public final class AplikasiBiometrikSMC {
     private static final long BATAS_TANPA_KONTROL = 1500;
     private static final long BATAS_ISI_TEKS = 3000;
     private static final int BATAS_PESAN = 1000;
+    private static final long BATAS_LAPOR_DEPAN = 2000;
     private static final int WM_SETTEXT = 0x000C;
     private static final int WM_GETTEXT = 0x000D;
     private static final int EM_GETPASSWORDCHAR = 0x00D2;
@@ -119,6 +121,7 @@ public final class AplikasiBiometrikSMC {
     private final long mulai = System.nanoTime();
     private final Robot robot = new Robot();
     private String langkah = "memulai";
+    private Callable<WinDef.HWND> sasaran = null;
     private boolean sandiDiClipboard = false;
 
     private AplikasiBiometrikSMC(String nama, int timeoutDetik) throws Exception {
@@ -175,13 +178,12 @@ public final class AplikasiBiometrikSMC {
             jendela = tunggu("jendela aplikasi muncul", AplikasiBiometrikSMC::cariFingerprint);
         }
 
-        jadikanDepan(jendela);
+        jadikanDepan(AplikasiBiometrikSMC::cariFingerprint);
         Status status = tungguStatus(AplikasiBiometrikSMC::cariFingerprint);
 
         if (Status.LOGIN == status) {
             LoadingOverlaySMC.setMessage("Login aplikasi sidik jari...");
-            jendela = cariFingerprint();
-            jadikanDepan(jendela);
+            jendela = jadikanDepan(AplikasiBiometrikSMC::cariFingerprint);
             isiLogin(jendela, user, password);
             tekan(KeyEvent.VK_ENTER);
             jendela = tunggu("login selesai", () -> {
@@ -200,10 +202,7 @@ public final class AplikasiBiometrikSMC {
         }
 
         LoadingOverlaySMC.setMessage("Memasukkan nomor kartu...");
-        if (jendela == null) {
-            jendela = tunggu("jendela aplikasi muncul kembali", AplikasiBiometrikSMC::cariFingerprint);
-        }
-        siapKetik(jendela);
+        jendela = siapKetik(AplikasiBiometrikSMC::cariFingerprint);
         kosongkan(tungguKolomAktif(jendela));
         tempel(noKartu);
         log("nomor kartu dimasukkan");
@@ -372,7 +371,7 @@ public final class AplikasiBiometrikSMC {
             }
 
             LoadingOverlaySMC.setMessage("Login aplikasi FRISTA...");
-            siapKetik(login);
+            login = siapKetik(AplikasiBiometrikSMC::cariLoginFrista);
             isiLogin(login, user, password);
             tekan(KeyEvent.VK_TAB);
             tekan(KeyEvent.VK_SPACE);
@@ -380,7 +379,7 @@ public final class AplikasiBiometrikSMC {
         }
 
         LoadingOverlaySMC.setMessage("Memasukkan nomor kartu...");
-        siapKetik(utama);
+        utama = siapKetik(AplikasiBiometrikSMC::cariUtamaFrista);
         kosongkan(tungguKolomAktif(utama));
         tempel(noKartu);
         log("nomor kartu dimasukkan");
@@ -508,26 +507,71 @@ public final class AplikasiBiometrikSMC {
         }
     }
 
-    private void jadikanDepan(WinDef.HWND jendela) throws Exception {
+    /**
+     * Membawa jendela aplikasi ke depan sampai siap menerima input. Jendela dicari ulang setiap kali diperiksa, karena aplikasi dapat menutup
+     * jendela yang baru dibuat lalu menggantinya dengan jendela baru berjudul sama (FRISTA melakukannya pada form login). Handle yang sudah
+     * tidak ada tidak pernah dapat dibawa ke depan, sehingga menahannya membuat langkah ini menunggu selamanya.
+     *
+     * @return handle jendela yang berada di depan
+     */
+    private WinDef.HWND jadikanDepan(Callable<WinDef.HWND> cari) throws Exception {
         langkah = "menampilkan jendela aplikasi";
-        if (User32SMC.INSTANCE.IsIconic(jendela)) {
-            User32.INSTANCE.ShowWindow(jendela, SW_RESTORE);
-        }
+        sasaran = cari;
+        long sejak = System.nanoTime();
+        long laporBerikutnya = sejak + BATAS_LAPOR_DEPAN * 1_000_000L;
+        int percobaan = 0;
+        WinDef.HWND sebelumnya = null;
         while (true) {
-            WinDef.HWND depan = User32.INSTANCE.GetForegroundWindow();
-            if (depan != null && prosesSama(depan, jendela) && siapInput(jendela)) {
-                return;
+            WinDef.HWND jendela = cari.call();
+            if (jendela != null && sebelumnya != null && !jendela.equals(sebelumnya)) {
+                log("jendela aplikasi diganti oleh aplikasi, memakai jendela yang baru");
             }
-            User32.INSTANCE.SetForegroundWindow(jendela);
+            sebelumnya = jendela != null ? jendela : sebelumnya;
+
+            WinDef.HWND depan = User32.INSTANCE.GetForegroundWindow();
+            boolean sudahDepan = jendela != null && depan != null && prosesSama(depan, jendela);
+            if (sudahDepan && siapInput(jendela)) {
+                if (percobaan > 0) {
+                    log("jendela aplikasi di depan setelah " + percobaan + " percobaan (" + (System.nanoTime() - sejak) / 1_000_000 + " ms)");
+                }
+                return jendela;
+            }
+
+            boolean berhasil = false;
+            if (jendela != null) {
+                if (User32SMC.INSTANCE.IsIconic(jendela)) {
+                    User32.INSTANCE.ShowWindow(jendela, SW_RESTORE);
+                }
+                berhasil = User32.INSTANCE.SetForegroundWindow(jendela);
+                percobaan++;
+            }
+            if (System.nanoTime() - laporBerikutnya >= 0) {
+                String keadaan;
+                if (jendela == null) {
+                    keadaan = "jendela aplikasi tidak ditemukan";
+                } else if (sudahDepan) {
+                    keadaan = "sudah di depan tetapi belum siap menerima input";
+                } else {
+                    keadaan = "SetForegroundWindow " + (berhasil ? "diterima" : "ditolak") + ", jendela depan '" + (depan == null ? "-" : judul(depan)) + "' pid " + (depan == null ? 0 : pid(depan));
+                }
+                log("menunggu jendela aplikasi di depan: percobaan " + percobaan + ", " + keadaan);
+                laporBerikutnya = System.nanoTime() + BATAS_LAPOR_DEPAN * 1_000_000L;
+            }
             jeda();
         }
     }
 
-    private void siapKetik(WinDef.HWND jendela) throws Exception {
-        jadikanDepan(jendela);
+    private WinDef.HWND siapKetik(Callable<WinDef.HWND> cari) throws Exception {
+        WinDef.HWND jendela = jadikanDepan(cari);
         if (null == statusJendela(jendela)) {
             jedaTetap();
+            WinDef.HWND sekarang = cari.call();
+            if (sekarang != null && !sekarang.equals(jendela)) {
+                log("jendela aplikasi diganti saat menunggu, membawa jendela yang baru ke depan");
+                jendela = jadikanDepan(cari);
+            }
         }
+        return jendela;
     }
 
     private static boolean prosesSama(WinDef.HWND a, WinDef.HWND b) {
@@ -603,7 +647,7 @@ public final class AplikasiBiometrikSMC {
         }
     }
 
-    private void kosongkan(Kolom kolom) {
+    private void kosongkan(Kolom kolom) throws Exception {
         if (kolom.hwnd != null) {
             User32SMC.INSTANCE.SendMessageTimeout(kolom.hwnd, WM_SETTEXT, new WinDef.WPARAM(0), new char[] {0}, SMTO_ABORTIFHUNG, BATAS_PESAN, new LongByReference());
         } else {
@@ -666,7 +710,12 @@ public final class AplikasiBiometrikSMC {
             log("batas waktu habis saat " + langkah);
             throw new TimeoutException(nama + ": batas waktu habis saat " + langkah);
         }
-        LoadingOverlaySMC.sleep(JEDA_PANTAU);
+        try {
+            LoadingOverlaySMC.sleep(JEDA_PANTAU);
+        } catch (CancellationException e) {
+            log("layar tunggu ditutup saat " + langkah + ", proses dihentikan");
+            throw e;
+        }
     }
 
     private void jedaTetap() throws Exception {
@@ -676,27 +725,51 @@ public final class AplikasiBiometrikSMC {
         }
     }
 
-    private void tekan(int tombol) {
+    /**
+     * Memastikan jendela aplikasi yang terakhir dibawa ke depan masih memegang fokus sebelum tombol dikirim. Tombol yang terkirim saat fokus berada
+     * di anjungan ditelan oleh layar tunggu dan tidak pernah sampai ke aplikasi, sehingga fokus yang berpindah dibawa kembali lebih dulu.
+     */
+    private void pastikanDepan() throws Exception {
+        if (sasaran == null) {
+            return;
+        }
+        WinDef.HWND jendela = sasaran.call();
+        WinDef.HWND depan = User32.INSTANCE.GetForegroundWindow();
+        if (jendela != null && depan != null && prosesSama(depan, jendela)) {
+            return;
+        }
+        log("fokus berada di '" + (depan == null ? "-" : judul(depan)) + "' pid " + (depan == null ? 0 : pid(depan)) + " sebelum mengetik, membawa jendela aplikasi kembali");
+        jadikanDepan(sasaran);
+    }
+
+    private void tekan(int tombol) throws Exception {
+        pastikanDepan();
+        tekanLangsung(tombol);
+    }
+
+    private void tekanLangsung(int tombol) {
         robot.keyPress(tombol);
         robot.keyRelease(tombol);
     }
 
-    private void pilihSemua() {
+    private void pilihSemua() throws Exception {
+        pastikanDepan();
         robot.keyPress(KeyEvent.VK_CONTROL);
-        tekan(KeyEvent.VK_A);
+        tekanLangsung(KeyEvent.VK_A);
         robot.keyRelease(KeyEvent.VK_CONTROL);
     }
 
-    private void tempel(String teks) {
+    private void tempel(String teks) throws Exception {
         StringSelection isi = new StringSelection(teks);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(isi, isi);
         sandiDiClipboard = false;
+        pastikanDepan();
         robot.keyPress(KeyEvent.VK_CONTROL);
-        tekan(KeyEvent.VK_V);
+        tekanLangsung(KeyEvent.VK_V);
         robot.keyRelease(KeyEvent.VK_CONTROL);
     }
 
-    private void tempelSandi(String sandi) {
+    private void tempelSandi(String sandi) throws Exception {
         tempel(sandi);
         sandiDiClipboard = true;
     }
