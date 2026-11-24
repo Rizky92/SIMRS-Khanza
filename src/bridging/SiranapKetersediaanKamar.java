@@ -683,7 +683,8 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
                             runBackground(() ->tampil());
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null,nameNode.path("deskripsi").asText());
+                    //JOptionPane.showMessageDialog(null,nameNode.path("deskripsi").asText());
+                    JOptionPane.showMessageDialog(null, root.path("deskripsi").asText());
                 }
             }catch (Exception ex) {
                 System.out.println("Notifikasi Bridging : "+ex);
@@ -735,7 +736,8 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
                             tbJnsPerawatan.getValueAt(i,1).toString(),tbJnsPerawatan.getValueAt(i,2).toString(),tbJnsPerawatan.getValueAt(i,3).toString(),tbJnsPerawatan.getValueAt(i,5).toString()
                         });
                     }else{
-                        JOptionPane.showMessageDialog(null,nameNode.path("deskripsi").asText());
+                        //JOptionPane.showMessageDialog(null,nameNode.path("deskripsi").asText());
+                        JOptionPane.showMessageDialog(null, root.path("deskripsi").asText());
                     }
                 }catch (Exception ex) {
                     System.out.println("Notifikasi Bridging : "+ex);
@@ -791,7 +793,8 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
                         tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString()
                     });
                 }else{
-                    JOptionPane.showMessageDialog(null,nameNode.path("deskripsi").asText());
+                    //JOptionPane.showMessageDialog(null,nameNode.path("deskripsi").asText());
+                    JOptionPane.showMessageDialog(null, root.path("deskripsi").asText());
                 }
             }catch (Exception ex) {
                 System.out.println("Notifikasi Bridging : "+ex);
@@ -839,7 +842,8 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
                             runBackground(() ->tampil());
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null,nameNode.path("deskripsi").asText());
+                    //JOptionPane.showMessageDialog(null,nameNode.path("deskripsi").asText());
+                    JOptionPane.showMessageDialog(null, root.path("deskripsi").asText());
                 }
             }catch (Exception ex) {
                 System.out.println("Notifikasi Bridging : "+ex);
