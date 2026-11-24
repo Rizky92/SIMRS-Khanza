@@ -10,6 +10,9 @@
  */
 
 package bridging;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -18,6 +21,7 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,7 +29,9 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -36,6 +42,11 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.HttpStatusCodeException;
 
 /**
  *
@@ -51,6 +62,8 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
+    private final ApiMobileJKN apiMobileJKN = new ApiMobileJKN();
+    private final ObjectMapper mapper = new ObjectMapper();
 
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
@@ -337,7 +350,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-02-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-11-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -351,7 +364,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-02-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-11-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -530,7 +543,27 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         if (tabMode.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!");
         } else {
+            boolean adaPilihan = false;
+            for (int i = 0; i < tabMode.getRowCount(); i++) {
+                if (Boolean.TRUE.equals(tabMode.getValueAt(i, 0))) {
+                    adaPilihan = true;
+                    break;
+                }
+            }
+            if (!adaPilihan) {
+                JOptionPane.showMessageDialog(null, "Silahkan pilih booking yang akan dibatalkan..!!");
+                return;
+            }
+            widget.CekBox chkDaftarUlang = new widget.CekBox();
+            chkDaftarUlang.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            chkDaftarUlang.setText("Daftarkan ulang booking setelah pembatalan dikonfirmasi BPJS");
+            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(null, new Object[] {"Batalkan booking yang dipilih?", chkDaftarUlang}, "Konfirmasi", JOptionPane.YES_NO_OPTION)) {
+                return;
+            }
             boolean adaTask99 = false;
+            ArrayList<String> bookingBatal = new ArrayList<>();
+            StringBuilder gagalKirim = new StringBuilder();
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             for (int i = 0; i < tabMode.getRowCount(); i++) {
                 if (tbJnsPerawatan.getValueAt(i, 0).toString().equals("true")) {
                     if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs_taskid where no_rawat = ? and taskid = '99'", tbJnsPerawatan.getValueAt(i, 1).toString())) {
@@ -544,11 +577,23 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
                             tbJnsPerawatan.getValueAt(i,2).toString(),tbJnsPerawatan.getValueAt(i,1).toString(),
                             tbJnsPerawatan.getValueAt(i,12).toString(),"Dibatalkan Oleh Admin","Belum",tbJnsPerawatan.getValueAt(i,15).toString()
                         });
+                        bookingBatal.add(tbJnsPerawatan.getValueAt(i, 15).toString());
+                        String hasilKirim = kirimBatalSmc(tbJnsPerawatan.getValueAt(i, 1).toString(), tbJnsPerawatan.getValueAt(i, 15).toString(), "Dibatalkan Oleh Admin");
+                        if (!hasilKirim.isBlank()) {
+                            gagalKirim.append(tbJnsPerawatan.getValueAt(i, 15).toString()).append(" : ").append(hasilKirim).append("<br>");
+                        }
                     }
                 }
             }
+            setCursor(Cursor.getDefaultCursor());
             if (adaTask99) {
                 JOptionPane.showMessageDialog(null, "<html><body>Antrian berhasil dibatalkan.<br>Beberapa antrian tidak dapat dibatalkan karena pasien sudah Checkin di BPJS (task 99 telah dikirim).</body></html>");
+            }
+            if (gagalKirim.length() > 0) {
+                JOptionPane.showMessageDialog(null, "<html><body>Antrian berikut sudah dibatalkan di SIMRS, tetapi pembatalannya belum diterima BPJS dan akan dikirim ulang oleh service :<br>" + gagalKirim + "</body></html>");
+            }
+            if (chkDaftarUlang.isSelected() && !bookingBatal.isEmpty()) {
+                bukaDaftarUlangSmc(bookingBatal);
             }
             runBackground(() ->tampil());
         }
@@ -591,14 +636,28 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         if (tabMode.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!");
         } else {
+            ArrayList<String> bookingBatal = new ArrayList<>();
             for (int i = 0; i < tabMode.getRowCount(); i++) {
                 if (tbJnsPerawatan.getValueAt(i, 0).toString().equals("true")) {
+                    /*
                     if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Belum',validasi='0000-00-00 00:00:00'",1,new String[]{
                         tbJnsPerawatan.getValueAt(i,15).toString()
                     })==true){
                         Sequel.meghapus("referensi_mobilejkn_bpjs_batal","nobooking",tbJnsPerawatan.getValueAt(i,15).toString());
                     }
+                    */
+                    if (Sequel.mengupdatetfSmc("referensi_mobilejkn_bpjs", "status = 'Belum', validasi = '0000-00-00 00:00:00.000'", "nobooking = ? and " +
+                        "exists(select * from referensi_mobilejkn_bpjs_batal where referensi_mobilejkn_bpjs_batal.nobooking = referensi_mobilejkn_bpjs.nobooking " +
+                        "and referensi_mobilejkn_bpjs_batal.statuskirim = 'Belum')", tbJnsPerawatan.getValueAt(i,15).toString()
+                    )) {
+                        Sequel.menghapustfSmc("referensi_mobilejkn_bpjs_batal", "nobooking = ?", tbJnsPerawatan.getValueAt(i, 15).toString());
+                    } else if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.nobooking = ? and referensi_mobilejkn_bpjs.status = 'Batal'", tbJnsPerawatan.getValueAt(i, 15).toString())) {
+                        bookingBatal.add(tbJnsPerawatan.getValueAt(i, 15).toString());
+                    }
                 }
+            }
+            if (!bookingBatal.isEmpty()) {
+                bukaDaftarUlangSmc(bookingBatal);
             }
             runBackground(() ->tampil());
         }
@@ -749,6 +808,51 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
+    }
+
+    private String kirimBatalSmc(String noRawat, String nobooking, String keterangan) {
+        String request = "", tanggalBatal = Sequel.cariIsiSmc("select referensi_mobilejkn_bpjs_batal.tanggalbatal from referensi_mobilejkn_bpjs_batal where referensi_mobilejkn_bpjs_batal.nobooking = ?", nobooking);
+        try {
+            ObjectNode json = mapper.createObjectNode();
+            json.put("kodebooking", nobooking);
+            json.put("keterangan", keterangan);
+            request = json.toString();
+            String utc = String.valueOf(apiMobileJKN.GetUTCdatetimeAsString());
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("x-cons-id", koneksiDB.CONSIDAPIMOBILEJKN());
+            headers.add("x-timestamp", utc);
+            headers.add("x-signature", apiMobileJKN.getHmac(utc));
+            headers.add("user_key", koneksiDB.USERKEYAPIMOBILEJKN());
+            JsonNode root = mapper.readTree(apiMobileJKN.getRest().exchange(koneksiDB.URLAPIMOBILEJKN() + "/antrean/batal", HttpMethod.POST, new HttpEntity(request, headers), String.class).getBody());
+            JsonNode metadata = root.path("metadata");
+            Sequel.logTaskid(noRawat, nobooking, "MobileJKN", "batalantrean", request, metadata.path("code").asText(), metadata.path("message").asText(), root.toString(), tanggalBatal);
+            if ("200".equals(metadata.path("code").asText())) {
+                Sequel.mengupdatetfSmc("referensi_mobilejkn_bpjs_batal", "statuskirim = 'Sudah'", "nobooking = ?", nobooking);
+                return "";
+            }
+            return metadata.path("code").asText() + " " + metadata.path("message").asText();
+        } catch (HttpStatusCodeException e) {
+            System.out.println("Notif : " + e);
+            Sequel.logTaskid(noRawat, nobooking, "MobileJKN", "batalantrean", request, String.valueOf(e.getStatusCode().value()), e.getMessage(), e.getResponseBodyAsString(), tanggalBatal);
+            return e.getMessage();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            return e.getMessage();
+        }
+    }
+
+    private void bukaDaftarUlangSmc(List<String> daftarBooking) {
+        MobileJKNDaftarUlangBookingSMC daftarUlang = new MobileJKNDaftarUlangBookingSMC(null, true);
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            daftarUlang.setBooking(daftarBooking);
+        } finally {
+            setCursor(Cursor.getDefaultCursor());
+        }
+        daftarUlang.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        daftarUlang.setLocationRelativeTo(internalFrame1);
+        daftarUlang.setVisible(true);
     }
 
     private void runBackground(Runnable task) {
