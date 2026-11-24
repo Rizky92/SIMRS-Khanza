@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -25,6 +24,7 @@ import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
+import widget.LoadingOverlaySMC;
 
 public class DlgAmbilAntrianFarmasi extends widget.Dialog {
     private final Connection koneksi = koneksiDB.condb();
@@ -150,9 +150,7 @@ public class DlgAmbilAntrianFarmasi extends widget.Dialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AmbilAntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AmbilAntrianActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        cetakAntrian();
-        this.setCursor(Cursor.getDefaultCursor());
+        LoadingOverlaySMC.run(this, "Mencetak nomor antrian...", this::cetakAntrian);
     }//GEN-LAST:event_AmbilAntrianActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated

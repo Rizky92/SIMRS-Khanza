@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class koneksiDB {
     private static Connection connection = null;
+    private static Connection koneksiLatarBelakangSMC = null, koneksiAsliSMC = null;
     private static final Properties prop = new Properties();
     private static final MysqlDataSource dataSource = new MysqlDataSource();
 
@@ -78,7 +79,11 @@ public class koneksiDB {
         } catch (SQLException ex) {
             Logger.getLogger(koneksiDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return connection;
+        if (koneksiAsliSMC != connection) {
+            koneksiLatarBelakangSMC = KoneksiLatarBelakangSMC.bungkus(connection);
+            koneksiAsliSMC = connection;
+        }
+        return koneksiLatarBelakangSMC;
     }
 
     private static String raw(String key, String defaultValue) {

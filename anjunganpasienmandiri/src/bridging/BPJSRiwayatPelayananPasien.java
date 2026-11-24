@@ -18,7 +18,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.validasi;
 import fungsi.koneksiDB;
-import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import java.util.List;
@@ -28,6 +27,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import widget.LoadingOverlaySMC;
 
 /**
  *
@@ -252,7 +252,7 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
         if (!isLoading) {
             isLoading = true;
             Valid.tabelKosongSmc(tabMode);
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            LoadingOverlaySMC.begin(this, "Memuat riwayat pelayanan...");
 
             new SwingWorker<Void, Object[]>() {
                 private final String tglAwal = Valid.getTglSmc(DTPCari1);
@@ -308,11 +308,11 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
                         }
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
-                        if (e.toString().contains("UnknownHostException")) {
+                        if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                             Valid.popupInfoDialog("Koneksi ke server BPJS terputus...!");
                         }
                     }
-                    BPJSRiwayatPelayananPasien.this.setCursor(Cursor.getDefaultCursor());
+                    LoadingOverlaySMC.end(BPJSRiwayatPelayananPasien.this);
                     isLoading = false;
                 }
             }.execute();
