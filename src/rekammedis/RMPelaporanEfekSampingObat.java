@@ -3469,6 +3469,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
 
     private void MnMonitoringEsoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnMonitoringEsoActionPerformed
         if(tbObat.getSelectedRow()>-1){
+            /*
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
@@ -3503,6 +3504,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                         "inner join bangsal on monitoring_efek_samping_obat.kd_bangsal=bangsal.kd_bangsal "+
                         "inner join suku_bangsa on suku_bangsa.id=pasien.suku_bangsa "+
                         "where monitoring_efek_samping_obat.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
+            */
         }
 
     }//GEN-LAST:event_MnMonitoringEsoActionPerformed

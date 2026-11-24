@@ -578,8 +578,8 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
                     bw.flush();
                 }
                 String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)"
+                }, "Laporan 4 (XLSX)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
                         Valid.exportHtmlSmc("SetPintu.html", "Data Set Pintu", tbJadwal);
@@ -593,6 +593,7 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
                     case "Laporan 4 (XLSX)":
                         Valid.exportXlsxSmc("SetPintu.xlsx", tbJadwal);
                         break;
+                    /*
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars", akses.getnamars());
@@ -616,6 +617,7 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
                             "order by set_pintu_smc.kd_pintu, dokter.nm_dokter, poliklinik.nm_poli";
                         Valid.MyReportqry("rptSetPintu.jasper", "report", "::[ Data Set Pintu ]::", sql, param);
                         break;
+                    */
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
