@@ -1995,13 +1995,13 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 kodePoli = response.path("poliRujukan").path("kode").asText();
                 namaPoli.setText(response.path("poliRujukan").path("nama").asText());
                 if (!cariJadwalSmc()) {
-                    emptTeks();
                     Valid.popupPeringatanDialog("Jadwal praktek poli " + namaPoli.getText() + " tidak ditemukan hari ini..!!", 5);
+                    emptTeks();
                     return false;
                 }
                 if (!cekWaktuRegistrasi()) {
-                    emptTeks();
                     Valid.popupPeringatanDialog("Pendaftaran untuk jadwal praktek " + jamPraktek + "\nbaru dibuka pukul " + jamDibukaSmc() + "..!!", 5);
+                    emptTeks();
                     return false;
                 }
                 isiDokterSmc();
@@ -2066,13 +2066,13 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         kodePoli = response.path("poliRujukan").path("kode").asText();
                         namaPoli.setText(response.path("poliRujukan").path("nama").asText());
                         if (!cariJadwalSmc()) {
-                            emptTeks();
                             Valid.popupPeringatanDialog("Jadwal praktek poli " + namaPoli.getText() + " tidak ditemukan hari ini..!!", 5);
+                            emptTeks();
                             return false;
                         }
                         if (!cekWaktuRegistrasi()) {
-                            emptTeks();
                             Valid.popupPeringatanDialog("Pendaftaran untuk jadwal praktek " + jamPraktek + "\nbaru dibuka pukul " + jamDibukaSmc() + "..!!", 5);
+                            emptTeks();
                             return false;
                         }
                         isiDokterSmc();
@@ -2188,13 +2188,13 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                 namaDokter.setText(rskontrol.getString("nm_dokter_bpjs"));
                                 kodeDokterReg = Sequel.cariIsiSmc("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs = ?", kodeDokter);
                                 if (!cariJadwalSmc()) {
-                                    emptTeks();
                                     Valid.popupPeringatanDialog("Jadwal praktek poli " + namaPoli.getText() + " tidak ditemukan hari ini..!!", 5);
+                                    emptTeks();
                                     return false;
                                 }
                                 if (!cekWaktuRegistrasi()) {
-                                    emptTeks();
                                     Valid.popupPeringatanDialog("Pendaftaran untuk jadwal praktek " + jamPraktek + "\nbaru dibuka pukul " + jamDibukaSmc() + "..!!", 5);
+                                    emptTeks();
                                     return false;
                                 }
                                 kodeDPJPLayanan.setText(kodeDokter);
@@ -2284,13 +2284,13 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                 namaDokter.setText(rskontrol.getString("nm_dokter_bpjs"));
                                 kodeDokterReg = Sequel.cariIsiSmc("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs = ?", kodeDokter);
                                 if (!cariJadwalSmc()) {
-                                    emptTeks();
                                     Valid.popupPeringatanDialog("Jadwal praktek poli " + namaPoli.getText() + " tidak ditemukan hari ini..!!", 5);
+                                    emptTeks();
                                     return false;
                                 }
                                 if (!cekWaktuRegistrasi()) {
-                                    emptTeks();
                                     Valid.popupPeringatanDialog("Pendaftaran untuk jadwal praktek " + jamPraktek + "\nbaru dibuka pukul " + jamDibukaSmc() + "..!!", 5);
+                                    emptTeks();
                                     return false;
                                 }
                                 switch (response.path("peserta").path("hakKelas").path("kode").asText()) {
@@ -2369,8 +2369,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         jamSelesaiJadwal = jamPraktek.substring(jamPraktek.indexOf('-') + 1).trim() + ":00";
                     }
                     if (!cekWaktuRegistrasi()) {
+                        Valid.popupPeringatanDialog("Waktu cek in anda masih harus menunggu..!!\nCek in akan dibuka mulai pukul " + jamDibukaSmc() + "..!!", 5);
                         emptTeks();
-                        Valid.popupPeringatanDialog("Waktu cekin anda masih harus menunggu lagi.\nJadwal praktek " + jamPraktek + " dibuka pukul " + jamDibukaSmc() + "..!!", 5);
                         return false;
                     }
                     noBooking = rsjkn.getString("nobooking");

@@ -703,6 +703,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnDIrawat = new widget.MenuItem();
         MnMeninggal = new widget.MenuItem();
         MnPulangPaksa = new widget.MenuItem();
+        MnPeriksaPenunjangSMC = new widget.MenuItem();
         jMenu7 = new widget.Menu();
         MnStatusBaru = new widget.MenuItem();
         MnStatusLama = new widget.MenuItem();
@@ -3993,10 +3994,10 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnStatus.setPreferredSize(new java.awt.Dimension(200, 26));
 
         ppBerkasRanap.setBackground(new java.awt.Color(255, 255, 254));
-        ppBerkasRanap.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         ppBerkasRanap.setForeground(new java.awt.Color(50, 50, 50));
         ppBerkasRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         ppBerkasRanap.setText("Berkas R.M. Di Ranap");
+        ppBerkasRanap.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         ppBerkasRanap.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ppBerkasRanap.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppBerkasRanap.setName("ppBerkasRanap"); // NOI18N
@@ -4009,10 +4010,10 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnStatus.add(ppBerkasRanap);
 
         ppBerkasDIterima.setBackground(new java.awt.Color(255, 255, 254));
-        ppBerkasDIterima.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         ppBerkasDIterima.setForeground(new java.awt.Color(50, 50, 50));
         ppBerkasDIterima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         ppBerkasDIterima.setText("Berkas R.M. Diterima");
+        ppBerkasDIterima.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         ppBerkasDIterima.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ppBerkasDIterima.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppBerkasDIterima.setName("ppBerkasDIterima"); // NOI18N
@@ -4073,10 +4074,10 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnStatus.add(MnBatal);
 
         MnRujukInternalSMC.setBackground(new java.awt.Color(255, 255, 254));
-        MnRujukInternalSMC.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnRujukInternalSMC.setForeground(new java.awt.Color(50, 50, 50));
         MnRujukInternalSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         MnRujukInternalSMC.setText("Rujuk Internal");
+        MnRujukInternalSMC.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnRujukInternalSMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnRujukInternalSMC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnRujukInternalSMC.setName("MnRujukInternalSMC"); // NOI18N
@@ -4137,10 +4138,10 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnStatus.add(MnMeninggal);
 
         MnPulangPaksa.setBackground(new java.awt.Color(255, 255, 254));
-        MnPulangPaksa.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnPulangPaksa.setForeground(new java.awt.Color(50, 50, 50));
         MnPulangPaksa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         MnPulangPaksa.setText("Pulang Paksa");
+        MnPulangPaksa.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnPulangPaksa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnPulangPaksa.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPulangPaksa.setName("MnPulangPaksa"); // NOI18N
@@ -4151,6 +4152,22 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             }
         });
         MnStatus.add(MnPulangPaksa);
+
+        MnPeriksaPenunjangSMC.setBackground(new java.awt.Color(255, 255, 254));
+        MnPeriksaPenunjangSMC.setForeground(new java.awt.Color(50, 50, 50));
+        MnPeriksaPenunjangSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPeriksaPenunjangSMC.setText("Pemeriksaan Penunjang");
+        MnPeriksaPenunjangSMC.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPeriksaPenunjangSMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPeriksaPenunjangSMC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPeriksaPenunjangSMC.setName("MnPeriksaPenunjangSMC"); // NOI18N
+        MnPeriksaPenunjangSMC.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnPeriksaPenunjangSMC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPeriksaPenunjangSMCActionPerformed(evt);
+            }
+        });
+        MnStatus.add(MnPeriksaPenunjangSMC);
 
         jMenu7.setBackground(new java.awt.Color(255, 255, 254));
         jMenu7.setForeground(new java.awt.Color(50, 50, 50));
@@ -6239,7 +6256,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelBiasa2.setLayout(null);
 
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-11-2026" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-11-2026" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -6286,7 +6303,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel32.setBounds(176, 10, 20, 23);
 
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-11-2026" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-11-2026" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -6561,7 +6578,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass8.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-11-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-11-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6574,7 +6591,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(23, 23));
         panelGlass8.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-11-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-11-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6586,7 +6603,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel12.setPreferredSize(new java.awt.Dimension(120, 23));
         panelGlass8.add(jLabel12);
 
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Belum", "Sudah", "Batal", "Berkas Diterima", "Dirujuk", "Meninggal", "Dirawat", "Pulang Paksa", "Rujuk Internal", " " }));
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Belum", "Sudah", "Batal", "Berkas Diterima", "Dirujuk", "Meninggal", "Dirawat", "Pulang Paksa", "Rujuk Internal", "Pemeriksaan Penunjang", " " }));
         cmbStatus.setName("cmbStatus"); // NOI18N
         cmbStatus.setPreferredSize(new java.awt.Dimension(150, 23));
         panelGlass8.add(cmbStatus);
@@ -14425,6 +14442,27 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_MnRujukInternalSMCActionPerformed
 
+    private void MnPeriksaPenunjangSMCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeriksaPenunjangSMCActionPerformed
+        if (0 == tabModekasir.getRowCount()) {
+            JOptionPane.showMessageDialog(null, "Maaf, table masih kosong..!!");
+        } else if (0 > tbKasirRalan.getSelectedRow()) {
+            JOptionPane.showMessageDialog(null, "Maaf, silahkan anda pilih dulu dengan menklik data pada table..!!");
+        } else {
+            String norawat = (String) tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), tbKasirRalan.convertColumnIndexToView(11));
+            if (Sequel.cariRegistrasi(norawat) > 0) {
+                JOptionPane.showMessageDialog(null, "Data billing sudah terverifikasi..!!");
+            } else {
+                if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Pemeriksaan Penunjang'", "no_rawat = ?", norawat)) {
+                    int selectedRow = tbKasirRalan.convertRowIndexToModel(tbKasirRalan.getSelectedRow());
+                    tabModekasir.setValueAt("Pemeriksaan Penunjang", selectedRow, 10);
+                    tabModekasir.fireTableRowsUpdated(selectedRow, selectedRow);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengubah status registrasi..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_MnPeriksaPenunjangSMCActionPerformed
+
     private void MnPenilaianPreInduksiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
@@ -16911,6 +16949,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     private widget.MenuItem MnPeriksaLabMB2;
     private widget.MenuItem MnPeriksaLabPA;
     private widget.MenuItem MnPeriksaLabPA2;
+    private widget.MenuItem MnPeriksaPenunjangSMC;
     private widget.MenuItem MnPeriksaRadiologi;
     private widget.MenuItem MnPeriksaRadiologi1;
     private widget.Menu MnPermintaan;

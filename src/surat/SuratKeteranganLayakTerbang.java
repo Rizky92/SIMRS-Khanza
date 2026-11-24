@@ -105,6 +105,7 @@ public final class SuratKeteranganLayakTerbang extends javax.swing.JDialog {
 
         jPopupMenu1 = new widget.PopupMenu();
         MnCetakSuratKeterangan = new widget.MenuItem();
+        MnCetakSuratKeterangan2Smc = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -144,18 +145,32 @@ public final class SuratKeteranganLayakTerbang extends javax.swing.JDialog {
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
         MnCetakSuratKeterangan.setBackground(new java.awt.Color(255, 255, 254));
-        MnCetakSuratKeterangan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnCetakSuratKeterangan.setForeground(new java.awt.Color(50, 50, 50));
         MnCetakSuratKeterangan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         MnCetakSuratKeterangan.setText("Cetak Surat Keterangan Layak Terbang");
+        MnCetakSuratKeterangan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnCetakSuratKeterangan.setName("MnCetakSuratKeterangan"); // NOI18N
-        MnCetakSuratKeterangan.setPreferredSize(new java.awt.Dimension(260, 18));
+        MnCetakSuratKeterangan.setPreferredSize(new java.awt.Dimension(260, 26));
         MnCetakSuratKeterangan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnCetakSuratKeteranganActionPerformed(evt);
             }
         });
         jPopupMenu1.add(MnCetakSuratKeterangan);
+
+        MnCetakSuratKeterangan2Smc.setBackground(new java.awt.Color(255, 255, 254));
+        MnCetakSuratKeterangan2Smc.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakSuratKeterangan2Smc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakSuratKeterangan2Smc.setText("Cetak Surat Keterangan Layak Terbang Pasien Non-hamil");
+        MnCetakSuratKeterangan2Smc.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakSuratKeterangan2Smc.setName("MnCetakSuratKeterangan2Smc"); // NOI18N
+        MnCetakSuratKeterangan2Smc.setPreferredSize(new java.awt.Dimension(290, 26));
+        MnCetakSuratKeterangan2Smc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakSuratKeterangan2SmcActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnCetakSuratKeterangan2Smc);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -322,7 +337,7 @@ public final class SuratKeteranganLayakTerbang extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-02-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-05-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -335,7 +350,7 @@ public final class SuratKeteranganLayakTerbang extends javax.swing.JDialog {
         panelGlass9.add(DTPCari1);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-02-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-05-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -472,7 +487,7 @@ public final class SuratKeteranganLayakTerbang extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(257, 40, 55, 23);
 
-        TanggalPeriksa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-02-2026" }));
+        TanggalPeriksa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-05-2026" }));
         TanggalPeriksa.setDisplayFormat("dd-MM-yyyy");
         TanggalPeriksa.setName("TanggalPeriksa"); // NOI18N
         FormInput.add(TanggalPeriksa);
@@ -551,9 +566,12 @@ public final class SuratKeteranganLayakTerbang extends javax.swing.JDialog {
             Valid.textKosong(NoSurat,"No.Surat");
         }else if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"pasien");
-        }else if(Kehamilan.getText().trim().equals("")){
-            Valid.textKosong(Kehamilan,"Kehamilan");
+        // }else if(Kehamilan.getText().trim().equals("")){
+        //     Valid.textKosong(Kehamilan,"Kehamilan");
         }else{
+            if (Kehamilan.getText().isBlank()) {
+                Kehamilan.setText("0");
+            }
             if(Sequel.menyimpantf("surat_keterangan_layak_terbang","?,?,?,?","No.Surat",4,new String[]{
                     NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalPeriksa.getSelectedItem()+""),Kehamilan.getText()
             })==true){
@@ -607,10 +625,13 @@ public final class SuratKeteranganLayakTerbang extends javax.swing.JDialog {
             Valid.textKosong(NoSurat,"No.Surat");
         }else if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"pasien");
-        }else if(Kehamilan.getText().trim().equals("")){
-            Valid.textKosong(Kehamilan,"Kehamilan");
+        // }else if(Kehamilan.getText().trim().equals("")){
+        //     Valid.textKosong(Kehamilan,"Kehamilan");
         }else{
             if(tbObat.getSelectedRow()!= -1){
+                if (Kehamilan.getText().isBlank()) {
+                    Kehamilan.setText("0");
+                }
                 if(Sequel.mengedittf("surat_keterangan_layak_terbang","no_surat=?","no_surat=?,no_rawat=?,tanggal_periksa=?,kehamilan=?",5,new String[]{
                     NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalPeriksa.getSelectedItem()+""),Kehamilan.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
                     })==true){
@@ -785,31 +806,31 @@ public final class SuratKeteranganLayakTerbang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatKeyReleased
 
     private void MnCetakSuratKeteranganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratKeteranganActionPerformed
-       if(TPasien.getText().trim().equals("")){
+        if(TPasien.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),6).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()));
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                Valid.MyReportqry("rptSuratLayakTerbang.jasper","report","::[ Surat Keterangan Layak Terbang ]::",
-                        "select surat_keterangan_layak_terbang.no_surat,surat_keterangan_layak_terbang.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
-                        "pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,pasien.jk,pasien.pekerjaan,reg_periksa.umurdaftar,"+
-                        "reg_periksa.sttsumur,surat_keterangan_layak_terbang.tanggal_periksa,surat_keterangan_layak_terbang.kehamilan,reg_periksa.kd_dokter,"+
-                        "dokter.nm_dokter from surat_keterangan_layak_terbang inner join reg_periksa on surat_keterangan_layak_terbang.no_rawat=reg_periksa.no_rawat "+
-                        "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on dokter.kd_dokter=reg_periksa.kd_dokter "+
-                        "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
-                        "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
-                        "where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",param);
-                this.setCursor(Cursor.getDefaultCursor());
-       }
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),6).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()));
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            Valid.MyReportqry("rptSuratLayakTerbang.jasper","report","::[ Surat Keterangan Layak Terbang ]::",
+                    "select surat_keterangan_layak_terbang.no_surat,surat_keterangan_layak_terbang.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
+                    "pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,pasien.jk,pasien.pekerjaan,reg_periksa.umurdaftar,"+
+                    "reg_periksa.sttsumur,surat_keterangan_layak_terbang.tanggal_periksa,surat_keterangan_layak_terbang.kehamilan,reg_periksa.kd_dokter,"+
+                    "dokter.nm_dokter from surat_keterangan_layak_terbang inner join reg_periksa on surat_keterangan_layak_terbang.no_rawat=reg_periksa.no_rawat "+
+                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on dokter.kd_dokter=reg_periksa.kd_dokter "+
+                    "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
+                    "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
+                    "where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",param);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
     }//GEN-LAST:event_MnCetakSuratKeteranganActionPerformed
 
     private void DTPCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DTPCari1ActionPerformed
@@ -849,6 +870,34 @@ public final class SuratKeteranganLayakTerbang extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_formWindowOpened
 
+    private void MnCetakSuratKeterangan2SmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratKeterangan2SmcActionPerformed
+        if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),6).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()));
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            Valid.MyReportqry("rptSuratLayakTerbang2SMC.jasper","report","::[ Surat Keterangan Layak Terbang ]::",
+                    "select surat_keterangan_layak_terbang.no_surat,surat_keterangan_layak_terbang.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
+                    "pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,pasien.jk,pasien.pekerjaan,reg_periksa.umurdaftar,"+
+                    "reg_periksa.sttsumur,surat_keterangan_layak_terbang.tanggal_periksa,surat_keterangan_layak_terbang.kehamilan,reg_periksa.kd_dokter,"+
+                    "dokter.nm_dokter from surat_keterangan_layak_terbang inner join reg_periksa on surat_keterangan_layak_terbang.no_rawat=reg_periksa.no_rawat "+
+                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on dokter.kd_dokter=reg_periksa.kd_dokter "+
+                    "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
+                    "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
+                    "where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",param);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_MnCetakSuratKeterangan2SmcActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -881,6 +930,7 @@ public final class SuratKeteranganLayakTerbang extends javax.swing.JDialog {
     private widget.TextBox Kehamilan;
     private widget.Label LCount;
     private widget.MenuItem MnCetakSuratKeterangan;
+    private widget.MenuItem MnCetakSuratKeterangan2Smc;
     private widget.TextBox NoSurat;
     private javax.swing.JPanel PanelInput;
     private widget.ScrollPane Scroll;

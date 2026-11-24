@@ -1021,7 +1021,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-06-2024 11:20:16" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-02-2026 14:13:24" }));
         tanggal.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -1209,7 +1209,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         jLabel22.setBounds(0, 102, 90, 23);
 
         TanggalDaftar.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-06-2024" }));
+        TanggalDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-02-2026" }));
         TanggalDaftar.setDisplayFormat("dd-MM-yyyy");
         TanggalDaftar.setName("TanggalDaftar"); // NOI18N
         TanggalDaftar.setOpaque(false);
@@ -1497,7 +1497,6 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         chkSubspesialis.setEnabled(false);
         chkSubspesialis.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         chkSubspesialis.setName("chkSubspesialis"); // NOI18N
-        chkSubspesialis.setOpaque(false);
         chkSubspesialis.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 chkSubspesialisItemStateChanged(evt);
@@ -1513,7 +1512,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         jLabel26.setBounds(30, 272, 97, 23);
 
         TanggalKunjungan.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKunjungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-06-2024" }));
+        TanggalKunjungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-02-2026" }));
         TanggalKunjungan.setDisplayFormat("dd-MM-yyyy");
         TanggalKunjungan.setEnabled(false);
         TanggalKunjungan.setName("TanggalKunjungan"); // NOI18N
@@ -1613,7 +1612,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         BtnStatusPulang.setBounds(700, 392, 28, 23);
 
         TanggalPulang.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-06-2024" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-02-2026" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy");
         TanggalPulang.setEnabled(false);
         TanggalPulang.setName("TanggalPulang"); // NOI18N
@@ -1805,7 +1804,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         jLabel32.setBounds(90, 492, 95, 23);
 
         TanggalEstRujuk.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalEstRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-06-2024" }));
+        TanggalEstRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-02-2026" }));
         TanggalEstRujuk.setDisplayFormat("dd-MM-yyyy");
         TanggalEstRujuk.setEnabled(false);
         TanggalEstRujuk.setName("TanggalEstRujuk"); // NOI18N
@@ -1857,7 +1856,6 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         chkKunjungan.setText("Kunjungan :");
         chkKunjungan.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         chkKunjungan.setName("chkKunjungan"); // NOI18N
-        chkKunjungan.setOpaque(false);
         chkKunjungan.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 chkKunjunganItemStateChanged(evt);
@@ -1875,7 +1873,6 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         ChkInternal.setEnabled(false);
         ChkInternal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         ChkInternal.setName("ChkInternal"); // NOI18N
-        ChkInternal.setOpaque(false);
         ChkInternal.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ChkInternalItemStateChanged(evt);
@@ -1888,7 +1885,6 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         ChkRujukLanjut.setEnabled(false);
         ChkRujukLanjut.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         ChkRujukLanjut.setName("ChkRujukLanjut"); // NOI18N
-        ChkRujukLanjut.setOpaque(false);
         ChkRujukLanjut.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ChkRujukLanjutItemStateChanged(evt);
@@ -1956,7 +1952,6 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         chkKhusus.setEnabled(false);
         chkKhusus.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         chkKhusus.setName("chkKhusus"); // NOI18N
-        chkKhusus.setOpaque(false);
         chkKhusus.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 chkKhususItemStateChanged(evt);
@@ -2326,7 +2321,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-06-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-02-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2340,7 +2335,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-06-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-02-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2430,7 +2425,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         panelGlass10.add(jLabel42);
 
         DTPCari3.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-06-2024" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-02-2026" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -2444,7 +2439,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         panelGlass10.add(jLabel43);
 
         DTPCari4.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-06-2024" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-02-2026" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
@@ -2534,7 +2529,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         panelGlass11.add(jLabel45);
 
         DTPCari5.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-06-2024" }));
+        DTPCari5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-02-2026" }));
         DTPCari5.setDisplayFormat("dd-MM-yyyy");
         DTPCari5.setName("DTPCari5"); // NOI18N
         DTPCari5.setOpaque(false);
@@ -2548,7 +2543,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         panelGlass11.add(jLabel46);
 
         DTPCari6.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-06-2024" }));
+        DTPCari6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-02-2026" }));
         DTPCari6.setDisplayFormat("dd-MM-yyyy");
         DTPCari6.setName("DTPCari6"); // NOI18N
         DTPCari6.setOpaque(false);
@@ -8376,7 +8371,8 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
             Sequel.menyimpan2("diagnosa_pasien","?,?,?,?,?","Penyakit",5,new String[]{TNoRw.getText(),KdDiagnosa1.getText(),"Ralan","1","Baru"});
         }
 
-        if(!NmDiagnosa2.equals("")){
+        //if(!NmDiagnosa2.equals("")){
+        if (!"".equals(NmDiagnosa2.getText().trim())) {
             Sequel.menyimpan3("penyakit","?,?,?,?,?,?","Penyakit",6,new String[]{KdDiagnosa2.getText(),NmDiagnosa2.getText(),NmDiagnosa2.getText(),"-","-","Tidak Menular"});
             if(Sequel.cariInteger(
                     "select count(diagnosa_pasien.kd_penyakit) from diagnosa_pasien "+
@@ -8390,7 +8386,8 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
             }
         }
 
-        if(!NmDiagnosa3.equals("")){
+        //if(!NmDiagnosa3.equals("")){
+        if (!"".equals(NmDiagnosa3.getText().trim())) {
             Sequel.menyimpan3("penyakit","?,?,?,?,?,?","Penyakit",6,new String[]{KdDiagnosa3.getText(),NmDiagnosa3.getText(),NmDiagnosa3.getText(),"-","-","Tidak Menular"});
             if(Sequel.cariInteger(
                     "select count(diagnosa_pasien.kd_penyakit) from diagnosa_pasien "+

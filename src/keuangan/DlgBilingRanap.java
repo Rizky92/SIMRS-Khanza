@@ -2470,13 +2470,15 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                         pilih=2;
                         break;
                     case "Data Pembayaran HtH BPD Jateng":
-                        i=3;
+                        //i=3;
+                        pilih=3;
                         break;
                     case "Data Pembayaran HtH BPD Papua":
                         pilih=4;
                         break;
                     case "Data Pembayaran HtH BPD Jabar":
                         pilih=5;
+                        break;
                     case "Data Pembayaran HtH Mandiri":
                         pilih=6;
                         break;
