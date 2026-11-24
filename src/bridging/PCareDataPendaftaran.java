@@ -8377,7 +8377,8 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
             Sequel.menyimpan2("diagnosa_pasien","?,?,?,?,?","Penyakit",5,new String[]{TNoRw.getText(),KdDiagnosa1.getText(),"Ralan","1","Baru"});
         }
 
-        if(!NmDiagnosa2.equals("")){
+        //if(!NmDiagnosa2.equals("")){
+        if (!"".equals(NmDiagnosa2.getText().trim())) {
             Sequel.menyimpan3("penyakit","?,?,?,?,?,?","Penyakit",6,new String[]{KdDiagnosa2.getText(),NmDiagnosa2.getText(),NmDiagnosa2.getText(),"-","-","Tidak Menular"});
             if(Sequel.cariInteger(
                     "select count(diagnosa_pasien.kd_penyakit) from diagnosa_pasien "+
@@ -8391,7 +8392,8 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
             }
         }
 
-        if(!NmDiagnosa3.equals("")){
+        //if(!NmDiagnosa3.equals("")){
+        if (!"".equals(NmDiagnosa3.getText().trim())) {
             Sequel.menyimpan3("penyakit","?,?,?,?,?,?","Penyakit",6,new String[]{KdDiagnosa3.getText(),NmDiagnosa3.getText(),NmDiagnosa3.getText(),"-","-","Tidak Menular"});
             if(Sequel.cariInteger(
                     "select count(diagnosa_pasien.kd_penyakit) from diagnosa_pasien "+
