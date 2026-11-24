@@ -1963,8 +1963,8 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
             Valid.textKosong(TNoRw,"Pasien");
         }else if(KdKasus.getText().trim().equals("")||NmKasus.getText().trim().equals("")){
             Valid.textKosong(btnKasus,"Macam Kasus");
-        }else if(KeteranganKedatangan.equals("")){
-            Valid.textKosong(btnKasus,"Keterangan");
+        // }else if(KeteranganKedatangan.equals("")){
+        //     Valid.textKosong(btnKasus,"Keterangan");
         }else{
             Sequel.AutoComitFalse();
             sukses=true;
@@ -2235,8 +2235,8 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
             Valid.textKosong(TNoRw,"Pasien");
         }else if(KdKasus.getText().trim().equals("")||NmKasus.getText().trim().equals("")){
             Valid.textKosong(btnKasus,"Macam Kasus");
-        }else if(KeteranganKedatangan.equals("")){
-            Valid.textKosong(btnKasus,"Keterangan");
+        // }else if(KeteranganKedatangan.equals("")){
+        //     Valid.textKosong(btnKasus,"Keterangan");
         }else{
             if(tbTriase.getSelectedRow()> -1){
                 if(akses.getkode().equals("Admin Utama")){
