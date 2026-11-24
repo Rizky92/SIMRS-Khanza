@@ -897,71 +897,71 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_tbBelumLunasKeyPressed
 
     private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailPiutangActionPerformed
-    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-    if (TabRawat.getSelectedIndex() == 0) {
-        if (tabMode.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
-            TCari.requestFocus();
-        } else {
-            if (tbBelumLunas.getSelectedRow() < 0) {
-                JOptionPane.showMessageDialog(null, "Silahkan pilih data terlebih dahulu...!!");
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if (TabRawat.getSelectedIndex() == 0) {
+            if (tabMode.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
+                TCari.requestFocus();
             } else {
-                status = Sequel.cariIsiSmc("select status_lanjut from reg_periksa where no_rawat = ?", tbBelumLunas.getValueAt(tbBelumLunas.getSelectedRow(), 1).toString());
-                if (status.equals("Ralan")) {
-                    DlgBilingRalan billing = new DlgBilingRalan(null, false);
-                    billing.TNoRw.setText(tbBelumLunas.getValueAt(tbBelumLunas.getSelectedRow(), 1).toString());
-                    billing.isCek();
-                    billing.isRawat();
-                    if (Sequel.cariIntegerSmc("select count(*) from piutang_pasien where no_rawat = ?", billing.TNoRw.getText()) > 0) {
-                        billing.setPiutang();
+                if (tbBelumLunas.getSelectedRow() < 0) {
+                    JOptionPane.showMessageDialog(null, "Silahkan pilih data terlebih dahulu...!!");
+                } else {
+                    status = Sequel.cariIsiSmc("select status_lanjut from reg_periksa where no_rawat = ?", tbBelumLunas.getValueAt(tbBelumLunas.getSelectedRow(), 1).toString());
+                    if (status.equals("Ralan")) {
+                        DlgBilingRalan billing = new DlgBilingRalan(null, false);
+                        billing.TNoRw.setText(tbBelumLunas.getValueAt(tbBelumLunas.getSelectedRow(), 1).toString());
+                        billing.isCek();
+                        billing.isRawat();
+                        if (Sequel.cariIntegerSmc("select count(*) from piutang_pasien where no_rawat = ?", billing.TNoRw.getText()) > 0) {
+                            billing.setPiutang();
+                        }
+                        billing.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                        billing.setLocationRelativeTo(internalFrame1);
+                        billing.setVisible(true);
+                    } else if (status.equals("Ranap")) {
+                        DlgBilingRanap billing = new DlgBilingRanap(null, false);
+                        billing.TNoRw.setText(tbBelumLunas.getValueAt(tbBelumLunas.getSelectedRow(), 1).toString());
+                        billing.isCek();
+                        billing.isRawat();
+                        billing.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                        billing.setLocationRelativeTo(internalFrame1);
+                        billing.setVisible(true);
                     }
-                    billing.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-                    billing.setLocationRelativeTo(internalFrame1);
-                    billing.setVisible(true);
-                } else if (status.equals("Ranap")) {
-                    DlgBilingRanap billing = new DlgBilingRanap(null, false);
-                    billing.TNoRw.setText(tbBelumLunas.getValueAt(tbBelumLunas.getSelectedRow(), 1).toString());
-                    billing.isCek();
-                    billing.isRawat();
-                    billing.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-                    billing.setLocationRelativeTo(internalFrame1);
-                    billing.setVisible(true);
+                }
+            }
+        } else if (TabRawat.getSelectedIndex() == 1) {
+            if (tabMode2.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
+                TCari.requestFocus();
+            } else {
+                if (tbBelumDitagihkan.getSelectedRow() < 0) {
+                    JOptionPane.showMessageDialog(null, "Silahkan pilih data terlebih dahulu...!!");
+                } else {
+                    status = Sequel.cariIsiSmc("select status_lanjut from reg_periksa where no_rawat = ?", tbBelumDitagihkan.getValueAt(tbBelumDitagihkan.getSelectedRow(), 1).toString());
+                    if (status.equals("Ralan")) {
+                        DlgBilingRalan billing = new DlgBilingRalan(null, false);
+                        billing.TNoRw.setText(tbBelumDitagihkan.getValueAt(tbBelumDitagihkan.getSelectedRow(), 1).toString());
+                        billing.isCek();
+                        billing.isRawat();
+                        if (Sequel.cariIntegerSmc("select count(*) from piutang_pasien where no_rawat = ?", billing.TNoRw.getText()) > 0) {
+                            billing.setPiutang();
+                        }
+                        billing.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                        billing.setLocationRelativeTo(internalFrame1);
+                        billing.setVisible(true);
+                    } else if (status.equals("Ranap")) {
+                        DlgBilingRanap billing = new DlgBilingRanap(null, false);
+                        billing.TNoRw.setText(tbBelumDitagihkan.getValueAt(tbBelumDitagihkan.getSelectedRow(), 1).toString());
+                        billing.isCek();
+                        billing.isRawat();
+                        billing.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                        billing.setLocationRelativeTo(internalFrame1);
+                        billing.setVisible(true);
+                    }
                 }
             }
         }
-    } else if (TabRawat.getSelectedIndex() == 1) {
-        if (tabMode2.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
-            TCari.requestFocus();
-        } else {
-            if (tbBelumDitagihkan.getSelectedRow() < 0) {
-                JOptionPane.showMessageDialog(null, "Silahkan pilih data terlebih dahulu...!!");
-            } else {
-                status = Sequel.cariIsiSmc("select status_lanjut from reg_periksa where no_rawat = ?", tbBelumDitagihkan.getValueAt(tbBelumDitagihkan.getSelectedRow(), 1).toString());
-                if (status.equals("Ralan")) {
-                    DlgBilingRalan billing = new DlgBilingRalan(null, false);
-                    billing.TNoRw.setText(tbBelumDitagihkan.getValueAt(tbBelumDitagihkan.getSelectedRow(), 1).toString());
-                    billing.isCek();
-                    billing.isRawat();
-                    if (Sequel.cariIntegerSmc("select count(*) from piutang_pasien where no_rawat = ?", billing.TNoRw.getText()) > 0) {
-                        billing.setPiutang();
-                    }
-                    billing.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-                    billing.setLocationRelativeTo(internalFrame1);
-                    billing.setVisible(true);
-                } else if (status.equals("Ranap")) {
-                    DlgBilingRanap billing = new DlgBilingRanap(null, false);
-                    billing.TNoRw.setText(tbBelumDitagihkan.getValueAt(tbBelumDitagihkan.getSelectedRow(), 1).toString());
-                    billing.isCek();
-                    billing.isRawat();
-                    billing.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-                    billing.setLocationRelativeTo(internalFrame1);
-                    billing.setVisible(true);
-                }
-            }
-        }
-    }
-    this.setCursor(Cursor.getDefaultCursor());
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnDetailPiutangActionPerformed
 
     private void BtnPenjaminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenjaminActionPerformed

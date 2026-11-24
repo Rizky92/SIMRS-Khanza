@@ -707,7 +707,7 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-    runBackground(() ->prosesCari());
+        runBackground(() ->prosesCari());
     }//GEN-LAST:event_btnCariActionPerformed
 
     private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed

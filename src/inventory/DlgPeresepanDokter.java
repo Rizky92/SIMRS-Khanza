@@ -921,14 +921,14 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         Scroll1.setPreferredSize(new java.awt.Dimension(454, 90));
 
         tbObatResepRacikan.setName("tbObatResepRacikan"); // NOI18N
-        tbObatResepRacikan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                tbObatResepRacikanPropertyChange(evt);
-            }
-        });
         tbObatResepRacikan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tbObatResepRacikanKeyPressed(evt);
+            }
+        });
+        tbObatResepRacikan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tbObatResepRacikanPropertyChange(evt);
             }
         });
         Scroll1.setViewportView(tbObatResepRacikan);
@@ -940,7 +940,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
-        tbDetailResepObatRacikan.setAutoCreateRowSorter(false);
         tbDetailResepObatRacikan.setComponentPopupMenu(Popup);
         tbDetailResepObatRacikan.setName("tbDetailResepObatRacikan"); // NOI18N
         tbDetailResepObatRacikan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -1326,32 +1325,32 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSeek5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek5ActionPerformed
-    DlgCariKonversi carikonversi=new DlgCariKonversi(null,false);
-    carikonversi.setLocationRelativeTo(internalFrame1);
-    carikonversi.setAlwaysOnTop(false);
-    carikonversi.setVisible(true);
+        DlgCariKonversi carikonversi=new DlgCariKonversi(null,false);
+        carikonversi.setLocationRelativeTo(internalFrame1);
+        carikonversi.setAlwaysOnTop(false);
+        carikonversi.setVisible(true);
     }//GEN-LAST:event_BtnSeek5ActionPerformed
 
     private void BtnSeek5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek5KeyPressed
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_BtnSeek5KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-    if(TabRawat.getSelectedIndex()==0){
-        for(i=0;i<tbResep.getRowCount();i++){
-            tbResep.setValueAt(false,i,0);
-            tbResep.setValueAt("",i,1);
-            tbResep.setValueAt("",i,2);
+        if(TabRawat.getSelectedIndex()==0){
+            for(i=0;i<tbResep.getRowCount();i++){
+                tbResep.setValueAt(false,i,0);
+                tbResep.setValueAt("",i,1);
+                tbResep.setValueAt("",i,2);
+            }
+        }else if(TabRawat.getSelectedIndex()==1){
+            for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
+                tbDetailResepObatRacikan.setValueAt(1,i,9);
+                tbDetailResepObatRacikan.setValueAt(1,i,11);
+                tbDetailResepObatRacikan.setValueAt("",i,12);
+                tbDetailResepObatRacikan.setValueAt(0,i,13);
+            }
         }
-    }else if(TabRawat.getSelectedIndex()==1){
-        for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
-            tbDetailResepObatRacikan.setValueAt(1,i,9);
-            tbDetailResepObatRacikan.setValueAt(1,i,11);
-            tbDetailResepObatRacikan.setValueAt("",i,12);
-            tbDetailResepObatRacikan.setValueAt(0,i,13);
-        }
-    }
-    hitungResep();
+        hitungResep();
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated

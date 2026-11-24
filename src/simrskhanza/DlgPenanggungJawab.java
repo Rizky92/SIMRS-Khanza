@@ -924,7 +924,7 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarKeyPressed
 
     private void NmAsuransiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmAsuransiKeyPressed
-   Valid.pindah(evt,KdAsuransi,NoTelp);
+        Valid.pindah(evt,KdAsuransi,NoTelp);
     }//GEN-LAST:event_NmAsuransiKeyPressed
 
     private void Kd2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kd2KeyPressed

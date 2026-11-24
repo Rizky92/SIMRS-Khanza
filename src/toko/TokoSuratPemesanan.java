@@ -709,15 +709,15 @@ public class TokoSuratPemesanan extends javax.swing.JDialog {
     */
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-    for(i=0;i<tbDokter.getRowCount();i++){
-        tbDokter.setValueAt("",i,0);
-        tbDokter.setValueAt(0,i,5);
-        tbDokter.setValueAt(0,i,6);
-        tbDokter.setValueAt(0,i,7);
-        tbDokter.setValueAt(0,i,8);
-    }
-    Meterai.setText("0");
-    getData();
+        for(i=0;i<tbDokter.getRowCount();i++){
+            tbDokter.setValueAt("",i,0);
+            tbDokter.setValueAt(0,i,5);
+            tbDokter.setValueAt(0,i,6);
+            tbDokter.setValueAt(0,i,7);
+            tbDokter.setValueAt(0,i,8);
+        }
+        Meterai.setText("0");
+        getData();
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void NoPemesananKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoPemesananKeyPressed

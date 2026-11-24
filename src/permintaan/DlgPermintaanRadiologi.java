@@ -77,6 +77,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
     private FileReader myObj;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
+    private String noRawatPenunjangSmc = "";
 
     /** Creates new form DlgPerawatan
      * @param parent
@@ -214,6 +215,9 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
@@ -598,24 +602,26 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
+        konfirmasiStatusPenunjangSmc();
         dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            konfirmasiStatusPenunjangSmc();
             dispose();
         }else{Valid.pindah(evt,BtnCari,TCariPeriksa);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-    DlgCariPermintaanRadiologi form=new DlgCariPermintaanRadiologi(null,false);
-    form.isCek();
-    form.setPasien(TNoRw.getText());
-    form.setSize(this.getWidth(),this.getHeight());
-    form.setLocationRelativeTo(this);
-    form.setVisible(true);
-    this.setCursor(Cursor.getDefaultCursor());
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgCariPermintaanRadiologi form=new DlgCariPermintaanRadiologi(null,false);
+        form.isCek();
+        form.setPasien(TNoRw.getText());
+        form.setSize(this.getWidth(),this.getHeight());
+        form.setLocationRelativeTo(this);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
@@ -941,6 +947,10 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
             });
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        konfirmasiStatusPenunjangSmc();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
     * @param args the command line arguments
@@ -1425,6 +1435,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
                 } while (retry++ < 5 && !sukses);
                 Sequel.AutoComitTrue();
                 if (sukses) {
+                    noRawatPenunjangSmc = TNoRw.getText();
                     if((!noorderTerbit.equals(""))&&(accession.simpanACSN(noorderTerbit)==false)){
                         JOptionPane.showMessageDialog(null,"Accession Number gagal diterbitkan untuk No.Permintaan "+noorderTerbit+"..!!");
                     }
@@ -1437,6 +1448,17 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
             }
             ChkJln.setSelected(true);
         }
+    }
+
+    private void konfirmasiStatusPenunjangSmc() {
+        if (!noRawatPenunjangSmc.isBlank() && Sequel.cariExistsSmc("select * from reg_periksa where reg_periksa.no_rawat = ? and reg_periksa.status_lanjut = 'Ralan' and reg_periksa.kd_poli <> 'IGDK' and reg_periksa.stts in ('Belum', 'TTV')", noRawatPenunjangSmc)) {
+            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(rootPane, "Mau sekalian ubah status menjadi \"Pemeriksaan Penunjang\"..??", "Konfirmasi", JOptionPane.YES_NO_OPTION)) {
+                if (!Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Pemeriksaan Penunjang'", "no_rawat = ? and status_lanjut = 'Ralan' and kd_poli <> 'IGDK' and stts in ('Belum', 'TTV')", noRawatPenunjangSmc)) {
+                    JOptionPane.showMessageDialog(rootPane, "Terjadi kesalahan pada saat mengubah status registrasi..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        noRawatPenunjangSmc = "";
     }
 
     private void runBackground(Runnable task) {

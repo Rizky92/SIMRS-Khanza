@@ -1914,7 +1914,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_TNoRwKeyPressed
 
     private void jenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jenisKeyPressed
-    Valid.pindah(evt,Kategori,tgl);
+        Valid.pindah(evt,Kategori,tgl);
     }//GEN-LAST:event_jenisKeyPressed
 
     private void kdasistoperator1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdasistoperator1KeyPressed
@@ -1923,7 +1923,6 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,kdInstrumen,kdasistoperator2);
         }
-
     }//GEN-LAST:event_kdasistoperator1KeyPressed
 
     private void btnAsis1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsis1ActionPerformed
@@ -2041,7 +2040,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatKeyPressed
 
     private void TCariPaketKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariPaketKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCari2ActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             BtnCari2.requestFocus();
@@ -2055,7 +2054,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCari2ActionPerformed
 
     private void BtnCari2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari2KeyPressed
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_BtnCari2KeyPressed
 
     private void BtnAll1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAll1ActionPerformed
@@ -2064,7 +2063,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAll1ActionPerformed
 
     private void BtnAll1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAll1KeyPressed
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_BtnAll1KeyPressed
 
     private void BtnTambahOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahOperasiActionPerformed
@@ -2079,7 +2078,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahOperasiActionPerformed
 
     private void tbtindakanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbtindakanMouseClicked
-       if(tbtindakan.getRowCount()!=0){
+        if(tbtindakan.getRowCount()!=0){
             try {
                 getData2();
             } catch (java.lang.NullPointerException e) {
@@ -2091,7 +2090,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbtindakanMouseClicked
 
     private void tbtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbtindakanKeyPressed
-    if(tbtindakan.getRowCount()!=0){
+        if(tbtindakan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 try {
                     int row=tbtindakan.getSelectedColumn();
@@ -2111,12 +2110,12 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
                 } catch (java.lang.NullPointerException e) {
                 }
             }
-    }
-    LTotal.setText("Total Biaya : "+Valid.SetAngka(biayaobat+biayatindakan));
+        }
+        LTotal.setText("Total Biaya : "+Valid.SetAngka(biayaobat+biayatindakan));
     }//GEN-LAST:event_tbtindakanKeyPressed
 
     private void kdoperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdoperator2KeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             nmoperator2.setText(Sequel.CariDokter(kdoperator2.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnOperator2ActionPerformed(null);
@@ -2157,7 +2156,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnOperator2ActionPerformed
 
     private void kdoperator3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdoperator3KeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             nmoperator3.setText(Sequel.CariDokter(kdoperator3.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnOperator3ActionPerformed(null);
@@ -2198,7 +2197,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_btnOperator3ActionPerformed
 
     private void kdanestesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdanestesiKeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             nmanestesi.setText(Sequel.CariDokter(kdanestesi.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnAnastesiActionPerformed(null);

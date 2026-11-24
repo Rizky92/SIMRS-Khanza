@@ -1568,6 +1568,29 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         BtnEdit.setEnabled(akses.getpengajuan_cuti());
     }
 
+    public void setPegawaiSmc(String nik, Date tanggal) {
+        try (PreparedStatement ps = koneksi.prepareStatement("select pegawai.nama, pegawai.bidang, pegawai.departemen from pegawai where pegawai.nik = ?")) {
+            ps.setString(1, nik);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    KdPetugas.setText(nik);
+                    NmPetugas.setText(rs.getString("nama"));
+                    Bidang.setText(rs.getString("bidang"));
+                    Departemen.setText(rs.getString("departemen"));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+
+        Tgl1.setDate(tanggal);
+        Tgl2.setDate(tanggal);
+        ChkInput.setSelected(true);
+        isForm();
+        hitungSisaCuti();
+        hitungHari();
+    }
+
     private void autoNomor() {
         /*
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_pengajuan,3),signed)),0) from pengajuan_cuti where tanggal='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",

@@ -918,7 +918,7 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
     }//GEN-LAST:event_tbKamarKeyPressed
 
     private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
-   Valid.pindah(evt,Cicilan,KdPerusahaan);
+        Valid.pindah(evt,Cicilan,KdPerusahaan);
     }//GEN-LAST:event_KeteranganKeyPressed
 
     private void Kd2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kd2KeyPressed
@@ -968,7 +968,7 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
     }//GEN-LAST:event_SisaKeyPressed
 
     private void ppNotaPiutangBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppNotaPiutangBtnPrintActionPerformed
-    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnKeluar.requestFocus();

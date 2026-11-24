@@ -1454,16 +1454,16 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void tbLabRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLabRalanMouseClicked
-    if(tabMode.getRowCount()!=0){
-        try {
-            getData();
-        } catch (java.lang.NullPointerException e) {
+        if(tabMode.getRowCount()!=0){
+            try {
+                getData();
+            } catch (java.lang.NullPointerException e) {
+            }
         }
-    }
     }//GEN-LAST:event_tbLabRalanMouseClicked
 
     private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbLabRalanKeyPressed
-   if(tabMode.getRowCount()!=0){
+        if(tabMode.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();

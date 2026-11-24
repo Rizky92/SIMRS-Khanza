@@ -594,11 +594,11 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-    if(TabRawat.getSelectedIndex()==0){
-        runBackground(() ->tampil());
-    }else if(TabRawat.getSelectedIndex()==1){
-        runBackground(() ->tampil2());
-    }
+        if(TabRawat.getSelectedIndex()==0){
+            runBackground(() ->tampil());
+        }else if(TabRawat.getSelectedIndex()==1){
+            runBackground(() ->tampil2());
+        }
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed

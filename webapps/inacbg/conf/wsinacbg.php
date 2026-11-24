@@ -1414,9 +1414,9 @@
                     </span><br /><br />
                     HTML;
             }
-            echo <<<'HTML'
-                <span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error_klaim_baru.'</span><br /><br />
-                <span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />
+            echo <<<HTML
+                <span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">{$error_klaim_baru}</span><br /><br />
+                <span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">{$error}</span><br /><br />
                 HTML;
 
             return [

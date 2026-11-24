@@ -1957,7 +1957,7 @@ public class DlgBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBarcodeItemBtnPrintActionPerformed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-    isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void ppStokBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppStokBtnPrintActionPerformed
@@ -1965,7 +1965,7 @@ public class DlgBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_ppStokBtnPrintActionPerformed
 
     private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KapasitasKeyPressed
-    Valid.pindah(evt, Isi,BtnJenis);
+        Valid.pindah(evt, Isi,BtnJenis);
     }//GEN-LAST:event_KapasitasKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

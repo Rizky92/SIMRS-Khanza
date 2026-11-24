@@ -1346,11 +1346,11 @@ public class DlgDataBatch extends javax.swing.JDialog {
     }//GEN-LAST:event_kelas2KeyPressed
 
     private void ralanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ralanKeyPressed
-    Valid.pindah(evt, beli, kelas1);
+        Valid.pindah(evt, beli, kelas1);
     }//GEN-LAST:event_ralanKeyPressed
 
     private void NoFakturKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoFakturKeyPressed
-    Valid.pindah(evt, TanggalDatang, DTPExpired);
+        Valid.pindah(evt, TanggalDatang, DTPExpired);
     }//GEN-LAST:event_NoFakturKeyPressed
 
     private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdKeyPressed
@@ -1415,7 +1415,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
     }//GEN-LAST:event_beliKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-    isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

@@ -767,7 +767,7 @@ public final class KeuanganPeminjamPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarKeyPressed
 
     private void NmPeminjamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmPeminjamKeyPressed
-   Valid.pindah(evt,KdPeminjam,NoTelp);
+        Valid.pindah(evt,KdPeminjam,NoTelp);
     }//GEN-LAST:event_NmPeminjamKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

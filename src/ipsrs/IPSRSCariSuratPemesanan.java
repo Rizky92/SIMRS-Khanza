@@ -1093,13 +1093,12 @@ public class IPSRSCariSuratPemesanan extends javax.swing.JDialog {
     }//GEN-LAST:event_nmjenisKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-  if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
-      Valid.textKosong(TCari,"No.Pemesanan");
-  }else{
-     Sequel.queryu2("delete from surat_pemesanan_non_medis where no_pemesanan=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
-     runBackground(() ->tampil());
-  }
-
+        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+            Valid.textKosong(TCari,"No.Pemesanan");
+        }else{
+            Sequel.queryu2("delete from surat_pemesanan_non_medis where no_pemesanan=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
+            runBackground(() ->tampil());
+        }
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -1135,7 +1134,7 @@ public class IPSRSCariSuratPemesanan extends javax.swing.JDialog {
             if(Sequel.cariIsi("select status from surat_pemesanan_non_medis where no_pemesanan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()).equals("Sudah Datang")){
                 JOptionPane.showMessageDialog(null,"Data pemesanan sudah tervalidasi..!!");
             }else{
-                Sequel.queryu("update surat_pemesanan_non_medis set status='Sudah Datang' where no_pemesanan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+                // Sequel.queryu("update surat_pemesanan_non_medis set status='Sudah Datang' where no_pemesanan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
                 IPSRSPemesanan aplikasi=new IPSRSPemesanan(null,false);
                 aplikasi.addWindowListener(new WindowAdapter() {
                     @Override

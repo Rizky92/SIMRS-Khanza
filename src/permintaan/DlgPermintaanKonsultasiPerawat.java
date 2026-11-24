@@ -1543,8 +1543,8 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
             Valid.textKosong(TCari,"Pasien");
         }else if(NoPermintaan.getText().trim().equals("")){
             Valid.textKosong(NoPermintaan,"No.Permintaan");
-        }else if(KdPerawat.getText().trim().equals("")||NmPerawat.getText().trim().equals("")){
-            Valid.textKosong(BtnPerawat,"Perawat Yang Konsul");
+        // }else if(KdPerawat.getText().trim().equals("")||NmPerawat.getText().trim().equals("")){
+        //     Valid.textKosong(BtnPerawat,"Perawat Yang Konsul");
         }else if(KdDokterDikonsuli.getText().trim().equals("")||NmDokterDikonsuli.getText().trim().equals("")){
             Valid.textKosong(BtnDokterDIkonsuli,"Dokter Dikonsuli");
         }else if(Situation.getText().trim().equals("")){
