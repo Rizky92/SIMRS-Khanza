@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
+import fungsi.SesiSMC;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -5100,6 +5101,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
             private final Object lock = new Object();
             private volatile Boolean lanjut = null;
             private String tglSekarang = LocalDate.now().toString();
+            private final SesiSMC.Sibuk sibuk = SesiSMC.mulai("Bulk kompilasi berkas klaim");
 
             @Override
             protected Void doInBackground() throws Exception {
@@ -5219,7 +5221,9 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
             protected void process(List<String> chunks) {
                 int konfirm = JOptionPane.YES_OPTION;
                 if (!lanjutKompilasiApabilaGagal.isSelected()) {
+                    sibuk.tunggu();
                     konfirm = JOptionPane.showConfirmDialog(null, new Object[] {chunks.get(chunks.size() - 1) + ", tetap lanjut?", lanjutKompilasiApabilaGagal}, "Lanjut?", JOptionPane.YES_NO_OPTION);
+                    sibuk.lanjut();
                 }
                 synchronized (lock) {
                     lanjut = (konfirm == JOptionPane.YES_OPTION);
@@ -5230,12 +5234,16 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
             @Override
             protected void done() {
                 popup.dispose();
+                String jumlah = bar.getValue() + " dari " + selectedRowCount + " berkas";
                 try {
                     get();
+                    sibuk.selesai("selesai, " + jumlah);
                     JOptionPane.showMessageDialog(null, "Bulk kompilasi selesai..!!");
                 } catch (CancellationException e) {
+                    sibuk.selesai("dihentikan, " + jumlah);
                     JOptionPane.showMessageDialog(null, "Proses dihentikan oleh user..!!");
                 } catch (Exception e) {
+                    sibuk.selesai("gagal setelah " + jumlah + ", " + e);
                     System.out.println("Notif : " + e);
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat melakukan kompilasi berkas\nProses dibatalkan..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
                 }

@@ -1,6 +1,7 @@
 package smc.satusehat;
 
 import bridging.ApiSatuSehat;
+import fungsi.SesiSMC;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
@@ -22,11 +23,13 @@ public class ResourceSender extends SwingWorker<Void, Void> implements ResourceS
     private final JProgressBar bar;
     private final JLabel keterangan;
     private final JDialog popup;
+    private final SesiSMC.Sibuk sibuk;
     private int nilai;
     private int total;
 
     private ResourceSender(Component induk, String judul, TugasSMC tugas) {
         this.tugas = tugas;
+        sibuk = SesiSMC.mulai(judul.replaceAll("\\.+$", ""));
 
         bar = new JProgressBar(0, 1);
         bar.setStringPainted(true);
@@ -137,16 +140,21 @@ public class ResourceSender extends SwingWorker<Void, Void> implements ResourceS
     @Override
     protected void done() {
         popup.dispose();
+        String jumlah = nilai + " dari " + total + " data";
         try {
             get();
             if (ApiSatuSehat.isStoppedSmc()) {
+                sibuk.selesai("dibatasi Satu Sehat setelah " + jumlah + ", sisa data belum terkirim");
                 JOptionPane.showMessageDialog(null, "Permintaan ke server Satu Sehat masih dibatasi (kode " + ApiSatuSehat.TOO_MANY_REQUESTS_SMC + ") setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
             } else {
+                sibuk.selesai("selesai, " + jumlah);
                 JOptionPane.showMessageDialog(null, "Proses pengiriman selesai...!!!!");
             }
         } catch (CancellationException e) {
+            sibuk.selesai("dihentikan, " + jumlah);
             JOptionPane.showMessageDialog(null, "Proses pengiriman dihentikan...!!!!");
         } catch (Exception e) {
+            sibuk.selesai("gagal setelah " + jumlah + ", " + e);
             System.out.println("Notifikasi : " + e);
             JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat mengirim data ke Satu Sehat\nProses dibatalkan..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
         }

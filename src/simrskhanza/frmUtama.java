@@ -230,6 +230,7 @@ import dapur.DapurStokKeluarBarangPerTanggal;
 import dapur.DapurSuplier;
 import dapur.DapurSuratPemesanan;
 import dapur.DapurVerifikasiPenerimaan;
+import fungsi.SesiSMC;
 import fungsi.akses;
 import fungsi.akseskamarinapralan;
 import fungsi.akunbillingralan;
@@ -7960,6 +7961,7 @@ public class frmUtama extends javax.swing.JFrame {
                 lblStts.setText("Status Admin : ");
                 lblUser.setText("Log Out");
                 BtnMenu.setEnabled(false);
+                SesiSMC.logout();
                 akses.setLogOut();
                 isTutup();
                 break;
@@ -8061,6 +8063,7 @@ public class frmUtama extends javax.swing.JFrame {
                     if(AKTIFKANTRACKSQL.equals("yes")){
                         Sequel.menyimpan("tracker","'"+edAdmin.getText()+"',current_date(),current_time()","Login");
                     }
+                    loginSesiSmc();
                     cekPeringatanPasswordSmc();
                 }else if((akses.getjml1()==0)&&(akses.getjml2()==0)){
                     JOptionPane.showMessageDialog(null,"Maaf, Gagal login. ID User atau password ada yang salah ...!");
@@ -50798,6 +50801,30 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetAturanPasswordSMC.setName("btnSetAturanPasswordSMC");
         btnSetAturanPasswordSMC.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetAturanPasswordSMC.addActionListener(this::btnSetAturanPasswordSMCActionPerformed);
+
+        SesiSMC.pasang(koneksiDB.TIMEOUTSESISMC(), this::sesiBerakhirSmc);
+    }
+
+    private void loginSesiSmc() {
+        SesiSMC.login();
+        java.util.List<String> hasil = SesiSMC.ambilHasil();
+        if (!hasil.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Proses berikut berakhir saat Anda tidak aktif :\n\n" + String.join("\n", hasil), "Hasil Proses", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    private void sesiBerakhirSmc() {
+        if (!"Log Out".equals(BtnLog.getText().trim())) {
+            return;
+        }
+
+        BtnLogActionPerformed(null);
+        for (Window win : Window.getWindows()) {
+            if (win instanceof Frame && this != win && win.isVisible()) {
+                win.dispose();
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Sesi Anda berakhir karena tidak ada aktivitas selama " + SesiSMC.getBatasMenit() + " menit.\nSilahkan login kembali.", "Sesi Berakhir", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void cekPeringatanPasswordSmc() {
