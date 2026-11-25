@@ -6,6 +6,7 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -661,6 +662,7 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            /*
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
                                         "\"identifier\": [" +
@@ -710,6 +712,31 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
                                         "\"issued\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
                                         "\"valueString\": \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r|\r||\r)","<br>").replaceAll("\t", " ")+"\"" +
                                    "}";
+                            */
+                            ObjectNode payload = mapper.createObjectNode();
+                            payload.put("resourceType", "Observation");
+                            ObjectNode identitas = payload.putArray("identifier").addObject();
+                            identitas.put("system", "http://sys-ids.kemkes.go.id/observation/"+koneksiDB.IDSATUSEHAT());
+                            identitas.put("value", tbObat.getValueAt(i,5).toString()+"."+tbObat.getValueAt(i,12).toString());
+                            payload.put("status", "final");
+                            ObjectNode kategoriCoding = payload.putArray("category").addObject().putArray("coding").addObject();
+                            kategoriCoding.put("system", "http://terminology.hl7.org/CodeSystem/observation-category");
+                            kategoriCoding.put("code", "laboratory");
+                            kategoriCoding.put("display", "Laboratory");
+                            ObjectNode kodeCoding = payload.putObject("code").putArray("coding").addObject();
+                            kodeCoding.put("system", tbObat.getValueAt(i,9).toString());
+                            kodeCoding.put("code", tbObat.getValueAt(i,8).toString());
+                            kodeCoding.put("display", tbObat.getValueAt(i,10).toString());
+                            payload.putObject("subject").put("reference", "Patient/"+idpasien);
+                            payload.putArray("performer").addObject().put("reference", "Practitioner/"+iddokter);
+                            ObjectNode encounter = payload.putObject("encounter");
+                            encounter.put("reference", "Encounter/"+tbObat.getValueAt(i,17).toString());
+                            encounter.put("display", "Hasil Pemeriksaan Lab "+tbObat.getValueAt(i,7).toString()+" No.Rawat "+tbObat.getValueAt(i,1).toString()+", Atas Nama Pasien "+tbObat.getValueAt(i,3).toString()+", No.RM "+tbObat.getValueAt(i,2).toString()+", Pada Tanggal "+tbObat.getValueAt(i,6).toString());
+                            payload.putObject("specimen").put("reference", "Specimen/"+tbObat.getValueAt(i,13).toString());
+                            payload.put("effectiveDateTime", tbObat.getValueAt(i,20).toString().replace(" ","T")+"+07:00");
+                            payload.put("issued", tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00");
+                            payload.put("valueString", tbObat.getValueAt(i,11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t"," "));
+                            json = mapper.writeValueAsString(payload);
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
@@ -775,6 +802,7 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            /*
                             json = "{" +
                                         "\"resourceType\": \"Observation\"," +
                                         "\"id\": \""+tbObat.getValueAt(i,18).toString()+"\"," +
@@ -825,6 +853,32 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
                                         "\"issued\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
                                         "\"valueString\": \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r|\r||\r)","<br>").replaceAll("\t", " ")+"\"" +
                                    "}";
+                            */
+                            ObjectNode payload = mapper.createObjectNode();
+                            payload.put("resourceType", "Observation");
+                            payload.put("id", tbObat.getValueAt(i,18).toString());
+                            ObjectNode identitas = payload.putArray("identifier").addObject();
+                            identitas.put("system", "http://sys-ids.kemkes.go.id/observation/"+koneksiDB.IDSATUSEHAT());
+                            identitas.put("value", tbObat.getValueAt(i,5).toString()+"."+tbObat.getValueAt(i,12).toString());
+                            payload.put("status", "final");
+                            ObjectNode kategoriCoding = payload.putArray("category").addObject().putArray("coding").addObject();
+                            kategoriCoding.put("system", "http://terminology.hl7.org/CodeSystem/observation-category");
+                            kategoriCoding.put("code", "laboratory");
+                            kategoriCoding.put("display", "Laboratory");
+                            ObjectNode kodeCoding = payload.putObject("code").putArray("coding").addObject();
+                            kodeCoding.put("system", tbObat.getValueAt(i,9).toString());
+                            kodeCoding.put("code", tbObat.getValueAt(i,8).toString());
+                            kodeCoding.put("display", tbObat.getValueAt(i,10).toString());
+                            payload.putObject("subject").put("reference", "Patient/"+idpasien);
+                            payload.putArray("performer").addObject().put("reference", "Practitioner/"+iddokter);
+                            ObjectNode encounter = payload.putObject("encounter");
+                            encounter.put("reference", "Encounter/"+tbObat.getValueAt(i,17).toString());
+                            encounter.put("display", "Hasil Pemeriksaan Lab "+tbObat.getValueAt(i,7).toString()+" No.Rawat "+tbObat.getValueAt(i,1).toString()+", Atas Nama Pasien "+tbObat.getValueAt(i,3).toString()+", No.RM "+tbObat.getValueAt(i,2).toString()+", Pada Tanggal "+tbObat.getValueAt(i,6).toString());
+                            payload.putObject("specimen").put("reference", "Specimen/"+tbObat.getValueAt(i,13).toString());
+                            payload.put("effectiveDateTime", tbObat.getValueAt(i,20).toString().replace(" ","T")+"+07:00");
+                            payload.put("issued", tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00");
+                            payload.put("valueString", tbObat.getValueAt(i,11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t"," "));
+                            json = mapper.writeValueAsString(payload);
                             System.out.println("URL : "+link+"/Observation/"+tbObat.getValueAt(i,18).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
