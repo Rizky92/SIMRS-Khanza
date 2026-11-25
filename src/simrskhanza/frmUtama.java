@@ -1159,6 +1159,7 @@ import setting.DlgSetAturanPasswordSMC;
 import setting.DlgSetEmbalase;
 import setting.DlgSetHarga;
 import setting.DlgSetHargaKamar;
+import setting.DlgSetHargaNonMedisSMC;
 import setting.DlgSetHargaObatRalan;
 import setting.DlgSetHargaObatRanap;
 import setting.DlgSetHargaToko;
@@ -50646,7 +50647,7 @@ public class frmUtama extends javax.swing.JFrame {
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaimSmc, btnUserSmc, btnSetAksesEditSementaraSmc, btnBPJSAntreanPerKodebookingMobileJKNSmc, btnSetTampilJenisObatResepSmc, btnSetPintuPoliSmc,
                              btnBPJSDaftarPelayananObat2ApotekSmc, btnBPJSKirimObatApotekSmc, btnBPJSKirimEditObatApotekSmc, btnBPJSRiwayatPelayananResepApotekSmc, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc,
                              btnPengkajianInvasifNonBedahSmc, btnPengajuanIzinAdminSmc, btnJadwalDinasSmc, btnJadwalDinasPegawaiSmc, btnRekapKehadiranSmc, btnIPSRSStokAkhirPerTanggalSmc, btnTemplatePaketMCUSmc,
-                             btnSetAturanPasswordSMC, btnTemplateUmumSmc;
+                             btnSetAturanPasswordSMC, btnTemplateUmumSmc, btnSetHargaNonMedisSMC;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaimSmc = new widget.ButtonBig();
@@ -50798,6 +50799,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetAturanPasswordSMC.setName("btnSetAturanPasswordSMC");
         btnSetAturanPasswordSMC.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetAturanPasswordSMC.addActionListener(this::btnSetAturanPasswordSMCActionPerformed);
+
+        btnSetHargaNonMedisSMC = new widget.ButtonBig();
+        btnSetHargaNonMedisSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487093_price.png")));
+        btnSetHargaNonMedisSMC.setText("Set Harga Barang Non Medis");
+        btnSetHargaNonMedisSMC.setIconTextGap(0);
+        btnSetHargaNonMedisSMC.setName("btnSetHargaNonMedisSMC");
+        btnSetHargaNonMedisSMC.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSetHargaNonMedisSMC.addActionListener(this::btnSetHargaNonMedisSMCActionPerformed);
     }
 
     private void cekPeringatanPasswordSmc() {
@@ -50925,6 +50934,11 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnSetAturanPasswordSMC);
                 jmlmenu++;
             }
+
+            if (akses.getadmin()) {
+                Panelmenu.add(btnSetHargaNonMedisSMC);
+                jmlmenu++;
+            }
         }
     }
 
@@ -50951,6 +50965,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if (akses.getadmin()) {
             Panelmenu.add(btnSetAturanPasswordSMC);
+            jmlmenu++;
+        }
+
+        if (akses.getadmin()) {
+            Panelmenu.add(btnSetHargaNonMedisSMC);
             jmlmenu++;
         }
 
@@ -51067,6 +51086,13 @@ public class frmUtama extends javax.swing.JFrame {
         if (akses.getadmin()) {
             if (btnSetAturanPasswordSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnSetAturanPasswordSMC);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getadmin()) {
+            if (btnSetHargaNonMedisSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnSetHargaNonMedisSMC);
                 jmlmenu++;
             }
         }
@@ -51267,6 +51293,17 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgSetAturanPasswordSMC aplikasi = new DlgSetAturanPasswordSMC(this, false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnSetHargaNonMedisSMCActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgSetHargaNonMedisSMC aplikasi = new DlgSetHargaNonMedisSMC(this, false);
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);

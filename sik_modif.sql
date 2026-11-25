@@ -1948,6 +1948,11 @@ CREATE TABLE IF NOT EXISTS `set_filter_jenis_resep_obat_ranap`  (
   CONSTRAINT `set_filter_jenis_resep_obat_ranap_kdjns_ibfk1` FOREIGN KEY (`kdjns`) REFERENCES `jenis` (`kdjns`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+CREATE TABLE IF NOT EXISTS `set_harga_non_medis_smc`  (
+  `hargadasar` enum('Harga Beli','Harga Diskon') NOT NULL,
+  `ppn` enum('Yes','No') NOT NULL
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `set_kode_shift_smc`  (
   `shift` varchar(15) NOT NULL,
   `kode_shift` varchar(5) NOT NULL,

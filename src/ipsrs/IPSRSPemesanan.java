@@ -751,6 +751,8 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
                     Valid.SetTgl(TglFaktur.getSelectedItem()+""),Valid.SetTgl(TglTempo.getSelectedItem()+""),""+sbttl,""+ttldisk,""+ttl,
                     ""+ppn,""+meterai,""+(ttl+ppn+meterai),"Belum Dibayar"
                 })==true){
+                    String hargaDasarSmc = Sequel.cariIsiSmc("select set_harga_non_medis_smc.hargadasar from set_harga_non_medis_smc limit 1"),
+                        ppnHargaSmc = Sequel.cariIsiSmc("select set_harga_non_medis_smc.ppn from set_harga_non_medis_smc limit 1");
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
                         if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
@@ -764,12 +766,16 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
                                     tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,1).toString()
                                 });
                                 if(tbDokter.getValueAt(i,4).toString().equals("true")&&(akses.getipsrs_barang()==true)){
-                                    Double hargadiskon=Valid.SetAngka(tbDokter.getValueAt(i,9).toString())/Valid.SetAngka(tbDokter.getValueAt(i,0).toString());
+//                                    Double hargadiskon=Valid.SetAngka(tbDokter.getValueAt(i,9).toString())/Valid.SetAngka(tbDokter.getValueAt(i,0).toString());
 //                                    Sequel.mengedit("ipsrsbarang","kode_brng=?","harga=?",2,new String[]{
 //                                        (hargadiskon+((Double.parseDouble(tppn.getText())/100)*hargadiskon))+"",tbDokter.getValueAt(i,1).toString()
 //                                    });
+                                    double hargaBarangSmc = "Harga Beli".equals(hargaDasarSmc) ? Valid.getAngkaSmc(tbDokter.getValueAt(i,5)) : Valid.getAngkaSmc(tbDokter.getValueAt(i,9)) / Valid.setAngkaSmc(tbDokter.getValueAt(i,0).toString());
+                                    if (!"No".equals(ppnHargaSmc)) {
+                                        hargaBarangSmc += (persenPPNSmc() / 100) * hargaBarangSmc;
+                                    }
                                     Sequel.mengedit("ipsrsbarang","kode_brng=?","harga=?",2,new String[]{
-                                        (hargadiskon+((persenPPNSmc()/100)*hargadiskon))+"",tbDokter.getValueAt(i,1).toString()
+                                        hargaBarangSmc+"",tbDokter.getValueAt(i,1).toString()
                                     });
                                 }
                             }else{
@@ -1638,6 +1644,10 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
     }
 
     private double angkaSmc(Object nilai) {
+        if (null == nilai) {
+            return 0;
+        }
+
         if (nilai instanceof Number) {
             return ((Number) nilai).doubleValue();
         }
