@@ -529,6 +529,15 @@ public class koneksiDB {
         }
     }
 
+    public static int TIMEOUTSESISMC() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return Integer.parseInt(prop.getProperty("TIMEOUTSESISMC", "0").trim());
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
     public static String HOST(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
