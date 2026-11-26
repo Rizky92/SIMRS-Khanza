@@ -13,6 +13,8 @@ package keuangan;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -27,11 +29,15 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.stream.StreamSupport;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -273,7 +279,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        runBackground(() ->tampil2());
+        tampil2Smc();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -286,7 +292,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        runBackground(() ->tampil());
+        tampilSmc();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -366,19 +372,19 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil2());
+                        tampil2Smc();
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil2());
+                        tampil2Smc();
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil2());
+                        tampil2Smc();
                     }
                 }
             });
@@ -581,6 +587,115 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
 
     public void isCek(){
        BtnTambah.setEnabled(akses.gettarif_operasi());
+    }
+
+    private void tampilSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            new SwingWorker<Void, Object[]>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try (Statement st = koneksi.createStatement(); ResultSet rs = st.executeQuery(
+                        "select paket_operasi.kode_paket, paket_operasi.nm_perawatan, paket_operasi.kategori, paket_operasi.kd_pj, paket_operasi.kelas, (paket_operasi.operator1 + " +
+                        "paket_operasi.operator2 + paket_operasi.operator3 + paket_operasi.asisten_operator1 + paket_operasi.asisten_operator2 + paket_operasi.asisten_operator3 + " +
+                        "paket_operasi.instrumen + paket_operasi.dokter_anak + paket_operasi.perawaat_resusitas + paket_operasi.dokter_anestesi + paket_operasi.asisten_anestesi + " +
+                        "paket_operasi.asisten_anestesi2 + paket_operasi.bidan + paket_operasi.bidan2 + paket_operasi.bidan3 + paket_operasi.perawat_luar + paket_operasi.alat + " +
+                        "paket_operasi.sewa_ok + paket_operasi.akomodasi + paket_operasi.bagian_rs + paket_operasi.omloop + paket_operasi.omloop2 + paket_operasi.omloop3 + " +
+                        "paket_operasi.omloop4 + paket_operasi.omloop5 + paket_operasi.sarpras + paket_operasi.dokter_pjanak + paket_operasi.dokter_umum) as total from " +
+                        "paket_operasi where paket_operasi.status = '1' order by paket_operasi.nm_perawatan"
+                    )) {
+                        ObjectNode root = mapper.createObjectNode();
+                        ArrayNode array = root.putArray("paketoperasi");
+                        while (rs.next()) {
+                            array.add(mapper.createObjectNode()
+                                .put("KodePaket", rs.getString("kode_paket"))
+                                .put("NamaOperasi", rs.getString("nm_perawatan"))
+                                .put("Kategori", rs.getString("kategori"))
+                                .put("Total", rs.getDouble("total"))
+                                .put("KodePJ", rs.getString("kd_pj"))
+                                .put("Kelas", rs.getString("kelas")));
+                            publish(new Object[] {rs.getString("kode_paket"), rs.getString("nm_perawatan"), rs.getString("kategori"), rs.getDouble("total")});
+                        }
+
+                        File file = new File("./cache/paketoperasi.iyem");
+                        file.createNewFile();
+                        try (FileWriter fw = new FileWriter(file)) {
+                            fw.write(mapper.writeValueAsString(root));
+                            fw.flush();
+                        }
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    DlgCariDaftarOperasi.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
+    }
+
+    private void tampil2Smc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            new SwingWorker<Void, Object[]>() {
+                final String cari = TCari.getText().trim();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try (FileReader fr = new FileReader("./cache/paketoperasi.iyem")) {
+                        StreamSupport.stream(mapper.readTree(fr).withArray("paketoperasi").spliterator(), false)
+                            .filter(item -> (!"Yes".equals(cara_bayar_operasi) || kd_pj.trim().equals(item.path("KodePJ").asText("")) || "-".equals(item.path("KodePJ").asText("")))
+                                && (!"Yes".equals(kelas_operasi) || kelas.trim().equals(item.path("Kelas").asText("")) || "-".equals(item.path("Kelas").asText("")))
+                                && (cari.isBlank() || item.path("KodePaket").asText().toLowerCase().contains(cari) || item.path("NamaOperasi").asText().toLowerCase().contains(cari)) || item.path("Kategori").asText("").contains(cari))
+                            .map(item -> new Object[] {
+                                item.path("KodePaket").asText(""),
+                                item.path("NamaOperasi").asText(""),
+                                item.path("Kategori").asText(""),
+                                item.path("Total").asDouble(0d)
+                            })
+                            .forEach(this::publish);
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    DlgCariDaftarOperasi.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
     }
 
     private void runBackground(Runnable task) {
