@@ -751,6 +751,8 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
                     Valid.SetTgl(TglFaktur.getSelectedItem()+""),Valid.SetTgl(TglTempo.getSelectedItem()+""),""+sbttl,""+ttldisk,""+ttl,
                     ""+ppn,""+meterai,""+(ttl+ppn+meterai),"Belum Dibayar"
                 })==true){
+                    String hargaDasarSmc = Sequel.cariIsiSmc("select set_harga_non_medis_smc.hargadasar from set_harga_non_medis_smc limit 1"),
+                        ppnHargaSmc = Sequel.cariIsiSmc("select set_harga_non_medis_smc.ppn from set_harga_non_medis_smc limit 1");
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
                         if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
@@ -764,12 +766,18 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
                                     tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,1).toString()
                                 });
                                 if(tbDokter.getValueAt(i,4).toString().equals("true")&&(akses.getipsrs_barang()==true)){
-                                    Double hargadiskon=Valid.SetAngka(tbDokter.getValueAt(i,9).toString())/Valid.SetAngka(tbDokter.getValueAt(i,0).toString());
-//                                    Sequel.mengedit("ipsrsbarang","kode_brng=?","harga=?",2,new String[]{
-//                                        (hargadiskon+((Double.parseDouble(tppn.getText())/100)*hargadiskon))+"",tbDokter.getValueAt(i,1).toString()
-//                                    });
+                                    // Double hargadiskon=Valid.SetAngka(tbDokter.getValueAt(i,9).toString())/Valid.SetAngka(tbDokter.getValueAt(i,0).toString());
+                                    // Sequel.mengedit("ipsrsbarang","kode_brng=?","harga=?",2,new String[]{
+                                    //     (hargadiskon+((Double.parseDouble(tppn.getText())/100)*hargadiskon))+"",tbDokter.getValueAt(i,1).toString()
+                                    // });
+                                    double hargaBarangSmc = "Harga Beli".equals(hargaDasarSmc)
+                                        ? Valid.getAngkaSmc(tbDokter.getValueAt(i,5))
+                                        : Valid.getAngkaSmc(tbDokter.getValueAt(i,9)) / Valid.setAngkaSmc(tbDokter.getValueAt(i,0).toString());
+                                    if (!"No".equals(ppnHargaSmc)) {
+                                        hargaBarangSmc += (Valid.getAngkaSmc(tppn.getText().replace(',', '.')) / 100) * hargaBarangSmc;
+                                    }
                                     Sequel.mengedit("ipsrsbarang","kode_brng=?","harga=?",2,new String[]{
-                                        (hargadiskon+((persenPPNSmc()/100)*hargadiskon))+"",tbDokter.getValueAt(i,1).toString()
+                                        hargaBarangSmc+"",tbDokter.getValueAt(i,1).toString()
                                     });
                                 }
                             }else{
@@ -1381,7 +1389,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
 //        if(!Meterai.getText().equals("")){
 //            meterai=Double.parseDouble(Meterai.getText());
 //        }
-        meterai = angkaSmc(Meterai.getText());
+        meterai = Valid.getAngkaSmc(Meterai.getText());
 
         jml=tbDokter.getRowCount();
         for(i=0;i<jml;i++){
@@ -1402,13 +1410,13 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
         LPotongan.setText(Valid.SetAngka(ttldisk));
         ttl=sbttl-ttldisk;
         LTotal2.setText(Valid.SetAngka(ttl));
-        ppn=0;
-//        if(!tppn.getText().equals("")){
-//            ppn=Math.round((Double.parseDouble(tppn.getText())/100) *(ttl));
-//            LPpn.setText(Valid.SetAngka(ppn));
-//            LTagiha.setText(Valid.SetAngka(ttl+ppn+meterai));
-//        }
-        ppn = Math.round((persenPPNSmc() / 100) * (ttl));
+        // ppn=0;
+        // if(!tppn.getText().equals("")){
+        //     ppn=Math.round((Double.parseDouble(tppn.getText())/100) *(ttl));
+        //     LPpn.setText(Valid.SetAngka(ppn));
+        //     LTagiha.setText(Valid.SetAngka(ttl+ppn+meterai));
+        // }
+        ppn = Math.round((Valid.getAngkaSmc(tppn.getText().replace(',', '.')) / 100) * (ttl));
         LPpn.setText(Valid.SetAngka(ppn));
         LTagiha.setText(Valid.SetAngka(ttl + ppn + meterai));
     }
@@ -1549,18 +1557,18 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
                 tabMode.setValueAt(0d, baris, 5);
             }
 
-            double jumlahBeli = angkaSmc(tabMode.getValueAt(baris, 0)),
+            double jumlahBeli = Valid.getAngkaSmc(tabMode.getValueAt(baris, 0)),
                 subtotalBeli = 0,
-                persenDiskon = angkaSmc(tabMode.getValueAt(baris, 7)),
+                persenDiskon = Valid.getAngkaSmc(tabMode.getValueAt(baris, 7)),
                 nominalDiskon = 0;
 
             if (jumlahBeli > 0) {
-                subtotalBeli = jumlahBeli * angkaSmc(tabMode.getValueAt(baris, 5));
+                subtotalBeli = jumlahBeli * Valid.getAngkaSmc(tabMode.getValueAt(baris, 5));
             }
 
             if (subtotalBeli > 0) {
                 if (8 == kolom) {
-                    nominalDiskon = angkaSmc(tabMode.getValueAt(baris, 8));
+                    nominalDiskon = Valid.getAngkaSmc(tabMode.getValueAt(baris, 8));
                     persenDiskon = nominalDiskon * 100 / subtotalBeli;
                 } else {
                     nominalDiskon = Math.round(subtotalBeli * persenDiskon / 100);
@@ -1623,10 +1631,6 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
         }
     }
 
-    private double persenPPNSmc() {
-        return angkaSmc(tppn.getText().replace(',', '.'));
-    }
-
     private void hitungTotalSmc() {
         menghitungSmc = true;
 
@@ -1634,18 +1638,6 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
             getData();
         } finally {
             menghitungSmc = false;
-        }
-    }
-
-    private double angkaSmc(Object nilai) {
-        if (nilai instanceof Number) {
-            return ((Number) nilai).doubleValue();
-        }
-
-        try {
-            return Double.parseDouble(nilai.toString().trim());
-        } catch (Exception e) {
-            return 0;
         }
     }
 

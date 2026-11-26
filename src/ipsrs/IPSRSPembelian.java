@@ -674,6 +674,8 @@ public class IPSRSPembelian extends javax.swing.JDialog {
                         NoFaktur.getText(),kdsup.getText(),kdptg.getText(),Valid.SetTgl(TglBeli.getSelectedItem()+""),
                         ""+sbttl,""+ttldisk,""+ttl,""+ppn,""+meterai,""+(ttl+ppn+meterai),akunbayar
                 })==true){
+                    String hargaDasarSmc = Sequel.cariIsiSmc("select set_harga_non_medis_smc.hargadasar from set_harga_non_medis_smc limit 1"),
+                        ppnHargaSmc = Sequel.cariIsiSmc("select set_harga_non_medis_smc.ppn from set_harga_non_medis_smc limit 1");
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
                         if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
@@ -687,9 +689,16 @@ public class IPSRSPembelian extends javax.swing.JDialog {
                                     tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,1).toString()
                                 });
                                 if(tbDokter.getValueAt(i,4).toString().equals("true")&&(akses.getipsrs_barang()==true)){
-                                    Double hargadiskon=Valid.SetAngka(tbDokter.getValueAt(i,9).toString())/Valid.SetAngka(tbDokter.getValueAt(i,0).toString());
+//                                    Double hargadiskon=Valid.SetAngka(tbDokter.getValueAt(i,9).toString())/Valid.SetAngka(tbDokter.getValueAt(i,0).toString());
+//                                    Sequel.mengedit("ipsrsbarang","kode_brng=?","harga=?",2,new String[]{
+//                                        (hargadiskon+((Double.parseDouble(tppn.getText())/100)*hargadiskon))+"",tbDokter.getValueAt(i,1).toString()
+//                                    });
+                                    double hargaBarangSmc = "Harga Beli".equals(hargaDasarSmc) ? Valid.getAngkaSmc(tbDokter.getValueAt(i,5)) : Valid.getAngkaSmc(tbDokter.getValueAt(i,9)) / Valid.setAngkaSmc(tbDokter.getValueAt(i,0).toString());
+                                    if (!"No".equals(ppnHargaSmc)) {
+                                        hargaBarangSmc += (Valid.setAngkaSmc(tppn.getText()) / 100) * hargaBarangSmc;
+                                    }
                                     Sequel.mengedit("ipsrsbarang","kode_brng=?","harga=?",2,new String[]{
-                                        (hargadiskon+((Double.parseDouble(tppn.getText())/100)*hargadiskon))+"",tbDokter.getValueAt(i,1).toString()
+                                        hargaBarangSmc+"",tbDokter.getValueAt(i,1).toString()
                                     });
                                 }
                             }else{
