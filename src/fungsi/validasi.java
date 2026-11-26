@@ -602,11 +602,19 @@ public final class validasi {
     }
 
     public double getAngkaSmc(Object value) {
-        if (value != null && value instanceof Number) {
+        if (value == null) {
+            return 0d;
+        }
+        
+        if (value instanceof Number) {
             return ((Number) value).doubleValue();
         }
 
-        return 0;
+        try {
+            return Double.parseDouble(value.toString());
+        } catch (NumberFormatException e) {
+            return 0d;
+        }
     }
 
     public boolean umurcacheSmc(File file, int hari) {
