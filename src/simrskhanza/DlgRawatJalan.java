@@ -14916,7 +14916,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                     TindakLanjut.setText("");TPenilaian.setText("");TInstruksi.setText("");SpO2.setText("");
                                     TEvaluasi.setText("");cmbKesadaran.setSelectedIndex(0);
                                     LCount.setText(""+tabModePemeriksaan.getRowCount());
-                                    Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV'", "no_rawat = ? and stts = 'Belum'", TNoRw.getText());
+                                    Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV'", "no_rawat = ? and stts in ('Belum', 'Pemeriksaan Penunjang')", TNoRw.getText());
                             }
                         }else{
                             if(akses.getkode().equals(KdPeg.getText())){
@@ -14937,7 +14937,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                         TindakLanjut.setText("");TPenilaian.setText("");TInstruksi.setText("");SpO2.setText("");
                                         TEvaluasi.setText("");cmbKesadaran.setSelectedIndex(0);
                                         LCount.setText(""+tabModePemeriksaan.getRowCount());
-                                        Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV'", "no_rawat = ? and stts = 'Belum'", TNoRw.getText());
+                                        Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV'", "no_rawat = ? and stts in ('Belum', 'Pemeriksaan Penunjang')", TNoRw.getText());
                                 }
                             }else{
                                 JOptionPane.showMessageDialog(null,"Hanya bisa disimpan oleh dokter/petugas yang bersangkutan..!!");
