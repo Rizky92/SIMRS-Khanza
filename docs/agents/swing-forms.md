@@ -8,15 +8,14 @@ Unless specified otherwise, the modules under `/src` are regular NetBeans Swing 
 The two files must agree:
 
 - The design maps to the `initComponents()` method in the java file.
-- Every event maps to a method marked with `//GEN-FIRST:event_<event method name>` after the opening curly
-  brace and `//GEN-LAST:event<event method name>` after the closing curly brace.
+- Every event maps to a method marked with `//GEN-FIRST:event_<event method name>` after the opening curly brace and `//GEN-LAST:event<event method name>` after the closing curly brace.
 
 A change on either side must be reflected on the other.
 
 ### Preferred workflow
 1. **Edit the `.form` file first**, if you understand its XML.
 2. Then hand it to NetBeans so it regenerates the java side for you:
-   - **If the NetBeans MCP server is available**, call its `regenerateFormCode` tool on the form counterpart. It re-synchronizes `initComponents()` and the generated event methods, so you never hand-write them.
+   - **If the NetBeans MCP server is available**, call its `regenerateFormCode` tool on the form counterpart. It re-synchronizes `initComponents()` and the generated event methods, so you never hand-write  them.
    - **If it is not available**, tell the user to open the form manually in NetBeans, and say which file.
 
 This avoids hand-editing generated code. If you do edit `initComponents()` or an event method directly, you own the job of mirroring it back into the `.form`.

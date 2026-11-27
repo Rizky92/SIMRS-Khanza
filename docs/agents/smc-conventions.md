@@ -28,16 +28,12 @@ The SMC affix is not an acronym in this rule — it keeps its own casing from th
 In database structures (column and table names) and named keys, the whole name is `snake_case`, acronym included: `no_sep`, `kode_kfa`, `tarif_inacbg`.
 
 ## Superseding upstream code
-Upstream code that an SMC replacement makes obsolete stays in the file, commented out — never deleted and
-never moved elsewhere. Put the SMC code next to it.
+Upstream code that an SMC replacement makes obsolete stays in the file, commented out — never deleted and never moved elsewhere. Put the SMC code next to it.
 
 - A whole method or block: wrap it in `/* ... */`.
 - A single call site or statement: prefix it with `//`.
 
-This repository merges from [`mas-elkhanza/SIMRS-Khanza`](https://github.com/mas-elkhanza/SIMRS-Khanza)
-regularly. Deleted or relocated upstream lines make every upstream touch of that file a merge conflict;
-commented-out lines still match, so the merge applies cleanly while our changes stay visible as the added
-side.
+This repository merges from [`mas-elkhanza/SIMRS-Khanza`](https://github.com/mas-elkhanza/SIMRS-Khanza) regularly. Deleted or relocated upstream lines make every upstream touch of that file a merge conflict; commented-out lines still match, so the merge applies cleanly while our changes stay visible as the added side.
 
 Consequences for agents:
 - Do not offer to clean up the commented-out remains, and do not count them as dead code.

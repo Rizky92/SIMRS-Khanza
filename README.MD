@@ -16,8 +16,8 @@ Untuk menjalankan projek, ada beberapa hal yang perlu diketahui.
 
 ### Requirements
 - [XAMPP](https://drive.google.com/file/d/1jQd3j16X_fFfS9Sq-7okpdBBD5ng78K_/view?usp=drive_link)  
-- [Apache NetBeans <= 27](https://netbeans.apache.org/front/main/download/nb27/)  
-- [Liberica JDK 17](https://github.com/bell-sw/Liberica/releases?q=17.0&expanded=true)  
+- [Apache NetBeans 27+](https://netbeans.apache.org/front/main/download/nb27/)  
+- [Liberica JDK 25](https://github.com/bell-sw/Liberica/releases?q=25.0&expanded=true)  
 - [Jaspersoft Studio 6.8.0](https://drive.google.com/file/d/1l2jNOd7gqmpQK_7NZBNxmUBLI7IwwKQ3/view?usp=drive_link)  
 - Library yang digunakan bisa di [download disini](https://drive.google.com/file/d/1D1rdtiYnfmjrhCOP0G6FrzL4zdlPAhyn/view?usp=sharing)  
 
@@ -42,14 +42,14 @@ git clone https://github.com/Rizky92/simrs-khanza.git --branch=custom "simrs-kha
 > 
 > Pastikan gunakan folder yang berbeda.  
 
-3. Setelah clone selesai dan library sudah diextract, masuk ke folder projek, kemudian buka file `nbproject/project.properties` menggunakan text editor kemudian cari `path.file-reference`. Ganti nilai ini dengan path ke folder tempat library di extract.  
+3. Setelah clone selesai dan library sudah diextract, masuk ke folder projek, kemudian buka file `nbproject/project.properties` menggunakan text editor kemudian cari `path.file-reference`. Ganti dengan path tempat library di extract.  
 ![path.file-reference di file project.properties](docs/Screenshot_27.png)
 
-4. Buka projek dalam Apache NetBeans, kemudian buka properties. Pada bagian library, pastikan `Java Platform` menggunakan [Liberica JDK 17](https://github.com/bell-sw/Liberica/releases?q=17.0&expanded=true).  
-![Java Platform menggunakan Liberica JDK 17](docs/Screenshot_25.png)  
+4. Buka projek dalam Apache NetBeans, kemudian buka properties. Pada bagian library, pastikan `Java Platform` menggunakan [Liberica JDK 25](https://github.com/bell-sw/Liberica/releases?q=25.0&expanded=true).  
+![Java Platform menggunakan Liberica JDK 25](docs/Screenshot_25.png)  
 
 > [!NOTE]
-> Apabila opsi "Liberica JDK 17" tidak ada, silahkan tambahkan dulu sebagai `Java Platform`. Cara menambahkan `Java Platform` bisa dilihat [disini](docs/menambah-jdk.md).  
+> Apabila opsi "Liberica JDK 25" tidak ada, silahkan tambahkan dulu sebagai `Java Platform`. Cara menambahkan `Java Platform` bisa dilihat [disini](docs/menambah-jdk.md).  
 
 5. Import `sik.sql` ke database bernama `sik`. Pastikan database dalam keadaan ***KOSONG***. Apabila database belum ada, silahkan buat terlebih dahulu.  
 ```bash
