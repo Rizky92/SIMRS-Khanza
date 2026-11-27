@@ -2,7 +2,7 @@
     <div class="entry">
     <div align="center" class="link">
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
+    </div>
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
             $action  = isset($_GET['action'])?$_GET['action']:NULL;
@@ -69,8 +69,8 @@
     <?php
         echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                 <tr class='head'>
-                    <td><div align='left'>Data : $jumlah <a target=_blank href=../penggajian/pages/pinjam/LaporanPinjam.php?&keyword=$keyword>| Laporan |</a></div></td>                        
-                </tr>     
+                    <td><div align='left'>Data : $jumlah <a target=_blank href=../penggajian/pages/pinjam/LaporanPinjam.php?&keyword=$keyword>| Laporan |</a></div></td>
+                </tr>
              </table>");
     ?>
     </div>

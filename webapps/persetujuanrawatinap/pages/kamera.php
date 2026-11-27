@@ -2,18 +2,18 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $namars        = getOne("select setting.nama_instansi from setting");
     $nopersetujuan = "";
     $norawat       = "";
-    
-    $_sql          = "select * from antripersetujuanrawatinap" ;  
+
+    $_sql          = "select * from antripersetujuanrawatinap" ;
     $hasil         = bukaquery2($_sql);
     while ($data = mysqli_fetch_array ($hasil)){
         $nopersetujuan = $data['no_persetujuan'];
         $norawat      = $data['no_rawat'];
     }
-    
+
     $no_rkm_medis = "";
     $nm_pasien    = "";
     $jk           = "";
@@ -21,14 +21,14 @@
     $tgl_lahir    = "";
     $alamat       = "";
     $no_tlp       = "";
-    
+
     $_sql2  = "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','LAKI-LAKI','PEREMPUAN') as jk,
-               pasien.umur,DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, 
-               pasien.no_tlp from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+               pasien.umur,DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,
+               pasien.no_tlp from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
-               inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
+               inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
                inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
-               where reg_periksa.no_rawat='".$norawat."'" ;  
+               where reg_periksa.no_rawat='".$norawat."'" ;
     $hasil2 = bukaquery2($_sql2);
     while ($data2  = mysqli_fetch_array ($hasil2)){
         $no_rkm_medis = $data2['no_rkm_medis'];
@@ -39,38 +39,38 @@
         $alamat       = $data2['alamat'];
         $no_tlp       = $data2['no_tlp'];
     }
-    
-    $tanggal                        = "";        
-    $nama_pj                        = "";        
-    $no_ktppj                       = "";        
-    $pendidikan_pj                  = "";        
-    $alamatpj                       = "";        
-    $no_telppj                      = "";        
-    $ruang                          = "";        
-    $kelas                          = "";        
-    $hubungan                       = "";        
-    $hak_kelas                      = "";        
-    $nama_alamat_keluarga_terdekat  = "";        
-    $bayar_secara                   = "";  
+
+    $tanggal                        = "";
+    $nama_pj                        = "";
+    $no_ktppj                       = "";
+    $pendidikan_pj                  = "";
+    $alamatpj                       = "";
+    $no_telppj                      = "";
+    $ruang                          = "";
+    $kelas                          = "";
+    $hubungan                       = "";
+    $hak_kelas                      = "";
+    $nama_alamat_keluarga_terdekat  = "";
+    $bayar_secara                   = "";
     $_sql2  = "select DATE_FORMAT(surat_persetujuan_rawat_inap.tanggal,'%d-%m-%Y') as tanggal,surat_persetujuan_rawat_inap.nama_pj,
                surat_persetujuan_rawat_inap.no_ktppj,surat_persetujuan_rawat_inap.pendidikan_pj,surat_persetujuan_rawat_inap.alamatpj,
                surat_persetujuan_rawat_inap.no_telppj,surat_persetujuan_rawat_inap.ruang,surat_persetujuan_rawat_inap.kelas,
                surat_persetujuan_rawat_inap.hubungan,surat_persetujuan_rawat_inap.hak_kelas,surat_persetujuan_rawat_inap.nama_alamat_keluarga_terdekat,
-               surat_persetujuan_rawat_inap.bayar_secara from surat_persetujuan_rawat_inap where surat_persetujuan_rawat_inap.no_surat='$nopersetujuan'" ;  
+               surat_persetujuan_rawat_inap.bayar_secara from surat_persetujuan_rawat_inap where surat_persetujuan_rawat_inap.no_surat='$nopersetujuan'" ;
     $hasil2 = bukaquery2($_sql2);
     while ($data2  = mysqli_fetch_array ($hasil2)){
-        $tanggal                        = $data2['tanggal'];       
-        $nama_pj                        = $data2['nama_pj'];        
-        $no_ktppj                       = $data2['no_ktppj'];        
-        $pendidikan_pj                  = $data2['pendidikan_pj'];        
-        $alamatpj                       = $data2['alamatpj'];        
-        $no_telppj                      = $data2['no_telppj'];        
-        $ruang                          = $data2['ruang'];        
-        $kelas                          = $data2['kelas'];        
-        $hubungan                       = $data2['hubungan'];        
-        $hak_kelas                      = $data2['hak_kelas'];        
-        $nama_alamat_keluarga_terdekat  = $data2['nama_alamat_keluarga_terdekat'];        
-        $bayar_secara                   = $data2['bayar_secara'];  
+        $tanggal                        = $data2['tanggal'];
+        $nama_pj                        = $data2['nama_pj'];
+        $no_ktppj                       = $data2['no_ktppj'];
+        $pendidikan_pj                  = $data2['pendidikan_pj'];
+        $alamatpj                       = $data2['alamatpj'];
+        $no_telppj                      = $data2['no_telppj'];
+        $ruang                          = $data2['ruang'];
+        $kelas                          = $data2['kelas'];
+        $hubungan                       = $data2['hubungan'];
+        $hak_kelas                      = $data2['hak_kelas'];
+        $nama_alamat_keluarga_terdekat  = $data2['nama_alamat_keluarga_terdekat'];
+        $bayar_secara                   = $data2['bayar_secara'];
     }
 ?>
 
@@ -147,9 +147,9 @@
             <h7 class="text-dark">
                 Dengan ini menyatakan dengan sesungguhnya bahwa saya setuju untuk dilakukan Rawat Inap di <?=$namars;?> di ruang : <?=$ruang;?> Kelas : <?=$kelas;?> Terhadap <?=$hubungan;?>
                 <br/>
-                Hak kelas perawatan : <?=$hak_kelas;?> 
+                Hak kelas perawatan : <?=$hak_kelas;?>
                 <br/>
-                Nama dan alamat keluarga terdekat : <?=$nama_alamat_keluarga_terdekat;?> 
+                Nama dan alamat keluarga terdekat : <?=$nama_alamat_keluarga_terdekat;?>
                 <br/>
                 Demi kelancaran pelayanan perawatan, pengobatan dan administrasi, dengan ini juga menyatakan :
             </h7>
@@ -191,7 +191,7 @@
             </div>
         </form>
     </div>
-    
+
     <script language="JavaScript">
         Webcam.set({
             width: 490,
@@ -211,4 +211,3 @@
     </script>
 </body>
 </html>
-

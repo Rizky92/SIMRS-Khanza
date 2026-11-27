@@ -100,7 +100,7 @@ Github: https://github.com/vadimsva/waitMe
           if (addStyle !== '') {
             addStyle += ';';
           }
-					
+
           if (effectElemCount > 0) {
             if(_options.effect === 'img') {
 							effectElemHTML = '<img src="' + _options.source + '">';
@@ -148,7 +148,7 @@ Github: https://github.com/vadimsva/waitMe
 					var elemContentObj = elem.find('.' + elemClass + '_content');
           elemObj.css({background: _options.bg});
 					elemContentObj.css({marginTop: - elemContentObj.outerHeight() / 2 + 'px'});
-					
+
 					if (_options.maxSize !== '') {
 						var elemH = effectObj.outerHeight();
 						var elemW = effectObj.outerWidth();
@@ -159,7 +159,7 @@ Github: https://github.com/vadimsva/waitMe
 							elemContentObj.css({marginTop: - elemContentObj.outerHeight() / 2 + 'px'});
 						} else {
 							if (_options.maxSize < elemMax) {
-								waitMeDivObj.css({transform: 'scale(' + _options.maxSize / elemMax + ')'});	
+								waitMeDivObj.css({transform: 'scale(' + _options.maxSize / elemMax + ')'});
 							}
 						}
 					}
@@ -197,7 +197,7 @@ Github: https://github.com/vadimsva/waitMe
               }
             });
           }
-					
+
 					elemObj.on('destroyed', function() {
 						if (_options.onClose && $.isFunction(_options.onClose)) {
 							_options.onClose();
@@ -212,7 +212,7 @@ Github: https://github.com/vadimsva/waitMe
 							}
 						}
 					};
-					
+
 					return elemObj;
         },
         hide : function() {

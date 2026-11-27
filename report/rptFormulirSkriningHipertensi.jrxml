@@ -20,8 +20,8 @@
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,skrining_hipertensi.nip,petugas.nama,skrining_hipertensi.tanggal,
                     skrining_hipertensi.anamnesis1,skrining_hipertensi.anamnesis2,skrining_hipertensi.anamnesis3,skrining_hipertensi.anamnesis4,skrining_hipertensi.anamnesis5,
                     skrining_hipertensi.anamnesis6,skrining_hipertensi.anamnesis7,skrining_hipertensi.anamnesis8,skrining_hipertensi.sistole,skrining_hipertensi.diastole,
-                    skrining_hipertensi.klasifikasi_hipertensi,skrining_hipertensi.hasil_skrining,skrining_hipertensi.keterangan from skrining_hipertensi 
-                    inner join reg_periksa on skrining_hipertensi.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    skrining_hipertensi.klasifikasi_hipertensi,skrining_hipertensi.hasil_skrining,skrining_hipertensi.keterangan from skrining_hipertensi
+                    inner join reg_periksa on skrining_hipertensi.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join petugas on skrining_hipertensi.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

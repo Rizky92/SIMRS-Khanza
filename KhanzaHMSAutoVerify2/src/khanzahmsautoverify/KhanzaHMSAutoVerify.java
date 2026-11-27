@@ -17,5 +17,5 @@ public class KhanzaHMSAutoVerify {
     public static void main(String[] args) {
         new frmUtama().setVisible(true);
     }
-    
+
 }

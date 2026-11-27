@@ -17,12 +17,12 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="finger2" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur, 
+		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,
                     pasien.jk,pasien.tgl_lahir,skrining_gizi_kehamilan.tanggal,skrining_gizi_kehamilan.parameter1,skrining_gizi_kehamilan.skor1,
                     skrining_gizi_kehamilan.parameter2,skrining_gizi_kehamilan.skor2,skrining_gizi_kehamilan.parameter3,
                     skrining_gizi_kehamilan.skor3,skrining_gizi_kehamilan.parameter4,skrining_gizi_kehamilan.skor4,
-                    skrining_gizi_kehamilan.nilai_skor,skrining_gizi_kehamilan.keterangan,skrining_gizi_kehamilan.nip,petugas.nama 
-                    from skrining_gizi_kehamilan inner join reg_periksa on skrining_gizi_kehamilan.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    skrining_gizi_kehamilan.nilai_skor,skrining_gizi_kehamilan.keterangan,skrining_gizi_kehamilan.nip,petugas.nama
+                    from skrining_gizi_kehamilan inner join reg_periksa on skrining_gizi_kehamilan.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join petugas on skrining_gizi_kehamilan.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

@@ -22,9 +22,9 @@
                     skrining_gizi_kehamilan.parameter2,skrining_gizi_kehamilan.skor2,skrining_gizi_kehamilan.parameter3,
                     skrining_gizi_kehamilan.skor3,skrining_gizi_kehamilan.parameter4,skrining_gizi_kehamilan.skor4,
                     skrining_gizi_kehamilan.nilai_skor,skrining_gizi_kehamilan.keterangan,skrining_gizi_kehamilan.nip,
-                    petugas.nama,date_format(pasien.tgl_lahir,'%d-%m-%Y') as lahir 
-                    from skrining_gizi_kehamilan inner join reg_periksa on skrining_gizi_kehamilan.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    petugas.nama,date_format(pasien.tgl_lahir,'%d-%m-%Y') as lahir
+                    from skrining_gizi_kehamilan inner join reg_periksa on skrining_gizi_kehamilan.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join petugas on skrining_gizi_kehamilan.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

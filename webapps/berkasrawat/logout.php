@@ -1,9 +1,9 @@
-<?php	
+<?php
      session_start();
      $_SESSION["ses_admin_berkas_rawat"]=null;
-     unset($_SESSION["ses_admin_berkas_rawat"]); 
+     unset($_SESSION["ses_admin_berkas_rawat"]);
      $_SESSION["ses_vedika"]=null;
-     unset($_SESSION["ses_vedika"]); 
+     unset($_SESSION["ses_vedika"]);
      session_destroy();
      exit(header("Location:index.php"));
 ?>

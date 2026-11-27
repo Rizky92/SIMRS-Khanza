@@ -14,21 +14,18 @@ package grafikanalisa;
  * and open the template in the editor.
  */
 
-
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import java.awt.Font;
-
-import javax.swing.JPanel;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
@@ -41,7 +38,6 @@ import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-
 /**
  *
  * @author Via
@@ -52,21 +48,21 @@ public class grafikperiksaralanibubulan extends JDialog {
       public grafikperiksaralanibubulan(String title,String symbol) {
           setTitle(title);
          JPanel chartPanel = createDemoPanel(symbol);
-         
+
          chartPanel.setSize(screen.width,screen.height);
-         setContentPane(chartPanel);       
+         setContentPane(chartPanel);
          setModal(true);
          setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
          pack();
          setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       }
     Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
-      
+
     public static CategoryDataset createDataset1(String symbol) { //data grafik nilai K dan D
 
           DefaultCategoryDataset result = new DefaultCategoryDataset();
           String series1 = "Registrasi Perbulan";
-          
+
             try {
                 Statement stat = koneksiDB.condb().createStatement();
                 ResultSet rs = stat.executeQuery(symbol);
@@ -86,7 +82,7 @@ public class grafikperiksaralanibubulan extends JDialog {
 
         public static CategoryDataset createDataset2(String symbol) {//grafik volume
             DefaultCategoryDataset result = new DefaultCategoryDataset();
-            String series1 = "Registrasi Perbulan";             
+            String series1 = "Registrasi Perbulan";
 
             try {
                 Statement stat = koneksiDB.condb().createStatement();
@@ -103,7 +99,6 @@ public class grafikperiksaralanibubulan extends JDialog {
             }
              return result;
          }
-
 
          private static JFreeChart createChart(String symbol) {
 
@@ -142,4 +137,3 @@ public class grafikperiksaralanibubulan extends JDialog {
              return new ChartPanel(chart);
          }
 }
-

@@ -29,9 +29,9 @@
                 penilaian_medis_ralan_urologi.keterangan_ekstrimitas,penilaian_medis_ralan_urologi.nyeri_ketok_cva,penilaian_medis_ralan_urologi.genitalia_eksternal,penilaian_medis_ralan_urologi.colok_dubur,
                 penilaian_medis_ralan_urologi.lainnya,penilaian_medis_ralan_urologi.urinalisis,penilaian_medis_ralan_urologi.darah,penilaian_medis_ralan_urologi.usg_urologi,penilaian_medis_ralan_urologi.radiologi,
                 penilaian_medis_ralan_urologi.penunjang_lain,penilaian_medis_ralan_urologi.diagnosis,penilaian_medis_ralan_urologi.diagnosis2,penilaian_medis_ralan_urologi.permasalahan,penilaian_medis_ralan_urologi.terapi,
-                penilaian_medis_ralan_urologi.tindakan,penilaian_medis_ralan_urologi.edukasi,dokter.nm_dokter 
-                from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                inner join penilaian_medis_ralan_urologi on reg_periksa.no_rawat=penilaian_medis_ralan_urologi.no_rawat 
+                penilaian_medis_ralan_urologi.tindakan,penilaian_medis_ralan_urologi.edukasi,dokter.nm_dokter
+                from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                inner join penilaian_medis_ralan_urologi on reg_periksa.no_rawat=penilaian_medis_ralan_urologi.no_rawat
                 inner join dokter on penilaian_medis_ralan_urologi.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

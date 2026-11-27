@@ -1029,7 +1029,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement mode="Opaque" x="224" y="0" width="17" height="35" isPrintWhenDetailOverflows="true" backcolor="#FF9632" uuid="ccb11b95-f370-4c51-8092-0a11528a1c21">
-					<printWhenExpression><![CDATA[($P{jd1}.equals("(Minggu)") ? 
+					<printWhenExpression><![CDATA[($P{jd1}.equals("(Minggu)") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="Left">

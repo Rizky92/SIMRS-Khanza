@@ -191,7 +191,7 @@ public class frmSmsView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_BtnServiceActionPerformed
 
-    Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();   
+    Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
     private void BtnPesanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPesanActionPerformed
         if(koneksi == null ){
             JOptionPane.showMessageDialog(this, "Start Service terlebih dahulu!!");
@@ -204,7 +204,7 @@ public class frmSmsView extends javax.swing.JFrame {
                     public void windowClosed(WindowEvent e) {
                         dlgPesan=null;
                     }
-                }); 
+                });
                 dlgPesan.setSize(screen.width-100,screen.height-100);
                 dlgPesan.setLocationRelativeTo(null);
             }
@@ -212,9 +212,9 @@ public class frmSmsView extends javax.swing.JFrame {
             if (dlgPesan.isVisible()) {
                 dlgPesan.toFront();
                 return;
-            }     
-            
-            dlgPesan.setVisible(true);            
+            }
+
+            dlgPesan.setVisible(true);
         }
     }//GEN-LAST:event_BtnPesanActionPerformed
 
@@ -229,7 +229,7 @@ public class frmSmsView extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

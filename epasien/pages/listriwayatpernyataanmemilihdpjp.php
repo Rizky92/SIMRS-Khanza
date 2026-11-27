@@ -23,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                             $queryperiksa = bukaquery(
                                 "select surat_pernyataan_memilih_dpjp.no_pernyataan,date_format(surat_pernyataan_memilih_dpjp.tanggal,'%d/%m/%Y') as tanggalperiksa,surat_pernyataan_memilih_dpjp.pembuat_pernyataan,surat_pernyataan_memilih_dpjp.hubungan_pembuat_pernyataan,surat_pernyataan_memilih_dpjp.saksi_keluarga,".
                                 "ifnull(bukti_surat_pernyataan_memilih_dpjp.photo,'') as photo,ifnull(bukti_surat_pernyataan_memilih_dpjp_saksikeluarga.photo,'') as photo2 from surat_pernyataan_memilih_dpjp inner join reg_periksa on surat_pernyataan_memilih_dpjp.no_rawat=reg_periksa.no_rawat ".

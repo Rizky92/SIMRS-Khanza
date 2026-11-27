@@ -2,14 +2,14 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $norawat       = "";
-    $_sql          = "select * from antripemulangan" ;  
+    $_sql          = "select * from antripemulangan" ;
     $hasil         = bukaquery2($_sql);
     while ($data = mysqli_fetch_array ($hasil)){
         $norawat   = $data['no_rawat'];
     }
-    
+
     $no_rkm_medis = "";
     $nm_pasien    = "";
     $jk           = "";
@@ -19,9 +19,9 @@
     $alamat       = "";
     $no_tlp       = "";
     $_sql2  = "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','LAKI-LAKI','PEREMPUAN') as jk,DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y') as tgl_registrasi,
-               reg_periksa.jam_reg,pasien.umur,DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, 
+               reg_periksa.jam_reg,pasien.umur,DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,
                pasien.no_tlp from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
-               inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab where reg_periksa.no_rawat='".$norawat."'" ;  
+               inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab where reg_periksa.no_rawat='".$norawat."'" ;
     $hasil2 = bukaquery2($_sql2);
     while ($data2  = mysqli_fetch_array ($hasil2)){
         $no_rkm_medis = $data2['no_rkm_medis'];
@@ -33,7 +33,7 @@
         $no_tlp       = $data2['no_tlp'];
         $tgl_masuk    = $data2['tgl_registrasi']." ".$data2['jam_reg'];
     }
-    
+
     $rencana_pulang                                 = "";
     $alasan_masuk                                   = "";
     $diagnosa_medis                                 = "";
@@ -76,7 +76,7 @@
                perencanaan_pemulangan.memerlukan_perawatan_khusus,perencanaan_pemulangan.keterangan_memerlukan_perawatan_khusus,perencanaan_pemulangan.bermasalah_memenuhi_kebutuhan,
                perencanaan_pemulangan.keterangan_bermasalah_memenuhi_kebutuhan,perencanaan_pemulangan.memiliki_nyeri_kronis,perencanaan_pemulangan.keterangan_memiliki_nyeri_kronis,
                perencanaan_pemulangan.memerlukan_edukasi_kesehatan,perencanaan_pemulangan.keterangan_memerlukan_edukasi_kesehatan,perencanaan_pemulangan.memerlukan_keterampilkan_khusus,
-               perencanaan_pemulangan.keterangan_memerlukan_keterampilkan_khusus,perencanaan_pemulangan.nama_pasien_keluarga from perencanaan_pemulangan where perencanaan_pemulangan.no_rawat='$norawat'" ;  
+               perencanaan_pemulangan.keterangan_memerlukan_keterampilkan_khusus,perencanaan_pemulangan.nama_pasien_keluarga from perencanaan_pemulangan where perencanaan_pemulangan.no_rawat='$norawat'" ;
     $hasil2 = bukaquery2($_sql2);
     while ($data2  = mysqli_fetch_array ($hasil2)){
         $rencana_pulang                                 = $data2["rencana_pulang"];
@@ -111,7 +111,7 @@
         $memerlukan_keterampilkan_khusus                = $data2["memerlukan_keterampilkan_khusus"];
         $keterangan_memerlukan_keterampilkan_khusus     = $data2["keterangan_memerlukan_keterampilkan_khusus"];
         $nama_pasien_keluarga                           = $data2["nama_pasien_keluarga"];
-    }   
+    }
 ?>
 
 <!DOCTYPE html>
@@ -266,7 +266,7 @@
             </div>
         </form>
     </div>
-    
+
     <script language="JavaScript">
         Webcam.set({
             width: 490,
@@ -286,4 +286,3 @@
     </script>
 </body>
 </html>
-

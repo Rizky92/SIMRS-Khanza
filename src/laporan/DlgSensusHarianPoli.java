@@ -11,10 +11,10 @@
 
 package laporan;
 
+import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
@@ -33,11 +33,10 @@ import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
-import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
-import simrskhanza.DlgCariPoli;
 import simrskhanza.DlgCariCaraBayar;
+import simrskhanza.DlgCariPoli;
 
 /**
  *
@@ -77,7 +76,7 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
         );
         LoadHTML.setDocument(kit.createDefaultDocument());
         LoadHTML2.setDocument(kit.createDefaultDocument());
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -426,17 +425,17 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                         ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                         ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
                 );
                 bg.close();
 
-                File f = new File("sensuspoli.html");            
+                File f = new File("sensuspoli.html");
                 BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 if(TabRawat.getSelectedIndex()==0){
                     bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
@@ -446,7 +445,7 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                                             "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                             akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                             akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>SENSUS HARIAN PASIEN POLIKLINIK<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                            "<font size='2' face='Tahoma'>SENSUS HARIAN PASIEN POLIKLINIK<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                         "</td>"+
                                    "</tr>"+
                                 "</table>")
@@ -460,7 +459,7 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                                             "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                             akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                             akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>SENSUS HARIAN PASIEN POLIKLINIK<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                            "<font size='2' face='Tahoma'>SENSUS HARIAN PASIEN POLIKLINIK<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                         "</td>"+
                                    "</tr>"+
                                 "</table>")
@@ -471,13 +470,13 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                 Desktop.getDesktop().browse(f.toURI());
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
-            }     
+            }
 
             this.setCursor(Cursor.getDefaultCursor());
         }else{
             JOptionPane.showMessageDialog(null,"Masih proses menampilkan data, harap tunggu terlebih dahulu...!");
         }
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -485,17 +484,17 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
         }else{
             //Valid.pindah(evt, BtnHapus, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnKeluar,TKd);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(koneksiDB.CARICEPAT().equals("aktif")){
@@ -546,7 +545,7 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                 if(poli.getTable().getSelectedRow()!= -1){
                     kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     nmpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
-                }      
+                }
                 kdpoli.requestFocus();
             }
             @Override
@@ -557,7 +556,7 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {poli.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
+        });
         poli.isCek();
         poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         poli.setLocationRelativeTo(internalFrame1);
@@ -595,7 +594,7 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -606,8 +605,8 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -749,7 +748,7 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
     private widget.MenuItem ppTampilkanLama;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil(){        
+    private void tampil(){
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try{
             jmllama=0;jmlbaru=0;jmllaki=0;jmlper=0;
@@ -803,10 +802,10 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='14%' rowspan='2'>Golongan Penyakit/<br>Sebab Penyakit</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%' rowspan='2'>Dirujuk Ke</td>"+
                                 "</tr>"+
-                                "<tr class='isi3'>"+                                        
+                                "<tr class='isi3'>"+
                                     "<td valign='top' bgcolor='#FFFAFA' align='center' width='3%'>Lama</td>"+
                                     "<td valign='top' bgcolor='#FFFAFA' align='center' width='3%'>Baru</td>"+
-                                "</tr>" 
+                                "</tr>"
                             );
                             psreg=koneksi.prepareStatement(
                                     "select reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.alamat,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) as umur,"+
@@ -883,13 +882,13 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                                         if(pspenyakit!=null){
                                             pspenyakit.close();
                                         }
-                                    }                                        
+                                    }
                                     htmlContent.append(
                                                 "</table>"+
                                             "</td>"+
                                             "<td valign='top'>"+dirujukke+"</td>"+
                                         "</tr>"
-                                    );        
+                                    );
                                     i++;
                                 }
                             } catch (Exception e) {
@@ -917,7 +916,7 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                                     "<td valign='top' align='center'></td>"+
                                     "<td valign='top' align='center'></td>"+
                                 "</tr>"
-                            ); 
+                            );
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi Poli : "+e);
@@ -928,7 +927,7 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                         if(pspoli!=null){
                             pspoli.close();
                         }
-                    }                                        
+                    }
                 }
                 if((jmlbaru+jmllama)>0){
                     htmlContent.append(
@@ -976,7 +975,7 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    public void tampil2(){        
+    public void tampil2(){
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try{
             jmllama=0;jmlbaru=0;jmllaki=0;jmlper=0;
@@ -1030,10 +1029,10 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='19%' rowspan='2'>Golongan Penyakit/<br>Sebab Penyakit</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%' rowspan='2'>Dirujuk Ke</td>"+
                                 "</tr>"+
-                                "<tr class='isi3'>"+                                        
+                                "<tr class='isi3'>"+
                                     "<td valign='top' bgcolor='#FFFAFA' align='center' width='3%'>Lama</td>"+
                                     "<td valign='top' bgcolor='#FFFAFA' align='center' width='3%'>Baru</td>"+
-                                "</tr>" 
+                                "</tr>"
                             );
                             psreg=koneksi.prepareStatement(
                                     "select reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.alamat,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) as umur,"+
@@ -1110,13 +1109,13 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                                         if(pspenyakit!=null){
                                             pspenyakit.close();
                                         }
-                                    }                                        
+                                    }
                                     htmlContent.append(
                                                 "</table>"+
                                             "</td>"+
                                             "<td valign='top'>"+dirujukke+"</td>"+
                                         "</tr>"
-                                    );         
+                                    );
                                     i++;
                                 }
                             } catch (Exception e) {
@@ -1144,8 +1143,8 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                                     "<td valign='top' align='center'></td>"+
                                     "<td valign='top' align='center'></td>"+
                                 "</tr>"
-                            );    
-                            
+                            );
+
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi Poli : "+e);
@@ -1156,7 +1155,7 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                         if(pspoli!=null){
                             pspoli.close();
                         }
-                    }                                        
+                    }
                 }
                 if((jmlbaru+jmllama)>0){
                     htmlContent.append(
@@ -1229,7 +1228,7 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

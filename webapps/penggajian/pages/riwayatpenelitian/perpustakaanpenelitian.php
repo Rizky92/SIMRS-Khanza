@@ -9,11 +9,11 @@
 ?>
 <div style="width: 100%; height: 99%; overflow: auto;">
 <?php
-    $_sql = "SELECT riwayat_penelitian.id,pegawai.nik,pegawai.nama,riwayat_penelitian.jenis_penelitian,riwayat_penelitian.peranan, 
-            riwayat_penelitian.judul_penelitian,riwayat_penelitian.judul_jurnal,riwayat_penelitian.tahun,riwayat_penelitian.berkas 
-            from pegawai inner join riwayat_penelitian on riwayat_penelitian.id=pegawai.id where 
-            pegawai.nik like '%".$keyword."%' or pegawai.nama like '%".$keyword."%' or riwayat_penelitian.jenis_penelitian like '%".$keyword."%' or 
-            riwayat_penelitian.peranan like '%".$keyword."%' or riwayat_penelitian.judul_penelitian like '%".$keyword."%' or 
+    $_sql = "SELECT riwayat_penelitian.id,pegawai.nik,pegawai.nama,riwayat_penelitian.jenis_penelitian,riwayat_penelitian.peranan,
+            riwayat_penelitian.judul_penelitian,riwayat_penelitian.judul_jurnal,riwayat_penelitian.tahun,riwayat_penelitian.berkas
+            from pegawai inner join riwayat_penelitian on riwayat_penelitian.id=pegawai.id where
+            pegawai.nik like '%".$keyword."%' or pegawai.nama like '%".$keyword."%' or riwayat_penelitian.jenis_penelitian like '%".$keyword."%' or
+            riwayat_penelitian.peranan like '%".$keyword."%' or riwayat_penelitian.judul_penelitian like '%".$keyword."%' or
             riwayat_penelitian.judul_jurnal like '%".$keyword."%' or riwayat_penelitian.tahun like '%".$keyword."%' order by riwayat_penelitian.tahun";
     $hasil=bukaquery($_sql);
     $jumlah=mysqli_num_rows($hasil);
@@ -41,7 +41,7 @@
                     <td valign='top'><a target=_blank href=../penggajian/pages/".$baris["berkas"].">".str_replace("pages/riwayatpenelitian/berkas/","",$baris["berkas"])."</a></td>
                   </tr>";
         }
-        echo "</table>";           
+        echo "</table>";
     } else {
         echo "<table width='99.8%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                 <tr class='head2'>

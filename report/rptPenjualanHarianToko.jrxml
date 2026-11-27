@@ -25,10 +25,10 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select tokopenjualan.nota_jual,tokopenjualan.tgl_jual, 
-tokopenjualan.nip,petugas.nama,tokopenjualan.ongkir,tokopenjualan.total, 
-tokopenjualan.no_member,tokopenjualan.nm_member,tokopenjualan.keterangan, 
-tokopenjualan.jns_jual,tokopenjualan.ppn,tokopenjualan.nama_bayar 
+		<![CDATA[select tokopenjualan.nota_jual,tokopenjualan.tgl_jual,
+tokopenjualan.nip,petugas.nama,tokopenjualan.ongkir,tokopenjualan.total,
+tokopenjualan.no_member,tokopenjualan.nm_member,tokopenjualan.keterangan,
+tokopenjualan.jns_jual,tokopenjualan.ppn,tokopenjualan.nama_bayar
 from tokopenjualan inner join petugas on tokopenjualan.nip=petugas.nip]]>
 	</queryString>
 	<field name="nota_jual" class="java.lang.String">

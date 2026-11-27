@@ -19,10 +19,10 @@
 	<parameter name="barang" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select databarang.kode_brng,databarang.nama_brng,kodesatuan.satuan,jenis.nama as jenis,
-sum(detail_permintaan_medis.jumlah) as jumlah from databarang inner join kodesatuan 
-inner join jenis inner join detail_permintaan_medis inner join permintaan_medis 
-on databarang.kode_brng=detail_permintaan_medis.kode_brng and databarang.kode_sat=kodesatuan.kode_sat 
-and databarang.kdjns=jenis.kdjns and detail_permintaan_medis.no_permintaan=permintaan_medis.no_permintaan 
+sum(detail_permintaan_medis.jumlah) as jumlah from databarang inner join kodesatuan
+inner join jenis inner join detail_permintaan_medis inner join permintaan_medis
+on databarang.kode_brng=detail_permintaan_medis.kode_brng and databarang.kode_sat=kodesatuan.kode_sat
+and databarang.kdjns=jenis.kdjns and detail_permintaan_medis.no_permintaan=permintaan_medis.no_permintaan
 where permintaan_medis.tanggal between $P{tanggal1} and $P{tanggal2} and databarang.nama_brng like $P{barang} and databarang.kode_brng like $P{parameter} or
 permintaan_medis.tanggal between $P{tanggal1} and $P{tanggal2} and databarang.nama_brng like $P{barang} and databarang.kode_brng like $P{parameter} or
 permintaan_medis.tanggal between $P{tanggal1} and $P{tanggal2} and databarang.nama_brng like $P{barang} and databarang.kode_brng like $P{parameter}

@@ -14,28 +14,28 @@
 	<parameter name="parameter" class="java.lang.String"/>
 	<parameter name="ruang" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select inventaris.no_inventaris,inventaris_barang.kode_barang, inventaris_barang.nama_barang, 
-                   inventaris_barang.nama_barang, inventaris_merk.nama_merk, inventaris_barang.thn_produksi, inventaris_barang.isbn, 
-                   inventaris_kategori.nama_kategori, inventaris_jenis.nama_jenis,inventaris.asal_barang,inventaris.tgl_pengadaan, 
-                   inventaris.harga,inventaris.status_barang,inventaris_ruang.nama_ruang,inventaris.no_rak,inventaris.no_box 
-                   from inventaris inner join inventaris_barang inner join inventaris_ruang 
-                   inner join inventaris_jenis inner join inventaris_kategori inner join inventaris_merk 
-                   on inventaris_barang.kode_barang=inventaris_barang.kode_barang and inventaris_barang.id_merk=inventaris_merk.id_merk 
-                   and inventaris_barang.id_kategori=inventaris_kategori.id_kategori and inventaris_barang.id_jenis=inventaris_jenis.id_jenis 
-                   and inventaris_barang.kode_barang=inventaris.kode_barang and inventaris.id_ruang=inventaris_ruang.id_ruang 
-                   where inventaris_ruang.nama_ruang like $P{ruang} and inventaris_barang.kode_barang like $P{parameter} 
-                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_barang.nama_barang like $P{parameter} 
-                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris.no_inventaris like $P{parameter} 
-                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris.asal_barang like $P{parameter} 
-                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris.tgl_pengadaan like $P{parameter} 
-                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris.status_barang like $P{parameter} 
-                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_ruang.nama_ruang like $P{parameter} 
-                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_barang.jml_barang like $P{parameter} 
-                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_barang.nama_barang like $P{parameter} 
-                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_merk.nama_merk like $P{parameter} 
-                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_barang.thn_produksi like $P{parameter} 
-                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_barang.isbn like $P{parameter} 
-                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_kategori.nama_kategori like $P{parameter} 
+		<![CDATA[select inventaris.no_inventaris,inventaris_barang.kode_barang, inventaris_barang.nama_barang,
+                   inventaris_barang.nama_barang, inventaris_merk.nama_merk, inventaris_barang.thn_produksi, inventaris_barang.isbn,
+                   inventaris_kategori.nama_kategori, inventaris_jenis.nama_jenis,inventaris.asal_barang,inventaris.tgl_pengadaan,
+                   inventaris.harga,inventaris.status_barang,inventaris_ruang.nama_ruang,inventaris.no_rak,inventaris.no_box
+                   from inventaris inner join inventaris_barang inner join inventaris_ruang
+                   inner join inventaris_jenis inner join inventaris_kategori inner join inventaris_merk
+                   on inventaris_barang.kode_barang=inventaris_barang.kode_barang and inventaris_barang.id_merk=inventaris_merk.id_merk
+                   and inventaris_barang.id_kategori=inventaris_kategori.id_kategori and inventaris_barang.id_jenis=inventaris_jenis.id_jenis
+                   and inventaris_barang.kode_barang=inventaris.kode_barang and inventaris.id_ruang=inventaris_ruang.id_ruang
+                   where inventaris_ruang.nama_ruang like $P{ruang} and inventaris_barang.kode_barang like $P{parameter}
+                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_barang.nama_barang like $P{parameter}
+                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris.no_inventaris like $P{parameter}
+                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris.asal_barang like $P{parameter}
+                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris.tgl_pengadaan like $P{parameter}
+                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris.status_barang like $P{parameter}
+                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_ruang.nama_ruang like $P{parameter}
+                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_barang.jml_barang like $P{parameter}
+                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_barang.nama_barang like $P{parameter}
+                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_merk.nama_merk like $P{parameter}
+                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_barang.thn_produksi like $P{parameter}
+                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_barang.isbn like $P{parameter}
+                    or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_kategori.nama_kategori like $P{parameter}
                     or inventaris_ruang.nama_ruang like $P{ruang} and inventaris_jenis.nama_jenis like $P{parameter} order by inventaris_barang.kode_barang,inventaris.no_inventaris]]>
 	</queryString>
 	<field name="no_inventaris" class="java.lang.String">

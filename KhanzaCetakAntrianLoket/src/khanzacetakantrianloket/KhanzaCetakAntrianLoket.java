@@ -19,5 +19,5 @@ public class KhanzaCetakAntrianLoket {
          frmUtama antrian=new frmUtama();
          antrian.setVisible(true);
     }
-    
+
 }

@@ -17,7 +17,7 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select DATE_FORMAT(bayar_piutang_lainlain.tgl_bayar,'%Y-%m-%d') as tanggal,bayar_piutang_lainlain.nota_piutang,bayar_piutang_lainlain.kode_peminjam,
-                peminjampiutang.nama_peminjam,bayar_piutang_lainlain.nama_bayar,bayar_piutang_lainlain.besar_cicilan 
+                peminjampiutang.nama_peminjam,bayar_piutang_lainlain.nama_bayar,bayar_piutang_lainlain.besar_cicilan
                 from bayar_piutang_lainlain inner join peminjampiutang on bayar_piutang_lainlain.kode_peminjam=peminjampiutang.kode_peminjam]]>
 	</queryString>
 	<field name="tanggal" class="java.lang.String">

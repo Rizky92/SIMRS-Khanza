@@ -2,9 +2,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["nopernyataan"])) {
         $nopernyataan    = validTeks3($iyem["nopernyataan"],20);
         $photo            = validTeks3($iyem["photo"],50);
@@ -52,7 +52,7 @@
                                 </table>
                                 <br/>
                                 <h7>
-                                    Atas pasien dengan identitas sebagai berikut :  
+                                    Atas pasien dengan identitas sebagai berikut :
                                 </h7>
                                 <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                     <tr>
@@ -82,7 +82,7 @@
                                 </table>
                                 <br/>
                                 <h7>
-                                    Dengan ini menyatakan bahwa :  
+                                    Dengan ini menyatakan bahwa :
                                 </h7>
                                 <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                     <tr>

@@ -13,25 +13,25 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-public class ApiKemenkesCorona {        
+public class ApiKemenkesCorona {
     private String Key,pass;
     public ApiKemenkesCorona(){
-        try {             
+        try {
             pass = koneksiDB.PASSCORONA();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
         }
     }
-    public String getHmac() {        
+    public String getHmac() {
          Key=pass;
 	return Key;
     }
 
-    public long GetUTCdatetimeAsString(){    
-        long millis = System.currentTimeMillis();   
+    public long GetUTCdatetimeAsString(){
+        long millis = System.currentTimeMillis();
         return millis/1000;
     }
-    
+
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = SSLContext.getInstance("SSL");
         javax.net.ssl.TrustManager[] trustManagers= {

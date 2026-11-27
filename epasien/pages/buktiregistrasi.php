@@ -2,7 +2,7 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $json       = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
     $json       = json_decode(encrypt_decrypt($json,"d"),true);
     if (isset($json["kd_dokter"])) {
@@ -11,10 +11,10 @@
         $tanggal    = cleankar2($json["tanggal"]);
         $queryregistrasi = bukaquery2("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,pasien.no_tlp,
                reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.umur as umur,poliklinik.nm_poli,
-               reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab 
-               from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab on reg_periksa.kd_dokter=dokter.kd_dokter 
-               and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli 
-               where reg_periksa.no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."' and reg_periksa.kd_dokter='$kd_dokter' 
+               reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab
+               from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab on reg_periksa.kd_dokter=dokter.kd_dokter
+               and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli
+               where reg_periksa.no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."' and reg_periksa.kd_dokter='$kd_dokter'
                and reg_periksa.kd_poli='$kd_poli' and reg_periksa.tgl_registrasi='$tanggal'");
         if($rsqueryregistrasi = mysqli_fetch_array($queryregistrasi)) {
             echo "<div class='block-header'>
@@ -117,6 +117,5 @@
                   </div>";
             JSRedirect2("index.php?act=BookingRegistrasi",5);
     }
-        
-?>
 
+?>

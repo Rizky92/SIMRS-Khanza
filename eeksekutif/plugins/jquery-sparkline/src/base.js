@@ -84,7 +84,6 @@
 
     $.fn.sparkline.defaults = getDefaults();
 
-
     $.sparkline_display_visible = function () {
         var el, i, pl;
         var done = [];
@@ -108,7 +107,6 @@
         }
     };
 
-
     /**
      * User option handler
      */
@@ -130,7 +128,6 @@
             }
             this.mergedOptions = $.extend({}, base, extendedOptions, userOptions);
         },
-
 
         getTagSetting: function (key) {
             var prefix = this.tagOptionsPrefix,
@@ -173,7 +170,6 @@
             return (result = this.mergedOptions[key]) === undefined ? defaultval : result;
         }
     });
-
 
     $.fn.sparkline._base = createClass({
         disabled: false,
@@ -412,4 +408,3 @@
             target.render();
         }
     };
-

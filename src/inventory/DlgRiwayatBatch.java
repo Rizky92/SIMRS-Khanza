@@ -1,8 +1,8 @@
 package inventory;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
@@ -18,7 +18,6 @@ import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
-import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
@@ -30,15 +29,13 @@ public class DlgRiwayatBatch extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-    
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public DlgRiwayatBatch(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -54,10 +51,9 @@ public class DlgRiwayatBatch extends javax.swing.JDialog {
         );
         LoadHTML.setDocument(kit.createDefaultDocument());
         LoadHTML2.setDocument(kit.createDefaultDocument());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-   
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -251,9 +247,9 @@ public class DlgRiwayatBatch extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 /*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
@@ -261,7 +257,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -272,8 +268,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 );
                 bg.close();
 
-                File f = new File("riwayatbatch.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));   
+                File f = new File("riwayatbatch.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 if(TabRawat.getSelectedIndex()==0){
                     bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                 "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
@@ -283,7 +279,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                             "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                             akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                             akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>DATA RIWAYAT BATCH<br>PERIODE BARANG DATANG "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                            "<font size='2' face='Tahoma'>DATA RIWAYAT BATCH<br>PERIODE BARANG DATANG "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                         "</td>"+
                                    "</tr>"+
                                 "</table>")
@@ -297,18 +293,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                             "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                             akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                             akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>DATA RIWAYAT BATCH<br>PERIODE BARANG DATANG "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                            "<font size='2' face='Tahoma'>DATA RIWAYAT BATCH<br>PERIODE BARANG DATANG "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                         "</td>"+
                                    "</tr>"+
                                 "</table>")
                     );
                 }
 
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
-            }     
+            }
 
             this.setCursor(Cursor.getDefaultCursor());
         }else{
@@ -334,17 +330,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else{Valid.pindah(evt,BtnPrint,Tgl1);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
     TabRawatMouseClicked(null);
-}//GEN-LAST:event_btnCariActionPerformed
+    }//GEN-LAST:event_btnCariActionPerformed
 
-private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
+    private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             btnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, Tgl2, BtnPrint);
         }
-}//GEN-LAST:event_btnCariKeyPressed
+    }//GEN-LAST:event_btnCariKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -446,7 +442,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             StringBuilder htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='head'>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='80px'>No.Batch</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='90px'>Kode Barang</td>").append(
@@ -470,8 +466,8 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='65px'>Jumlah</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='65px'>Sisa</td>").append(
                 "</tr>"
-            );   
-            
+            );
+
             ps=koneksi.prepareStatement(
                     "select data_batch.no_batch,data_batch.kode_brng,databarang.nama_brng,"+
                     "databarang.kode_sat,data_batch.tgl_beli,data_batch.tgl_kadaluarsa,"+
@@ -572,7 +568,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             rs2.close();
                         }
                     }
-                    
+
                     //detail pemberian obat
                     try {
                         rs2=koneksi.prepareStatement(
@@ -622,7 +618,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             rs2.close();
                         }
                     }
-                    
+
                     //pengambilan UTD
                     try {
                         rs2=koneksi.prepareStatement(
@@ -667,7 +663,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             rs2.close();
                         }
                     }
-                    
+
                     //retur jual
                     try {
                         rs2=koneksi.prepareStatement(
@@ -719,7 +715,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             rs2.close();
                         }
                     }
-                    
+
                     //piutang
                     try {
                         rs2=koneksi.prepareStatement(
@@ -771,7 +767,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             rs2.close();
                         }
                     }
-                    
+
                     //retur piutang
                     try {
                         rs2=koneksi.prepareStatement(
@@ -823,7 +819,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             rs2.close();
                         }
                     }
-                    
+
                     //retur suplier
                     try {
                         rs2=koneksi.prepareStatement(
@@ -875,7 +871,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             rs2.close();
                         }
                     }
-                    
+
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
@@ -887,7 +883,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ps.close();
                 }
             }
-            
+
             LoadHTML.setText(
                     "<html>"+
                       "<table width='1400px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -897,16 +893,16 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             htmlContent=null;
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
-        
+
     }
-    
+
     private void prosesCari2() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             StringBuilder htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='head'>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='80px'>No.Batch</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='90px'>Kode Barang</td>").append(
@@ -919,8 +915,8 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='65px'>Jumlah</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='65px'>Sisa</td>").append(
                 "</tr>"
-            );   
-            
+            );
+
             ps=koneksi.prepareStatement(
                     "select data_batch.no_batch,data_batch.kode_brng,databarang.nama_brng,"+
                     "databarang.kode_sat,data_batch.tgl_beli,data_batch.tgl_kadaluarsa,"+
@@ -970,7 +966,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                     "<td valign='middle' bgcolor='#fdfff9' align='center'>Stok</td>").append(
                                 "</tr>"
                             );
-                            
+
                             rs2.beforeFirst();
                             while(rs2.next()){
                                htmlContent.append(
@@ -981,7 +977,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                     "</tr>"
                                );
                             }
-                            
+
                             htmlContent.append(
                                 "<tr class='isi'>").append(
                                     "<td valign='middle' align='left' colspan='11'><hr></td>").append(
@@ -1006,7 +1002,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ps.close();
                 }
             }
-            
+
             LoadHTML2.setText(
                     "<html>"+
                       "<table width='850px' border='0' align='left' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1016,15 +1012,15 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             htmlContent=null;
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
-        
+
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getriwayat_data_batch());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1050,7 +1046,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

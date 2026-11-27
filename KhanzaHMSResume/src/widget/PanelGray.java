@@ -85,5 +85,4 @@ public class PanelGray extends JPanel {
         g2.dispose();
     }
 
-
 }

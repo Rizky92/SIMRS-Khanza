@@ -5461,22 +5461,17 @@ button.close {
           transform: translateX(0);
 }
 
-
-
 .carousel-item-next,
 .active.carousel-item-right {
   -webkit-transform: translateX(100%);
           transform: translateX(100%);
 }
 
-
 .carousel-item-prev,
 .active.carousel-item-left {
   -webkit-transform: translateX(-100%);
           transform: translateX(-100%);
 }
-
-
 
 .carousel-control-prev,
 .carousel-control-next {
@@ -6749,8 +6744,6 @@ a.bg-dark:focus, a.bg-dark:hover {
   left: 0;
   z-index: 1030;
 }
-
-
 
 .sr-only {
   position: absolute;

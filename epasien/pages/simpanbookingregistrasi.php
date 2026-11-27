@@ -34,7 +34,7 @@
                 $sekarang   = date("Y-m-d");
                 $interval   = getOne2("select (TO_DAYS('$tanggal')-TO_DAYS('$sekarang'))");
                 if($interval>0){
-                    $daftar = getOne("select count(no_rkm_medis) from booking_registrasi where tanggal_periksa='$tanggal' and kd_dokter='$kd_dokter' and kd_poli='$kd_poli'" ); 
+                    $daftar = getOne("select count(no_rkm_medis) from booking_registrasi where tanggal_periksa='$tanggal' and kd_dokter='$kd_dokter' and kd_poli='$kd_poli'" );
                     if(($kuota>0)&&($daftar>=$kuota)){
                         echo "<div class='block-header'>
                                     <h2><center>Gagal melakukan booking</center></h2>
@@ -82,14 +82,14 @@
                                                 <label for='poli_dipilih'>Poli/Unit Pilihan Anda</label>
                                                 <div class='form-group'>
                                                     <div class='form-line'>
-                                                        <input type='text' readonly class='form-control' value='".getOne2("select nm_poli from poliklinik where kd_poli='$kd_poli'")."' /> 
+                                                        <input type='text' readonly class='form-control' value='".getOne2("select nm_poli from poliklinik where kd_poli='$kd_poli'")."' />
                                                     </div>
                                                 </div>
                                                 <label for='penjab_dipilih'>Pilihan Jenis Bayar</label>
                                                 <div class='form-group'>
                                                     <div class='form-line'>
                                                         <select name='penjab' class='form-control'>
-                                                            ".$_SESSION["penjab"]." 
+                                                            ".$_SESSION["penjab"]."
                                                         </select>
                                                     </div>
                                                 </div>
@@ -137,7 +137,7 @@
             }
         }
     }
-    
+
     $BtnSimpan = isset($_POST['BtnSimpan'])?$_POST['BtnSimpan']:NULL;
     if (isset($BtnSimpan)) {
         $penjab     = validTeks(isset($_POST['penjab'])?$_POST['penjab']:NULL);
@@ -147,24 +147,24 @@
         if ((!empty($penjab))&&(!empty($kd_poli))&&(!empty($tanggal))&&(!empty($kd_dokter))) {
             $nourut = "";
             switch (URUTNOREG) {
-                case "poli" : 
+                case "poli" :
                     $max    = getOne("select ifnull(MAX(CONVERT(no_reg,signed)),0)+1 from booking_registrasi where kd_poli='$kd_poli' and tanggal_periksa='$tanggal'");
                     $nourut = sprintf("%03s", $max);
                     break;
-                case "dokter" : 
+                case "dokter" :
                     $max    = getOne("select ifnull(MAX(CONVERT(no_reg,signed)),0)+1 from booking_registrasi where kd_dokter='$kd_dokter' and tanggal_periksa='$tanggal'");
                     $nourut = sprintf("%03s", $max);
                     break;
-                case "dokter + poli" : 
+                case "dokter + poli" :
                     $max    = getOne("select ifnull(MAX(CONVERT(no_reg,signed)),0)+1 from booking_registrasi where kd_poli='$kd_poli' and kd_dokter='$kd_dokter' and tanggal_periksa='$tanggal'");
                     $nourut = sprintf("%03s", $max);
                     break;
-                default : 
+                default :
                     $max    = getOne("select ifnull(MAX(CONVERT(no_reg,signed)),0)+1 from booking_registrasi where kd_dokter='$kd_dokter' and tanggal_periksa='$tanggal'");
                     $nourut = sprintf("%03s", $max);
                     break;
             }
-            
+
             $insert = Tambah4("booking_registrasi","CURRENT_DATE(),CURRENT_TIME(),'".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."','$tanggal','$kd_dokter','$kd_poli','$nourut','$penjab','1','$tanggal 00:00:00','Belum'");
             if($insert){
                 echo "<div class='block-header'>
@@ -238,6 +238,5 @@
             Proses();
         }
     }
-        
-?>
 
+?>

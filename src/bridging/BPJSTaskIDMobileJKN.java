@@ -45,7 +45,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private ApiMobileJKN api=new ApiMobileJKN();
     private String URL="",link="",utc="",requestJson="";
@@ -111,7 +111,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         try {
             link=koneksiDB.URLAPIMOBILEJKN();
         } catch (Exception e) {
@@ -282,13 +282,13 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnCari,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -298,11 +298,11 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -310,12 +310,12 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -324,7 +324,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(koneksiDB.CARICEPAT().equals("aktif")){
@@ -412,7 +412,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
                     ps.setString(9,"%"+TCari.getText()+"%");
                     ps.setString(10,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     try {
@@ -427,7 +427,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
                                         "\"kodebooking\": \""+rs.getString("no_rawat")+"\"" +
                                      "}";
                         requestEntity = new HttpEntity(requestJson,headers);
-                        URL = link+"/antrean/getlisttask";	
+                        URL = link+"/antrean/getlisttask";
                         System.out.println("URL : "+URL);
                         System.out.println("JSON : "+requestJson);
                         root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
@@ -446,8 +446,8 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
                                 }
                             }
                         }else {
-                            System.out.println("Notif : "+nameNode.path("message").asText());               
-                        }   
+                            System.out.println("Notif : "+nameNode.path("message").asText());
+                        }
                     } catch (Exception ex) {
                         System.out.println("Notifikasi : "+ex);
                         if(ex.toString().contains("UnknownHostException")){
@@ -468,7 +468,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                    "SELECT referensi_mobilejkn_bpjs.nobooking,reg_periksa.no_rkm_medis,pasien.nm_pasien,referensi_mobilejkn_bpjs.nohp,referensi_mobilejkn_bpjs.nomorkartu,"+
@@ -495,7 +495,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
                     ps.setString(9,"%"+TCari.getText()+"%");
                     ps.setString(10,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     try {
@@ -510,7 +510,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
                                         "\"kodebooking\": \""+rs.getString("nobooking")+"\"" +
                                      "}";
                         requestEntity = new HttpEntity(requestJson,headers);
-                        URL = link+"/antrean/getlisttask";	
+                        URL = link+"/antrean/getlisttask";
                         System.out.println("URL : "+URL);
                         System.out.println("JSON : "+requestJson);
                         root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
@@ -529,8 +529,8 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
                                 }
                             }
                         }else {
-                            System.out.println("Notif : "+nameNode.path("message").asText());                  
-                        }   
+                            System.out.println("Notif : "+nameNode.path("message").asText());
+                        }
                     } catch (Exception ex) {
                         System.out.println("Notifikasi : "+ex);
                         if(ex.toString().contains("UnknownHostException")){
@@ -553,7 +553,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -579,7 +579,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

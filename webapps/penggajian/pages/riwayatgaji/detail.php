@@ -5,7 +5,7 @@
         }
     }
 ?>
-<div id="entry">       
+<div id="entry">
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
             $action             = isset($_GET['action'])?$_GET['action']:NULL;
@@ -14,7 +14,7 @@
             echo "<input type=hidden name=id  value=$id><input type=hidden name=action value=$action>";
             $_sql               = "SELECT pegawai.nik,pegawai.nama FROM pegawai where pegawai.id='$id'";
             $hasil              = bukaquery($_sql);
-            $baris              = mysqli_fetch_row($hasil);   
+            $baris              = mysqli_fetch_row($hasil);
             $_sqlnext         	= "SELECT pegawai.id FROM pegawai WHERE pegawai.id>'$id' order by pegawai.id asc limit 1";
             $hasilnext        	= bukaquery($_sqlnext);
             $barisnext        	= mysqli_fetch_row($hasilnext);
@@ -130,7 +130,7 @@
                     <input name="dokumen" class="text2" onkeydown="setDefault(this, document.getElementById('MsgIsi9'));" type=file id="TxtIsi9" value="<?php echo $dokumen;?>" size="40" maxlength="255" accept="image/jpeg,image/jpg"/>
                     <span id="MsgIsi9" style="color:#CC0000; font-size:10px;"></span>
                 </td>
-            </tr>            
+            </tr>
         </table>
         <div align="center"><input name=BtnSimpan type=submit class="button" value="&nbsp;&nbsp;SIMPAN&nbsp;&nbsp;">&nbsp<input name=BtnKosong type=reset class="button" value="&nbsp;&nbsp;KOSONG&nbsp;&nbsp;"></div><br>
         <div style="width: 100%; height: 66%; overflow: auto;">
@@ -138,7 +138,7 @@
             $BtnSimpan=isset($_POST['BtnSimpan'])?$_POST['BtnSimpan']:NULL;
             if (isset($BtnSimpan)) {
                 $id                 = validTeks(trim($_POST['id']));
-                $jabatan            = validTeks(trim($_POST['jabatan']));                    
+                $jabatan            = validTeks(trim($_POST['jabatan']));
                 $gapok              = validTeks(trim($_POST['gapok']));
                 $tmt_berkala        = validTeks(trim($_POST['ThnBerkala'])."-".trim($_POST['BlnBerkala'])."-".trim($_POST['TglBerkala']));
                 $tmt_berkala_yad    = validTeks(trim($_POST['ThnBerkalaYad'])."-".trim($_POST['BlnBerkalaYad'])."-".trim($_POST['TglBerkalaYad']));
@@ -167,20 +167,20 @@
                                         }
                                     }else{
                                         echo "Berkas harus JPEG/JPG";
-                                    } 
+                                    }
                                 }else{
                                     echo "Berkas harus JPEG/JPG";
-                                } 
+                                }
                             }else{
                                 echo "Berkas harus JPEG/JPG";
-                            } 
+                            }
                             break;
                     }
                 }else if ((empty($id))||(empty($gapok))){
                     echo 'Semua field harus isi..!!!';
                 }
             }
-            
+
             $_sql       = "SELECT riwayat_naik_gaji.pangkatjabatan,riwayat_naik_gaji.gapok,riwayat_naik_gaji.tmt_berkala,riwayat_naik_gaji.tmt_berkala_yad,riwayat_naik_gaji.no_sk,riwayat_naik_gaji.tgl_sk,riwayat_naik_gaji.masa_kerja,riwayat_naik_gaji.bulan_kerja,riwayat_naik_gaji.berkas from riwayat_naik_gaji where riwayat_naik_gaji.id='$id' ORDER BY riwayat_naik_gaji.tmt_berkala ASC ";
             $hasil      = bukaquery($_sql);
             $jumlah     = mysqli_num_rows($hasil);
@@ -198,10 +198,10 @@
                             <td width='10%'><div align='center'>Tanggal S.K.</div></td>
                             <td width='10%'><div align='center'>Masa Kerja</div></td>
                         </tr>";
-                while($baris = mysqli_fetch_array($hasil)) {  
+                while($baris = mysqli_fetch_array($hasil)) {
                     $gb="-";
                     if($baris["berkas"]=="pages/riwayatgaji/berkas"){
-                        $gb="-";                            
+                        $gb="-";
                     }else{
                         $gb="<img src='".$baris["berkas"]."' width='850px' height='950px'>";
                     }
@@ -222,7 +222,7 @@
                          <tr class='isi'>
                             <td width='70'></td>
                             <td valign='top' align='center' colspan='9'><a target=_blank href=../penggajian/".$baris["berkas"].">".$gb."</a></td>
-                         </tr>";    
+                         </tr>";
                 }
                 echo "</table>";
 
@@ -251,6 +251,6 @@
             } catch(mysqli_sql_exception $e) {
                 echo "<b style='color:red'>Gagal menghapus</b>";
             }
-        }      
+        }
     ?>
 </div>

@@ -29,7 +29,7 @@ public class tarifralan {
             System.out.println("Notif Pengaturan Tarif Ralan : "+e);
         }
     }
-    
+
     public static String getPoliRalan(){return tarifralan.PoliRalan;}
     public static String getCaraBayarRalan(){return tarifralan.CaraBayarRalan;}
 }

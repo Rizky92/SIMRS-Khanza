@@ -12,9 +12,9 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select reg_periksa.tgl_registrasi,prosedur_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,
-prosedur_pasien.kode,icd9.deskripsi_panjang, prosedur_pasien.status 
-from prosedur_pasien inner join reg_periksa inner join pasien inner join icd9 
-on prosedur_pasien.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+prosedur_pasien.kode,icd9.deskripsi_panjang, prosedur_pasien.status
+from prosedur_pasien inner join reg_periksa inner join pasien inner join icd9
+on prosedur_pasien.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 and prosedur_pasien.kode=icd9.kode]]>
 	</queryString>
 	<field name="tgl_registrasi" class="java.sql.Date">

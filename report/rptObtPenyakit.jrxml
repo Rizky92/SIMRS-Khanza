@@ -11,13 +11,13 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select obat_penyakit.kd_penyakit,nm_penyakit,ciri_ciri,penyakit.keterangan, 
-                               nm_kategori,ciri_umum, obat_penyakit.kode_brng,nama_brng,jenis.nama,h_beli,referensi 
-                               from obat_penyakit,penyakit,kategori_penyakit,databarang,jenis 
-                               where penyakit.kd_ktg=kategori_penyakit.kd_ktg and 
-                               obat_penyakit.kd_penyakit=penyakit.kd_penyakit and 
-                               databarang.kdjns=jenis.kdjns and 
-                               obat_penyakit.kode_brng=databarang.kode_brng 
+		<![CDATA[select obat_penyakit.kd_penyakit,nm_penyakit,ciri_ciri,penyakit.keterangan,
+                               nm_kategori,ciri_umum, obat_penyakit.kode_brng,nama_brng,jenis.nama,h_beli,referensi
+                               from obat_penyakit,penyakit,kategori_penyakit,databarang,jenis
+                               where penyakit.kd_ktg=kategori_penyakit.kd_ktg and
+                               obat_penyakit.kd_penyakit=penyakit.kd_penyakit and
+                               databarang.kdjns=jenis.kdjns and
+                               obat_penyakit.kode_brng=databarang.kode_brng
                                 order by obat_penyakit.kd_penyakit]]>
 	</queryString>
 	<field name="kd_penyakit" class="java.lang.String">

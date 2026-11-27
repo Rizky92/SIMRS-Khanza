@@ -158,7 +158,7 @@
                                                                     <td width='50%' valign='top'>".htmlspecialchars($teks_saran)."</td>
                                                                 </tr>";
                                 }
-                                
+
                                 $tabel_kesimpulan_saran = "<table width='100%' class='table table-bordered' style='margin-bottom:0'>".$baris_kesimpulan_saran."</table>";
 
                                 echo "<tr>

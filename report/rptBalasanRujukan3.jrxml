@@ -19,8 +19,8 @@
 pasien.nm_pasien,reg_periksa.almt_pj,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,reg_periksa.tgl_registrasi,
 rujuk_masuk.jm_perujuk,rujuk_masuk.dokter_perujuk,rujuk_masuk.kd_penyakit,penyakit.nm_penyakit,
 rujuk_masuk.kategori_rujuk,
-rujuk_masuk.keterangan,rujuk_masuk.no_balasan,poliklinik.nm_poli,pasien.jk,dokter.nm_dokter 
-from reg_periksa inner join pasien inner join rujuk_masuk inner join penyakit inner join poliklinik inner join dokter 
+rujuk_masuk.keterangan,rujuk_masuk.no_balasan,poliklinik.nm_poli,pasien.jk,dokter.nm_dokter
+from reg_periksa inner join pasien inner join rujuk_masuk inner join penyakit inner join poliklinik inner join dokter
 on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.no_rawat=rujuk_masuk.no_rawat
 and penyakit.kd_penyakit=rujuk_masuk.kd_penyakit and reg_periksa.kd_poli=poliklinik.kd_poli
 and reg_periksa.kd_dokter=dokter.kd_dokter ]]>

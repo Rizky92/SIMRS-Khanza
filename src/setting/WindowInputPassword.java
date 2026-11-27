@@ -19,7 +19,7 @@ public class WindowInputPassword extends javax.swing.JDialog {
     private final validasi Valid=new validasi();
     private final sekuel Sequel=new sekuel();
     private String user="",password="";
-    
+
     /**
      * Creates new form WindowInputPassword
      */
@@ -27,7 +27,7 @@ public class WindowInputPassword extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setSize(349,180);
-        
+
         PassLama.setDocument(new batasInput((byte)100).getKata(PassLama));
         Passbaru1.setDocument(new batasInput((byte)100).getKata(Passbaru1));
         PassBaru2.setDocument(new batasInput((byte)100).getKata(PassBaru2));
@@ -166,7 +166,7 @@ public class WindowInputPassword extends javax.swing.JDialog {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

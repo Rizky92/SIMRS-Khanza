@@ -34,11 +34,11 @@
                 telaah_farmasi.resep_interaksi_obat,telaah_farmasi.resep_ket_interaksi_obat,telaah_farmasi.resep_kontra_indikasi_obat,
                 telaah_farmasi.resep_ket_kontra_indikasi_obat,telaah_farmasi.obat_tepat_pasien,telaah_farmasi.obat_tepat_obat,
                 telaah_farmasi.obat_tepat_dosis,telaah_farmasi.obat_tepat_cara_pemberian,telaah_farmasi.obat_tepat_waktu_pemberian,
-                telaah_farmasi.nip,petugas.nama 
-                from telaah_farmasi inner join resep_obat on telaah_farmasi.no_resep=resep_obat.no_resep 
-                inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat 
-                inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis 
-                inner join dokter on resep_obat.kd_dokter=dokter.kd_dokter 
+                telaah_farmasi.nip,petugas.nama
+                from telaah_farmasi inner join resep_obat on telaah_farmasi.no_resep=resep_obat.no_resep
+                inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat
+                inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis
+                inner join dokter on resep_obat.kd_dokter=dokter.kd_dokter
                 inner join petugas on telaah_farmasi.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_resep" class="java.lang.String">

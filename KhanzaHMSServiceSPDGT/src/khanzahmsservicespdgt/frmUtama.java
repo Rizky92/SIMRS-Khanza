@@ -51,13 +51,13 @@ public class frmUtama extends javax.swing.JFrame {
         initComponents();
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            URL = koneksiDB.URLAPISPDGT();	
+            URL = koneksiDB.URLAPISPDGT();
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
-        
+
         this.setSize(390,340);
-        
+
         jam();
     }
 
@@ -105,7 +105,7 @@ public class frmUtama extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -177,12 +177,12 @@ public class frmUtama extends javax.swing.JFrame {
                     if(jam.equals("01")&&menit.equals("01")&&detik.equals("01")){
                         TeksArea.setText("");
                     }
-                      
+
                     api=new SPDGTApi();
                     try {
                         koneksi=koneksiDB.condb();
                         TeksArea.append("Memulai update SPDGT\n");
-                        try { 
+                        try {
                             TeksArea.append("Proses Mengirim Stok Darah\n");
                             headers = new HttpHeaders();
                             headers.add("Authorization", "Bearer "+api.TokenSPDGT());
@@ -193,7 +193,7 @@ public class frmUtama extends javax.swing.JFrame {
                         }catch (Exception ex) {
                             System.out.println("Notifikasi Bridging : "+ex);
                         }
-                        try { 
+                        try {
                             TeksArea.append("Proses Mengirim Ketersediaan Kamar\n");
                             headers = new HttpHeaders();
                             headers.add("Authorization", "Bearer "+api.TokenSPDGT());

@@ -15,7 +15,7 @@
 jns_perawatan_lab.bagian_rs,jns_perawatan_lab.bhp,
 jns_perawatan_lab.tarif_perujuk,
 jns_perawatan_lab.tarif_tindakan_dokter,jns_perawatan_lab.kso,jns_perawatan_lab.menejemen,
-jns_perawatan_lab.tarif_tindakan_petugas,jns_perawatan_lab.total_byr,penjab.png_jawab 
+jns_perawatan_lab.tarif_tindakan_petugas,jns_perawatan_lab.total_byr,penjab.png_jawab
 from jns_perawatan_lab inner join penjab on penjab.kd_pj=jns_perawatan_lab.kd_pj order by jns_perawatan_lab.kd_jenis_prw]]>
 	</queryString>
 	<field name="kd_jenis_prw" class="java.lang.String">

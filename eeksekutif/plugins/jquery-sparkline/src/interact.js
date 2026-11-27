@@ -134,7 +134,6 @@
         }
     });
 
-
     Tooltip = createClass({
         sizeStyle: 'position: static !important;' +
             'display: block !important;' +
@@ -244,4 +243,3 @@
             $(window).unbind('resize.jqs scroll.jqs');
         }
     });
-

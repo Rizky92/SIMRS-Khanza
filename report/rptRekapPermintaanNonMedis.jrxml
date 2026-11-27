@@ -20,12 +20,12 @@
 	<queryString>
 		<![CDATA[select ipsrsbarang.kode_brng,ipsrsbarang.nama_brng,kodesatuan.satuan,ipsrsjenisbarang.nm_jenis as jenis,
 sum(detail_permintaan_non_medis.jumlah) as jumlah,ipsrsbarang.kode_sat from ipsrsbarang inner join kodesatuan
-inner join ipsrsjenisbarang inner join detail_permintaan_non_medis inner join permintaan_non_medis 
-on ipsrsbarang.kode_brng=detail_permintaan_non_medis.kode_brng and ipsrsbarang.kode_sat=kodesatuan.kode_sat 
-and ipsrsbarang.jenis=ipsrsjenisbarang.kd_jenis and detail_permintaan_non_medis.no_permintaan=permintaan_non_medis.no_permintaan 
-where permintaan_non_medis.tanggal between $P{tanggal1} and $P{tanggal2} and ipsrsbarang.nama_brng like $P{barang} and ipsrsbarang.kode_brng like $P{parameter} or 
-permintaan_non_medis.tanggal between $P{tanggal1} and $P{tanggal2} and ipsrsbarang.nama_brng like $P{barang} and ipsrsbarang.nama_brng like $P{parameter} or 
-permintaan_non_medis.tanggal between $P{tanggal1} and $P{tanggal2} and ipsrsbarang.nama_brng like $P{barang} and ipsrsjenisbarang.nm_jenis like $P{parameter} 
+inner join ipsrsjenisbarang inner join detail_permintaan_non_medis inner join permintaan_non_medis
+on ipsrsbarang.kode_brng=detail_permintaan_non_medis.kode_brng and ipsrsbarang.kode_sat=kodesatuan.kode_sat
+and ipsrsbarang.jenis=ipsrsjenisbarang.kd_jenis and detail_permintaan_non_medis.no_permintaan=permintaan_non_medis.no_permintaan
+where permintaan_non_medis.tanggal between $P{tanggal1} and $P{tanggal2} and ipsrsbarang.nama_brng like $P{barang} and ipsrsbarang.kode_brng like $P{parameter} or
+permintaan_non_medis.tanggal between $P{tanggal1} and $P{tanggal2} and ipsrsbarang.nama_brng like $P{barang} and ipsrsbarang.nama_brng like $P{parameter} or
+permintaan_non_medis.tanggal between $P{tanggal1} and $P{tanggal2} and ipsrsbarang.nama_brng like $P{barang} and ipsrsjenisbarang.nm_jenis like $P{parameter}
 group by ipsrsbarang.kode_brng order by ipsrsbarang.kode_brng]]>
 	</queryString>
 	<field name="kode_brng" class="java.lang.String">

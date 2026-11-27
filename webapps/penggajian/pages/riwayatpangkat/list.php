@@ -6,7 +6,7 @@
     $keyword    = str_replace("_"," ",isset($_GET['keyword']))?str_replace("_"," ",$_GET['keyword']):NULL;
     $keyword    = validTeks($keyword);
     echo "<input type=hidden name=keyword value=$keyword><input type=hidden name=action value=$action>";
-?>  
+?>
 <div style="width: 100%; height: 99%; overflow: auto;">
 <?php
     $_sql   = "SELECT pegawai.id,pegawai.nik,pegawai.nama FROM pegawai where pegawai.stts_aktif='AKTIF' and (pegawai.nik like '%".$keyword."%' or pegawai.nama like '%".$keyword."%') order by pegawai.id ASC ";
@@ -42,8 +42,8 @@
                         </tr>";
             }
             $no=1;
-            while($baris2 = mysqli_fetch_array($hasil2)) { 
-                echo "  <tr> 
+            while($baris2 = mysqli_fetch_array($hasil2)) {
+                echo "  <tr>
                             <td>$no</td>
                             <td>$baris2[0]</td>
                             <td>$baris2[1]</td>
@@ -55,7 +55,7 @@
                     </td>
                  </tr>";
         }
-        echo "</table>";           
+        echo "</table>";
     } else {
         echo "<table width='99.8%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head2'>

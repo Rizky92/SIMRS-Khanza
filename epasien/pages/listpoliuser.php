@@ -20,7 +20,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                            $querypoli = bukaquery("select nm_poli,registrasi,registrasilama from poliklinik where status='1' order by nm_poli");
                            while($rsquerypoli = mysqli_fetch_array($querypoli)) {
                                echo "<tr>

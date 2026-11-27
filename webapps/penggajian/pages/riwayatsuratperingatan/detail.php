@@ -5,7 +5,7 @@
         }
     }
 ?>
-<div id="entry">       
+<div id="entry">
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
             echo "";
@@ -16,7 +16,7 @@
             echo "<input type=hidden name=id  value=$id><input type=hidden name=action value=$action>";
             $_sql               = "SELECT pegawai.nik,pegawai.nama FROM pegawai where pegawai.id='$id'";
             $hasil              = bukaquery($_sql);
-            $baris              = mysqli_fetch_row($hasil);   
+            $baris              = mysqli_fetch_row($hasil);
             $_sqlnext         	= "SELECT pegawai.id FROM pegawai WHERE pegawai.id>'$id' order by pegawai.id asc limit 1";
             $hasilnext        	= bukaquery($_sqlnext);
             $barisnext        	= mysqli_fetch_row($hasilnext);
@@ -113,20 +113,20 @@
                                         }
                                     }else{
                                         echo "Berkas harus JPEG/JPG";
-                                    } 
+                                    }
                                 }else{
                                     echo "Berkas harus JPEG/JPG";
-                                } 
+                                }
                             }else{
                                 echo "Berkas harus JPEG/JPG";
-                            } 
+                            }
                             break;
                     }
                 }else if ((empty($id))||(empty($jenis))||(empty($nama_peringatan))){
                     echo 'Semua field harus isi..!!!';
                 }
             }
-            
+
             $_sql       = "SELECT riwayat_surat_peringatan.jenis,riwayat_surat_peringatan.nama_peringatan,riwayat_surat_peringatan.tanggal,riwayat_surat_peringatan.berkas from riwayat_surat_peringatan where riwayat_surat_peringatan.id='$id' ORDER BY riwayat_surat_peringatan.tanggal ASC ";
             $hasil      = bukaquery($_sql);
             $jumlah     = mysqli_num_rows($hasil);
@@ -140,10 +140,10 @@
                             <td width='70%'><div align='center'>Nama Peringatan</div></td>
                             <td width='5%'><div align='center'>Tanggal</div></td>
                         </tr>";
-                while($baris = mysqli_fetch_array($hasil)) {   
+                while($baris = mysqli_fetch_array($hasil)) {
                     $gb="-";
                     if($baris["berkas"]=="pages/riwayatsuratperingatan/berkas"){
-                        $gb="-";                            
+                        $gb="-";
                     }else{
                         $gb="<img src='".$baris["berkas"]."' width='850px' height='950px'>";
                     }
@@ -160,7 +160,7 @@
                           <tr class='isi'>
                             <td width='70'></td>
                             <td valign='top' align='center' colspan='3'><a target=_blank href=../penggajian/".$baris["berkas"].">".$gb."</a></td>
-                          </tr>";   
+                          </tr>";
                 }
                 echo "</table>";
             } else {
@@ -171,10 +171,10 @@
                                 <td width='70%'><div align='center'>Nama Peringatan</div></td>
                                 <td width='5%'><div align='center'>Tanggal</div></td>
                             </tr>
-                      </table>";            
+                      </table>";
             }
         ?>
-        </div>                        
+        </div>
     </form>
     <?php
         if ($action=="HAPUS") {

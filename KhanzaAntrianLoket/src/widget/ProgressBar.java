@@ -27,7 +27,7 @@ public class ProgressBar extends JProgressBar {
     private final Color warna = Color.magenta;
 
     /**
-     * 
+     *
      * @return
      */
     private Timer getTimer() {
@@ -44,7 +44,7 @@ public class ProgressBar extends JProgressBar {
     }
 
     /**
-     * 
+     *
      * @return
      */
     private int getPercent() {
@@ -52,7 +52,7 @@ public class ProgressBar extends JProgressBar {
     }
 
     /**
-     * 
+     *
      * @param percent
      */
     private void setPercent(int percent) {
@@ -61,7 +61,7 @@ public class ProgressBar extends JProgressBar {
     }
 
     /**
-     * 
+     *
      */
     public ProgressBar() {
         super();
@@ -119,7 +119,6 @@ public class ProgressBar extends JProgressBar {
             Shape s = new Rectangle2D.Double(0, 0, now * rate, getHeight());
             g2.fill(s);
         }
-
 
         paint = new GradientPaint(0, 0, light, 0, getHeight() * 3 / 4, dark);
         g2.setPaint(paint);

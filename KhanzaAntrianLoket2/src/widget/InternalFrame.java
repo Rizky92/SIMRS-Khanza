@@ -32,7 +32,7 @@ public class InternalFrame extends JPanel{
 
     //private Color warnaAtas = new Color(255,194,255);
     //private Color warnaBawah = new Color(255,194,255);
-    
+
     public InternalFrame(){
         super();
         this.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(239,244,234)));
@@ -63,7 +63,7 @@ public class InternalFrame extends JPanel{
     protected void paintComponent(Graphics g) {
          super.paintComponent(g);
         if (isOpaque()) {
-            
+
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -100,12 +100,12 @@ public class InternalFrame extends JPanel{
             g2.setPaint(paint);
             g2.fill(path);
             g2.dispose();
-            
+
             /*if (gradientImage != null) {
                 g.drawImage(gradientImage, 0, 0, getWidth(), getHeight(), null);
             }*/
         }
-        
+
     }
 
     protected void createImageCache() {

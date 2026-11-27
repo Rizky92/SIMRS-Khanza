@@ -28,13 +28,13 @@
 				pasien.tmp_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,
 				surat_persetujuan_umum.nilai_kepercayaan,surat_persetujuan_umum.nama_pj,surat_persetujuan_umum.umur_pj,surat_persetujuan_umum.no_ktppj,
 				surat_persetujuan_umum.jkpj,surat_persetujuan_umum.bertindak_atas,surat_persetujuan_umum.no_telp,surat_persetujuan_umum.nip,
-				petugas.nama,penjab.png_jawab from surat_persetujuan_umum 
-				inner join reg_periksa on surat_persetujuan_umum.no_rawat=reg_periksa.no_rawat 
-				inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+				petugas.nama,penjab.png_jawab from surat_persetujuan_umum
+				inner join reg_periksa on surat_persetujuan_umum.no_rawat=reg_periksa.no_rawat
+				inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 				inner join petugas on surat_persetujuan_umum.nip=petugas.nip
-				inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel 
-				inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
-				inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab 
+				inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
+				inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
+				inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
 				inner join propinsi on pasien.kd_prop=propinsi.kd_prop
 				inner join penjab on reg_periksa.kd_pj=penjab.kd_pj]]>
 	</queryString>

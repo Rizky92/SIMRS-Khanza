@@ -5,7 +5,7 @@
         }
     }
 ?>
-<div id="post">        
+<div id="post">
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype="multipart/form-data">
         <?php
             $action             = isset($_GET['action'])?$_GET['action']:NULL;
@@ -47,11 +47,11 @@
                     $berkas             = $baris["berkas"];
                     $thn_terbit         = $baris["thn_terbit"];
                 }
-                    
+
             }
             echo "<input type=hidden name=action value=$action><input type=hidden name=kode_ebook2 value=$kode_ebook2>";
         ?>
-        
+
         <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0" class="tbl_form">
             <tr class="isi2">
                 <td width="15%" >Kode Ebook</td>
@@ -75,7 +75,7 @@
                     </select>
                     <span id="MsgIsi5" style="color:#CC0000; font-size:10px;"></span>
                 </td>
-            </tr>  
+            </tr>
             <tr class="isi2">
                 <td width="15%" >Judul Ebook</td>
                 <td width="35%">
@@ -85,7 +85,7 @@
                 <td width="15%" >Tahun Terbit</td>
                 <td width="35%">
                     :&nbsp;<select name="thn_terbit" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi6'));" id="TxtIsi6">
-                        <?php                               
+                        <?php
                             if($action == "UBAH"){
                                 echo "<option id='TxtIsi6' value=$thn_terbit>$thn_terbit</option>";
                             }
@@ -132,7 +132,7 @@
                     </select>
                     <span id="MsgIsi8" style="color:#CC0000; font-size:10px;"></span>
                 </td>
-            </tr> 
+            </tr>
             <tr class="isi2">
                 <td width="15%" >Jenis Koleksi</td>
                 <td width="35%">
@@ -159,7 +159,7 @@
                         <span id="MsgIsi9" style="color:#CC0000; font-size:10px;"></span>
                 <?php } ?>
                 </td>
-            </tr> 
+            </tr>
         </table>
         <div align="center"><input name=BtnSimpan type=submit class="button" value="&nbsp;&nbsp;Simpan&nbsp;&nbsp;">&nbsp<input name=BtnKosong type=reset class="button" value="&nbsp;&nbsp;Kosong&nbsp;&nbsp;"></div>
         <?php
@@ -201,7 +201,7 @@
                                 }
                             }else{
                                 echo "Berkas harus pdf";
-                            }   
+                            }
                             break;
                         case "UBAH":
                             if($berkas=="pages/upload/"){
@@ -228,9 +228,9 @@
                                 }
                             }else{
                                 echo "Berkas harus pdf";
-                            } 
+                            }
                             break;
-                    }                        
+                    }
                 }else if ((empty($kode_ebook))||(empty($judul_ebook))||(empty($jml_halaman))||(empty($kode_penerbit))||(empty($kode_pengarang))||(empty($id_jenis))||(empty($id_kategori))||(empty($berkas))){
                     echo 'Semua field harus isi..!!!';
                 }
@@ -239,19 +239,19 @@
     </form>
     <div style="width: 100%; height: 72%; overflow: auto;">
     <?php
-        $_sql = "select perpustakaan_ebook.kode_ebook, perpustakaan_ebook.judul_ebook, perpustakaan_ebook.jml_halaman, 
+        $_sql = "select perpustakaan_ebook.kode_ebook, perpustakaan_ebook.judul_ebook, perpustakaan_ebook.jml_halaman,
                perpustakaan_penerbit.nama_penerbit, perpustakaan_pengarang.nama_pengarang, perpustakaan_ebook.thn_terbit,
-               perpustakaan_kategori.nama_kategori, perpustakaan_jenis_buku.nama_jenis,perpustakaan_ebook.berkas from perpustakaan_ebook inner join perpustakaan_penerbit 
-               inner join perpustakaan_jenis_buku inner join perpustakaan_kategori inner join perpustakaan_pengarang 
-               on perpustakaan_ebook.kode_penerbit=perpustakaan_penerbit.kode_penerbit and perpustakaan_ebook.kode_pengarang=perpustakaan_pengarang.kode_pengarang 
-               and perpustakaan_ebook.id_kategori=perpustakaan_kategori.id_kategori and perpustakaan_ebook.id_jenis=perpustakaan_jenis_buku.id_jenis 
-               where perpustakaan_ebook.kode_ebook like '%$keyword%' 
-                or perpustakaan_ebook.judul_ebook like '%$keyword%' 
-                or perpustakaan_ebook.jml_halaman like '%$keyword%' 
-                or perpustakaan_penerbit.nama_penerbit like '%$keyword%' 
-                or perpustakaan_pengarang.nama_pengarang like '%$keyword%' 
-                or perpustakaan_ebook.thn_terbit like '%$keyword%' 
-                or perpustakaan_kategori.nama_kategori like '%$keyword%' 
+               perpustakaan_kategori.nama_kategori, perpustakaan_jenis_buku.nama_jenis,perpustakaan_ebook.berkas from perpustakaan_ebook inner join perpustakaan_penerbit
+               inner join perpustakaan_jenis_buku inner join perpustakaan_kategori inner join perpustakaan_pengarang
+               on perpustakaan_ebook.kode_penerbit=perpustakaan_penerbit.kode_penerbit and perpustakaan_ebook.kode_pengarang=perpustakaan_pengarang.kode_pengarang
+               and perpustakaan_ebook.id_kategori=perpustakaan_kategori.id_kategori and perpustakaan_ebook.id_jenis=perpustakaan_jenis_buku.id_jenis
+               where perpustakaan_ebook.kode_ebook like '%$keyword%'
+                or perpustakaan_ebook.judul_ebook like '%$keyword%'
+                or perpustakaan_ebook.jml_halaman like '%$keyword%'
+                or perpustakaan_penerbit.nama_penerbit like '%$keyword%'
+                or perpustakaan_pengarang.nama_pengarang like '%$keyword%'
+                or perpustakaan_ebook.thn_terbit like '%$keyword%'
+                or perpustakaan_kategori.nama_kategori like '%$keyword%'
                 or perpustakaan_jenis_buku.nama_jenis like '%$keyword%' order by perpustakaan_ebook.kode_ebook ";
         $hasil=bukaquery($_sql);
         $jumlah=mysqli_num_rows($hasil);
@@ -269,7 +269,7 @@
                         <td width='11%'><div align='center'>Kategori</div></td>
                         <td width='11%'><div align='center'>Jenis</div></td>
                     </tr>";
-            while($baris = mysqli_fetch_array($hasil)) {                        
+            while($baris = mysqli_fetch_array($hasil)) {
               echo "<tr class='isi'>
                         <td valign='top'>
                             <center>
@@ -315,11 +315,11 @@
                 echo "<b style='color:red'>Gagal menghapus</b>";
             }
         }
-        
+
         echo("<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                 <tr class='head'>
-                    <td><div align='left'>Data : $jumlah</div></td>                        
-                </tr>     
+                    <td><div align='left'>Data : $jumlah</div></td>
+                </tr>
              </table>");
     ?>
 </div>

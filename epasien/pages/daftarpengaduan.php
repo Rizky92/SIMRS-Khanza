@@ -6,7 +6,7 @@
 
 <table class="table table-hover dataTable">
     <body>
-    <?php 
+    <?php
         $sqlpengaduan    = "SELECT DATE_FORMAT(pengaduan.tanggal,'%d/%m/%y %H:%i:%s')as tanggal,pengaduan.pesan,pengaduan.id FROM pengaduan where pengaduan.no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."' ORDER BY tanggal limit 30";
         $resultpengaduan = bukaquery2($sqlpengaduan);
         while($rowpengaduan = mysqli_fetch_array($resultpengaduan)) {
@@ -29,5 +29,3 @@
     ?>
     </body>
 </table>
-    
-

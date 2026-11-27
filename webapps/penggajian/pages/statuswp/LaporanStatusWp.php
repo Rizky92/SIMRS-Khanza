@@ -22,22 +22,22 @@
                     </tr>";
             while($baris = mysqli_fetch_array($hasil)) {
                 echo "<tr class='isi'>
-                        <td>$no</td>  
+                        <td>$no</td>
                         <td>$baris[0]</td>
-                        <td>$baris[1]</td> 
+                        <td>$baris[1]</td>
                      </tr>";
                 $no++;
             }
             echo "</table>";
         }else {
             echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
-                    <tr class='head'>					    
+                    <tr class='head'>
                         <td width='10%'><div align='center'>Proses</div></td>
                         <td width='28%'><div align='center'>Status WP</div></td>
                         <td width='60%'><div align='center'>Keterangan</div></td>
                     </tr>
                   </table>";
-        } 
+        }
     ?>
     </body>
 </html>

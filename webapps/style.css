@@ -19,7 +19,7 @@ body {
 }
 #head {
 	background-color: #FFFFFF;
-	
+
 }
 
 #menutop {
@@ -27,11 +27,11 @@ body {
 	background-image:url(images/menutop.gif);
 	border: 1px solid #000000;
 	padding: 13px;
-	
+
 }
 #menutop li {
 	color: #CF0;
-	display: inline; 
+	display: inline;
 	font-size: 14px;
 }
 #menutop li a{
@@ -76,7 +76,7 @@ body {
 	line-height: 16px;
 	padding: 8px;
 	margin-bottom: 1px;
-	
+
 }
 #container {
 	width: 100%;
@@ -89,7 +89,7 @@ body {
 	width:100%;
 	height: 100%;
 	position: absolute;
-	
+
 }
 #container>.btn {
 	position:absolute;
@@ -101,9 +101,8 @@ body {
 	background:#390;
 	color: white;
 	font-size: 20px;
-	
-}
 
+}
 
 #containeri {
 	width: 100%;
@@ -116,9 +115,8 @@ body {
 	width:100%;
 	height: 200%;
 	position: absolute;
-	
-}
 
+}
 
 #containeri>.btna {
 	position:absolute;
@@ -130,10 +128,8 @@ body {
 	background: black;
 	color: white;
 	font-size: 20px;
-	
+
 }
-
-
 
 #container>#btn1:hover {
 	box-shadow: 10px 0px 20px 0px black;
@@ -155,7 +151,7 @@ body {
 #containeri>#btn4 {
 	position: relative;
 	float: right;
-}	
+}
 
 #menu-bar {
   width: 98.5%;
@@ -307,8 +303,3 @@ body {
 * html #menu-bar {
   height: 1%;
 }
-	 
-		
-	
-	
-

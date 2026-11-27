@@ -23,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                            $queryriwayat = bukaquery(
                                 "select booking_mcu_perusahaan.no_mcu,booking_mcu_perusahaan.tanggal_mcu,booking_mcu_perusahaan_berhasil_registrasi.no_rawat,dokter.nm_dokter,perusahaan_pasien.nama_perusahaan ".
                                 "from booking_mcu_perusahaan inner join booking_mcu_perusahaan_berhasil_registrasi on booking_mcu_perusahaan_berhasil_registrasi.no_mcu=booking_mcu_perusahaan.no_mcu ".

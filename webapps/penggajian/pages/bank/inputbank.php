@@ -8,7 +8,7 @@
         <a href=?act=InputBank&action=TAMBAH>| Input Data |</a>
         <a href=?act=ListBank>| List Data |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>  
+    </div>
     <div class="entry">
         <form name="frm_pelatihan" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
@@ -37,7 +37,7 @@
                 $BtnSimpan=isset($_POST['BtnSimpan'])?$_POST['BtnSimpan']:NULL;
                 if (isset($BtnSimpan)) {
                     $namabank    = trim($_POST['namabank']);
-                    $namabank    = validTeks($namabank);   
+                    $namabank    = validTeks($namabank);
                     if (!empty($namabank)) {
                         switch($action) {
                             case "TAMBAH":

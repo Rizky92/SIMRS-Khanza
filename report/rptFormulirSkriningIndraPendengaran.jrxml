@@ -21,8 +21,8 @@
                     skrining_indra_pendengaran.curiga_tuli_telinga_kiri,skrining_indra_pendengaran.curiga_tuli_telinga_kanan,skrining_indra_pendengaran.curiga_tuli_telinga_rujuk,skrining_indra_pendengaran.penurunan_pendengaran_telinga_kiri,
                     skrining_indra_pendengaran.penurunan_pendengaran_telinga_kanan,skrining_indra_pendengaran.mendengar_bisikan_telinga_kiri,skrining_indra_pendengaran.mendengar_bisikan_telinga_kanan,skrining_indra_pendengaran.congek_telinga_kiri,
                     skrining_indra_pendengaran.congek_telinga_kanan,skrining_indra_pendengaran.congek_telinga_rujuk,skrining_indra_pendengaran.sumbatan_serumen_telinga_kiri,skrining_indra_pendengaran.sumbatan_serumen_telinga_kanan,
-                    skrining_indra_pendengaran.sumbatan_serumen_telinga_rujuk,skrining_indra_pendengaran.hasil_skrining,skrining_indra_pendengaran.keterangan 
-                    from skrining_indra_pendengaran inner join reg_periksa on skrining_indra_pendengaran.no_rawat=reg_periksa.no_rawat 
+                    skrining_indra_pendengaran.sumbatan_serumen_telinga_rujuk,skrining_indra_pendengaran.hasil_skrining,skrining_indra_pendengaran.keterangan
+                    from skrining_indra_pendengaran inner join reg_periksa on skrining_indra_pendengaran.no_rawat=reg_periksa.no_rawat
                     inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_indra_pendengaran.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

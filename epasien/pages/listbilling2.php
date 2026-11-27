@@ -3,11 +3,11 @@
         exit(header("Location:../index.php"));
     }
     $norawat = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $norawat = json_decode(encrypt_decrypt($norawat,"d"),true); 
+    $norawat = json_decode(encrypt_decrypt($norawat,"d"),true);
     if (isset($norawat["norawat"])) {
         $norawat      = cleankar2($norawat["norawat"]);
         $querybilling = bukaquery("select no,nm_perawatan, if(biaya<>0,biaya,null) as satu, if(jumlah<>0,jumlah,null) as dua,
-                        if(tambahan<>0,tambahan,null) as tiga, if(totalbiaya<>0,totalbiaya,null) as empat,pemisah,status 
+                        if(tambahan<>0,tambahan,null) as tiga, if(totalbiaya<>0,totalbiaya,null) as empat,pemisah,status
                         from billing where no_rawat='$norawat' order by noindex");
         if(mysqli_num_rows($querybilling)!=0) {
             echo "<div class='block-header'>
@@ -19,7 +19,7 @@
                             <div class='body'>
                                 <div class='table-responsive'>
                                     <table class='table table-hover dataTable'>";
-            
+
             $z=1;
             $total=0;
             while($rsquerybilling = mysqli_fetch_array($querybilling)) {
@@ -42,7 +42,7 @@
                                         $z++;
                 }
             }
-                                        
+
             echo "                      <tr>
                                             <td><b>TOTAL BILLING</b></td>
                                             <td>:</td>

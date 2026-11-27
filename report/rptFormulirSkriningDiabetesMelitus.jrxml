@@ -22,7 +22,7 @@
                     skrining_diabetes_melitus.anamnesis6,skrining_diabetes_melitus.anamnesis7,skrining_diabetes_melitus.anamnesis8,skrining_diabetes_melitus.anamnesis9,skrining_diabetes_melitus.anamnesis10,
                     skrining_diabetes_melitus.anamnesis11,skrining_diabetes_melitus.anamnesis12,skrining_diabetes_melitus.berat_badan,skrining_diabetes_melitus.tinggi_badan,skrining_diabetes_melitus.imt,
                     skrining_diabetes_melitus.kasifikasi_imt,skrining_diabetes_melitus.hasil_gds,skrining_diabetes_melitus.keterangan_gds,skrining_diabetes_melitus.hasil_gdp,skrining_diabetes_melitus.keterangan_gdp,
-                    skrining_diabetes_melitus.hasil_skrining,skrining_diabetes_melitus.keterangan_skrining from skrining_diabetes_melitus inner join reg_periksa on skrining_diabetes_melitus.no_rawat=reg_periksa.no_rawat 
+                    skrining_diabetes_melitus.hasil_skrining,skrining_diabetes_melitus.keterangan_skrining from skrining_diabetes_melitus inner join reg_periksa on skrining_diabetes_melitus.no_rawat=reg_periksa.no_rawat
                     inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_diabetes_melitus.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

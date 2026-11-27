@@ -39,8 +39,8 @@
                             hasil_pemeriksaan_echo_pediatrik.mode_ivds,hasil_pemeriksaan_echo_pediatrik.mode_ivss,hasil_pemeriksaan_echo_pediatrik.mode_lvid_dextra,
                             hasil_pemeriksaan_echo_pediatrik.mode_lvid_sinistra,hasil_pemeriksaan_echo_pediatrik.mode_lvpw_dextra,hasil_pemeriksaan_echo_pediatrik.mode_lvpw_sinistra,
                             hasil_pemeriksaan_echo_pediatrik.mode_ejection_fraction,hasil_pemeriksaan_echo_pediatrik.mode_fraction_shotening,hasil_pemeriksaan_echo_pediatrik.doppler,
-                            hasil_pemeriksaan_echo_pediatrik.kesimpulan,hasil_pemeriksaan_echo_pediatrik.saran from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                            inner join hasil_pemeriksaan_echo_pediatrik on reg_periksa.no_rawat=hasil_pemeriksaan_echo_pediatrik.no_rawat 
+                            hasil_pemeriksaan_echo_pediatrik.kesimpulan,hasil_pemeriksaan_echo_pediatrik.saran from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                            inner join hasil_pemeriksaan_echo_pediatrik on reg_periksa.no_rawat=hasil_pemeriksaan_echo_pediatrik.no_rawat
                             inner join dokter on hasil_pemeriksaan_echo_pediatrik.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

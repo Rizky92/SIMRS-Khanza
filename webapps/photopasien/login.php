@@ -1,7 +1,7 @@
 <?php
     include_once "conf/command.php";
     require_once('../conf/conf.php');
-    
+
     $usere      = trim(isset($_GET['usere']))?trim($_GET['usere']):NULL;
     $passwordte = trim(isset($_GET['passwordte']))?trim($_GET['passwordte']):NULL;
     $url        = "index.php?act=Home";
@@ -10,7 +10,7 @@
             session_start();
             $_SESSION['ses_admin_photopasien']="admin";
             $_SESSION['pasien']= validTeks($_GET['norm']);
-            $url = "index.php?act=Kamera";			
+            $url = "index.php?act=Kamera";
         }else{
             session_start();
             session_destroy();

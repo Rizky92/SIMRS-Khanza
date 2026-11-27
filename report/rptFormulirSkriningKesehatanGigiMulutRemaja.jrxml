@@ -22,8 +22,8 @@
                     skrining_kesehatan_gigi_mulut_remaja.punya_gigi_berlubang,skrining_kesehatan_gigi_mulut_remaja.pernah_gusi_berdarah,skrining_kesehatan_gigi_mulut_remaja.punya_karang_gigi,
                     skrining_kesehatan_gigi_mulut_remaja.gigi_depan_tidak_teratur,skrining_kesehatan_gigi_mulut_remaja.menyikat_gigi_sebelum_tidur,skrining_kesehatan_gigi_mulut_remaja.punya_sariawan,
                     skrining_kesehatan_gigi_mulut_remaja.pemeriksaan_fisik,skrining_kesehatan_gigi_mulut_remaja.pemeriksaan_penunjang,skrining_kesehatan_gigi_mulut_remaja.hasil_skrining,
-                    skrining_kesehatan_gigi_mulut_remaja.keterangan from skrining_kesehatan_gigi_mulut_remaja inner join reg_periksa on skrining_kesehatan_gigi_mulut_remaja.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_kesehatan_gigi_mulut_remaja.nip=petugas.nip 
+                    skrining_kesehatan_gigi_mulut_remaja.keterangan from skrining_kesehatan_gigi_mulut_remaja inner join reg_periksa on skrining_kesehatan_gigi_mulut_remaja.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_kesehatan_gigi_mulut_remaja.nip=petugas.nip
                     ]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

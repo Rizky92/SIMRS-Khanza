@@ -2,13 +2,13 @@
     if(strpos($_SERVER['REQUEST_URI'],"conf")){
         exit(header("Location:../index.php"));
     }
-    
+
     function title(){
             $judul ="SIMKES Khanza --)(*!!@#$%";
             $judul = preg_replace("[^A-Za-z0-9_\-\./,|]"," ",$judul);
             $judul = str_replace(array('.','-','/',',')," ",$judul);
             $judul = trim($judul);
-            echo "$judul";	
+            echo "$judul";
     }
 
     function cekSessiAdmin() {
@@ -18,7 +18,6 @@
             return false;
         }
     }
-
 
     function cekUser() {
         if (isset($_SESSION['ses_admin_pernyataanumum'])) {
@@ -40,7 +39,7 @@
         } else {
             return true;
         }
-    }	
+    }
 
     function formProtek() {
         $aksi=isset($_GET['act'])?$_GET['act']:NULL;

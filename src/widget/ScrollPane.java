@@ -31,7 +31,7 @@ public class ScrollPane extends JScrollPane {
 
         setOpaque(false);
         setBackground(Color.WHITE);
-        setBorder(new LineBorder(new Color(239, 244, 234)));  
+        setBorder(new LineBorder(new Color(239, 244, 234)));
 
         getVerticalScrollBar().setUI(new ModernScrollBarUI());
         getHorizontalScrollBar().setUI(new ModernScrollBarUI());
@@ -51,9 +51,9 @@ public class ScrollPane extends JScrollPane {
     }
 
     public static class ModernScrollBarUI extends BasicScrollBarUI {
-        private static final int LEBAR = 11;      
-        private static final int THUMB = 6;        
-        private static final int THUMB_HOVER = 8;  
+        private static final int LEBAR = 11;
+        private static final int THUMB = 6;
+        private static final int THUMB_HOVER = 8;
 
         @Override
         protected void configureScrollBarColors() {

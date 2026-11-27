@@ -27,6 +27,6 @@ public class catatanpasien {
             System.out.println("Notif Pengaturan Catatan Pasien : "+e);
         }
     }
-    
+
     public static String getTampilkanCatatan(){return catatanpasien.TampilkanCatatan;}
 }

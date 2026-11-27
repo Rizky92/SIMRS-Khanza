@@ -18,7 +18,7 @@
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
 	<queryString>
-		<![CDATA[select pemberi_hutang_lain.kode_pemberi_hutang,pemberi_hutang_lain.nama_pemberi_hutang,pemberi_hutang_lain.alamat,pemberi_hutang_lain.no_telp, 
+		<![CDATA[select pemberi_hutang_lain.kode_pemberi_hutang,pemberi_hutang_lain.nama_pemberi_hutang,pemberi_hutang_lain.alamat,pemberi_hutang_lain.no_telp,
                     pemberi_hutang_lain.kd_rek,rekening.nm_rek from pemberi_hutang_lain inner join rekening on pemberi_hutang_lain.kd_rek=rekening.kd_rek]]>
 	</queryString>
 	<field name="kode_pemberi_hutang" class="java.lang.String">

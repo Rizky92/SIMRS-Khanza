@@ -26,9 +26,9 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select bayar_pemesanan.tgl_bayar,bayar_pemesanan.no_faktur,datasuplier.nama_suplier,bayar_pemesanan.nip,
-                petugas.nama,bayar_pemesanan.nama_bayar,bayar_pemesanan.no_bukti,bayar_pemesanan.besar_bayar 
-                from bayar_pemesanan inner join pemesanan on bayar_pemesanan.no_faktur=pemesanan.no_faktur 
-                inner join datasuplier on pemesanan.kode_suplier=datasuplier.kode_suplier 
+                petugas.nama,bayar_pemesanan.nama_bayar,bayar_pemesanan.no_bukti,bayar_pemesanan.besar_bayar
+                from bayar_pemesanan inner join pemesanan on bayar_pemesanan.no_faktur=pemesanan.no_faktur
+                inner join datasuplier on pemesanan.kode_suplier=datasuplier.kode_suplier
                 inner join petugas on petugas.nip=bayar_pemesanan.nip]]>
 	</queryString>
 	<field name="tgl_bayar" class="java.sql.Date">

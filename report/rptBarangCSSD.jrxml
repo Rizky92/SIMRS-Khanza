@@ -16,11 +16,11 @@
 	<parameter name="parameter" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select inventaris.no_inventaris,inventaris_barang.kode_barang, inventaris_barang.nama_barang,
-                    inventaris_ruang.nama_ruang,cssd_barang.jenis_barang from inventaris inner join inventaris_barang 
-                    inner join inventaris_ruang inner join cssd_barang on inventaris_barang.kode_barang=inventaris.kode_barang 
-                    and inventaris.id_ruang=inventaris_ruang.id_ruang and inventaris.no_inventaris=cssd_barang.no_inventaris where 
-                    inventaris.no_inventaris like $P{parameter} or inventaris_barang.nama_barang like $P{parameter} 
-                     or inventaris_ruang.nama_ruang like $P{parameter} or 
+                    inventaris_ruang.nama_ruang,cssd_barang.jenis_barang from inventaris inner join inventaris_barang
+                    inner join inventaris_ruang inner join cssd_barang on inventaris_barang.kode_barang=inventaris.kode_barang
+                    and inventaris.id_ruang=inventaris_ruang.id_ruang and inventaris.no_inventaris=cssd_barang.no_inventaris where
+                    inventaris.no_inventaris like $P{parameter} or inventaris_barang.nama_barang like $P{parameter}
+                     or inventaris_ruang.nama_ruang like $P{parameter} or
                     cssd_barang.jenis_barang like $P{parameter} order by cssd_barang.jenis_barang]]>
 	</queryString>
 	<field name="no_inventaris" class="java.lang.String">

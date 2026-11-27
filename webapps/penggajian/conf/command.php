@@ -2,13 +2,13 @@
     if(strpos($_SERVER['REQUEST_URI'],"conf")){
         exit(header("Location:../index.php"));
     }
-    
+
     function title(){
         $judul ="SIMKES Khanza --)(*!!@#$%";
         $judul = preg_replace("[^A-Za-z0-9_\-\./,|]"," ",$judul);
         $judul = str_replace(array('.','-','/',',')," ",$judul);
         $judul = trim($judul);
-        echo "$judul";	
+        echo "$judul";
     }
 
     function cekSessiAdmin() {
@@ -62,7 +62,7 @@
                                         break;
                                 }
                             }
-                    }		
+                    }
 
     }
 
@@ -146,7 +146,7 @@
                 case 'InputJasaLain'                    : include_once('pages/lampiran/detailjasalain.php'); break;
                 case 'InputPasien'                      : include_once('pages/lampiran/detailpasien.php'); break;
                 case 'InputJasLa'                       : include_once('pages/jasalain/detailjasalain.php'); break;
-                case 'ListJasLa'                        : include_once('pages/jasalain/listjasalain.php'); break;                        
+                case 'ListJasLa'                        : include_once('pages/jasalain/listjasalain.php'); break;
                 case 'InputBank'                        : include_once('pages/bank/inputbank.php'); break;
                 case 'ListBank'                         : include_once('pages/bank/listbank.php'); break;
                 case 'ListPinjam'                       : include_once('pages/pinjam/listpinjam.php'); break;
@@ -156,7 +156,7 @@
                 case 'ListRj'                           : include_once('pages/rawat/listrj.php'); break;
                 case 'DetailTindakanRj'                 : include_once('pages/rawat/detailtindakanrj.php'); break;
                 case 'HomeAdmin'                        : include_once('pages/home.php'); break;
-                case 'InputDataAdmin'                   : include_once('pages/aturadmin.php'); break;			
+                case 'InputDataAdmin'                   : include_once('pages/aturadmin.php'); break;
                 case 'InputTahun'                       : include_once('pages/aturtahun.php'); break;
                 case 'ListPresensi'                     : include_once('pages/presensi/listpresensi.php'); break;
                 case 'DetailPresensi'                   : include_once('pages/presensi/detailpresensi.php'); break;

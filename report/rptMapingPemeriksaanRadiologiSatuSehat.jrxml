@@ -27,9 +27,9 @@
 	<parameter name="parameter" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select satu_sehat_mapping_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,satu_sehat_mapping_radiologi.code,satu_sehat_mapping_radiologi.system,
-                   satu_sehat_mapping_radiologi.display from satu_sehat_mapping_radiologi inner join jns_perawatan_radiologi 
-                   on satu_sehat_mapping_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw 
-                   where satu_sehat_mapping_radiologi.kd_jenis_prw like $P{parameter} or jns_perawatan_radiologi.nm_perawatan like $P{parameter} or 
+                   satu_sehat_mapping_radiologi.display from satu_sehat_mapping_radiologi inner join jns_perawatan_radiologi
+                   on satu_sehat_mapping_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw
+                   where satu_sehat_mapping_radiologi.kd_jenis_prw like $P{parameter} or jns_perawatan_radiologi.nm_perawatan like $P{parameter} or
                    satu_sehat_mapping_radiologi.code like $P{parameter} or satu_sehat_mapping_radiologi.display like $P{parameter}
                     order by satu_sehat_mapping_radiologi.code]]>
 	</queryString>

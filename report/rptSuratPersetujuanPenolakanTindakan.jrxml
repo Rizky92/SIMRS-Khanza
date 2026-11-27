@@ -36,14 +36,14 @@
 				persetujuan_penolakan_tindakan.lain_lain_konfirmasi,persetujuan_penolakan_tindakan.kd_dokter,dokter.nm_dokter,persetujuan_penolakan_tindakan.nip,petugas.nama,reg_periksa.sttsumur,
 				persetujuan_penolakan_tindakan.penerima_informasi,persetujuan_penolakan_tindakan.alasan_diwakilkan_penerima_informasi,persetujuan_penolakan_tindakan.jk_penerima_informasi,
 				persetujuan_penolakan_tindakan.tanggal_lahir_penerima_informasi,persetujuan_penolakan_tindakan.umur_penerima_informasi,persetujuan_penolakan_tindakan.alamat_penerima_informasi,
-				persetujuan_penolakan_tindakan.no_hp,persetujuan_penolakan_tindakan.hubungan_penerima_informasi,persetujuan_penolakan_tindakan.pernyataan,persetujuan_penolakan_tindakan.saksi_keluarga 
-				from persetujuan_penolakan_tindakan inner join reg_periksa on persetujuan_penolakan_tindakan.no_rawat=reg_periksa.no_rawat 
-				inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis 
-				inner join dokter on dokter.kd_dokter=persetujuan_penolakan_tindakan.kd_dokter 
+				persetujuan_penolakan_tindakan.no_hp,persetujuan_penolakan_tindakan.hubungan_penerima_informasi,persetujuan_penolakan_tindakan.pernyataan,persetujuan_penolakan_tindakan.saksi_keluarga
+				from persetujuan_penolakan_tindakan inner join reg_periksa on persetujuan_penolakan_tindakan.no_rawat=reg_periksa.no_rawat
+				inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis
+				inner join dokter on dokter.kd_dokter=persetujuan_penolakan_tindakan.kd_dokter
 				inner join petugas on petugas.nip=persetujuan_penolakan_tindakan.nip
-				inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel 
-				inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
-				inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab 
+				inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
+				inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
+				inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
 				inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 	</queryString>
 	<field name="no_pernyataan" class="java.lang.String"/>

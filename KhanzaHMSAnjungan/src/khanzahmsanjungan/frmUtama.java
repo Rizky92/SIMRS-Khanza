@@ -26,14 +26,14 @@ public class frmUtama extends javax.swing.JFrame {
     private final sekuel Sequel=new sekuel();
     private final validasi Valid=new validasi();
     private String validasiregistrasi=Sequel.cariIsi("select set_validasi_registrasi.wajib_closing_kasir from set_validasi_registrasi");
-        
+
     /** Creates new form frmUtama */
     public frmUtama() {
         initComponents();
-        setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());      
+        setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
         this.setSize(screen.width,screen.height);
-    }    
-    private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();  
+    }
+    private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -183,7 +183,7 @@ public class frmUtama extends javax.swing.JFrame {
                          pilih.setPasien(TCari.getText());
                          pilih.tampil();
                          pilih.setVisible(true);
-                     }  
+                     }
                 }else if(Sequel.cariInteger("select count(no_ktp) from pasien where no_ktp=?",TCari.getText().trim())>0){
                      if(validasiregistrasi.equals("Yes")){
                          if(Sequel.cariInteger("select count(no_rkm_medis) from reg_periksa where no_rkm_medis=? and status_bayar='Belum Bayar' and stts<>'Batal'",Sequel.cariIsi("select no_rkm_medis from pasien where no_ktp=?",TCari.getText().trim()))>0){
@@ -222,7 +222,7 @@ public class frmUtama extends javax.swing.JFrame {
                          pilih.setLocationRelativeTo(this);
                          pilih.setPasien(Sequel.cariIsi("select pasien.no_rkm_medis from pasien where pasien.no_peserta=?",TCari.getText().trim()));
                          pilih.tampil();
-                         pilih.setVisible(true); 
+                         pilih.setVisible(true);
                      }
                 }else{
                     JOptionPane.showMessageDialog(rootPane,
@@ -235,7 +235,7 @@ public class frmUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        
+
     }//GEN-LAST:event_formWindowClosing
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -265,7 +265,7 @@ public class frmUtama extends javax.swing.JFrame {
                      pilih.setPasien(TCari.getText());
                      pilih.tampil();
                      pilih.setVisible(true);
-                 }  
+                 }
             }else if(Sequel.cariInteger("select count(no_ktp) from pasien where no_ktp=?",TCari.getText().trim())>0){
                  if(validasiregistrasi.equals("Yes")){
                      if(Sequel.cariInteger("select count(no_rkm_medis) from reg_periksa where no_rkm_medis=? and status_bayar='Belum Bayar' and stts<>'Batal'",Sequel.cariIsi("select no_rkm_medis from pasien where no_ktp=?",TCari.getText().trim()))>0){
@@ -304,7 +304,7 @@ public class frmUtama extends javax.swing.JFrame {
                      pilih.setLocationRelativeTo(this);
                      pilih.setPasien(Sequel.cariIsi("select pasien.no_rkm_medis from pasien where pasien.no_peserta=?",TCari.getText().trim()));
                      pilih.tampil();
-                     pilih.setVisible(true); 
+                     pilih.setVisible(true);
                  }
             }else{
                 JOptionPane.showMessageDialog(rootPane,

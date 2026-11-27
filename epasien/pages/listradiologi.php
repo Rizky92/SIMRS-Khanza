@@ -11,7 +11,7 @@
                           <h2>Radiologi</h2>
                      </div>
                 </div>
-                       
+
                 <div class="col-md-12 col-sm-12">
                      <div class="news-thumb wow fadeInUp" data-wow-delay="0.3s">
                          <form id="cariKamar" name="frmCariRadiologi" method="post" action="" enctype=multipart/form-data>
@@ -31,7 +31,7 @@
                                    <th width="20%"><center>Kelas</center></th>
                                    <th width="20%"><center>Tarif Radiologi</center></th>
                                </tr>
-                               <?php 
+                               <?php
                                   if(!isset($_SESSION["radiologi"])){
                                       $dataradiologi  = "";
                                       $queryradiologi = bukaquery("select jns_perawatan_radiologi.nm_perawatan,jns_perawatan_radiologi.total_byr,jns_perawatan_radiologi.kelas from jns_perawatan_radiologi inner join penjab on penjab.kd_pj=jns_perawatan_radiologi.kd_pj where jns_perawatan_radiologi.status='1' and penjab.png_jawab like '%umum%' order by jns_perawatan_radiologi.kelas");
@@ -63,9 +63,9 @@
                                       }
                                   }else{
                                       echo $_SESSION["radiologi"];
-                                  }    
+                                  }
                               ?>
-                           </table> 
+                           </table>
                          </div>
                      </div>
                 </div>

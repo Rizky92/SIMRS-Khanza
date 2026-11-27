@@ -22,7 +22,7 @@
                     skrining_instrumen_acrs.nilai_acrs3,skrining_instrumen_acrs.pernyataanacrs4,skrining_instrumen_acrs.nilai_acrs4,skrining_instrumen_acrs.pernyataanacrs5,skrining_instrumen_acrs.nilai_acrs5,
                     skrining_instrumen_acrs.pernyataanacrs6,skrining_instrumen_acrs.nilai_acrs6,skrining_instrumen_acrs.pernyataanacrs7,skrining_instrumen_acrs.nilai_acrs7,skrining_instrumen_acrs.pernyataanacrs8,
                     skrining_instrumen_acrs.nilai_acrs8,skrining_instrumen_acrs.pernyataanacrs9,skrining_instrumen_acrs.nilai_acrs9,skrining_instrumen_acrs.pernyataanacrs10,skrining_instrumen_acrs.nilai_acrs10,
-                    skrining_instrumen_acrs.nilai_total_acrs,skrining_instrumen_acrs.kesimpulan from skrining_instrumen_acrs inner join reg_periksa on skrining_instrumen_acrs.no_rawat=reg_periksa.no_rawat 
+                    skrining_instrumen_acrs.nilai_total_acrs,skrining_instrumen_acrs.kesimpulan from skrining_instrumen_acrs inner join reg_periksa on skrining_instrumen_acrs.no_rawat=reg_periksa.no_rawat
                     inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_instrumen_acrs.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

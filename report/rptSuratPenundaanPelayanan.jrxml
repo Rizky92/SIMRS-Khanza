@@ -26,14 +26,14 @@
 				persetujuan_penundaan_pelayanan.dokter_pengirim,persetujuan_penundaan_pelayanan.pelayanan_dilakukan,persetujuan_penundaan_pelayanan.ditunda_karena,
 				persetujuan_penundaan_pelayanan.keterangan_ditunda,persetujuan_penundaan_pelayanan.alternatif_diberikan,
 				persetujuan_penundaan_pelayanan.keterangan_alternatif_diberikan,persetujuan_penundaan_pelayanan.nip,petugas.nama,
-				persetujuan_penundaan_pelayanan.kd_dokter,dokter.nm_dokter from persetujuan_penundaan_pelayanan 
-				inner join reg_periksa on persetujuan_penundaan_pelayanan.no_rawat=reg_periksa.no_rawat 
-				inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-				inner join petugas on persetujuan_penundaan_pelayanan.nip=petugas.nip 
-				inner join dokter on persetujuan_penundaan_pelayanan.kd_dokter=dokter.kd_dokter  
-				inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel 
-				inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
-				inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab 
+				persetujuan_penundaan_pelayanan.kd_dokter,dokter.nm_dokter from persetujuan_penundaan_pelayanan
+				inner join reg_periksa on persetujuan_penundaan_pelayanan.no_rawat=reg_periksa.no_rawat
+				inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+				inner join petugas on persetujuan_penundaan_pelayanan.nip=petugas.nip
+				inner join dokter on persetujuan_penundaan_pelayanan.kd_dokter=dokter.kd_dokter
+				inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
+				inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
+				inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
 				inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 	</queryString>
 	<field name="no_surat" class="java.lang.String"/>

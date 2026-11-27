@@ -66,7 +66,7 @@ public class DlgPilihPoli extends javax.swing.JDialog {
             }
         }
         tbAdmin.setDefaultRenderer(Object.class, new WarnaTable());
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));                
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         setPasien();
     }
 
@@ -357,7 +357,7 @@ public class DlgPilihPoli extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(() -> {
             DlgPilihPoli dialog = new DlgPilihPoli(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                
+
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
                     System.exit(0);
@@ -392,8 +392,8 @@ public class DlgPilihPoli extends javax.swing.JDialog {
                     "select poliklinik.kd_poli,poliklinik.nm_poli,poliklinik.registrasi,poliklinik.registrasilama "+
                     "from poliklinik inner join jadwal on poliklinik.kd_poli=jadwal.kd_poli "+
                     "where jadwal.hari_kerja=? and poliklinik.kd_poli like ? or "+
-                    "jadwal.hari_kerja=? and poliklinik.nm_poli like ? group by poliklinik.kd_poli order by poliklinik.nm_poli "); 
-            try{                
+                    "jadwal.hari_kerja=? and poliklinik.nm_poli like ? group by poliklinik.kd_poli order by poliklinik.nm_poli ");
+            try{
                 if(day==1){
                     hari="AKHAD";
                 }else if(day==2){
@@ -413,10 +413,10 @@ public class DlgPilihPoli extends javax.swing.JDialog {
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
                 ps.setString(3,hari);
                 ps.setString(4,"%"+TCari.getText().trim()+"%");
-                rs=ps.executeQuery(); 
+                rs=ps.executeQuery();
                 while(rs.next()){
                     tabmode.addRow(new Object[]{rs.getString(1),"  "+rs.getString(2),rs.getString(3),rs.getString(4)});
-                }  
+                }
             }catch(Exception ex){
                 System.out.println(ex);
             }finally{
@@ -426,12 +426,12 @@ public class DlgPilihPoli extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }                     
+            }
         }catch(Exception ex){
             System.out.println(ex);
         }
     }
-    
+
     public void setPasien(){
         LblNoRm.setText(Sequel.cariIsi("select no_rkm_medis from temppanggilrm"));
         LblNama.setText(Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=?",LblNoRm.getText()));

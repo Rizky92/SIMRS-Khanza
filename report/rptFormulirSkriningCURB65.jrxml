@@ -20,7 +20,7 @@
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,skrining_curb65.nip,petugas.nama,skrining_curb65.tanggal,reg_periksa.umurdaftar,reg_periksa.sttsumur,
                     skrining_curb65.pernyataancurb651,skrining_curb65.nilai_curb651,skrining_curb65.pernyataancurb652,skrining_curb65.nilai_curb652,skrining_curb65.pernyataancurb653,
                     skrining_curb65.nilai_curb653,skrining_curb65.pernyataancurb654,skrining_curb65.nilai_curb654,skrining_curb65.pernyataancurb655,skrining_curb65.nilai_curb655,
-                    skrining_curb65.nilai_total_curb65,skrining_curb65.kesimpulan from skrining_curb65 inner join reg_periksa on skrining_curb65.no_rawat=reg_periksa.no_rawat 
+                    skrining_curb65.nilai_total_curb65,skrining_curb65.kesimpulan from skrining_curb65 inner join reg_periksa on skrining_curb65.no_rawat=reg_periksa.no_rawat
                     inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_curb65.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

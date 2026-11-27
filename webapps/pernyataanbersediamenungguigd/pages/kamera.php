@@ -2,18 +2,18 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $namars        = getOne("select setting.nama_instansi from setting");
     $nopernyataan  = "";
     $norawat       = "";
-    
-    $_sql          = "select * from antrikesediaanmenungguigd" ;  
+
+    $_sql          = "select * from antrikesediaanmenungguigd" ;
     $hasil         = bukaquery2($_sql);
     while ($data = mysqli_fetch_array ($hasil)){
         $nopernyataan = $data['no_surat'];
         $norawat      = $data['no_rawat'];
     }
-    
+
     $no_rkm_medis = "";
     $nm_pasien    = "";
     $jk           = "";
@@ -21,14 +21,14 @@
     $tgl_lahir    = "";
     $alamat       = "";
     $no_tlp       = "";
-    
+
     $_sql2  = "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','LAKI-LAKI','PEREMPUAN') as jk,
-               pasien.umur,DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, 
-               pasien.no_tlp from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+               pasien.umur,DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,
+               pasien.no_tlp from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
-               inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
+               inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
                inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
-               where reg_periksa.no_rawat='".$norawat."'" ;  
+               where reg_periksa.no_rawat='".$norawat."'" ;
     $hasil2 = bukaquery2($_sql2);
     while ($data2  = mysqli_fetch_array ($hasil2)){
         $no_rkm_medis = $data2['no_rkm_medis'];
@@ -39,7 +39,7 @@
         $alamat       = $data2['alamat'];
         $no_tlp       = $data2['no_tlp'];
     }
-    
+
     $tanggal              = "";
     $nama_pj              = "";
     $no_ktppj             = "";
@@ -49,7 +49,7 @@
     $alamatpj             = "";
     $no_telp              = "";
     $hubungan             = "";
-    $_sql2  = "select DATE_FORMAT(surat_kesediaan_menunggu_igd.tanggal,'%d-%m-%Y') as tanggal,surat_kesediaan_menunggu_igd.nama_pj,surat_kesediaan_menunggu_igd.no_ktppj,surat_kesediaan_menunggu_igd.tempat_lahirpj,DATE_FORMAT(surat_kesediaan_menunggu_igd.lahirpj,'%d-%m-%Y') as lahirpj,surat_kesediaan_menunggu_igd.jkpj,surat_kesediaan_menunggu_igd.alamatpj,surat_kesediaan_menunggu_igd.no_telp,surat_kesediaan_menunggu_igd.hubungan from surat_kesediaan_menunggu_igd where surat_kesediaan_menunggu_igd.no_surat='$nopernyataan'" ;  
+    $_sql2  = "select DATE_FORMAT(surat_kesediaan_menunggu_igd.tanggal,'%d-%m-%Y') as tanggal,surat_kesediaan_menunggu_igd.nama_pj,surat_kesediaan_menunggu_igd.no_ktppj,surat_kesediaan_menunggu_igd.tempat_lahirpj,DATE_FORMAT(surat_kesediaan_menunggu_igd.lahirpj,'%d-%m-%Y') as lahirpj,surat_kesediaan_menunggu_igd.jkpj,surat_kesediaan_menunggu_igd.alamatpj,surat_kesediaan_menunggu_igd.no_telp,surat_kesediaan_menunggu_igd.hubungan from surat_kesediaan_menunggu_igd where surat_kesediaan_menunggu_igd.no_surat='$nopernyataan'" ;
     $hasil2 = bukaquery2($_sql2);
     while ($data2  = mysqli_fetch_array ($hasil2)){
         $tanggal              = $data2['tanggal'];
@@ -156,7 +156,7 @@
             </div>
         </form>
     </div>
-    
+
     <script language="JavaScript">
         Webcam.set({
             width: 490,
@@ -176,4 +176,3 @@
     </script>
 </body>
 </html>
-

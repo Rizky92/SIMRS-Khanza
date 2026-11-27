@@ -2,9 +2,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["norawat"])) {
         $norawat    = validTeks3($iyem["norawat"],20);
         $queryusgkandungan = bukaquery(
@@ -35,82 +35,82 @@
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>HTA</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["hta"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Jenis Prestasi</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["jenis_prestasi"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Ukuran Kantong Gestasi (GS)</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["kantong_gestasi"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Ukuran Bokong - Kepala (CRL)</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["ukuran_bokongkepala"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Diameter Biparietal (DBP)</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["diameter_biparietal"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Panjang Femur (FL)</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["panjang_femur"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Lingkar Abdomen (AC)</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["lingkar_abdomen"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Tafsiran berat Janin (TBJ)</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["tafsiran_berat_janin"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Usia Kehamilan Sesuai</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["usia_kehamilan"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Plasenta Berimplatansi Di</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["plasenta_berimplatansi"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Derajat Maturitas Plasenta</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["derajat_maturitas"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Jumlah Air Ketuban</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["jumlah_air_ketuban"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Peluang Sex</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["peluang_sex"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Indeks Cairan Ketuban (ICK)</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["indek_cairan_ketuban"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Kelainan Kongenital Mayor</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["kelainan_kongenital"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Kesimpulan</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusgkandungan["kesimpulan"]."</td>
                                     </tr>";
             $querygambarusg= bukaquery(

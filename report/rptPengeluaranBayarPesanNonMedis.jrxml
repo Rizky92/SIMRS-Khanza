@@ -26,9 +26,9 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select bayar_pemesanan_non_medis.tgl_bayar,bayar_pemesanan_non_medis.no_faktur,ipsrssuplier.nama_suplier,bayar_pemesanan_non_medis.nip,
-                petugas.nama,bayar_pemesanan_non_medis.nama_bayar,bayar_pemesanan_non_medis.no_bukti,bayar_pemesanan_non_medis.besar_bayar 
-                from bayar_pemesanan_non_medis inner join ipsrspemesanan on bayar_pemesanan_non_medis.no_faktur=ipsrspemesanan.no_faktur 
-                inner join ipsrssuplier on ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier 
+                petugas.nama,bayar_pemesanan_non_medis.nama_bayar,bayar_pemesanan_non_medis.no_bukti,bayar_pemesanan_non_medis.besar_bayar
+                from bayar_pemesanan_non_medis inner join ipsrspemesanan on bayar_pemesanan_non_medis.no_faktur=ipsrspemesanan.no_faktur
+                inner join ipsrssuplier on ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier
                 inner join petugas on petugas.nip=bayar_pemesanan_non_medis.nip]]>
 	</queryString>
 	<field name="tgl_bayar" class="java.sql.Date">

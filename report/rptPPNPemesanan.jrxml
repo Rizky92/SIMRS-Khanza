@@ -12,11 +12,11 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="periode" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select pemesanan.tgl_pesan,pemesanan.no_faktur, 
-                     pemesanan.kode_suplier,datasuplier.nama_suplier, 
+		<![CDATA[select pemesanan.tgl_pesan,pemesanan.no_faktur,
+                     pemesanan.kode_suplier,datasuplier.nama_suplier,
                      pemesanan.nip,petugas.nama,pemesanan.total1,
-                     pemesanan.potongan,pemesanan.total2,pemesanan.ppn,pemesanan.tagihan 
-                     from pemesanan inner join datasuplier inner join petugas on 
+                     pemesanan.potongan,pemesanan.total2,pemesanan.ppn,pemesanan.tagihan
+                     from pemesanan inner join datasuplier inner join petugas on
                      pemesanan.kode_suplier=datasuplier.kode_suplier and pemesanan.nip=petugas.nip ]]>
 	</queryString>
 	<field name="tgl_pesan" class="java.sql.Date">

@@ -67,7 +67,7 @@ import org.apache.pdfbox.multipdf.PDFMergerUtility;
 public class DlgBerkasRawat extends javax.swing.JDialog {
     private final JFXPanel jfxPanel = new JFXPanel();
     private WebEngine engine;
- 
+
     private final JPanel panel = new JPanel(new BorderLayout());
     private final JLabel lblStatus = new JLabel();
 
@@ -86,22 +86,22 @@ public class DlgBerkasRawat extends javax.swing.JDialog {
         initComponents();
         initComponents2();
     }
-    
-    private void initComponents2() {           
+
+    private void initComponents2() {
         txtURL.addActionListener((ActionEvent e) -> {
             runBackground(() ->loadURL(txtURL.getText()));
         });
-  
+
         progressBar.setPreferredSize(new Dimension(150, 18));
         progressBar.setStringPainted(true);
-        
+
         panel.add(jfxPanel, BorderLayout.CENTER);
-        
+
         internalFrame1.setLayout(new BorderLayout());
-        internalFrame1.add(panel);        
+        internalFrame1.add(panel);
     }
-    
-     private void createScene() {        
+
+     private void createScene() {
         Platform.runLater(new Runnable() {
 
             public void run() {
@@ -109,11 +109,11 @@ public class DlgBerkasRawat extends javax.swing.JDialog {
                     return;
                 }
                 WebView view = new WebView();
-                
+
                 final WebEngine we = view.getEngine();
                 engine = we;
                 we.setJavaScriptEnabled(true);
-                
+
                 we.setCreatePopupHandler(new Callback<PopupFeatures, WebEngine>() {
                     @Override
                     public WebEngine call(PopupFeatures p) {
@@ -121,27 +121,25 @@ public class DlgBerkasRawat extends javax.swing.JDialog {
                         return view.getEngine();
                     }
                 });
-                
+
                 we.titleProperty().addListener((ObservableValue<? extends String> observable, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         DlgBerkasRawat.this.setTitle(newValue);
                     });
                 });
-                
-                
+
                 we.setOnStatusChanged((final WebEvent<String> event) -> {
                     SwingUtilities.invokeLater(() -> {
                         lblStatus.setText(event.getData());
                     });
                 });
-                
-                
+
                 we.getLoadWorker().workDoneProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, final Number newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         progressBar.setValue(newValue.intValue());
-                    });                                                   
+                    });
                 });
-                
+
                 we.getLoadWorker().exceptionProperty().addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
                     if (we.getLoadWorker().getState() == FAILED) {
                         SwingUtilities.invokeLater(() -> {
@@ -155,14 +153,13 @@ public class DlgBerkasRawat extends javax.swing.JDialog {
                         });
                     }
                 });
-                
-                
+
                 we.locationProperty().addListener((ObservableValue<? extends String> ov, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         txtURL.setText(newValue);
                     });
                 });
-                
+
                 we.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
                     @Override
                     public void changed(ObservableValue ov, State oldState, State newState) {
@@ -212,38 +209,38 @@ public class DlgBerkasRawat extends javax.swing.JDialog {
                                         if(ps!=null){
                                             ps.close();
                                         }
-                                    }                                    
+                                    }
                                 }
                             } catch (Exception ex) {
                                 System.out.println("Notifikasi : "+ex);
                             }
-                        } 
+                        }
                     }
                 });
-                
+
                 jfxPanel.setScene(new Scene(view));
             }
         });
     }
- 
-    public void loadURL(String url) {  
+
+    public void loadURL(String url) {
         try {
             createScene();
         } catch (Exception e) {
         }
-        
+
         Platform.runLater(() -> {
             final WebEngine eng = engine;
             if (eng != null) {
                 eng.load(url);
             }
-        });        
-    }    
-    
+        });
+    }
+
     public void CloseScane(){
         Platform.setImplicitExit(false);
     }
-    
+
     public void print(final Node node) {
         Printer printer = Printer.getDefaultPrinter();
         PageLayout pageLayout = printer.createPageLayout(Paper.NA_LETTER, PageOrientation.PORTRAIT, Printer.MarginType.DEFAULT);
@@ -259,7 +256,6 @@ public class DlgBerkasRawat extends javax.swing.JDialog {
             }
         }
     }
-    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -326,10 +322,10 @@ public class DlgBerkasRawat extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void setJudul(String Judul,String Pages){
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), Judul, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); 
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), Judul, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50)));
         this.halaman=Pages;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -355,7 +351,7 @@ public class DlgBerkasRawat extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         try {

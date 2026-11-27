@@ -25,7 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                            $querysuratcovid = bukaquery("select surat_keterangan_covid.no_surat,surat_keterangan_covid.no_rawat,surat_keterangan_covid.kd_dokter,dokter.nm_dokter,surat_keterangan_covid.nip,petugas.nama,surat_keterangan_covid.igm,surat_keterangan_covid.igg,surat_keterangan_covid.sehat,surat_keterangan_covid.tidaksehat,date_format(surat_keterangan_covid.berlakumulai,'%d/%m/%Y') as berlakumulai,date_format(surat_keterangan_covid.berlakuselsai,'%d/%m/%Y') as berlakuselsai from surat_keterangan_covid inner join reg_periksa on surat_keterangan_covid.no_rawat=reg_periksa.no_rawat inner join dokter on surat_keterangan_covid.kd_dokter=dokter.kd_dokter inner join petugas on surat_keterangan_covid.nip=petugas.nip where reg_periksa.no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."'");
                            while($rsquerysuratcovid = mysqli_fetch_array($querysuratcovid)) {
                                echo "<tr>

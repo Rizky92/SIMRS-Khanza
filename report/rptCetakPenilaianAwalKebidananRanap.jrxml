@@ -80,10 +80,10 @@
 	<parameter name="keadaan5" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[
-		
-		
-		
-		
+
+
+
+
 		select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,
                 if(pasien.jk='L','Laki-Laki','Perempuan') jk,pasien.tgl_lahir,pasien.agama,
                 bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat,
@@ -208,10 +208,10 @@
                 inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien
                 inner join cacat_fisik on cacat_fisik.id=pasien.cacat_fisik
                 inner join penjab on penjab.kd_pj=reg_periksa.kd_pj
-	
-	
-	
-	
+
+
+
+
 	]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

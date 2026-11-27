@@ -4,7 +4,7 @@
         $judul = preg_replace("[^A-Za-z0-9_\-\./,|]"," ",$judul);
         $judul = str_replace(array('.','-','/',',')," ",$judul);
         $judul = trim($judul);
-        echo "$judul";	
+        echo "$judul";
     }
 
     function cekSessiAdmin() {
@@ -53,7 +53,7 @@
                     break;
                 }
             }
-        }	
+        }
     }
 
     function actionPages() {
@@ -121,6 +121,6 @@
             case "MutuPelayananRad"                     : include_once("pages/mutupelayananradiologi.php"); break;
             case "PerkiraanBiayaRanap"                  : include_once("pages/perkiraanbiayaranap.php"); break;
             default                                     : include_once("pages/listhome.php");
-        }   
+        }
     }
 ?>

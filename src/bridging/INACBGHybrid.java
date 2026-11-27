@@ -24,6 +24,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -50,13 +51,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import keuangan.DlgBilingRalan;
 import keuangan.DlgBilingRanap;
 import laporan.DlgDiagnosaPenyakit;
 import rekammedis.RMRiwayatPerawatan;
-import java.util.concurrent.RejectedExecutionException;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 
 /**
  *
@@ -65,7 +65,7 @@ import javax.swing.WindowConstants;
 public class INACBGHybrid extends javax.swing.JDialog {
     private final JFXPanel jfxPanel = new JFXPanel();
     private WebEngine engine;
- 
+
     private final JPanel panel = new JPanel(new BorderLayout());
     private final JLabel lblStatus = new JLabel();
 
@@ -82,29 +82,28 @@ public class INACBGHybrid extends javax.swing.JDialog {
     private DlgBilingRalan dlgbil;
     private DlgBilingRanap billing;
     private DlgDiagnosaPenyakit diagnosa;
-                                    
-    
+
     public INACBGHybrid(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         initComponents2();
     }
-    
-    private void initComponents2() {           
+
+    private void initComponents2() {
         txtURL.addActionListener((ActionEvent e) -> {
             runBackground(() ->loadURL(txtURL.getText()));
         });
-  
+
         progressBar.setPreferredSize(new Dimension(150, 18));
         progressBar.setStringPainted(true);
-        
+
         panel.add(jfxPanel, BorderLayout.CENTER);
-        
+
         internalFrame1.setLayout(new BorderLayout());
-        internalFrame1.add(panel);        
+        internalFrame1.add(panel);
     }
-    
-     private void createScene() {        
+
+     private void createScene() {
         Platform.runLater(new Runnable() {
 
             public void run() {
@@ -112,11 +111,11 @@ public class INACBGHybrid extends javax.swing.JDialog {
                     return;
                 }
                 WebView view = new WebView();
-                
+
                 final WebEngine we = view.getEngine();
                 engine = we;
                 we.setJavaScriptEnabled(true);
-                
+
                 we.setCreatePopupHandler(new Callback<PopupFeatures, WebEngine>() {
                     @Override
                     public WebEngine call(PopupFeatures p) {
@@ -124,27 +123,25 @@ public class INACBGHybrid extends javax.swing.JDialog {
                         return view.getEngine();
                     }
                 });
-                
+
                 we.titleProperty().addListener((ObservableValue<? extends String> observable, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         INACBGHybrid.this.setTitle(newValue);
                     });
                 });
-                
-                
+
                 we.setOnStatusChanged((final WebEvent<String> event) -> {
                     SwingUtilities.invokeLater(() -> {
                         lblStatus.setText(event.getData());
                     });
                 });
-                
-                
+
                 we.getLoadWorker().workDoneProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, final Number newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         progressBar.setValue(newValue.intValue());
-                    });                                                   
+                    });
                 });
-                
+
                 we.getLoadWorker().exceptionProperty().addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
                     if (we.getLoadWorker().getState() == FAILED) {
                         SwingUtilities.invokeLater(() -> {
@@ -158,14 +155,13 @@ public class INACBGHybrid extends javax.swing.JDialog {
                         });
                     }
                 });
-                
-                
+
                 we.locationProperty().addListener((ObservableValue<? extends String> ov, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         txtURL.setText(newValue);
                     });
                 });
-                
+
                 we.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
                     @Override
                     public void changed(ObservableValue ov, State oldState, State newState) {
@@ -177,7 +173,7 @@ public class INACBGHybrid extends javax.swing.JDialog {
                                     we.executeScript("history.back()");
                                     setCursor(Cursor.getDefaultCursor());
                                 }else if(we.getLocation().replaceAll("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/","").contains("Keluar")){
-                                    dispose();    
+                                    dispose();
                                 }else if(we.getLocation().replaceAll("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/","").contains("InputDiagnosa")){
                                     URL=we.getLocation().replaceAll("InputDiagnosa","no");
                                     ps=koneksi.prepareStatement("select temppanggilnorawat.no_rawat, reg_periksa.status_lanjut, reg_periksa.tgl_registrasi  "+
@@ -210,18 +206,18 @@ public class INACBGHybrid extends javax.swing.JDialog {
                                                 diagnosa.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                                 diagnosa.setLocationRelativeTo(internalFrame1);
                                             }
-                                                
+
                                             if (diagnosa == null) return;
                                             if (!diagnosa.isVisible()) {
                                                 diagnosa.isCek();
                                                 diagnosa.setNoRm(rs.getString("no_rawat"),rs.getDate("tgl_registrasi"),rs.getDate("tgl_registrasi"),rs.getString("status_lanjut"));
-                                            }  
+                                            }
                                             if (diagnosa.isVisible()) {
                                                 diagnosa.toFront();
                                                 return;
-                                            } 
-                                                
-                                            diagnosa.setVisible(true); 
+                                            }
+
+                                            diagnosa.setVisible(true);
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Notif : "+e);
@@ -232,7 +228,7 @@ public class INACBGHybrid extends javax.swing.JDialog {
                                         if(ps!=null){
                                             ps.close();
                                         }
-                                    }   
+                                    }
                                 }else if(we.getLocation().replaceAll("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/","").contains("InputCorona")){
                                     URL=we.getLocation().replaceAll("InputCorona","no");
                                     ps=koneksi.prepareStatement("select temppanggilnorawat.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien "+
@@ -265,7 +261,7 @@ public class INACBGHybrid extends javax.swing.JDialog {
                                             corona.isCek();
                                             corona.setPasien(rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"));
                                             corona.tampil();
-                                            corona.setVisible(true); 
+                                            corona.setVisible(true);
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Notif : "+e);
@@ -276,7 +272,7 @@ public class INACBGHybrid extends javax.swing.JDialog {
                                         if(ps!=null){
                                             ps.close();
                                         }
-                                    }   
+                                    }
                                 }else if(we.getLocation().replaceAll("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/","").contains("RiwayatPerawatan")){
                                     URL=we.getLocation().replaceAll("RiwayatPerawatan","no");
                                     ps=koneksi.prepareStatement("select temppanggilnorawat.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien "+
@@ -314,11 +310,11 @@ public class INACBGHybrid extends javax.swing.JDialog {
                                             if (!resume.isVisible()) {
                                                 resume.setNoRawat(rs.getString("no_rawat"));
                                                 resume.setNoRm(rs.getString("no_rkm_medis"),rs.getString("nm_pasien"));
-                                            }  
+                                            }
                                             if (resume.isVisible()) {
                                                 resume.toFront();
                                                 return;
-                                            }    
+                                            }
                                             resume.setVisible(true);
                                         }
                                     } catch (Exception e) {
@@ -330,7 +326,7 @@ public class INACBGHybrid extends javax.swing.JDialog {
                                         if(ps!=null){
                                             ps.close();
                                         }
-                                    }   
+                                    }
                                 }else if(we.getLocation().replaceAll("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/","").contains("DataBilling")){
                                     URL=we.getLocation().replaceAll("DataBilling","no");
                                     ps=koneksi.prepareStatement("select temppanggilnorawat.no_rawat,reg_periksa.status_lanjut from temppanggilnorawat inner join reg_periksa on temppanggilnorawat.no_rawat=reg_periksa.no_rawat");
@@ -362,19 +358,19 @@ public class INACBGHybrid extends javax.swing.JDialog {
                                                     });
                                                     dlgbil.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                                     dlgbil.setLocationRelativeTo(internalFrame1);
-                                                }   
-                                                
+                                                }
+
                                                 if (dlgbil == null) return;
                                                 if (!dlgbil.isVisible()) {
                                                     dlgbil.TNoRw.setText(rs.getString("no_rawat"));
                                                     dlgbil.isCek();
-                                                    dlgbil.isRawat(); 
-                                                }  
+                                                    dlgbil.isRawat();
+                                                }
                                                 if (dlgbil.isVisible()) {
                                                     dlgbil.toFront();
                                                     return;
-                                                } 
-                                                
+                                                }
+
                                                 dlgbil.setVisible(true);
                                             }else if(rs.getString("status_lanjut").equals("Ranap")){
                                                 if (billing == null || !billing.isDisplayable()) {
@@ -401,19 +397,19 @@ public class INACBGHybrid extends javax.swing.JDialog {
                                                     });
                                                     billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                                     billing.setLocationRelativeTo(internalFrame1);
-                                                }  
-                                                
+                                                }
+
                                                 if (billing == null) return;
                                                 if (!billing.isVisible()) {
-                                                    billing.TNoRw.setText(rs.getString("no_rawat"));                   
-                                                    billing.isCek();  
-                                                    billing.isRawat(); 
-                                                }  
+                                                    billing.TNoRw.setText(rs.getString("no_rawat"));
+                                                    billing.isCek();
+                                                    billing.isRawat();
+                                                }
                                                 if (billing.isVisible()) {
                                                     billing.toFront();
                                                     return;
-                                                }  
-                                                
+                                                }
+
                                                 billing.setVisible(true);
                                             }
                                         }
@@ -426,38 +422,38 @@ public class INACBGHybrid extends javax.swing.JDialog {
                                         if(ps!=null){
                                             ps.close();
                                         }
-                                    }   
+                                    }
                                 }
                             } catch (Exception ex) {
                                 System.out.println("Notifikasi : "+ex);
                             }
-                        } 
+                        }
                     }
                 });
-                
+
                 jfxPanel.setScene(new Scene(view));
             }
         });
     }
-     
-    public void loadURL(String url) {  
+
+    public void loadURL(String url) {
         try {
             createScene();
         } catch (Exception e) {
         }
-        
+
         Platform.runLater(() -> {
             final WebEngine eng = engine;
             if (eng != null) {
                 eng.load(url);
             }
-        });        
-    }    
-    
+        });
+    }
+
     public void CloseScane(){
         Platform.setImplicitExit(false);
     }
-    
+
     public void print(final Node node) {
         Printer printer = Printer.getDefaultPrinter();
         PageLayout pageLayout = printer.createPageLayout(Paper.NA_LETTER, PageOrientation.PORTRAIT, Printer.MarginType.DEFAULT);
@@ -473,7 +469,6 @@ public class INACBGHybrid extends javax.swing.JDialog {
             }
         }
     }
-    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -542,7 +537,7 @@ public class INACBGHybrid extends javax.swing.JDialog {
     public void setJudul(String Judul){
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), Judul, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); // NOI18N
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -568,7 +563,7 @@ public class INACBGHybrid extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         try {

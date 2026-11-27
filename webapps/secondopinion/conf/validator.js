@@ -30,7 +30,7 @@ var http_request = false;
       if (http_request.readyState == 4) {
          if (http_request.status == 200) {
             result = http_request.responseText;
-            document.getElementById('myspan').innerHTML = result;            
+            document.getElementById('myspan').innerHTML = result;
          } else {
             alert('ada masalah.');
          }
@@ -56,7 +56,7 @@ function validasiLogin()
  	var TxtPassword 	= document.getElementById("TxtPassword");
         var MsgUser  		= document.getElementById("MsgUser");
  	var MsgPassword 	= document.getElementById("MsgPassword");
- 	
+
  	if (TxtUser.value.length == 0)
  	{
   		kedip("document.getElementById('TxtUser').style.backgroundColor = ");
@@ -289,10 +289,6 @@ function validasiPengguna()
           return true;
          }
 }
-
-
-
-
 
 /* Perbaikan <select> pada WebView JavaFX di macOS: klik mouse pada popup bawaan tidak memilih item. Dropdown diganti dengan daftar HTML. */
 (function () {

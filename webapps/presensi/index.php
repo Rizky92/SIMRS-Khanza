@@ -48,7 +48,7 @@ Flash-Templates-Today.com - Gives a possibility to obtain a ready free flash tem
     <!-- end #sidebar1 -->
     <!-- begin #mainContent -->
     <div id="mainContent">
-		
+
 	<div class="t">
         <div class="b">
         <div class="l">
@@ -97,5 +97,3 @@ Flash-Templates-Today.com - Gives a possibility to obtain a ready free flash tem
 <!-- end #container -->
 </body>
 </html>
-
-

@@ -2,9 +2,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["norawat"])) {
         $norawat          = validTeks3($iyem["norawat"],20);
         $tanggal          = validTeks4($iyem["tanggal"],20);
@@ -37,7 +37,7 @@
                                 </table>
                                 <br/>
                                 <h7>
-                                    Dari pasien ".$_SESSION["nama_instansi"]." dengan : 
+                                    Dari pasien ".$_SESSION["nama_instansi"]." dengan :
                                 </h7>
                                 <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                     <tr>

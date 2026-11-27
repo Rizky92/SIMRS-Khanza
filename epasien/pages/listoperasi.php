@@ -10,7 +10,7 @@
                      <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
                           <h2>Operasi</h2>
                      </div>
-                </div> 
+                </div>
                 <div class="col-md-12 col-sm-12">
                      <div class="news-thumb wow fadeInUp" data-wow-delay="0.3s">
                          <form id="cariKamar" name="frmCariOperasi" method="post" action="" enctype=multipart/form-data>
@@ -30,7 +30,7 @@
                                    <th width="20%"><center>Kelas</center></th>
                                    <th width="20%"><center>Tarif Operasi</center></th>
                                </tr>
-                               <?php 
+                               <?php
                                   if(!isset($_SESSION["operasi"])){
                                       $dataoperasi  = "";
                                       $queryoperasi = bukaquery("select paket_operasi.nm_perawatan,(paket_operasi.operator1+paket_operasi.operator2+paket_operasi.operator3+paket_operasi.asisten_operator1+paket_operasi.asisten_operator2+paket_operasi.asisten_operator3+paket_operasi.instrumen+paket_operasi.dokter_anak+paket_operasi.perawaat_resusitas+paket_operasi.alat+paket_operasi.dokter_anestesi+paket_operasi.asisten_anestesi+paket_operasi.asisten_anestesi2+paket_operasi.bidan+paket_operasi.bidan2+paket_operasi.bidan3+paket_operasi.perawat_luar+paket_operasi.sewa_ok+paket_operasi.akomodasi+paket_operasi.bagian_rs+paket_operasi.omloop+paket_operasi.omloop2+paket_operasi.omloop3+paket_operasi.omloop4+paket_operasi.omloop5+paket_operasi.sarpras+paket_operasi.dokter_pjanak+paket_operasi.dokter_umum) as total,paket_operasi.kelas from paket_operasi inner join penjab on penjab.kd_pj=paket_operasi.kd_pj where paket_operasi.status='1' and penjab.png_jawab like '%umum%' order by paket_operasi.kelas");
@@ -62,9 +62,9 @@
                                       }
                                   }else{
                                       echo $_SESSION["operasi"];
-                                  }    
+                                  }
                               ?>
-                           </table> 
+                           </table>
                          </div>
                      </div>
                 </div>

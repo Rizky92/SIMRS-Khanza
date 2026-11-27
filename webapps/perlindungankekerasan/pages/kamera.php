@@ -64,7 +64,7 @@
         $hubungan       = $data2['hubungan'];
         $no_telppj      = $data2['no_telp'];
     }
-    
+
     if(($nama_pj=="")&&($norawat!="")){
         $_sql2  = "select surat_perlindungan_dari_kekerasan.no_surat,DATE_FORMAT(surat_perlindungan_dari_kekerasan.tanggal,'%d-%m-%Y') as tanggal,
                    surat_perlindungan_dari_kekerasan.nama_pj,surat_perlindungan_dari_kekerasan.no_ktppj,surat_perlindungan_dari_kekerasan.tempat_lahirpj,

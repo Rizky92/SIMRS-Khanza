@@ -239,7 +239,7 @@ public class GrafikInventarisPerJenis extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        
+
     }//GEN-LAST:event_formWindowActivated
 
     private void BtnPrint3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint3ActionPerformed
@@ -248,7 +248,7 @@ public class GrafikInventarisPerJenis extends javax.swing.JDialog {
             switch (pilihan) {
                 case "Jumlah Inventaris":
                     DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-                    try {                
+                    try {
                         rs = koneksi.prepareStatement("select inventaris_jenis.id_jenis,count(inventaris_jenis.id_jenis) as jumlah,inventaris_jenis.nama_jenis from inventaris inner join inventaris_barang inner join inventaris_jenis on inventaris_jenis.id_jenis=inventaris_barang.id_jenis "+
                              "and inventaris.kode_barang=inventaris_barang.kode_barang group by inventaris_jenis.id_jenis").executeQuery();
                         while(rs.next()) {
@@ -261,18 +261,18 @@ public class GrafikInventarisPerJenis extends javax.swing.JDialog {
                     } catch (Exception e) {
                         System.out.println("Notifikasi : " + e);
                     }
-                    JFreeChart freeChart = ChartFactory.createBarChart("Grafik Jumlah Inventaris Per Jenis","Jenis Inventaris","Jumlah Inventaris", dcd, PlotOrientation.VERTICAL,true, true,true); 
+                    JFreeChart freeChart = ChartFactory.createBarChart("Grafik Jumlah Inventaris Per Jenis","Jenis Inventaris","Jumlah Inventaris", dcd, PlotOrientation.VERTICAL,true, true,true);
                     ChartFrame cf = new ChartFrame("Grafik Jumlah Inventaris Per Jenis",freeChart);
-                    cf.setSize(Scroll.getWidth(),Scroll.getHeight());   
+                    cf.setSize(Scroll.getWidth(),Scroll.getHeight());
                     cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
                     cf.setLocationRelativeTo(Scroll);
                     cf.setAlwaysOnTop(true);
                     cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-                    cf.setVisible(true);  
+                    cf.setVisible(true);
                     break;
                 case "Nilai Inventaris":
                     DefaultCategoryDataset dcd2 = new DefaultCategoryDataset();
-                    try {                
+                    try {
                         rs = koneksi.prepareStatement("select inventaris_jenis.id_jenis,sum(inventaris.harga) as harga,inventaris_jenis.nama_jenis from inventaris inner join inventaris_barang inner join inventaris_jenis on inventaris_jenis.id_jenis=inventaris_barang.id_jenis "+
                                 "and inventaris.kode_barang=inventaris_barang.kode_barang group by inventaris_jenis.id_jenis").executeQuery();
                         while(rs.next()) {
@@ -285,23 +285,23 @@ public class GrafikInventarisPerJenis extends javax.swing.JDialog {
                     } catch (Exception e) {
                         System.out.println("Notifikasi : " + e);
                     }
-                    JFreeChart freeChart2 = ChartFactory.createBarChart("Grafik Jumlah Inventaris Per Jenis","Jenis Inventaris","Jumlah Inventaris", dcd2, PlotOrientation.VERTICAL,true, true,true); 
+                    JFreeChart freeChart2 = ChartFactory.createBarChart("Grafik Jumlah Inventaris Per Jenis","Jenis Inventaris","Jumlah Inventaris", dcd2, PlotOrientation.VERTICAL,true, true,true);
                     ChartFrame cf2 = new ChartFrame("Grafik Jumlah Inventaris Per Jenis",freeChart2);
-                    cf2.setSize(Scroll.getWidth(),Scroll.getHeight());   
+                    cf2.setSize(Scroll.getWidth(),Scroll.getHeight());
                     cf2.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
                     cf2.setLocationRelativeTo(Scroll);
                     cf2.setAlwaysOnTop(true);
                     cf2.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-                    cf2.setVisible(true);  
+                    cf2.setVisible(true);
                     break;
             }
         } catch (Exception e) {
         }
-                    
+
     }//GEN-LAST:event_BtnPrint3ActionPerformed
 
     private void BtnPrint3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint3KeyPressed
-        
+
     }//GEN-LAST:event_BtnPrint3KeyPressed
 
     private void BtnKeluar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar3ActionPerformed
@@ -309,7 +309,7 @@ public class GrafikInventarisPerJenis extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluar3ActionPerformed
 
     private void BtnKeluar3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluar3KeyPressed
-        
+
     }//GEN-LAST:event_BtnKeluar3KeyPressed
 
     private void BtnPrint4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint4ActionPerformed
@@ -320,7 +320,7 @@ public class GrafikInventarisPerJenis extends javax.swing.JDialog {
                     grafiksql2 kas=new grafiksql2("Grafik Jumlah Inventaris Per Jenis",
                             "select concat(inventaris_jenis.nama_jenis,'(',inventaris_jenis.id_jenis,')'),count(inventaris_jenis.id_jenis) as jumlah from inventaris inner join inventaris_barang inner join inventaris_jenis on inventaris_jenis.id_jenis=inventaris_barang.id_jenis "+
                             "and inventaris.kode_barang=inventaris_barang.kode_barang group by inventaris_jenis.id_jenis","Jenis Inventaris");
-                    kas.setSize(Scroll.getWidth(),Scroll.getHeight());  
+                    kas.setSize(Scroll.getWidth(),Scroll.getHeight());
                     kas.setModal(true);
                     kas.setAlwaysOnTop(true);
                     kas.setLocationRelativeTo(Scroll);
@@ -330,7 +330,7 @@ public class GrafikInventarisPerJenis extends javax.swing.JDialog {
                     grafiksql2 kas2=new grafiksql2("Grafik Jumlah Inventaris Per Jenis",
                             "select concat(inventaris_jenis.nama_jenis,'(',inventaris_jenis.id_jenis,')'),sum(inventaris.harga) as harga from inventaris inner join inventaris_barang inner join inventaris_jenis on inventaris_jenis.id_jenis=inventaris_barang.id_jenis "+
                             "and inventaris.kode_barang=inventaris_barang.kode_barang group by inventaris_jenis.id_jenis","Jenis Inventaris");
-                    kas2.setSize(Scroll.getWidth(),Scroll.getHeight());  
+                    kas2.setSize(Scroll.getWidth(),Scroll.getHeight());
                     kas2.setModal(true);
                     kas2.setAlwaysOnTop(true);
                     kas2.setLocationRelativeTo(Scroll);
@@ -339,7 +339,7 @@ public class GrafikInventarisPerJenis extends javax.swing.JDialog {
             }
         } catch (Exception e) {
         }
-                    
+
     }//GEN-LAST:event_BtnPrint4ActionPerformed
 
     private void BtnPrint4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint4KeyPressed
@@ -352,7 +352,7 @@ public class GrafikInventarisPerJenis extends javax.swing.JDialog {
             switch (pilihan) {
                 case "Jumlah Inventaris":
                     DefaultPieDataset dpd = new DefaultPieDataset();
-                    try {                
+                    try {
                         rs = koneksi.prepareStatement("select inventaris_jenis.id_jenis,count(inventaris_jenis.id_jenis) as jumlah,inventaris_jenis.nama_jenis from inventaris inner join inventaris_barang inner join inventaris_jenis on inventaris_jenis.id_jenis=inventaris_barang.id_jenis "+
                                 "and inventaris.kode_barang=inventaris_barang.kode_barang group by inventaris_jenis.id_jenis").executeQuery();
                         while(rs.next()) {
@@ -364,20 +364,20 @@ public class GrafikInventarisPerJenis extends javax.swing.JDialog {
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : " + e);
-                    } 
+                    }
 
-                    JFreeChart freeChart = ChartFactory.createPieChart("Grafik Jumlah Inventaris Per Jenis",dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+                    JFreeChart freeChart = ChartFactory.createPieChart("Grafik Jumlah Inventaris Per Jenis",dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
                     ChartFrame cf = new ChartFrame("Grafik Jumlah Inventaris Per Jenis",freeChart);
-                    cf.setSize(Scroll.getWidth(),Scroll.getHeight());   
+                    cf.setSize(Scroll.getWidth(),Scroll.getHeight());
                     cf.setLocationRelativeTo(Scroll);
                     cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
                     cf.setAlwaysOnTop(true);
                     cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-                    cf.setVisible(true); 
+                    cf.setVisible(true);
                     break;
                 case "Nilai Inventaris":
                     DefaultPieDataset dpd2 = new DefaultPieDataset();
-                    try {                
+                    try {
                         rs = koneksi.prepareStatement("select inventaris_jenis.id_jenis,sum(inventaris.harga) as harga,inventaris_jenis.nama_jenis from inventaris inner join inventaris_barang inner join inventaris_jenis on inventaris_jenis.id_jenis=inventaris_barang.id_jenis "+
                                 "and inventaris.kode_barang=inventaris_barang.kode_barang group by inventaris_jenis.id_jenis").executeQuery();
                         while(rs.next()) {
@@ -389,21 +389,21 @@ public class GrafikInventarisPerJenis extends javax.swing.JDialog {
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : " + e);
-                    } 
+                    }
 
-                    JFreeChart freeChart2 = ChartFactory.createPieChart("Grafik Jumlah Inventaris Per Jenis",dpd2,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+                    JFreeChart freeChart2 = ChartFactory.createPieChart("Grafik Jumlah Inventaris Per Jenis",dpd2,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
                     ChartFrame cf2 = new ChartFrame("Grafik Jumlah Inventaris Per Jenis",freeChart2);
-                    cf2.setSize(Scroll.getWidth(),Scroll.getHeight());   
+                    cf2.setSize(Scroll.getWidth(),Scroll.getHeight());
                     cf2.setLocationRelativeTo(Scroll);
                     cf2.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
                     cf2.setAlwaysOnTop(true);
                     cf2.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-                    cf2.setVisible(true); 
+                    cf2.setVisible(true);
                     break;
             }
         } catch (Exception e) {
         }
-                     
+
     }//GEN-LAST:event_BtnPrint5ActionPerformed
 
     private void BtnPrint5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint5KeyPressed
@@ -486,7 +486,7 @@ public class GrafikInventarisPerJenis extends javax.swing.JDialog {
                 }
                 if(tabMode.getRowCount()>0){
                     tabMode.addRow(new Object[]{"Jumlah : ",total,"100 %",totalaset,"100 %"});
-                    for(i=0;i<tbInventaris.getRowCount();i++){ 
+                    for(i=0;i<tbInventaris.getRowCount();i++){
                         tbInventaris.setValueAt(Math.round((Double.parseDouble(tbInventaris.getValueAt(i,1).toString())/total)*100)+" %",i,2);
                         tbInventaris.setValueAt(Math.round((Double.parseDouble(tbInventaris.getValueAt(i,3).toString())/totalaset)*100)+" %",i,4);
                     }
@@ -500,7 +500,7 @@ public class GrafikInventarisPerJenis extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }

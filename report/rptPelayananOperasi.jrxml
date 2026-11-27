@@ -30,9 +30,9 @@
 	<parameter name="lebihduajam" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select reg_periksa.no_rkm_medis,pasien.nm_pasien,dokter.nm_dokter,laporan_operasi.tanggal,laporan_operasi.selesaioperasi,
-paket_operasi.nm_perawatan,round((TIME_TO_SEC(laporan_operasi.selesaioperasi)-TIME_TO_SEC(laporan_operasi.tanggal))/60,2) as durasi 
-from reg_periksa inner join laporan_operasi on reg_periksa.no_rawat=laporan_operasi.no_rawat 
-inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+paket_operasi.nm_perawatan,round((TIME_TO_SEC(laporan_operasi.selesaioperasi)-TIME_TO_SEC(laporan_operasi.tanggal))/60,2) as durasi
+from reg_periksa inner join laporan_operasi on reg_periksa.no_rawat=laporan_operasi.no_rawat
+inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 inner join operasi on operasi.no_rawat=laporan_operasi.no_rawat and operasi.tgl_operasi=laporan_operasi.tanggal
 inner join dokter on dokter.kd_dokter=operasi.operator1
 inner join paket_operasi on paket_operasi.kode_paket=operasi.kode_paket]]>

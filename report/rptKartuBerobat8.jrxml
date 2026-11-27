@@ -12,7 +12,7 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo2" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp,pasien.no_peserta, pasien.jk, 
+		<![CDATA[select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp,pasien.no_peserta, pasien.jk,
 pasien.tmp_lahir, pasien.tgl_lahir, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,
 pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,pasien.nm_ibu,
 pasien.pnd, pasien.keluarga, pasien.namakeluarga from pasien inner join kelurahan inner join kecamatan inner join kabupaten on pasien.kd_kel=kelurahan.kd_kel and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>

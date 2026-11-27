@@ -168,7 +168,7 @@ public final class DlgLihatPesan extends javax.swing.JDialog {
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         dispose();
-}//GEN-LAST:event_button1ActionPerformed
+    }//GEN-LAST:event_button1ActionPerformed
 
     /**
     * @param args the command line arguments
@@ -201,8 +201,8 @@ public final class DlgLihatPesan extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
-        try{   
-            Valid.tabelKosong(tabMode);  
+        try{
+            Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement("select * from sms");
             try {
                 rs=ps.executeQuery();
@@ -210,7 +210,7 @@ public final class DlgLihatPesan extends javax.swing.JDialog {
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9)
                     });
-                } 
+                }
             } catch (Exception e) {
                 System.out.println(e);
             } finally{
@@ -220,7 +220,7 @@ public final class DlgLihatPesan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }              
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }

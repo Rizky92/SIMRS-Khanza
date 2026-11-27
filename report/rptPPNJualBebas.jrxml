@@ -19,7 +19,7 @@
 	<queryString>
 		<![CDATA[select penjualan.tgl_jual,penjualan.nota_jual, penjualan.no_rkm_medis,pasien.nm_pasien,
 penjualan.nip,petugas.nama,penjualan.ongkir as ppn,sum(detailjual.total) as total
- from penjualan inner join pasien on penjualan.no_rkm_medis=pasien.no_rkm_medis 
+ from penjualan inner join pasien on penjualan.no_rkm_medis=pasien.no_rkm_medis
  inner join petugas on penjualan.nip=petugas.nip inner join detailjual on penjualan.nota_jual=detailjual.nota_jual]]>
 	</queryString>
 	<field name="tgl_jual" class="java.sql.Date">

@@ -4,12 +4,12 @@
     }
 ?>
 <div id="post">
-    <div class="entry">   
+    <div class="entry">
     <div align="center" class="link">
         <a href=?act=InputDepartemen&action=TAMBAH>| Input Data |</a>
         <a href=?act=ListDepartemen>| List Data |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
+    </div>
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
             $action  = isset($_GET['action'])?$_GET['action']:NULL;
@@ -32,7 +32,7 @@
         $_sql   = "SELECT dep_id,nama FROM departemen where dep_id like '%".$keyword."%' or nama like '%".$keyword."%' ORDER BY dep_id ASC ";
         $hasil  = bukaquery($_sql);
         $jumlah = mysqli_num_rows($hasil);
-        
+
         if(mysqli_num_rows($hasil)!=0) {
             echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
@@ -50,7 +50,7 @@
                             echo "</center>
                                </td>
                                 <td>$baris[0] &nbsp;</td>
-                                <td>$baris[1] &nbsp;</td>                                
+                                <td>$baris[1] &nbsp;</td>
                              </tr>";
                     }
             echo "</table>";
@@ -64,7 +64,7 @@
                  </table>";
         }
     ?>
-    
+
     <?php
        $aksi=isset($_GET['action'])?$_GET['action']:NULL;
        if ($aksi=="HAPUS") {
@@ -80,8 +80,8 @@
         if(mysqli_num_rows($hasil)!=0) {
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah | <a target=_blank href=../penggajian/pages/departemen/LaporanDepartemen.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Laporan</a> | <a target=_blank href=../penggajian/pages/departemen/LaporanDepartemenExel.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Excel</a> |</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah | <a target=_blank href=../penggajian/pages/departemen/LaporanDepartemen.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Laporan</a> | <a target=_blank href=../penggajian/pages/departemen/LaporanDepartemenExel.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Excel</a> |</div></td>
+                    </tr>
                  </table>");
         }
     ?>

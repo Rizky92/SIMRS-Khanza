@@ -10,12 +10,12 @@
     $bulan        = empty($baris[1])?date("m"):$baris[1];
 ?>
 
-<div id="post">    
+<div id="post">
     <div align="center" class="link">
         <a href=?act=InputAkte&action=TAMBAH>| Input Pendapatan Akte |</a>
         <a href=?act=InputPenerimaAkte&action=TAMBAH>| Input Bagian Akte |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
+    </div>
     &nbsp;Pendapatan Akte :
     <div style="width: 100%; height: 65px;overflow: auto;">
     <?php
@@ -33,7 +33,7 @@
 			<td width='25%'><div align='center'>Bagian RS</div></td>
                         <td width='7%'><div align='center'>% Kry</div></td>
                         <td width='25%'><div align='center'>Bagian Kry</div></td>
-                    </tr>";					
+                    </tr>";
                     while($baris = mysqli_fetch_array($hasil)) {
                         $total_akte=$baris[4];
                         echo "<tr class='isi'>
@@ -51,7 +51,7 @@
                              </tr>";
                     }
             echo "</table>";
-            
+
         } else {
             echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
@@ -62,10 +62,10 @@
                         <td width='7%'><div align='center'>% Kry</div></td>
                         <td width='25%'><div align='center'>Bagian Kry</div></td>
                     </tr>
-                  </table>";	
+                  </table>";
         }
 
-    ?>      
+    ?>
     </div>
     &nbsp;Pembagian Akte :
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
@@ -131,7 +131,7 @@
                     </tr>
                   </table>";
         }
-    ?>    
+    ?>
     </div>
     <?php
        $aksi=isset($_GET['action'])?$_GET['action']:NULL;
@@ -152,10 +152,9 @@
        if(mysqli_num_rows($hasil)!=0) {
            echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah, Ttl Prosen : ".$prosen."%, Ttl Bagian : ".formatDuit($ttl)." | <a target=_blank href=../penggajian/pages/akte/LaporanAkte.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Laporan</a> | <a target=_blank href=../penggajian/pages/akte/LaporanAkteExel.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Excel</a> |</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah, Ttl Prosen : ".$prosen."%, Ttl Bagian : ".formatDuit($ttl)." | <a target=_blank href=../penggajian/pages/akte/LaporanAkte.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Laporan</a> | <a target=_blank href=../penggajian/pages/akte/LaporanAkteExel.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Excel</a> |</div></td>
+                    </tr>
                  </table>");
        }
     ?>
 </div>
-

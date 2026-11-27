@@ -4,7 +4,7 @@
     if(file_exists(host()."/webapps/persetujuantindakan/pages/upload/".$nopernyataan."PP.jpeg")){
         @unlink(host()."/webapps/persetujuantindakan/pages/upload/".$nopernyataan."PP.jpeg");
     }
-    
+
     $tindakan_konfirmasi          = "false";
     $diagnosa_konfirmasi          = "false";
     $indikasi_tindakan_konfirmasi = "false";
@@ -16,7 +16,7 @@
     $alternatif_konfirmasi        = "false";
     $lain_lain_konfirmasi         = "false";
     $biaya_konfirmasi             = "false";
-    
+
     if(isset($_POST["tindakan_konfirmasi"])) {
         $tindakan_konfirmasi = "true";
     }
@@ -50,7 +50,7 @@
     if(isset($_POST["biaya_konfirmasi"])) {
         $biaya_konfirmasi = "true";
     }
-    
+
     $pilihansetuju  = validTeks4($_POST["pilihansetuju"],20);
     $img            = $_POST["image"];
     $folderPath     = "upload/";

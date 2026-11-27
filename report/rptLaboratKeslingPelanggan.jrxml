@@ -14,7 +14,7 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select laborat_kesling_pelanggan.kode_pelanggan, laborat_kesling_pelanggan.nama_pelanggan, 
+		<![CDATA[select laborat_kesling_pelanggan.kode_pelanggan, laborat_kesling_pelanggan.nama_pelanggan,
                     laborat_kesling_pelanggan.alamat,laborat_kesling_pelanggan.kota, laborat_kesling_pelanggan.no_telp,
                     laborat_kesling_pelanggan.kegiatan_usaha,laborat_kesling_pelanggan.personal_dihubungi from laborat_kesling_pelanggan]]>
 	</queryString>

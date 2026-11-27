@@ -9,8 +9,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
-import java.awt.RenderingHints;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
 import java.awt.event.FocusAdapter;
@@ -31,11 +31,11 @@ import uz.ncipro.calendar.JDateTimePicker;
 public final class Tanggal extends JDateTimePicker {
     private static final long serialVersionUID = 2L;
     private static final Color AKSEN     = new Color(0x16A05D);
-    private static final Color BORDER    = new Color(0x96BEA5);   
+    private static final Color BORDER    = new Color(0x96BEA5);
     private static final Color NONAKTIF  = new Color(0xFAFCFB);
     private static final Color PEMISAH   = new Color(0xD3DDD7);
-    private static final Color TINT      = new Color(0x16, 0xA0, 0x5D, 30);   
-    private static final Color BENING    = new Color(0, 0, 0, 0);            
+    private static final Color TINT      = new Color(0x16, 0xA0, 0x5D, 30);
+    private static final Color BENING    = new Color(0, 0, 0, 0);
     private static final Color LATAR_PANAH = Color.WHITE;
     private static final Color TEKS      = new Color(0x1C2520);
     private static final int   RADIUS    = 6;
@@ -47,7 +47,7 @@ public final class Tanggal extends JDateTimePicker {
     public Tanggal() {
         super();
         setForeground(TEKS);
-        setBackground(BENING);   
+        setBackground(BENING);
         setFont(new Font("Tahoma", Font.PLAIN, 11));
         gayakan();
 
@@ -81,7 +81,7 @@ public final class Tanggal extends JDateTimePicker {
         JComponent jc = (JComponent) c;
         boolean sudah = Boolean.TRUE.equals(jc.getClientProperty(KUNCI));
 
-        if (c instanceof AbstractButton) {               
+        if (c instanceof AbstractButton) {
             AbstractButton b = (AbstractButton) c;
             b.setBackground(BENING);
             b.setOpaque(false);
@@ -94,7 +94,7 @@ public final class Tanggal extends JDateTimePicker {
                 b.addMouseListener(hoverTombol(b));
                 b.addMouseListener(hoverKomponen());
             }
-        } else if (c instanceof JTextComponent) {        
+        } else if (c instanceof JTextComponent) {
             JTextComponent t = (JTextComponent) c;
             t.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 4));
             t.setBackground(BENING);
@@ -229,7 +229,7 @@ public final class Tanggal extends JDateTimePicker {
 
     private Rectangle areaPanah() {
         Insets in = getInsets();
-        int lebar = getHeight() - in.top - in.bottom;     
+        int lebar = getHeight() - in.top - in.bottom;
         if (lebar <= 0) {
             return null;
         }
@@ -307,7 +307,7 @@ public final class Tanggal extends JDateTimePicker {
 
         @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(2, 6, 2, 3);   
+            return new Insets(2, 6, 2, 3);
         }
 
         @Override

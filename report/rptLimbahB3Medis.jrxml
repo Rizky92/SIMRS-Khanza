@@ -27,8 +27,8 @@
 	<queryString>
 		<![CDATA[select kesling_limbah_b3medis.nip,petugas.nama,kesling_limbah_b3medis.tanggal,
 kesling_limbah_b3medis.jmllimbah,kesling_limbah_b3medis.tujuan_penyerahan,
-kesling_limbah_b3medis.bukti_dokumen, 
-kesling_limbah_b3medis.sisa_di_tps,kesling_limbah_b3medis.keterangan 
+kesling_limbah_b3medis.bukti_dokumen,
+kesling_limbah_b3medis.sisa_di_tps,kesling_limbah_b3medis.keterangan
 from kesling_limbah_b3medis inner join petugas on kesling_limbah_b3medis.nip=petugas.nip]]>
 	</queryString>
 	<field name="nip" class="java.lang.String">

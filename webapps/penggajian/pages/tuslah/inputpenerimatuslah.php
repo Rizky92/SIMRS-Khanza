@@ -33,7 +33,7 @@
                     <td width="31%" >Pegawai</td><td width="">:</td>
                     <td width="67%">
                          <select name="id" class="text1" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" id="TxtIsi1" autofocus>
-                            <?php                            
+                            <?php
                                 if($action == "UBAH"){
                                     $_sql2  = "SELECT pegawai.id,pegawai.nik,pegawai.nama FROM pegawai where pegawai.id='$id' ORDER BY pegawai.nama";
                                     $hasil2 = bukaquery($_sql2);
@@ -47,7 +47,7 @@
                                     while($barisdep = mysqli_fetch_array($hasildep)) {
                                         echo "<option id='TxtIsi1' value='$barisdep[0]'>$barisdep[2] $barisdep[1]</option>";
                                     }
-                                }                                
+                                }
                             ?>
                         </select>
                         <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>

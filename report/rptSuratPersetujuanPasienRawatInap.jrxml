@@ -21,13 +21,13 @@
 				surat_persetujuan_rawat_inap.no_ktppj,surat_persetujuan_rawat_inap.pendidikan_pj,surat_persetujuan_rawat_inap.alamatpj,
 				surat_persetujuan_rawat_inap.no_telppj,surat_persetujuan_rawat_inap.ruang,surat_persetujuan_rawat_inap.kelas,
 				surat_persetujuan_rawat_inap.hubungan,surat_persetujuan_rawat_inap.hak_kelas,surat_persetujuan_rawat_inap.nama_alamat_keluarga_terdekat,
-				surat_persetujuan_rawat_inap.bayar_secara,surat_persetujuan_rawat_inap.nip,petugas.nama from surat_persetujuan_rawat_inap 
-				inner join reg_periksa on surat_persetujuan_rawat_inap.no_rawat=reg_periksa.no_rawat 
-				inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-				inner join petugas on surat_persetujuan_rawat_inap.nip=petugas.nip  
-				inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel 
-				inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
-				inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab 
+				surat_persetujuan_rawat_inap.bayar_secara,surat_persetujuan_rawat_inap.nip,petugas.nama from surat_persetujuan_rawat_inap
+				inner join reg_periksa on surat_persetujuan_rawat_inap.no_rawat=reg_periksa.no_rawat
+				inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+				inner join petugas on surat_persetujuan_rawat_inap.nip=petugas.nip
+				inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
+				inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
+				inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
 				inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 	</queryString>
 	<field name="no_surat" class="java.lang.String"/>

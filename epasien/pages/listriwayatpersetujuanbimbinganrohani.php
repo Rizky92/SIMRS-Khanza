@@ -21,7 +21,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                             $queryperiksa = bukaquery(
                                 "select permintaan_binrohtal.no_surat,date_format(permintaan_binrohtal.tanggal,'%d/%m/%Y') as tanggal,permintaan_binrohtal.nip,pegawai.nama,ifnull(bukti_permintaan_binrohtal.photo,'') as photo from permintaan_binrohtal ".
                                 "inner join reg_periksa on permintaan_binrohtal.no_rawat=reg_periksa.no_rawat inner join pegawai on permintaan_binrohtal.nip=pegawai.nik left join bukti_permintaan_binrohtal on bukti_permintaan_binrohtal.no_surat=permintaan_binrohtal.no_surat where ".

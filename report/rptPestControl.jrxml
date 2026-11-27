@@ -12,7 +12,7 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select kesling_pest_control.nip,petugas.nama,kesling_pest_control.tanggal,
-kesling_pest_control.rincian_kegiatan,kesling_pest_control.rekomendasi 
+kesling_pest_control.rincian_kegiatan,kesling_pest_control.rekomendasi
 from kesling_pest_control inner join petugas on kesling_pest_control.nip=petugas.nip]]>
 	</queryString>
 	<field name="nip" class="java.lang.String">

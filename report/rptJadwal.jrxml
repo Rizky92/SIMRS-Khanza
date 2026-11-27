@@ -11,10 +11,10 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select jadwal.kd_dokter,dokter.nm_dokter,jadwal.hari_kerja, 
+		<![CDATA[select jadwal.kd_dokter,dokter.nm_dokter,jadwal.hari_kerja,
 jadwal.jam_mulai,jadwal.jam_selesai,poliklinik.nm_poli,jadwal.kuota
-from jadwal inner join poliklinik inner join dokter 
-on jadwal.kd_dokter=dokter.kd_dokter 
+from jadwal inner join poliklinik inner join dokter
+on jadwal.kd_dokter=dokter.kd_dokter
 and jadwal.kd_poli=poliklinik.kd_poli]]>
 	</queryString>
 	<field name="kd_dokter" class="java.lang.String">

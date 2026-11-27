@@ -1100,7 +1100,6 @@ define("ephox/imagetools/transformations/ImageResizerCanvas", [
         });
     }
 
-
     function _scale(image, wRatio, hRatio) {
         return new Promise(function(resolve) {
             var sW = ImageSize.getWidth(image);

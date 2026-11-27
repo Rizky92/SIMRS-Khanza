@@ -26,19 +26,19 @@
                     if(bridging_rujukan_bpjs.jnsPelayanan='1','1. Rawat Inap','2. Rawat Jalan') as jenis,
                     bridging_rujukan_bpjs.tipeRujukan,bridging_rujukan_bpjs.catatan,
                     bridging_rujukan_bpjs.diagRujukan,bridging_rujukan_bpjs.nama_diagRujukan,
-                    bridging_rujukan_bpjs.poliRujukan,bridging_rujukan_bpjs.nama_poliRujukan  
-                    from bridging_sep inner join bridging_rujukan_bpjs on bridging_rujukan_bpjs.no_sep=bridging_sep.no_sep where 
-                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.no_sep like $P{parameter} or 
-                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_sep.no_rawat like $P{parameter} or 
-                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_sep.nomr like $P{parameter} or 
-                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_sep.nama_pasien like $P{parameter} or 
-                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.no_rujukan like $P{parameter} or 
-                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.ppkDirujuk like $P{parameter} or 
-                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.nm_ppkDirujuk like $P{parameter} or 
-                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.diagRujukan like $P{parameter} or 
-                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.nama_diagRujukan like $P{parameter} or 
-                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.poliRujukan like $P{parameter} or 
-                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.nama_poliRujukan like $P{parameter} or 
+                    bridging_rujukan_bpjs.poliRujukan,bridging_rujukan_bpjs.nama_poliRujukan
+                    from bridging_sep inner join bridging_rujukan_bpjs on bridging_rujukan_bpjs.no_sep=bridging_sep.no_sep where
+                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.no_sep like $P{parameter} or
+                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_sep.no_rawat like $P{parameter} or
+                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_sep.nomr like $P{parameter} or
+                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_sep.nama_pasien like $P{parameter} or
+                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.no_rujukan like $P{parameter} or
+                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.ppkDirujuk like $P{parameter} or
+                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.nm_ppkDirujuk like $P{parameter} or
+                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.diagRujukan like $P{parameter} or
+                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.nama_diagRujukan like $P{parameter} or
+                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.poliRujukan like $P{parameter} or
+                    bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.nama_poliRujukan like $P{parameter} or
                     bridging_rujukan_bpjs.tglRujukan between $P{tanggal1} and $P{tanggal2} and bridging_rujukan_bpjs.catatan like $P{parameter} order by bridging_rujukan_bpjs.tglRujukan]]>
 	</queryString>
 	<field name="no_sep" class="java.lang.String">

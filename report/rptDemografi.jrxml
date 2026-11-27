@@ -13,7 +13,7 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select kabupaten.nm_kab as area,count(kabupaten.nm_kab) as jumlah from pasien inner join kabupaten 
+		<![CDATA[select kabupaten.nm_kab as area,count(kabupaten.nm_kab) as jumlah from pasien inner join kabupaten
  on pasien.kd_kab=kabupaten.kd_kab group by kabupaten.nm_kab order by kabupaten.nm_kab]]>
 	</queryString>
 	<field name="area" class="java.lang.String">

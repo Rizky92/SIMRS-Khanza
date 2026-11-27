@@ -159,7 +159,7 @@
 		<band height="14">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="111" height="14" uuid="7c85f61b-56e7-403e-be4e-e816388fbf36">
-					<printWhenExpression><![CDATA[(!$F{temp1}.toLowerCase().equals("No.") ? 
+					<printWhenExpression><![CDATA[(!$F{temp1}.toLowerCase().equals("No.") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement>
@@ -170,7 +170,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="112" y="0" width="347" height="14" uuid="2a5253cf-7a40-4aa0-9102-f8bd2eea1ef9">
-					<printWhenExpression><![CDATA[(!$F{temp1}.toLowerCase().equals("No.") ? 
+					<printWhenExpression><![CDATA[(!$F{temp1}.toLowerCase().equals("No.") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement>
@@ -181,7 +181,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="459" y="0" width="96" height="14" uuid="6b20f513-7e99-4a47-b392-fd80a12d54f2">
-					<printWhenExpression><![CDATA[(!$F{temp1}.toLowerCase().equals("No.") ? 
+					<printWhenExpression><![CDATA[(!$F{temp1}.toLowerCase().equals("No.") ?
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right">

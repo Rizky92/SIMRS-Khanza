@@ -29,7 +29,7 @@ public class embalasetuslah {
             System.out.println("Notif Embalase : "+e);
         }
     }
-    
+
     public static Double getEmbalase(){return embalasetuslah.Embalase;}
     public static Double getTuslah(){return embalasetuslah.Tuslah;}
 }

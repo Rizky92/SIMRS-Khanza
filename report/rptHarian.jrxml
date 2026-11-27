@@ -15,16 +15,16 @@
 	<parameter name="durasi" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
-  pegawai.id, 
-                pegawai.nik, 
-                pegawai.nama, 
-                rekap_presensi.shift, 
-                rekap_presensi.jam_datang, 
-                rekap_presensi.jam_pulang, 
-                rekap_presensi.status, 
-                rekap_presensi.keterlambatan, 
-                rekap_presensi.durasi, 
-                rekap_presensi.keterangan 
+  pegawai.id,
+                pegawai.nik,
+                pegawai.nama,
+                rekap_presensi.shift,
+                rekap_presensi.jam_datang,
+                rekap_presensi.jam_pulang,
+                rekap_presensi.status,
+                rekap_presensi.keterlambatan,
+                rekap_presensi.durasi,
+                rekap_presensi.keterangan
                  from pegawai INNER JOIN `rekap_presensi` rekap_presensi ON pegawai.`id` = rekap_presensi.`id` order by pegawai.nama]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer"/>

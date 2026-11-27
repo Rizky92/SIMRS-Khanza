@@ -14,13 +14,13 @@ import java.sql.ResultSet;
  * @author khanzamedia
  */
 public class riwayattoko {
-    private final Connection koneksi=koneksiDB.condb(); 
+    private final Connection koneksi=koneksiDB.condb();
     private ResultSet rs,rsawal;
     private PreparedStatement ps,psawal;
     private double stokawal=0,stokakhir=0;
-    public synchronized void catatRiwayat(String kodebarang,double masuk,double keluar,String posisi,String petugas,String status){        
+    public synchronized void catatRiwayat(String kodebarang,double masuk,double keluar,String posisi,String petugas,String status){
         try {
-            stokakhir=0;stokawal=0;            
+            stokakhir=0;stokawal=0;
             psawal=koneksi.prepareStatement("select tokobarang.stok from tokobarang where tokobarang.kode_brng=?");
             try {
                 psawal.setString(1,kodebarang);
@@ -42,7 +42,7 @@ public class riwayattoko {
                     psawal.close();
                 }
             }
-                     
+
             ps=koneksi.prepareStatement("insert into toko_riwayat_barang values(?,?,?,?,?,?,current_date(),current_time(),?,?)");
             try {
                 if(posisi.equals("Opname")){
@@ -65,18 +65,16 @@ public class riwayattoko {
                     ps.setString(7,petugas);
                     ps.setString(8,status);
                     ps.executeUpdate();
-                }                    
+                }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             } finally{
                 if(ps!=null){
                     ps.close();
                 }
-            }          
+            }
         } catch (Exception ex) {
-            System.out.println("Notifikasi : "+ex);  
-        }            
+            System.out.println("Notifikasi : "+ex);
+        }
    }
 }
-    
-

@@ -22,7 +22,7 @@
         function PopupCenter(pageURL, title,w,h) {
             var left = (screen.width/2)-(w/2);
             var top = (screen.height/2)-(h/2);
-            var targetWin = window.open (pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);        
+            var targetWin = window.open (pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
         }
     </script>
 </head>
@@ -85,7 +85,7 @@
                             </div>
                         </div>
                     </form>
-                    <?php 
+                    <?php
                         $BtnLogin=isset($_POST['BtnLogin'])?$_POST['BtnLogin']:NULL;
                         if (isset($BtnLogin)) {
                             if(@$_SESSION["Capcay"]==getOne2("select aes_encrypt(".validTeks4($_POST["inputcaptcha"],10).",'windi')")){
@@ -94,7 +94,7 @@
                                 $password  = validTeks4($_POST['password'],40);
                                 if(getOne2("select count(*) from password_perusahaan_pasien where password_perusahaan_pasien.kode_perusahaan='$username' and password_perusahaan_pasien.password=AES_ENCRYPT('$password','windi')")>0){
                                     $_SESSION["ses_emcu"]= encrypt_decrypt($username,"e");
-                                    exit(header("Location:index.php")); 
+                                    exit(header("Location:index.php"));
                                 }else{
                                     echo "Username/Password ada yang salah. Silahkan ulangi...!";
                                 }

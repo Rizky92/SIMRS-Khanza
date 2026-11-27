@@ -26,9 +26,9 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select tokopembelian.tgl_beli,tokopembelian.no_faktur,tokosuplier.nama_suplier,tokopembelian.nip,
-                petugas.nama,rekening.nm_rek,tokopembelian.tagihan from tokopembelian 
-                inner join tokosuplier on tokopembelian.kode_suplier=tokosuplier.kode_suplier 
-                inner join petugas on petugas.nip=tokopembelian.nip 
+                petugas.nama,rekening.nm_rek,tokopembelian.tagihan from tokopembelian
+                inner join tokosuplier on tokopembelian.kode_suplier=tokosuplier.kode_suplier
+                inner join petugas on petugas.nip=tokopembelian.nip
                 inner join rekening on rekening.kd_rek=tokopembelian.kd_rek]]>
 	</queryString>
 	<field name="tgl_beli" class="java.sql.Date">

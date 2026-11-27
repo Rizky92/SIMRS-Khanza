@@ -40,14 +40,14 @@ public class TabPane extends JTabbedPane {
 
     public static class MacTabUI extends BasicTabbedPaneUI {
 
-        private static final Color GARIS_DASAR = new Color(255, 255, 255);   
-        private static final Color GARIS_PILIH = new Color(22, 160, 93);     
-        private static final Color TEKS_PILIH  = new Color(50, 50, 50);      
-        private static final Color TEKS_HOVER  = new Color(22, 120, 70);     
-        private static final Color TEKS        = new Color(112, 128, 118);   
-        private static final Color TEKS_OFF    = new Color(190, 196, 192);   
-        private static final int   TEBAL_PILIH = 1;                          
-        private static final int   SISI_GARIS  = 4;                          
+        private static final Color GARIS_DASAR = new Color(255, 255, 255);
+        private static final Color GARIS_PILIH = new Color(22, 160, 93);
+        private static final Color TEKS_PILIH  = new Color(50, 50, 50);
+        private static final Color TEKS_HOVER  = new Color(22, 120, 70);
+        private static final Color TEKS        = new Color(112, 128, 118);
+        private static final Color TEKS_OFF    = new Color(190, 196, 192);
+        private static final int   TEBAL_PILIH = 1;
+        private static final int   SISI_GARIS  = 4;
 
         public static ComponentUI createUI(JComponent c) {
             return new MacTabUI();
@@ -56,9 +56,9 @@ public class TabPane extends JTabbedPane {
         @Override
         protected void installDefaults() {
             super.installDefaults();
-            tabInsets = new Insets(1, 8, 1, 8);            
+            tabInsets = new Insets(1, 8, 1, 8);
             selectedTabPadInsets = new Insets(0, 0, 0, 0);
-            tabAreaInsets = new Insets(0, 4, 0, 4);          
+            tabAreaInsets = new Insets(0, 4, 0, 4);
             contentBorderInsets = new Insets(0, 0, 0, 0);
             tabRunOverlay = 0;
         }

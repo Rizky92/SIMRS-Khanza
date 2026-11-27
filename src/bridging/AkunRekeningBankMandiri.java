@@ -64,7 +64,7 @@ public class AkunRekeningBankMandiri extends javax.swing.JDialog {
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
@@ -117,7 +117,7 @@ public class AkunRekeningBankMandiri extends javax.swing.JDialog {
         KodeFaskes.setDocument(new batasInput((byte)5).getKata(KodeFaskes));
         NoRekening.setDocument(new batasInput((byte)30).getOnlyAngka(NoRekening));
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -481,17 +481,17 @@ public class AkunRekeningBankMandiri extends javax.swing.JDialog {
             rekening.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(rekening.getTabel().getSelectedRow()!= -1){      
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         if(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),3).toString().equals("N")&&
                                 rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),4).toString().equals("D")){
                             kdrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
-                            nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString()); 
+                            nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
                         }else{
                             JOptionPane.showMessageDialog(rootPane,"Rekening harus Tipe N dan Balance D..!!");
                         }
 
                         kdrek.requestFocus();
-                    } 
+                    }
                     rekening=null;
                 }
             });
@@ -503,17 +503,17 @@ public class AkunRekeningBankMandiri extends javax.swing.JDialog {
                         rekening.dispose();
                     }
                 }
-            });   
+            });
             rekening.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             rekening.setLocationRelativeTo(internalFrame1);
         }
         if (rekening == null) return;
         if (!rekening.isVisible()) {
-            rekening.isCek();    
+            rekening.isCek();
             rekening.emptTeks();
             rekening.tampil2();
         }
-        
+
         if (rekening.isVisible()) {
             rekening.toFront();
             return;
@@ -633,7 +633,7 @@ public class AkunRekeningBankMandiri extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu akun pengaturan ...!!!!");
             Username.requestFocus();
         }
-        
+
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
@@ -687,17 +687,17 @@ public class AkunRekeningBankMandiri extends javax.swing.JDialog {
             rekening.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(rekening.getTabel().getSelectedRow()!= -1){      
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         if(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),3).toString().equals("R")&&
                                 rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),4).toString().equals("D")){
                             KdRekBiaya.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
-                            NmRekBiaya.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString()); 
+                            NmRekBiaya.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
                         }else{
                             JOptionPane.showMessageDialog(rootPane,"Rekening harus Tipe R dan Balance D..!!");
                         }
 
                         KdRekBiaya.requestFocus();
-                    } 
+                    }
                     rekening=null;
                 }
             });
@@ -709,17 +709,17 @@ public class AkunRekeningBankMandiri extends javax.swing.JDialog {
                         rekening.dispose();
                     }
                 }
-            });   
+            });
             rekening.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             rekening.setLocationRelativeTo(internalFrame1);
         }
         if (rekening == null) return;
         if (!rekening.isVisible()) {
-            rekening.isCek();    
+            rekening.isCek();
             rekening.emptTeks();
             rekening.tampil2();
         }
-        
+
         if (rekening.isVisible()) {
             rekening.toFront();
             return;
@@ -797,10 +797,10 @@ public class AkunRekeningBankMandiri extends javax.swing.JDialog {
                    "select set_akun_mandiri.kd_rek,akunmandiri.nm_rek,set_akun_mandiri.kd_rek_biaya,biaya.nm_rek,aes_decrypt(username,'nur'),aes_decrypt(set_akun_mandiri.password,'windi'),"+
                    "aes_decrypt(set_akun_mandiri.client_id,'nur'),aes_decrypt(set_akun_mandiri.client_secret,'windi'),set_akun_mandiri.kode_rs,set_akun_mandiri.kode_mcm,set_akun_mandiri.no_rekening "+
                    "from set_akun_mandiri inner join rekening as akunmandiri on set_akun_mandiri.kd_rek=akunmandiri.kd_rek "+
-                   "inner join rekening as biaya on set_akun_mandiri.kd_rek_biaya=biaya.kd_rek "); 
+                   "inner join rekening as biaya on set_akun_mandiri.kd_rek_biaya=biaya.kd_rek ");
             try{
                 rs=ps.executeQuery();
-                while(rs.next()){                
+                while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11)
                     });
@@ -817,7 +817,7 @@ public class AkunRekeningBankMandiri extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }            
+        }
     }
 
     public void emptTeks() {
@@ -877,7 +877,7 @@ public class AkunRekeningBankMandiri extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

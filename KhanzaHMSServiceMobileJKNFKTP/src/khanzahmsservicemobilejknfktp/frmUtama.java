@@ -48,7 +48,7 @@ public class frmUtama extends javax.swing.JFrame {
     private  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private  SimpleDateFormat tanggalFormat = new SimpleDateFormat("yyyy-MM-dd");
     private  Date parsedDate;
-    private  Date date = new Date();  
+    private  Date date = new Date();
 
     /**
      * Creates new form frmUtama
@@ -61,12 +61,12 @@ public class frmUtama extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
-        
+
         this.setSize(390,340);
-        
-        date = new Date();  
-        Tanggal1.setText(tanggalFormat.format(date)); 
-        Tanggal2.setText(tanggalFormat.format(date)); 
+
+        date = new Date();
+        Tanggal1.setText(tanggalFormat.format(date));
+        Tanggal2.setText(tanggalFormat.format(date));
         jam();
     }
 
@@ -140,7 +140,7 @@ public class frmUtama extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -214,9 +214,9 @@ public class frmUtama extends javax.swing.JFrame {
                 detik = nol_detik + Integer.toString(nilai_detik);
                 if(jam.equals("01")&&menit.equals("01")&&detik.equals("01")){
                     TeksArea.setText("");
-                    date = new Date();  
-                    Tanggal1.setText(tanggalFormat.format(date)); 
-                    Tanggal2.setText(tanggalFormat.format(date)); 
+                    date = new Date();
+                    Tanggal1.setText(tanggalFormat.format(date));
+                    Tanggal2.setText(tanggalFormat.format(date));
                 }
                 if(detik.equals("01")){
                     day=cal.get(Calendar.DAY_OF_WEEK);
@@ -245,7 +245,7 @@ public class frmUtama extends javax.swing.JFrame {
                         default:
                             break;
                     }
-                    
+
                     try {
                         koneksi=koneksiDB.condb();
                         TeksArea.append("Menjalankan WS tambah antrian Mobile JKN FKTP\n");
@@ -289,14 +289,14 @@ public class frmUtama extends javax.swing.JFrame {
                                                     ps3.close();
                                                 }
                                             }
-                                            
+
                                             if(task1.equals("")){
                                                 if(!rs.getString("kd_pj").equals(kodebpjs)){
                                                     headers = new HttpHeaders();
                                                     headers.setContentType(MediaType.APPLICATION_JSON);
                                                     headers.add("X-cons-id",koneksiDB.CONSIDMOBILEJKNFKTP());
                                                     utc=String.valueOf(api.GetUTCdatetimeAsString());
-                                                    headers.add("X-timestamp",utc);            
+                                                    headers.add("X-timestamp",utc);
                                                     headers.add("X-signature",api.getHmac());
                                                     headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                                                     headers.add("user_key",koneksiDB.USERKEYMOBILEJKNFKTP());
@@ -317,14 +317,14 @@ public class frmUtama extends javax.swing.JFrame {
                                                                 "}";
                                                     TeksArea.append("JSON : "+requestJson+"\n");
                                                     requestEntity = new HttpEntity(requestJson,headers);
-                                                    URL = link+"/antrean/add";	
+                                                    URL = link+"/antrean/add";
                                                     System.out.println("URL : "+URL);
                                                     //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                     root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
-                                                    nameNode = root.path("metadata");  
+                                                    nameNode = root.path("metadata");
                                                     TeksArea.append("respon WS BPJS : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
                                                 }
-                                                
+
                                                 datajam=Sequel.cariIsi("select concat(pemeriksaan_ralan.tgl_perawatan,' ',pemeriksaan_ralan.jam_rawat) from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat=?",rs.getString("no_rawat"));
                                                 if(datajam.equals("")){
                                                     datajam=Sequel.cariIsi("select if(mutasi_berkas.diterima='0000-00-00 00:00:00','',mutasi_berkas.diterima) from mutasi_berkas where mutasi_berkas.no_rawat=?",rs.getString("no_rawat"));
@@ -332,13 +332,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                 if(!datajam.equals("")){
                                                     if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat"),"1",datajam})==true){
                                                         parsedDate = dateFormat.parse(datajam);
-                                                        try {     
+                                                        try {
                                                             TeksArea.append("Menjalankan WS taskid mulai pelayanan poli Mobile JKN Pasien Non BPJS/BPS\n");
                                                             headers = new HttpHeaders();
                                                             headers.setContentType(MediaType.APPLICATION_JSON);
                                                             headers.add("X-cons-id",koneksiDB.CONSIDMOBILEJKNFKTP());
                                                             utc=String.valueOf(api.GetUTCdatetimeAsString());
-                                                            headers.add("X-timestamp",utc);            
+                                                            headers.add("X-timestamp",utc);
                                                             headers.add("X-signature",api.getHmac());
                                                             headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                                                             headers.add("user_key",koneksiDB.USERKEYMOBILEJKNFKTP());
@@ -351,14 +351,14 @@ public class frmUtama extends javax.swing.JFrame {
                                                                           "}";
                                                             TeksArea.append("JSON : "+requestJson+"\n");
                                                             requestEntity = new HttpEntity(requestJson,headers);
-                                                            URL = link+"/antrean/panggil";	
+                                                            URL = link+"/antrean/panggil";
                                                             System.out.println("URL : "+URL);
                                                             //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                             nameNode = root.path("metadata");
                                                             if(!nameNode.path("code").asText().equals("200")){
                                                                 Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='1' and no_rawat='"+rs.getString("no_rawat")+"'");
-                                                            }   
+                                                            }
                                                             TeksArea.append("respon WS BPJS : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
                                                         }catch (Exception ex) {
                                                             System.out.println("Notifikasi Bridging : "+ex);
@@ -372,13 +372,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                 if(!datajam.equals("")){
                                                     if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat"),"2",datajam})==true){
                                                         parsedDate = dateFormat.parse(datajam);
-                                                        try {     
+                                                        try {
                                                             TeksArea.append("Menjalankan WS taskid batal pelayanan poli Mobile JKN Pasien Non BPJS/BPS Onsite\n");
                                                             headers = new HttpHeaders();
                                                             headers.setContentType(MediaType.APPLICATION_JSON);
                                                             headers.add("X-cons-id",koneksiDB.CONSIDMOBILEJKNFKTP());
                                                             utc=String.valueOf(api.GetUTCdatetimeAsString());
-                                                            headers.add("X-timestamp",utc);            
+                                                            headers.add("X-timestamp",utc);
                                                             headers.add("X-signature",api.getHmac());
                                                             headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                                                             headers.add("user_key",koneksiDB.USERKEYMOBILEJKNFKTP());
@@ -391,25 +391,25 @@ public class frmUtama extends javax.swing.JFrame {
                                                                           "}";
                                                             TeksArea.append("JSON : "+requestJson+"\n");
                                                             requestEntity = new HttpEntity(requestJson,headers);
-                                                            URL = link+"/antrean/panggil";	
+                                                            URL = link+"/antrean/panggil";
                                                             System.out.println("URL : "+URL);
                                                             //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                             nameNode = root.path("metadata");
                                                             if(!nameNode.path("code").asText().equals("200")){
                                                                 Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='2' and no_rawat='"+rs.getString("no_rawat")+"'");
-                                                            }  
+                                                            }
                                                             TeksArea.append("respon WS BPJS : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
                                                         }catch (Exception ex) {
                                                             System.out.println("Notifikasi Bridging : "+ex);
                                                         }
-                                                        
-                                                        try {     
+
+                                                        try {
                                                             headers = new HttpHeaders();
                                                             headers.setContentType(MediaType.APPLICATION_JSON);
                                                             headers.add("X-cons-id",koneksiDB.CONSIDMOBILEJKNFKTP());
                                                             utc=String.valueOf(api.GetUTCdatetimeAsString());
-                                                            headers.add("X-timestamp",utc);            
+                                                            headers.add("X-timestamp",utc);
                                                             headers.add("X-signature",api.getHmac());
                                                             headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                                                             headers.add("user_key",koneksiDB.USERKEYMOBILEJKNFKTP());
@@ -421,14 +421,14 @@ public class frmUtama extends javax.swing.JFrame {
                                                                           "}";
                                                             TeksArea.append("JSON : "+requestJson+"\n");
                                                             requestEntity = new HttpEntity(requestJson,headers);
-                                                            URL = link+"/antrean/batal";	
+                                                            URL = link+"/antrean/batal";
                                                             System.out.println("URL : "+URL);
                                                             //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                             nameNode = root.path("metadata");
                                                             if(!nameNode.path("code").asText().equals("200")){
                                                                 Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='2' and no_rawat='"+rs.getString("no_rawat")+"'");
-                                                            }  
+                                                            }
                                                             TeksArea.append("respon WS BPJS : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
                                                         }catch (Exception ex) {
                                                             System.out.println("Notifikasi Bridging : "+ex);
@@ -463,7 +463,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 ps.close();
                             }
                         }
-                        
+
                         TeksArea.append("Proses update selesai\n");
                     } catch (Exception ez) {
                         System.out.println("Notif : "+ez);

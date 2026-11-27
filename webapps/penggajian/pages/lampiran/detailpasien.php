@@ -101,7 +101,7 @@
                                 <td width='10%'><div align='center'>Proses</div></td>
                                 <td width='90%'><div align='center'>Jumlah Pasien</div></td>
                             </tr>";
-                    while($baris = mysqli_fetch_array($hasil)) {                        
+                    while($baris = mysqli_fetch_array($hasil)) {
                       echo "<tr class='isi'>
                                 <td width='70'>
                                     <center>"; ?>

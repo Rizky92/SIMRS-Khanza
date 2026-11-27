@@ -58,7 +58,7 @@
 	for ($d=1;$d<=$endDate;$d++) {
 		if (date("w",mktime (0,0,0,$month,$d,$year)) == 0) echo "<tr bgcolor=\"#FFFFFF\">";
 		$fontColor="#000000";
-		
+
 		if (date("D",mktime (0,0,0,$month,$d,$year)) == "Sun") $fontColor="red";
 		if (date("D",mktime (0,0,0,$month,$d,$year)) == "Sat") $fontColor="blue";
 		if ($d==$day)

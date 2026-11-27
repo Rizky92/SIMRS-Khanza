@@ -13,8 +13,8 @@
 	<queryString>
 		<![CDATA[select kesling_limbah_domestik.nip,petugas.nama,kesling_limbah_domestik.tanggal,
 kesling_limbah_domestik.jumlahlimbah,kesling_limbah_domestik.tanggalangkut,
-kesling_limbah_domestik.keterangan 
-from kesling_limbah_domestik inner join petugas 
+kesling_limbah_domestik.keterangan
+from kesling_limbah_domestik inner join petugas
 on kesling_limbah_domestik.nip=petugas.nip]]>
 	</queryString>
 	<field name="nip" class="java.lang.String">

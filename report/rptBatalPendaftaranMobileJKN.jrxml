@@ -17,7 +17,7 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[SELECT referensi_mobilejkn_bpjs_batal.no_rkm_medis,pasien.nm_pasien,referensi_mobilejkn_bpjs_batal.no_rawat_batal,
-referensi_mobilejkn_bpjs_batal.nomorreferensi,referensi_mobilejkn_bpjs_batal.tanggalbatal,referensi_mobilejkn_bpjs_batal.keterangan 
+referensi_mobilejkn_bpjs_batal.nomorreferensi,referensi_mobilejkn_bpjs_batal.tanggalbatal,referensi_mobilejkn_bpjs_batal.keterangan
 FROM referensi_mobilejkn_bpjs_batal INNER JOIN pasien ON referensi_mobilejkn_bpjs_batal.no_rkm_medis=pasien.no_rkm_medis]]>
 	</queryString>
 	<field name="no_rkm_medis" class="java.lang.String">

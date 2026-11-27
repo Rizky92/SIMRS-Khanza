@@ -27,20 +27,20 @@ public class PasswordBox extends JPasswordField {
 
     private static final long serialVersionUID = 3L;
 
-    static final Color AKSEN_GELAP  = new Color(0x3DDC84);                  
+    static final Color AKSEN_GELAP  = new Color(0x3DDC84);
     static final Color BORDER_GELAP = new Color(255, 255, 255, 150);
     static final Color HOVER_GELAP  = new Color(255, 255, 255, 200);
     static final Color OFF_GELAP    = new Color(255, 255, 255, 60);
     static final Color TEKS_GELAP   = Color.WHITE;
 
-    static final Color AKSEN        = new Color(22, 160, 93);               
-    static final Color BORDER       = new Color(0x96BEA5);                  
+    static final Color AKSEN        = new Color(22, 160, 93);
+    static final Color BORDER       = new Color(0x96BEA5);
     static final Color HOVER        = new Color(0x5A9170);
     static final Color OFF          = new Color(0xC9D3CD);
     static final Color TEKS         = new Color(50, 50, 50);
 
-    static final Color IKON         = new Color(22, 160, 93);               
-    static final Color IKON_AKTIF   = new Color(12, 110, 62);               
+    static final Color IKON         = new Color(22, 160, 93);
+    static final Color IKON_AKTIF   = new Color(12, 110, 62);
     static final Color TINT_IKON    = new Color(22, 160, 93, 35);
     static final char  TITIK        = '•';
     static final int   RADIUS       = 6;
@@ -50,8 +50,8 @@ public class PasswordBox extends JPasswordField {
     private boolean hoverIkon;
     private boolean tampilkan;
     private boolean ikonMata;
-    private Boolean latarGelap;     
-    private int     modeTerpasang;  
+    private Boolean latarGelap;
+    private int     modeTerpasang;
 
     public PasswordBox() {
         super();
@@ -61,7 +61,7 @@ public class PasswordBox extends JPasswordField {
         setEchoChar(TITIK);
         setOpaque(false);
         setBorder(new BorderModern());
-        terapkanWarna(true);   
+        terapkanWarna(true);
 
         addFocusListener(new FocusAdapter() {
             @Override
@@ -128,7 +128,7 @@ public class PasswordBox extends JPasswordField {
         if (latarGelap != null) {
             return latarGelap;
         }
-        
+
         for (Component p = getParent(); p != null; p = p.getParent()) {
             if (p.isOpaque()) {
                 Color c = p.getBackground();
@@ -187,7 +187,7 @@ public class PasswordBox extends JPasswordField {
             float cy = r.y + r.height / 2f;
 
             if (hoverIkon) {
-                g2.setColor(TINT_IKON);   
+                g2.setColor(TINT_IKON);
                 g2.fill(new RoundRectangle2D.Float(cx - 9, cy - 7, 18, 14, 6, 6));
             }
 

@@ -6,11 +6,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -41,9 +41,8 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
 
-
 /**
- * 
+ *
  * @author windiartohugroho
  */
 public final class RMLaporanMESO extends javax.swing.JDialog {
@@ -58,13 +57,13 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
     private StringBuilder htmlContent;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     public RMLaporanMESO(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(8,1);
         setSize(628,674);
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
                 "No.Laporan","No.Rawat","No.R.M.","Nama Pasien","Tgl.Laporan","NIP","Pelapor","Tgl.Lahir","J.K.","Suku",
                 "Pekerjaan","BB (kg)","Anamnesa","Penyakit Utama","Kesudahan Penyakit","Gg.Ginjal","Gg.Hati","Alergi",
@@ -228,7 +227,7 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
         tbObatData.setDefaultRenderer(Object.class, new WarnaTable());
         ChkAccor.setSelected(false);
         isMenu();
-        
+
         tabModeObat=new DefaultTableModel(null,new Object[]{
                 "Nama Obat","Bentuk Sediaan","JKN","No.Batch","Dicurigai","Cara","Dosis/Waktu","Tgl.Mulai","Tgl.Akhir","Indikasi"
             }){
@@ -263,9 +262,9 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
             }
         }
         tbObatMeso.setDefaultRenderer(Object.class, new WarnaTable());
-        
-        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));    
-        KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));  
+
+        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
+        KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         NoLaporan.setDocument(new batasInput((int)20).getKata(NoLaporan));
         BeratBadan.setDocument(new batasInput((int)6).getOnlyAngka(BeratBadan));
@@ -302,8 +301,7 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
-    
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -2001,13 +1999,13 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()>-1){
@@ -2024,8 +2022,8 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        } 
-}//GEN-LAST:event_BtnHapusActionPerformed
+        }
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2033,7 +2031,7 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         boolean obatDicurigai=false;
@@ -2086,17 +2084,17 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnKeluarActionPerformed(null);
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -2271,14 +2269,14 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
     private void MnFormulirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnFormulirActionPerformed
         if(tbObat.getSelectedRow()>-1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptFormulirLaporanMESO.jasper","report","::[ Formulir Pelaporan Efek Samping Obat (ESO) ]::",
                 "select laporan_meso.no_laporan,laporan_meso.tanggal,pasien.nm_pasien,date_format(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,suku_bangsa.nama_suku_bangsa as suku,"+
                 "laporan_meso.berat_badan,pasien.pekerjaan,pasien.jk,laporan_meso.anamnesa,laporan_meso.penyakit_utama,laporan_meso.kesudahan_penyakit,laporan_meso.gangguan_ginjal,"+
@@ -2308,7 +2306,7 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -2318,11 +2316,11 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2330,12 +2328,12 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2344,9 +2342,8 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TPasien);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
-   
-                                  
+    }//GEN-LAST:event_BtnAllKeyPressed
+
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
@@ -2360,7 +2357,7 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
                 TabRawat.setSelectedIndex(0);
             }
         }
-}//GEN-LAST:event_tbObatMouseClicked
+    }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -2379,7 +2376,7 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbObatKeyPressed
+    }//GEN-LAST:event_tbObatKeyPressed
 
     private void BtnPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPetugasKeyPressed
         Valid.pindah(evt,Tanggal,NoLaporan);
@@ -2392,10 +2389,10 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas.requestFocus();
                     petugas=null;
                 }
@@ -2406,10 +2403,10 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
@@ -2970,7 +2967,7 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
                     "or laporan_meso.manifestasi_eso like ? or laporan_meso.nip like ? or petugas.nama like ?) order by laporan_meso.tanggal"
                 );
             }
-                
+
             try {
                 ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
                 ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
@@ -2983,7 +2980,7 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
                     ps.setString(8,"%"+TCari.getText()+"%");
                     ps.setString(9,"%"+TCari.getText()+"%");
                 }
-                  
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -3142,7 +3139,7 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
         SkorN8.setText(""+sN8);
         SkorN9.setText(""+sN9);
         SkorN10.setText(""+sN10);
-        
+
         int skor=sN1+sN2+sN3+sN4+sN5+sN6+sN7+sN8+sN9+sN10;
         SkorNaranjo.setText(""+skor);
         if(Naranjo1.getSelectedIndex()==0&&Naranjo2.getSelectedIndex()==0&&Naranjo3.getSelectedIndex()==0&&Naranjo4.getSelectedIndex()==0&&Naranjo5.getSelectedIndex()==0&&Naranjo6.getSelectedIndex()==0&&Naranjo7.getSelectedIndex()==0&&Naranjo8.getSelectedIndex()==0&&Naranjo9.getSelectedIndex()==0&&Naranjo10.getSelectedIndex()==0){
@@ -3264,12 +3261,12 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
         DTPCari2.setDate(tgl2);
-        isRawat(); 
+        isRawat();
         runBackground(() ->tampil());
     }
     public void setTampil(){
@@ -3280,7 +3277,7 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
         BtnSimpan.setEnabled(akses.getlaporan_meso());
         BtnHapus.setEnabled(akses.getlaporan_meso());
         BtnEdit.setEnabled(akses.getlaporan_meso());
-        BtnPrint.setEnabled(akses.getlaporan_meso()); 
+        BtnPrint.setEnabled(akses.getlaporan_meso());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             BtnPetugas.setEnabled(false);
@@ -3290,9 +3287,9 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }            
+        }
     }
-  
+
     private void simpan() {
         if(Sequel.menyimpantf2("laporan_meso","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",46,new String[]{
             NoLaporan.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),KdPetugas.getText(),
@@ -3469,13 +3466,10 @@ public final class RMLaporanMESO extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
 }
-
-
-

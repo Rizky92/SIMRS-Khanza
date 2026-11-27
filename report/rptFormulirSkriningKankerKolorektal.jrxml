@@ -20,8 +20,8 @@
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,reg_periksa.umurdaftar,reg_periksa.sttsumur,skrining_kanker_kolorektal.tanggal,
                     skrining_kanker_kolorektal.riwayat_polip_adenomatosa,skrining_kanker_kolorektal.riwayat_bab_berdarah,skrining_kanker_kolorektal.riwayat_reseksi_kuratif,skrining_kanker_kolorektal.colok_dubur,
                     skrining_kanker_kolorektal.riwayat_kolorektal_keluarga,skrining_kanker_kolorektal.darah_samar_feses,skrining_kanker_kolorektal.rujuk_faskes_lanjut,skrining_kanker_kolorektal.kesimpulan,
-                    skrining_kanker_kolorektal.keterangan_kesimpulan,skrining_kanker_kolorektal.nip,petugas.nama 
-                    from skrining_kanker_kolorektal inner join reg_periksa on skrining_kanker_kolorektal.no_rawat=reg_periksa.no_rawat 
+                    skrining_kanker_kolorektal.keterangan_kesimpulan,skrining_kanker_kolorektal.nip,petugas.nama
+                    from skrining_kanker_kolorektal inner join reg_periksa on skrining_kanker_kolorektal.no_rawat=reg_periksa.no_rawat
                     inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_kanker_kolorektal.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

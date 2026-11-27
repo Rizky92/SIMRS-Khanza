@@ -31,40 +31,40 @@ public class SatuSehatCekNIK {
     private JsonNode root;
     private JsonNode response;
     private FileReader dataPropinsi,dataKabupaten,dataKecamatan,dataKelurahan;
-        
+
     public SatuSehatCekNIK(){
         super();
         try {
             link=koneksiDB.URLFHIRSATUSEHAT();
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        }  
-        
+        }
+
         try {
             dataPropinsi = new FileReader("./cache/propinsi.iyem");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
-        
+        }
+
         try {
             dataKabupaten = new FileReader("./cache/kabupaten.iyem");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
-        
+        }
+
         try {
             dataKecamatan= new FileReader("./cache/kecamatan.iyem");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
-        
+        }
+
         try {
             dataKelurahan= new FileReader("./cache/kelurahan.iyem");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
     }
-    
+
     public void tampil(String cari) {
         try{
             birthDate="";province="";provincename="";city="";cityname="";district="";districtname="";village="";villagename="";
@@ -151,7 +151,7 @@ public class SatuSehatCekNIK {
                     }
                 }
             }
-            
+
             if(name.equals("")){
                 try{
                     headers = new HttpHeaders();
@@ -239,12 +239,12 @@ public class SatuSehatCekNIK {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         if(name.equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Belum Ada data di Server Satu Sehat");
         }
     }
-    
+
     public String tampilIDPasien(String cari) {
         idpasien="";
         try{
@@ -265,7 +265,7 @@ public class SatuSehatCekNIK {
         }
         return idpasien;
     }
-    
+
     public String tampilIDParktisi(String cari) {
         idpasien="";
         try{

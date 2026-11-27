@@ -15,9 +15,9 @@
 		<![CDATA[select ipsrspengeluaran.no_keluar,ipsrspengeluaran.tanggal,ipsrspengeluaran.nip,
                     ipsrspengeluaran.keterangan,petugas.nama,ipsrsdetailpengeluaran.kode_brng,
                     ipsrsbarang.nama_brng,kodesatuan.satuan,ipsrsdetailpengeluaran.jumlah,
-                    ipsrsdetailpengeluaran.harga,ipsrsdetailpengeluaran.total from ipsrspengeluaran 
-                    inner join petugas inner join ipsrsbarang inner join kodesatuan inner join 
-                    ipsrsdetailpengeluaran on ipsrspengeluaran.nip=petugas.nip and ipsrspengeluaran.no_keluar=ipsrsdetailpengeluaran.no_keluar 
+                    ipsrsdetailpengeluaran.harga,ipsrsdetailpengeluaran.total from ipsrspengeluaran
+                    inner join petugas inner join ipsrsbarang inner join kodesatuan inner join
+                    ipsrsdetailpengeluaran on ipsrspengeluaran.nip=petugas.nip and ipsrspengeluaran.no_keluar=ipsrsdetailpengeluaran.no_keluar
                     and ipsrsdetailpengeluaran.kode_brng=ipsrsbarang.kode_brng and ipsrsdetailpengeluaran.kode_sat=kodesatuan.kode_sat]]>
 	</queryString>
 	<field name="no_keluar" class="java.lang.String">

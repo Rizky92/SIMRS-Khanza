@@ -30,10 +30,10 @@
                     checklist_kesiapan_anestesi.jalannapas9,checklist_kesiapan_anestesi.lainlain1,checklist_kesiapan_anestesi.lainlain2,checklist_kesiapan_anestesi.lainlain3,
                     checklist_kesiapan_anestesi.lainlain4,checklist_kesiapan_anestesi.lainlain5,checklist_kesiapan_anestesi.lainlain6,checklist_kesiapan_anestesi.lainlain7,
                     checklist_kesiapan_anestesi.lainlain8,checklist_kesiapan_anestesi.obatobat1,checklist_kesiapan_anestesi.obatobat2,checklist_kesiapan_anestesi.obatobat3,
-                    checklist_kesiapan_anestesi.obatobat4,checklist_kesiapan_anestesi.obatobat5,checklist_kesiapan_anestesi.obatobat6,checklist_kesiapan_anestesi.keterangan_lainnya 
-                    from checklist_kesiapan_anestesi inner join reg_periksa on checklist_kesiapan_anestesi.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                    inner join petugas on petugas.nip=checklist_kesiapan_anestesi.nip 
+                    checklist_kesiapan_anestesi.obatobat4,checklist_kesiapan_anestesi.obatobat5,checklist_kesiapan_anestesi.obatobat6,checklist_kesiapan_anestesi.keterangan_lainnya
+                    from checklist_kesiapan_anestesi inner join reg_periksa on checklist_kesiapan_anestesi.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                    inner join petugas on petugas.nip=checklist_kesiapan_anestesi.nip
                     inner join dokter on dokter.kd_dokter=checklist_kesiapan_anestesi.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

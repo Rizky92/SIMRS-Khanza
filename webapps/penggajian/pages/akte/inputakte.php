@@ -2,7 +2,7 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $_sql    = "SELECT * FROM set_tahun";
     $hasil   = bukaquery($_sql);
     $baris   = mysqli_fetch_row($hasil);
@@ -14,7 +14,7 @@
     <div align="center" class="link">
         <a href=?act=ListAkte>| List Akte |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>  
+    </div>
     <div class="entry">
         <form name="frm_pelatihan" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php

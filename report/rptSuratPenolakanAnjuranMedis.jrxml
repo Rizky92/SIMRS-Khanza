@@ -21,13 +21,13 @@
 				master_menolak_anjuran_medis.nama_penolakan,surat_penolakan_anjuran_medis.alasan_penolakan,surat_penolakan_anjuran_medis.informasi_risiko_penolakan,
 				surat_penolakan_anjuran_medis.nama_pj,surat_penolakan_anjuran_medis.umur_pj,surat_penolakan_anjuran_medis.no_ktppj,
 				surat_penolakan_anjuran_medis.jkpj,surat_penolakan_anjuran_medis.hubungan,surat_penolakan_anjuran_medis.no_telp,surat_penolakan_anjuran_medis.nik,
-				pegawai.nama from surat_penolakan_anjuran_medis inner join reg_periksa on surat_penolakan_anjuran_medis.no_rawat=reg_periksa.no_rawat 
-				inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-				inner join master_menolak_anjuran_medis on master_menolak_anjuran_medis.kode_penolakan=surat_penolakan_anjuran_medis.kode_penolakan 
-				inner join pegawai on surat_penolakan_anjuran_medis.nik=pegawai.nik  
-				inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel 
-				inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
-				inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab 
+				pegawai.nama from surat_penolakan_anjuran_medis inner join reg_periksa on surat_penolakan_anjuran_medis.no_rawat=reg_periksa.no_rawat
+				inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+				inner join master_menolak_anjuran_medis on master_menolak_anjuran_medis.kode_penolakan=surat_penolakan_anjuran_medis.kode_penolakan
+				inner join pegawai on surat_penolakan_anjuran_medis.nik=pegawai.nik
+				inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
+				inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
+				inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
 				inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 	</queryString>
 	<field name="no_surat" class="java.lang.String"/>

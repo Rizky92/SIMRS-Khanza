@@ -17,7 +17,7 @@
         $blncariclosing2 = validTeks(trim(isset($_POST['tgl_cari_closing2']))?substr($_POST['tgl_cari_closing2'],3,2):$blnsekarang);
         $tglcariclosing2 = validTeks(trim(isset($_POST['tgl_cari_closing2']))?substr($_POST['tgl_cari_closing2'],0,2):$tglsekarang);
     }
-    
+
     $kategoriKosong = [
         'rawatinap'        => 0,
         'rawatjalan'       => 0,
@@ -28,23 +28,23 @@
         'piutangperawatan' => 0,
         'piutangobat'      => 0
     ];
-    
+
     $akunList   = [];
     $queryBayar = bukaquery("select akun_bayar.nama_bayar from akun_bayar group by akun_bayar.nama_bayar order by akun_bayar.nama_bayar asc");
     while($rsbayar = mysqli_fetch_array($queryBayar)) {
         $akunList[] = array_merge(['label'=>$rsbayar["nama_bayar"],'type'=>'bayar','key'=>$rsbayar["nama_bayar"],'total'=>0], $kategoriKosong);
     }
-    
+
     $queryRekLain = bukaquery("select rekening.kd_rek,rekening.nm_rek from rekening where rekening.kd_rek in (select kategori_pemasukan_lain.kd_rek2 from kategori_pemasukan_lain group by kategori_pemasukan_lain.kd_rek2) order by rekening.nm_rek asc");
     while($rsreklain = mysqli_fetch_array($queryRekLain)) {
         $akunList[] = array_merge(['label'=>$rsreklain["nm_rek"],'type'=>'rekening','key'=>$rsreklain["kd_rek"],'total'=>0], $kategoriKosong);
     }
-    
+
     $queryPiutang = bukaquery("select akun_piutang.nama_bayar from akun_piutang order by akun_piutang.nama_bayar asc");
     while($rspiutang = mysqli_fetch_array($queryPiutang)) {
         $akunList[] = array_merge(['label'=>$rspiutang["nama_bayar"],'type'=>'piutang','key'=>$rspiutang["nama_bayar"],'total'=>0], $kategoriKosong);
     }
-    
+
     $obatIdx         = count($akunList);
     $akunList[]      = array_merge(['label'=>'Piutang Obat','type'=>'obat','key'=>'','total'=>0], $kategoriKosong);
     $allTotal        = 0;
@@ -92,29 +92,29 @@
                 }
             }
         }
-        
+
         if($kat=="") {
             continue;
         }
-        
+
         $tglBayar = substr($rstagihan["tgl_bayar"],0,10);
         $blnBayar = substr($rstagihan["tgl_bayar"],0,7);
         if(!isset($tanggalAkun[$tglBayar])) {
             $tanggalAkun[$tglBayar] = array_fill(0,count($akunList),0);
         }
-        
+
         if(!isset($bulanAkun[$blnBayar])) {
             $bulanAkun[$blnBayar] = array_fill(0,count($akunList),0);
         }
-        
+
         if(!isset($tanggalKategori[$tglBayar])) {
             $tanggalKategori[$tglBayar] = $kategoriKosong;
         }
-        
+
         if(!isset($bulanKategori[$blnBayar])) {
             $bulanKategori[$blnBayar] = $kategoriKosong;
         }
-        
+
         foreach($akunList as $idx => $akun) {
             if($akun["type"]=="bayar") {
                 $bayarAkun = 0;
@@ -257,21 +257,21 @@
         'piutangperawatan' => 'Piutang Perawatan',
         'piutangobat'      => 'Piutang Obat'
     ];
-    
+
     $kategoriTotal = $kategoriKosong;
     foreach($tanggalKategori as $nilaiPerKategori) {
         foreach($nilaiPerKategori as $kk => $vv) {
             $kategoriTotal[$kk] += $vv;
         }
     }
-    
+
     $kategoriAktif = [];
     foreach($kategoriLabel as $kk => $lbl) {
         if($kategoriTotal[$kk]>0) {
             $kategoriAktif[] = $kk;
         }
     }
-    
+
     $dataPieAkun = [];
     foreach($akunList as $akun) {
         if($akun["total"]>0) {
@@ -281,7 +281,7 @@
             ];
         }
     }
-    
+
     $akunAktifIdx = [];
     foreach($akunList as $idx => $akun) {
         if($akun["total"]>0) {

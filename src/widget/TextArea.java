@@ -26,7 +26,7 @@ public class TextArea extends JTextArea {
     private static final long serialVersionUID = 2L;
 
     static final Color AKSEN    = new Color(0x16A05D);
-    static final Color BORDER   = new Color(0x96BEA5);   
+    static final Color BORDER   = new Color(0x96BEA5);
     static final Color HOVER    = new Color(0x5A9170);
     static final int   RADIUS   = 6;
 
@@ -73,7 +73,7 @@ public class TextArea extends JTextArea {
             sp.setViewportBorder(null);
             JViewport vp = sp.getViewport();
             vp.setOpaque(false);
-            vp.setScrollMode(JViewport.SIMPLE_SCROLL_MODE);   
+            vp.setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
             sp.getVerticalScrollBar().setUI(new ScrollPane.ModernScrollBarUI());
             sp.getHorizontalScrollBar().setUI(new ScrollPane.ModernScrollBarUI());
             sp.getVerticalScrollBar().setOpaque(false);

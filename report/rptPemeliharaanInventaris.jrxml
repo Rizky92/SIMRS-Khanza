@@ -19,10 +19,10 @@
 		<![CDATA[select pemeliharaan_inventaris.no_inventaris,inventaris.kode_barang,inventaris_barang.nama_barang,
 inventaris_ruang.nama_ruang,pemeliharaan_inventaris.nip,petugas.nama,pemeliharaan_inventaris.uraian_kegiatan,
 pemeliharaan_inventaris.tanggal,pemeliharaan_inventaris.pelaksana,pemeliharaan_inventaris.biaya,
-pemeliharaan_inventaris.jenis_pemeliharaan from pemeliharaan_inventaris inner join inventaris 
-on pemeliharaan_inventaris.no_inventaris=inventaris.no_inventaris 
-inner join inventaris_barang on inventaris.kode_barang=inventaris_barang.kode_barang 
-inner join inventaris_ruang on inventaris.id_ruang=inventaris_ruang.id_ruang 
+pemeliharaan_inventaris.jenis_pemeliharaan from pemeliharaan_inventaris inner join inventaris
+on pemeliharaan_inventaris.no_inventaris=inventaris.no_inventaris
+inner join inventaris_barang on inventaris.kode_barang=inventaris_barang.kode_barang
+inner join inventaris_ruang on inventaris.id_ruang=inventaris_ruang.id_ruang
 inner join petugas on pemeliharaan_inventaris.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_inventaris" class="java.lang.String">

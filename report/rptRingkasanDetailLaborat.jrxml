@@ -32,16 +32,16 @@
 sum(detail_periksa_lab.bagian_rs) as bagian_rs,sum(detail_periksa_lab.bhp) as bhp,sum(detail_periksa_lab.bagian_perujuk) as bagian_perujuk,
 sum(detail_periksa_lab.bagian_dokter) as bagian_dokter,sum(detail_periksa_lab.bagian_laborat) as bagian_laborat,
 sum(detail_periksa_lab.kso) as kso,sum(detail_periksa_lab.menejemen) as menejemen,
-sum(detail_periksa_lab.biaya_item) as biaya_item,count(detail_periksa_lab.id_template) as jumlah from detail_periksa_lab 
+sum(detail_periksa_lab.biaya_item) as biaya_item,count(detail_periksa_lab.id_template) as jumlah from detail_periksa_lab
 inner join reg_periksa inner join pasien inner join template_laboratorium
-inner join jns_perawatan_lab inner join periksa_lab 
-inner join dokter inner join petugas inner join penjab inner join dokter as perujuk 
-on detail_periksa_lab.no_rawat=reg_periksa.no_rawat 
-and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and periksa_lab.no_rawat=detail_periksa_lab.no_rawat 
-and periksa_lab.kd_jenis_prw=detail_periksa_lab.kd_jenis_prw and perujuk.kd_dokter=periksa_lab.dokter_perujuk 
-and reg_periksa.kd_pj=penjab.kd_pj and periksa_lab.kd_dokter=dokter.kd_dokter 
-and periksa_lab.nip=petugas.nip and periksa_lab.tgl_periksa=detail_periksa_lab.tgl_periksa 
-and periksa_lab.jam=detail_periksa_lab.jam and detail_periksa_lab.id_template=template_laboratorium.id_template 
+inner join jns_perawatan_lab inner join periksa_lab
+inner join dokter inner join petugas inner join penjab inner join dokter as perujuk
+on detail_periksa_lab.no_rawat=reg_periksa.no_rawat
+and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and periksa_lab.no_rawat=detail_periksa_lab.no_rawat
+and periksa_lab.kd_jenis_prw=detail_periksa_lab.kd_jenis_prw and perujuk.kd_dokter=periksa_lab.dokter_perujuk
+and reg_periksa.kd_pj=penjab.kd_pj and periksa_lab.kd_dokter=dokter.kd_dokter
+and periksa_lab.nip=petugas.nip and periksa_lab.tgl_periksa=detail_periksa_lab.tgl_periksa
+and periksa_lab.jam=detail_periksa_lab.jam and detail_periksa_lab.id_template=template_laboratorium.id_template
 and jns_perawatan_lab.kd_jenis_prw=detail_periksa_lab.kd_jenis_prw]]>
 	</queryString>
 	<field name="id_template" class="java.lang.Integer">

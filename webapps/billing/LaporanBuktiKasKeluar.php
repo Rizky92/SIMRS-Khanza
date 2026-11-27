@@ -1,6 +1,6 @@
 <?php
    include '../conf/conf.php';
-   include '../phpqrcode/qrlib.php'; 
+   include '../phpqrcode/qrlib.php';
 ?>
 <html>
     <head>
@@ -11,11 +11,11 @@
             window.onload = function() { window.print(); }
         </script>
         <?php
-            reportsqlinjection();  
+            reportsqlinjection();
             $usere      = trim(isset($_GET['usere']))?trim($_GET['usere']):NULL;
             $passwordte = trim(isset($_GET['passwordte']))?trim($_GET['passwordte']):NULL;
             if((USERHYBRIDWEB==$usere)&&(PASHYBRIDWEB==$passwordte)){
-                $nobukti                = validTeks4($_GET['kode'],20); 
+                $nobukti                = validTeks4($_GET['kode'],20);
                 $tanggal                = validTeks4($_GET['tanggal'],16);
                 $akunbayar              = validTeks4($_GET['akunbayar'],50);
                 $petugas                = validTeks4($_GET['petugas'],50);
@@ -45,7 +45,7 @@
                                                 <font color='000000' size='1'  face='Tahoma'>
                                                    ".$setting["alamat_instansi"].", ".$setting["kabupaten"].", ".$setting["propinsi"]."<br/>
                                                    ".$setting["kontak"].", E-mail : ".$setting["email"]."
-                                                </font> 
+                                                </font>
                                                 <br><br>
                                                 <font color='000000' size='3'  face='Tahoma'>BUKTI KAS KELUAR</font><br><br>
                                             </center>
@@ -59,20 +59,20 @@
                         <tr>
                             <td width='100%' align='center'>
                                 <table width=100%>
-                                    <tr>								
+                                    <tr>
                                         <td width='15%'>
                                             <font color='000000' size='2' face='Tahoma'>No.Voucher/Bukti</font>
                                         </td>
                                         <td width='35%'>
                                             <font color='000000' size='2' face='Tahoma'>: $nobukti</font>
-                                        </td>           							
+                                        </td>
                                         <td width='15%'>
                                             <font color='000000' size='2' face='Tahoma'>Tanggal</font>
                                         </td>
                                         <td width='35%'>
                                             <font color='000000' size='2' face='Tahoma'>: $tanggal</font>
-                                        </td>                                                                
-                                    </tr> 
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td width='15%'>
                                             <font color='000000' size='2' face='Tahoma'>Akun Bayar</font>
@@ -134,38 +134,38 @@
                                             <hr>
                                             <center><font color='000000' size='2' face='Tahoma'>LEMBAR OTORISASI PEMBAYARAN</font></center>
                                             <table width='100%' cellpadding='0' cellspacing='0' class='tbl_form'>
-                                                <tr class=isi15>							
+                                                <tr class=isi15>
                                                     <td width='20%' align='center'>
                                                         <font color='000000' size='2' face='Tahoma'>Dibuat Oleh</font>
                                                     </td>
                                                     <td width='20%' align='center'>
                                                         <font color='000000' size='2' face='Tahoma'>Diperiksa Oleh</font>
-                                                    </td>           							
+                                                    </td>
                                                     <td width='40%' colspan='2' align='center'>
                                                         <font color='000000' size='2' face='Tahoma'><center>Disetujui Oleh</center></font>
                                                     </td>
                                                     <td width='20%' align='center'>
                                                         <font color='000000' size='2' face='Tahoma'>Diterima Oleh</font>
-                                                    </td>                                                                
-                                                </tr> 
-                                                <tr class=isi15>								
+                                                    </td>
+                                                </tr>
+                                                <tr class=isi15>
                                                     <td width='20%' align='center'>
                                                         <img width='60' height='60' src='".$PNG_WEB_DIR.basename($filename)."'/><br>
                                                         <font color='000000' size='2' face='Tahoma'>".str_replace("_"," ",$petugas)."</font>
                                                     </td>
                                                     <td width='20%'>
                                                         &nbsp;
-                                                    </td>           							
+                                                    </td>
                                                     <td width='20%'>
                                                         &nbsp;
                                                     </td>
                                                     <td width='20%'>
                                                         &nbsp;
-                                                    </td>   
+                                                    </td>
                                                     <td width='20%'>
                                                         &nbsp;
-                                                    </td>  
-                                                </tr> 
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </td>
                                     </tr>

@@ -10,11 +10,11 @@
  */
 
 package keuangan;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
@@ -79,9 +79,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
         LoadHTML2.setDocument(doc);
-    }    
-    
-     
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -282,8 +280,8 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        try {            
-            File g = new File("fileakunbayar.css");            
+        try {
+            File g = new File("fileakunbayar.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                 ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -293,15 +291,15 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                 ".isi4 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
+
             BufferedWriter bw;
             File f;
-            
+
             String pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (XLS)"},"Laporan 1 (HTML)");
             switch (pilihan) {
                 case "Laporan 1 (HTML)":
-                    f = new File("PendapatanPerAkunClosing.html");            
-                    bw = new BufferedWriter(new FileWriter(f));            
+                    f = new File("PendapatanPerAkunClosing.html");
+                    bw = new BufferedWriter(new FileWriter(f));
                     bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"fileakunbayar.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                 "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                     "<tr class='isi2'>"+
@@ -309,36 +307,36 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                                             "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                             akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                             akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>PENDAPATAN PER AKUN CLOSING<br>TANGGAL "+Tgl1.getSelectedItem()+"<br><br></font>"+        
+                                            "<font size='2' face='Tahoma'>PENDAPATAN PER AKUN CLOSING<br>TANGGAL "+Tgl1.getSelectedItem()+"<br><br></font>"+
                                         "</td>"+
                                    "</tr>"+
                                 "</table>")
                     );
-                    bw.close();                         
+                    bw.close();
                     Desktop.getDesktop().browse(f.toURI());
                     break;
                 case "Laporan 2 (WPS)":
-                    f = new File("PendapatanPerAkunClosing.wps");            
-                    bw = new BufferedWriter(new FileWriter(f));            
+                    f = new File("PendapatanPerAkunClosing.wps");
+                    bw = new BufferedWriter(new FileWriter(f));
                     bw.write(LoadHTML.getText());
-                    bw.close();                         
+                    bw.close();
                     Desktop.getDesktop().browse(f.toURI());
                     break;
                 case "Laporan 3 (XLS)":
-                    f= new File("PendapatanPerAkunClosing.xls");            
-                    bw = new BufferedWriter(new FileWriter(f));            
+                    f= new File("PendapatanPerAkunClosing.xls");
+                    bw = new BufferedWriter(new FileWriter(f));
                     bw.write(LoadHTML.getText());
-                    bw.close();                         
+                    bw.close();
                     Desktop.getDesktop().browse(f.toURI());
                     break;
 
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -346,17 +344,17 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, Tgl1,BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnKeluar,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
@@ -416,9 +414,9 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
     }//GEN-LAST:event_TabRawatMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try{        
+        try{
             StringBuilder htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='head'>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='3%'>No.</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='9%'>Tanggal</td>").append(
@@ -427,7 +425,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'>Jenis/Cara Bayar</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='30%'>Akun Bayar</td>").append(
                 "</tr>"
-            );           
+            );
             LoadHTML.setText(
                     "<html>"+
                       "<table width='100%' border='0' align='left' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -512,10 +510,10 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil(){
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
-        try{        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try{
             StringBuilder htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='head'>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='3%'>No.</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='9%'>Tanggal</td>").append(
@@ -524,8 +522,8 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'>Jenis/Cara Bayar</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='30%'>Akun Closing</td>").append(
                 "</tr>"
-            );   
-            
+            );
+
             kolom=0;
             psakunbayar=koneksi.prepareStatement("select akun_bayar.nama_bayar from akun_bayar order by akun_bayar.nama_bayar");
             try {
@@ -548,9 +546,9 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                     psakunbayar.close();
                 }
             }
-            
-            totalbayar=new double[kolom]; 
-            
+
+            totalbayar=new double[kolom];
+
             kolompiutang=0;
             psakunpiutang=koneksi.prepareStatement("select akun_piutang.nama_bayar from akun_piutang order by akun_piutang.nama_bayar");
             try {
@@ -573,9 +571,9 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                     psakunpiutang.close();
                 }
             }
-            
-            totalpiutang=new double[kolompiutang]; 
-            
+
+            totalpiutang=new double[kolompiutang];
+
             kolom2=0;
             psakunbayar=koneksi.prepareStatement("select rekening.kd_rek,rekening.nm_rek from rekening where rekening.kd_rek in (select kategori_pemasukan_lain.kd_rek2 from kategori_pemasukan_lain group by kategori_pemasukan_lain.kd_rek2) order by rekening.nm_rek");
             try {
@@ -600,9 +598,9 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                     psakunbayar.close();
                 }
             }
-            
-            totalbayar2=new double[kolom2]; 
-            
+
+            totalbayar2=new double[kolom2];
+
             all=0;
             ps=koneksi.prepareStatement(
                     "select tagihan_sadewa.no_nota,date_format(tagihan_sadewa.tgl_bayar,'%Y-%m-%d') as tgl_bayar,tagihan_sadewa.nama_pasien "+
@@ -612,7 +610,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                 ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                 rs=ps.executeQuery();
                 no=1;
-                while(rs.next()){                            
+                while(rs.next()){
                     norawatinap="";
                     norawatjalan="";
                     notajual="";
@@ -648,12 +646,12 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                                         carabayar="Transaksi Tidak Ditemukan";
                                     }
                                 }
-                            }                                             
+                            }
                         }
                     }
-                    
+
                     if((!carabayar.equals("Transaksi Tidak Ditemukan"))&&(rs.getString("nama_pasien").toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())||nonota.toLowerCase().trim().contains(TCari.getText().toLowerCase().trim()))){
-                        htmlContent.append(                             
+                        htmlContent.append(
                             "<tr class='isi'>").append(
                                 "<td valign='middle' align='center'>").append(no).append("</td>").append(
                                 "<td valign='middle' align='center'>").append(rs.getString("tgl_bayar")).append("</td>").append(
@@ -663,7 +661,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                                 "<td>").append(
                                     "<table width='100%' border='0' align='left' cellpadding='3px' cellspacing='0' class='tbl_form'>"
                         );
-                        
+
                         for(i=0;i<kolom;i++){
                             bayar=0;
                             if(!norawatinap.equals("")){
@@ -685,7 +683,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                             all=all+bayar;
                             totalbayar[i]=totalbayar[i]+bayar;
                         }
-                        
+
                         for(i=0;i<kolompiutang;i++){
                             bayar=Sequel.cariIsiAngka("select sum(detail_piutang_pasien.totalpiutang) from detail_piutang_pasien where detail_piutang_pasien.no_rawat='"+rs.getString("no_nota")+"' and detail_piutang_pasien.nama_bayar='"+namapiutang[i]+"'");
                             if(bayar>0){
@@ -694,14 +692,14 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                             all=all+bayar;
                             totalpiutang[i]=totalpiutang[i]+bayar;
                         }
-                        
-                        htmlContent.append( 
+
+                        htmlContent.append(
                                     "</table>").append(
                                 "</td>").append(
                             "</tr>"
-                        ); 
+                        );
                         no++;
-                    }                           
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -713,7 +711,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
             //pemasukanlain2
             ps= koneksi.prepareStatement(
                     "select tagihan_sadewa.no_nota,date_format(tagihan_sadewa.tgl_bayar,'%Y-%m-%d') as tgl_bayar,tagihan_sadewa.nama_pasien "+
@@ -723,10 +721,10 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                 ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                 ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                 rs=ps.executeQuery();
-                while(rs.next()){                            
+                while(rs.next()){
                     nonota=rs.getString("no_nota");
                     if((rs.getString("nama_pasien").toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())||nonota.toLowerCase().trim().contains(TCari.getText().toLowerCase().trim()))){
-                        htmlContent.append(                             
+                        htmlContent.append(
                             "<tr class='isi'>").append(
                                 "<td valign='middle' align='center'>").append(no).append("</td>").append(
                                 "<td valign='middle' align='center'>").append(rs.getString("tgl_bayar")).append("</td>").append(
@@ -743,13 +741,13 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                             all=all+bayar;
                             totalbayar2[i]=totalbayar2[i]+bayar;
                         }
-                        htmlContent.append( 
+                        htmlContent.append(
                                     "</table>").append(
                                 "</td>").append(
                             "</tr>"
-                        ); 
+                        );
                         no++;
-                    }                                
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -760,8 +758,8 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            } 
-            
+            }
+
             ps=koneksi.prepareStatement(
                 "select piutang_pasien.no_rawat,piutang_pasien.tgl_piutang,pasien.nm_pasien from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
                 "where piutang_pasien.uangmuka='0' and piutang_pasien.tgl_piutang between ? and ? "+(!TCari.getText().trim().equals("")?" and (piutang_pasien.no_rawat like ? or pasien.nm_pasien like ?) ":"")+
@@ -775,7 +773,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                 }
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    htmlContent.append(                             
+                    htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td valign='middle' align='center'>").append(no).append("</td>").append(
                             "<td valign='middle' align='center'>").append(rs.getString("tgl_piutang")).append("</td>").append(
@@ -795,12 +793,12 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                         totalpiutang[i]=totalpiutang[i]+bayar;
                     }
 
-                    htmlContent.append( 
+                    htmlContent.append(
                                 "</table>").append(
                             "</td>").append(
                         "</tr>"
-                    ); 
-                    no++;                            
+                    );
+                    no++;
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -812,7 +810,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                 "select piutang.nota_piutang,piutang.tgl_piutang,piutang.nm_pasien,piutang.sisapiutang from piutang "+
                 "where piutang.tgl_piutang between ? and ? "+(!TCari.getText().trim().equals("")?" and (piutang.nota_piutang like ? or pasien.nm_pasien like ?) ":"")+
@@ -828,7 +826,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                 piutangobat=0;
                 while(rs.next()){
                     piutangobat=piutangobat+rs.getDouble("sisapiutang");
-                    htmlContent.append(                             
+                    htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td valign='middle' align='center'>").append(no).append("</td>").append(
                             "<td valign='middle' align='center'>").append(rs.getString("tgl_piutang")).append("</td>").append(
@@ -841,8 +839,8 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                                 "</table>").append(
                             "</td>").append(
                         "</tr>"
-                    ); 
-                    no++;                            
+                    );
+                    no++;
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -854,63 +852,63 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
             for(i=0;i<kolom;i++){
                 if(totalbayar[i]>0){
-                    htmlContent.append(                             
+                    htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td valign='middle' align='center'></td>").append(
                             "<td valign='middle' align='left' colspan='4'>Total ").append(namabayar[i]).append("</td>").append(
                             "<td valign='middle' align='right'>").append(Valid.SetAngka(totalbayar[i])).append("</td>").append(
                         "</tr>"
-                    ); 
-                }  
+                    );
+                }
             }
-            
+
             for(i=0;i<kolom2;i++){
                 if(totalbayar2[i]>0){
-                    htmlContent.append(                             
+                    htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td valign='middle' align='center'></td>").append(
                             "<td valign='middle' align='left' colspan='4'>Total ").append(namarekening[i]).append("</td>").append(
                             "<td valign='middle' align='right'>").append(Valid.SetAngka(totalbayar2[i])).append("</td>").append(
                         "</tr>"
-                    ); 
-                }  
+                    );
+                }
             }
-            
+
             for(i=0;i<kolompiutang;i++){
                 if(totalpiutang[i]>0){
-                    htmlContent.append(                             
+                    htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td valign='middle' align='center'></td>").append(
                             "<td valign='middle' align='left' colspan='4'>Total ").append(namapiutang[i]).append("</td>").append(
                             "<td valign='middle' align='right'>").append(Valid.SetAngka(totalpiutang[i])).append("</td>").append(
                         "</tr>"
-                    ); 
-                }  
+                    );
+                }
             }
-            
+
             if(piutangobat>0){
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>").append(
                         "<td valign='middle' align='center'></td>").append(
                         "<td valign='middle' align='left' colspan='4'>Total ").append(akunpiutangobat).append("</td>").append(
                         "<td valign='middle' align='right'>").append(Valid.SetAngka(piutangobat)).append("</td>").append(
                     "</tr>"
-                ); 
+                );
             }
-            
+
             if(all>0){
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>").append(
                         "<td valign='middle' align='center'></td>").append(
                         "<td valign='middle' align='left' colspan='4'><b>Jumlah Total<b></td>").append(
                         "<td valign='middle' align='right'><b>").append(Valid.SetAngka(all+piutangobat)).append("<b></td>").append(
                     "</tr>"
-                ); 
+                );
             }
-                         
+
             LoadHTML.setText(
                     "<html>"+
                       "<table width='100%' border='0' align='left' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -922,13 +920,13 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         this.setCursor(Cursor.getDefaultCursor());
-    }    
-    
+    }
+
     private void tampil2(){
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
-        try{        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try{
             StringBuilder htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='head'>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='3%'>No.</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='9%'>Tanggal</td>").append(
@@ -937,8 +935,8 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'>Jenis/Cara Bayar</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='30%'>Akun Closing</td>").append(
                 "</tr>"
-            );   
-            
+            );
+
             kolom=0;
             psakunbayar=koneksi.prepareStatement("select akun_bayar.nama_bayar from akun_bayar order by akun_bayar.nama_bayar");
             try {
@@ -961,9 +959,9 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                     psakunbayar.close();
                 }
             }
-            
-            totalbayar=new double[kolom]; 
-            
+
+            totalbayar=new double[kolom];
+
             kolompiutang=0;
             psakunpiutang=koneksi.prepareStatement("select akun_piutang.nama_bayar from akun_piutang order by akun_piutang.nama_bayar");
             try {
@@ -986,9 +984,9 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                     psakunpiutang.close();
                 }
             }
-            
-            totalpiutang=new double[kolompiutang]; 
-            
+
+            totalpiutang=new double[kolompiutang];
+
             kolom2=0;
             psakunbayar=koneksi.prepareStatement("select rekening.kd_rek,rekening.nm_rek from rekening where rekening.kd_rek in (select kategori_pemasukan_lain.kd_rek2 from kategori_pemasukan_lain group by kategori_pemasukan_lain.kd_rek2) order by rekening.nm_rek");
             try {
@@ -1013,9 +1011,9 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                     psakunbayar.close();
                 }
             }
-            
-            totalbayar2=new double[kolom2]; 
-            
+
+            totalbayar2=new double[kolom2];
+
             all=0;
             ps=koneksi.prepareStatement(
                     "select tagihan_sadewa.no_nota,date_format(tagihan_sadewa.tgl_bayar,'%Y-%m-%d') as tgl_bayar,tagihan_sadewa.nama_pasien "+
@@ -1025,7 +1023,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                 ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                 rs=ps.executeQuery();
                 no=1;
-                while(rs.next()){                            
+                while(rs.next()){
                     norawatinap="";
                     norawatjalan="";
                     notajual="";
@@ -1061,12 +1059,12 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                                         carabayar="Transaksi Tidak Ditemukan";
                                     }
                                 }
-                            }                                             
+                            }
                         }
                     }
-                    
+
                     if((!carabayar.equals("Transaksi Tidak Ditemukan"))&&(rs.getString("nama_pasien").toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())||nonota.toLowerCase().trim().contains(TCari.getText().toLowerCase().trim()))){
-                        htmlContent.append(                             
+                        htmlContent.append(
                             "<tr class='isi'>").append(
                                 "<td valign='middle' align='center'>").append(no).append("</td>").append(
                                 "<td valign='middle' align='center'>").append(rs.getString("tgl_bayar")).append("</td>").append(
@@ -1076,7 +1074,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                                 "<td>").append(
                                     "<table width='100%' border='0' align='left' cellpadding='3px' cellspacing='0' class='tbl_form'>"
                         );
-                        
+
                         for(i=0;i<kolom;i++){
                             bayar=0;
                             if(!norawatinap.equals("")){
@@ -1098,7 +1096,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                             all=all+bayar;
                             totalbayar[i]=totalbayar[i]+bayar;
                         }
-                        
+
                         for(i=0;i<kolompiutang;i++){
                             bayar=Sequel.cariIsiAngka("select sum(detail_piutang_pasien.totalpiutang) from detail_piutang_pasien where detail_piutang_pasien.no_rawat='"+rs.getString("no_nota")+"' and detail_piutang_pasien.nama_bayar='"+namapiutang[i]+"'");
                             if(bayar>0){
@@ -1107,14 +1105,14 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                             all=all+bayar;
                             totalpiutang[i]=totalpiutang[i]+bayar;
                         }
-                        
-                        htmlContent.append( 
+
+                        htmlContent.append(
                                     "</table>").append(
                                 "</td>").append(
                             "</tr>"
-                        ); 
+                        );
                         no++;
-                    }                           
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -1126,7 +1124,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
             //pemasukanlain2
             ps= koneksi.prepareStatement(
                     "select tagihan_sadewa.no_nota,date_format(tagihan_sadewa.tgl_bayar,'%Y-%m-%d') as tgl_bayar,tagihan_sadewa.nama_pasien "+
@@ -1136,10 +1134,10 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                 ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                 ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                 rs=ps.executeQuery();
-                while(rs.next()){                            
+                while(rs.next()){
                     nonota=rs.getString("no_nota");
                     if((rs.getString("nama_pasien").toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())||nonota.toLowerCase().trim().contains(TCari.getText().toLowerCase().trim()))){
-                        htmlContent.append(                             
+                        htmlContent.append(
                             "<tr class='isi'>").append(
                                 "<td valign='middle' align='center'>").append(no).append("</td>").append(
                                 "<td valign='middle' align='center'>").append(rs.getString("tgl_bayar")).append("</td>").append(
@@ -1156,13 +1154,13 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                             all=all+bayar;
                             totalbayar2[i]=totalbayar2[i]+bayar;
                         }
-                        htmlContent.append( 
+                        htmlContent.append(
                                     "</table>").append(
                                 "</td>").append(
                             "</tr>"
-                        ); 
+                        );
                         no++;
-                    }                                
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -1173,8 +1171,8 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            } 
-            
+            }
+
             ps=koneksi.prepareStatement(
                 "select piutang_pasien.no_rawat,piutang_pasien.tgl_piutang,pasien.nm_pasien from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
                 "where piutang_pasien.uangmuka='0' and piutang_pasien.tgl_piutang between ? and ? "+(!TCari.getText().trim().equals("")?" and (piutang_pasien.no_rawat like ? or pasien.nm_pasien like ?) ":"")+
@@ -1188,7 +1186,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                 }
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    htmlContent.append(                             
+                    htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td valign='middle' align='center'>").append(no).append("</td>").append(
                             "<td valign='middle' align='center'>").append(rs.getString("tgl_piutang")).append("</td>").append(
@@ -1208,12 +1206,12 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                         totalpiutang[i]=totalpiutang[i]+bayar;
                     }
 
-                    htmlContent.append( 
+                    htmlContent.append(
                                 "</table>").append(
                             "</td>").append(
                         "</tr>"
-                    ); 
-                    no++;                            
+                    );
+                    no++;
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -1225,7 +1223,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                 "select piutang.nota_piutang,piutang.tgl_piutang,piutang.nm_pasien,piutang.sisapiutang from piutang "+
                 "where piutang.tgl_piutang between ? and ? "+(!TCari.getText().trim().equals("")?" and (piutang.nota_piutang like ? or pasien.nm_pasien like ?) ":"")+
@@ -1241,7 +1239,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                 piutangobat=0;
                 while(rs.next()){
                     piutangobat=piutangobat+rs.getDouble("sisapiutang");
-                    htmlContent.append(                             
+                    htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td valign='middle' align='center'>").append(no).append("</td>").append(
                             "<td valign='middle' align='center'>").append(rs.getString("tgl_piutang")).append("</td>").append(
@@ -1254,8 +1252,8 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                                 "</table>").append(
                             "</td>").append(
                         "</tr>"
-                    ); 
-                    no++;                            
+                    );
+                    no++;
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -1267,63 +1265,63 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
             for(i=0;i<kolom;i++){
                 if(totalbayar[i]>0){
-                    htmlContent.append(                             
+                    htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td valign='middle' align='center'></td>").append(
                             "<td valign='middle' align='left' colspan='4'>Total ").append(namabayar[i]).append("</td>").append(
                             "<td valign='middle' align='right'>").append(Math.round(totalbayar[i])).append("</td>").append(
                         "</tr>"
-                    ); 
-                }  
+                    );
+                }
             }
-            
+
             for(i=0;i<kolom2;i++){
                 if(totalbayar2[i]>0){
-                    htmlContent.append(                             
+                    htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td valign='middle' align='center'></td>").append(
                             "<td valign='middle' align='left' colspan='4'>Total ").append(namarekening[i]).append("</td>").append(
                             "<td valign='middle' align='right'>").append(Math.round(totalbayar2[i])).append("</td>").append(
                         "</tr>"
-                    ); 
-                }  
+                    );
+                }
             }
-            
+
             for(i=0;i<kolompiutang;i++){
                 if(totalpiutang[i]>0){
-                    htmlContent.append(                             
+                    htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td valign='middle' align='center'></td>").append(
                             "<td valign='middle' align='left' colspan='4'>Total ").append(namapiutang[i]).append("</td>").append(
                             "<td valign='middle' align='right'>").append(Math.round(totalpiutang[i])).append("</td>").append(
                         "</tr>"
-                    ); 
-                }  
+                    );
+                }
             }
-            
+
             if(piutangobat>0){
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>").append(
                         "<td valign='middle' align='center'></td>").append(
                         "<td valign='middle' align='left' colspan='4'>Total ").append(akunpiutangobat).append("</td>").append(
                         "<td valign='middle' align='right'>").append(Math.round(piutangobat)).append("</td>").append(
                     "</tr>"
-                ); 
+                );
             }
-            
+
             if(all>0){
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>").append(
                         "<td valign='middle' align='center'></td>").append(
                         "<td valign='middle' align='left' colspan='4'><b>Jumlah Total<b></td>").append(
                         "<td valign='middle' align='right'><b>").append(Math.round(all+piutangobat)).append("<b></td>").append(
                     "</tr>"
-                ); 
+                );
             }
-                         
+
             LoadHTML.setText(
                     "<html>"+
                       "<table width='100%' border='0' align='left' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1335,8 +1333,8 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         this.setCursor(Cursor.getDefaultCursor());
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1362,7 +1360,7 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

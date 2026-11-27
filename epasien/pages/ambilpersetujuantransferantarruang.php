@@ -9,9 +9,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["norawat"])) {
         $norawat          = validTeks3($iyem["norawat"],20);
         $tanggal          = validTeks4($iyem["tanggal"],20);
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                   </div>";
-            
+
             $BtnSimpan=isset($_POST['BtnSimpan'])?$_POST['BtnSimpan']:NULL;
             if (isset($BtnSimpan)) {
                 $norawat           = validTeks4($_POST["norawat"],20);

@@ -59,7 +59,7 @@ body {
   transform:translate(-50%, -50%);
 }
 
-#navcontainer {        
+#navcontainer {
 	margin:auto 0;
 	width:100%;
 	text-align:center;
@@ -81,7 +81,7 @@ body {
 	border-right-color: #f1f6ec;
         border-left-width: 1px;
 	border-left-style: solid;
-	border-left-color: #f1f6ec;        
+	border-left-color: #f1f6ec;
 }
 
 #navcontainer table tr td {

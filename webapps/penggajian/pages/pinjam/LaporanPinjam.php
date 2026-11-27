@@ -20,7 +20,7 @@
                         <td width='100px'><div align='center'>NIP</div></td>
                         <td width='200px'><div align='center'>Nama</div></td>
                         <td width='200px'><div align='center'>Keterangan Pinjam</div></td>
-                    </tr>";                        
+                    </tr>";
                     while($baris = mysqli_fetch_array($hasil)) {
                         $_sql2   = "select peminjaman_koperasi.status from peminjaman_koperasi where peminjaman_koperasi.status='Belum Lunas' and peminjaman_koperasi.id='$baris[0]' ";
 			$hasil2  = bukaquery($_sql2);
@@ -38,10 +38,10 @@
             echo "</table>
                   <table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah</div></td>
+                    </tr>
                  </table>";
-        } 
+        }
     ?>
     </body>
 </html>

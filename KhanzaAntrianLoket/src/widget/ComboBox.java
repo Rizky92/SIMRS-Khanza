@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package widget; 
+package widget;
 
 import java.awt.Color;
 import javax.swing.JComboBox;
@@ -19,5 +19,5 @@ public final class ComboBox extends JComboBox {
         setBackground(new Color(255,255,255));
         setForeground(new Color(70,70,70));
         setSize(WIDTH,23);
-    } 
+    }
 }

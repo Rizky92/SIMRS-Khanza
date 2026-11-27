@@ -23,11 +23,11 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select data_batch.kode_brng, databarang.nama_brng, 
+		<![CDATA[select data_batch.kode_brng, databarang.nama_brng,
                 data_batch.no_faktur,data_batch.no_batch,data_batch.tgl_beli, data_batch.dasar,data_batch.h_beli,
                 data_batch.ralan,data_batch.kelas1,data_batch.kelas2,data_batch.kelas3,
                 data_batch.utama,data_batch.vip,data_batch.vvip,data_batch.beliluar,data_batch.jualbebas,
-                data_batch.karyawan,data_batch.tgl_kadaluarsa, data_batch.asal,data_batch.jumlahbeli,data_batch.sisa 
+                data_batch.karyawan,data_batch.tgl_kadaluarsa, data_batch.asal,data_batch.jumlahbeli,data_batch.sisa
                 from data_batch inner join databarang on data_batch.kode_brng=databarang.kode_brng]]>
 	</queryString>
 	<field name="kode_brng" class="java.lang.String">

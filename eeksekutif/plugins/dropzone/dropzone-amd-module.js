@@ -10,7 +10,6 @@
 } (function (jQuery) {
     var module = { exports: { } }; // Fake component
 
-
 /*
  *
  * More info at [www.dropzonejs.com](http://www.dropzonejs.com)
@@ -114,12 +113,11 @@
 
     Dropzone.prototype.Emitter = Emitter;
 
-
     /*
     This is a list of all available events you can register on a dropzone object.
-    
+
     You can register an event handler like this:
-    
+
         dropzone.on("dragEnter", function() { });
      */
 
@@ -1665,9 +1663,8 @@
 
   Dropzone.SUCCESS = "success";
 
-
   /*
-  
+
   Bugfix for iOS 6 and 7
   Source: http://stackoverflow.com/questions/11929099/html5-canvas-drawimage-ratio-bug-ios
   based on the work of https://github.com/stomita/ios-imagefile-megapixel
@@ -1708,7 +1705,6 @@
     vertSquashRatio = detectVerticalSquash(img);
     return ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
   };
-
 
   /*
    * contentloaded.js

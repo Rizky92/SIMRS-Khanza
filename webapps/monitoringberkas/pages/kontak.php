@@ -3,5 +3,3 @@
         exit(header("Location:../index.php"));
     }
 ?>
-
-

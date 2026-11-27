@@ -84,7 +84,6 @@
 		};
 	})();
 
-
 	// Picker object
 
 	var Datepicker = function(element, options){
@@ -1992,7 +1991,6 @@
 
 	$.fn.datepicker.DPGlobal = DPGlobal;
 
-
 	/* DATEPICKER NO CONFLICT
 	* =================== */
 
@@ -2011,7 +2009,6 @@
 			console.warn('DEPRECATED: ' + msg);
 		}
 	};
-
 
 	/* DATEPICKER DATA-API
 	* ================== */

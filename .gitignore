@@ -1,0 +1,46 @@
+# Root level ignore
+/.vscode/
+/.idea/
+/.claude/
+/.php-cs-fixer.cache
+/*.css
+/*.html
+/*.html_files
+/build/
+/Claude outputs/
+/dist/
+/lib/
+/ssrme_tab/
+/tanggal_baru/
+/setting/*.ini
+/setting/*.xml
+report/.settings/org.eclipse.core.resources.prefs
+report/.project
+
+*.DS_Store
+*.*~*
+*.doc
+*.docx
+*.csv
+*.exe
+*.jar
+*.log
+*.pdf
+*.py
+*.sql
+*.txt
+*.tsv
+*.wps
+*.xls
+*.xlsx
+*.py
+*.txt
+.php-cs-fixer.cache
+CLAUDE.local.md
+
+# Don't ignore these
+!lisensi.txt
+!README.TXT
+!sik_bridging_lab.sql
+!sik_bridging_radiologi.sql
+!sik.sql

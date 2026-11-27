@@ -21,12 +21,12 @@
 	<queryString>
 		<![CDATA[select reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,reg_periksa.kd_dokter,
                    pegawai.nama,pegawai.no_ktp as ktpdokter,reg_periksa.kd_poli,poliklinik.nm_poli,satu_sehat_mapping_lokasi_ralan.id_lokasi_satusehat,reg_periksa.stts,
-                   reg_periksa.status_lanjut,DATE_FORMAT(tagihan_sadewa.tgl_bayar,'%Y-%m-%dT%H:%i:%s+07:00') as pulang,ifnull(satu_sehat_encounter.id_encounter,'') as id_encounter 
-                   from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join pegawai on pegawai.nik=reg_periksa.kd_dokter 
-                   inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join satu_sehat_mapping_lokasi_ralan on satu_sehat_mapping_lokasi_ralan.kd_poli=poliklinik.kd_poli 
-                   inner join tagihan_sadewa on tagihan_sadewa.no_nota=reg_periksa.no_rawat left join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat 
-                   where reg_periksa.tgl_registrasi between $P{tanggal1} and $P{tanggal2} and (reg_periksa.no_rawat like $P{parameter} or reg_periksa.no_rkm_medis like $P{parameter} or 
-                   pasien.nm_pasien like $P{parameter} or pasien.no_ktp like $P{parameter} or pegawai.nama like $P{parameter} or poliklinik.nm_poli like $P{parameter} or 
+                   reg_periksa.status_lanjut,DATE_FORMAT(tagihan_sadewa.tgl_bayar,'%Y-%m-%dT%H:%i:%s+07:00') as pulang,ifnull(satu_sehat_encounter.id_encounter,'') as id_encounter
+                   from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join pegawai on pegawai.nik=reg_periksa.kd_dokter
+                   inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join satu_sehat_mapping_lokasi_ralan on satu_sehat_mapping_lokasi_ralan.kd_poli=poliklinik.kd_poli
+                   inner join tagihan_sadewa on tagihan_sadewa.no_nota=reg_periksa.no_rawat left join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat
+                   where reg_periksa.tgl_registrasi between $P{tanggal1} and $P{tanggal2} and (reg_periksa.no_rawat like $P{parameter} or reg_periksa.no_rkm_medis like $P{parameter} or
+                   pasien.nm_pasien like $P{parameter} or pasien.no_ktp like $P{parameter} or pegawai.nama like $P{parameter} or poliklinik.nm_poli like $P{parameter} or
                    reg_periksa.stts like $P{parameter} or reg_periksa.status_lanjut like $P{parameter}) order by reg_periksa.tgl_registrasi,reg_periksa.jam_reg]]>
 	</queryString>
 	<field name="tgl_registrasi" class="java.sql.Date">

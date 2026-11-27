@@ -18,7 +18,7 @@ public final class akuntindakanradiologi {
             Beban_Jasa_Medik_Petugas_Radiologi_Ralan="",Utang_Jasa_Medik_Petugas_Radiologi_Ralan="",Beban_Kso_Radiologi_Ralan="",Utang_Kso_Radiologi_Ralan="",
             HPP_Persediaan_Radiologi_Rawat_Jalan="",Persediaan_BHP_Radiologi_Rawat_Jalan="",Beban_Jasa_Sarana_Radiologi_Ralan="",Utang_Jasa_Sarana_Radiologi_Ralan="",
             Beban_Jasa_Perujuk_Radiologi_Ralan="",Utang_Jasa_Perujuk_Radiologi_Ralan="",Beban_Jasa_Menejemen_Radiologi_Ralan="",Utang_Jasa_Menejemen_Radiologi_Ralan="";
-    
+
     public static void SetAkunTindakanRadiologi() {
         try (
             PreparedStatement ps = koneksi.prepareStatement(
@@ -54,7 +54,7 @@ public final class akuntindakanradiologi {
         } catch (Exception e) {
             System.out.println("Notif Rekening : "+e);
         }
-        
+
         try (
             PreparedStatement ps = koneksi.prepareStatement(
                 "select set_akun_ralan.Suspen_Piutang_Radiologi_Ralan,set_akun_ralan.Radiologi_Ralan,"+
@@ -90,7 +90,7 @@ public final class akuntindakanradiologi {
             System.out.println("Notif Rekening : "+e);
         }
     }
-    
+
     public static String getSuspen_Piutang_Radiologi_Ranap(){return akuntindakanradiologi.Suspen_Piutang_Radiologi_Ranap;}
     public static String getRadiologi_Ranap(){return akuntindakanradiologi.Radiologi_Ranap;}
     public static String getBeban_Jasa_Medik_Dokter_Radiologi_Ranap(){return akuntindakanradiologi.Beban_Jasa_Medik_Dokter_Radiologi_Ranap;}

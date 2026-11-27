@@ -20,8 +20,8 @@
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,skrining_risiko_kanker_serviks.nip,petugas.nama,skrining_risiko_kanker_serviks.tanggal,reg_periksa.umurdaftar,reg_periksa.sttsumur,
                     skrining_risiko_kanker_serviks.riwayat_penyakit_keluarga,skrining_risiko_kanker_serviks.riwayat_penyakit_sendiri,skrining_risiko_kanker_serviks.risiko_merokok,skrining_risiko_kanker_serviks.risiko_kurang_fisik,
                     skrining_risiko_kanker_serviks.risiko_gula_berlebihan,skrining_risiko_kanker_serviks.risiko_garam_berlebihan,skrining_risiko_kanker_serviks.risiko_lemak_berlebihan,skrining_risiko_kanker_serviks.risiko_kurang_buah_sayur,
-                    skrining_risiko_kanker_serviks.risiko_alkohol,skrining_risiko_kanker_serviks.hasil_iva,skrining_risiko_kanker_serviks.hasil_skrining,skrining_risiko_kanker_serviks.keterangan from skrining_risiko_kanker_serviks 
-                    inner join reg_periksa on skrining_risiko_kanker_serviks.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    skrining_risiko_kanker_serviks.risiko_alkohol,skrining_risiko_kanker_serviks.hasil_iva,skrining_risiko_kanker_serviks.hasil_skrining,skrining_risiko_kanker_serviks.keterangan from skrining_risiko_kanker_serviks
+                    inner join reg_periksa on skrining_risiko_kanker_serviks.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join petugas on skrining_risiko_kanker_serviks.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

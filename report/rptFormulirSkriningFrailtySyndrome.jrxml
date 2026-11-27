@@ -24,7 +24,7 @@
                     skrining_frailty_syndrome.penyakit_asma,skrining_frailty_syndrome.penyakit_nyeri_sendi,skrining_frailty_syndrome.penyakit_paru_kronis,skrining_frailty_syndrome.penyakit_hipertensi,
                     skrining_frailty_syndrome.penyakit_diabetes,skrining_frailty_syndrome.nilai_penyakit,skrining_frailty_syndrome.usaha_berjalan,skrining_frailty_syndrome.nilai_usaha_berjalan,
                     skrining_frailty_syndrome.berat_badan,skrining_frailty_syndrome.nilai_berat_badan,skrining_frailty_syndrome.nilai_total,skrining_frailty_syndrome.hasil_skrining,
-                    skrining_frailty_syndrome.keterangan from skrining_frailty_syndrome inner join reg_periksa on skrining_frailty_syndrome.no_rawat=reg_periksa.no_rawat 
+                    skrining_frailty_syndrome.keterangan from skrining_frailty_syndrome inner join reg_periksa on skrining_frailty_syndrome.no_rawat=reg_periksa.no_rawat
                     inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_frailty_syndrome.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

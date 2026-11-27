@@ -5,7 +5,6 @@ $(function () {
     getMorris('donut', 'donut_chart');
 });
 
-
 function getMorris(type, element) {
     if (type === 'line') {
         Morris.Line({

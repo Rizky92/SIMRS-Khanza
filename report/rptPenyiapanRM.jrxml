@@ -30,15 +30,15 @@
 	<queryString>
 		<![CDATA[select reg_periksa.no_rkm_medis,pasien.nm_pasien,dokter.nm_dokter,poliklinik.nm_poli,
 reg_periksa.tgl_registrasi,reg_periksa.jam_reg,mutasi_berkas.dikirim,
-round((TIME_TO_SEC(concat(mutasi_berkas.dikirim))-TIME_TO_SEC(concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg)))/60,2) as durasi 
-from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join mutasi_berkas 
-on reg_periksa.kd_dokter=dokter.kd_dokter 
-and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+round((TIME_TO_SEC(concat(mutasi_berkas.dikirim))-TIME_TO_SEC(concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg)))/60,2) as durasi
+from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join mutasi_berkas
+on reg_periksa.kd_dokter=dokter.kd_dokter
+and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 and reg_periksa.kd_poli=poliklinik.kd_poli and reg_periksa.no_rawat=mutasi_berkas.no_rawat
-where reg_periksa.tgl_registrasi between $P{tanggal1} and $P{tanggal2} and poliklinik.nm_poli like $P{parameter} or 
-reg_periksa.tgl_registrasi between $P{tanggal1} and $P{tanggal2} and dokter.nm_dokter like $P{parameter} or 
-reg_periksa.tgl_registrasi between $P{tanggal1} and $P{tanggal2} and reg_periksa.no_rkm_medis like $P{parameter} or 
-reg_periksa.tgl_registrasi between $P{tanggal1} and $P{tanggal2} and pasien.nm_pasien like $P{parameter} 
+where reg_periksa.tgl_registrasi between $P{tanggal1} and $P{tanggal2} and poliklinik.nm_poli like $P{parameter} or
+reg_periksa.tgl_registrasi between $P{tanggal1} and $P{tanggal2} and dokter.nm_dokter like $P{parameter} or
+reg_periksa.tgl_registrasi between $P{tanggal1} and $P{tanggal2} and reg_periksa.no_rkm_medis like $P{parameter} or
+reg_periksa.tgl_registrasi between $P{tanggal1} and $P{tanggal2} and pasien.nm_pasien like $P{parameter}
 order by reg_periksa.tgl_registrasi,reg_periksa.jam_reg]]>
 	</queryString>
 	<field name="no_rkm_medis" class="java.lang.String">

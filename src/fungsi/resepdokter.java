@@ -27,6 +27,6 @@ public class resepdokter {
             System.out.println("Notif Pengaturan Resep Dokter Per Cara Bayar : "+e);
         }
     }
-    
+
     public static String getResepPerCaraBayar(){return resepdokter.ResepPerCaraBayar;}
 }

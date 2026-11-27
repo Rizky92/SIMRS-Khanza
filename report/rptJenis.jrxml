@@ -11,7 +11,7 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select kdjns, nama, keterangan 
+		<![CDATA[select kdjns, nama, keterangan
                  from jenis  order by kdjns]]>
 	</queryString>
 	<field name="kdjns" class="java.lang.String">

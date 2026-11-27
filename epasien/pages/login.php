@@ -21,7 +21,7 @@
                             <div class="col-md-12 col-sm-12">
                                 Jika anda pasien lama atau pernah berobat sebelumnya, untuk nomor rekam medis dan password login bisa Anda tanyakan kepada petugas Kami saat Anda melakukan registrasi secara offline. Dan password bisa Anda ubah setelah login di aplikasi EPasien. Jika Anda pasien baru dan belum pernah periksa sebelumnya, silahkan melakukan booking atau buat janji melalui menu utama EPasien ini. Setelah admin kami melakukan verifikasi data, Anda akan mendapat password login dan antrian periksa sesuai booking Anda.<br/><br/><br/>
                             </div>
-                            <?php 
+                            <?php
                                 $BtnLogin=isset($_POST['BtnLogin'])?$_POST['BtnLogin']:NULL;
                                 if (isset($BtnLogin)) {
                                     if(@$_SESSION["Capcay"]!= getOne2("select aes_encrypt(".cleankar($_POST["inputcaptcha"]).",'windi')")){
@@ -141,5 +141,3 @@
           </div>
      </section>
 </body>
-
-    

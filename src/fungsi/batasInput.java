@@ -32,7 +32,7 @@ public class batasInput {
                     upp[i]=Character.toUpperCase(upp[i]);
                         boolean isOnlyAngka=Character.isDigit(upp[i]);
                         boolean isOnlyLetter=Character.isLetter(upp[i]);
-                        boolean isOnlySpasi=Character.isSpaceChar(upp[i]);                        
+                        boolean isOnlySpasi=Character.isSpaceChar(upp[i]);
                         if(isOnlyLetter==true){
                             upp[c]=upp[i];
                             c++;
@@ -90,7 +90,7 @@ public class batasInput {
             }
         };return filter;
     }
-  
+
     public PlainDocument getOnlyAngka(final JTextField inputan) {
         filter=new PlainDocument(){
             @Override
@@ -134,7 +134,7 @@ public class batasInput {
                         boolean isOnlyAngka=Character.isDigit(upp[i]);
                         boolean isOnlyLetter=Character.isLetter(upp[i]);
                         boolean isOnlySpasi=Character.isSpaceChar(upp[i]);
-                        
+
                         if(isOnlyLetter==true){
                             upp[c]=upp[i];
                             c++;
@@ -157,7 +157,7 @@ public class batasInput {
             }
         };return filter;
     }
-   
+
     public PlainDocument getKata(final JTextArea inputan){
         filter=new PlainDocument(){
             @Override
@@ -169,7 +169,7 @@ public class batasInput {
                         boolean isOnlyAngka=Character.isDigit(upp[i]);
                         boolean isOnlyLetter=Character.isLetter(upp[i]);
                         boolean isOnlySpasi=Character.isSpaceChar(upp[i]);
-                        
+
                         if(isOnlyLetter==true){
                             upp[c]=upp[i];
                             c++;

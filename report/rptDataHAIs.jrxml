@@ -19,12 +19,12 @@
                     data_HAIs.ETT,data_HAIs.CVL,data_HAIs.IVL,data_HAIs.UC,data_HAIs.VAP,data_HAIs.IAD,
                     data_HAIs.PLEB,data_HAIs.ISK,data_HAIs.ILO,data_HAIs.HAP,data_HAIs.Tinea,data_HAIs.Scabies,
                     data_HAIs.DEKU,data_HAIs.SPUTUM,data_HAIs.DARAH,data_HAIs.URINE,data_HAIs.ANTIBIOTIK,
-                    concat(data_HAIs.kd_kamar,', ',bangsal.nm_bangsal),data_HAIs.kd_kamar from data_HAIs inner join reg_periksa 
-                    inner join pasien inner join kamar inner join bangsal on data_HAIs.kd_kamar=kamar.kd_kamar 
-                    and kamar.kd_bangsal=bangsal.kd_bangsal and data_HAIs.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis where 
-                    data_HAIs.tanggal between $P{tanggal1} and $P{tanggal2} and data_HAIs.no_rawat like $P{parameter} or 
-                    data_HAIs.tanggal between $P{tanggal1} and $P{tanggal2} and reg_periksa.no_rkm_medis like $P{parameter} or 
-                    data_HAIs.tanggal between $P{tanggal1} and $P{tanggal2} and bangsal.nm_bangsal like $P{parameter} or 
+                    concat(data_HAIs.kd_kamar,', ',bangsal.nm_bangsal),data_HAIs.kd_kamar from data_HAIs inner join reg_periksa
+                    inner join pasien inner join kamar inner join bangsal on data_HAIs.kd_kamar=kamar.kd_kamar
+                    and kamar.kd_bangsal=bangsal.kd_bangsal and data_HAIs.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis where
+                    data_HAIs.tanggal between $P{tanggal1} and $P{tanggal2} and data_HAIs.no_rawat like $P{parameter} or
+                    data_HAIs.tanggal between $P{tanggal1} and $P{tanggal2} and reg_periksa.no_rkm_medis like $P{parameter} or
+                    data_HAIs.tanggal between $P{tanggal1} and $P{tanggal2} and bangsal.nm_bangsal like $P{parameter} or
                     data_HAIs.tanggal between $P{tanggal1} and $P{tanggal2} and pasien.nm_pasien like $P{parameter} order by data_HAIs.tanggal]]>
 	</queryString>
 	<field name="tanggal" class="java.sql.Date">

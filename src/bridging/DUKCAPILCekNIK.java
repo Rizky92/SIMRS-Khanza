@@ -7,9 +7,9 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fungsi.sekuel;
 import fungsi.akses;
 import fungsi.koneksiDB;
+import fungsi.sekuel;
 import java.io.FileInputStream;
 import java.util.Properties;
 import javax.swing.JOptionPane;
@@ -34,7 +34,7 @@ public class DUKCAPILCekNIK {
     private String URL;
     private HttpHeaders headers;
     private HttpEntity requestEntity;
-    private RestTemplate rest = new RestTemplate();	            
+    private RestTemplate rest = new RestTemplate();
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode nameNode;
@@ -47,7 +47,7 @@ public class DUKCAPILCekNIK {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void tampil(String nik) {
         try {
 	    headers = new HttpHeaders();
@@ -58,15 +58,15 @@ public class DUKCAPILCekNIK {
                             "\"user_id\" : \""+koneksiDB.USERDUKCAPIL()+"\"," +
                             "\"password\": \""+koneksiDB.PASSDUKCAPIL()+"\"," +
                             "\"IP_USER\":\""+prop.getProperty("IPUSERDUKCAPIL")+"\"" +
-                            "}"; 
+                            "}";
             System.out.println("JSON dikirim : "+requestJson);
-	    requestEntity = new HttpEntity(requestJson,headers);	    
+	    requestEntity = new HttpEntity(requestJson,headers);
             stringbalik=rest.exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody();
             System.out.println("string balik : "+stringbalik);
             root = mapper.readTree(stringbalik);
             nameNode = root.path("content");
             if(nameNode.isArray()){
-                for(JsonNode list:nameNode){                    
+                for(JsonNode list:nameNode){
                     try {
                         if(list.path("RESPON").asText().equals("Data Tidak Ditemukan")){
                             JOptionPane.showMessageDialog(null,"Data Tidak Ditemukan");
@@ -107,7 +107,7 @@ public class DUKCAPILCekNIK {
                         }
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null,e+" "+list.path("RESPON").asText());
-                    }                            
+                    }
                 }
             }
         } catch (Exception ex) {
@@ -117,5 +117,5 @@ public class DUKCAPILCekNIK {
             }
         }
     }
-    
+
 }

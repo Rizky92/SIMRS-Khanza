@@ -23,9 +23,9 @@
                     penilaian_risiko_dekubitus.status_mental_nilai,penilaian_risiko_dekubitus.aktifitas,penilaian_risiko_dekubitus.aktifitas_nilai,
                     penilaian_risiko_dekubitus.mobilitas,penilaian_risiko_dekubitus.mobilitas_nilai,penilaian_risiko_dekubitus.inkontinensia,
                     penilaian_risiko_dekubitus.inkontinensia_nilai,penilaian_risiko_dekubitus.totalnilai,penilaian_risiko_dekubitus.kategorinilai,
-                    penilaian_risiko_dekubitus.nip,petugas.nama 
-                    from penilaian_risiko_dekubitus inner join reg_periksa on penilaian_risiko_dekubitus.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    penilaian_risiko_dekubitus.nip,petugas.nama
+                    from penilaian_risiko_dekubitus inner join reg_periksa on penilaian_risiko_dekubitus.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join petugas on penilaian_risiko_dekubitus.nip=petugas.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

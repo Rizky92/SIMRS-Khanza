@@ -9,14 +9,14 @@
     $url     = explode("/", $url);
     $header  = getallheaders();
     $method = $_SERVER['REQUEST_METHOD'];
-    
+
     if ($method == 'POST') {
         if (!empty($url[0])) {
             if (!empty($url[1])) {
                 if(($url[0]=="oauth")&&($url[1]=="token")){
                     $konten = trim(file_get_contents("php://input"));
                     $decode = json_decode($konten, true);
-                    if(empty($decode['grant_type'])) { 
+                    if(empty($decode['grant_type'])) {
                         $response = array(
                             'error' => 'invalid_client',
                             'error_description' => 'Bad client credentials'
@@ -28,7 +28,7 @@
                             'error_description' => 'Bad client credentials'
                         );
                         http_response_code(401);
-                    }else if(empty($decode['username'])) { 
+                    }else if(empty($decode['username'])) {
                         $response = array(
                             'error' => 'invalid_client',
                             'error_description' => 'Bad client credentials'
@@ -40,7 +40,7 @@
                             'error_description' => 'Bad client credentials'
                         );
                         http_response_code(401);
-                    }else if(empty($decode['password'])) { 
+                    }else if(empty($decode['password'])) {
                         $response = array(
                             'error' => 'invalid_client',
                             'error_description' => '401'
@@ -52,7 +52,7 @@
                             'error_description' => 'Bad client credentials'
                         );
                         http_response_code(401);
-                    }else if(empty($decode['client_id'])) { 
+                    }else if(empty($decode['client_id'])) {
                         $response = array(
                             'error' => 'invalid_client',
                             'error_description' => 'Bad client credentials'
@@ -64,7 +64,7 @@
                             'error_description' => 'Bad client credentials'
                         );
                         http_response_code(401);
-                    }else if(empty($decode['client_secret'])) { 
+                    }else if(empty($decode['client_secret'])) {
                         $response = array(
                             'error' => 'invalid_client',
                             'error_description' => 'Bad client credentials'
@@ -112,8 +112,8 @@
                                     }else if(cektoken(str_replace("bearer ","",$header['Authorization']))=="true"){
                                         $konten = trim(file_get_contents("php://input"));
                                         $decode = json_decode($konten, true);
-                                        if(!empty($decode['regNo'])){ 
-                                            if(!preg_match("/^[0-9]{1,14}$/",$decode['regNo'])){ 
+                                        if(!empty($decode['regNo'])){
+                                            if(!preg_match("/^[0-9]{1,14}$/",$decode['regNo'])){
                                                 $response = array(
                                                     'error' => 'invalid_parameter',
                                                     'error_description' => 'Error regNo'
@@ -122,7 +122,7 @@
                                             }else{
                                                 $query = bukaquery2("select tagihan_mandiri.no_rkm_medis,tagihan_mandiri.nm_pasien,tagihan_mandiri.jk,tagihan_mandiri.tgl_lahir,tagihan_mandiri.tgl_registrasi,
                                                                      tagihan_mandiri.no_nota,tagihan_mandiri.besar_bayar,tagihan_mandiri.no_rawat,tagihan_mandiri.status_lanjut,tagihan_mandiri.tgl_closing,
-                                                                     tagihan_mandiri.status_bayar,tagihan_mandiri.pembatalan,tagihan_mandiri.dibatalkan_oleh,tagihan_mandiri.besar_batal,tagihan_mandiri.no_id 
+                                                                     tagihan_mandiri.status_bayar,tagihan_mandiri.pembatalan,tagihan_mandiri.dibatalkan_oleh,tagihan_mandiri.besar_batal,tagihan_mandiri.no_id
                                                                      from tagihan_mandiri where tagihan_mandiri.no_id='".validTeks3($decode['regNo'],14)."' and tagihan_mandiri.status_bayar='Pending'");
                                                 if(num_rows($query)>0) {
                                                     if($rsquery = mysqli_fetch_array($query)) {
@@ -131,8 +131,8 @@
                                                         $kodedokter = "";
                                                         $namadokter = "";
                                                         if($rsquery["status_lanjut"]=="Ralan"){
-                                                            $queryralan = bukaquery2("select reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.kd_poli,poliklinik.nm_poli from reg_periksa 
-                                                                                    inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli 
+                                                            $queryralan = bukaquery2("select reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.kd_poli,poliklinik.nm_poli from reg_periksa
+                                                                                    inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli
                                                                                     where reg_periksa.no_rawat='".$rsquery["no_rawat"]."'");
                                                             if($rsqueryralan = mysqli_fetch_array($queryralan)) {
                                                                 $kodelokasi = "0001";
@@ -169,7 +169,7 @@
                                                             'additional1' => $namalokasi,
                                                             'additional2' => ($rsquery["status_lanjut"]=="Ralan"?"":$namadokter),
                                                             'additional3' => ''
-                                                        ); 
+                                                        );
                                                         $response = array(
                                                             'code' => 200,
                                                             'message' => 'success',
@@ -219,7 +219,7 @@
                                                 }
                                             }
                                         }else{
-                                            if(empty($decode['rmNo'])){ 
+                                            if(empty($decode['rmNo'])){
                                                 $response = array(
                                                     'error' => 'invalid_parameter',
                                                     'error_description' => 'Error rmNo'
@@ -231,7 +231,7 @@
                                                     'error_description' => 'Error rmNo'
                                                 );
                                                 http_response_code(401);
-                                            }else if(empty($decode['startDate'])){ 
+                                            }else if(empty($decode['startDate'])){
                                                 $response = array(
                                                     'error' => 'invalid_parameter',
                                                     'error_description' => 'Error startDate'
@@ -243,7 +243,7 @@
                                                     'error_description' => 'Error startDate'
                                                 );
                                                 http_response_code(401);
-                                            }else if(empty($decode['endDate'])){ 
+                                            }else if(empty($decode['endDate'])){
                                                 $response = array(
                                                     'error' => 'invalid_parameter',
                                                     'error_description' => 'Error endDate'
@@ -256,15 +256,15 @@
                                                 );
                                                 http_response_code(401);
                                             }else{
-                                                $query = bukaquery2("select tagihan_mandiri.no_rkm_medis,tagihan_mandiri.nm_pasien,tagihan_mandiri.jk,tagihan_mandiri.tgl_lahir from tagihan_mandiri 
-                                                                     where tagihan_mandiri.no_rkm_medis='".validTeks3($decode['rmNo'],14)."' and tagihan_mandiri.tgl_closing between  
+                                                $query = bukaquery2("select tagihan_mandiri.no_rkm_medis,tagihan_mandiri.nm_pasien,tagihan_mandiri.jk,tagihan_mandiri.tgl_lahir from tagihan_mandiri
+                                                                     where tagihan_mandiri.no_rkm_medis='".validTeks3($decode['rmNo'],14)."' and tagihan_mandiri.tgl_closing between
                                                                      '".validTeks3($decode['startDate'],10)." 00:00:01' and '".validTeks3($decode['endDate'],10)." 23:59:59'");
                                                 if(num_rows($query)>0) {
                                                     if($rsquery = mysqli_fetch_array($query)){
                                                         $nomor=1;
                                                         $querycari=bukaquery2("select tagihan_mandiri.tgl_registrasi,tagihan_mandiri.no_nota,tagihan_mandiri.besar_bayar,tagihan_mandiri.no_rawat,tagihan_mandiri.no_id,
                                                                                tagihan_mandiri.status_lanjut,tagihan_mandiri.status_bayar,tagihan_mandiri.pembatalan,tagihan_mandiri.dibatalkan_oleh,
-                                                                               tagihan_mandiri.besar_batal from tagihan_mandiri where tagihan_mandiri.no_rkm_medis='".validTeks3($decode['rmNo'],14)."' and 
+                                                                               tagihan_mandiri.besar_batal from tagihan_mandiri where tagihan_mandiri.no_rkm_medis='".validTeks3($decode['rmNo'],14)."' and
                                                                                tagihan_mandiri.tgl_closing between '".validTeks3($decode['startDate'],10)." 00:00:01' and '".validTeks3($decode['endDate'],10)." 23:59:59'");
                                                         while($rsquerycari = mysqli_fetch_array($querycari)) {
                                                             $kodelokasi = "";
@@ -272,8 +272,8 @@
                                                             $kodedokter = "";
                                                             $namadokter = "";
                                                             if($rsquerycari["status_lanjut"]=="Ralan"){
-                                                                $queryralan = bukaquery2("select reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.kd_poli,poliklinik.nm_poli from reg_periksa 
-                                                                                        inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli 
+                                                                $queryralan = bukaquery2("select reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.kd_poli,poliklinik.nm_poli from reg_periksa
+                                                                                        inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli
                                                                                         where reg_periksa.no_rawat='".$rsquerycari["no_rawat"]."'");
                                                                 if($rsqueryralan = mysqli_fetch_array($queryralan)) {
                                                                     $kodelokasi = "0001";
@@ -310,7 +310,7 @@
                                                                 'additional1' => $namalokasi,
                                                                 'additional2' => ($rsquerycari["status_lanjut"]=="Ralan"?"":$namadokter),
                                                                 'additional3' => ''
-                                                            ); 
+                                                            );
                                                             $nomor++;
                                                         }
                                                         $response = array(
@@ -388,7 +388,7 @@
                                     }else if(cektoken(str_replace("bearer ","",$header['Authorization']))=="true"){
                                         $konten = trim(file_get_contents("php://input"));
                                         $decode = json_decode($konten, true);
-                                        if(empty($decode['regNo'])){ 
+                                        if(empty($decode['regNo'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error regNo'
@@ -400,7 +400,7 @@
                                                 'error_description' => 'Error regNo'
                                             );
                                             http_response_code(401);
-                                        }else if(empty($decode['rmNo'])){ 
+                                        }else if(empty($decode['rmNo'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error rmNo'
@@ -412,7 +412,7 @@
                                                 'error_description' => 'Error rmNo'
                                             );
                                             http_response_code(401);
-                                        }else if(empty($decode['pasienName'])){ 
+                                        }else if(empty($decode['pasienName'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error rmNo'
@@ -424,7 +424,7 @@
                                                 'error_description' => 'Error pasienName'
                                             );
                                             http_response_code(401);
-                                        }else if(empty($decode['regDate'])){ 
+                                        }else if(empty($decode['regDate'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error regDate'
@@ -436,7 +436,7 @@
                                                 'error_description' => 'Error regDate'
                                             );
                                             http_response_code(401);
-                                        }else if(!isset($decode['jenisPelayananId'])){ 
+                                        }else if(!isset($decode['jenisPelayananId'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error jenisPelayananId'
@@ -448,7 +448,7 @@
                                                 'error_description' => 'Error jenisPelayananId'
                                             );
                                             http_response_code(401);
-                                        }else if(!isset($decode['paymentTp'])){ 
+                                        }else if(!isset($decode['paymentTp'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error paymentTp'
@@ -460,7 +460,7 @@
                                                 'error_description' => 'Error paymentTp'
                                             );
                                             http_response_code(401);
-                                        }else if(empty($decode['trxNo'])){ 
+                                        }else if(empty($decode['trxNo'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error trxNo'
@@ -472,7 +472,7 @@
                                                 'error_description' => 'Error trxNo'
                                             );
                                             http_response_code(401);
-                                        }else if(empty($decode['noKuitansi'])){ 
+                                        }else if(empty($decode['noKuitansi'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error noKuitansi'
@@ -484,7 +484,7 @@
                                                 'error_description' => 'Error noKuitansi'
                                             );
                                             http_response_code(401);
-                                        }else if(!isset($decode['paidFlag'])){ 
+                                        }else if(!isset($decode['paidFlag'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error paidFlag'
@@ -496,7 +496,7 @@
                                                 'error_description' => 'Error paidFlag'
                                             );
                                             http_response_code(401);
-                                        }else if(!isset($decode['paymentBill'])){ 
+                                        }else if(!isset($decode['paymentBill'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error paymentBill'
@@ -508,7 +508,7 @@
                                                 'error_description' => 'Error paymentBill'
                                             );
                                             http_response_code(401);
-                                        }else if(!isset($decode['newPaymentBill'])){ 
+                                        }else if(!isset($decode['newPaymentBill'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error newPaymentBill'
@@ -520,7 +520,7 @@
                                                 'error_description' => 'Error newPaymentBill'
                                             );
                                             http_response_code(401);
-                                        }else if(empty($decode['timeStamp'])){ 
+                                        }else if(empty($decode['timeStamp'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error timeStamp'
@@ -696,7 +696,7 @@
                                     }else if(cektoken(str_replace("bearer ","",$header['Authorization']))=="true"){
                                         $konten = trim(file_get_contents("php://input"));
                                         $decode = json_decode($konten, true);
-                                        if(empty($decode['noKuitansi'])){ 
+                                        if(empty($decode['noKuitansi'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error noKuitansi'
@@ -708,7 +708,7 @@
                                                 'error_description' => 'Error noKuitansi'
                                             );
                                             http_response_code(401);
-                                        }else if(empty($decode['timeStamp'])){ 
+                                        }else if(empty($decode['timeStamp'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error timeStamp'
@@ -729,8 +729,8 @@
                                                     $kodedokter = "";
                                                     $namadokter = "";
                                                     if($rsquery["status_lanjut"]=="Ralan"){
-                                                        $queryralan = bukaquery2("select reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.kd_poli,poliklinik.nm_poli from reg_periksa 
-                                                                                inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli 
+                                                        $queryralan = bukaquery2("select reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.kd_poli,poliklinik.nm_poli from reg_periksa
+                                                                                inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli
                                                                                 where reg_periksa.no_rawat='".$rsquery["no_rawat"]."'");
                                                         if($rsqueryralan = mysqli_fetch_array($queryralan)) {
                                                             $kodelokasi = "0001";
@@ -767,7 +767,7 @@
                                                         'additional1' => $rsquery["tambahan1"],
                                                         'additional2' => $rsquery["tambahan2"],
                                                         'additional3' => $rsquery["tambahan3"]
-                                                    ); 
+                                                    );
                                                     $response = array(
                                                         'code' => 200,
                                                         'message' => 'success',
@@ -842,7 +842,7 @@
                                     }else if(cektoken(str_replace("bearer ","",$header['Authorization']))=="true"){
                                         $konten = trim(file_get_contents("php://input"));
                                         $decode = json_decode($konten, true);
-                                        if(empty($decode['regNo'])){ 
+                                        if(empty($decode['regNo'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error regNo'
@@ -854,7 +854,7 @@
                                                 'error_description' => 'Error regNo'
                                             );
                                             http_response_code(401);
-                                        }else if(empty($decode['rmNo'])){ 
+                                        }else if(empty($decode['rmNo'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error rmNo'
@@ -866,7 +866,7 @@
                                                 'error_description' => 'Error rmNo'
                                             );
                                             http_response_code(401);
-                                        }else if(empty($decode['pasienName'])){ 
+                                        }else if(empty($decode['pasienName'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error rmNo'
@@ -878,7 +878,7 @@
                                                 'error_description' => 'Error pasienName'
                                             );
                                             http_response_code(401);
-                                        }else if(empty($decode['regDate'])){ 
+                                        }else if(empty($decode['regDate'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error regDate'
@@ -890,7 +890,7 @@
                                                 'error_description' => 'Error regDate'
                                             );
                                             http_response_code(401);
-                                        }else if(!isset($decode['jenisPelayananId'])){ 
+                                        }else if(!isset($decode['jenisPelayananId'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error jenisPelayananId'
@@ -902,7 +902,7 @@
                                                 'error_description' => 'Error jenisPelayananId'
                                             );
                                             http_response_code(401);
-                                        }else if(!isset($decode['paymentTp'])){ 
+                                        }else if(!isset($decode['paymentTp'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error paymentTp'
@@ -914,7 +914,7 @@
                                                 'error_description' => 'Error paymentTp'
                                             );
                                             http_response_code(401);
-                                        }else if(empty($decode['trxNo'])){ 
+                                        }else if(empty($decode['trxNo'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error trxNo'
@@ -926,7 +926,7 @@
                                                 'error_description' => 'Error trxNo'
                                             );
                                             http_response_code(401);
-                                        }else if(empty($decode['noKuitansi'])){ 
+                                        }else if(empty($decode['noKuitansi'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error noKuitansi'
@@ -938,7 +938,7 @@
                                                 'error_description' => 'Error noKuitansi'
                                             );
                                             http_response_code(401);
-                                        }else if(empty($decode['oldNoKuitansi'])){ 
+                                        }else if(empty($decode['oldNoKuitansi'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error oldNoKuitansi'
@@ -950,7 +950,7 @@
                                                 'error_description' => 'Error oldNoKuitansi'
                                             );
                                             http_response_code(401);
-                                        }else if(!isset($decode['paidFlag'])){ 
+                                        }else if(!isset($decode['paidFlag'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error paidFlag'
@@ -962,7 +962,7 @@
                                                 'error_description' => 'Error paidFlag'
                                             );
                                             http_response_code(401);
-                                        }else if(!isset($decode['cancelFlag'])){ 
+                                        }else if(!isset($decode['cancelFlag'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error cancelFlag'
@@ -974,7 +974,7 @@
                                                 'error_description' => 'Error cancelFlag'
                                             );
                                             http_response_code(401);
-                                        }else if(!isset($decode['isCancel'])){ 
+                                        }else if(!isset($decode['isCancel'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error isCancel'
@@ -986,7 +986,7 @@
                                                 'error_description' => 'Error isCancel'
                                             );
                                             http_response_code(401);
-                                        }else if(!isset($decode['paymentBill'])){ 
+                                        }else if(!isset($decode['paymentBill'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error paymentBill'
@@ -998,7 +998,7 @@
                                                 'error_description' => 'Error paymentBill'
                                             );
                                             http_response_code(401);
-                                        }else if(!isset($decode['cancelNominal'])){ 
+                                        }else if(!isset($decode['cancelNominal'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error cancelNominal'
@@ -1010,7 +1010,7 @@
                                                 'error_description' => 'Error cancelNominal'
                                             );
                                             http_response_code(401);
-                                        }else if(!isset($decode['newPaymentBill'])){ 
+                                        }else if(!isset($decode['newPaymentBill'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error newPaymentBill'
@@ -1022,7 +1022,7 @@
                                                 'error_description' => 'Error newPaymentBill'
                                             );
                                             http_response_code(401);
-                                        }else if(empty($decode['timeStamp'])){ 
+                                        }else if(empty($decode['timeStamp'])){
                                             $response = array(
                                                 'error' => 'invalid_parameter',
                                                 'error_description' => 'Error timeStamp'
@@ -1241,7 +1241,7 @@
             }
         }
     }
-    
+
     if (!empty($response)) {
         echo json_encode($response);
     } else {

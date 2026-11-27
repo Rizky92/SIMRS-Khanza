@@ -56,9 +56,9 @@ public class frmUtama extends javax.swing.JFrame {
      */
     public frmUtama() {
         initComponents();
-        
+
         this.setSize(390,340);
-        
+
         jam();
     }
 
@@ -106,7 +106,7 @@ public class frmUtama extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -176,7 +176,7 @@ public class frmUtama extends javax.swing.JFrame {
                 if(jam.equals("01")&&menit.equals("01")&&detik.equals("01")){
                     TeksArea.setText("");
                 }
-                
+
                 if(jam.equals("15")&&menit.equals("01")&&detik.equals("01")){
                     try {
                         date = new Date();
@@ -205,19 +205,19 @@ public class frmUtama extends javax.swing.JFrame {
                                         TeksArea.append("--> File "+norekening+"MT940"+formattanggal.format(date)+" ditemukan, proses menyalin ke lokal\n");
                                         sftpChannel.get(koneksiDB.SFTPMANDIRIPATHMT940()+"/"+norekening+"MT940"+formattanggal.format(date),"./cache");
                                         file=new File("./cache/"+norekening+"MT940"+formattanggal.format(date));
-                                        sc = new Scanner(file);  
+                                        sc = new Scanner(file);
                                         sc.useDelimiter(":");
                                         data=new StringBuffer();
                                         json="";
-                                        while (sc.hasNext()){  
+                                        while (sc.hasNext()){
                                             json=sc.nextLine();
                                             if(json.contains(":61:")||json.contains(":86:")){
                                                 data.append(json+";");
                                             }
-                                        }   
+                                        }
                                         json="{"+data.toString().replaceAll(";:86:","\",\"referensi\":\"").replaceAll(";:61:","\"},{\"transaksi\":\"").replaceAll(":61:","\"transaksi\":\"")+"}";
                                         json="{\"data\":["+json.substring(0,json.length()-2)+"\"}]}";
-                                        sc.close();   
+                                        sc.close();
                                         TeksArea.append("--> "+json+"\n");
                                         if(!json.equals("")){
                                             root = mapper.readTree(json);
@@ -258,7 +258,7 @@ public class frmUtama extends javax.swing.JFrame {
                         System.out.println("Notif 1 : "+ex);
                     }
                 }
-                
+
                 if(detik.equals("01")&&((nilai_menit%20)==0)){
                     try {
                         ps=koneksi.prepareStatement(
@@ -323,7 +323,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                             }
                                                         }
                                                     }
-                                                } 
+                                                }
                                             } catch (SftpException x) {
                                                 if (x.id == SSH_FX_NO_SUCH_FILE) {
                                                     TeksArea.append("--> File "+rs.getString("nomor_pembayaran")+".txt tidak ditemukan, dilakukan proses generate file\n");

@@ -17,8 +17,8 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select DATE_FORMAT(toko_bayar_piutang.tgl_bayar,'%Y-%m-%d') as tanggal,toko_bayar_piutang.nota_piutang,
-                toko_bayar_piutang.no_member,tokomember.nama,rekening.nm_rek,toko_bayar_piutang.besar_cicilan 
-                from toko_bayar_piutang inner join tokomember on toko_bayar_piutang.no_member=tokomember.no_member 
+                toko_bayar_piutang.no_member,tokomember.nama,rekening.nm_rek,toko_bayar_piutang.besar_cicilan
+                from toko_bayar_piutang inner join tokomember on toko_bayar_piutang.no_member=tokomember.no_member
                 inner join rekening on rekening.kd_rek=toko_bayar_piutang.kd_rek]]>
 	</queryString>
 	<field name="tanggal" class="java.lang.String">

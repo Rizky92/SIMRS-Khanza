@@ -25,9 +25,9 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select tokobarang.kode_brng,tokobarang.nama_brng,kodesatuan.satuan,tokojenisbarang.nm_jenis, 
-tokobarang.stok,tokobarang.dasar,tokobarang.h_beli,tokobarang.distributor,tokobarang.grosir,tokobarang.retail 
-from tokobarang inner join kodesatuan on tokobarang.kode_sat=kodesatuan.kode_sat 
+		<![CDATA[select tokobarang.kode_brng,tokobarang.nama_brng,kodesatuan.satuan,tokojenisbarang.nm_jenis,
+tokobarang.stok,tokobarang.dasar,tokobarang.h_beli,tokobarang.distributor,tokobarang.grosir,tokobarang.retail
+from tokobarang inner join kodesatuan on tokobarang.kode_sat=kodesatuan.kode_sat
 inner join tokojenisbarang on tokobarang.jenis=tokojenisbarang.kd_jenis
 where tokobarang.status='1' order by tokobarang.kode_brng]]>
 	</queryString>

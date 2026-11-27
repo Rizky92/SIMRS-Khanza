@@ -11,7 +11,7 @@
                           <h2>Poli/Unit Yang Kami Layani</h2>
                      </div>
                 </div>
-                       
+
                 <div class="col-md-12 col-sm-12">
                      <div class="news-thumb wow fadeInUp" data-wow-delay="0.3s">
                          <form id="cariKamar" name="frmCariPoli" method="post" action="" enctype=multipart/form-data>
@@ -31,7 +31,7 @@
                                    <th width="25%"><center>Registrasi Pasien Baru</center></th>
                                    <th width="25%"><center>Registrasi Pasien Lama</center></th>
                                </tr>
-                               <?php 
+                               <?php
                                   $poli      = trim(isset($_POST['poli']))?trim($_POST['poli']):NULL;
                                   $poli      = cleankar($poli);
                                   if(strlen($poli)>20){
@@ -47,7 +47,7 @@
                                         }
                                   }
                               ?>
-                           </table> 
+                           </table>
                          </div>
                      </div>
                 </div>

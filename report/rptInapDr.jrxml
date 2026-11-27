@@ -13,12 +13,12 @@
 	<queryString>
 		<![CDATA[select rawat_inap_dr.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,
                    jns_perawatan_inap.nm_perawatan,rawat_inap_dr.kd_dokter,dokter.nm_dokter,
-                   rawat_inap_dr.tgl_perawatan,rawat_inap_dr.jam_rawat,rawat_inap_dr.biaya_rawat  
-                   from pasien inner join reg_periksa inner join jns_perawatan_inap inner join 
-                   dokter inner join rawat_inap_dr 
-                   on rawat_inap_dr.no_rawat=reg_periksa.no_rawat 
-                   and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                   and rawat_inap_dr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw 
+                   rawat_inap_dr.tgl_perawatan,rawat_inap_dr.jam_rawat,rawat_inap_dr.biaya_rawat
+                   from pasien inner join reg_periksa inner join jns_perawatan_inap inner join
+                   dokter inner join rawat_inap_dr
+                   on rawat_inap_dr.no_rawat=reg_periksa.no_rawat
+                   and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                   and rawat_inap_dr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw
                    and rawat_inap_dr.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

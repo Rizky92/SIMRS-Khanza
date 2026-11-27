@@ -24,17 +24,17 @@ public class Menu extends JMenu {
 
     private static final long serialVersionUID = 1L;
 
-    static final Color AKSEN       = new Color(22, 160, 93);     
+    static final Color AKSEN       = new Color(22, 160, 93);
     static final Color PILIH_PASIF = new Color(220, 234, 226);
     static final Color TEKS        = new Color(50, 50, 50);
     static final Color SHORTCUT    = new Color(120, 120, 120);
-    static final Color LATAR       = new Color(255, 255, 254);  
+    static final Color LATAR       = new Color(255, 255, 254);
     static final Font  FONT        = new Font("Tahoma", Font.PLAIN, 11);
     static final Border PADDING    = new EmptyBorder(0, 6, 0, 6);
     static final int   TINGGI_MIN  = 24;
-    static final int   R           = 4;   
+    static final int   R           = 4;
     static final Color PANAH       = new Color(140, 140, 140);
-    static final Color PILL_ATAS   = new Color(255, 255, 255, 50);  
+    static final Color PILL_ATAS   = new Color(255, 255, 255, 50);
 
     private static final BufferedImage PANAH_ABU   = buatPanah(PANAH);
     private static final BufferedImage PANAH_PUTIH = buatPanah(Color.WHITE);
@@ -86,7 +86,7 @@ public class Menu extends JMenu {
     @Override
     public void setPopupMenuVisible(boolean b) {
         if (b && !modeDesain()) {
-            widget.PopupMenu.gayakanBilaAman(getPopupMenu(), this);   
+            widget.PopupMenu.gayakanBilaAman(getPopupMenu(), this);
         }
         super.setPopupMenuVisible(b);
     }
@@ -112,7 +112,7 @@ public class Menu extends JMenu {
     }
 
     private void gaya() {
-        if (modeDesain()) {          
+        if (modeDesain()) {
             return;
         }
         setFont(FONT);
@@ -124,7 +124,7 @@ public class Menu extends JMenu {
 
     @Override
     public void updateUI() {
-        if (modeDesain()) {         
+        if (modeDesain()) {
             super.updateUI();
             return;
         }
@@ -167,8 +167,8 @@ public class Menu extends JMenu {
             selectionForeground = Color.WHITE;
             acceleratorForeground = SHORTCUT;
             acceleratorSelectionForeground = Color.WHITE;
-            checkIcon = null;            
-            arrowIcon = IKON_PANAH;      
+            checkIcon = null;
+            arrowIcon = IKON_PANAH;
         }
 
         @Override

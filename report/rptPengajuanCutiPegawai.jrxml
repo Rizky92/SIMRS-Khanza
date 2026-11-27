@@ -26,7 +26,7 @@
 	<queryString>
 		<![CDATA[select pengajuan_cuti.no_pengajuan,pengajuan_cuti.tanggal,pengajuan_cuti.tanggal_awal,pengajuan_cuti.tanggal_akhir,
 pengajuan_cuti.urgensi,pengajuan_cuti.alamat,pengajuan_cuti.jumlah,
-pengajuan_cuti.kepentingan,pengajuan_cuti.nik_pj,pegawai.nama,pengajuan_cuti.status 
+pengajuan_cuti.kepentingan,pengajuan_cuti.nik_pj,pegawai.nama,pengajuan_cuti.status
 from pengajuan_cuti inner join pegawai on pengajuan_cuti.nik_pj=pegawai.nik]]>
 	</queryString>
 	<field name="no_pengajuan" class="java.lang.String">

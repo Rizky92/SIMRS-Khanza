@@ -13,10 +13,10 @@
 	<queryString>
 		<![CDATA[select rujuk.no_rujuk,rujuk.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,
 rujuk.rujuk_ke,rujuk.tgl_rujuk,rujuk.jam,rujuk.keterangan_diagnosa,rujuk.kd_dokter,
-dokter.nm_dokter,rujuk.kat_rujuk,rujuk.ambulance,rujuk.keterangan 
-from rujuk inner join reg_periksa inner join pasien inner join dokter 
-on rujuk.no_rawat=reg_periksa.no_rawat 
-and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+dokter.nm_dokter,rujuk.kat_rujuk,rujuk.ambulance,rujuk.keterangan
+from rujuk inner join reg_periksa inner join pasien inner join dokter
+on rujuk.no_rawat=reg_periksa.no_rawat
+and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 and rujuk.kd_dokter=dokter.kd_dokter ]]>
 	</queryString>
 	<field name="no_rujuk" class="java.lang.String">

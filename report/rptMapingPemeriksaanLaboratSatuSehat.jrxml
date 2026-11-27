@@ -27,9 +27,9 @@
 	<parameter name="parameter" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select satu_sehat_mapping_lab.id_template,template_laboratorium.Pemeriksaan,satu_sehat_mapping_lab.code,satu_sehat_mapping_lab.system,
-                   satu_sehat_mapping_lab.display from satu_sehat_mapping_lab inner join template_laboratorium 
-                   on satu_sehat_mapping_lab.id_template=template_laboratorium.id_template 
-                   where satu_sehat_mapping_lab.id_template like $P{parameter} or template_laboratorium.Pemeriksaan like $P{parameter} or 
+                   satu_sehat_mapping_lab.display from satu_sehat_mapping_lab inner join template_laboratorium
+                   on satu_sehat_mapping_lab.id_template=template_laboratorium.id_template
+                   where satu_sehat_mapping_lab.id_template like $P{parameter} or template_laboratorium.Pemeriksaan like $P{parameter} or
                    satu_sehat_mapping_lab.code like $P{parameter} or satu_sehat_mapping_lab.display like $P{parameter}
                     order by satu_sehat_mapping_lab.code]]>
 	</queryString>

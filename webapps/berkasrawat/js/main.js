@@ -12,7 +12,7 @@
             else {
                 $(this).removeClass('has-val');
             }
-        })    
+        })
     })
 
     /*==================================================================
@@ -31,7 +31,6 @@
 
         return check;
     });
-
 
     $('.validate-form .input100').each(function(){
         $(this).focus(function(){
@@ -63,6 +62,5 @@
 
         $(thisAlert).removeClass('alert-validate');
     }
-    
 
 })(jQuery);

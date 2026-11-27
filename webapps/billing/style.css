@@ -76,7 +76,6 @@ img.aligncenter {
 
 /* Header */
 
-
 #header {
 	width: 100%;
 	height: 130px;
@@ -102,7 +101,6 @@ img.aligncenter {
 	font-size:11px;
         font-family: "serif", Times, serif;
 }
-
 
 /* Logo */
 
@@ -134,7 +132,7 @@ img.aligncenter {
 }
 
 #logo p {
-	
+
 	text-align: center;
 	font-family: 'Abel', sans-serif;
 	font-size: 20px;
@@ -216,7 +214,7 @@ img.aligncenter {
 	text-decoration: none;
 	text-transform: lowercase;
 	text-shadow: 2px 2px 2px #2E7C0E;
-	font-family: 'Abel', sans-serif;	
+	font-family: 'Abel', sans-serif;
 	font-size: 24px;
 	font-weight: normal;
 	color: #FFFFFF;
@@ -303,7 +301,6 @@ img.aligncenter {
 	padding: 10px 0px 0px 0px;
 }
 
-
 #post b {
 	color: #9f9f98;
 	font-weight:bold;
@@ -345,7 +342,6 @@ img.aligncenter {
         font-family: "Tahoma",Arial,Verdana, serif;
         font-size: 12px;
 }
-
 
 .links {
 	display: block;
@@ -445,7 +441,6 @@ img.aligncenter {
 	text-decoration: none;
 	font-size:12px;
 }
-
 
 /* Calendar */
 
@@ -552,7 +547,6 @@ background:url(images/checked.png) no-repeat left #7bbcc7; color:#FFFFFF;backgro
         color:#504b4b;
 }
 
-
 /*--------------*/
 
 .head td{
@@ -573,7 +567,7 @@ background:url(images/checked.png) no-repeat left #7bbcc7; color:#FFFFFF;backgro
 	padding: 6px 1px 6px 1px;
         background: #555555;
 	color:#DDDDDD;
-	font: 12px  "Tahoma", Arial, Helvetica, sans-serif;	
+	font: 12px  "Tahoma", Arial, Helvetica, sans-serif;
         height:100%
 }
 
@@ -677,7 +671,6 @@ background:url(images/checked.png) no-repeat left #7bbcc7; color:#FFFFFF;backgro
 	font-style: italic;
 }
 
-
 .head9 td{
 	font: 12px  "Arial", Arial, Helvetica, sans-serif;
         font-style: italic;
@@ -724,13 +717,12 @@ background:url(images/checked.png) no-repeat left #7bbcc7; color:#FFFFFF;backgro
 	padding-left:8px;
 	padding-right:8px;
 	color:#CC6699;
-	font: 12px  "Tahoma", Arial, Helvetica, sans-serif;	
+	font: 12px  "Tahoma", Arial, Helvetica, sans-serif;
         height:100%
 }
 
-
 .isi12 td{
-	
+
 	/*border-bottom: 1px solid #FFFFFF;*/
 	background: #ffffff;
 	padding-top:0px;
@@ -742,7 +734,7 @@ background:url(images/checked.png) no-repeat left #7bbcc7; color:#FFFFFF;backgro
 }
 
 .isi13 td{
-	
+
 	border-bottom: 0px;
 	background: #ffffff;
 	padding-top:0px;
@@ -770,7 +762,7 @@ background:url(images/checked.png) no-repeat left #7bbcc7; color:#FFFFFF;backgro
 	border: none;
 	background: #915555;
 	font-size: 12px;
-	color: #FFFFFF;        
+	color: #FFFFFF;
         font-family: "Tahoma", Times, serif;
          width:60px;
 }
@@ -825,7 +817,6 @@ background:url(images/checked.png) no-repeat left #7bbcc7; color:#FFFFFF;backgro
 	color: #BF3600;
         list-style: none;
 }
-
 
 /*---------------contact_form------------------*/
 .contact_form{
@@ -936,4 +927,3 @@ input.register{
         font-family:Arial, Georgia,Verdana, "Tahoma";
         font-size: 12px;
 }
-

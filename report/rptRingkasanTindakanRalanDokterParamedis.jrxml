@@ -30,12 +30,12 @@
 	<queryString>
 		<![CDATA[select rawat_jl_drpr.kd_jenis_prw,jns_perawatan.nm_perawatan,
 sum(rawat_jl_drpr.material) as material,sum(rawat_jl_drpr.bhp) as bhp,sum(rawat_jl_drpr.tarif_tindakandr) as tarif_tindakandr,sum(rawat_jl_drpr.tarif_tindakanpr) as tarif_tindakanpr,
-sum(rawat_jl_drpr.kso) as kso,sum(rawat_jl_drpr.menejemen) as menejemen,sum(rawat_jl_drpr.biaya_rawat) as biaya_rawat,count(rawat_jl_drpr.kd_jenis_prw) as jumlah 
-from pasien inner join reg_periksa on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-inner join rawat_jl_drpr on rawat_jl_drpr.no_rawat=reg_periksa.no_rawat 
-inner join jns_perawatan on rawat_jl_drpr.kd_jenis_prw=jns_perawatan.kd_jenis_prw 
-inner join dokter on rawat_jl_drpr.kd_dokter=dokter.kd_dokter 
-inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli 
+sum(rawat_jl_drpr.kso) as kso,sum(rawat_jl_drpr.menejemen) as menejemen,sum(rawat_jl_drpr.biaya_rawat) as biaya_rawat,count(rawat_jl_drpr.kd_jenis_prw) as jumlah
+from pasien inner join reg_periksa on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+inner join rawat_jl_drpr on rawat_jl_drpr.no_rawat=reg_periksa.no_rawat
+inner join jns_perawatan on rawat_jl_drpr.kd_jenis_prw=jns_perawatan.kd_jenis_prw
+inner join dokter on rawat_jl_drpr.kd_dokter=dokter.kd_dokter
+inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli
 inner join penjab on reg_periksa.kd_pj=penjab.kd_pj inner join petugas on rawat_jl_drpr.nip=petugas.nip]]>
 	</queryString>
 	<field name="kd_jenis_prw" class="java.lang.String">

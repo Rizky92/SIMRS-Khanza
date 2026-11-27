@@ -25,12 +25,12 @@
                     </tr>";
                     while($baris = mysqli_fetch_array($hasil)) {
                         echo "<tr class='isi'>
-				<td>$no</td>  
+				<td>$no</td>
                                 <td>$baris[0]</td>
                                 <td>$baris[1]</td>
                                 <td>".formatDuit($baris[2])."</td>
                                 <td>".formatDuit($baris[3])."</td>
-                                <td>$baris[4]</td> 
+                                <td>$baris[4]</td>
                              </tr>";$no++;
                     }
             echo "</table>";
@@ -45,7 +45,7 @@
                         <td width='15%'><div align='center'>Jml Tahun Maksimal</div></td>
                     </tr>
                   </table>";
-        } 
+        }
     ?>
     </body>
 </html>

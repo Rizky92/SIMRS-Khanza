@@ -23,15 +23,15 @@
 	<parameter name="barang" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select detail_surat_pemesanan_medis.kode_brng,databarang.nama_brng,databarang.kode_sat,jenis.nama as namajenis,
-kodesatuan.satuan,detail_surat_pemesanan_medis.jumlah,detail_surat_pemesanan_medis.total from surat_pemesanan_medis 
-inner join datasuplier inner join pegawai  
- inner join detail_surat_pemesanan_medis inner join databarang 
-inner join kodesatuan inner join jenis inner join industrifarmasi 
-on detail_surat_pemesanan_medis.kode_brng=databarang.kode_brng 
-and databarang.kode_sat=kodesatuan.kode_sat 
-and surat_pemesanan_medis.no_pemesanan=detail_surat_pemesanan_medis.no_pemesanan 
-and surat_pemesanan_medis.kode_suplier=datasuplier.kode_suplier 
-and databarang.kode_industri=industrifarmasi.kode_industri 
+kodesatuan.satuan,detail_surat_pemesanan_medis.jumlah,detail_surat_pemesanan_medis.total from surat_pemesanan_medis
+inner join datasuplier inner join pegawai
+ inner join detail_surat_pemesanan_medis inner join databarang
+inner join kodesatuan inner join jenis inner join industrifarmasi
+on detail_surat_pemesanan_medis.kode_brng=databarang.kode_brng
+and databarang.kode_sat=kodesatuan.kode_sat
+and surat_pemesanan_medis.no_pemesanan=detail_surat_pemesanan_medis.no_pemesanan
+and surat_pemesanan_medis.kode_suplier=datasuplier.kode_suplier
+and databarang.kode_industri=industrifarmasi.kode_industri
 and surat_pemesanan_medis.nip=pegawai.nik and databarang.kdjns=jenis.kdjns]]>
 	</queryString>
 	<field name="kode_brng" class="java.lang.String">

@@ -17,13 +17,13 @@ perpustakaan_pengarang.nama_pengarang,perpustakaan_buku.thn_terbit,
 perpustakaan_buku.isbn,perpustakaan_kategori.nama_kategori,
 perpustakaan_jenis_buku.nama_jenis,perpustakaan_peminjaman.no_anggota,
 perpustakaan_anggota.nama_anggota,perpustakaan_peminjaman.tgl_pinjam,
-perpustakaan_peminjaman.tgl_kembali,petugas.nama from perpustakaan_peminjaman 
-inner join perpustakaan_inventaris inner join perpustakaan_buku 
-inner join perpustakaan_penerbit inner join perpustakaan_pengarang inner join perpustakaan_kategori inner join perpustakaan_jenis_buku 
+perpustakaan_peminjaman.tgl_kembali,petugas.nama from perpustakaan_peminjaman
+inner join perpustakaan_inventaris inner join perpustakaan_buku
+inner join perpustakaan_penerbit inner join perpustakaan_pengarang inner join perpustakaan_kategori inner join perpustakaan_jenis_buku
 inner join petugas inner join perpustakaan_anggota on perpustakaan_peminjaman.no_inventaris=perpustakaan_inventaris.no_inventaris
-and perpustakaan_buku.kode_buku=perpustakaan_inventaris.kode_buku and perpustakaan_peminjaman.no_anggota=perpustakaan_anggota.no_anggota 
-and perpustakaan_buku.kode_penerbit=perpustakaan_penerbit.kode_penerbit and perpustakaan_buku.kode_pengarang=perpustakaan_pengarang.kode_pengarang 
-and perpustakaan_buku.id_kategori=perpustakaan_kategori.id_kategori and perpustakaan_buku.id_jenis=perpustakaan_jenis_buku.id_jenis 
+and perpustakaan_buku.kode_buku=perpustakaan_inventaris.kode_buku and perpustakaan_peminjaman.no_anggota=perpustakaan_anggota.no_anggota
+and perpustakaan_buku.kode_penerbit=perpustakaan_penerbit.kode_penerbit and perpustakaan_buku.kode_pengarang=perpustakaan_pengarang.kode_pengarang
+and perpustakaan_buku.id_kategori=perpustakaan_kategori.id_kategori and perpustakaan_buku.id_jenis=perpustakaan_jenis_buku.id_jenis
 and petugas.nip=perpustakaan_peminjaman.nip]]>
 	</queryString>
 	<field name="no_inventaris" class="java.lang.String">

@@ -10,14 +10,11 @@
  */
 
 package informasi;
-import simrskhanza.DlgKtgPerawatan;
-import simrskhanza.DlgCariCaraBayar;
-import simrskhanza.DlgCariPoli;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import fungsi.sekuel;
 import fungsi.validasi;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -28,7 +25,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JTable;
-import java.awt.Cursor;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -102,7 +98,7 @@ public final class InformasiTarifRanap extends javax.swing.JDialog {
             }
         }
         tbJnsPerawatan1.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode3=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -123,7 +119,7 @@ public final class InformasiTarifRanap extends javax.swing.JDialog {
             }
         }
         tbJnsPerawatan2.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
@@ -305,11 +301,11 @@ public final class InformasiTarifRanap extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         TabRawatMouseClicked(null);
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -317,7 +313,7 @@ public final class InformasiTarifRanap extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         runBackground(() ->tampil());
@@ -414,7 +410,7 @@ public final class InformasiTarifRanap extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
                        "jns_perawatan_inap.total_byrdr,penjab.png_jawab,bangsal.nm_bangsal "+
                        "from jns_perawatan_inap inner join kategori_perawatan inner join penjab inner join bangsal  "+
@@ -451,16 +447,16 @@ public final class InformasiTarifRanap extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }   
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void tampil2() {
         Valid.tabelKosong(tabMode2);
-        try{    
+        try{
             ps=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
                        "jns_perawatan_inap.total_byrpr,penjab.png_jawab,bangsal.nm_bangsal "+
                        "from jns_perawatan_inap inner join kategori_perawatan inner join penjab inner join bangsal  "+
@@ -497,16 +493,16 @@ public final class InformasiTarifRanap extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }   
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode2.getRowCount());
     }
-    
+
     private void tampil3() {
         Valid.tabelKosong(tabMode3);
-        try{    
+        try{
             ps=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
                        "jns_perawatan_inap.total_byrdrpr,penjab.png_jawab,bangsal.nm_bangsal "+
                        "from jns_perawatan_inap inner join kategori_perawatan inner join penjab inner join bangsal  "+
@@ -543,7 +539,7 @@ public final class InformasiTarifRanap extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }   
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -575,7 +571,7 @@ public final class InformasiTarifRanap extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

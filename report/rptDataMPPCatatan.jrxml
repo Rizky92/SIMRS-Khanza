@@ -17,16 +17,16 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select mpp_evaluasi_catatan.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,
-				concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat, 
-				mpp_evaluasi_catatan.tgl_implementasi,mpp_evaluasi_catatan.masalah,mpp_evaluasi_catatan.tinjut, 
-				mpp_evaluasi_catatan.evaluasi,mpp_evaluasi_catatan.nip,petugas.nama                   
-				from mpp_evaluasi_catatan 
-				inner join reg_periksa on mpp_evaluasi_catatan.no_rawat=reg_periksa.no_rawat 
-				inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-				inner join petugas on mpp_evaluasi_catatan.nip=petugas.nip 
-				inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel 
-				inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
-				inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab 
+				concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,
+				mpp_evaluasi_catatan.tgl_implementasi,mpp_evaluasi_catatan.masalah,mpp_evaluasi_catatan.tinjut,
+				mpp_evaluasi_catatan.evaluasi,mpp_evaluasi_catatan.nip,petugas.nama
+				from mpp_evaluasi_catatan
+				inner join reg_periksa on mpp_evaluasi_catatan.no_rawat=reg_periksa.no_rawat
+				inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+				inner join petugas on mpp_evaluasi_catatan.nip=petugas.nip
+				inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
+				inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
+				inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
 				inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

@@ -21,20 +21,20 @@
                         pcare_kegiatan_kelompok.nmKegiatan,pcare_kegiatan_kelompok.nmKelompok,
                         pcare_kegiatan_kelompok.materi,pcare_kegiatan_kelompok.pembicara,
                         pcare_kegiatan_kelompok.lokasi,pcare_kegiatan_kelompok.keterangan,
-                        pcare_kegiatan_kelompok.biaya,pcare_peserta_kegiatan_kelompok.no_rkm_medis, 
-                        pasien.no_peserta,pasien.nm_pasien from pcare_kegiatan_kelompok inner join pasien inner join 
-                        pcare_peserta_kegiatan_kelompok on pcare_kegiatan_kelompok.eduId=pcare_peserta_kegiatan_kelompok.eduId 
-                        and pcare_peserta_kegiatan_kelompok.no_rkm_medis=pasien.no_rkm_medis where 
-                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.eduId like $P{parameter} or 
-                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.clubId like $P{parameter} or 
-                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.nmKelompok like $P{parameter} or 
-                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.materi like $P{parameter} or 
-                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.pembicara like $P{parameter} or 
-                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.lokasi like $P{parameter} or 
-                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.keterangan like $P{parameter} or 
-                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.keterangan like $P{parameter} or 
-                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_peserta_kegiatan_kelompok.no_rkm_medis like $P{parameter} or 
-                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pasien.no_peserta like $P{parameter} or 
+                        pcare_kegiatan_kelompok.biaya,pcare_peserta_kegiatan_kelompok.no_rkm_medis,
+                        pasien.no_peserta,pasien.nm_pasien from pcare_kegiatan_kelompok inner join pasien inner join
+                        pcare_peserta_kegiatan_kelompok on pcare_kegiatan_kelompok.eduId=pcare_peserta_kegiatan_kelompok.eduId
+                        and pcare_peserta_kegiatan_kelompok.no_rkm_medis=pasien.no_rkm_medis where
+                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.eduId like $P{parameter} or
+                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.clubId like $P{parameter} or
+                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.nmKelompok like $P{parameter} or
+                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.materi like $P{parameter} or
+                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.pembicara like $P{parameter} or
+                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.lokasi like $P{parameter} or
+                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.keterangan like $P{parameter} or
+                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_kegiatan_kelompok.keterangan like $P{parameter} or
+                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pcare_peserta_kegiatan_kelompok.no_rkm_medis like $P{parameter} or
+                        pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pasien.no_peserta like $P{parameter} or
                         pcare_kegiatan_kelompok.tglPelayanan between $P{tanggal1} and $P{tanggal2} and pasien.nm_pasien like $P{parameter} order by pcare_kegiatan_kelompok.eduId]]>
 	</queryString>
 	<field name="eduId" class="java.lang.String">

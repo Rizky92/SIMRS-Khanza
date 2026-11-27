@@ -17,7 +17,7 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select DATE_FORMAT(bayar_piutang_jasa_perusahaan.tgl_bayar,'%Y-%m-%d') as tanggal,bayar_piutang_jasa_perusahaan.no_piutang,bayar_piutang_jasa_perusahaan.kode_perusahaan,
-                    perusahaan_pasien.nama_perusahaan,bayar_piutang_jasa_perusahaan.nama_bayar,bayar_piutang_jasa_perusahaan.besar_cicilan 
+                    perusahaan_pasien.nama_perusahaan,bayar_piutang_jasa_perusahaan.nama_bayar,bayar_piutang_jasa_perusahaan.besar_cicilan
                     from bayar_piutang_jasa_perusahaan inner join perusahaan_pasien on bayar_piutang_jasa_perusahaan.kode_perusahaan=perusahaan_pasien.kode_perusahaan ]]>
 	</queryString>
 	<field name="tanggal" class="java.lang.String">

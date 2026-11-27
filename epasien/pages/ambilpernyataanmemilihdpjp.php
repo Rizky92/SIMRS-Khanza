@@ -9,9 +9,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["nopernyataan"])) {
         $nopernyataan    = validTeks3($iyem["nopernyataan"],20);
         $photo            = validTeks3($iyem["photo"],50);
@@ -21,7 +21,7 @@
                 "select surat_pernyataan_memilih_dpjp.tanggal,dokter.nm_dokter,surat_pernyataan_memilih_dpjp.pembuat_pernyataan,surat_pernyataan_memilih_dpjp.alamat_pembuat_pernyataan,".
                 "DATE_FORMAT(surat_pernyataan_memilih_dpjp.tgl_lahir_pembuat_pernyataan,'%d-%m-%Y') as tgl_lahir_pembuat_pernyataan,if(surat_pernyataan_memilih_dpjp.jk_pembuat_pernyataan='L','LAKI-LAKI','PEREMPUAN') as jk_pembuat_pernyataan,".
                 "surat_pernyataan_memilih_dpjp.hubungan_pembuat_pernyataan from surat_pernyataan_memilih_dpjp inner join dokter on surat_pernyataan_memilih_dpjp.kd_dokter=dokter.kd_dokter ".
-                "where surat_pernyataan_memilih_dpjp.no_pernyataan='$nopernyataan'" 
+                "where surat_pernyataan_memilih_dpjp.no_pernyataan='$nopernyataan'"
             );
             if($rsquerypernyataan= mysqli_fetch_array($querypernyataan)){
                 echo "<div class='row clearfix'>
@@ -62,7 +62,7 @@
                                         </table>
                                         <br/>
                                         <h7>
-                                            Atas pasien dengan identitas sebagai berikut :  
+                                            Atas pasien dengan identitas sebagai berikut :
                                         </h7>
                                         <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                             <tr>
@@ -92,7 +92,7 @@
                                         </table>
                                         <br/>
                                         <h7>
-                                            Dengan ini menyatakan bahwa :  
+                                            Dengan ini menyatakan bahwa :
                                         </h7>
                                         <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                             <tr>

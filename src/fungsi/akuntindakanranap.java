@@ -14,7 +14,7 @@ public final class akuntindakanranap {
             Beban_Jasa_Medik_Paramedis_Tindakan_Ranap="",Utang_Jasa_Medik_Paramedis_Tindakan_Ranap="",Beban_KSO_Tindakan_Ranap="",Utang_KSO_Tindakan_Ranap="",
             Beban_Jasa_Sarana_Tindakan_Ranap="",Utang_Jasa_Sarana_Tindakan_Ranap="",Beban_Jasa_Menejemen_Tindakan_Ranap="",Utang_Jasa_Menejemen_Tindakan_Ranap="",
             HPP_BHP_Tindakan_Ranap="",Persediaan_BHP_Tindakan_Ranap="";
-    
+
     public static void SetAkunTindakanRanap() {
         try (
             PreparedStatement ps = koneksi.prepareStatement(
@@ -46,7 +46,7 @@ public final class akuntindakanranap {
             System.out.println("Notif Rekening : "+e);
         }
     }
-    
+
     public static String getSuspen_Piutang_Tindakan_Ranap(){return akuntindakanranap.Suspen_Piutang_Tindakan_Ranap;}
     public static String getTindakan_Ranap(){return akuntindakanranap.Tindakan_Ranap;}
     public static String getBeban_Jasa_Medik_Dokter_Tindakan_Ranap(){return akuntindakanranap.Beban_Jasa_Medik_Dokter_Tindakan_Ranap;}

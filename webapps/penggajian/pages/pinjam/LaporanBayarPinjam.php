@@ -18,7 +18,7 @@
             @$jasa           = $baris2[4];
             @$setoran        = $baris2[4]+$baris2[3];
             @$tanggal        = $baris2[5];
-            @$status         = $baris2[6];                
+            @$status         = $baris2[6];
             $_sql            = "SELECT pegawai.nik,pegawai.nama FROM pegawai where pegawai.id='$id'";
             $hasil           = bukaquery($_sql);
             $baris           = mysqli_fetch_row($hasil);
@@ -81,8 +81,8 @@
                 <td width="31%" >Sisa Pinjaman</td><td width="">:</td>
                 <td width="67%"><?php echo formatDuit($sisa_pinjam);?></td>
             </tr>
-        </table>     
-        </div>      
+        </table>
+        </div>
         <?php
             $BtnGenerate=isset($_POST['BtnGenerate'])?$_POST['BtnGenerate']:NULL;
             if (isset($BtnGenerate)) {
@@ -104,7 +104,7 @@
                 }
                 echo "<html><head><title></title><meta http-equiv='refresh' content='2;URL=?act=BayarPinjam&action=TAMBAH&id=$id&tanggal=$tanggal'></head><body></body></html>";
             }
-            
+
             $_sql   = "select angsuran_koperasi.id,angsuran_koperasi.tanggal_pinjam,angsuran_koperasi.tanggal_angsur,angsuran_koperasi.pokok,angsuran_koperasi.jasa from angsuran_koperasi where angsuran_koperasi.id='$id' and angsuran_koperasi.tanggal_pinjam='$tanggal'";
             $hasil  = bukaquery($_sql);
             $jumlah = mysqli_num_rows($hasil);

@@ -7,7 +7,7 @@
     if(file_exists(host()."/webapps/persetujuanumum/pages/upload/".$nosurat.".jpeg")){
         @unlink(host()."/webapps/persetujuanumum/pages/upload/".$nosurat.".jpeg");
     }
-    
+
     $img        = $_POST["image"];
     $folderPath = "upload/";
     $image_parts     = explode(";base64,", $img);

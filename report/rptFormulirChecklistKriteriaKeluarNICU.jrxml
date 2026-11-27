@@ -24,9 +24,9 @@
                     checklist_kriteria_keluar_nicu.nutrisi2,checklist_kriteria_keluar_nicu.nutrisi3,checklist_kriteria_keluar_nicu.suhutubuh1,
                     checklist_kriteria_keluar_nicu.suhutubuh2,checklist_kriteria_keluar_nicu.infeksi1,checklist_kriteria_keluar_nicu.infeksi2,
                     checklist_kriteria_keluar_nicu.infeksi3,checklist_kriteria_keluar_nicu.keputusan,checklist_kriteria_keluar_nicu.keterangan,
-                    checklist_kriteria_keluar_nicu.nik,pegawai.nama from checklist_kriteria_keluar_nicu 
-                    inner join reg_periksa on checklist_kriteria_keluar_nicu.no_rawat=reg_periksa.no_rawat 
-                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                    checklist_kriteria_keluar_nicu.nik,pegawai.nama from checklist_kriteria_keluar_nicu
+                    inner join reg_periksa on checklist_kriteria_keluar_nicu.no_rawat=reg_periksa.no_rawat
+                    inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                     inner join pegawai on pegawai.nik=checklist_kriteria_keluar_nicu.nik]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

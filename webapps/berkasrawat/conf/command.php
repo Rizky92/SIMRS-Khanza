@@ -2,13 +2,13 @@
     if(strpos($_SERVER['REQUEST_URI'],"conf")){
         exit(header("Location:../index.php"));
     }
-    
+
     function title(){
             $judul ="Vedika SIMKES Khanza--)(*!!@#$%";
             $judul = preg_replace("[^A-Za-z0-9_\-\./,|]"," ",$judul);
             $judul = str_replace(array('.','-','/',',')," ",$judul);
             $judul = trim($judul);
-            echo "$judul";	
+            echo "$judul";
     }
 
     function cekSessiAdmin() {
@@ -18,7 +18,7 @@
             return false;
         }
     }
-    
+
     function cekSessiVedika() {
         if (isset($_SESSION['ses_vedika'])) {
             return true;
@@ -49,7 +49,7 @@
         } else {
             return true;
         }
-    }	
+    }
 
     function formProtek() {
         $aksi=isset($_GET['act'])?$_GET['act']:NULL;
@@ -62,7 +62,7 @@
                     break;
                 }
             }
-        }		
+        }
 
     }
 
@@ -92,6 +92,6 @@
                 case 'HomeAdmin'            : include_once('homevedika.php'); break;
                 default			    : include_once('homevedika.php');
             }
-        }   
+        }
     }
 ?>

@@ -23,13 +23,13 @@
 	<parameter name="barang" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select detailjual.kode_brng,databarang.nama_brng, detailjual.kode_sat,
-kodesatuan.satuan,jenis.nama as namajenis,sum(detailjual.jumlah) as jumlah,sum(detailjual.total) as total 
-from penjualan inner join petugas inner join bangsal inner join jenis  
+kodesatuan.satuan,jenis.nama as namajenis,sum(detailjual.jumlah) as jumlah,sum(detailjual.total) as total
+from penjualan inner join petugas inner join bangsal inner join jenis
  inner join detailjual inner join databarang inner join kodesatuan
-on detailjual.kode_brng=databarang.kode_brng 
-and databarang.kode_sat=kodesatuan.kode_sat 
- and penjualan.kd_bangsal=bangsal.kd_bangsal 
- and penjualan.nota_jual=detailjual.nota_jual 
+on detailjual.kode_brng=databarang.kode_brng
+and databarang.kode_sat=kodesatuan.kode_sat
+ and penjualan.kd_bangsal=bangsal.kd_bangsal
+ and penjualan.nota_jual=detailjual.nota_jual
 and penjualan.nip=petugas.nip and databarang.kdjns=jenis.kdjns]]>
 	</queryString>
 	<field name="kode_brng" class="java.lang.String">

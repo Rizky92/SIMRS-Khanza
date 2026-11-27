@@ -102,7 +102,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                             $queryjadwal = bukaquery("Select dokter.nm_dokter,poliklinik.nm_poli,jadwal.jam_mulai,jadwal.jam_selesai,poliklinik.kd_poli,jadwal.kuota,dokter.kd_dokter from jadwal inner join dokter on dokter.kd_dokter=jadwal.kd_dokter inner join poliklinik on jadwal.kd_poli=poliklinik.kd_poli where jadwal.hari_kerja like '%".konversiHari($hari)."%'");
                             while($rsqueryjadwal = mysqli_fetch_array($queryjadwal)) {
                                 echo "<tr>
@@ -122,7 +122,6 @@
         </div>
     </div>
 </div>
-
 
 <?php
     $querybooking = bukaquery("select booking_registrasi.tanggal_booking,booking_registrasi.jam_booking,booking_registrasi.tanggal_periksa,booking_registrasi.kd_dokter,dokter.nm_dokter,booking_registrasi.kd_poli,poliklinik.nm_poli,booking_registrasi.no_reg,booking_registrasi.kd_pj,penjab.png_jawab,booking_registrasi.status from booking_registrasi inner join dokter on booking_registrasi.kd_dokter=dokter.kd_dokter inner join poliklinik on booking_registrasi.kd_poli=poliklinik.kd_poli inner join penjab on booking_registrasi.kd_pj=penjab.kd_pj where booking_registrasi.no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."' and booking_registrasi.status='Belum' and booking_registrasi.tanggal_periksa=current_date()");
@@ -169,18 +168,18 @@
                     </div>
                  </div>
               </div>";
-    }       
-    
+    }
+
     $queryregistrasi = bukaquery("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.kd_poli,poliklinik.nm_poli,reg_periksa.stts_daftar,penjab.png_jawab from reg_periksa inner join dokter inner join poliklinik inner join penjab on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."' and reg_periksa.tgl_registrasi=current_date()");
     if($rsqueryregistrasi = mysqli_fetch_array($queryregistrasi)) {
         $PNG_TEMP_DIR           = dirname(__FILE__).DIRECTORY_SEPARATOR.'temp'.DIRECTORY_SEPARATOR;
         $PNG_WEB_DIR            = 'temp/';
-        include_once "plugins/phpqrcode/qrlib.php"; 
+        include_once "plugins/phpqrcode/qrlib.php";
         if (!file_exists($PNG_TEMP_DIR)) mkdir($PNG_TEMP_DIR);
         $filename               = $PNG_TEMP_DIR.str_replace("/","",$rsqueryregistrasi["no_rawat"]).'.png';
         $errorCorrectionLevel   = 'L';
         $matrixPointSize        = 4;
-        QRcode::png($rsqueryregistrasi["no_rawat"], $filename, $errorCorrectionLevel, $matrixPointSize, 2); 
+        QRcode::png($rsqueryregistrasi["no_rawat"], $filename, $errorCorrectionLevel, $matrixPointSize, 2);
 
         $_SESSION["kd_poli"]        = $rsqueryregistrasi["kd_poli"];
         $_SESSION["kd_dokter"]      = $rsqueryregistrasi["kd_dokter"];
@@ -251,9 +250,9 @@
 <script src="js/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(my_function());
-    
-    setInterval("my_function();",6000); 
-    
+
+    setInterval("my_function();",6000);
+
     function my_function(){
         $("#screen").load("pages/daftarantrian.php");
     }

@@ -1,4 +1,4 @@
-<?php	
+<?php
 	session_start();
 	unset($id);
 	unset($nama);
@@ -9,5 +9,5 @@
 		session_unregister("ses_admin");
 	}
 	header("Location:index.php");
-	
+
 ?>

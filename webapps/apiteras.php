@@ -23,21 +23,21 @@
     $nopermintaan = validTeks4((isset($_GET["nopermintaan"])?$_GET["nopermintaan"]:NULL),25);
     $json         = "";
     $json2        = "";
-    
+
     $qrypermintaan  = bukaquery("select permintaan_lab.noorder,permintaan_lab.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,permintaan_lab.tgl_permintaan,
         if(permintaan_lab.jam_permintaan='00:00:00','',permintaan_lab.jam_permintaan) as jam_permintaan,pasien.tgl_lahir,pasien.jk,pasien.alamat,pasien.no_ktp,
         if(permintaan_lab.tgl_sampel='0000-00-00','',permintaan_lab.tgl_sampel) as tgl_sampel,if(permintaan_lab.jam_sampel='00:00:00','',permintaan_lab.jam_sampel) as jam_sampel,
         if(permintaan_lab.tgl_hasil='0000-00-00','',permintaan_lab.tgl_hasil) as tgl_hasil,if(permintaan_lab.jam_hasil='00:00:00','',permintaan_lab.jam_hasil) as jam_hasil,
         permintaan_lab.dokter_perujuk,dokter.nm_dokter,poliklinik.nm_poli,pasien.no_tlp,penjab.png_jawab,pasien.no_peserta,pasien.jk,pasien.tgl_lahir,
-        YEAR(FROM_DAYS(DATEDIFF(NOW(),pasien.tgl_lahir))) as tahun,MONTH(FROM_DAYS(DATEDIFF(NOW(),pasien.tgl_lahir))) as bulan,DAY(FROM_DAYS(DATEDIFF(NOW(),pasien.tgl_lahir))) as hari, 
-        pasien.alamat,pasien.no_tlp,permintaan_lab.status,reg_periksa.kd_poli,permintaan_lab.diagnosa_klinis,permintaan_lab.informasi_tambahan 
+        YEAR(FROM_DAYS(DATEDIFF(NOW(),pasien.tgl_lahir))) as tahun,MONTH(FROM_DAYS(DATEDIFF(NOW(),pasien.tgl_lahir))) as bulan,DAY(FROM_DAYS(DATEDIFF(NOW(),pasien.tgl_lahir))) as hari,
+        pasien.alamat,pasien.no_tlp,permintaan_lab.status,reg_periksa.kd_poli,permintaan_lab.diagnosa_klinis,permintaan_lab.informasi_tambahan
         from permintaan_lab inner join reg_periksa inner join pasien inner join dokter inner join poliklinik inner join penjab
-        on permintaan_lab.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj 
+        on permintaan_lab.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj
         and permintaan_lab.dokter_perujuk=dokter.kd_dokter and reg_periksa.kd_poli=poliklinik.kd_poli where permintaan_lab.noorder='$nopermintaan'");
     while ($rsqrypermintaan = mysqli_fetch_array ($qrypermintaan)){
         $qrydetailpermintaan = bukaquery("select permintaan_detail_permintaan_lab.id_template,template_laboratorium.Pemeriksaan,
-            template_laboratorium.urut from permintaan_detail_permintaan_lab 
-            inner join template_laboratorium on permintaan_detail_permintaan_lab.id_template=template_laboratorium.id_template 
+            template_laboratorium.urut from permintaan_detail_permintaan_lab
+            inner join template_laboratorium on permintaan_detail_permintaan_lab.id_template=template_laboratorium.id_template
             where permintaan_detail_permintaan_lab.noorder='$nopermintaan' order by template_laboratorium.kd_jenis_prw,template_laboratorium.urut desc");
         while ($rsqrydetailpermintaan = mysqli_fetch_array ($qrydetailpermintaan)){
             $json2 = '{"id_pemeriksaan": '.$rsqrydetailpermintaan['id_template'].',"status": "add"},'.$json2;
@@ -73,7 +73,7 @@
                     "no_lab": "'.str_replace("PL","",$rsqrypermintaan['noorder']).'"
                 }';
     }
-    
+
     $curl2 = curl_init();
     curl_setopt_array($curl2, array(
         CURLOPT_URL => "https://demo2.terassekawanbersama.co.id/ws/",
@@ -90,7 +90,7 @@
           "x-mod: order"
         )
     ));
-    
+
     $response = json_decode(curl_exec($curl2),true);
     echo $response;
     curl_close($curl2);

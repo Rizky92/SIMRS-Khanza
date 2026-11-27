@@ -16,7 +16,7 @@
                            inventaris_barang.nama_barang,
                            inventaris_produsen.nama_produsen,
                            inventaris_merk.nama_merk,
-                           inventaris_barang.thn_produksi, 
+                           inventaris_barang.thn_produksi,
                            inventaris_barang.isbn,
                            inventaris_kategori.nama_kategori,
                            inventaris_jenis.nama_jenis,
@@ -24,7 +24,7 @@
                            inventaris_peminjaman.tlp,
                            inventaris_peminjaman.tgl_pinjam,
                            inventaris_peminjaman.tgl_kembali,
-                           petugas.nama 
+                           petugas.nama
                            from inventaris_peminjaman inner join inventaris inner join inventaris_barang inner join inventaris_produsen inner join inventaris_merk inner join inventaris_kategori inner join inventaris_jenis inner join petugas  on inventaris_peminjaman.no_inventaris=inventaris.no_inventaris  and inventaris_barang.kode_barang=inventaris.kode_barang and inventaris_barang.kode_produsen=inventaris_produsen.kode_produsen  and inventaris_barang.id_merk=inventaris_merk.id_merk and inventaris_barang.id_kategori=inventaris_kategori.id_kategori and inventaris_barang.id_jenis=inventaris_jenis.id_jenis and petugas.nip=inventaris_peminjaman.nip]]>
 	</queryString>
 	<field name="no_inventaris" class="java.lang.String">

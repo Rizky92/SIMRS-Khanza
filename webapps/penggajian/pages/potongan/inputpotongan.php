@@ -10,7 +10,7 @@
         <form name="frm_lokasi" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                 $id          = validTeks(isset($_GET['id'])?$_GET['id']:NULL);
-                $action      = isset($_GET['action'])?$_GET['action']:NULL; 
+                $action      = isset($_GET['action'])?$_GET['action']:NULL;
                 $_sql        = "SELECT potongan.id,potongan.bpjs,potongan.jamsostek,potongan.dansos,potongan.simwajib,potongan.angkop,potongan.angla,potongan.telpri,potongan.pajak,
                                 potongan.pribadi,potongan.lain,potongan.ktg FROM potongan WHERE potongan.id='$id' AND potongan.tahun='$tahun' and potongan.bulan='$bulan'";
                 $hasil       = bukaquery($_sql);
@@ -19,7 +19,7 @@
                 $bariskon    = mysqli_fetch_row($hasilkon);
                 if(mysqli_num_rows($hasil)!=0) {
                     $action         = "UBAH";
-                    $baris          = mysqli_fetch_row($hasil); 
+                    $baris          = mysqli_fetch_row($hasil);
                     @$bpjs          = $baris[1];
                     @$jamsostek     = $baris[2];
                     @$dansos	    = $baris[3];
@@ -39,7 +39,7 @@
                         @$tanggal_pinjam = $baris2[3];
                         @$pinjaman       = $baris2[4];
                         @$angkop         = $baris2[1]+$baris2[2];
-                    }       
+                    }
                     @$angla	     = $baris[6];
                     @$telpri	     = $baris[7];
                     @$pajak	     = $baris[8];
@@ -93,7 +93,7 @@
                         @$tanggal_pinjam = $baris2[3];
                         @$pinjaman       = $baris2[4];
                         @$angkop 	 = $baris2[1]+$baris2[2];
-                    }       
+                    }
                     $angla	 = '-';
                     $telpri	 = '-';
                     $pajak	 = '-';
@@ -101,11 +101,11 @@
                     $lain        = '-';
 	            $ktg         = '-';
                 }
-                
+
                 $_sql2      = "SELECT pegawai.nik,pegawai.nama,pegawai.departemen FROM pegawai where pegawai.id='$id'";
                 $hasil2     = bukaquery($_sql2);
-                $baris2     = mysqli_fetch_row($hasil2);  		
-				
+                $baris2     = mysqli_fetch_row($hasil2);
+
                 echo"<input type=hidden name=id  value=$id><input type=hidden name=action value=$action>";
                 $_sqlnext   = "SELECT pegawai.id FROM pegawai WHERE pegawai.id>'$id' order by pegawai.id asc limit 1";
                 $hasilnext  = bukaquery($_sqlnext);
@@ -128,7 +128,7 @@
                           <a href=?act=InputPotongan&action=$action&id=$next>-->></a>
                       </div>";
             ?>
-            <div style="width: 100%; height: 75%; overflow: auto;"> 
+            <div style="width: 100%; height: 75%; overflow: auto;">
             <table width="100%" align="center">
                 <tr class="head">
                     <td width="31%" >NIP</td><td width="">:</td>

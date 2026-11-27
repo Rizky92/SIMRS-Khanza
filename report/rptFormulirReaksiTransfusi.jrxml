@@ -17,7 +17,7 @@
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur,
 laporan_reaksi_transfusi.nip,pegawai.nama as nm_pelapor,laporan_reaksi_transfusi.kd_dokter,dokter.nm_dokter,laporan_reaksi_transfusi.tanggal,laporan_reaksi_transfusi.diagnosis_klinis,
 laporan_reaksi_transfusi.indikasi_transfusi,laporan_reaksi_transfusi.komponen_darah,laporan_reaksi_transfusi.komponen_lainnya,laporan_reaksi_transfusi.volume_cc,laporan_reaksi_transfusi.nokantong,laporan_reaksi_transfusi.jenis_reaksi,laporan_reaksi_transfusi.penanganan
-from laporan_reaksi_transfusi inner join reg_periksa on laporan_reaksi_transfusi.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+from laporan_reaksi_transfusi inner join reg_periksa on laporan_reaksi_transfusi.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 inner join pegawai on laporan_reaksi_transfusi.nip=pegawai.nik inner join dokter on laporan_reaksi_transfusi.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String"/>

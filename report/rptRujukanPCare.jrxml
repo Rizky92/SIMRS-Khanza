@@ -36,7 +36,7 @@
 		<![CDATA[select no_rawat,noKunjungan,tglDaftar,no_rkm_medis,nm_pasien,noKartu,kdPoli,nmPoli,keluhan,
             kdSadar,nmSadar,sistole, diastole,beratBadan,tinggiBadan,respRate,heartRate,lingkarPerut,terapi,
             kdStatusPulang,nmStatusPulang,tglPulang, kdDokter,nmDokter,kdDiag1,nmDiag1,kdDiag2,
-            nmDiag2,kdDiag3,nmDiag3,tglEstRujuk,kdPPK,nmPPK,kdSubSpesialis, 
+            nmDiag2,kdDiag3,nmDiag3,tglEstRujuk,kdPPK,nmPPK,kdSubSpesialis,
             nmSubSpesialis,kdSarana,nmSarana,kdTACC,nmTACC,alasanTACC from pcare_rujuk_subspesialis  where no_rawat= $P{no_rawat}]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

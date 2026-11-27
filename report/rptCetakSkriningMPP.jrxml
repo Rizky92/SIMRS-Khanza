@@ -30,14 +30,14 @@
 mpp_skrining.tanggal,mpp_skrining.param1,mpp_skrining.param2,mpp_skrining.param3,mpp_skrining.param3,
 mpp_skrining.param4,mpp_skrining.param5,mpp_skrining.param5,mpp_skrining.param6,mpp_skrining.param7,
 mpp_skrining.param8,mpp_skrining.param9,mpp_skrining.param10,mpp_skrining.param11,mpp_skrining.param12,
-mpp_skrining.param13,mpp_skrining.param14,mpp_skrining.param15,mpp_skrining.param16,mpp_skrining.nip,pegawai.nama,reg_periksa.umurdaftar,reg_periksa.sttsumur, penjab.png_jawab 
-from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-inner join mpp_skrining on reg_periksa.no_rawat=mpp_skrining.no_rawat 
-inner join pegawai on mpp_skrining.nip=pegawai.nik 
-inner join penjab on reg_periksa.kd_pj=penjab.kd_pj 
-inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel 
-inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
-inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab 
+mpp_skrining.param13,mpp_skrining.param14,mpp_skrining.param15,mpp_skrining.param16,mpp_skrining.nip,pegawai.nama,reg_periksa.umurdaftar,reg_periksa.sttsumur, penjab.png_jawab
+from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+inner join mpp_skrining on reg_periksa.no_rawat=mpp_skrining.no_rawat
+inner join pegawai on mpp_skrining.nip=pegawai.nik
+inner join penjab on reg_periksa.kd_pj=penjab.kd_pj
+inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
+inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
+inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
 inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">

@@ -15,7 +15,6 @@
 var factory = function( $, DataTable ) {
 "use strict";
 
-
 /* Set the defaults for DataTables initialisation */
 $.extend( true, DataTable.defaults, {
 	dom:
@@ -25,14 +24,12 @@ $.extend( true, DataTable.defaults, {
 	renderer: 'bootstrap'
 } );
 
-
 /* Default class modification */
 $.extend( DataTable.ext.classes, {
 	sWrapper:      "dataTables_wrapper form-inline dt-bootstrap",
 	sFilterInput:  "form-control input-sm",
 	sLengthSelect: "form-control input-sm"
 } );
-
 
 /* Bootstrap paging button renderer */
 DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, buttons, page, pages ) {
@@ -125,7 +122,7 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 	};
 
 	// IE9 throws an 'unknown error' if document.activeElement is used
-	// inside an iframe or frame. 
+	// inside an iframe or frame.
 	var activeEl;
 
 	try {
@@ -146,7 +143,6 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 		$(host).find( '[data-dt-idx='+activeEl+']' ).focus();
 	}
 };
-
 
 /*
  * TableTools Bootstrap compatibility
@@ -187,7 +183,6 @@ if ( DataTable.TableTools ) {
 
 }; // /factory
 
-
 // Define as an AMD module if possible
 if ( typeof define === 'function' && define.amd ) {
 	define( ['jquery', 'datatables'], factory );
@@ -201,6 +196,4 @@ else if ( jQuery ) {
 	factory( jQuery, jQuery.fn.dataTable );
 }
 
-
 })(window, document);
-
