@@ -28,9 +28,21 @@
     <target name="clean" description="Delete build and distribution directories.">
         <delete dir="${build.dir}"/>
         <delete dir="${dist.dir}"/>
+        <delete dir="${project.KhanzaSecurity16bit}/build"/>
+        <delete dir="${project.KhanzaSecurity16bit}/dist"/>
     </target>
 
-    <target name="compile" description="Compile sources and copy non source resources.">
+    <target name="-build-subprojects" description="Build the foreign NetBeans projects referenced on javac.classpath, which build-impl.xml would otherwise build first.">
+        <property file="${project.KhanzaSecurity16bit}/nbproject/project.properties" prefix="KhanzaSecurity16bit"/>
+        <mkdir dir="${project.KhanzaSecurity16bit}/build/classes"/>
+        <javac srcdir="${project.KhanzaSecurity16bit}/src" destdir="${project.KhanzaSecurity16bit}/build/classes" source="${KhanzaSecurity16bit.javac.source}" target="${KhanzaSecurity16bit.javac.target}" encoding="${KhanzaSecurity16bit.source.encoding}" debug="${javac.debug}" includeantruntime="false" fork="yes" tempdir="${java.io.tmpdir}">
+            <classpath refid="classpath.ci"/>
+        </javac>
+        <mkdir dir="${project.KhanzaSecurity16bit}/dist"/>
+        <jar jarfile="${reference.KhanzaSecurity16bit.jar}" compress="${jar.compress}" basedir="${project.KhanzaSecurity16bit}/build/classes"/>
+    </target>
+
+    <target name="compile" depends="-build-subprojects" description="Compile sources and copy non source resources.">
         <mkdir dir="${build.classes.dir}"/>
         <mkdir dir="${empty.dir}"/>
         <mkdir dir="${ap.source.output.dir}"/>
