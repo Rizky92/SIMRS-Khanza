@@ -6,6 +6,8 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -653,6 +655,7 @@ public final class SatuSehatKirimServiceRequestLabPK extends javax.swing.JDialog
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            /*
                             json = "{" +
                                         "\"resourceType\": \"ServiceRequest\"," +
                                         "\"identifier\": [" +
@@ -706,6 +709,8 @@ public final class SatuSehatKirimServiceRequestLabPK extends javax.swing.JDialog
                                             "}" +
                                         "]" +
                                     "}";
+                            */
+                            json = jsonServiceRequestSmc(i, iddokter, idpasien, false);
                             System.out.println("URL : "+link+"/ServiceRequest");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
@@ -770,6 +775,7 @@ public final class SatuSehatKirimServiceRequestLabPK extends javax.swing.JDialog
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            /*
                             json = "{" +
                                         "\"resourceType\": \"ServiceRequest\"," +
                                         "\"id\": \""+tbObat.getValueAt(i,16).toString()+"\"," +
@@ -824,6 +830,8 @@ public final class SatuSehatKirimServiceRequestLabPK extends javax.swing.JDialog
                                             "}" +
                                         "]" +
                                     "}";
+                            */
+                            json = jsonServiceRequestSmc(i, iddokter, idpasien, true);
                             System.out.println("URL : "+link+"/ServiceRequest/"+tbObat.getValueAt(i,16).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
@@ -842,6 +850,45 @@ public final class SatuSehatKirimServiceRequestLabPK extends javax.swing.JDialog
             }
         });
     }//GEN-LAST:event_BtnUpdateActionPerformed
+
+    private String jsonServiceRequestSmc(int baris, String iddokter, String idpasien, boolean perbarui) {
+        ObjectNode servicerequest = mapper.createObjectNode();
+        servicerequest.put("resourceType", "ServiceRequest");
+        if (perbarui) {
+            servicerequest.put("id", tbObat.getValueAt(baris, 16).toString());
+        }
+        ObjectNode identifier = servicerequest.putArray("identifier").addObject();
+        identifier.put("system", "http://sys-ids.kemkes.go.id/servicerequest/" + koneksiDB.IDSATUSEHAT());
+        identifier.put("value", tbObat.getValueAt(baris, 9).toString() + "." + tbObat.getValueAt(baris, 17).toString());
+        servicerequest.put("status", "active");
+        servicerequest.put("intent", "order");
+        ObjectNode category = servicerequest.putArray("category").addObject();
+        ObjectNode categoryCoding = category.putArray("coding").addObject();
+        categoryCoding.put("system", "http://snomed.info/sct");
+        categoryCoding.put("code", "108252007");
+        categoryCoding.put("display", "Laboratory procedure");
+        ObjectNode code = servicerequest.putObject("code");
+        ObjectNode codeCoding = code.putArray("coding").addObject();
+        codeCoding.put("system", tbObat.getValueAt(baris, 14).toString());
+        codeCoding.put("code", tbObat.getValueAt(baris, 13).toString());
+        codeCoding.put("display", tbObat.getValueAt(baris, 15).toString());
+        code.put("text", tbObat.getValueAt(baris, 12).toString());
+        ObjectNode subject = servicerequest.putObject("subject");
+        subject.put("reference", "Patient/" + idpasien);
+        ObjectNode encounter = servicerequest.putObject("encounter");
+        encounter.put("reference", "Encounter/" + tbObat.getValueAt(baris, 8).toString());
+        encounter.put("display", "Permintaan " + tbObat.getValueAt(baris, 12).toString() + " atas nama pasien " + tbObat.getValueAt(baris, 3).toString() + " No.RM " + tbObat.getValueAt(baris, 2).toString() + " No.Rawat " + tbObat.getValueAt(baris, 1).toString() + ", pada tanggal " + tbObat.getValueAt(baris, 10).toString());
+        servicerequest.put("authoredOn", tbObat.getValueAt(baris, 10).toString().replaceAll(" ", "T") + "+07:00");
+        ObjectNode requester = servicerequest.putObject("requester");
+        requester.put("reference", "Practitioner/" + iddokter);
+        requester.put("display", tbObat.getValueAt(baris, 6).toString());
+        ObjectNode performer = servicerequest.putArray("performer").addObject();
+        performer.put("reference", "Organization/" + koneksiDB.IDSATUSEHAT());
+        performer.put("display", "Ruang Laborat/Petugas Laborat");
+        ObjectNode reasonCode = servicerequest.putArray("reasonCode").addObject();
+        reasonCode.put("text", tbObat.getValueAt(baris, 11).toString());
+        return servicerequest.toString();
+    }
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
