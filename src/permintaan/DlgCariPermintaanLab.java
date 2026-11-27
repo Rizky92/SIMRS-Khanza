@@ -2213,11 +2213,13 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                                         break;
                                     case "Lembar Permintaan Lab & Barcode No.Permintaan 1":
                                         BtnBarcodePermintaanActionPerformed(evt);
+                                        getData();
                                         getData2();
                                         BtnCetakHasilLabActionPerformed(null);
                                         break;
                                     case "Lembar Permintaan Lab & Barcode No.Permintaan 2":
                                         BtnBarcodePermintaan2ActionPerformed(evt);
+                                        getData();
                                         getData2();
                                         BtnCetakHasilLabActionPerformed(null);
                                         break;

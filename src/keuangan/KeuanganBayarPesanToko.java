@@ -1055,7 +1055,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
             }
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){

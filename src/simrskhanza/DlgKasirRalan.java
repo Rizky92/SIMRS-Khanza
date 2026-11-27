@@ -9405,11 +9405,75 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_TabRawatMouseClicked
 
+    /*
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {
+        cachekasirralan.SetTanggalAwal(DTPCari1.getDate());
+        cachekasirralan.SetTanggalAkhir(DTPCari2.getDate());
+        cachekasirralan.SetKeyWord(TCari.getText());
+        cachekasirralan.SetDokter(CrPtg.getText());
+        cachekasirralan.SetPoli(CrPoli.getText());
+        cachekasirralan.SetPenjab(caripenjab);
+        cachekasirralan.SetStatusBayar(cmbStatusBayar.getSelectedItem().toString());
+        cachekasirralan.SetStatusPelayanan(cmbStatus.getSelectedItem().toString());
+        cachekasirralan.clearDataPasien();
+
+        for (i = 0; i < tabModekasir.getRowCount(); i++) {
+            Object[] baris = new Object[tabModekasir.getColumnCount()];
+            for (int j = 0; j < tabModekasir.getColumnCount(); j++) {
+                baris[j] = tabModekasir.getValueAt(i, j);
+            }
+            cachekasirralan.setDataPasien(baris);
+        }
+    }
+    */
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(akuntindakanralan.getSuspen_Piutang_Tindakan_Ralan().equals("")){
             akuntindakanralan.SetAkunTindakanRalan();
         }
+        /*
+        if(cachekasirralan.getTanggalAwal()!=null){
+            DTPCari1.setDate(cachekasirralan.getTanggalAwal());
+        }
 
+        if(cachekasirralan.getTanggalAkhir()!=null){
+            DTPCari2.setDate(cachekasirralan.getTanggalAkhir());
+        }
+
+        if(cachekasirralan.getKeyWord()!=null){
+            TCari.setText(cachekasirralan.getKeyWord());
+        }
+
+        if(cachekasirralan.getDokter()!=null){
+            CrPtg.setText(cachekasirralan.getDokter());
+        }
+
+        if(cachekasirralan.getPoli()!=null){
+            CrPoli.setText(cachekasirralan.getPoli());
+        }
+
+        if(cachekasirralan.getPenjab()!=null){
+            caripenjab=cachekasirralan.getPenjab();
+        }
+
+        if(cachekasirralan.getStatusBayar()!=null){
+            cmbStatusBayar.setSelectedItem(cachekasirralan.getStatusBayar());
+        }
+
+        if(cachekasirralan.getStatusPelayanan()!=null){
+            cmbStatus.setSelectedItem(cachekasirralan.getStatusPelayanan());
+        }
+
+        if(!cachekasirralan.getDataPasien().isEmpty()){
+            for (Object[] baris : cachekasirralan.getDataPasien()) {
+                tabModekasir.addRow(baris);
+            }
+            LCount.setText("" + tabModekasir.getRowCount());
+            cachekasirralan.clearDataPasien();
+        }else{
+            tampilkasir();
+        }
+        */
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override

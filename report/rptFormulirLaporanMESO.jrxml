@@ -27,7 +27,7 @@
                 laporan_meso_obat.indikasi,petugas.nama,jabatan.nm_jbtn from laporan_meso inner join reg_periksa on laporan_meso.no_rawat=reg_periksa.no_rawat
                 inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                 inner join suku_bangsa on pasien.suku_bangsa=suku_bangsa.id
-                inner join petugas on laporan_meso.nip=petugas.nip 
+                inner join petugas on laporan_meso.nip=petugas.nip
                 inner join jabatan on petugas.kd_jbtn=jabatan.kd_jbtn inner join laporan_meso_obat on laporan_meso.no_laporan=laporan_meso_obat.no_laporan order by laporan_meso_obat.nama_obat]]>
 	</queryString>
 	<field name="no_laporan" class="java.lang.String"/>
@@ -120,7 +120,7 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Nama (Singkatan) : "+$F{nm_pasien}.trim().replaceAll("(\\S)\\S*\\s*","$1").toUpperCase()]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Nama : "+$F{nm_pasien}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="false" isBlankWhenNull="true">
 				<reportElement x="125" y="36" width="92" height="22" uuid="e889392a-47dc-4d3d-854e-0ee715be93a0"/>

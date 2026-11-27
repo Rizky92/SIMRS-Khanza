@@ -41179,20 +41179,21 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             System.out.println("Notif Pengkajian Awal Medis Rawat Jalan Gigi : "+e);
         }
     }
-    
+
     private void menampilkanLaporanMESO(String norawat) {
         try {
             if(chkLaporanMESO.isSelected()==true){
                 try {
                     rs2=koneksi.prepareStatement(
-                            "select laporan_meso.no_laporan,laporan_meso.tanggal,laporan_meso.nip,petugas.nama,laporan_meso.tgl_mula_eso,laporan_meso.manifestasi_eso,"+
-                            "laporan_meso.kesudahan_eso,laporan_meso.tgl_kesudahan_eso,laporan_meso.skor_naranjo,laporan_meso.kategori_naranjo "+
-                            "from laporan_meso inner join petugas on laporan_meso.nip=petugas.nip "+
-                            "where laporan_meso.no_rawat='"+norawat+"' order by laporan_meso.tanggal,laporan_meso.no_laporan").executeQuery();
+                        "select laporan_meso.no_laporan,laporan_meso.tanggal,laporan_meso.nip,petugas.nama,laporan_meso.tgl_mula_eso,laporan_meso.manifestasi_eso,"+
+                        "laporan_meso.kesudahan_eso,laporan_meso.tgl_kesudahan_eso,laporan_meso.skor_naranjo,laporan_meso.kategori_naranjo from laporan_meso "+
+                        "inner join petugas on laporan_meso.nip=petugas.nip where laporan_meso.no_rawat='"+norawat+"' "+
+                        "order by laporan_meso.tanggal,laporan_meso.no_laporan"
+                    ).executeQuery();
                     if(rs2.next()){
                         htmlContent.append(
-                          "<tr class='isi'>").append( 
-                            "<td valign='top' width='2%'></td>").append(        
+                          "<tr class='isi'>").append(
+                            "<td valign='top' width='2%'></td>").append(
                             "<td valign='top' width='18%'>Laporan Monitoring Efek Samping Obat</td>").append(
                             "<td valign='top' width='1%' align='center'>:</td>").append(
                             "<td valign='top' width='79%'>").append(
@@ -41202,18 +41203,19 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                             htmlContent.append(
                                  "<tr>").append(
                                     "<td valign='top'>").append(
-                                       "YANG MELAPORKAN").append(  
+                                       "YANG MELAPORKAN").append(
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
                                           "<tr>").append(
                                               "<td width='30%' border='0'>Tanggal : ").append(rs2.getString("tanggal")).append("</td>").append(
-                                              "<td width='70%' border='0'>Pelapor : ").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
+                                              "<td width='40%' border='0'>Pelapor : ").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
+                                              "<td width='30%' border='0'>No.Laporan : ").append(rs2.getString("no_laporan")).append("</td>").append(
                                           "</tr>").append(
                                        "</table>").append(
                                     "</td>").append(
                                  "</tr>").append(
                                  "<tr>").append(
                                     "<td valign='top'>").append(
-                                       "I. EFEK SAMPING OBAT").append(  
+                                       "I. EFEK SAMPING OBAT").append(
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
                                           "<tr>").append(
                                               "<td width='33%' border='0'>Tgl.Mula Terjadi : ").append(rs2.getString("tgl_mula_eso")).append("</td>").append(
@@ -41228,7 +41230,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                  "</tr>").append(
                                  "<tr>").append(
                                     "<td valign='top'>").append(
-                                       "II. OBAT").append(  
+                                       "II. OBAT").append(
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
                                           "<tr>").append(
                                               "<td valign='top' width='4%' bgcolor='#FFFAF8' align='center'>No.</td>").append(
@@ -41269,7 +41271,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                  "</tr>").append(
                                  "<tr>").append(
                                     "<td valign='top'>").append(
-                                       "III. INTERPRETASI NARANJO").append(  
+                                       "III. INTERPRETASI NARANJO").append(
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
                                           "<tr>").append(
                                               "<td width='30%' border='0'>Total Skor : ").append(rs2.getString("skor_naranjo")).append("</td>").append(
@@ -41278,7 +41280,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                        "</table>").append(
                                     "</td>").append(
                                  "</tr>"
-                            ); 
+                            );
                         }while(rs2.next());
                         htmlContent.append(
                               "</table>").append(

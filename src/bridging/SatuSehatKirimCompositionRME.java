@@ -834,7 +834,6 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
         }
         tbAwalKeperawatanRalan.setDefaultRenderer(Object.class, new WarnaTable());
 
-
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
 
         try {
@@ -13079,19 +13078,19 @@ KirimTriaseIGDSekunder();
                         try{
                             StringBuilder iyembuilder = new StringBuilder();
                             if(!tbAwalKeperawatanIGD.getValueAt(i,18).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,18).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanIGD.getValueAt(i,18).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanIGD.getValueAt(i,20).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,20).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanIGD.getValueAt(i,20).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanIGD.getValueAt(i,22).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,22).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanIGD.getValueAt(i,22).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanIGD.getValueAt(i,24).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,24).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanIGD.getValueAt(i,24).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanIGD.getValueAt(i,26).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanIGD.getValueAt(i,26).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanIGD.getValueAt(i,26).toString()).append("\"},");
                             }
                             if(iyembuilder.length()>0){
                                 iyembuilder.setLength(iyembuilder.length()-1);
@@ -13099,18 +13098,11 @@ KirimTriaseIGDSekunder();
                             }
                             StringBuilder iyembuilder2 = new StringBuilder();
                             if(!tbAwalKeperawatanIGD.getValueAt(i,107).toString().equals("")&&!tbAwalKeperawatanIGD.getValueAt(i,107).toString().equals("-")){
-                                rencanabuilder.append("{\"reference\": \"CarePlan/"+tbAwalKeperawatanIGD.getValueAt(i,107).toString()+"\"},");
+                                rencanabuilder.append("{\"reference\": \"CarePlan/").append(tbAwalKeperawatanIGD.getValueAt(i,107).toString()).append("\"},");
                             }
                             if(rencanabuilder.length()>0){
                                 rencanabuilder.setLength(rencanabuilder.length()-1);
-                                iyembuilder2.append(
-                                    "{" +
-                                        "\"title\": \"Rencana Keperawatan\"," +
-                                        "\"entry\": [" +
-                                            rencanabuilder.toString() +
-                                        "]" +
-                                    "}"
-                                );
+                                iyembuilder2.append("{\"title\": \"Rencana Keperawatan\",").append("\"entry\": [").append(rencanabuilder.toString()).append("]}");
                             }
                             StringBuilder iyembuilder3 = new StringBuilder();
                             if(masalahbuilder.length()>0){
@@ -13381,41 +13373,41 @@ KirimTriaseIGDSekunder();
                                         "\"effectiveDateTime\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"issued\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"component\" : ["+
-                        "{" +
-                            "\"code\" : {" +
-                                "\"coding\" : ["+
-                                    "{" +
-                                        "\"system\" : \"http://loinc.org\"," +
-                                        "\"code\" : \"8480-6\"," +
-                                        "\"display\" : \"Systolic blood pressure\"" +
-                                    "}"+
-                                "]" +
-                            "}," +
-                            "\"valueQuantity\" : {" +
-                                "\"value\" : "+sistole+"," +
-                                "\"unit\" : \"mmHg\"," +
-                                "\"system\" : \"http://unitsofmeasure.org\"," +
-                                "\"code\" : \"mm[Hg]\"" +
-                            "}" +
-                        "}"+","+
-                        "{" +
-                            "\"code\" : {" +
-                                "\"coding\" : ["+
-                                    "{" +
-                                        "\"system\" : \"http://loinc.org\"," +
-                                        "\"code\" : \"8462-4\"," +
-                                        "\"display\" : \"Diastolic blood pressure\"" +
-                                    "}"+
-                                "]" +
-                            "}," +
-                            "\"valueQuantity\" : {" +
-                                "\"value\" : "+diastole+"," +
-                                "\"unit\" : \"mmHg\"," +
-                                "\"system\" : \"http://unitsofmeasure.org\"," +
-                                "\"code\" : \"mm[Hg]\"" +
-                            "}" +
-                        "}"+
-                        "]" +
+                                            "{" +
+                                                "\"code\" : {" +
+                                                    "\"coding\" : ["+
+                                                        "{" +
+                                                            "\"system\" : \"http://loinc.org\"," +
+                                                            "\"code\" : \"8480-6\"," +
+                                                            "\"display\" : \"Systolic blood pressure\"" +
+                                                        "}"+
+                                                    "]" +
+                                                "}," +
+                                                "\"valueQuantity\" : {" +
+                                                    "\"value\" : "+sistole+"," +
+                                                    "\"unit\" : \"mmHg\"," +
+                                                    "\"system\" : \"http://unitsofmeasure.org\"," +
+                                                    "\"code\" : \"mm[Hg]\"" +
+                                                "}" +
+                                            "}"+","+
+                                            "{" +
+                                                "\"code\" : {" +
+                                                    "\"coding\" : ["+
+                                                        "{" +
+                                                            "\"system\" : \"http://loinc.org\"," +
+                                                            "\"code\" : \"8462-4\"," +
+                                                            "\"display\" : \"Diastolic blood pressure\"" +
+                                                        "}"+
+                                                    "]" +
+                                                "}," +
+                                                "\"valueQuantity\" : {" +
+                                                    "\"value\" : "+diastole+"," +
+                                                    "\"unit\" : \"mmHg\"," +
+                                                    "\"system\" : \"http://unitsofmeasure.org\"," +
+                                                    "\"code\" : \"mm[Hg]\"" +
+                                                "}" +
+                                            "}"+
+                                        "]" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -13480,11 +13472,11 @@ KirimTriaseIGDSekunder();
                                         "\"effectiveDateTime\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"issued\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                            "\"value\": " + tbAwalKeperawatanRalan.getValueAt(i,13).toString().replaceAll(",", ".").replaceAll("[^0-9.]","") + ","+
-                            "\"unit\": \"/min\","+
-                            "\"system\": \"http://unitsofmeasure.org\","+
-                            "\"code\": \"/min\""+
-                        "}" +
+                                            "\"value\": " + tbAwalKeperawatanRalan.getValueAt(i,13).toString().replaceAll(",", ".").replaceAll("[^0-9.]","") + ","+
+                                            "\"unit\": \"/min\","+
+                                            "\"system\": \"http://unitsofmeasure.org\","+
+                                            "\"code\": \"/min\""+
+                                        "}" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -13549,11 +13541,11 @@ KirimTriaseIGDSekunder();
                                         "\"effectiveDateTime\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"issued\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                            "\"value\": " + tbAwalKeperawatanRalan.getValueAt(i,15).toString().replaceAll(",", ".").replaceAll("[^0-9.]","") + ","+
-                            "\"unit\": \"/min\","+
-                            "\"system\": \"http://unitsofmeasure.org\","+
-                            "\"code\": \"/min\""+
-                        "}" +
+                                            "\"value\": " + tbAwalKeperawatanRalan.getValueAt(i,15).toString().replaceAll(",", ".").replaceAll("[^0-9.]","") + ","+
+                                            "\"unit\": \"/min\","+
+                                            "\"system\": \"http://unitsofmeasure.org\","+
+                                            "\"code\": \"/min\""+
+                                        "}" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -13618,11 +13610,11 @@ KirimTriaseIGDSekunder();
                                         "\"effectiveDateTime\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"issued\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                            "\"value\": " + tbAwalKeperawatanRalan.getValueAt(i,17).toString().replaceAll(",", ".").replaceAll("[^0-9.]","") + ","+
-                            "\"unit\": \"degree Celsius\","+
-                            "\"system\": \"http://unitsofmeasure.org\","+
-                            "\"code\": \"Cel\""+
-                        "}" +
+                                            "\"value\": " + tbAwalKeperawatanRalan.getValueAt(i,17).toString().replaceAll(",", ".").replaceAll("[^0-9.]","") + ","+
+                                            "\"unit\": \"degree Celsius\","+
+                                            "\"system\": \"http://unitsofmeasure.org\","+
+                                            "\"code\": \"Cel\""+
+                                        "}" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -13751,11 +13743,11 @@ KirimTriaseIGDSekunder();
                                         "\"effectiveDateTime\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"issued\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                            "\"value\": " + tbAwalKeperawatanRalan.getValueAt(i,21).toString().replaceAll(",", ".").replaceAll("[^0-9.]","") + ","+
-                            "\"unit\": \"kg\","+
-                            "\"system\": \"http://unitsofmeasure.org\","+
-                            "\"code\": \"kg\""+
-                        "}" +
+                                            "\"value\": " + tbAwalKeperawatanRalan.getValueAt(i,21).toString().replaceAll(",", ".").replaceAll("[^0-9.]","") + ","+
+                                            "\"unit\": \"kg\","+
+                                            "\"system\": \"http://unitsofmeasure.org\","+
+                                            "\"code\": \"kg\""+
+                                        "}" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -13820,11 +13812,11 @@ KirimTriaseIGDSekunder();
                                         "\"effectiveDateTime\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"issued\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                            "\"value\": " + tbAwalKeperawatanRalan.getValueAt(i,23).toString().replaceAll(",", ".").replaceAll("[^0-9.]","") + ","+
-                            "\"unit\": \"cm\","+
-                            "\"system\": \"http://unitsofmeasure.org\","+
-                            "\"code\": \"cm\""+
-                        "}" +
+                                            "\"value\": " + tbAwalKeperawatanRalan.getValueAt(i,23).toString().replaceAll(",", ".").replaceAll("[^0-9.]","") + ","+
+                                            "\"unit\": \"cm\","+
+                                            "\"system\": \"http://unitsofmeasure.org\","+
+                                            "\"code\": \"cm\""+
+                                        "}" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -13889,11 +13881,11 @@ KirimTriaseIGDSekunder();
                                         "\"effectiveDateTime\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"issued\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                         "\"valueQuantity\": {"+
-                            "\"value\": " + tbAwalKeperawatanRalan.getValueAt(i,25).toString().replaceAll(",", ".").replaceAll("[^0-9.]","") + ","+
-                            "\"unit\": \"kg/m2\","+
-                            "\"system\": \"http://unitsofmeasure.org\","+
-                            "\"code\": \"kg/m2\""+
-                        "}" +
+                                            "\"value\": " + tbAwalKeperawatanRalan.getValueAt(i,25).toString().replaceAll(",", ".").replaceAll("[^0-9.]","") + ","+
+                                            "\"unit\": \"kg/m2\","+
+                                            "\"system\": \"http://unitsofmeasure.org\","+
+                                            "\"code\": \"kg/m2\""+
+                                        "}" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
@@ -15145,35 +15137,35 @@ KirimTriaseIGDSekunder();
                                             headers.setContentType(MediaType.APPLICATION_JSON);
                                             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                                             json = "{" +
-                                        "\"resourceType\": \"CarePlan\"," +
-                                        "\"status\": \"active\"," +
-                                        "\"intent\": \"plan\"," +
-                                        "\"title\": \"Rencana Keperawatan\"," +
-                                        "\"description\": \""+rs2.getString("rencana_keperawatan").replace("\"", "'")+"\"," +
-                                        "\"subject\": {"+
-                                            "\"reference\": \"Patient/" + idpasien + "\""+
-                                        "}," +
-                                        "\"category\": [" +
-                                            "{" +
-                                                "\"coding\": [" +
-                                                    "{" +
-                                                        "\"system\": \"http://terminology.kemkes.go.id\"," +
-                                                        "\"code\": \"TK000068\"," +
-                                                        "\"display\": \"Emergency care plan\"" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "]," +
-                                        "\"encounter\": {"+
-                                            "\"reference\": \"Encounter/" + tbAwalKeperawatanRalan.getValueAt(i,5).toString() + "\""+
-                                        "}," +
-                                        "\"author\": {"+
-                                            "\"reference\": \"Practitioner/" + iddokter + "\""+
-                                        "}," +
-                                        "\"period\": {"+
-                                            "\"start\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\""+
-                                        "}" +
-                                   "}";
+                                                        "\"resourceType\": \"CarePlan\"," +
+                                                        "\"status\": \"active\"," +
+                                                        "\"intent\": \"plan\"," +
+                                                        "\"title\": \"Rencana Keperawatan\"," +
+                                                        "\"description\": \""+rs2.getString("rencana_keperawatan").replace("\"", "'")+"\"," +
+                                                        "\"subject\": {"+
+                                                            "\"reference\": \"Patient/" + idpasien + "\""+
+                                                        "}," +
+                                                        "\"category\": [" +
+                                                            "{" +
+                                                                "\"coding\": [" +
+                                                                    "{" +
+                                                                        "\"system\": \"http://terminology.kemkes.go.id\"," +
+                                                                        "\"code\": \"TK000068\"," +
+                                                                        "\"display\": \"Emergency care plan\"" +
+                                                                    "}" +
+                                                                "]" +
+                                                            "}" +
+                                                        "]," +
+                                                        "\"encounter\": {"+
+                                                            "\"reference\": \"Encounter/" + tbAwalKeperawatanRalan.getValueAt(i,5).toString() + "\""+
+                                                        "}," +
+                                                        "\"author\": {"+
+                                                            "\"reference\": \"Practitioner/" + iddokter + "\""+
+                                                        "}," +
+                                                        "\"period\": {"+
+                                                            "\"start\": \""+tbAwalKeperawatanRalan.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\""+
+                                                        "}" +
+                                                   "}";
                                             System.out.println("URL : "+link+"/CarePlan");
                                             System.out.println("Request JSON : "+json);
                                             requestEntity = new HttpEntity(json,headers);
@@ -15221,28 +15213,28 @@ KirimTriaseIGDSekunder();
                         try{
                             StringBuilder iyembuilder = new StringBuilder();
                             if(!tbAwalKeperawatanRalan.getValueAt(i,12).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,12).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,12).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanRalan.getValueAt(i,14).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,14).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,14).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanRalan.getValueAt(i,16).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,16).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,16).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanRalan.getValueAt(i,18).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,18).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,18).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanRalan.getValueAt(i,20).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,20).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,20).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanRalan.getValueAt(i,22).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,22).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,22).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanRalan.getValueAt(i,24).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,24).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,24).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanRalan.getValueAt(i,26).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,26).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,26).toString()).append("\"},");
                             }
                             if(iyembuilder.length()>0){
                                 iyembuilder.setLength(iyembuilder.length()-1);
@@ -15250,39 +15242,16 @@ KirimTriaseIGDSekunder();
                             }
                             StringBuilder iyembuilder2 = new StringBuilder();
                             if((!tbAwalKeperawatanRalan.getValueAt(i,88).toString().equals("")&&!tbAwalKeperawatanRalan.getValueAt(i,88).toString().equals("-"))&&!tbAwalKeperawatanRalan.getValueAt(i,89).toString().equals("")&&!tbAwalKeperawatanRalan.getValueAt(i,89).toString().equals("-")){
-                                rencanabuilder.append("{\"reference\": \"CarePlan/"+tbAwalKeperawatanRalan.getValueAt(i,89).toString()+"\"},");
+                                rencanabuilder.append("{\"reference\": \"CarePlan/").append(tbAwalKeperawatanRalan.getValueAt(i,89).toString()).append("\"},");
                             }
                             if(rencanabuilder.length()>0){
                                 rencanabuilder.setLength(rencanabuilder.length()-1);
-                                iyembuilder2.append(
-                                    "{" +
-                                        "\"title\": \"Rencana Keperawatan\"," +
-                                        "\"entry\": [" +
-                                            rencanabuilder.toString() +
-                                        "]" +
-                                    "}"
-                                );
+                                iyembuilder2.append("{\"title\": \"Rencana Keperawatan\",\"entry\": [").append(rencanabuilder.toString()).append("]}");
                             }
                             StringBuilder iyembuilder3 = new StringBuilder();
                             if(masalahbuilder.length()>0){
                                 masalahbuilder.setLength(masalahbuilder.length()-1);
-                                iyembuilder3.append(
-                                    "{" +
-                                        "\"title\": \"Masalah Keperawatan\"," +
-                                        "\"code\": {" +
-                                            "\"coding\": [" +
-                                                "{" +
-                                                    "\"system\": \"http://loinc.org\"," +
-                                                    "\"code\": \"11450-4\"," +
-                                                    "\"display\": \"Problem list - Reported\"" +
-                                                "}" +
-                                            "]" +
-                                        "}," +
-                                        "\"entry\": [" +
-                                            masalahbuilder.toString() +
-                                        "]" +
-                                    "}"
-                                );
+                                iyembuilder3.append("{\"title\": \"Masalah Keperawatan\",\"code\": {\"coding\": [{\"system\": \"http://loinc.org\",\"code\": \"11450-4\",\"display\": \"Problem list - Reported\"}]},\"entry\": [").append(masalahbuilder.toString()).append("]}");
                             }
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -17139,28 +17108,28 @@ KirimTriaseIGDSekunder();
                         try{
                             StringBuilder iyembuilder = new StringBuilder();
                             if(!tbAwalKeperawatanRalan.getValueAt(i,12).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,12).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,12).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanRalan.getValueAt(i,14).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,14).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,14).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanRalan.getValueAt(i,16).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,16).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,16).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanRalan.getValueAt(i,18).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,18).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,18).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanRalan.getValueAt(i,20).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,20).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,20).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanRalan.getValueAt(i,22).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,22).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,22).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanRalan.getValueAt(i,24).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,24).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,24).toString()).append("\"},");
                             }
                             if(!tbAwalKeperawatanRalan.getValueAt(i,26).toString().equals("")){
-                                iyembuilder.append("{\"reference\": \"Observation/"+tbAwalKeperawatanRalan.getValueAt(i,26).toString()+"\"},");
+                                iyembuilder.append("{\"reference\": \"Observation/").append(tbAwalKeperawatanRalan.getValueAt(i,26).toString()).append("\"},");
                             }
                             if(iyembuilder.length()>0){
                                 iyembuilder.setLength(iyembuilder.length()-1);
@@ -17168,39 +17137,16 @@ KirimTriaseIGDSekunder();
                             }
                             StringBuilder iyembuilder2 = new StringBuilder();
                             if((!tbAwalKeperawatanRalan.getValueAt(i,88).toString().equals("")&&!tbAwalKeperawatanRalan.getValueAt(i,88).toString().equals("-"))&&!tbAwalKeperawatanRalan.getValueAt(i,89).toString().equals("")&&!tbAwalKeperawatanRalan.getValueAt(i,89).toString().equals("-")){
-                                rencanabuilder.append("{\"reference\": \"CarePlan/"+tbAwalKeperawatanRalan.getValueAt(i,89).toString()+"\"},");
+                                rencanabuilder.append("{\"reference\": \"CarePlan/").append(tbAwalKeperawatanRalan.getValueAt(i,89).toString()).append("\"},");
                             }
                             if(rencanabuilder.length()>0){
                                 rencanabuilder.setLength(rencanabuilder.length()-1);
-                                iyembuilder2.append(
-                                    "{" +
-                                        "\"title\": \"Rencana Keperawatan\"," +
-                                        "\"entry\": [" +
-                                            rencanabuilder.toString() +
-                                        "]" +
-                                    "}"
-                                );
+                                iyembuilder2.append("{\"title\": \"Rencana Keperawatan\",\"entry\": [").append(rencanabuilder.toString()).append("]}");
                             }
                             StringBuilder iyembuilder3 = new StringBuilder();
                             if(masalahbuilder.length()>0){
                                 masalahbuilder.setLength(masalahbuilder.length()-1);
-                                iyembuilder3.append(
-                                    "{" +
-                                        "\"title\": \"Masalah Keperawatan\"," +
-                                        "\"code\": {" +
-                                            "\"coding\": [" +
-                                                "{" +
-                                                    "\"system\": \"http://loinc.org\"," +
-                                                    "\"code\": \"11450-4\"," +
-                                                    "\"display\": \"Problem list - Reported\"" +
-                                                "}" +
-                                            "]" +
-                                        "}," +
-                                        "\"entry\": [" +
-                                            masalahbuilder.toString() +
-                                        "]" +
-                                    "}"
-                                );
+                                iyembuilder3.append("{\"title\": \"Masalah Keperawatan\",\"code\": {\"coding\": [{\"system\": \"http://loinc.org\",\"code\": \"11450-4\",\"display\": \"Problem list - Reported\"}]},\"entry\": [").append(masalahbuilder.toString()).append("]}");
                             }
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);

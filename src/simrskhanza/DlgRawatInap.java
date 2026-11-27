@@ -6489,11 +6489,51 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         Valid.pindah2(evt,TKeluhan,TSuhu);
     }//GEN-LAST:event_TPemeriksaanKeyPressed
 
+    /*
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {
+        cacherawatinap.SetKodePetugas(kdptg.getText());
+        cacherawatinap.SetNamaPetugas(TPerawat.getText());
+        cacherawatinap.SetKodePetugas2(kdptg2.getText());
+        cacherawatinap.SetNamaPetugas2(TPerawat2.getText());
+        cacherawatinap.SetKodePemeriksa(KdPeg.getText());
+        cacherawatinap.SetNamaPemeriksa(TPegawai.getText());
+        cacherawatinap.SetJabatanPemeriksa(Jabatan.getText());
+    }
+    */
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(akuntindakanranap.getSuspen_Piutang_Tindakan_Ranap().equals("")){
             akuntindakanranap.SetAkunTindakanRanap();
         }
+        /*
+        if(cacherawatinap.getKodePetugas()!=null){
+            kdptg.setText(cacherawatinap.getKodePetugas());
+        }
 
+        if(cacherawatinap.getNamaPetugas()!=null){
+            TPerawat.setText(cacherawatinap.getNamaPetugas());
+        }
+
+        if(cacherawatinap.getKodePetugas2()!=null){
+            kdptg2.setText(cacherawatinap.getKodePetugas2());
+        }
+
+        if(cacherawatinap.getNamaPetugas2()!=null){
+            TPerawat2.setText(cacherawatinap.getNamaPetugas2());
+        }
+
+        if(cacherawatinap.getKodePemeriksa()!=null){
+            KdPeg.setText(cacherawatinap.getKodePemeriksa());
+        }
+
+        if(cacherawatinap.getNamaPemeriksa()!=null){
+            TPegawai.setText(cacherawatinap.getNamaPemeriksa());
+        }
+
+        if(cacherawatinap.getJabatanPemeriksa()!=null){
+            Jabatan.setText(cacherawatinap.getJabatanPemeriksa());
+        }
+        */
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
